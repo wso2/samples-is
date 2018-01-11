@@ -1,6 +1,5 @@
-<%@page import="org.apache.commons.lang.StringUtils" %>
-<%@page import="org.apache.oltu.oauth2.client.response.OAuthAuthzResponse" %>
-<%@page import="org.wso2.sample.identity.oauth2.OAuth2Constants" %>
+<%@ page import="org.apache.commons.lang.StringUtils" %>
+<%@ page import="org.wso2.sample.identity.oauth2.OAuth2Constants" %>
 <%@ page import="org.apache.oltu.oauth2.client.request.OAuthClientRequest" %>
 <%@ page import="org.apache.oltu.oauth2.client.OAuthClient" %>
 <%@ page import="org.apache.oltu.oauth2.client.URLConnectionClient" %>

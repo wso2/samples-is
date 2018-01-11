@@ -87,9 +87,9 @@
                 <version>${nimbusds.version}</version>
             </dependency>
             <dependency>
-                <groupId>commons-codec.wso2</groupId>
-                <artifactId>commons-codec</artifactId>
-                <version>${commons-codec.version}</version>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>${commons-lang.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -99,6 +99,7 @@
         <oauth2.client.version>1.0.0</oauth2.client.version>
         <nimbusds.version>2.26.1</nimbusds.version>
         <commons-codec.version>1.4.0.wso2v1</commons-codec.version>
+        <commons-lang.version>2.6</commons-lang.version>
     </properties>
 
     <repositories>

@@ -17,12 +17,12 @@
  */
 package org.wso2.sample.identity.oauth2;
 
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
 
 public class SampleContextEventListener implements ServletContextListener {
 

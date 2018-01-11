@@ -25,12 +25,6 @@ public final class OAuth2Constants {
     public static final String ACCESS_TOKEN = "access_token";
     public static final String SESSION_STATE = "session_state";
 
-    // oauth scopes
-    public static final String SCOPE_OPENID = "openid";
-
-    // oauth grant type constants
-    public static final String OAUTH2_GRANT_TYPE_CODE = "code";
-
     // application specific request parameters and session attributes
     public static final String CONSUMER_KEY = "consumerKey";
     public static final String CALL_BACK_URL = "callbackurl";

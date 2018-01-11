@@ -1,13 +1,13 @@
-<%@page import="org.apache.commons.lang.StringUtils" %>
-<%@page import="org.wso2.sample.identity.oauth2.OAuth2Constants" %>
-<%@ page import="org.apache.oltu.oauth2.client.request.OAuthClientRequest" %>
+<%@ page import="org.apache.commons.lang.StringUtils" %>
 <%@ page import="org.apache.oltu.oauth2.client.OAuthClient" %>
 <%@ page import="org.apache.oltu.oauth2.client.URLConnectionClient" %>
-<%@ page import="org.apache.oltu.oauth2.common.message.types.GrantType" %>
+<%@ page import="org.apache.oltu.oauth2.client.request.OAuthClientRequest" %>
 <%@ page import="org.apache.oltu.oauth2.client.response.OAuthClientResponse" %>
-<%@ page import="com.nimbusds.jwt.SignedJWT" %>
-<%@ page import="java.util.Properties" %>
+<%@ page import="org.apache.oltu.oauth2.common.message.types.GrantType" %>
+<%@ page import="org.wso2.sample.identity.oauth2.OAuth2Constants" %>
 <%@ page import="org.wso2.sample.identity.oauth2.SampleContextEventListener" %>
+<%@ page import="java.util.Properties" %>
+<%@ page import="com.nimbusds.jwt.SignedJWT" %>
 <%
     String code = null;
     String idToken;
@@ -422,7 +422,7 @@
                         </table>
                     </div>
                     <div class=" add-padding-bottom-3x">
-                        <a href="javascript:;" class="btn btn-default"><i class="fa fa-plus"></i> Add</a>
+                        <a href="javascript:" class="btn btn-default"><i class="fa fa-plus"></i> Add</a>
                     </div>
                 </div>
                 <div class="bhoechie-tab-content">
