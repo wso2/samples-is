@@ -23,6 +23,7 @@
     <groupId>org.wso2.carbon.consent.mgt</groupId>
     <artifactId>sample-consent-mgt-interceptor</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+    <packaging>bundle</packaging>
 
     <repositories>
         <repository>
@@ -75,19 +76,19 @@
             <artifactId>org.wso2.carbon.core</artifactId>
             <version>${carbon.core.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.scr.ds-annotations</artifactId>
+            <version>${felix.scr.annotations.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon</groupId>
+            <artifactId>org.wso2.carbon.logging</artifactId>
+            <version>${carbon.logging.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.felix</groupId>
-                    <artifactId>maven-bundle-plugin</artifactId>
-                    <version>${maven.bundle.plugin.version}</version>
-                    <extensions>true</extensions>
-                </plugin>
-            </plugins>
-        </pluginManagement>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -99,14 +100,57 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-scr-plugin</artifactId>
+                <version>${maven.scr.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>generate-scr-scrdescriptor</id>
+                        <goals>
+                            <goal>scr</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>${maven.bundle.plugin.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+                        <Bundle-Name>${project.artifactId}</Bundle-Name>
+                        <Private-Package>org.wso2.carbon.consent.mgt.sample.interceptor.internal</Private-Package>
+                        <Import-Package>
+                            org.osgi.framework; version="${osgi.framework.version.range}",
+                            org.osgi.service.component; version="${osgi.service.component.version.range}",
+                            org.wso2.carbon.consent.mgt.core.*; version="${consent.mgt.core.version.range}",
+                            org.apache.commons.logging; version="${commons.logging.version.range}"
+                        </Import-Package>
+                        <Export-Package>
+                            !org.wso2.carbon.consent.mgt.sample.interceptor.internal,
+                            org.wso2.carbon.consent.mgt.sample.interceptor.*; version="${project.version}",
+                        </Export-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
     <properties>
-        <carbon.consent.mgt.version>1.0.6</carbon.consent.mgt.version>
+        <carbon.consent.mgt.version>1.0.7</carbon.consent.mgt.version>
         <eclipse.osgi.version>3.5.100.v20160504-1419</eclipse.osgi.version>
         <carbon.core.version>4.4.20</carbon.core.version>
         <maven.compiler.plugin>3.7.0</maven.compiler.plugin>
         <maven.bundle.plugin.version>2.4.0</maven.bundle.plugin.version>
+        <maven.scr.plugin.version>1.22.0</maven.scr.plugin.version>
+        <carbon.logging.version>4.4.20</carbon.logging.version>
+        <felix.scr.annotations.version>1.2.4</felix.scr.annotations.version>
+        <osgi.framework.version.range>[1.7.0, 2.0.0)</osgi.framework.version.range>
+        <osgi.service.component.version.range>[1.2.0, 2.0.0)</osgi.service.component.version.range>
+        <consent.mgt.core.version.range>[1.0.7, 2.0.0)</consent.mgt.core.version.range>
+        <commons.logging.version.range>[1.2.0, 2.0.0)</commons.logging.version.range>
     </properties>
 </project>
