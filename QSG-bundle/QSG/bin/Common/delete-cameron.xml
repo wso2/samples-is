@@ -1,0 +1,9 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.ws.um.carbon.wso2.org">
+  <soapenv:Header/>
+  <soapenv:Body>
+     <ser:deleteUser>
+        <!--Optional:-->
+        <ser:userName>cameron</ser:userName>
+     </ser:deleteUser>
+  </soapenv:Body>
+</soapenv:Envelope>

@@ -1,0 +1,49 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.ws.um.carbon.wso2.org" xmlns:xsd="http://dao.service.ws.um.carbon.wso2.org/xsd">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:addRole>
+         <!--Optional:-->
+         <ser:roleName>Manager</ser:roleName>
+         <!--Zero or more repetitions:-->
+         <ser:userList>cameron</ser:userList>
+         <!--Zero or more repetitions:-->
+	 <ser:permissions>
+            <!--Optional:-->
+            <xsd:action>ui.execute</xsd:action>
+            <!--Optional:-->
+            <xsd:resourceId>/permission/admin/login</xsd:resourceId>
+         </ser:permissions>
+	 <ser:permissions>
+            <!--Optional:-->
+            <xsd:action>ui.execute</xsd:action>
+            <!--Optional:-->
+            <xsd:resourceId>/permission/admin/manage/identity/applicationmgt</xsd:resourceId>
+         </ser:permissions>
+         <ser:permissions>
+            <!--Optional:-->
+            <xsd:action>ui.execute</xsd:action>
+            <!--Optional:-->
+            <xsd:resourceId>/permission/admin/manage/identity/applicationmgt/create</xsd:resourceId>
+         </ser:permissions>
+	<ser:permissions>
+            <!--Optional:-->
+            <xsd:action>ui.execute</xsd:action>
+            <!--Optional:-->          
+	    <xsd:resourceId>/permission/admin/manage/identity/applicationmgt/delete</xsd:resourceId>
+         </ser:permissions>
+	<ser:permissions>
+            <!--Optional:-->
+            <xsd:action>ui.execute</xsd:action>
+            <!--Optional:-->
+	    <xsd:resourceId>/permission/admin/manage/identity/applicationmgt/update</xsd:resourceId>
+         </ser:permissions>
+	<ser:permissions>
+            <!--Optional:-->
+            <xsd:action>ui.execute</xsd:action>
+            <!--Optional:-->
+	    <xsd:resourceId>/permission/admin/manage/identity/applicationmgt/view</xsd:resourceId>
+         </ser:permissions>
+      </ser:addRole>
+   </soapenv:Body>
+</soapenv:Envelope>
+

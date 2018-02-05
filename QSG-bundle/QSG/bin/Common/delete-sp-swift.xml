@@ -1,0 +1,9 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://org.apache.axis2/xsd">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <xsd:deleteApplication>
+         <!--Optional:-->
+         <xsd:applicationName>swift</xsd:applicationName>
+      </xsd:deleteApplication>
+   </soapenv:Body>
+</soapenv:Envelope>

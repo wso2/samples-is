@@ -1,0 +1,14 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://org.apache.axis2/xsd" xmlns:xsd1="http://model.common.application.identity.carbon.wso2.org/xsd">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <xsd:createApplication>
+         <!--Optional:-->
+         <xsd:serviceProvider>
+            <!--Optional:-->
+            <xsd1:applicationName>swift</xsd1:applicationName>
+            <!--Optional:-->
+            <xsd1:description>A Quick Start Guide</xsd1:description>
+         </xsd:serviceProvider>
+      </xsd:createApplication>
+   </soapenv:Body>
+</soapenv:Envelope>
