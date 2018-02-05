@@ -126,7 +126,7 @@
                         <Import-Package>
                             org.osgi.framework; version="${osgi.framework.version.range}",
                             org.osgi.service.component; version="${osgi.service.component.version.range}",
-                            org.wso2.carbon.consent.mgt.core.connector; version="${consent.mgt.core.version.range}",
+                            org.wso2.carbon.consent.mgt.core.*; version="${consent.mgt.core.version.range}",
                             org.apache.commons.logging; version="${commons.logging.version.range}"
                         </Import-Package>
                         <Export-Package>
