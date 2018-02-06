@@ -15,8 +15,15 @@
  */
 package org.wso2.carbon.identity.piicontroller.connector;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.wso2.carbon.consent.mgt.core.connector.PIIController;
+import org.wso2.carbon.consent.mgt.core.model.Address;
+import org.wso2.carbon.consent.mgt.core.model.PiiController;
 import org.wso2.carbon.consent.mgt.core.util.ConsentConfigParser;
+import org.wso2.carbon.identity.application.common.model.Property;
 import org.wso2.carbon.identity.governance.IdentityGovernanceException;
+import org.wso2.carbon.identity.governance.IdentityGovernanceService;
 import org.wso2.carbon.identity.governance.common.IdentityConnectorConfig;
 import org.wso2.carbon.identity.piicontroller.ConsentConstants;
 
@@ -43,8 +50,9 @@ import static org.wso2.carbon.consent.mgt.core.constant.ConsentConstants.PIICont
 /**
  * This class used to define default/customize values of PII controller details.
  */
-public class ConsentMgtConfigImpl implements IdentityConnectorConfig {
+public class ConsentMgtConfigImpl implements IdentityConnectorConfig, PIIController {
 
+    private static Log log = LogFactory.getLog(ConsentMgtConfigImpl.class);
     private static final String DISPLAY_NAME_PII_CONTROLLER = "Name";
     private static final String DISPLAY_NAME_CONTACT = "Contact Name";
     private static final String DISPLAY_NAME_EMAIL = "Email Address";
@@ -76,6 +84,12 @@ public class ConsentMgtConfigImpl implements IdentityConnectorConfig {
     private static final String DISPLAY_DESCRIPTION_STREET_ADDRESS = "Street Address of the PII Controller";
     private static final String DISPLAY_DESCRIPTION_PUBLIC_KEY = "Public key of the PII Controller";
     private static final String EMPTY = "";
+    private IdentityGovernanceService identityGovernanceService;
+
+    public ConsentMgtConfigImpl(IdentityGovernanceService identityGovernanceService) {
+
+        this.identityGovernanceService = identityGovernanceService;
+    }
 
     @Override
     public String getName() {
@@ -210,4 +224,78 @@ public class ConsentMgtConfigImpl implements IdentityConnectorConfig {
         return EMPTY;
     }
 
+    @Override
+    public int getPriority() {
+
+        return 10;
+    }
+
+    @Override
+    public PiiController getControllerInfo(String tenantDomain) {
+
+        String addressCountry = getConfiguration(countryElement);
+        String addressLocality = getConfiguration(localityElement);
+        String addressRegion = getConfiguration(regionElement);
+        String addressPostOfficeBoxNumber = getConfiguration(postOfficeBoxNumberElement);
+        String addressPostCode = getConfiguration(postCodeElement);
+        String addressStreetAddress = getConfiguration(streetAddressElement);
+
+        String piiControllerName = getConfiguration(piiControllerNameElement);
+        String piiControllerContact = getConfiguration(piiControllerContactElement);
+        String piiControllerPhone = getConfiguration(piiControllerPhoneElement);
+        String piiControllerEmail = getConfiguration(piiControllerEmailElement);
+        boolean piiControllerOnBehalf = Boolean.parseBoolean(getConfiguration(piiControllerOnBehalfElement));
+        String piiControllerURL = getConfiguration(piiControllerUrlElement);
+        String publicKey = getConfiguration(piiControllerPublicKeyElement);
+
+        try {
+            Property[] configurations = identityGovernanceService.getConfiguration(getPropertyNames(), tenantDomain);
+            if (configurations != null) {
+                for (Property config : configurations) {
+                    if (ConsentConstants.PII_CONTROLLER.equals(config.getName())) {
+                        piiControllerName = config.getValue();
+
+                    } else if (ConsentConstants.CONTACT.equals(config.getName())) {
+                        piiControllerContact = config.getValue();
+                    } else if (ConsentConstants.EMAIL.equals(config.getName())) {
+                        piiControllerEmail = config.getValue();
+                    } else if (ConsentConstants.PHONE.equals(config.getName())) {
+                        piiControllerPhone = config.getValue();
+                    } else if (ConsentConstants.ON_BEHALF.equals(config.getName())) {
+                        piiControllerOnBehalf = Boolean.parseBoolean(config.getValue());
+                    } else if (ConsentConstants.PII_CONTROLLER_URL.equals(config.getName())) {
+                        piiControllerURL = config.getValue();
+                    } else if (ConsentConstants.ADDRESS_COUNTRY.equals(config.getName())) {
+                        addressCountry = config.getValue();
+                    } else if (ConsentConstants.ADDRESS_LOCALITY.equals(config.getName())) {
+                        addressLocality = config.getValue();
+                    } else if (ConsentConstants.ADDRESS_REGION.equals(config.getName())) {
+                        addressRegion = config.getValue();
+                    } else if (ConsentConstants.POST_OFFICE_BOX_NUMBER.equals(config.getName())) {
+                        addressPostOfficeBoxNumber = config.getValue();
+                    } else if (ConsentConstants.POSTAL_CODE.equals(config.getName())) {
+                        addressPostCode = config.getValue();
+                    } else if (ConsentConstants.STREET_ADDRESS.equals(config.getName())) {
+                        addressStreetAddress = config.getValue();
+                    } else if (ConsentConstants.PUBLIC_KEY.equals(config.getName())) {
+                        publicKey = config.getValue();
+                    }
+                }
+            }
+        } catch (IdentityGovernanceException e) {
+            String errorMessage = "Error while getting configuration from governance service. Default to configs  " +
+                    "defined in xml file.";
+            if (log.isDebugEnabled()) {
+                log.debug(errorMessage, e);
+            } else {
+                log.warn(errorMessage);
+            }
+        }
+
+        Address address = new Address(addressCountry, addressLocality, addressRegion, addressPostOfficeBoxNumber,
+                addressPostCode, addressStreetAddress);
+
+        return new PiiController(piiControllerName, piiControllerOnBehalf, piiControllerContact, piiControllerEmail,
+                piiControllerPhone, piiControllerURL, address, publicKey);
+    }
 }

@@ -20,6 +20,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.component.ComponentContext;
+import org.wso2.carbon.consent.mgt.core.connector.PIIController;
 import org.wso2.carbon.identity.governance.IdentityGovernanceService;
 import org.wso2.carbon.identity.governance.common.IdentityConnectorConfig;
 import org.wso2.carbon.identity.piicontroller.connector.ConsentMgtConfigImpl;
@@ -33,12 +34,16 @@ import org.wso2.carbon.identity.piicontroller.connector.ConsentMgtConfigImpl;
 public class IdentityPIIControllerServiceComponent {
 
     private static Log log = LogFactory.getLog(IdentityPIIControllerServiceComponent.class);
+    private IdentityGovernanceService identityGovernanceService;
 
     protected void activate(ComponentContext context) {
 
         try {
             BundleContext bundleContext = context.getBundleContext();
-            bundleContext.registerService(IdentityConnectorConfig.class.getName(), new ConsentMgtConfigImpl(), null);
+            ConsentMgtConfigImpl consentMgtConfig = new ConsentMgtConfigImpl(identityGovernanceService);
+            bundleContext.registerService(IdentityConnectorConfig.class.getName(), consentMgtConfig,
+                    null);
+            bundleContext.registerService(PIIController.class.getName(), consentMgtConfig, null);
         } catch (Exception e) {
             log.error("Error while activating pii controller sample component.", e);
         }
@@ -56,12 +61,14 @@ public class IdentityPIIControllerServiceComponent {
         if (log.isDebugEnabled()) {
             log.debug("Identity Governance service is unset from PII Controller sample");
         }
+        identityGovernanceService = null;
     }
 
-    protected void setIdentityGovernanceService(IdentityGovernanceService idpManager) {
+    protected void setIdentityGovernanceService(IdentityGovernanceService identityGovernanceService) {
 
         if (log.isDebugEnabled()) {
             log.debug("Identity Governance service is set form PII Controller sample");
         }
+        this.identityGovernanceService = identityGovernanceService;
     }
 }
