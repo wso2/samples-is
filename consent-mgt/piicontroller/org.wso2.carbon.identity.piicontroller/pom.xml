@@ -46,6 +46,11 @@
             <version>${carbon.identity.framework.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.wso2.carbon.identity.framework</groupId>
+            <artifactId>org.wso2.carbon.identity.application.common</artifactId>
+            <version>${carbon.identity.framework.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.wso2.carbon.identity.governance</groupId>
             <artifactId>org.wso2.carbon.identity.governance</artifactId>
             <version>${identity.governance.version}</version>
@@ -79,7 +84,7 @@
                             ${project.artifactId}
                         </Bundle-SymbolicName>
                         <Private-Package>
-                            org.wso2.carbon.identity.recovery.internal
+                            org.wso2.carbon.identity.piicontroller.internal
                         </Private-Package>
                         <Export-Package>
                             org.wso2.carbon.identity.piicontroller.*;
@@ -89,10 +94,9 @@
                         <Import-Package>
                             org.osgi.framework; version="${osgi.framework.imp.pkg.version.range}",
                             org.osgi.service.component; version="${osgi.service.component.imp.pkg.version.range}",
-                            org.wso2.carbon.identity.core;version="${carbon.identity.framework.version.range}",
-                            org.wso2.carbon.idp.mgt;version="${carbon.identity.framework.version.range}",
                             org.wso2.carbon.identity.governance.*;version="${identity.governance.version.range}",
                             org.wso2.carbon.consent.mgt.core.*;version="${consent.mgt.version}",
+                            org.wso2.carbon.identity.application.common.*;version="${carbon.identity.framework.version.range}",
                             org.apache.commons.logging.*; version="${commons-logging.osgi.version.range}",
                         </Import-Package>
                     </instructions>
