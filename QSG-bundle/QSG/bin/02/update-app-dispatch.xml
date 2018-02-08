@@ -5,7 +5,7 @@
             <!--Optional:-->
             <xsd:serviceProvider>
                 <!--Optional:-->
-                <xsd1:applicationID>10</xsd1:applicationID>
+                <xsd1:applicationID>46</xsd1:applicationID>
                 <!--Optional:-->
                 <xsd1:applicationName>dispatch</xsd1:applicationName>
                 <!--Optional:-->

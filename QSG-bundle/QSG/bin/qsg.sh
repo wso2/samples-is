@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # ----------------------------------------------------------------------------
-#  Copyright 2017 WSO2, Inc. http://www.wso2.org
+#  Copyright 2018 WSO2, Inc. http://www.wso2.org
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -89,10 +89,10 @@ read clean
 
  case ${clean} in
         [Yy]* ) 
-	delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
+	    delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
         delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
         delete_user
-	break;;
+	   break;;
         [Nn]* ) exit;;
         * ) echo "Please answer yes or no.";;
     esac
@@ -158,15 +158,6 @@ if [ ! -d "${TOMCAT_PATH}" ]
    cp saml2-web-app-swift.com.war ${TOMCAT_PATH}/webapps
    echo "** Web application Swift successfully deployed. **"
  fi
-
-# pid=`(ps x | grep "${TOMCAT_PATH}" | grep -v grep | cut -d ' ' -f 1)`
-
-# if [ ! "${pid}" ]; then
-#  echo "Please start up your Tomcat server..."
-#  echo "To start the server, open a new terminal in ${TOMCAT_PATH}/bin and type sh catalina.sh run."
-#  echo
-#  return -1
-# fi
 
 cd ..
 }
@@ -760,4 +751,3 @@ echo "Enter the scenario number you selected."
 		;;
 	esac	
 echo
-

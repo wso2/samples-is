@@ -5,7 +5,7 @@
             <!--Optional:-->
             <xsd:serviceProvider>
                 <!--Optional:-->
-                <xsd1:applicationID>11</xsd1:applicationID>
+                <xsd1:applicationID>47</xsd1:applicationID>
                 <!--Optional:-->
                 <xsd1:applicationName>swift</xsd1:applicationName>
                 <!--Optional:-->
