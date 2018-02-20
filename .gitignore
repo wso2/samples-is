@@ -1,8 +1,14 @@
 # Compiled class file
 *.class
+*.exe
+*.o
+*.so
+*.com
 
 # Log file
 *.log
+*.sql
+*.sqlite
 
 # BlueJ files
 *.ctxt
@@ -19,6 +25,11 @@
 *.rar
 
 .DS_Store
+.DS_Store?
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
 target
 .idea
 *.iml
