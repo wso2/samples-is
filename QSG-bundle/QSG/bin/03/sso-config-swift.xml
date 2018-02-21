@@ -1,0 +1,24 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://org.apache.axis2/xsd" xmlns:xsd1="http://dto.oauth.identity.carbon.wso2.org/xsd">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <xsd:registerOAuthApplicationData>
+         <!--Optional:-->
+         <xsd:application>
+            <!--Optional:-->
+            <xsd1:OAuthVersion>OAuth-2.0</xsd1:OAuthVersion>
+            <!--Optional:-->
+            <xsd1:applicationName>swift</xsd1:applicationName>
+            <!--Optional:-->
+            <xsd1:callbackUrl>http://localhost.com:8080/Swift/oauth2client</xsd1:callbackUrl>
+            <!--Optional:-->
+            <xsd1:grantTypes>refresh_token urn:ietf:params:oauth:grant-type:saml2-bearer implicit password client_credentials iwa:ntlm authorization_code</xsd1:grantTypes>
+            <!--Optional:-->
+            <xsd1:oauthConsumerKey>c3dpZnRhcHA=</xsd1:oauthConsumerKey>
+            <!--Optional:-->
+            <xsd1:oauthConsumerSecret>c3dpZnRhcHAxMjM=</xsd1:oauthConsumerSecret>
+            <!--Optional:-->
+            <xsd1:pkceMandatory>false</xsd1:pkceMandatory>
+         </xsd:application>
+      </xsd:registerOAuthApplicationData>
+   </soapenv:Body>
+</soapenv:Envelope>
