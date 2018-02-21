@@ -122,7 +122,7 @@
         <identity.governance.version>1.0.37</identity.governance.version>
         <identity.governance.version.range>[1.0.0, 2.0.0]</identity.governance.version.range>
         <identity.pii-controller.exp.pkg.version>1.0.0-SNAPSHOT</identity.pii-controller.exp.pkg.version>
-        <consent.mgt.version>1.0.5</consent.mgt.version>
+        <consent.mgt.version>1.0.28</consent.mgt.version>
         <osgi.framework.imp.pkg.version.range>[1.7.0, 2.0.0)</osgi.framework.imp.pkg.version.range>
         <osgi.service.component.imp.pkg.version.range>[1.2.0, 2.0.0)</osgi.service.component.imp.pkg.version.range>
         <maven.scr.plugin.version>1.7.2</maven.scr.plugin.version>
