@@ -33,19 +33,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import static org.wso2.carbon.consent.mgt.core.constant.ConsentConstants.PIIControllerElements.countryElement;
-import static org.wso2.carbon.consent.mgt.core.constant.ConsentConstants.PIIControllerElements.localityElement;
-import static org.wso2.carbon.consent.mgt.core.constant.ConsentConstants.PIIControllerElements.piiControllerContactElement;
-import static org.wso2.carbon.consent.mgt.core.constant.ConsentConstants.PIIControllerElements.piiControllerEmailElement;
-import static org.wso2.carbon.consent.mgt.core.constant.ConsentConstants.PIIControllerElements.piiControllerNameElement;
-import static org.wso2.carbon.consent.mgt.core.constant.ConsentConstants.PIIControllerElements.piiControllerOnBehalfElement;
-import static org.wso2.carbon.consent.mgt.core.constant.ConsentConstants.PIIControllerElements.piiControllerPhoneElement;
-import static org.wso2.carbon.consent.mgt.core.constant.ConsentConstants.PIIControllerElements.piiControllerPublicKeyElement;
-import static org.wso2.carbon.consent.mgt.core.constant.ConsentConstants.PIIControllerElements.piiControllerUrlElement;
-import static org.wso2.carbon.consent.mgt.core.constant.ConsentConstants.PIIControllerElements.postCodeElement;
-import static org.wso2.carbon.consent.mgt.core.constant.ConsentConstants.PIIControllerElements.postOfficeBoxNumberElement;
-import static org.wso2.carbon.consent.mgt.core.constant.ConsentConstants.PIIControllerElements.regionElement;
-import static org.wso2.carbon.consent.mgt.core.constant.ConsentConstants.PIIControllerElements.streetAddressElement;
+import static org.wso2.carbon.consent.mgt.core.constant.ConsentConstants.PIIControllerElements.COUNTRY_ELEMENT;
+import static org.wso2.carbon.consent.mgt.core.constant.ConsentConstants.PIIControllerElements.LOCALITY_ELEMENT;
+import static org.wso2.carbon.consent.mgt.core.constant.ConsentConstants.PIIControllerElements.PII_CONTROLLER_CONTACT_ELEMENT;
+import static org.wso2.carbon.consent.mgt.core.constant.ConsentConstants.PIIControllerElements.PII_CONTROLLER_EMAIL_ELEMENT;
+import static org.wso2.carbon.consent.mgt.core.constant.ConsentConstants.PIIControllerElements.PII_CONTROLLER_NAME_ELEMENT;
+import static org.wso2.carbon.consent.mgt.core.constant.ConsentConstants.PIIControllerElements.PII_CONTROLLER_ON_BEHALF_ELEMENT;
+import static org.wso2.carbon.consent.mgt.core.constant.ConsentConstants.PIIControllerElements.PII_CONTROLLER_PHONE_ELEMENT;
+import static org.wso2.carbon.consent.mgt.core.constant.ConsentConstants.PIIControllerElements.PII_CONTROLLER_PUBLIC_KEYE_LEMENT;
+import static org.wso2.carbon.consent.mgt.core.constant.ConsentConstants.PIIControllerElements.PII_CONTROLLER_URL_ELEMENT;
+import static org.wso2.carbon.consent.mgt.core.constant.ConsentConstants.PIIControllerElements.POSTAL_CODE;
+import static org.wso2.carbon.consent.mgt.core.constant.ConsentConstants.PIIControllerElements.POST_CODE_ELEMENT;
+import static org.wso2.carbon.consent.mgt.core.constant.ConsentConstants.PIIControllerElements.POST_OFFICE_BOX_NUMBER_ELEMENT;
+import static org.wso2.carbon.consent.mgt.core.constant.ConsentConstants.PIIControllerElements.PUBLIC_KEY;
+import static org.wso2.carbon.consent.mgt.core.constant.ConsentConstants.PIIControllerElements.REGION_ELEMENT;
+import static org.wso2.carbon.consent.mgt.core.constant.ConsentConstants.PIIControllerElements.STREET_ADDRESS_ELEMENT;
 
 /**
  * This class used to define default/customize values of PII controller details.
@@ -57,7 +59,7 @@ public class ConsentMgtConfigImpl implements IdentityConnectorConfig, PIIControl
     private static final String DISPLAY_NAME_CONTACT = "Contact Name";
     private static final String DISPLAY_NAME_EMAIL = "Email Address";
     private static final String DISPLAY_NAME_PHONE = "Phone Number";
-    private static final String DISPLAY_NAME_ON_BEHALF = "Nn Behalf";
+    private static final String DISPLAY_NAME_ON_BEHALF = "On Behalf";
     private static final String DISPLAY_NAME_PII_CONTROLLER_URL = "Url";
     private static final String DISPLAY_NAME_ADDRESS_COUNTRY = "Country";
     private static final String DISPLAY_NAME_ADDRESS_LOCALITY = "Locality";
@@ -156,7 +158,6 @@ public class ConsentMgtConfigImpl implements IdentityConnectorConfig, PIIControl
         properties.add(ConsentConstants.POST_OFFICE_BOX_NUMBER);
         properties.add(ConsentConstants.POSTAL_CODE);
         properties.add(ConsentConstants.STREET_ADDRESS);
-        properties.add(ConsentConstants.PUBLIC_KEY);
         return properties.toArray(new String[properties.size()]);
     }
 
@@ -165,20 +166,18 @@ public class ConsentMgtConfigImpl implements IdentityConnectorConfig, PIIControl
 
         Map<String, String> defaultProperties = new HashMap<>();
 
-        defaultProperties.put(ConsentConstants.PII_CONTROLLER, getConfiguration(piiControllerNameElement));
-        defaultProperties.put(ConsentConstants.CONTACT, getConfiguration(piiControllerContactElement));
-        defaultProperties.put(ConsentConstants.EMAIL, getConfiguration(piiControllerEmailElement));
-        defaultProperties.put(ConsentConstants.PHONE, getConfiguration(piiControllerPhoneElement));
-        defaultProperties.put(ConsentConstants.ON_BEHALF, getConfiguration(piiControllerOnBehalfElement));
-        defaultProperties.put(ConsentConstants.PII_CONTROLLER_URL, getConfiguration(piiControllerUrlElement));
-        defaultProperties.put(ConsentConstants.ADDRESS_COUNTRY, getConfiguration(countryElement));
-        defaultProperties.put(ConsentConstants.ADDRESS_LOCALITY, getConfiguration(localityElement));
-        defaultProperties.put(ConsentConstants.ADDRESS_REGION, getConfiguration(regionElement));
-        defaultProperties.put(ConsentConstants.POST_OFFICE_BOX_NUMBER, getConfiguration(postOfficeBoxNumberElement));
-        defaultProperties.put(ConsentConstants.POSTAL_CODE, getConfiguration(postCodeElement));
-        defaultProperties.put(ConsentConstants.STREET_ADDRESS, getConfiguration(streetAddressElement));
-        defaultProperties.put(ConsentConstants.PUBLIC_KEY, getConfiguration(piiControllerPublicKeyElement));
-
+        defaultProperties.put(ConsentConstants.PII_CONTROLLER, getConfiguration(PII_CONTROLLER_NAME_ELEMENT));
+        defaultProperties.put(ConsentConstants.CONTACT, getConfiguration(PII_CONTROLLER_CONTACT_ELEMENT));
+        defaultProperties.put(ConsentConstants.EMAIL, getConfiguration(PII_CONTROLLER_EMAIL_ELEMENT));
+        defaultProperties.put(ConsentConstants.PHONE, getConfiguration(PII_CONTROLLER_PHONE_ELEMENT));
+        defaultProperties.put(ConsentConstants.ON_BEHALF, getConfiguration(PII_CONTROLLER_ON_BEHALF_ELEMENT));
+        defaultProperties.put(ConsentConstants.PII_CONTROLLER_URL, getConfiguration(PII_CONTROLLER_URL_ELEMENT));
+        defaultProperties.put(ConsentConstants.ADDRESS_COUNTRY, getConfiguration(COUNTRY_ELEMENT));
+        defaultProperties.put(ConsentConstants.ADDRESS_LOCALITY, getConfiguration(LOCALITY_ELEMENT));
+        defaultProperties.put(ConsentConstants.ADDRESS_REGION, getConfiguration(REGION_ELEMENT));
+        defaultProperties.put(ConsentConstants.POST_OFFICE_BOX_NUMBER, getConfiguration(POST_OFFICE_BOX_NUMBER_ELEMENT));
+        defaultProperties.put(ConsentConstants.POSTAL_CODE, getConfiguration(POST_CODE_ELEMENT));
+        defaultProperties.put(ConsentConstants.STREET_ADDRESS, getConfiguration(STREET_ADDRESS_ELEMENT));
         Properties properties = new Properties();
         properties.putAll(defaultProperties);
         return properties;
@@ -210,7 +209,6 @@ public class ConsentMgtConfigImpl implements IdentityConnectorConfig, PIIControl
         mapping.put(ConsentConstants.POST_OFFICE_BOX_NUMBER, valuePostOfficeBoxNumber);
         mapping.put(ConsentConstants.POSTAL_CODE, valuePostalCode);
         mapping.put(ConsentConstants.STREET_ADDRESS, valueStreetAddress);
-        mapping.put(ConsentConstants.PUBLIC_KEY, publicKey);
         return mapping;
     }
 
@@ -233,20 +231,20 @@ public class ConsentMgtConfigImpl implements IdentityConnectorConfig, PIIControl
     @Override
     public PiiController getControllerInfo(String tenantDomain) {
 
-        String addressCountry = getConfiguration(countryElement);
-        String addressLocality = getConfiguration(localityElement);
-        String addressRegion = getConfiguration(regionElement);
-        String addressPostOfficeBoxNumber = getConfiguration(postOfficeBoxNumberElement);
-        String addressPostCode = getConfiguration(postCodeElement);
-        String addressStreetAddress = getConfiguration(streetAddressElement);
+        String addressCountry = getConfiguration(COUNTRY_ELEMENT);
+        String addressLocality = getConfiguration(LOCALITY_ELEMENT);
+        String addressRegion = getConfiguration(REGION_ELEMENT);
+        String addressPostOfficeBoxNumber = getConfiguration(POST_OFFICE_BOX_NUMBER_ELEMENT);
+        String addressPostCode = getConfiguration(POST_CODE_ELEMENT);
+        String addressStreetAddress = getConfiguration(STREET_ADDRESS_ELEMENT);
 
-        String piiControllerName = getConfiguration(piiControllerNameElement);
-        String piiControllerContact = getConfiguration(piiControllerContactElement);
-        String piiControllerPhone = getConfiguration(piiControllerPhoneElement);
-        String piiControllerEmail = getConfiguration(piiControllerEmailElement);
-        boolean piiControllerOnBehalf = Boolean.parseBoolean(getConfiguration(piiControllerOnBehalfElement));
-        String piiControllerURL = getConfiguration(piiControllerUrlElement);
-        String publicKey = getConfiguration(piiControllerPublicKeyElement);
+        String piiControllerName = getConfiguration(PII_CONTROLLER_NAME_ELEMENT);
+        String piiControllerContact = getConfiguration(PII_CONTROLLER_CONTACT_ELEMENT);
+        String piiControllerPhone = getConfiguration(PII_CONTROLLER_PHONE_ELEMENT);
+        String piiControllerEmail = getConfiguration(PII_CONTROLLER_EMAIL_ELEMENT);
+        boolean piiControllerOnBehalf = Boolean.parseBoolean(getConfiguration(PII_CONTROLLER_ON_BEHALF_ELEMENT));
+        String piiControllerURL = getConfiguration(PII_CONTROLLER_URL_ELEMENT);
+        String publicKey = getConfiguration(PII_CONTROLLER_PUBLIC_KEYE_LEMENT);
 
         try {
             Property[] configurations = identityGovernanceService.getConfiguration(getPropertyNames(), tenantDomain);
