@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Kentor.AuthServices.HttpModule</name>
+    </assembly>
+    <members>
+        <member name="T:Kentor.AuthServices.HttpModule.CommandResultHttpExtension">
+            <summary>
+            Extension methods to CommandResult to update a HttpResponseBase.
+            </summary>
+        </member>
+        <member name="M:Kentor.AuthServices.HttpModule.CommandResultHttpExtension.Apply(Kentor.AuthServices.WebSso.CommandResult,System.Web.HttpResponseBase)">
+            <summary>
+            Apply the command result to a bare HttpResponse.
+            </summary>
+            <param name="commandResult">The CommandResult that will update the HttpResponse.</param>
+            <param name="response">Http Response to write the result to.</param>
+        </member>
+        <member name="M:Kentor.AuthServices.HttpModule.CommandResultHttpExtension.ApplyCookies(Kentor.AuthServices.WebSso.CommandResult,System.Web.HttpResponseBase)">
+            <summary>
+            Apply cookies of the CommandResult to the response.
+            </summary>
+            <param name="commandResult">Commandresult</param>
+            <param name="response">Response</param>
+        </member>
+        <member name="M:Kentor.AuthServices.HttpModule.CommandResultHttpExtension.SignInOrOutSessionAuthenticationModule(Kentor.AuthServices.WebSso.CommandResult)">
+            <summary>
+            Establishes an application session by calling the session authentication module.
+            </summary>
+        </member>
+        <member name="T:Kentor.AuthServices.HttpModule.HttpRequestBaseExtensions">
+            <summary>
+            Static class that hold extension methods for <see cref="T:System.Web.HttpRequestBase"/>.
+            </summary>
+        </member>
+        <member name="M:Kentor.AuthServices.HttpModule.HttpRequestBaseExtensions.ToHttpRequestData(System.Web.HttpRequestBase)">
+            <summary>
+            Extension method to convert a HttpRequestBase to a HttpRequestData.
+            </summary>
+            <param name="requestBase">The request object used to populate the <c>HttpRequestData</c>.</param>
+            <returns>The <c>HttpRequestData</c> object that has been populated by the request.</returns>
+        </member>
+        <member name="M:Kentor.AuthServices.HttpModule.HttpRequestBaseExtensions.ToHttpRequestData(System.Web.HttpRequestBase,System.Boolean)">
+            <summary>
+            Extension method to convert a HttpRequestBase to a HttpRequestData.
+            </summary>
+            <param name="requestBase">The request object used to populate the <c>HttpRequestData</c>.</param>
+            <param name="ignoreCookies">Ignore cookies when extracting data.
+            This is useful for the stub idp that might see the relay state
+            and the requester's cookie, but shouldn't try to decrypt it.</param>
+            <returns>The <c>HttpRequestData</c> object that has been populated by the request.</returns>
+        </member>
+        <member name="T:Kentor.AuthServices.HttpModule.Saml2AuthenticationModule">
+            <summary>
+            Http Module for SAML2 authentication. The module hijacks the 
+            ~/Saml2AuthenticationModule/ path of the http application to provide 
+            authentication services.
+            </summary>
+        </member>
+        <member name="P:Kentor.AuthServices.HttpModule.Saml2AuthenticationModule.Options">
+            <summary>
+            The one and only options instance used by the
+            <see cref="T:Kentor.AuthServices.HttpModule.Saml2AuthenticationModule"/>. It is instantiated by
+            loading the web.config, but after that it can be modified or even
+            replaced from code.
+            </summary>
+        </member>
+        <member name="M:Kentor.AuthServices.HttpModule.Saml2AuthenticationModule.Init(System.Web.HttpApplication)">
+            <summary>
+            Init the module and subscribe to events.
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:Kentor.AuthServices.HttpModule.Saml2AuthenticationModule.OnAuthenticateRequest(System.Object,System.EventArgs)">
+            <summary>
+            Begin request handler that captures all traffic to configured module
+            path.
+            </summary>
+            <param name="sender">The http application.</param>
+            <param name="e">Ignored</param>
+        </member>
+        <member name="M:Kentor.AuthServices.HttpModule.Saml2AuthenticationModule.Dispose">
+            <summary>
+            IDisposable implementation.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,5 @@
+debug log message
+info log message
+warn log message
+error log message
+fatal log message

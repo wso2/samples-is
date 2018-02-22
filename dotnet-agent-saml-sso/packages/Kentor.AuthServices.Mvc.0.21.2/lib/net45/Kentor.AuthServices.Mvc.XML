@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Kentor.AuthServices.Mvc</name>
+    </assembly>
+    <members>
+        <member name="T:Kentor.AuthServices.Mvc.AuthServicesController">
+            <summary>
+            Mvc Controller that provides the authentication functionality.
+            </summary>
+        </member>
+        <member name="P:Kentor.AuthServices.Mvc.AuthServicesController.Options">
+            <summary>
+            The options used by the controller. By default read from config, 
+            but can be set.
+            </summary>
+        </member>
+        <member name="M:Kentor.AuthServices.Mvc.AuthServicesController.SignIn">
+            <summary>
+            SignIn action that sends the AuthnRequest to the Idp.
+            </summary>
+            <returns>Redirect with sign in request</returns>
+        </member>
+        <member name="M:Kentor.AuthServices.Mvc.AuthServicesController.Acs">
+            <summary>
+            Assertion consumer Url that accepts the incoming Saml response.
+            </summary>
+            <returns>Redirect to start page on success.</returns>
+            <remarks>The action effectively accepts the SAMLResponse, but
+            due to using common infrastructure it is read for the current
+            http request.</remarks>
+        </member>
+        <member name="M:Kentor.AuthServices.Mvc.AuthServicesController.Index">
+            <summary>
+            Metadata of the service provider.
+            </summary>
+            <returns>ActionResult with Metadata</returns>
+        </member>
+        <member name="M:Kentor.AuthServices.Mvc.AuthServicesController.Logout">
+            <summary>
+            Logout locally and if Idp supports it, perform a federated logout
+            </summary>
+            <returns>ActionResult</returns>
+        </member>
+        <member name="T:Kentor.AuthServices.Mvc.CommandResultExtensions">
+            <summary>
+            Extension methods for CommandResult for integrating CommandResults in
+            the MVC architecture.
+            </summary>
+        </member>
+        <member name="M:Kentor.AuthServices.Mvc.CommandResultExtensions.ToActionResult(Kentor.AuthServices.WebSso.CommandResult)">
+            <summary>
+            Converts a command result to an action result.
+            </summary>
+            <param name="commandResult">The source command result.</param>
+            <returns>Action result</returns>
+            <remarks>The reason to use a separate command result at all, instead
+            of simply using ActionResult is that the core library should not
+            be Mvc dependant.</remarks>
+        </member>
+    </members>
+</doc>
