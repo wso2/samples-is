@@ -28,19 +28,19 @@
             <dependency>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.0.2</version>
+                <version>${maven.plugins.jar-plugin.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.wso2.carbon.identity.agent.sso.java</groupId>
                 <artifactId>identity-agent-sso</artifactId>
-                <version>5.1.18</version>
+                <version>${identity.agent.sso.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.wso2.sample</groupId>
                 <artifactId>qsg-demo</artifactId>
-                <version>1.0</version>
+                <version>${sample.qsg-demo.version}</version>
             </dependency>
 
             <dependency>
@@ -78,14 +78,22 @@
                         <goals>
                             <goal>single</goal>
                         </goals>
-                    <configuration>
-                        <descriptors>
-                            <descriptor>${project.basedir}/src/assembly/dist.xml</descriptor>
-                        </descriptors>
-                    </configuration>
-                </execution>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>${project.basedir}/src/assembly/dist.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
         </plugins>
     </build>
+
+    <properties>
+        <!--repo versions-->
+        <maven.plugins.jar-plugin.version>3.0.2</maven.plugins.jar-plugin.version>
+        <identity.agent.sso.version>5.1.18</identity.agent.sso.version>
+        <sample.qsg-demo.version>1.0</sample.qsg-demo.version>
+    </properties>
+
 </project>

@@ -33,19 +33,28 @@ import javax.xml.parsers.ParserConfigurationException;
 public class AppId {
 
     private static Logger LOGGER = Logger.getLogger(AppId.class.getSimpleName());
+    private static final String RESPONSE_FORMATTED_FILE = "response_unformatted.xml";
+    private static final String RESPONSE_TAG = "ax2140:applicationID";
 
     public static void main(String[] args) {
 
         try {
             DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-            Document doc = docBuilder.parse(new File("response_unformatted.xml"));
+            Document doc = docBuilder.parse(new File(RESPONSE_FORMATTED_FILE));
 
-            NodeList appId = doc.getElementsByTagName("ax2140:applicationID");
+            NodeList appId = doc.getElementsByTagName(RESPONSE_TAG);
 
-            Element appElement = (Element) appId.item(0);
-            NodeList appList = appElement.getChildNodes();
-            System.out.println(((Node) appList.item(0)).getNodeValue().trim());
+            if (appId.item(0) != null) {
+                Element appElement = (Element) appId.item(0);
+                NodeList appList = appElement.getChildNodes();
+
+                // This stdout is added to be read by the shell script.
+                System.out.println(((Node) appList.item(0)).getNodeValue().trim());
+
+            } else {
+                LOGGER.info("Application ID not found.");
+            }
 
         } catch (SAXParseException err) {
             LOGGER.info("** Parsing error" + ", line "
@@ -53,15 +62,15 @@ public class AppId {
             System.exit(-1);
 
         } catch (SAXException e) {
-            LOGGER.info("** SAX error" + " " + e.getMessage ());
+            LOGGER.info("** SAX error" + " " + e.getMessage());
             System.exit(-1);
 
         } catch (ParserConfigurationException er) {
-            LOGGER.info("** Parser configuration error" + " " + er.getMessage ());
+            LOGGER.info("** Parser configuration error" + " " + er.getMessage());
             System.exit(-1);
 
         } catch (IOException error) {
-            LOGGER.info("** Error occurred" + " " + error.getMessage ());
+            LOGGER.info("** Error occurred" + " " + error.getMessage());
             System.exit(-1);
         }
 

@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # ----------------------------------------------------------------------------
-#  Copyright 2017 WSO2, Inc. http://www.wso2.org
+#  Copyright 2018 WSO2, Inc. http://www.wso2.org
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -195,14 +195,14 @@ if [ ! -d "${TOMCAT_PATH}" ]
    echo "** Web application Swift successfully deployed. **"
  fi
 
-# pid=`(ps x | grep "${TOMCAT_PATH}" | grep -v grep | cut -d ' ' -f 1)`
+ pid=`(ps x | grep "${TOMCAT_PATH}" | grep -v grep | cut -d ' ' -f 1)`
 
-# if [ ! "${pid}" ]; then
-#  echo "Please start up your Tomcat server..."
-#  echo "To start the server, open a new terminal in ${TOMCAT_PATH}/bin and type sh catalina.sh run."
-#  echo
-#  return -1
-# fi
+ if [ ! "${pid}" ]; then
+  echo "Please start up your Tomcat server..."
+  echo "To start the server, open a new terminal in ${TOMCAT_PATH}/bin and type sh catalina.sh run."
+  echo
+  return -1
+ fi
 
 cd ..
 }
@@ -242,7 +242,7 @@ echo
 
 echo "Creating a role named Manager..."
 
-cd ~/QSG-bundle/QSG/bin
+cd ${QSG}/QSG/bin
 #The following command will add a role to the user.
 curl -s -k --user ${IS_name}:${IS_pass} -d @$request_data -H "Content-Type: text/xml" -H "SOAPAction: urn:addRole" -o /dev/null https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 res=$?
@@ -257,7 +257,7 @@ cd ..
 }
 
 add_service_provider() {
-cd ~/QSG-bundle/QSG/bin
+cd ${QSG}/QSG/bin
 sp_name=$1
 scenario=$2
 soap_action=$3
@@ -294,7 +294,7 @@ return 0;
 }
 
 delete_user() {
-cd ~/QSG-bundle/QSG/bin
+cd ${QSG}/QSG/bin
 request_data1="Common/delete-cameron.xml"
 request_data2="Common/delete-alex.xml"
 request_data3="Common/delete-role.xml"
@@ -339,7 +339,7 @@ cd ..
 }
 
 delete_sp() {
-cd ~/QSG-bundle/QSG/bin
+cd ${QSG}/QSG/bin
 sp_name=$1
 scenario=$2
 soap_action=$3
@@ -374,7 +374,7 @@ return 0;
 }
 
 delete_idp() {
-cd ~/QSG-bundle/QSG/bin
+cd ${QSG}/QSG/bin
 scenario=$1
 soap_action=$2
 endpoint=$3
@@ -383,6 +383,12 @@ request_data="${scenario}/delete-idp-twitter.xml"
  if [ ! -d "$scenario" ]
   then
     echo "$scenario Directory not exists."
+    return -1
+  fi
+
+  if [ ! -f "$request_data" ]
+   then
+    echo "$request_data File does not exists."
     return -1
   fi
 
@@ -404,7 +410,7 @@ return 0;
 
 configure_saml() {
 
-cd ~/QSG-bundle/QSG/bin
+cd ${QSG}/QSG/bin
 sp_name=$1
 scenario=$2
 soap_action=$3
@@ -440,7 +446,7 @@ return 0;
 }
 
 configure_oidc() {
-cd ~/QSG-bundle/QSG/bin
+cd ${QSG}/QSG/bin
 sp_name=$1
 scenario=$2
 soap_action=$3
@@ -799,7 +805,7 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
 }
 
 update_application_saml() {
-cd ~/QSG-bundle/QSG/bin
+cd ${QSG}/QSG/bin
 sp_name=$1
 scenario=$2
 soap_action=$3
@@ -836,7 +842,7 @@ return 0;
 }
 
 update_application_oidc() {
-cd ~/QSG-bundle/QSG/bin
+cd ${QSG}/QSG/bin
 sp_name=$1
 scenario=$2
 soap_action=$3
@@ -869,7 +875,7 @@ return 0;
 }
 
 add_identity_provider() {
-cd ~/QSG-bundle/QSG/bin
+cd ${QSG}/QSG/bin
 IS_name=$1
 IS_pass=$2
 scenario=$3
