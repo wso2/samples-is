@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Kentor.AuthServices.Owin</name>
+    </assembly>
+    <members>
+        <member name="T:Kentor.AuthServices.Owin.KentorAuthServicesAuthenticationMiddleware">
+            <summary>
+            Owin middleware for SAML2 authentication.
+            </summary>
+        </member>
+        <member name="M:Kentor.AuthServices.Owin.KentorAuthServicesAuthenticationMiddleware.#ctor(Microsoft.Owin.OwinMiddleware,Owin.IAppBuilder,Kentor.AuthServices.Owin.KentorAuthServicesAuthenticationOptions)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="next">The next middleware in the pipeline.</param>
+            <param name="app">The app that this middleware will be registered with.</param>
+            <param name="options">Settings for the middleware.</param>
+        </member>
+        <member name="M:Kentor.AuthServices.Owin.KentorAuthServicesAuthenticationMiddleware.CreateHandler">
+            <summary>
+            Creates a handler instance for use when processing a request.
+            </summary>
+            <returns>Handler instance.</returns>
+        </member>
+        <member name="T:Kentor.AuthServices.Owin.KentorAuthServicesAuthenticationOptions">
+            <summary>
+            Options for Kentor AuthServices Saml2 Authentication.
+            </summary>
+        </member>
+        <member name="P:Kentor.AuthServices.Owin.KentorAuthServicesAuthenticationOptions.Notifications">
+            <summary>
+            Set of callbacks that can be used as extension points for various
+            events.
+            </summary>
+        </member>
+        <member name="M:Kentor.AuthServices.Owin.KentorAuthServicesAuthenticationOptions.#ctor(System.Boolean)">
+            <summary>
+            Constructor
+            <param name="loadConfiguration">Should the options be inited by loading app/web.config?</param>
+            </summary>
+        </member>
+        <member name="P:Kentor.AuthServices.Owin.KentorAuthServicesAuthenticationOptions.SignInAsAuthenticationType">
+            <summary>
+            The authentication type that will be used to sign in with. Typically this will be "ExternalCookie"
+            to be picked up by the external cookie authentication middleware that persists the identity in a cookie.
+            </summary>
+        </member>
+        <member name="P:Kentor.AuthServices.Owin.KentorAuthServicesAuthenticationOptions.SPOptions">
+            <summary>
+            Options for the service provider's behaviour; i.e. everything except
+            the idp and federation list.
+            </summary>
+        </member>
+        <member name="P:Kentor.AuthServices.Owin.KentorAuthServicesAuthenticationOptions.IdentityProviders">
+            <summary>
+            Available identity providers.
+            </summary>
+        </member>
+        <member name="P:Kentor.AuthServices.Owin.KentorAuthServicesAuthenticationOptions.Caption">
+            <summary>
+            Passthrough property to Description.Caption.
+            </summary>
+        </member>
+        <member name="P:Kentor.AuthServices.Owin.KentorAuthServicesAuthenticationOptions.DataProtector">
+            <summary>
+            Gets or sets the type used to secure data handled by the middleware.
+            </summary>
+        </member>
+        <member name="T:Kentor.AuthServices.Owin.OwinLoggerAdapter">
+            <summary>
+            Adapter for AuthServices logging around owin logging system.
+            </summary>
+        </member>
+        <member name="M:Kentor.AuthServices.Owin.OwinLoggerAdapter.#ctor(Microsoft.Owin.Logging.ILogger)">
+            <summary>
+            Ctor
+            </summary>
+            <param name="logger">Owin logger to wrap</param>
+        </member>
+        <member name="M:Kentor.AuthServices.Owin.OwinLoggerAdapter.WriteError(System.String,System.Exception)">
+            <summary>
+            Write an error message and include an exception
+            </summary>
+            <param name="message">Message to write</param>
+            <param name="ex">Exception with details</param>
+        </member>
+        <member name="M:Kentor.AuthServices.Owin.OwinLoggerAdapter.WriteInformation(System.String)">
+            <summary>
+            Write an informational message.
+            </summary>
+            <param name="message">Message to write.</param>
+        </member>
+        <member name="M:Kentor.AuthServices.Owin.OwinLoggerAdapter.WriteVerbose(System.String)">
+            <summary>
+            Write a verbose informational message.
+            </summary>
+            <param name="message">Message to write</param>
+        </member>
+        <member name="T:Owin.KentorAuthServicesAuthenticationExtensions">
+            <summary>
+            Extension method to easily attach Kentor AuthServices to the Owin pipeline.
+            </summary>
+        </member>
+        <member name="M:Owin.KentorAuthServicesAuthenticationExtensions.UseKentorAuthServicesAuthentication(Owin.IAppBuilder,Kentor.AuthServices.Owin.KentorAuthServicesAuthenticationOptions)">
+            <summary>
+            Add Kentor AuthServices SAML2 authentication to the Owin pipeline.
+            </summary>
+            <param name="app">Owin pipeline builder.</param>
+            <param name="options">Options for the middleware.</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
