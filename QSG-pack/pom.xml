@@ -17,39 +17,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
 
+    <modelVersion>4.0.0</modelVersion>
     <groupId>Quick-Start-Guide</groupId>
     <artifactId>QSG</artifactId>
     <version>1.0</version>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>${maven.plugins.jar-plugin.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.wso2.carbon.identity.agent.sso.java</groupId>
-                <artifactId>identity-agent-sso</artifactId>
-                <version>${identity.agent.sso.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.wso2.sample</groupId>
-                <artifactId>qsg-demo</artifactId>
-                <version>${sample.qsg-demo.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.wso2.is.extensions</groupId>
-                <artifactId>quick-start-guide</artifactId>
-            </dependency>
-        </dependencies>
-
-    </dependencyManagement>
 
     <build>
         <plugins>
@@ -88,12 +60,5 @@
             </plugin>
         </plugins>
     </build>
-
-    <properties>
-        <!--repo versions-->
-        <maven.plugins.jar-plugin.version>3.0.2</maven.plugins.jar-plugin.version>
-        <identity.agent.sso.version>5.1.18</identity.agent.sso.version>
-        <sample.qsg-demo.version>1.0</sample.qsg-demo.version>
-    </properties>
 
 </project>

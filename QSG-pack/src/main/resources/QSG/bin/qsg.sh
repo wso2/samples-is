@@ -112,7 +112,17 @@ echo "|  *** Please press ctrl button and click on the links ***       |"
 echo "|                                                                |"
 echo "|  Dispatch - http://localhost:8080/${dispatch_url}/  |"
 echo "|  Swift - http://localhost:8080/${swift_url}/        |"
-echo "|                                                                |"  
+echo "|                                                                |"
+echo "|  Please use the following user credentials to log in.          |"
+echo "|                                                                |"
+echo "|  MANAGER                                                       |"
+echo "|    Username: cameron                                           |"
+echo "|    Password: cameron123                                        |"
+echo "|                                                                |"
+echo "|  EMPLOYEE                                                      |"
+echo "|    Username: alex                                              |"
+echo "|    Password: alex123                                           |"
+echo "|                                                                |"
 echo "------------------------------------------------------------------"
 echo
 echo "If you have finished trying out the sample web apps, you can clean the process now."
@@ -195,15 +205,6 @@ if [ ! -d "${TOMCAT_PATH}" ]
    echo "** Web application Swift successfully deployed. **"
  fi
 
- pid=`(ps x | grep "${TOMCAT_PATH}" | grep -v grep | cut -d ' ' -f 1)`
-
- if [ ! "${pid}" ]; then
-  echo "Please start up your Tomcat server..."
-  echo "To start the server, open a new terminal in ${TOMCAT_PATH}/bin and type sh catalina.sh run."
-  echo
-  return -1
- fi
-
 cd ..
 }
 
@@ -235,6 +236,8 @@ res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while creating user alex. !!"
   echo
+  delete_user
+  echo
   return -1
  fi
 echo "** The user alex was successfully created. **"
@@ -248,6 +251,8 @@ curl -s -k --user ${IS_name}:${IS_pass} -d @$request_data -H "Content-Type: text
 res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while creating role manager. !!"
+  echo
+  delete_user
   echo
   return -1
  fi
@@ -284,6 +289,10 @@ curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type:
 res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while creating the service provider. !!"
+  echo
+  delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
+  delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
+  delete_user
   echo
   return -1
  fi
@@ -409,7 +418,6 @@ return 0;
 }
 
 configure_saml() {
-
 cd ${QSG}/QSG/bin
 sp_name=$1
 scenario=$2
@@ -437,6 +445,10 @@ curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type:
 res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while configuring SAML2 web SSO for ${sp_name}.... !!"
+  echo
+  delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
+  delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
+  delete_user
   echo
   return -1
  fi
@@ -474,6 +486,10 @@ res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while configuring OIDC web SSO for ${sp_name}.... !!"
   echo
+  delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
+  delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
+  delete_user
+  echo
   return -1
  fi
 echo "** OIDC successfully configured for the Service Provider $sp_name. **"
@@ -503,6 +519,10 @@ curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type:
 res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while getting application details for ${sp_name}.... !!"
+  echo
+  delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
+  delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
+  delete_user
   echo
   return -1
  fi
@@ -611,6 +631,10 @@ curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type:
 res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while getting application details for ${sp_name}.... !!"
+  echo
+  delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
+  delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
+  delete_user
   echo
   return -1
  fi
@@ -728,6 +752,10 @@ res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while getting application details for ${sp_name}.... !!"
   echo
+  delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
+  delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
+  delete_user
+  echo
   return -1
  fi
 
@@ -834,6 +862,10 @@ res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while updating application ${sp_name}.... !!"
   echo
+  delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
+  delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
+  delete_user
+  echo
   return -1
  fi
 echo "** Successfully updated the application ${sp_name}. **"
@@ -867,6 +899,10 @@ curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type:
 res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while updating application ${sp_name}.... !!"
+  echo
+  delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
+  delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
+  delete_user
   echo
   return -1
  fi
@@ -992,7 +1028,7 @@ echo "|  Scenario 2 - Configuring Single-Sign-On with SAML2                     
 echo "|  Scenario 3 - Configuring Single-Sign-On with OIDC                        |"
 echo "|  Scenario 4 - Configuring Multi-Factor Authentication                     |"
 echo "|  Scenario 5 - Configuring Twitter as a Federated Authenticator            |"
-echo "|  Scenario 6 - Setting up Self-Signup                                      |"
+echo "|  Scenario 6 - Configuring Self-Signup                                     |"
 echo "|  Scenario 7 - Creating a workflow                                         |"  
 echo "-----------------------------------------------------------------------------"
 echo "Enter the scenario number you selected."
@@ -1041,7 +1077,7 @@ echo "Enter the scenario number you selected."
 		break ;;
 
 		6)
-		echo "Setting up Self-Signup"
+		echo "Configuring self-signup"
 		echo
 		echo "Not yet implemented."
 		break ;;
