@@ -1,0 +1,245 @@
+<!--
+ Copyright (c) 2018, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mgt="http://mgt.idp.carbon.wso2.org"
+                  xmlns:xsd="http://model.common.application.identity.carbon.wso2.org/xsd">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <mgt:updateResidentIdP>
+            <!--Optional:-->
+            <mgt:identityProvider>
+                <!--Zero or more repetitions:-->
+                <xsd:federatedAuthenticatorConfigs>
+                    <!--Optional:-->
+                    <xsd:name>samlsso</xsd:name>
+                    <!--Zero or more repetitions:-->
+                    <xsd:properties>
+                        <!--Optional:-->
+                        <xsd:name>IdpEntityId</xsd:name>
+                        <!--Optional:-->
+                        <xsd:value>localhost</xsd:value>
+                    </xsd:properties>
+                    <xsd:properties>
+                        <xsd:name>DestinationURI.1</xsd:name>
+                        <xsd:value>https://localhost:9443/samlsso</xsd:value>
+                    </xsd:properties>
+                </xsd:federatedAuthenticatorConfigs>
+                <xsd:federatedAuthenticatorConfigs xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>passivests</xsd:name>
+                    <xsd:properties>
+                        <xsd:name>IdPEntityId</xsd:name>
+                        <xsd:value>localhost</xsd:value>
+                    </xsd:properties>
+                </xsd:federatedAuthenticatorConfigs>
+                <xsd:federatedAuthenticatorConfigs xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>openidconnect</xsd:name>
+                    <xsd:properties>
+                        <xsd:name>IdPEntityId</xsd:name>
+                        <xsd:value>https://localhost:9443/oauth2/token</xsd:value>
+                    </xsd:properties>
+                </xsd:federatedAuthenticatorConfigs>
+                <!--Optional:-->
+                <xsd:homeRealmId>localhost</xsd:homeRealmId>
+                <!--Optional:-->
+                <xsd:identityProviderName>LOCAL</xsd:identityProviderName>
+                <!--Zero or more repetitions:-->
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>passwordHistory.enable</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>passwordHistory.count</xsd:name>
+                    <xsd:value>5</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>passwordPolicy.enable</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>passwordPolicy.min.length</xsd:name>
+                    <xsd:value>6</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>passwordPolicy.max.length</xsd:name>
+                    <xsd:value>12</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>passwordPolicy.pattern</xsd:name>
+                    <xsd:value>^((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%&amp;*])).{0,100}$</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>passwordPolicy.errorMsg</xsd:name>
+                    <xsd:value>'Password pattern policy violated. Password should contain a digit[0-9], a lower case
+                        letter[a-z], an upper case letter[A-Z], one of !@#$%&amp;* characters'
+                    </xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>sso.login.recaptcha.enable</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>sso.login.recaptcha.on.max.failed.attempts</xsd:name>
+                    <xsd:value>3</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>account.lock.handler.enable</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>account.lock.handler.On.Failure.Max.Attempts</xsd:name>
+                    <xsd:value>5</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>account.lock.handler.Time</xsd:name>
+                    <xsd:value>5</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>account.lock.handler.login.fail.timeout.ratio</xsd:name>
+                    <xsd:value>2</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>account.lock.handler.notification.manageInternally</xsd:name>
+                    <xsd:value>true</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>account.disable.handler.enable</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>account.disable.handler.notification.manageInternally</xsd:name>
+                    <xsd:value>true</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>suspension.notification.enable</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>suspension.notification.account.disable.delay</xsd:name>
+                    <xsd:value>90</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>suspension.notification.delays</xsd:name>
+                    <xsd:value>30,45,60,75</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>Recovery.Notification.Password.Enable</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>Recovery.Question.Password.Enable</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>Recovery.Question.Password.MinAnswers</xsd:name>
+                    <xsd:value>2</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>Recovery.Question.Password.ReCaptcha.Enable</xsd:name>
+                    <xsd:value>true</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>Recovery.Question.Password.ReCaptcha.MaxFailedAttempts</xsd:name>
+                    <xsd:value>2</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>Recovery.Notification.Username.Enable</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>Recovery.Notification.InternallyManage</xsd:name>
+                    <xsd:value>true</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>Recovery.NotifySuccess</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>Recovery.Question.Password.NotifyStart</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>Recovery.ExpiryTime</xsd:name>
+                    <xsd:value>1440</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>SelfRegistration.Enable</xsd:name>
+                    <xsd:value>true</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>SelfRegistration.LockOnCreation</xsd:name>
+                    <xsd:value>true</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>SelfRegistration.Notification.InternallyManage</xsd:name>
+                    <xsd:value>true</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>SelfRegistration.ReCaptcha</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>SelfRegistration.VerificationCode.ExpiryTime</xsd:name>
+                    <xsd:value>1440</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>EmailVerification.Enable</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>EmailVerification.LockOnCreation</xsd:name>
+                    <xsd:value>true</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>EmailVerification.Notification.InternallyManage</xsd:name>
+                    <xsd:value>true</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>EmailVerification.ExpiryTime</xsd:name>
+                    <xsd:value>1440</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>EmailVerification.AskPassword.ExpiryTime</xsd:name>
+                    <xsd:value>1440</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>EmailVerification.AskPassword.PasswordGenerator</xsd:name>
+                    <xsd:value>org.wso2.carbon.user.mgt.common.DefaultPasswordGenerator</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>Recovery.AdminPasswordReset.RecoveryLink</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>Recovery.AdminPasswordReset.OTP</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>Recovery.AdminPasswordReset.Offline</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>SessionIdleTimeout</xsd:name>
+                    <xsd:value>15</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <xsd:name>RememberMeTimeout</xsd:name>
+                    <xsd:value>20160</xsd:value>
+                </xsd:idpProperties>
+                <!--Optional:-->
+                <xsd:primary>true</xsd:primary>
+            </mgt:identityProvider>
+        </mgt:updateResidentIdP>
+    </soapenv:Body>
+</soapenv:Envelope>

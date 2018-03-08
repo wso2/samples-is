@@ -99,6 +99,202 @@ case ${user} in
 return 0;
 }
 
+configure_self_signup (){
+cd ${QSG}/QSG/bin
+
+echo
+echo "-----------------------------------------------------------------------"
+echo "|                                                                     |"
+echo "|  You can configure self signup in WSO2 IS in three different ways.  |"
+echo "|  So choose your desired approach from the list below to enable the  |"
+echo "|  required settings.                                                 |"
+echo "|                                                                     |"
+echo "|    Press 1 - Enable Self User Registration(without any config.)     |"
+echo "|               [ This will enable self signup in the IS without any  |"
+echo "|               other configuration changes.]                         |"
+echo "|                                                                     |"
+echo "|    Press 2 - Enable account lock on creation                        |"
+echo "|               [ This will lock the user account during user         |"
+echo "|               registration. You can only log into the app after     |"
+echo "|               after clicking the verification link sent to the      |"
+echo "|               email address you provided.]                          |"
+echo "|                                                                     |"
+echo "|    Press 3 - Enable Notification Internally Management              |"
+echo "|               [ Notify user on the account creation.]               |"
+echo "|                                                                     |"
+echo "-----------------------------------------------------------------------"
+echo
+echo "Please enter the number you selected... "
+echo
+read user
+
+case ${user} in
+     1)
+     update_idp_selfsignup urn:updateResidentIdP https://localhost:9443/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4= 06 selfsignup
+     break ;;
+
+     2)
+     echo
+     echo "-----------------------------------------------------------------------"
+     echo "|                                                                     |"
+     echo "|  Please do the following before trying self signup with account     |"
+     echo "|  lock on creation enabled.                                          |"
+     echo "|                                                                     |"
+     echo "|  1. Open the file: output-event-adapters.xml in the path,           |"
+     echo "|     (Your WSO2-IS)/repository/conf.                                 |"
+     echo "|     Ex: wso2is-5.4.1/repository/conf/output-event-adapters.xml.     |"
+     echo "|                                                                     |"
+     echo "|  2. Find the adapter configuration for emails and change the        |"
+     echo "|     email address, username, password values.                       |"
+     echo "|                                                                     |"
+     echo "|  3. Finally, restart the server.                                    |"
+     echo "|                                                                     |"
+     echo "-----------------------------------------------------------------------"
+     echo
+     echo "Have you make the above mentioned configurations?"
+     echo
+     echo    "Press y - YES"
+     echo    "Press n - NO"
+     echo
+     read input
+     case ${input} in
+        [Yy]* )
+        update_idp_selfsignup urn:updateResidentIdP https://localhost:9443/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4= 06 lockon
+        break;;
+
+        [Nn]* )
+        echo "Please make the necessary configurations and restart the script."
+        echo
+        return -1;;
+
+        * )
+        echo "Please answer yes or no.";;
+     esac
+     break ;;
+
+     3)
+     echo
+     echo "-----------------------------------------------------------------------"
+     echo "|                                                                     |"
+     echo "|  Please do the following before trying self signup with account     |"
+     echo "|  lock on creation enabled.                                          |"
+     echo "|                                                                     |"
+     echo "|  1. Open the file: output-event-adapters.xml in the path,           |"
+     echo "|     (Your WSO2-IS)/repository/conf.                                 |"
+     echo "|     Ex: wso2is-5.4.1/repository/conf/output-event-adapters.xml.     |"
+     echo "|                                                                     |"
+     echo "|  2. Find the adapter configuration for emails and change the        |"
+     echo "|     email address, username, password values.                       |"
+     echo "|                                                                     |"
+     echo "|  3. Finally, restart the server.                                    |"
+     echo "|                                                                     |"
+     echo "-----------------------------------------------------------------------"
+     echo
+     echo "Have you make the above mentioned configurations?"
+     echo
+     echo    "Press y - YES"
+     echo    "Press n - NO"
+     echo
+     read input
+     case ${input} in
+        [Yy]* )
+        update_idp_selfsignup urn:updateResidentIdP https://localhost:9443/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4= 06 notify
+        break ;;
+
+        [Nn]* )
+        echo "Please make the necessary configurations and restart the script."
+        echo
+        return -1;;
+
+        * )
+        echo "Please answer yes or no.";;
+     esac
+     break ;;
+
+	*)
+	echo "Sorry, that's not an option."
+	;;
+esac
+
+# Add a service provider in wso2-is
+add_service_provider dispatch Common urn:createApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4=
+
+# Configure OIDC for the Service Providers
+configure_oidc dispatch 03 urn:registerOAuthApplicationData https://localhost:9443/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4=
+
+create_updateapp_oidc dispatch YWRtaW46YWRtaW4= ZGlzcGF0Y2g= ZGlzcGF0Y2gxMjM0
+update_application_oidc dispatch 03 urn:updateApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4=
+
+echo
+echo "-------------------------------------------------------------------"
+echo "|                                                                 |"
+echo "|  To tryout self registration please log into the sample         |"
+echo "|  app below.                                                     |"
+echo "|  *** Please press ctrl button and click on the link ***         |"
+echo "|                                                                 |"
+echo "|  Dispatch - http://localhost:8080/Dispatch/                     |"
+echo "|                                                                 |"
+echo "|  Click on the ** Register now ** link in the login page.        |"
+echo "|  Fill in the user details form and create an account.           |"
+echo "|                                                                 |"
+echo "|  You can now use the username and password you provided, to     |"
+echo "|  log into Dispatch.                                             |"
+echo "|                                                                 |"
+echo "-------------------------------------------------------------------"
+echo
+echo "If you have finished trying out the sample web apps, you can clean the process now."
+echo "Do you want to clean up the setup?"
+echo
+echo "Press y - YES"
+echo "Press n - NO"
+echo
+read clean
+
+case ${clean} in
+        [Yy]* )
+        delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4=
+	break;;
+        [Nn]* ) exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+
+return 0;
+}
+
+update_idp_selfsignup() {
+
+soap_action=$1
+endpoint=$2
+auth=$3
+scenario=$4
+config=$5
+
+request_data="${scenario}/update-idp-${config}.xml"
+
+if [ ! -d "$scenario" ]
+  then
+    echo "$scenario Directory does not exists."
+    return -1
+  fi
+
+  if [ ! -f "$request_data" ]
+   then
+    echo "$request_data File does not exists."
+    return -1
+  fi
+
+curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type: text/xml" -H "SOAPAction: ${soap_action}" -o /dev/null $endpoint
+res=$?
+ if test "${res}" != "0"; then
+  echo "!! Problem occurred while updating the identity provider. !!"
+  echo
+  return -1
+ fi
+echo "** Identity Provider successfully updated. **"
+echo
+return 0;
+}
+
 end_message() {
 
 dispatch_url=$1
@@ -135,8 +331,8 @@ read clean
 
  case ${clean} in
         [Yy]* ) 
-	    delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
-        delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
+        delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+        delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
         delete_user
 	break;;
         [Nn]* ) exit;;
@@ -290,8 +486,8 @@ res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while creating the service provider. !!"
   echo
-  delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
-  delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
+  delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
   delete_user
   echo
   return -1
@@ -353,6 +549,7 @@ sp_name=$1
 scenario=$2
 soap_action=$3
 endpoint=$4
+auth=$5
 request_data="${scenario}/delete-sp-${sp_name}.xml"
   
  if [ ! -d "$scenario" ]
@@ -370,7 +567,7 @@ echo
 echo "Deleting Service Provider $sp_name..."
 
 # Send the SOAP request to delete a SP.
-curl -s -k -d @$request_data -H "Authorization: Basic Y2FtZXJvbjpjYW1lcm9uMTIz" -H "Content-Type: text/xml" -H "SOAPAction: ${soap_action}" -o /dev/null $endpoint
+curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type: text/xml" -H "SOAPAction: ${soap_action}" -o /dev/null $endpoint
 res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while deleting the service provider. !!"
@@ -446,8 +643,8 @@ res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while configuring SAML2 web SSO for ${sp_name}.... !!"
   echo
-  delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
-  delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
+  delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
   delete_user
   echo
   return -1
@@ -486,8 +683,8 @@ res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while configuring OIDC web SSO for ${sp_name}.... !!"
   echo
-  delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
-  delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
+  delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
   delete_user
   echo
   return -1
@@ -520,8 +717,8 @@ res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while getting application details for ${sp_name}.... !!"
   echo
-  delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
-  delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
+  delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
   delete_user
   echo
   return -1
@@ -632,8 +829,8 @@ res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while getting application details for ${sp_name}.... !!"
   echo
-  delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
-  delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
+  delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
   delete_user
   echo
   return -1
@@ -752,8 +949,8 @@ res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while getting application details for ${sp_name}.... !!"
   echo
-  delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
-  delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
+  delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
   delete_user
   echo
   return -1
@@ -862,8 +1059,8 @@ res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while updating application ${sp_name}.... !!"
   echo
-  delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
-  delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
+  delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
   delete_user
   echo
   return -1
@@ -900,8 +1097,8 @@ res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while updating application ${sp_name}.... !!"
   echo
-  delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
-  delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
+  delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
   delete_user
   echo
   return -1
@@ -1033,63 +1230,63 @@ echo "|  Scenario 7 - Creating a workflow                                       
 echo "-----------------------------------------------------------------------------"
 echo "Enter the scenario number you selected."
 
-	read scenario
-	case $scenario in
-		1)
-		echo "Not yet implemented."
-		;;
+read scenario
+case $scenario in
+	1)
+	echo "Not yet implemented."
+	;;
+
+	2)
+	# Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
+	setup_servers
+	configure_sso_saml2
+	end_message saml2-web-app-dispatch.com saml2-web-app-swift.com
+	if [ "$?" -ne "0" ]; then
+	  echo "Sorry, we had a problem there!"
+	fi
+   	break ;;
+
+	3)
+	# Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
+	setup_servers
+	configure_sso_oidc
+	end_message Dispatch Swift
+	if [ "$?" -ne "0" ]; then
+	  echo "Sorry, we had a problem there!"
+	fi
+	break ;;
 		
-		2)
-		# Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
-        setup_servers
-		configure_sso_saml2
-		end_message saml2-web-app-dispatch.com saml2-web-app-swift.com
-		if [ "$?" -ne "0" ]; then
-  		  echo "Sorry, we had a problem there!"
-		fi
-		break ;;
+	4)
+	echo "Configuring Multi-Factor Authentication"
+	echo
+	echo "Not yet implemented."
+	break ;;
 
-		3)
-        # Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
-        setup_servers
-		configure_sso_oidc
-		end_message Dispatch Swift
-		if [ "$?" -ne "0" ]; then
-  		  echo "Sorry, we had a problem there!"
-		fi
-		break ;;
+	5)
+	# Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
+	setup_servers
+	configure_federated_auth
+	end_message saml2-web-app-dispatch.com saml2-web-app-swift.com
+	delete_idp 05 urn:deleteIdP https://localhost:9443/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/
+	if [ "$?" -ne "0" ]; then
+	  echo "Sorry, we had a problem there!"
+	fi
+	break ;;
+
+	6)
+	# Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
+	setup_servers
+	configure_self_signup
+	break ;;
 		
-		4)
-		echo "Configuring Multi-Factor Authentication"
-		echo
-		echo "Not yet implemented."
-		break ;;
+	7)
+	echo "Creating a workflow"
+	echo
+	echo "Not yet implemented."
+	break ;;
 
-		5)
-		# Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
-        setup_servers
-	    configure_federated_auth
-	    end_message saml2-web-app-dispatch.com saml2-web-app-swift.com
-	    delete_idp 05 urn:deleteIdP https://localhost:9443/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/
-	    if [ "$?" -ne "0" ]; then
-  		  echo "Sorry, we had a problem there!"
-		fi
-		break ;;
-
-		6)
-		echo "Configuring self-signup"
-		echo
-		echo "Not yet implemented."
-		break ;;
-		
-		7)
-		echo "Creating a workflow"
-		echo
-		echo "Not yet implemented."
-		break ;;
-
-		*)
-		echo "Sorry, that's not an option."
-		;;
-	esac	
+	*)
+	echo "Sorry, that's not an option."
+	;;
+esac
 echo
