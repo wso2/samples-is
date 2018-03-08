@@ -40,6 +40,10 @@
         </file>
         <file>
             <source>${project.basedir}/target/QSG-1.0.jar</source>
+            <outputDirectory>QSG-bundle/QSG/bin/04</outputDirectory>
+        </file>
+        <file>
+            <source>${project.basedir}/target/QSG-1.0.jar</source>
             <outputDirectory>QSG-bundle/QSG/bin/05</outputDirectory>
         </file>
     </files>

@@ -20,7 +20,7 @@
     <soapenv:Body>
         <ser:addRole>
             <!--Optional:-->
-            <ser:roleName>Manager</ser:roleName>
+            <ser:roleName>senior-manager</ser:roleName>
             <!--Zero or more repetitions:-->
             <ser:userList>cameron</ser:userList>
             <!--Zero or more repetitions:-->
@@ -34,31 +34,13 @@
                 <!--Optional:-->
                 <xsd:action>ui.execute</xsd:action>
                 <!--Optional:-->
-                <xsd:resourceId>/permission/admin/manage/identity/applicationmgt</xsd:resourceId>
+                <xsd:resourceId>/permission/admin/manage/humantask/viewtasks</xsd:resourceId>
             </ser:permissions>
             <ser:permissions>
                 <!--Optional:-->
                 <xsd:action>ui.execute</xsd:action>
                 <!--Optional:-->
-                <xsd:resourceId>/permission/admin/manage/identity/applicationmgt/create</xsd:resourceId>
-            </ser:permissions>
-            <ser:permissions>
-                <!--Optional:-->
-                <xsd:action>ui.execute</xsd:action>
-                <!--Optional:-->
-                <xsd:resourceId>/permission/admin/manage/identity/applicationmgt/delete</xsd:resourceId>
-            </ser:permissions>
-            <ser:permissions>
-                <!--Optional:-->
-                <xsd:action>ui.execute</xsd:action>
-                <!--Optional:-->
-                <xsd:resourceId>/permission/admin/manage/identity/applicationmgt/update</xsd:resourceId>
-            </ser:permissions>
-            <ser:permissions>
-                <!--Optional:-->
-                <xsd:action>ui.execute</xsd:action>
-                <!--Optional:-->
-                <xsd:resourceId>/permission/admin/manage/identity/applicationmgt/view</xsd:resourceId>
+                <xsd:resourceId>/permission/admin/manage/identity/workflow/profile/view</xsd:resourceId>
             </ser:permissions>
         </ser:addRole>
     </soapenv:Body>

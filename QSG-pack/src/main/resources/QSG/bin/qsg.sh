@@ -17,10 +17,10 @@
 
 configure_sso_saml2 () {
 
-# Add users in the wso2-is.
+# Add users in wso2-is.
 add_user admin admin Common
 
-# Add service providers in the wso2-is 
+# Add service providers in wso2-is
 add_service_provider dispatch Common urn:createApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
 add_service_provider swift Common urn:createApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
 
@@ -258,6 +258,96 @@ case ${clean} in
         * ) echo "Please answer yes or no.";;
     esac
 
+cd ..
+return 0;
+}
+
+create_workflow() {
+cd ${QSG}/QSG/bin
+
+# Add users and the relevant roles in wso2-is.
+add_users_workflow admin admin 07
+
+# Create the workflow definition
+add_workflow_definition 07 YWRtaW46YWRtaW4=
+
+# Create a workflow association
+add_workflow_association 07 YWRtaW46YWRtaW4=
+
+# Update resident IDP
+update_idp_selfsignup urn:updateResidentIdP https://localhost:9443/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4= 06 selfsignup
+
+# Add a service provider in wso2-is
+add_service_provider dispatch Common urn:createApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4=
+
+# Configure OIDC for the Service Providers
+configure_oidc dispatch 03 urn:registerOAuthApplicationData https://localhost:9443/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4=
+
+create_updateapp_oidc dispatch YWRtaW46YWRtaW4= ZGlzcGF0Y2g= ZGlzcGF0Y2gxMjM0
+update_application_oidc dispatch 03 urn:updateApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4=
+
+echo
+echo
+echo "------------------------------------------------------------------"
+echo "|                                                                |"
+echo "|    The workflow feature enables you to add more control and    |"
+echo "|    constraints to the tasks executed within it.                |"
+echo "|                                                                |"
+echo "|    Here we are going to try out a workflow which defines an    |"
+echo "|    approval process for new user additions.                    |"
+echo "|                                                                |"
+echo "|    Use case: Senior manager and junior manager has to          |"
+echo "|    approve each new user addition.                             |"
+echo "|                                                                |"
+echo "|    To tryout the workflow please log into the sample           |"
+echo "|    app below.                                                  |"
+echo "|    *** Please press ctrl button and click on the link ***      |"
+echo "|                                                                |"
+echo "|    Dispatch - http://localhost:8080/Dispatch/                  |"
+echo "|                                                                |"
+echo "|    Click on the ** Register now ** link in the login page      |"
+echo "|    Fill in the user details form and create an account.        |"
+echo "|                                                                |"
+echo "|    But the new user you created will be disabled.              |"
+echo "|    So to enable the user please log into the WSO2 dashboard    |"
+echo "|    using the following credentials and approve the pending     |"
+echo "|    workflow requests.                                          |"
+echo "|                                                                |"
+echo "|    WSO2 Dashboard: https://localhost:9443/dashboard            |"
+echo "|                                                                |"
+echo "|    First login with Junior Manager                             |"
+echo "|      Username: alex                                            |"
+echo "|      Password: alex123                                         |"
+echo "|                                                                |"
+echo "|    Secondly, login with Senior Manager                         |"
+echo "|      Username: cameron                                         |"
+echo "|      Password: cameron123                                      |"
+echo "|                                                                |"
+echo "|    Now you can use your new user credentials to log into       |"
+echo "|    the app Dispatch:  http://localhost:8080/Dispatch/          |"
+echo "|                                                                |"
+echo "------------------------------------------------------------------"
+echo
+
+echo "If you have finished trying out the workflow, you can clean the process now."
+echo "Do you want to clean up the setup?"
+echo
+echo "Press y - YES"
+echo "Press n - NO"
+echo
+read input
+
+case ${input} in
+        [Yy]* )
+        delete_users_workflow
+        delete_workflow_definition 07 YWRtaW46YWRtaW4=
+        delete_workflow_association 07 YWRtaW46YWRtaW4=
+        delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4=
+        break;;
+        [Nn]* ) exit;;
+         * ) echo "Please answer yes or no.";;
+         esac
+cd ..
 return 0;
 }
 
@@ -301,25 +391,25 @@ dispatch_url=$1
 swift_url=$2
 
 echo
-echo "------------------------------------------------------------------"
-echo "|                                                                |"
-echo "|  You can find the sample web apps on the following URLs.       |"
-echo "|  *** Please press ctrl button and click on the links ***       |"              
-echo "|                                                                |"
-echo "|  Dispatch - http://localhost:8080/${dispatch_url}/  |"
-echo "|  Swift - http://localhost:8080/${swift_url}/        |"
-echo "|                                                                |"
-echo "|  Please use the following user credentials to log in.          |"
-echo "|                                                                |"
-echo "|  MANAGER                                                       |"
-echo "|    Username: cameron                                           |"
-echo "|    Password: cameron123                                        |"
-echo "|                                                                |"
-echo "|  EMPLOYEE                                                      |"
-echo "|    Username: alex                                              |"
-echo "|    Password: alex123                                           |"
-echo "|                                                                |"
-echo "------------------------------------------------------------------"
+echo "--------------------------------------------------------------------"
+echo "|                                                                  |"
+echo "|    You can find the sample web apps on the following URLs.       |"
+echo "|    *** Please press ctrl button and click on the links ***       |"
+echo "|                                                                  |"
+echo "|    Dispatch - http://localhost:8080/${dispatch_url}/  |"
+echo "|    Swift - http://localhost:8080/${swift_url}/        |"
+echo "|                                                                  |"
+echo "|    Please use the following user credentials to log in.          |"
+echo "|                                                                  |"
+echo "|    MANAGER                                                       |"
+echo "|      Username: cameron                                           |"
+echo "|      Password: cameron123                                        |"
+echo "|                                                                  |"
+echo "|    EMPLOYEE                                                      |"
+echo "|      Username: alex                                              |"
+echo "|      Password: alex123                                           |"
+echo "|                                                                  |"
+echo "--------------------------------------------------------------------"
 echo
 echo "If you have finished trying out the sample web apps, you can clean the process now."
 echo "Do you want to clean up the setup?"
@@ -338,6 +428,176 @@ read clean
         [Nn]* ) exit;;
         * ) echo "Please answer yes or no.";;
     esac
+return 0;
+}
+
+create_multifactor_auth() {
+echo
+echo "-------------------------------------------------------------------"
+echo "|                                                                 |"
+echo "|  We are configuring Twitter as the second authentication        |"
+echo "|  factor. Therefore, you have to register an application         |"
+echo "|  in https://apps.twitter.com/                                   |"
+echo "|                                                                 |"
+echo "|  So please make sure you have registered an application before  |"
+echo "|  continuing the script.                                         |"
+echo "|                                                                 |"
+echo "|  Do you want to continue?                                       |"
+echo "|                                                                 |"
+echo "|  Press y - YES                                                  |"
+echo "|  Press n - NO                                                   |"
+echo "|                                                                 |"
+echo "-------------------------------------------------------------------"
+echo
+read user
+
+case ${user} in
+    [Yy]* )
+
+    add_identity_provider admin admin 05
+
+    configure_sso_saml2
+
+    create_updateapp_multi dispatch Y2FtZXJvbjpjYW1lcm9uMTIz
+    create_updateapp_multi swift Y2FtZXJvbjpjYW1lcm9uMTIz
+
+    update_application_saml dispatch 04 urn:updateApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+    update_application_saml swift 04 urn:updateApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+
+break;;
+    [Nn]* ) return -1;;
+        * ) echo "Please answer yes or no.";;
+    esac
+
+return 0;
+}
+
+create_updateapp_multi() {
+cd ${QSG}/QSG/bin/04
+sp_name=$1
+request_data="get-app-${sp_name}.xml"
+auth=$2
+
+ if [ ! -f "$request_data" ]
+  then
+    echo "$request_data File does not exists."
+    return -1
+  fi
+
+ if [ -f "response_unformatted.xml" ]
+  then
+   rm -r response_unformatted.xml
+ fi
+
+touch response_unformatted.xml
+curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type: text/xml" -H "SOAPAction: urn:getApplication" https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ > response_unformatted.xml
+res=$?
+ if test "${res}" != "0"; then
+  echo "!! Problem occurred while getting application details for ${sp_name}.... !!"
+  echo
+  delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_user
+  echo
+  return -1
+ fi
+
+app_id=`java -jar QSG-1.0.jar`
+
+ if [ -f "update-app-${sp_name}.xml" ]
+  then
+   rm -r update-app-${sp_name}.xml
+ fi
+
+touch update-app-${sp_name}.xml
+echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelope/"\" xmlns:xsd="\"http://org.apache.axis2/xsd"\" xmlns:xsd1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns3:updateApplication xmlns:ns3="\"http://org.apache.axis2/xsd"\">
+  <ns3:serviceProvider>
+    <ns1:applicationID xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">${app_id}</ns1:applicationID>
+    <ns1:applicationName xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">${sp_name}</ns1:applicationName>
+    <claimConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">
+      <alwaysSendMappedLocalSubjectId>false</alwaysSendMappedLocalSubjectId>
+      <localClaimDialect>true</localClaimDialect>
+      <roleClaimURI/>
+    </claimConfig>
+    <ns1:description xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">sample service provider</ns1:description>
+    <inboundAuthenticationConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">
+      <inboundAuthenticationRequestConfigs>
+        <inboundAuthKey>saml2-web-app-dispatch.com</inboundAuthKey>
+        <inboundAuthType>samlsso</inboundAuthType>
+        <properties>
+          <name>attrConsumServiceIndex</name>
+          <value>1223160755</value>
+        </properties>
+      </inboundAuthenticationRequestConfigs>
+      <inboundAuthenticationRequestConfigs>
+        <inboundAuthKey/>
+        <inboundAuthType>passivests</inboundAuthType>
+      </inboundAuthenticationRequestConfigs>
+      <inboundAuthenticationRequestConfigs>
+        <inboundAuthKey/>
+        <inboundAuthType>openid</inboundAuthType>
+      </inboundAuthenticationRequestConfigs>
+    </inboundAuthenticationConfig>
+    <inboundProvisioningConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">
+      <dumbMode>false</dumbMode>
+      <provisioningUserStore>PRIMARY</provisioningUserStore>
+    </inboundProvisioningConfig>
+    <localAndOutBoundAuthenticationConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">
+      <alwaysSendBackAuthenticatedListOfIdPs>false</alwaysSendBackAuthenticatedListOfIdPs>
+      <authenticationScriptConfig>
+        <ns2:content xmlns:ns2="\"http://script.model.common.application.identity.carbon.wso2.org/xsd"\"/>
+        <ns2:enabled xmlns:ns2="\"http://script.model.common.application.identity.carbon.wso2.org/xsd"\">false</ns2:enabled>
+      </authenticationScriptConfig>
+      <authenticationStepForAttributes xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/>
+      <authenticationStepForSubject xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/>
+      <authenticationSteps>
+        <attributeStep>true</attributeStep>
+        <localAuthenticatorConfigs>
+          <displayName>basic</displayName>
+          <name>BasicAuthenticator</name>
+        </localAuthenticatorConfigs>
+        <stepOrder>1</stepOrder>
+        <subjectStep>true</subjectStep>
+      </authenticationSteps>
+      <authenticationSteps>
+        <attributeStep>false</attributeStep>
+        <federatedIdentityProviders>
+          <defaultAuthenticatorConfig>
+            <displayName>twitter</displayName>
+            <name>TwitterAuthenticator</name>
+          </defaultAuthenticatorConfig>
+          <federatedAuthenticatorConfigs>
+            <displayName>twitter</displayName>
+            <name>TwitterAuthenticator</name>
+          </federatedAuthenticatorConfigs>
+          <identityProviderName>IDP-twitter</identityProviderName>
+        </federatedIdentityProviders>
+        <stepOrder>2</stepOrder>
+        <subjectStep>false</subjectStep>
+      </authenticationSteps>
+      <authenticationType>flow</authenticationType>
+      <enableAuthorization>false</enableAuthorization>
+      <subjectClaimUri xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/>
+      <useTenantDomainInLocalSubjectIdentifier>false</useTenantDomainInLocalSubjectIdentifier>
+      <useUserstoreDomainInLocalSubjectIdentifier>false</useUserstoreDomainInLocalSubjectIdentifier>
+    </localAndOutBoundAuthenticationConfig>
+    <outboundProvisioningConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"/>
+    <owner xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">
+      <tenantDomain>carbon.super</tenantDomain>
+      <userName>cameron</userName>
+      <userStoreDomain>PRIMARY</userStoreDomain>
+    </owner>
+    <permissionAndRoleConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"/>
+    <ns1:requestPathAuthenticatorConfigs xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/>
+    <ns1:saasApp xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">false</ns1:saasApp>
+  </ns3:serviceProvider>
+</ns3:updateApplication>
+   </soapenv:Body>
+</soapenv:Envelope>" >> update-app-${sp_name}.xml
+
 return 0;
 }
 
@@ -402,6 +662,282 @@ if [ ! -d "${TOMCAT_PATH}" ]
  fi
 
 cd ..
+}
+
+add_users_workflow() {
+
+IS_name=$1
+IS_pass=$2
+scenario=$3
+request_data1="${scenario}/add-role-senior.xml"
+request_data2="${scenario}/add-role-junior.xml"
+
+if [ ! -d "$scenario" ]
+  then
+    echo "$scenario Directory does not exists."
+    return -1
+  fi
+
+  if [ ! -f "$request_data1" ]
+   then
+    echo "$request_data1 File does not exists."
+    return -1
+  fi
+
+  if [ ! -f "$request_data2" ]
+   then
+    echo "$request_data2 File does not exists."
+    return -1
+  fi
+
+echo
+echo "Creating a user named cameron..."
+
+# The following command can be used to create a user.
+curl -s -k --user ${IS_name}:${IS_pass} --data '{"schemas":[],"name":{"familyName":"Smith","givenName":"Cameron"},"userName":"cameron","password":"cameron123","emails":"cameron@gmail.com","addresses":{"country":"Canada"}}' --header "Content-Type:application/json" -o /dev/null https://localhost:9443/wso2/scim/Users
+res=$?
+ if test "${res}" != "0"; then
+  echo "!! Problem occurred while creating user cameron. !!"
+  echo
+  return -1
+ fi
+echo "** The user cameron was successfully created. **"
+echo
+
+echo "Creating a user named alex..."
+
+# The following command can be used to create a user.
+curl -s -k --user ${IS_name}:${IS_pass} --data '{"schemas":[],"name":{"familyName":"Miller","givenName":"Alex"},"userName":"alex","password":"alex123","emails":"alex@gmail.com","addresses":{"country":"Canada"}}' --header "Content-Type:application/json" -o /dev/null https://localhost:9443/wso2/scim/Users
+res=$?
+ if test "${res}" != "0"; then
+  echo "!! Problem occurred while creating user alex. !!"
+  echo
+  delete_user
+  echo
+  return -1
+ fi
+echo "** The user alex was successfully created. **"
+echo
+
+echo "Creating a role named senior_manager..."
+
+#The following command will add a role to the user.
+curl -s -k --user ${IS_name}:${IS_pass} -d @$request_data1 -H "Content-Type: text/xml" -H "SOAPAction: urn:addRole" -o /dev/null https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+res=$?
+ if test "${res}" != "0"; then
+  echo "!! Problem occurred while creating role senior_manager. !!"
+  echo
+  delete_user
+  echo
+  return -1
+ fi
+echo "** The role senior_manager was successfully created. **"
+echo
+
+echo "Creating a role named junior_manager..."
+
+#The following command will add a role to the user.
+curl -s -k --user ${IS_name}:${IS_pass} -d @$request_data2 -H "Content-Type: text/xml" -H "SOAPAction: urn:addRole" -o /dev/null https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+res=$?
+ if test "${res}" != "0"; then
+  echo "!! Problem occurred while creating role junior_manager. !!"
+  echo
+  delete_user
+  echo
+  return -1
+ fi
+echo "** The role junior_manager was successfully created. **"
+echo
+
+return 0;
+}
+
+delete_users_workflow() {
+
+request_data1="Common/delete-cameron.xml"
+request_data2="Common/delete-alex.xml"
+request_data3="07/delete-role-senior.xml"
+request_data4="07/delete-role-junior.xml"
+
+echo
+echo "Deleting the user named cameron..."
+
+# Send the SOAP request to delete the user.
+curl -s -k -d @$request_data1 -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o /dev/null https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+res=$?
+ if test "${res}" != "0"; then
+  echo "!! Problem occurred while deleting the user cameron. !!"
+  echo
+  return -1
+ fi
+echo "** The user cameron was successfully deleted. **"
+echo
+echo "Deleting the user named alex..."
+
+# Send the SOAP request to delete the user.
+curl -s -k -d @$request_data2 -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o /dev/null https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+res=$?
+ if test "${res}" != "0"; then
+  echo "!! Problem occurred while deleting the user alex. !!"
+  echo
+  return -1
+ fi
+echo "** The user alex was successfully deleted. **"
+echo
+
+echo "Deleting the role named senior-manager"
+# Send the SOAP request to delete the role.
+curl -s -k -d @$request_data3 -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteRole" -o /dev/null https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+res=$?
+ if test "${res}" != "0"; then
+  echo "!! Problem occurred while deleting the role senior-manager. !!"
+  echo
+  return -1
+ fi
+echo "** The role senior-manager was successfully deleted. **"
+echo
+echo "Deleting the role named junior-manager"
+# Send the SOAP request to delete the role.
+curl -s -k -d @$request_data4 -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteRole" -o /dev/null https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+res=$?
+ if test "${res}" != "0"; then
+  echo "!! Problem occurred while deleting the role junior-manager. !!"
+  echo
+  return -1
+ fi
+echo "** The role junior-manager was successfully deleted. **"
+echo
+
+return 0;
+}
+
+add_workflow_definition() {
+
+scenario=$1
+auth=$2
+request_data="${scenario}/add-definition.xml"
+
+if [ ! -d "$scenario" ]
+  then
+    echo "$scenario Directory does not exists."
+    return -1
+  fi
+
+  if [ ! -f "$request_data" ]
+   then
+    echo "$request_data File does not exists."
+    return -1
+  fi
+
+curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type: text/xml" -H "SOAPAction: urn:addWorkflow" -o /dev/null https://localhost:9443/services/WorkflowAdminService.WorkflowAdminServiceHttpsSoap11Endpoint/
+res=$?
+ if test "${res}" != "0"; then
+  echo "!! Problem occurred while creating the workflow definition. !!"
+  echo
+  delete_users_workflow
+  echo
+  return -1
+ fi
+echo "** The workflow definition was successfully created. **"
+echo
+
+return 0;
+}
+
+delete_workflow_definition() {
+
+scenario=$1
+auth=$2
+request_data="${scenario}/delete-definition.xml"
+
+if [ ! -d "$scenario" ]
+  then
+    echo "$scenario Directory does not exists."
+    return -1
+  fi
+
+  if [ ! -f "$request_data" ]
+   then
+    echo "$request_data File does not exists."
+    return -1
+  fi
+
+curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type: text/xml" -H "SOAPAction: urn:removeWorkflow" -o /dev/null https://localhost:9443/services/WorkflowAdminService.WorkflowAdminServiceHttpsSoap11Endpoint/
+res=$?
+ if test "${res}" != "0"; then
+  echo "!! Problem occurred while deleting the workflow definition. !!"
+  echo
+  return -1
+ fi
+echo "** The workflow definition was successfully deleted. **"
+echo
+
+return 0;
+}
+
+add_workflow_association() {
+
+scenario=$1
+auth=$2
+request_data="${scenario}/add-association.xml"
+
+if [ ! -d "$scenario" ]
+  then
+    echo "$scenario Directory does not exists."
+    return -1
+  fi
+
+  if [ ! -f "$request_data" ]
+   then
+    echo "$request_data File does not exists."
+    return -1
+  fi
+
+curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type: text/xml" -H "SOAPAction: urn:addAssociation" -o /dev/null https://localhost:9443/services/WorkflowAdminService.WorkflowAdminServiceHttpsSoap11Endpoint/
+res=$?
+ if test "${res}" != "0"; then
+  echo "!! Problem occurred while creating the workflow association. !!"
+  echo
+  delete_users_workflow
+  delete_workflow_definition 07 YWRtaW46YWRtaW4=
+  echo
+  return -1
+ fi
+echo "** The workflow association was successfully created. **"
+echo
+
+return 0;
+}
+
+delete_workflow_association() {
+
+scenario=$1
+auth=$2
+request_data="${scenario}/delete-association.xml"
+
+if [ ! -d "$scenario" ]
+  then
+    echo "$scenario Directory does not exists."
+    return -1
+  fi
+
+  if [ ! -f "$request_data" ]
+   then
+    echo "$request_data File does not exists."
+    return -1
+  fi
+
+curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type: text/xml" -H "SOAPAction: urn:removeAssociation" -o /dev/null https://localhost:9443/services/WorkflowAdminService.WorkflowAdminServiceHttpsSoap11Endpoint/
+res=$?
+ if test "${res}" != "0"; then
+  echo "!! Problem occurred while deleting the workflow association. !!"
+  echo
+  return -1
+ fi
+echo "** The workflow association was successfully deleted. **"
+echo
+
+return 0;
 }
 
 add_user() {
@@ -1164,11 +1700,11 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
       <name>TwitterAuthenticator</name>
       <properties>
         <name>APIKey</name>
-        <value>STxf3PlNjDXvvUmWr0dbC1rVV</value>
+        <value>${key}</value>
       </properties>
       <properties>
         <name>APISecret</name>
-        <value>QaHwXLGe6s7ImFcJ3RjmDQCfrvufS3JqoVm2p30hSqEACbvhgU</value>
+        <value>${secret}</value>
       </properties>
       <properties>
         <name>callbackUrl</name>
@@ -1257,9 +1793,11 @@ case $scenario in
 	break ;;
 		
 	4)
-	echo "Configuring Multi-Factor Authentication"
-	echo
-	echo "Not yet implemented."
+	# Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
+	setup_servers
+	create_multifactor_auth
+	end_message saml2-web-app-dispatch.com saml2-web-app-swift.com
+	delete_idp 05 urn:deleteIdP https://localhost:9443/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/
 	break ;;
 
 	5)
@@ -1280,9 +1818,8 @@ case $scenario in
 	break ;;
 		
 	7)
-	echo "Creating a workflow"
-	echo
-	echo "Not yet implemented."
+	setup_servers
+	create_workflow
 	break ;;
 
 	*)

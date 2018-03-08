@@ -3,13 +3,13 @@
 This is a Quick Start Guide is use to demonstrate the key functionalities of WSO2
 Identity server using the seven scenarios given below.
 
-       1 - Getting Started with WSO2 IS (not implemented)
+       1 - Getting Started with WSO2 IS (not implemented.)
        2 - Configuring Single-Sign-On with SAML2
        3 - Configuring Single-Sign-On with OIDC
-       4 - Configuring Multi-Factor Authentication (not implemented)   
+       4 - Configuring Multi-Factor Authentication   
        5 - Configuring Twitter as a Federated Authenticator 
        6 - Setting up Self-Signup                 
-       7 - Creating a workflow (not implemented)
+       7 - Creating a workflow
        
 ## Building from source ##
 
