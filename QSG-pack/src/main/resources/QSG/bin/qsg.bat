@@ -664,7 +664,6 @@ IF %ERRORLEVEL% NEQ 0 (
 )
 echo "** The identity provider was successfully created. **"
 echo(
-cd ..
 EXIT /B
 
 :add_workflow_definition
