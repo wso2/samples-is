@@ -664,7 +664,6 @@ IF %ERRORLEVEL% NEQ 0 (
 )
 echo "** The identity provider was successfully created. **"
 echo(
-cd ..
 EXIT /B
 
 :add_workflow_definition
@@ -785,7 +784,7 @@ set request_data=%~2\sso-config-%~1.xml
 echo Configuring OIDC web SSO for %~1...
 
 REM Configure OIDC for the created SPs.
-curl -s -k -d @%request_data% -H "Authorization: Basic %~5" -H "Content-Type: text/xml" -H "SOAPAction: %~3" %~4
+curl -s -k -d @%request_data% -H "Authorization: Basic %~5" -H "Content-Type: text/xml" -H "SOAPAction: %~3" -o NUL %~4
 
 echo "** OIDC successfully configured for the Service Provider %~1. **"
 echo(
@@ -810,7 +809,7 @@ IF EXIST "response_unformatted.xml" (
    DEL response_unformatted.xml
 )
 
-curl -s -k -d @%request_data% -H "Authorization: Basic %~2" -H "Content-Type: text/xml" -H "SOAPAction: urn:getApplication" https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ > response_unformatted.xml
+curl -s -k -d @%request_data% -H "Authorization: Basic %~2" -H "Content-Type: text/xml" -H "SOAPAction: urn:getApplication" -o NUL https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ > response_unformatted.xml
 
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while getting application details for %sp_name%.... !!"
