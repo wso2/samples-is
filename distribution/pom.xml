@@ -21,14 +21,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.wso2</groupId>
-    <artifactId>samples-is</artifactId>
-    <version>1.0</version>
+    <artifactId>IS-samples</artifactId>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>quick-start-guide</module>
-        <module>QSGDemo</module>
-        <module>QSG-pack</module>
+        <module>../quick-start-guide</module>
+        <module>../QSGDemo</module>
+        <module>../QSG-pack</module>
     </modules>
 
     <dependencyManagement>
@@ -258,6 +258,27 @@
                         </manifest>
                     </archive>
                 </configuration>
+            </plugin>
+            <!--plugins for distribution -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>IS-samples-zip</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <appendAssemblyId>false</appendAssemblyId>
+                            <descriptors>
+                                <descriptor>${project.basedir}/src/assembly/dist.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
