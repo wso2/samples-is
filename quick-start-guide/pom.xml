@@ -27,8 +27,8 @@
     <name>quick-start-guide</name>
 
     <modules>
-        <module>components/SAML2/saml2-web-app-dispatch</module>
         <module>components/SAML2/saml2-web-app-swift</module>
+        <module>components/SAML2/saml2-web-app-dispatch</module>
     </modules>
 
     <dependencyManagement>
@@ -140,6 +140,16 @@
             <dependency>
                 <groupId>org.wso2.carbon</groupId>
                 <artifactId>org.wso2.carbon.utils</artifactId>
+                <version>${carbon.kernel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon</groupId>
+                <artifactId>org.wso2.carbon.user.api</artifactId>
+                <version>${carbon.kernel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon</groupId>
+                <artifactId>org.wso2.carbon.user.core</artifactId>
                 <version>${carbon.kernel.version}</version>
             </dependency>
             <dependency>
