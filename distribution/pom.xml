@@ -293,6 +293,19 @@
         </plugins>
     </build>
 
+    <repositories>
+        <repository>
+            <id>wso2-nexus</id>
+            <name>WSO2 Internal Repository</name>
+            <url>http://maven.wso2.org/nexus/content/groups/wso2-public/</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>ignore</checksumPolicy>
+            </releases>
+        </repository>
+    </repositories>
+
     <properties>
         <!--repo versions of qsg-pack-->
         <identity.agent.sso.version>5.1.18</identity.agent.sso.version>
