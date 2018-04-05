@@ -1768,10 +1768,6 @@ echo "Enter the scenario number you selected."
 read scenario
 case $scenario in
 	1)
-	echo "Not yet implemented."
-	;;
-
-	2)
 	# Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
 	setup_servers
 	configure_sso_saml2
@@ -1781,7 +1777,7 @@ case $scenario in
 	fi
    	break ;;
 
-	3)
+	2)
 	# Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
 	setup_servers
 	configure_sso_oidc
@@ -1791,7 +1787,7 @@ case $scenario in
 	fi
 	break ;;
 		
-	4)
+	3)
 	# Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
 	setup_servers
 	create_multifactor_auth
@@ -1799,7 +1795,7 @@ case $scenario in
 	delete_idp 05 urn:deleteIdP https://localhost:9443/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/
 	break ;;
 
-	5)
+	4)
 	# Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
 	setup_servers
 	configure_federated_auth
@@ -1810,13 +1806,13 @@ case $scenario in
 	fi
 	break ;;
 
-	6)
+	5)
 	# Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
 	setup_servers
 	configure_self_signup
 	break ;;
 		
-	7)
+	6)
 	setup_servers
 	create_workflow
 	break ;;
