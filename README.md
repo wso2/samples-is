@@ -36,3 +36,7 @@ Alternatively, you can install samples-is from the source using the following in
 
 1. Get a clone or download source from this repository
 2. Run the Maven command mvn clean install from within the distribution directory.
+
+## License
+
+samples-is code is distributed under [Apache license 2.0](https://github.com/wso2/samples-is/blob/master/LICENSE).
