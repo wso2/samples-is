@@ -28,7 +28,7 @@
             <useDefaultExcludes>true</useDefaultExcludes>
         </fileSet>
         <fileSet>
-            <directory>${project.basedir}/../QSG-pack/target/QSG-1.0-bundle</directory>
+            <directory>${project.basedir}/../quick-start-guide/target/QSG-1.0-bundle</directory>
             <outputDirectory>samples</outputDirectory>
             <useDefaultExcludes>true</useDefaultExcludes>
         </fileSet>
@@ -37,42 +37,42 @@
     <files>
         <file>
             <source>
-                ${project.basedir}/../quick-start-guide/components/SAML2/saml2-web-app-dispatch/target/saml2-web-app-dispatch.com.war
+                ${project.basedir}/../saml2-sso-sample/components/SAML2/saml2-web-app-dispatch/target/saml2-web-app-dispatch.com.war
             </source>
             <outputDirectory>samples/SAML2-APPS</outputDirectory>
         </file>
         <file>
             <source>
-                ${project.basedir}/../quick-start-guide/components/SAML2/saml2-web-app-swift/target/saml2-web-app-swift.com.war
+                ${project.basedir}/../saml2-sso-sample/components/SAML2/saml2-web-app-swift/target/saml2-web-app-swift.com.war
             </source>
             <outputDirectory>samples/SAML2-APPS</outputDirectory>
         </file>
         <file>
-            <source>${project.basedir}/../QSGDemo/Dispatch/target/Dispatch.war</source>
+            <source>${project.basedir}/../oidc-sso-sample/Dispatch/target/Dispatch.war</source>
             <outputDirectory>samples/OIDC-APPS</outputDirectory>
         </file>
         <file>
-            <source>${project.basedir}/../QSGDemo/Swift/target/Swift.war</source>
+            <source>${project.basedir}/../oidc-sso-sample/Swift/target/Swift.war</source>
             <outputDirectory>samples/OIDC-APPS</outputDirectory>
         </file>
         <file>
             <source>
-                ${project.basedir}/../quick-start-guide/components/SAML2/saml2-web-app-dispatch/target/saml2-web-app-dispatch.com.war
+                ${project.basedir}/../saml2-sso-sample/components/SAML2/saml2-web-app-dispatch/target/saml2-web-app-dispatch.com.war
             </source>
             <outputDirectory>samples/QSG-bundle/QSG/bin</outputDirectory>
         </file>
         <file>
             <source>
-                ${project.basedir}/../quick-start-guide/components/SAML2/saml2-web-app-swift/target/saml2-web-app-swift.com.war
+                ${project.basedir}/../saml2-sso-sample/components/SAML2/saml2-web-app-swift/target/saml2-web-app-swift.com.war
             </source>
             <outputDirectory>samples/QSG-bundle/QSG/bin</outputDirectory>
         </file>
         <file>
-            <source>${project.basedir}/../QSGDemo/Dispatch/target/Dispatch.war</source>
+            <source>${project.basedir}/../oidc-sso-sample/Dispatch/target/Dispatch.war</source>
             <outputDirectory>samples/QSG-bundle/QSG/bin</outputDirectory>
         </file>
         <file>
-            <source>${project.basedir}/../QSGDemo/Swift/target/Swift.war</source>
+            <source>${project.basedir}/../oidc-sso-sample/Swift/target/Swift.war</source>
             <outputDirectory>samples/QSG-bundle/QSG/bin</outputDirectory>
         </file>
     </files>
