@@ -17,7 +17,7 @@ SAML stands for Security Assertion Markup Language which is a XML based data for
 * [Java](http://www.oracle.com/technetwork/java/javase/downloads)
 
 1. Get a clone or download source from this repository
-2. Run the Maven command mvn clean install from within the distribution directory.
+2. Run the Maven command mvn clean install from within the saml2-sso-sample directory.
 
 ## Getting started
  

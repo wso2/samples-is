@@ -21,7 +21,7 @@ In the context of the OIDC-conformant authentication pipeline, SSO must happen a
 * [Java](http://www.oracle.com/technetwork/java/javase/downloads)
 
 1. Get a clone or download source from this repository
-2. Run the Maven command mvn clean install from within the distribution directory.
+2. Run the Maven command mvn clean install from within the oidc-sso-sample directory.
 
 ## Getting started
 
@@ -37,5 +37,3 @@ In order to check sigle sign on using OIDC, please follow the steps
 8. Try out single sign on flow.
 
 Note:-Please add the host names used for the applications to your etc/hosts file. You can find the needed host names through the property files. Addition to that, use the call back urls in the property files when configuring inbound protocols for each service providers
-
- 

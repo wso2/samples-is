@@ -1,7 +1,7 @@
-Sample OAuth2 Client Authenticator
+# Sample OAuth2 Client Authenticator
 
 OAuth 2 client authentication is the process of identifying and authenticating the client of an incoming request.
-According to the specification [1] clients can be authenticated in multiple ways. ex - using client id and client secret
+According to the [specification](http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication) clients can be authenticated in multiple ways. ex - using client id and client secret
 .Using client id and client secret also has two flavours. Client id and secret can be either sent as HTTP authorization
 header or client id and secret can be sent in the request body.
 
@@ -20,29 +20,46 @@ header "Authorization" with value Basic (base64encoded(client_id:client_secret))
 client_id=qwertyuiosdfghjk&client_secret=zxcvbnmsdfghj in the body of the request. But this sample authenticator only
 expects to have client id and secret as two separate HTTP headers.
 
+## Table of contents
 
-How to Deploy the sample.
+- [Download and install](#download-and-install)
+- [Getting started](#getting-started)
+- [Useful links](#useful-links)
 
-1) Clone the project from GitHub and build it using the following command.
+## Download and install
 
-mvn clean install
+### Install from source
 
-2) Get the built jar which resides in target directory with name org.wso2.carbon.identity.oauth.client.auth
-.sample-<version>
+#### Prerequisites
 
-3) Copy the jar to <IS_HOME>/repository/components/dropins
+* [Maven](https://maven.apache.org/download.cgi)
+* [Java](http://www.oracle.com/technetwork/java/javase/downloads)
 
-4) Start Identity Server once the jar is copied.
+1. Get a clone or download source from this repository
+2. Run the Maven command mvn clean install from within the oauth-sample-client-authenticator directory.
 
-5) Once the server is started, log in to the management console and create a service provider. Generate client id
+## Getting started
+
+1. Clone the project from GitHub and build it using the following command.
+
+    ```bash
+    mvn clean install
+    ```
+    
+2. Get the built jar which resides in target directory with name org.wso2.carbon.identity.oauth.client.auth.sample-<version>
+3. Copy the jar to <IS_HOME>/repository/components/dropins
+4. Start Identity Server once the jar is copied.
+5. Once the server is started, log in to the management console and create a service provider. Generate client id
 and secrets for the oauth application.
-
-6) Use the following curl command to retrieve a token using password grant type. Replace the client_id and secret with
+6. Use the following curl command to retrieve a token using password grant type. Replace the client_id and secret with
 your generated client id and secret.
 
-
-curl -k -d "grant_type=password&username=admin&password=admin" -H "Content-Type: application/x-www-form-urlencoded" https://localhost:9443/oauth2/token -i -H "client_id: 5Me6ta8IqnrcTN07t5SZ8OPqS0Qa" -H "client_secret: jih0VuTzAVa4Mqm3auATbAQgCA0a"
-
+    ```bash
+    curl -k -d "grant_type=password&username=admin&password=admin" -H "Content-Type: application/x-www-form-urlencoded" https://localhost:9443/oauth2/token -i -H "client_id: 5Me6ta8IqnrcTN07t5SZ8OPqS0Qa" -H "client_secret: jih0VuTzAVa4Mqm3auATbAQgCA0a"
+    ```
+    
 You will successfully get the token. The way you used to authenticate the client is our new protocol which is using client id and secret as separate headers.
 
-[1] http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication
+## Useful links
+
+* For more information please refer [Openid Connect specification](http://openid.net/specs/openid-connect-core-1_0.html).
