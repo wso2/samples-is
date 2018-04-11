@@ -27,7 +27,7 @@
 
     <artifactId>saml2-web-app-dispatch</artifactId>
     <packaging>war</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <name>saml2-web-app-dispatch Maven Webapp</name>
 
     <dependencies>
