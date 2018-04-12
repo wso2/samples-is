@@ -93,7 +93,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><img src="img/logo.png" height="30"/> Swift</a>
+            <a class="navbar-brand" href="#"><img src="img/logo.png" height="30"/> Dispatch</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
@@ -116,7 +116,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2><strong>PickUp Swift</strong></h2>
+                <h2><strong>PickUp Dispatch</strong></h2>
                 <p class="lead">Management Application</p>
             </div>
         </div>
