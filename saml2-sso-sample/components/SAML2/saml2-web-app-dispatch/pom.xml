@@ -18,7 +18,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <parent>
-        <groupId>org.wso2.is.saml2</groupId>
+        <groupId>org.wso2.is.samples</groupId>
         <artifactId>saml2-sso-sample</artifactId>
         <version>1.0.0-SNAPSHOT</version>
         <relativePath>../../../pom.xml</relativePath>
@@ -37,8 +37,8 @@
                 <exclusion>
                     <groupId>commons-collections</groupId>
                     <artifactId>commons-collections</artifactId>
-                </exclusion>
-            </exclusions>
+                    </exclusion>
+        </exclusions>
         </dependency>
         <dependency>
             <groupId>org.apache.santuario</groupId>
