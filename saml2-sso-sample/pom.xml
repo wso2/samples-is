@@ -26,7 +26,6 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.wso2.is.saml2</groupId>
     <artifactId>saml2-sso-sample</artifactId>
     <packaging>pom</packaging>
 
