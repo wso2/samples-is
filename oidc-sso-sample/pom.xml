@@ -25,7 +25,6 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.wso2.is.oidc</groupId>
     <artifactId>oidc-sso-sample</artifactId>
     <packaging>pom</packaging>
     <description>WSO2 Identity Server Quick Start Guide for OIDC SSO</description>
