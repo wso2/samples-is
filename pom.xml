@@ -75,11 +75,6 @@
                 <version>${sample.oidc-sso-sample.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>org.wso2.is.extensions</groupId>
-                <artifactId>saml2-sso-sample</artifactId>
-            </dependency>
-
             <!--=============================================================================-->
 
             <!--dependencies of the saml2-sso-sample-->
