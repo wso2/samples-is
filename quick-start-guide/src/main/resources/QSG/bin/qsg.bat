@@ -761,7 +761,10 @@ IF %ERRORLEVEL% NEQ 0 (
   exit -1
 )
 
-FOR /F "tokens=*" %%A IN ('java -jar QSG-1.0.jar') DO SET app_id=%%A
+FOR /F "tokens=*" %%A IN ('dir /b QSG-*.jar') DO SET jarname=%%A
+FOR /L %%b IN (1,1,2) DO IF "!jarname:~-1!"==" " SET jarname=!jarname:~0,-1!
+
+FOR /F "tokens=*" %%A IN ('java -jar %jarname%') DO SET app_id=%%A
 FOR /L %%b IN (1,1,2) DO IF "!app_id:~-1!"==" " SET app_id=!app_id:~0,-1!
 echo(
 echo Updating application %~1...
@@ -821,7 +824,10 @@ IF %ERRORLEVEL% NEQ 0 (
   exit -1
 )
 
-FOR /F "tokens=*" %%A IN ('java -jar QSG-1.0.jar') DO SET app_id=%%A
+FOR /F "tokens=*" %%A IN ('dir /b QSG-*.jar') DO SET jarname=%%A
+FOR /L %%b IN (1,1,2) DO IF "!jarname:~-1!"==" " SET jarname=!jarname:~0,-1!
+
+FOR /F "tokens=*" %%A IN ('java -jar %jarname%') DO SET app_id=%%A
 FOR /L %%b IN (1,1,2) DO IF "!app_id:~-1!"==" " SET app_id=!app_id:~0,-1!
 echo(
 echo Updating application %~1...
@@ -870,7 +876,10 @@ IF %ERRORLEVEL% NEQ 0 (
   exit -1
 )
 
-FOR /F "tokens=*" %%A IN ('java -jar QSG-1.0.jar') DO SET app_id=%%A
+FOR /F "tokens=*" %%A IN ('dir /b QSG-*.jar') DO SET jarname=%%A
+FOR /L %%b IN (1,1,2) DO IF "!jarname:~-1!"==" " SET jarname=!jarname:~0,-1!
+
+FOR /F "tokens=*" %%A IN ('java -jar %jarname%') DO SET app_id=%%A
 FOR /L %%b IN (1,1,2) DO IF "!app_id:~-1!"==" " SET app_id=!app_id:~0,-1!
 echo(
 
@@ -909,7 +918,10 @@ IF %ERRORLEVEL% NEQ 0 (
   exit -1
 )
 
-FOR /F "tokens=*" %%A IN ('java -jar QSG-1.0.jar') DO SET app_id=%%A
+FOR /F "tokens=*" %%A IN ('dir /b QSG-*.jar') DO SET jarname=%%A
+FOR /L %%b IN (1,1,2) DO IF "!jarname:~-1!"==" " SET jarname=!jarname:~0,-1!
+
+FOR /F "tokens=*" %%A IN ('java -jar %jarname%') DO SET app_id=%%A
 FOR /L %%b IN (1,1,2) DO IF "!app_id:~-1!"==" " SET app_id=!app_id:~0,-1!
 echo(
 

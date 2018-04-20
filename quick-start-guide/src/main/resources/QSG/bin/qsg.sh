@@ -502,7 +502,10 @@ res=$?
   return -1
  fi
 
-app_id=`java -jar QSG-1.0.jar`
+jarName=`find -name "QSG-*.jar"  2>&1 | grep -v "Permission denied"`
+jarName2=`echo "${jarName#./}"`
+
+app_id=`java -jar ${jarName2}`
 
  if [ -f "update-app-${sp_name}.xml" ]
   then
@@ -1260,7 +1263,10 @@ res=$?
   return -1
  fi
 
-app_id=`java -jar QSG-1.0.jar`
+jarName=`find -name "QSG-*.jar"  2>&1 | grep -v "Permission denied"`
+jarName2=`echo "${jarName#./}"`
+
+app_id=`java -jar ${jarName2}`
 
  if [ -f "update-app-${sp_name}.xml" ]
   then 
@@ -1372,7 +1378,10 @@ res=$?
   return -1
  fi
 
-app_id=`java -jar QSG-1.0.jar`
+jarName=`find -name "QSG-*.jar"  2>&1 | grep -v "Permission denied"`
+jarName2=`echo "${jarName#./}"`
+
+app_id=`java -jar ${jarName2}`
 
  if [ -f "update-app-${sp_name}.xml" ]
   then 
@@ -1492,7 +1501,10 @@ res=$?
   return -1
  fi
 
-app_id=`java -jar QSG-1.0.jar`
+jarName=`find -name "QSG-*.jar"  2>&1 | grep -v "Permission denied"`
+jarName2=`echo "${jarName#./}"`
+
+app_id=`java -jar ${jarName2}`
 
  if [ -f "update-app-${sp_name}.xml" ]
   then
