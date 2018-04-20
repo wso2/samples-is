@@ -45,45 +45,6 @@
         </dependency>
     </dependencies>
 
-    <repositories>
-
-        <repository>
-            <id>wso2-nexus</id>
-            <name>WSO2 internal Repository</name>
-            <url>http://maven.wso2.org/nexus/content/groups/wso2-public/</url>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>daily</updatePolicy>
-                <checksumPolicy>ignore</checksumPolicy>
-            </releases>
-        </repository>
-
-        <repository>
-            <id>wso2.releases</id>
-            <name>WSO2 internal Repository</name>
-            <url>http://maven.wso2.org/nexus/content/repositories/releases/</url>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>daily</updatePolicy>
-                <checksumPolicy>ignore</checksumPolicy>
-            </releases>
-        </repository>
-
-        <repository>
-            <id>wso2.snapshots</id>
-            <name>Apache Snapshot Repository</name>
-            <url>http://maven.wso2.org/nexus/content/repositories/snapshots/</url>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>daily</updatePolicy>
-            </snapshots>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-        </repository>
-
-    </repositories>
-
     <build>
         <plugins>
             <plugin>
@@ -119,7 +80,16 @@
                             org.wso2.carbon.identity.oauth.client.auth.sample.*;
                             version="${project.version}"
                         </Export-Package>
-                        <DynamicImport-Package>*</DynamicImport-Package>
+                        <Import-Package>
+                            javax.servlet.http,
+                            org.wso2.carbon.identity.base,
+                            org.wso2.carbon.identity.oauth,
+                            org.wso2.carbon.identity.oauth.common.exception,
+                            org.wso2.carbon.identity.oauth2,
+                            org.wso2.carbon.identity.oauth2.bean,
+                            org.wso2.carbon.identity.oauth2.client.authentication,
+                            org.wso2.carbon.identity.oauth2.util,
+                        </Import-Package>
                     </instructions>
                 </configuration>
             </plugin>
