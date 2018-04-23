@@ -33,9 +33,7 @@
     </dependencies>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>Quick-Start-Guide</groupId>
-    <artifactId>QSG</artifactId>
-    <version>1.0</version>
+    <artifactId>org.wso2.samples.is.qsg</artifactId>
 
     <build>
         <plugins>
@@ -50,6 +48,7 @@
                             <mainClass>AppId</mainClass>
                         </manifest>
                     </archive>
+                    <finalName>QSG-${project.version}</finalName>
                 </configuration>
             </plugin>
             <plugin>

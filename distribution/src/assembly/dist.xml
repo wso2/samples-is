@@ -28,7 +28,7 @@
             <useDefaultExcludes>true</useDefaultExcludes>
         </fileSet>
         <fileSet>
-            <directory>${project.basedir}/../quick-start-guide/target/QSG-1.0-bundle</directory>
+            <directory>${project.basedir}/../quick-start-guide/target/org.wso2.samples.is.qsg-${project.version}-bundle</directory>
             <outputDirectory>samples</outputDirectory>
             <useDefaultExcludes>true</useDefaultExcludes>
         </fileSet>
