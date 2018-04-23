@@ -31,19 +31,19 @@
 
     <files>
         <file>
-            <source>${project.basedir}/target/QSG-1.0.jar</source>
+            <source>${project.basedir}/target/QSG-${project.version}.jar</source>
             <outputDirectory>QSG-bundle/QSG/bin/02</outputDirectory>
         </file>
         <file>
-            <source>${project.basedir}/target/QSG-1.0.jar</source>
+            <source>${project.basedir}/target/QSG-${project.version}.jar</source>
             <outputDirectory>QSG-bundle/QSG/bin/03</outputDirectory>
         </file>
         <file>
-            <source>${project.basedir}/target/QSG-1.0.jar</source>
+            <source>${project.basedir}/target/QSG-${project.version}.jar</source>
             <outputDirectory>QSG-bundle/QSG/bin/04</outputDirectory>
         </file>
         <file>
-            <source>${project.basedir}/target/QSG-1.0.jar</source>
+            <source>${project.basedir}/target/QSG-${project.version}.jar</source>
             <outputDirectory>QSG-bundle/QSG/bin/05</outputDirectory>
         </file>
     </files>
