@@ -20,7 +20,7 @@ Identity server using the seven scenarios given below.
 
 ## Getting started
 
-1. Download and unzip the IS-samples-1.0.0.zip
+1. Download and unzip the is-samples-1.0.0.zip
 2. Deploy the sample web apps on the tomcat server.
 3. Start your WSO2 Identity server.
 4. Start your Tomcat server.
@@ -47,7 +47,7 @@ Alternatively, you can install the Quick Start Guide from the source using the f
 
 1. Get a clone or download source from this repository
 2. Run the Maven command mvn clean install from within the distribution directory.
-3. Unzip the IS-samples-1.0.0.zip
+3. Unzip the is-samples-1.0.0.zip
 4. Deploy the sample web apps on the tomcat server.
 5. Start your WSO2 Identity server.
 6. Start your Tomcat server.
