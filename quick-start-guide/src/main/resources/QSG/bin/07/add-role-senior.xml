@@ -42,6 +42,12 @@
                 <!--Optional:-->
                 <xsd:resourceId>/permission/admin/manage/identity/workflow/profile/view</xsd:resourceId>
             </ser:permissions>
+            <ser:permissions>
+                <!--Optional:-->
+                <xsd:action>ui.execute</xsd:action>
+                <!--Optional:-->
+                <xsd:resourceId>/permission/admin/manage/identity/applicationmgt</xsd:resourceId>
+            </ser:permissions>
         </ser:addRole>
     </soapenv:Body>
 </soapenv:Envelope>
