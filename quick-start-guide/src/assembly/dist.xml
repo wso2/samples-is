@@ -46,5 +46,9 @@
             <source>${project.basedir}/target/QSG-${project.version}.jar</source>
             <outputDirectory>QSG-bundle/QSG/bin/05</outputDirectory>
         </file>
+        <file>
+            <source>${project.basedir}/target/QSG-${project.version}.jar</source>
+            <outputDirectory>QSG-bundle/QSG/bin/08</outputDirectory>
+        </file>
     </files>
 </assembly>
