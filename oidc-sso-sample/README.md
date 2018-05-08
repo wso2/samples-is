@@ -4,7 +4,7 @@ Openid Connect is an identity layer which is built on top of Oauth 2.0. It enabl
 
 Single sign-on (SSO) occurs when a user logs in to one client and is then signed in to other clients automatically.
 
-In the context of the OIDC-conformant authentication pipeline, SSO must happen at the authorization server (i.e. Auth0) and not client applications. This means that for SSO to happen, you must employ universal login and redirect users to the login page. These applications demonstrates oidc sso with WSO2 server. 
+In the context of the OIDC-conformant authentication pipeline, SSO must happen at the authorization server and not client applications. This means that for SSO to happen, you must employ universal login and redirect users to the login page. These applications demonstrates oidc sso with WSO2 server. 
 
 ## Table of contents
 
