@@ -37,6 +37,9 @@ password.
 Navigate to `<SAMPLE_HOME>/ConditionalAuthSamples/sample1` in terminal and execute the configuration script 
 `sh configure_sample1.sh`
 
+***NOTE:*** *You will be required to provide the Client Id and the Secret of the registered OAuth 2.0 application in
+order to configure the federated identity provider.*
+
 The script will,
 - Create two tenants 'management.pickup.com' and 'drivers.pickup.com'
 - Add users in each tenant
@@ -63,6 +66,7 @@ Try to login to any of the dispatch or swift applications using one of the above
 drivers department will be prompted to log in using the Google credentials in order to access the system.
 
 Dispatch - [http://localhost:8080/saml2-web-app-dispatch.com/](http://localhost:8080/saml2-web-app-dispatch.com/)
+
 Swift - [http://localhost:8080/saml2-web-app-swift.com/](http://localhost:8080/saml2-web-app-swift.com/)
 
 ## Conditional Authentication Script

@@ -1,7 +1,7 @@
-# Authentication Steps Based On User Agent
+# Enforcing Multi-factor Authentication Based On User-Agent
 
 This sample demonstrates a scenario where authentication steps for a user is decided on the user agent used to log in to
-the system.
+the system. User agent is extracted from the 'User-Agent' header which includes in the authentication request.
 
 ### Use Case
 
@@ -28,8 +28,7 @@ authenticate the users log in from mobile devices by a second factor.
 5. This sample requires sample authenticators for multi-factor authentication step configurations. In order to get the 
    sample authenticators follow the section: [Getting Sample Authenticators](#getting-sample-authenticators)
 
-6. Start WSO2 Identity Server and Apache Tomcat Server.This sample requires sample authenticators for multi-factor 
-   authentication step configurations.
+6. Start WSO2 Identity Server and Apache Tomcat Server.
 
 ### Getting Sample Authenticators
 

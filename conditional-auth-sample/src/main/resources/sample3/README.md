@@ -1,4 +1,4 @@
-# Authentication Steps Based On User Attribute/Claim
+# Deny Authentication Based On User Attribute/Claim
 
 This sample demonstrates a scenario where user will be authenticated if a pre defined condition is met regards to an
 attribute of the user.
@@ -24,8 +24,7 @@ attribute of the user.
    
 4. Copy the `.war` files inside the `SAML2-APPS` directory and deploy in tomcat server.
 
-5. Start WSO2 Identity Server and Apache Tomcat Server.This sample requires sample authenticators for multi-factor 
-   authentication step configurations.
+5. Start WSO2 Identity Server and Apache Tomcat Server.
    
 ### Running the Sample
 

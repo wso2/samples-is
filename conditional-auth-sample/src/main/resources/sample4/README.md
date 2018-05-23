@@ -37,6 +37,9 @@ is outside the allowed set of ip addresses, login review notification is send to
 Navigate to `<SAMPLE_HOME>/ConditionalAuthSamples/sample4` in terminal and execute the configuration script 
 `sh configure_sample4.sh`
 
+***NOTE:*** *You will be required to provide the allowed ip range in the format of ip subnet and mask 
+(e.g. 192.168.8.0/22).*
+
 The script will,
 - Create service providers for dispatch and swift web applications and configure them.
 - Configure Basic Authentication
