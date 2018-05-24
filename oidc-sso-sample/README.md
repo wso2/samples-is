@@ -1,10 +1,13 @@
 # Openid Connect SSO Samples
 
-Openid Connect is an identity layer which is built on top of Oauth 2.0. It enables the clients to identity their users depending on the authentication carried out by an identity server, also it allows them to obtain basic profile information about the users.
+OpenID Connect is an identity layer that is built on top of the OAuth 2.0 protocol. It allows clients to verify the identity of users depending on the authentication performed by an identity server, and also allows clients to obtain basic profile information of users.
 
-Single sign-on (SSO) occurs when a user logs in to one client and is then signed in to other clients automatically.
+Single sign-on (SSO) allows users to provide their credentials once and obtain access to multiple applications. 
 
-In the context of the OIDC-conformant authentication pipeline, SSO must happen at the authorization server and not client applications. This means that for SSO to happen, you must employ universal login and redirect users to the login page. These applications demonstrates oidc sso with WSO2 server. 
+According to the OpenID Connect session management specification, a relying party can monitor the login status of an end user using two hidden iframes. One at the relying party, and the other at the OpenID Connect provider. The relying party iframe can continuously poll the hidden OpenID Connect provider iframe so that the relying party gets notified when the session state of the user changes.
+
+                                                              
+
 
 ## Table of contents
 

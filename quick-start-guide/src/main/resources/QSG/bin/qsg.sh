@@ -119,7 +119,7 @@ echo "|               registration. You can only log into the app after     |"
 echo "|               after clicking the verification link sent to the      |"
 echo "|               email address you provided.]                          |"
 echo "|                                                                     |"
-echo "|    Press 3 - Enable Notification Internally Management              |"
+echo "|    Press 3 - Enable Internal Notification Management                |"
 echo "|               [ Notify user on the account creation.]               |"
 echo "|                                                                     |"
 echo "-----------------------------------------------------------------------"
@@ -351,7 +351,7 @@ cd ..
 return 0;
 }
 
-configure_conditional_auth() {
+configure_conditional_auth_s1() {
 echo
 echo "-------------------------------------------------------------------"
 echo "|                                                                 |"
@@ -400,8 +400,8 @@ case ${user} in
     update_application_saml dispatch 04 urn:updateApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
     update_application_saml swift 04 urn:updateApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
 
-    create_updateapp_conditional dispatch Y2FtZXJvbjpjYW1lcm9uMTIz
-    create_updateapp_conditional swift Y2FtZXJvbjpjYW1lcm9uMTIz
+    create_updateapp_conditional_s1 dispatch Y2FtZXJvbjpjYW1lcm9uMTIz
+    create_updateapp_conditional_s1 swift Y2FtZXJvbjpjYW1lcm9uMTIz
 
     update_application_saml dispatch 08 urn:updateApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
     update_application_saml swift 08 urn:updateApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
@@ -464,6 +464,107 @@ break;;
 
 return 0;
 }
+
+configure_conditional_auth_s2() {
+echo
+echo "-------------------------------------------------------------------"
+echo "|                                                                 |"
+echo "|  We are configuring Twitter as the second authentication        |"
+echo "|  factor. Therefore, you have to register an application         |"
+echo "|  in https://apps.twitter.com/                                   |"
+echo "|                                                                 |"
+echo "|  So please make sure you have registered an application before  |"
+echo "|  continuing the script.                                         |"
+echo "|                                                                 |"
+echo "|  Do you want to continue?                                       |"
+echo "|                                                                 |"
+echo "|  Press y - YES                                                  |"
+echo "|  Press n - NO                                                   |"
+echo "|                                                                 |"
+echo "-------------------------------------------------------------------"
+echo
+read user
+
+case ${user} in
+    [Yy]* )
+
+    add_identity_provider admin admin 05
+
+    configure_sso_saml2
+
+    create_updateapp_multi dispatch Y2FtZXJvbjpjYW1lcm9uMTIz
+    create_updateapp_multi swift Y2FtZXJvbjpjYW1lcm9uMTIz
+
+    update_application_saml dispatch 04 urn:updateApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+    update_application_saml swift 04 urn:updateApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+
+    create_updateapp_conditional_s2 dispatch Y2FtZXJvbjpjYW1lcm9uMTIz
+    create_updateapp_conditional_s2 swift Y2FtZXJvbjpjYW1lcm9uMTIz
+
+    update_application_saml dispatch 09 urn:updateApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+    update_application_saml swift 09 urn:updateApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+
+    echo
+    echo
+    echo "----------------------------------------------------------------------"
+    echo "|                                                                    |"
+    echo "|    The conditional authentication enables you to add more          |"
+    echo "|    control and constraints to the authentication process.          |"
+    echo "|                                                                    |"
+    echo "|    Here we are going to try out a conditional authentication       |"
+    echo "|    scenario where users will be prompted to be authenticated       |"
+    echo "|    with multiple factors depending on whether they have already    |"
+    echo "|    logged in to the application previously.                        |"
+    echo "|                                                                    |"
+    echo "|    Use case: The user will be authenticated both with basic        |"
+    echo "|    authentication and federated authentication(Twitter), when      |"
+    echo "|    logging into the application for the first time, and will       |"
+    echo "|    authenticated via basic authentication for the later logins     |"
+    echo "|    through the same web browser.                                   |"
+    echo "|                                                                    |"
+    echo "|    To tryout conditional authentication please log into            |"
+    echo "|    the sample applications below.                                  |"
+    echo "|                                                                    |"
+    echo "|    Dispatch - http://localhost:8080/saml2-web-app-dispatch.com/    |"
+    echo "|    Swift - http://localhost:8080/saml2-web-app-swift.com/          |"
+    echo "|                                                                    |"
+    echo "|    Manager                                                         |"
+    echo "|      Username: cameron                                             |"
+    echo "|      Password: cameron123                                          |"
+    echo "|                                                                    |"
+    echo "|    Employee                                                        |"
+    echo "|      Username: alex                                                |"
+    echo "|      Password: alex123                                             |"
+    echo "|                                                                    |"
+    echo "----------------------------------------------------------------------"
+    echo
+    echo "If you have finished trying out the sample web apps, you can clean the process now."
+    echo "Do you want to clean up the setup?"
+    echo
+    echo "Press y - YES"
+    echo "Press n - NO"
+    echo
+    read clean
+
+     case ${clean} in
+        [Yy]* )
+        delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+        delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+        delete_user
+
+	 break;;
+        [Nn]* ) exit;;
+        * ) echo "Please answer yes or no.";;
+     esac
+
+break;;
+    [Nn]* ) return -1;;
+        * ) echo "Please answer yes or no.";;
+    esac
+
+return 0;
+}
+
 
 update_idp_selfsignup() {
 
@@ -718,7 +819,7 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
 return 0;
 }
 
-create_updateapp_conditional() {
+create_updateapp_conditional_s1() {
 cd ${QSG}/QSG/bin/08
 sp_name=$1
 request_data="get-app-${sp_name}.xml"
@@ -804,20 +905,17 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
        on: {&#xD;
            success: function (context) {&#xD;
 &#xD;
-               var isSenior = hasRole(context, 'senior-manager');&#xD;
-               var isJunior = hasRole(context, 'junior-manager');&#xD;
-&#xD;
-               if (isSenior) {&#xD;
-                   Log.info("\"--------------- Has Senior Manager "\" + isSenior);&#xD;
+               if (hasRole(context, 'senior-manager')) {&#xD;
+                   Log.info("\"--------------- "\" + context.steps[1].subject.username + "\" is the Senior Manager "\");&#xD;
                    executeStep({id: '2'});&#xD;
                }&#xD;
-               else if (isJunior) {&#xD;
-                   Log.info("\"--------------- Has Junior Manager "\" + isJunior);&#xD;
+               else if (hasRole(context, 'junior-manager')) {&#xD;
+                   Log.info("\"--------------- "\" + context.steps[1].subject.username + "\" is the Junior Manager "\");&#xD;
                }&#xD;
            }&#xD;
        }&#xD;
    });&#xD;
-}
+}&#xD;
 </ns2:content>
         <ns2:enabled xmlns:ns2="\"http://script.model.common.application.identity.carbon.wso2.org/xsd"\">true</ns2:enabled>
       </authenticationScriptConfig>
@@ -871,7 +969,7 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
 return 0;
 }
 
-delete_roles_conditional() {
+delete_roles_conditional_s1() {
 cd ${QSG}/QSG/bin
 
 request_data1="07/delete-role-senior.xml"
@@ -899,6 +997,162 @@ res=$?
  fi
 echo "** The role junior-manager was successfully deleted. **"
 echo
+
+return 0;
+}
+
+create_updateapp_conditional_s2() {
+cd ${QSG}/QSG/bin/09
+sp_name=$1
+request_data="get-app-${sp_name}.xml"
+auth=$2
+
+ if [ ! -f "$request_data" ]
+  then
+    echo "$request_data File does not exists."
+    return -1
+  fi
+
+ if [ -f "response_unformatted.xml" ]
+  then
+   rm -r response_unformatted.xml
+ fi
+
+touch response_unformatted.xml
+curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type: text/xml" -H "SOAPAction: urn:getApplication" https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ > response_unformatted.xml
+res=$?
+ if test "${res}" != "0"; then
+  echo "!! Problem occurred while getting application details for ${sp_name}.... !!"
+  echo
+  delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_user
+  echo
+  return -1
+ fi
+
+jarName=`find -name "QSG-*.jar"  2>&1 | grep -v "Permission denied"`
+jarName2=`echo "${jarName#./}"`
+
+app_id=`java -jar ${jarName2}`
+
+ if [ -f "update-app-${sp_name}.xml" ]
+  then
+   rm -r update-app-${sp_name}.xml
+ fi
+
+touch update-app-${sp_name}.xml
+echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelope/"\" xmlns:xsd="\"http://org.apache.axis2/xsd"\" xmlns:xsd1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsd2="\"http://script.model.common.application.identity.carbon.wso2.org/xsd"\">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns4:updateApplication xmlns:ns4="\"http://org.apache.axis2/xsd"\">
+  <ns4:serviceProvider>
+    <ns1:applicationID xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">${app_id}</ns1:applicationID>
+    <ns1:applicationName xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">${sp_name}</ns1:applicationName>
+    <ns1:certificateContent xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"/>
+    <claimConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">
+      <alwaysSendMappedLocalSubjectId>false</alwaysSendMappedLocalSubjectId>
+      <localClaimDialect>true</localClaimDialect>
+      <roleClaimURI/>
+    </claimConfig>
+    <ns1:description xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">sample service provider</ns1:description>
+    <inboundAuthenticationConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">
+      <inboundAuthenticationRequestConfigs>
+        <inboundAuthKey>saml2-web-app-${sp_name}.com</inboundAuthKey>
+        <inboundAuthType>samlsso</inboundAuthType>
+        <properties>
+          <name>attrConsumServiceIndex</name>
+          <value>1223160755</value>
+        </properties>
+      </inboundAuthenticationRequestConfigs>
+      <inboundAuthenticationRequestConfigs>
+        <inboundAuthKey>${sp_name}</inboundAuthKey>
+        <inboundAuthType>passivests</inboundAuthType>
+      </inboundAuthenticationRequestConfigs>
+      <inboundAuthenticationRequestConfigs>
+        <inboundAuthKey>${sp_name}</inboundAuthKey>
+        <inboundAuthType>openid</inboundAuthType>
+      </inboundAuthenticationRequestConfigs>
+    </inboundAuthenticationConfig>
+    <inboundProvisioningConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">
+      <dumbMode>false</dumbMode>
+      <provisioningUserStore>PRIMARY</provisioningUserStore>
+    </inboundProvisioningConfig>
+    <localAndOutBoundAuthenticationConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">
+      <alwaysSendBackAuthenticatedListOfIdPs>false</alwaysSendBackAuthenticatedListOfIdPs>
+      <authenticationScriptConfig>
+        <ns2:content xmlns:ns2="\"http://script.model.common.application.identity.carbon.wso2.org/xsd"\">function onInitialRequest(context) {&#xD;
+	executeStep({&#xD;
+    	id: '1',&#xD;
+    	on: {&#xD;
+        	success: function (context) {&#xD;
+&#xD;
+            	if (context.request.cookies.knownbrowser) {&#xD;
+                	Log.info("\"--------------- cookie found in the request. This is a known browser"\");&#xD;
+                	Log.info("\"--------------- Logged-in user: "\" + context.request.cookies.knownbrowser.value);&#xD;
+            	} else {&#xD;
+                	executeStep({&#xD;
+                    	id: '2',&#xD;
+                    	on: {&#xD;
+                        	success: function (context) {                               &#xD;
+                                Log.info("\"--------------- setting cookie : knownbrowser"\");&#xD;
+							    context.response.headers["\"Set-Cookie"\"] = "\"knownbrowser= "\" + context.steps[1].subject.username + "\"\; Path=/\; "Secure"\; "HttpOnly"\; Expires=Wed, "21" Dec 2018 07:28:00 GMT"\"&#xD;
+                        	}&#xD;
+                    	}&#xD;
+                	});&#xD;
+            	}&#xD;
+        	}&#xD;
+    	}&#xD;
+	});&#xD;
+}&#xD;</ns2:content>
+        <ns2:enabled xmlns:ns2="\"http://script.model.common.application.identity.carbon.wso2.org/xsd"\">true</ns2:enabled>
+      </authenticationScriptConfig>
+      <authenticationStepForAttributes xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/>
+      <authenticationStepForSubject xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/>
+      <authenticationSteps>
+        <attributeStep>true</attributeStep>
+        <localAuthenticatorConfigs>
+          <displayName>basic</displayName>
+          <name>BasicAuthenticator</name>
+        </localAuthenticatorConfigs>
+        <stepOrder>1</stepOrder>
+        <subjectStep>true</subjectStep>
+      </authenticationSteps>
+      <authenticationSteps>
+        <attributeStep>false</attributeStep>
+        <federatedIdentityProviders>
+          <defaultAuthenticatorConfig>
+            <displayName>twitter</displayName>
+            <name>TwitterAuthenticator</name>
+          </defaultAuthenticatorConfig>
+          <federatedAuthenticatorConfigs>
+            <displayName>twitter</displayName>
+            <name>TwitterAuthenticator</name>
+          </federatedAuthenticatorConfigs>
+          <identityProviderName>IDP-twitter</identityProviderName>
+        </federatedIdentityProviders>
+        <stepOrder>2</stepOrder>
+        <subjectStep>false</subjectStep>
+      </authenticationSteps>
+      <authenticationType>flow</authenticationType>
+      <enableAuthorization>false</enableAuthorization>
+      <subjectClaimUri xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/>
+      <useTenantDomainInLocalSubjectIdentifier>false</useTenantDomainInLocalSubjectIdentifier>
+      <useUserstoreDomainInLocalSubjectIdentifier>false</useUserstoreDomainInLocalSubjectIdentifier>
+    </localAndOutBoundAuthenticationConfig>
+    <outboundProvisioningConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"/>
+    <owner xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">
+      <tenantDomain>carbon.super</tenantDomain>
+      <userName>cameron</userName>
+      <userStoreDomain>PRIMARY</userStoreDomain>
+    </owner>
+    <permissionAndRoleConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"/>
+    <ns1:requestPathAuthenticatorConfigs xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/>
+    <ns1:saasApp xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">false</ns1:saasApp>
+  </ns4:serviceProvider>
+</ns4:updateApplication>
+   </soapenv:Body>
+</soapenv:Envelope>" >> update-app-${sp_name}.xml
 
 return 0;
 }
@@ -2030,11 +2284,11 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
       <name>TwitterAuthenticator</name>
       <properties>
         <name>APIKey</name>
-        <value>STxf3PlNjDXvvUmWr0dbC1rVV</value>
+        <value>${key}</value>
       </properties>
       <properties>
         <name>APISecret</name>
-        <value>QaHwXLGe6s7ImFcJ3RjmDQCfrvufS3JqoVm2p30hSqEACbvhgU</value>
+        <value>${secret}</value>
       </properties>
       <properties>
         <name>callbackUrl</name>
@@ -2073,7 +2327,8 @@ echo "|  Scenario 3 - Configuring Multi-Factor Authentication                   
 echo "|  Scenario 4 - Configuring Twitter as a Federated Authenticator            |"
 echo "|  Scenario 5 - Configuring Self-Signup                                     |"
 echo "|  Scenario 6 - Creating a workflow                                         |"
-echo "|  Scenario 7 - Configuring Conditional Authentication                      |"
+echo "|  Scenario 7 - Configuring Conditional Authentication(Role based)          |"
+echo "|  Scenario 8 - Configuring Conditional Authentication(Cookie based)        |"
 echo "-----------------------------------------------------------------------------"
 echo "Enter the scenario number you selected."
 
@@ -2131,10 +2386,16 @@ case $scenario in
 
 	7)
 	setup_servers
-	configure_conditional_auth
-	delete_roles_conditional
+	configure_conditional_auth_s1
+	delete_roles_conditional_s1
 	delete_idp 05 urn:deleteIdP https://localhost:9443/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/
 	break ;;
+
+	8)
+	setup_servers
+	configure_conditional_auth_s2
+	delete_idp 05 urn:deleteIdP https://localhost:9443/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/
+	break;;
 
 	*)
 	echo "Sorry, that's not an option."
