@@ -75,21 +75,16 @@ Following script is used to check and enforce users in the drivers department to
 
 ```javascript
 function onInitialRequest(context) {
-    executeStep({
-        id: '1',
-        on: {
-            success: function(context) {
-                // Extracting authenticated subject from the authenticated step 1.
-                var user = context.steps[1].subject;
-                // Extracting tenant domain of the subject.
-                var tenantDomain = user.tenantDomain;
+    executeStep(1, {
+        onSuccess: function(context) {
+            // Extracting authenticated subject from the authenticated step 1.
+            var user = context.steps[1].subject;
+            // Extracting tenant domain of the subject.
+            var tenantDomain = user.tenantDomain;
 
-                if (tenantDomain === "drivers.pickup.com") {
-                    Log.info("User: " + user.username + " is from the drivers.pickup.com tenant.");
-                        executeStep({
-                            id: '2'
-                        });
-                }
+            if (tenantDomain === "drivers.pickup.com") {
+                Log.info("User: " + user.username + " is from the drivers.pickup.com tenant.");
+                    executeStep(2);
             }
         }
     });

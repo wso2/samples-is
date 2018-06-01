@@ -61,30 +61,24 @@ Following script is used to check and decide whether to authenticate or not base
 
 ```javascript
 function onInitialRequest(context) {
-    executeStep({
-        id: '1',
-        on: {
-            success: function(context) {
-                // Extracting authenticated subject
-                var subject = context.steps[1].subject;
-                
-                // Extracting claims/attributes of the subject
-                var dateOfBirth = subject.localClaims['http://wso2.org/claims/dob'];
-			  	
-                if (!dateOfBirth || getAge(dateOfBirth) < 18) {
-                    Log.info("User: " + subject.username + " is below the allowed age limit");
-				  
-                    // Error page URL to redirect to. This can be a custom URL
-                    var errorPageURL = "/authenticationendpoint/retry.do";
-                    // Error message: parameters mentioned here will be passed as query params to the error page
-                    var errorMessage = {
-                        status: "Login Restricted",
-                        statusMsg: "User: " + subject.username + " is Not Allowed to login to the system."
-                    };
-				  	
-                    // Redirecting to the error page
-                    sendError(errorPageURL, errorMessage);
-                }
+    executeStep(1, {
+        onSuccess: function(context) {
+            // Extracting authenticated subject
+            var subject = context.steps[1].subject;
+            // Extracting claims/attributes of the subject
+            var dateOfBirth = subject.localClaims['http://wso2.org/claims/dob'];
+            
+            if (!dateOfBirth || getAge(dateOfBirth) < 18) {
+                Log.info("User: " + subject.username + " is below the allowed age limit");
+                // Error page URL to redirect to. This can be a custom URL
+                var errorPageURL = "/authenticationendpoint/retry.do";
+                // Error message: parameters mentioned here will be passed as query params to the error page
+                var errorMessage = {
+                    status: "Login Restricted",
+                    statusMsg: "User: " + subject.username + " is Not Allowed to login to the system."
+                };
+                // Redirecting to the error page
+                sendError(errorPageURL, errorMessage);
             }
         }
     });

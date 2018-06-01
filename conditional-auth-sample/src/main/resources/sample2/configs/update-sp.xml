@@ -80,19 +80,14 @@
                     <xsd1:authenticationScriptConfig>
                         <!--Optional:-->
                         <xsd2:content>function onInitialRequest(context) {&#xD;
-    executeStep({&#xD;
-        id: '1',&#xD;
-        on: {&#xD;
-            success: function(context) {&#xD;
-                var userAgent = context.request.headers["user-agent"];&#xD;
-                Log.info("--------------- user-agent:." + context.request.headers["user-agent"]);&#xD;
+    executeStep(1, {&#xD;
+        onSuccess: function(context) {&#xD;
+            var userAgent = context.request.headers["user-agent"];&#xD;
+            Log.info("user-agent: " + context.request.headers["user-agent"]);&#xD;
 &#xD;
-                if (isMobile(userAgent)) {&#xD;
-                    Log.info("User has logged from a mobile device. Prompting Hardware Key Authentication");&#xD;
-                    executeStep({&#xD;
-                        id: '2'&#xD;
-                    });&#xD;
-                }&#xD;
+            if (isMobile(userAgent)) {&#xD;
+                Log.info("User has logged from a mobile device. Prompting Hardware Key Authentication");&#xD;
+                executeStep(2);&#xD;
             }&#xD;
         }&#xD;
     });&#xD;

@@ -82,21 +82,16 @@ agents.
 
 ```javascript
 function onInitialRequest(context) {
-    executeStep({
-        id: '1',
-        on: {
-            success: function(context) {
-                // Extracting user agent from the request headers
-                var userAgent = context.request.headers["user-agent"];
-                Log.info("user-agent:." + context.request.headers["user-agent"]);
+    executeStep(1, {
+        onSuccess: function(context) {
+            // Extracting user agent from the request headers
+            var userAgent = context.request.headers["user-agent"];
+            Log.info("user-agent: " + context.request.headers["user-agent"]);
 
-                if (isMobile(userAgent)) {
-                    Log.info("User has logged from a mobile device. Prompting Hardware Key Authentication");
-                    // Enforcing authentication step 2 for the user log in from mobile devices
-                    executeStep({
-                        id: '2'
-                    });
-                }
+            if (isMobile(userAgent)) {
+                Log.info("User has logged from a mobile device. Prompting Hardware Key Authentication");
+                // Enforcing authentication step 2 for the user log in from mobile devices
+                executeStep(2);
             }
         }
     });

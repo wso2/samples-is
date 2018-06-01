@@ -80,19 +80,14 @@
                     <xsd1:authenticationScriptConfig>
                         <!--Optional:-->
                         <xsd2:content>function onInitialRequest(context) {&#xD;
-    executeStep({&#xD;
-        id: '1',&#xD;
-        on: {&#xD;
-            success: function(context) {&#xD;
-                var user = context.steps[1].subject;&#xD;
-                var tenantDomain = user.tenantDomain;&#xD;
-                &#xD;
-                if (tenantDomain == "drivers.pickup.com") {&#xD;
-                    Log.info("User: " + user.username + " is from the drivers.pickup.com tenant.");&#xD;
-                        executeStep({&#xD;
-                            id: '2'&#xD;
-                        }); &#xD;
-                }&#xD;
+    executeStep(1, {&#xD;
+        onSuccess: function(context) {&#xD;
+            var user = context.steps[1].subject;&#xD;
+            var tenantDomain = user.tenantDomain;&#xD;
+&#xD;
+            if (tenantDomain === "drivers.pickup.com") {&#xD;
+                Log.info("User: " + user.username + " is from the drivers.pickup.com tenant.");&#xD;
+                executeStep(2);&#xD;
             }&#xD;
         }&#xD;
     });&#xD;

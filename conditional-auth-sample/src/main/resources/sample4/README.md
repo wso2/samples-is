@@ -62,33 +62,30 @@ Following script is used to check and decide whether to authenticate or not base
 
 ```javascript
 function onInitialRequest(context) {
-    executeStep({
-        id: '1',
-        on: {
-            success: function (context) {
-                // Allowed user ip range should be given as subnet with mask. E.g. 192.168.8.0/22
-                var allowedRange = '${ALLOWED_IP_RANGE}';
-                // Extracting authenticated subject
-                var user = context.steps[1].subject;
-                // Extracting the origin IP of the request
-                var loginIp = context.request.ip;
+    executeStep(1, {
+        onSuccess: function (context) {
+            // Allowed user ip range should be given as subnet with mask. E.g. 192.168.8.0/22
+            var allowedRange = '${ALLOWED_IP_RANGE}';
+            // Extracting authenticated subject
+            var user = context.steps[1].subject;
+            // Extracting the origin IP of the request
+            var loginIp = context.request.ip;
 
-                Log.info("User: " + user.username + " logged in from IP: " + loginIp);
-                
-                // Checking if the IP is within the allowed range                
-                if (!isAllowedIp(loginIp, allowedRange)) {
-                    // Parameters to fill in the placeholders in the email template
-                    var emailAttributes = {
-                        'display-name': user.localClaims['http://wso2.org/claims/givenname'],
-                        'ip-addr': loginIp,
-                        'user-agent': context.request.headers["user-agent"]
-                    };
+            Log.info("User: " + user.username + " logged in from IP: " + loginIp);
+            
+            // Checking if the IP is within the allowed range                
+            if (!isAllowedIp(loginIp, allowedRange)) {
+                // Parameters to fill in the placeholders in the email template
+                var emailAttributes = {
+                    'display-name': user.localClaims['http://wso2.org/claims/givenname'],
+                    'ip-addr': loginIp,
+                    'user-agent': context.request.headers["user-agent"]
+                };
 
-                    if (sendEmail(user, 'LoginWarning', emailAttributes)) {
-                        Log.info("Sending email to user with the login details- User: " + subject.username + " IP: " + loginIp);
-                    } else {
-                        Log.info("Error occurred while trying to send an email");
-                    }
+                if (sendEmail(user, 'LoginWarning', emailAttributes)) {
+                    Log.info("Sending email to user with the login details, User: " + subject.username + " IP: " + loginIp);
+                } else {
+                    Log.info("Error occurred while trying to send an email");
                 }
             }
         }
