@@ -43,6 +43,7 @@
         <module>distribution</module>
         <module>oauth-sample-client-authenticator</module>
         <module>sample-post-authentication-handler</module>
+        <module>conditional-auth-sample</module>
     </modules>
 
     <licenses>

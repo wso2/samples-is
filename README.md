@@ -11,11 +11,12 @@ samples-is repository contains the sample applications that are integrated with 
 
 ## Getting started
 
-* [Quick Start Guide](https://github.com/NipuniBhagya/samples-is/tree/master/quick-start-guide)
-* [SAML2 SSO sample application](https://github.com/NipuniBhagya/samples-is/tree/master/saml2-sso-sample)
-* [OIDC SSO sample application](https://github.com/NipuniBhagya/samples-is/tree/master/oidc-sso-sample)
-* [Sample post authentication handler](https://github.com/NipuniBhagya/samples-is/tree/master/sample-post-authentication-handler)
-* [Oauth sample client authenticator](https://github.com/NipuniBhagya/samples-is/tree/master/oauth-sample-client-authenticator)
+* [Quick Start Guide](https://github.com/wso2/samples-is/tree/master/quick-start-guide)
+* [SAML2 SSO sample application](https://github.com/wso2/samples-is/tree/master/saml2-sso-sample)
+* [OIDC SSO sample application](https://github.com/wso2/samples-is/tree/master/oidc-sso-sample)
+* [Sample post authentication handler](https://github.com/wso2/samples-is/tree/master/sample-post-authentication-handler)
+* [Oauth sample client authenticator](https://github.com/wso2/samples-is/tree/master/oauth-sample-client-authenticator)
+* [Conditional authentication sample](https://github.com/madawas/samples-is/tree/master/conditional-auth-sample)
 
 ## Download and install
 

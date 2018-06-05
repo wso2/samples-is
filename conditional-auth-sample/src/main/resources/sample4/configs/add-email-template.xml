@@ -1,0 +1,92 @@
+<!--
+  ~ Copyright (c) 2018, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+  ~
+  ~ WSO2 Inc. licenses this file to you under the Apache License,
+  ~ Version 2.0 (the "License"); you may not use this file except
+  ~ in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mgt="http://mgt.email.carbon.wso2.org"
+                  xmlns:xsd="http://model.mgt.email.carbon.wso2.org/xsd">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <mgt:saveEmailTemplate>
+            <!--Optional:-->
+            <mgt:emailTemplate>
+                <!--Optional:-->
+                <xsd:body><![CDATA[<table align="center" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#f0f0f0">
+    <tr>
+        <td style="padding: 30px 30px 20px 30px;">
+            <table cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#ffffff"
+                   style="max-width: 650px; margin: auto;">
+                <tr>
+                    <td colspan="2" align="center" style="background-color: #333; padding: 40px;"><a
+                            href="http://wso2.com/" target="_blank"><img
+                            src="http://cdn.wso2.com/wso2/newsletter/images/nl-2017/wso2-logo-transparent.png"
+                            border="0"/></a></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center" style="padding: 50px 50px 0px 50px;">
+                        <h1 style="padding-right: 0em; margin: 0; line-height: 40px; font-weight:300; font-family: 'Nunito Sans', Arial, Verdana, Helvetica, sans-serif; color: #666; text-align: left; padding-bottom: 1em;">
+                            Login Notification </h1>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding: 0px 50px 20px 50px;" valign="top">
+                        <p style="font-size: 18px; margin: 0; line-height: 24px; font-family: 'Nunito Sans', Arial, Verdana, Helvetica, sans-serif; color: #666; text-align: left; padding-bottom: 3%;">
+                            Hi {{display-name}}, </p>
+                        <p style="font-size: 18px; margin: 0; line-height: 24px; font-family: 'Nunito Sans', Arial, Verdana, Helvetica, sans-serif; color: #666; text-align: left; padding-bottom: 3%;">
+                            Someone logged to your account from unknown location with below information. <br/><br/>
+                            User: <b>{{user-name}}</b><br> IP Address: <b>{{ip-addr}}</b><br>User Agent: <b>{{user-agent}}</b><br>
+                        </p>
+                        <p style="font-size: 18px; margin: 0; line-height: 24px; font-family: 'Nunito Sans', Arial, Verdana, Helvetica, sans-serif; color: #666; text-align: left; padding-bottom: 3%;">
+                            Was this you? If so, you can disregard the rest of this email.
+                            <br/><br/>
+                            If this wasn't you, please contact administrator of your account as this could be a breach
+                            in
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; padding: 30px 50px 50px 50px;" valign="top">
+                        <p style="font-size: 18px; margin: 0; line-height: 24px; font-family: 'Nunito Sans', Arial, Verdana, Helvetica, sans-serif; color: #505050; text-align: left;">
+                            Thanks,<br/>WSO2 Identity Server Team </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center" style="padding: 20px 40px 40px 40px;" bgcolor="#f0f0f0">
+                        <p style="font-size: 12px; margin: 0; line-height: 24px; font-family: 'Nunito Sans', Arial, Verdana, Helvetica, sans-serif; color: #777;">
+                            &copy; 2018 <a href="http://wso2.com/" target="_blank"
+                                           style="color: #777; text-decoration: none">WSO2</a> <br> 787 Castro Street,
+                            Mountain View, CA 94041. </p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>]]></xsd:body>
+                <!--Optional:-->
+                <xsd:emailContentType>text/html; charset=UTF-8</xsd:emailContentType>
+                <!--Optional:-->
+                <xsd:footer>---</xsd:footer>
+                <!--Optional:-->
+                <xsd:locale>en_US</xsd:locale>
+                <!--Optional:-->
+                <xsd:subject>WSO2 Identity Server - Login Warning</xsd:subject>
+                <!--Optional:-->
+                <xsd:templateDisplayName>LoginWarning</xsd:templateDisplayName>
+                <!--Optional:-->
+                <xsd:templateType>LoginWarning</xsd:templateType>
+            </mgt:emailTemplate>
+        </mgt:saveEmailTemplate>
+    </soapenv:Body>
+</soapenv:Envelope>
