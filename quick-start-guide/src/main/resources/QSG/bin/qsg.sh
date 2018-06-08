@@ -717,10 +717,7 @@ res=$?
   return -1
  fi
 
-jarName=`find -name "QSG-*.jar"  2>&1 | grep -v "Permission denied"`
-jarName2=`echo "${jarName#./}"`
-
-app_id=`java -jar ${jarName2}`
+app_id=`java -jar QSG-*.jar`
 
  if [ -f "update-app-${sp_name}.xml" ]
   then
@@ -849,10 +846,7 @@ res=$?
   return -1
  fi
 
-jarName=`find -name "QSG-*.jar"  2>&1 | grep -v "Permission denied"`
-jarName2=`echo "${jarName#./}"`
-
-app_id=`java -jar ${jarName2}`
+app_id=`java -jar QSG-*.jar`
 
  if [ -f "update-app-${sp_name}.xml" ]
   then
@@ -905,12 +899,13 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
        on: {&#xD;
            success: function (context) {&#xD;
 &#xD;
-               if (hasRole(context, 'senior-manager')) {&#xD;
-                   Log.info("\"--------------- "\" + context.steps[1].subject.username + "\" is the Senior Manager "\");&#xD;
+               var user = context.steps[1].subject;&#xD;
+               if (hasRole(user, 'senior-manager')) {&#xD;
+                   Log.info("\"--------------- "\" + user + "\" is the Senior Manager "\");&#xD;
                    executeStep({id: '2'});&#xD;
                }&#xD;
-               else if (hasRole(context, 'junior-manager')) {&#xD;
-                   Log.info("\"--------------- "\" + context.steps[1].subject.username + "\" is the Junior Manager "\");&#xD;
+               else if (hasRole(user, 'junior-manager')) {&#xD;
+                   Log.info("\"--------------- "\" + user + "\" is the Junior Manager "\");&#xD;
                }&#xD;
            }&#xD;
        }&#xD;
@@ -1031,10 +1026,7 @@ res=$?
   return -1
  fi
 
-jarName=`find -name "QSG-*.jar"  2>&1 | grep -v "Permission denied"`
-jarName2=`echo "${jarName#./}"`
-
-app_id=`java -jar ${jarName2}`
+app_id=`java -jar QSG-*.jar`
 
  if [ -f "update-app-${sp_name}.xml" ]
   then
@@ -1816,10 +1808,7 @@ res=$?
   return -1
  fi
 
-jarName=`find -name "QSG-*.jar"  2>&1 | grep -v "Permission denied"`
-jarName2=`echo "${jarName#./}"`
-
-app_id=`java -jar ${jarName2}`
+app_id=`java -jar QSG-*.jar`
 
  if [ -f "update-app-${sp_name}.xml" ]
   then 
@@ -1931,10 +1920,7 @@ res=$?
   return -1
  fi
 
-jarName=`find -name "QSG-*.jar"  2>&1 | grep -v "Permission denied"`
-jarName2=`echo "${jarName#./}"`
-
-app_id=`java -jar ${jarName2}`
+app_id=`java -jar QSG-*.jar`
 
  if [ -f "update-app-${sp_name}.xml" ]
   then 
@@ -2054,10 +2040,7 @@ res=$?
   return -1
  fi
 
-jarName=`find -name "QSG-*.jar"  2>&1 | grep -v "Permission denied"`
-jarName2=`echo "${jarName#./}"`
-
-app_id=`java -jar ${jarName2}`
+app_id=`java -jar QSG-*.jar`
 
  if [ -f "update-app-${sp_name}.xml" ]
   then

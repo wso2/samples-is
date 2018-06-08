@@ -34,16 +34,37 @@ public class AppId {
 
     private static Logger LOGGER = Logger.getLogger(AppId.class.getSimpleName());
     private static final String RESPONSE_FORMATTED_FILE = "response_unformatted.xml";
-    private static final String RESPONSE_TAG = "ax2140:applicationID";
+    private static final String RESPONSE_TAG = ":applicationID";
 
     public static void main(String[] args) {
 
         try {
+
             DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
             Document doc = docBuilder.parse(new File(RESPONSE_FORMATTED_FILE));
 
-            NodeList appId = doc.getElementsByTagName(RESPONSE_TAG);
+            NodeList tagName = doc.getElementsByTagName("ns:return");
+            String prefix = null;
+
+            if (tagName.item(0) != null) {
+                Element appElement1 = (Element) tagName.item(0);
+
+                String tagAttr = appElement1.getAttribute("xsi:type");
+
+                if(tagAttr != null) {
+                    String[] str = tagAttr.split(":", 0);
+                    prefix = str[0];
+
+                } else {
+                    LOGGER.info("type attribute not found.");
+                }
+
+            } else {
+                LOGGER.info("return tag not found.");
+            }
+
+            NodeList appId = doc.getDocumentElement().getElementsByTagName(prefix+RESPONSE_TAG);
 
             if (appId.item(0) != null) {
                 Element appElement = (Element) appId.item(0);
