@@ -40,6 +40,12 @@
                 <!--Optional:-->
                 <xsd:action>ui.execute</xsd:action>
                 <!--Optional:-->
+                <xsd:resourceId>/permission/admin/manage/identity/claimmgt</xsd:resourceId>
+            </ser:permissions>
+            <ser:permissions>
+                <!--Optional:-->
+                <xsd:action>ui.execute</xsd:action>
+                <!--Optional:-->
                 <xsd:resourceId>/permission/admin/manage/identity/applicationmgt/create</xsd:resourceId>
             </ser:permissions>
             <ser:permissions>
