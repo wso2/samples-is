@@ -40,6 +40,7 @@
         <module>saml2-sso-sample</module>
         <module>oidc-sso-sample</module>
         <module>quick-start-guide</module>
+        <module>gdpr-samples</module>
         <module>distribution</module>
         <module>oauth-sample-client-authenticator</module>
         <module>sample-post-authentication-handler</module>
@@ -265,6 +266,44 @@
                 <artifactId>org.wso2.carbon.identity.application.authentication.framework</artifactId>
                 <version>${identity.framework.version}</version>
             </dependency>
+
+
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${http.client.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpcore</artifactId>
+                <version>${http.core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+                <version>${commons-logging.version}</version>
+            </dependency>
+
+            <!--=============================================================================-->
+
+            <!--dependencies of gdpr-samples-->
+            <dependency>
+                <groupId>commons-codec.wso2</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${commons-codec.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.json</groupId>
+                <artifactId>json</artifactId>
+                <version>${org.json.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>${maven.dependency.plugin.version}</version>
+            </dependency>
+
+
         </dependencies>
     </dependencyManagement>
 
@@ -434,6 +473,16 @@
         <maven.scr.plugin.version>1.22.0</maven.scr.plugin.version>
         <maven.bundle.plugin.version>2.4.0</maven.bundle.plugin.version>
         <maven.buildnumber.plugin.version>1.4</maven.buildnumber.plugin.version>
+        <http.client.version>4.5.3</http.client.version>
+        <http.core.version>4.4.6</http.core.version>
+        <commons-logging.version>1.2</commons-logging.version>
+
+        <!--=============================================================================-->
+
+        <!--repo versions of gdpr-samples-->
+        <org.json.version>20180130</org.json.version>
+        <maven.dependency.plugin.version>3.1.0</maven.dependency.plugin.version>
+
     </properties>
 
 </project>
