@@ -1,0 +1,13 @@
+{
+  "schemas":[],
+  "name":{
+    "familyName":"Winters",
+    "givenName":"Garrett"
+  },
+  "userName":"garrett",
+  "password":"garrett123",
+  "emails":"garrett@drivers.pickup.com",
+  "addresses":{
+    "country":"United States"
+  }
+}

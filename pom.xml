@@ -14,29 +14,56 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <parent>
+        <groupId>org.wso2</groupId>
+        <artifactId>wso2</artifactId>
+        <version>1</version>
+    </parent>
 
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>org.wso2</groupId>
+    <groupId>org.wso2.samples.is</groupId>
     <artifactId>samples-is</artifactId>
-    <version>1.0</version>
     <packaging>pom</packaging>
+    <description>WSO2 Identity Server Samples</description>
+    <version>1.0.1-SNAPSHOT</version>
+
+    <scm>
+        <url>https://github.com/wso2/samples-is.git</url>
+        <developerConnection>scm:git:https://github.com/wso2/samples-is.git</developerConnection>
+        <connection>scm:git:https://github.com/wso2/samples-is.git</connection>
+        <tag>HEAD</tag>
+    </scm>
 
     <modules>
+        <module>saml2-sso-sample</module>
+        <module>oidc-sso-sample</module>
         <module>quick-start-guide</module>
-        <module>QSGDemo</module>
-        <module>QSG-pack</module>
+        <module>distribution</module>
+        <module>oauth-sample-client-authenticator</module>
+        <module>sample-post-authentication-handler</module>
+        <module>conditional-auth-sample</module>
     </modules>
+
+    <licenses>
+        <license>
+            <name>Apache License Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
+
+    <organization>
+        <name>WSO2</name>
+        <url>http://www.wso2.org</url>
+    </organization>
 
     <dependencyManagement>
         <dependencies>
 
-            <!--dependencies of the qsg-pack-->
+            <!--dependencies of the quick-start-guide-->
             <dependency>
-                <groupId>Quick-Start-Guide</groupId>
+                <groupId>saml2-sso-sample</groupId>
                 <artifactId>QSG</artifactId>
                 <version>${sample.qsg.version}</version>
             </dependency>
@@ -49,18 +76,13 @@
 
             <dependency>
                 <groupId>org.wso2.sample</groupId>
-                <artifactId>qsg-demo</artifactId>
-                <version>${sample.qsg-demo.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.wso2.is.extensions</groupId>
-                <artifactId>quick-start-guide</artifactId>
+                <artifactId>oidc-sso-sample</artifactId>
+                <version>${sample.oidc-sso-sample.version}</version>
             </dependency>
 
             <!--=============================================================================-->
 
-            <!--dependencies of the quick-start-guide-->
+            <!--dependencies of the saml2-sso-sample-->
             <dependency>
                 <groupId>org.opensaml</groupId>
                 <artifactId>opensaml</artifactId>
@@ -156,6 +178,16 @@
                 <version>${carbon.kernel.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.wso2.carbon</groupId>
+                <artifactId>org.wso2.carbon.user.api</artifactId>
+                <version>${carbon.kernel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon</groupId>
+                <artifactId>org.wso2.carbon.user.core</artifactId>
+                <version>${carbon.kernel.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>com.googlecode.json-simple</groupId>
                 <artifactId>json-simple</artifactId>
                 <version>${json.simple.version}</version>
@@ -183,7 +215,7 @@
 
             <!--=============================================================================-->
 
-            <!--dependencies of the qsg-demo-->
+            <!--dependencies of the oidc-sso-sample-->
             <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>servlet-api</artifactId>
@@ -205,72 +237,151 @@
                 <artifactId>commons-lang</artifactId>
                 <version>${commons-lang.version}</version>
             </dependency>
+
+            <!--=============================================================================-->
+
+            <!--dependencies of oauth-sample-client-authenticator-->
+            <dependency>
+                <groupId>org.wso2.carbon.identity.inbound.auth.oauth2</groupId>
+                <artifactId>org.wso2.carbon.identity.oauth.common</artifactId>
+                <version>${identity.inbound.oauth.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.identity.inbound.auth.oauth2</groupId>
+                <artifactId>org.wso2.carbon.identity.oauth</artifactId>
+                <version>${identity.inbound.oauth.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>org.apache.felix.scr.ds-annotations</artifactId>
+                <version>${apache.felix.scr.ds.annotations.version}</version>
+            </dependency>
+
+            <!--=============================================================================-->
+
+            <!--dependencies of sample-post-authentication-handler-->
+            <dependency>
+                <groupId>org.wso2.carbon.identity.framework</groupId>
+                <artifactId>org.wso2.carbon.identity.application.authentication.framework</artifactId>
+                <version>${identity.framework.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
     <build>
         <plugins>
-            <!--plugins for qsg-demo -->
+            <!--plugins for oidc-sso-sample -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
-                <configuration>
-                    <preparationGoals>clean install</preparationGoals>
-                    <autoVersionSubmodules>true</autoVersionSubmodules>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
-                <version>2.8.2</version>
+                <version>${maven.deploy.plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.6.1</version>
-                <configuration>
-                    <encoding>UTF-8</encoding>
-                    <source>1.7</source>
-                    <target>1.7</target>
-                </configuration>
+                <version>${maven.compiler.plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.18</version>
+                <version>${maven.surefire.plugin.version}</version>
             </plugin>
             <plugin>
                 <inherited>false</inherited>
                 <artifactId>maven-clean-plugin</artifactId>
-                <version>2.1</version>
+                <version>${maven.clean.plugin.version}</version>
             </plugin>
-            <!--plugins for qsg-pack -->
+            <!--plugins for quick-start-guide -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.0.2</version>
-                <configuration>
-                    <archive>
-                        <index>true</index>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <mainClass>AppId</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
+                <version>${maven.jar.plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>${maven.assembly.plugin.version}</version>
+            </plugin>
+            <!--plugins for oauth-sample-client-authenticator -->
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-scr-plugin</artifactId>
+                <version>${maven.scr.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>generate-scr-scrdescriptor</id>
+                        <goals>
+                            <goal>scr</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>${maven.bundle.plugin.version}</version>
+                <extensions>true</extensions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <version>${maven.buildnumber.plugin.version}</version>
             </plugin>
         </plugins>
     </build>
 
+    <repositories>
+        <repository>
+            <id>wso2-nexus</id>
+            <name>WSO2 Internal Repository</name>
+            <url>http://maven.wso2.org/nexus/content/groups/wso2-public/</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>ignore</checksumPolicy>
+            </releases>
+        </repository>
+
+        <repository>
+            <id>wso2.releases</id>
+            <name>WSO2 internal Repository</name>
+            <url>http://maven.wso2.org/nexus/content/repositories/releases/</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>ignore</checksumPolicy>
+            </releases>
+        </repository>
+
+        <repository>
+            <id>wso2.snapshots</id>
+            <name>Apache Snapshot Repository</name>
+            <url>http://maven.wso2.org/nexus/content/repositories/snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+    </repositories>
+
     <properties>
-        <!--repo versions of qsg-pack-->
+        <!--repo versions of quick-start-guide-->
         <identity.agent.sso.version>5.1.18</identity.agent.sso.version>
-        <sample.qsg-demo.version>1.0</sample.qsg-demo.version>
+        <sample.oidc-sso-sample.version>1.0</sample.oidc-sso-sample.version>
         <sample.qsg.version>1.0</sample.qsg.version>
+        <maven.jar.plugin.version>3.0.2</maven.jar.plugin.version>
+        <maven.assembly.plugin.version>3.1.0</maven.assembly.plugin.version>
 
         <!--=============================================================================-->
 
-        <!--repo versions of quick-start-guide-->
+        <!--repo versions of saml2-sso-sample-->
         <junit.version>3.8.1</junit.version>
         <opensaml.version>2.6.4</opensaml.version>
         <xmlsec.version>1.4.4</xmlsec.version>
@@ -299,12 +410,30 @@
 
         <!--=============================================================================-->
 
-        <!--repo versions of qsg-demo-->
+        <!--repo versions of oidc-sso-sample-->
         <sevlet.api.version>2.5</sevlet.api.version>
         <oauth2.client.version>1.0.0</oauth2.client.version>
         <nimbusds.version>2.26.1</nimbusds.version>
         <commons-codec.version>1.4.0.wso2v1</commons-codec.version>
         <commons-lang.version>2.6</commons-lang.version>
+        <maven.surefire.plugin.version>2.18</maven.surefire.plugin.version>
+        <maven.clean.plugin.version>2.1</maven.clean.plugin.version>
+        <maven.deploy.plugin.version>2.8.2</maven.deploy.plugin.version>
+
+        <!--=============================================================================-->
+
+        <!--repo versions of oauth-sample-client-authenticator-->
+        <identity.inbound.oauth.version>5.6.10</identity.inbound.oauth.version>
+        <apache.felix.scr.ds.annotations.version>1.2.4</apache.felix.scr.ds.annotations.version>
+
+        <!--=============================================================================-->
+
+        <!--repo versions of sample-post-authentication-handler-->
+        <identity.framework.version>5.11.19</identity.framework.version>
+        <maven.compiler.plugin.version>3.6.1</maven.compiler.plugin.version>
+        <maven.scr.plugin.version>1.22.0</maven.scr.plugin.version>
+        <maven.bundle.plugin.version>2.4.0</maven.bundle.plugin.version>
+        <maven.buildnumber.plugin.version>1.4</maven.buildnumber.plugin.version>
     </properties>
 
 </project>

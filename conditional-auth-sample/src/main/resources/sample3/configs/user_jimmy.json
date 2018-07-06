@@ -1,0 +1,13 @@
+{
+  "schemas":[],
+  "name":{
+    "familyName":"Samuel",
+    "givenName":"Jimmy"
+  },
+  "userName":"jimmy",
+  "password":"jimmy123",
+  "emails":"jimmy@pickup.com",
+  "addresses":{
+    "country":"United States"
+  }
+}

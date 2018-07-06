@@ -1,0 +1,13 @@
+{
+  "schemas":[],
+  "name":{
+    "familyName":"Nixon",
+    "givenName":"Tiger"
+  },
+  "userName":"tiger",
+  "password":"tiger123",
+  "emails":"tiger@drivers.pickup.com",
+  "addresses":{
+    "country":"United States"
+  }
+}
