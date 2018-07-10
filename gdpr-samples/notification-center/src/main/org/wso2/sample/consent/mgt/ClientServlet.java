@@ -52,9 +52,7 @@ public class ClientServlet extends HttpServlet {
                 .setUri("https://localhost:9443/api/identity/consent-mgt/v1.0/consents")
                 .addHeader("Accept","application/json")
                 .addHeader("Authorization","Basic YWRtaW46YWRtaW4=")
-//                .addParameter("service","pickup")
                 .addParameter("state","ACTIVE")
-//                .addParameter("piiPrincipalId","anna")
                 .build();
 
         CloseableHttpClient httpclient = HttpClients.createDefault();

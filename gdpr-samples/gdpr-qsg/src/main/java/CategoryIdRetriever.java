@@ -27,7 +27,14 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-public class CategoryId {
+/**
+ * The class which outputs the PII category Id for 'Mobile'.
+ *
+ * TODO : Pass the needed category to the program rather than hard coding.
+ *
+ */
+public class CategoryIdRetriever {
+
     public static void main(String[] args) throws IOException {
 
         // This stdout intentionally added to be read by the script

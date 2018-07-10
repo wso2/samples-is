@@ -238,10 +238,10 @@ echo(
 FOR /F "tokens=*" %%A IN ('dir /b GDPR-*.jar') DO SET jarname=%%A
 FOR /L %%b IN (1,1,2) DO IF "!jarname:~-1!"==" " SET jarname=!jarname:~0,-1!
 
-FOR /F "tokens=*" %%A IN ('java -cp "%jarname%;lib/httpclient-4.5.3.jar;lib/httpcore-4.4.6.jar;lib/json-20180130.jar;lib/commons-logging-1.2.jar" CategoryId') DO SET cat_id=%%A
+FOR /F "tokens=*" %%A IN ('java -cp "%jarname%;lib/httpclient-4.5.3.jar;lib/httpcore-4.4.6.jar;lib/json-20180130.jar;lib/commons-logging-1.2.jar" CategoryIdRetriever') DO SET cat_id=%%A
 FOR /L %%b IN (1,1,2) DO IF "!cat_id:~-1!"==" " SET cat_id=!cat_id:~0,-1!
 
-FOR /F "tokens=*" %%A IN ('java -cp "%jarname%;lib/httpclient-4.5.3.jar;lib/httpcore-4.4.6.jar;lib/json-20180130.jar;lib/commons-logging-1.2.jar" PurposeId') DO SET purp_id=%%A
+FOR /F "tokens=*" %%A IN ('java -cp "%jarname%;lib/httpclient-4.5.3.jar;lib/httpcore-4.4.6.jar;lib/json-20180130.jar;lib/commons-logging-1.2.jar" PurposeIdRetriever') DO SET purp_id=%%A
 FOR /L %%b IN (1,1,2) DO IF "!purp_id:~-1!"==" " SET purp_id=!purp_id:~0,-1!
 
 curl -s -k -X POST "https://localhost:9443/api/identity/consent-mgt/v1.0/consents" -H "Authorization: Basic YWxleDphbGV4MTIz" -H "accept: application/json" -H "Content-Type: application/json" -o NUL -d "{\"services\":[{\"service\":\"localhost\",\"serviceDisplayName\": \"Resident IDP\",\"serviceDescription\": \"Resident IDP\",\"tenantDomain\":\"carbon.super\",\"purposes\":[{\"purposeId\":%purp_id%,\"purposeCategoryId\":[1],\"consentType\":\"EXPLICIT\",\"piiCategory\":[{\"piiCategoryId\":2,\"validity\":\"DATE_UNTIL:INDEFINITE\"},{\"piiCategoryId\":%cat_id%,\"validity\":\"DATE_UNTIL:INDEFINITE\"}],\"primaryPurpose\":true,\"termination\":\"DATE_UNTIL:INDEFINITE\",\"thirdPartyDisclosure\":false,\"thirdPartyName\":null}]}],\"collectionMethod\":\"Sign-Up\",\"jurisdiction\":\"CA\",\"language\":\"EN\",\"policyURL\":\"https://localhost:9443/authenticationendpoint/privacy_policy.do\",\"properties\":[{\"key\":\"publicKey\",\"value\":\"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAluZFdW1ynitztkWLC6xKegbRWxky+5P0p4ShYEOkHs30QI2VCuR6Qo4Bz5rTgLBrky03W1GAVrZxuvKRGj9V9+PmjdGtau4CTXu9pLLcqnruaczoSdvBYA3lS9a7zgFU0+s6kMl2EhB+rk7gXluEep7lIOenzfl2f6IoTKa2fVgVd3YKiSGsyL4tztS70vmmX121qm0sTJdKWP4HxXyqK9neolXI9fYyHOYILVNZ69z/73OOVhkh/mvTmWZLM7GM6sApmyLX6OXUp8z0pkY+vT/9+zRxxQs7GurC4/C1nK3rI/0ySUgGEafO1atNjYmlFN+M3tZX6nEcA6g94IavyQIDAQAB\"}]}"

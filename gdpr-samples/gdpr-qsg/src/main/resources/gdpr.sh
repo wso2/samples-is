@@ -196,8 +196,8 @@ add_consents() {
 echo "Adding consents to the users created..."
 echo
 
-cat_id=`java -cp "GDPR-*.jar:lib/httpclient-4.5.3.jar:lib/httpcore-4.4.6.jar:lib/json-20180130.jar:lib/commons-logging-1.2.jar" CategoryId`
-purp_id=`java -cp "GDPR-*.jar:lib/httpclient-4.5.3.jar:lib/httpcore-4.4.6.jar:lib/json-20180130.jar:lib/commons-logging-1.2.jar" PurposeId`
+cat_id=`java -cp "GDPR-*.jar:lib/httpclient-4.5.3.jar:lib/httpcore-4.4.6.jar:lib/json-20180130.jar:lib/commons-logging-1.2.jar" CategoryIdRetriever`
+purp_id=`java -cp "GDPR-*.jar:lib/httpclient-4.5.3.jar:lib/httpcore-4.4.6.jar:lib/json-20180130.jar:lib/commons-logging-1.2.jar" PurposeIdRetriever`
 
 curl -s -k -X POST "https://localhost:9443/api/identity/consent-mgt/v1.0/consents" -H "Authorization: Basic YWxleDphbGV4MTIz" -H "accept: application/json" -H "Content-Type: application/json" -o /dev/null -d "{\"services\":[{\"service\":\"localhost\",\"serviceDisplayName\": \"Resident IDP\",\"serviceDescription\": \"Resident IDP\",\"tenantDomain\":\"carbon.super\",\"purposes\":[{\"purposeId\":${purp_id},\"purposeCategoryId\":[1],\"consentType\":\"EXPLICIT\",\"piiCategory\":[{\"piiCategoryId\":2,\"validity\":\"DATE_UNTIL:INDEFINITE\"},{\"piiCategoryId\":${cat_id},\"validity\":\"DATE_UNTIL:INDEFINITE\"}],\"primaryPurpose\":true,\"termination\":\"DATE_UNTIL:INDEFINITE\",\"thirdPartyDisclosure\":false,\"thirdPartyName\":null}]}],\"collectionMethod\":\"Sign-Up\",\"jurisdiction\":\"CA\",\"language\":\"EN\",\"policyURL\":\"https://localhost:9443/authenticationendpoint/privacy_policy.do\",\"properties\":[{\"key\":\"publicKey\",\"value\":\"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAluZFdW1ynitztkWLC6xKegbRWxky+5P0p4ShYEOkHs30QI2VCuR6Qo4Bz5rTgLBrky03W1GAVrZxuvKRGj9V9+PmjdGtau4CTXu9pLLcqnruaczoSdvBYA3lS9a7zgFU0+s6kMl2EhB+rk7gXluEep7lIOenzfl2f6IoTKa2fVgVd3YKiSGsyL4tztS70vmmX121qm0sTJdKWP4HxXyqK9neolXI9fYyHOYILVNZ69z/73OOVhkh/mvTmWZLM7GM6sApmyLX6OXUp8z0pkY+vT/9+zRxxQs7GurC4/C1nK3rI/0ySUgGEafO1atNjYmlFN+M3tZX6nEcA6g94IavyQIDAQAB\"}]}"
 res=$?

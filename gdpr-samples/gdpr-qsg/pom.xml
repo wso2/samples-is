@@ -50,11 +50,11 @@
                         <index>true</index>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>CategoryId</mainClass>
+                            <mainClass>CategoryIdRetriever</mainClass>
                         </manifest>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>PurposeId</mainClass>
+                            <mainClass>PurposeIdRetriever</mainClass>
                         </manifest>
                     </archive>
                     <excludes>

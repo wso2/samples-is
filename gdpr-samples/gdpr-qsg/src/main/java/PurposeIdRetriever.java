@@ -27,7 +27,14 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-public class PurposeId {
+/**
+ * The class which outputs the purpose Id for 'Pickup promotion'.
+ *
+ * TODO : Pass the needed purpose to the program rather than hard coding.
+ *
+ */
+public class PurposeIdRetriever {
+
     public static void main(String[] args) throws IOException {
 
         // This stdout intentionally added to be read by the script
