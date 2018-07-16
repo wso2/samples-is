@@ -42,11 +42,11 @@
             <outputDirectory>GDPR-QSG/resources/lib</outputDirectory>
             <useDefaultExcludes>true</useDefaultExcludes>
         </fileSet>
-        <fileSet>
-            <directory>${project.basedir}/../conditional-auth-sample/target/ConditionalAuthSamples</directory>
-            <outputDirectory>samples/ConditionalAuthSamples</outputDirectory>
-            <useDefaultExcludes>true</useDefaultExcludes>
-        </fileSet>
+        <!--<fileSet>-->
+            <!--<directory>${project.basedir}/../conditional-auth-sample/target/ConditionalAuthSamples</directory>-->
+            <!--<outputDirectory>samples/ConditionalAuthSamples</outputDirectory>-->
+            <!--<useDefaultExcludes>true</useDefaultExcludes>-->
+        <!--</fileSet>-->
     </fileSets>
 
     <files>

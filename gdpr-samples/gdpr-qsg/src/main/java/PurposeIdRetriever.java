@@ -16,16 +16,37 @@
  * under the License.
  */
 
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.methods.RequestBuilder;
+import org.apache.http.conn.ssl.NoopHostnameVerifier;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.ssl.SSLContexts;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.Socket;
+import java.nio.charset.StandardCharsets;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLEngine;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509ExtendedTrustManager;
+import javax.net.ssl.X509TrustManager;
 
 /**
  * The class which outputs the purpose Id for 'Pickup promotion'.
@@ -35,13 +56,13 @@ import java.io.IOException;
  */
 public class PurposeIdRetriever {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, KeyManagementException, NoSuchAlgorithmException {
 
         // This stdout intentionally added to be read by the script
         System.out.println(getPurposeId());
     }
 
-    public static int getPurposeId() throws IOException {
+    public static int getPurposeId() throws IOException, NoSuchAlgorithmException, KeyManagementException {
 
         JSONObject json;
         int purposeId = 0;
@@ -54,10 +75,9 @@ public class PurposeIdRetriever {
                 .addHeader("Content-Type","application/json")
                 .build();
 
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-
-        CloseableHttpResponse closeablehttpresponse = httpclient.execute(request);
-        String responseString = EntityUtils.toString(closeablehttpresponse.getEntity(), "UTF-8");
+        CloseableHttpClient httpClient = Util.newClient();
+        CloseableHttpResponse closeableHttpResponse = httpClient.execute(request);
+        String responseString = EntityUtils.toString(closeableHttpResponse.getEntity(), StandardCharsets.UTF_8);
 
         JSONArray jsonArray = new JSONArray(responseString);
         for (int i = 0; i < jsonArray.length(); i++) {
