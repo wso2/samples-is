@@ -654,9 +654,9 @@ if [ ! -d "${TOMCAT_PATH}" ]
 
  if [ ! -f "${TOMCAT_PATH}/webapps/saml2-web-app-dispatch.com.war" ]
   then
-   cp ${QSG}/bin/saml2-web-app-dispatch.com.war ${TOMCAT_PATH}/webapps
+   cp ${QSG}/QSG/bin/saml2-web-app-dispatch.com.war ${TOMCAT_PATH}/webapps
    echo "** Web application Dispatch successfully deployed. **"
-   cp ${QSG}/bin/saml2-web-app-swift.com.war ${TOMCAT_PATH}/webapps
+   cp ${QSG}/QSG/bin/saml2-web-app-swift.com.war ${TOMCAT_PATH}/webapps
    echo "** Web application Swift successfully deployed. **"
  fi
 

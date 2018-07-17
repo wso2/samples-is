@@ -21,7 +21,7 @@
             <!--Optional:-->
             <xsd:serviceProvider>
                 <!--Optional:-->
-                <xsd1:applicationName>${SP_NAME}</xsd1:applicationName>
+                <xsd1:applicationName>${sp_name}</xsd1:applicationName>
                 <!--Optional:-->
                 <xsd1:description>Sample service provider for ${SP_NAME} Web Application</xsd1:description>
             </xsd:serviceProvider>

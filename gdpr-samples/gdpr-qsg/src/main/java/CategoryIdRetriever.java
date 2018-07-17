@@ -19,6 +19,7 @@
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.methods.RequestBuilder;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
@@ -26,6 +27,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * The class which outputs the PII category Id for 'Mobile'.
@@ -53,10 +55,9 @@ public class CategoryIdRetriever {
                 .addHeader("Authorization","Basic YWRtaW46YWRtaW4=")
                 .build();
 
-        CloseableHttpClient httpclient = HttpClients.createDefault();
-
-        CloseableHttpResponse closeablehttpresponse = httpclient.execute(request);
-        String responseString = EntityUtils.toString(closeablehttpresponse.getEntity(), "UTF-8");
+        CloseableHttpClient httpClient = Util.newClient();
+        CloseableHttpResponse closeableHttpResponse = httpClient.execute(request);
+        String responseString = EntityUtils.toString(closeableHttpResponse.getEntity(), StandardCharsets.UTF_8);
 
         JSONArray jsonArray = new JSONArray(responseString);
         for (int i = 0; i < jsonArray.length(); i++) {

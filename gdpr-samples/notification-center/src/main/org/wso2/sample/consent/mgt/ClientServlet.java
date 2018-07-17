@@ -29,7 +29,7 @@ public class ClientServlet extends HttpServlet {
             session.setAttribute("response", getConsentReceipt(getConsentReceiptId()));
 
         } catch (URISyntaxException e) {
-            e.printStackTrace();
+            System.out.println("Failed to set response attribute.");
         }
 
         resp.sendRedirect("view-consent.jsp");
