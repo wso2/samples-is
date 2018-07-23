@@ -24,61 +24,89 @@
     <fileSets>
         <fileSet>
             <directory>${project.basedir}/src/main/resources</directory>
-            <outputDirectory>src</outputDirectory>
+            <outputDirectory>IS-QSG/src</outputDirectory>
             <useDefaultExcludes>true</useDefaultExcludes>
         </fileSet>
         <fileSet>
             <directory>${project.basedir}/../quick-start-guide/target/org.wso2.samples.is.qsg-${project.version}-bundle</directory>
-            <outputDirectory>samples</outputDirectory>
+            <outputDirectory>IS-QSG/samples</outputDirectory>
             <useDefaultExcludes>true</useDefaultExcludes>
         </fileSet>
         <fileSet>
-            <directory>${project.basedir}/../conditional-auth-sample/target/ConditionalAuthSamples</directory>
-            <outputDirectory>samples/ConditionalAuthSamples</outputDirectory>
+            <directory>${project.basedir}/../gdpr-samples/gdpr-qsg/target/gdpr-qsg-${project.version}-bundle/QSG-bundle</directory>
+            <outputDirectory>GDPR-QSG</outputDirectory>
             <useDefaultExcludes>true</useDefaultExcludes>
         </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/../gdpr-samples/gdpr-qsg/target/lib</directory>
+            <outputDirectory>GDPR-QSG/resources/lib</outputDirectory>
+            <useDefaultExcludes>true</useDefaultExcludes>
+        </fileSet>
+        <!--<fileSet>-->
+            <!--<directory>${project.basedir}/../conditional-auth-sample/target/ConditionalAuthSamples</directory>-->
+            <!--<outputDirectory>samples/ConditionalAuthSamples</outputDirectory>-->
+            <!--<useDefaultExcludes>true</useDefaultExcludes>-->
+        <!--</fileSet>-->
     </fileSets>
 
     <files>
         <file>
             <source>
-                ${project.basedir}/../saml2-sso-sample/components/SAML2/saml2-web-app-dispatch/target/saml2-web-app-dispatch.com.war
+                ${project.basedir}/../gdpr-samples/pickup/target/pickup.war
             </source>
-            <outputDirectory>samples/SAML2-APPS</outputDirectory>
+            <outputDirectory>GDPR-QSG/sample-apps</outputDirectory>
         </file>
         <file>
             <source>
-                ${project.basedir}/../saml2-sso-sample/components/SAML2/saml2-web-app-swift/target/saml2-web-app-swift.com.war
+                ${project.basedir}/../gdpr-samples/pick-my-book/target/pick-my-book.war
             </source>
-            <outputDirectory>samples/SAML2-APPS</outputDirectory>
+            <outputDirectory>GDPR-QSG/sample-apps</outputDirectory>
         </file>
         <file>
-            <source>${project.basedir}/../oidc-sso-sample/Dispatch/target/Dispatch.war</source>
-            <outputDirectory>samples/OIDC-APPS</outputDirectory>
-        </file>
-        <file>
-            <source>${project.basedir}/../oidc-sso-sample/Swift/target/Swift.war</source>
-            <outputDirectory>samples/OIDC-APPS</outputDirectory>
+            <source>
+                ${project.basedir}/../gdpr-samples/notification-center/target/notification.war
+            </source>
+            <outputDirectory>GDPR-QSG/sample-apps</outputDirectory>
         </file>
         <file>
             <source>
                 ${project.basedir}/../saml2-sso-sample/components/SAML2/saml2-web-app-dispatch/target/saml2-web-app-dispatch.com.war
             </source>
-            <outputDirectory>samples/QSG-bundle/QSG/bin</outputDirectory>
+            <outputDirectory>IS-QSG/samples/SAML2-APPS</outputDirectory>
         </file>
         <file>
             <source>
                 ${project.basedir}/../saml2-sso-sample/components/SAML2/saml2-web-app-swift/target/saml2-web-app-swift.com.war
             </source>
-            <outputDirectory>samples/QSG-bundle/QSG/bin</outputDirectory>
+            <outputDirectory>IS-QSG/samples/SAML2-APPS</outputDirectory>
         </file>
         <file>
             <source>${project.basedir}/../oidc-sso-sample/Dispatch/target/Dispatch.war</source>
-            <outputDirectory>samples/QSG-bundle/QSG/bin</outputDirectory>
+            <outputDirectory>IS-QSG/samples/OIDC-APPS</outputDirectory>
         </file>
         <file>
             <source>${project.basedir}/../oidc-sso-sample/Swift/target/Swift.war</source>
-            <outputDirectory>samples/QSG-bundle/QSG/bin</outputDirectory>
+            <outputDirectory>IS-QSG/samples/OIDC-APPS</outputDirectory>
+        </file>
+        <file>
+            <source>
+                ${project.basedir}/../saml2-sso-sample/components/SAML2/saml2-web-app-dispatch/target/saml2-web-app-dispatch.com.war
+            </source>
+            <outputDirectory>IS-QSG/samples/QSG-bundle/QSG/bin</outputDirectory>
+        </file>
+        <file>
+            <source>
+                ${project.basedir}/../saml2-sso-sample/components/SAML2/saml2-web-app-swift/target/saml2-web-app-swift.com.war
+            </source>
+            <outputDirectory>IS-QSG/samples/QSG-bundle/QSG/bin</outputDirectory>
+        </file>
+        <file>
+            <source>${project.basedir}/../oidc-sso-sample/Dispatch/target/Dispatch.war</source>
+            <outputDirectory>IS-QSG/samples/QSG-bundle/QSG/bin</outputDirectory>
+        </file>
+        <file>
+            <source>${project.basedir}/../oidc-sso-sample/Swift/target/Swift.war</source>
+            <outputDirectory>IS-QSG/samples/QSG-bundle/QSG/bin</outputDirectory>
         </file>
     </files>
 </assembly>
