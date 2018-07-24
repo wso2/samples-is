@@ -48,7 +48,7 @@ set /p scenario=Enter the scenario number you selected.
 	CALL :setup_servers
 	CALL :create_multifactor_auth
 	CALL :end_message saml2-web-app-dispatch.com saml2-web-app-swift.com
-	CALL :delete_idp 05 urn:deleteIdP https://localhost:9443/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/
+	CALL :delete_idp 05 urn:deleteIdP https://127.0.0.1:9443/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/
 	EXIT 0
 	)
 
@@ -57,7 +57,7 @@ set /p scenario=Enter the scenario number you selected.
 	CALL :setup_servers
 	CALL :configure_federated_auth
 	CALL :end_message saml2-web-app-dispatch.com saml2-web-app-swift.com
-	CALL :delete_idp 05 urn:deleteIdP https://localhost:9443/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/
+	CALL :delete_idp 05 urn:deleteIdP https://127.0.0.1:9443/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/
 	EXIT 0
     )
 
@@ -110,15 +110,15 @@ REM Add users in the wso2-is.
 CALL :add_user admin admin Common
 
 REM Add service providers in wso2-is
-CALL :add_service_provider dispatch Common urn:createApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-CALL :add_service_provider swift Common urn:createApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+CALL :add_service_provider dispatch Common urn:createApplication https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+CALL :add_service_provider swift Common urn:createApplication https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
 
 REM Configure OIDC for the Service Providers
-CALL :configure_oidc dispatch 03 urn:registerOAuthApplicationData https://localhost:9443/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-CALL :configure_oidc swift 03 urn:registerOAuthApplicationData https://localhost:9443/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+CALL :configure_oidc dispatch 03 urn:registerOAuthApplicationData https://127.0.0.1:9443/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+CALL :configure_oidc swift 03 urn:registerOAuthApplicationData https://127.0.0.1:9443/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
 
-CALL :update_application_oidc "dispatch" "Y2FtZXJvbjpjYW1lcm9uMTIz" "ZGlzcGF0Y2g=" "ZGlzcGF0Y2gxMjM0" "urn:updateApplication" "https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/"
-CALL :update_application_oidc "swift" "Y2FtZXJvbjpjYW1lcm9uMTIz" "c3dpZnRhcHA=" "c3dpZnRhcHAxMjM=" "urn:updateApplication" "https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/"
+CALL :update_application_oidc "dispatch" "Y2FtZXJvbjpjYW1lcm9uMTIz" "ZGlzcGF0Y2g=" "ZGlzcGF0Y2gxMjM0" "urn:updateApplication" "https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/"
+CALL :update_application_oidc "swift" "Y2FtZXJvbjpjYW1lcm9uMTIz" "c3dpZnRhcHA=" "c3dpZnRhcHAxMjM=" "urn:updateApplication" "https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/"
 
 EXIT /B
 
@@ -128,15 +128,15 @@ REM Add users in wso2-is.
 CALL :add_user admin admin Common
 
 REM Add service providers in wso2-is
-CALL :add_service_provider dispatch Common urn:createApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-CALL :add_service_provider swift Common urn:createApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+CALL :add_service_provider dispatch Common urn:createApplication https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+CALL :add_service_provider swift Common urn:createApplication https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
 
 REM Configure SAML for the service providers
-CALL :configure_saml dispatch 02 urn:addRPServiceProvider https://localhost:9443/services/IdentitySAMLSSOConfigService.IdentitySAMLSSOConfigServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-CALL :configure_saml swift 02 urn:addRPServiceProvider https://localhost:9443/services/IdentitySAMLSSOConfigService.IdentitySAMLSSOConfigServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+CALL :configure_saml dispatch 02 urn:addRPServiceProvider https://127.0.0.1:9443/services/IdentitySAMLSSOConfigService.IdentitySAMLSSOConfigServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+CALL :configure_saml swift 02 urn:addRPServiceProvider https://127.0.0.1:9443/services/IdentitySAMLSSOConfigService.IdentitySAMLSSOConfigServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
 
-CALL :update_application_saml dispatch Y2FtZXJvbjpjYW1lcm9uMTIz urn:updateApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
-CALL :update_application_saml swift Y2FtZXJvbjpjYW1lcm9uMTIz urn:updateApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
+CALL :update_application_saml dispatch Y2FtZXJvbjpjYW1lcm9uMTIz urn:updateApplication https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
+CALL :update_application_saml swift Y2FtZXJvbjpjYW1lcm9uMTIz urn:updateApplication https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
 
 EXIT /B
 
@@ -165,8 +165,8 @@ set /p input="Please enter your answer..."
      IF "%result%" == "true" (
         CALL :configure_sso_saml2
         CALL :add_identity_provider admin admin
-        CALL :updateapp_multi dispatch Y2FtZXJvbjpjYW1lcm9uMTIz urn:updateApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
-        CALL :updateapp_multi swift Y2FtZXJvbjpjYW1lcm9uMTIz urn:updateApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
+        CALL :updateapp_multi dispatch Y2FtZXJvbjpjYW1lcm9uMTIz urn:updateApplication https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
+        CALL :updateapp_multi swift Y2FtZXJvbjpjYW1lcm9uMTIz urn:updateApplication https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
      )
      IF "%result%" == "false" (
         echo Please register a Twitter application and restart the script.
@@ -198,8 +198,8 @@ IF "%user%"=="Y" set result=true
 IF "%result%" == "true" (
     CALL :configure_sso_saml2
     CALL :add_identity_provider admin admin 05
-    CALL :updateapp_fed_auth dispatch Y2FtZXJvbjpjYW1lcm9uMTIz urn:updateApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
-    CALL :updateapp_fed_auth swift Y2FtZXJvbjpjYW1lcm9uMTIz urn:updateApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
+    CALL :updateapp_fed_auth dispatch Y2FtZXJvbjpjYW1lcm9uMTIz urn:updateApplication https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
+    CALL :updateapp_fed_auth swift Y2FtZXJvbjpjYW1lcm9uMTIz urn:updateApplication https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
 )
 
 IF "%result%" == "false" (
@@ -267,24 +267,24 @@ echo(
 set /p user="Please enter the number you selected... "
 
 IF "%user%"=="1" (
-     CALL :update_idp_selfsignup "urn:updateResidentIdP" "https://localhost:9443/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4=" "06" "selfsignup"
+     CALL :update_idp_selfsignup "urn:updateResidentIdP" "https://127.0.0.1:9443/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4=" "06" "selfsignup"
 )
 
 IF "%user%"=="2" (
-    CALL :update_idp_selfsignup "urn:updateResidentIdP" "https://localhost:9443/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4=" "06" "lockon"
+    CALL :update_idp_selfsignup "urn:updateResidentIdP" "https://127.0.0.1:9443/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4=" "06" "lockon"
 )
 
 IF "%user%"=="3" (
-    CALL :update_idp_selfsignup "urn:updateResidentIdP" "https://localhost:9443/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4=" "06" "notify"
+    CALL :update_idp_selfsignup "urn:updateResidentIdP" "https://127.0.0.1:9443/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4=" "06" "notify"
 )
 
 REM Add a service provider in wso2-is
-CALL :add_service_provider "dispatch" "Common" "urn:createApplication" "https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4="
+CALL :add_service_provider "dispatch" "Common" "urn:createApplication" "https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4="
 
 REM Configure OIDC for the Service Providers
-CALL :configure_oidc "dispatch" "03" "urn:registerOAuthApplicationData" "https://localhost:9443/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4="
+CALL :configure_oidc "dispatch" "03" "urn:registerOAuthApplicationData" "https://127.0.0.1:9443/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4="
 
-CALL :update_application_oidc "dispatch" "YWRtaW46YWRtaW4=" "ZGlzcGF0Y2g=" "ZGlzcGF0Y2gxMjM0" "urn:updateApplication" "https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/"
+CALL :update_application_oidc "dispatch" "YWRtaW46YWRtaW4=" "ZGlzcGF0Y2g=" "ZGlzcGF0Y2gxMjM0" "urn:updateApplication" "https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/"
 
 echo(
 echo "-------------------------------------------------------------------"
@@ -293,7 +293,7 @@ echo "|  To tryout self registration please log into the sample         |"
 echo "|  app below.                                                     |"
 echo "|  *** Please press ctrl button and click on the link ***         |"
 echo "|                                                                 |"
-echo "|  Dispatch - http://localhost:8080/Dispatch/                     |"
+echo "|  Dispatch - http://127.0.0.1:8080/Dispatch/                     |"
 echo "|                                                                 |"
 echo "|  Click on the ** Register now ** link in the login page.        |"
 echo "|  Fill in the user details form and create an account.           |"
@@ -314,100 +314,12 @@ set result=false
      IF "%clean%"=="y" set result=true
      IF "%clean%"=="Y" set result=true
      IF "%result%" == "true" (
-        CALL :delete_sp "dispatch" "Common" "urn:deleteApplication" "https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4="
+        CALL :delete_sp "dispatch" "Common" "urn:deleteApplication" "https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4="
      )
      IF "%result%" == "false" (
         echo Please clean up the process manually.
         exit -1
      )
-EXIT /B
-
-:create_workflow
-
-REM Add users and the relevant roles in wso2-is.
-CALL :add_users_workflow admin admin 07
-
-REM Create the workflow definition
-CALL :add_workflow_definition "07" "YWRtaW46YWRtaW4="
-
-REM Create a workflow association
-CALL :add_workflow_association "07" "YWRtaW46YWRtaW4="
-
-REM Update resident IDP
-CALL :update_idp_selfsignup "urn:updateResidentIdP" "https://localhost:9443/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4=" "06" "selfsignup"
-
-REM Add a service provider in wso2-is
-CALL :add_service_provider "dispatch" "Common" "urn:createApplication" "https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4="
-
-REM Configure OIDC for the Service Providers
-CALL :configure_oidc "dispatch" "03" "urn:registerOAuthApplicationData" "https://localhost:9443/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4="
-
-CALL :update_application_oidc "dispatch" "YWRtaW46YWRtaW4=" "ZGlzcGF0Y2g=" "ZGlzcGF0Y2gxMjM0" "urn:updateApplication" "https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/"
-
-echo(
-echo(
-echo "------------------------------------------------------------------"
-echo "|                                                                |"
-echo "|    The workflow feature enables you to add more control and    |"
-echo "|    constraints to the tasks executed within it.                |"
-echo "|                                                                |"
-echo "|    Here we are going to try out a workflow which defines an    |"
-echo "|    approval process for new user additions.                    |"
-echo "|                                                                |"
-echo "|    Use case: Senior manager and junior manager has to          |"
-echo "|    approve each new user addition.                             |"
-echo "|                                                                |"
-echo "|    To tryout the workflow please log into the sample           |"
-echo "|    app below.                                                  |"
-echo "|    *** Please press ctrl button and click on the link ***      |"
-echo "|                                                                |"
-echo "|    Dispatch - http://localhost:8080/Dispatch/                  |"
-echo "|                                                                |"
-echo "|    Click on the ** Register now ** link in the login page      |"
-echo "|    Fill in the user details form and create an account.        |"
-echo "|                                                                |"
-echo "|    But the new user you created will be disabled.              |"
-echo "|    So to enable the user please log into the WSO2 dashboard    |"
-echo "|    using the following credentials and approve the pending     |"
-echo "|    workflow requests.                                          |"
-echo "|                                                                |"
-echo "|    WSO2 Dashboard: https://localhost:9443/dashboard            |"
-echo "|                                                                |"
-echo "|    First login with Junior Manager                             |"
-echo "|      Username: alex                                            |"
-echo "|      Password: alex123                                         |"
-echo "|                                                                |"
-echo "|    Secondly, login with Senior Manager                         |"
-echo "|      Username: cameron                                         |"
-echo "|      Password: cameron123                                      |"
-echo "|                                                                |"
-echo "|    Now you can use your new user credentials to log into       |"
-echo "|    the app Dispatch:  http://localhost:8080/Dispatch/          |"
-echo "|                                                                |"
-echo "------------------------------------------------------------------"
-echo(
-
-echo "If you have finished trying out the workflow, you can clean the process now."
-echo "Do you want to clean up the setup?"
-echo(
-echo "Press y - YES"
-echo "Press n - NO"
-echo(
-set /p input="Please enter the response... "
-set result=false
-     IF "%input%"=="y" set result=true
-     IF "%input%"=="Y" set result=true
-     IF "%result%" == "true" (
-        CALL :delete_users_workflow
-        CALL :delete_workflow_association "07" "YWRtaW46YWRtaW4="
-        CALL :delete_workflow_definition "07" "YWRtaW46YWRtaW4="
-        CALL :delete_sp "dispatch" "Common" "urn:deleteApplication" "https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4="
-     )
-     IF "%result%" == "false" (
-     echo Please clean up the process manually.
-     exit -1
-     )
-
 EXIT /B
 
 :add_workflow_association
@@ -426,7 +338,7 @@ IF NOT EXIST "%QSG%\%request_data%" (
     exit -1
 )
 
-curl -s -k -d @%QSG%\%request_data% -H "Authorization: Basic %auth%" -H "Content-Type: text/xml" -H "SOAPAction: urn:addAssociation" -o NUL https://localhost:9443/services/WorkflowAdminService.WorkflowAdminServiceHttpsSoap11Endpoint/
+curl -s -k -d @%QSG%\%request_data% -H "Authorization: Basic %auth%" -H "Content-Type: text/xml" -H "SOAPAction: urn:addAssociation" -o NUL https://127.0.0.1:9443/services/WorkflowAdminService.WorkflowAdminServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while creating the workflow association. !!"
@@ -438,6 +350,94 @@ IF %ERRORLEVEL% NEQ 0 (
 )
 echo "** The workflow association was successfully created. **"
 echo(
+
+EXIT /B
+
+:create_workflow
+
+REM Add users and the relevant roles in wso2-is.
+CALL :add_users_workflow admin admin 07
+
+REM Create the workflow definition
+CALL :add_workflow_definition "07" "YWRtaW46YWRtaW4="
+
+REM Create a workflow association
+CALL :add_workflow_association "07" "YWRtaW46YWRtaW4="
+
+REM Update resident IDP
+CALL :update_idp_selfsignup "urn:updateResidentIdP" "https://127.0.0.1:9443/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4=" "06" "selfsignup"
+
+REM Add a service provider in wso2-is
+CALL :add_service_provider "dispatch" "Common" "urn:createApplication" "https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4="
+
+REM Configure OIDC for the Service Providers
+CALL :configure_oidc "dispatch" "03" "urn:registerOAuthApplicationData" "https://127.0.0.1:9443/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4="
+
+CALL :update_application_oidc "dispatch" "YWRtaW46YWRtaW4=" "ZGlzcGF0Y2g=" "ZGlzcGF0Y2gxMjM0" "urn:updateApplication" "https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/"
+
+echo(
+echo(
+echo "------------------------------------------------------------------"
+echo "|                                                                |"
+echo "|    The workflow feature enables you to add more control and    |"
+echo "|    constraints to the tasks executed within it.                |"
+echo "|                                                                |"
+echo "|    Here we are going to try out a workflow which defines an    |"
+echo "|    approval process for new user additions.                    |"
+echo "|                                                                |"
+echo "|    Use case: Senior manager and junior manager has to          |"
+echo "|    approve each new user addition.                             |"
+echo "|                                                                |"
+echo "|    To tryout the workflow please log into the sample           |"
+echo "|    app below.                                                  |"
+echo "|    *** Please press ctrl button and click on the link ***      |"
+echo "|                                                                |"
+echo "|    Dispatch - http://127.0.0.1:8080/Dispatch/                  |"
+echo "|                                                                |"
+echo "|    Click on the ** Register now ** link in the login page      |"
+echo "|    Fill in the user details form and create an account.        |"
+echo "|                                                                |"
+echo "|    But the new user you created will be disabled.              |"
+echo "|    So to enable the user please log into the WSO2 dashboard    |"
+echo "|    using the following credentials and approve the pending     |"
+echo "|    workflow requests.                                          |"
+echo "|                                                                |"
+echo "|    WSO2 Dashboard: https://127.0.0.1:9443/dashboard            |"
+echo "|                                                                |"
+echo "|    First login with Junior Manager                             |"
+echo "|      Username: alex                                            |"
+echo "|      Password: alex123                                         |"
+echo "|                                                                |"
+echo "|    Secondly, login with Senior Manager                         |"
+echo "|      Username: cameron                                         |"
+echo "|      Password: cameron123                                      |"
+echo "|                                                                |"
+echo "|    Now you can use your new user credentials to log into       |"
+echo "|    the app Dispatch:  http://127.0.0.1:8080/Dispatch/          |"
+echo "|                                                                |"
+echo "------------------------------------------------------------------"
+echo(
+
+echo "If you have finished trying out the workflow, you can clean the process now."
+echo "Do you want to clean up the setup?"
+echo(
+echo "Press y - YES"
+echo "Press n - NO"
+echo(
+set /p input="Please enter the response... "
+set result=false
+     IF "%input%"=="y" set result=true
+     IF "%input%"=="Y" set result=true
+     IF "%result%" == "true" (
+        CALL :delete_users_workflow
+        CALL :delete_workflow_association "07" "YWRtaW46YWRtaW4="
+        CALL :delete_workflow_definition "07" "YWRtaW46YWRtaW4="
+        CALL :delete_sp "dispatch" "Common" "urn:deleteApplication" "https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4="
+     )
+     IF "%result%" == "false" (
+     echo Please clean up the process manually.
+     exit -1
+     )
 
 EXIT /B
 
@@ -481,7 +481,7 @@ echo(
 echo Creating a user named cameron...
 
 REM The following command can be used to create a user.
-curl -s -k --user %~1:%~2 --data "{"schemas":[],"name":{"familyName":"Smith","givenName":"Cameron"},"userName":"cameron","password":"cameron123","emails":"cameron@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://localhost:9443/wso2/scim/Users
+curl -s -k --user %~1:%~2 --data "{"schemas":[],"name":{"familyName":"Smith","givenName":"Cameron"},"userName":"cameron","password":"cameron123","emails":"cameron@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://127.0.0.1:9443/wso2/scim/Users
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while creating user cameron. !!
@@ -494,7 +494,7 @@ echo(
 echo Creating a user named alex...
 
 REM The following command can be used to create a user.
-curl -s -k --user %~1:%~2 --data "{"schemas":[],"name":{"familyName":"Miller","givenName":"Alex"},"userName":"alex","password":"alex123","emails":"alex@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://localhost:9443/wso2/scim/Users
+curl -s -k --user %~1:%~2 --data "{"schemas":[],"name":{"familyName":"Miller","givenName":"Alex"},"userName":"alex","password":"alex123","emails":"alex@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://127.0.0.1:9443/wso2/scim/Users
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while creating user alex. !!
@@ -509,7 +509,7 @@ echo(
 echo Creating a role named Manager...
 
 REM The following command will add a role to the user.
-curl -s -k --user %~1:%~2 -d @%QSG%\%request_data% -H "Content-Type: text/xml" -H "SOAPAction: urn:addRole" -o NUL https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k --user %~1:%~2 -d @%QSG%\%request_data% -H "Content-Type: text/xml" -H "SOAPAction: urn:addRole" -o NUL https://127.0.0.1:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while creating role manager. !!
@@ -549,7 +549,7 @@ echo(
 echo "Creating a user named cameron..."
 
 REM The following command can be used to create a user.
-curl -s -k --user %~1:%~2 --data "{"schemas":[],"name":{"familyName":"Smith","givenName":"Cameron"},"userName":"cameron","password":"cameron123","emails":"cameron@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://localhost:9443/wso2/scim/Users
+curl -s -k --user %~1:%~2 --data "{"schemas":[],"name":{"familyName":"Smith","givenName":"Cameron"},"userName":"cameron","password":"cameron123","emails":"cameron@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://127.0.0.1:9443/wso2/scim/Users
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while creating user cameron. !!"
   echo(
@@ -561,7 +561,7 @@ echo(
 echo "Creating a user named alex..."
 
 REM The following command can be used to create a user.
-curl -s -k --user %~1:%~2 --data "{"schemas":[],"name":{"familyName":"Miller","givenName":"Alex"},"userName":"alex","password":"alex123","emails":"alex@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://localhost:9443/wso2/scim/Users
+curl -s -k --user %~1:%~2 --data "{"schemas":[],"name":{"familyName":"Miller","givenName":"Alex"},"userName":"alex","password":"alex123","emails":"alex@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://127.0.0.1:9443/wso2/scim/Users
 
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while creating user alex. !!"
@@ -576,7 +576,7 @@ echo(
 echo "Creating a role named senior_manager..."
 
 REM The following command will add a role to the user.
-curl -s -k --user %~1:%~2 -d @%QSG%\%request_data1% -H "Content-Type: text/xml" -H "SOAPAction: urn:addRole" https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k --user %~1:%~2 -d @%QSG%\%request_data1% -H "Content-Type: text/xml" -H "SOAPAction: urn:addRole" https://127.0.0.1:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while creating role senior_manager. !!"
@@ -591,7 +591,7 @@ echo(
 echo "Creating a role named junior_manager..."
 
 REM The following command will add a role to the user.
-curl -s -k --user %~1:%~2 -d @%QSG%\%request_data2% -H "Content-Type: text/xml" -H "SOAPAction: urn:addRole" https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k --user %~1:%~2 -d @%QSG%\%request_data2% -H "Content-Type: text/xml" -H "SOAPAction: urn:addRole" https://127.0.0.1:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while creating role junior_manager. !!"
@@ -631,8 +631,8 @@ curl -s -k -d @%QSG%\%request_data% -H "Authorization: Basic %~5" -H "Content-Ty
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while creating the service provider. !!
   echo(
-  CALL :delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  CALL :delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  CALL :delete_sp dispatch Common urn:deleteApplication https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  CALL :delete_sp swift Common urn:deleteApplication https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
   CALL :delete_user
   echo(
   exit -1
@@ -656,42 +656,13 @@ echo(
 
 echo "Creating Identity Provider..."
 cd ..
-curl -s -k --user %~1:%~2 -H "Content-Type: text/xml" -H "SOAPAction: urn:addIdP" -o NUL https://localhost:9443/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/ -d "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelope/"\" xmlns:mgt="\"http://mgt.idp.carbon.wso2.org"\" xmlns:xsd="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><soapenv:Header/><soapenv:Body><ns4:addIdP xmlns:ns4="\"http://mgt.idp.carbon.wso2.org"\"><ns4:identityProvider><ns1:alias xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">https://localhost:9443/oauth2/token</ns1:alias><ns1:certificate xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><claimConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><localClaimDialect>true</localClaimDialect><roleClaimURI>http://wso2.org/claims/role</roleClaimURI><userClaimURI xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/></claimConfig><defaultAuthenticatorConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><displayName>twitterIDP</displayName><enabled>true</enabled><name>TwitterAuthenticator</name><properties><name>APIKey</name><value>%key%</value></properties><properties><name>APISecret</name><value>%secret%</value></properties><properties><name>callbackUrl</name><value>https://localhost:9443/commonauth</value></properties></defaultAuthenticatorConfig><ns1:displayName xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><ns1:enable xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">false</ns1:enable><federatedAuthenticatorConfigs xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><displayName>twitter</displayName><enabled>true</enabled><name>TwitterAuthenticator</name><properties><name>APIKey</name><value>%key%</value></properties><properties><name>APISecret</name><value>%secret%</value></properties><properties><name>callbackUrl</name><value>https://localhost:9443/commonauth</value></properties></federatedAuthenticatorConfigs><ns1:federationHub xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">false</ns1:federationHub><ns1:homeRealmId xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><ns1:identityProviderDescription xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><ns1:identityProviderName xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">IDP-twitter</ns1:identityProviderName><permissionAndRoleConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"/><ns1:provisioningRole xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/></ns4:identityProvider></ns4:addIdP></soapenv:Body></soapenv:Envelope>"
+curl -s -k --user %~1:%~2 -H "Content-Type: text/xml" -H "SOAPAction: urn:addIdP" -o NUL https://127.0.0.1:9443/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/ -d "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelope/"\" xmlns:mgt="\"http://mgt.idp.carbon.wso2.org"\" xmlns:xsd="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><soapenv:Header/><soapenv:Body><ns4:addIdP xmlns:ns4="\"http://mgt.idp.carbon.wso2.org"\"><ns4:identityProvider><ns1:alias xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">https://localhost:9443/oauth2/token</ns1:alias><ns1:certificate xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><claimConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><localClaimDialect>true</localClaimDialect><roleClaimURI>http://wso2.org/claims/role</roleClaimURI><userClaimURI xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/></claimConfig><defaultAuthenticatorConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><displayName>twitterIDP</displayName><enabled>true</enabled><name>TwitterAuthenticator</name><properties><name>APIKey</name><value>%key%</value></properties><properties><name>APISecret</name><value>%secret%</value></properties><properties><name>callbackUrl</name><value>https://localhost:9443/commonauth</value></properties></defaultAuthenticatorConfig><ns1:displayName xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><ns1:enable xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">false</ns1:enable><federatedAuthenticatorConfigs xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><displayName>twitter</displayName><enabled>true</enabled><name>TwitterAuthenticator</name><properties><name>APIKey</name><value>%key%</value></properties><properties><name>APISecret</name><value>%secret%</value></properties><properties><name>callbackUrl</name><value>https://localhost:9443/commonauth</value></properties></federatedAuthenticatorConfigs><ns1:federationHub xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">false</ns1:federationHub><ns1:homeRealmId xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><ns1:identityProviderDescription xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><ns1:identityProviderName xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">IDP-twitter</ns1:identityProviderName><permissionAndRoleConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"/><ns1:provisioningRole xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/></ns4:identityProvider></ns4:addIdP></soapenv:Body></soapenv:Envelope>"
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while creating the identity provider. !!"
   echo(
   exit -1
 )
 echo "** The identity provider was successfully created. **"
-echo(
-EXIT /B
-
-:add_workflow_definition
-
-set scenario=%~1
-set auth=%~2
-set request_data=%~1\add-definition.xml
-
-IF NOT EXIST "%QSG%\%~1" (
-    echo "%~1 Directory does not exists."
-    exit -1
-)
-
-IF NOT EXIST "%QSG%\%request_data%" (
-    echo "%request_data% File does not exists."
-    exit -1
-)
-
-curl -s -k -d @%QSG%\%request_data% -H "Authorization: Basic %~2" -H "Content-Type: text/xml" -H "SOAPAction: urn:addWorkflow" -o NUL https://localhost:9443/services/WorkflowAdminService.WorkflowAdminServiceHttpsSoap11Endpoint/
-
-IF %ERRORLEVEL% NEQ 0 (
-  echo "!! Problem occurred while creating the workflow definition. !!"
-  echo(
-  CALL :delete_users_workflow
-  echo(
-  exit -1
-)
-echo "** The workflow definition was successfully created. **"
 echo(
 EXIT /B
 
@@ -722,13 +693,42 @@ curl -s -k -d @%request_data% -H "Authorization: Basic %~5" -H "Content-Type: te
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while configuring SAML2 web SSO for %~1.... !!
   echo(
-  CALL :delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  CALL :delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  CALL :delete_sp dispatch Common urn:deleteApplication https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  CALL :delete_sp swift Common urn:deleteApplication https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
   CALL :delete_user
   echo(
   exit -1
 )
 echo ** Successfully configured SAML. **
+echo(
+EXIT /B
+
+:add_workflow_definition
+
+set scenario=%~1
+set auth=%~2
+set request_data=%~1\add-definition.xml
+
+IF NOT EXIST "%QSG%\%~1" (
+    echo "%~1 Directory does not exists."
+    exit -1
+)
+
+IF NOT EXIST "%QSG%\%request_data%" (
+    echo "%request_data% File does not exists."
+    exit -1
+)
+
+curl -s -k -d @%QSG%\%request_data% -H "Authorization: Basic %~2" -H "Content-Type: text/xml" -H "SOAPAction: urn:addWorkflow" -o NUL https://127.0.0.1:9443/services/WorkflowAdminService.WorkflowAdminServiceHttpsSoap11Endpoint/
+
+IF %ERRORLEVEL% NEQ 0 (
+  echo "!! Problem occurred while creating the workflow definition. !!"
+  echo(
+  CALL :delete_users_workflow
+  echo(
+  exit -1
+)
+echo "** The workflow definition was successfully created. **"
 echo(
 EXIT /B
 
@@ -749,13 +749,13 @@ IF EXIST "response_unformatted.xml" (
    DEL response_unformatted.xml
 )
 
-curl -s -k -d @%request_data% -H "Authorization: Basic %~2" -H "Content-Type: text/xml" -H "SOAPAction: urn:getApplication" https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ > response_unformatted.xml
+curl -s -k -d @%request_data% -H "Authorization: Basic %~2" -H "Content-Type: text/xml" -H "SOAPAction: urn:getApplication" https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ > response_unformatted.xml
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while getting application details for %~1.... !!
   echo(
-  CALL :delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  CALL :delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  CALL :delete_sp dispatch Common urn:deleteApplication https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  CALL :delete_sp swift Common urn:deleteApplication https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
   CALL :delete_user
   echo(
   exit -1
@@ -812,13 +812,13 @@ IF EXIST "response_unformatted.xml" (
    DEL response_unformatted.xml
 )
 
-curl -s -k -d @%request_data% -H "Authorization: Basic %~2" -H "Content-Type: text/xml" -H "SOAPAction: urn:getApplication" https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ > response_unformatted.xml
+curl -s -k -d @%request_data% -H "Authorization: Basic %~2" -H "Content-Type: text/xml" -H "SOAPAction: urn:getApplication" https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ > response_unformatted.xml
 
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while getting application details for %sp_name%.... !!"
   echo(
-  CALL :delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  CALL :delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  CALL :delete_sp dispatch Common urn:deleteApplication https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  CALL :delete_sp swift Common urn:deleteApplication https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
   CALL :delete_user
   echo(
   exit -1
@@ -838,8 +838,8 @@ curl -s -k -H "Authorization: Basic %~2" -H "Content-Type: text/xml" -H "SOAPAct
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while updating application %sp_name%.... !!"
   echo(
-  CALL :delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  CALL :delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  CALL :delete_sp dispatch Common urn:deleteApplication https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  CALL :delete_sp swift Common urn:deleteApplication https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
   CALL :delete_user
   echo(
   exit -1
@@ -864,13 +864,13 @@ IF EXIST "response_unformatted.xml" (
    DEL response_unformatted.xml
 )
 
-curl -s -k -d @%request_data% -H "Authorization: Basic %auth%" -H "Content-Type: text/xml" -H "SOAPAction: urn:getApplication" https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ > response_unformatted.xml
+curl -s -k -d @%request_data% -H "Authorization: Basic %auth%" -H "Content-Type: text/xml" -H "SOAPAction: urn:getApplication" https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ > response_unformatted.xml
 
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while getting application details for %sp_name%.... !!"
   echo(
-  CALL :delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  CALL :delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  CALL :delete_sp dispatch Common urn:deleteApplication https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  CALL :delete_sp swift Common urn:deleteApplication https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
   CALL :delete_user
   echo(
   exit -1
@@ -906,13 +906,13 @@ IF EXIST "response_unformatted.xml" (
    DEL response_unformatted.xml
 )
 
-curl -s -k -d @%request_data% -H "Authorization: Basic %auth%" -H "Content-Type: text/xml" -H "SOAPAction: urn:getApplication" https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ > response_unformatted.xml
+curl -s -k -d @%request_data% -H "Authorization: Basic %auth%" -H "Content-Type: text/xml" -H "SOAPAction: urn:getApplication" https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ > response_unformatted.xml
 
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while getting application details for %sp_name%.... !!"
   echo(
-  CALL :delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  CALL :delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  CALL :delete_sp dispatch Common urn:deleteApplication https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  CALL :delete_sp swift Common urn:deleteApplication https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
   CALL :delete_user
   echo(
   exit -1
@@ -942,7 +942,7 @@ echo(
 echo "Deleting the user named cameron..."
 
 REM Send the SOAP request to delete the user.
-curl -s -k -d @%QSG%\%request_data1% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @%QSG%\%request_data1% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://127.0.0.1:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while deleting the user cameron. !!
@@ -954,7 +954,7 @@ echo(
 echo Deleting the user named alex...
 
 REM Send the SOAP request to delete the user.
-curl -s -k -d @%QSG%\%request_data2% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @%QSG%\%request_data2% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://127.0.0.1:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while deleting the user alex. !!
@@ -966,7 +966,7 @@ echo(
 echo "Deleting the role named Manager..."
 
 REM Send the SOAP request to delete the role.
-curl -s -k -d @%QSG%\%request_data3% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteRole" -o NUL https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @%QSG%\%request_data3% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteRole" -o NUL https://127.0.0.1:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while deleting the role Manager. !!
@@ -1020,7 +1020,7 @@ echo(
 echo "Deleting the user named cameron..."
 
 REM Send the SOAP request to delete the user.
-curl -s -k -d @%QSG%\%request_data1% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @%QSG%\%request_data1% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://127.0.0.1:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while deleting the user cameron. !!"
@@ -1032,7 +1032,7 @@ echo(
 echo "Deleting the user named alex..."
 
 REM Send the SOAP request to delete the user.
-curl -s -k -d @%QSG%\%request_data2% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @%QSG%\%request_data2% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://127.0.0.1:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while deleting the user alex. !!"
@@ -1044,7 +1044,7 @@ echo(
 
 echo "Deleting the role named senior-manager"
 REM Send the SOAP request to delete the role.
-curl -s -k -d @%QSG%\%request_data3% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteRole" -o NUL https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @%QSG%\%request_data3% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteRole" -o NUL https://127.0.0.1:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while deleting the role senior-manager. !!"
@@ -1055,7 +1055,7 @@ echo "** The role senior-manager was successfully deleted. **"
 echo(
 echo "Deleting the role named junior-manager"
 REM Send the SOAP request to delete the role.
-curl -s -k -d @%QSG%\%request_data4% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteRole" -o NUL https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @%QSG%\%request_data4% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteRole" -o NUL https://127.0.0.1:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while deleting the role junior-manager. !!"
@@ -1083,7 +1083,7 @@ IF NOT EXIST "%QSG%\%request_data%" (
     exit -1
 )
 
-curl -s -k -d @%QSG%\%request_data% -H "Authorization: Basic %~2" -H "Content-Type: text/xml" -H "SOAPAction: urn:removeWorkflow" -o NUL https://localhost:9443/services/WorkflowAdminService.WorkflowAdminServiceHttpsSoap11Endpoint/
+curl -s -k -d @%QSG%\%request_data% -H "Authorization: Basic %~2" -H "Content-Type: text/xml" -H "SOAPAction: urn:removeWorkflow" -o NUL https://127.0.0.1:9443/services/WorkflowAdminService.WorkflowAdminServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while deleting the workflow definition. !!"
@@ -1111,7 +1111,7 @@ IF NOT EXIST "%QSG%\%request_data%" (
     exit -1
 )
 
-curl -s -k -d @%QSG%\%request_data% -H "Authorization: Basic %~2" -H "Content-Type: text/xml" -H "SOAPAction: urn:removeAssociation" -o NULs https://localhost:9443/services/WorkflowAdminService.WorkflowAdminServiceHttpsSoap11Endpoint/
+curl -s -k -d @%QSG%\%request_data% -H "Authorization: Basic %~2" -H "Content-Type: text/xml" -H "SOAPAction: urn:removeAssociation" -o NULs https://127.0.0.1:9443/services/WorkflowAdminService.WorkflowAdminServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while deleting the workflow association. !!"
@@ -1166,8 +1166,8 @@ echo "|                                                                  |"
 echo "|    You can find the sample web apps on the following URLs.       |"
 echo "|    *** Please press ctrl button and click on the links ***       |"
 echo "|                                                                  |"
-echo "|    Dispatch - http://localhost:8080/%~1/  |"
-echo "|    Swift - http://localhost:8080/%~2/        |"
+echo "|    Dispatch - http://127.0.0.1:8080/%~1/  |"
+echo "|    Swift - http://127.0.0.1:8080/%~2/        |"
 echo "|                                                                  |"
 echo "|    Please use the following user credentials to log in.          |"
 echo "|                                                                  |"
@@ -1192,8 +1192,8 @@ set result=false
      IF "%clean%"=="y" set result=true
      IF "%clean%"=="Y" set result=true
      IF "%result%" == "true" (
-        CALL :delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-        CALL :delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+        CALL :delete_sp dispatch Common urn:deleteApplication https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+        CALL :delete_sp swift Common urn:deleteApplication https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
         CALL :delete_user
 	 )
      IF "%result%" == "false" (
