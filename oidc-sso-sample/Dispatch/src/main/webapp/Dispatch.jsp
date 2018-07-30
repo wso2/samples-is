@@ -332,7 +332,7 @@
         <div class="row">
             <div class="col-lg-10 col-lg-offset-1 text-center">
                 <a href="http://wso2.com/" target="_blank" ><img src="img/wso2logo.svg" height="20" /></a>
-                <p class="text-muted">Copyright &copy; WSO2 2017</p>
+                <p class="text-muted">Copyright &copy; WSO2 2018</p>
             </div>
         </div>
     </div>
