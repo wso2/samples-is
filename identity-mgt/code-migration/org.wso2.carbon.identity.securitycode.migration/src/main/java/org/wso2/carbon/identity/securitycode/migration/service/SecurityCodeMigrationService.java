@@ -66,6 +66,14 @@ public class SecurityCodeMigrationService {
         }
     }
 
+    public void migrateTenantRange(int startTenantID, int tenantCount) {
+
+        migrateSuperTenantSecurityCodes();
+        for (int tenantId = startTenantID; tenantId < (tenantCount + startTenantID); tenantCount++) {
+            migrateSecurityCodes(IdentityTenantUtil.getTenantDomain(tenantId), tenantId);
+        }
+
+    }
     public void migrateTenants(String[] tenantDomains) {
 
         for (String tenantDomain : tenantDomains) {

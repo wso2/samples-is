@@ -29,7 +29,10 @@ public class MigrationConstants {
     public static final String REG_DELIMITER = "___";
     public static final String TENANT_DELIMITER = ":";
     public static final String SYSTEM_PROPERTY_MIGRATE = "migrateSecurityCode";
-    public static final String SYSTEM_PROPERTY_TENANTS = "tenantsToMigrate";
+    public static final String SYSTEM_PROPERTY_MIGRATE_TENANTS = "migrateTenants";
+    public static final String SYSTEM_PROPERTY_MIGRATE_TENANT_RANGE = "migrateTenantRange";
+    public static final String SYSTEM_PROPERTY_START_TENANT = "tenantStartNo";
+    public static final String SYSTEM_PROPERTY_TENANT_COUNT = "tenantCount";
 
 
 }
