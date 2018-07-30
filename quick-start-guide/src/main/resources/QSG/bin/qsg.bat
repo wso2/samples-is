@@ -127,11 +127,11 @@ EXIT /B
 REM Add users in wso2-is.
 CALL :add_user admin admin Common
 
-REM Add service providers in wso2-is
+REM Add service providers in wso2-is for the user cameron
 CALL :add_service_provider dispatch Common urn:createApplication https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
 CALL :add_service_provider swift Common urn:createApplication https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
 
-REM Configure SAML for the service providers
+REM Configure SAML for the service providers in the cameron account
 CALL :configure_saml dispatch 02 urn:addRPServiceProvider https://127.0.0.1:9443/services/IdentitySAMLSSOConfigService.IdentitySAMLSSOConfigServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
 CALL :configure_saml swift 02 urn:addRPServiceProvider https://127.0.0.1:9443/services/IdentitySAMLSSOConfigService.IdentitySAMLSSOConfigServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
 
@@ -250,7 +250,9 @@ echo "|  required settings.                                                 |"
 echo "|                                                                     |"
 echo "|    Press 1 - Enable Self User Registration(without any config.)     |"
 echo "|               [ This will enable self signup in the IS without any  |"
-echo "|               other configuration changes.]                         |"
+echo "|               other configuration changes.], Here you will not get  |"
+echo "|               any email notification although you see the           |"
+echo "|               notification.                                         |"
 echo "|                                                                     |"
 echo "|    Press 2 - Enable account lock on creation                        |"
 echo "|               [ This will lock the user account during user         |"
@@ -297,6 +299,8 @@ echo "|  Dispatch - http://127.0.0.1:8080/Dispatch/                     |"
 echo "|                                                                 |"
 echo "|  Click on the ** Register now ** link in the login page.        |"
 echo "|  Fill in the user details form and create an account.           |"
+echo "|  The email will not be sent here, although you see the          |"
+echo "|  notification.                                                  | "
 echo "|                                                                 |"
 echo "|  You can now use the username and password you provided, to     |"
 echo "|  log into Dispatch.                                             |"
@@ -480,7 +484,7 @@ set request_data=%~3\add-role.xml
 echo(
 echo Creating a user named cameron...
 
-REM The following command can be used to create a user.
+REM The following command can be used to create a user cameron.
 curl -s -k --user %~1:%~2 --data "{"schemas":[],"name":{"familyName":"Smith","givenName":"Cameron"},"userName":"cameron","password":"cameron123","emails":"cameron@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://127.0.0.1:9443/wso2/scim/Users
 
 IF %ERRORLEVEL% NEQ 0 (
@@ -493,7 +497,7 @@ echo(
 
 echo Creating a user named alex...
 
-REM The following command can be used to create a user.
+REM The following command can be used to create a user alex.
 curl -s -k --user %~1:%~2 --data "{"schemas":[],"name":{"familyName":"Miller","givenName":"Alex"},"userName":"alex","password":"alex123","emails":"alex@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://127.0.0.1:9443/wso2/scim/Users
 
 IF %ERRORLEVEL% NEQ 0 (
@@ -941,7 +945,7 @@ set request_data3=Common\delete-role.xml
 echo(
 echo "Deleting the user named cameron..."
 
-REM Send the SOAP request to delete the user.
+REM Send the SOAP request to delete the user cameron.
 curl -s -k -d @%QSG%\%request_data1% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://127.0.0.1:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
@@ -953,7 +957,7 @@ echo ** The user cameron was successfully deleted. **
 echo(
 echo Deleting the user named alex...
 
-REM Send the SOAP request to delete the user.
+REM Send the SOAP request to delete the user alex.
 curl -s -k -d @%QSG%\%request_data2% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://127.0.0.1:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
@@ -965,7 +969,7 @@ echo ** The user alex was successfully deleted. **
 echo(
 echo "Deleting the role named Manager..."
 
-REM Send the SOAP request to delete the role.
+REM Send the SOAP request to delete the role manager.
 curl -s -k -d @%QSG%\%request_data3% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteRole" -o NUL https://127.0.0.1:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
@@ -1143,7 +1147,7 @@ IF NOT EXIST "%request_data%" (
 echo(
 echo "Deleting Identity Provider IDP-twitter..."
 
-REM Send the SOAP request to delete a SP.
+REM Send the SOAP request to delete twitter Idp.
 curl -s -k -d @%QSG%\%request_data% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: %~2" -o NUL %~3
 
 IF %ERRORLEVEL% NEQ 0 (
