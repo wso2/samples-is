@@ -22,7 +22,7 @@
                     <!--Zero or more repetitions:-->
                     <xsd1:inboundAuthenticationRequestConfigs>
                         <!--Optional:-->
-                        <xsd1:inboundAuthKey>saml2-web-app-dispatch.com</xsd1:inboundAuthKey>
+                        <xsd1:inboundAuthKey>saml2-web-app-swift.com</xsd1:inboundAuthKey>
                         <!--Optional:-->
                         <xsd1:inboundAuthType>samlsso</xsd1:inboundAuthType>
                         <!--Zero or more repetitions:-->

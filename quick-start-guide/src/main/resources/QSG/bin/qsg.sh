@@ -1291,7 +1291,7 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
                     <!--Zero or more repetitions:-->
                     <xsd1:inboundAuthenticationRequestConfigs>
                         <!--Optional:-->
-                        <xsd1:inboundAuthKey>saml2-web-app-dispatch.com</xsd1:inboundAuthKey>
+                        <xsd1:inboundAuthKey>saml2-web-app-${sp_name}.com</xsd1:inboundAuthKey>
                         <!--Optional:-->
                         <xsd1:inboundAuthType>samlsso</xsd1:inboundAuthType>
                         <!--Zero or more repetitions:-->
@@ -1514,7 +1514,7 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
     <ns1:description xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">sample service provider</ns1:description>
     <inboundAuthenticationConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">
       <inboundAuthenticationRequestConfigs>
-        <inboundAuthKey>saml2-web-app-dispatch.com</inboundAuthKey>
+        <inboundAuthKey>saml2-web-app-${sp_name}.com</inboundAuthKey>
         <inboundAuthType>samlsso</inboundAuthType>
         <properties>
           <name>attrConsumServiceIndex</name>
