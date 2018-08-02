@@ -38,8 +38,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
-                    <div class="form-wrap">
-                        <img src="img/logo.png" class="center-block" height="60"/>
+                    <div  class="form-wrap">
+                        <img src="img/dispatch_logo.png" class="center-block" height="60"/>
                         <!--<h1 class="pickup-primary-color">Log in with your email account</h1>-->
                         </br>
                         <form role="form" action="oauth2-authorize-user.jsp?reset=true" method="post" id="login-form"
@@ -59,7 +59,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     <a href="http://wso2.com/" target="_blank" ><img src="img/wso2logo.svg" height="20" /></a>
-                    <p>Copyright &copy; <a href="http://wso2.com/" target="_blank">WSO2</a> 2017</p>
+                    <p>Copyright &copy; <a href="http://wso2.com/" target="_blank">WSO2</a> 2018</p>
                 </div>
             </div>
         </div>

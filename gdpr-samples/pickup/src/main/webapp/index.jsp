@@ -60,8 +60,8 @@
             <div class="row">
                 <div class="col-xs-12">
                     <a href="http://wso2.com/" target="_blank" ><img src="img/wso2logo.svg" height="20" /></a>
-                    <p>Copyright &copy; <a href="http://wso2.com/" target="_blank">WSO2</a> 2017</p>
-                </div>
+                    <p>Copyright &copy; <a href="http://wso2.com/" target="_blank">WSO2</a> 2018</p>
+                </div>8
             </div>
         </div>
     </footer>
