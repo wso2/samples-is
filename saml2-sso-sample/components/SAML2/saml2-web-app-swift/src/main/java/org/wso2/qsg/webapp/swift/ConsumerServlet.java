@@ -34,5 +34,11 @@ public class ConsumerServlet extends HttpServlet {
             IOException {
         // Authentication and Authorization successful redirect to the required page.
         response.sendRedirect(request.getContextPath() + "/view.jsp");
+       /* if(request.getRequestURI().endsWith("/samlsso") || request.getRequestURI().endsWith("/openid") ||
+                request.getRequestURI().endsWith("/token")){
+            request.getRequestDispatcher("view.jsp").forward(request,response);
+        } else if (request.getRequestURI().endsWith("/logout")){
+            request.getRequestDispatcher("index.jsp").forward(request,response);
+        }*/
     }
 }

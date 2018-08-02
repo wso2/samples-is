@@ -17,6 +17,7 @@
 -->
 <%@ page import="org.wso2.carbon.identity.sso.agent.bean.LoggedInSessionBean" %>
 <%@ page import="org.wso2.carbon.identity.sso.agent.util.SSOAgentConstants" %>
+<%@ page import="java.util.Iterator" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
@@ -31,7 +32,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Dispatch</title>
+    <title>Swift</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -41,8 +42,7 @@
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic"
-          rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -72,8 +72,8 @@
     }
     LoggedInSessionBean sessionBean = (LoggedInSessionBean) session.getAttribute(SSOAgentConstants.SESSION_BEAN_NAME);
     if(sessionBean != null && sessionBean.getSAML2SSO() != null) {
-        subjectId = sessionBean.getSAML2SSO().getSubjectId();
-        saml2SSOAttributes = sessionBean.getSAML2SSO().getSubjectAttributes();
+            subjectId = sessionBean.getSAML2SSO().getSubjectId();
+            saml2SSOAttributes = sessionBean.getSAML2SSO().getSubjectAttributes();
     } else {
 %>
 <script type="text/javascript">
@@ -84,6 +84,7 @@
     }
 
 %>
+
 
 <body class="swift">
 
@@ -103,11 +104,10 @@
                 <li class="dropdown user-name">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img class="img-circle" height="30" width=30" src="img/Admin-icon.jpg"> <span
-                            class="user-name"><%=subjectId%> <i class="fa fa-chevron-down"></i></span>
+                            class="user-name"><%=subjectId%><i class="fa fa-chevron-down"></i></span>
                     </a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href=<%=SAML_LOGOUT_URL%>>Logout</a></li>
-                        <li><a href="profile.jsp">Profile</a></li>
                     </ul>
                 </li>
             </ul>
@@ -127,98 +127,64 @@
     </div>
     <!-- /.container -->
 </section>
-<div class="container">
-    <div class="row">
-        <div class="col-lg-10 col-lg-offset-1 bhoechie-tab-container">
-            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 bhoechie-tab-menu">
-                <div class="list-group">
-                    <a href="overview.jsp" class="list-group-item text-center">
-                        <h4 class="fa fa-desktop"></h4><br/>Overview
-                    </a>
-                    <a href="drivers.jsp" class="list-group-item text-center">
-                        <h4 class="fa fa-users"></h4><br/>Drivers
-                    </a>
-                    <a href="vehicles.jsp" class="list-group-item text-center">
-                        <h4 class="fa fa-cab"></h4><br/>Vehicles
-                    </a>
-                    <a href="bookings.jsp" class="list-group-item active text-center">
-                        <h4 class="fa fa-book"></h4><br/>Bookings
-                    </a>
-                    <a href="finance.jsp" class="list-group-item text-center">
-                        <h4 class="fa fa-money"></h4><br/>Finance
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-11 col-md-11 col-sm-11 col-xs-9 bhoechie-tab">
-                <!-- Bookings section -->
-                <div class="bhoechie-tab-content active">
-                    <h4 class="text-left"><strong>Bookings</strong></h4>
-                    <div class="table-responsive">
-                        <table class="table table-bordered" width="100%" id="dataTable" cellspacing="0">
-                            <thead>
-                            <tr>
-                                <th>Booking ID</th>
-                                <td>Driver</td>
-                                <th>Vehicle No</th>
-                                <th>Date</th>
-                                <th>Time</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>B0034</td>
-                                <td>Tiger Nixon</td>
-                                <td>HG-3423</td>
-                                <td>2011/04/25</td>
-                                <td>04:00</td>
-                            </tr>
-                            <tr>
-                                <td>B0042</td>
-                                <td>Garrett Winters</td>
-                                <td>JD-8877</td>
-                                <td>2011/07/25</td>
-                                <td>17:50</td>
-                            </tr>
-                            <tr>
-                                <td>B0178</td>
-                                <td>Ashton Cox</td>
-                                <td>DB-9090</td>
-                                <td>2009/01/12</td>
-                                <td>09:25</td>
-                            </tr>
-                            <tr>
-                                <td>B0097</td>
-                                <td>Cedric Kelly</td>
-                                <td>SA-5555</td>
-                                <td>2012/03/29</td>
-                                <td>13:30</td>
-                            </tr>
-                            <tr>
-                                <td>B0022</td>
-                                <td>Airi Satou</td>
-                                <td>KN-4536</td>
-                                <td>2008/11/28</td>
-                                <td>04:10</td>
-                            </tr>
-                            <tr>
-                                <td>B0045</td>
-                                <td>Brielle Williamson</td>
-                                <td>CA-1234</td>
-                                <td>2012/12/02</td>
-                                <td>12:34</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class=" add-padding-bottom-3x">
-                        <a href="javascript:;" class="btn btn-default"><i class="fa fa-plus"></i> Add</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<!--Profile section -->
+<section id="allocations" class="services">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-lg-10 col-lg-offset-1">
+                <h3><%=subjectId%> User Profile</h3>
+                <hr class="small">
+                <div class="product-box">
+                    <%
+                        if(subjectId != null){
+                    %>
+                    <h6> You are logged in as <%=subjectId%></h6>
+                    <%
+                        }
+                    %>
+                    <br>
+                    <table class="table table-striped">
+                        <%
+                            if(saml2SSOAttributes != null) {
+                        %>
+                        <thead>
+                        <tr>
+                            <th>User Claim</th>
+                            <th>Value</th>
 
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <%
+                            for (Map.Entry<String, String> entry:saml2SSOAttributes.entrySet()) {
+                        %>
+                        <tr>
+                            <td><%=entry.getKey()%></td>
+                            <td><%=entry.getValue()%></td>
+                        </tr>
+                        <%
+                                }
+                            }
+                        %>
+
+                        </tbody>
+                    </table>
+                    <!--
+
+
+                     token
+                -->  </div>
+                <!-- /.row (nested) -->
+            </div>
+            <!-- /.col-lg-10 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section>
+
+<!-- Footer section-->
 <footer id="footer">
     <div class="container">
         <div class="row">
