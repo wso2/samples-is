@@ -60,9 +60,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
-                    <div class="form-wrap">
-                        <img src="img/logo.png" class="center-block" height="60"/>
-                        <!--<h1 class="pickup-primary-color">Log in with your email account</h1>-->
+                    <div class="form-wrap" style="text-align: center;">
+                        <img src="img/logo.png" height style="max-height: 65px;"/>
+                        <span class="login-text">Dispatch </span>
                         </br>
                         <form role="form" action="samlsso"
                               method="post" id="login-form" autocomplete="off">
@@ -89,7 +89,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     <a href="http://wso2.com/" target="_blank" ><img src="img/wso2logo.svg" height="20" /></a>
-                    <p>Copyright &copy; <a href="http://wso2.com/" target="_blank">WSO2</a> 2017</p>
+                    <p>Copyright &copy; <a href="http://wso2.com/" target="_blank">WSO2</a> 2018</p>
                 </div>
             </div>
         </div>
