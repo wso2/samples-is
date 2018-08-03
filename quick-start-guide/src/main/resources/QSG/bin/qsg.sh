@@ -1331,6 +1331,14 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
                 <xsd1:permissionAndRoleConfig></xsd1:permissionAndRoleConfig>
                 <!--Optional:-->
                 <xsd1:saasApp>false</xsd1:saasApp>
+                    <xsd1:owner>
+               <!--Optional:-->
+               <xsd1:tenantDomain>carbon.super</xsd1:tenantDomain>
+               <!--Optional:-->
+               <xsd1:userName>cameron</xsd1:userName>
+               <!--Optional:-->
+               <xsd1:userStoreDomain>PRIMARY</xsd1:userStoreDomain>
+            </xsd1:owner>
             </xsd:serviceProvider>
         </xsd:updateApplication>
     </soapenv:Body>

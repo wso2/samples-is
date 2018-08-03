@@ -499,6 +499,14 @@ curl -s -k -H "Authorization: Basic ${auth}" -H "Content-Type: text/xml" -H "SOA
             <xsd1:permissionAndRoleConfig></xsd1:permissionAndRoleConfig>
             <!--Optional:-->
             <xsd1:saasApp>false</xsd1:saasApp>
+            <xsd1:owner>
+               <!--Optional:-->
+               <xsd1:tenantDomain>carbon.super</xsd1:tenantDomain>
+               <!--Optional:-->
+               <xsd1:userName>admin</xsd1:userName>
+               <!--Optional:-->
+               <xsd1:userStoreDomain>PRIMARY</xsd1:userStoreDomain>
+            </xsd1:owner>
          </xsd:serviceProvider>
       </xsd:updateApplication>
    </soapenv:Body>
@@ -766,16 +774,41 @@ return 0;
 
 echo Please pick a scenario from the following.
 echo "----------------------------------------------------------------"
+echo "| This is the Quick Start Guide for GDPR demonstrations.        |"
+echo "| =====================================================         |"
+echo "| Before run this make sure your WSO2 IS and Tomcat is running  |"
+echo "| in default ports WSO2 IS - localhost:9443                     |"
+echo "|                  tomcat  - localhost:8080                     |"
+echo "| Next, Try the below steps in order                            |"
+echo "|                                                               |"
 echo "|  Step 1 - Add an admin user and Configure service providers.  |"
-echo "|  Step 2 - Add users with consents.                            |"
+echo "|                                                               |"
+echo "|   Once you finish step 1, Try out the below scenarios         |"
+echo "|     Scenario 1: Admin add consent purposes for                |"
+echo "|                 self-registration                             |"
+echo "|     Scenario 2: Granting consent during Self registration     |"
+echo "|     Scenario 3: View consents provided via the user portal    |"
+echo "|                                                               |"
+echo "|                                                               |"
+echo "|  Step 2 - Add multiple users with consents.                   |"
+echo "|     Scenario 4: Admin user view users who has provided consent|"
+echo "|                 for promotion via notification app in order to|"
+echo "|                 send promotions via email or mobile           |"
+echo "|                                                               |"
+echo "|  Step 3 - Add TwitterIDP as federated IDP and configure       |"
+echo "|           JIT provisioning                                    |"
+echo "|    Scenario 5: Admin add consent purposes for JIT provisioning|"
+echo "|                                                               |"
+echo "| |"
+echo "| |"
+echo "| |"
 echo "----------------------------------------------------------------"
 echo "Enter the scenario number you selected."
 
 read scenario
 case $scenario in
 	1)
-	# Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
-	setup_servers
+
 	run_step01
 	if [ "$?" -ne "0" ]; then
 	  echo "Sorry, we had a problem there!"
