@@ -69,12 +69,12 @@ public class MyUserMgtCustomExtension extends AbstractUserOperationEventListener
         log.info("Username: " + userName);
         log.info("Profile: " + profileName);
 
-        log.info("NAME: " + userStoreManager.getUserClaimValue(userName, "http://wso2.org/claims/fullname", "default"));
-        log.info("EMAIL: " + userStoreManager.getUserClaimValue(userName, "http://wso2.org/claims/emailaddress", "default"));
+        log.info("NAME: " + userStoreManager.getUserClaimValue(userName, "http://wso2.org/claims/fullname", profileName));
+        log.info("EMAIL: " + userStoreManager.getUserClaimValue(userName, "http://wso2.org/claims/emailaddress", profileName));
 
 
 //        This doens't work for identity claims
-//        log.info("LOCKED: " + userStoreManager.getUserClaimValue(userName, "http://wso2.org/claims/identity/accountLocked", "default"));
+//        log.info("LOCKED: " + userStoreManager.getUserClaimValue(userName, "http://wso2.org/claims/identity/accountLocked", profileName));
 
 //        Following is the workaround for above problem
 
@@ -83,7 +83,7 @@ public class MyUserMgtCustomExtension extends AbstractUserOperationEventListener
                 "http://wso2.org/claims/identity/emailVerified"
         };
 
-        Map<String, String> claimValues = userStoreManager.getUserClaimValues(userName, claimNames, null);
+        Map<String, String> claimValues = userStoreManager.getUserClaimValues(userName, claimNames, profileName);
 
         log.info("LOCKED: " + claimValues.get(claimNames[0]));
         log.info("EmailVerified: " + claimValues.get(claimNames[1]));
