@@ -25,7 +25,6 @@ set /p scenario=Enter the step number you selected.
 
     IF "%scenario%"=="1" (
 	REM Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
-	CALL :setup_servers
 	CALL :run_step01
 	EXIT 0
    	)
@@ -62,31 +61,6 @@ CALL :add_users admin admin
 CALL :add_consents admin admin
 
 CALL :delete_setup
-
-EXIT /B
-
-:setup_servers
-
-echo "Please enter the path to your Tomcat server pack."
-echo(
-set /p TOMCAT_PATH="Example: C:\Downloads\apache-tomcat-8.0.49"
-echo(
-
-IF NOT EXIST %TOMCAT_PATH% (
-    echo Tomcat server does not exist in the given location %TOMCAT_PATH%.
-    echo Please download and install the latest pack.
-    exit -1
-)
-
-IF NOT EXIST "%TOMCAT_PATH%/webapps/pickup.war" (
-   COPY "..\sample-apps\pickup.war" "%TOMCAT_PATH%\webapps"
-   exit -1
-)
-
-IF NOT EXIST "%TOMCAT_PATH%/webapps/pick-my-book.war" (
-   COPY "..\sample-apps\pick-my-book.war" "%TOMCAT_PATH%\webapps"
-   exit -1
-)
 
 EXIT /B
 
@@ -417,7 +391,7 @@ set result=false
         CALL :delete_sp "pickup" "urn:deleteApplication" "https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4="
         CALL :delete_sp "pick-my-book" "urn:deleteApplication" "https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4="
         CALL :delete_sp "notification-center" "urn:deleteApplication" "https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4="
-        CALL :delete_user
+        CALL :delete_users
         CALL :delete_users
 	 )
      IF "%result%" == "false" (
@@ -435,7 +409,7 @@ echo(
 echo "Deleting the user named cameron..."
 
 REM Send the SOAP request to delete the user.
-curl -s -k -d @%QSG%\%request_data1% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @%GDPR%\%request_data1% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while deleting the user cameron. !!
@@ -448,7 +422,7 @@ echo(
 echo "Deleting the role named Manager..."
 
 REM Send the SOAP request to delete the role.
-curl -s -k -d @%QSG%\%request_data2% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteRole" -o NUL https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @%GDPR%\%request_data2% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteRole" -o NUL https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while deleting the role Manager. !!
@@ -476,7 +450,7 @@ echo(
 echo "Deleting the user named Alex..."
 
 REM Send the SOAP request to delete the user.
-curl -s -k -d @%QSG%\%request_data1% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @%GDPR%\%request_data1% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while deleting the user Alex. !!
@@ -490,7 +464,7 @@ echo(
 echo "Deleting the user named Blake..."
 
 REM Send the SOAP request to delete the user.
-curl -s -k -d @%QSG%\%request_data2% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @%GDPR%\%request_data2% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while deleting the user Blake. !!
@@ -504,7 +478,7 @@ echo(
 echo "Deleting the user named Chris..."
 
 REM Send the SOAP request to delete the user.
-curl -s -k -d @%QSG%\%request_data3% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @%GDPR%\%request_data3% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while deleting the user Chris. !!
@@ -518,7 +492,7 @@ echo(
 echo "Deleting the user named Dale..."
 
 REM Send the SOAP request to delete the user.
-curl -s -k -d @%QSG%\%request_data4% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @%GDPR%\%request_data4% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while deleting the user Dale. !!
@@ -532,7 +506,7 @@ echo(
 echo "Deleting the user named Eddie..."
 
 REM Send the SOAP request to delete the user.
-curl -s -k -d @%QSG%\%request_data5% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @%GDPR%\%request_data5% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while deleting the user Eddie. !!
@@ -546,7 +520,7 @@ echo(
 echo "Deleting the user named Gray..."
 
 REM Send the SOAP request to delete the user.
-curl -s -k -d @%QSG%\%request_data6% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @%GDPR%\%request_data6% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while deleting the user Gray. !!
@@ -560,7 +534,7 @@ echo(
 echo "Deleting the user named Harper..."
 
 REM Send the SOAP request to delete the user.
-curl -s -k -d @%QSG%\%request_data7% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @%GDPR%\%request_data7% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while deleting the user Harper. !!
@@ -574,7 +548,7 @@ echo(
 echo "Deleting the user named Jean..."
 
 REM Send the SOAP request to delete the user.
-curl -s -k -d @%QSG%\%request_data8% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @%GDPR%\%request_data8% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while deleting the user Jean. !!
@@ -588,7 +562,7 @@ echo(
 echo "Deleting the user named Kelly..."
 
 REM Send the SOAP request to delete the user.
-curl -s -k -d @%QSG%\%request_data9% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @%GDPR%\%request_data9% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while deleting the user Kelly. !!
@@ -602,7 +576,7 @@ echo(
 echo "Deleting the user named Ray..."
 
 REM Send the SOAP request to delete the user.
-curl -s -k -d @%QSG%\%request_data10% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @%GDPR%\%request_data10% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while deleting the user Ray. !!
