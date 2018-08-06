@@ -40,7 +40,6 @@ run_step02() {
 
 add_users admin admin
 add_consents admin admin
-delete_setup
 
 return 0;
 }
@@ -841,8 +840,10 @@ case $scenario in
                    echo "Please enter the consumer key of the Twitter application :"
                    read output2
                    echo "Please enter the secret of the Twitter application :"
-                   echo output3
-                   run_step03
+                   read output3
+                   #TODO this method need to be implemented
+                   run_step03 output2 output3
+                   delete_setup
                    ;;
 
                  *)
