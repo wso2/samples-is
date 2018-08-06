@@ -16,24 +16,69 @@ REM  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 REM  See the License for the specific language governing permissions and
 REM  limitations under the License.
 
-echo Please pick a scenario from the following.
+echo Please start from step 1:.
 echo "----------------------------------------------------------------"
+echo "| This is the Quick Start Guide for GDPR demonstrations.        |"
+echo "| =====================================================         |"
+echo "| Before run this make sure your WSO2 IS and Tomcat is running  |"
+echo "| in default ports WSO2 IS - localhost:9443                     |"
+echo "|                  tomcat  - localhost:8080                     |"
+echo "| Next, Try the below steps in order                            |"
+echo "|                                                               |"
 echo "|  Step 1 - Add an admin user and Configure service providers.  |"
-echo "|  Step 2 - Add users with consents.                            |"
+echo "|                                                               |"
+echo "|   Once you finish step 1, Try out the below scenarios         |"
+echo "|     Scenario 1: Admin add consent purposes for                |"
+echo "|                 self-registration                             |"
+echo "|     Scenario 2: Granting consent during Self registration     |"
+echo "|     Scenario 3: View consents provided via the user portal    |"
+echo "|     Scenario 4: Use of consent for access resources           |"
+echo "|                                                               |"
+echo "|                                                               |"
+echo "|  Step 2 - Add multiple users with consents.                   |"
+echo "|     Scenario 5: Admin user view users who has provided consent|"
+echo "|                 for promotion via notification app in order to|"
+echo "|                 send promotions via email or mobile           |"
+echo "|                                                               |"
+echo "|  Step 3 - Add TwitterIDP as federated IDP and configure       |"
+echo "|           JIT provisioning                                    |"
+echo "|    Scenario 6: Admin add consent purposes for JIT provisioning|"
+echo "|                                                               |"
+echo "|    Scenario 7: Login with a Twitter IDP to the application by |"
+echo "|                providing consent                              |"
+echo "|    Scenario 8: Manage consent of the provisioned user's       |"
+echo "|                consent by himself                             |"
 echo "----------------------------------------------------------------"
+echo "Type step 1 to proceed further : "
 set /p scenario=Enter the step number you selected.
 
     IF "%scenario%"=="1" (
-	REM Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
-	CALL :setup_servers
-	CALL :run_step01
-	EXIT 0
+        REM Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
+        CALL :run_step01
+        echo "Now you can try out the scenarios 1 to 4 !"
+        echo "Once you finish please type step 2 to continue :"
+        set /p nextStep1=Enter the step 2 you selected.
+          IF "%nextStep1%"=="2" (
+            echo "Now multiple users will be added with consents to the system."
+            CALL :run_step02
+            echo "Now you can try out the scenario 5 !"
+            echo "Once you finish please type step 3 to continue :"
+            set /p nextStep2=Enter the step number you selected.
+
+            IF "%nextStep2%"=="3" (
+                echo "For this you need to have the consumer key and the secret of a twitter application registered!"
+                echo "Please enter the consumer key of the Twitter application :"
+                set /p key=Enter the consumer key of the Twitter Application.
+                echo "Please enter the secret of the Twitter application :"
+                set /p secret=Enter the secret of the Twitter Application.
+                CALL :run_step03
+
+            )
+          )
+
    	)
 
-    IF "%scenario%"=="2" (
-	CALL :run_step02
-	EXIT 0
-   	)
+
 
 :run_step01
 
@@ -65,30 +110,10 @@ CALL :delete_setup
 
 EXIT /B
 
-:setup_servers
-
-echo "Please enter the path to your Tomcat server pack."
-echo(
-set /p TOMCAT_PATH="Example: C:\Downloads\apache-tomcat-8.0.49"
-echo(
-
-IF NOT EXIST %TOMCAT_PATH% (
-    echo Tomcat server does not exist in the given location %TOMCAT_PATH%.
-    echo Please download and install the latest pack.
-    exit -1
-)
-
-IF NOT EXIST "%TOMCAT_PATH%/webapps/pickup.war" (
-   COPY "..\sample-apps\pickup.war" "%TOMCAT_PATH%\webapps"
-   exit -1
-)
-
-IF NOT EXIST "%TOMCAT_PATH%/webapps/pick-my-book.war" (
-   COPY "..\sample-apps\pick-my-book.war" "%TOMCAT_PATH%\webapps"
-   exit -1
-)
+:run_step03
 
 EXIT /B
+
 
 :add_user
 

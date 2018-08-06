@@ -45,6 +45,12 @@ delete_setup
 return 0;
 }
 
+#Federated IDP with JIT provisioning
+run_step03() {
+
+return 0;
+}
+
 add_user() {
 
 IS_name=$1
@@ -772,7 +778,7 @@ echo "** Service Provider ${sp_name} successfully deleted. **"
 return 0;
 }
 
-echo Please pick a scenario from the following.
+echo Please start from step 1:.
 echo "----------------------------------------------------------------"
 echo "| This is the Quick Start Guide for GDPR demonstrations.        |"
 echo "| =====================================================         |"
@@ -788,22 +794,24 @@ echo "|     Scenario 1: Admin add consent purposes for                |"
 echo "|                 self-registration                             |"
 echo "|     Scenario 2: Granting consent during Self registration     |"
 echo "|     Scenario 3: View consents provided via the user portal    |"
+echo "|     Scenario 4: Use of consent for access resources           |"
 echo "|                                                               |"
 echo "|                                                               |"
 echo "|  Step 2 - Add multiple users with consents.                   |"
-echo "|     Scenario 4: Admin user view users who has provided consent|"
+echo "|     Scenario 5: Admin user view users who has provided consent|"
 echo "|                 for promotion via notification app in order to|"
 echo "|                 send promotions via email or mobile           |"
 echo "|                                                               |"
 echo "|  Step 3 - Add TwitterIDP as federated IDP and configure       |"
 echo "|           JIT provisioning                                    |"
-echo "|    Scenario 5: Admin add consent purposes for JIT provisioning|"
+echo "|    Scenario 6: Admin add consent purposes for JIT provisioning|"
 echo "|                                                               |"
-echo "| |"
-echo "| |"
-echo "| |"
+echo "|    Scenario 7: Login with a Twitter IDP to the application by |"
+echo "|                providing consent                              |"
+echo "|    Scenario 8: Manage consent of the provisioned user's       |"
+echo "|                consent by himself                             |"
 echo "----------------------------------------------------------------"
-echo "Enter the scenario number you selected."
+echo "Type step 1 to proceed further : "
 
 read scenario
 case $scenario in
@@ -812,15 +820,43 @@ case $scenario in
 	run_step01
 	if [ "$?" -ne "0" ]; then
 	  echo "Sorry, we had a problem there!"
+	  return 0
 	fi
-   	break ;;
+   	echo "Now you can try out the scenarios 1 to 4 !"
+    echo "Once you finish please type step 2 to continue :"
+    read output
+    case $output in
+         2)
+            echo "Now multiple users will be added with consents to the system."
+            run_step02
+           	if [ "$?" -ne "0" ]; then
+        	  echo "Sorry, we had a problem there!"
+        	fi
+        	echo "Now you can try out the scenario 5 !"
+            echo "Once you finish please type step 3 to continue :"
+            read output1
+            case $output1 in
+                 3)
+                   echo "For this you need to have the consumer key and the secret of a twitter application registered!"
+                   echo "Please enter the consumer key of the Twitter application :"
+                   read output2
+                   echo "Please enter the secret of the Twitter application :"
+                   echo output3
+                   run_step03
+                   ;;
 
-	2)
-	# Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
-    run_step02
-	if [ "$?" -ne "0" ]; then
-	  echo "Sorry, we had a problem there!"
-	fi
+                 *)
+	               echo "Sorry, that's not an option."
+	               ;;
+	         esac
+
+         	break ;;
+
+         *)
+	       echo "Sorry, that's not an option."
+	       ;;
+	     esac
+
 	break ;;
 
     *)
@@ -828,3 +864,4 @@ case $scenario in
 	;;
 esac
 echo
+
