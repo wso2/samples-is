@@ -601,12 +601,17 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
 return 0;
 }
 
+getProperty() {
+   PROP_KEY=$1
+   PROP_VALUE=`cat $PROPERTY_FILE | grep "$PROP_KEY" | cut -d'=' -f2`
+   echo $PROP_VALUE
+}
+
 setup_servers() {
-cd ../..
-QSG=`pwd`
-echo "Please enter the path to your WSO2-IS pack."
-echo "Example: /home/downloads/WSO2_Products/wso2is-5.4.0"
-read WSO2_PATH
+
+PROPERTY_FILE=server.properties
+echo "Reading server paths from $PROPERTY_FILE"
+WSO2_PATH=$(getProperty "wso2is.location")
 echo
 
 if [ ! -d "${WSO2_PATH}" ]
@@ -615,9 +620,10 @@ if [ ! -d "${WSO2_PATH}" ]
     return -1
  fi
 
-echo "Please enter the path to your Tomcat server pack."
-echo "Example: /home/downloads/apache-tomcat-8.0.49"
-read TOMCAT_PATH
+TOMCAT_PATH=$(getProperty "tomcat.location")
+
+cd ../..
+QSG=`pwd`
 echo
 
 if [ ! -d "${TOMCAT_PATH}" ]
@@ -1770,6 +1776,8 @@ return 0;
 }
 
 echo "Please pick a scenario from the following."
+echo "Before Run: Make sure you have added server details to the server.properties file  "
+echo " in the QSG/bin folder                                                       "
 echo "-----------------------------------------------------------------------------"
 echo "|  Scenario 1 - Configuring Single-Sign-On with SAML2                       |"
 echo "|  Scenario 2 - Configuring Single-Sign-On with OIDC                        |"

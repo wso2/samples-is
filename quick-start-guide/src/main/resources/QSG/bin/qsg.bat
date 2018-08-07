@@ -76,9 +76,11 @@ set /p scenario=Enter the scenario number you selected.
 
 :setup_servers
 
-echo "Please enter the path to your WSO2-IS pack."
-echo(
-set /p WSO2_PATH="Example: C:\Downloads\WSO2_Products\wso2is-5.5.0"
+echo "Reading server paths from %PROPERTY_FILE%"
+
+FOR /F "eol=; tokens=2,2 delims==" %%i IN ('findstr "wso2is.location" server.properties') DO SET WSO2_PATH=%%i
+echo %WSO2_PATH%
+
 echo(
 
 IF NOT EXIST %WSO2_PATH% (
@@ -86,9 +88,9 @@ IF NOT EXIST %WSO2_PATH% (
     exit -1
 )
 
-echo "Please enter the path to your Tomcat server pack."
-echo(
-set /p TOMCAT_PATH="Example: C:\Downloads\apache-tomcat-8.0.49"
+FOR /F "eol=; tokens=2,2 delims==" %%i IN ('findstr "tomcat.location" server.properties') DO SET TOMCAT_PATH=%%i
+echo %TOMCAT_PATH%
+
 echo(
 
 IF NOT EXIST %TOMCAT_PATH% (

@@ -53,7 +53,7 @@ echo "Type step 1 to proceed further : "
 set /p scenario=Enter the step number you selected.
 
     IF "%scenario%"=="1" (
-        REM Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
+
         CALL :run_step01
         echo "Now you can try out the scenarios 1 to 4 !"
         echo "Once you finish please type any key to start step 2:"
