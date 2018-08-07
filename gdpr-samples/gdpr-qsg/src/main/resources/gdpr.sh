@@ -44,12 +44,6 @@ add_consents admin admin
 return 0;
 }
 
-#Federated IDP with JIT provisioning
-run_step03() {
-
-return 0;
-}
-
 add_user() {
 
 IS_name=$1
@@ -781,8 +775,8 @@ echo Please start from step 1:.
 echo "----------------------------------------------------------------"
 echo "| This is the Quick Start Guide for GDPR demonstrations.        |"
 echo "| =====================================================         |"
-echo "| Before run this make sure your WSO2 IS and Tomcat is running  |"
-echo "| in default ports.                                             |"
+echo "| Before run this make sure your WSO2 IS 5.7.0 and Tomcat is    |"
+echo "| running in default ports.                                     |"
 echo "|      WSO2 IS - localhost:9443                                 |"
 echo "|      tomcat  - localhost:8080                                 |"
 echo "| Next, Try the below steps in order                            |"
@@ -802,14 +796,6 @@ echo "|     Scenario 5: Admin user view users who has provided consent|"
 echo "|                 for promotion via notification app in order to|"
 echo "|                 send promotions via email or mobile           |"
 echo "|                                                               |"
-echo "|  Step 3 - Add TwitterIDP as federated IDP and configure       |"
-echo "|           JIT provisioning                                    |"
-echo "|    Scenario 6: Admin add consent purposes for JIT provisioning|"
-echo "|                                                               |"
-echo "|    Scenario 7: Login with a Twitter IDP to the application by |"
-echo "|                providing consent                              |"
-echo "|    Scenario 8: Manage consent of the provisioned user's       |"
-echo "|                consent by himself                             |"
 echo "----------------------------------------------------------------"
 echo "Type step 1 to proceed further : "
 
@@ -825,39 +811,31 @@ case $scenario in
    	echo "Now you can try out the scenarios 1 to 4 !"
     echo "Once you finish please type step 2 to continue :"
     read output
-    case $output in
-         2)
-            echo "Now multiple users will be added with consents to the system."
-            run_step02
-           	if [ "$?" -ne "0" ]; then
-        	  echo "Sorry, we had a problem there!"
-        	fi
-        	echo "Now you can try out the scenario 5 !"
-            echo "Once you finish please type step 3 to continue :"
-            read output1
-            case $output1 in
-                 3)
-                   echo "For this you need to have the consumer key and the secret of a twitter application registered!"
-                   echo "Please enter the consumer key of the Twitter application :"
-                   read output2
-                   echo "Please enter the secret of the Twitter application :"
-                   read output3
-                   #TODO this method need to be implemented
-                   run_step03 output2 output3
-                   delete_setup
-                   ;;
+        case $output in
+             2)
+                echo "Now multiple users will be added with consents to the system."
+                run_step02
+                if [ "$?" -ne "0" ]; then
+                  echo "Sorry, we had a problem there!"
+                fi
+                echo "Now you can try out the scenario 5 !"
+                echo "Once you finish, please press 'q' to delete the setup "
+                read output1
+                    case $output1 in
+                      q)
+                       delete_setup
+                       ;;
 
-                 *)
-	               echo "Sorry, that's not an option."
-	               ;;
-	         esac
+                      *)
+                       echo "Set up is not deleted. Please delete the set-up manually."
+                       ;;
+                     esac
+             break ;;
 
-         	break ;;
-
-         *)
-	       echo "Sorry, that's not an option."
-	       ;;
-	     esac
+             *)
+               echo "Sorry, that's not an option."
+               ;;
+        esac
 
 	break ;;
 

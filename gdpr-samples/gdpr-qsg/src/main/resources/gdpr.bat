@@ -20,8 +20,9 @@ echo Please start from step 1:.
 echo "----------------------------------------------------------------"
 echo "| This is the Quick Start Guide for GDPR demonstrations.        |"
 echo "| =====================================================         |"
-echo "| Before run this make sure your WSO2 IS and Tomcat is running  |"
-echo "| in default ports WSO2 IS - 127.0.0.1:9443                     |"
+echo "| Before run this make sure your WSO2 IS 5.7.0 and Tomcat is    |"
+echo "| running in default ports                                      |"
+echo "|                  WSO2 IS - 127.0.0.1:9443                     |"
 echo "|                  tomcat  - 127.0.0.1:8080                     |"
 echo "| Next, Try the below steps in order                            |"
 echo "|                                                               |"
@@ -40,14 +41,6 @@ echo "|     Scenario 5: Admin user view users who has provided consent|"
 echo "|                 for promotion via notification app in order to|"
 echo "|                 send promotions via email or mobile           |"
 echo "|                                                               |"
-echo "|  Step 3 - Add TwitterIDP as federated IDP and configure       |"
-echo "|           JIT provisioning                                    |"
-echo "|    Scenario 6: Admin add consent purposes for JIT provisioning|"
-echo "|                                                               |"
-echo "|    Scenario 7: Login with a Twitter IDP to the application by |"
-echo "|                providing consent                              |"
-echo "|    Scenario 8: Manage consent of the provisioned user's       |"
-echo "|                consent by himself                             |"
 echo "----------------------------------------------------------------"
 echo "Type step 1 to proceed further : "
 set /p scenario=Enter the step number you selected.
@@ -95,30 +88,17 @@ CALL :add_consents admin admin
 
 EXIT /B
 
-:run_step03
- echo "run step 3"
-EXIT /B
-
 :next_step_02
     echo "Now multiple users will be added with consents to the system."
     CALL :run_step02
     echo "Now you can try out the scenario 5 !"
-    echo "Once you finish please type step 3 to continue :"
-    set /p nextStep2=Enter the step number you selected.
+    echo "Once you finish, press 'q' to delete the set-up"
+    set /p nextStep2=Enter q to delete the set up.
 
-            IF "%nextStep2%"=="3" (
-                echo "For this you need to have the consumer key and the secret of a twitter application registered!"
-                echo "Please enter the consumer key of the Twitter application :"
-                set /p key=Enter the consumer key of the Twitter Application.
-                echo "Please enter the secret of the Twitter application :"
-                set /p secret=Enter the secret of the Twitter Application.
-                REM TODO this method has to be implemented
-                CALL :run_step03
+            IF "%nextStep2%"=="q" (
                 CALL :delete_setup
-
             ) ELSE (
-               echo Please start again! you have selected wrong step. It should be Step 3.
-               CALL :delete_setup
+               echo Set up is not deleted. Please delete the set-up manually.
             )
 EXIT /B
 

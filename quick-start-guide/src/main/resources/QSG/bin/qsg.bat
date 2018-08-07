@@ -16,7 +16,14 @@ REM  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 REM  See the License for the specific language governing permissions and
 REM  limitations under the License.
 
-echo Please pick a scenario from the following.
+
+echo "Before Run: Make sure the following -                                         "
+echo "  * Added server details to the server.properties file in the QSG/bin folder  "
+echo "  * Your WSO2 IS 5.7.0 and Tomcat is running on default ports.                "
+echo "                       WSO2 IS - localhost:9443                               "
+echo "                       tomcat  - localhost:8080                               "
+echo "                                                                              "
+echo "Please pick a scenario from the following."
 echo "-----------------------------------------------------------------------------"
 echo "|  Scenario 1 - Configuring Single-Sign-On with SAML2                       |"
 echo "|  Scenario 2 - Configuring Single-Sign-On with OIDC                        |"
