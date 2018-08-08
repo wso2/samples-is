@@ -17,8 +17,8 @@
 
 configure_sample4() {
     add_email_template admin admin "${SAMPLE_HOME}/configs/add-email-template-type.xml" "${SAMPLE_HOME}/configs/add-email-template.xml"
-    configure_service_provider_for_samlsso dispatch saml2-web-app-dispatch.com http://localhost.com:8080/saml2-web-app-dispatch.com/consumer admin admin "${COMMON_HOME}/configs/sso-config.xml"
-    configure_service_provider_for_samlsso swift saml2-web-app-swift.com http://localhost.com:8080/saml2-web-app-swift.com/consumer admin admin "${COMMON_HOME}/configs/sso-config.xml"
+    configure_service_provider_for_samlsso dispatch saml2-web-app-dispatch.com http://localhost:8080/saml2-web-app-dispatch.com/consumer admin admin "${COMMON_HOME}/configs/sso-config.xml"
+    configure_service_provider_for_samlsso swift saml2-web-app-swift.com http://localhost:8080/saml2-web-app-swift.com/consumer admin admin "${COMMON_HOME}/configs/sso-config.xml"
 
     echo
     echo "Please enter your allowed IP subnet."

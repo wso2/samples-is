@@ -40,7 +40,6 @@ run_step02() {
 
 add_users admin admin
 add_consents admin admin
-delete_setup
 
 return 0;
 }
@@ -499,6 +498,14 @@ curl -s -k -H "Authorization: Basic ${auth}" -H "Content-Type: text/xml" -H "SOA
             <xsd1:permissionAndRoleConfig></xsd1:permissionAndRoleConfig>
             <!--Optional:-->
             <xsd1:saasApp>false</xsd1:saasApp>
+            <xsd1:owner>
+               <!--Optional:-->
+               <xsd1:tenantDomain>carbon.super</xsd1:tenantDomain>
+               <!--Optional:-->
+               <xsd1:userName>admin</xsd1:userName>
+               <!--Optional:-->
+               <xsd1:userStoreDomain>PRIMARY</xsd1:userStoreDomain>
+            </xsd1:owner>
          </xsd:serviceProvider>
       </xsd:updateApplication>
    </soapenv:Body>
@@ -764,30 +771,72 @@ echo "** Service Provider ${sp_name} successfully deleted. **"
 return 0;
 }
 
-echo Please pick a scenario from the following.
+echo Please start from step 1:.
 echo "----------------------------------------------------------------"
+echo "| This is the Quick Start Guide for GDPR demonstrations.        |"
+echo "| =====================================================         |"
+echo "| Before run this make sure your WSO2 IS 5.7.0 and Tomcat is    |"
+echo "| running in default ports.                                     |"
+echo "|      WSO2 IS - localhost:9443                                 |"
+echo "|      tomcat  - localhost:8080                                 |"
+echo "| Next, Try the below steps in order                            |"
+echo "|                                                               |"
 echo "|  Step 1 - Add an admin user and Configure service providers.  |"
-echo "|  Step 2 - Add users with consents.                            |"
+echo "|                                                               |"
+echo "|   Once you finish step 1, Try out the below scenarios         |"
+echo "|     Scenario 1: Admin add consent purposes for                |"
+echo "|                 self-registration                             |"
+echo "|     Scenario 2: Granting consent during Self registration     |"
+echo "|     Scenario 3: View consents provided via the user portal    |"
+echo "|     Scenario 4: Use of consent for access resources           |"
+echo "|                                                               |"
+echo "|                                                               |"
+echo "|  Step 2 - Add multiple users with consents.                   |"
+echo "|     Scenario 5: Admin user view users who has provided consent|"
+echo "|                 for promotion via notification app in order to|"
+echo "|                 send promotions via email or mobile           |"
+echo "|                                                               |"
 echo "----------------------------------------------------------------"
-echo "Enter the scenario number you selected."
+echo "Type step 1 to proceed further : "
 
 read scenario
 case $scenario in
 	1)
-	# Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
-	setup_servers
+
 	run_step01
 	if [ "$?" -ne "0" ]; then
 	  echo "Sorry, we had a problem there!"
+	  return 0
 	fi
-   	break ;;
+   	echo "Now you can try out the scenarios 1 to 4 !"
+    echo "Once you finish please type step 2 to continue :"
+    read output
+        case $output in
+             2)
+                echo "Now multiple users will be added with consents to the system."
+                run_step02
+                if [ "$?" -ne "0" ]; then
+                  echo "Sorry, we had a problem there!"
+                fi
+                echo "Now you can try out the scenario 5 !"
+                echo "Once you finish, please press 'q' to delete the setup "
+                read output1
+                    case $output1 in
+                      q)
+                       delete_setup
+                       ;;
 
-	2)
-	# Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
-    run_step02
-	if [ "$?" -ne "0" ]; then
-	  echo "Sorry, we had a problem there!"
-	fi
+                      *)
+                       echo "Set up is not deleted. Please delete the set-up manually."
+                       ;;
+                     esac
+             break ;;
+
+             *)
+               echo "Sorry, that's not an option."
+               ;;
+        esac
+
 	break ;;
 
     *)
@@ -795,3 +844,4 @@ case $scenario in
 	;;
 esac
 echo
+

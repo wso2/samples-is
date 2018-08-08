@@ -16,7 +16,14 @@ REM  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 REM  See the License for the specific language governing permissions and
 REM  limitations under the License.
 
-echo Please pick a scenario from the following.
+
+echo "Before Run: Make sure the following -                                         "
+echo "  * Added server details to the server.properties file in the QSG/bin folder  "
+echo "  * Your WSO2 IS 5.7.0 and Tomcat is running on default ports.                "
+echo "                       WSO2 IS - localhost:9443                               "
+echo "                       tomcat  - localhost:8080                               "
+echo "                                                                              "
+echo "Please pick a scenario from the following."
 echo "-----------------------------------------------------------------------------"
 echo "|  Scenario 1 - Configuring Single-Sign-On with SAML2                       |"
 echo "|  Scenario 2 - Configuring Single-Sign-On with OIDC                        |"
@@ -76,9 +83,11 @@ set /p scenario=Enter the scenario number you selected.
 
 :setup_servers
 
-echo "Please enter the path to your WSO2-IS pack."
-echo(
-set /p WSO2_PATH="Example: C:\Downloads\WSO2_Products\wso2is-5.5.0"
+echo "Reading server paths from %PROPERTY_FILE%"
+
+FOR /F "eol=; tokens=2,2 delims==" %%i IN ('findstr "wso2is.location" server.properties') DO SET WSO2_PATH=%%i
+echo %WSO2_PATH%
+
 echo(
 
 IF NOT EXIST %WSO2_PATH% (
@@ -86,9 +95,9 @@ IF NOT EXIST %WSO2_PATH% (
     exit -1
 )
 
-echo "Please enter the path to your Tomcat server pack."
-echo(
-set /p TOMCAT_PATH="Example: C:\Downloads\apache-tomcat-8.0.49"
+FOR /F "eol=; tokens=2,2 delims==" %%i IN ('findstr "tomcat.location" server.properties') DO SET TOMCAT_PATH=%%i
+echo %TOMCAT_PATH%
+
 echo(
 
 IF NOT EXIST %TOMCAT_PATH% (
@@ -565,11 +574,11 @@ echo(
 echo "Creating a user named alex..."
 
 REM The following command can be used to create a user.
-curl -s -k --user %~1:%~2 --data "{"schemas":[],"name":{"familyName":"Miller","givenName":"Alex"},"userName":"alex","password":"alex123","emails":"alex@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://127.0.0.1:9443/wso2/scim/Users
 
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while creating user alex. !!"
-  echo(
+  echo(curl -s -k --user %~1:%~2 --data "{"schemas":[],"name":{"familyName":"Miller","givenName":"Alex"},"userName":"alex","password":"alex123","emails":"alex@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://127.0.0.1:9443/wso2/scim/Users
+
   CALL :delete_user
   echo(
   exit -1
@@ -774,7 +783,7 @@ echo(
 echo Updating application %~1...
 
 REM Send the SOAP request to Update the Application.
-curl -s -k -H "Authorization: Basic %~2" -H "Content-Type: text/xml" -H "SOAPAction: %~3" -o NUL %~4 -d "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelope/"\" xmlns:xsd="\"http://org.apache.axis2/xsd"\" xmlns:xsd1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><soapenv:Header/><soapenv:Body><xsd:updateApplication><xsd:serviceProvider><xsd1:applicationID>%app_id%</xsd1:applicationID><xsd1:applicationName>%~1</xsd1:applicationName><xsd1:claimConfig><xsd1:alwaysSendMappedLocalSubjectId>false</xsd1:alwaysSendMappedLocalSubjectId><xsd1:localClaimDialect>true</xsd1:localClaimDialect></xsd1:claimConfig><xsd1:description>sample service provider</xsd1:description><xsd1:inboundAuthenticationConfig><xsd1:inboundAuthenticationRequestConfigs><xsd1:inboundAuthKey>saml2-web-app-%~1.com</xsd1:inboundAuthKey><xsd1:inboundAuthType>samlsso</xsd1:inboundAuthType><xsd1:properties><xsd1:name>attrConsumServiceIndex</xsd1:name><xsd1:value>1223160755</xsd1:value></xsd1:properties></xsd1:inboundAuthenticationRequestConfigs></xsd1:inboundAuthenticationConfig><xsd1:inboundProvisioningConfig><xsd1:provisioningEnabled>false</xsd1:provisioningEnabled><xsd1:provisioningUserStore>PRIMARY</xsd1:provisioningUserStore></xsd1:inboundProvisioningConfig><xsd1:localAndOutBoundAuthenticationConfig><xsd1:alwaysSendBackAuthenticatedListOfIdPs>false</xsd1:alwaysSendBackAuthenticatedListOfIdPs><xsd1:authenticationStepForAttributes></xsd1:authenticationStepForAttributes><xsd1:authenticationStepForSubject></xsd1:authenticationStepForSubject><xsd1:authenticationType>default</xsd1:authenticationType><xsd1:subjectClaimUri>http://wso2.org/claims/fullname</xsd1:subjectClaimUri></xsd1:localAndOutBoundAuthenticationConfig><xsd1:outboundProvisioningConfig><xsd1:provisionByRoleList></xsd1:provisionByRoleList></xsd1:outboundProvisioningConfig><xsd1:permissionAndRoleConfig></xsd1:permissionAndRoleConfig><xsd1:saasApp>false</xsd1:saasApp></xsd:serviceProvider></xsd:updateApplication></soapenv:Body></soapenv:Envelope>"
+curl -s -k -H "Authorization: Basic %~2" -H "Content-Type: text/xml" -H "SOAPAction: %~3" -o NUL %~4 -d "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelope/"\" xmlns:xsd="\"http://org.apache.axis2/xsd"\" xmlns:xsd1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><soapenv:Header/><soapenv:Body><xsd:updateApplication><xsd:serviceProvider><xsd1:applicationID>%app_id%</xsd1:applicationID><xsd1:applicationName>%~1</xsd1:applicationName><xsd1:claimConfig><xsd1:alwaysSendMappedLocalSubjectId>false</xsd1:alwaysSendMappedLocalSubjectId><xsd1:localClaimDialect>true</xsd1:localClaimDialect></xsd1:claimConfig><xsd1:description>sample service provider</xsd1:description><xsd1:inboundAuthenticationConfig><xsd1:inboundAuthenticationRequestConfigs><xsd1:inboundAuthKey>saml2-web-app-%~1.com</xsd1:inboundAuthKey><xsd1:inboundAuthType>samlsso</xsd1:inboundAuthType><xsd1:properties><xsd1:name>attrConsumServiceIndex</xsd1:name><xsd1:value>1223160755</xsd1:value></xsd1:properties></xsd1:inboundAuthenticationRequestConfigs></xsd1:inboundAuthenticationConfig><xsd1:inboundProvisioningConfig><xsd1:provisioningEnabled>false</xsd1:provisioningEnabled><xsd1:provisioningUserStore>PRIMARY</xsd1:provisioningUserStore></xsd1:inboundProvisioningConfig><xsd1:localAndOutBoundAuthenticationConfig><xsd1:alwaysSendBackAuthenticatedListOfIdPs>false</xsd1:alwaysSendBackAuthenticatedListOfIdPs><xsd1:authenticationStepForAttributes></xsd1:authenticationStepForAttributes><xsd1:authenticationStepForSubject></xsd1:authenticationStepForSubject><xsd1:authenticationType>default</xsd1:authenticationType><xsd1:subjectClaimUri>http://wso2.org/claims/fullname</xsd1:subjectClaimUri></xsd1:localAndOutBoundAuthenticationConfig><xsd1:outboundProvisioningConfig><xsd1:provisionByRoleList></xsd1:provisionByRoleList></xsd1:outboundProvisioningConfig><xsd1:permissionAndRoleConfig></xsd1:permissionAndRoleConfig><xsd1:saasApp>false</xsd1:saasApp><xsd1:owner><xsd1:tenantDomain>carbon.super</xsd1:tenantDomain> <xsd1:userName>cameron</xsd1:userName> <xsd1:userStoreDomain>PRIMARY</xsd1:userStoreDomain> </xsd1:owner></xsd:serviceProvider></xsd:updateApplication></soapenv:Body></soapenv:Envelope>"
 echo ** Successfully updated the application %~1. **
 cd ..
 EXIT /B
@@ -837,7 +846,7 @@ echo(
 echo Updating application %~1...
 
 REM Send the SOAP request to Update the Application.
-curl -s -k -H "Authorization: Basic %~2" -H "Content-Type: text/xml" -H "SOAPAction: %~5" -o NUL %~6 -d "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelope/"\" xmlns:xsd="\"http://org.apache.axis2/xsd"\" xmlns:xsd1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><soapenv:Header/><soapenv:Body><xsd:updateApplication><xsd:serviceProvider><xsd1:applicationID>%app_id%</xsd1:applicationID><xsd1:applicationName>%~1</xsd1:applicationName><xsd1:claimConfig><xsd1:alwaysSendMappedLocalSubjectId>false</xsd1:alwaysSendMappedLocalSubjectId><xsd1:localClaimDialect>true</xsd1:localClaimDialect></xsd1:claimConfig><xsd1:description>oauth application</xsd1:description><xsd1:inboundAuthenticationConfig><xsd1:inboundAuthenticationRequestConfigs><xsd1:inboundAuthKey>%~3</xsd1:inboundAuthKey><xsd1:inboundAuthType>oauth2</xsd1:inboundAuthType><xsd1:properties><xsd1:advanced>false</xsd1:advanced><xsd1:confidential>false</xsd1:confidential><xsd1:defaultValue></xsd1:defaultValue><xsd1:description></xsd1:description><xsd1:displayName></xsd1:displayName><xsd1:name>oauthConsumerSecret</xsd1:name><xsd1:required>false</xsd1:required><xsd1:value>%~4</xsd1:value></xsd1:properties></xsd1:inboundAuthenticationRequestConfigs></xsd1:inboundAuthenticationConfig><xsd1:inboundProvisioningConfig><xsd1:provisioningEnabled>false</xsd1:provisioningEnabled><xsd1:provisioningUserStore>PRIMARY</xsd1:provisioningUserStore></xsd1:inboundProvisioningConfig><xsd1:localAndOutBoundAuthenticationConfig><xsd1:alwaysSendBackAuthenticatedListOfIdPs>false</xsd1:alwaysSendBackAuthenticatedListOfIdPs><xsd1:authenticationStepForAttributes></xsd1:authenticationStepForAttributes><xsd1:authenticationStepForSubject></xsd1:authenticationStepForSubject><xsd1:authenticationType>default</xsd1:authenticationType><xsd1:subjectClaimUri>http://wso2.org/claims/fullname</xsd1:subjectClaimUri></xsd1:localAndOutBoundAuthenticationConfig><xsd1:outboundProvisioningConfig><xsd1:provisionByRoleList></xsd1:provisionByRoleList></xsd1:outboundProvisioningConfig><xsd1:permissionAndRoleConfig></xsd1:permissionAndRoleConfig><xsd1:saasApp>false</xsd1:saasApp></xsd:serviceProvider></xsd:updateApplication></soapenv:Body></soapenv:Envelope>"
+curl -s -k -H "Authorization: Basic %~2" -H "Content-Type: text/xml" -H "SOAPAction: %~5" -o NUL %~6 -d "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelope/"\" xmlns:xsd="\"http://org.apache.axis2/xsd"\" xmlns:xsd1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><soapenv:Header/><soapenv:Body><xsd:updateApplication><xsd:serviceProvider><xsd1:applicationID>%app_id%</xsd1:applicationID><xsd1:applicationName>%~1</xsd1:applicationName><xsd1:claimConfig><xsd1:alwaysSendMappedLocalSubjectId>false</xsd1:alwaysSendMappedLocalSubjectId><xsd1:localClaimDialect>true</xsd1:localClaimDialect></xsd1:claimConfig><xsd1:description>oauth application</xsd1:description><xsd1:inboundAuthenticationConfig><xsd1:inboundAuthenticationRequestConfigs><xsd1:inboundAuthKey>%~3</xsd1:inboundAuthKey><xsd1:inboundAuthType>oauth2</xsd1:inboundAuthType><xsd1:properties><xsd1:advanced>false</xsd1:advanced><xsd1:confidential>false</xsd1:confidential><xsd1:defaultValue></xsd1:defaultValue><xsd1:description></xsd1:description><xsd1:displayName></xsd1:displayName><xsd1:name>oauthConsumerSecret</xsd1:name><xsd1:required>false</xsd1:required><xsd1:value>%~4</xsd1:value></xsd1:properties></xsd1:inboundAuthenticationRequestConfigs></xsd1:inboundAuthenticationConfig><xsd1:inboundProvisioningConfig><xsd1:provisioningEnabled>false</xsd1:provisioningEnabled><xsd1:provisioningUserStore>PRIMARY</xsd1:provisioningUserStore></xsd1:inboundProvisioningConfig><xsd1:localAndOutBoundAuthenticationConfig><xsd1:alwaysSendBackAuthenticatedListOfIdPs>false</xsd1:alwaysSendBackAuthenticatedListOfIdPs><xsd1:authenticationStepForAttributes></xsd1:authenticationStepForAttributes><xsd1:authenticationStepForSubject></xsd1:authenticationStepForSubject><xsd1:authenticationType>default</xsd1:authenticationType><xsd1:subjectClaimUri>http://wso2.org/claims/fullname</xsd1:subjectClaimUri></xsd1:localAndOutBoundAuthenticationConfig><xsd1:outboundProvisioningConfig><xsd1:provisionByRoleList></xsd1:provisionByRoleList></xsd1:outboundProvisioningConfig><xsd1:permissionAndRoleConfig></xsd1:permissionAndRoleConfig><xsd1:saasApp>false</xsd1:saasApp><xsd1:owner><xsd1:tenantDomain>carbon.super</xsd1:tenantDomain><xsd1:userName>cameron</xsd1:userName><xsd1:userStoreDomain>PRIMARY</xsd1:userStoreDomain></xsd1:owner></xsd:serviceProvider></xsd:updateApplication></soapenv:Body></soapenv:Envelope>"
 
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while updating application %sp_name%.... !!"
