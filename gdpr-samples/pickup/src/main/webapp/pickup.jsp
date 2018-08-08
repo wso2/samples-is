@@ -38,8 +38,8 @@
                 return;
             }
         }
-        
-        if (request.getParameter(OAuth2Constants.CODE)!=null) {
+
+        if (request.getParameter(OAuth2Constants.CODE) != null) {
             code = request.getParameter(OAuth2Constants.CODE);
         }
 
@@ -93,7 +93,8 @@
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic"
+          rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -113,22 +114,23 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><img src="img/logo.png" height="30" /> Taxies</a>
+            <a class="navbar-brand" href="#"><img src="img/logo.png" height="30"/> Taxies</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
                 <!--<li><button class="btn btn-dark custom-primary btn-login"><strong>Login</strong></button></li>-->
                 <li class="dropdown user-name">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img class="img-circle" height="30" width=30" src="img/Admin-icon.jpg"> <span
-                            class="user-name"><%=name%><i class="fa fa-chevron-down"></i></span>
+                        <img class="img-circle" height="30" width="30" src="img/Admin-icon.jpg">
+                        <span class="user-name"><%=name%><i class="fa fa-chevron-down"></i></span>
                     </a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a
-                                <%--href='<%=properties.getProperty("OIDC_LOGOUT_ENDPOINT")%>"?post_logout_redirect_uri--%>
-                                <%--="<%=properties.getProperty("post_logout_redirect_uri")%>"&id_token_hint="<%=idToken%>'>--%>
-                                href='<%=properties.getProperty("OIDC_LOGOUT_ENDPOINT")%>'>Logout</a>
-                        </li>                    </ul>
+                        <li><a href='<%=properties.getProperty("OIDC_LOGOUT_ENDPOINT")%>'>Logout</a>
+                        <%--href='<%=properties.getProperty("OIDC_LOGOUT_ENDPOINT")%>"?post_logout_redirect_uri--%>
+                        <%--="<%=properties.getProperty("post_logout_redirect_uri")%>"&id_token_hint="<%=idToken%>'>--%>
+
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>
@@ -150,14 +152,13 @@
 </section>
 
 
-
 <!-- Create -->
 <section class="create content">
     <div class="container">
         <div class="row">
             <div class="col-lg-10 col-lg-offset-1">
                 <h3 class="text-center" style="color:#01969c">Plan Your Ride</h3>
-                <br />
+                <br/>
                 <div class="row">
                     <div class="col-lg-6 col-lg-offset-3">
                         <form>
@@ -190,8 +191,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <br />
-                            <button type="submit" class="btn btn-lg btn-dark custom-primary center-block">Book Now</button>
+                            <br/>
+                            <button type="submit" class="btn btn-lg btn-dark custom-primary center-block">Book Now
+                            </button>
                         </form>
 
                     </div>
@@ -209,7 +211,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-10 col-lg-offset-1 text-center">
-                <a href="http://wso2.com/" target="_blank" ><img src="img/wso2logo.svg" height="20" /></a>
+                <a href="http://wso2.com/" target="_blank"><img src="img/wso2logo.svg" height="20"/></a>
                 <p class="text-muted">Copyright &copy; WSO2 2018</p>
             </div>
         </div>
@@ -229,17 +231,17 @@
     $(".allocations").first().addClass('active');
     $(".allocations .circle").first().addClass('custom-primary-color');
 
-    $("#menu-close").click(function(e) {
+    $("#menu-close").click(function (e) {
         e.preventDefault();
         $("#sidebar-wrapper").toggleClass("active");
     });
     // Opens the sidebar menu
-    $("#menu-toggle").click(function(e) {
+    $("#menu-toggle").click(function (e) {
         e.preventDefault();
         $("#sidebar-wrapper").toggleClass("active");
     });
 
-    $(".allocations").click(function(e) {
+    $(".allocations").click(function (e) {
         e.preventDefault();
         $(".allocations").removeClass('active');
         $('.circle').removeClass('custom-primary-color');
@@ -249,8 +251,8 @@
     });
 
     // Scrolls to the selected menu item on the page
-    $(function() {
-        $('a[href*=#]:not([href=#],[data-toggle],[data-target],[data-slide])').click(function() {
+    $(function () {
+        $('a[href*=#]:not([href=#],[data-toggle],[data-target],[data-slide])').click(function () {
             if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
                 var target = $(this.hash);
                 target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
@@ -263,7 +265,7 @@
             }
         });
 
-        $("div.bhoechie-tab-menu>div.list-group>a").click(function(e) {
+        $("div.bhoechie-tab-menu>div.list-group>a").click(function (e) {
             e.preventDefault();
             $(this).siblings('a.active').removeClass("active");
             $(this).addClass("active");
@@ -274,12 +276,12 @@
     });
     //#to-top button appears after scrolling
     var fixed = false;
-    $(document).scroll(function() {
+    $(document).scroll(function () {
         if ($(this).scrollTop() > 250) {
             if (!fixed) {
                 fixed = true;
                 // $('#to-top').css({position:'fixed', display:'block'});
-                $('#to-top').show("slow", function() {
+                $('#to-top').show("slow", function () {
                     $('#to-top').css({
                         position: 'fixed',
                         display: 'block'
@@ -289,7 +291,7 @@
         } else {
             if (fixed) {
                 fixed = false;
-                $('#to-top').hide("slow", function() {
+                $('#to-top').hide("slow", function () {
                     $('#to-top').css({
                         display: 'none'
                     });
