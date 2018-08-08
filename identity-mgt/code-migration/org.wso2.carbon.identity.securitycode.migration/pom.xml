@@ -27,7 +27,7 @@
     <artifactId>org.wso2.carbon.identity.securitycode.migration</artifactId>
     <packaging>bundle</packaging>
     <name>WSO2 Carbon - Identity Security Code Migration</name>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
 
     <dependencies>
         <dependency>

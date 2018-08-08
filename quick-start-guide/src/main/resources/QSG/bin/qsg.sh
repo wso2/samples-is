@@ -601,12 +601,17 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
 return 0;
 }
 
+getProperty() {
+   PROP_KEY=$1
+   PROP_VALUE=`cat $PROPERTY_FILE | grep "$PROP_KEY" | cut -d'=' -f2`
+   echo $PROP_VALUE
+}
+
 setup_servers() {
-cd ../..
-QSG=`pwd`
-echo "Please enter the path to your WSO2-IS pack."
-echo "Example: /home/downloads/WSO2_Products/wso2is-5.4.0"
-read WSO2_PATH
+
+PROPERTY_FILE=server.properties
+echo "Reading server paths from $PROPERTY_FILE"
+WSO2_PATH=$(getProperty "wso2is.location")
 echo
 
 if [ ! -d "${WSO2_PATH}" ]
@@ -615,9 +620,10 @@ if [ ! -d "${WSO2_PATH}" ]
     return -1
  fi
 
-echo "Please enter the path to your Tomcat server pack."
-echo "Example: /home/downloads/apache-tomcat-8.0.49"
-read TOMCAT_PATH
+TOMCAT_PATH=$(getProperty "tomcat.location")
+
+cd ../..
+QSG=`pwd`
 echo
 
 if [ ! -d "${TOMCAT_PATH}" ]
@@ -1291,7 +1297,7 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
                     <!--Zero or more repetitions:-->
                     <xsd1:inboundAuthenticationRequestConfigs>
                         <!--Optional:-->
-                        <xsd1:inboundAuthKey>saml2-web-app-dispatch.com</xsd1:inboundAuthKey>
+                        <xsd1:inboundAuthKey>saml2-web-app-${sp_name}.com</xsd1:inboundAuthKey>
                         <!--Optional:-->
                         <xsd1:inboundAuthType>samlsso</xsd1:inboundAuthType>
                         <!--Zero or more repetitions:-->
@@ -1331,6 +1337,14 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
                 <xsd1:permissionAndRoleConfig></xsd1:permissionAndRoleConfig>
                 <!--Optional:-->
                 <xsd1:saasApp>false</xsd1:saasApp>
+                 <xsd1:owner>
+                   <!--Optional:-->
+                   <xsd1:tenantDomain>carbon.super</xsd1:tenantDomain>
+                   <!--Optional:-->
+                   <xsd1:userName>cameron</xsd1:userName>
+                   <!--Optional:-->
+                   <xsd1:userStoreDomain>PRIMARY</xsd1:userStoreDomain>
+                </xsd1:owner>
             </xsd:serviceProvider>
         </xsd:updateApplication>
     </soapenv:Body>
@@ -1455,6 +1469,14 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
             <xsd1:permissionAndRoleConfig></xsd1:permissionAndRoleConfig>
             <!--Optional:-->
             <xsd1:saasApp>false</xsd1:saasApp>
+            <xsd1:owner>
+                   <!--Optional:-->
+                   <xsd1:tenantDomain>carbon.super</xsd1:tenantDomain>
+                   <!--Optional:-->
+                   <xsd1:userName>cameron</xsd1:userName>
+                   <!--Optional:-->
+                   <xsd1:userStoreDomain>PRIMARY</xsd1:userStoreDomain>
+            </xsd1:owner>
          </xsd:serviceProvider>
       </xsd:updateApplication>
    </soapenv:Body>
@@ -1514,7 +1536,7 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
     <ns1:description xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">sample service provider</ns1:description>
     <inboundAuthenticationConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">
       <inboundAuthenticationRequestConfigs>
-        <inboundAuthKey>saml2-web-app-dispatch.com</inboundAuthKey>
+        <inboundAuthKey>saml2-web-app-${sp_name}.com</inboundAuthKey>
         <inboundAuthType>samlsso</inboundAuthType>
         <properties>
           <name>attrConsumServiceIndex</name>
@@ -1753,6 +1775,13 @@ cd ..
 return 0;
 }
 
+
+echo "Before Run: Make sure the following -                                         "
+echo "  * Added server details to the server.properties file in the QSG/bin folder  "
+echo "  * Your WSO2 IS 5.7.0 and Tomcat is running on default ports.                "
+echo "                       WSO2 IS - localhost:9443                               "
+echo "                       tomcat  - localhost:8080                               "
+echo "                                                                              "
 echo "Please pick a scenario from the following."
 echo "-----------------------------------------------------------------------------"
 echo "|  Scenario 1 - Configuring Single-Sign-On with SAML2                       |"

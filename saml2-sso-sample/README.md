@@ -29,7 +29,7 @@ In order to check sigle sign on using SAML2, please follow the steps
   
 3. Under Inbound Authentication Configuration, create a new SAML2 Web SSO configuration.
      Issuer - saml2-web-app-dispatch.com  
-     Assertion Consumer URLs - http://localhost.com:8080/saml2-web-app-dispatch.com/consumer 
+     Assertion Consumer URLs - http://localhost:8080/saml2-web-app-dispatch.com/consumer 
 
 (Keep the other default settings as it is and save the configuration.)
 

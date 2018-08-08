@@ -41,8 +41,8 @@ configure_sample_1() {
     case ${continue} in
         [Yy]* )
             create_google_idp "GoogleIDP" "GoogleIDP" "${COMMON_HOME}/configs/create-google-idp.xml" admin admin
-            configure_service_provider_for_samlsso dispatch saml2-web-app-dispatch.com http://localhost.com:8080/saml2-web-app-dispatch.com/consumer admin admin "${COMMON_HOME}/configs/sso-config.xml"
-            configure_service_provider_for_samlsso swift saml2-web-app-swift.com http://localhost.com:8080/saml2-web-app-swift.com/consumer admin admin "${COMMON_HOME}/configs/sso-config.xml"
+            configure_service_provider_for_samlsso dispatch saml2-web-app-dispatch.com http://localhost:8080/saml2-web-app-dispatch.com/consumer admin admin "${COMMON_HOME}/configs/sso-config.xml"
+            configure_service_provider_for_samlsso swift saml2-web-app-swift.com http://localhost:8080/saml2-web-app-swift.com/consumer admin admin "${COMMON_HOME}/configs/sso-config.xml"
             configure_service_provider dispatch admin admin "${COMMON_HOME}/configs/get-sp.xml" "${SAMPLE_HOME}/configs/update-sp.xml"
             configure_service_provider swift admin admin "${COMMON_HOME}/configs/get-sp.xml" "${SAMPLE_HOME}/configs/update-sp.xml"
             display_sample_info

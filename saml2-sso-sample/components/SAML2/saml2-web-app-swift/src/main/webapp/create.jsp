@@ -17,6 +17,7 @@
 -->
 <%@ page import="org.wso2.carbon.identity.sso.agent.bean.LoggedInSessionBean" %>
 <%@ page import="org.wso2.carbon.identity.sso.agent.util.SSOAgentConstants" %>
+<%@ page import="java.util.Map" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,10 +53,9 @@
 
 <%
     String subjectId = null;
-
+    Map<String, String> saml2SSOAttributes = null;
     final String SAML_SSO_URL = "samlsso";
     final String SAML_LOGOUT_URL = "logout";
-
     // if web-browser session is there but no session bean set,
     // invalidate session and direct back to login page
     if (request.getSession(false) != null
@@ -69,9 +69,9 @@
         return;
     }
     LoggedInSessionBean sessionBean = (LoggedInSessionBean) session.getAttribute(SSOAgentConstants.SESSION_BEAN_NAME);
-
-    if (sessionBean != null && sessionBean.getSAML2SSO() != null) {
+    if(sessionBean != null && sessionBean.getSAML2SSO() != null) {
         subjectId = sessionBean.getSAML2SSO().getSubjectId();
+        saml2SSOAttributes = sessionBean.getSAML2SSO().getSubjectAttributes();
     } else {
 %>
 <script type="text/javascript">
@@ -80,6 +80,7 @@
 <%
         return;
     }
+
 %>
 
 <body>
@@ -99,7 +100,7 @@
                     <li class="dropdown user-name">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <img class="img-circle" height="30" width=30" src="img/Admin-icon.jpg"/>
-                            <span class="user-name"><%=subjectId%>@pickup.com <i class="fa fa-chevron-down"></i></span>
+                            <span class="user-name"><%=subjectId%><i class="fa fa-chevron-down"></i></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href=<%=SAML_LOGOUT_URL%>>Logout</a></li>
@@ -250,7 +251,7 @@
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1 text-center">
                     <a href="http://wso2.com/" target="_blank" ><img src="img/wso2logo.svg" height="20" /></a>
-                    <p class="text-muted">Copyright &copy; WSO2 2017</p>
+                    <p class="text-muted">Copyright &copy; WSO2 2018</p>
                 </div>
             </div>
         </div>

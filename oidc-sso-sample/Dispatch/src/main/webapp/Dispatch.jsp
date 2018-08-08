@@ -10,8 +10,8 @@
 <%@ page import="org.wso2.sample.identity.oauth2.SampleContextEventListener" %>
 <%
     String code = null;
-    String idToken;
-    String sessionState;
+    String idToken = null;
+    String sessionState = null;
     String error;
     String name = null;
     Properties properties;
@@ -22,24 +22,20 @@
         if (StringUtils.isNotBlank(sessionState)) {
             session.setAttribute(OAuth2Constants.SESSION_STATE, sessionState);
         }
-
+        session.setAttribute(OAuth2Constants.CONSUMER_KEY, properties.getProperty("consumerKey"));
+        session.setAttribute(OAuth2Constants.OIDC_SESSION_IFRAME_ENDPOINT, properties.getProperty("sessionIFrameEndpoint"));
+        session.setAttribute(OAuth2Constants.OAUTH2_AUTHZ_ENDPOINT, properties.getProperty("authzEndpoint"));
+        session.setAttribute(OAuth2Constants.OAUTH2_GRANT_TYPE, properties.getProperty("authzGrantType"));
+        session.setAttribute(OAuth2Constants.CALL_BACK_URL, properties.getProperty("callBackUrl"));
+        session.setAttribute(OAuth2Constants.SCOPE, properties.getProperty("scope"));
         error = request.getParameter(OAuth2Constants.ERROR);
-        if (StringUtils.isNotBlank(request.getHeader(OAuth2Constants.REFERER)) &&
-                request.getHeader(OAuth2Constants.REFERER).contains("rpIFrame")) {
-            /*
-             * Here referer is being checked to identify that this is exactly is an response to the passive request
-             * initiated by the session checking iframe.
-             * In this sample, every error is forwarded back to this page. Thus, this condition is added to treat
-             * error response coming for the passive request separately, and to identify that as a logout scenario.
-             */
-            if (StringUtils.isNotBlank(error)) { // User has been logged out
-                session.invalidate();
-                response.sendRedirect("index.jsp");
-                return;
-            }
+        if (StringUtils.isNotBlank(error)) { // User has been logged out
+            session.invalidate();
+            response.sendRedirect("index.jsp");
+            return;
         }
-        
-        if (request.getParameter(OAuth2Constants.CODE)!=null) {
+    
+        if (request.getParameter(OAuth2Constants.CODE) != null) {
             code = request.getParameter(OAuth2Constants.CODE);
         }
 
@@ -62,6 +58,7 @@
             if (idToken != null) {
                 try {
                     name = SignedJWT.parse(idToken).getJWTClaimsSet().getSubject();
+                    session.setAttribute(OAuth2Constants.NAME, name);
                 } catch (Exception e) {
 //ignore
                 }
@@ -121,14 +118,14 @@
                 <li class="dropdown user-name">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img class="img-circle" height="30" width=30" src="img/Admin-icon.jpg"> <span
-                            class="user-name"><%=name%>@pickup.com<i class="fa fa-chevron-down"></i></span>
+                            class="user-name"><%=(String)session.getAttribute(OAuth2Constants.NAME)%><i class="fa fa-chevron-down"></i></span>
                     </a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a
-                                <%--href='<%=properties.getProperty("OIDC_LOGOUT_ENDPOINT")%>"?post_logout_redirect_uri--%>
-                                <%--="<%=properties.getProperty("post_logout_redirect_uri")%>"&id_token_hint="<%=idToken%>'>--%>
-                                href='<%=properties.getProperty("OIDC_LOGOUT_ENDPOINT")%>'>Logout</a>
-                        </li>                    </ul>
+                                href='<%=properties.getProperty("OIDC_LOGOUT_ENDPOINT")%>?post_logout_redirect_uri=<%=properties.getProperty("post_logout_redirect_uri")%>&id_token_hint=<%=idToken%>&session_state=<%=sessionState%>'>
+                            Logout</a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>
@@ -332,7 +329,7 @@
         <div class="row">
             <div class="col-lg-10 col-lg-offset-1 text-center">
                 <a href="http://wso2.com/" target="_blank" ><img src="img/wso2logo.svg" height="20" /></a>
-                <p class="text-muted">Copyright &copy; WSO2 2017</p>
+                <p class="text-muted">Copyright &copy; WSO2 2018</p>
             </div>
         </div>
     </div>

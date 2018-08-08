@@ -66,6 +66,14 @@ public class SecurityCodeMigrationService {
         }
     }
 
+    public void migrateTenantRange(int startTenantID, int tenantCount) {
+
+        migrateSuperTenantSecurityCodes();
+        for (int tenantId = startTenantID; tenantId < (tenantCount + startTenantID); tenantCount++) {
+            migrateSecurityCodes(IdentityTenantUtil.getTenantDomain(tenantId), tenantId);
+        }
+
+    }
     public void migrateTenants(String[] tenantDomains) {
 
         for (String tenantDomain : tenantDomains) {
@@ -95,23 +103,35 @@ public class SecurityCodeMigrationService {
 
         startTenantFlow(tenantDomain);
         try {
+            IdentityTenantUtil.getTenantRegistryLoader().loadTenantRegistry(tenantId);
             Registry registry = getConfigSystemRegistry(tenantId);
             String[] identityResourcesPaths = getIdentityResourcesPaths(registry);
             if (!isEmpty(identityResourcesPaths)) {
                 for (String path : identityResourcesPaths) {
+                    if (log.isDebugEnabled()) {
+                        log.debug("The resource path :" + path);
+                    }
+
                     Resource currentResource = registry.get(path);
                     if (currentResource instanceof CollectionImpl) {
                         String[] resources = ((CollectionImpl) currentResource).getChildren();
                         for (String resource : resources) {
+                            if (log.isDebugEnabled()) {
+                                log.debug("Migrating resource :" + registry.get(resource) + "of tenant :" + tenantDomain);
+                            }
                             migrateCodeFromRegistryResource(tenantDomain, registry.get(resource));
                         }
                     } else if (currentResource instanceof ResourceImpl) {
                         migrateCodeFromRegistryResource(tenantDomain, currentResource);
                     }
+
                 }
             }
         } catch (RegistryException e) {
-            log.error("Error occurred while migrating codes of tenant: " + tenantDomain, e);
+            log.error("Error occurred while migrating codes of tenant: " + tenantDomain);
+            if (log.isDebugEnabled()) {
+                log.error(e);
+            }
         } finally {
             PrivilegedCarbonContext.endTenantFlow();
         }
@@ -120,6 +140,10 @@ public class SecurityCodeMigrationService {
     private void migrateCodeFromRegistryResource(String tenantDomain, Resource currentResource) {
 
         if (isCodeNotValid(currentResource)) {
+            if (log.isDebugEnabled()) {
+                log.debug("The code in the current resource: " + currentResource + "  is not valid, its Expired for" +
+                        " the tenant domain : " + tenantDomain);
+            }
             return;
         }
         String resourceName = currentResource.getPath().replace(CONFIRMATION_REGISTRY_RESOURCE_PATH, "");

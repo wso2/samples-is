@@ -17,6 +17,7 @@
 -->
 <%@ page import="org.wso2.carbon.identity.sso.agent.bean.LoggedInSessionBean" %>
 <%@ page import="org.wso2.carbon.identity.sso.agent.util.SSOAgentConstants" %>
+<%@ page import="java.util.Iterator" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
@@ -69,11 +70,12 @@
 <%
         return;
     }
-    LoggedInSessionBean sessionBean = (LoggedInSessionBean) session.getAttribute(SSOAgentConstants.SESSION_BEAN_NAME);
-    if(sessionBean != null && sessionBean.getSAML2SSO() != null) {
-        subjectId = sessionBean.getSAML2SSO().getSubjectId();
-        saml2SSOAttributes = sessionBean.getSAML2SSO().getSubjectAttributes();
-    } else {
+   LoggedInSessionBean sessionBean = (LoggedInSessionBean) session.getAttribute(SSOAgentConstants.SESSION_BEAN_NAME);
+    if(sessionBean != null&& sessionBean.getSAML2SSO() != null) {
+            subjectId = sessionBean.getSAML2SSO().getSubjectId();
+            saml2SSOAttributes = sessionBean.getSAML2SSO().getSubjectAttributes();
+
+        } else {
 %>
 <script type="text/javascript">
     location.href = <%=SAML_SSO_URL%>;
@@ -83,7 +85,6 @@
     }
 
 %>
-
 
 
 <body>
@@ -107,7 +108,7 @@
                     </a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href=<%=SAML_LOGOUT_URL%>>Logout</a></li>
-                        <li><a href="profile.jsp">Profile</a></li>
+                        <li><a href="view.jsp">Back</a></li>
                     </ul>
                 </li>
             </ul>
@@ -121,7 +122,6 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h2><strong>PickUp Swift</strong></h2>
-                <p class="lead">A vehicle allocation application used to allocate drivers to vehicles</p>
             </div>
         </div>
         <!-- /.row -->
@@ -133,48 +133,49 @@
     <div class="container">
         <div class="row text-center">
             <div class="col-lg-10 col-lg-offset-1">
-                <h3>Allocations</h3>
+                <h3><%=subjectId%> User Profile</h3>
                 <hr class="small">
-                <div class="row">
-                    <div class="col-md-3 col-sm-6">
-                    </div>
-                    <div class="col-md-3 col-sm-6 tab-nav">
-                        <a href="create.jsp" class="allocations" >
-                            <div class="service-item">
-                                    <span class="fa-stack fa-3x">
-                                    <i class="fa fa-circle fa-stack-2x circle"></i>
-                                    <i class="fa fa-tasks fa-stack-1x text-link"></i>
-                                </span>
-                                <span class="text-gray">
-                                        <h4>
-                                            <strong>Create</strong>
-                                        </h4>
-                                    </br>
-                                    </span>
-                            </div>
-                        </a>
+                <div class="product-box">
+                    <%
+                        if(subjectId != null){
+                    %>
+                    <h6> You are logged in as <%=subjectId%></h6>
+                    <%
+                    }
+                    %>
+                    <br>
+                   <table class="table table-striped">
+                        <%
+                            if(saml2SSOAttributes != null) {
+                        %>
+                       <thead>
+                           <tr>
+                               <th>User Claim</th>
+                               <th>Value</th>
 
-                    </div>
-                    <div class="col-md-3 col-sm-6 tab-nav">
-                        <a href="view.jsp" class="allocations active">
-                            <div class="service-item">
-                                    <span class="fa-stack fa-3x">
-                                    <i class="fa fa-circle fa-stack-2x circle custom-primary-color"></i>
-                                    <i class="fa fa-eye fa-stack-1x text-link"></i>
-                                </span>
-                                <span class="text-gray">
-                                        <h4>
-                                            <strong>View</strong>
-                                        </h4>
-                                    <!--<h5>List Allocations</h5>-->
-                                    </br>
-                                    </span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                    </div>
-                </div>
+                           </tr>
+                       </thead>
+                       <tbody>
+
+                       <%
+                                for (Map.Entry<String, String> entry:saml2SSOAttributes.entrySet()) {
+                        %>
+                        <tr>
+                            <td><%=entry.getKey()%></td>
+                            <td><%=entry.getValue()%></td>
+                        </tr>
+                        <%
+                            }
+                        }
+                        %>
+
+                       </tbody>
+                    </table>
+                  <!--
+
+
+                   token
+              -->  </div>
                 <!-- /.row (nested) -->
             </div>
             <!-- /.col-lg-10 -->
@@ -184,62 +185,6 @@
     <!-- /.container -->
 </section>
 
-<!-- View Section -->
-<section id="view" class="view content">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-10 col-lg-offset-1">
-                <!--<hr class="custom-hr">-->
-                <h4 class="text-center">View Allocations</h4>
-                </br>
-                <div class="table-responsive">
-                    <table class="table table-bordered" width="100%" id="dataTable" cellspacing="0">
-                        <thead>
-                        <tr>
-                            <th>Driver</th>
-                            <th>Vehicle</th>
-                            <th>Vehicle No</th>
-                            <th>Date</th>
-                            <th>Time</th>
-                            <th>Period</th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>Tiger Nixon</td>
-                            <td>Car</td>
-                            <td>CN-1234</td>
-                            <td>2017/04/15</td>
-                            <td>07:00</td>
-                            <td>7 days</td>
-                            <td><i class="fa fa-trash"></i></td>
-                        </tr>
-                        <tr>
-                            <td>Garrett Winters</td>
-                            <td>Van</td>
-                            <td>KC-3543</td>
-                            <td>2017/04/25</td>
-                            <td>02:30</td>
-                            <td>5 days</td>
-                            <td><i class="fa fa-trash"></i></td>
-                        </tr>
-                        <tr>
-                            <td>Ashton Cox</td>
-                            <td>Car</td>
-                            <td>CA-8877</td>
-                            <td>2017/01/12</td>
-                            <td>05:30</td>
-                            <td>10 days</td>
-                            <td><i class="fa fa-trash"></i></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
 <!-- Footer -->
 <footer id="footer">

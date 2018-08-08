@@ -179,7 +179,7 @@
                 </xsd:idpProperties>
                 <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
                     <xsd:name>SelfRegistration.LockOnCreation</xsd:name>
-                    <xsd:value>false</xsd:value>
+                    <xsd:value>true</xsd:value>
                 </xsd:idpProperties>
                 <xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
                     <xsd:name>SelfRegistration.Notification.InternallyManage</xsd:name>

@@ -42,6 +42,7 @@ Alternatively, you can install the Quick Start Guide from the source using the f
 * [Java](http://www.oracle.com/technetwork/java/javase/downloads)
 * [WSO2 Identity Server](https://wso2.com/identity-and-access-management)
 * [Apache Tomcat server](https://tomcat.apache.org/download-80.cgi)
+* [cURL](https://curl.haxx.se/download.html)
 
 #### Building the source
 

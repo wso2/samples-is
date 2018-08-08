@@ -124,8 +124,8 @@
                 <!--<li><button class="btn btn-dark custom-primary-swift btn-login"><strong>Login</strong></button></li>-->
                 <li class="dropdown user-name">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img class="img-circle" height="30" width=30" src="img/Admin-icon.jpg"> <span
-                            class="user-name"><%=name%>@pickmybook <i class="fa fa-chevron-down"></i></span>
+                        <img class="img-circle" height="30" width="30" src="img/Admin-icon.jpg"> <span
+                            class="user-name"><%=name%><i class="fa fa-chevron-down"></i></span>
                     </a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a
@@ -391,7 +391,7 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <a href="http://wso2.com/" target="_blank"><img src="img/wso2logo.svg" height="20"/></a>
-                <p>Copyright &copy; <a href="http://wso2.com/" target="_blank">WSO2</a> 2017</p>
+                <p>Copyright &copy; <a href="http://wso2.com/" target="_blank">WSO2</a> 2018</p>
             </div>
         </div>
     </div>

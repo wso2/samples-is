@@ -32,7 +32,10 @@ import org.wso2.carbon.user.core.service.RealmService;
 import static org.apache.commons.lang.StringUtils.isBlank;
 import static org.apache.commons.lang.StringUtils.isNotBlank;
 import static org.wso2.carbon.identity.securitycode.migration.MigrationConstants.SYSTEM_PROPERTY_MIGRATE;
-import static org.wso2.carbon.identity.securitycode.migration.MigrationConstants.SYSTEM_PROPERTY_TENANTS;
+import static org.wso2.carbon.identity.securitycode.migration.MigrationConstants.SYSTEM_PROPERTY_MIGRATE_TENANTS;
+import static org.wso2.carbon.identity.securitycode.migration.MigrationConstants.SYSTEM_PROPERTY_MIGRATE_TENANT_RANGE;
+import static org.wso2.carbon.identity.securitycode.migration.MigrationConstants.SYSTEM_PROPERTY_START_TENANT;
+import static org.wso2.carbon.identity.securitycode.migration.MigrationConstants.SYSTEM_PROPERTY_TENANT_COUNT;
 import static org.wso2.carbon.identity.securitycode.migration.MigrationConstants.TENANT_DELIMITER;
 
 @Component(
@@ -52,26 +55,40 @@ public class IdentityCodeMigrationServiceComponent {
 
         SecurityCodeMigrationService securityCodeMigrationService = new SecurityCodeMigrationService();
         String migrateCode = System.getProperty(SYSTEM_PROPERTY_MIGRATE);
-        String tenantToMigrate = System.getProperty(SYSTEM_PROPERTY_TENANTS);
+        String tenantsToMigrate = System.getProperty(SYSTEM_PROPERTY_MIGRATE_TENANTS);
+        String tenantRangeMigrate = System.getProperty(SYSTEM_PROPERTY_MIGRATE_TENANT_RANGE);
+        String startTenant = System.getProperty(SYSTEM_PROPERTY_START_TENANT);
+        String tenantCount = System.getProperty(SYSTEM_PROPERTY_TENANT_COUNT);
 
         if (log.isDebugEnabled()) {
-            log.debug("migrateCode: " + migrateCode);
-            log.debug("Tenant to Migrate: " + tenantToMigrate);
+            log.debug("MigrateCode: " + migrateCode);
+            log.debug("All tenant Migrate: " + tenantsToMigrate);
+            log.debug ("Tenant range Migrate: " + tenantRangeMigrate);
+            log.debug ("Tenant Start Count: " + tenantCount);
         }
 
         try {
-            if (migrateAll(migrateCode, tenantToMigrate)) {
-                if (log.isDebugEnabled()) {
-                    log.debug("Migrating security codes of all tenants started");
-                }
-                securityCodeMigrationService.migrateAllTenants();
-
-                if (log.isDebugEnabled()) {
-                    log.debug("Migrating security codes of all tenants ended");
-                }
-            } else if (Boolean.parseBoolean(migrateCode) && isNotBlank(tenantToMigrate)) {
-                String[] tenantDomains = tenantToMigrate.split(TENANT_DELIMITER);
+            if (Boolean.parseBoolean(migrateCode) && isNotBlank(tenantsToMigrate)) {
+                String[] tenantDomains = tenantsToMigrate.split(TENANT_DELIMITER);
                 securityCodeMigrationService.migrateTenants(tenantDomains);
+            } else if (Boolean.parseBoolean(migrateCode)) {
+                if (Boolean.parseBoolean(tenantRangeMigrate)) {
+                    if (log.isDebugEnabled()) {
+                        log.debug("Migrating security codes of a given tenant range started");
+                    }
+                    securityCodeMigrationService.migrateTenantRange(Integer.parseInt(startTenant),
+                            Integer.parseInt(tenantCount));
+
+                } else if(isBlank(tenantsToMigrate)) {
+                    if (log.isDebugEnabled()) {
+                        log.debug("Migrating security codes of all tenants started");
+                    }
+                    securityCodeMigrationService.migrateAllTenants();
+                    if (log.isDebugEnabled()) {
+                        log.debug("Migrating security codes of all tenants ended");
+                    }
+                }
+
             }
         } catch (Throwable throwable) {
             log.error(throwable);
@@ -140,9 +157,9 @@ public class IdentityCodeMigrationServiceComponent {
          is started */
     }
 
-    private boolean migrateAll(String migrateCode, String tenantToMigrate) {
+    private boolean migrateAll(String migrateCode, String tenantsToMigrate) {
 
-        return Boolean.parseBoolean(migrateCode) && isBlank(tenantToMigrate);
+        return Boolean.parseBoolean(migrateCode) && isBlank(tenantsToMigrate);
     }
 }
 

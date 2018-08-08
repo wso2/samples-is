@@ -218,19 +218,19 @@ footer {
     padding-top: 50px
 }
 #login .form-wrap {
-    width: 30%;
+    width: 40%;
     margin: 0 auto;
     background: #eee;
     padding: 20px;
     border-radius: 5px;
+    padding-top: 20px;
 }
-#login h1 {
-    color: #025678;
-    font-size: 18px;
-    text-align: center;
-    font-weight: bold;
-    padding-bottom: 20px;
+.login-text {
+    font-size: 30px;
+    color: #444;
+    vertical-align: middle;
 }
+
 #login .form-group {
     margin-bottom: 25px;
 }
@@ -289,6 +289,22 @@ footer {
 .btn-custom:hover,
 .btn-custom:focus {
     color: #fff;
+}
+
+/*    --------------------------------------------------
+    :: Profile section
+	-------------------------------------------------- */
+
+.product-box{
+    background-repeat:repeat-x;
+    background-position:0 0;
+    border:solid 1px #ececec;
+    background-color:#fff;
+    margin-top:10px;
+    padding:1em;
+    margin-bottom:40px;
+    color:#535353;
+    line-height:30px;
 }
 
 /*    --------------------------------------------------

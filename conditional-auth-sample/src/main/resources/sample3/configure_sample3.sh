@@ -16,8 +16,8 @@
 #  limitations under the License.
 
 configure_sample3() {
-    configure_service_provider_for_samlsso dispatch saml2-web-app-dispatch.com http://localhost.com:8080/saml2-web-app-dispatch.com/consumer admin admin "${COMMON_HOME}/configs/sso-config.xml"
-    configure_service_provider_for_samlsso swift saml2-web-app-swift.com http://localhost.com:8080/saml2-web-app-swift.com/consumer admin admin "${COMMON_HOME}/configs/sso-config.xml"
+    configure_service_provider_for_samlsso dispatch saml2-web-app-dispatch.com http://localhost:8080/saml2-web-app-dispatch.com/consumer admin admin "${COMMON_HOME}/configs/sso-config.xml"
+    configure_service_provider_for_samlsso swift saml2-web-app-swift.com http://localhost:8080/saml2-web-app-swift.com/consumer admin admin "${COMMON_HOME}/configs/sso-config.xml"
     configure_service_provider dispatch admin admin "${COMMON_HOME}/configs/get-sp.xml" "${SAMPLE_HOME}/configs/update-sp.xml"
     configure_service_provider swift admin admin "${COMMON_HOME}/configs/get-sp.xml" "${SAMPLE_HOME}/configs/update-sp.xml"
     add_user_claim admin admin jimmy http://wso2.org/claims/dob "2005-05-02" "${SAMPLE_HOME}/configs/set-claim.xml"
