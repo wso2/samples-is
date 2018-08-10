@@ -70,8 +70,10 @@
 <%
         return;
     }
-    SSOAgentConfig ssoAgentConfig = (SSOAgentConfig)getServletContext().getAttribute(SSOAgentConstants.CONFIG_BEAN_NAME);
-    LoggedInSessionBean sessionBean = (LoggedInSessionBean) session.getAttribute(SSOAgentConstants.SESSION_BEAN_NAME);
+    SSOAgentConfig ssoAgentConfig = (SSOAgentConfig)getServletContext()
+            .getAttribute(SSOAgentConstants.CONFIG_BEAN_NAME);
+    LoggedInSessionBean sessionBean = (LoggedInSessionBean) session
+            .getAttribute(SSOAgentConstants.SESSION_BEAN_NAME);
     LoggedInSessionBean.AccessTokenResponseBean accessTokenResponseBean = null;
     if(sessionBean != null && sessionBean.getSAML2SSO() != null) {
         subjectId = sessionBean.getSAML2SSO().getSubjectId();
@@ -177,17 +179,16 @@
                     <!-- SAML Bearer grant section -->
                     <%
                         if (subjectId != null) {
-
                             if(accessTokenResponseBean != null) {
                     %>
                     <div>
                     <h3><b>Your OAuth2 Access Token details</b></h3>
-                        <h7>Access Token</h7>
+                        <h6>Access Token</h6>
                         <div class="well">
                             <div class="access-token"> <%=accessTokenResponseBean.getAccessToken()%> </div>
                         </div>
                         <br/>
-                        <h7 class="token-header">Refress Token</h7>
+                        <h6 class="token-header">Refress Token</h6>
                         <div class="well">
                             <div class="access-token"> <%=accessTokenResponseBean.getRefreshToken()%></div>
                         </div>
@@ -228,7 +229,6 @@
         </div>
     </div>
 </footer>
-
 
 <!-- jQuery -->
 <script src="js/jquery.js"></script>

@@ -33,12 +33,10 @@ public class ConsumerServlet extends HttpServlet {
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException {
         // Authentication and Authorization successful redirect to the required page.
-        response.sendRedirect(request.getContextPath() + "/view.jsp");
-       /* if(request.getRequestURI().endsWith("/samlsso") || request.getRequestURI().endsWith("/openid") ||
-                request.getRequestURI().endsWith("/token")){
-            request.getRequestDispatcher("view.jsp").forward(request,response);
-        } else if (request.getRequestURI().endsWith("/logout")){
-            request.getRequestDispatcher("index.jsp").forward(request,response);
-        }*/
+        if(request.getRequestURI().endsWith("/token")) {
+            request.getRequestDispatcher("profile.jsp").forward(request,response);
+        } else {
+            response.sendRedirect(request.getContextPath() + "/view.jsp");
+        }
     }
 }
