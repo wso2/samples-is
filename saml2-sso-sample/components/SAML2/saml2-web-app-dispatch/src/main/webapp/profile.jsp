@@ -16,9 +16,8 @@
 ~ under the License.
 -->
 <%@ page import="org.wso2.carbon.identity.sso.agent.bean.LoggedInSessionBean" %>
+<%@ page import="org.wso2.carbon.identity.sso.agent.bean.SSOAgentConfig" %>
 <%@ page import="org.wso2.carbon.identity.sso.agent.util.SSOAgentConstants" %>
-<%@ page import="java.util.Iterator" %>
-<%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -32,7 +31,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Swift</title>
+    <title>Dispatch</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -56,6 +55,7 @@
 <%
     String subjectId = null;
     Map<String, String> saml2SSOAttributes = null;
+
     final String SAML_SSO_URL = "samlsso";
     final String SAML_LOGOUT_URL = "logout";
     // if web-browser session is there but no session bean set,
@@ -70,10 +70,13 @@
 <%
         return;
     }
+    SSOAgentConfig ssoAgentConfig = (SSOAgentConfig)getServletContext().getAttribute(SSOAgentConstants.CONFIG_BEAN_NAME);
     LoggedInSessionBean sessionBean = (LoggedInSessionBean) session.getAttribute(SSOAgentConstants.SESSION_BEAN_NAME);
+    LoggedInSessionBean.AccessTokenResponseBean accessTokenResponseBean = null;
     if(sessionBean != null && sessionBean.getSAML2SSO() != null) {
-            subjectId = sessionBean.getSAML2SSO().getSubjectId();
-            saml2SSOAttributes = sessionBean.getSAML2SSO().getSubjectAttributes();
+        subjectId = sessionBean.getSAML2SSO().getSubjectId();
+        saml2SSOAttributes = sessionBean.getSAML2SSO().getSubjectAttributes();
+        accessTokenResponseBean = sessionBean.getSAML2SSO().getAccessTokenResponseBean();
     } else {
 %>
 <script type="text/javascript">
@@ -108,6 +111,7 @@
                     </a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href=<%=SAML_LOGOUT_URL%>>Logout</a></li>
+                        <li><a href="overview.jsp">Back</a></li>
                     </ul>
                 </li>
             </ul>
@@ -120,7 +124,7 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h2><strong>PickUp Dispatch</strong></h2>
-                <p class="lead">Management Application</p>
+                <p class="lead"><%=subjectId%> User Profile</p>
             </div>
         </div>
         <!-- /.row -->
@@ -132,7 +136,6 @@
     <div class="container">
         <div class="row text-center">
             <div class="col-lg-10 col-lg-offset-1">
-                <h3><%=subjectId%> User Profile</h3>
                 <hr class="small">
                 <div class="product-box">
                     <%
@@ -143,10 +146,11 @@
                         }
                     %>
                     <br>
+                    <%
+                        if(saml2SSOAttributes != null && !saml2SSOAttributes.isEmpty()) {
+                    %>
                     <table class="table table-striped">
-                        <%
-                            if(saml2SSOAttributes != null) {
-                        %>
+
                         <thead>
                         <tr>
                             <th>User Claim</th>
@@ -163,18 +167,47 @@
                             <td><%=entry.getKey()%></td>
                             <td><%=entry.getValue()%></td>
                         </tr>
+
                         <%
                                 }
                             }
                         %>
-
                         </tbody>
                     </table>
-                    <!--
+                    <!-- SAML Bearer grant section -->
+                    <%
+                        if (subjectId != null) {
 
+                            if(accessTokenResponseBean != null) {
+                    %>
+                    <div>
+                    <h3><b>Your OAuth2 Access Token details</b></h3>
+                        <h7>Access Token</h7>
+                        <div class="well">
+                            <div class="access-token"> <%=accessTokenResponseBean.getAccessToken()%> </div>
+                        </div>
+                        <br/>
+                        <h7 class="token-header">Refress Token</h7>
+                        <div class="well">
+                            <div class="access-token"> <%=accessTokenResponseBean.getRefreshToken()%></div>
+                        </div>
+                        <br/>
+                    <div>Token Type: <%=accessTokenResponseBean.getTokenType()%> <br/></div>
+                    <div>Expiry In: <%=accessTokenResponseBean.getExpiresIn()%> <br/></div>
+                    </div>
+                    <%
+                            } else {
+                                if(ssoAgentConfig.isOAuth2SAML2GrantEnabled()){
+                    %>
+                    <a href="token" class="token-link">Request OAuth2 Access Token</a><br/>
+                    <%
 
-                     token
-                -->  </div>
+                                }
+                            }
+                        }
+                    %>
+
+                </div>
                 <!-- /.row (nested) -->
             </div>
             <!-- /.col-lg-10 -->
