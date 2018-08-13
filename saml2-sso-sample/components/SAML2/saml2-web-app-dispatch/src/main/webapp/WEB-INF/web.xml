@@ -40,6 +40,14 @@
     </filter-mapping>
     <filter-mapping>
         <filter-name>SSOAgentFilter</filter-name>
+        <url-pattern>/openid</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>SSOAgentFilter</filter-name>
+        <url-pattern>/token</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>SSOAgentFilter</filter-name>
         <url-pattern>*.jsp</url-pattern>
     </filter-mapping>
 
@@ -60,6 +68,10 @@
     <servlet-mapping>
         <servlet-name>ConsumerServlet</servlet-name>
         <url-pattern>/consumer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConsumerServlet</servlet-name>
+        <url-pattern>/token</url-pattern>
     </servlet-mapping>
 
     <listener>

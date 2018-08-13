@@ -153,7 +153,6 @@ footer {
 
 
 #allocations a{
-    color:#fff;
     text-decoration: none;
 }
 
@@ -298,13 +297,24 @@ footer {
 .product-box{
     background-repeat:repeat-x;
     background-position:0 0;
-    border:solid 1px #ececec;
     background-color:#fff;
     margin-top:10px;
     padding:1em;
     margin-bottom:40px;
     color:#535353;
     line-height:30px;
+}
+
+.token-link a {
+    color: navy;
+}
+
+.access-token {
+    color: #337ab7;
+}
+/* profile page */
+.token-header {
+    color: #656565;
 }
 
 /*    --------------------------------------------------
