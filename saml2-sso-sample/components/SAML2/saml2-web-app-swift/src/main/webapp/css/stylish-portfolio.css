@@ -153,7 +153,6 @@ footer {
 
 
 #allocations a{
-    color:#fff;
     text-decoration: none;
 }
 
@@ -298,13 +297,24 @@ footer {
 .product-box{
     background-repeat:repeat-x;
     background-position:0 0;
-    border:solid 1px #ececec;
     background-color:#fff;
     margin-top:10px;
     padding:1em;
     margin-bottom:40px;
     color:#535353;
     line-height:30px;
+}
+
+.token-link a{
+    color: #EDB500;
+}
+
+.access-token {
+    color: #EDB500;
+}
+/* profile page */
+.token-header {
+    color: #656565;
 }
 
 /*    --------------------------------------------------
@@ -379,7 +389,7 @@ div.bhoechie-tab-menu div.list-group>a.active:after{
     border-left: 0;
     border-bottom: 13px solid transparent;
     border-top: 13px solid transparent;
-    border-left: 10px solid #598292;
+    border-left: 10px solid #EDB500;
 }
 
 div.bhoechie-tab-content{
@@ -394,13 +404,13 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active){
 }
 
 div.bhoechie-tab-menu .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover{
-    border-color: #598292;
+    border-color: #EDB500;
 }
 
 .navbar-custom-swift{
     margin-bottom: 0px;
     border-radius: 0px;
-    border-bottom: 4px solid #025678;
+    border-bottom: 4px solid #EDB500;
 }
 .navbar-custom-swift .navbar-nav>li>a {
     color: #fff;
@@ -408,7 +418,7 @@ div.bhoechie-tab-menu .list-group-item.active, .list-group-item.active:focus, .l
 }
 
 .custom-primary-swift {
-    background: #025678;
+    background: #EDB500;
 }
 
 .custom-hr {
