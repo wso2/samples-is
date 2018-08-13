@@ -67,46 +67,30 @@
   <!-- Bootstrap Core JavaScript -->
   <script src="libs/bootstrap_3.3.7/js/bootstrap.min.js"></script>
   <script src="./js/bundle.js"></script>
+  <script src="./js/app.js"></script>
   <script type="text/javascript">
 
     var application = null;
-    var init = function () {
-      application = new App({
-    'authorizeUrl': 'https://localhost:9443/oauth2/authorize',
-    'tokenUrl': 'https://localhost:9443/oauth2/token',
-    'revokeUrl': 'https://localhost:9443/oauth2/revoke',
-    'logoutUrl': 'https://localhost:9443/oidc/logout',
-    'userInfoUrl': 'https://localhost:9443/oauth2/userinfo',
-    'flowType': "PKCE",
-    'userStore': "LOCAL_STORAGE",
-    'clientId': '0Ob7gGlPWWoCMx4qrGNSWjRgnMwa',
-    'clientSecret': '4jjZU5nke4iovlq5seaSPVxnqBMa',
-    'redirectUri': 'http://localhost:8080/app/home.html',
-    'scope': 'openid',
-    'postLogoutRedirectUri': 'http://localhost:8080/app/'
-  });
-  application.init();
-      // check for authorization response if available.
-      application.checkForAuthorizationResponse();
-
-      // fetch configuration handler
-      /*var fetchConfiguration = document.querySelector('#fetchConfig');
-      fetchConfiguration.addEventListener('click', function () {
-        application.fetchServiceConfiguration();
-        event.preventDefault();
-      });*/
-
-      // authorize request handler
-      var authorize = document.querySelector('#authorize');
-      authorize.addEventListener('click', function (event) {
-        application.makeAuthorizationRequest();
-        event.preventDefault();
-      });
-    };
     // initialize app when MDL is ready to go.
     window.addEventListener('load', function () {
       console.log('Initializing App.');
-      init();
+      application = init();
+    });
+
+    // fetch configuration handler
+    // This is for discovery route implementation. Which will use the discoveryUri field in the application.
+    // Uncomment if you are using the discovery route to get the WSO2-IAM configurations for the WSP2-IAM Server.
+    /*var fetchConfiguration = document.querySelector('#fetchConfig');
+    fetchConfiguration.addEventListener('click', function () {
+      application.fetchServiceConfiguration();
+      event.preventDefault();
+    });*/
+
+    // authorize request handler
+    var authorize = document.querySelector('#authorize');
+    authorize.addEventListener('click', function (event) {
+      application.makeAuthorizationRequest();
+      event.preventDefault();
     });
   </script>
 </body>
