@@ -36,10 +36,11 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <div class="form-wrap">
-                    <img src="img/logo.png" class="center-block" height="60"/>
+                <div class="form-wrap" style="text-align: center;">
+                    <img src="img/logo.png" height style="max-height: 65px;"/>
+                    <span class="login-text">Swift</span>
                     <!--<h1 class="pickup-primary-color">Log in with your email account</h1>-->
-                    </br>
+                    <br/>
                     <form role="form" action="oauth2-authorize-user.jsp?reset=true" method="post" id="login-form"
                           autocomplete="off">
                         <input type="submit" id="btn-login" class="btn btn-custom btn-lg btn-block pickup-primary-bg"

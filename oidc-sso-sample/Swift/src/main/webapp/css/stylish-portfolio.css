@@ -275,6 +275,11 @@ footer {
     text-align: center;
     display: block;
 }
+.login-text {
+    font-size: 30px;
+    color: #444;
+    vertical-align: middle;
+}
 
 /*    --------------------------------------------------
 	:: Inputs & Buttons
@@ -430,10 +435,10 @@ div.bhoechie-tab-menu .list-group-item.active, .list-group-item.active:focus, .l
 }
 
 .pickup-primary-bg{
-    background: #025678;
+    background: #EDB500;
 }
 .pickup-primary-color{
-    color: #025678;
+    color: #EDB500;
 }
 
 /*    --------------------------------------------------
