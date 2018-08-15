@@ -8,6 +8,9 @@
 <%@ page import="com.nimbusds.jwt.SignedJWT" %>
 <%@ page import="java.util.Properties" %>
 <%@ page import="org.wso2.sample.identity.oauth2.SampleContextEventListener" %>
+<%@ page import="com.nimbusds.jwt.ReadOnlyJWTClaimsSet" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.HashMap" %>
 <%
     String code = null;
     String idToken = null;
@@ -16,6 +19,7 @@
     String name = null;
     Properties properties;
     properties = SampleContextEventListener.getProperties();
+    ReadOnlyJWTClaimsSet claimsSet = null;
 
     try {
         sessionState = request.getParameter(OAuth2Constants.SESSION_STATE);
@@ -28,20 +32,20 @@
         session.setAttribute(OAuth2Constants.OAUTH2_GRANT_TYPE, properties.getProperty("authzGrantType"));
         session.setAttribute(OAuth2Constants.CALL_BACK_URL, properties.getProperty("callBackUrl"));
         session.setAttribute(OAuth2Constants.SCOPE, properties.getProperty("scope"));
+
         error = request.getParameter(OAuth2Constants.ERROR);
         if (StringUtils.isNotBlank(error)) { // User has been logged out
             session.invalidate();
             response.sendRedirect("index.jsp");
             return;
         }
-    
         if (request.getParameter(OAuth2Constants.CODE) != null) {
             code = request.getParameter(OAuth2Constants.CODE);
         }
 
         if (code != null) {
-            OAuthClientRequest.TokenRequestBuilder oAuthTokenRequestBuilder = new
-                    OAuthClientRequest.TokenRequestBuilder(properties.getProperty("tokenEndpoint"));
+            OAuthClientRequest.TokenRequestBuilder oAuthTokenRequestBuilder =
+                    new OAuthClientRequest.TokenRequestBuilder(properties.getProperty("tokenEndpoint"));
 
             OAuthClientRequest accessRequest = oAuthTokenRequestBuilder.setGrantType(GrantType.AUTHORIZATION_CODE)
                     .setClientId(properties.getProperty("consumerKey"))
@@ -54,10 +58,12 @@
             OAuthClient oAuthClient = new OAuthClient(new URLConnectionClient());
 
             OAuthClientResponse oAuthResponse = oAuthClient.accessToken(accessRequest);
+
             idToken = oAuthResponse.getParam("id_token");
             if (idToken != null) {
                 try {
                     name = SignedJWT.parse(idToken).getJWTClaimsSet().getSubject();
+                    claimsSet= SignedJWT.parse(idToken).getJWTClaimsSet();
                     session.setAttribute(OAuth2Constants.NAME, name);
                 } catch (Exception e) {
 //ignore
@@ -65,9 +71,6 @@
             }
         }
 
-    } catch (Exception e) {
-        error = e.getMessage();
-    }
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -125,6 +128,7 @@
                                 href='<%=properties.getProperty("OIDC_LOGOUT_ENDPOINT")%>?post_logout_redirect_uri=<%=properties.getProperty("post_logout_redirect_uri")%>&id_token_hint=<%=idToken%>&session_state=<%=sessionState%>'>
                             Logout</a>
                         </li>
+                        <li><a href="#profileWindow">Profile</a></li>
                     </ul>
                 </li>
             </ul>
@@ -145,7 +149,7 @@
     </div>
     <!-- /.container -->
 </section>
-
+<div id="welcomeWindow" style="margin-bottom: 100px">
 <section id="allocations" class="services">
     <div class="container">
         <div class="row text-center">
@@ -322,6 +326,47 @@
         </div>
     </div>
 </section>
+</div>
+
+<div id="profileWindow">
+    <section >
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h3>User Profile details</h3> <br/>
+                    <h5>You are loged in as <%=name%></h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-vertical-center">
+                    <%
+                        if (claimsSet != null) {
+                            Map<String, Object> hashmap = new HashMap<>();
+                            hashmap = claimsSet.getCustomClaims();
+
+                    %>
+                    <ul>
+                        <%
+                            for (String key : hashmap.keySet()){
+                                if (!(key.equals("at_hash") || key.equals("c_hash") || key.equals("azp")
+                                        || key.equals("amr") || key.equals("sid"))) {
+                        %>
+
+                        <li><%=key%> : <%=hashmap.get(key).toString()%></li>
+                        <%
+                                }
+                            }
+                        %>
+                    </ul>
+                    <%
+                        }
+                    %>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
 
 <!-- Footer -->
 <footer id="footer">
@@ -420,4 +465,9 @@
 <iframe id="rpIFrame" src="rpIFrame.jsp" frameborder="0" width="0" height="0"></iframe>
 </body>
 
+<%
+    } catch (Exception e) {
+        error = e.getMessage();
+    }
+%>
 </html>
