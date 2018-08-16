@@ -134,7 +134,7 @@ var App = /** @class */ (function () {
             this.pkceTokenRequestHandler.performPKCEAuthorizationCodeRequest(this.configuration, request);
         }
     };
-    App.prototype.checkForAuthorizationResponse = function (authcompletionCallback) {
+    App.prototype.checkForAuthorizationResponse = function (authCompletionCallback, logoutCompletionCallback) {
         var isAuthRequestComplete = false;
         switch (this.configuration.toJson().oauth_flow_type) {
             case types_1.FLOW_TYPE_IMPLICIT:
@@ -151,12 +151,15 @@ var App = /** @class */ (function () {
         }
         if (isAuthRequestComplete) {
             this.authorizationHandler.completeAuthorizationRequestIfPossible();
+            if (authCompletionCallback) {
+                authCompletionCallback();
+            }
         }
         else {
             this.endSessionHandler.completeEndSessionRequestIfPossible();
-        }
-        if (authcompletionCallback) {
-            authcompletionCallback();
+            if (logoutCompletionCallback) {
+                logoutCompletionCallback();
+            }
         }
     };
     App.prototype.makeLogoutRequest = function (state) {

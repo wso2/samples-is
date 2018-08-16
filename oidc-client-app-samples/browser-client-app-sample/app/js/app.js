@@ -31,20 +31,20 @@ var appConfigs = {
   'userInfoUrl': 'https://localhost:9443/oauth2/userinfo',
   'flowType': "PKCE", // Possible values are IMPLICIT and PKCE, default is IMPLICIT
   'userStore': "LOCAL_STORAGE", // Possible values are LOCAL_STORAGE and SESSION_STORAGE, default is LOCAL_STORAGE and SESSION_STORAGE is not not supported yet
-  'clientId': '<client ID from WSO2-IAM Server SP configurations>', // Get this value from WSO2-IAM Server Service Provider (SP) definition
-  'clientSecret': '<client secret from WSO2-IAM Server SP configurations>', // Get this value from WSO2-IAM Server Service Provider (SP) definition
-  'redirectUri': 'http://localhost:8080/app/home.html', // Specify the redirect URL to land back after login redirect to WSO2-IAM Server login page
+  'clientId': '0Ob7gGlPWWoCMx4qrGNSWjRgnMwa', // Get this value from WSO2-IAM Server Service Provider (SP) definition
+  'clientSecret': '4jjZU5nke4iovlq5seaSPVxnqBMa', // Get this value from WSO2-IAM Server Service Provider (SP) definition
+  'redirectUri': 'http://localhost:8080/app/', // Specify the redirect URL to land back after login redirect to WSO2-IAM Server login page
   'scope': 'openid', // This is to specify that you are using openID Connect
   'postLogoutRedirectUri': 'http://localhost:8080/app/' // Specify the post logout redirect URL to land back after logout redirect to WSO2-IAM Server logout page
 };
 
-var init = function () {
+var init = function (authCompletionCallback, logoutCompletionCallback) {
   var application = new App(appConfigs);
 
   application.init();
 
   // check for authorization response if available.
-  application.checkForAuthorizationResponse();
+  application.checkForAuthorizationResponse(authCompletionCallback, logoutCompletionCallback);
 
   return application;
 }
