@@ -61,20 +61,20 @@ class LogInViewController: UIViewController {
         
         // Read from dictionary content
         if let configFileDictionaryContent = configFileDictionary {
-            clientId = configFileDictionaryContent.object(forKey: Constants.OAuthReqConstants.kClientIdPropKey
-                ) as? String
-            issuerURLStr = configFileDictionaryContent.object(forKey: Constants.OAuthReqConstants.kIssuerIdPropKey
-                ) as? String
-            redirectURLStr = configFileDictionaryContent.object(forKey: Constants.OAuthReqConstants.kRedirectURLPropKey
-                ) as? String
-            authURLStr = configFileDictionaryContent.object(forKey: Constants.OAuthReqConstants.kAuthURLPropKey
-                ) as? String
-            tokenURLStr = configFileDictionaryContent.object(forKey: Constants.OAuthReqConstants.kTokenURLPropKey
-                ) as? String
-            userInfoURLStr = configFileDictionaryContent.object(forKey: Constants.OAuthReqConstants.kUserInfoURLPropKey
-                ) as? String
-            logoutURLStr = configFileDictionaryContent.object(forKey: Constants.OAuthReqConstants.kLogoutURLPropKey
-                ) as? String
+            clientId = configFileDictionaryContent.object(forKey:
+                Constants.OAuthReqConstants.kClientIdPropKey) as? String
+            issuerURLStr = configFileDictionaryContent.object(forKey:
+                Constants.OAuthReqConstants.kIssuerIdPropKey) as? String
+            redirectURLStr = configFileDictionaryContent.object(forKey:
+                Constants.OAuthReqConstants.kRedirectURLPropKey) as? String
+            authURLStr = configFileDictionaryContent.object(forKey:
+                Constants.OAuthReqConstants.kAuthURLPropKey) as? String
+            tokenURLStr = configFileDictionaryContent.object(forKey:
+                Constants.OAuthReqConstants.kTokenURLPropKey) as? String
+            userInfoURLStr = configFileDictionaryContent.object(forKey:
+                Constants.OAuthReqConstants.kUserInfoURLPropKey) as? String
+            logoutURLStr = configFileDictionaryContent.object(forKey:
+                Constants.OAuthReqConstants.kLogoutURLPropKey) as? String
         }
         
     }

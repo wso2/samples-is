@@ -63,14 +63,14 @@ class ProfileViewController: UIViewController, SFSafariViewControllerDelegate {
         
         // Read from dictionary content
         if let configFileDictionaryContent = configFileDictionary {
-            authURLStr = configFileDictionaryContent.object(forKey: Constants.OAuthReqConstants.kAuthURLPropKey
-                ) as? String
-            tokenURLStr = configFileDictionaryContent.object(forKey: Constants.OAuthReqConstants.kTokenURLPropKey
-                ) as? String
-            logoutURLStr = configFileDictionaryContent.object(forKey: Constants.OAuthReqConstants.kLogoutURLPropKey
-                ) as? String
-            redirectURLStr = configFileDictionaryContent.object(forKey: Constants.OAuthReqConstants.kRedirectURLPropKey
-                ) as? String
+            authURLStr = configFileDictionaryContent.object(forKey:
+                Constants.OAuthReqConstants.kAuthURLPropKey) as? String
+            tokenURLStr = configFileDictionaryContent.object(forKey:
+                Constants.OAuthReqConstants.kTokenURLPropKey) as? String
+            logoutURLStr = configFileDictionaryContent.object(forKey:
+                Constants.OAuthReqConstants.kLogoutURLPropKey) as? String
+            redirectURLStr = configFileDictionaryContent.object(forKey:
+                Constants.OAuthReqConstants.kRedirectURLPropKey) as? String
         }
         
     }
@@ -83,9 +83,11 @@ class ProfileViewController: UIViewController, SFSafariViewControllerDelegate {
     // MARK: Actions
     @IBAction func signOutButton(_ sender: UIButton) {
         let refreshAlert = UIAlertController(title: NSLocalizedString("info.alert.signout.title", comment: "Sign out"),
-                                             message: NSLocalizedString("info.alert.signout.message", comment:
-                                                "Are you sure you want to logout? This will clear all your data"
-                                                    + "on this device."), preferredStyle: UIAlertControllerStyle.alert)
+                                             message: NSLocalizedString("info.alert.signout.message",
+                                                                        comment: "Are you sure you want to logout?" +
+                                                                            " This will clear all your data"
+                                                                            + "on this device."),
+                                             preferredStyle: UIAlertControllerStyle.alert)
         
         refreshAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
             self.logOutUser()
@@ -147,7 +149,8 @@ class ProfileViewController: UIViewController, SFSafariViewControllerDelegate {
             let postLogoutRedirURL = URL(string: self.redirectURLStr!)
             
             let config = OIDServiceConfiguration(authorizationEndpoint: authURL!, tokenEndpoint: tokenURL!,
-                                                 issuer: nil, registrationEndpoint: nil, endSessionEndpoint: logoutURL)
+                                                 issuer: nil, registrationEndpoint: nil,
+                                                 endSessionEndpoint: logoutURL)
             
             let logoutRequest = OIDEndSessionRequest(configuration: config, idTokenHint: currentIdToken!,
                                                      postLogoutRedirectURL: postLogoutRedirURL!,
