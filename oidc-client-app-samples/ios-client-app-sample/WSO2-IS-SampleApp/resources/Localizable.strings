@@ -1,0 +1,42 @@
+/*
+ * Copyright (c) 2018, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ *
+ * WSO2 Inc. licenses this file to you under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+// Error messages.
+"error.auth.failed" = "Authorization failed.";
+"error.fetch.freshtokens" = "Error fetching fresh tokens.";
+"error.fetch.accesstoken" = "Error retrieving access token.";
+"error.fetch.idtoken" = "Error retrieving ID token.";
+"error.http.request.fail" = "HTTP request failed.";
+"error.json.serialization" = "JSON Serialization Error.";
+"error.authorization" = "Authorization Error.";
+"error.userinfo.fetch" = "Couldn't fetch user information.";
+"error.login.fail" = "Could not log you in";
+
+// Info messages
+"info.accesstoken.refreshed" = "Access token was refreshed automatically.";
+"info.accesstoken.valid" = "Access token was valid and not updated.";
+"info.idtoken.valid" = "ID token was valid and not updated.";
+"info.idtoken.refreshed" = "ID token was refreshed automatically.";
+"info.http.response.empty" = "HTTP response data is empty.";
+"info.nonhttp.response" = "Non-HTTP response.";
+"info.information.fetch.success" = "Information retrieval success.";
+"info.alert.signout.title" = "Sign out";
+"info.alert.signout.message" = "Are you sure you want to logout? This will clear all your data on this device.";
+"info.external.logout.notify.title" = "Logout from WSO2";
+"info.external.logout.notify.message" = "You will be redirected to the log out page of WSO2";
+"info.alert.signin.fail.title" = "Sign in failed";
