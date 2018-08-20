@@ -12,6 +12,7 @@ target 'WSO2-IS-SampleApp' do
     # Pods for testing
   end
   
+  # Currently using the 'dev-logout' branch since the master branch does not support the logout functionality.
   pod 'AppAuth', :git => 'https://github.com/openid/AppAuth-iOS.git', :branch => 'dev-logout'
 
 end

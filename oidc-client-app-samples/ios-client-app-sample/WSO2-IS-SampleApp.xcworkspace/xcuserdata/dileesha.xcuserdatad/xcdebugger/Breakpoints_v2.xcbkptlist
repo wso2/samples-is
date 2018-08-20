@@ -698,54 +698,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "WSO2-IS-SampleApp/controllers/LogInViewController.swift"
-            timestampString = "556436402.698239"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
-            landmarkName = "startAuthWithPKCE()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__ObjC.OIDAuthState&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in WSO2_IS_Sample.LogInViewController.startAuthWithPKCE() -&gt; ()"
-                  moduleName = "WSO2 IS Sample"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/dileesha/Documents/Training/IS/iOS-Sample/WSO2-IS-SampleApp/WSO2-IS-SampleApp/controllers/LogInViewController.swift"
-                  timestampString = "556435150.551181"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "128"
-                  endingLineNumber = "128"
-                  offsetFromSymbolStart = "4701">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;WSO2_IS_Sample.UserInfo&gt;) -&gt; () in closure #1 (Swift.Optional&lt;__ObjC.OIDAuthState&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in WSO2_IS_Sample.LogInViewController.startAuthWithPKCE() -&gt; ()"
-                  moduleName = "WSO2 IS Sample"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/dileesha/Documents/Training/IS/iOS-Sample/WSO2-IS-SampleApp/WSO2-IS-SampleApp/controllers/LogInViewController.swift"
-                  timestampString = "556435150.553002"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "129"
-                  endingLineNumber = "129"
-                  offsetFromSymbolStart = "28">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "WSO2-IS-SampleApp/utils/OAuthUtils.swift"
             timestampString = "556436402.698333"
             startingColumnNumber = "9223372036854775807"
@@ -763,7 +715,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WSO2-IS-SampleApp/controllers/ProfileViewController.swift"
-            timestampString = "556436402.698395"
+            timestampString = "556438326.157943"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "120"
@@ -779,7 +731,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WSO2-IS-SampleApp/controllers/ProfileViewController.swift"
-            timestampString = "556436402.6987931"
+            timestampString = "556438326.1582251"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "141"
