@@ -356,7 +356,7 @@ then
 fi
 touch update-idp-${config}.xml
 
-if [ "${config}" == "${selfsignup}" ];
+if [ "$config" = "$selfsignup" ];
 then
 echo " <soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:mgt=\"http://mgt.idp.carbon.wso2.org\"
                   xmlns:xsd=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
@@ -590,7 +590,7 @@ echo " <soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelop
 </soapenv:Envelope>" >> update-idp-${config}.xml
 fi
 
-if [ "${config}" == "${lockon}" ];
+if [ "$config" = "$lockon" ];
 then
 echo " <soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:mgt=\"http://mgt.idp.carbon.wso2.org\"
                   xmlns:xsd=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
@@ -1774,14 +1774,14 @@ tomcat_port=$9
 dispatch="dispatch"
 swift="swift"
 
-if [ "${sp_name}" == "${dispatch}" ];
+if [ "$sp_name" = "$dispatch" ];
 then
     client_id="ZGlzcGF0Y2g="
     secret="ZGlzcGF0Y2gxMjM0"
     cap_spName="Dispatch"
 fi
 
-if [ "${sp_name}" == "${swift}" ];
+if [ "$sp_name" = "$swift" ];
 then
     client_id="c3dpZnRhcHA="
     secret="c3dpZnRhcHAxMjM="
@@ -2475,9 +2475,6 @@ echo "  * Added server details to the server.properties file in the QSG/bin fold
 echo "  * Your WSO2 IS 5.7.0 and Tomcat is running.                                 "
 echo "  * Configure the running domains/ips and ports in server.properties file     "
 echo "   in the QSG/bin folder.                                                     "
-echo "                                                                              "
-echo " Note: Some bash commands will not work unless you run using 'bash ./qsg.sh'  "
-echo "                                                                              "
 echo "                                                                              "
 echo " If okay to continue, Please press 'Y' else press 'N'                         "
 read continueState
