@@ -16,9 +16,8 @@
 ~ under the License.
 -->
 <%@ page import="org.wso2.carbon.identity.sso.agent.bean.LoggedInSessionBean" %>
+<%@ page import="org.wso2.carbon.identity.sso.agent.bean.SSOAgentConfig" %>
 <%@ page import="org.wso2.carbon.identity.sso.agent.util.SSOAgentConstants" %>
-<%@ page import="java.util.Iterator" %>
-<%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -56,6 +55,7 @@
 <%
     String subjectId = null;
     Map<String, String> saml2SSOAttributes = null;
+
     final String SAML_SSO_URL = "samlsso";
     final String SAML_LOGOUT_URL = "logout";
     // if web-browser session is there but no session bean set,
@@ -70,12 +70,16 @@
 <%
         return;
     }
-   LoggedInSessionBean sessionBean = (LoggedInSessionBean) session.getAttribute(SSOAgentConstants.SESSION_BEAN_NAME);
-    if(sessionBean != null&& sessionBean.getSAML2SSO() != null) {
-            subjectId = sessionBean.getSAML2SSO().getSubjectId();
-            saml2SSOAttributes = sessionBean.getSAML2SSO().getSubjectAttributes();
-
-        } else {
+    SSOAgentConfig ssoAgentConfig = (SSOAgentConfig)getServletContext()
+            .getAttribute(SSOAgentConstants.CONFIG_BEAN_NAME);
+    LoggedInSessionBean sessionBean = (LoggedInSessionBean) session
+            .getAttribute(SSOAgentConstants.SESSION_BEAN_NAME);
+    LoggedInSessionBean.AccessTokenResponseBean accessTokenResponseBean = null;
+    if(sessionBean != null && sessionBean.getSAML2SSO() != null) {
+        subjectId = sessionBean.getSAML2SSO().getSubjectId();
+        saml2SSOAttributes = sessionBean.getSAML2SSO().getSubjectAttributes();
+        accessTokenResponseBean = sessionBean.getSAML2SSO().getAccessTokenResponseBean();
+    } else {
 %>
 <script type="text/javascript">
     location.href = <%=SAML_SSO_URL%>;
@@ -87,8 +91,9 @@
 %>
 
 
-<body>
-<nav id="top" class="navbar navbar-inverse navbar-custom">
+<body class="swift">
+
+<nav id="top" class="navbar navbar-inverse navbar-custom-swift">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -96,44 +101,43 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><img src="img/logo.png" height="30" /> Swift</a>
+            <a class="navbar-brand" href="#"><img src="img/logo.png" height="30"/>Swift</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
-                <!--<li><button class="btn btn-dark custom-primary btn-login"><strong>Login</strong></button></li>-->
+                <!--<li><button class="btn btn-dark custom-primary-swift btn-login"><strong>Login</strong></button></li>-->
                 <li class="dropdown user-name">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img class="img-circle" height="30" width=30" src="img/Admin-icon.jpg"/>
-                        <span class="user-name"><%=subjectId%><i class="fa fa-chevron-down"></i></span>
+                        <img class="img-circle" height="30" width=30" src="img/Admin-icon.jpg"> <span
+                            class="user-name"><%=subjectId%><i class="fa fa-chevron-down"></i></span>
                     </a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href=<%=SAML_LOGOUT_URL%>>Logout</a></li>
-                        <li><a href="view.jsp">Back</a></li>
+                        <li><a href="overview.jsp">Back</a></li>
                     </ul>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
-
 <!-- About -->
 <section id="about" class="about">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h2><strong>PickUp Swift</strong></h2>
+                <p class="lead"><%=subjectId%> User Profile</p>
             </div>
         </div>
         <!-- /.row -->
     </div>
     <!-- /.container -->
 </section>
-
+<!--Profile section -->
 <section id="allocations" class="services">
     <div class="container">
         <div class="row text-center">
             <div class="col-lg-10 col-lg-offset-1">
-                <h3><%=subjectId%> User Profile</h3>
                 <hr class="small">
                 <div class="product-box">
                     <%
@@ -141,41 +145,71 @@
                     %>
                     <h6> You are logged in as <%=subjectId%></h6>
                     <%
-                    }
+                        }
                     %>
                     <br>
-                   <table class="table table-striped">
+                    <%
+                        if(saml2SSOAttributes != null && !saml2SSOAttributes.isEmpty()) {
+                    %>
+                    <table class="table table-striped">
+
+                        <thead>
+                        <tr>
+                            <th>User Claim</th>
+                            <th>Value</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+
                         <%
-                            if(saml2SSOAttributes != null) {
-                        %>
-                       <thead>
-                           <tr>
-                               <th>User Claim</th>
-                               <th>Value</th>
-
-                           </tr>
-                       </thead>
-                       <tbody>
-
-                       <%
-                                for (Map.Entry<String, String> entry:saml2SSOAttributes.entrySet()) {
+                            for (Map.Entry<String, String> entry:saml2SSOAttributes.entrySet()) {
                         %>
                         <tr>
                             <td><%=entry.getKey()%></td>
                             <td><%=entry.getValue()%></td>
                         </tr>
+
                         <%
+                                }
+                            }
+                        %>
+                        </tbody>
+                    </table>
+                    <!-- SAML Bearer grant section -->
+                    <%
+                        if (subjectId != null) {
+
+                            if(accessTokenResponseBean != null) {
+                    %>
+                    <div>
+                        <h3><b>Your OAuth2 Access Token details</b></h3>
+                        <h6>Access Token</h6>
+                        <div class="well">
+                            <div class="access-token"> <%=accessTokenResponseBean.getAccessToken()%> </div>
+                        </div>
+                        <br/>
+                        <h6 class="token-header">Refress Token</h6>
+                        <div class="well">
+                            <div class="access-token"> <%=accessTokenResponseBean.getRefreshToken()%></div>
+                        </div>
+                        <br/>
+                        <div>Token Type: <%=accessTokenResponseBean.getTokenType()%> <br/></div>
+                        <div>Expiry In: <%=accessTokenResponseBean.getExpiresIn()%> <br/></div>
+                    </div>
+                    <%
+                    } else {
+                        if(ssoAgentConfig.isOAuth2SAML2GrantEnabled()){
+                    %>
+                    <a href="token" style="color: #ec971f">Request OAuth2 Access Token</a><br/>
+                    <%
+
+                                }
                             }
                         }
-                        %>
+                    %>
 
-                       </tbody>
-                    </table>
-                  <!--
-
-
-                   token
-              -->  </div>
+                </div>
                 <!-- /.row (nested) -->
             </div>
             <!-- /.col-lg-10 -->
@@ -185,18 +219,16 @@
     <!-- /.container -->
 </section>
 
-
-<!-- Footer -->
+<!-- Footer section-->
 <footer id="footer">
     <div class="container">
         <div class="row">
-            <div class="col-lg-10 col-lg-offset-1 text-center">
-                <a href="http://wso2.com/" target="_blank" ><img src="img/wso2logo.svg" height="20" /></a>
-                <p class="text-muted">Copyright &copy; WSO2 2018</p>
+            <div class="col-xs-12">
+                <a href="http://wso2.com/" target="_blank"><img src="img/wso2logo.svg" height="20"/></a>
+                <p>Copyright &copy; <a href="http://wso2.com/" target="_blank">WSO2</a> 2018</p>
             </div>
         </div>
     </div>
-    <a id="to-top" href="#top" class="btn btn-dark btn-lg"><i class="fa fa-chevron-up fa-fw fa-1x"></i></a>
 </footer>
 
 <!-- jQuery -->
@@ -206,5 +238,4 @@
 <script src="js/bootstrap.min.js"></script>
 
 </body>
-
 </html>

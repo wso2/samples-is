@@ -218,12 +218,20 @@ footer {
     padding-top: 50px
 }
 #login .form-wrap {
-    width: 30%;
+    width: 40%;
     margin: 0 auto;
     background: #eee;
     padding: 20px;
     border-radius: 5px;
+    padding-top: 20px;
 }
+
+.login-text {
+    font-size: 30px;
+    color: #444;
+    vertical-align: middle;
+}
+
 #login h1 {
     color: #025678;
     font-size: 18px;

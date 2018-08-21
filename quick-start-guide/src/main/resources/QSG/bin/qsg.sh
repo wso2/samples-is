@@ -17,49 +17,65 @@
 
 configure_sso_saml2 () {
 
+is_host=$1
+is_port=$2
+tomcat_host=$3
+tomcat_port=$4
+
 # Add users in wso2-is.
-add_user admin admin Common
+add_user admin admin Common ${is_host} ${is_port}
 
 # Add service providers in wso2-is
-add_service_provider dispatch Common urn:createApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-add_service_provider swift Common urn:createApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+add_service_provider dispatch Common urn:createApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
+add_service_provider swift Common urn:createApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
 
 # Configure SAML for the service providers   
-configure_saml dispatch 02 urn:addRPServiceProvider https://localhost:9443/services/IdentitySAMLSSOConfigService.IdentitySAMLSSOConfigServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-configure_saml swift 02 urn:addRPServiceProvider https://localhost:9443/services/IdentitySAMLSSOConfigService.IdentitySAMLSSOConfigServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+configure_saml dispatch 02 urn:addRPServiceProvider https://${is_host}:${is_port}/services/IdentitySAMLSSOConfigService.IdentitySAMLSSOConfigServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
+configure_saml swift 02 urn:addRPServiceProvider https://${is_host}:${is_port}/services/IdentitySAMLSSOConfigService.IdentitySAMLSSOConfigServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
 
-create_updateapp_saml dispatch Y2FtZXJvbjpjYW1lcm9uMTIz
-create_updateapp_saml swift Y2FtZXJvbjpjYW1lcm9uMTIz	
+create_updateapp_saml dispatch Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
+create_updateapp_saml swift Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
 	
-update_application_saml dispatch 02 urn:updateApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-update_application_saml swift 02 urn:updateApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+update_application_saml dispatch 02 urn:updateApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
+update_application_saml swift 02 urn:updateApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
 
 return 0;
 }
 
 configure_sso_oidc() {
 
+is_host=$1
+is_port=$2
+tomcat_host=$3
+tomcat_port=$4
+
 # Add users in the wso2-is.
-add_user admin admin Common
+add_user admin admin Common ${is_host} ${is_port}
 
 # Add service providers in the wso2-is 
-add_service_provider dispatch Common urn:createApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-add_service_provider swift Common urn:createApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+add_service_provider dispatch Common urn:createApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
+add_service_provider swift Common urn:createApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
 
 # Configure OIDC for the Service Providers
-configure_oidc dispatch 03 urn:registerOAuthApplicationData https://localhost:9443/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-configure_oidc swift 03 urn:registerOAuthApplicationData https://localhost:9443/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+configure_oidc dispatch 03 urn:registerOAuthApplicationData https://${is_host}:${is_port}/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
+configure_oidc swift 03 urn:registerOAuthApplicationData https://${is_host}:${is_port}/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
 
-create_updateapp_oidc dispatch Y2FtZXJvbjpjYW1lcm9uMTIz ZGlzcGF0Y2g= ZGlzcGF0Y2gxMjM0
-create_updateapp_oidc swift Y2FtZXJvbjpjYW1lcm9uMTIz c3dpZnRhcHA= c3dpZnRhcHAxMjM=
+create_updateapp_oidc dispatch Y2FtZXJvbjpjYW1lcm9uMTIz ZGlzcGF0Y2g= ZGlzcGF0Y2gxMjM0 ${is_host} ${is_port}
+create_updateapp_oidc swift Y2FtZXJvbjpjYW1lcm9uMTIz c3dpZnRhcHA= c3dpZnRhcHAxMjM= ${is_host} ${is_port}
 
-update_application_oidc dispatch 03 urn:updateApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-update_application_oidc swift 03 urn:updateApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+update_application_oidc dispatch 03 urn:updateApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
+update_application_oidc swift 03 urn:updateApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
 
 return 0;
 }
 
 configure_federated_auth() {
+
+is_host=$1
+is_port=$2
+tomcat_host=$3
+tomcat_port=$4
+
 echo
 echo "-------------------------------------------------------------------"
 echo "|                                                                 |"
@@ -81,17 +97,17 @@ read user
 case ${user} in
     [Yy]* )
 
-    add_identity_provider admin admin 05
+    add_identity_provider admin admin 05 ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
 
-    configure_sso_saml2
+    configure_sso_saml2 ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
 
-    create_updateapp_fed_auth dispatch Y2FtZXJvbjpjYW1lcm9uMTIz
-    create_updateapp_fed_auth swift Y2FtZXJvbjpjYW1lcm9uMTIz
+    create_updateapp_fed_auth dispatch Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
+    create_updateapp_fed_auth swift Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
 
-    update_application_saml dispatch 05 urn:updateApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-    update_application_saml swift 05 urn:updateApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+    update_application_saml dispatch 05 urn:updateApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
+    update_application_saml swift 05 urn:updateApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
 
-    break;;
+    ;;
     [Nn]* ) return -1;;
         * ) echo "Please answer yes or no.";;
     esac
@@ -101,6 +117,11 @@ return 0;
 
 configure_self_signup (){
 cd ${QSG}/QSG/bin
+
+is_host=$1
+is_port=$2
+tomcat_host=$3
+tomcat_port=$4
 
 echo
 echo "-----------------------------------------------------------------------"
@@ -119,8 +140,6 @@ echo "|               registration. You can only log into the app after     |"
 echo "|               after clicking the verification link sent to the      |"
 echo "|               email address you provided.]                          |"
 echo "|                                                                     |"
-echo "|    Press 3 - Enable Internal Notification Management                |"
-echo "|               [ Notify user on the account creation.]               |"
 echo "|                                                                     |"
 echo "-----------------------------------------------------------------------"
 echo
@@ -130,8 +149,8 @@ read user
 
 case ${user} in
      1)
-     update_idp_selfsignup urn:updateResidentIdP https://localhost:9443/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4= 06 selfsignup
-     break ;;
+     update_idp_selfsignup urn:updateResidentIdP https://${is_host}:${is_port}/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4= 06 selfsignup ${is_host} ${is_port}
+     ;;
 
      2)
      echo
@@ -159,8 +178,8 @@ case ${user} in
      read input
      case ${input} in
         [Yy]* )
-        update_idp_selfsignup urn:updateResidentIdP https://localhost:9443/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4= 06 lockon
-        break;;
+        update_idp_selfsignup urn:updateResidentIdP https://${is_host}:${is_port}/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4= 06 lockon ${is_host} ${is_port}
+        ;;
 
         [Nn]* )
         echo "Please make the necessary configurations and restart the script."
@@ -170,46 +189,7 @@ case ${user} in
         * )
         echo "Please answer yes or no.";;
      esac
-     break ;;
-
-     3)
-     echo
-     echo "-----------------------------------------------------------------------"
-     echo "|                                                                     |"
-     echo "|  Please do the following before trying self signup with account     |"
-     echo "|  lock on creation enabled.                                          |"
-     echo "|                                                                     |"
-     echo "|  1. Open the file: output-event-adapters.xml in the path,           |"
-     echo "|     (Your WSO2-IS)/repository/conf.                                 |"
-     echo "|     Ex: wso2is-5.4.1/repository/conf/output-event-adapters.xml.     |"
-     echo "|                                                                     |"
-     echo "|  2. Find the adapter configuration for emails and change the        |"
-     echo "|     email address, username, password values.                       |"
-     echo "|                                                                     |"
-     echo "|  3. Finally, restart the server.                                    |"
-     echo "|                                                                     |"
-     echo "-----------------------------------------------------------------------"
-     echo
-     echo "Have you make the above mentioned configurations?"
-     echo
-     echo    "Press y - YES"
-     echo    "Press n - NO"
-     echo
-     read input
-     case ${input} in
-        [Yy]* )
-        update_idp_selfsignup urn:updateResidentIdP https://localhost:9443/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4= 06 notify
-        break ;;
-
-        [Nn]* )
-        echo "Please make the necessary configurations and restart the script."
-        echo
-        return -1;;
-
-        * )
-        echo "Please answer yes or no.";;
-     esac
-     break ;;
+     ;;
 
 	*)
 	echo "Sorry, that's not an option."
@@ -217,13 +197,13 @@ case ${user} in
 esac
 
 # Add a service provider in wso2-is
-add_service_provider dispatch Common urn:createApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4=
+add_service_provider dispatch Common urn:createApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4= ${is_host} ${is_port}
 
 # Configure OIDC for the Service Providers
-configure_oidc dispatch 03 urn:registerOAuthApplicationData https://localhost:9443/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4=
+configure_oidc dispatch 03 urn:registerOAuthApplicationData https://${is_host}:${is_port}/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4= ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
 
-create_updateapp_oidc dispatch YWRtaW46YWRtaW4= ZGlzcGF0Y2g= ZGlzcGF0Y2gxMjM0
-update_application_oidc dispatch 03 urn:updateApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4=
+create_updateapp_oidc dispatch YWRtaW46YWRtaW4= ZGlzcGF0Y2g= ZGlzcGF0Y2gxMjM0 ${is_host} ${is_port}
+update_application_oidc dispatch 03 urn:updateApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4= ${is_host} ${is_port}
 
 echo
 echo "-------------------------------------------------------------------"
@@ -232,7 +212,7 @@ echo "|  To tryout self registration please log into the sample         |"
 echo "|  app below.                                                     |"
 echo "|  *** Please press ctrl button and click on the link ***         |"
 echo "|                                                                 |"
-echo "|  Dispatch - http://localhost:8080/Dispatch/                     |"
+echo "|  Dispatch - http://${tomcat_host}:${tomcat_port}/Dispatch/      |"
 echo "|                                                                 |"
 echo "|  Click on the ** Register now ** link in the login page.        |"
 echo "|  Fill in the user details form and create an account.           |"
@@ -252,8 +232,8 @@ read clean
 
 case ${clean} in
         [Yy]* )
-        delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4=
-	break;;
+        delete_sp dispatch Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4=
+	     ;;
         [Nn]* ) exit;;
         * ) echo "Please answer yes or no.";;
     esac
@@ -263,28 +243,33 @@ return 0;
 }
 
 create_workflow() {
+is_host=$1
+is_port=$2
+tomcat_host=$3
+tomcat_port=$4
+
 cd ${QSG}/QSG/bin
 
 # Add users and the relevant roles in wso2-is.
-add_users_workflow admin admin 07
+add_users_workflow admin admin 07 ${is_host} ${is_port}
 
 # Create the workflow definition
-add_workflow_definition 07 YWRtaW46YWRtaW4=
+add_workflow_definition 07 YWRtaW46YWRtaW4= ${is_host} ${is_port}
 
 # Create a workflow association
-add_workflow_association 07 YWRtaW46YWRtaW4=
+add_workflow_association 07 YWRtaW46YWRtaW4= ${is_host} ${is_port}
 
 # Update resident IDP
-update_idp_selfsignup urn:updateResidentIdP https://localhost:9443/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4= 06 selfsignup
+update_idp_selfsignup urn:updateResidentIdP https://${is_host}:${is_port}/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4= 06 selfsignup ${is_host} ${is_port}
 
 # Add a service provider in wso2-is
-add_service_provider dispatch Common urn:createApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4=
+add_service_provider dispatch Common urn:createApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4= ${is_host} ${is_port}
 
 # Configure OIDC for the Service Providers
-configure_oidc dispatch 03 urn:registerOAuthApplicationData https://localhost:9443/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4=
+configure_oidc dispatch 03 urn:registerOAuthApplicationData https://${is_host}:${is_port}/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4= ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
 
-create_updateapp_oidc dispatch YWRtaW46YWRtaW4= ZGlzcGF0Y2g= ZGlzcGF0Y2gxMjM0
-update_application_oidc dispatch 03 urn:updateApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4=
+create_updateapp_oidc dispatch YWRtaW46YWRtaW4= ZGlzcGF0Y2g= ZGlzcGF0Y2gxMjM0 ${is_host} ${is_port}
+update_application_oidc dispatch 03 urn:updateApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4= ${is_host} ${is_port}
 
 echo
 echo
@@ -303,7 +288,7 @@ echo "|    To tryout the workflow please log into the sample           |"
 echo "|    app below.                                                  |"
 echo "|    *** Please press ctrl button and click on the link ***      |"
 echo "|                                                                |"
-echo "|    Dispatch - http://localhost:8080/Dispatch/                  |"
+echo "|    Dispatch - http://${tomcat_host}:${tomcat_port}/Dispatch/                  |"
 echo "|                                                                |"
 echo "|    Click on the ** Register now ** link in the login page      |"
 echo "|    Fill in the user details form and create an account.        |"
@@ -313,7 +298,7 @@ echo "|    So to enable the user please log into the WSO2 dashboard    |"
 echo "|    using the following credentials and approve the pending     |"
 echo "|    workflow requests.                                          |"
 echo "|                                                                |"
-echo "|    WSO2 Dashboard: https://localhost:9443/dashboard            |"
+echo "|    WSO2 Dashboard: https://${is_host}:${is_port}/dashboard            |"
 echo "|                                                                |"
 echo "|    First login with Junior Manager                             |"
 echo "|      Username: alex                                            |"
@@ -324,7 +309,8 @@ echo "|      Username: cameron                                         |"
 echo "|      Password: cameron123                                      |"
 echo "|                                                                |"
 echo "|    Now you can use your new user credentials to log into       |"
-echo "|    the app Dispatch:  http://localhost:8080/Dispatch/          |"
+echo "|    the app Dispatch:                                           |"
+echo "|        http://${tomcat_host}:${tomcat_port}/Dispatch/          |"
 echo "|                                                                |"
 echo "------------------------------------------------------------------"
 echo
@@ -339,11 +325,11 @@ read input
 
 case ${input} in
         [Yy]* )
-        delete_users_workflow
-        delete_workflow_definition 07 YWRtaW46YWRtaW4=
-        delete_workflow_association 07 YWRtaW46YWRtaW4=
-        delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4=
-        break;;
+        delete_users_workflow ${is_host} ${is_port}
+        delete_workflow_definition 07 YWRtaW46YWRtaW4= ${is_host} ${is_port}
+        delete_workflow_association 07 YWRtaW46YWRtaW4= ${is_host} ${is_port}
+        delete_sp dispatch Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4=
+        ;;
         [Nn]* ) exit;;
          * ) echo "Please answer yes or no.";;
          esac
@@ -358,6 +344,486 @@ endpoint=$2
 auth=$3
 scenario=$4
 config=$5
+is_host=$6
+is_port=$7
+selfsignup="selfsignup"
+lockon="lockon"
+# Update the sso-config xml file with correct host names and port values
+cd ${scenario}
+if [ -f "update-idp-${config}.xml" ]
+then
+   rm -r update-idp-${config}.xml
+fi
+touch update-idp-${config}.xml
+
+if [ "$config" = "$selfsignup" ];
+then
+echo " <soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:mgt=\"http://mgt.idp.carbon.wso2.org\"
+                  xmlns:xsd=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <mgt:updateResidentIdP>
+            <!--Optional:-->
+            <mgt:identityProvider>
+                <!--Zero or more repetitions:-->
+                <xsd:federatedAuthenticatorConfigs>
+                    <!--Optional:-->
+                    <xsd:name>samlsso</xsd:name>
+                    <!--Zero or more repetitions:-->
+                    <xsd:properties>
+                        <!--Optional:-->
+                        <xsd:name>IdpEntityId</xsd:name>
+                        <!--Optional:-->
+                        <xsd:value>localhost</xsd:value>
+                    </xsd:properties>
+                    <xsd:properties>
+                        <xsd:name>DestinationURI.1</xsd:name>
+                        <xsd:value>https://${is_host}:${is_port}/samlsso</xsd:value>
+                    </xsd:properties>
+                </xsd:federatedAuthenticatorConfigs>
+                <xsd:federatedAuthenticatorConfigs xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>passivests</xsd:name>
+                    <xsd:properties>
+                        <xsd:name>IdPEntityId</xsd:name>
+                        <xsd:value>localhost</xsd:value>
+                    </xsd:properties>
+                </xsd:federatedAuthenticatorConfigs>
+                <xsd:federatedAuthenticatorConfigs xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>openidconnect</xsd:name>
+                    <xsd:properties>
+                        <xsd:name>IdPEntityId</xsd:name>
+                        <xsd:value>https://${is_host}:${is_port}/oauth2/token</xsd:value>
+                    </xsd:properties>
+                </xsd:federatedAuthenticatorConfigs>
+                <!--Optional:-->
+                <xsd:homeRealmId>localhost</xsd:homeRealmId>
+                <!--Optional:-->
+                <xsd:identityProviderName>LOCAL</xsd:identityProviderName>
+                <!--Zero or more repetitions:-->
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>passwordHistory.enable</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>passwordHistory.count</xsd:name>
+                    <xsd:value>5</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>passwordPolicy.enable</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>passwordPolicy.min.length</xsd:name>
+                    <xsd:value>6</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>passwordPolicy.max.length</xsd:name>
+                    <xsd:value>12</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>passwordPolicy.pattern</xsd:name>
+                    <xsd:value>^((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%&amp;*])).{0,100}$</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>passwordPolicy.errorMsg</xsd:name>
+                    <xsd:value>'Password pattern policy violated. Password should contain a digit[0-9], a lower case
+                        letter[a-z], an upper case letter[A-Z], one of !@#$%&amp;* characters'
+                    </xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>sso.login.recaptcha.enable</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>sso.login.recaptcha.on.max.failed.attempts</xsd:name>
+                    <xsd:value>3</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>account.lock.handler.enable</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>account.lock.handler.On.Failure.Max.Attempts</xsd:name>
+                    <xsd:value>5</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>account.lock.handler.Time</xsd:name>
+                    <xsd:value>5</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>account.lock.handler.login.fail.timeout.ratio</xsd:name>
+                    <xsd:value>2</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>account.lock.handler.notification.manageInternally</xsd:name>
+                    <xsd:value>true</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>account.disable.handler.enable</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>account.disable.handler.notification.manageInternally</xsd:name>
+                    <xsd:value>true</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>suspension.notification.enable</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>suspension.notification.account.disable.delay</xsd:name>
+                    <xsd:value>90</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>suspension.notification.delays</xsd:name>
+                    <xsd:value>30,45,60,75</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>Recovery.Notification.Password.Enable</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>Recovery.Question.Password.Enable</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>Recovery.Question.Password.MinAnswers</xsd:name>
+                    <xsd:value>2</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>Recovery.Question.Password.ReCaptcha.Enable</xsd:name>
+                    <xsd:value>true</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>Recovery.Question.Password.ReCaptcha.MaxFailedAttempts</xsd:name>
+                    <xsd:value>2</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>Recovery.Notification.Username.Enable</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>Recovery.Notification.InternallyManage</xsd:name>
+                    <xsd:value>true</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>Recovery.NotifySuccess</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>Recovery.Question.Password.NotifyStart</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>Recovery.ExpiryTime</xsd:name>
+                    <xsd:value>1440</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>SelfRegistration.Enable</xsd:name>
+                    <xsd:value>true</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>SelfRegistration.LockOnCreation</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>SelfRegistration.Notification.InternallyManage</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>SelfRegistration.ReCaptcha</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>SelfRegistration.VerificationCode.ExpiryTime</xsd:name>
+                    <xsd:value>1440</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>EmailVerification.Enable</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>EmailVerification.LockOnCreation</xsd:name>
+                    <xsd:value>true</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>EmailVerification.Notification.InternallyManage</xsd:name>
+                    <xsd:value>true</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>EmailVerification.ExpiryTime</xsd:name>
+                    <xsd:value>1440</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>EmailVerification.AskPassword.ExpiryTime</xsd:name>
+                    <xsd:value>1440</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>EmailVerification.AskPassword.PasswordGenerator</xsd:name>
+                    <xsd:value>org.wso2.carbon.user.mgt.common.DefaultPasswordGenerator</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>Recovery.AdminPasswordReset.RecoveryLink</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>Recovery.AdminPasswordReset.OTP</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>Recovery.AdminPasswordReset.Offline</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>SessionIdleTimeout</xsd:name>
+                    <xsd:value>15</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>RememberMeTimeout</xsd:name>
+                    <xsd:value>20160</xsd:value>
+                </xsd:idpProperties>
+                <!--Optional:-->
+                <xsd:primary>true</xsd:primary>
+            </mgt:identityProvider>
+        </mgt:updateResidentIdP>
+    </soapenv:Body>
+</soapenv:Envelope>" >> update-idp-${config}.xml
+fi
+
+if [ "$config" = "$lockon" ];
+then
+echo " <soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:mgt=\"http://mgt.idp.carbon.wso2.org\"
+                  xmlns:xsd=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <mgt:updateResidentIdP>
+            <!--Optional:-->
+            <mgt:identityProvider>
+                <!--Zero or more repetitions:-->
+                <xsd:federatedAuthenticatorConfigs>
+                    <!--Optional:-->
+                    <xsd:name>samlsso</xsd:name>
+                    <!--Zero or more repetitions:-->
+                    <xsd:properties>
+                        <!--Optional:-->
+                        <xsd:name>IdpEntityId</xsd:name>
+                        <!--Optional:-->
+                        <xsd:value>localhost</xsd:value>
+                    </xsd:properties>
+                    <xsd:properties>
+                        <xsd:name>DestinationURI.1</xsd:name>
+                        <xsd:value>https://${is_host}:${is_port}/samlsso</xsd:value>
+                    </xsd:properties>
+                </xsd:federatedAuthenticatorConfigs>
+                <xsd:federatedAuthenticatorConfigs xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>passivests</xsd:name>
+                    <xsd:properties>
+                        <xsd:name>IdPEntityId</xsd:name>
+                        <xsd:value>localhost</xsd:value>
+                    </xsd:properties>
+                </xsd:federatedAuthenticatorConfigs>
+                <xsd:federatedAuthenticatorConfigs xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>openidconnect</xsd:name>
+                    <xsd:properties>
+                        <xsd:name>IdPEntityId</xsd:name>
+                        <xsd:value>https://${is_host}:${is_port}/oauth2/token</xsd:value>
+                    </xsd:properties>
+                </xsd:federatedAuthenticatorConfigs>
+                <!--Optional:-->
+                <xsd:homeRealmId>localhost</xsd:homeRealmId>
+                <!--Optional:-->
+                <xsd:identityProviderName>LOCAL</xsd:identityProviderName>
+                <!--Zero or more repetitions:-->
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>passwordHistory.enable</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>passwordHistory.count</xsd:name>
+                    <xsd:value>5</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>passwordPolicy.enable</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>passwordPolicy.min.length</xsd:name>
+                    <xsd:value>6</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>passwordPolicy.max.length</xsd:name>
+                    <xsd:value>12</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>passwordPolicy.pattern</xsd:name>
+                    <xsd:value>^((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%&amp;*])).{0,100}$</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>passwordPolicy.errorMsg</xsd:name>
+                    <xsd:value>'Password pattern policy violated. Password should contain a digit[0-9], a lower case
+                        letter[a-z], an upper case letter[A-Z], one of !@#$%&amp;* characters'
+                    </xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>sso.login.recaptcha.enable</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>sso.login.recaptcha.on.max.failed.attempts</xsd:name>
+                    <xsd:value>3</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>account.lock.handler.enable</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>account.lock.handler.On.Failure.Max.Attempts</xsd:name>
+                    <xsd:value>5</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>account.lock.handler.Time</xsd:name>
+                    <xsd:value>5</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>account.lock.handler.login.fail.timeout.ratio</xsd:name>
+                    <xsd:value>2</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>account.lock.handler.notification.manageInternally</xsd:name>
+                    <xsd:value>true</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>account.disable.handler.enable</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>account.disable.handler.notification.manageInternally</xsd:name>
+                    <xsd:value>true</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>suspension.notification.enable</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>suspension.notification.account.disable.delay</xsd:name>
+                    <xsd:value>90</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>suspension.notification.delays</xsd:name>
+                    <xsd:value>30,45,60,75</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>Recovery.Notification.Password.Enable</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>Recovery.Question.Password.Enable</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>Recovery.Question.Password.MinAnswers</xsd:name>
+                    <xsd:value>2</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>Recovery.Question.Password.ReCaptcha.Enable</xsd:name>
+                    <xsd:value>true</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>Recovery.Question.Password.ReCaptcha.MaxFailedAttempts</xsd:name>
+                    <xsd:value>2</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>Recovery.Notification.Username.Enable</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>Recovery.Notification.InternallyManage</xsd:name>
+                    <xsd:value>true</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>Recovery.NotifySuccess</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>Recovery.Question.Password.NotifyStart</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>Recovery.ExpiryTime</xsd:name>
+                    <xsd:value>1440</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>SelfRegistration.Enable</xsd:name>
+                    <xsd:value>true</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>SelfRegistration.LockOnCreation</xsd:name>
+                    <xsd:value>true</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>SelfRegistration.Notification.InternallyManage</xsd:name>
+                    <xsd:value>true</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>SelfRegistration.ReCaptcha</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>SelfRegistration.VerificationCode.ExpiryTime</xsd:name>
+                    <xsd:value>1440</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>EmailVerification.Enable</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>EmailVerification.LockOnCreation</xsd:name>
+                    <xsd:value>true</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>EmailVerification.Notification.InternallyManage</xsd:name>
+                    <xsd:value>true</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>EmailVerification.ExpiryTime</xsd:name>
+                    <xsd:value>1440</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>EmailVerification.AskPassword.ExpiryTime</xsd:name>
+                    <xsd:value>1440</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>EmailVerification.AskPassword.PasswordGenerator</xsd:name>
+                    <xsd:value>org.wso2.carbon.user.mgt.common.DefaultPasswordGenerator</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>Recovery.AdminPasswordReset.RecoveryLink</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>Recovery.AdminPasswordReset.OTP</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>Recovery.AdminPasswordReset.Offline</xsd:name>
+                    <xsd:value>false</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>SessionIdleTimeout</xsd:name>
+                    <xsd:value>15</xsd:value>
+                </xsd:idpProperties>
+                <xsd:idpProperties xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
+                    <xsd:name>RememberMeTimeout</xsd:name>
+                    <xsd:value>20160</xsd:value>
+                </xsd:idpProperties>
+                <!--Optional:-->
+                <xsd:primary>true</xsd:primary>
+            </mgt:identityProvider>
+        </mgt:updateResidentIdP>
+    </soapenv:Body>
+</soapenv:Envelope>" >> update-idp-${config}.xml
+fi
+cd ..
 
 request_data="${scenario}/update-idp-${config}.xml"
 
@@ -396,8 +862,9 @@ echo "|                                                                  |"
 echo "|    You can find the sample web apps on the following URLs.       |"
 echo "|    *** Please press ctrl button and click on the links ***       |"
 echo "|                                                                  |"
-echo "|    Dispatch - http://localhost:8080/${dispatch_url}/  |"
-echo "|    Swift - http://localhost:8080/${swift_url}/        |"
+echo "|    Dispatch -                                                    |"
+echo "|        http://${tomcat_host}:${tomcat_port}/${dispatch_url}/     |"
+echo "|    Swift - http://${tomcat_host}:${tomcat_port}/${swift_url}/    |"
 echo "|                                                                  |"
 echo "|    Please use the following user credentials to log in.          |"
 echo "|                                                                  |"
@@ -420,11 +887,11 @@ echo
 read clean
 
  case ${clean} in
-        [Yy]* ) 
-        delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-        delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-        delete_user
-	break;;
+        [Yy]* )
+        delete_sp dispatch Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+        delete_sp swift Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+        delete_user ${is_host} ${is_port}
+	;;
         [Nn]* ) exit;;
         * ) echo "Please answer yes or no.";;
     esac
@@ -432,6 +899,12 @@ return 0;
 }
 
 create_multifactor_auth() {
+
+is_host=$1
+is_port=$2
+tomcat_host=$3
+tomcat_port=$4
+
 echo
 echo "-------------------------------------------------------------------"
 echo "|                                                                 |"
@@ -454,17 +927,17 @@ read user
 case ${user} in
     [Yy]* )
 
-    add_identity_provider admin admin 05
+    add_identity_provider admin admin 05 ${is_host} ${is_port}
 
-    configure_sso_saml2
+    configure_sso_saml2 ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
 
-    create_updateapp_multi dispatch Y2FtZXJvbjpjYW1lcm9uMTIz
-    create_updateapp_multi swift Y2FtZXJvbjpjYW1lcm9uMTIz
+    create_updateapp_multi dispatch Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
+    create_updateapp_multi swift Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
 
-    update_application_saml dispatch 04 urn:updateApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-    update_application_saml swift 04 urn:updateApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+    update_application_saml dispatch 04 urn:updateApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
+    update_application_saml swift 04 urn:updateApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
 
-break;;
+   ;;
     [Nn]* ) return -1;;
         * ) echo "Please answer yes or no.";;
     esac
@@ -477,6 +950,8 @@ cd ${QSG}/QSG/bin/04
 sp_name=$1
 request_data="get-app-${sp_name}.xml"
 auth=$2
+is_host=$3
+is_port=$4
 
  if [ ! -f "$request_data" ]
   then
@@ -490,14 +965,14 @@ auth=$2
  fi
 
 touch response_unformatted.xml
-curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type: text/xml" -H "SOAPAction: urn:getApplication" https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ > response_unformatted.xml
+curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type: text/xml" -H "SOAPAction: urn:getApplication" https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ > response_unformatted.xml
 res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while getting application details for ${sp_name}.... !!"
   echo
-  delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  delete_user
+  delete_sp dispatch Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_sp swift Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_user ${is_host} ${is_port}
   echo
   return -1
  fi
@@ -525,7 +1000,7 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
     <ns1:description xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">sample service provider</ns1:description>
     <inboundAuthenticationConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">
       <inboundAuthenticationRequestConfigs>
-        <inboundAuthKey>saml2-web-app-dispatch.com</inboundAuthKey>
+        <inboundAuthKey>saml2-web-app-${sp_name}.com</inboundAuthKey>
         <inboundAuthType>samlsso</inboundAuthType>
         <properties>
           <name>attrConsumServiceIndex</name>
@@ -648,7 +1123,7 @@ if [ ! -d "${TOMCAT_PATH}" ]
         echo "** Web application Dispatch successfully deployed. **"
         cp saml2-web-app-swift.com.war ${QSG}/apache-tomcat-8.0.49/webapps
         echo "** Web application Swift successfully deployed. **"
-	    break;;
+	    ;;
         [Nn]* )
         echo "Please install Tomcat and restart the script."
         exit;;
@@ -674,6 +1149,8 @@ add_users_workflow() {
 IS_name=$1
 IS_pass=$2
 scenario=$3
+is_host=$4
+is_port=$5
 request_data1="${scenario}/add-role-senior.xml"
 request_data2="${scenario}/add-role-junior.xml"
 
@@ -699,7 +1176,7 @@ echo
 echo "Creating a user named cameron..."
 
 # The following command can be used to create a user.
-curl -s -k --user ${IS_name}:${IS_pass} --data '{"schemas":[],"name":{"familyName":"Smith","givenName":"Cameron"},"userName":"cameron","password":"cameron123","emails":"cameron@gmail.com","addresses":{"country":"Canada"}}' --header "Content-Type:application/json" -o /dev/null https://localhost:9443/wso2/scim/Users
+curl -s -k --user ${IS_name}:${IS_pass} --data '{"schemas":[],"name":{"familyName":"Smith","givenName":"Cameron"},"userName":"cameron","password":"cameron123","emails":"cameron@gmail.com","addresses":{"country":"Canada"}}' --header "Content-Type:application/json" -o /dev/null https://${is_host}:${is_port}/wso2/scim/Users
 res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while creating user cameron. !!"
@@ -712,12 +1189,12 @@ echo
 echo "Creating a user named alex..."
 
 # The following command can be used to create a user.
-curl -s -k --user ${IS_name}:${IS_pass} --data '{"schemas":[],"name":{"familyName":"Miller","givenName":"Alex"},"userName":"alex","password":"alex123","emails":"alex@gmail.com","addresses":{"country":"Canada"}}' --header "Content-Type:application/json" -o /dev/null https://localhost:9443/wso2/scim/Users
+curl -s -k --user ${IS_name}:${IS_pass} --data '{"schemas":[],"name":{"familyName":"Miller","givenName":"Alex"},"userName":"alex","password":"alex123","emails":"alex@gmail.com","addresses":{"country":"Canada"}}' --header "Content-Type:application/json" -o /dev/null https://${is_host}:${is_port}/wso2/scim/Users
 res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while creating user alex. !!"
   echo
-  delete_user
+  delete_user ${is_host} ${is_port}
   echo
   return -1
  fi
@@ -727,12 +1204,12 @@ echo
 echo "Creating a role named senior_manager..."
 
 #The following command will add a role to the user.
-curl -s -k --user ${IS_name}:${IS_pass} -d @$request_data1 -H "Content-Type: text/xml" -H "SOAPAction: urn:addRole" -o /dev/null https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k --user ${IS_name}:${IS_pass} -d @$request_data1 -H "Content-Type: text/xml" -H "SOAPAction: urn:addRole" -o /dev/null https://${is_host}:${is_port}/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while creating role senior_manager. !!"
   echo
-  delete_user
+  delete_user ${is_host} ${is_port}
   echo
   return -1
  fi
@@ -742,12 +1219,12 @@ echo
 echo "Creating a role named junior_manager..."
 
 #The following command will add a role to the user.
-curl -s -k --user ${IS_name}:${IS_pass} -d @$request_data2 -H "Content-Type: text/xml" -H "SOAPAction: urn:addRole" -o /dev/null https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k --user ${IS_name}:${IS_pass} -d @$request_data2 -H "Content-Type: text/xml" -H "SOAPAction: urn:addRole" -o /dev/null https://${is_host}:${is_port}/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while creating role junior_manager. !!"
   echo
-  delete_user
+  delete_user ${is_host} ${is_port}
   echo
   return -1
  fi
@@ -759,6 +1236,8 @@ return 0;
 
 delete_users_workflow() {
 
+is_host=$1
+is_port=$2
 request_data1="Common/delete-cameron.xml"
 request_data2="Common/delete-alex.xml"
 request_data3="07/delete-role-senior.xml"
@@ -768,7 +1247,7 @@ echo
 echo "Deleting the user named cameron..."
 
 # Send the SOAP request to delete the user.
-curl -s -k -d @$request_data1 -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o /dev/null https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @$request_data1 -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o /dev/null https://${is_host}:${is_port}/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while deleting the user cameron. !!"
@@ -780,7 +1259,7 @@ echo
 echo "Deleting the user named alex..."
 
 # Send the SOAP request to delete the user.
-curl -s -k -d @$request_data2 -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o /dev/null https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @$request_data2 -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o /dev/null https://${is_host}:${is_port}/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while deleting the user alex. !!"
@@ -792,7 +1271,7 @@ echo
 
 echo "Deleting the role named senior-manager"
 # Send the SOAP request to delete the role.
-curl -s -k -d @$request_data3 -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteRole" -o /dev/null https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @$request_data3 -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteRole" -o /dev/null https://${is_host}:${is_port}/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while deleting the role senior-manager. !!"
@@ -803,7 +1282,7 @@ echo "** The role senior-manager was successfully deleted. **"
 echo
 echo "Deleting the role named junior-manager"
 # Send the SOAP request to delete the role.
-curl -s -k -d @$request_data4 -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteRole" -o /dev/null https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @$request_data4 -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteRole" -o /dev/null https://${is_host}:${is_port}/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while deleting the role junior-manager. !!"
@@ -820,6 +1299,8 @@ add_workflow_definition() {
 
 scenario=$1
 auth=$2
+is_host=$3
+is_port=$4
 request_data="${scenario}/add-definition.xml"
 
 if [ ! -d "$scenario" ]
@@ -834,12 +1315,12 @@ if [ ! -d "$scenario" ]
     return -1
   fi
 
-curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type: text/xml" -H "SOAPAction: urn:addWorkflow" -o /dev/null https://localhost:9443/services/WorkflowAdminService.WorkflowAdminServiceHttpsSoap11Endpoint/
+curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type: text/xml" -H "SOAPAction: urn:addWorkflow" -o /dev/null https://${is_host}:${is_port}/services/WorkflowAdminService.WorkflowAdminServiceHttpsSoap11Endpoint/
 res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while creating the workflow definition. !!"
   echo
-  delete_users_workflow
+  delete_users_workflow ${is_host} ${is_port}
   echo
   return -1
  fi
@@ -853,6 +1334,8 @@ delete_workflow_definition() {
 
 scenario=$1
 auth=$2
+is_host=$3
+is_port=$4
 request_data="${scenario}/delete-definition.xml"
 
 if [ ! -d "$scenario" ]
@@ -867,7 +1350,7 @@ if [ ! -d "$scenario" ]
     return -1
   fi
 
-curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type: text/xml" -H "SOAPAction: urn:removeWorkflow" -o /dev/null https://localhost:9443/services/WorkflowAdminService.WorkflowAdminServiceHttpsSoap11Endpoint/
+curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type: text/xml" -H "SOAPAction: urn:removeWorkflow" -o /dev/null https://${is_host}:${is_port}/services/WorkflowAdminService.WorkflowAdminServiceHttpsSoap11Endpoint/
 res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while deleting the workflow definition. !!"
@@ -884,6 +1367,8 @@ add_workflow_association() {
 
 scenario=$1
 auth=$2
+is_host=$3
+is_port=$4
 request_data="${scenario}/add-association.xml"
 
 if [ ! -d "$scenario" ]
@@ -898,13 +1383,13 @@ if [ ! -d "$scenario" ]
     return -1
   fi
 
-curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type: text/xml" -H "SOAPAction: urn:addAssociation" -o /dev/null https://localhost:9443/services/WorkflowAdminService.WorkflowAdminServiceHttpsSoap11Endpoint/
+curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type: text/xml" -H "SOAPAction: urn:addAssociation" -o /dev/null https://${is_host}:${is_port}/services/WorkflowAdminService.WorkflowAdminServiceHttpsSoap11Endpoint/
 res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while creating the workflow association. !!"
   echo
-  delete_users_workflow
-  delete_workflow_definition 07 YWRtaW46YWRtaW4=
+  delete_users_workflow ${is_host} ${is_port}
+  delete_workflow_definition 07 YWRtaW46YWRtaW4= ${is_host} ${is_port}
   echo
   return -1
  fi
@@ -918,6 +1403,8 @@ delete_workflow_association() {
 
 scenario=$1
 auth=$2
+is_host=$3
+is_port=$4
 request_data="${scenario}/delete-association.xml"
 
 if [ ! -d "$scenario" ]
@@ -932,7 +1419,7 @@ if [ ! -d "$scenario" ]
     return -1
   fi
 
-curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type: text/xml" -H "SOAPAction: urn:removeAssociation" -o /dev/null https://localhost:9443/services/WorkflowAdminService.WorkflowAdminServiceHttpsSoap11Endpoint/
+curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type: text/xml" -H "SOAPAction: urn:removeAssociation" -o /dev/null https://${is_host}:${is_port}/services/WorkflowAdminService.WorkflowAdminServiceHttpsSoap11Endpoint/
 res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while deleting the workflow association. !!"
@@ -950,12 +1437,14 @@ add_user() {
 IS_name=$1
 IS_pass=$2
 scenario=$3
+is_host=$4
+is_port=$5
 request_data="${scenario}/add-role.xml"
 echo
 echo "Creating a user named cameron..."
 
 # The following command can be used to create a user.
-curl -s -k --user ${IS_name}:${IS_pass} --data '{"schemas":[],"name":{"familyName":"Smith","givenName":"Cameron"},"userName":"cameron","password":"cameron123","emails":"cameron@gmail.com","addresses":{"country":"Canada"}}' --header "Content-Type:application/json" -o /dev/null https://localhost:9443/wso2/scim/Users
+curl -s -k --user ${IS_name}:${IS_pass} --data '{"schemas":[],"name":{"familyName":"Smith","givenName":"Cameron"},"userName":"cameron","password":"cameron123","emails":"cameron@gmail.com","addresses":{"country":"Canada"}}' --header "Content-Type:application/json" -o /dev/null https://${is_host}:${is_port}/wso2/scim/Users
 res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while creating user cameron. !!"
@@ -968,12 +1457,12 @@ echo
 echo "Creating a user named alex..."
 
 # The following command can be used to create a user.
-curl -s -k --user ${IS_name}:${IS_pass} --data '{"schemas":[],"name":{"familyName":"Miller","givenName":"Alex"},"userName":"alex","password":"alex123","emails":"alex@gmail.com","addresses":{"country":"Canada"}}' --header "Content-Type:application/json" -o /dev/null https://localhost:9443/wso2/scim/Users
+curl -s -k --user ${IS_name}:${IS_pass} --data '{"schemas":[],"name":{"familyName":"Miller","givenName":"Alex"},"userName":"alex","password":"alex123","emails":"alex@gmail.com","addresses":{"country":"Canada"}}' --header "Content-Type:application/json" -o /dev/null https://${is_host}:${is_port}/wso2/scim/Users
 res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while creating user alex. !!"
   echo
-  delete_user
+  delete_user ${is_host} ${is_port}
   echo
   return -1
  fi
@@ -984,12 +1473,12 @@ echo "Creating a role named Manager..."
 
 cd ${QSG}/QSG/bin
 #The following command will add a role to the user.
-curl -s -k --user ${IS_name}:${IS_pass} -d @$request_data -H "Content-Type: text/xml" -H "SOAPAction: urn:addRole" -o /dev/null https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k --user ${IS_name}:${IS_pass} -d @$request_data -H "Content-Type: text/xml" -H "SOAPAction: urn:addRole" -o /dev/null https://${is_host}:${is_port}/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while creating role manager. !!"
   echo
-  delete_user
+  delete_user ${is_host} ${is_port}
   echo
   return -1
  fi
@@ -1005,8 +1494,10 @@ scenario=$2
 soap_action=$3
 endpoint=$4
 auth=$5
+is_host=$6
+is_port=$7
 request_data="${scenario}/create-sp-${sp_name}.xml"
-  
+
  if [ ! -d "$scenario" ]
   then
     echo "$scenario Directory not exists."
@@ -1027,9 +1518,9 @@ res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while creating the service provider. !!"
   echo
-  delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  delete_user
+  delete_sp dispatch Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_sp swift Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_user ${is_host} ${is_port}
   echo
   return -1
  fi
@@ -1040,6 +1531,9 @@ return 0;
 }
 
 delete_user() {
+
+is_host=$1
+is_port=$2
 cd ${QSG}/QSG/bin
 request_data1="Common/delete-cameron.xml"
 request_data2="Common/delete-alex.xml"
@@ -1048,7 +1542,7 @@ echo
 echo "Deleting the user named cameron..."
 
 # Send the SOAP request to delete the user.
-curl -s -k -d @$request_data1 -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o /dev/null https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @$request_data1 -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o /dev/null https://${is_host}:${is_port}/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while deleting the user cameron. !!"
@@ -1060,7 +1554,7 @@ echo
 echo "Deleting the user named alex..."
 
 # Send the SOAP request to delete the user.
-curl -s -k -d @$request_data2 -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o /dev/null https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @$request_data2 -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o /dev/null https://${is_host}:${is_port}/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while deleting the user alex. !!"
@@ -1072,7 +1566,7 @@ echo
 echo "Deleting the role named Manager..."
 
 # Send the SOAP request to delete the role.
-curl -s -k -d @$request_data3 -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteRole" -o /dev/null https://localhost:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @$request_data3 -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteRole" -o /dev/null https://${is_host}:${is_port}/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while deleting the role Manager. !!"
@@ -1092,7 +1586,7 @@ soap_action=$3
 endpoint=$4
 auth=$5
 request_data="${scenario}/delete-sp-${sp_name}.xml"
-  
+
  if [ ! -d "$scenario" ]
   then
     echo "$scenario Directory not exists."
@@ -1162,6 +1656,77 @@ scenario=$2
 soap_action=$3
 endpoint=$4
 auth=$5
+is_host=$6
+is_port=$7
+tomcat_host=$8
+tomcat_port=$9
+
+# Update the sso-config xml file with correct host names and port values
+cd ${scenario}
+if [ -f "sso-config-${sp_name}.xml" ]
+then
+   rm -r sso-config-${sp_name}.xml
+fi
+touch sso-config-${sp_name}.xml
+echo " <soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:xsd=\"http://org.apache.axis2/xsd\" xmlns:xsd1=\"http://dto.saml.sso.identity.carbon.wso2.org/xsd\">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <xsd:addRPServiceProvider>
+         <!--Optional:-->
+         <xsd:spDto>
+            <!--Zero or more repetitions:-->
+            <xsd1:assertionConsumerUrls>http://${tomcat_host}:${tomcat_port}/saml2-web-app-${sp_name}.com/consumer</xsd1:assertionConsumerUrls>
+            <!--Optional:-->
+            <xsd1:assertionQueryRequestProfileEnabled>false</xsd1:assertionQueryRequestProfileEnabled>
+            <!--Optional:-->
+            <xsd1:attributeConsumingServiceIndex>1223160755</xsd1:attributeConsumingServiceIndex>
+            <!--Optional:-->
+            <xsd1:certAlias>wso2carbon</xsd1:certAlias>
+            <!--Optional:-->
+            <xsd1:defaultAssertionConsumerUrl>http://${tomcat_host}:${tomcat_port}/saml2-web-app-${sp_name}.com/consumer</xsd1:defaultAssertionConsumerUrl>
+            <!--Optional:-->
+            <xsd1:digestAlgorithmURI>http://www.w3.org/2000/09/xmldsig#sha1</xsd1:digestAlgorithmURI>
+            <!--Optional:-->
+            <xsd1:doEnableEncryptedAssertion>false</xsd1:doEnableEncryptedAssertion>
+            <!--Optional:-->
+            <xsd1:doSignAssertions>true</xsd1:doSignAssertions>
+            <!--Optional:-->
+            <xsd1:doSignResponse>true</xsd1:doSignResponse>
+            <!--Optional:-->
+            <xsd1:doSingleLogout>true</xsd1:doSingleLogout>
+            <!--Optional:-->
+            <xsd1:doValidateSignatureInRequests>false</xsd1:doValidateSignatureInRequests>
+            <!--Optional:-->
+            <xsd1:enableAttributeProfile>false</xsd1:enableAttributeProfile>
+            <!--Optional:-->
+            <xsd1:enableAttributesByDefault>false</xsd1:enableAttributesByDefault>
+            <!--Optional:-->
+            <xsd1:idPInitSLOEnabled>true</xsd1:idPInitSLOEnabled>
+            <!--Optional:-->
+            <xsd1:idPInitSSOEnabled>true</xsd1:idPInitSSOEnabled>
+            <!--Zero or more repetitions:-->
+            <xsd1:idpInitSLOReturnToURLs>http://${tomcat_host}:${tomcat_port}/saml2-web-app-${sp_name}.com/consumer</xsd1:idpInitSLOReturnToURLs>
+            <!--Optional:-->
+            <xsd1:issuer>saml2-web-app-${sp_name}.com</xsd1:issuer>
+            <!--Optional:-->
+            <xsd1:nameIDFormat>urn/oasis/names/tc/SAML/1.1/nameid-format/emailAddress</xsd1:nameIDFormat>
+            <!--Zero or more repetitions:-->
+            <xsd1:requestedAudiences>https://${is_host}:${is_port}/oauth2/token</xsd1:requestedAudiences>
+            <!--Zero or more repetitions:-->
+            <xsd1:requestedRecipients>https://${is_host}:${is_port}/oauth2/token</xsd1:requestedRecipients>
+            <!--Optional:-->
+            <xsd1:signingAlgorithmURI>http://www.w3.org/2000/09/xmldsig#rsa-sha1</xsd1:signingAlgorithmURI>
+            <!--Optional:-->
+            <xsd1:sloRequestURL></xsd1:sloRequestURL>
+            <!--Optional:-->
+            <xsd1:sloResponseURL></xsd1:sloResponseURL>
+         </xsd:spDto>
+      </xsd:addRPServiceProvider>
+   </soapenv:Body>
+</soapenv:Envelope>" >> sso-config-${sp_name}.xml
+cd ..
+
+# Configure sso for Service Provider
 request_data="${scenario}/sso-config-${sp_name}.xml"
 
  if [ ! -d "$scenario" ]
@@ -1184,9 +1749,9 @@ res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while configuring SAML2 web SSO for ${sp_name}.... !!"
   echo
-  delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  delete_user
+  delete_sp dispatch Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_sp swift Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_user ${is_host} ${is_port}
   echo
   return -1
  fi
@@ -1202,6 +1767,61 @@ scenario=$2
 soap_action=$3
 endpoint=$4
 auth=$5
+is_host=$6
+is_port=$7
+tomcat_host=$8
+tomcat_port=$9
+dispatch="dispatch"
+swift="swift"
+
+if [ "$sp_name" = "$dispatch" ];
+then
+    client_id="ZGlzcGF0Y2g="
+    secret="ZGlzcGF0Y2gxMjM0"
+    cap_spName="Dispatch"
+fi
+
+if [ "$sp_name" = "$swift" ];
+then
+    client_id="c3dpZnRhcHA="
+    secret="c3dpZnRhcHAxMjM="
+    cap_spName="Swift"
+fi
+
+cd ${scenario}
+ if [ -f "sso-config-${sp_name}.xml" ]
+  then
+   rm -r sso-config-${sp_name}.xml
+ fi
+touch sso-config-${sp_name}.xml
+
+echo "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:xsd=\"http://org.apache.axis2/xsd\" xmlns:xsd1=\"http://dto.oauth.identity.carbon.wso2.org/xsd\">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <xsd:registerOAuthApplicationData>
+         <!--Optional:-->
+         <xsd:application>
+            <!--Optional:-->
+            <xsd1:OAuthVersion>OAuth-2.0</xsd1:OAuthVersion>
+            <!--Optional:-->
+            <xsd1:applicationName>${sp_name}</xsd1:applicationName>
+            <!--Optional:-->
+            <xsd1:callbackUrl>http://${tomcat_host}:${tomcat_port}/${cap_spName}/oauth2client</xsd1:callbackUrl>
+            <!--Optional:-->
+            <xsd1:grantTypes>refresh_token urn:ietf:params:oauth:grant-type:saml2-bearer implicit password client_credentials iwa:ntlm authorization_code</xsd1:grantTypes>
+            <!--Optional:-->
+            <xsd1:oauthConsumerKey>${client_id}</xsd1:oauthConsumerKey>
+            <!--Optional:-->
+            <xsd1:oauthConsumerSecret>${secret}</xsd1:oauthConsumerSecret>
+            <!--Optional:-->
+            <xsd1:pkceMandatory>false</xsd1:pkceMandatory>
+         </xsd:application>
+      </xsd:registerOAuthApplicationData>
+   </soapenv:Body>
+</soapenv:Envelope>" >> sso-config-${sp_name}.xml
+cd ..
+
+# Configure sso for Service Provider
 request_data="${scenario}/sso-config-${sp_name}.xml"
 
  if [ ! -d "$scenario" ]
@@ -1224,9 +1844,9 @@ res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while configuring OIDC web SSO for ${sp_name}.... !!"
   echo
-  delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  delete_user
+  delete_sp dispatch Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_sp swift Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_user ${is_host} ${is_port}
   echo
   return -1
  fi
@@ -1240,6 +1860,10 @@ cd ${QSG}/QSG/bin/02
 sp_name=$1
 request_data="get-app-${sp_name}.xml"
 auth=$2
+is_host=$3
+is_port=$4
+tomcat_host=$5
+tomcat_port=$6
  
  if [ ! -f "$request_data" ]
   then
@@ -1253,14 +1877,14 @@ auth=$2
  fi
 
 touch response_unformatted.xml
-curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type: text/xml" -H "SOAPAction: urn:getApplication" https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ > response_unformatted.xml
+curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type: text/xml" -H "SOAPAction: urn:getApplication" https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ > response_unformatted.xml
 res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while getting application details for ${sp_name}.... !!"
   echo
-  delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  delete_user
+  delete_sp dispatch Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_sp swift Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_user ${is_host} ${is_port}
   echo
   return -1
  fi
@@ -1337,14 +1961,6 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
                 <xsd1:permissionAndRoleConfig></xsd1:permissionAndRoleConfig>
                 <!--Optional:-->
                 <xsd1:saasApp>false</xsd1:saasApp>
-                 <xsd1:owner>
-                   <!--Optional:-->
-                   <xsd1:tenantDomain>carbon.super</xsd1:tenantDomain>
-                   <!--Optional:-->
-                   <xsd1:userName>cameron</xsd1:userName>
-                   <!--Optional:-->
-                   <xsd1:userStoreDomain>PRIMARY</xsd1:userStoreDomain>
-                </xsd1:owner>
             </xsd:serviceProvider>
         </xsd:updateApplication>
     </soapenv:Body>
@@ -1359,6 +1975,8 @@ request_data="get-app-${sp_name}.xml"
 auth=$2
 key=$3
 secret=$4
+is_host=$5
+is_port=$6
  
  if [ ! -f "$request_data" ]
   then
@@ -1373,14 +1991,14 @@ secret=$4
 
 touch response_unformatted.xml
 
-curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type: text/xml" -H "SOAPAction: urn:getApplication" https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ > response_unformatted.xml
+curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type: text/xml" -H "SOAPAction: urn:getApplication" https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ > response_unformatted.xml
 res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while getting application details for ${sp_name}.... !!"
   echo
-  delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  delete_user
+  delete_sp dispatch Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_sp swift Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_user ${is_host} ${is_port}
   echo
   return -1
  fi
@@ -1469,14 +2087,6 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
             <xsd1:permissionAndRoleConfig></xsd1:permissionAndRoleConfig>
             <!--Optional:-->
             <xsd1:saasApp>false</xsd1:saasApp>
-            <xsd1:owner>
-                   <!--Optional:-->
-                   <xsd1:tenantDomain>carbon.super</xsd1:tenantDomain>
-                   <!--Optional:-->
-                   <xsd1:userName>cameron</xsd1:userName>
-                   <!--Optional:-->
-                   <xsd1:userStoreDomain>PRIMARY</xsd1:userStoreDomain>
-            </xsd1:owner>
          </xsd:serviceProvider>
       </xsd:updateApplication>
    </soapenv:Body>
@@ -1488,6 +2098,8 @@ cd ${QSG}/QSG/bin/05
 sp_name=$1
 request_data="get-app-${sp_name}.xml"
 auth=$2
+is_host=$3
+is_port=$4
 
  if [ ! -f "$request_data" ]
   then
@@ -1501,14 +2113,14 @@ auth=$2
  fi
 
 touch response_unformatted.xml
-curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type: text/xml" -H "SOAPAction: urn:getApplication" https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ > response_unformatted.xml
+curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type: text/xml" -H "SOAPAction: urn:getApplication" https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ > response_unformatted.xml
 res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while getting application details for ${sp_name}.... !!"
   echo
-  delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  delete_user
+  delete_sp dispatch Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_sp swift Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_user ${is_host} ${is_port}
   echo
   return -1
  fi
@@ -1593,6 +2205,8 @@ scenario=$2
 soap_action=$3
 endpoint=$4
 auth=$5
+is_host=$6
+is_port=$7
 request_data="${scenario}/update-app-${sp_name}.xml"
 
  if [ ! -d "$scenario" ]
@@ -1616,9 +2230,9 @@ res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while updating application ${sp_name}.... !!"
   echo
-  delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  delete_user
+  delete_sp dispatch Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_sp swift Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_user ${is_host} ${is_port}
   echo
   return -1
  fi
@@ -1634,6 +2248,9 @@ scenario=$2
 soap_action=$3
 endpoint=$4
 auth=$5
+is_host=$6
+is_port=$7
+
 request_data="${scenario}/update-app-${sp_name}.xml"
 
  if [ ! -d "$scenario" ]
@@ -1654,9 +2271,9 @@ res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while updating application ${sp_name}.... !!"
   echo
-  delete_sp dispatch Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  delete_sp swift Common urn:deleteApplication https://localhost:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  delete_user
+  delete_sp dispatch Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_sp swift Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_user ${is_host} ${is_port}
   echo
   return -1
  fi
@@ -1669,6 +2286,9 @@ cd ${QSG}/QSG/bin
 IS_name=$1
 IS_pass=$2
 scenario=$3
+is_host=$4
+is_port=$5
+
 request_data="${scenario}/create-idp.xml"
 
  if [ ! -d "$scenario" ]
@@ -1708,7 +2328,7 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
    <soapenv:Body>
       <ns4:addIdP xmlns:ns4="\"http://mgt.idp.carbon.wso2.org"\">
   <ns4:identityProvider>
-    <ns1:alias xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">https://localhost:9443/oauth2/token</ns1:alias>
+    <ns1:alias xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">https://${is_host}:${is_port}/oauth2/token</ns1:alias>
     <ns1:certificate xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/>
     <claimConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">
       <localClaimDialect>true</localClaimDialect>
@@ -1729,7 +2349,7 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
       </properties>
       <properties>
         <name>callbackUrl</name>
-        <value>https://localhost:9443/commonauth</value>
+        <value>https://${is_host}:${is_port}/commonauth</value>
       </properties>
     </defaultAuthenticatorConfig>
     <ns1:displayName xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/>
@@ -1748,7 +2368,7 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
       </properties>
       <properties>
         <name>callbackUrl</name>
-        <value>https://localhost:9443/commonauth</value>
+        <value>https://${is_host}:${is_port}/commonauth</value>
       </properties>
     </federatedAuthenticatorConfigs>
     <ns1:federationHub xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">false</ns1:federationHub>
@@ -1762,7 +2382,7 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
 </soapenv:Body>
 </soapenv:Envelope>" >> create-idp.xml
 cd ..
-curl -s -k --user ${IS_name}:${IS_pass} -d @$request_data -H "Content-Type: text/xml" -H "SOAPAction: urn:addIdP" -o /dev/null https://localhost:9443/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/
+curl -s -k --user ${IS_name}:${IS_pass} -d @$request_data -H "Content-Type: text/xml" -H "SOAPAction: urn:addIdP" -o /dev/null https://${is_host}:${is_port}/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/
 res=$?
  if test "${res}" != "0"; then
   echo "!! Problem occurred while creating the identity provider. !!"
@@ -1775,78 +2395,135 @@ cd ..
 return 0;
 }
 
+start_the_flow() {
+    echo "Please pick a scenario from the following."
+    echo "-----------------------------------------------------------------------------"
+    echo "|  Scenario 1 - Configuring Single-Sign-On with SAML2                       |"
+    echo "|  Scenario 2 - Configuring Single-Sign-On with OIDC                        |"
+    echo "|  Scenario 3 - Configuring Multi-Factor Authentication                     |"
+    echo "|  Scenario 4 - Configuring Twitter as a Federated Authenticator            |"
+    echo "|  Scenario 5 - Configuring Self-Signup                                     |"
+    echo "|  Scenario 6 - Creating a workflow                                         |"
+    echo "-----------------------------------------------------------------------------"
+    echo "Enter the scenario number you selected."
+
+
+    # Reading the scenarios available.
+    read scenario
+    case $scenario in
+        1)
+        # Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
+        setup_servers
+        configure_sso_saml2 ${IS_DOMAIN} ${IS_PORT} ${TOMCAT_DOMAIN} ${TOMCAT_PORT}
+        end_message saml2-web-app-dispatch.com saml2-web-app-swift.com
+        if [ "$?" -ne "0" ]; then
+          echo "Sorry, we had a problem there!"
+        fi
+        ;;
+
+        2)
+        # Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
+        setup_servers
+        configure_sso_oidc ${IS_DOMAIN} ${IS_PORT} ${TOMCAT_DOMAIN} ${TOMCAT_PORT}
+        end_message Dispatch Swift
+        if [ "$?" -ne "0" ]; then
+          echo "Sorry, we had a problem there!"
+        fi
+        ;;
+
+        3)
+        # Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
+        setup_servers
+        create_multifactor_auth ${IS_DOMAIN} ${IS_PORT} ${TOMCAT_DOMAIN} ${TOMCAT_PORT}
+        end_message saml2-web-app-dispatch.com saml2-web-app-swift.com
+        delete_idp 05 urn:deleteIdP https://${is_host}:${is_port}/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/
+        ;;
+
+        4)
+        # Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
+        setup_servers
+        configure_federated_auth ${IS_DOMAIN} ${IS_PORT} ${TOMCAT_DOMAIN} ${TOMCAT_PORT}
+        end_message saml2-web-app-dispatch.com saml2-web-app-swift.com
+        delete_idp 05 urn:deleteIdP https://${is_host}:${is_port}/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/
+        if [ "$?" -ne "0" ]; then
+          echo "Sorry, we had a problem there!"
+        fi
+        ;;
+
+        5)
+        # Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
+        setup_servers
+        configure_self_signup ${IS_DOMAIN} ${IS_PORT} ${TOMCAT_DOMAIN} ${TOMCAT_PORT}
+        ;;
+
+        6)
+        setup_servers
+        create_workflow ${IS_DOMAIN} ${IS_PORT} ${TOMCAT_DOMAIN} ${TOMCAT_PORT}
+        ;;
+
+        *)
+        echo "Sorry, that's not an option."
+        ;;
+    esac
+    echo
+}
+
+#=================The start of the script:============================================
 
 echo "Before Run: Make sure the following -                                         "
 echo "  * Added server details to the server.properties file in the QSG/bin folder  "
-echo "  * Your WSO2 IS 5.7.0 and Tomcat is running on default ports.                "
-echo "                       WSO2 IS - localhost:9443                               "
-echo "                       tomcat  - localhost:8080                               "
+echo "  * Your WSO2 IS 5.7.0 and Tomcat is running.                                 "
+echo "  * Configure the running domains/ips and ports in server.properties file     "
+echo "   in the QSG/bin folder.                                                     "
 echo "                                                                              "
-echo "Please pick a scenario from the following."
-echo "-----------------------------------------------------------------------------"
-echo "|  Scenario 1 - Configuring Single-Sign-On with SAML2                       |"
-echo "|  Scenario 2 - Configuring Single-Sign-On with OIDC                        |"
-echo "|  Scenario 3 - Configuring Multi-Factor Authentication                     |"
-echo "|  Scenario 4 - Configuring Twitter as a Federated Authenticator            |"
-echo "|  Scenario 5 - Configuring Self-Signup                                     |"
-echo "|  Scenario 6 - Creating a workflow                                         |"
-echo "-----------------------------------------------------------------------------"
-echo "Enter the scenario number you selected."
+echo " If okay to continue, Please press 'Y' else press 'N'                         "
+read continueState
+case $continueState in
+      [Yy]*)
+        # Read domians/ips and ports from server.properties file
+        PROPERTY_FILE=server.properties
+        echo "Reading server paths from $PROPERTY_FILE"
+        IS_DOMAIN=$(getProperty "wso2is.host.domain")
+        echo ${IS_DOMAIN}
 
-read scenario
-case $scenario in
-	1)
-	# Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
-	setup_servers
-	configure_sso_saml2
-	end_message saml2-web-app-dispatch.com saml2-web-app-swift.com
-	if [ "$?" -ne "0" ]; then
-	  echo "Sorry, we had a problem there!"
-	fi
-   	break ;;
+        if [ -z "${IS_DOMAIN}" ]
+        then
+            echo "IS host domain is not configured. Please configure that and Try again"
+            return -1
+        fi
 
-	2)
-	# Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
-	setup_servers
-	configure_sso_oidc
-	end_message Dispatch Swift
-	if [ "$?" -ne "0" ]; then
-	  echo "Sorry, we had a problem there!"
-	fi
-	break ;;
-		
-	3)
-	# Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
-	setup_servers
-	create_multifactor_auth
-	end_message saml2-web-app-dispatch.com saml2-web-app-swift.com
-	delete_idp 05 urn:deleteIdP https://localhost:9443/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/
-	break ;;
+        IS_PORT=$(getProperty "wso2is.host.port")
+        echo "is port ${IS_PORT}"
 
-	4)
-	# Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
-	setup_servers
-	configure_federated_auth
-	end_message saml2-web-app-dispatch.com saml2-web-app-swift.com
-	delete_idp 05 urn:deleteIdP https://localhost:9443/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/
-	if [ "$?" -ne "0" ]; then
-	  echo "Sorry, we had a problem there!"
-	fi
-	break ;;
+        if [ -z "${IS_PORT}" ]
+        then
+            echo "IS host port is not configured. Please configure that and Try again"
+            return -1
+        fi
 
-	5)
-	# Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
-	setup_servers
-	configure_self_signup
-	break ;;
-		
-	6)
-	setup_servers
-	create_workflow
-	break ;;
+        TOMCAT_DOMAIN=$(getProperty "tomcat.host.domain")
+        echo "tomcat port ${TOMCAT_DOMAIN}"
 
-	*)
-	echo "Sorry, that's not an option."
-	;;
+        if [ -z "${TOMCAT_DOMAIN}" ]
+        then
+            echo "Tomcat host domain is not configured. Please configure that and Try again"
+            return -1
+        fi
+
+        TOMCAT_PORT=$(getProperty "tomcat.host.port")
+        echo "tomcat port ${TOMCAT_PORT}"
+        if [ -z "${TOMCAT_PORT}" ]
+        then
+            echo "Tomcat host port is not configured. Please configure that and Try again"
+            return -1
+        fi
+        start_the_flow
+        ;;
+
+      [Nn]*)
+         echo "Please install Tomcat and restart the script."
+         exit;;
+      *)
+         echo "Please answer yes or no."
+         ;;
 esac
-echo
