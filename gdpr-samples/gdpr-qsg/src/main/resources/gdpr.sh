@@ -15,6 +15,12 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
+getProperty() {
+   PROP_KEY=$1
+   PROP_VALUE=`cat $PROPERTY_FILE | grep "$PROP_KEY" | cut -d'=' -f2`
+   echo $PROP_VALUE
+}
+
 run_step01() {
 
 is_host=$1
@@ -28,7 +34,7 @@ configure_selfsignup urn:updateResidentIdP https://${is_host}:${is_port}/service
 
 add_service_provider pickup urn:createApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
 add_service_provider pick-my-book urn:createApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
-add_service_provider notification-center urn:createApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ YY2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
+add_service_provider notification-center urn:createApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
 
 configure_oidc pickup urn:registerOAuthApplicationData https://${is_host}:${is_port}/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
 configure_oidc pick-my-book urn:registerOAuthApplicationData https://${is_host}:${is_port}/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
@@ -620,17 +626,21 @@ if [ "$sp_name" = "pickup" ];
  then
  client_id="PQGlzcGF0Y2g="
  secret="PqGlzcGF0Y2gMjMO"
+ callback=${sp_name}
 elif [ "$sp_name" = "pick-my-book" ];
 then
  client_id="YQGlzcGF0Y2g="
  secret="YqGlzcGF0Y2gMjMo="
+ callback=${sp_name}
 elif [ "$sp_name" = "notification-center" ];
 then
  client_id="KpQGlzcGF0Y2h="
  secret="KpGlzcGF0Y2gMjHy"
+ callback="notification"
  else
   client_id="CdQGlzcGF0Y2g="
   secret="CdHmlzcGF0Y2gMjMo="
+  callback=${sp_name}
 fi
 
 request_data="oidc-config-${sp_name}.xml"
@@ -650,7 +660,7 @@ echo "
         <xsd:application>
             <xsd1:OAuthVersion>OAuth-2.0</xsd1:OAuthVersion>
             <xsd1:applicationName>${sp_name}</xsd1:applicationName>
-            <xsd1:callbackUrl>http://${tomcat_host}:${tomcat_port}/${sp_name}/oauth2client</xsd1:callbackUrl>
+            <xsd1:callbackUrl>http://${tomcat_host}:${tomcat_port}/${callback}/oauth2client</xsd1:callbackUrl>
             <xsd1:grantTypes>refresh_token urn:ietf:params:oauth:grant-type:saml2-bearer implicit password client_credentials iwa:ntlm authorization_code</xsd1:grantTypes>
             <xsd1:oauthConsumerKey>${client_id}</xsd1:oauthConsumerKey>
             <xsd1:oauthConsumerSecret>${secret}</xsd1:oauthConsumerSecret>
@@ -721,7 +731,6 @@ jarName=`find . -name "QSG-*.jar"  2>&1 | grep -v "Permission denied"`
 jarName2=`echo "${jarName#./}"`
 
 app_id=`java -jar ${jarName2}`
-
 # Send the SOAP request to Update the Application.
 curl -s -k -H "Authorization: Basic ${auth}" -H "Content-Type: text/xml" -H "SOAPAction: urn:updateApplication" -o /dev/null https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ -d "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelope/"\" xmlns:xsd="\"http://org.apache.axis2/xsd"\" xmlns:xsd1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">
    <soapenv:Header/>
@@ -1154,7 +1163,7 @@ case $continueState in
         PROPERTY_FILE=server.properties
         echo "Reading server paths from $PROPERTY_FILE"
         IS_HOST=$(getProperty "wso2is.host.domain")
-        echo ${IS_HOST}
+        # echo ${IS_HOST}
 
         if [ -z "${IS_HOST}" ]
         then
@@ -1163,7 +1172,7 @@ case $continueState in
         fi
 
         IS_PORT=$(getProperty "wso2is.host.port")
-        echo "is port ${IS_PORT}"
+        # echo "is port ${IS_PORT}"
 
         if [ -z "${IS_PORT}" ]
         then
@@ -1172,7 +1181,7 @@ case $continueState in
         fi
 
         TOMCAT_HOST=$(getProperty "tomcat.host.domain")
-        echo "tomcat port ${TOMCAT_HOST}"
+        # echo "tomcat port ${TOMCAT_HOST}"
 
         if [ -z "${TOMCAT_HOST}" ]
         then
@@ -1181,7 +1190,7 @@ case $continueState in
         fi
 
         TOMCAT_PORT=$(getProperty "tomcat.host.port")
-        echo "tomcat port ${TOMCAT_PORT}"
+        # echo "tomcat port ${TOMCAT_PORT}"
         if [ -z "${TOMCAT_PORT}" ]
         then
             echo "Tomcat host port is not configured. Please configure that and Try again"
