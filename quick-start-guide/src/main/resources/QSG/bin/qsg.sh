@@ -2484,7 +2484,7 @@ case $continueState in
         PROPERTY_FILE=server.properties
         echo "Reading server paths from $PROPERTY_FILE"
         IS_DOMAIN=$(getProperty "wso2is.host.domain")
-        echo ${IS_DOMAIN}
+        #echo ${IS_DOMAIN}
 
         if [ -z "${IS_DOMAIN}" ]
         then
@@ -2493,7 +2493,7 @@ case $continueState in
         fi
 
         IS_PORT=$(getProperty "wso2is.host.port")
-        echo "is port ${IS_PORT}"
+        #echo "is port ${IS_PORT}"
 
         if [ -z "${IS_PORT}" ]
         then
@@ -2502,7 +2502,7 @@ case $continueState in
         fi
 
         TOMCAT_DOMAIN=$(getProperty "tomcat.host.domain")
-        echo "tomcat port ${TOMCAT_DOMAIN}"
+        #echo "tomcat port ${TOMCAT_DOMAIN}"
 
         if [ -z "${TOMCAT_DOMAIN}" ]
         then
@@ -2511,7 +2511,7 @@ case $continueState in
         fi
 
         TOMCAT_PORT=$(getProperty "tomcat.host.port")
-        echo "tomcat port ${TOMCAT_PORT}"
+        #echo "tomcat port ${TOMCAT_PORT}"
         if [ -z "${TOMCAT_PORT}" ]
         then
             echo "Tomcat host port is not configured. Please configure that and Try again"
