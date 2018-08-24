@@ -21,6 +21,169 @@ getProperty() {
    echo $PROP_VALUE
 }
 
+update_app_fed_auth() {
+sp_name=$1
+request_data="get-app-${sp_name}.xml"
+auth=$2
+is_host=$3
+is_port=$4
+key=$5
+secret=$6
+soap_action=$7
+endpoint=$8
+
+ if [ ! -f "$request_data" ]
+  then
+    echo "$request_data File does not exists."
+    return -1
+  fi
+
+ if [ -f "response_unformatted.xml" ]
+  then
+   rm -r response_unformatted.xml
+ fi
+
+touch response_unformatted.xml
+curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type: text/xml" -H "SOAPAction: urn:getApplication" https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ > response_unformatted.xml
+res=$?
+ if test "${res}" != "0"; then
+  echo "!! Problem occurred while getting application details for ${sp_name}.... !!"
+  echo
+  delete_sp dispatch Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_sp swift Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_user ${is_host} ${is_port}
+  echo
+  return -1
+ fi
+
+app_id=`java -jar QSG-*.jar`
+
+ if [ -f "update-app-${sp_name}.xml" ]
+  then
+   rm -r update-app-${sp_name}.xml
+ fi
+
+touch update-app-${sp_name}.xml
+echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelope/"\" xmlns:xsd="\"http://org.apache.axis2/xsd"\" xmlns:xsd1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">
+ <soapenv:Header/>
+   <soapenv:Body>
+      <xsd:updateApplication>
+         <!--Optional:-->
+         <xsd:serviceProvider>
+            <!--Optional:-->
+            <xsd1:applicationID>${app_id}</xsd1:applicationID>
+            <!--Optional:-->
+            <xsd1:applicationName>${sp_name}</xsd1:applicationName>
+            <!--Optional:-->
+            <xsd1:claimConfig>
+               <!--Optional:-->
+               <xsd1:alwaysSendMappedLocalSubjectId>false</xsd1:alwaysSendMappedLocalSubjectId>
+               <!--Optional:-->
+               <xsd1:localClaimDialect>true</xsd1:localClaimDialect>
+            </xsd1:claimConfig>
+            <!--Optional:-->
+            <xsd1:description>oauth application</xsd1:description>
+            <!--Optional:-->
+            <xsd1:inboundAuthenticationConfig>
+               <!--Zero or more repetitions:-->
+               <xsd1:inboundAuthenticationRequestConfigs>
+                  <!--Optional:-->
+                  <xsd1:inboundAuthKey>${key}</xsd1:inboundAuthKey>
+                  <!--Optional:-->
+                  <xsd1:inboundAuthType>oauth2</xsd1:inboundAuthType>
+                  <!--Zero or more repetitions:-->
+                  <xsd1:properties>
+                     <!--Optional:-->
+                     <xsd1:advanced>false</xsd1:advanced>
+                     <!--Optional:-->
+                     <xsd1:confidential>false</xsd1:confidential>
+                     <!--Optional:-->
+                     <xsd1:defaultValue></xsd1:defaultValue>
+                     <!--Optional:-->
+                     <xsd1:description></xsd1:description>
+                     <!--Optional:-->
+                     <xsd1:displayName></xsd1:displayName>
+                     <!--Optional:-->
+                     <xsd1:name>oauthConsumerSecret</xsd1:name>
+                     <!--Optional:-->
+                     <xsd1:required>false</xsd1:required>
+                     <!--Optional:-->
+                     <xsd1:value>${secret}</xsd1:value>
+                  </xsd1:properties>
+               </xsd1:inboundAuthenticationRequestConfigs>
+            </xsd1:inboundAuthenticationConfig>
+            <!--Optional:-->
+            <xsd1:inboundProvisioningConfig>
+               <!--Optional:-->
+               <xsd1:provisioningEnabled>false</xsd1:provisioningEnabled>
+               <!--Optional:-->
+               <xsd1:provisioningUserStore>PRIMARY</xsd1:provisioningUserStore>
+            </xsd1:inboundProvisioningConfig>
+            <!--Optional:-->
+            <localAndOutBoundAuthenticationConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">
+              <alwaysSendBackAuthenticatedListOfIdPs>false</alwaysSendBackAuthenticatedListOfIdPs>
+              <authenticationStepForAttributes xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/>
+              <authenticationStepForSubject xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/>
+              <authenticationSteps>
+                <federatedIdentityProviders>
+                  <identityProviderName>IDP-twitter</identityProviderName>
+                </federatedIdentityProviders>
+              </authenticationSteps>
+              <authenticationType>federated</authenticationType>
+              <enableAuthorization>false</enableAuthorization>
+              <subjectClaimUri>http://wso2.org/claims/fullname</subjectClaimUri>
+              <useTenantDomainInLocalSubjectIdentifier>false</useTenantDomainInLocalSubjectIdentifier>
+              <useUserstoreDomainInLocalSubjectIdentifier>false</useUserstoreDomainInLocalSubjectIdentifier>
+            </localAndOutBoundAuthenticationConfig>
+            <!--Optional:-->
+            <xsd1:outboundProvisioningConfig>
+               <!--Zero or more repetitions:-->
+               <xsd1:provisionByRoleList></xsd1:provisionByRoleList>
+            </xsd1:outboundProvisioningConfig>
+            <!--Optional:-->
+            <xsd1:permissionAndRoleConfig></xsd1:permissionAndRoleConfig>
+            <!--Optional:-->
+            <xsd1:saasApp>false</xsd1:saasApp>
+         </xsd:serviceProvider>
+      </xsd:updateApplication>
+   </soapenv:Body>
+</soapenv:Envelope>" >> update-app-${sp_name}.xml
+
+echo "Updating application ${sp_name}..."
+
+# Send the SOAP request to Update the Application.
+curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type: text/xml" -H "SOAPAction: ${soap_action}" -o /dev/null $endpoint
+res=$?
+ if test "${res}" != "0"; then
+  echo "!! Problem occurred while updating application ${sp_name}.... !!"
+  echo
+     delete_sp pickup urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+     delete_user ${is_host} ${is_port}
+  echo
+  return -1
+ fi
+echo "** Successfully updated the application ${sp_name}. **"
+return 0;
+}
+
+run_fed_step01() {
+
+is_host=$1
+is_port=$2
+tomcat_host=$3
+tomcat_port=$4
+
+add_user admin admin ${is_host} ${is_port}
+
+add_identity_provider admin admin ${is_host} ${is_port}
+
+add_service_provider pickup urn:createApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
+configure_oidc pickup urn:registerOAuthApplicationData https://${is_host}:${is_port}/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
+update_oidc_app pickup Y2FtZXJvbjpjYW1lcm9uMTIz PQGlzcGF0Y2g= PqGlzcGF0Y2gMjMO ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
+
+update_app_fed_auth pickup Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port} PQGlzcGF0Y2g= PqGlzcGF0Y2gMjMO urn:updateApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/
+}
+
 run_step01() {
 
 is_host=$1
@@ -54,6 +217,119 @@ add_consents admin admin ${is_host} ${is_port}
 
 return 0;
 }
+
+add_identity_provider() {
+
+IS_name=$1
+IS_pass=$2
+is_host=$3
+is_port=$4
+
+request_data="create-idp.xml"
+
+ if [ ! -f "$request_data" ]
+  then
+   echo "$request_data File does not exists."
+   return -1
+ fi
+
+echo
+echo "Please enter your API key"
+echo "(This can be found in the Keys and Access token section in the Application settings)"
+echo
+read key
+echo
+echo "Please enter your API secret"
+echo "(This can be found in the Keys and Access token section in the Application settings)"
+echo
+read secret
+echo
+
+ if [ -f "create-idp.xml" ]
+  then
+   rm -r create-idp.xml
+ fi
+
+echo "Creating Identity Provider..."
+touch create-idp.xml
+echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelope/"\" xmlns:mgt="\"http://mgt.idp.carbon.wso2.org"\" xmlns:xsd="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns4:addIdP xmlns:ns4="\"http://mgt.idp.carbon.wso2.org"\">
+  <ns4:identityProvider>
+    <ns1:alias xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">https://${is_host}:${is_port}/oauth2/token</ns1:alias>
+    <ns1:certificate xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/>
+    <claimConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">
+      <localClaimDialect>true</localClaimDialect>
+      <roleClaimURI>http://wso2.org/claims/role</roleClaimURI>
+      <userClaimURI xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/>
+    </claimConfig>
+    <defaultAuthenticatorConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">
+      <displayName>twitterIDP</displayName>
+      <enabled>true</enabled>
+      <name>TwitterAuthenticator</name>
+      <properties>
+        <name>APIKey</name>
+        <value>${key}</value>
+      </properties>
+      <properties>
+        <name>APISecret</name>
+        <value>${secret}</value>
+      </properties>
+      <properties>
+        <name>callbackUrl</name>
+        <value>https://${is_host}:${is_port}/commonauth</value>
+      </properties>
+    </defaultAuthenticatorConfig>
+    <ns1:displayName xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/>
+    <ns1:enable xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">false</ns1:enable>
+    <federatedAuthenticatorConfigs xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">
+      <displayName>twitter</displayName>
+      <enabled>true</enabled>
+      <name>TwitterAuthenticator</name>
+      <properties>
+        <name>APIKey</name>
+        <value>${key}</value>
+      </properties>
+      <properties>
+        <name>APISecret</name>
+        <value>${secret}</value>
+      </properties>
+      <properties>
+        <name>callbackUrl</name>
+        <value>https://${is_host}:${is_port}/commonauth</value>
+      </properties>
+    </federatedAuthenticatorConfigs>
+    <justInTimeProvisioningConfig xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" >
+      <provisioningEnabled>true</provisioningEnabled>
+      <provisioningUserStore>PRIMARY</provisioningUserStore>
+      <passwordProvisioningEnabled>true</passwordProvisioningEnabled>
+      <promptConsent>true</promptConsent>
+    </justInTimeProvisioningConfig>
+    <ns1:federationHub xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">false</ns1:federationHub>
+    <ns1:homeRealmId xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/>
+    <ns1:identityProviderDescription xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/>
+    <ns1:identityProviderName xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">IDP-twitter</ns1:identityProviderName>
+    <permissionAndRoleConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"/>
+    <ns1:provisioningRole xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/>
+  </ns4:identityProvider>
+</ns4:addIdP>
+</soapenv:Body>
+</soapenv:Envelope>" >> create-idp.xml
+
+curl -s -k --user ${IS_name}:${IS_pass} -d @$request_data -H "Content-Type: text/xml" -H "SOAPAction: urn:addIdP" -o /dev/null https://${is_host}:${is_port}/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/
+res=$?
+ if test "${res}" != "0"; then
+  echo "!! Problem occurred while creating the identity provider. !!"
+  echo
+  return -1
+ fi
+echo "** The identity provider was successfully created. **"
+echo
+
+return 0;
+}
+
 
 add_user() {
 
@@ -825,6 +1101,65 @@ echo "** Successfully updated the application ${sp_name}. **"
 return 0;
 }
 
+delete_idp() {
+soap_action=$1
+endpoint=$2
+request_data="$delete-idp-twitter.xml"
+
+ if [ ! -d "$scenario" ]
+  then
+    echo "$scenario Directory not exists."
+    return -1
+  fi
+
+  if [ ! -f "$request_data" ]
+   then
+    echo "$request_data File does not exists."
+    return -1
+  fi
+
+echo
+echo "Deleting Identity Provider IDP-twitter..."
+
+# Send the SOAP request to delete a SP.
+curl -s -k -d @$request_data -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: ${soap_action}" -o /dev/null $endpoint
+res=$?
+ if test "${res}" != "0"; then
+  echo "!! Problem occurred while deleting the service provider. !!"
+  echo
+  return -1
+ fi
+echo "** Identity Provider IDP-twitter successfully deleted. **"
+cd ..
+return 0;
+}
+
+
+delete_setup_fed() {
+is_host=$1
+is_port=$2
+echo "If you have finished trying out the sample web apps, you can clean the process now."
+echo "Do you want to clean up the setup?"
+echo
+echo "Press y - YES"
+echo "Press n - NO"
+echo
+read clean
+
+ case ${clean} in
+        [Yy]* )
+        delete_idp urn:deleteIdP https://${is_host}:${is_port}/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/
+        delete_sp pickup urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+        delete_user ${is_host} ${is_port}
+
+    break;;
+        [Nn]* ) exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+
+return 0;
+}
+
 delete_setup() {
 is_host=$1
 is_port=$2
@@ -1077,7 +1412,12 @@ return 0;
 start_the_flow() {
 
 echo "----------------------------------------------------------------"
-echo "| Next, Try the below steps in order                            |"
+echo "| GDPR QSG is based on two scenarios.                           |"
+echo "|     Scenario 1: Provide consent during self-sign up           |"
+echo "|     Scenario 2: Provide consent for JIT provisioning in a     |"
+echo "|          federated scenario                                   |"
+echo "|                                                               |"
+echo "| Activity 1:                                                   |"
 echo "|                                                               |"
 echo "|  Step 1 - Add an admin user and Configure service providers.  |"
 echo "|                                                               |"
@@ -1094,8 +1434,17 @@ echo "|     Scenario 5: Admin user view users who has provided consent|"
 echo "|                 for promotion via notification app in order to|"
 echo "|                 send promotions via email or mobile           |"
 echo "|                                                               |"
+echo "| Activity 2:                                                   |"
+echo "|  Step 3 - Add an admin user, a Twitter IDP and Configure      |"
+echo "|  service providers.                                           |"
+echo "|                                                               |"
+echo "|   Once you finish step 3, Try out the below scenarios         |"
+echo "|     Scenario 6: Admin add consent purposes for                |"
+echo "|                JIT provisioning for user-on-boarding          |"
+echo "|     Scenario 7: Granting consent during Federated user login  |"
+echo "|     Scenario 8: View consents provided via the user portal    |"
 echo "----------------------------------------------------------------"
-echo "Type step 1 to proceed further : "
+echo "Please enter the Activity you want to try : "
 
 read scenario
 case $scenario in
@@ -1136,7 +1485,25 @@ case $scenario in
         esac
 
 	break ;;
+    2)
+    echo "You are now configuring pickup as a Service Provider and configure twitter as the federated IDP"
+    run_fed_step01 ${IS_HOST} ${IS_PORT} ${TOMCAT_HOST} ${TOMCAT_PORT}
+    if [ "$?" -ne "0" ]; then
+         echo "Sorry, we had a problem there!"
+    fi
+       echo "Now you can try out the scenario 6,7,8 !"
+       echo "Once you finish, please press 'q' to delete the setup "
+       read output1
+       case $output1 in
+             q)
+                 delete_setup ${IS_HOST} ${IS_PORT}
+                 ;;
 
+             *)
+                echo "Set up is not deleted. Please delete the set-up manually."
+                ;;
+             esac
+    ;;
     *)
 	echo "Sorry, that's not an option."
 	;;
