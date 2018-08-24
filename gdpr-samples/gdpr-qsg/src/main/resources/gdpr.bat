@@ -20,11 +20,49 @@ echo Please start from step 1:.
 echo "----------------------------------------------------------------"
 echo "| This is the Quick Start Guide for GDPR demonstrations.        |"
 echo "| =====================================================         |"
-echo "| Before run this make sure your WSO2 IS 5.7.0 and Tomcat is    |"
-echo "| running in default ports                                      |"
-echo "|                  WSO2 IS - 127.0.0.1:9443                     |"
-echo "|                  tomcat  - 127.0.0.1:8080                     |"
-echo "| Next, Try the below steps in order                            |"
+echo "Before Run: Make sure the following -                                         "
+echo "  * Added server details to the server.properties file in the QSG/bin folder  "
+echo "  * Your WSO2 IS 5.7.0 and Tomcat is running.                                 "
+echo "  * Configure the running domains/ips and ports in server.properties file     "
+echo "   in the QSG/bin folder.                                                     "
+echo " Next, Try the below steps in order                                           "
+echo " If okay to continue, Please press 'Y' else press 'N'                         "
+echo(
+set /p input="Please enter your answer..."
+    set result=false
+    IF "%input%"=="n" ( set result=true )
+    IF "%input%"=="N" ( set result=true )
+    IF "%result%" == "true" (
+        echo "Please make the necessary configurations and restart the script."
+        echo(
+        exit -1
+    )
+
+echo "Reading server paths from %PROPERTY_FILE%"
+
+FOR /F "eol=; tokens=6,2 delims==" %%i IN ('findstr "wso2is.host.domain" server.properties') DO SET IS_HOST_NEW=%%i
+REM echo %IS_HOST_NEW%
+
+FOR /F "eol=; tokens=6,2 delims==" %%i IN ('findstr "wso2is.host.port" server.properties') DO SET IS_PORT=%%i
+REM echo %IS_PORT%
+
+FOR /F "eol=; tokens=6,2 delims==" %%i IN ('findstr "tomcat.host.domain" server.properties') DO SET TOMCAT_HOST_NEW=%%i
+REM echo %TOMCAT_HOST_NEW%
+
+FOR /F "eol=; tokens=6,2 delims==" %%i IN ('findstr "tomcat.host.port" server.properties') DO SET TOMCAT_PORT=%%i
+REM echo %TOMCAT_PORT%
+
+IF "%IS_HOST_NEW%"=="localhost" (
+ set IS_HOST=127.0.0.1
+ )
+REM echo %IS_HOST%
+
+IF "%TOMCAT_HOST_NEW%"=="localhost" (
+ set TOMCAT_HOST=127.0.0.1
+)
+REM echo %TOMCAT_HOST%
+
+echo "----------------------------------------------------------------"
 echo "|                                                               |"
 echo "|  Step 1 - Add an admin user and Configure service providers.  |"
 echo "|                                                               |"
@@ -47,7 +85,7 @@ set /p scenario=Enter the step number you selected.
 
     IF "%scenario%"=="1" (
 
-        CALL :run_step01
+        CALL :run_step01 %IS_HOST% %IS_PORT% %TOMCAT_HOST% %TOMCAT_PORT%
         echo "Now you can try out the scenarios 1 to 4 !"
         echo "Once you finish please type any key to start step 2:"
         set /p nextStep1=Enter the step 2 you selected.
@@ -61,21 +99,26 @@ set /p scenario=Enter the step number you selected.
 
 :run_step01
 
-CALL :add_user admin admin
+set is_domain=%~1
+set is_port=%~2
+set tomcat_domain=%~3
+set tomcat_port=%~4
 
-CALL :configure_selfsignup "urn:updateResidentIdP" "https://127.0.0.1:9443/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4="
+CALL :add_user admin admin %is_host% %is_port%
 
-CALL :add_service_provider "pickup" "urn:createApplication" "https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4="
-CALL :add_service_provider "pick-my-book" "urn:createApplication" "https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4="
-CALL :add_service_provider "notification-center" "urn:createApplication" "https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4="
+CALL :configure_selfsignup "urn:updateResidentIdP" "https://%is_host%:%is_port%/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4=" %is_host% %is_port%
 
-CALL :configure_oidc "pickup" "urn:registerOAuthApplicationData" "https://127.0.0.1:9443/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4="
-CALL :configure_oidc "pick-my-book" "urn:registerOAuthApplicationData" "https://127.0.0.1:9443/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4="
-CALL :configure_oidc "notification-center" "urn:registerOAuthApplicationData" "https://127.0.0.1:9443/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4="
+CALL :add_service_provider "pickup" "urn:createApplication" "https://%is_host%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" "Y2FtZXJvbjpjYW1lcm9uMTIz" %is_host% %is_port% %tomcat_host% %tomcat_port%
+CALL :add_service_provider "pick-my-book" "urn:createApplication" "https://%is_host%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" "Y2FtZXJvbjpjYW1lcm9uMTIz" %is_host% %is_port% %tomcat_host% %tomcat_port%
+CALL :add_service_provider "notification-center" "urn:createApplication" "https://%is_host%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" "Y2FtZXJvbjpjYW1lcm9uMTIz" %is_host% %is_port% %tomcat_host% %tomcat_port%
 
-CALL :update_application_oidc "pickup" "YWRtaW46YWRtaW4=" "ZGlzcGF0Y2g=" "ZGlzcGF0Y2gxMjM0" "urn:updateApplication" "https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/"
-CALL :update_application_oidc "pick-my-book" "YWRtaW46YWRtaW4=" "c3dpZnRhcHA=" "c3dpZnRhcHAxMjM=" "urn:updateApplication" "https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/"
-CALL :update_application_oidc "notification-center" "YWRtaW46YWRtaW4=" "bm90aWZpY2F0aW9u" "bm90aWZpY2F0aW9uMTIz" "urn:updateApplication" "https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/"
+CALL :configure_oidc "pickup" "urn:registerOAuthApplicationData" "https://%is_host%:%is_port%/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/" "Y2FtZXJvbjpjYW1lcm9uMTIz"
+CALL :configure_oidc "pick-my-book" "urn:registerOAuthApplicationData" "https://%is_host%:%is_port%/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/" "Y2FtZXJvbjpjYW1lcm9uMTIz"
+CALL :configure_oidc "notification-center" "urn:registerOAuthApplicationData" "https://%is_host%:%is_port%/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/" "Y2FtZXJvbjpjYW1lcm9uMTIz"
+
+CALL :update_application_oidc "pickup" "Y2FtZXJvbjpjYW1lcm9uMTIz" "ZGlzcGF0Y2g=" "ZGlzcGF0Y2gxMjM0" "urn:updateApplication" "https://%is_host%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/"
+CALL :update_application_oidc "pick-my-book" "Y2FtZXJvbjpjYW1lcm9uMTIz" "c3dpZnRhcHA=" "c3dpZnRhcHAxMjM=" "urn:updateApplication" "https://%is_host%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/"
+CALL :update_application_oidc "notification-center" "Y2FtZXJvbjpjYW1lcm9uMTIz" "bm90aWZpY2F0aW9u" "bm90aWZpY2F0aW9uMTIz" "urn:updateApplication" "https://%is_host%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/"
 
 EXIT /B
 
@@ -107,10 +150,12 @@ EXIT /B
 
 set IS_name=%~1
 set IS_pass=%~2
+set is_domain=%~3
+set is_port=%~4
 set request_data=add-role.xml
 
 REM The following command can be used to create a user.
-curl -s -k --user %~1:%~2 --data "{"schemas":[],"name":{"familyName":"Smith","givenName":"Cameron"},"userName":"cameron","password":"cameron123","emails":"cameron@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://127.0.0.1:9443/wso2/scim/Users
+curl -s -k --user %~1:%~2 --data "{"schemas":[],"name":{"familyName":"Smith","givenName":"Cameron"},"userName":"cameron","password":"cameron123","emails":"cameron@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://%is_host%:%is_port%/wso2/scim/Users
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while creating user Cameron. !!
@@ -123,12 +168,12 @@ echo(
 echo Creating a role named Manager...
 
 REM The following command will add a role to the user.
-curl -s -k --user %~1:%~2 -d @%request_data% -H "Content-Type: text/xml" -H "SOAPAction: urn:addRole" -o NUL https://127.0.0.1:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k --user %~1:%~2 -d @%request_data% -H "Content-Type: text/xml" -H "SOAPAction: urn:addRole" -o NUL https://%is_host%:%is_port%/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while creating role manager. !!
   echo(
-  CALL :delete_user
+  CALL :delete_user %is_host% %is_port%
   echo(
   exit -1
 )
@@ -141,7 +186,7 @@ EXIT /B
 set IS_name=%~1
 set IS_pass=%~2
 
-curl -s -k --user %~1:%~2 --data "{"schemas":[],"name":{"familyName":"Richards","givenName":"Alex"},"userName":"alex","password":"alex123","emails":"alex@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://127.0.0.1:9443/wso2/scim/Users
+curl -s -k --user %~1:%~2 --data "{"schemas":[],"name":{"familyName":"Richards","givenName":"Alex"},"userName":"alex","password":"alex123","emails":"alex@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://%is_host%:%is_port%/wso2/scim/Users
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while creating user Alex. !!
@@ -151,7 +196,7 @@ IF %ERRORLEVEL% NEQ 0 (
 echo ** The user Alex was successfully created. **
 echo(
 
-curl -s -k --user %~1:%~2 --data "{"schemas":[],"name":{"familyName":"Lively","givenName":"Blake"},"userName":"blake","password":"blake123","emails":"blake@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://127.0.0.1:9443/wso2/scim/Users
+curl -s -k --user %~1:%~2 --data "{"schemas":[],"name":{"familyName":"Lively","givenName":"Blake"},"userName":"blake","password":"blake123","emails":"blake@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://%is_host%:%is_port%/wso2/scim/Users
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while creating user Blake. !!
@@ -161,7 +206,7 @@ IF %ERRORLEVEL% NEQ 0 (
 echo ** The user Blake was successfully created. **
 echo(
 
-curl -s -k --user %~1:%~2 --data "{"schemas":[],"name":{"familyName":"Mathews","givenName":"Chris"},"userName":"chris","password":"chris123","emails":"chris@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://127.0.0.1:9443/wso2/scim/Users
+curl -s -k --user %~1:%~2 --data "{"schemas":[],"name":{"familyName":"Mathews","givenName":"Chris"},"userName":"chris","password":"chris123","emails":"chris@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://%is_host%:%is_port%/wso2/scim/Users
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while creating user Chris. !!
@@ -171,7 +216,7 @@ IF %ERRORLEVEL% NEQ 0 (
 echo ** The user Chris was successfully created. **
 echo(
 
-curl -s -k --user %~1:%~2 --data "{"schemas":[],"name":{"familyName":"Garret","givenName":"Dale"},"userName":"dale","password":"dale123","emails":"dale@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://127.0.0.1:9443/wso2/scim/Users
+curl -s -k --user %~1:%~2 --data "{"schemas":[],"name":{"familyName":"Garret","givenName":"Dale"},"userName":"dale","password":"dale123","emails":"dale@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://%is_host%:%is_port%/wso2/scim/Users
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while creating user Dale. !!
@@ -181,7 +226,7 @@ IF %ERRORLEVEL% NEQ 0 (
 echo ** The user Dale was successfully created. **
 echo(
 
-curl -s -k --user %~1:%~2 --data "{"schemas":[],"name":{"familyName":"Simon","givenName":"Eddie"},"userName":"eddie","password":"eddie123","emails":"eddie@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://127.0.0.1:9443/wso2/scim/Users
+curl -s -k --user %~1:%~2 --data "{"schemas":[],"name":{"familyName":"Simon","givenName":"Eddie"},"userName":"eddie","password":"eddie123","emails":"eddie@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://%is_host%:%is_port%/wso2/scim/Users
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while creating user Eddie. !!
@@ -191,7 +236,7 @@ IF %ERRORLEVEL% NEQ 0 (
 echo ** The user Eddie was successfully created. **
 echo(
 
-curl -s -k --user %~1:%~2 --data "{"schemas":[],"name":{"familyName":"Colin","givenName":"Gray"},"userName":"gray","password":"gray123","emails":"gray@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://127.0.0.1:9443/wso2/scim/Users
+curl -s -k --user %~1:%~2 --data "{"schemas":[],"name":{"familyName":"Colin","givenName":"Gray"},"userName":"gray","password":"gray123","emails":"gray@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://%is_host%:%is_port%/wso2/scim/Users
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while creating user Gray. !!
@@ -201,7 +246,7 @@ IF %ERRORLEVEL% NEQ 0 (
 echo ** The user Gray was successfully created. **
 echo(
 
-curl -s -k --user %~1:%~2 --data "{"schemas":[],"name":{"familyName":"Brown","givenName":"Harper"},"userName":"harper","password":"harper123","emails":"harper@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://127.0.0.1:9443/wso2/scim/Users
+curl -s -k --user %~1:%~2 --data "{"schemas":[],"name":{"familyName":"Brown","givenName":"Harper"},"userName":"harper","password":"harper123","emails":"harper@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://%is_host%:%is_port%/wso2/scim/Users
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while creating user Harper. !!
@@ -211,7 +256,7 @@ IF %ERRORLEVEL% NEQ 0 (
 echo ** The user Harper was successfully created. **
 echo(
 
-curl -s -k --user %~1:%~2 --data "{"schemas":[],"name":{"familyName":"Smith","givenName":"Jean"},"userName":"jean","password":"jean123","emails":"jean@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://127.0.0.1:9443/wso2/scim/Users
+curl -s -k --user %~1:%~2 --data "{"schemas":[],"name":{"familyName":"Smith","givenName":"Jean"},"userName":"jean","password":"jean123","emails":"jean@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://%is_host%:%is_port%/wso2/scim/Users
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while creating user Jean. !!
@@ -221,7 +266,7 @@ IF %ERRORLEVEL% NEQ 0 (
 echo ** The user Jean was successfully created. **
 echo(
 
-curl -s -k --user %~1:%~2 --data "{"schemas":[],"name":{"familyName":"Thomas","givenName":"Kelly"},"userName":"kelly","password":"kelly123","emails":"kelly@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://127.0.0.1:9443/wso2/scim/Users
+curl -s -k --user %~1:%~2 --data "{"schemas":[],"name":{"familyName":"Thomas","givenName":"Kelly"},"userName":"kelly","password":"kelly123","emails":"kelly@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://%is_host%:%is_port%/wso2/scim/Users
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while creating user Kelly. !!
@@ -231,7 +276,7 @@ IF %ERRORLEVEL% NEQ 0 (
 echo ** The user Kelly was successfully created. **
 echo(
 
-curl -s -k --user %~1:%~2 --data "{"schemas":[],"name":{"familyName":"Moore","givenName":"Ray"},"userName":"ray","password":"ray123","emails":"ray@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://127.0.0.1:9443/wso2/scim/Users
+curl -s -k --user %~1:%~2 --data "{"schemas":[],"name":{"familyName":"Moore","givenName":"Ray"},"userName":"ray","password":"ray123","emails":"ray@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://%is_host%:%is_port%/wso2/scim/Users
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while creating user Ray. !!
@@ -257,25 +302,25 @@ FOR /L %%b IN (1,1,2) DO IF "!cat_id:~-1!"==" " SET cat_id=!cat_id:~0,-1!
 FOR /F "tokens=*" %%A IN ('java -cp "%jarname%;lib/httpclient-4.5.3.jar;lib/httpcore-4.4.6.jar;lib/json-20180130.jar;lib/commons-logging-1.2.jar" PurposeIdRetriever') DO SET purp_id=%%A
 FOR /L %%b IN (1,1,2) DO IF "!purp_id:~-1!"==" " SET purp_id=!purp_id:~0,-1!
 
-curl -s -k -X POST "https://127.0.0.1:9443/api/identity/consent-mgt/v1.0/consents" -H "Authorization: Basic YWxleDphbGV4MTIz" -H "accept: application/json" -H "Content-Type: application/json" -o NUL -d "{\"services\":[{\"service\":\"127.0.0.1\",\"serviceDisplayName\": \"Resident IDP\",\"serviceDescription\": \"Resident IDP\",\"tenantDomain\":\"carbon.super\",\"purposes\":[{\"purposeId\":%purp_id%,\"purposeCategoryId\":[1],\"consentType\":\"EXPLICIT\",\"piiCategory\":[{\"piiCategoryId\":2,\"validity\":\"DATE_UNTIL:INDEFINITE\"},{\"piiCategoryId\":%cat_id%,\"validity\":\"DATE_UNTIL:INDEFINITE\"}],\"primaryPurpose\":true,\"termination\":\"DATE_UNTIL:INDEFINITE\",\"thirdPartyDisclosure\":false,\"thirdPartyName\":null}]}],\"collectionMethod\":\"Sign-Up\",\"jurisdiction\":\"CA\",\"language\":\"EN\",\"policyURL\":\"https://127.0.0.1:9443/authenticationendpoint/privacy_policy.do\",\"properties\":[{\"key\":\"publicKey\",\"value\":\"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAluZFdW1ynitztkWLC6xKegbRWxky+5P0p4ShYEOkHs30QI2VCuR6Qo4Bz5rTgLBrky03W1GAVrZxuvKRGj9V9+PmjdGtau4CTXu9pLLcqnruaczoSdvBYA3lS9a7zgFU0+s6kMl2EhB+rk7gXluEep7lIOenzfl2f6IoTKa2fVgVd3YKiSGsyL4tztS70vmmX121qm0sTJdKWP4HxXyqK9neolXI9fYyHOYILVNZ69z/73OOVhkh/mvTmWZLM7GM6sApmyLX6OXUp8z0pkY+vT/9+zRxxQs7GurC4/C1nK3rI/0ySUgGEafO1atNjYmlFN+M3tZX6nEcA6g94IavyQIDAQAB\"}]}"
+curl -s -k -X POST "https://%is_host%:%is_port%/api/identity/consent-mgt/v1.0/consents" -H "Authorization: Basic YWxleDphbGV4MTIz" -H "accept: application/json" -H "Content-Type: application/json" -o NUL -d "{\"services\":[{\"service\":\"127.0.0.1\",\"serviceDisplayName\": \"Resident IDP\",\"serviceDescription\": \"Resident IDP\",\"tenantDomain\":\"carbon.super\",\"purposes\":[{\"purposeId\":%purp_id%,\"purposeCategoryId\":[1],\"consentType\":\"EXPLICIT\",\"piiCategory\":[{\"piiCategoryId\":2,\"validity\":\"DATE_UNTIL:INDEFINITE\"},{\"piiCategoryId\":%cat_id%,\"validity\":\"DATE_UNTIL:INDEFINITE\"}],\"primaryPurpose\":true,\"termination\":\"DATE_UNTIL:INDEFINITE\",\"thirdPartyDisclosure\":false,\"thirdPartyName\":null}]}],\"collectionMethod\":\"Sign-Up\",\"jurisdiction\":\"CA\",\"language\":\"EN\",\"policyURL\":\"https://%is_host%:%is_port%/authenticationendpoint/privacy_policy.do\",\"properties\":[{\"key\":\"publicKey\",\"value\":\"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAluZFdW1ynitztkWLC6xKegbRWxky+5P0p4ShYEOkHs30QI2VCuR6Qo4Bz5rTgLBrky03W1GAVrZxuvKRGj9V9+PmjdGtau4CTXu9pLLcqnruaczoSdvBYA3lS9a7zgFU0+s6kMl2EhB+rk7gXluEep7lIOenzfl2f6IoTKa2fVgVd3YKiSGsyL4tztS70vmmX121qm0sTJdKWP4HxXyqK9neolXI9fYyHOYILVNZ69z/73OOVhkh/mvTmWZLM7GM6sApmyLX6OXUp8z0pkY+vT/9+zRxxQs7GurC4/C1nK3rI/0ySUgGEafO1atNjYmlFN+M3tZX6nEcA6g94IavyQIDAQAB\"}]}"
 
-curl -s -k -X POST "https://127.0.0.1:9443/api/identity/consent-mgt/v1.0/consents" -H "Authorization: Basic Ymxha2U6Ymxha2UxMjM=" -H "accept: application/json" -H "Content-Type: application/json" -o NUL -d "{\"services\":[{\"service\":\"127.0.0.1\",\"serviceDisplayName\": \"Resident IDP\",\"serviceDescription\": \"Resident IDP\",\"tenantDomain\":\"carbon.super\",\"purposes\":[{\"purposeId\":%purp_id%,\"purposeCategoryId\":[1],\"consentType\":\"EXPLICIT\",\"piiCategory\":[{\"piiCategoryId\":2,\"validity\":\"DATE_UNTIL:INDEFINITE\"}],\"primaryPurpose\":true,\"termination\":\"DATE_UNTIL:INDEFINITE\",\"thirdPartyDisclosure\":false,\"thirdPartyName\":null}]}],\"collectionMethod\":\"Sign-Up\",\"jurisdiction\":\"CA\",\"language\":\"EN\",\"policyURL\":\"https://127.0.0.1:9443/authenticationendpoint/privacy_policy.do\",\"properties\":[{\"key\":\"publicKey\",\"value\":\"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAluZFdW1ynitztkWLC6xKegbRWxky+5P0p4ShYEOkHs30QI2VCuR6Qo4Bz5rTgLBrky03W1GAVrZxuvKRGj9V9+PmjdGtau4CTXu9pLLcqnruaczoSdvBYA3lS9a7zgFU0+s6kMl2EhB+rk7gXluEep7lIOenzfl2f6IoTKa2fVgVd3YKiSGsyL4tztS70vmmX121qm0sTJdKWP4HxXyqK9neolXI9fYyHOYILVNZ69z/73OOVhkh/mvTmWZLM7GM6sApmyLX6OXUp8z0pkY+vT/9+zRxxQs7GurC4/C1nK3rI/0ySUgGEafO1atNjYmlFN+M3tZX6nEcA6g94IavyQIDAQAB\"}]}"
+curl -s -k -X POST "https://%is_host%:%is_port%/api/identity/consent-mgt/v1.0/consents" -H "Authorization: Basic Ymxha2U6Ymxha2UxMjM=" -H "accept: application/json" -H "Content-Type: application/json" -o NUL -d "{\"services\":[{\"service\":\"127.0.0.1\",\"serviceDisplayName\": \"Resident IDP\",\"serviceDescription\": \"Resident IDP\",\"tenantDomain\":\"carbon.super\",\"purposes\":[{\"purposeId\":%purp_id%,\"purposeCategoryId\":[1],\"consentType\":\"EXPLICIT\",\"piiCategory\":[{\"piiCategoryId\":2,\"validity\":\"DATE_UNTIL:INDEFINITE\"}],\"primaryPurpose\":true,\"termination\":\"DATE_UNTIL:INDEFINITE\",\"thirdPartyDisclosure\":false,\"thirdPartyName\":null}]}],\"collectionMethod\":\"Sign-Up\",\"jurisdiction\":\"CA\",\"language\":\"EN\",\"policyURL\":\"https://%is_host%:%is_port%/authenticationendpoint/privacy_policy.do\",\"properties\":[{\"key\":\"publicKey\",\"value\":\"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAluZFdW1ynitztkWLC6xKegbRWxky+5P0p4ShYEOkHs30QI2VCuR6Qo4Bz5rTgLBrky03W1GAVrZxuvKRGj9V9+PmjdGtau4CTXu9pLLcqnruaczoSdvBYA3lS9a7zgFU0+s6kMl2EhB+rk7gXluEep7lIOenzfl2f6IoTKa2fVgVd3YKiSGsyL4tztS70vmmX121qm0sTJdKWP4HxXyqK9neolXI9fYyHOYILVNZ69z/73OOVhkh/mvTmWZLM7GM6sApmyLX6OXUp8z0pkY+vT/9+zRxxQs7GurC4/C1nK3rI/0ySUgGEafO1atNjYmlFN+M3tZX6nEcA6g94IavyQIDAQAB\"}]}"
 
-curl -s -k -X POST "https://127.0.0.1:9443/api/identity/consent-mgt/v1.0/consents" -H "Authorization: Basic Y2hyaXM6Y2hyaXMxMjM=" -H "accept: application/json" -H "Content-Type: application/json" -o NUL -d "{\"services\":[{\"service\":\"127.0.0.1\",\"serviceDisplayName\": \"Resident IDP\",\"serviceDescription\": \"Resident IDP\",\"tenantDomain\":\"carbon.super\",\"purposes\":[{\"purposeId\":%purp_id%,\"purposeCategoryId\":[1],\"consentType\":\"EXPLICIT\",\"piiCategory\":[{\"piiCategoryId\":2,\"validity\":\"DATE_UNTIL:INDEFINITE\"},{\"piiCategoryId\":%cat_id%,\"validity\":\"DATE_UNTIL:INDEFINITE\"}],\"primaryPurpose\":true,\"termination\":\"DATE_UNTIL:INDEFINITE\",\"thirdPartyDisclosure\":false,\"thirdPartyName\":null}]}],\"collectionMethod\":\"Sign-Up\",\"jurisdiction\":\"CA\",\"language\":\"EN\",\"policyURL\":\"https://127.0.0.1:9443/authenticationendpoint/privacy_policy.do\",\"properties\":[{\"key\":\"publicKey\",\"value\":\"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAluZFdW1ynitztkWLC6xKegbRWxky+5P0p4ShYEOkHs30QI2VCuR6Qo4Bz5rTgLBrky03W1GAVrZxuvKRGj9V9+PmjdGtau4CTXu9pLLcqnruaczoSdvBYA3lS9a7zgFU0+s6kMl2EhB+rk7gXluEep7lIOenzfl2f6IoTKa2fVgVd3YKiSGsyL4tztS70vmmX121qm0sTJdKWP4HxXyqK9neolXI9fYyHOYILVNZ69z/73OOVhkh/mvTmWZLM7GM6sApmyLX6OXUp8z0pkY+vT/9+zRxxQs7GurC4/C1nK3rI/0ySUgGEafO1atNjYmlFN+M3tZX6nEcA6g94IavyQIDAQAB\"}]}"
+curl -s -k -X POST "https://%is_host%:%is_port%/api/identity/consent-mgt/v1.0/consents" -H "Authorization: Basic Y2hyaXM6Y2hyaXMxMjM=" -H "accept: application/json" -H "Content-Type: application/json" -o NUL -d "{\"services\":[{\"service\":\"127.0.0.1\",\"serviceDisplayName\": \"Resident IDP\",\"serviceDescription\": \"Resident IDP\",\"tenantDomain\":\"carbon.super\",\"purposes\":[{\"purposeId\":%purp_id%,\"purposeCategoryId\":[1],\"consentType\":\"EXPLICIT\",\"piiCategory\":[{\"piiCategoryId\":2,\"validity\":\"DATE_UNTIL:INDEFINITE\"},{\"piiCategoryId\":%cat_id%,\"validity\":\"DATE_UNTIL:INDEFINITE\"}],\"primaryPurpose\":true,\"termination\":\"DATE_UNTIL:INDEFINITE\",\"thirdPartyDisclosure\":false,\"thirdPartyName\":null}]}],\"collectionMethod\":\"Sign-Up\",\"jurisdiction\":\"CA\",\"language\":\"EN\",\"policyURL\":\"https://%is_host%:%is_port%/authenticationendpoint/privacy_policy.do\",\"properties\":[{\"key\":\"publicKey\",\"value\":\"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAluZFdW1ynitztkWLC6xKegbRWxky+5P0p4ShYEOkHs30QI2VCuR6Qo4Bz5rTgLBrky03W1GAVrZxuvKRGj9V9+PmjdGtau4CTXu9pLLcqnruaczoSdvBYA3lS9a7zgFU0+s6kMl2EhB+rk7gXluEep7lIOenzfl2f6IoTKa2fVgVd3YKiSGsyL4tztS70vmmX121qm0sTJdKWP4HxXyqK9neolXI9fYyHOYILVNZ69z/73OOVhkh/mvTmWZLM7GM6sApmyLX6OXUp8z0pkY+vT/9+zRxxQs7GurC4/C1nK3rI/0ySUgGEafO1atNjYmlFN+M3tZX6nEcA6g94IavyQIDAQAB\"}]}"
 
-curl -s -k -X POST "https://127.0.0.1:9443/api/identity/consent-mgt/v1.0/consents" -H "Authorization: Basic ZGFsZTpkYWxlMTIz" -H "accept: application/json" -H "Content-Type: application/json" -o NUL -d "{\"services\":[{\"service\":\"127.0.0.1\",\"serviceDisplayName\": \"Resident IDP\",\"serviceDescription\": \"Resident IDP\",\"tenantDomain\":\"carbon.super\",\"purposes\":[{\"purposeId\":%purp_id%,\"purposeCategoryId\":[1],\"consentType\":\"EXPLICIT\",\"piiCategory\":[{\"piiCategoryId\":2,\"validity\":\"DATE_UNTIL:INDEFINITE\"}],\"primaryPurpose\":true,\"termination\":\"DATE_UNTIL:INDEFINITE\",\"thirdPartyDisclosure\":false,\"thirdPartyName\":null}]}],\"collectionMethod\":\"Sign-Up\",\"jurisdiction\":\"CA\",\"language\":\"EN\",\"policyURL\":\"https://127.0.0.1:9443/authenticationendpoint/privacy_policy.do\",\"properties\":[{\"key\":\"publicKey\",\"value\":\"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAluZFdW1ynitztkWLC6xKegbRWxky+5P0p4ShYEOkHs30QI2VCuR6Qo4Bz5rTgLBrky03W1GAVrZxuvKRGj9V9+PmjdGtau4CTXu9pLLcqnruaczoSdvBYA3lS9a7zgFU0+s6kMl2EhB+rk7gXluEep7lIOenzfl2f6IoTKa2fVgVd3YKiSGsyL4tztS70vmmX121qm0sTJdKWP4HxXyqK9neolXI9fYyHOYILVNZ69z/73OOVhkh/mvTmWZLM7GM6sApmyLX6OXUp8z0pkY+vT/9+zRxxQs7GurC4/C1nK3rI/0ySUgGEafO1atNjYmlFN+M3tZX6nEcA6g94IavyQIDAQAB\"}]}"
+curl -s -k -X POST "https://%is_host%:%is_port%/api/identity/consent-mgt/v1.0/consents" -H "Authorization: Basic ZGFsZTpkYWxlMTIz" -H "accept: application/json" -H "Content-Type: application/json" -o NUL -d "{\"services\":[{\"service\":\"127.0.0.1\",\"serviceDisplayName\": \"Resident IDP\",\"serviceDescription\": \"Resident IDP\",\"tenantDomain\":\"carbon.super\",\"purposes\":[{\"purposeId\":%purp_id%,\"purposeCategoryId\":[1],\"consentType\":\"EXPLICIT\",\"piiCategory\":[{\"piiCategoryId\":2,\"validity\":\"DATE_UNTIL:INDEFINITE\"}],\"primaryPurpose\":true,\"termination\":\"DATE_UNTIL:INDEFINITE\",\"thirdPartyDisclosure\":false,\"thirdPartyName\":null}]}],\"collectionMethod\":\"Sign-Up\",\"jurisdiction\":\"CA\",\"language\":\"EN\",\"policyURL\":\"https://%is_host%:%is_port%/authenticationendpoint/privacy_policy.do\",\"properties\":[{\"key\":\"publicKey\",\"value\":\"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAluZFdW1ynitztkWLC6xKegbRWxky+5P0p4ShYEOkHs30QI2VCuR6Qo4Bz5rTgLBrky03W1GAVrZxuvKRGj9V9+PmjdGtau4CTXu9pLLcqnruaczoSdvBYA3lS9a7zgFU0+s6kMl2EhB+rk7gXluEep7lIOenzfl2f6IoTKa2fVgVd3YKiSGsyL4tztS70vmmX121qm0sTJdKWP4HxXyqK9neolXI9fYyHOYILVNZ69z/73OOVhkh/mvTmWZLM7GM6sApmyLX6OXUp8z0pkY+vT/9+zRxxQs7GurC4/C1nK3rI/0ySUgGEafO1atNjYmlFN+M3tZX6nEcA6g94IavyQIDAQAB\"}]}"
 
-curl -s -k -X POST "https://127.0.0.1:9443/api/identity/consent-mgt/v1.0/consents" -H "Authorization: Basic ZWRkaWU6ZWRkaWUxMjM=" -H "accept: application/json" -H "Content-Type: application/json" -o NUL -d "{\"services\":[{\"service\":\"127.0.0.1\",\"serviceDisplayName\": \"Resident IDP\",\"serviceDescription\": \"Resident IDP\",\"tenantDomain\":\"carbon.super\",\"purposes\":[{\"purposeId\":%purp_id%,\"purposeCategoryId\":[1],\"consentType\":\"EXPLICIT\",\"piiCategory\":[{\"piiCategoryId\":2,\"validity\":\"DATE_UNTIL:INDEFINITE\"},{\"piiCategoryId\":%cat_id%,\"validity\":\"DATE_UNTIL:INDEFINITE\"}],\"primaryPurpose\":true,\"termination\":\"DATE_UNTIL:INDEFINITE\",\"thirdPartyDisclosure\":false,\"thirdPartyName\":null}]}],\"collectionMethod\":\"Sign-Up\",\"jurisdiction\":\"CA\",\"language\":\"EN\",\"policyURL\":\"https://127.0.0.1:9443/authenticationendpoint/privacy_policy.do\",\"properties\":[{\"key\":\"publicKey\",\"value\":\"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAluZFdW1ynitztkWLC6xKegbRWxky+5P0p4ShYEOkHs30QI2VCuR6Qo4Bz5rTgLBrky03W1GAVrZxuvKRGj9V9+PmjdGtau4CTXu9pLLcqnruaczoSdvBYA3lS9a7zgFU0+s6kMl2EhB+rk7gXluEep7lIOenzfl2f6IoTKa2fVgVd3YKiSGsyL4tztS70vmmX121qm0sTJdKWP4HxXyqK9neolXI9fYyHOYILVNZ69z/73OOVhkh/mvTmWZLM7GM6sApmyLX6OXUp8z0pkY+vT/9+zRxxQs7GurC4/C1nK3rI/0ySUgGEafO1atNjYmlFN+M3tZX6nEcA6g94IavyQIDAQAB\"}]}"
+curl -s -k -X POST "https://%is_host%:%is_port%/api/identity/consent-mgt/v1.0/consents" -H "Authorization: Basic ZWRkaWU6ZWRkaWUxMjM=" -H "accept: application/json" -H "Content-Type: application/json" -o NUL -d "{\"services\":[{\"service\":\"127.0.0.1\",\"serviceDisplayName\": \"Resident IDP\",\"serviceDescription\": \"Resident IDP\",\"tenantDomain\":\"carbon.super\",\"purposes\":[{\"purposeId\":%purp_id%,\"purposeCategoryId\":[1],\"consentType\":\"EXPLICIT\",\"piiCategory\":[{\"piiCategoryId\":2,\"validity\":\"DATE_UNTIL:INDEFINITE\"},{\"piiCategoryId\":%cat_id%,\"validity\":\"DATE_UNTIL:INDEFINITE\"}],\"primaryPurpose\":true,\"termination\":\"DATE_UNTIL:INDEFINITE\",\"thirdPartyDisclosure\":false,\"thirdPartyName\":null}]}],\"collectionMethod\":\"Sign-Up\",\"jurisdiction\":\"CA\",\"language\":\"EN\",\"policyURL\":\"https://%is_host%:%is_port%/authenticationendpoint/privacy_policy.do\",\"properties\":[{\"key\":\"publicKey\",\"value\":\"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAluZFdW1ynitztkWLC6xKegbRWxky+5P0p4ShYEOkHs30QI2VCuR6Qo4Bz5rTgLBrky03W1GAVrZxuvKRGj9V9+PmjdGtau4CTXu9pLLcqnruaczoSdvBYA3lS9a7zgFU0+s6kMl2EhB+rk7gXluEep7lIOenzfl2f6IoTKa2fVgVd3YKiSGsyL4tztS70vmmX121qm0sTJdKWP4HxXyqK9neolXI9fYyHOYILVNZ69z/73OOVhkh/mvTmWZLM7GM6sApmyLX6OXUp8z0pkY+vT/9+zRxxQs7GurC4/C1nK3rI/0ySUgGEafO1atNjYmlFN+M3tZX6nEcA6g94IavyQIDAQAB\"}]}"
 
-curl -s -k -X POST "https://127.0.0.1:9443/api/identity/consent-mgt/v1.0/consents" -H "Authorization: Basic Z3JheTpncmF5MTIz" -H "accept: application/json" -H "Content-Type: application/json" -o NUL -d "{\"services\":[{\"service\":\"127.0.0.1\",\"serviceDisplayName\": \"Resident IDP\",\"serviceDescription\": \"Resident IDP\",\"tenantDomain\":\"carbon.super\",\"purposes\":[{\"purposeId\":%purp_id%,\"purposeCategoryId\":[1],\"consentType\":\"EXPLICIT\",\"piiCategory\":[{\"piiCategoryId\":2,\"validity\":\"DATE_UNTIL:INDEFINITE\"}],\"primaryPurpose\":true,\"termination\":\"DATE_UNTIL:INDEFINITE\",\"thirdPartyDisclosure\":false,\"thirdPartyName\":null}]}],\"collectionMethod\":\"Sign-Up\",\"jurisdiction\":\"CA\",\"language\":\"EN\",\"policyURL\":\"https://127.0.0.1:9443/authenticationendpoint/privacy_policy.do\",\"properties\":[{\"key\":\"publicKey\",\"value\":\"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAluZFdW1ynitztkWLC6xKegbRWxky+5P0p4ShYEOkHs30QI2VCuR6Qo4Bz5rTgLBrky03W1GAVrZxuvKRGj9V9+PmjdGtau4CTXu9pLLcqnruaczoSdvBYA3lS9a7zgFU0+s6kMl2EhB+rk7gXluEep7lIOenzfl2f6IoTKa2fVgVd3YKiSGsyL4tztS70vmmX121qm0sTJdKWP4HxXyqK9neolXI9fYyHOYILVNZ69z/73OOVhkh/mvTmWZLM7GM6sApmyLX6OXUp8z0pkY+vT/9+zRxxQs7GurC4/C1nK3rI/0ySUgGEafO1atNjYmlFN+M3tZX6nEcA6g94IavyQIDAQAB\"}]}"
+curl -s -k -X POST "https://%is_host%:%is_port%/api/identity/consent-mgt/v1.0/consents" -H "Authorization: Basic Z3JheTpncmF5MTIz" -H "accept: application/json" -H "Content-Type: application/json" -o NUL -d "{\"services\":[{\"service\":\"127.0.0.1\",\"serviceDisplayName\": \"Resident IDP\",\"serviceDescription\": \"Resident IDP\",\"tenantDomain\":\"carbon.super\",\"purposes\":[{\"purposeId\":%purp_id%,\"purposeCategoryId\":[1],\"consentType\":\"EXPLICIT\",\"piiCategory\":[{\"piiCategoryId\":2,\"validity\":\"DATE_UNTIL:INDEFINITE\"}],\"primaryPurpose\":true,\"termination\":\"DATE_UNTIL:INDEFINITE\",\"thirdPartyDisclosure\":false,\"thirdPartyName\":null}]}],\"collectionMethod\":\"Sign-Up\",\"jurisdiction\":\"CA\",\"language\":\"EN\",\"policyURL\":\"https://%is_host%:%is_port%/authenticationendpoint/privacy_policy.do\",\"properties\":[{\"key\":\"publicKey\",\"value\":\"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAluZFdW1ynitztkWLC6xKegbRWxky+5P0p4ShYEOkHs30QI2VCuR6Qo4Bz5rTgLBrky03W1GAVrZxuvKRGj9V9+PmjdGtau4CTXu9pLLcqnruaczoSdvBYA3lS9a7zgFU0+s6kMl2EhB+rk7gXluEep7lIOenzfl2f6IoTKa2fVgVd3YKiSGsyL4tztS70vmmX121qm0sTJdKWP4HxXyqK9neolXI9fYyHOYILVNZ69z/73OOVhkh/mvTmWZLM7GM6sApmyLX6OXUp8z0pkY+vT/9+zRxxQs7GurC4/C1nK3rI/0ySUgGEafO1atNjYmlFN+M3tZX6nEcA6g94IavyQIDAQAB\"}]}"
 
-curl -s -k -X POST "https://127.0.0.1:9443/api/identity/consent-mgt/v1.0/consents" -H "Authorization: Basic aGFycGVyOmhhcnBlcjEyMw==" -H "accept: application/json" -H "Content-Type: application/json" -o NUL -d "{\"services\":[{\"service\":\"127.0.0.1\",\"serviceDisplayName\": \"Resident IDP\",\"serviceDescription\": \"Resident IDP\",\"tenantDomain\":\"carbon.super\",\"purposes\":[{\"purposeId\":%purp_id%,\"purposeCategoryId\":[1],\"consentType\":\"EXPLICIT\",\"piiCategory\":[{\"piiCategoryId\":2,\"validity\":\"DATE_UNTIL:INDEFINITE\"},{\"piiCategoryId\":%cat_id%,\"validity\":\"DATE_UNTIL:INDEFINITE\"}],\"primaryPurpose\":true,\"termination\":\"DATE_UNTIL:INDEFINITE\",\"thirdPartyDisclosure\":false,\"thirdPartyName\":null}]}],\"collectionMethod\":\"Sign-Up\",\"jurisdiction\":\"CA\",\"language\":\"EN\",\"policyURL\":\"https://127.0.0.1:9443/authenticationendpoint/privacy_policy.do\",\"properties\":[{\"key\":\"publicKey\",\"value\":\"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAluZFdW1ynitztkWLC6xKegbRWxky+5P0p4ShYEOkHs30QI2VCuR6Qo4Bz5rTgLBrky03W1GAVrZxuvKRGj9V9+PmjdGtau4CTXu9pLLcqnruaczoSdvBYA3lS9a7zgFU0+s6kMl2EhB+rk7gXluEep7lIOenzfl2f6IoTKa2fVgVd3YKiSGsyL4tztS70vmmX121qm0sTJdKWP4HxXyqK9neolXI9fYyHOYILVNZ69z/73OOVhkh/mvTmWZLM7GM6sApmyLX6OXUp8z0pkY+vT/9+zRxxQs7GurC4/C1nK3rI/0ySUgGEafO1atNjYmlFN+M3tZX6nEcA6g94IavyQIDAQAB\"}]}"
+curl -s -k -X POST "https://%is_host%:%is_port%/api/identity/consent-mgt/v1.0/consents" -H "Authorization: Basic aGFycGVyOmhhcnBlcjEyMw==" -H "accept: application/json" -H "Content-Type: application/json" -o NUL -d "{\"services\":[{\"service\":\"127.0.0.1\",\"serviceDisplayName\": \"Resident IDP\",\"serviceDescription\": \"Resident IDP\",\"tenantDomain\":\"carbon.super\",\"purposes\":[{\"purposeId\":%purp_id%,\"purposeCategoryId\":[1],\"consentType\":\"EXPLICIT\",\"piiCategory\":[{\"piiCategoryId\":2,\"validity\":\"DATE_UNTIL:INDEFINITE\"},{\"piiCategoryId\":%cat_id%,\"validity\":\"DATE_UNTIL:INDEFINITE\"}],\"primaryPurpose\":true,\"termination\":\"DATE_UNTIL:INDEFINITE\",\"thirdPartyDisclosure\":false,\"thirdPartyName\":null}]}],\"collectionMethod\":\"Sign-Up\",\"jurisdiction\":\"CA\",\"language\":\"EN\",\"policyURL\":\"https://%is_host%:%is_port%/authenticationendpoint/privacy_policy.do\",\"properties\":[{\"key\":\"publicKey\",\"value\":\"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAluZFdW1ynitztkWLC6xKegbRWxky+5P0p4ShYEOkHs30QI2VCuR6Qo4Bz5rTgLBrky03W1GAVrZxuvKRGj9V9+PmjdGtau4CTXu9pLLcqnruaczoSdvBYA3lS9a7zgFU0+s6kMl2EhB+rk7gXluEep7lIOenzfl2f6IoTKa2fVgVd3YKiSGsyL4tztS70vmmX121qm0sTJdKWP4HxXyqK9neolXI9fYyHOYILVNZ69z/73OOVhkh/mvTmWZLM7GM6sApmyLX6OXUp8z0pkY+vT/9+zRxxQs7GurC4/C1nK3rI/0ySUgGEafO1atNjYmlFN+M3tZX6nEcA6g94IavyQIDAQAB\"}]}"
 
-curl -s -k -X POST "https://127.0.0.1:9443/api/identity/consent-mgt/v1.0/consents" -H "Authorization: Basic amVhbjpqZWFuMTIz" -H "accept: application/json" -H "Content-Type: application/json" -o NUL -d "{\"services\":[{\"service\":\"127.0.0.1\",\"serviceDisplayName\": \"Resident IDP\",\"serviceDescription\": \"Resident IDP\",\"tenantDomain\":\"carbon.super\",\"purposes\":[{\"purposeId\":%purp_id%,\"purposeCategoryId\":[1],\"consentType\":\"EXPLICIT\",\"piiCategory\":[{\"piiCategoryId\":2,\"validity\":\"DATE_UNTIL:INDEFINITE\"}],\"primaryPurpose\":true,\"termination\":\"DATE_UNTIL:INDEFINITE\",\"thirdPartyDisclosure\":false,\"thirdPartyName\":null}]}],\"collectionMethod\":\"Sign-Up\",\"jurisdiction\":\"CA\",\"language\":\"EN\",\"policyURL\":\"https://127.0.0.1:9443/authenticationendpoint/privacy_policy.do\",\"properties\":[{\"key\":\"publicKey\",\"value\":\"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAluZFdW1ynitztkWLC6xKegbRWxky+5P0p4ShYEOkHs30QI2VCuR6Qo4Bz5rTgLBrky03W1GAVrZxuvKRGj9V9+PmjdGtau4CTXu9pLLcqnruaczoSdvBYA3lS9a7zgFU0+s6kMl2EhB+rk7gXluEep7lIOenzfl2f6IoTKa2fVgVd3YKiSGsyL4tztS70vmmX121qm0sTJdKWP4HxXyqK9neolXI9fYyHOYILVNZ69z/73OOVhkh/mvTmWZLM7GM6sApmyLX6OXUp8z0pkY+vT/9+zRxxQs7GurC4/C1nK3rI/0ySUgGEafO1atNjYmlFN+M3tZX6nEcA6g94IavyQIDAQAB\"}]}"
+curl -s -k -X POST "https://%is_host%:%is_port%/api/identity/consent-mgt/v1.0/consents" -H "Authorization: Basic amVhbjpqZWFuMTIz" -H "accept: application/json" -H "Content-Type: application/json" -o NUL -d "{\"services\":[{\"service\":\"127.0.0.1\",\"serviceDisplayName\": \"Resident IDP\",\"serviceDescription\": \"Resident IDP\",\"tenantDomain\":\"carbon.super\",\"purposes\":[{\"purposeId\":%purp_id%,\"purposeCategoryId\":[1],\"consentType\":\"EXPLICIT\",\"piiCategory\":[{\"piiCategoryId\":2,\"validity\":\"DATE_UNTIL:INDEFINITE\"}],\"primaryPurpose\":true,\"termination\":\"DATE_UNTIL:INDEFINITE\",\"thirdPartyDisclosure\":false,\"thirdPartyName\":null}]}],\"collectionMethod\":\"Sign-Up\",\"jurisdiction\":\"CA\",\"language\":\"EN\",\"policyURL\":\"https://%is_host%:%is_port%/authenticationendpoint/privacy_policy.do\",\"properties\":[{\"key\":\"publicKey\",\"value\":\"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAluZFdW1ynitztkWLC6xKegbRWxky+5P0p4ShYEOkHs30QI2VCuR6Qo4Bz5rTgLBrky03W1GAVrZxuvKRGj9V9+PmjdGtau4CTXu9pLLcqnruaczoSdvBYA3lS9a7zgFU0+s6kMl2EhB+rk7gXluEep7lIOenzfl2f6IoTKa2fVgVd3YKiSGsyL4tztS70vmmX121qm0sTJdKWP4HxXyqK9neolXI9fYyHOYILVNZ69z/73OOVhkh/mvTmWZLM7GM6sApmyLX6OXUp8z0pkY+vT/9+zRxxQs7GurC4/C1nK3rI/0ySUgGEafO1atNjYmlFN+M3tZX6nEcA6g94IavyQIDAQAB\"}]}"
 
-curl -s -k -X POST "https://127.0.0.1:9443/api/identity/consent-mgt/v1.0/consents" -H "Authorization: Basic a2VsbHk6a2VsbHkxMjM=" -H "accept: application/json" -H "Content-Type: application/json" -o NUL -d "{\"services\":[{\"service\":\"127.0.0.1\",\"serviceDisplayName\": \"Resident IDP\",\"serviceDescription\": \"Resident IDP\",\"tenantDomain\":\"carbon.super\",\"purposes\":[{\"purposeId\":%purp_id%,\"purposeCategoryId\":[1],\"consentType\":\"EXPLICIT\",\"piiCategory\":[{\"piiCategoryId\":2,\"validity\":\"DATE_UNTIL:INDEFINITE\"},{\"piiCategoryId\":%cat_id%,\"validity\":\"DATE_UNTIL:INDEFINITE\"}],\"primaryPurpose\":true,\"termination\":\"DATE_UNTIL:INDEFINITE\",\"thirdPartyDisclosure\":false,\"thirdPartyName\":null}]}],\"collectionMethod\":\"Sign-Up\",\"jurisdiction\":\"CA\",\"language\":\"EN\",\"policyURL\":\"https://127.0.0.1:9443/authenticationendpoint/privacy_policy.do\",\"properties\":[{\"key\":\"publicKey\",\"value\":\"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAluZFdW1ynitztkWLC6xKegbRWxky+5P0p4ShYEOkHs30QI2VCuR6Qo4Bz5rTgLBrky03W1GAVrZxuvKRGj9V9+PmjdGtau4CTXu9pLLcqnruaczoSdvBYA3lS9a7zgFU0+s6kMl2EhB+rk7gXluEep7lIOenzfl2f6IoTKa2fVgVd3YKiSGsyL4tztS70vmmX121qm0sTJdKWP4HxXyqK9neolXI9fYyHOYILVNZ69z/73OOVhkh/mvTmWZLM7GM6sApmyLX6OXUp8z0pkY+vT/9+zRxxQs7GurC4/C1nK3rI/0ySUgGEafO1atNjYmlFN+M3tZX6nEcA6g94IavyQIDAQAB\"}]}"
+curl -s -k -X POST "https://%is_host%:%is_port%/api/identity/consent-mgt/v1.0/consents" -H "Authorization: Basic a2VsbHk6a2VsbHkxMjM=" -H "accept: application/json" -H "Content-Type: application/json" -o NUL -d "{\"services\":[{\"service\":\"127.0.0.1\",\"serviceDisplayName\": \"Resident IDP\",\"serviceDescription\": \"Resident IDP\",\"tenantDomain\":\"carbon.super\",\"purposes\":[{\"purposeId\":%purp_id%,\"purposeCategoryId\":[1],\"consentType\":\"EXPLICIT\",\"piiCategory\":[{\"piiCategoryId\":2,\"validity\":\"DATE_UNTIL:INDEFINITE\"},{\"piiCategoryId\":%cat_id%,\"validity\":\"DATE_UNTIL:INDEFINITE\"}],\"primaryPurpose\":true,\"termination\":\"DATE_UNTIL:INDEFINITE\",\"thirdPartyDisclosure\":false,\"thirdPartyName\":null}]}],\"collectionMethod\":\"Sign-Up\",\"jurisdiction\":\"CA\",\"language\":\"EN\",\"policyURL\":\"https://%is_host%:%is_port%/authenticationendpoint/privacy_policy.do\",\"properties\":[{\"key\":\"publicKey\",\"value\":\"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAluZFdW1ynitztkWLC6xKegbRWxky+5P0p4ShYEOkHs30QI2VCuR6Qo4Bz5rTgLBrky03W1GAVrZxuvKRGj9V9+PmjdGtau4CTXu9pLLcqnruaczoSdvBYA3lS9a7zgFU0+s6kMl2EhB+rk7gXluEep7lIOenzfl2f6IoTKa2fVgVd3YKiSGsyL4tztS70vmmX121qm0sTJdKWP4HxXyqK9neolXI9fYyHOYILVNZ69z/73OOVhkh/mvTmWZLM7GM6sApmyLX6OXUp8z0pkY+vT/9+zRxxQs7GurC4/C1nK3rI/0ySUgGEafO1atNjYmlFN+M3tZX6nEcA6g94IavyQIDAQAB\"}]}"
 
-curl -s -k -X POST "https://127.0.0.1:9443/api/identity/consent-mgt/v1.0/consents" -H "Authorization: Basic cmF5OnJheTEyMw==" -H "accept: application/json" -H "Content-Type: application/json" -o NUL -d "{\"services\":[{\"service\":\"127.0.0.1\",\"serviceDisplayName\": \"Resident IDP\",\"serviceDescription\": \"Resident IDP\",\"tenantDomain\":\"carbon.super\",\"purposes\":[{\"purposeId\":%purp_id%,\"purposeCategoryId\":[1],\"consentType\":\"EXPLICIT\",\"piiCategory\":[{\"piiCategoryId\":2,\"validity\":\"DATE_UNTIL:INDEFINITE\"}],\"primaryPurpose\":true,\"termination\":\"DATE_UNTIL:INDEFINITE\",\"thirdPartyDisclosure\":false,\"thirdPartyName\":null}]}],\"collectionMethod\":\"Sign-Up\",\"jurisdiction\":\"CA\",\"language\":\"EN\",\"policyURL\":\"https://127.0.0.1:9443/authenticationendpoint/privacy_policy.do\",\"properties\":[{\"key\":\"publicKey\",\"value\":\"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAluZFdW1ynitztkWLC6xKegbRWxky+5P0p4ShYEOkHs30QI2VCuR6Qo4Bz5rTgLBrky03W1GAVrZxuvKRGj9V9+PmjdGtau4CTXu9pLLcqnruaczoSdvBYA3lS9a7zgFU0+s6kMl2EhB+rk7gXluEep7lIOenzfl2f6IoTKa2fVgVd3YKiSGsyL4tztS70vmmX121qm0sTJdKWP4HxXyqK9neolXI9fYyHOYILVNZ69z/73OOVhkh/mvTmWZLM7GM6sApmyLX6OXUp8z0pkY+vT/9+zRxxQs7GurC4/C1nK3rI/0ySUgGEafO1atNjYmlFN+M3tZX6nEcA6g94IavyQIDAQAB\"}]}"
+curl -s -k -X POST "https://%is_host%:%is_port%/api/identity/consent-mgt/v1.0/consents" -H "Authorization: Basic cmF5OnJheTEyMw==" -H "accept: application/json" -H "Content-Type: application/json" -o NUL -d "{\"services\":[{\"service\":\"127.0.0.1\",\"serviceDisplayName\": \"Resident IDP\",\"serviceDescription\": \"Resident IDP\",\"tenantDomain\":\"carbon.super\",\"purposes\":[{\"purposeId\":%purp_id%,\"purposeCategoryId\":[1],\"consentType\":\"EXPLICIT\",\"piiCategory\":[{\"piiCategoryId\":2,\"validity\":\"DATE_UNTIL:INDEFINITE\"}],\"primaryPurpose\":true,\"termination\":\"DATE_UNTIL:INDEFINITE\",\"thirdPartyDisclosure\":false,\"thirdPartyName\":null}]}],\"collectionMethod\":\"Sign-Up\",\"jurisdiction\":\"CA\",\"language\":\"EN\",\"policyURL\":\"https://%is_host%:%is_port%/authenticationendpoint/privacy_policy.do\",\"properties\":[{\"key\":\"publicKey\",\"value\":\"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAluZFdW1ynitztkWLC6xKegbRWxky+5P0p4ShYEOkHs30QI2VCuR6Qo4Bz5rTgLBrky03W1GAVrZxuvKRGj9V9+PmjdGtau4CTXu9pLLcqnruaczoSdvBYA3lS9a7zgFU0+s6kMl2EhB+rk7gXluEep7lIOenzfl2f6IoTKa2fVgVd3YKiSGsyL4tztS70vmmX121qm0sTJdKWP4HxXyqK9neolXI9fYyHOYILVNZ69z/73OOVhkh/mvTmWZLM7GM6sApmyLX6OXUp8z0pkY+vT/9+zRxxQs7GurC4/C1nK3rI/0ySUgGEafO1atNjYmlFN+M3tZX6nEcA6g94IavyQIDAQAB\"}]}"
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while adding consents. !!
@@ -292,6 +337,8 @@ EXIT /B
 set soap_action=%~1
 set endpoint=%~2
 set auth=%~3
+set is_domain=%~4
+set is_port=%~5
 
 set request_data=enable-selfsignup.xml
 
@@ -331,8 +378,8 @@ curl -s -k -d @%request_data% -H "Authorization: Basic %~4" -H "Content-Type: te
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while creating the service provider. !!
   echo(
-REM CALL :delete_sp dispatch Common urn:deleteApplication https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-REM CALL :delete_sp swift Common urn:deleteApplication https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+REM CALL :delete_sp dispatch Common urn:deleteApplication https://%is_host%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+REM CALL :delete_sp swift Common urn:deleteApplication https://%is_host%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
 REM CALL :delete_user
   echo(
   exit -1
@@ -377,13 +424,13 @@ IF EXIST "response_unformatted.xml" (
    DEL response_unformatted.xml
 )
 
-curl -s -k -d @%request_data% -H "Authorization: Basic %~2" -H "Content-Type: text/xml" -H "SOAPAction: urn:getApplication" https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ > response_unformatted.xml
+curl -s -k -d @%request_data% -H "Authorization: Basic %~2" -H "Content-Type: text/xml" -H "SOAPAction: urn:getApplication" https://%is_host%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ > response_unformatted.xml
 
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while getting application details for %sp_name%.... !!"
   echo(
-REM CALL :delete_sp dispatch Common urn:deleteApplication https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-REM CALL :delete_sp swift Common urn:deleteApplication https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+REM CALL :delete_sp dispatch Common urn:deleteApplication https://%is_host%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+REM CALL :delete_sp swift Common urn:deleteApplication https://%is_host%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
 REM CALL :delete_user
   echo(
   exit -1
@@ -403,8 +450,8 @@ curl -s -k -H "Authorization: Basic %~2" -H "Content-Type: text/xml" -H "SOAPAct
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while updating application %sp_name%.... !!"
   echo(
-REM CALL :delete_sp dispatch Common urn:deleteApplication https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-REM CALL :delete_sp swift Common urn:deleteApplication https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+REM CALL :delete_sp dispatch Common urn:deleteApplication https://%is_host%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+REM CALL :delete_sp swift Common urn:deleteApplication https://%is_host%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
 REM CALL :delete_user
   echo(
   exit -1
@@ -427,11 +474,11 @@ set result=false
      IF "%clean%"=="y" set result=true
      IF "%clean%"=="Y" set result=true
      IF "%result%" == "true" (
-        CALL :delete_sp "pickup" "urn:deleteApplication" "https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4="
-        CALL :delete_sp "pick-my-book" "urn:deleteApplication" "https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4="
-        CALL :delete_sp "notification-center" "urn:deleteApplication" "https://127.0.0.1:9443/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4="
-        CALL :delete_user
-        CALL :delete_users
+        CALL :delete_sp "pickup" "urn:deleteApplication" "https://%is_host%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" "Y2FtZXJvbjpjYW1lcm9uMTIz"
+        CALL :delete_sp "pick-my-book" "urn:deleteApplication" "https://%is_host%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" "Y2FtZXJvbjpjYW1lcm9uMTIz"
+        CALL :delete_sp "notification-center" "urn:deleteApplication" "https://%is_host%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" "Y2FtZXJvbjpjYW1lcm9uMTIz"
+        CALL :delete_user %is_host% %is_port%
+        CALL :delete_users %is_host% %is_port%
 	 )
      IF "%result%" == "false" (
      exit -1
@@ -440,7 +487,8 @@ set result=false
 EXIT /B
 
 :delete_user
-
+set is_domain=%~1
+set is_port=%~2
 set request_data1=delete-cameron.xml
 set request_data2=delete-role.xml
 
@@ -448,7 +496,7 @@ echo(
 echo "Deleting the user named cameron..."
 
 REM Send the SOAP request to delete the user.
-curl -s -k -d @%QSG%\%request_data1% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://127.0.0.1:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @%QSG%\%request_data1% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://%is_host%:%is_port%/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while deleting the user cameron. !!
@@ -461,7 +509,7 @@ echo(
 echo "Deleting the role named Manager..."
 
 REM Send the SOAP request to delete the role.
-curl -s -k -d @%QSG%\%request_data2% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteRole" -o NUL https://127.0.0.1:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @%QSG%\%request_data2% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteRole" -o NUL https://%is_host%:%is_port%/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while deleting the role Manager. !!
@@ -473,7 +521,8 @@ echo(
 EXIT /B
 
 :delete_users
-
+set is_domain=%~1
+set is_port=%~2
 set request_data1=delete-alex.xml
 set request_data2=delete-blake.xml
 set request_data3=delete-chris.xml
@@ -489,7 +538,7 @@ echo(
 echo "Deleting the user named Alex..."
 
 REM Send the SOAP request to delete the user.
-curl -s -k -d @%QSG%\%request_data1% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://127.0.0.1:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @%QSG%\%request_data1% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://%is_host%:%is_port%/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while deleting the user Alex. !!
@@ -503,7 +552,7 @@ echo(
 echo "Deleting the user named Blake..."
 
 REM Send the SOAP request to delete the user.
-curl -s -k -d @%QSG%\%request_data2% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://127.0.0.1:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @%QSG%\%request_data2% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://%is_host%:%is_port%/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while deleting the user Blake. !!
@@ -517,7 +566,7 @@ echo(
 echo "Deleting the user named Chris..."
 
 REM Send the SOAP request to delete the user.
-curl -s -k -d @%QSG%\%request_data3% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://127.0.0.1:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @%QSG%\%request_data3% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://%is_host%:%is_port%/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while deleting the user Chris. !!
@@ -531,7 +580,7 @@ echo(
 echo "Deleting the user named Dale..."
 
 REM Send the SOAP request to delete the user.
-curl -s -k -d @%QSG%\%request_data4% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://127.0.0.1:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @%QSG%\%request_data4% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://%is_host%:%is_port%/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while deleting the user Dale. !!
@@ -545,7 +594,7 @@ echo(
 echo "Deleting the user named Eddie..."
 
 REM Send the SOAP request to delete the user.
-curl -s -k -d @%QSG%\%request_data5% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://127.0.0.1:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @%QSG%\%request_data5% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://%is_host%:%is_port%/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while deleting the user Eddie. !!
@@ -559,7 +608,7 @@ echo(
 echo "Deleting the user named Gray..."
 
 REM Send the SOAP request to delete the user.
-curl -s -k -d @%QSG%\%request_data6% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://127.0.0.1:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @%QSG%\%request_data6% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://%is_host%:%is_port%/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while deleting the user Gray. !!
@@ -573,7 +622,7 @@ echo(
 echo "Deleting the user named Harper..."
 
 REM Send the SOAP request to delete the user.
-curl -s -k -d @%QSG%\%request_data7% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://127.0.0.1:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @%QSG%\%request_data7% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://%is_host%:%is_port%/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while deleting the user Harper. !!
@@ -587,7 +636,7 @@ echo(
 echo "Deleting the user named Jean..."
 
 REM Send the SOAP request to delete the user.
-curl -s -k -d @%QSG%\%request_data8% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://127.0.0.1:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @%QSG%\%request_data8% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://%is_host%:%is_port%/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while deleting the user Jean. !!
@@ -601,7 +650,7 @@ echo(
 echo "Deleting the user named Kelly..."
 
 REM Send the SOAP request to delete the user.
-curl -s -k -d @%QSG%\%request_data9% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://127.0.0.1:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @%QSG%\%request_data9% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://%is_host%:%is_port%/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while deleting the user Kelly. !!
@@ -615,7 +664,7 @@ echo(
 echo "Deleting the user named Ray..."
 
 REM Send the SOAP request to delete the user.
-curl -s -k -d @%QSG%\%request_data10% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://127.0.0.1:9443/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @%QSG%\%request_data10% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://%is_host%:%is_port%/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while deleting the user Ray. !!
