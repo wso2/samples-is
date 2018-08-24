@@ -62,7 +62,14 @@ IF "%TOMCAT_HOST_NEW%"=="localhost" (
 )
 REM echo %TOMCAT_HOST%
 
+
 echo "----------------------------------------------------------------"
+echo "| GDPR QSG is based on two scenarios.                           |"
+echo "|     Scenario 1: Provide consent during self-sign up           |"
+echo "|     Scenario 2: Provide consent for JIT provisioning in a     |"
+echo "|          federated scenario                                   |"
+echo "|                                                               |"
+echo "| Activity 1:                                                   |"
 echo "|                                                               |"
 echo "|  Step 1 - Add an admin user and Configure service providers.  |"
 echo "|                                                               |"
@@ -79,8 +86,17 @@ echo "|     Scenario 5: Admin user view users who has provided consent|"
 echo "|                 for promotion via notification app in order to|"
 echo "|                 send promotions via email or mobile           |"
 echo "|                                                               |"
+echo "| Activity 2:                                                   |"
+echo "|  Step 3 - Add an admin user, a Twitter IDP and Configure      |"
+echo "|  service providers.                                           |"
+echo "|                                                               |"
+echo "|   Once you finish step 3, Try out the below scenarios         |"
+echo "|     Scenario 6: Admin add consent purposes for                |"
+echo "|                JIT provisioning for user-on-boarding          |"
+echo "|     Scenario 7: Granting consent during Federated user login  |"
+echo "|     Scenario 8: View consents provided via the user portal    |"
 echo "----------------------------------------------------------------"
-echo "Type step 1 to proceed further : "
+echo "Please enter the Activity you want to try : "
 set /p scenario=Enter the step number you selected.
 
     IF "%scenario%"=="1" (
@@ -92,14 +108,77 @@ set /p scenario=Enter the step number you selected.
         CALL :next_step_02
 
    	) ELSE (
-        echo Please enter the correct step. It should be Step1.
-        CALL :delete_setup
-        EXIT 0
+
+        IF "%scenario%"=="2" (
+           echo "You are now configuring pickup as a Service Provider and configure twitter as the federated IDP"
+           CALL :run_fed_step01 %IS_HOST% %IS_PORT% %TOMCAT_HOST% %TOMCAT_PORT%
+           echo "Now you can try out the scenario 6,7,8 !"
+           echo "Once you finish, press 'q' to delete the set-up"
+           set /p nextStep3=Enter q to delete the set up.
+              IF "%nextStep3%"=="q" (
+                   CALL :delete_setup %IS_HOST% %IS_PORT%
+                   CALL :delete_idp urn:deleteIdP https://%IS_HOST%:%IS_PORT%/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/
+              ) ELSE (
+                   echo Set up is not deleted. Please delete the set-up manually.
+              )
+
+        ) ELSE (
+            echo Please enter the correct step. It should be Step1.
+            CALL :delete_setup %IS_HOST% %IS_PORT%
+            EXIT 0
+        )
     )
+
+REM Add a Federated authenticator support
+:run_fed_step01
+
+set is_host=%~1
+set is_port=%~2
+set tomcat_domain=%~3
+set tomcat_port=%~4
+
+CALL :add_user admin admin %is_host% %is_port%
+CALL :add_identity_provider admin admin %is_host% %is_port%
+CALL :add_service_provider "pickup" "urn:createApplication" "https://%is_host%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" "Y2FtZXJvbjpjYW1lcm9uMTIz" %is_host% %is_port% %tomcat_host% %tomcat_port%
+CALL :configure_oidc "pickup" "urn:registerOAuthApplicationData" "https://%is_host%:%is_port%/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/" "Y2FtZXJvbjpjYW1lcm9uMTIz"
+CALL :update_application_oidc "pickup" "Y2FtZXJvbjpjYW1lcm9uMTIz" "ZGlzcGF0Y2g=" "ZGlzcGF0Y2gxMjM0" "urn:updateApplication" "https://%is_host%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/"
+
+EXIT /B
+
+REM Add a Twitter Identity Provider
+:add_identity_provider
+
+set IS_name=%~1
+set IS_pass=%~2
+set is_host=%~3
+set is_port=%~4
+
+IF "%is_host%"=="127.0.0.1" (
+ set is_host=localhost
+)
+echo(
+echo "Please enter your API key"
+set /p key="(This can be found in the Keys and Access token section in the Application settings)"
+echo(
+echo "Please enter your API secret"
+set /p secret="(This can be found in the Keys and Access token section in the Application settings)"
+echo(
+
+echo "Creating Identity Provider..."
+
+curl -s -k --user %~1:%~2 -H "Content-Type: text/xml" -H "SOAPAction: urn:addIdP" -o NUL https://%is_host%:%is_port%/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/ -d "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelope/"\" xmlns:mgt="\"http://mgt.idp.carbon.wso2.org"\" xmlns:xsd="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><soapenv:Header/><soapenv:Body><ns4:addIdP xmlns:ns4="\"http://mgt.idp.carbon.wso2.org"\"><ns4:identityProvider><ns1:alias xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">https://%is_host%:%is_port%/oauth2/token</ns1:alias><ns1:certificate xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><claimConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><localClaimDialect>true</localClaimDialect><roleClaimURI>http://wso2.org/claims/role</roleClaimURI><userClaimURI xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/></claimConfig><defaultAuthenticatorConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><displayName>twitterIDP</displayName><enabled>true</enabled><name>TwitterAuthenticator</name><properties><name>APIKey</name><value>%key%</value></properties><properties><name>APISecret</name><value>%secret%</value></properties><properties><name>callbackUrl</name><value>https://%is_host%:%is_port%/commonauth</value></properties></defaultAuthenticatorConfig><ns1:displayName xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><ns1:enable xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">false</ns1:enable><federatedAuthenticatorConfigs xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><displayName>twitter</displayName><enabled>true</enabled><name>TwitterAuthenticator</name><properties><name>APIKey</name><value>%key%</value></properties><properties><name>APISecret</name><value>%secret%</value></properties><properties><name>callbackUrl</name><value>https://%is_host%:%is_port%/commonauth</value></properties></federatedAuthenticatorConfigs><justInTimeProvisioningConfig xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" ><provisioningEnabled>true</provisioningEnabled><provisioningUserStore>PRIMARY</provisioningUserStore><passwordProvisioningEnabled>true</passwordProvisioningEnabled><promptConsent>true</promptConsent></justInTimeProvisioningConfig><ns1:federationHub xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">false</ns1:federationHub><ns1:homeRealmId xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><ns1:identityProviderDescription xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><ns1:identityProviderName xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">IDP-twitter</ns1:identityProviderName><permissionAndRoleConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"/><ns1:provisioningRole xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/></ns4:identityProvider></ns4:addIdP></soapenv:Body></soapenv:Envelope>"
+IF %ERRORLEVEL% NEQ 0 (
+  echo "!! Problem occurred while creating the identity provider. !!"
+  echo(
+  exit -1
+)
+echo "** The identity provider was successfully created. **"
+echo(
+EXIT /B
 
 :run_step01
 
-set is_domain=%~1
+set is_host=%~1
 set is_port=%~2
 set tomcat_domain=%~3
 set tomcat_port=%~4
@@ -132,6 +211,9 @@ CALL :add_consents admin admin
 EXIT /B
 
 :next_step_02
+
+    set is_host=%~1
+    set is_port=%~1
     echo "Now multiple users will be added with consents to the system."
     CALL :run_step02
     echo "Now you can try out the scenario 5 !"
@@ -139,7 +221,7 @@ EXIT /B
     set /p nextStep2=Enter q to delete the set up.
 
             IF "%nextStep2%"=="q" (
-                CALL :delete_setup
+                CALL :delete_setup %is_host% %is_port%
             ) ELSE (
                echo Set up is not deleted. Please delete the set-up manually.
             )
@@ -150,7 +232,7 @@ EXIT /B
 
 set IS_name=%~1
 set IS_pass=%~2
-set is_domain=%~3
+set is_host=%~3
 set is_port=%~4
 set request_data=add-role.xml
 
@@ -337,7 +419,7 @@ EXIT /B
 set soap_action=%~1
 set endpoint=%~2
 set auth=%~3
-set is_domain=%~4
+set is_host=%~4
 set is_port=%~5
 
 set request_data=enable-selfsignup.xml
@@ -463,6 +545,8 @@ EXIT /B
 
 :delete_setup
 
+set is_host=%~1
+set is_port=%~2
 echo "If you have finished trying out the sample web apps, you can clean the process now."
 echo "Do you want to clean up the setup?"
 echo(
@@ -487,7 +571,7 @@ set result=false
 EXIT /B
 
 :delete_user
-set is_domain=%~1
+set is_host=%~1
 set is_port=%~2
 set request_data1=delete-cameron.xml
 set request_data2=delete-role.xml
@@ -521,7 +605,7 @@ echo(
 EXIT /B
 
 :delete_users
-set is_domain=%~1
+set is_host=%~1
 set is_port=%~2
 set request_data1=delete-alex.xml
 set request_data2=delete-blake.xml
@@ -701,3 +785,35 @@ IF %ERRORLEVEL% NEQ 0 (
 )
 echo ** Service Provider %~1 successfully deleted. **
 EXIT /B
+
+:delete_idp
+
+set soap_action=%~1
+set endpoint=%~2
+set request_data=delete-idp-twitter.xml
+
+IF NOT EXIST "%~1" (
+    echo "%~1 Directory not exists."
+    exit -1
+)
+
+IF NOT EXIST "%request_data%" (
+    echo "%request_data% File does not exists."
+    exit -1
+)
+
+echo(
+echo "Deleting Identity Provider IDP-twitter..."
+
+REM Send the SOAP request to delete twitter Idp.
+curl -s -k -d @%QSG%\%request_data% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: %~2" -o NUL %~3
+
+IF %ERRORLEVEL% NEQ 0 (
+  echo "!! Problem occurred while deleting the service provider. !!"
+  echo(
+  exit -1
+)
+echo "** Identity Provider IDP-twitter successfully deleted. **"
+echo(
+EXIT /B
+
