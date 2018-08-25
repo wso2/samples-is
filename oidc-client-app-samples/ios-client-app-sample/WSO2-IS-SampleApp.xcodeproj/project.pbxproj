@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2412CDFD3B1D5B23AC3EE65F /* Pods_WSO2_IS_SampleAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5F6DF6C1CA432C1F2FF999B /* Pods_WSO2_IS_SampleAppTests.framework */; };
 		2E95CD915361DA4EF6995E72 /* Pods_WSO2_IS_SampleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC8AAA34E9AE6C78E71AE45B /* Pods_WSO2_IS_SampleApp.framework */; };
+		894F0DFB212E9742000534CD /* WSO2OIDCAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F0DFA212E9742000534CD /* WSO2OIDCAuthService.swift */; };
 		89AA106821142F4C00D64645 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AA106721142F4C00D64645 /* AppDelegate.swift */; };
 		89AA106A21142F4C00D64645 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AA106921142F4C00D64645 /* LogInViewController.swift */; };
 		89AA106D21142F4C00D64645 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89AA106B21142F4C00D64645 /* Main.storyboard */; };
@@ -39,6 +40,7 @@
 /* Begin PBXFileReference section */
 		1EC2638003BA63D7A8F5F1C8 /* Pods-WSO2-IS-SampleAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WSO2-IS-SampleAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WSO2-IS-SampleAppTests/Pods-WSO2-IS-SampleAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		431C92A6CD79D9D4E5E4F22F /* Pods-WSO2-IS-SampleAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WSO2-IS-SampleAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WSO2-IS-SampleAppTests/Pods-WSO2-IS-SampleAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		894F0DFA212E9742000534CD /* WSO2OIDCAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WSO2OIDCAuthService.swift; sourceTree = "<group>"; };
 		89AA106421142F4C00D64645 /* WSO2 IS Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WSO2 IS Sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		89AA106721142F4C00D64645 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		89AA106921142F4C00D64645 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				89AA106E21142F4D00D64645 /* Assets.xcassets */,
 				89AA107321142F4D00D64645 /* Info.plist */,
 				89AA108A2117F5C500D64645 /* Config.plist */,
+				894F0DFA212E9742000534CD /* WSO2OIDCAuthService.swift */,
 			);
 			path = "WSO2-IS-SampleApp";
 			sourceTree = "<group>";
@@ -365,6 +368,7 @@
 				89AA10A8211BF37400D64645 /* UserInfo.swift in Sources */,
 				89AA106821142F4C00D64645 /* AppDelegate.swift in Sources */,
 				89AA10952118380900D64645 /* Constants.swift in Sources */,
+				894F0DFB212E9742000534CD /* WSO2OIDCAuthService.swift in Sources */,
 				89AA10A4211BEE1100D64645 /* AuthStateManager.swift in Sources */,
 				89AA10AA211BFF7B00D64645 /* UserInfoManager.swift in Sources */,
 			);

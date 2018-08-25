@@ -3,18 +3,18 @@
 <plist version="1.0">
 <dict>
 	<key>IssuerURL</key>
-	<string>https://localhost:9443/oauth/token</string>
+	<string>https://wso2is.local:9443</string>
 	<key>LogOutURL</key>
-	<string>https://localhost:9443/oidc/logout</string>
+	<string>https://wso2is.local:9443/oidc/logout</string>
 	<key>UserInfoURL</key>
-	<string>https://localhost:9443/oauth2/userinfo?schema=openid</string>
+	<string>https://wso2is.local:9443/oauth2/userinfo?schema=openid</string>
 	<key>TokenURL</key>
-	<string>https://localhost:9443/oauth2/token</string>
+	<string>https://wso2is.local:9443/oauth2/token</string>
 	<key>AuthURL</key>
-	<string>https://localhost:9443/oauth2/authorize</string>
+	<string>https://wso2is.local:9443/oauth2/authorize</string>
 	<key>RedirectURL</key>
 	<string>wso2issample://oauth</string>
 	<key>ClientID</key>
-	<string></string>
+	<string>BRa73rLLNiP5cGBflG7mjxG9N7Ya</string>
 </dict>
 </plist>
