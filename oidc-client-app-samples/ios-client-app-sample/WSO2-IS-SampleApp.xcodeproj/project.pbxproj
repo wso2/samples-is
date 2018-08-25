@@ -115,6 +115,14 @@
 			path = controllers;
 			sourceTree = "<group>";
 		};
+		894F0DFC2131A179000534CD /* service */ = {
+			isa = PBXGroup;
+			children = (
+				894F0DFA212E9742000534CD /* WSO2OIDCAuthService.swift */,
+			);
+			path = service;
+			sourceTree = "<group>";
+		};
 		89AA105B21142F4C00D64645 = {
 			isa = PBXGroup;
 			children = (
@@ -144,12 +152,12 @@
 				8925075521229D3B0031F299 /* controllers */,
 				89AA10A6211BF35F00D64645 /* model */,
 				89AA10A5211BEE2E00D64645 /* mgt */,
+				894F0DFC2131A179000534CD /* service */,
 				89AA109C2118BB4100D64645 /* utils */,
 				89AA109B2118B48800D64645 /* resources */,
 				89AA106E21142F4D00D64645 /* Assets.xcassets */,
 				89AA107321142F4D00D64645 /* Info.plist */,
 				89AA108A2117F5C500D64645 /* Config.plist */,
-				894F0DFA212E9742000534CD /* WSO2OIDCAuthService.swift */,
 			);
 			path = "WSO2-IS-SampleApp";
 			sourceTree = "<group>";
