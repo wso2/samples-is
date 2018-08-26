@@ -57,28 +57,8 @@ class WSO2OIDCAuthService {
     func logInUser(configFilePath: String, callingViewController: UIViewController,
                            completion: @escaping (_ userInfo : UserInfo?) -> Void) {
         
+        readConfig(path: configFilePath)
         self.authState = AuthStateManager.shared.getAuthState()
-        
-        //Load configurations into the resourceFileDictionary dictionary
-        configFileDictionary = NSDictionary(contentsOfFile: configFilePath)
-        
-        // Read from dictionary content
-        if let configFileDictionaryContent = configFileDictionary {
-            clientId = configFileDictionaryContent.object(forKey:
-                Constants.OAuthReqConstants.kClientIdPropKey) as? String
-            issuerURLStr = configFileDictionaryContent.object(forKey:
-                Constants.OAuthReqConstants.kIssuerIdPropKey) as? String
-            redirectURLStr = configFileDictionaryContent.object(forKey:
-                Constants.OAuthReqConstants.kRedirectURLPropKey) as? String
-            authURLStr = configFileDictionaryContent.object(forKey:
-                Constants.OAuthReqConstants.kAuthURLPropKey) as? String
-            tokenURLStr = configFileDictionaryContent.object(forKey:
-                Constants.OAuthReqConstants.kTokenURLPropKey) as? String
-            userInfoURLStr = configFileDictionaryContent.object(forKey:
-                Constants.OAuthReqConstants.kUserInfoURLPropKey) as? String
-            logoutURLStr = configFileDictionaryContent.object(forKey:
-                Constants.OAuthReqConstants.kLogoutURLPropKey) as? String
-        }
         
         let authURL = URL(string: authURLStr!)
         let tokenURL = URL(string: tokenURLStr!)
@@ -116,6 +96,7 @@ class WSO2OIDCAuthService {
             
             // Authorization request success
             if let authState = authorizationState {
+                AuthStateManager.shared.saveAuthState(authState: authState)
                 self.authState = authState
                 self.accessToken = authState.lastTokenResponse?.accessToken!
                 self.refreshToken = authState.lastTokenResponse?.refreshToken!
@@ -215,6 +196,7 @@ class WSO2OIDCAuthService {
         let viewController = storyBoard.instantiateViewController(withIdentifier: targetViewControllerId)
         self.appDelegate.window?.rootViewController = viewController
         viewController.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+    
     }
     
 
@@ -331,7 +313,6 @@ class WSO2OIDCAuthService {
             task.resume()
         }
     }
-    
     
     /// Reads from a configuration property file.
     ///

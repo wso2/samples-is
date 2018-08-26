@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Resume app if already run
         if (authStateManager.getAuthState() != nil) {
             let storyBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
-            let viewController = storyBoard.instantiateViewController(withIdentifier: "profileVc")
+            let viewController = storyBoard.instantiateViewController(withIdentifier: "profileVC")
             self.window?.rootViewController = viewController
         }
         
