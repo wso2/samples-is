@@ -18,6 +18,7 @@
 
 package com.wso2is.androidsample.activities;
 
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -51,16 +52,16 @@ public class UserActivity extends AppCompatActivity {
     private final String TAG = UserActivity.class.getSimpleName();
 
     private AuthorizationService authService;
-    public static AuthStateManager stateManager;
+    private static AuthStateManager stateManager;
     private ConfigManager configuration;
 
     public static String idToken;
     public static String state;
-    public static String accessToken;
+    private static String accessToken;
 
-    User user = new User();
+    private final User user = new User();
 
-    public static AtomicReference<JSONObject> userInfoJson = new AtomicReference<>();
+    public static final AtomicReference<JSONObject> userInfoJson = new AtomicReference<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,14 +89,12 @@ public class UserActivity extends AppCompatActivity {
         if (stateManager.getCurrentState().isAuthorized()) {
             displayAuthorized();
         } else {
-
             AuthorizationResponse response = AuthorizationResponse.fromIntent(getIntent());
             AuthorizationException ex = AuthorizationException.fromIntent(getIntent());
 
             if (response != null || ex != null) {
 
                 stateManager.updateAfterAuthorization(response, ex);
-
                 if (response != null && response.authorizationCode != null) {
 
                     // authorization code exchange is required
@@ -122,7 +121,7 @@ public class UserActivity extends AppCompatActivity {
     /**
      * Once the access token is obtained the User content view will be set.
      */
-    public void displayAuthorized() {
+    private void displayAuthorized() {
 
         boolean val = UserInfoRequest.getInstance().fetchUserInfo(accessToken, this, user);
         if (val) {
@@ -138,6 +137,8 @@ public class UserActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this,"Unable to Fetch User Information", Toast.LENGTH_LONG).show();
             Log.e(TAG, "Error while fetching user information.");
+            Intent login = new Intent(this, LoginActivity.class);
+            startActivity(login);
         }
     }
 
@@ -153,7 +154,7 @@ public class UserActivity extends AppCompatActivity {
         additionalParameters.put("client_secret", configuration.getClientSecret());
 
         // state is stored to generate the logout endpoint request
-        state = authorizationResponse.state.toString();
+        state = authorizationResponse.state;
         performTokenRequest(authorizationResponse.createTokenExchangeRequest(additionalParameters),
                             this::handleCodeExchangeResponse);
     }

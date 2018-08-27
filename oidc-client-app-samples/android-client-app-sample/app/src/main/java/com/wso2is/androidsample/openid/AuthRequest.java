@@ -45,19 +45,20 @@ public class AuthRequest {
     private static final String TAG = AuthRequest.class.getSimpleName();
 
     private final AtomicReference<String> clientId = new AtomicReference<>();
-    private static WeakReference<AuthRequest> instance = new WeakReference<AuthRequest>(null);
+    private static WeakReference<AuthRequest> instance = new WeakReference<>(null);
     private final AtomicReference<AuthorizationRequest> authRequest = new AtomicReference<>();
     private final AtomicReference<CustomTabsIntent> customTabIntent = new AtomicReference<>();
 
     private static AuthStateManager authStateManager;
-    private static ConfigManager configuration;
+    private final ConfigManager configuration;
     private AuthorizationService authService;
-    private Context context;
+    private final Context context;
 
     private final BrowserMatcher browserMatcher = AnyBrowserMatcher.INSTANCE;
 
     private AuthRequest(Context context){
         this.context = context;
+        configuration = ConfigManager.getInstance(context);
     }
 
     /**
@@ -72,7 +73,6 @@ public class AuthRequest {
             authRequest = new AuthRequest(context.getApplicationContext());
             instance = new WeakReference<>(authRequest);
             authStateManager = AuthStateManager.getInstance(context);
-            configuration = ConfigManager.getInstance(context);
         }
 
         return authRequest;
@@ -97,7 +97,7 @@ public class AuthRequest {
     /**
      * Creates an authorization service and initializes the authorization service configuration if necessary.
      */
-    public void initializeAppAuth() {
+    private void initializeAppAuth() {
         Log.i(TAG, "Initializing AppAuth");
         recreateAuthorizationService();
 

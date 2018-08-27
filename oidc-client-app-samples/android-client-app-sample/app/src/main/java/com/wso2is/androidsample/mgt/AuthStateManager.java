@@ -102,7 +102,6 @@ public class AuthStateManager {
      * @param state AuthState object that should replaceState the existing one.
      */
     @AnyThread
-    @NonNull
     public void replaceState(@NonNull AuthState state) {
         writeState(state);
         currentAuthState.set(state);
@@ -114,8 +113,8 @@ public class AuthStateManager {
      * @param response Authorization response
      * @param ex Authorization exception
      */
+
     @AnyThread
-    @NonNull
     public void updateAfterAuthorization(@Nullable AuthorizationResponse response,
                                          @Nullable AuthorizationException ex) {
         AuthState current = getCurrentState();
@@ -130,7 +129,6 @@ public class AuthStateManager {
      * @param ex Authorization exception
      */
     @AnyThread
-    @NonNull
     public void updateAfterTokenResponse(@Nullable TokenResponse response, @Nullable AuthorizationException ex) {
         AuthState current = getCurrentState();
         current.update(response, ex);
@@ -145,7 +143,7 @@ public class AuthStateManager {
     @AnyThread
     @NonNull
     private AuthState readState() {
-        AuthState auth = null;
+        AuthState auth;
         String currentState = prefs.getString(KEY_STATE, null);
         if (currentState == null) {
             auth = new AuthState();

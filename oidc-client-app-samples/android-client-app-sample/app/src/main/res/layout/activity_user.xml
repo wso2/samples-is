@@ -91,7 +91,7 @@
             app:layout_constraintVertical_bias="0.555"
             app:srcCompat="@drawable/avatar_default"/>
     <TextView
-            android:text="TextView"
+            android:text="@string/email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"

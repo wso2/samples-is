@@ -5,6 +5,7 @@
     <string name="welcome">Welcome!</string>
     <string name="test">Admin</string>
     <string name="username">Username</string>
+    <string name="email">user@abc.com</string>
     <string name="sign_out">Sign Out</string>
     <string name="wso2_logo">WSO2 Logo</string>
     <string name="user_image">User Image</string>

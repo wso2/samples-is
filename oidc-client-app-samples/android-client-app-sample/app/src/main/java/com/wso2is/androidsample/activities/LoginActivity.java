@@ -39,16 +39,12 @@ public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = LoginActivity.class.getSimpleName();
 
-    private AuthStateManager authStateManager;
-    private ConfigManager configuration;
-    private AuthRequest authRequest;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        authStateManager = AuthStateManager.getInstance(this);
-        configuration = ConfigManager.getInstance(this);
+        AuthStateManager authStateManager = AuthStateManager.getInstance(this);
+        ConfigManager configuration = ConfigManager.getInstance(this);
 
         // if the user is already authorized the UserActivity will be launched
         if (authStateManager.getCurrentState().isAuthorized() && !configuration.hasConfigurationChanged()) {
@@ -59,9 +55,7 @@ public class LoginActivity extends AppCompatActivity {
 
             // if not the user will be directed to the Login View
             setContentView(R.layout.activity_login);
-            findViewById(R.id.bLogin).setOnClickListener((View view) -> {
-                authRequest.getInstance(this).doAuth();
-            });
+            findViewById(R.id.bLogin).setOnClickListener((View view) -> AuthRequest.getInstance(this).doAuth());
 
             // checking if the configuration is valid
             if (!configuration.isValid()) {

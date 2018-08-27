@@ -68,11 +68,7 @@ public class ConnectionBuilderForTesting implements ConnectionBuilder {
     };
 
     @SuppressLint("BadHostnameVerifier")
-    private static final HostnameVerifier ANY_HOSTNAME_VERIFIER = new HostnameVerifier() {
-        public boolean verify(String hostname, SSLSession session) {
-            return true;
-        }
-    };
+    private static final HostnameVerifier ANY_HOSTNAME_VERIFIER = (hostname, session) -> true;
 
     @Nullable
     private static final SSLContext TRUSTING_CONTEXT;

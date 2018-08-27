@@ -36,10 +36,7 @@ import static com.wso2is.androidsample.activities.UserActivity.state;
  */
 public class LogoutRequest {
 
-    private AuthStateManager authStateManager;
-    private ConfigManager configuration;
-
-    private static AtomicReference<WeakReference<LogoutRequest>> instance = new AtomicReference<>
+    private static final AtomicReference<WeakReference<LogoutRequest>> instance = new AtomicReference<>
             (new WeakReference<LogoutRequest>(null));
 
     private LogoutRequest() {}
@@ -66,8 +63,8 @@ public class LogoutRequest {
      */
     public void signOut(Context context) {
 
-        authStateManager = AuthStateManager.getInstance(context);
-        configuration = ConfigManager.getInstance(context);
+        AuthStateManager authStateManager = AuthStateManager.getInstance(context);
+        ConfigManager configuration = ConfigManager.getInstance(context);
 
         // discarding the authorization and token state, but retaining the configuration
         // to save from retrieving them again.

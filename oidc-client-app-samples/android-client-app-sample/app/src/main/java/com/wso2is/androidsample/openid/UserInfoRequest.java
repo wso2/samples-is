@@ -48,12 +48,11 @@ import static com.wso2is.androidsample.utils.Constants.UTF_8;
 public class UserInfoRequest {
 
     private ConfigManager configuration;
-    private ExecutorService executor;
-    private CountDownLatch authIntentLatch = new CountDownLatch(1);
+    private final CountDownLatch authIntentLatch = new CountDownLatch(1);
 
     private static final String TAG = UserInfoRequest.class.getSimpleName();
 
-    private static AtomicReference<WeakReference<UserInfoRequest>> instance = new AtomicReference<>
+    private static final AtomicReference<WeakReference<UserInfoRequest>> instance = new AtomicReference<>
             (new WeakReference<UserInfoRequest>(null));
 
     private boolean val = false;
@@ -84,7 +83,7 @@ public class UserInfoRequest {
     public boolean fetchUserInfo(String accessToken, Context context, User user) {
 
         configuration = ConfigManager.getInstance(context);
-        executor = Executors.newSingleThreadExecutor();
+        ExecutorService executor = Executors.newSingleThreadExecutor();
 
         URL userInfoEndpoint;
 
