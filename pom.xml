@@ -27,7 +27,7 @@
     <artifactId>samples-is</artifactId>
     <packaging>pom</packaging>
     <description>WSO2 Identity Server Samples</description>
-    <version>2.0.0-m3-SNAPSHOT</version>
+    <version>2.0.0-m4-SNAPSHOT</version>
 
     <scm>
         <url>https://github.com/wso2/samples-is.git</url>
@@ -418,7 +418,7 @@
 
     <properties>
         <!--repo versions of quick-start-guide-->
-        <identity.agent.sso.version>5.1.18</identity.agent.sso.version>
+        <identity.agent.sso.version>5.1.22</identity.agent.sso.version>
         <sample.oidc-sso-sample.version>1.0</sample.oidc-sso-sample.version>
         <sample.qsg.version>1.0</sample.qsg.version>
         <maven.jar.plugin.version>3.0.2</maven.jar.plugin.version>
