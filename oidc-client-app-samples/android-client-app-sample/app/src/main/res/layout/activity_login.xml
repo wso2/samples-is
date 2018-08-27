@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:id="@+id/background"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent"
+                                             android:background="@android:color/white"
+                                             tools:context=".activities.LoginActivity">
+
+    <Button
+            android:id="@+id/bLogin"
+            android:layout_width="287dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/holo_orange_dark"
+            android:fontFamily="sans-serif"
+            android:text="@string/sign_in"
+            android:textAllCaps="false"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.87" android:textColor="@android:color/white"/>
+
+    <ImageView
+            android:id="@+id/ivLogo"
+            android:layout_width="212dp"
+            android:layout_height="154dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/wso2logo_round"
+            android:contentDescription="@string/wso2_logo"
+            app:layout_constraintBottom_toTopOf="@+id/bLogin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.573"/>
+
+    <TextView
+            android:id="@+id/tvLogoutMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:text="@string/logged_out"
+            android:textAllCaps="true"
+            android:textColor="@android:color/background_dark"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.498"/>
+</android.support.constraint.ConstraintLayout>

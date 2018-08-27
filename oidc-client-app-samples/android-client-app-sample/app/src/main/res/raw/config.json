@@ -1,0 +1,11 @@
+{
+  "client_id": "7hFpiG6U3fVfHJHLW5UO_5u4EEAa",
+  "client_secret": "CShEPt6LUn3reIohVdSuRBE0eH4a",
+  "redirect_uri": "com.wso2is.androidsample://oauth",
+  "authorization_scope": "openid email profile",
+  "authorization_endpoint": "https://10.0.2.2:9443/oauth2/authorize",
+  "end_session_endpoint": "https://10.0.2.2:9443/oidc/logout",
+  "token_endpoint": "https://10.0.2.2:9443/oauth2/token",
+  "userinfo_endpoint": "https://10.0.2.2:9443/oauth2/userinfo",
+  "https_required": false
+}
