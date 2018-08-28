@@ -31,7 +31,6 @@ class ProfileViewController: UIViewController, SFSafariViewControllerDelegate {
     var userInfo: UserInfo?
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    
     var userAgent:OIDExternalUserAgentIOS?
     
     // MARK: Properties

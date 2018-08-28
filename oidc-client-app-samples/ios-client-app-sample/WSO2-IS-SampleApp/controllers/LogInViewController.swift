@@ -36,7 +36,7 @@ class LogInViewController: UIViewController {
     override open var shouldAutorotate: Bool {
         return false
     }
-
+    
     // MARK: Actions
     @IBAction func loginButtonAction(_ sender: UIButton) {
         // Action when the login button is clicked
