@@ -69,7 +69,21 @@ class ProfileViewController: UIViewController, SFSafariViewControllerDelegate {
                                              preferredStyle: UIAlertControllerStyle.alert)
         
         refreshAlert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action: UIAlertAction!) in
-            WSO2OIDCAuthService.shared.logOutUser(callingViewController: self, targetViewControllerId: "loginVC")
+            
+            // Action when the login button is clicked
+            guard let configPath = Bundle.main.path(forResource: "Config", ofType: "plist") else {
+                let alert = UIAlertController(title: NSLocalizedString("info.alert.signin.fail.title",
+                                                                       comment: "Could not sign you in"),
+                                              message: NSLocalizedString("error.login.fail",
+                                                                         comment: Constants.ErrorMessages.kLogInFail),
+                                              preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
+            
+            WSO2OIDCAuthService.shared.logOutUser(configFilePath: configPath, callingViewController: self,
+                                                  targetViewControllerId: "loginVC")
         }))
         
         refreshAlert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { (action: UIAlertAction!) in }))

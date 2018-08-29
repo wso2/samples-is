@@ -40,13 +40,14 @@ class WSO2OIDCAuthService {
     var idToken: String?
     
     let kAuthStateKey = "authState"
+    let kPropertyFileType = "plist"
+    
     var authState: OIDAuthState?
     var config: OIDServiceConfiguration?
     var configFileDictionary: NSDictionary?
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var userAgent:OIDExternalUserAgentIOS?
-    
     
     /// Logs in user.
     ///
@@ -56,9 +57,9 @@ class WSO2OIDCAuthService {
     ///   - completion: Completion callback.
     func logInUser(configFilePath: String, callingViewController: UIViewController,
                            completion: @escaping (_ userInfo : UserInfo?) -> Void) {
-        
-        readConfig(path: configFilePath)
+    
         self.authState = AuthStateManager.shared.getAuthState()
+        readConfig(path: configFilePath)
         
         let authURL = URL(string: authURLStr!)
         let tokenURL = URL(string: tokenURLStr!)
@@ -124,7 +125,9 @@ class WSO2OIDCAuthService {
     /// - Parameters:
     ///   - callingViewController: Calling view controller.
     ///   - targetViewControllerId: Target view controller to redirect the user after logging out.
-    func logOutUser(callingViewController: UIViewController, targetViewControllerId: String) {
+    func logOutUser(configFilePath: String, callingViewController: UIViewController, targetViewControllerId: String) {
+        
+        readConfig(path: configFilePath)
         
         // Retrieve ID token from current state
         let currentIdToken: String? = authState?.lastTokenResponse?.idToken
@@ -187,7 +190,9 @@ class WSO2OIDCAuthService {
                 logoutRequest, externalUserAgent: self.userAgent!, callback: { (authorizationState, error) in })
         }))
         
-        callingViewController.present(alert, animated: true, completion: nil)
+        if (self.authState != nil) {
+            callingViewController.present(alert, animated: true, completion: nil)
+        }
         
         // Log out locally
         appDelegate.externalUserAgentSession = nil
