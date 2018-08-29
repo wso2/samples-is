@@ -1,0 +1,6 @@
+framework module Pods_WSO2_IS_SampleAppTests {
+  umbrella header "Pods-WSO2-IS-SampleAppTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
