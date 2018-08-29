@@ -20,7 +20,7 @@
          <!--Optional:-->
          <xsd:spDto>
             <!--Zero or more repetitions:-->
-            <xsd1:assertionConsumerUrls>http://localhost:8080/saml2-web-app-dispatch.com/consumer</xsd1:assertionConsumerUrls>
+            <xsd1:assertionConsumerUrls>http://localhost:8080/saml2-web-app-pickup-dispatch.com/home.jsp</xsd1:assertionConsumerUrls>
             <!--Optional:-->
             <xsd1:assertionQueryRequestProfileEnabled>false</xsd1:assertionQueryRequestProfileEnabled>
             <!--Optional:-->
@@ -28,7 +28,7 @@
             <!--Optional:-->
             <xsd1:certAlias>wso2carbon</xsd1:certAlias>
             <!--Optional:-->
-            <xsd1:defaultAssertionConsumerUrl>http://localhost:8080/saml2-web-app-dispatch.com/consumer</xsd1:defaultAssertionConsumerUrl>
+            <xsd1:defaultAssertionConsumerUrl>http://localhost:8080/saml2-web-app-pickup-dispatch.com/home.jsp</xsd1:defaultAssertionConsumerUrl>
             <!--Optional:-->
             <xsd1:digestAlgorithmURI>http://www.w3.org/2000/09/xmldsig#sha1</xsd1:digestAlgorithmURI>
             <!--Optional:-->
@@ -50,9 +50,9 @@
             <!--Optional:-->
             <xsd1:idPInitSSOEnabled>true</xsd1:idPInitSSOEnabled>
             <!--Zero or more repetitions:-->
-            <xsd1:idpInitSLOReturnToURLs>http://localhost:8080/saml2-web-app-dispatch.com/consumer</xsd1:idpInitSLOReturnToURLs>
+            <xsd1:idpInitSLOReturnToURLs>http://localhost:8080/saml2-web-app-pickup-dispatch.com/home.jsp</xsd1:idpInitSLOReturnToURLs>
             <!--Optional:-->
-            <xsd1:issuer>saml2-web-app-dispatch.com</xsd1:issuer>
+            <xsd1:issuer>saml2-web-app-pickup-dispatch.com</xsd1:issuer>
             <!--Optional:-->
             <xsd1:nameIDFormat>urn/oasis/names/tc/SAML/1.1/nameid-format/emailAddress</xsd1:nameIDFormat>
             <!--Zero or more repetitions:-->

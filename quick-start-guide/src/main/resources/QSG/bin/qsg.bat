@@ -81,7 +81,7 @@ set /p scenario=Enter the scenario number you selected.
     	REM Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
     	CALL :setup_servers %IS_PATH% %TOMCAT_PATH%
     	CALL :configure_sso_saml2 %IS_DOMAIN% %IS_PORT% %TOMCAT_DOMAIN% %TOMCAT_PORT%
-    	CALL :end_message saml2-web-app-dispatch.com saml2-web-app-swift.com %IS_DOMAIN% %IS_PORT% %TOMCAT_DOMAIN% %TOMCAT_PORT%
+    	CALL :end_message saml2-web-app-pickup-dispatch.com saml2-web-app-pickup-manager.com %IS_DOMAIN% %IS_PORT% %TOMCAT_DOMAIN% %TOMCAT_PORT%
     	EXIT 0
     )
 
@@ -89,7 +89,7 @@ set /p scenario=Enter the scenario number you selected.
 	REM Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
 	CALL :setup_servers %IS_PATH% %TOMCAT_PATH%
 	CALL :configure_sso_oidc %IS_DOMAIN% %IS_PORT% %TOMCAT_DOMAIN% %TOMCAT_PORT%
-	CALL :end_message Dispatch Swift %IS_DOMAIN% %IS_PORT% %TOMCAT_DOMAIN% %TOMCAT_PORT%
+	CALL :end_message pickup-dispatch pickup-manager %IS_DOMAIN% %IS_PORT% %TOMCAT_DOMAIN% %TOMCAT_PORT%
 	EXIT 0
     )
 
@@ -97,7 +97,7 @@ set /p scenario=Enter the scenario number you selected.
 	REM Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
 	CALL :setup_servers %IS_PATH% %TOMCAT_PATH%
 	CALL :create_multifactor_auth %IS_DOMAIN% %IS_PORT% %TOMCAT_DOMAIN% %TOMCAT_PORT%
-	CALL :end_message saml2-web-app-dispatch.com saml2-web-app-swift.com %IS_DOMAIN% %IS_PORT% %TOMCAT_DOMAIN% %TOMCAT_PORT%
+	CALL :end_message saml2-web-app-pickup-dispatch.com saml2-web-app-pickup-manager.com %IS_DOMAIN% %IS_PORT% %TOMCAT_DOMAIN% %TOMCAT_PORT%
 	CALL :delete_idp 05 urn:deleteIdP https://%IS_DOMAIN%:%IS_PORT%/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/
 	EXIT 0
 	)
@@ -106,7 +106,7 @@ set /p scenario=Enter the scenario number you selected.
 	REM Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
 	CALL :setup_servers %IS_PATH% %TOMCAT_PATH%
 	CALL :configure_federated_auth %IS_DOMAIN% %IS_PORT% %TOMCAT_DOMAIN% %TOMCAT_PORT%
-	CALL :end_message saml2-web-app-dispatch.com saml2-web-app-swift.com %IS_DOMAIN% %IS_PORT% %TOMCAT_DOMAIN% %TOMCAT_PORT%
+	CALL :end_message saml2-web-app-pickup-dispatch.com saml2-web-app-pickup-manager.com %IS_DOMAIN% %IS_PORT% %TOMCAT_DOMAIN% %TOMCAT_PORT%
 	CALL :delete_idp 05 urn:deleteIdP https://%IS_DOMAIN%:%IS_PORT%/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/
 	EXIT 0
     )
@@ -143,7 +143,7 @@ IF NOT EXIST %tomcat_path% (
     exit -1
 )
 
-IF NOT EXIST "%tomcat_path%/webapps/saml2-web-app-dispatch.com.war" (
+IF NOT EXIST "%tomcat_path%/webapps/saml2-web-app-pickup-dispatch.com.war" (
    echo Please deploy the sample webapps on the tomcat server.
    exit -1
 )
@@ -163,14 +163,14 @@ CALL :add_user admin admin Common %is_domain% %is_port%
 
 REM Add service providers in wso2-is
 CALL :add_service_provider dispatch Common urn:createApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz %is_domain% %is_port%
-CALL :add_service_provider swift Common urn:createApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz %is_domain% %is_port%
+CALL :add_service_provider manager Common urn:createApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz %is_domain% %is_port%
 
 REM Configure OIDC for the Service Providers
-CALL :configure_oidc "swift" "03" "urn:registerOAuthApplicationData" "https://%is_domain%:%is_port%/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/" "Y2FtZXJvbjpjYW1lcm9uMTIz" %is_domain% %is_port% %tomcat_domain% %tomcat_port%
+CALL :configure_oidc "manager" "03" "urn:registerOAuthApplicationData" "https://%is_domain%:%is_port%/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/" "Y2FtZXJvbjpjYW1lcm9uMTIz" %is_domain% %is_port% %tomcat_domain% %tomcat_port%
 CALL :configure_oidc "dispatch" "03" "urn:registerOAuthApplicationData" "https://%is_domain%:%is_port%/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/" "Y2FtZXJvbjpjYW1lcm9uMTIz" %is_domain% %is_port% %tomcat_domain% %tomcat_port%
 
 CALL :update_application_oidc "dispatch" "Y2FtZXJvbjpjYW1lcm9uMTIz" "ZGlzcGF0Y2g=" "ZGlzcGF0Y2gxMjM0" "urn:updateApplication" "https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" %is_domain% %is_port%
-CALL :update_application_oidc "swift" "Y2FtZXJvbjpjYW1lcm9uMTIz" "c3dpZnRhcHA=" "c3dpZnRhcHAxMjM=" "urn:updateApplication" "https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" %is_domain% %is_port%
+CALL :update_application_oidc "manager" "Y2FtZXJvbjpjYW1lcm9uMTIz" "c3dpZnRhcHA=" "c3dpZnRhcHAxMjM=" "urn:updateApplication" "https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" %is_domain% %is_port%
 
 EXIT /B
 
@@ -187,14 +187,14 @@ CALL :add_user admin admin Common %is_domain% %is_port%
 
 REM Add service providers in wso2-is for the user cameron
 CALL :add_service_provider dispatch Common urn:createApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz %is_domain% %is_port%
-CALL :add_service_provider swift Common urn:createApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz %is_domain% %is_port%
+CALL :add_service_provider manager Common urn:createApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz %is_domain% %is_port%
 
 REM Configure SAML for the service providers in the cameron account
 CALL :configure_saml dispatch 02 urn:addRPServiceProvider https://%is_domain%:%is_port%/services/IdentitySAMLSSOConfigService.IdentitySAMLSSOConfigServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz %is_domain% %is_port% %tomcat_domain% %tomcat_port%
-CALL :configure_saml swift 02 urn:addRPServiceProvider  https://%is_domain%:%is_port%/services/IdentitySAMLSSOConfigService.IdentitySAMLSSOConfigServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz %is_domain% %is_port% %tomcat_domain% %tomcat_port%
+CALL :configure_saml manager 02 urn:addRPServiceProvider  https://%is_domain%:%is_port%/services/IdentitySAMLSSOConfigService.IdentitySAMLSSOConfigServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz %is_domain% %is_port% %tomcat_domain% %tomcat_port%
 
 CALL :update_application_saml dispatch Y2FtZXJvbjpjYW1lcm9uMTIz urn:updateApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ %is_domain% %is_port% %tomcat_domain% %tomcat_port%
-CALL :update_application_saml swift Y2FtZXJvbjpjYW1lcm9uMTIz urn:updateApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ %is_domain% %is_port% %tomcat_domain% %tomcat_port%
+CALL :update_application_saml manager Y2FtZXJvbjpjYW1lcm9uMTIz urn:updateApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ %is_domain% %is_port% %tomcat_domain% %tomcat_port%
 
 EXIT /B
 
@@ -229,7 +229,7 @@ set /p input="Please enter your answer..."
         CALL :configure_sso_saml2  %is_domain% %is_port% %tomcat_domain% %tomcat_port%
         CALL :add_identity_provider admin admin %is_domain% %is_port%
         CALL :updateapp_multi "dispatch" "Y2FtZXJvbjpjYW1lcm9uMTIz" "urn:updateApplication" "https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" %is_domain% %is_port% %tomcat_domain% %tomcat_port%
-        CALL :updateapp_multi "swift" "Y2FtZXJvbjpjYW1lcm9uMTIz" "urn:updateApplication" "https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" %is_domain% %is_port% %tomcat_domain% %tomcat_port%
+        CALL :updateapp_multi "manager" "Y2FtZXJvbjpjYW1lcm9uMTIz" "urn:updateApplication" "https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" %is_domain% %is_port% %tomcat_domain% %tomcat_port%
      )
      IF "%result%" == "false" (
         echo Please register a Twitter application and restart the script.
@@ -269,7 +269,7 @@ IF "%result%" == "true" (
     CALL :configure_sso_saml2 %is_domain% %is_port% %tomcat_domain% %tomcat_port%
     CALL :add_identity_provider admin admin %is_domain% %is_port%
     CALL :updateapp_fed_auth dispatch Y2FtZXJvbjpjYW1lcm9uMTIz urn:updateApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ %is_domain% %is_port% %tomcat_domain% %tomcat_port%
-    CALL :updateapp_fed_auth swift Y2FtZXJvbjpjYW1lcm9uMTIz urn:updateApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ %is_domain% %is_port% %tomcat_domain% %tomcat_port%
+    CALL :updateapp_fed_auth manager Y2FtZXJvbjpjYW1lcm9uMTIz urn:updateApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ %is_domain% %is_port% %tomcat_domain% %tomcat_port%
 )
 
 IF "%result%" == "false" (
@@ -363,7 +363,7 @@ echo "|  To tryout self registration please log into the sample         |"
 echo "|  app below.                                                     |"
 echo "|  *** Please press ctrl button and click on the link ***         |"
 echo "|                                                                 |"
-echo "|  Dispatch - http://%tomcat_domain%:%tomcat_port%/Dispatch/      |"
+echo "|  pickup-dispatch - http://%tomcat_domain%:%tomcat_port%/pickup-dispatch/      |"
 echo "|                                                                 |"
 echo "|  Click on the ** Register now ** link in the login page.        |"
 echo "|  Fill in the user details form and create an account.           |"
@@ -371,7 +371,7 @@ echo "|  The email will not be sent here, although you see the          |"
 echo "|  notification.                                                  | "
 echo "|                                                                 |"
 echo "|  You can now use the username and password you provided, to     |"
-echo "|  log into Dispatch.                                             |"
+echo "|  log into pickup-dispatch.                                             |"
 echo "|                                                                 |"
 echo "-------------------------------------------------------------------"
 echo(
@@ -471,7 +471,7 @@ echo "|    To tryout the workflow please log into the sample           |"
 echo "|    app below.                                                  |"
 echo "|    *** Please press ctrl button and click on the link ***      |"
 echo "|                                                                |"
-echo "|    Dispatch - http://127.0.0.1:8080/Dispatch/                  |"
+echo "|    pickup-dispatch - http://127.0.0.1:8080/pickup-dispatch/                  |"
 echo "|                                                                |"
 echo "|    Click on the ** Register now ** link in the login page      |"
 echo "|    Fill in the user details form and create an account.        |"
@@ -492,7 +492,7 @@ echo "|      Username: cameron                                         |"
 echo "|      Password: cameron123                                      |"
 echo "|                                                                |"
 echo "|    Now you can use your new user credentials to log into       |"
-echo "|    the app Dispatch:  http://127.0.0.1:8080/Dispatch/          |"
+echo "|    the app pickup-dispatch:  http://127.0.0.1:8080/pickup-dispatch/          |"
 echo "|                                                                |"
 echo "------------------------------------------------------------------"
 echo(
@@ -735,7 +735,7 @@ IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while creating the service provider. !!
   echo(
   CALL :delete_sp dispatch Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  CALL :delete_sp swift Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  CALL :delete_sp manager Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
   CALL :delete_user %is_domain% %is_port%
   echo(
   exit -1
@@ -812,7 +812,7 @@ IF EXIST "%file%" (
 
 
 REM touch sso-config-${sp_name}.xml
-echo  ^<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://org.apache.axis2/xsd" xmlns:xsd1="http://dto.saml.sso.identity.carbon.wso2.org/xsd"^> ^<soapenv:Header/^> ^<soapenv:Body^> ^<xsd:addRPServiceProvider^> ^<xsd:spDto^> ^<xsd1:assertionConsumerUrls^>http://%tomcat_host%:%tomcat_port%/saml2-web-app-%sp_name%.com/consumer^</xsd1:assertionConsumerUrls^> ^<xsd1:assertionQueryRequestProfileEnabled^>false^</xsd1:assertionQueryRequestProfileEnabled^> ^<xsd1:attributeConsumingServiceIndex^>1223160755^</xsd1:attributeConsumingServiceIndex^> ^<xsd1:certAlias^>wso2carbon^</xsd1:certAlias^> ^<xsd1:defaultAssertionConsumerUrl^>http://%tomcat_host%:%tomcat_port%/saml2-web-app-%sp_name%.com/consumer^</xsd1:defaultAssertionConsumerUrl^> ^<xsd1:digestAlgorithmURI^>http://www.w3.org/2000/09/xmldsig#sha1^</xsd1:digestAlgorithmURI^> ^<xsd1:doEnableEncryptedAssertion^>false^</xsd1:doEnableEncryptedAssertion^> ^<xsd1:doSignAssertions^>true^</xsd1:doSignAssertions^> ^<xsd1:doSignResponse^>true^</xsd1:doSignResponse^> ^<xsd1:doSingleLogout^>true^</xsd1:doSingleLogout^> ^<xsd1:doValidateSignatureInRequests^>false^</xsd1:doValidateSignatureInRequests^> ^<xsd1:enableAttributeProfile^>false^</xsd1:enableAttributeProfile^> ^<xsd1:enableAttributesByDefault^>false^</xsd1:enableAttributesByDefault^> ^<xsd1:idPInitSLOEnabled^>true^</xsd1:idPInitSLOEnabled^> ^<xsd1:idPInitSSOEnabled^>true^</xsd1:idPInitSSOEnabled^> ^<xsd1:idpInitSLOReturnToURLs^>http://%tomcat_domain%:%tomcat_port%/saml2-web-app-%sp_name%.com/consumer^</xsd1:idpInitSLOReturnToURLs^> ^<xsd1:issuer^>saml2-web-app-%sp_name%.com^</xsd1:issuer^> ^<xsd1:nameIDFormat^>urn/oasis/names/tc/SAML/1.1/nameid-format/emailAddress^</xsd1:nameIDFormat^> ^<xsd1:requestedAudiences^>https://%is_domain%:%is_port%/oauth2/token^</xsd1:requestedAudiences^> ^<xsd1:requestedRecipients^>https://%is_domain%:%is_port%/oauth2/token^</xsd1:requestedRecipients^> ^<xsd1:signingAlgorithmURI^>http://www.w3.org/2000/09/xmldsig#rsa-sha1^</xsd1:signingAlgorithmURI^> ^<xsd1:sloRequestURL^>^</xsd1:sloRequestURL^> ^<xsd1:sloResponseURL^>^</xsd1:sloResponseURL^> ^</xsd:spDto^> ^</xsd:addRPServiceProvider^> ^</soapenv:Body^> ^</soapenv:Envelope^> >> %file%
+echo  ^<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://org.apache.axis2/xsd" xmlns:xsd1="http://dto.saml.sso.identity.carbon.wso2.org/xsd"^> ^<soapenv:Header/^> ^<soapenv:Body^> ^<xsd:addRPServiceProvider^> ^<xsd:spDto^> ^<xsd1:assertionConsumerUrls^>http://%tomcat_host%:%tomcat_port%/saml2-web-app-pickup-%sp_name%.com/home.jsp^</xsd1:assertionConsumerUrls^> ^<xsd1:assertionQueryRequestProfileEnabled^>false^</xsd1:assertionQueryRequestProfileEnabled^> ^<xsd1:attributeConsumingServiceIndex^>1223160755^</xsd1:attributeConsumingServiceIndex^> ^<xsd1:certAlias^>wso2carbon^</xsd1:certAlias^> ^<xsd1:defaultAssertionConsumerUrl^>http://%tomcat_host%:%tomcat_port%/saml2-web-app-pickup-%sp_name%.com/home.jsp^</xsd1:defaultAssertionConsumerUrl^> ^<xsd1:digestAlgorithmURI^>http://www.w3.org/2000/09/xmldsig#sha1^</xsd1:digestAlgorithmURI^> ^<xsd1:doEnableEncryptedAssertion^>false^</xsd1:doEnableEncryptedAssertion^> ^<xsd1:doSignAssertions^>true^</xsd1:doSignAssertions^> ^<xsd1:doSignResponse^>true^</xsd1:doSignResponse^> ^<xsd1:doSingleLogout^>true^</xsd1:doSingleLogout^> ^<xsd1:doValidateSignatureInRequests^>false^</xsd1:doValidateSignatureInRequests^> ^<xsd1:enableAttributeProfile^>false^</xsd1:enableAttributeProfile^> ^<xsd1:enableAttributesByDefault^>false^</xsd1:enableAttributesByDefault^> ^<xsd1:idPInitSLOEnabled^>true^</xsd1:idPInitSLOEnabled^> ^<xsd1:idPInitSSOEnabled^>true^</xsd1:idPInitSSOEnabled^> ^<xsd1:idpInitSLOReturnToURLs^>http://%tomcat_domain%:%tomcat_port%/saml2-web-app-pickup-%sp_name%.com/home.jsp^</xsd1:idpInitSLOReturnToURLs^> ^<xsd1:issuer^>saml2-web-app-pickup-%sp_name%.com^</xsd1:issuer^> ^<xsd1:nameIDFormat^>urn/oasis/names/tc/SAML/1.1/nameid-format/emailAddress^</xsd1:nameIDFormat^> ^<xsd1:requestedAudiences^>https://%is_domain%:%is_port%/oauth2/token^</xsd1:requestedAudiences^> ^<xsd1:requestedRecipients^>https://%is_domain%:%is_port%/oauth2/token^</xsd1:requestedRecipients^> ^<xsd1:signingAlgorithmURI^>http://www.w3.org/2000/09/xmldsig#rsa-sha1^</xsd1:signingAlgorithmURI^> ^<xsd1:sloRequestURL^>^</xsd1:sloRequestURL^> ^<xsd1:sloResponseURL^>^</xsd1:sloResponseURL^> ^</xsd:spDto^> ^</xsd:addRPServiceProvider^> ^</soapenv:Body^> ^</soapenv:Envelope^> >> %file%
 cd ..
 
 echo Configuring SAML2 web SSO for %~1...
@@ -824,7 +824,7 @@ IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while configuring SAML2 web SSO for %~1.... !!
   echo(
   CALL :delete_sp dispatch Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  CALL :delete_sp swift Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  CALL :delete_sp manager Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
   CALL :delete_user %is_domain% %is_port%
   echo(
   exit -1
@@ -891,7 +891,7 @@ IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while getting application details for %~1.... !!
   echo(
   CALL :delete_sp dispatch Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  CALL :delete_sp swift Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  CALL :delete_sp manager Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
   CALL :delete_user %is_domain% %is_port%
   echo(
   exit -1
@@ -906,7 +906,7 @@ echo(
 echo Updating application %~1...
 
 REM Send the SOAP request to Update the Application.
-curl -s -k -H "Authorization: Basic %~2" -H "Content-Type: text/xml" -H "SOAPAction: %~3" -o NUL %~4 -d "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelope/"\" xmlns:xsd="\"http://org.apache.axis2/xsd"\" xmlns:xsd1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><soapenv:Header/><soapenv:Body><xsd:updateApplication><xsd:serviceProvider><xsd1:applicationID>%app_id%</xsd1:applicationID><xsd1:applicationName>%~1</xsd1:applicationName><xsd1:claimConfig><xsd1:alwaysSendMappedLocalSubjectId>false</xsd1:alwaysSendMappedLocalSubjectId><xsd1:localClaimDialect>true</xsd1:localClaimDialect></xsd1:claimConfig><xsd1:description>sample service provider</xsd1:description><xsd1:inboundAuthenticationConfig><xsd1:inboundAuthenticationRequestConfigs><xsd1:inboundAuthKey>saml2-web-app-%~1.com</xsd1:inboundAuthKey><xsd1:inboundAuthType>samlsso</xsd1:inboundAuthType><xsd1:properties><xsd1:name>attrConsumServiceIndex</xsd1:name><xsd1:value>1223160755</xsd1:value></xsd1:properties></xsd1:inboundAuthenticationRequestConfigs></xsd1:inboundAuthenticationConfig><xsd1:inboundProvisioningConfig><xsd1:provisioningEnabled>false</xsd1:provisioningEnabled><xsd1:provisioningUserStore>PRIMARY</xsd1:provisioningUserStore></xsd1:inboundProvisioningConfig><xsd1:localAndOutBoundAuthenticationConfig><xsd1:alwaysSendBackAuthenticatedListOfIdPs>false</xsd1:alwaysSendBackAuthenticatedListOfIdPs><xsd1:authenticationStepForAttributes></xsd1:authenticationStepForAttributes><xsd1:authenticationStepForSubject></xsd1:authenticationStepForSubject><xsd1:authenticationType>default</xsd1:authenticationType><xsd1:subjectClaimUri>http://wso2.org/claims/fullname</xsd1:subjectClaimUri></xsd1:localAndOutBoundAuthenticationConfig><xsd1:outboundProvisioningConfig><xsd1:provisionByRoleList></xsd1:provisionByRoleList></xsd1:outboundProvisioningConfig><xsd1:permissionAndRoleConfig></xsd1:permissionAndRoleConfig><xsd1:saasApp>false</xsd1:saasApp></xsd:serviceProvider></xsd:updateApplication></soapenv:Body></soapenv:Envelope>"
+curl -s -k -H "Authorization: Basic %~2" -H "Content-Type: text/xml" -H "SOAPAction: %~3" -o NUL %~4 -d "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelope/"\" xmlns:xsd="\"http://org.apache.axis2/xsd"\" xmlns:xsd1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><soapenv:Header/><soapenv:Body><xsd:updateApplication><xsd:serviceProvider><xsd1:applicationID>%app_id%</xsd1:applicationID><xsd1:applicationName>%~1</xsd1:applicationName><xsd1:claimConfig><xsd1:alwaysSendMappedLocalSubjectId>false</xsd1:alwaysSendMappedLocalSubjectId><xsd1:localClaimDialect>true</xsd1:localClaimDialect></xsd1:claimConfig><xsd1:description>sample service provider</xsd1:description><xsd1:inboundAuthenticationConfig><xsd1:inboundAuthenticationRequestConfigs><xsd1:inboundAuthKey>saml2-web-app-pickup-%~1.com</xsd1:inboundAuthKey><xsd1:inboundAuthType>samlsso</xsd1:inboundAuthType><xsd1:properties><xsd1:name>attrConsumServiceIndex</xsd1:name><xsd1:value>1223160755</xsd1:value></xsd1:properties></xsd1:inboundAuthenticationRequestConfigs></xsd1:inboundAuthenticationConfig><xsd1:inboundProvisioningConfig><xsd1:provisioningEnabled>false</xsd1:provisioningEnabled><xsd1:provisioningUserStore>PRIMARY</xsd1:provisioningUserStore></xsd1:inboundProvisioningConfig><xsd1:localAndOutBoundAuthenticationConfig><xsd1:alwaysSendBackAuthenticatedListOfIdPs>false</xsd1:alwaysSendBackAuthenticatedListOfIdPs><xsd1:authenticationStepForAttributes></xsd1:authenticationStepForAttributes><xsd1:authenticationStepForSubject></xsd1:authenticationStepForSubject><xsd1:authenticationType>default</xsd1:authenticationType><xsd1:subjectClaimUri>http://wso2.org/claims/fullname</xsd1:subjectClaimUri></xsd1:localAndOutBoundAuthenticationConfig><xsd1:outboundProvisioningConfig><xsd1:provisionByRoleList></xsd1:provisionByRoleList></xsd1:outboundProvisioningConfig><xsd1:permissionAndRoleConfig></xsd1:permissionAndRoleConfig><xsd1:saasApp>false</xsd1:saasApp></xsd:serviceProvider></xsd:updateApplication></soapenv:Body></soapenv:Envelope>"
 echo ** Successfully updated the application %~1. **
 cd ..
 EXIT /B
@@ -948,13 +948,13 @@ IF EXIST "%file%" (
 )
 
 IF "%sp_name%"=="dispatch" (
- set sample_name=Dispatch
+ set sample_name=pickup-dispatch
  set client_id=ZGlzcGF0Y2g=
  set secret=ZGlzcGF0Y2gxMjM0
 )
 
-IF "%sp_name%"=="swift" (
- set sample_name=Swift
+IF "%sp_name%"=="manager" (
+ set sample_name=pickup-manager
  set client_id=c3dpZnRhcHA=
  set secret=c3dpZnRhcHAxMjM=
 )
@@ -1005,7 +1005,7 @@ IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while getting application details for %sp_name%.... !!"
   echo(
   CALL :delete_sp dispatch Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  CALL :delete_sp swift Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  CALL :delete_sp manager Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
   CALL :delete_user %is_domain% %is_port%
   echo(
   exit -1
@@ -1027,7 +1027,7 @@ IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while updating application %sp_name%.... !!"
   echo(
   CALL :delete_sp dispatch Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  CALL :delete_sp swift Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  CALL :delete_sp manager Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
   CALL :delete_user %is_domain% %is_port%
   echo(
   exit -1
@@ -1070,7 +1070,7 @@ IF %ERRORLEVEL% NEQ 0 (
   cd ..
   echo(
   CALL :delete_sp dispatch Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  CALL :delete_sp swift Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  CALL :delete_sp manager Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
   CALL :delete_user %is_domain% %is_port%
   echo(
   exit -1
@@ -1087,7 +1087,7 @@ echo Updating application %~1...
 echo app id is %app_id%
 
 REM Send the SOAP request to Update the Application.
-curl -s -k -H "Authorization: Basic %~2" -H "Content-Type: text/xml" -H "SOAPAction: %soap_action%" -o NUL %endpoint% -d "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelope/"\" xmlns:xsd="\"http://org.apache.axis2/xsd"\" xmlns:xsd1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><soapenv:Header/><soapenv:Body><ns3:updateApplication xmlns:ns3="\"http://org.apache.axis2/xsd"\"><ns3:serviceProvider><ns1:applicationID xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">%app_id%</ns1:applicationID><ns1:applicationName xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">%~1</ns1:applicationName><claimConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><alwaysSendMappedLocalSubjectId>false</alwaysSendMappedLocalSubjectId><localClaimDialect>true</localClaimDialect><roleClaimURI/></claimConfig><ns1:description xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">sample service provider</ns1:description><inboundAuthenticationConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><inboundAuthenticationRequestConfigs><inboundAuthKey>saml2-web-app-%sp_name%.com</inboundAuthKey><inboundAuthType>samlsso</inboundAuthType><properties><name>attrConsumServiceIndex</name><value>1223160755</value></properties></inboundAuthenticationRequestConfigs><inboundAuthenticationRequestConfigs><inboundAuthKey/><inboundAuthType>passivests</inboundAuthType></inboundAuthenticationRequestConfigs><inboundAuthenticationRequestConfigs><inboundAuthKey/><inboundAuthType>openid</inboundAuthType></inboundAuthenticationRequestConfigs></inboundAuthenticationConfig><inboundProvisioningConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><dumbMode>false</dumbMode><provisioningUserStore>PRIMARY</provisioningUserStore></inboundProvisioningConfig><localAndOutBoundAuthenticationConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><alwaysSendBackAuthenticatedListOfIdPs>false</alwaysSendBackAuthenticatedListOfIdPs><authenticationScriptConfig><ns2:content xmlns:ns2="\"http://script.model.common.application.identity.carbon.wso2.org/xsd"\"/><ns2:enabled xmlns:ns2="\"http://script.model.common.application.identity.carbon.wso2.org/xsd"\">false</ns2:enabled></authenticationScriptConfig><authenticationStepForAttributes xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><authenticationStepForSubject xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><authenticationSteps><attributeStep>true</attributeStep><localAuthenticatorConfigs><displayName>basic</displayName><name>BasicAuthenticator</name></localAuthenticatorConfigs><stepOrder>1</stepOrder><subjectStep>true</subjectStep></authenticationSteps><authenticationSteps><attributeStep>false</attributeStep><federatedIdentityProviders><defaultAuthenticatorConfig><displayName>twitter</displayName><name>TwitterAuthenticator</name></defaultAuthenticatorConfig><federatedAuthenticatorConfigs><displayName>twitter</displayName><name>TwitterAuthenticator</name></federatedAuthenticatorConfigs><identityProviderName>IDP-twitter</identityProviderName></federatedIdentityProviders><stepOrder>2</stepOrder><subjectStep>false</subjectStep></authenticationSteps><authenticationType>flow</authenticationType><enableAuthorization>false</enableAuthorization><subjectClaimUri xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><useTenantDomainInLocalSubjectIdentifier>false</useTenantDomainInLocalSubjectIdentifier><useUserstoreDomainInLocalSubjectIdentifier>false</useUserstoreDomainInLocalSubjectIdentifier></localAndOutBoundAuthenticationConfig><outboundProvisioningConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"/><permissionAndRoleConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"/><ns1:requestPathAuthenticatorConfigs xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><ns1:saasApp xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">false</ns1:saasApp></ns3:serviceProvider></ns3:updateApplication></soapenv:Body></soapenv:Envelope>"
+curl -s -k -H "Authorization: Basic %~2" -H "Content-Type: text/xml" -H "SOAPAction: %soap_action%" -o NUL %endpoint% -d "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelope/"\" xmlns:xsd="\"http://org.apache.axis2/xsd"\" xmlns:xsd1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><soapenv:Header/><soapenv:Body><ns3:updateApplication xmlns:ns3="\"http://org.apache.axis2/xsd"\"><ns3:serviceProvider><ns1:applicationID xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">%app_id%</ns1:applicationID><ns1:applicationName xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">%~1</ns1:applicationName><claimConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><alwaysSendMappedLocalSubjectId>false</alwaysSendMappedLocalSubjectId><localClaimDialect>true</localClaimDialect><roleClaimURI/></claimConfig><ns1:description xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">sample service provider</ns1:description><inboundAuthenticationConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><inboundAuthenticationRequestConfigs><inboundAuthKey>saml2-web-app-pickup-%sp_name%.com</inboundAuthKey><inboundAuthType>samlsso</inboundAuthType><properties><name>attrConsumServiceIndex</name><value>1223160755</value></properties></inboundAuthenticationRequestConfigs><inboundAuthenticationRequestConfigs><inboundAuthKey/><inboundAuthType>passivests</inboundAuthType></inboundAuthenticationRequestConfigs><inboundAuthenticationRequestConfigs><inboundAuthKey/><inboundAuthType>openid</inboundAuthType></inboundAuthenticationRequestConfigs></inboundAuthenticationConfig><inboundProvisioningConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><dumbMode>false</dumbMode><provisioningUserStore>PRIMARY</provisioningUserStore></inboundProvisioningConfig><localAndOutBoundAuthenticationConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><alwaysSendBackAuthenticatedListOfIdPs>false</alwaysSendBackAuthenticatedListOfIdPs><authenticationScriptConfig><ns2:content xmlns:ns2="\"http://script.model.common.application.identity.carbon.wso2.org/xsd"\"/><ns2:enabled xmlns:ns2="\"http://script.model.common.application.identity.carbon.wso2.org/xsd"\">false</ns2:enabled></authenticationScriptConfig><authenticationStepForAttributes xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><authenticationStepForSubject xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><authenticationSteps><attributeStep>true</attributeStep><localAuthenticatorConfigs><displayName>basic</displayName><name>BasicAuthenticator</name></localAuthenticatorConfigs><stepOrder>1</stepOrder><subjectStep>true</subjectStep></authenticationSteps><authenticationSteps><attributeStep>false</attributeStep><federatedIdentityProviders><defaultAuthenticatorConfig><displayName>twitter</displayName><name>TwitterAuthenticator</name></defaultAuthenticatorConfig><federatedAuthenticatorConfigs><displayName>twitter</displayName><name>TwitterAuthenticator</name></federatedAuthenticatorConfigs><identityProviderName>IDP-twitter</identityProviderName></federatedIdentityProviders><stepOrder>2</stepOrder><subjectStep>false</subjectStep></authenticationSteps><authenticationType>flow</authenticationType><enableAuthorization>false</enableAuthorization><subjectClaimUri xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><useTenantDomainInLocalSubjectIdentifier>false</useTenantDomainInLocalSubjectIdentifier><useUserstoreDomainInLocalSubjectIdentifier>false</useUserstoreDomainInLocalSubjectIdentifier></localAndOutBoundAuthenticationConfig><outboundProvisioningConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"/><permissionAndRoleConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"/><ns1:requestPathAuthenticatorConfigs xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><ns1:saasApp xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">false</ns1:saasApp></ns3:serviceProvider></ns3:updateApplication></soapenv:Body></soapenv:Envelope>"
 echo ** Successfully updated the application %~1. **
 cd ..
 EXIT /B
@@ -1121,7 +1121,7 @@ IF %ERRORLEVEL% NEQ 0 (
   cd ..
   echo(
   CALL :delete_sp dispatch Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  CALL :delete_sp swift Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  CALL :delete_sp manager Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
   CALL :delete_user  %is_domain% %is_port%
   echo(
   exit -1
@@ -1137,7 +1137,7 @@ echo(
 echo Updating application %~1...
 
 REM Send the SOAP request to Update the Application.
-curl -s -k -H "Authorization: Basic %~2" -H "Content-Type: text/xml" -H "SOAPAction: %~3" -o NUL %~4 -d "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelope/"\" xmlns:xsd="\"http://org.apache.axis2/xsd"\" xmlns:xsd1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><soapenv:Header/><soapenv:Body><ns3:updateApplication xmlns:ns3="\"http://org.apache.axis2/xsd"\"><ns3:serviceProvider><ns1:applicationID xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">%app_id%</ns1:applicationID><ns1:applicationName xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">%sp_name%</ns1:applicationName><claimConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><alwaysSendMappedLocalSubjectId>false</alwaysSendMappedLocalSubjectId><localClaimDialect>true</localClaimDialect><roleClaimURI/></claimConfig><ns1:description xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">sample service provider</ns1:description><inboundAuthenticationConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><inboundAuthenticationRequestConfigs><inboundAuthKey>saml2-web-app-%sp_name%.com</inboundAuthKey><inboundAuthType>samlsso</inboundAuthType><properties><name>attrConsumServiceIndex</name><value>1223160755</value></properties></inboundAuthenticationRequestConfigs><inboundAuthenticationRequestConfigs><inboundAuthKey/><inboundAuthType>passivests</inboundAuthType></inboundAuthenticationRequestConfigs><inboundAuthenticationRequestConfigs><inboundAuthKey/><inboundAuthType>openid</inboundAuthType></inboundAuthenticationRequestConfigs></inboundAuthenticationConfig><inboundProvisioningConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><dumbMode>false</dumbMode><provisioningUserStore>PRIMARY</provisioningUserStore></inboundProvisioningConfig><localAndOutBoundAuthenticationConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><alwaysSendBackAuthenticatedListOfIdPs>false</alwaysSendBackAuthenticatedListOfIdPs><authenticationStepForAttributes xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><authenticationStepForSubject xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><authenticationSteps><federatedIdentityProviders><identityProviderName>IDP-twitter</identityProviderName></federatedIdentityProviders></authenticationSteps><authenticationType>federated</authenticationType><enableAuthorization>false</enableAuthorization><subjectClaimUri>http://wso2.org/claims/fullname</subjectClaimUri><useTenantDomainInLocalSubjectIdentifier>false</useTenantDomainInLocalSubjectIdentifier><useUserstoreDomainInLocalSubjectIdentifier>false</useUserstoreDomainInLocalSubjectIdentifier></localAndOutBoundAuthenticationConfig><outboundProvisioningConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"/><permissionAndRoleConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"/><ns1:requestPathAuthenticatorConfigs xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><ns1:saasApp xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">false</ns1:saasApp></ns3:serviceProvider></ns3:updateApplication></soapenv:Body></soapenv:Envelope>"
+curl -s -k -H "Authorization: Basic %~2" -H "Content-Type: text/xml" -H "SOAPAction: %~3" -o NUL %~4 -d "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelope/"\" xmlns:xsd="\"http://org.apache.axis2/xsd"\" xmlns:xsd1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><soapenv:Header/><soapenv:Body><ns3:updateApplication xmlns:ns3="\"http://org.apache.axis2/xsd"\"><ns3:serviceProvider><ns1:applicationID xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">%app_id%</ns1:applicationID><ns1:applicationName xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">%sp_name%</ns1:applicationName><claimConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><alwaysSendMappedLocalSubjectId>false</alwaysSendMappedLocalSubjectId><localClaimDialect>true</localClaimDialect><roleClaimURI/></claimConfig><ns1:description xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">sample service provider</ns1:description><inboundAuthenticationConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><inboundAuthenticationRequestConfigs><inboundAuthKey>saml2-web-app-pickup-%sp_name%.com</inboundAuthKey><inboundAuthType>samlsso</inboundAuthType><properties><name>attrConsumServiceIndex</name><value>1223160755</value></properties></inboundAuthenticationRequestConfigs><inboundAuthenticationRequestConfigs><inboundAuthKey/><inboundAuthType>passivests</inboundAuthType></inboundAuthenticationRequestConfigs><inboundAuthenticationRequestConfigs><inboundAuthKey/><inboundAuthType>openid</inboundAuthType></inboundAuthenticationRequestConfigs></inboundAuthenticationConfig><inboundProvisioningConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><dumbMode>false</dumbMode><provisioningUserStore>PRIMARY</provisioningUserStore></inboundProvisioningConfig><localAndOutBoundAuthenticationConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><alwaysSendBackAuthenticatedListOfIdPs>false</alwaysSendBackAuthenticatedListOfIdPs><authenticationStepForAttributes xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><authenticationStepForSubject xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><authenticationSteps><federatedIdentityProviders><identityProviderName>IDP-twitter</identityProviderName></federatedIdentityProviders></authenticationSteps><authenticationType>federated</authenticationType><enableAuthorization>false</enableAuthorization><subjectClaimUri>http://wso2.org/claims/fullname</subjectClaimUri><useTenantDomainInLocalSubjectIdentifier>false</useTenantDomainInLocalSubjectIdentifier><useUserstoreDomainInLocalSubjectIdentifier>false</useUserstoreDomainInLocalSubjectIdentifier></localAndOutBoundAuthenticationConfig><outboundProvisioningConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"/><permissionAndRoleConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"/><ns1:requestPathAuthenticatorConfigs xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><ns1:saasApp xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">false</ns1:saasApp></ns3:serviceProvider></ns3:updateApplication></soapenv:Body></soapenv:Envelope>"
 echo ** Successfully updated the application %~1. **
 cd ..
 EXIT /B
@@ -1376,7 +1376,7 @@ EXIT /B
 :end_message
 
 set dispatch_url=%~1
-set swift_url=%~2
+set manager_url=%~2
 set is_domain=%~3
 set is_port=%~4
 set tomcat_domain=%~5
@@ -1388,8 +1388,8 @@ echo "|                                                                  |"
 echo "|    You can find the sample web apps on the following URLs.       |"
 echo "|    *** Please press ctrl button and click on the links ***       |"
 echo "|                                                                  |"
-echo "|    Dispatch - http://%tomcat_domain%:%tomcat_port%/%~1/                         |"
-echo "|    Swift - http://%tomcat_domain%:%tomcat_port%/%~2/                            |"
+echo "|    pickup-dispatch - http://%tomcat_domain%:%tomcat_port%/%~1/                         |"
+echo "|    pickup-manager - http://%tomcat_domain%:%tomcat_port%/%~2/                            |"
 echo "|                                                                  |"
 echo "|    Please use the following user credentials to log in.          |"
 echo "|                                                                  |"
@@ -1415,7 +1415,7 @@ set result=false
      IF "%clean%"=="Y" set result=true
      IF "%result%" == "true" (
         CALL :delete_sp dispatch Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-        CALL :delete_sp swift Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+        CALL :delete_sp manager Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
         CALL :delete_user %is_domain% %is_port%
 	 )
      IF "%result%" == "false" (

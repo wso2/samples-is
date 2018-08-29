@@ -26,7 +26,7 @@
 
     <artifactId>saml2-web-app-pickup-manager</artifactId>
     <packaging>war</packaging>
-    <name>saml2-web-app-swift Maven Webapp</name>
+    <name>saml2-web-app-pickup-manger Maven Webapp</name>
 
     <dependencies>
         <dependency>
