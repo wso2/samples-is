@@ -25,8 +25,10 @@ import android.support.customtabs.CustomTabsIntent;
 import com.wso2is.androidsample.mgt.AuthStateManager;
 import com.wso2is.androidsample.mgt.ConfigManager;
 import net.openid.appauth.AuthState;
+
 import java.lang.ref.WeakReference;
 import java.util.concurrent.atomic.AtomicReference;
+
 import static com.wso2is.androidsample.activities.UserActivity.idToken;
 import static com.wso2is.androidsample.activities.UserActivity.state;
 
@@ -36,10 +38,11 @@ import static com.wso2is.androidsample.activities.UserActivity.state;
  */
 public class LogoutRequest {
 
-    private static final AtomicReference<WeakReference<LogoutRequest>> instance = new AtomicReference<>
-            (new WeakReference<LogoutRequest>(null));
+    private static final AtomicReference<WeakReference<LogoutRequest>> instance = new AtomicReference<>(new WeakReference<LogoutRequest>(null));
 
-    private LogoutRequest() {}
+    private LogoutRequest() {
+
+    }
 
     /**
      * Returns an instance of the LogoutRequest class.
@@ -49,7 +52,7 @@ public class LogoutRequest {
     public static LogoutRequest getInstance() {
 
         LogoutRequest logoutRequest = instance.get().get();
-        if(logoutRequest == null) {
+        if (logoutRequest == null) {
             logoutRequest = new LogoutRequest();
             instance.set(new WeakReference<>(logoutRequest));
         }
@@ -79,8 +82,8 @@ public class LogoutRequest {
 
         String logout_uri = configuration.getLogoutEndpointUri().toString();
         String redirect = configuration.getRedirectUri().toString();
-        String url = logout_uri + "?id_token_hint=" + idToken + "&post_logout_redirect_uri="
-                + redirect + "&state=" + state;
+        String url = logout_uri + "?id_token_hint=" + idToken + "&post_logout_redirect_uri=" + redirect
+                + "&state=" + state;
 
         CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
         CustomTabsIntent customTabsIntent = builder.build();

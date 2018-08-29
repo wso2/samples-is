@@ -18,19 +18,23 @@
 
 package com.wso2is.androidsample.mgt;
 
+import android.util.Log;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.AnyThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
+
 import net.openid.appauth.AuthState;
 import net.openid.appauth.AuthorizationException;
 import net.openid.appauth.AuthorizationResponse;
 import net.openid.appauth.TokenResponse;
+
 import org.json.JSONException;
+
 import java.lang.ref.WeakReference;
 import java.util.concurrent.atomic.AtomicReference;
+
 import static com.wso2is.androidsample.utils.Constants.KEY_STATE;
 import static com.wso2is.androidsample.utils.Constants.STORE_NAME;
 
@@ -42,10 +46,9 @@ public class AuthStateManager {
     private static final AtomicReference<WeakReference<AuthStateManager>> INSTANCE_REF =
             new AtomicReference<>(new WeakReference<AuthStateManager>(null));
 
-    private  final String TAG = AuthStateManager.class.getSimpleName();
-
     private final SharedPreferences prefs;
     private final AtomicReference<AuthState> currentAuthState;
+    private final String TAG = AuthStateManager.class.getSimpleName();
 
     /**
      * Returns an instance of the AuthStateManager class.
@@ -55,6 +58,7 @@ public class AuthStateManager {
      */
     @AnyThread
     public static AuthStateManager getInstance(@NonNull Context context) {
+
         AuthStateManager manager = INSTANCE_REF.get().get();
         if (manager == null) {
             manager = new AuthStateManager(context.getApplicationContext());
@@ -70,6 +74,7 @@ public class AuthStateManager {
      * @param context Application Context
      */
     private AuthStateManager(Context context) {
+
         prefs = context.getSharedPreferences(STORE_NAME, Context.MODE_PRIVATE);
         currentAuthState = new AtomicReference<>();
     }
@@ -82,6 +87,7 @@ public class AuthStateManager {
     @AnyThread
     @NonNull
     public AuthState getCurrentState() {
+
         AuthState current;
         if (currentAuthState.get() != null) {
             current = currentAuthState.get();
@@ -103,6 +109,7 @@ public class AuthStateManager {
      */
     @AnyThread
     public void replaceState(@NonNull AuthState state) {
+
         writeState(state);
         currentAuthState.set(state);
     }
@@ -111,12 +118,13 @@ public class AuthStateManager {
      * Updates the current AuthState with authorization response and exception.
      *
      * @param response Authorization response
-     * @param ex Authorization exception
+     * @param ex       Authorization exception
      */
 
     @AnyThread
     public void updateAfterAuthorization(@Nullable AuthorizationResponse response,
                                          @Nullable AuthorizationException ex) {
+
         AuthState current = getCurrentState();
         current.update(response, ex);
         replaceState(current);
@@ -126,10 +134,11 @@ public class AuthStateManager {
      * Updates the current AuthState with token response and exception.
      *
      * @param response Token response
-     * @param ex Authorization exception
+     * @param ex       Authorization exception
      */
     @AnyThread
     public void updateAfterTokenResponse(@Nullable TokenResponse response, @Nullable AuthorizationException ex) {
+
         AuthState current = getCurrentState();
         current.update(response, ex);
         replaceState(current);
@@ -143,6 +152,7 @@ public class AuthStateManager {
     @AnyThread
     @NonNull
     private AuthState readState() {
+
         AuthState auth;
         String currentState = prefs.getString(KEY_STATE, null);
         if (currentState == null) {

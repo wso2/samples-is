@@ -27,6 +27,7 @@ import com.wso2is.androidsample.utils.ConnectionBuilderForTesting;
 import okio.Okio;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
@@ -37,6 +38,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicReference;
+
 import static com.wso2is.androidsample.activities.UserActivity.userInfoJson;
 import static com.wso2is.androidsample.utils.Constants.AUTHORIZATION;
 import static com.wso2is.androidsample.utils.Constants.BEARER;
@@ -47,17 +49,18 @@ import static com.wso2is.androidsample.utils.Constants.UTF_8;
  */
 public class UserInfoRequest {
 
-    private ConfigManager configuration;
+    private static final String TAG = UserInfoRequest.class.getSimpleName();
+    private static final AtomicReference<WeakReference<UserInfoRequest>> instance =
+            new AtomicReference<>(new WeakReference<UserInfoRequest>(null));
+
     private final CountDownLatch authIntentLatch = new CountDownLatch(1);
 
-    private static final String TAG = UserInfoRequest.class.getSimpleName();
-
-    private static final AtomicReference<WeakReference<UserInfoRequest>> instance = new AtomicReference<>
-            (new WeakReference<UserInfoRequest>(null));
-
+    private ConfigManager configuration;
     private boolean val = false;
 
-    private UserInfoRequest() {}
+    private UserInfoRequest() {
+
+    }
 
     /**
      * Returns an instance of the UserInfoRequest class.
@@ -67,7 +70,7 @@ public class UserInfoRequest {
     public static UserInfoRequest getInstance() {
 
         UserInfoRequest userInfoRequest = instance.get().get();
-        if(userInfoRequest == null) {
+        if (userInfoRequest == null) {
             userInfoRequest = new UserInfoRequest();
             instance.set(new WeakReference<>(userInfoRequest));
         }
@@ -78,7 +81,7 @@ public class UserInfoRequest {
      * Fetches user information by invoking the userinfo endpoint of the WSO2 IS.
      *
      * @param accessToken Access token of the current session.
-     * @param context Application context.
+     * @param context     Application context.
      */
     public boolean fetchUserInfo(String accessToken, Context context, User user) {
 
@@ -99,8 +102,8 @@ public class UserInfoRequest {
         executor.submit(() -> {
             try {
                 HttpURLConnection conn;
-                if (configuration.isHttpsRequired()){
-                     conn = (HttpURLConnection) userInfoEndpoint.openConnection();
+                if (configuration.isHttpsRequired()) {
+                    conn = (HttpURLConnection) userInfoEndpoint.openConnection();
                 } else {
                     conn = ConnectionBuilderForTesting.INSTANCE.openConnection(Uri.parse(userInfoEndpoint.toString()));
                 }

@@ -23,10 +23,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.customtabs.CustomTabsIntent;
 import android.util.Log;
+
 import com.wso2is.androidsample.activities.LoginActivity;
 import com.wso2is.androidsample.activities.UserActivity;
 import com.wso2is.androidsample.mgt.AuthStateManager;
 import com.wso2is.androidsample.mgt.ConfigManager;
+
 import net.openid.appauth.AppAuthConfiguration;
 import net.openid.appauth.AuthState;
 import net.openid.appauth.AuthorizationRequest;
@@ -36,8 +38,10 @@ import net.openid.appauth.CodeVerifierUtil;
 import net.openid.appauth.ResponseTypeValues;
 import net.openid.appauth.browser.AnyBrowserMatcher;
 import net.openid.appauth.browser.BrowserMatcher;
+
 import java.lang.ref.WeakReference;
 import java.util.concurrent.atomic.AtomicReference;
+
 import static net.openid.appauth.AuthorizationRequest.CODE_CHALLENGE_METHOD_S256;
 
 public class AuthRequest {
@@ -45,18 +49,19 @@ public class AuthRequest {
     private static final String TAG = AuthRequest.class.getSimpleName();
 
     private final AtomicReference<String> clientId = new AtomicReference<>();
-    private static WeakReference<AuthRequest> instance = new WeakReference<>(null);
     private final AtomicReference<AuthorizationRequest> authRequest = new AtomicReference<>();
     private final AtomicReference<CustomTabsIntent> customTabIntent = new AtomicReference<>();
-
-    private static AuthStateManager authStateManager;
+    private final BrowserMatcher browserMatcher = AnyBrowserMatcher.INSTANCE;
     private final ConfigManager configuration;
-    private AuthorizationService authService;
     private final Context context;
 
-    private final BrowserMatcher browserMatcher = AnyBrowserMatcher.INSTANCE;
+    private static WeakReference<AuthRequest> instance = new WeakReference<>(null);
+    private static AuthStateManager authStateManager;
 
-    private AuthRequest(Context context){
+    private AuthorizationService authService;
+
+    private AuthRequest(Context context) {
+
         this.context = context;
         configuration = ConfigManager.getInstance(context);
     }
@@ -68,6 +73,7 @@ public class AuthRequest {
      * @return An instance of the AuthRequest class.
      */
     public static AuthRequest getInstance(Context context) {
+
         AuthRequest authRequest = instance.get();
         if (authRequest == null) {
             authRequest = new AuthRequest(context.getApplicationContext());
@@ -89,15 +95,16 @@ public class AuthRequest {
         cancelIntent.putExtra("failed", true);
         cancelIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-        authService.performAuthorizationRequest(
-                authRequest.get(), PendingIntent.getActivity(context, 0, completionIntent, 0),
-                PendingIntent.getActivity(context, 0, cancelIntent, 0), customTabIntent.get());
+        authService.performAuthorizationRequest(authRequest.get(), PendingIntent.getActivity(context, 0,
+                completionIntent, 0), PendingIntent.getActivity(context, 0, cancelIntent, 0),
+                customTabIntent.get());
     }
 
     /**
      * Creates an authorization service and initializes the authorization service configuration if necessary.
      */
     private void initializeAppAuth() {
+
         Log.i(TAG, "Initializing AppAuth");
         recreateAuthorizationService();
 
@@ -125,6 +132,7 @@ public class AuthRequest {
      * Creates a new authorization service.
      */
     private void recreateAuthorizationService() {
+
         if (authService != null) {
             Log.i(TAG, "Discarding existing AuthService instance.");
             authService.dispose();
@@ -141,6 +149,7 @@ public class AuthRequest {
      * @return New authorization service.
      */
     private AuthorizationService createAuthorizationService() {
+
         Log.i(TAG, "Creating authorization service.");
 
         AppAuthConfiguration.Builder builder = new AppAuthConfiguration.Builder();
@@ -154,6 +163,7 @@ public class AuthRequest {
      * Warms up the custom tab by specifying the possible request URI.
      */
     private void warmUpBrowser() {
+
         Log.i(TAG, "Warming up browser instance for auth request.");
 
         CustomTabsIntent.Builder intentBuilder = authService.createCustomTabsIntentBuilder(authRequest.get().toUri());
@@ -164,13 +174,14 @@ public class AuthRequest {
      * Creates the authorization request with PKCE.
      */
     private void createAuthRequest() {
+
         Log.i(TAG, "Creating authorization request.");
 
         String codeVerifier = CodeVerifierUtil.generateRandomCodeVerifier();
         String codeChallenge = CodeVerifierUtil.deriveCodeVerifierChallenge(codeVerifier);
 
-        AuthorizationRequest.Builder authRequestBuilder = new AuthorizationRequest.Builder(
-                authStateManager.getCurrentState().getAuthorizationServiceConfiguration(), clientId.get(),
+        AuthorizationRequest.Builder authRequestBuilder = new AuthorizationRequest.Builder(authStateManager
+                .getCurrentState().getAuthorizationServiceConfiguration(), clientId.get(),
                 ResponseTypeValues.CODE, configuration.getRedirectUri()).setScope(configuration.getScope())
                 .setCodeVerifier(codeVerifier, codeChallenge, CODE_CHALLENGE_METHOD_S256);
 

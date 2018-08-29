@@ -1,4 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--
+ Copyright (c) 2018, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                              xmlns:app="http://schemas.android.com/apk/res-auto"
                                              xmlns:tools="http://schemas.android.com/tools"
@@ -6,6 +23,22 @@
                                              android:layout_height="match_parent"
                                              android:background="@android:color/white"
                                              tools:context=".activities.UserActivity">
+
+    <TextView
+            android:text="@string/copyright"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintVertical_bias="1.0"/>
 
     <TextView
             android:id="@+id/tvProfile"
@@ -62,24 +95,27 @@
 
     <Button
             android:id="@+id/bLogout"
-            android:layout_width="311dp"
-            android:layout_height="wrap_content"
+            android:layout_width="287dp"
+            android:layout_height="34dp"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/sign_out"
             android:textColor="@android:color/white"
+            android:background="#fc511f"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.506"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.932" android:background="@android:color/holo_orange_dark"
-            android:textAllCaps="false" android:textSize="24sp" android:fontFamily="sans-serif"/>
+            app:layout_constraintVertical_bias="0.884"
+            style="?android:attr/borderlessButtonStyle"/>
 
     <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="187dp"
-            android:layout_height="189dp"
+            android:layout_width="151dp"
+            android:layout_height="141dp"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
             android:contentDescription="@string/user_image"
@@ -88,15 +124,7 @@
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.555"
-            app:srcCompat="@drawable/avatar_default"/>
-    <TextView
-            android:text="@string/email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            android:id="@+id/tvEmail" android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="8dp"
-            app:layout_constraintVertical_bias="0.0" app:layout_constraintTop_toBottomOf="@+id/tvUsername"/>
+            app:layout_constraintVertical_bias="0.463"
+            app:srcCompat="@drawable/usercircleicon"/>
 
 </android.support.constraint.ConstraintLayout>

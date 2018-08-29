@@ -39,6 +39,6 @@ public final class Constants {
     public static final String KEY_STATE = "state";
 
     // constants in ConnectionBuilderForTesting class
-    public static final String SSL = "SSL";
+    public static final String TSL = "TLSv1.2";
 
 }

@@ -37,12 +37,12 @@ import java.util.concurrent.TimeUnit;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
+
 import static com.wso2is.androidsample.utils.Constants.HTTP;
 import static com.wso2is.androidsample.utils.Constants.HTTPS;
-import static com.wso2is.androidsample.utils.Constants.SSL;
+import static com.wso2is.androidsample.utils.Constants.TSL;
 
 /**
  * This class can be used in a testing scenario, where the WSO2 IS is hosted in
@@ -55,18 +55,24 @@ public class ConnectionBuilderForTesting implements ConnectionBuilder {
     private static final int CONNECTION_TIMEOUT_MS = (int) TimeUnit.SECONDS.toMillis(15);
     private static final int READ_TIMEOUT_MS = (int) TimeUnit.SECONDS.toMillis(10);
 
+    // Default trust manager is overridden for testing purposes of the sample application
     @SuppressLint("TrustAllX509TrustManager")
-    private static final TrustManager[] ANY_CERT_MANAGER = new TrustManager[] {
-            new X509TrustManager() {
-                public X509Certificate[] getAcceptedIssuers() {
-                    return null;
-                }
+    private static final TrustManager[] ANY_CERT_MANAGER = new TrustManager[]{new X509TrustManager() {
+        public X509Certificate[] getAcceptedIssuers() {
 
-                public void checkClientTrusted(X509Certificate[] certs, String authType) {}
-                public void checkServerTrusted(X509Certificate[] certs, String authType) {}
-            }
-    };
+            return null;
+        }
 
+        public void checkClientTrusted(X509Certificate[] certs, String authType) {
+
+        }
+
+        public void checkServerTrusted(X509Certificate[] certs, String authType) {
+
+        }
+    }};
+
+    // Hostname verification is turned off for testing purposes of the sample application
     @SuppressLint("BadHostnameVerifier")
     private static final HostnameVerifier ANY_HOSTNAME_VERIFIER = (hostname, session) -> true;
 
@@ -76,7 +82,7 @@ public class ConnectionBuilderForTesting implements ConnectionBuilder {
     static {
         SSLContext context;
         try {
-            context = SSLContext.getInstance(SSL);
+            context = SSLContext.getInstance(TSL);
         } catch (NoSuchAlgorithmException ex) {
             Log.e(TAG, "Unable to acquire SSL context: ", ex);
             context = null;
@@ -105,6 +111,7 @@ public class ConnectionBuilderForTesting implements ConnectionBuilder {
     @NonNull
     @Override
     public HttpURLConnection openConnection(@NonNull Uri uri) throws IOException {
+
         Preconditions.checkNotNull(uri, "URL must not be null");
         Preconditions.checkArgument(HTTP.equals(uri.getScheme()) || HTTPS.equals(uri.getScheme()),
                 "Scheme or URI must be HTTP or HTTPS");

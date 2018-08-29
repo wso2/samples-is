@@ -15,7 +15,6 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
 package com.wso2is.androidsample.mgt;
 
 import android.content.Context;
@@ -26,18 +25,24 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+
 import com.wso2is.androidsample.utils.ConnectionBuilderForTesting;
 import com.wso2is.androidsample.R;
+
 import net.openid.appauth.connectivity.ConnectionBuilder;
 import net.openid.appauth.connectivity.DefaultConnectionBuilder;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.nio.charset.Charset;
+
 import okio.Buffer;
 import okio.BufferedSource;
 import okio.Okio;
+
 import static com.wso2is.androidsample.utils.Constants.HTTP;
 import static com.wso2is.androidsample.utils.Constants.HTTPS;
 import static com.wso2is.androidsample.utils.Constants.KEY_LAST_HASH;
@@ -66,25 +71,10 @@ public class ConfigManager {
     private Uri tokenEndpointUri;
     private Uri userInfoEndpointUri;
     private Uri logoutEndpointUri;
-    private boolean httpsRequired;
-
-    /**
-     * Gives an instance of the ConfigManager class.
-     *
-     * @param context Context object with information about the current state of the application.
-     * @return A ConfigManager instance.
-     */
-    public static ConfigManager getInstance(Context context) {
-        ConfigManager config = sInstance.get();
-        if (config == null) {
-            config = new ConfigManager(context);
-            sInstance = new WeakReference<>(config);
-        }
-
-        return config;
-    }
+    private Boolean httpsRequired;
 
     private ConfigManager(Context context) {
+
         this.context = context;
         prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         resources = context.getResources();
@@ -97,11 +87,29 @@ public class ConfigManager {
     }
 
     /**
+     * Gives an instance of the ConfigManager class.
+     *
+     * @param context Context object with information about the current state of the application.
+     * @return A ConfigManager instance.
+     */
+    public static ConfigManager getInstance(Context context) {
+
+        ConfigManager config = sInstance.get();
+        if (config == null) {
+            config = new ConfigManager(context);
+            sInstance = new WeakReference<>(config);
+        }
+
+        return config;
+    }
+
+    /**
      * Indicates whether the configuration has changed from the last known valid state.
      *
      * @return Gives a true if the last known configuration has changed, no if it is the same.
      */
     public boolean hasConfigurationChanged() {
+
         String lastHash = getLastKnownConfigHash();
 
         return !configHash.equals(lastHash);
@@ -113,16 +121,18 @@ public class ConfigManager {
      * @return True if the current configuration is valid, false if it is not valid.
      */
     public boolean isValid() {
+
         return configError == null;
     }
 
     /**
      * Returns a description of the configuration error, if the configuration is invalid.
      *
-     * @return ConfigManager error
+     * @return ConfigManager error.
      */
     @Nullable
     public String getConfigurationError() {
+
         return configError;
     }
 
@@ -130,86 +140,95 @@ public class ConfigManager {
      * Indicates that the current configuration should be accepted as the last known valid configuration.
      */
     public void acceptConfiguration() {
+
         prefs.edit().putString(KEY_LAST_HASH, configHash).apply();
     }
 
     /**
      * Returns the client id specified in the res/raw/config.json file.
      *
-     * @return Client ID
+     * @return Client ID.
      */
     @Nullable
     public String getClientId() {
+
         return clientId;
     }
 
     /**
      * Returns the authorization scope specified in the res/raw/config.json file.
      *
-     * @return Authorization Scope
+     * @return Authorization Scope.
      */
     @NonNull
     public String getScope() {
+
         return scope;
     }
 
     /**
      * Returns the redirect uri specified in the res/raw/config.json file.
      *
-     * @return Redirect URI
+     * @return Redirect URI.
      */
     @NonNull
     public Uri getRedirectUri() {
+
         return redirectUri;
     }
 
     /**
      * Returns the authorization endpoint uri specified in the res/raw/config.json file.
      *
-     * @return Authorization Endpoint URI
+     * @return Authorization Endpoint URI.
      */
     @Nullable
     public Uri getAuthEndpointUri() {
+
         return authEndpointUri;
     }
 
     /**
      * Returns the token endpoint uri specified in the res/raw/config.json file.
      *
-     * @return Token Endpoint URI
+     * @return Token Endpoint URI.
      */
     @Nullable
     public Uri getTokenEndpointUri() {
+
         return tokenEndpointUri;
     }
 
     /**
      * Returns the user info endpoint uri specified in the res/raw/config.json file.
      *
-     * @return User Info Endpoint URI
+     * @return User Info Endpoint URI.
      */
     @Nullable
     public Uri getUserInfoEndpointUri() {
+
         return userInfoEndpointUri;
     }
 
     /**
      * Returns the logout endpoint uri specified in the res/raw/config.json file.
      *
-     * @return LogoutRequest Endpoint URI
+     * @return LogoutRequest Endpoint URI.
      */
     @Nullable
     public Uri getLogoutEndpointUri() {
+
         return logoutEndpointUri;
     }
 
     /**
      * Returns the client secret specified in the res/raw/config.json file.
      *
-     * @return Client Secret
+     * @return Client Secret.
      */
     @Nullable
     public String getClientSecret() {
+
         return clientSecret;
     }
 
@@ -221,15 +240,17 @@ public class ConfigManager {
      */
 
     public boolean isHttpsRequired() {
+
         return httpsRequired;
     }
 
     /**
      * Gives an instance of Connection Builder.
      *
-     * @return  Connection builder instance.
+     * @return Connection builder instance.
      */
     public ConnectionBuilder getConnectionBuilder() {
+
         if (isHttpsRequired()) {
             return DefaultConnectionBuilder.INSTANCE;
         } else {
@@ -243,17 +264,20 @@ public class ConfigManager {
      * @return Config Hash
      */
     private String getLastKnownConfigHash() {
+
         return prefs.getString(KEY_LAST_HASH, null);
     }
 
     /**
      * Reads the configuration values.
      *
-     * @throws InvalidConfigurationException
+     * @throws InvalidConfigurationException Invalid Configuration Exception.
      */
     private void readConfiguration() throws InvalidConfigurationException {
+
         BufferedSource configSource = Okio.buffer(Okio.source(resources.openRawResource(R.raw.config)));
         Buffer configData = new Buffer();
+
         try {
             configSource.readAll(configData);
             configJson = new JSONObject(configData.readString(Charset.forName(UTF_8)));
@@ -280,9 +304,7 @@ public class ConfigManager {
         tokenEndpointUri = getRequiredConfigWebUri("token_endpoint");
         userInfoEndpointUri = getRequiredConfigWebUri("userinfo_endpoint");
         logoutEndpointUri = getRequiredConfigWebUri("end_session_endpoint");
-
         httpsRequired = configJson.optBoolean("https_required", true);
-
     }
 
     /**
@@ -293,7 +315,9 @@ public class ConfigManager {
      */
     @Nullable
     private String getConfigString(String propName) {
+
         String value = configJson.optString(propName);
+
         if (value != null) {
             value = value.trim();
             if (TextUtils.isEmpty(value)) {
@@ -309,11 +333,13 @@ public class ConfigManager {
      *
      * @param propName Property name.
      * @return Property value.
-     * @throws InvalidConfigurationException
+     * @throws InvalidConfigurationException Invalid Configuration Exception.
      */
     @NonNull
     private String getRequiredConfigString(String propName) throws InvalidConfigurationException {
+
         String value = getConfigString(propName);
+
         if (value == null) {
             throw new InvalidConfigurationException(propName + " is required but not specified in the configuration");
         }
@@ -326,12 +352,14 @@ public class ConfigManager {
      *
      * @param propName Property name.
      * @return Config URI.
-     * @throws InvalidConfigurationException
+     * @throws InvalidConfigurationException Invalid Configuration Exception.
      */
     @NonNull
     private Uri getRequiredConfigUri(String propName) throws InvalidConfigurationException {
+
         String uriStr = getRequiredConfigString(propName);
         Uri uri;
+
         try {
             uri = Uri.parse(uriStr);
         } catch (Throwable ex) {
@@ -362,11 +390,13 @@ public class ConfigManager {
      *
      * @param propName Property name.
      * @return Config Web URI.
-     * @throws InvalidConfigurationException
+     * @throws InvalidConfigurationException Invalid Configuration Exception.
      */
     private Uri getRequiredConfigWebUri(String propName) throws InvalidConfigurationException {
+
         Uri uri = getRequiredConfigUri(propName);
         String scheme = uri.getScheme();
+
         if (TextUtils.isEmpty(scheme) || !(HTTP.equals(scheme) || HTTPS.equals(scheme))) {
             throw new InvalidConfigurationException(propName + " must have an http or https scheme");
         }
@@ -381,8 +411,9 @@ public class ConfigManager {
      * @return True if redirect URI is registered, false if not registered.
      */
     private boolean isRedirectUriRegistered() {
-        //
+
         Intent redirectIntent = new Intent();
+
         redirectIntent.setPackage(context.getPackageName());
         redirectIntent.setAction(Intent.ACTION_VIEW);
         redirectIntent.addCategory(Intent.CATEGORY_BROWSABLE);
@@ -395,11 +426,14 @@ public class ConfigManager {
      * Invalid configuration exception class.
      */
     static final class InvalidConfigurationException extends Exception {
+
         InvalidConfigurationException(String reason) {
+
             super(reason);
         }
 
         InvalidConfigurationException(String reason, Throwable cause) {
+
             super(reason, cause);
         }
     }
