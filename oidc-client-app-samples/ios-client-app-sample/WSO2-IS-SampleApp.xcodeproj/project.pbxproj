@@ -1,0 +1,648 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2412CDFD3B1D5B23AC3EE65F /* Pods_WSO2_IS_SampleAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5F6DF6C1CA432C1F2FF999B /* Pods_WSO2_IS_SampleAppTests.framework */; };
+		2E95CD915361DA4EF6995E72 /* Pods_WSO2_IS_SampleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC8AAA34E9AE6C78E71AE45B /* Pods_WSO2_IS_SampleApp.framework */; };
+		894F0DFB212E9742000534CD /* WSO2OIDCAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894F0DFA212E9742000534CD /* WSO2OIDCAuthService.swift */; };
+		89AA106821142F4C00D64645 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AA106721142F4C00D64645 /* AppDelegate.swift */; };
+		89AA106A21142F4C00D64645 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AA106921142F4C00D64645 /* LogInViewController.swift */; };
+		89AA106D21142F4C00D64645 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89AA106B21142F4C00D64645 /* Main.storyboard */; };
+		89AA106F21142F4D00D64645 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89AA106E21142F4D00D64645 /* Assets.xcassets */; };
+		89AA107221142F4D00D64645 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89AA107021142F4D00D64645 /* LaunchScreen.storyboard */; };
+		89AA107D21142F4D00D64645 /* WSO2_IS_SampleAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AA107C21142F4D00D64645 /* WSO2_IS_SampleAppTests.swift */; };
+		89AA108B2117F5C500D64645 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89AA108A2117F5C500D64645 /* Config.plist */; };
+		89AA10952118380900D64645 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AA10942118380900D64645 /* Constants.swift */; };
+		89AA1097211848AE00D64645 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AA1096211848AE00D64645 /* ProfileViewController.swift */; };
+		89AA109E2118BB5D00D64645 /* OAuthUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AA109D2118BB5D00D64645 /* OAuthUtils.swift */; };
+		89AA10A2211BE92B00D64645 /* LocalStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AA10A1211BE92B00D64645 /* LocalStorageManager.swift */; };
+		89AA10A4211BEE1100D64645 /* AuthStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AA10A3211BEE1100D64645 /* AuthStateManager.swift */; };
+		89AA10A8211BF37400D64645 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AA10A7211BF37400D64645 /* UserInfo.swift */; };
+		89AA10AA211BFF7B00D64645 /* UserInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AA10A9211BFF7B00D64645 /* UserInfoManager.swift */; };
+		89AA10B1211D636B00D64645 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 89AA10B0211D636B00D64645 /* Localizable.strings */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		89AA107921142F4D00D64645 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 89AA105C21142F4C00D64645 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 89AA106321142F4C00D64645;
+			remoteInfo = "WSO2-IS-SampleApp";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1EC2638003BA63D7A8F5F1C8 /* Pods-WSO2-IS-SampleAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WSO2-IS-SampleAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WSO2-IS-SampleAppTests/Pods-WSO2-IS-SampleAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		431C92A6CD79D9D4E5E4F22F /* Pods-WSO2-IS-SampleAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WSO2-IS-SampleAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WSO2-IS-SampleAppTests/Pods-WSO2-IS-SampleAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		894F0DFA212E9742000534CD /* WSO2OIDCAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WSO2OIDCAuthService.swift; sourceTree = "<group>"; };
+		89AA106421142F4C00D64645 /* WSO2 IS Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WSO2 IS Sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		89AA106721142F4C00D64645 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		89AA106921142F4C00D64645 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		89AA106C21142F4C00D64645 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		89AA106E21142F4D00D64645 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		89AA107121142F4D00D64645 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		89AA107321142F4D00D64645 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		89AA107821142F4D00D64645 /* WSO2-IS-SampleAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WSO2-IS-SampleAppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		89AA107C21142F4D00D64645 /* WSO2_IS_SampleAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WSO2_IS_SampleAppTests.swift; sourceTree = "<group>"; };
+		89AA107E21142F4D00D64645 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		89AA108A2117F5C500D64645 /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
+		89AA10942118380900D64645 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		89AA1096211848AE00D64645 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		89AA109D2118BB5D00D64645 /* OAuthUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthUtils.swift; sourceTree = "<group>"; };
+		89AA10A1211BE92B00D64645 /* LocalStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageManager.swift; sourceTree = "<group>"; };
+		89AA10A3211BEE1100D64645 /* AuthStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStateManager.swift; sourceTree = "<group>"; };
+		89AA10A7211BF37400D64645 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		89AA10A9211BFF7B00D64645 /* UserInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoManager.swift; sourceTree = "<group>"; };
+		89AA10B0211D636B00D64645 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = "WSO2-IS-SampleApp/resources/Localizable.strings"; sourceTree = SOURCE_ROOT; };
+		9294C912C025A912174E9DF8 /* Pods-WSO2-IS-SampleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WSO2-IS-SampleApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-WSO2-IS-SampleApp/Pods-WSO2-IS-SampleApp.release.xcconfig"; sourceTree = "<group>"; };
+		CC8AAA34E9AE6C78E71AE45B /* Pods_WSO2_IS_SampleApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WSO2_IS_SampleApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E817B8FD6EC7D08A6E5F067A /* Pods-WSO2-IS-SampleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WSO2-IS-SampleApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WSO2-IS-SampleApp/Pods-WSO2-IS-SampleApp.debug.xcconfig"; sourceTree = "<group>"; };
+		F5F6DF6C1CA432C1F2FF999B /* Pods_WSO2_IS_SampleAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WSO2_IS_SampleAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		89AA106121142F4C00D64645 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2E95CD915361DA4EF6995E72 /* Pods_WSO2_IS_SampleApp.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		89AA107521142F4D00D64645 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2412CDFD3B1D5B23AC3EE65F /* Pods_WSO2_IS_SampleAppTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1BD42636C39F4AEB02C089F2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CC8AAA34E9AE6C78E71AE45B /* Pods_WSO2_IS_SampleApp.framework */,
+				F5F6DF6C1CA432C1F2FF999B /* Pods_WSO2_IS_SampleAppTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3D90E7994BCD2FDD28FF5CAE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E817B8FD6EC7D08A6E5F067A /* Pods-WSO2-IS-SampleApp.debug.xcconfig */,
+				9294C912C025A912174E9DF8 /* Pods-WSO2-IS-SampleApp.release.xcconfig */,
+				431C92A6CD79D9D4E5E4F22F /* Pods-WSO2-IS-SampleAppTests.debug.xcconfig */,
+				1EC2638003BA63D7A8F5F1C8 /* Pods-WSO2-IS-SampleAppTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		8925075521229D3B0031F299 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				89AA106921142F4C00D64645 /* LogInViewController.swift */,
+				89AA1096211848AE00D64645 /* ProfileViewController.swift */,
+			);
+			path = controllers;
+			sourceTree = "<group>";
+		};
+		894F0DFC2131A179000534CD /* service */ = {
+			isa = PBXGroup;
+			children = (
+				894F0DFA212E9742000534CD /* WSO2OIDCAuthService.swift */,
+			);
+			path = service;
+			sourceTree = "<group>";
+		};
+		89AA105B21142F4C00D64645 = {
+			isa = PBXGroup;
+			children = (
+				89AA106621142F4C00D64645 /* WSO2-IS-SampleApp */,
+				89AA107B21142F4D00D64645 /* WSO2-IS-SampleAppTests */,
+				89AA106521142F4C00D64645 /* Products */,
+				3D90E7994BCD2FDD28FF5CAE /* Pods */,
+				1BD42636C39F4AEB02C089F2 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		89AA106521142F4C00D64645 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				89AA106421142F4C00D64645 /* WSO2 IS Sample.app */,
+				89AA107821142F4D00D64645 /* WSO2-IS-SampleAppTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		89AA106621142F4C00D64645 /* WSO2-IS-SampleApp */ = {
+			isa = PBXGroup;
+			children = (
+				89AA106721142F4C00D64645 /* AppDelegate.swift */,
+				89AA106B21142F4C00D64645 /* Main.storyboard */,
+				89AA107021142F4D00D64645 /* LaunchScreen.storyboard */,
+				8925075521229D3B0031F299 /* controllers */,
+				89AA10A6211BF35F00D64645 /* model */,
+				89AA10A5211BEE2E00D64645 /* mgt */,
+				894F0DFC2131A179000534CD /* service */,
+				89AA109C2118BB4100D64645 /* utils */,
+				89AA109B2118B48800D64645 /* resources */,
+				89AA106E21142F4D00D64645 /* Assets.xcassets */,
+				89AA107321142F4D00D64645 /* Info.plist */,
+				89AA108A2117F5C500D64645 /* Config.plist */,
+			);
+			path = "WSO2-IS-SampleApp";
+			sourceTree = "<group>";
+		};
+		89AA107B21142F4D00D64645 /* WSO2-IS-SampleAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				89AA107C21142F4D00D64645 /* WSO2_IS_SampleAppTests.swift */,
+				89AA107E21142F4D00D64645 /* Info.plist */,
+			);
+			path = "WSO2-IS-SampleAppTests";
+			sourceTree = "<group>";
+		};
+		89AA109B2118B48800D64645 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				89AA10942118380900D64645 /* Constants.swift */,
+				89AA10B0211D636B00D64645 /* Localizable.strings */,
+			);
+			path = resources;
+			sourceTree = "<group>";
+		};
+		89AA109C2118BB4100D64645 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				89AA109D2118BB5D00D64645 /* OAuthUtils.swift */,
+				89AA10A1211BE92B00D64645 /* LocalStorageManager.swift */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
+		89AA10A5211BEE2E00D64645 /* mgt */ = {
+			isa = PBXGroup;
+			children = (
+				89AA10A3211BEE1100D64645 /* AuthStateManager.swift */,
+				89AA10A9211BFF7B00D64645 /* UserInfoManager.swift */,
+			);
+			path = mgt;
+			sourceTree = "<group>";
+		};
+		89AA10A6211BF35F00D64645 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				89AA10A7211BF37400D64645 /* UserInfo.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		89AA106321142F4C00D64645 /* WSO2-IS-SampleApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 89AA108121142F4D00D64645 /* Build configuration list for PBXNativeTarget "WSO2-IS-SampleApp" */;
+			buildPhases = (
+				B582BAE96168C28E49FD1993 /* [CP] Check Pods Manifest.lock */,
+				89AA106021142F4C00D64645 /* Sources */,
+				89AA106121142F4C00D64645 /* Frameworks */,
+				89AA106221142F4C00D64645 /* Resources */,
+				D909BCE443606CDB4ED7DD8B /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "WSO2-IS-SampleApp";
+			productName = "WSO2-IS-SampleApp";
+			productReference = 89AA106421142F4C00D64645 /* WSO2 IS Sample.app */;
+			productType = "com.apple.product-type.application";
+		};
+		89AA107721142F4D00D64645 /* WSO2-IS-SampleAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 89AA108421142F4D00D64645 /* Build configuration list for PBXNativeTarget "WSO2-IS-SampleAppTests" */;
+			buildPhases = (
+				9A7AB7B27229BC3DB57BBFE2 /* [CP] Check Pods Manifest.lock */,
+				89AA107421142F4D00D64645 /* Sources */,
+				89AA107521142F4D00D64645 /* Frameworks */,
+				89AA107621142F4D00D64645 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				89AA107A21142F4D00D64645 /* PBXTargetDependency */,
+			);
+			name = "WSO2-IS-SampleAppTests";
+			productName = "WSO2-IS-SampleAppTests";
+			productReference = 89AA107821142F4D00D64645 /* WSO2-IS-SampleAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		89AA105C21142F4C00D64645 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0940;
+				LastUpgradeCheck = 0940;
+				ORGANIZATIONNAME = WSO2;
+				TargetAttributes = {
+					89AA106321142F4C00D64645 = {
+						CreatedOnToolsVersion = 9.4.1;
+					};
+					89AA107721142F4D00D64645 = {
+						CreatedOnToolsVersion = 9.4.1;
+						TestTargetID = 89AA106321142F4C00D64645;
+					};
+				};
+			};
+			buildConfigurationList = 89AA105F21142F4C00D64645 /* Build configuration list for PBXProject "WSO2-IS-SampleApp" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 89AA105B21142F4C00D64645;
+			productRefGroup = 89AA106521142F4C00D64645 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				89AA106321142F4C00D64645 /* WSO2-IS-SampleApp */,
+				89AA107721142F4D00D64645 /* WSO2-IS-SampleAppTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		89AA106221142F4C00D64645 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89AA10B1211D636B00D64645 /* Localizable.strings in Resources */,
+				89AA108B2117F5C500D64645 /* Config.plist in Resources */,
+				89AA107221142F4D00D64645 /* LaunchScreen.storyboard in Resources */,
+				89AA106F21142F4D00D64645 /* Assets.xcassets in Resources */,
+				89AA106D21142F4C00D64645 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		89AA107621142F4D00D64645 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9A7AB7B27229BC3DB57BBFE2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WSO2-IS-SampleAppTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B582BAE96168C28E49FD1993 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WSO2-IS-SampleApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D909BCE443606CDB4ED7DD8B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-WSO2-IS-SampleApp/Pods-WSO2-IS-SampleApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AppAuth/AppAuth.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppAuth.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WSO2-IS-SampleApp/Pods-WSO2-IS-SampleApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		89AA106021142F4C00D64645 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89AA109E2118BB5D00D64645 /* OAuthUtils.swift in Sources */,
+				89AA1097211848AE00D64645 /* ProfileViewController.swift in Sources */,
+				89AA106A21142F4C00D64645 /* LogInViewController.swift in Sources */,
+				89AA10A2211BE92B00D64645 /* LocalStorageManager.swift in Sources */,
+				89AA10A8211BF37400D64645 /* UserInfo.swift in Sources */,
+				89AA106821142F4C00D64645 /* AppDelegate.swift in Sources */,
+				89AA10952118380900D64645 /* Constants.swift in Sources */,
+				894F0DFB212E9742000534CD /* WSO2OIDCAuthService.swift in Sources */,
+				89AA10A4211BEE1100D64645 /* AuthStateManager.swift in Sources */,
+				89AA10AA211BFF7B00D64645 /* UserInfoManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		89AA107421142F4D00D64645 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89AA107D21142F4D00D64645 /* WSO2_IS_SampleAppTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		89AA107A21142F4D00D64645 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 89AA106321142F4C00D64645 /* WSO2-IS-SampleApp */;
+			targetProxy = 89AA107921142F4D00D64645 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		89AA106B21142F4C00D64645 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				89AA106C21142F4C00D64645 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		89AA107021142F4D00D64645 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				89AA107121142F4D00D64645 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		89AA107F21142F4D00D64645 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		89AA108021142F4D00D64645 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		89AA108221142F4D00D64645 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E817B8FD6EC7D08A6E5F067A /* Pods-WSO2-IS-SampleApp.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "WSO2-IS-SampleApp/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wso2.is.sample.WSO2-IS-SampleApp";
+				PRODUCT_NAME = "WSO2 IS Sample";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		89AA108321142F4D00D64645 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9294C912C025A912174E9DF8 /* Pods-WSO2-IS-SampleApp.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "WSO2-IS-SampleApp/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wso2.is.sample.WSO2-IS-SampleApp";
+				PRODUCT_NAME = "WSO2 IS Sample";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		89AA108521142F4D00D64645 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 431C92A6CD79D9D4E5E4F22F /* Pods-WSO2-IS-SampleAppTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "WSO2-IS-SampleAppTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wso2.is.sample.WSO2-IS-SampleAppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WSO2-IS-SampleApp.app/WSO2-IS-SampleApp";
+			};
+			name = Debug;
+		};
+		89AA108621142F4D00D64645 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1EC2638003BA63D7A8F5F1C8 /* Pods-WSO2-IS-SampleAppTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "WSO2-IS-SampleAppTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wso2.is.sample.WSO2-IS-SampleAppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WSO2-IS-SampleApp.app/WSO2-IS-SampleApp";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		89AA105F21142F4C00D64645 /* Build configuration list for PBXProject "WSO2-IS-SampleApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				89AA107F21142F4D00D64645 /* Debug */,
+				89AA108021142F4D00D64645 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		89AA108121142F4D00D64645 /* Build configuration list for PBXNativeTarget "WSO2-IS-SampleApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				89AA108221142F4D00D64645 /* Debug */,
+				89AA108321142F4D00D64645 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		89AA108421142F4D00D64645 /* Build configuration list for PBXNativeTarget "WSO2-IS-SampleAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				89AA108521142F4D00D64645 /* Debug */,
+				89AA108621142F4D00D64645 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 89AA105C21142F4C00D64645 /* Project object */;
+}
