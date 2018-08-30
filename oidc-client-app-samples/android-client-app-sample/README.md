@@ -1,4 +1,4 @@
-# Android Client Sample for WSO2 IS
+# Android Client Application Sample for WSO2 IS
 Sample application to demonstrate the integration of WSO2 IS with Android Applications.
 The application uses the [AppAuth for Android](https://github.com/openid/AppAuth-Android) library, which is a native app SDK for [OAuth 2.0](https://oauth.net/2/) and 
 [Open ID Connect](http://openid.net/connect/), implementing modern best practices. PKCE enabled OAuth 2.0 communication flow is used and the functionalities authorization, token handling, user info endpoint invocation and logout are demonstrated through the application.
