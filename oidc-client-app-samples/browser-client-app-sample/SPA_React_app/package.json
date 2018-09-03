@@ -1,0 +1,25 @@
+{
+  "name": "reactapp",
+  "version": "1.0.0",
+  "description": "SPA react sample app",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --hot"
+  },
+  "author": "Chinthaka Senanayaka",
+  "license": "ISC",
+  "dependencies": {
+    "@openid/appauth": "file:///home/chinthaka/projects/appauth-lib-dev/AppAuth-JS",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-router-dom": "^4.3.1",
+    "webpack": "^4.14.0",
+    "webpack-dev-server": "^3.1.4"
+  },
+  "devDependencies": {
+    "babel-plugin-react-html-attrs": "^2.1.0",
+    "eslint": "^5.1.0",
+    "flow-bin": "^0.76.0",
+    "webpack-cli": "^3.0.8"
+  }
+}
