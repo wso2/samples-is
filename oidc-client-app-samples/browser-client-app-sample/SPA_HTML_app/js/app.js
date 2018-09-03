@@ -16,11 +16,12 @@
 
 
 
-/** To run this app with minimal config changes in order to test this sample app
-  1. Install WSO2-IAM Server in your local
-  2. Create an SP in WSO2-IAM Server
-  3. Specify clientId and clientSecret here in the appConfig JSON
-  4. Deploy the sample app with the app folder in <Tomcat installation>/webapps/
+/** 
+  To run this app with minimal config changes in order to test this sample app
+    1. Install WSO2-IAM Server in your local
+    2. Create an SP in WSO2-IAM Server
+    3. Specify clientId and clientSecret here in the appConfig JSON
+    4. Deploy the sample app with the app folder in <Tomcat installation>/webapps/
 */
 
 var appConfigs = {
