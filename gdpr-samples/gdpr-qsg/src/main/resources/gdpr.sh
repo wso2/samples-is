@@ -196,15 +196,12 @@ add_user admin admin ${is_host} ${is_port}
 configure_selfsignup urn:updateResidentIdP https://${is_host}:${is_port}/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
 
 add_service_provider pickup urn:createApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
-add_service_provider pick-my-book urn:createApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
 add_service_provider notification-center urn:createApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
 
 configure_oidc pickup urn:registerOAuthApplicationData https://${is_host}:${is_port}/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
-configure_oidc pick-my-book urn:registerOAuthApplicationData https://${is_host}:${is_port}/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
 configure_oidc notification-center urn:registerOAuthApplicationData https://${is_host}:${is_port}/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
 
 update_oidc_app pickup Y2FtZXJvbjpjYW1lcm9uMTIz PQGlzcGF0Y2g= PqGlzcGF0Y2gMjMO ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
-update_oidc_app pick-my-book Y2FtZXJvbjpjYW1lcm9uMTIz YQGlzcGF0Y2g= YqGlzcGF0Y2gMjMo= ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
 update_oidc_app notification-center Y2FtZXJvbjpjYW1lcm9uMTIz KpQGlzcGF0Y2h= KpGlzcGF0Y2gMjHy ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
 
 return 0;
@@ -903,11 +900,6 @@ if [ "$sp_name" = "pickup" ];
  client_id="PQGlzcGF0Y2g="
  secret="PqGlzcGF0Y2gMjMO"
  callback=${sp_name}
-elif [ "$sp_name" = "pick-my-book" ];
-then
- client_id="YQGlzcGF0Y2g="
- secret="YqGlzcGF0Y2gMjMo="
- callback=${sp_name}
 elif [ "$sp_name" = "notification-center" ];
 then
  client_id="KpQGlzcGF0Y2h="
@@ -1174,7 +1166,6 @@ read clean
  case ${clean} in
         [Yy]* )
         delete_sp pickup urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-        delete_sp pick-my-book urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
         delete_sp notification-center urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
         delete_user ${is_host} ${is_port}
         delete_users ${is_host} ${is_port}

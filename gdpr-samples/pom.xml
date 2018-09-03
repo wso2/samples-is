@@ -30,7 +30,6 @@
 
     <modules>
         <module>pickup</module>
-        <module>pick-my-book</module>
         <module>gdpr-qsg</module>
         <module>notification-center</module>
     </modules>
