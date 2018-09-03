@@ -1,3 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<!--
+~   Copyright (c) 2018 WSO2 Inc. (http://wso2.com) All Rights Reserved.
+~
+~   Licensed under the Apache License, Version 2.0 (the "License");
+~   you may not use this file except in compliance with the License.
+~   You may obtain a copy of the License at
+~
+~        http://www.apache.org/licenses/LICENSE-2.0
+~
+~   Unless required by applicable law or agreed to in writing, software
+~   distributed under the License is distributed on an "AS IS" BASIS,
+~   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+~   See the License for the specific language governing permissions and
+~   limitations under the License.
+-->
+
 <%@ page import="org.apache.commons.lang.StringUtils" %>
 <%@ page import="org.wso2.sample.identity.oauth2.OAuth2Constants" %>
 <%@ page import="org.apache.oltu.oauth2.client.request.OAuthClientRequest" %>
@@ -8,6 +26,9 @@
 <%@ page import="com.nimbusds.jwt.SignedJWT" %>
 <%@ page import="java.util.Properties" %>
 <%@ page import="org.wso2.sample.identity.oauth2.SampleContextEventListener" %>
+<%@ page import="com.nimbusds.jwt.ReadOnlyJWTClaimsSet" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.HashMap" %>
 <%
     String code = null;
     String idToken;
@@ -16,6 +37,7 @@
     String name = null;
     Properties properties;
     properties = SampleContextEventListener.getProperties();
+    ReadOnlyJWTClaimsSet claimsSet = null;
 
     try {
         sessionState = request.getParameter(OAuth2Constants.SESSION_STATE);
@@ -62,8 +84,10 @@
             if (idToken != null) {
                 try {
                     name = SignedJWT.parse(idToken).getJWTClaimsSet().getSubject();
+                    claimsSet= SignedJWT.parse(idToken).getJWTClaimsSet();
+                    session.setAttribute("name", name);
                 } catch (Exception e) {
-//ignore
+                    System.console().printf("Values are not populated in JWT properly");
                 }
             }
         }
@@ -72,235 +96,166 @@
         error = e.getMessage();
     }
 %>
-<!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="PickUp Application">
 
-    <title> PickUp</title>
+    <title>PickUp</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="css/stylish-portfolio.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic"
-          rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+    <!-- Bootstrap Material Design CSS -->
+    <link href="libs/bootstrap-material-design_4.0.0/css/bootstrap-material-design.min.css" rel="stylesheet">
+    <!-- Font Awesome icons -->
+    <link href="libs/fontawesome-5.2.0/css/solid.min.css" rel="stylesheet">
+    <link href="libs/fontawesome-5.2.0/css/fontawesome.min.css" rel="stylesheet">
+    <!-- Custom styles -->
+    <link href="css/custom.css" rel="stylesheet">
+    <link href="css/pickup.css" rel="stylesheet">
 </head>
 
-<body>
-<nav id="top" class="navbar navbar-inverse navbar-custom">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#"><img src="img/logo.png" height="30"/> Taxies</a>
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav navbar-right">
-                <!--<li><button class="btn btn-dark custom-primary btn-login"><strong>Login</strong></button></li>-->
-                <li class="dropdown user-name">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img class="img-circle" height="30" width="30" src="img/Admin-icon.jpg">
-                        <span class="user-name"><%=name%><i class="fa fa-chevron-down"></i></span>
-                    </a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href='<%=properties.getProperty("OIDC_LOGOUT_ENDPOINT")%>'>Logout</a>
-                        <%--href='<%=properties.getProperty("OIDC_LOGOUT_ENDPOINT")%>"?post_logout_redirect_uri--%>
-                        <%--="<%=properties.getProperty("post_logout_redirect_uri")%>"&id_token_hint="<%=idToken%>'>--%>
+<body class="app-home pickup">
 
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
+<nav class="navbar navbar-expand-lg navbar-dark app-navbar justify-content-between">
+    <a class="navbar-brand" id="back-home" href="#"><i class="fas fa-taxi"></i> PICKUP </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav flex-row ml-md-auto ">
+            <li class="nav-item dropdown ">
+                <a class="nav-link dropdown-toggle user-dropdown" href="#" id="navbarDropdownMenuLink"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-user-circle"></i> <span><%=name%></span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" onclick="toggleToProfile()">Profile</a>
+                    <a class="dropdown-item" href='<%=properties.getProperty("OIDC_LOGOUT_ENDPOINT")%>'>Logout</a>
+                </div>
+            </li>
+        </ul>
     </div>
 </nav>
 
-<!-- About -->
-<section id="about" class="about">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2><strong>PickUp</strong></h2>
-                <p class="lead">A Taxi Booking Application </p>
+<main role="main" class="main-content" >
+    <div id="main-content" >
+        <div class="container text-center">
+            <div class="row">
+                <div class="col-sm-9 col-md-4 col-lg-4 mx-auto">
+                    <div class="mt-5 welcome-msg">Welcome, <%=name%>!</div>
+                    <div>
+                        <img src="img/pickup-book.png" class="taxi-book mt-3">
+                    </div>
+                    <a class="btn btn-primary mt-3 pickup-btn" role="button" aria-expanded="false" data-toggle="modal"
+                       data-target="#sampleModal">
+                        Book a Taxi
+                    </a>
+                </div>
             </div>
         </div>
-        <!-- /.row -->
     </div>
-    <!-- /.container -->
-</section>
 
+    <div id="profile-content" style="display: none">
+        <section class="jumbotron text-center">
+            <div class="container">
+                <div class="user-icon">
+                    <i class="fas fa-user-circle fa-5x"></i>
+                </div>
+                <div class="jumbotron-heading"><%=name%></div>
+            </div>
+        </section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 d-block mx-auto">
+                    <div class="card card-body table-container">
+                        <div class="table-responsive content-table">
+                            <%
+                                if (claimsSet != null) {
+                                    Map<String, Object> hashmap = new HashMap<>();
+                                    hashmap = claimsSet.getCustomClaims();
+                                    if (!hashmap.isEmpty()) {
+                            %>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th rowspan="2">User Details</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <%
+                                    for (String key : hashmap.keySet()){
+                                        if (!(key.equals("at_hash") || key.equals("c_hash") || key.equals("azp")
+                                                || key.equals("amr") || key.equals("sid"))) {
+                                %>
+                                <tr>
+                                    <td><%=key%></td>
+                                    <td><%=hashmap.get(key).toString()%></td>
+                                </tr>
+                                <%
+                                        }
+                                    }
+                                %>
+                                </tbody>
+                            </table>
+                            <%
+                            } else {
+                            %>
+                            <p align="center">No user details Available. Configure SP Claim Configurations.</p>
 
-<!-- Create -->
-<section class="create content">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-10 col-lg-offset-1">
-                <h3 class="text-center" style="color:#01969c">Plan Your Ride</h3>
-                <br/>
-                <div class="row">
-                    <div class="col-lg-6 col-lg-offset-3">
-                        <form>
-                            <div class="form-group">
-                                <label>Destination</label>
-                                <input type="text" class="form-control" placeholder="Enter your destination">
-                            </div>
-                            <div class="form-group">
-                                <label>Vehicle</label>
-                                <select class="form-control" id="sel1">
-                                    <option selected>Select a vehicle</option>
-                                    <option>Car</option>
-                                    <option>Van</option>
-                                    <option>Jeep</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Pickup Location</label>
-                                <input type="text" class="form-control" placeholder="Enter your pickup location">
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Date</label>
-                                        <input type="date" class="form-control" placeholder="Enter trip date">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label>Time</label>
-                                        <input type="time" class="form-control" placeholder="Enter trip time">
-                                    </div>
-                                </div>
-                            </div>
-                            <br/>
-                            <button type="submit" class="btn btn-lg btn-dark custom-primary center-block">Book Now
-                            </button>
-                        </form>
+                            <%
+                                    }
+                                }
+                            %>
 
+                        </div>
                     </div>
                 </div>
             </div>
-            <!-- /.col-lg-10 -->
+            </section>
         </div>
-        <!-- /.row -->
     </div>
-    <!-- /.container -->
-</section>
 
-<!-- Footer -->
-<footer id="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-10 col-lg-offset-1 text-center">
-                <a href="http://wso2.com/" target="_blank"><img src="img/wso2logo.svg" height="20"/></a>
-                <p class="text-muted">Copyright &copy; WSO2 2018</p>
+</main>
+
+</main>
+<footer class="text-muted footer text-center">
+    <span>Copyright &copy;  <a href="http://wso2.com/" target="_blank">
+        <img src="img/wso2-dark.svg" class="wso2-logo" alt="wso2-logo"></a> &nbsp;<span class="year"></span>
+    </span>
+</footer>
+
+<!-- sample application actions message -->
+<div class="modal fade" id="sampleModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">You cannot perform this action</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Sample application functionalities are added for display purposes only.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
             </div>
         </div>
     </div>
-    <a id="to-top" href="#top" class="btn btn-dark btn-lg"><i class="fa fa-chevron-up fa-fw fa-1x"></i></a>
-</footer>
+</div>
 
-<!-- jQuery -->
-<script src="js/jquery.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
-
-<!-- Custom Theme JavaScript -->
-<script>
-    // Closes the sidebar menu
-    $(".allocations").first().addClass('active');
-    $(".allocations .circle").first().addClass('custom-primary-color');
-
-    $("#menu-close").click(function (e) {
-        e.preventDefault();
-        $("#sidebar-wrapper").toggleClass("active");
-    });
-    // Opens the sidebar menu
-    $("#menu-toggle").click(function (e) {
-        e.preventDefault();
-        $("#sidebar-wrapper").toggleClass("active");
-    });
-
-    $(".allocations").click(function (e) {
-        e.preventDefault();
-        $(".allocations").removeClass('active');
-        $('.circle').removeClass('custom-primary-color');
-        $(this).toggleClass("active");
-        $('.content').toggleClass('hide');
-        $(this).find('.circle').toggleClass('custom-primary-color');
-    });
-
-    // Scrolls to the selected menu item on the page
-    $(function () {
-        $('a[href*=#]:not([href=#],[data-toggle],[data-target],[data-slide])').click(function () {
-            if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
-                var target = $(this.hash);
-                target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-                if (target.length) {
-                    $('html,body').animate({
-                        scrollTop: target.offset().top
-                    }, 1000);
-                    return false;
-                }
-            }
-        });
-
-        $("div.bhoechie-tab-menu>div.list-group>a").click(function (e) {
-            e.preventDefault();
-            $(this).siblings('a.active').removeClass("active");
-            $(this).addClass("active");
-            var index = $(this).index();
-            $("div.bhoechie-tab>div.bhoechie-tab-content").removeClass("active");
-            $("div.bhoechie-tab>div.bhoechie-tab-content").eq(index).addClass("active");
-        });
-    });
-    //#to-top button appears after scrolling
-    var fixed = false;
-    $(document).scroll(function () {
-        if ($(this).scrollTop() > 250) {
-            if (!fixed) {
-                fixed = true;
-                // $('#to-top').css({position:'fixed', display:'block'});
-                $('#to-top').show("slow", function () {
-                    $('#to-top').css({
-                        position: 'fixed',
-                        display: 'block'
-                    });
-                });
-            }
-        } else {
-            if (fixed) {
-                fixed = false;
-                $('#to-top').hide("slow", function () {
-                    $('#to-top').css({
-                        display: 'none'
-                    });
-                });
-            }
-        }
-    });
-</script>
+<!-- JQuery -->
+<script src="libs/jquery_3.3.1/jquery.min.js"></script>
+<!-- Popper -->
+<script src="libs/popper_1.12.9/popper.min.js"></script>
+<!-- Bootstrap Material Design JavaScript -->
+<script src="libs/bootstrap-material-design_4.0.0/js/bootstrap-material-design.min.js"></script>
+<!-- Custom Js -->
+<script src="js/custom.js"></script>
 <iframe id="rpIFrame" src="rpIFrame.jsp" frameborder="0" width="0" height="0"></iframe>
-</body>
 
+</body>
 </html>
+
