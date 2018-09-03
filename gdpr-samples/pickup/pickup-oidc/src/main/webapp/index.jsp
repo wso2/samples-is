@@ -23,7 +23,7 @@
     Properties properties;
     properties = SampleContextEventListener.getProperties();
 
-    String registrationEndpoint = properties.getProperty("registrationEndpoint");
+    String registrationEndpoint = properties.getProperty(OAuth2Constants.SELF_REGISTER_ENDPOINT);
     session.removeAttribute(OAuth2Constants.OAUTH2_GRANT_TYPE);
     session.removeAttribute(OAuth2Constants.ACCESS_TOKEN);
     session.removeAttribute(OAuth2Constants.CODE);
