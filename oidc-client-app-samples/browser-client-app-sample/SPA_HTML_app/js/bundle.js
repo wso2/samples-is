@@ -92,7 +92,7 @@ var App = /** @class */ (function () {
         this.endSessionHandler.setEndSessionNotifier(this.endSessionNotifier);
         // set a listener to listen for authorization responses
         this.endSessionNotifier.setEndSessionListener(function (request, response, error) {
-            console.log('Authorization request complete ', request, response, error);
+            console.log('End session request complete ', request, response, error);
             if (endSessionListenerCallback) {
                 endSessionListenerCallback(request, response, error);
             }

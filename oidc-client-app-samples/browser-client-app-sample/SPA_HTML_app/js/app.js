@@ -41,10 +41,10 @@ var appConfigs = {
 var init = function (authCompletionCallback, logoutCompletionCallback) {
   var application = new App(appConfigs);
 
-  application.init();
+  application.init(authCompletionCallback, logoutCompletionCallback);
 
   // check for authorization response if available.
-  application.checkForAuthorizationResponse(authCompletionCallback, logoutCompletionCallback);
+  application.checkForAuthorizationResponse();
 
   return application;
 }
