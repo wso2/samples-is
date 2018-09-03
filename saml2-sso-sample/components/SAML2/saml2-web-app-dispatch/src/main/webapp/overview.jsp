@@ -17,7 +17,6 @@
 -->
 <%@ page import="org.wso2.carbon.identity.sso.agent.bean.LoggedInSessionBean" %>
 <%@ page import="org.wso2.carbon.identity.sso.agent.util.SSOAgentConstants" %>
-<%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <!DOCTYPE html>

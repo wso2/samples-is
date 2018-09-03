@@ -6,9 +6,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <%
-    
-    Properties properties;
-    properties = SampleContextEventListener.getProperties();
+    Properties properties = SampleContextEventListener.getProperties();
     
     String consumerKey = properties.getProperty("consumerKey");
     String authzEndpoint = properties.getProperty("authzEndpoint");
@@ -26,9 +24,8 @@
     session.setAttribute(OAuth2Constants.OIDC_LOGOUT_ENDPOINT, OIDC_LOGOUT_ENDPOINT);
     session.setAttribute(OAuth2Constants.OIDC_SESSION_IFRAME_ENDPOINT, sessionIFrameEndpoint);
     
-    OAuthClientRequest.AuthenticationRequestBuilder oAuthAuthenticationRequestBuilder = new
-            OAuthClientRequest.AuthenticationRequestBuilder(authzEndpoint);
-    
+    OAuthClientRequest.AuthenticationRequestBuilder oAuthAuthenticationRequestBuilder =
+            new OAuthClientRequest.AuthenticationRequestBuilder(authzEndpoint);
     oAuthAuthenticationRequestBuilder
             .setClientId(consumerKey)
             .setRedirectURI((String) session.getAttribute(OAuth2Constants.CALL_BACK_URL))
