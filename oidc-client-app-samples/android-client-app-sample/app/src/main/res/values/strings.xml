@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">PICKUP</string>
+    <string name="sign_in">LOGIN</string>
+    <string name="logged_out">Successfully Logged Out!</string>
+    <string name="welcome">Welcome!</string>
+    <string name="test">Admin</string>
+    <string name="username">Username</string>
+    <string name="sign_out">SIGN OUT</string>
+    <string name="wso2_logo">WSO2 Logo</string>
+    <string name="user_image">User Image</string>
+    <string name="copyright">Copyright \u00A9 WSO2 2018</string>
+</resources>
