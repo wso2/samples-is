@@ -16,7 +16,7 @@
  * under the License.
  */
 
-package org.wso2.qsg.webapp.dispatch;
+package org.wso2.sample.saml.pickup;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -33,10 +33,6 @@ public class ConsumerServlet extends HttpServlet {
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException {
         // Authentication and Authorization successful redirect to the required page.
-        if(request.getRequestURI().endsWith("/token")) {
-            request.getRequestDispatcher("profile.jsp").forward(request,response);
-        } else {
-            response.sendRedirect(request.getContextPath() + "/overview.jsp");
-        }
+
     }
 }
