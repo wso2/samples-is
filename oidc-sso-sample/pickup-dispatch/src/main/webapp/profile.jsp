@@ -50,7 +50,7 @@
                 claimsSet= SignedJWT.parse(idToken).getJWTClaimsSet();
                 session.setAttribute(OAuth2Constants.NAME, name);
             } catch (Exception e) {
-//ignore
+                System.console().printf("Error in retrieving values from JWT");
             }
         }
 
