@@ -17,6 +17,7 @@
  */
 package org.wso2.sample.identity.oauth2;
 
+
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import java.io.IOException;

@@ -22,6 +22,9 @@ $(document).ready(function () {
 
     $(".year").text((new Date()).getFullYear());
 
+    var request = $('#request').val();
+    $('code.requestContent').val(JSON.stringify(request, null, 3));
+
 });
 
 function randomDate(start, end) {
