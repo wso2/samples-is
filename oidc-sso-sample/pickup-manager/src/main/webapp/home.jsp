@@ -61,14 +61,12 @@
         if (currentSession == null || currentSession.getAttribute("authenticated") == null) {
             currentSession.invalidate();
             response.sendRedirect("index.jsp");
-            System.out.println( "counter = " + "this is if");
         } else {
             currentSession.setAttribute(OAuth2Constants.SESSION_STATE, sessionState);
             accessToken = (String) currentSession.getAttribute("accessToken");
             idToken = (String) currentSession.getAttribute("idToken");
             requestObject = (JSONObject) currentSession.getAttribute("requestObject");
             responseObject = (JSONObject) currentSession.getAttribute("responseObject");
-            System.out.println( "counter = " + "this is else");
         }
     } catch (ClientAppException e) {
         response.sendRedirect("index.jsp");
@@ -99,8 +97,8 @@
     <!-- Bootstrap Material Design CSS -->
     <link href="libs/bootstrap-material-design_4.0.0/css/bootstrap-material-design.min.css" rel="stylesheet">
     <!-- Font Awesome icons -->
-    <link href="libs/fontawesome-5.2.0/css/solid.min.css" rel="stylesheet">
     <link href="libs/fontawesome-5.2.0/css/fontawesome.min.css" rel="stylesheet">
+    <link href="libs/fontawesome-5.2.0/css/solid.min.css" rel="stylesheet">
     <!-- Golden Layout styles -->
     <link href="libs/goldenlayout/css/goldenlayout-base.css" rel="stylesheet">
     <!-- Highlight styles -->
@@ -153,7 +151,6 @@
                     <p class="lead text-muted">Management Application</p>
                 </div>
             </section>
-            <% System.out.println( "counter = " + "ths is home.jsp"); %>
             <div class="container">
                 <section id="tabs">
                     <div class="row">

@@ -22,11 +22,190 @@ $(document).ready(function () {
 
     $(".year").text((new Date()).getFullYear());
 
-    var request = $('#request').val();
-    $('code.requestContent').val(JSON.stringify(request, null, 3));
+    $("#profile-content").hide();
 
+    $("#back-home").click(function () {
+        $("#main-content").show();
+        $("#profile-content").hide();
+    });
+
+    $("#profile").click(function () {
+        $("#main-content").hide();
+        $("#profile-content").show();
+    });
 });
 
 function randomDate(start, end) {
     return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 }
+
+var config = {
+    settings: {
+        hasHeaders: false,
+        constrainDragToContainer: false,
+        reorderEnabled: false,
+        selectionEnabled: false,
+        popoutWholeStack: false,
+        blockedPopoutsThrowError: true,
+        closePopoutsOnUnload: false,
+        showPopoutIcon: false,
+        showMaximiseIcon: false,
+        showCloseIcon: false,
+    },
+    dimensions: {
+        borderWidth: 5,
+        minItemHeight: 10,
+        minItemWidth: 0,
+        headerHeight: 20,
+        dragProxyWidth: 300,
+        dragProxyHeight: 200,
+    },
+    labels: {
+        close: 'close',
+        maximise: 'maximise',
+        minimise: 'minimise',
+        popout: 'open in new window',
+    },
+
+    content: [{
+        type: 'row',
+        width: 100,
+        content: [
+            {
+                id: "actionContainer",
+                type: 'component',
+                componentName: 'actionContainer',
+                componentState: {
+                    text: 'Component 1',
+                    color: '#fff',
+                },
+                title: "Action",
+                width: 100
+            },
+            {
+                id: "viewContainer",
+                title: "title",
+                type: 'component',
+                componentName: 'viewContainer',
+                componentState: {text: "text"},
+                width: 0
+            }
+        ]
+    }]
+};
+
+var myLayout = new GoldenLayout(config, '#wrapper');
+
+var toggleRowColumn = function () {
+    var oldElement = myLayout.root.contentItems[0],
+        newElement = myLayout.createContentItem({
+            type: oldElement.isRow ? 'column' : 'row',
+            content: []
+        });
+
+    //Prevent it from re-initialising any child items
+    newElement.isInitialised = true;
+
+    for (i = 0; i < oldElement.contentItems.length; i++) {
+        newElement.addChild(oldElement.contentItems[i]);
+    }
+    myLayout.root.replaceChild(oldElement, newElement);
+
+    if (newElement.isColumn) {
+        $('#toggleLayout').html('<span data-toggle="tooltip" data-placement="bottom" title="Dock to right"><i class="fas fa-columns" ></i></span>');
+    } else {
+        $('#toggleLayout').html('<span data-toggle="tooltip" data-placement="bottom" title="Dock to bottom"><i class="fas fa-window-maximize"></i></span>');
+    }
+};
+
+var isShown = false;
+
+myLayout.registerComponent('actionContainer', function (container, componentState) {
+    container.getElement().html($("#actionContainer"));
+
+});
+
+myLayout.registerComponent('viewContainer', function (container, componentState) {
+    container.getElement().html($("#viewContainer"));
+});
+
+myLayout.init();
+
+$('.request-response-title').on("click", function (e) {
+    var display = $(this).next().css('display');
+    $(this).next().slideToggle();
+    if (display == "block") {
+        $(this).children().children("i").removeClass("fa-angle-right");
+        $(this).children().children("i").addClass("fa-angle-down");
+    } else {
+        $(this).children().children("i").removeClass("fa-angle-down")
+        $(this).children().children("i").addClass("fa-angle-right");
+    }
+});
+
+$('.code-container')
+    .on("mouseenter", function () {
+        $(this).children(".btn-clipboard").fadeTo("fast", 1);
+    })
+    .on("mouseleave", function () {
+        $(this).children(".btn-clipboard").fadeTo("fast", 0.4);
+    });
+
+
+$('#clearAll').on("click", function () {
+    $("#timeline-content .event").hide();
+});
+
+$('#toggleView').on("click", function () {
+    toggleConsole();
+});
+
+function toggleConsole() {
+    if (myLayout.root.contentItems[0].contentItems[1].config.width == 0) {
+        myLayout.root.contentItems[0].contentItems[0].config.width = 50;
+        myLayout.root.contentItems[0].contentItems[1].config.width = 50;
+        myLayout.root.contentItems[0].contentItems[0].config.height = 100;
+        myLayout.root.contentItems[0].contentItems[1].config.height = 100;
+        $('#wrapper .lm_splitter').show();
+        $("#toggleView").addClass("active");
+    } else if (myLayout.root.contentItems[0].contentItems[1].config.width == 50) {
+        myLayout.root.contentItems[0].contentItems[0].config.width = 100;
+        myLayout.root.contentItems[0].contentItems[1].config.width = 0;
+        myLayout.root.contentItems[0].contentItems[0].config.height = 100;
+        myLayout.root.contentItems[0].contentItems[1].config.height = 100;
+        $("#toggleView").removeClass("active");
+
+    } else if (myLayout.root.contentItems[0].contentItems[1].config.width == 100) {
+        toggleRowColumn();
+        myLayout.root.contentItems[0].contentItems[0].config.height = 100;
+        myLayout.root.contentItems[0].contentItems[1].config.height = 100;
+        myLayout.root.contentItems[0].contentItems[0].config.width = 100;
+        myLayout.root.contentItems[0].contentItems[1].config.width = 0;
+        $('#wrapper .lm_splitter').hide();
+        $("#toggleView").removeClass("active");
+    }
+    myLayout.updateSize();
+}
+
+$("#toggleLayout").on("click", function () {
+    toggleRowColumn();
+    $('#wrapper .lm_splitter').show();
+    if (myLayout.root.contentItems[0].contentItems[0].config.height > 0) {
+        myLayout.root.contentItems[0].contentItems[0].config.width = 100;
+        myLayout.root.contentItems[0].contentItems[1].config.width = 100;
+    }
+});
+
+$('#console-close').on("click", function () {
+    toggleConsole();
+});
+
+var clipboard = new Clipboard('.btn-clipboard');
+clipboard.on('success', function (e) {
+    $(e.trigger).next().show().fadeOut(1000);
+    e.clearSelection();
+});
+
+$(window).resize(function () {
+    myLayout.updateSize();
+});
