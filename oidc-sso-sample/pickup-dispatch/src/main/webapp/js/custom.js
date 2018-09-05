@@ -96,6 +96,16 @@ var config = {
 
 var myLayout = new GoldenLayout(config, '#wrapper');
 
+myLayout.registerComponent('actionContainer', function (container, componentState) {
+    container.getElement().html($("#actionContainer"));
+});
+
+myLayout.registerComponent('viewContainer', function (container, componentState) {
+    container.getElement().html($("#viewContainer"));
+});
+
+myLayout.init();
+
 var toggleRowColumn = function () {
     var oldElement = myLayout.root.contentItems[0],
         newElement = myLayout.createContentItem({
@@ -111,25 +121,21 @@ var toggleRowColumn = function () {
     }
     myLayout.root.replaceChild(oldElement, newElement);
 
+    var actionContainer = myLayout.root.contentItems[0].contentItems[0];
+    var viewContainer = myLayout.root.contentItems[0].contentItems[1];
+
     if (newElement.isColumn) {
-        $('#toggleLayout').html('<span data-toggle="tooltip" data-placement="bottom" title="Dock to right"><i class="fas fa-columns" ></i></span>');
+        $('#toggleLayout').html('<span data-toggle="tooltip" data-placement="bottom" title="Dock to right">' +
+            '<i class="fas fa-columns" ></i></span>');
+        columnLayout(actionContainer, viewContainer);
     } else {
-        $('#toggleLayout').html('<span data-toggle="tooltip" data-placement="bottom" title="Dock to bottom"><i class="fas fa-window-maximize"></i></span>');
+        $('#toggleLayout').html('<span data-toggle="tooltip" data-placement="bottom" title="Dock to bottom">' +
+            '<i class="fas fa-window-maximize"></i></span>');
+        rowLayout(actionContainer, viewContainer);
     }
+
+    myLayout.updateSize();
 };
-
-var isShown = false;
-
-myLayout.registerComponent('actionContainer', function (container, componentState) {
-    container.getElement().html($("#actionContainer"));
-
-});
-
-myLayout.registerComponent('viewContainer', function (container, componentState) {
-    container.getElement().html($("#viewContainer"));
-});
-
-myLayout.init();
 
 $('.request-response-title').on("click", function (e) {
     var display = $(this).next().css('display');
@@ -156,48 +162,59 @@ $('#clearAll').on("click", function () {
     $("#timeline-content .event").hide();
 });
 
-$('#toggleView').on("click", function () {
+$('#toggleView, #console-close').on("click", function () {
     toggleConsole();
 });
 
 function toggleConsole() {
-    if (myLayout.root.contentItems[0].contentItems[1].config.width == 0) {
-        myLayout.root.contentItems[0].contentItems[0].config.width = 50;
-        myLayout.root.contentItems[0].contentItems[1].config.width = 50;
-        myLayout.root.contentItems[0].contentItems[0].config.height = 100;
-        myLayout.root.contentItems[0].contentItems[1].config.height = 100;
+    var actionContainer = myLayout.root.contentItems[0].contentItems[0];
+    var viewContainer = myLayout.root.contentItems[0].contentItems[1];
+
+    if (viewContainer.config.width == 0) {
+        rowLayout(actionContainer, viewContainer);
         $('#wrapper .lm_splitter').show();
         $("#toggleView").addClass("active");
-    } else if (myLayout.root.contentItems[0].contentItems[1].config.width == 50) {
-        myLayout.root.contentItems[0].contentItems[0].config.width = 100;
-        myLayout.root.contentItems[0].contentItems[1].config.width = 0;
-        myLayout.root.contentItems[0].contentItems[0].config.height = 100;
-        myLayout.root.contentItems[0].contentItems[1].config.height = 100;
-        $("#toggleView").removeClass("active");
 
-    } else if (myLayout.root.contentItems[0].contentItems[1].config.width == 100) {
-        toggleRowColumn();
-        myLayout.root.contentItems[0].contentItems[0].config.height = 100;
-        myLayout.root.contentItems[0].contentItems[1].config.height = 100;
-        myLayout.root.contentItems[0].contentItems[0].config.width = 100;
-        myLayout.root.contentItems[0].contentItems[1].config.width = 0;
+    } else if (viewContainer.config.width == 100) {
+        if (viewContainer.config.height < 100) {
+            toggleRowColumn(actionContainer, viewContainer);
+        }
+        defaultLayout(actionContainer, viewContainer);
         $('#wrapper .lm_splitter').hide();
         $("#toggleView").removeClass("active");
     }
+    else {
+        defaultLayout(actionContainer, viewContainer);
+        $("#toggleView").removeClass("active");
+    }
+
     myLayout.updateSize();
+}
+
+var rowLayout = function (actionContainer, viewContainer) {
+    actionContainer.config.width = 50;
+    viewContainer.config.width = 50;
+    actionContainer.config.height = 100;
+    viewContainer.config.height = 100;
+}
+
+var defaultLayout = function (actionContainer, viewContainer) {
+    actionContainer.config.width = 100;
+    viewContainer.config.width = 0;
+    actionContainer.config.height = 100;
+    viewContainer.config.height = 100;
+}
+
+var columnLayout = function (actionContainer, viewContainer) {
+    actionContainer.config.width = 100;
+    viewContainer.config.width = 100;
+    actionContainer.config.height = 50;
+    viewContainer.config.height = 50;
 }
 
 $("#toggleLayout").on("click", function () {
     toggleRowColumn();
     $('#wrapper .lm_splitter').show();
-    if (myLayout.root.contentItems[0].contentItems[0].config.height > 0) {
-        myLayout.root.contentItems[0].contentItems[0].config.width = 100;
-        myLayout.root.contentItems[0].contentItems[1].config.width = 100;
-    }
-});
-
-$('#console-close').on("click", function () {
-    toggleConsole();
 });
 
 var clipboard = new Clipboard('.btn-clipboard');
