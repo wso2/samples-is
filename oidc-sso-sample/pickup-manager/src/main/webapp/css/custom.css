@@ -169,6 +169,7 @@ a.btn-login:hover {
     height: 3.75rem;
     line-height: 3.75rem;
     background-color: #f5f5f5;
+    z-index: 999;
 }
 
 .footer span {
@@ -322,11 +323,7 @@ a.btn-login:hover {
     border-bottom: 0.0625rem solid #eee;
 }
 
-.console-headers .btn {
-    padding: 0;
-    margin: .325rem 0 .325rem .325rem;
-}
-
-.console-headers .btn:hover {
-    background-color: #fff;
+.console-action {
+    margin: .4rem 0 .4rem .8rem;
+    color: #676767;
 }

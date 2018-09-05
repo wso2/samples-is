@@ -33,9 +33,6 @@ $(document).ready(function () {
         $("#main-content").hide();
         $("#profile-content").show();
     });
-
-    var request = $('#request').val();
-    $('code.requestContent').val(JSON.stringify(request, null, 3));
 });
 
 function randomDate(start, end) {
@@ -85,7 +82,6 @@ var config = {
                 title: "Action",
                 width: 100
             },
-
             {
                 id: "viewContainer",
                 title: "title",
@@ -115,9 +111,14 @@ var toggleRowColumn = function () {
     }
     myLayout.root.replaceChild(oldElement, newElement);
 
+    if (newElement.isColumn) {
+        $('#toggleLayout').html('<span data-toggle="tooltip" data-placement="bottom" title="Dock to right"><i class="fas fa-columns" ></i></span>');
+    } else {
+        $('#toggleLayout').html('<span data-toggle="tooltip" data-placement="bottom" title="Dock to bottom"><i class="fas fa-window-maximize"></i></span>');
+    }
 };
-var isShown = false;
 
+var isShown = false;
 
 myLayout.registerComponent('actionContainer', function (container, componentState) {
     container.getElement().html($("#actionContainer"));
@@ -129,17 +130,6 @@ myLayout.registerComponent('viewContainer', function (container, componentState)
 });
 
 myLayout.init();
-
-function enableToggle(t) {
-    if (t) {
-        $("#toggleLayout").removeClass("disabled").prop("disabled", false);
-        $("#toggleLayout").on("click", function () {
-            toggleRowColumn();
-        });
-    } else {
-        $("#toggleLayout").addClass("disabled").prop("disabled", true);
-    }
-}
 
 $('.request-response-title').on("click", function (e) {
     var display = $(this).next().css('display');
@@ -167,22 +157,47 @@ $('#clearAll').on("click", function () {
 });
 
 $('#toggleView').on("click", function () {
-    if (isShown) {
+    toggleConsole();
+});
+
+function toggleConsole() {
+    if (myLayout.root.contentItems[0].contentItems[1].config.width == 0) {
+        myLayout.root.contentItems[0].contentItems[0].config.width = 50;
+        myLayout.root.contentItems[0].contentItems[1].config.width = 50;
+        myLayout.root.contentItems[0].contentItems[0].config.height = 100;
+        myLayout.root.contentItems[0].contentItems[1].config.height = 100;
+        $('#wrapper .lm_splitter').show();
+        $("#toggleView").addClass("active");
+    } else if (myLayout.root.contentItems[0].contentItems[1].config.width == 50) {
+        myLayout.root.contentItems[0].contentItems[0].config.width = 100;
+        myLayout.root.contentItems[0].contentItems[1].config.width = 0;
+        myLayout.root.contentItems[0].contentItems[0].config.height = 100;
+        myLayout.root.contentItems[0].contentItems[1].config.height = 100;
+        $("#toggleView").removeClass("active");
+
+    } else if (myLayout.root.contentItems[0].contentItems[1].config.width == 100) {
+        toggleRowColumn();
+        myLayout.root.contentItems[0].contentItems[0].config.height = 100;
+        myLayout.root.contentItems[0].contentItems[1].config.height = 100;
         myLayout.root.contentItems[0].contentItems[0].config.width = 100;
         myLayout.root.contentItems[0].contentItems[1].config.width = 0;
         $('#wrapper .lm_splitter').hide();
-        isShown = false;
         $("#toggleView").removeClass("active");
     }
-    else {
-        $('#wrapper .lm_splitter').show();
-        myLayout.root.contentItems[0].contentItems[0].config.width = 50;
-        myLayout.root.contentItems[0].contentItems[1].config.width = 50;
-        isShown = true;
-        $("#toggleView").addClass("active");
-        enableToggle(true);
-    }
     myLayout.updateSize();
+}
+
+$("#toggleLayout").on("click", function () {
+    toggleRowColumn();
+    $('#wrapper .lm_splitter').show();
+    if (myLayout.root.contentItems[0].contentItems[0].config.height > 0) {
+        myLayout.root.contentItems[0].contentItems[0].config.width = 100;
+        myLayout.root.contentItems[0].contentItems[1].config.width = 100;
+    }
+});
+
+$('#console-close').on("click", function () {
+    toggleConsole();
 });
 
 var clipboard = new Clipboard('.btn-clipboard');

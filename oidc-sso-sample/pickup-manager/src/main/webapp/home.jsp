@@ -15,88 +15,76 @@
 ~   See the License for the specific language governing permissions and
 ~   limitations under the License.
 -->
-<%@ page import="org.apache.commons.lang.StringUtils" %>
+
 <%@ page import="org.wso2.sample.identity.oauth2.OAuth2Constants" %>
-<%@ page import="org.apache.oltu.oauth2.client.request.OAuthClientRequest" %>
-<%@ page import="org.apache.oltu.oauth2.client.OAuthClient" %>
-<%@ page import="org.apache.oltu.oauth2.client.URLConnectionClient" %>
-<%@ page import="org.apache.oltu.oauth2.common.message.types.GrantType" %>
-<%@ page import="org.apache.oltu.oauth2.client.response.OAuthClientResponse" %>
 <%@ page import="com.nimbusds.jwt.SignedJWT" %>
-<%@ page import="java.util.Properties" %>
 <%@ page import="org.wso2.sample.identity.oauth2.SampleContextEventListener" %>
 <%@ page import="com.nimbusds.jwt.ReadOnlyJWTClaimsSet" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="java.util.HashMap" %>
 <%@ page import="org.json.JSONObject" %>
 <%@ page import="org.wso2.sample.identity.oauth2.CommonUtils" %>
+<%@ page import="org.wso2.sample.identity.oauth2.ClientAppException" %>
+<%@ page import="org.apache.commons.lang.StringUtils" %>
+<%@ page import="java.util.*" %>
 
 <%
-    String code = null;
-    String idToken = null;
-    String sessionState = null;
-    String error;
-    String name = null;
-    Properties properties;
-    properties = SampleContextEventListener.getProperties();
+
+    if (request.getParameterMap().isEmpty()) {
+        CommonUtils.logout(request, response);
+        session.invalidate();
+        response.sendRedirect("index.jsp");
+        return;
+    }
+
+    String error = request.getParameter(OAuth2Constants.ERROR);
+    if (StringUtils.isNotBlank(error)) {
+        // User has been logged out
+        CommonUtils.logout(request, response);
+        session.invalidate();
+        response.sendRedirect("index.jsp");
+        return;
+    }
+
+    HttpSession currentSession = request.getSession(false);
+    String accessToken = "";
+    String idToken = "";
+    String name = "";
     ReadOnlyJWTClaimsSet claimsSet = null;
+    Properties properties = SampleContextEventListener.getProperties();
+    String sessionState = null;
     JSONObject requestObject = null;
     JSONObject responseObject = null;
 
     try {
-
-
         sessionState = request.getParameter(OAuth2Constants.SESSION_STATE);
-        if (StringUtils.isNotBlank(sessionState)) {
-            session.setAttribute(OAuth2Constants.SESSION_STATE, sessionState);
-        }
-        session.setAttribute(OAuth2Constants.CONSUMER_KEY, properties.getProperty("consumerKey"));
-        session.setAttribute(OAuth2Constants.OIDC_SESSION_IFRAME_ENDPOINT, properties.getProperty("sessionIFrameEndpoint"));
-        session.setAttribute(OAuth2Constants.OAUTH2_AUTHZ_ENDPOINT, properties.getProperty("authzEndpoint"));
-        session.setAttribute(OAuth2Constants.OAUTH2_GRANT_TYPE, properties.getProperty("authzGrantType"));
-        session.setAttribute(OAuth2Constants.CALL_BACK_URL, properties.getProperty("callBackUrl"));
-        session.setAttribute(OAuth2Constants.SCOPE, properties.getProperty("scope"));
-
-        error = request.getParameter(OAuth2Constants.ERROR);
-        if (StringUtils.isNotBlank(error)) {
-            // User has been logged out
-            session.invalidate();
+        CommonUtils.getToken(request, response);
+        System.out.println( "counter = " + "finished after get token");
+        if (currentSession == null || currentSession.getAttribute("authenticated") == null) {
+            currentSession.invalidate();
             response.sendRedirect("index.jsp");
-            return;
+            System.out.println( "counter = " + "this is if");
+        } else {
+            currentSession.setAttribute(OAuth2Constants.SESSION_STATE, sessionState);
+            accessToken = (String) currentSession.getAttribute("accessToken");
+            idToken = (String) currentSession.getAttribute("idToken");
+            requestObject = (JSONObject) currentSession.getAttribute("requestObject");
+            responseObject = (JSONObject) currentSession.getAttribute("responseObject");
+            System.out.println( "counter = " + "this is else");
         }
-        if (request.getParameter(OAuth2Constants.CODE) != null) {
-            code = request.getParameter(OAuth2Constants.CODE);
+    } catch (ClientAppException e) {
+        response.sendRedirect("index.jsp");
+    }
+
+    if (idToken != null) {
+        try {
+            name = SignedJWT.parse(idToken).getJWTClaimsSet().getSubject();
+            claimsSet= SignedJWT.parse(idToken).getJWTClaimsSet();
+            session.setAttribute(OAuth2Constants.NAME, name);
+        } catch (Exception e) {
+            System.console().printf("Error in retrieving values from JWT");
         }
+    }
 
-        if (code != null) {
-            OAuthClientRequest.TokenRequestBuilder oAuthTokenRequestBuilder =
-                    new OAuthClientRequest.TokenRequestBuilder(properties.getProperty("tokenEndpoint"));
 
-            OAuthClientRequest accessRequest = oAuthTokenRequestBuilder.setGrantType(GrantType.AUTHORIZATION_CODE)
-                    .setClientId(properties.getProperty("consumerKey"))
-                    .setClientSecret(properties.getProperty("consumerSecret"))
-                    .setRedirectURI(properties.getProperty("callBackUrl"))
-                    .setCode(code)
-                    .buildBodyMessage();
-
-            //create OAuth client that uses custom http client under the hood
-            OAuthClient oAuthClient = new OAuthClient(new URLConnectionClient());
-            requestObject = CommonUtils.requestToJson(accessRequest);
-
-            OAuthClientResponse oAuthResponse = oAuthClient.accessToken(accessRequest);
-            responseObject = CommonUtils.responseToJson(oAuthResponse);
-
-            idToken = oAuthResponse.getParam("id_token");
-            if (idToken != null) {
-                try {
-                    name = SignedJWT.parse(idToken).getJWTClaimsSet().getSubject();
-                    claimsSet= SignedJWT.parse(idToken).getJWTClaimsSet();
-                    session.setAttribute(OAuth2Constants.NAME, name);
-                } catch (Exception e) {
-                    System.console().printf("Error in retrieving values from JWT");
-                }
-            }
-        }
 
 %>
 <html lang="en">
@@ -149,7 +137,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="toggleView" href="#">
+                    <a class="nav-link" id="toggleView" href="#" data-toggle="tooltip" data-placement="bottom" title="Console">
                         <i class="fa fa-cogs"></i>
                     </a>
                 </li>
@@ -165,6 +153,7 @@
                     <p class="lead text-muted">Management Application</p>
                 </div>
             </section>
+            <% System.out.println( "counter = " + "ths is home.jsp"); %>
             <div class="container">
                 <section id="tabs">
                     <div class="row">
@@ -426,8 +415,8 @@
                                     if (claimsSet != null) {
                                         Map<String, Object> hashmap = new HashMap<>();
                                         hashmap = claimsSet.getCustomClaims();
-                                        if (!hashmap.isEmpty()) {
 
+                                        if (!hashmap.isEmpty()) {
                                 %>
                                 <table class="table">
                                     <thead>
@@ -458,10 +447,10 @@
                                 <p align="center">No user details Available. Configure SP Claim Configurations.</p>
 
                                 <%
+
                                         }
                                     }
                                 %>
-
                             </div>
                         </div>
                     </div>
@@ -500,21 +489,20 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 console-headers">
-                    <button id="console-close" type="button" class="btn btn-secondary float-right">
-                        <i class="fas fa-window-close"></i>
-                    </button>
-                    <button id="toggleLayout" type="button" class="btn btn-secondary float-right">
-                        <i class="fas fa-columns"></i>
-                    </button>
+                    <span id="console-close" class="float-right console-action">
+                        <span data-toggle="tooltip" data-placement="bottom" title="Close"><i
+                                class="fas fa-times"></i></span>
+                    </span>
+                    <span id="toggleLayout" class="float-right console-action">
+                        <span data-toggle="tooltip" data-placement="bottom" title="Dock to bottom"><i
+                                class="fas fa-window-maximize"></i></span>
+                    </span>
+                    <span id="clearAll" class="float-right console-action">
+                        <span data-toggle="tooltip" data-placement="bottom" title="Clear All"><i class="fas fa-ban"></i></span>
+                    </span>
 
                 </div>
                 <div class="col-md-12">
-                    <div class="view-actions clearfix pt-3">
-                        <button id="clearAll" type="button" class="btn btn-outline-secondary float-right">
-                            Clear All
-                        </button>
-
-                    </div>
                     <div id="timeline-content">
                         <ul class="timeline">
                             <li class="event sent">
@@ -557,13 +545,6 @@
         </div>
     </section>
 </div>
-<%
-    } catch (Exception e) {
-        error = e.getMessage();
-        System.console().printf(error);
-    }
-
-%>
 
 <!-- JQuery -->
 <script src="libs/jquery_3.3.1/jquery.min.js"></script>
@@ -582,7 +563,6 @@
 <!-- Custom Js -->
 <script src="js/custom.js"></script>
 <iframe id="rpIFrame" src="rpIFrame.jsp" frameborder="0" width="0" height="0"></iframe>
-
 <script>hljs.initHighlightingOnLoad();</script>
 
 </body>
