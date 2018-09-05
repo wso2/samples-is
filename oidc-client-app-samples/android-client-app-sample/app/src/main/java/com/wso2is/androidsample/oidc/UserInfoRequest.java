@@ -16,17 +16,15 @@
  * under the License.
  */
 
-package com.wso2is.androidsample.openid;
+package com.wso2is.androidsample.oidc;
 
 import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
+
 import com.wso2is.androidsample.mgt.ConfigManager;
 import com.wso2is.androidsample.models.User;
 import com.wso2is.androidsample.utils.ConnectionBuilderForTesting;
-import okio.Okio;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
@@ -38,6 +36,11 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicReference;
+
+import okio.Okio;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import static com.wso2is.androidsample.activities.UserActivity.userInfoJson;
 import static com.wso2is.androidsample.utils.Constants.AUTHORIZATION;
@@ -81,7 +84,9 @@ public class UserInfoRequest {
      * Fetches user information by invoking the userinfo endpoint of the WSO2 IS.
      *
      * @param accessToken Access token of the current session.
-     * @param context     Application context.
+     * @param context Application context.
+     * @param user User object that stores details of the user.
+     * @return Returns a boolean to represent success or failure of the user info fetch.
      */
     public boolean fetchUserInfo(String accessToken, Context context, User user) {
 
@@ -112,7 +117,7 @@ public class UserInfoRequest {
                 String response = Okio.buffer(Okio.source(conn.getInputStream())).readString(Charset.forName(UTF_8));
                 userInfoJson.set(new JSONObject(response));
 
-                // sets values for the user object
+                // Sets values for the user object.
                 user.setUsername(userInfoJson.get().getString("name"));
                 user.setEmail(userInfoJson.get().getString("email"));
                 val = true;
@@ -121,7 +126,7 @@ public class UserInfoRequest {
                 Log.e(TAG, "Network error when querying userinfo endpoint: ", ioEx);
 
             } catch (JSONException jsonEx) {
-                Log.e(TAG, "Failed to parse userinfo response.");
+                Log.e(TAG, "Failed to parse userinfo response: ", jsonEx);
 
             } finally {
                 authIntentLatch.countDown();
@@ -131,7 +136,7 @@ public class UserInfoRequest {
         try {
             authIntentLatch.await();
         } catch (InterruptedException ex) {
-            Log.w(TAG, "Interrupted while waiting for auth intent.");
+            Log.w(TAG, "Interrupted while waiting for auth intent: ", ex);
         }
         return val;
     }

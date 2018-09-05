@@ -16,7 +16,7 @@
  * under the License.
  */
 
-package com.wso2is.androidsample.openid;
+package com.wso2is.androidsample.oidc;
 
 import android.app.PendingIntent;
 import android.content.Context;
@@ -29,6 +29,9 @@ import com.wso2is.androidsample.activities.UserActivity;
 import com.wso2is.androidsample.mgt.AuthStateManager;
 import com.wso2is.androidsample.mgt.ConfigManager;
 
+import java.lang.ref.WeakReference;
+import java.util.concurrent.atomic.AtomicReference;
+
 import net.openid.appauth.AppAuthConfiguration;
 import net.openid.appauth.AuthState;
 import net.openid.appauth.AuthorizationRequest;
@@ -39,11 +42,11 @@ import net.openid.appauth.ResponseTypeValues;
 import net.openid.appauth.browser.AnyBrowserMatcher;
 import net.openid.appauth.browser.BrowserMatcher;
 
-import java.lang.ref.WeakReference;
-import java.util.concurrent.atomic.AtomicReference;
-
 import static net.openid.appauth.AuthorizationRequest.CODE_CHALLENGE_METHOD_S256;
 
+/**
+ * This class facilitates carrying out of the authorization request.
+ */
 public class AuthRequest {
 
     private static final String TAG = AuthRequest.class.getSimpleName();

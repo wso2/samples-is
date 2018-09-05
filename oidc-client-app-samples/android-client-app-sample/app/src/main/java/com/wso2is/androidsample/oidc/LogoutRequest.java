@@ -16,18 +16,20 @@
  * under the License.
  */
 
-package com.wso2is.androidsample.openid;
+package com.wso2is.androidsample.oidc;
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.customtabs.CustomTabsIntent;
+
 import com.wso2is.androidsample.mgt.AuthStateManager;
 import com.wso2is.androidsample.mgt.ConfigManager;
-import net.openid.appauth.AuthState;
 
 import java.lang.ref.WeakReference;
 import java.util.concurrent.atomic.AtomicReference;
+
+import net.openid.appauth.AuthState;
 
 import static com.wso2is.androidsample.activities.UserActivity.idToken;
 import static com.wso2is.androidsample.activities.UserActivity.state;
@@ -38,7 +40,8 @@ import static com.wso2is.androidsample.activities.UserActivity.state;
  */
 public class LogoutRequest {
 
-    private static final AtomicReference<WeakReference<LogoutRequest>> instance = new AtomicReference<>(new WeakReference<LogoutRequest>(null));
+    private static final AtomicReference<WeakReference<LogoutRequest>> instance = new AtomicReference<>
+            (new WeakReference<LogoutRequest>(null));
 
     private LogoutRequest() {
 
@@ -69,8 +72,7 @@ public class LogoutRequest {
         AuthStateManager authStateManager = AuthStateManager.getInstance(context);
         ConfigManager configuration = ConfigManager.getInstance(context);
 
-        // discarding the authorization and token state, but retaining the configuration
-        // to save from retrieving them again.
+        // Discards the authorization and token states, but retains the configuration.
         AuthState currentState = authStateManager.getCurrentState();
         AuthState clearedState = new AuthState(currentState.getAuthorizationServiceConfiguration());
 
