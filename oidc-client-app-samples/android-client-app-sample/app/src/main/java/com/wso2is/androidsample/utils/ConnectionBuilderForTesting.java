@@ -19,30 +19,31 @@
 package com.wso2is.androidsample.utils;
 
 import android.annotation.SuppressLint;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.net.Uri;
 
-import net.openid.appauth.Preconditions;
-import net.openid.appauth.connectivity.ConnectionBuilder;
-
-import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
 import java.util.concurrent.TimeUnit;
+
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import net.openid.appauth.connectivity.ConnectionBuilder;
+import net.openid.appauth.Preconditions;
+
 import static com.wso2is.androidsample.utils.Constants.HTTP;
 import static com.wso2is.androidsample.utils.Constants.HTTPS;
-import static com.wso2is.androidsample.utils.Constants.TSL;
+import static com.wso2is.androidsample.utils.Constants.PROTOCOL;
 
 /**
  * This class can be used in a testing scenario, where the WSO2 IS is hosted in
@@ -55,7 +56,7 @@ public class ConnectionBuilderForTesting implements ConnectionBuilder {
     private static final int CONNECTION_TIMEOUT_MS = (int) TimeUnit.SECONDS.toMillis(15);
     private static final int READ_TIMEOUT_MS = (int) TimeUnit.SECONDS.toMillis(10);
 
-    // Default trust manager is overridden for testing purposes of the sample application
+    // Default trust manager is overridden for testing purposes of the sample application.
     @SuppressLint("TrustAllX509TrustManager")
     private static final TrustManager[] ANY_CERT_MANAGER = new TrustManager[]{new X509TrustManager() {
         public X509Certificate[] getAcceptedIssuers() {
@@ -72,7 +73,7 @@ public class ConnectionBuilderForTesting implements ConnectionBuilder {
         }
     }};
 
-    // Hostname verification is turned off for testing purposes of the sample application
+    // Hostname verification is turned off for testing purposes of the sample application.
     @SuppressLint("BadHostnameVerifier")
     private static final HostnameVerifier ANY_HOSTNAME_VERIFIER = (hostname, session) -> true;
 
@@ -82,7 +83,7 @@ public class ConnectionBuilderForTesting implements ConnectionBuilder {
     static {
         SSLContext context;
         try {
-            context = SSLContext.getInstance(TSL);
+            context = SSLContext.getInstance(PROTOCOL);
         } catch (NoSuchAlgorithmException ex) {
             Log.e(TAG, "Unable to acquire SSL context: ", ex);
             context = null;

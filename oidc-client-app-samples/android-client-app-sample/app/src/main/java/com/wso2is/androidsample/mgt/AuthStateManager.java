@@ -25,15 +25,15 @@ import android.support.annotation.AnyThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import java.lang.ref.WeakReference;
+import java.util.concurrent.atomic.AtomicReference;
+
 import net.openid.appauth.AuthState;
 import net.openid.appauth.AuthorizationException;
 import net.openid.appauth.AuthorizationResponse;
 import net.openid.appauth.TokenResponse;
 
 import org.json.JSONException;
-
-import java.lang.ref.WeakReference;
-import java.util.concurrent.atomic.AtomicReference;
 
 import static com.wso2is.androidsample.utils.Constants.KEY_STATE;
 import static com.wso2is.androidsample.utils.Constants.STORE_NAME;
@@ -50,11 +50,17 @@ public class AuthStateManager {
     private final AtomicReference<AuthState> currentAuthState;
     private final String TAG = AuthStateManager.class.getSimpleName();
 
+    private AuthStateManager(Context context) {
+
+        prefs = context.getSharedPreferences(STORE_NAME, Context.MODE_PRIVATE);
+        currentAuthState = new AtomicReference<>();
+    }
+
     /**
      * Returns an instance of the AuthStateManager class.
      *
-     * @param context Application context
-     * @return AuthStateManager instance
+     * @param context Application context.
+     * @return AuthStateManager instance.
      */
     @AnyThread
     public static AuthStateManager getInstance(@NonNull Context context) {
@@ -69,20 +75,9 @@ public class AuthStateManager {
     }
 
     /**
-     * AuthStateManager constructor.
-     *
-     * @param context Application Context
-     */
-    private AuthStateManager(Context context) {
-
-        prefs = context.getSharedPreferences(STORE_NAME, Context.MODE_PRIVATE);
-        currentAuthState = new AtomicReference<>();
-    }
-
-    /**
      * Returns the current AuthState instance.
      *
-     * @return Current AuthState
+     * @return Current AuthState instance.
      */
     @AnyThread
     @NonNull
@@ -105,7 +100,7 @@ public class AuthStateManager {
     /**
      * Replaces the current AuthState with a new AuthState.
      *
-     * @param state AuthState object that should replaceState the existing one.
+     * @param state AuthState object that is to replace the existing one.
      */
     @AnyThread
     public void replaceState(@NonNull AuthState state) {
@@ -117,10 +112,9 @@ public class AuthStateManager {
     /**
      * Updates the current AuthState with authorization response and exception.
      *
-     * @param response Authorization response
-     * @param ex       Authorization exception
+     * @param response Authorization response.
+     * @param ex Authorization exception.
      */
-
     @AnyThread
     public void updateAfterAuthorization(@Nullable AuthorizationResponse response,
                                          @Nullable AuthorizationException ex) {
@@ -133,8 +127,8 @@ public class AuthStateManager {
     /**
      * Updates the current AuthState with token response and exception.
      *
-     * @param response Token response
-     * @param ex       Authorization exception
+     * @param response Token response.
+     * @param ex Authorization exception.
      */
     @AnyThread
     public void updateAfterTokenResponse(@Nullable TokenResponse response, @Nullable AuthorizationException ex) {
@@ -147,7 +141,7 @@ public class AuthStateManager {
     /**
      * Reads the AuthState.
      *
-     * @return AuthState
+     * @return AuthState object.
      */
     @AnyThread
     @NonNull
@@ -171,7 +165,7 @@ public class AuthStateManager {
     /**
      * Writes the AuthState.
      *
-     * @param state AuthState
+     * @param state AuthState object.
      */
     @AnyThread
     private void writeState(@Nullable AuthState state) {
