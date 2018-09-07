@@ -1001,7 +1001,7 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
     <ns1:description xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">sample service provider</ns1:description>
     <inboundAuthenticationConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">
       <inboundAuthenticationRequestConfigs>
-        <inboundAuthKey>saml2-web-app-pickup${sp_name}.com</inboundAuthKey>
+        <inboundAuthKey>saml2-web-app-pickup-${sp_name}.com</inboundAuthKey>
         <inboundAuthType>samlsso</inboundAuthType>
         <properties>
           <name>attrConsumServiceIndex</name>
@@ -1676,7 +1676,7 @@ echo " <soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelop
          <!--Optional:-->
          <xsd:spDto>
             <!--Zero or more repetitions:-->
-            <xsd1:assertionConsumerUrls>http://${tomcat_host}:${tomcat_port}/saml2-web-app-pickup${sp_name}.com/home.jsp</xsd1:assertionConsumerUrls>
+            <xsd1:assertionConsumerUrls>http://${tomcat_host}:${tomcat_port}/saml2-web-app-pickup-${sp_name}.com/home.jsp</xsd1:assertionConsumerUrls>
             <!--Optional:-->
             <xsd1:assertionQueryRequestProfileEnabled>false</xsd1:assertionQueryRequestProfileEnabled>
             <!--Optional:-->
@@ -1684,7 +1684,7 @@ echo " <soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelop
             <!--Optional:-->
             <xsd1:certAlias>wso2carbon</xsd1:certAlias>
             <!--Optional:-->
-            <xsd1:defaultAssertionConsumerUrl>http://${tomcat_host}:${tomcat_port}/saml2-web-app-pickup${sp_name}.com/home.jsp</xsd1:defaultAssertionConsumerUrl>
+            <xsd1:defaultAssertionConsumerUrl>http://${tomcat_host}:${tomcat_port}/saml2-web-app-pickup-${sp_name}.com/home.jsp</xsd1:defaultAssertionConsumerUrl>
             <!--Optional:-->
             <xsd1:digestAlgorithmURI>http://www.w3.org/2000/09/xmldsig#sha1</xsd1:digestAlgorithmURI>
             <!--Optional:-->
@@ -1708,7 +1708,7 @@ echo " <soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelop
             <!--Zero or more repetitions:-->
             <xsd1:idpInitSLOReturnToURLs>http://${tomcat_host}:${tomcat_port}/saml2-web-app-pickup-${sp_name}.com/home.jsp</xsd1:idpInitSLOReturnToURLs>
             <!--Optional:-->
-            <xsd1:issuer>saml2-web-app-pickup${sp_name}.com</xsd1:issuer>
+            <xsd1:issuer>saml2-web-app-pickup-${sp_name}.com</xsd1:issuer>
             <!--Optional:-->
             <xsd1:nameIDFormat>urn/oasis/names/tc/SAML/1.1/nameid-format/emailAddress</xsd1:nameIDFormat>
             <!--Zero or more repetitions:-->
@@ -1922,7 +1922,7 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
                     <!--Zero or more repetitions:-->
                     <xsd1:inboundAuthenticationRequestConfigs>
                         <!--Optional:-->
-                        <xsd1:inboundAuthKey>saml2-web-app-pickup${sp_name}.com</xsd1:inboundAuthKey>
+                        <xsd1:inboundAuthKey>saml2-web-app-pickup-${sp_name}.com</xsd1:inboundAuthKey>
                         <!--Optional:-->
                         <xsd1:inboundAuthType>samlsso</xsd1:inboundAuthType>
                         <!--Zero or more repetitions:-->
@@ -2149,7 +2149,7 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
     <ns1:description xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">sample service provider</ns1:description>
     <inboundAuthenticationConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">
       <inboundAuthenticationRequestConfigs>
-        <inboundAuthKey>saml2-web-app-pickup${sp_name}.com</inboundAuthKey>
+        <inboundAuthKey>saml2-web-app-pickup-${sp_name}.com</inboundAuthKey>
         <inboundAuthType>samlsso</inboundAuthType>
         <properties>
           <name>attrConsumServiceIndex</name>
