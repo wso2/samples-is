@@ -19,8 +19,8 @@
 <%@ page import="org.wso2.carbon.identity.sso.agent.bean.LoggedInSessionBean" %>
 <%@ page import="org.wso2.carbon.identity.sso.agent.util.SSOAgentConstants" %>
 <%@ page import="org.json.JSONObject" %>
-<%@ page import="com.google.gson.Gson" %>
 <%@ page import="org.opensaml.saml2.core.Assertion" %>
+<%@ page import="org.wso2.qsg.webapp.pickup.dispatch.CommonUtil" %>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -51,7 +51,7 @@
     Map<String, String> saml2SSOAttributes = null;
     final String SAML_SSO_URL = "samlsso";
     final String SAML_LOGOUT_URL = "logout";
-    Gson gson = new Gson();
+    String samlResponse = "";
 
     // if web-browser session is there but no session bean set,
     // invalidate session and direct back to login page
@@ -62,24 +62,22 @@
     if (request.getSession(false) != null
             && request.getSession(false).getAttribute(SSOAgentConstants.SESSION_BEAN_NAME) == null) {
         request.getSession().invalidate();
-    %>
-    <script type="text/javascript">
-        location.href = <%=SAML_SSO_URL%>;
-    </script>
-    <%
+%>
+<script type="text/javascript">
+    location.href = <%=SAML_SSO_URL%>;
+</script>
+<%
         return;
     }
     LoggedInSessionBean sessionBean = (LoggedInSessionBean) session.getAttribute(SSOAgentConstants.SESSION_BEAN_NAME);
     if(sessionBean != null && sessionBean.getSAML2SSO() != null) {
         subjectId = sessionBean.getSAML2SSO().getSubjectId();
-        saml2SSOAttributes = sessionBean.getSAML2SSO().getSubjectAttributes();
-        Assertion assertion = sessionBean.getSAML2SSO().getAssertion();
-        res.append("subject", assertion.getSubject().getNameID().getValue());
-        res.append("issuer", assertion.getIssuer().getValue());
-        res.append("audience", assertion.getConditions().getAudienceRestrictions()
-                .get(0).getAudiences().get(0).getAudienceURI());
-        res.append("statusCode", response.getStatus());
-        responseObject.append("Assertion Content",res);
+        samlResponse =  CommonUtil.marshall(sessionBean.getSAML2SSO().getSAMLResponse());
+        System.out.println("SAML response string : "+ samlResponse);
+        samlResponse = samlResponse.replace("<", "&lt;");
+        samlResponse = samlResponse.replace(">", "&gt;");
+        System.out.println("SAML response string : " + samlResponse);
+
     } else {
 %>
 <script type="text/javascript">
@@ -301,6 +299,7 @@
                                     } else {
                                     %>
                                     <tr>
+                                        <h3 align="center" >There are no user details to show.</h3><br/>
                                         <p align="center"> Please configure claim mapping in SP configurations.</p>
                                     </tr>
                                     <%
@@ -393,7 +392,7 @@
                                                     data-clipboard-target=".copy-target3"><i
                                                     class="fa fa-clipboard"></i></button>
                                             <p class="copied">Copied..!</p>
-                                            <pre><code class="copy-target3 JSON pt-3 pb-3 requestContent"><%=responseObject.toString(4)%></code></pre>
+                                            <pre><code class="copy-target3 JSON pt-3 pb-3 requestContent"><%=samlResponse%></code></pre>
                                         </div>
                                     </div>
                                 </div>
