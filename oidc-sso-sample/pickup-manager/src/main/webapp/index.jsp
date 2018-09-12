@@ -64,8 +64,7 @@
 <script src="libs/popper_1.12.9/popper.min.js"></script>
 <!-- Bootstrap Material Design JavaScript -->
 <script src="libs/bootstrap-material-design_4.0.0/js/bootstrap-material-design.min.js"></script>
-<!-- Custom Js -->
-<script src="js/custom.js"></script>
+
 
 </body>
 </html>
