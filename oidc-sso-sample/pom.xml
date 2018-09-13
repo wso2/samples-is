@@ -29,8 +29,8 @@
     <description>WSO2 Identity Server Quick Start Guide for OIDC SSO</description>
 
     <modules>
-        <module>Dispatch</module>
-        <module>Swift</module>
+        <module>pickup-dispatch</module>
+        <module>pickup-manager</module>
     </modules>
 
     <build>

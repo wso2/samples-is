@@ -27,17 +27,17 @@ add_user admin admin Common ${is_host} ${is_port}
 
 # Add service providers in wso2-is
 add_service_provider dispatch Common urn:createApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
-add_service_provider swift Common urn:createApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
+add_service_provider manager Common urn:createApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
 
 # Configure SAML for the service providers   
 configure_saml dispatch 02 urn:addRPServiceProvider https://${is_host}:${is_port}/services/IdentitySAMLSSOConfigService.IdentitySAMLSSOConfigServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
-configure_saml swift 02 urn:addRPServiceProvider https://${is_host}:${is_port}/services/IdentitySAMLSSOConfigService.IdentitySAMLSSOConfigServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
+configure_saml manager 02 urn:addRPServiceProvider https://${is_host}:${is_port}/services/IdentitySAMLSSOConfigService.IdentitySAMLSSOConfigServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
 
 create_updateapp_saml dispatch Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
-create_updateapp_saml swift Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
+create_updateapp_saml manager Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
 	
 update_application_saml dispatch 02 urn:updateApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
-update_application_saml swift 02 urn:updateApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
+update_application_saml manager 02 urn:updateApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
 
 return 0;
 }
@@ -54,17 +54,17 @@ add_user admin admin Common ${is_host} ${is_port}
 
 # Add service providers in the wso2-is 
 add_service_provider dispatch Common urn:createApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
-add_service_provider swift Common urn:createApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
+add_service_provider manager Common urn:createApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
 
 # Configure OIDC for the Service Providers
 configure_oidc dispatch 03 urn:registerOAuthApplicationData https://${is_host}:${is_port}/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
-configure_oidc swift 03 urn:registerOAuthApplicationData https://${is_host}:${is_port}/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
+configure_oidc manager 03 urn:registerOAuthApplicationData https://${is_host}:${is_port}/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
 
 create_updateapp_oidc dispatch Y2FtZXJvbjpjYW1lcm9uMTIz ZGlzcGF0Y2g= ZGlzcGF0Y2gxMjM0 ${is_host} ${is_port}
-create_updateapp_oidc swift Y2FtZXJvbjpjYW1lcm9uMTIz c3dpZnRhcHA= c3dpZnRhcHAxMjM= ${is_host} ${is_port}
+create_updateapp_oidc manager Y2FtZXJvbjpjYW1lcm9uMTIz c3dpZnRhcHA= c3dpZnRhcHAxMjM= ${is_host} ${is_port}
 
 update_application_oidc dispatch 03 urn:updateApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
-update_application_oidc swift 03 urn:updateApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
+update_application_oidc manager 03 urn:updateApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
 
 return 0;
 }
@@ -102,10 +102,10 @@ case ${user} in
     configure_sso_saml2 ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
 
     create_updateapp_fed_auth dispatch Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
-    create_updateapp_fed_auth swift Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
+    create_updateapp_fed_auth manager Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
 
     update_application_saml dispatch 05 urn:updateApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
-    update_application_saml swift 05 urn:updateApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
+    update_application_saml manager 05 urn:updateApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
 
     ;;
     [Nn]* ) return -1;;
@@ -126,7 +126,7 @@ tomcat_port=$4
 echo
 echo "-----------------------------------------------------------------------"
 echo "|                                                                     |"
-echo "|  You can configure self signup in WSO2 IS in three different ways.  |"
+echo "|  You can configure self signup in WSO2 IS in two different ways.    |"
 echo "|  So choose your desired approach from the list below to enable the  |"
 echo "|  required settings.                                                 |"
 echo "|                                                                     |"
@@ -134,7 +134,7 @@ echo "|    Press 1 - Enable Self User Registration(without any config.)     |"
 echo "|               [ This will enable self signup in the IS without any  |"
 echo "|               other configuration changes.]                         |"
 echo "|                                                                     |"
-echo "|    Press 2 - Enable account lock on creation                        |"
+echo "|    Press 2 - Enable Account Lock On Creation                        |"
 echo "|               [ This will lock the user account during user         |"
 echo "|               registration. You can only log into the app after     |"
 echo "|               after clicking the verification link sent to the      |"
@@ -206,21 +206,21 @@ create_updateapp_oidc dispatch YWRtaW46YWRtaW4= ZGlzcGF0Y2g= ZGlzcGF0Y2gxMjM0 ${
 update_application_oidc dispatch 03 urn:updateApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4= ${is_host} ${is_port}
 
 echo
-echo "-------------------------------------------------------------------"
-echo "|                                                                 |"
-echo "|  To tryout self registration please log into the sample         |"
-echo "|  app below.                                                     |"
-echo "|  *** Please press ctrl button and click on the link ***         |"
-echo "|                                                                 |"
-echo "|  Dispatch - http://${tomcat_host}:${tomcat_port}/Dispatch/      |"
-echo "|                                                                 |"
-echo "|  Click on the ** Register now ** link in the login page.        |"
-echo "|  Fill in the user details form and create an account.           |"
-echo "|                                                                 |"
-echo "|  You can now use the username and password you provided, to     |"
-echo "|  log into Dispatch.                                             |"
-echo "|                                                                 |"
-echo "-------------------------------------------------------------------"
+echo "---------------------------------------------------------------------------------"
+echo "|                                                                               |"
+echo "|  To tryout self registration please log into the sample                       |"
+echo "|  app below.                                                                   |"
+echo "|  *** Please press ctrl button and click on the link ***                       |"
+echo "|                                                                               |"
+echo "|  pickup-dispatch - http://${tomcat_host}:${tomcat_port}/pickup-dispatch/      |"
+echo "|                                                                               |"
+echo "|  Click on the ** Register now ** link in the login page.                      |"
+echo "|  Fill in the user details form and create an account.                         |"
+echo "|                                                                               |"
+echo "|  You can now use the username and password you provided, to                   |"
+echo "|  log into pickup-dispatch.                                                    |"
+echo "|                                                                               |"
+echo "---------------------------------------------------------------------------------"
 echo
 echo "If you have finished trying out the sample web apps, you can clean the process now."
 echo "Do you want to clean up the setup?"
@@ -273,46 +273,46 @@ update_application_oidc dispatch 03 urn:updateApplication https://${is_host}:${i
 
 echo
 echo
-echo "------------------------------------------------------------------"
-echo "|                                                                |"
-echo "|    The workflow feature enables you to add more control and    |"
-echo "|    constraints to the tasks executed within it.                |"
-echo "|                                                                |"
-echo "|    Here we are going to try out a workflow which defines an    |"
-echo "|    approval process for new user additions.                    |"
-echo "|                                                                |"
-echo "|    Use case: Senior manager and junior manager has to          |"
-echo "|    approve each new user addition.                             |"
-echo "|                                                                |"
-echo "|    To tryout the workflow please log into the sample           |"
-echo "|    app below.                                                  |"
-echo "|    *** Please press ctrl button and click on the link ***      |"
-echo "|                                                                |"
-echo "|    Dispatch - http://${tomcat_host}:${tomcat_port}/Dispatch/                  |"
-echo "|                                                                |"
-echo "|    Click on the ** Register now ** link in the login page      |"
-echo "|    Fill in the user details form and create an account.        |"
-echo "|                                                                |"
-echo "|    But the new user you created will be disabled.              |"
-echo "|    So to enable the user please log into the WSO2 dashboard    |"
-echo "|    using the following credentials and approve the pending     |"
-echo "|    workflow requests.                                          |"
-echo "|                                                                |"
-echo "|    WSO2 Dashboard: https://${is_host}:${is_port}/dashboard            |"
-echo "|                                                                |"
-echo "|    First login with Junior Manager                             |"
-echo "|      Username: alex                                            |"
-echo "|      Password: alex123                                         |"
-echo "|                                                                |"
-echo "|    Secondly, login with Senior Manager                         |"
-echo "|      Username: cameron                                         |"
-echo "|      Password: cameron123                                      |"
-echo "|                                                                |"
-echo "|    Now you can use your new user credentials to log into       |"
-echo "|    the app Dispatch:                                           |"
-echo "|        http://${tomcat_host}:${tomcat_port}/Dispatch/          |"
-echo "|                                                                |"
-echo "------------------------------------------------------------------"
+echo "--------------------------------------------------------------------------------------"
+echo "|                                                                                    |"
+echo "|    The workflow feature enables you to add more control and                        |"
+echo "|    constraints to the tasks executed within it.                                    |"
+echo "|                                                                                    |"
+echo "|    Here we are going to try out a workflow which defines an                        |"
+echo "|    approval process for new user additions.                                        |"
+echo "|                                                                                    |"
+echo "|    Use case: Senior manager and junior manager has to                              |"
+echo "|    approve each new user addition.                                                 |"
+echo "|                                                                                    |"
+echo "|    To tryout the workflow please log into the sample                               |"
+echo "|    app below.                                                                      |"
+echo "|    *** Please press ctrl button and click on the link ***                          |"
+echo "|                                                                                    |"
+echo "|    pickup-dispatch - http://${tomcat_host}:${tomcat_port}/pickup-dispatch/         |"
+echo "|                                                                                    |"
+echo "|    Click on the ** Register now ** link in the login page                          |"
+echo "|    Fill in the user details form and create an account.                            |"
+echo "|                                                                                    |"
+echo "|    But the new user you created will be disabled.                                  |"
+echo "|    So to enable the user please log into the WSO2 dashboard                        |"
+echo "|    using the following credentials and approve the pending                         |"
+echo "|    workflow requests.                                                              |"
+echo "|                                                                                    |"
+echo "|    WSO2 Dashboard: https://${is_host}:${is_port}/dashboard                         |"
+echo "|                                                                                    |"
+echo "|    First login with Junior Manager                                                 |"
+echo "|      Username: alex                                                                |"
+echo "|      Password: alex123                                                             |"
+echo "|                                                                                    |"
+echo "|    Secondly, login with Senior Manager                                             |"
+echo "|      Username: cameron                                                             |"
+echo "|      Password: cameron123                                                          |"
+echo "|                                                                                    |"
+echo "|    Now you can use your new user credentials to log into                           |"
+echo "|    the app pickup-dispatch:                                                        |"
+echo "|        http://${tomcat_host}:${tomcat_port}/pickup-dispatch/                       |"
+echo "|                                                                                    |"
+echo "--------------------------------------------------------------------------------------"
 echo
 
 echo "If you have finished trying out the workflow, you can clean the process now."
@@ -854,29 +854,22 @@ return 0;
 end_message() {
 
 dispatch_url=$1
-swift_url=$2
+manager_url=$2
 
 echo
-echo "--------------------------------------------------------------------"
-echo "|                                                                  |"
-echo "|    You can find the sample web apps on the following URLs.       |"
-echo "|    *** Please press ctrl button and click on the links ***       |"
-echo "|                                                                  |"
-echo "|    Dispatch -                                                    |"
-echo "|        http://${tomcat_host}:${tomcat_port}/${dispatch_url}/     |"
-echo "|    Swift - http://${tomcat_host}:${tomcat_port}/${swift_url}/    |"
-echo "|                                                                  |"
-echo "|    Please use the following user credentials to log in.          |"
-echo "|                                                                  |"
-echo "|    MANAGER                                                       |"
-echo "|      Username: cameron                                           |"
-echo "|      Password: cameron123                                        |"
-echo "|                                                                  |"
-echo "|    EMPLOYEE                                                      |"
-echo "|      Username: alex                                              |"
-echo "|      Password: alex123                                           |"
-echo "|                                                                  |"
-echo "--------------------------------------------------------------------"
+echo "---------------------------------------------------------------------------------------"
+echo "|                                                                                     |"
+echo "|    You can find the sample web apps on the following URLs.                          |"
+echo "|    *** Please press ctrl button and click on the links ***                          |"
+echo "|                                                                                     |"
+echo "|    pickup-dispatch -                                                                |"
+echo "|        http://${tomcat_host}:${tomcat_port}/${dispatch_url}/                        |"
+echo "|    pick-manager     -                                                               |"
+echo "|        http://${tomcat_host}:${tomcat_port}/${manager_url}/                         |"
+echo "|                                                                                     |"
+echo "|    Please use the user credentials to log in.                                       |"
+echo "|                                                                                     |"
+echo "---------------------------------------------------------------------------------------"
 echo
 echo "If you have finished trying out the sample web apps, you can clean the process now."
 echo "Do you want to clean up the setup?"
@@ -889,7 +882,7 @@ read clean
  case ${clean} in
         [Yy]* )
         delete_sp dispatch Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-        delete_sp swift Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+        delete_sp manager Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
         delete_user ${is_host} ${is_port}
 	;;
         [Nn]* ) exit;;
@@ -932,10 +925,10 @@ case ${user} in
     configure_sso_saml2 ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
 
     create_updateapp_multi dispatch Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
-    create_updateapp_multi swift Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
+    create_updateapp_multi manager Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
 
     update_application_saml dispatch 04 urn:updateApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
-    update_application_saml swift 04 urn:updateApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
+    update_application_saml manager 04 urn:updateApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
 
    ;;
     [Nn]* ) return -1;;
@@ -971,7 +964,7 @@ res=$?
   echo "!! Problem occurred while getting application details for ${sp_name}.... !!"
   echo
   delete_sp dispatch Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  delete_sp swift Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_sp manager Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
   delete_user ${is_host} ${is_port}
   echo
   return -1
@@ -1000,7 +993,7 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
     <ns1:description xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">sample service provider</ns1:description>
     <inboundAuthenticationConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">
       <inboundAuthenticationRequestConfigs>
-        <inboundAuthKey>saml2-web-app-${sp_name}.com</inboundAuthKey>
+        <inboundAuthKey>saml2-web-app-pickup-${sp_name}.com</inboundAuthKey>
         <inboundAuthType>samlsso</inboundAuthType>
         <properties>
           <name>attrConsumServiceIndex</name>
@@ -1119,10 +1112,10 @@ if [ ! -d "${TOMCAT_PATH}" ]
         wget http://www-eu.apache.org/dist/tomcat/tomcat-8/v8.0.49/bin/apache-tomcat-8.0.49.tar.gz
         tar xvzf apache-tomcat-8.0.49.tar.gz
         cd binaries
-        cp saml2-web-app-dispatch.com.war ${QSG}/apache-tomcat-8.0.49/webapps
-        echo "** Web application Dispatch successfully deployed. **"
-        cp saml2-web-app-swift.com.war ${QSG}/apache-tomcat-8.0.49/webapps
-        echo "** Web application Swift successfully deployed. **"
+        cp saml2-web-app-pickup-dispatch.com.war ${QSG}/apache-tomcat-8.0.49/webapps
+        echo "** Web application pickup-dispatch successfully deployed. **"
+        cp saml2-web-app-pickup-manager.com.war ${QSG}/apache-tomcat-8.0.49/webapps
+        echo "** Web application pickup-manager successfully deployed. **"
 	    ;;
         [Nn]* )
         echo "Please install Tomcat and restart the script."
@@ -1133,12 +1126,12 @@ if [ ! -d "${TOMCAT_PATH}" ]
 
  fi
 
- if [ ! -f "${TOMCAT_PATH}/webapps/saml2-web-app-dispatch.com.war" ]
+ if [ ! -f "${TOMCAT_PATH}/webapps/saml2-web-app-pickup-dispatch.com.war" ]
   then
-   cp ${QSG}/QSG/bin/saml2-web-app-dispatch.com.war ${TOMCAT_PATH}/webapps
-   echo "** Web application Dispatch successfully deployed. **"
-   cp ${QSG}/QSG/bin/saml2-web-app-swift.com.war ${TOMCAT_PATH}/webapps
-   echo "** Web application Swift successfully deployed. **"
+   cp ${QSG}/QSG/bin/saml2-web-app-pickup-dispatch.com.war ${TOMCAT_PATH}/webapps
+   echo "** Web application pickup-dispatch successfully deployed. **"
+   cp ${QSG}/QSG/bin/saml2-web-app-pickup-manager.com.war ${TOMCAT_PATH}/webapps
+   echo "** Web application pickup-manager successfully deployed. **"
  fi
 
 cd ..
@@ -1519,7 +1512,7 @@ res=$?
   echo "!! Problem occurred while creating the service provider. !!"
   echo
   delete_sp dispatch Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  delete_sp swift Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_sp manager Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
   delete_user ${is_host} ${is_port}
   echo
   return -1
@@ -1675,7 +1668,7 @@ echo " <soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelop
          <!--Optional:-->
          <xsd:spDto>
             <!--Zero or more repetitions:-->
-            <xsd1:assertionConsumerUrls>http://${tomcat_host}:${tomcat_port}/saml2-web-app-${sp_name}.com/consumer</xsd1:assertionConsumerUrls>
+            <xsd1:assertionConsumerUrls>http://${tomcat_host}:${tomcat_port}/saml2-web-app-pickup-${sp_name}.com/home.jsp</xsd1:assertionConsumerUrls>
             <!--Optional:-->
             <xsd1:assertionQueryRequestProfileEnabled>false</xsd1:assertionQueryRequestProfileEnabled>
             <!--Optional:-->
@@ -1683,7 +1676,7 @@ echo " <soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelop
             <!--Optional:-->
             <xsd1:certAlias>wso2carbon</xsd1:certAlias>
             <!--Optional:-->
-            <xsd1:defaultAssertionConsumerUrl>http://${tomcat_host}:${tomcat_port}/saml2-web-app-${sp_name}.com/consumer</xsd1:defaultAssertionConsumerUrl>
+            <xsd1:defaultAssertionConsumerUrl>http://${tomcat_host}:${tomcat_port}/saml2-web-app-pickup-${sp_name}.com/home.jsp</xsd1:defaultAssertionConsumerUrl>
             <!--Optional:-->
             <xsd1:digestAlgorithmURI>http://www.w3.org/2000/09/xmldsig#sha1</xsd1:digestAlgorithmURI>
             <!--Optional:-->
@@ -1705,9 +1698,9 @@ echo " <soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelop
             <!--Optional:-->
             <xsd1:idPInitSSOEnabled>true</xsd1:idPInitSSOEnabled>
             <!--Zero or more repetitions:-->
-            <xsd1:idpInitSLOReturnToURLs>http://${tomcat_host}:${tomcat_port}/saml2-web-app-${sp_name}.com/consumer</xsd1:idpInitSLOReturnToURLs>
+            <xsd1:idpInitSLOReturnToURLs>http://${tomcat_host}:${tomcat_port}/saml2-web-app-pickup-${sp_name}.com/home.jsp</xsd1:idpInitSLOReturnToURLs>
             <!--Optional:-->
-            <xsd1:issuer>saml2-web-app-${sp_name}.com</xsd1:issuer>
+            <xsd1:issuer>saml2-web-app-pickup-${sp_name}.com</xsd1:issuer>
             <!--Optional:-->
             <xsd1:nameIDFormat>urn/oasis/names/tc/SAML/1.1/nameid-format/emailAddress</xsd1:nameIDFormat>
             <!--Zero or more repetitions:-->
@@ -1750,7 +1743,7 @@ res=$?
   echo "!! Problem occurred while configuring SAML2 web SSO for ${sp_name}.... !!"
   echo
   delete_sp dispatch Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  delete_sp swift Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_sp manager Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
   delete_user ${is_host} ${is_port}
   echo
   return -1
@@ -1772,20 +1765,20 @@ is_port=$7
 tomcat_host=$8
 tomcat_port=$9
 dispatch="dispatch"
-swift="swift"
+manager="manager"
 
 if [ "$sp_name" = "$dispatch" ];
 then
     client_id="ZGlzcGF0Y2g="
     secret="ZGlzcGF0Y2gxMjM0"
-    cap_spName="Dispatch"
+    cap_spName="pickup-dispatch"
 fi
 
-if [ "$sp_name" = "$swift" ];
+if [ "$sp_name" = "$manager" ];
 then
     client_id="c3dpZnRhcHA="
     secret="c3dpZnRhcHAxMjM="
-    cap_spName="Swift"
+    cap_spName="pickup-manager"
 fi
 
 cd ${scenario}
@@ -1845,7 +1838,7 @@ res=$?
   echo "!! Problem occurred while configuring OIDC web SSO for ${sp_name}.... !!"
   echo
   delete_sp dispatch Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  delete_sp swift Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_sp manager Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
   delete_user ${is_host} ${is_port}
   echo
   return -1
@@ -1883,7 +1876,7 @@ res=$?
   echo "!! Problem occurred while getting application details for ${sp_name}.... !!"
   echo
   delete_sp dispatch Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  delete_sp swift Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_sp manager Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
   delete_user ${is_host} ${is_port}
   echo
   return -1
@@ -1921,7 +1914,7 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
                     <!--Zero or more repetitions:-->
                     <xsd1:inboundAuthenticationRequestConfigs>
                         <!--Optional:-->
-                        <xsd1:inboundAuthKey>saml2-web-app-${sp_name}.com</xsd1:inboundAuthKey>
+                        <xsd1:inboundAuthKey>saml2-web-app-pickup-${sp_name}.com</xsd1:inboundAuthKey>
                         <!--Optional:-->
                         <xsd1:inboundAuthType>samlsso</xsd1:inboundAuthType>
                         <!--Zero or more repetitions:-->
@@ -1997,7 +1990,7 @@ res=$?
   echo "!! Problem occurred while getting application details for ${sp_name}.... !!"
   echo
   delete_sp dispatch Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  delete_sp swift Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_sp manager Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
   delete_user ${is_host} ${is_port}
   echo
   return -1
@@ -2119,7 +2112,7 @@ res=$?
   echo "!! Problem occurred while getting application details for ${sp_name}.... !!"
   echo
   delete_sp dispatch Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  delete_sp swift Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_sp manager Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
   delete_user ${is_host} ${is_port}
   echo
   return -1
@@ -2148,7 +2141,7 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
     <ns1:description xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">sample service provider</ns1:description>
     <inboundAuthenticationConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">
       <inboundAuthenticationRequestConfigs>
-        <inboundAuthKey>saml2-web-app-${sp_name}.com</inboundAuthKey>
+        <inboundAuthKey>saml2-web-app-pickup-${sp_name}.com</inboundAuthKey>
         <inboundAuthType>samlsso</inboundAuthType>
         <properties>
           <name>attrConsumServiceIndex</name>
@@ -2231,7 +2224,7 @@ res=$?
   echo "!! Problem occurred while updating application ${sp_name}.... !!"
   echo
   delete_sp dispatch Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  delete_sp swift Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_sp manager Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
   delete_user ${is_host} ${is_port}
   echo
   return -1
@@ -2272,7 +2265,7 @@ res=$?
   echo "!! Problem occurred while updating application ${sp_name}.... !!"
   echo
   delete_sp dispatch Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  delete_sp swift Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  delete_sp manager Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
   delete_user ${is_host} ${is_port}
   echo
   return -1
@@ -2415,7 +2408,7 @@ start_the_flow() {
         # Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
         setup_servers
         configure_sso_saml2 ${IS_DOMAIN} ${IS_PORT} ${TOMCAT_DOMAIN} ${TOMCAT_PORT}
-        end_message saml2-web-app-dispatch.com saml2-web-app-swift.com
+        end_message saml2-web-app-pickup-dispatch.com saml2-web-app-pickup-manager.com
         if [ "$?" -ne "0" ]; then
           echo "Sorry, we had a problem there!"
         fi
@@ -2425,7 +2418,7 @@ start_the_flow() {
         # Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
         setup_servers
         configure_sso_oidc ${IS_DOMAIN} ${IS_PORT} ${TOMCAT_DOMAIN} ${TOMCAT_PORT}
-        end_message Dispatch Swift
+        end_message pickup-dispatch pickup-manager
         if [ "$?" -ne "0" ]; then
           echo "Sorry, we had a problem there!"
         fi
@@ -2435,7 +2428,7 @@ start_the_flow() {
         # Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
         setup_servers
         create_multifactor_auth ${IS_DOMAIN} ${IS_PORT} ${TOMCAT_DOMAIN} ${TOMCAT_PORT}
-        end_message saml2-web-app-dispatch.com saml2-web-app-swift.com
+        end_message saml2-web-app-pickup-dispatch.com saml2-web-app-pickup-manager.com
         delete_idp 05 urn:deleteIdP https://${is_host}:${is_port}/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/
         ;;
 
@@ -2443,7 +2436,7 @@ start_the_flow() {
         # Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
         setup_servers
         configure_federated_auth ${IS_DOMAIN} ${IS_PORT} ${TOMCAT_DOMAIN} ${TOMCAT_PORT}
-        end_message saml2-web-app-dispatch.com saml2-web-app-swift.com
+        end_message saml2-web-app-pickup-dispatch.com saml2-web-app-pickup-manager.com
         delete_idp 05 urn:deleteIdP https://${is_host}:${is_port}/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/
         if [ "$?" -ne "0" ]; then
           echo "Sorry, we had a problem there!"
