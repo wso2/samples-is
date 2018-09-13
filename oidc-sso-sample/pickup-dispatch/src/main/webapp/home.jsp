@@ -1,27 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <!--
-~   Copyright (c) 2018 WSO2 Inc. (http://wso2.com) All Rights Reserved.
+~ Copyright (c) 2018 WSO2 Inc. (http://wso2.com) All Rights Reserved.
 ~
-~   Licensed under the Apache License, Version 2.0 (the "License");
-~   you may not use this file except in compliance with the License.
-~   You may obtain a copy of the License at
+~ Licensed under the Apache License, Version 2.0 (the "License");
+~ you may not use this file except in compliance with the License.
+~ You may obtain a copy of the License at
 ~
-~        http://www.apache.org/licenses/LICENSE-2.0
+~ http://www.apache.org/licenses/LICENSE-2.0
 ~
-~   Unless required by applicable law or agreed to in writing, software
-~   distributed under the License is distributed on an "AS IS" BASIS,
-~   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-~   See the License for the specific language governing permissions and
-~   limitations under the License.
+~ Unless required by applicable law or agreed to in writing, software
+~ distributed under the License is distributed on an "AS IS" BASIS,
+~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+~ See the License for the specific language governing permissions and
+~ limitations under the License.
 -->
 <%@ page import="org.apache.commons.lang.StringUtils" %>
 <%@ page import="org.wso2.sample.identity.oauth2.OAuth2Constants" %>
-<%@ page import="org.apache.oltu.oauth2.client.request.OAuthClientRequest" %>
-<%@ page import="org.apache.oltu.oauth2.client.OAuthClient" %>
-<%@ page import="org.apache.oltu.oauth2.client.URLConnectionClient" %>
-<%@ page import="org.apache.oltu.oauth2.common.message.types.GrantType" %>
-<%@ page import="org.apache.oltu.oauth2.client.response.OAuthClientResponse" %>
 <%@ page import="com.nimbusds.jwt.SignedJWT" %>
 <%@ page import="java.util.Properties" %>
 <%@ page import="org.wso2.sample.identity.oauth2.SampleContextEventListener" %>
@@ -31,6 +26,7 @@
 <%@ page import="org.wso2.sample.identity.oauth2.ClientAppException" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.Map" %>
+<%@ page import="org.wso2.carbon.ui.CarbonUIMessage" %>
 
 <%
 
@@ -51,7 +47,6 @@
     }
 
     HttpSession currentSession = request.getSession(false);
-    String accessToken = "";
     String idToken = "";
     String name = "";
     ReadOnlyJWTClaimsSet claimsSet = null;
@@ -63,13 +58,11 @@
     try {
         sessionState = request.getParameter(OAuth2Constants.SESSION_STATE);
         CommonUtils.getToken(request, response);
-        System.out.println( "counter = " + "finished after get token");
         if (currentSession == null || currentSession.getAttribute("authenticated") == null) {
             currentSession.invalidate();
             response.sendRedirect("index.jsp");
         } else {
             currentSession.setAttribute(OAuth2Constants.SESSION_STATE, sessionState);
-            accessToken = (String) currentSession.getAttribute("accessToken");
             idToken = (String) currentSession.getAttribute("idToken");
             requestObject = (JSONObject) currentSession.getAttribute("requestObject");
             responseObject = (JSONObject) currentSession.getAttribute("responseObject");
@@ -81,13 +74,13 @@
     if (idToken != null) {
         try {
             name = SignedJWT.parse(idToken).getJWTClaimsSet().getSubject();
-            claimsSet= SignedJWT.parse(idToken).getJWTClaimsSet();
+            claimsSet = SignedJWT.parse(idToken).getJWTClaimsSet();
             session.setAttribute(OAuth2Constants.NAME, name);
         } catch (Exception e) {
-            System.console().printf("Error in retrieving values from JWT");
+            CarbonUIMessage.sendCarbonUIMessage("Error in retrieving values from JWT", CarbonUIMessage.ERROR,
+                    request, e);
         }
     }
-
 
 
 %>
@@ -132,16 +125,19 @@
                 <li class="nav-item dropdown ">
                     <a class="nav-link dropdown-toggle user-dropdown" href="#" id="navbarDropdownMenuLink"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-user-circle"></i> <span><%=(String)session.getAttribute(OAuth2Constants.NAME)%></span>
+                        <i class="fas fa-user-circle"></i>
+                        <span><%=(String) session.getAttribute(OAuth2Constants.NAME)%></span>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="#" id="profile">Profile</a>
-                        <a class="dropdown-item" href='<%=properties.getProperty("OIDC_LOGOUT_ENDPOINT")%>?post_logout_redirect_uri=<%=properties.getProperty("post_logout_redirect_uri")%>&id_token_hint=<%=idToken%>&session_state=<%=sessionState%>'>
+                        <a class="dropdown-item"
+                           href='<%=properties.getProperty("OIDC_LOGOUT_ENDPOINT")%>?post_logout_redirect_uri=<%=properties.getProperty("post_logout_redirect_uri")%>&id_token_hint=<%=idToken%>&session_state=<%=sessionState%>'>
                             Logout</a>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="toggleView" href="#" data-toggle="tooltip" data-placement="bottom" title="Console">
+                    <a class="nav-link" id="toggleView" href="#" data-toggle="tooltip" data-placement="bottom"
+                       title="Console">
                         <i class="fa fa-cogs"></i>
                     </a>
                 </li>
@@ -165,9 +161,11 @@
                                 <div class="col-md-6 d-block mx-auto">
                                     <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                                         <a class="nav-item nav-link active" id="nav-overview-tab" data-toggle="tab"
-                                           href="#nav-overview" role="tab" aria-controls="nav-overview" aria-selected="true"><i
+                                           href="#nav-overview" role="tab" aria-controls="nav-overview"
+                                           aria-selected="true"><i
                                                 class="fas fa-edit"></i> &nbsp;Make a Booking</a>
-                                        <a class="nav-item nav-link" id="nav-drivers-tab" data-toggle="tab" href="#nav-drivers"
+                                        <a class="nav-item nav-link" id="nav-drivers-tab" data-toggle="tab"
+                                           href="#nav-drivers"
                                            role="tab" aria-controls="nav-drivers" aria-selected="false"><i
                                                 class="fas fa-list"></i> &nbsp;View Bookings</a>
                                     </div>
@@ -203,7 +201,8 @@
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="passesnger" class="bmd-label-floating">Passesnger</label>
+                                                    <label for="passesnger"
+                                                           class="bmd-label-floating">Passesnger</label>
                                                     <select class="form-control" id="passesnger">
                                                         <option selected>Select a passesnger</option>
                                                         <option>James Easton (P0064)</option>
@@ -230,7 +229,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="nav-drivers" role="tabpanel" aria-labelledby="nav-drivers-tab">
+                                <div class="tab-pane fade" id="nav-drivers" role="tabpanel"
+                                     aria-labelledby="nav-drivers-tab">
                                     <div class="table-responsive content-table">
                                         <table class="table">
                                             <thead>
@@ -295,7 +295,8 @@
                     <div class="user-icon">
                         <i class="fas fa-user-circle fa-5x"></i>
                     </div>
-                    <div class="jumbotron-heading"><%=name%></div>
+                    <div class="jumbotron-heading"><%=name%>
+                    </div>
                 </div>
             </section>
             <div class="container">
@@ -318,13 +319,15 @@
                                     </thead>
                                     <tbody>
                                     <%
-                                        for (String key : hashmap.keySet()){
+                                        for (String key : hashmap.keySet()) {
                                             if (!(key.equals("at_hash") || key.equals("c_hash") || key.equals("azp")
                                                     || key.equals("amr") || key.equals("sid"))) {
                                     %>
                                     <tr>
-                                        <td><%=key%></td>
-                                        <td><%=hashmap.get(key).toString()%></td>
+                                        <td><%=key%>
+                                        </td>
+                                        <td><%=hashmap.get(key).toString()%>
+                                        </td>
                                     </tr>
                                     <%
                                             }
@@ -357,7 +360,8 @@
     </footer>
 
     <!-- sample application actions message -->
-    <div class="modal fade" id="sampleModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal fade" id="sampleModal" tabindex="-1" role="dialog" aria-labelledby="basicModal"
+         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -408,7 +412,8 @@
                                                     data-clipboard-target=".copy-target1"><i
                                                     class="fa fa-clipboard"></i></button>
                                             <p class="copied">Copied..!</p>
-                                            <pre><code class="copy-target1 JSON pt-3 pb-3"><%=requestObject.toString(4)%></code></pre>
+                                            <pre><code
+                                                    class="copy-target1 JSON pt-3 pb-3"><%=requestObject.toString(4)%></code></pre>
                                         </div>
                                     </div>
                                 </div>
@@ -425,7 +430,8 @@
                                                     data-clipboard-target=".copy-target3"><i
                                                     class="fa fa-clipboard"></i></button>
                                             <p class="copied">Copied..!</p>
-                                            <pre><code class="copy-target3 JSON pt-3 pb-3 requestContent"><%=responseObject.toString(4)%></code></pre>
+                                            <pre><code
+                                                    class="copy-target3 JSON pt-3 pb-3 requestContent"><%=responseObject.toString(4)%></code></pre>
                                         </div>
                                     </div>
                                 </div>

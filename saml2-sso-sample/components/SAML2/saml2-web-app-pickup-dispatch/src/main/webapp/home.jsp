@@ -19,7 +19,6 @@
 <%@ page import="org.wso2.carbon.identity.sso.agent.bean.LoggedInSessionBean" %>
 <%@ page import="org.wso2.carbon.identity.sso.agent.util.SSOAgentConstants" %>
 <%@ page import="org.json.JSONObject" %>
-<%@ page import="org.opensaml.saml2.core.Assertion" %>
 <%@ page import="org.wso2.qsg.webapp.pickup.dispatch.CommonUtil" %>
 <html lang="en">
 <head>
@@ -56,8 +55,6 @@
     // if web-browser session is there but no session bean set,
     // invalidate session and direct back to login page
     JSONObject requestObject = new JSONObject();
-    JSONObject responseObject = new JSONObject();
-    JSONObject res = new JSONObject();
     requestObject.append("requestEndpoint", request.getRequestURI());
     if (request.getSession(false) != null
             && request.getSession(false).getAttribute(SSOAgentConstants.SESSION_BEAN_NAME) == null) {
@@ -73,10 +70,8 @@
     if(sessionBean != null && sessionBean.getSAML2SSO() != null) {
         subjectId = sessionBean.getSAML2SSO().getSubjectId();
         samlResponse =  CommonUtil.marshall(sessionBean.getSAML2SSO().getSAMLResponse());
-        System.out.println("SAML response string : "+ samlResponse);
         samlResponse = samlResponse.replace("<", "&lt;");
         samlResponse = samlResponse.replace(">", "&gt;");
-        System.out.println("SAML response string : " + samlResponse);
 
     } else {
 %>

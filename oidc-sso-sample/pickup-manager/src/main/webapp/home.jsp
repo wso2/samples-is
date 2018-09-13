@@ -25,6 +25,7 @@
 <%@ page import="org.wso2.sample.identity.oauth2.ClientAppException" %>
 <%@ page import="org.apache.commons.lang.StringUtils" %>
 <%@ page import="java.util.*" %>
+<%@ page import="org.wso2.carbon.ui.CarbonUIMessage" %>
 
 <%
 
@@ -45,7 +46,6 @@
     }
 
     HttpSession currentSession = request.getSession(false);
-    String accessToken = "";
     String idToken = "";
     String name = "";
     ReadOnlyJWTClaimsSet claimsSet = null;
@@ -57,13 +57,11 @@
     try {
         sessionState = request.getParameter(OAuth2Constants.SESSION_STATE);
         CommonUtils.getToken(request, response);
-        System.out.println( "counter = " + "finished after get token");
         if (currentSession == null || currentSession.getAttribute("authenticated") == null) {
             currentSession.invalidate();
             response.sendRedirect("index.jsp");
         } else {
             currentSession.setAttribute(OAuth2Constants.SESSION_STATE, sessionState);
-            accessToken = (String) currentSession.getAttribute("accessToken");
             idToken = (String) currentSession.getAttribute("idToken");
             requestObject = (JSONObject) currentSession.getAttribute("requestObject");
             responseObject = (JSONObject) currentSession.getAttribute("responseObject");
@@ -78,7 +76,8 @@
             claimsSet= SignedJWT.parse(idToken).getJWTClaimsSet();
             session.setAttribute(OAuth2Constants.NAME, name);
         } catch (Exception e) {
-            System.console().printf("Error in retrieving values from JWT");
+            CarbonUIMessage.sendCarbonUIMessage("Error in retrieving values from JWT", CarbonUIMessage.ERROR,
+                    request, e);
         }
     }
 

@@ -60,20 +60,6 @@
         <param-value>wso2carbon.jks</param-value>
     </context-param>
 
-
-    <servlet>
-        <servlet-name>ConsumerServlet</servlet-name>
-        <servlet-class>org.wso2.qsg.webapp.pickup.dispatch.ConsumerServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ConsumerServlet</servlet-name>
-        <url-pattern>/consumer</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ConsumerServlet</servlet-name>
-        <url-pattern>/token</url-pattern>
-    </servlet-mapping>
-
     <listener>
         <listener-class>org.wso2.carbon.identity.sso.agent.SSOAgentContextEventListener</listener-class>
     </listener>
