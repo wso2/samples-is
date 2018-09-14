@@ -29,7 +29,6 @@
     <description>WSO2 Identity Server Quick Start Guide for OIDC SSO</description>
 
     <modules>
-        <module>pickup</module>
         <module>gdpr-qsg</module>
         <module>notification-center</module>
     </modules>

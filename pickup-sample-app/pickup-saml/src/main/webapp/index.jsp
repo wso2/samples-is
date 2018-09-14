@@ -73,10 +73,9 @@
 <!-- Bootstrap Material Design JavaScript -->
 <script src="libs/bootstrap-material-design_4.0.0/js/bootstrap-material-design.min.js"></script>
 <!-- Custom Js -->
-<script src="js/custom.js"></script>
 <script>
     function registration() {
-        location.href = "https://localhost:9443/accountrecoveryendpoint/register.do?callback=http://localhost:8080/pickup/";
+        location.href = "";
     }
 </script>
 

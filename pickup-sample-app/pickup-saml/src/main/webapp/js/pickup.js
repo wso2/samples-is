@@ -15,26 +15,23 @@
  */
 
 $(document).ready(function () {
-    $(".date-time").each(function (index) {
-        var randomDateTime = randomDate(new Date(2018, 0, 1), new Date());
-        $(this).text(moment(randomDateTime).format('DD/MM/YYYY hh:mm A'));
+
+    var $noRideMsg = $('.no-rides-msg');
+
+    $('.rides').hide();
+
+    $('.book-btn').on('click', function(){
+        $('.nav-tabs a[href="#nav-rides"]').tab('show');
+        $noRideMsg.hide();
+        $('.rides').show();
+        $('.action-response').hide();
     });
 
-    $(".year").text((new Date()).getFullYear());
-
-    $("#back-home").click(function() {
-        $("#main-content").show();
-        $("#profile-content").hide();
+    $('.cancel').on('click', function(){
+        $('.rides').hide();
+        $('.action-response').hide();
+        $noRideMsg.show();
     });
 
 });
-
-function randomDate(start, end) {
-    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-}
-
-function toggleToProfile() {
-    $("#main-content").hide();
-    $("#profile-content").show();
-}
 

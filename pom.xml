@@ -39,6 +39,7 @@
     <modules>
         <module>saml2-sso-sample</module>
         <module>oidc-sso-sample</module>
+        <module>pickup-sample-app</module>
         <module>quick-start-guide</module>
         <module>gdpr-samples</module>
         <module>distribution</module>
@@ -308,7 +309,6 @@
                 <artifactId>maven-dependency-plugin</artifactId>
                 <version>${maven.dependency.plugin.version}</version>
             </dependency>
-
 
         </dependencies>
     </dependencyManagement>
