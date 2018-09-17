@@ -33,7 +33,7 @@ public class OAuth2ClientServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException,
 			IOException {
-		RequestDispatcher dispatcher = req.getRequestDispatcher("pickup.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("home.jsp");
 		dispatcher.forward(req, resp);
 	}
 

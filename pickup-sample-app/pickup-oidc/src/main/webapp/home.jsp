@@ -15,47 +15,86 @@
 ~   See the License for the specific language governing permissions and
 ~   limitations under the License.
 -->
-<%@ page import="org.wso2.carbon.identity.sso.agent.bean.LoggedInSessionBean" %>
-<%@ page import="org.wso2.carbon.identity.sso.agent.bean.SSOAgentConfig" %>
-<%@ page import="org.wso2.carbon.identity.sso.agent.util.SSOAgentConstants" %>
+
+<%@ page import="org.apache.commons.lang.StringUtils" %>
+<%@ page import="org.wso2.sample.identity.oauth2.OAuth2Constants" %>
+<%@ page import="org.apache.oltu.oauth2.client.request.OAuthClientRequest" %>
+<%@ page import="org.apache.oltu.oauth2.client.OAuthClient" %>
+<%@ page import="org.apache.oltu.oauth2.client.URLConnectionClient" %>
+<%@ page import="org.apache.oltu.oauth2.common.message.types.GrantType" %>
+<%@ page import="org.apache.oltu.oauth2.client.response.OAuthClientResponse" %>
+<%@ page import="com.nimbusds.jwt.SignedJWT" %>
+<%@ page import="java.util.Properties" %>
+<%@ page import="org.wso2.sample.identity.oauth2.SampleContextEventListener" %>
+<%@ page import="com.nimbusds.jwt.ReadOnlyJWTClaimsSet" %>
 <%@ page import="java.util.Map" %>
-
+<%@ page import="java.util.HashMap" %>
 <%
-    String subjectId = null;
-    Map<String, String> saml2SSOAttributes = null;
+    String code = null;
+    String idToken;
+    String sessionState;
+    String error;
+    String name = null;
+    Properties properties;
+    properties = SampleContextEventListener.getProperties();
+    ReadOnlyJWTClaimsSet claimsSet = null;
 
-    final String SAML_SSO_URL = "samlsso";
-    final String SAML_LOGOUT_URL = "logout";
-    // if web-browser session is there but no session bean set,
-    // invalidate session and direct back to login page
-    if (request.getSession(false) != null
-            && request.getSession(false).getAttribute(SSOAgentConstants.SESSION_BEAN_NAME) == null) {
-        request.getSession().invalidate();
-%>
-<script type="text/javascript">
-    location.href = <%=SAML_SSO_URL%>;
-</script>
-<%
-        return;
+    try {
+        sessionState = request.getParameter(OAuth2Constants.SESSION_STATE);
+        if (StringUtils.isNotBlank(sessionState)) {
+            session.setAttribute(OAuth2Constants.SESSION_STATE, sessionState);
+        }
+
+        error = request.getParameter(OAuth2Constants.ERROR);
+        if (StringUtils.isNotBlank(request.getHeader(OAuth2Constants.REFERER)) &&
+                request.getHeader(OAuth2Constants.REFERER).contains("rpIFrame")) {
+            /*
+             * Here referer is being checked to identify that this is exactly is an response to the passive request
+             * initiated by the session checking iframe.
+             * In this sample, every error is forwarded back to this page. Thus, this condition is added to treat
+             * error response coming for the passive request separately, and to identify that as a logout scenario.
+             */
+            if (StringUtils.isNotBlank(error)) { // User has been logged out
+                session.invalidate();
+                response.sendRedirect("index.jsp");
+                return;
+            }
+        }
+
+        if (request.getParameter(OAuth2Constants.CODE) != null) {
+            code = request.getParameter(OAuth2Constants.CODE);
+        }
+
+        if (code != null) {
+            OAuthClientRequest.TokenRequestBuilder oAuthTokenRequestBuilder = new
+                    OAuthClientRequest.TokenRequestBuilder(properties.getProperty("tokenEndpoint"));
+
+            OAuthClientRequest accessRequest = oAuthTokenRequestBuilder.setGrantType(GrantType.AUTHORIZATION_CODE)
+                    .setClientId(properties.getProperty("consumerKey"))
+                    .setClientSecret(properties.getProperty("consumerSecret"))
+                    .setRedirectURI(properties.getProperty("callBackUrl"))
+                    .setCode(code)
+                    .buildBodyMessage();
+
+            //create OAuth client that uses custom http client under the hood
+            OAuthClient oAuthClient = new OAuthClient(new URLConnectionClient());
+
+            OAuthClientResponse oAuthResponse = oAuthClient.accessToken(accessRequest);
+            idToken = oAuthResponse.getParam("id_token");
+            if (idToken != null) {
+                try {
+                    name = SignedJWT.parse(idToken).getJWTClaimsSet().getSubject();
+                    claimsSet= SignedJWT.parse(idToken).getJWTClaimsSet();
+                    session.setAttribute("name", name);
+                } catch (Exception e) {
+                    System.console().printf("Values are not populated in JWT properly");
+                }
+            }
+        }
+
+    } catch (Exception e) {
+        error = e.getMessage();
     }
-    SSOAgentConfig ssoAgentConfig = (SSOAgentConfig)getServletContext()
-            .getAttribute(SSOAgentConstants.CONFIG_BEAN_NAME);
-    LoggedInSessionBean sessionBean = (LoggedInSessionBean) session
-            .getAttribute(SSOAgentConstants.SESSION_BEAN_NAME);
-    LoggedInSessionBean.AccessTokenResponseBean accessTokenResponseBean = null;
-    if(sessionBean != null && sessionBean.getSAML2SSO() != null) {
-        subjectId = sessionBean.getSAML2SSO().getSubjectId();
-        saml2SSOAttributes = sessionBean.getSAML2SSO().getSubjectAttributes();
-        accessTokenResponseBean = sessionBean.getSAML2SSO().getAccessTokenResponseBean();
-    } else {
-%>
-<script type="text/javascript">
-    location.href = <%=SAML_SSO_URL%>;
-</script>
-<%
-        return;
-    }
-
 %>
 <html lang="en">
 <head>
@@ -96,11 +135,11 @@
                 <li class="nav-item dropdown ">
                     <a class="nav-link dropdown-toggle user-dropdown" href="#" id="navbarDropdownMenuLink"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-user-circle"></i> <span><%=subjectId%></span>
+                        <i class="fas fa-user-circle"></i> <span><%=name%></span>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="#" id="profile">Profile</a>
-                        <a class="dropdown-item" href=<%=SAML_LOGOUT_URL%>>Logout</a>
+                        <a class="dropdown-item" href='<%=properties.getProperty("OIDC_LOGOUT_ENDPOINT")%>'>Logout</a>
                     </div>
                 </li>
                 <li class="nav-item">
@@ -245,7 +284,7 @@
                     <div class="user-icon">
                         <i class="fas fa-user-circle fa-5x"></i>
                     </div>
-                    <div class="jumbotron-heading"><%=subjectId%></div>
+                    <div class="jumbotron-heading"><%=name%></div>
                 </div>
             </section>
             <div class="container">
@@ -254,7 +293,10 @@
                         <div class="card card-body table-container">
                             <div class="table-responsive content-table">
                                 <%
-                                    if(saml2SSOAttributes != null && !saml2SSOAttributes.isEmpty()) {
+                                    if (claimsSet != null) {
+                                        Map<String, Object> hashmap = new HashMap<>();
+                                        hashmap = claimsSet.getCustomClaims();
+                                        if (!hashmap.isEmpty()) {
                                 %>
                                 <table class="table">
                                     <thead>
@@ -264,14 +306,17 @@
                                     </thead>
                                     <tbody>
                                     <%
-                                        for (Map.Entry<String, String> entry:saml2SSOAttributes.entrySet()) {
+                                        for (String key : hashmap.keySet()){
+                                            if (!(key.equals("at_hash") || key.equals("c_hash") || key.equals("azp")
+                                                    || key.equals("amr") || key.equals("sid"))) {
                                     %>
                                     <tr>
-                                        <td><%=entry.getKey()%></td>
-                                        <td><%=entry.getValue()%></td>
+                                        <td><%=key%></td>
+                                        <td><%=hashmap.get(key).toString()%></td>
                                     </tr>
                                     <%
                                             }
+                                        }
                                     %>
                                     </tbody>
                                 </table>
@@ -281,6 +326,7 @@
                                 <p align="center">No user details Available. Configure SP Claim Configurations.</p>
 
                                 <%
+                                        }
                                     }
                                 %>
 
@@ -288,6 +334,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
 
@@ -339,36 +386,124 @@
                 <div class="col-md-12">
                     <div id="timeline-content">
                         <ul class="timeline">
-                            <%--<li class="event sent">--%>
-                                <%--<div class="request-response-infos">--%>
-                                    <%--<h1 class='request-response-title'>Request <span class="float-right"><i--%>
-                                            <%--class="fas fa-angle-down"></i></span></h1>--%>
-                                    <%--<div class="request-response-details mt-3">--%>
-                                        <%--<h2>Data:</h2>--%>
-                                        <%--<div class="code-container mb-3">--%>
-                                            <%--<button class="btn btn-primary btn-clipboard"--%>
-                                                    <%--data-clipboard-target=".copy-target1"><i--%>
-                                                    <%--class="fa fa-clipboard"></i></button>--%>
-                                            <%--<p class="copied">Copied..!</p>--%>
-                                            <%--<pre><code class="copy-target1 JSON pt-3 pb-3"> Request data </code></pre>--%>
-                                        <%--</div>--%>
-                                    <%--</div>--%>
-                                <%--</div>--%>
-                            <%--</li>--%>
-                            <%--<li class="event sending" style="display: none;">--%>
-                                <%--<div class="request-response-infos">--%>
-                                    <%--<h1 class='request-response-title'>Sending...--%>
-                                        <%--<div class="spinner">--%>
-                                            <%--<div class="bounce1"></div>--%>
-                                            <%--<div class="bounce2"></div>--%>
-                                            <%--<div class="bounce3"></div>--%>
-                                        <%--</div>--%>
-                                    <%--</h1>--%>
-                                <%--</div>--%>
-                            <%--</li>--%>
-                            <li class="event received" style="display: none;">
+                            <li class="event sent event1-sent" style="display: none;">
                                 <div class="request-response-infos">
-                                    <h1 class='request-response-title'>Response <span class="float-right"><i
+                                    <h1 class='request-response-title'>Get Token Request <span class="float-right"><i
+                                            class="fas fa-angle-down"></i></span></h1>
+                                    <div class="request-response-details mt-3">
+                                        <h2>cURL:</h2>
+                                        <div class="code-container mb-3">
+                                            <button class="btn btn-primary btn-clipboard"
+                                                    data-clipboard-target=".copy-target1"><i
+                                                    class="fa fa-clipboard"></i></button>
+                                            <p class="copied">Copied..!</p>
+                                            <pre><code class="copy-target1 JSON pt-3 pb-3"> Request data </code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="event sending event1-sending" style="display: none;">
+                                <div class="request-response-infos">
+                                    <h1 class='request-response-title'>Sending...
+                                        <div class="spinner">
+                                            <div class="bounce1"></div>
+                                            <div class="bounce2"></div>
+                                            <div class="bounce3"></div>
+                                        </div>
+                                    </h1>
+                                </div>
+                            </li>
+                            <li class="event received event1-received" style="display: none;">
+                                <div class="request-response-infos">
+                                    <h1 class='request-response-title'>Get Token Response <span class="float-right"><i
+                                            class="fa fa-angle-down"></i></span></h1>
+                                    <div class="request-response-details mt-3">
+                                        <h2>Data:</h2>
+                                        <div class="code-container mb-3">
+                                            <button class="btn btn-primary btn-clipboard"
+                                                    data-clipboard-target=".copy-target3"><i
+                                                    class="fa fa-clipboard"></i></button>
+                                            <p class="copied">Copied..!</p>
+                                            <pre><code class="copy-target3 JSON pt-3 pb-3"> Response data </code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="event sent event3-sent" style="display: none;">
+                                <div class="request-response-infos">
+                                    <h1 class='request-response-title'>API Request <span class="float-right"><i
+                                            class="fas fa-angle-down"></i></span></h1>
+                                    <div class="request-response-details mt-3">
+                                        <h2>Data:</h2>
+                                        <div class="code-container mb-3">
+                                            <button class="btn btn-primary btn-clipboard"
+                                                    data-clipboard-target=".copy-target1"><i
+                                                    class="fa fa-clipboard"></i></button>
+                                            <p class="copied">Copied..!</p>
+                                            <pre><code class="copy-target1 JSON pt-3 pb-3"> Request data </code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="event sending event3-sending" style="display: none;">
+                                <div class="request-response-infos">
+                                    <h1 class='request-response-title'>Sending...
+                                        <div class="spinner">
+                                            <div class="bounce1"></div>
+                                            <div class="bounce2"></div>
+                                            <div class="bounce3"></div>
+                                        </div>
+                                    </h1>
+                                </div>
+                            </li>
+
+                            <li class="event sent event2-sent" style="display: none;">
+                                <div class="request-response-infos">
+                                    <h1 class='request-response-title'>Validate Token Request <span class="float-right"><i
+                                            class="fas fa-angle-down"></i></span></h1>
+                                    <div class="request-response-details mt-3">
+                                        <h2>cURL:</h2>
+                                        <div class="code-container mb-3">
+                                            <button class="btn btn-primary btn-clipboard"
+                                                    data-clipboard-target=".copy-target1"><i
+                                                    class="fa fa-clipboard"></i></button>
+                                            <p class="copied">Copied..!</p>
+                                            <pre><code class="copy-target1 JSON pt-3 pb-3"> Request data </code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="event sending event2-sending" style="display: none;">
+                                <div class="request-response-infos">
+                                    <h1 class='request-response-title'>Sending...
+                                        <div class="spinner">
+                                            <div class="bounce1"></div>
+                                            <div class="bounce2"></div>
+                                            <div class="bounce3"></div>
+                                        </div>
+                                    </h1>
+                                </div>
+                            </li>
+                            <li class="event received event2-received" style="display: none;">
+                                <div class="request-response-infos">
+                                    <h1 class='request-response-title'>Validate Token Response <span class="float-right"><i
+                                            class="fa fa-angle-down"></i></span></h1>
+                                    <div class="request-response-details mt-3">
+                                        <h2>Data:</h2>
+                                        <div class="code-container mb-3">
+                                            <button class="btn btn-primary btn-clipboard"
+                                                    data-clipboard-target=".copy-target3"><i
+                                                    class="fa fa-clipboard"></i></button>
+                                            <p class="copied">Copied..!</p>
+                                            <pre><code class="copy-target3 JSON pt-3 pb-3"> Response data </code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="event received event3-received" style="display: none;">
+                                <div class="request-response-infos">
+                                    <h1 class='request-response-title'>API Response <span class="float-right"><i
                                             class="fa fa-angle-down"></i></span></h1>
                                     <div class="request-response-details mt-3">
                                         <h2>Data:</h2>
@@ -390,6 +525,7 @@
     </section>
 </div>
 
+
 <!-- JQuery -->
 <script src="libs/jquery_3.3.1/jquery.min.js"></script>
 <!-- Popper -->
@@ -409,6 +545,7 @@
 <script src="js/custom.js"></script>
 <script src="js/REST_calls.js"></script>
 <script src="js/pickup.js"></script>
+<iframe id="rpIFrame" src="rpIFrame.jsp" frameborder="0" width="0" height="0"></iframe>
 
 
 </body>

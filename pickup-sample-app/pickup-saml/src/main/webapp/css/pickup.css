@@ -129,13 +129,25 @@
     font-size: 0.75rem
 }
 
-.action-response i {
+.action-response.success i {
     color: #27ae60;
+}
+
+.action-response.error i {
+    color: #e74c3c;
 }
 
 .action-text {
     font-size: 0.9rem;
     color: #444;
+}
+
+.event2-sent .request-response-title, .event2-sending .request-response-title, .event2-received .request-response-title {
+    color: #666;
+}
+
+.event2-sent .request-response-infos, .event2-sending .request-response-infos, .event2-received .request-response-infos {
+    padding-left: 1.5rem;
 }
 
 /* Profile page */

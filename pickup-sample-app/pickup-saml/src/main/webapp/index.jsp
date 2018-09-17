@@ -32,35 +32,34 @@
     <title>PickUp Login</title>
 
     <!-- Bootstrap Material Design CSS -->
-    <link href="libs/bootstrap-material-design_4.0.0/css/bootstrap-material-design.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="libs/bootstrap-material-design_4.0.0/css/bootstrap-material-design.min.css">
     <!-- Font Awesome icons -->
-    <link href="libs/fontawesome-5.2.0/css/solid.min.css" rel="stylesheet">
-    <link href="libs/fontawesome-5.2.0/css/fontawesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="libs/fontawesome-5.2.0/css/solid.min.css">
+    <link rel="stylesheet" type="text/css" href="libs/fontawesome-5.2.0/css/fontawesome.min.css">
     <!-- Custom styles -->
-    <link href="css/custom.css" rel="stylesheet">
-    <link href="css/pickup.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/custom.css">
+    <link rel="stylesheet" type="text/css" href="css/pickup.css">
 </head>
 
-<body class="app-login auth">
+<body class="app-login pickup">
 
 <section class="login-block">
     <div class="container">
         <div class="row">
             <div class="col-sm-9 col-md-4 col-lg-4 mx-auto login-sec">
                 <div class="app-icon d-block mx-auto">
-                    <i class="fas fa-taxi fa-4x"></i>
+                    <img src="img/pickup-book-icon.png" class="login-img">
                 </div>
                 <div class="app-name text-center">PICKUP</div>
                 <form class="app-login-form" role="form" action="samlsso" method="post" id="login-form" autocomplete="off">
                     <input type="submit"  class="btn btn-primary btn-login pickup-btn" value="LOGIN"><br/>
-                    <button type="button" class="btn btn-primary btn-login pickup-btn" onclick="registration()">Register Now</button>
                 </form>
             </div>
         </div>
     </div>
     <div class="text-muted text-center login-footer">
         <span>Sample Application. </span>
-        <span>Copyright &copy; <a href="http://wso2.com/" target="_blank">
+        <span>Copyright &copy;  <a href="http://wso2.com/" target="_blank">
             <img src="img/wso2-dark.svg" class="wso2-logo" alt="wso2-logo"></a> &nbsp;<span class="year"></span>
         </span>
     </div>
@@ -72,7 +71,8 @@
 <script src="libs/popper_1.12.9/popper.min.js"></script>
 <!-- Bootstrap Material Design JavaScript -->
 <script src="libs/bootstrap-material-design_4.0.0/js/bootstrap-material-design.min.js"></script>
-<!-- Custom Js -->
+
+</body>
 <script>
     function registration() {
         location.href = "";

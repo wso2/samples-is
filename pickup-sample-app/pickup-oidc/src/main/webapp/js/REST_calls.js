@@ -17,6 +17,9 @@
 
 var driverRequest;
 
+$.getJSON( "./mocks/shareRequestData.json", function( data ) {
+    driverRequest = $.parseJSON(JSON.stringify(data, null, 4));
+});
 
 function shareRide(){
 

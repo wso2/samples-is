@@ -85,7 +85,7 @@
     </dependencies>
 
     <build>
-        <finalName>pickup</finalName>
+        <finalName>pickup-saml</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
