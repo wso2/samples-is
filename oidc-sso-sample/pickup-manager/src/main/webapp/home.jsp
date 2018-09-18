@@ -25,11 +25,13 @@
 <%@ page import="org.wso2.sample.identity.oauth2.ClientAppException" %>
 <%@ page import="org.apache.commons.lang.StringUtils" %>
 <%@ page import="java.util.*" %>
-<%@ page import="org.wso2.carbon.ui.CarbonUIMessage" %>
+<%@ page import="java.util.logging.Level" %>
+<%@ page import="java.util.logging.Logger" %>
+
 
 <%
-
-    if (request.getParameterMap().isEmpty()) {
+    Logger logger = Logger.getLogger(getClass().getName());
+    if (request.getParameterMap().isEmpty() || (request.getParameterMap().containsKey("sp") && request.getParameterMap().containsKey("tenantDomain"))) {
         CommonUtils.logout(request, response);
         session.invalidate();
         response.sendRedirect("index.jsp");
@@ -76,8 +78,7 @@
             claimsSet= SignedJWT.parse(idToken).getJWTClaimsSet();
             session.setAttribute(OAuth2Constants.NAME, name);
         } catch (Exception e) {
-            CarbonUIMessage.sendCarbonUIMessage("Error in retrieving values from JWT", CarbonUIMessage.ERROR,
-                    request, e);
+            logger.log(Level.SEVERE, "Error when getting id_token details.", e);
         }
     }
 
