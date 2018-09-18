@@ -56,12 +56,12 @@ REM echo %TOMCAT_DOMAIN_NEW%
 FOR /F "eol=; tokens=6,2 delims==" %%i IN ('findstr "tomcat.host.port" server.properties') DO SET TOMCAT_PORT=%%i
 REM echo %TOMCAT_PORT%
 
-IF "%IS_DOMAIN_NEW%"=="localhost" (
+IF "%IS_DOMAIN_NEW%"=="localhost.com" (
  set IS_DOMAIN=127.0.0.1
  )
 REM echo %IS_DOMAIN%
 
-IF "%TOMCAT_DOMAIN_NEW%"=="localhost" (
+IF "%TOMCAT_DOMAIN_NEW%"=="localhost.com" (
  set TOMCAT_DOMAIN=127.0.0.1
 )
 REM echo %TOMCAT_DOMAIN%
@@ -753,7 +753,7 @@ set is_domain=%~3
 set is_port=%~4
 
 IF "%is_domain%"=="127.0.0.1" (
- set is_host=localhost
+ set is_host=localhost.com
 )
 echo(
 echo "Please enter your API key"
@@ -790,7 +790,7 @@ set request_data=%~2\sso-config-%~1.xml
 set file=sso-config-%~1.xml
 
 IF "%tomcat_domain%" == "127.0.0.1" (
-  SET tomcat_host=localhost
+  SET tomcat_host=localhost.com
 )
 
 IF NOT EXIST "%QSG%\%~2" (
@@ -927,7 +927,7 @@ set request_data=%~2\sso-config-%~1.xml
 set file=sso-config-%~1.xml
 
 IF "%tomcat_domain%" == "127.0.0.1" (
-  SET tomcat_host=localhost
+  SET tomcat_host=localhost.com
 )
 
 IF NOT EXIST "%QSG%\%~2" (
