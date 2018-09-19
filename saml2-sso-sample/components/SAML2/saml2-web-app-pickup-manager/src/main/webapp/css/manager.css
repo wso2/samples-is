@@ -23,7 +23,7 @@
     letter-spacing: 0.1rem;
 }
 
-a.btn-login:hover, a.btn-login:active, a.btn-login:focus {
+.btn-login:hover, .btn-login:active, .btn-login:focus {
     color: #fff !important;
     background: #02c5b3 !important;
 }
