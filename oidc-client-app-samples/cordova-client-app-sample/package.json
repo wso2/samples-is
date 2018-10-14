@@ -1,0 +1,34 @@
+{
+    "name": "org.wso2.cordova.oidc.sample",
+    "displayName": "cordova-client-app-sample",
+    "version": "1.0.0",
+    "description": "A sample Apache Cordova application that demonstrate oidc login flow.",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "WSO2 IAM Team",
+    "license": "Apache-2.0",
+    "dependencies": {
+        "cordova-plugin-customurlscheme": "^4.3.0",
+        "cordova-plugin-inappbrowser": "^3.0.0",
+        "cordova-plugin-safariviewcontroller": "^1.5.4",
+        "cordova-plugin-whitelist": "^1.3.3",
+        "cordova-plugin-x-toast": "^2.7.0"
+    },
+    "cordova": {
+        "plugins": {
+            "cordova-plugin-whitelist": {},
+            "cordova-plugin-x-toast": {},
+            "cordova-plugin-inappbrowser": {},
+            "cordova-plugin-safariviewcontroller": {},
+            "cordova-plugin-customurlscheme": {
+                "URL_SCHEME": "com.wso2.cordova.oidc.sample",
+                "ANDROID_SCHEME": " ",
+                "ANDROID_HOST": " ",
+                "ANDROID_PATHPREFIX": "/"
+            }
+        },
+        "platforms": []
+    }
+}
