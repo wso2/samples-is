@@ -32,4 +32,7 @@
         <variable name="ANDROID_HOST" value=" " />
         <variable name="ANDROID_PATHPREFIX" value="/" />
     </plugin>
+    <plugin name="cordova-plugin-browsertab" spec="^0.2.0">
+        <variable name="CUSTOM_TAB_COLOR_RGB" value="#fc511f" />
+    </plugin>
 </widget>
