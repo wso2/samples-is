@@ -22,7 +22,7 @@ samples-is repository contains the sample applications that are integrated with 
 
 ### Download the binary
 
-You can download the samples-is distribution at [link]().
+You can download the samples-is distribution at [link](https://github.com/wso2/samples-is/releases/latest).
 
 ### Install from source
 
