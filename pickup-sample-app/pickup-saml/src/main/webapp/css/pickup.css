@@ -1,0 +1,174 @@
+/*
+~   Copyright (c) 2018 WSO2 Inc. (http://wso2.com) All Rights Reserved.
+~
+~   Licensed under the Apache License, Version 2.0 (the "License");
+~   you may not use this file except in compliance with the License.
+~   You may obtain a copy of the License at
+~
+~        http://www.apache.org/licenses/LICENSE-2.0
+~
+~   Unless required by applicable law or agreed to in writing, software
+~   distributed under the License is distributed on an "AS IS" BASIS,
+~   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+~   See the License for the specific language governing permissions and
+~   limitations under the License.
+*/
+
+/* Login page */
+
+.btn.btn-primary {
+    background-color: #fc511f;
+    color: #fff;
+}
+
+.btn.btn-primary, .btn.btn-primary:active:hover, .btn.btn-primary:hover,
+.btn.btn-primary:not(:disabled):not(.disabled):active, .btn.btn-primary:focus {
+    background-color: #fc511f;
+    color: #fff;
+}
+
+.btn.btn-outline-primary, .btn.btn-outline-primary:active:hover, .btn.btn-outline-primary:hover,
+.btn-outline-primary:not(:disabled):not(.disabled):active, .btn.btn-outline-primary:focus {
+    color: #fc511f;
+    border: 1px solid #fc511f;
+}
+
+.btn-outline-primary:not(:disabled):not(.disabled):active:focus{
+    box-shadow: none
+}
+
+.pickup-btn {
+    width: 100%;
+    letter-spacing: 0.1rem;
+}
+
+.app-icon {
+    border: 0.25rem solid #d4dce4;
+}
+
+.app-icon > i {
+    color: #ff7851;
+}
+
+.app-name {
+    color: #ff7851;
+}
+
+.pickup .login-img {
+    height: 5rem;
+    padding-left: 0;
+}
+
+/* Home page */
+
+.app-navbar {
+    background: #fc511f;
+}
+
+#tabs .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #fc511f;
+    background-color: transparent;
+    border-color: transparent #fc511f;
+    border-bottom: 0.25rem solid !important;
+    font-size: 1.25rem;
+}
+
+#tabs .nav-tabs .nav-link {
+    border: 0.0625rem solid transparent;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+    color: #fc511f;
+    font-size: 1rem;
+}
+
+.orange-text {
+    color: #fc511f;
+}
+
+.taxi-book {
+    width: 100%;
+}
+
+.welcome-msg {
+    letter-spacing: 0.1rem;
+}
+
+.driver-name {
+    font-size: 1.125rem;
+}
+
+.driver-vehicle {
+    font-size:  0.875rem;
+}
+
+.driver {
+    height: 5rem;
+}
+
+.btn-outline-primary.focus, .btn-outline-primary:focus {
+    box-shadow: none;
+}
+
+.pickup .hljs-string, pickup .hljs-symbol, pickup .hljs-bullet {
+    color: #fc511f;
+}
+
+.pickup-heading {
+    color: #666;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.past-rides-table {
+    color: #555;
+    font-size: 0.875rem;
+}
+
+.pickup-route {
+    color: #fc511f;
+    font-size: 0.75rem
+}
+
+.action-response.success i {
+    color: #27ae60;
+}
+
+.action-response.error i {
+    color: #e74c3c;
+}
+
+.action-text {
+    font-size: 0.9rem;
+    color: #444;
+}
+
+.event2-sent .request-response-title, .event2-sending .request-response-title, .event2-received .request-response-title {
+    color: #666;
+}
+
+.event2-sent .request-response-infos, .event2-sending .request-response-infos, .event2-received .request-response-infos {
+    padding-left: 1.5rem;
+}
+
+/* Profile page */
+
+.btn-details {
+    color: #fc511f;
+    background-color: transparent;
+    border-color: #ccc;
+}
+
+.pickup .main-content .jumbotron {
+    background: #fff;
+    padding-bottom: 0;
+}
+
+.table-container {
+    border: 0.0625rem solid #eee;
+    box-shadow: none;
+}
+
+.loading-icon {
+    display: none;
+    color: #666;
+}
