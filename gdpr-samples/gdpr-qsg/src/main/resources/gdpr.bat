@@ -188,15 +188,12 @@ CALL :add_user admin admin %is_host% %is_port%
 CALL :configure_selfsignup "urn:updateResidentIdP" "https://%is_host%:%is_port%/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4=" %is_host% %is_port%
 
 CALL :add_service_provider "pickup" "urn:createApplication" "https://%is_host%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" "Y2FtZXJvbjpjYW1lcm9uMTIz" %is_host% %is_port% %tomcat_host% %tomcat_port%
-CALL :add_service_provider "pick-my-book" "urn:createApplication" "https://%is_host%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" "Y2FtZXJvbjpjYW1lcm9uMTIz" %is_host% %is_port% %tomcat_host% %tomcat_port%
 CALL :add_service_provider "notification-center" "urn:createApplication" "https://%is_host%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" "Y2FtZXJvbjpjYW1lcm9uMTIz" %is_host% %is_port% %tomcat_host% %tomcat_port%
 
 CALL :configure_oidc "pickup" "urn:registerOAuthApplicationData" "https://%is_host%:%is_port%/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/" "Y2FtZXJvbjpjYW1lcm9uMTIz"
-CALL :configure_oidc "pick-my-book" "urn:registerOAuthApplicationData" "https://%is_host%:%is_port%/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/" "Y2FtZXJvbjpjYW1lcm9uMTIz"
 CALL :configure_oidc "notification-center" "urn:registerOAuthApplicationData" "https://%is_host%:%is_port%/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/" "Y2FtZXJvbjpjYW1lcm9uMTIz"
 
 CALL :update_application_oidc "pickup" "Y2FtZXJvbjpjYW1lcm9uMTIz" "ZGlzcGF0Y2g=" "ZGlzcGF0Y2gxMjM0" "urn:updateApplication" "https://%is_host%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/"
-CALL :update_application_oidc "pick-my-book" "Y2FtZXJvbjpjYW1lcm9uMTIz" "c3dpZnRhcHA=" "c3dpZnRhcHAxMjM=" "urn:updateApplication" "https://%is_host%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/"
 CALL :update_application_oidc "notification-center" "Y2FtZXJvbjpjYW1lcm9uMTIz" "bm90aWZpY2F0aW9u" "bm90aWZpY2F0aW9uMTIz" "urn:updateApplication" "https://%is_host%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/"
 
 EXIT /B
@@ -559,7 +556,6 @@ set result=false
      IF "%clean%"=="Y" set result=true
      IF "%result%" == "true" (
         CALL :delete_sp "pickup" "urn:deleteApplication" "https://%is_host%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" "Y2FtZXJvbjpjYW1lcm9uMTIz"
-        CALL :delete_sp "pick-my-book" "urn:deleteApplication" "https://%is_host%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" "Y2FtZXJvbjpjYW1lcm9uMTIz"
         CALL :delete_sp "notification-center" "urn:deleteApplication" "https://%is_host%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" "Y2FtZXJvbjpjYW1lcm9uMTIz"
         CALL :delete_user %is_host% %is_port%
         CALL :delete_users %is_host% %is_port%

@@ -52,13 +52,7 @@
     <files>
         <file>
             <source>
-                ${project.basedir}/../gdpr-samples/pickup/target/pickup.war
-            </source>
-            <outputDirectory>GDPR-QSG/sample-apps</outputDirectory>
-        </file>
-        <file>
-            <source>
-                ${project.basedir}/../gdpr-samples/pick-my-book/target/pick-my-book.war
+                ${project.basedir}/../pickup-sample-app/pickup-oidc/target/pickup.war
             </source>
             <outputDirectory>GDPR-QSG/sample-apps</outputDirectory>
         </file>
