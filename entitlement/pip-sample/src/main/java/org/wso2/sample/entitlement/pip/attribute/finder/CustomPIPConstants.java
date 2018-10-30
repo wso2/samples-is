@@ -19,8 +19,8 @@
 package org.wso2.sample.entitlement.pip.attribute.finder;
 
 public class CustomPIPConstants {
+
     public static final String SAMPLE_ATTRIBUTE_ID ="http://wso2.org/identity/sample/id";
     public static final String SAMPLE_ATTRIBUTE_NAME ="http://wso2.org/identity/sample/name";
     public static final String SAMPLE_CATEGORY ="http://wso2.org/identity/sample";
-
 }

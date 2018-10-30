@@ -28,7 +28,6 @@
     <packaging>bundle</packaging>
 
     <repositories>
-
         <repository>
             <id>wso2-nexus</id>
             <name>WSO2 internal Repository</name>
@@ -135,12 +134,11 @@
                             org.wso2.carbon.identity.entitlement;version="${carbon.identity.framework.import.version.range}",
                             org.wso2.carbon.identity.entitlement.pip;version="${carbon.identity.framework.import.version.range}",
                             org.wso2.carbon.identity.entitlement.common.dto;version="${carbon.identity.framework.import.version.range}",
-                            org.wso2.carbon.identity.entitlement.common.util;version="${carbon.identity.framework.import.version.range}",
-                            *;</Import-Package>
+                            org.wso2.carbon.identity.entitlement.common.util;version="${carbon.identity.framework.import.version.range}"
+                        </Import-Package>
                         <Export-Package>
-                            org.wso2.accenture.xacml.pip.*
+                            org.wso2.sample.entitlement.pip.attribute.finder.*
                         </Export-Package>
-                        <DynamicImports>*</DynamicImports>
                     </instructions>
                 </configuration>
             </plugin>

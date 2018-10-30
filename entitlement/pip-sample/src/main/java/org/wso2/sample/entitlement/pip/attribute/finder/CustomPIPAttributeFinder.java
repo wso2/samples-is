@@ -38,7 +38,6 @@ import java.util.Set;
 public class CustomPIPAttributeFinder extends AbstractPIPAttributeFinder {
 
     private static final String PIP_NAME = "CustomPIPAttributeFinder";
-
     private static final Set<String> SUPPORTED_ATTRIBUTES;
     private static final Log log = LogFactory.getLog(CustomPIPAttributeFinder.class);
 
@@ -72,7 +71,6 @@ public class CustomPIPAttributeFinder extends AbstractPIPAttributeFinder {
                 }
             }
         }
-
 
         if (sampleID != null) {
             String sampleName = retrieveSampleName(sampleID);
@@ -115,7 +113,6 @@ public class CustomPIPAttributeFinder extends AbstractPIPAttributeFinder {
     }
 
     public void init(Properties properties) throws Exception {
-
 
     }
 
