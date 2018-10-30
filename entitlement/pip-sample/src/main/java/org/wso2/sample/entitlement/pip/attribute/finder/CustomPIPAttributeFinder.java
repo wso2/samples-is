@@ -18,7 +18,6 @@
 
 package org.wso2.sample.entitlement.pip.attribute.finder;
 
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -77,11 +76,8 @@ public class CustomPIPAttributeFinder extends AbstractPIPAttributeFinder {
             if (StringUtils.isNotEmpty(sampleName)) {
                 Set<String> values = new HashSet<String>();
 
-                switch (attributeId.toString()) {
-                    case CustomPIPConstants.SAMPLE_ATTRIBUTE_NAME:
-                        values.add(sampleName);
-                        break;
-                    default:
+                if (CustomPIPConstants.SAMPLE_ATTRIBUTE_NAME.equals(attributeId.toString())) {
+                    values.add(sampleName);
                 }
                 if (log.isDebugEnabled()) {
                     String valuesString = StringUtils.join(values, ",");
