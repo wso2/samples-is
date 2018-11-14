@@ -38,7 +38,7 @@
         <dependency>
             <groupId>org.wso2.samples.is</groupId>
             <artifactId>oidc-jks-loader</artifactId>
-            <version>${version}</version>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 
@@ -49,11 +49,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>3.2.2</version>
                 <configuration>
                     <webResources>
                         <resource>
-                            <directory>${project.parent.parent.basedir}/CommonResources/</directory>
+                            <directory>${project.parent.parent.basedir}/common-resources/</directory>
                             <targetPath>WEB-INF/classes</targetPath>
                             <includes>
                                 <include>wso2carbon.jks</include>
