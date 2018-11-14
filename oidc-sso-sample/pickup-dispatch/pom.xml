@@ -35,11 +35,33 @@
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.wso2.samples.is</groupId>
+            <artifactId>oidc-jks-loader</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
         <sourceDirectory>src/main</sourceDirectory>
         <finalName>pickup-dispatch</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <webResources>
+                        <resource>
+                            <directory>${project.parent.parent.basedir}/common-resources/</directory>
+                            <targetPath>WEB-INF/classes</targetPath>
+                            <includes>
+                                <include>wso2carbon.jks</include>
+                            </includes>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 
 </project>

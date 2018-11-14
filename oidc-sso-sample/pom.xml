@@ -29,6 +29,7 @@
     <description>WSO2 Identity Server Quick Start Guide for OIDC SSO</description>
 
     <modules>
+        <module>oidc-jks-loader</module>
         <module>pickup-dispatch</module>
         <module>pickup-manager</module>
     </modules>
