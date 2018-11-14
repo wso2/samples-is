@@ -15,74 +15,48 @@
 ~ See the License for the specific language governing permissions and
 ~ limitations under the License.
 -->
-<%@ page import="org.apache.commons.lang.StringUtils" %>
-<%@ page import="org.wso2.sample.identity.oauth2.OAuth2Constants" %>
-<%@ page import="com.nimbusds.jwt.SignedJWT" %>
-<%@ page import="java.util.Properties" %>
-<%@ page import="org.wso2.sample.identity.oauth2.SampleContextEventListener" %>
-<%@ page import="com.nimbusds.jwt.ReadOnlyJWTClaimsSet" %>
-<%@ page import="org.json.JSONObject" %>
-<%@ page import="org.wso2.sample.identity.oauth2.CommonUtils" %>
-<%@ page import="org.wso2.sample.identity.oauth2.ClientAppException" %>
-<%@ page import="java.util.HashMap" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="java.util.logging.Logger" %>
-<%@ page import="java.util.logging.Level" %>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.logging.Level"%>
+<%@page import="com.nimbusds.jwt.SignedJWT"%>
+<%@page import="org.wso2.sample.identity.oauth2.OAuth2Constants"%>
+<%@page import="org.json.JSONObject"%>
+<%@page import="java.util.Properties"%>
+<%@page import="org.wso2.sample.identity.oauth2.SampleContextEventListener"%>
+<%@page import="com.nimbusds.jwt.ReadOnlyJWTClaimsSet"%>
+<%@page import="java.util.logging.Logger"%>
 
 <%
-    Logger logger = Logger.getLogger(getClass().getName());
-    if (request.getParameterMap().isEmpty() || (request.getParameterMap().containsKey("sp") && request.getParameterMap().containsKey("tenantDomain"))) {
-        CommonUtils.logout(request, response);
-        session.invalidate();
+    final Logger logger = Logger.getLogger(getClass().getName());
+    final HttpSession currentSession =  request.getSession(false);
+    
+    if (currentSession == null || currentSession.getAttribute("authenticated") == null) {
+        // A direct access to home. Must redirect to index
         response.sendRedirect("index.jsp");
         return;
     }
-
-    String error = request.getParameter(OAuth2Constants.ERROR);
-    if (StringUtils.isNotBlank(error)) {
-        // User has been logged out
-        CommonUtils.logout(request, response);
-        session.invalidate();
-        response.sendRedirect("index.jsp");
-        return;
-    }
-
-    HttpSession currentSession = request.getSession(false);
-    String idToken = "";
-    String name = "";
+    
+    final Properties properties = SampleContextEventListener.getProperties();
+    final String sessionState = request.getParameter(OAuth2Constants.SESSION_STATE);
+    
+    currentSession.setAttribute(OAuth2Constants.SESSION_STATE, sessionState);
+   
+    final JSONObject requestObject = (JSONObject) currentSession.getAttribute("requestObject");
+    final JSONObject responseObject = (JSONObject) currentSession.getAttribute("responseObject");
+    
+    final String idToken = (String) currentSession.getAttribute("idToken");
+    
     ReadOnlyJWTClaimsSet claimsSet = null;
-    Properties properties = SampleContextEventListener.getProperties();
-    String sessionState = null;
-    JSONObject requestObject = null;
-    JSONObject responseObject = null;
-
-    try {
-        sessionState = request.getParameter(OAuth2Constants.SESSION_STATE);
-        CommonUtils.getToken(request, response);
-        if (currentSession == null || currentSession.getAttribute("authenticated") == null) {
-            currentSession.invalidate();
-            response.sendRedirect("index.jsp");
-        } else {
-            currentSession.setAttribute(OAuth2Constants.SESSION_STATE, sessionState);
-            idToken = (String) currentSession.getAttribute("idToken");
-            requestObject = (JSONObject) currentSession.getAttribute("requestObject");
-            responseObject = (JSONObject) currentSession.getAttribute("responseObject");
-        }
-    } catch (ClientAppException e) {
-        response.sendRedirect("index.jsp");
-    }
-
+    String name = "";
+    
     if (idToken != null) {
         try {
             name = SignedJWT.parse(idToken).getJWTClaimsSet().getSubject();
             claimsSet = SignedJWT.parse(idToken).getJWTClaimsSet();
-            session.setAttribute(OAuth2Constants.NAME, name);
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error when getting id_token details.", e);
         }
     }
-
-
 %>
 <html lang="en">
 <head>
@@ -126,7 +100,7 @@
                     <a class="nav-link dropdown-toggle user-dropdown" href="#" id="navbarDropdownMenuLink"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-user-circle"></i>
-                        <span><%=(String) session.getAttribute(OAuth2Constants.NAME)%></span>
+                        <span><%=name%></span>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="#" id="profile">Profile</a>

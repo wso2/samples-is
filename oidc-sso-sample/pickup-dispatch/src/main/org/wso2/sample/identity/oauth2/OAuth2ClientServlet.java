@@ -18,28 +18,64 @@
 
 package org.wso2.sample.identity.oauth2;
 
-import java.io.IOException;
-import javax.servlet.RequestDispatcher;
+import org.apache.commons.lang.StringUtils;
+import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
+import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
+import org.wso2.sample.identity.oauth2.exceptions.SampleAppServerException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-/**
+/**x
  * This is the servlet which handles OAuth callbacks.
  */
 public class OAuth2ClientServlet extends HttpServlet {
+    private final Logger LOGGER = Logger.getLogger(OAuth2ClientServlet.class.getName());
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException,
-			IOException {
-		RequestDispatcher dispatcher = req.getRequestDispatcher("home.jsp");
-		dispatcher.forward(req, resp);
-	}
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        responseHandler(req, resp);
+    }
 
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		doGet(req, resp);
-	}
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        responseHandler(req, resp);
+    }
+
+    private void responseHandler(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+        // Create the initial session
+        if (request.getSession(false) == null) {
+            request.getSession(true);
+        }
+
+        // Validate callback properties
+        if (request.getParameterMap().isEmpty() || (request.getParameterMap().containsKey("sp") && request.getParameterMap().containsKey("tenantDomain"))) {
+            CommonUtils.logout(request, response);
+            response.sendRedirect("index.jsp");
+            return;
+        }
+
+        final String error = request.getParameter(OAuth2Constants.ERROR);
+
+        if (StringUtils.isNotBlank(error)) {
+            // Error response from IDP
+            CommonUtils.logout(request, response);
+            response.sendRedirect("index.jsp");
+            return;
+        }
+
+        try {
+            // Obtain token response
+            CommonUtils.getToken(request, response);
+            response.sendRedirect("home.jsp");
+        } catch (SampleAppServerException | OAuthSystemException | OAuthProblemException e) {
+            LOGGER.log(Level.SEVERE, "Something went wrong", e);
+            response.sendRedirect("index.jsp");
+        }
+    }
 }

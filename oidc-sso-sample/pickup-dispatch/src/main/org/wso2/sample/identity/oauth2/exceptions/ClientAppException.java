@@ -1,4 +1,4 @@
-package org.wso2.sample.identity.oauth2;
+package org.wso2.sample.identity.oauth2.exceptions;
 
 public class ClientAppException extends Exception {
 
