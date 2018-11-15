@@ -17,6 +17,9 @@
  */
 package org.wso2.sample.identity.oauth2.exceptions;
 
+/**x
+ * Exception that is used to handle server-side anomalies
+ */
 public class SampleAppServerException extends Exception {
 
     public SampleAppServerException(final String message) {
