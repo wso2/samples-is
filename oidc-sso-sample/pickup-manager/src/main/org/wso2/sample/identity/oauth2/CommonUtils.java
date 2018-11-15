@@ -1,3 +1,20 @@
+/*
+ * Copyright (c) 2018, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ *
+ * WSO2 Inc. licenses this file to you under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
 package org.wso2.sample.identity.oauth2;
 
 import org.apache.oltu.oauth2.client.OAuthClient;
@@ -8,6 +25,8 @@ import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.apache.oltu.oauth2.common.message.types.GrantType;
 import org.json.JSONObject;
+import org.wso2.sample.identity.oauth2.exceptions.ClientAppException;
+import org.wso2.sample.identity.oauth2.exceptions.SampleAppServerException;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.http.Cookie;
@@ -18,17 +37,15 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Properties;
 import java.util.UUID;
-import java.util.logging.Logger;
 
-public  class CommonUtils {
-    private static Logger LOGGER = Logger.getLogger("org.wso2.sample.identity.oauth2.CommonUtils");
-    private static Map<String, TokenData> tokenStore = new HashMap<>();
+public class CommonUtils {
+    private static final Map<String, TokenData> tokenStore = new HashMap<>();
 
 
-    public static JSONObject requestToJson(OAuthClientRequest accessRequest) {
-
+    public static JSONObject requestToJson(final OAuthClientRequest accessRequest) {
         JSONObject obj = new JSONObject();
         obj.append("tokenEndPoint", accessRequest.getLocationUri());
         obj.append("request body", accessRequest.getBody());
@@ -36,7 +53,7 @@ public  class CommonUtils {
         return obj;
     }
 
-    public static JSONObject responseToJson(OAuthClientResponse oAuthResponse) {
+    public static JSONObject responseToJson(final OAuthClientResponse oAuthResponse) {
 
         JSONObject obj = new JSONObject();
         obj.append("status-code", "200");
@@ -46,56 +63,64 @@ public  class CommonUtils {
 
     }
 
-    public static boolean logout(HttpServletRequest request, HttpServletResponse response) {
+    public static boolean logout(final HttpServletRequest request, final HttpServletResponse response) {
+        // Invalidate session
+        final HttpSession session = request.getSession(false);
+        if(session != null){
+            session.invalidate();
+        }
 
-        Cookie appIdCookie = getAppIdCookie(request);
+        final Optional<Cookie> appIdCookie = getAppIdCookie(request);
 
-        if (appIdCookie != null) {
-            tokenStore.remove(appIdCookie.getValue());
-            appIdCookie.setMaxAge(0);
-            response.addCookie(appIdCookie);
+        if (appIdCookie.isPresent()) {
+            tokenStore.remove(appIdCookie.get().getValue());
+            appIdCookie.get().setMaxAge(0);
+            response.addCookie(appIdCookie.get());
             return true;
         }
         return false;
     }
 
-    public static void getToken(HttpServletRequest request, HttpServletResponse response) throws ClientAppException,
-            OAuthProblemException, OAuthSystemException {
+    public static void getToken(final HttpServletRequest request, final HttpServletResponse response)
+            throws OAuthProblemException, OAuthSystemException, SampleAppServerException {
+        final Optional<Cookie> appIdCookie = getAppIdCookie(request);
+        final HttpSession session = request.getSession(false);
+        final Properties properties = SampleContextEventListener.getProperties();
 
-        Cookie appIdCookie = getAppIdCookie(request);
-        HttpSession session = request.getSession(false);
-        TokenData storedTokenData;;
-        String accessToken;
-        Properties properties = SampleContextEventListener.getProperties();
-        if (appIdCookie != null) {
-            storedTokenData = tokenStore.get(appIdCookie.getValue());
+        final TokenData storedTokenData;
+
+        if (appIdCookie.isPresent()) {
+            storedTokenData = tokenStore.get(appIdCookie.get().getValue());
             if (storedTokenData != null) {
                 setTokenDataToSession(session, storedTokenData);
                 return;
             }
         }
 
-        String authzCode = request.getParameter("code");
+        final String authzCode = request.getParameter("code");
+
         if (authzCode == null) {
-            return;
+            throw new SampleAppServerException("Authorization code not present in callback");
         }
-        OAuthClientRequest.TokenRequestBuilder oAuthTokenRequestBuilder =
+
+        final OAuthClientRequest.TokenRequestBuilder oAuthTokenRequestBuilder =
                 new OAuthClientRequest.TokenRequestBuilder(properties.getProperty("tokenEndpoint"));
 
 
-        OAuthClientRequest accessRequest = oAuthTokenRequestBuilder.setGrantType(GrantType.AUTHORIZATION_CODE)
-                    .setClientId(properties.getProperty("consumerKey"))
-                    .setClientSecret(properties.getProperty("consumerSecret"))
-                    .setRedirectURI(properties.getProperty("callBackUrl"))
-                    .setCode(authzCode)
-                    .buildBodyMessage();
+        final OAuthClientRequest accessRequest = oAuthTokenRequestBuilder.setGrantType(GrantType.AUTHORIZATION_CODE)
+                .setClientId(properties.getProperty("consumerKey"))
+                .setClientSecret(properties.getProperty("consumerSecret"))
+                .setRedirectURI(properties.getProperty("callBackUrl"))
+                .setCode(authzCode)
+                .buildBodyMessage();
 
         //create OAuth client that uses custom http client under the hood
-        OAuthClient oAuthClient = new OAuthClient(new URLConnectionClient());
-        JSONObject requestObject = requestToJson(accessRequest);
-        OAuthClientResponse oAuthResponse = oAuthClient.accessToken(accessRequest);
-        JSONObject responseObject = responseToJson(oAuthResponse);
-        accessToken = oAuthResponse.getParam("access_token");
+        final OAuthClient oAuthClient = new OAuthClient(new URLConnectionClient());
+        final JSONObject requestObject = requestToJson(accessRequest);
+        final OAuthClientResponse oAuthResponse = oAuthClient.accessToken(accessRequest);
+        final JSONObject responseObject = responseToJson(oAuthResponse);
+        final String accessToken = oAuthResponse.getParam("access_token");
+
         session.setAttribute("requestObject", requestObject);
         session.setAttribute("responseObject", responseObject);
         if (accessToken != null) {
@@ -109,9 +134,9 @@ public  class CommonUtils {
             tokenData.setAccessToken(accessToken);
             tokenData.setIdToken(idToken);
 
-            String sessionId = UUID.randomUUID().toString();
+            final String sessionId = UUID.randomUUID().toString();
             tokenStore.put(sessionId, tokenData);
-            Cookie cookie = new Cookie("AppID", sessionId);
+            final Cookie cookie = new Cookie("AppID", sessionId);
             cookie.setMaxAge(-1);
             cookie.setPath("/");
             response.addCookie(cookie);
@@ -120,36 +145,31 @@ public  class CommonUtils {
         }
     }
 
-    private static Cookie getAppIdCookie(HttpServletRequest request) {
+    private static Optional<Cookie> getAppIdCookie(final HttpServletRequest request) {
+        final Cookie[] cookies = request.getCookies();
 
-        Cookie[] cookies = request.getCookies();
-        Cookie appIdCookie = null;
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if ("AppID".equals(cookie.getName())) {
-                    appIdCookie = cookie;
-                    break;
+                    return Optional.of(cookie);
                 }
             }
         }
-        return appIdCookie;
+        return Optional.empty();
     }
-    private static void setTokenDataToSession(HttpSession session, TokenData storedTokenData) {
 
+    private static void setTokenDataToSession(final HttpSession session, final TokenData storedTokenData) {
         session.setAttribute("authenticated", true);
         session.setAttribute("accessToken", storedTokenData.getAccessToken());
         session.setAttribute("idToken", storedTokenData.getIdToken());
-        return;
     }
 
-    private static HttpsURLConnection getHttpsURLConnection(String url) throws ClientAppException {
-
+    private static HttpsURLConnection getHttpsURLConnection(final String url) throws ClientAppException {
         try {
-            URL requestUrl = new URL(url);
+            final URL requestUrl = new URL(url);
             return (HttpsURLConnection) requestUrl.openConnection();
         } catch (IOException e) {
             throw new ClientAppException("Error while creating connection to: " + url, e);
         }
     }
-
 }

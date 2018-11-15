@@ -34,8 +34,8 @@ import java.util.logging.Logger;
 /**x
  * This is the servlet which handles OAuth callbacks.
  */
-public class OAuth2ClientServlet extends HttpServlet {
-    private final Logger LOGGER = Logger.getLogger(OAuth2ClientServlet.class.getName());
+public class DispatchClientServlet extends HttpServlet {
+    private final Logger LOGGER = Logger.getLogger(DispatchClientServlet.class.getName());
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
