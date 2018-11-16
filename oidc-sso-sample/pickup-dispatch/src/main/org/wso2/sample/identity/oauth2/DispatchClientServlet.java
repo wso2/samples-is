@@ -30,7 +30,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**x
+/**
  * This is the servlet which handles OAuth callbacks.
  */
 public class DispatchClientServlet extends HttpServlet {
