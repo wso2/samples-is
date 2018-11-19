@@ -14,7 +14,7 @@
     </servlet>
     <servlet>
         <servlet-name>BackendServiceServlet</servlet-name>
-        <servlet-class>org.wso2.sample.identity.oauth2.services.TokenServiceServlet</servlet-class>
+        <servlet-class>org.wso2.sample.identity.oauth2.services.MetadataServlet</servlet-class>
         <load-on-startup>0</load-on-startup>
     </servlet>
 

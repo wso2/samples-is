@@ -20,6 +20,7 @@ package org.wso2.sample.identity.oauth2.services;
 
 import org.json.JSONObject;
 import org.wso2.sample.identity.oauth2.CommonUtils;
+import org.wso2.sample.identity.oauth2.SampleContextEventListener;
 import org.wso2.sample.identity.oauth2.TokenData;
 
 import javax.servlet.http.Cookie;
@@ -31,20 +32,19 @@ import java.io.PrintWriter;
 import java.util.Optional;
 
 /**
- * A servlet that helps to retrieve access token to front end
- * Will only be used when we want front end to interact with an external API protected by IS tokens
+ * A servlet that helps to retrieve access token and service endpoint metadata to front end
  */
-public class TokenServiceServlet extends HttpServlet {
+public class MetadataServlet extends HttpServlet {
 
     @Override
     protected void doGet(final HttpServletRequest req, final HttpServletResponse resp)
             throws IOException {
         final Optional<Cookie> appIdCookie = CommonUtils.getAppIdCookie(req);
 
-        if (!appIdCookie.isPresent()) {
-            sendNotFound(resp);
+        if (appIdCookie.isPresent()) {
+            metadataResponse(appIdCookie.get(), resp);
         } else {
-            sendAccessToken(appIdCookie.get(), resp);
+            sendNotFound(resp);
         }
     }
 
@@ -52,12 +52,13 @@ public class TokenServiceServlet extends HttpServlet {
         response.sendError(404);
     }
 
-    private static void sendAccessToken(final Cookie appIdCookie, final HttpServletResponse response) throws IOException {
+    private static void metadataResponse(final Cookie appIdCookie, final HttpServletResponse response) throws IOException {
         final Optional<TokenData> tokenData = CommonUtils.getTokenDataByCookieID(appIdCookie.getValue());
 
         if (tokenData.isPresent()) {
             final JSONObject jsonObject = new JSONObject();
-            jsonObject.put("value", tokenData.get().getAccessToken());
+            jsonObject.put("AccessToken", tokenData.get().getAccessToken());
+            jsonObject.put("ApiEndpoint", SampleContextEventListener.getPropertyByKey("api_endpoint"));
 
             final PrintWriter responseWriter = response.getWriter();
             responseWriter.write(jsonObject.toString());

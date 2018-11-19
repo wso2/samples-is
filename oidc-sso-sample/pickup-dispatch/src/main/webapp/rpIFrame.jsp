@@ -61,10 +61,10 @@
 <body onload="setTimer()">
 <iframe id="opIFrame"
         src="<%=
-            SampleContextEventListener.getProperties().getProperty(OAuth2Constants.OIDC_SESSION_IFRAME_ENDPOINT)
+            SampleContextEventListener.getPropertyByKey(OAuth2Constants.OIDC_SESSION_IFRAME_ENDPOINT)
             + "?"
-            + "client_id=" + SampleContextEventListener.getProperties().getProperty(OAuth2Constants.CONSUMER_KEY)
-            + "&redirect_uri="+ SampleContextEventListener.getProperties().getProperty(OAuth2Constants.CALL_BACK_URL)
+            + "client_id=" + SampleContextEventListener.getPropertyByKey(OAuth2Constants.CONSUMER_KEY)
+            + "&redirect_uri="+ SampleContextEventListener.getPropertyByKey(OAuth2Constants.CALL_BACK_URL)
             %>"
         frameborder="0" width="0"
         height="0"></iframe>

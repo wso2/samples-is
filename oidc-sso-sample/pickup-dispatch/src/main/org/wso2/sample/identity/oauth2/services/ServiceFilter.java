@@ -30,8 +30,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * A filter to protect service endpoints
- * Filtering is done on authenticated session
+ * A filter to protect backend service endpoints. Filtering is done on authenticated session
  */
 public class ServiceFilter implements Filter {
     @Override

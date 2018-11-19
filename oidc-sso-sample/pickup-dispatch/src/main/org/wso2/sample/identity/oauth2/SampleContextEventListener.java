@@ -34,9 +34,9 @@ public class SampleContextEventListener implements ServletContextListener {
 
         properties = new Properties();
         try {
-                properties.load(servletContextEvent.getServletContext().
-                        getResourceAsStream("/WEB-INF/classes/dispatch.properties"));
-        } catch (IOException e){
+            properties.load(servletContextEvent.getServletContext().
+                    getResourceAsStream("/WEB-INF/classes/dispatch.properties"));
+        } catch (IOException e) {
             LOGGER.log(Level.SEVERE, e.getMessage(), e);
         }
     }
@@ -47,9 +47,14 @@ public class SampleContextEventListener implements ServletContextListener {
 
     /**
      * Get the properties of the sample
+     *
      * @return Properties
      */
-    public static Properties getProperties(){
+    public static Properties getProperties() {
         return properties;
+    }
+
+    public static String getPropertyByKey(final String key) {
+        return properties.getProperty(key);
     }
 }
