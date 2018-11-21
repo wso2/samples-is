@@ -43,8 +43,7 @@ public class BookingService {
 
     // Simply store requests and response them for requests
     private static final JSONObject JSON_OBJECT = new JSONObject();
-
-    private int index = 0;
+    private static int index = 0;
 
     @OPTIONS
     public Response bookingsOptions() {
