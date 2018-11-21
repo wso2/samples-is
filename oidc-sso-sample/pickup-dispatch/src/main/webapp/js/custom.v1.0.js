@@ -351,6 +351,11 @@ function refreshTable(jsonPayload) {
     var newTBody = document.createElement('tbody');
     oldTBody.parentNode.replaceChild(newTBody, oldTBody);
 
+    // Check for empty json or invalid payload
+    if (!jsonPayload["bookings"]) {
+        return;
+    }
+
     // Iterate and append to body
     jsonPayload["bookings"].forEach(entry => {
         var row = newTBody.insertRow(newTBody.rows.length);
