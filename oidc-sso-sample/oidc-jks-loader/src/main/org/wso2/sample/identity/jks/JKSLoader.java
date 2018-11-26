@@ -29,7 +29,7 @@ import java.util.logging.Logger;
 /**
  * A listener to get invoked at application deployment.
  * This will allow us to set the carbon JKS for HTTPS communication.
- * */
+ */
 public class JKSLoader implements ServletContextListener {
 
     private static final Logger LOGGER = Logger.getLogger(JKSLoader.class.getName());

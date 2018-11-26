@@ -30,19 +30,22 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**x
+/**
  * This is the servlet which handles OAuth callbacks.
  */
 public class DispatchClientServlet extends HttpServlet {
+
     private final Logger LOGGER = Logger.getLogger(DispatchClientServlet.class.getName());
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         responseHandler(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         responseHandler(req, resp);
     }
 

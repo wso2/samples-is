@@ -34,15 +34,18 @@ import java.util.logging.Logger;
  * This is the servlet which handles OAuth callbacks.
  */
 public class ManagerClientServlet extends HttpServlet {
+
     private final Logger LOGGER = Logger.getLogger(ManagerClientServlet.class.getName());
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         responseHandler(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         responseHandler(req, resp);
     }
 
