@@ -39,6 +39,7 @@ public class MetadataServlet extends HttpServlet {
     @Override
     protected void doGet(final HttpServletRequest req, final HttpServletResponse resp)
             throws IOException {
+
         final Optional<Cookie> appIdCookie = CommonUtils.getAppIdCookie(req);
 
         if (appIdCookie.isPresent()) {
@@ -49,10 +50,12 @@ public class MetadataServlet extends HttpServlet {
     }
 
     private static void sendNotFound(final HttpServletResponse response) throws IOException {
+
         response.sendError(404);
     }
 
     private static void metadataResponse(final Cookie appIdCookie, final HttpServletResponse response) throws IOException {
+
         final Optional<TokenData> tokenData = CommonUtils.getTokenDataByCookieID(appIdCookie.getValue());
 
         if (tokenData.isPresent()) {

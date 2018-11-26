@@ -33,13 +33,16 @@ import java.io.IOException;
  * A filter to protect backend service endpoints. Filtering is done on authenticated session
  */
 public class ServiceFilter implements Filter {
+
     @Override
     public void init(FilterConfig filterConfig) {
+
     }
 
     @Override
     public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain)
             throws IOException, ServletException {
+
         final HttpServletRequest req = (HttpServletRequest) request;
         final HttpServletResponse res = (HttpServletResponse) response;
 
@@ -52,9 +55,11 @@ public class ServiceFilter implements Filter {
 
     @Override
     public void destroy() {
+
     }
 
     private static boolean checkOAuth(final HttpServletRequest request) {
+
         final HttpSession currentSession = request.getSession(false);
 
         return currentSession != null

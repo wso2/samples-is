@@ -21,9 +21,11 @@ package org.wso2.sample.identity.backend;
  * Simple class to store constants for backend services
  */
 public class Constants {
+
     private static final String PORT_ARG = "-port";
 
     static String getPortArg() {
+
         return PORT_ARG;
     }
 }

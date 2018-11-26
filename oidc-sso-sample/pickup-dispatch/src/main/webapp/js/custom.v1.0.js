@@ -253,10 +253,9 @@ function toggleBackend() {
     // onClick triggered when checkbox click is finished. So check the current status and execute logic
     // Get current value of checkbox
     if (document.getElementById("backendToggleCheckBox").checked) {
-        swal("Backend calls enabled", "Please make sure service is running on " + localStorage.getItem("API_ENDPOINT"), "warning");
-        fetchBookings();
+        swal("Backend calls enabled.", "Please make sure service is running on " + localStorage.getItem("API_ENDPOINT"), "warning");
     } else {
-        swal("Backend calls disabled");
+        swal("Backend calls disabled.");
         setDummyData();
     }
 }
@@ -271,17 +270,17 @@ async function addData() {
 
     // Do a pre-check
     if (document.getElementById("drivers").selectedIndex == 0) {
-        swal("Incorrect input", "Driver must be selected", "warning");
+        swal("Incorrect input", "Driver must be selected.", "warning");
         return;
     }
 
     if (!document.getElementById("passengerName").value) {
-        swal("Incorrect input", "Please enter passenger name", "warning");
+        swal("Incorrect input", "Please enter passenger name.", "warning");
         return;
     }
 
     if (!document.getElementById("contactNumber").value) {
-        swal("Incorrect input", "Please enter contact number", "warning");
+        swal("Incorrect input", "Please enter contact number.", "warning");
         return;
     }
 

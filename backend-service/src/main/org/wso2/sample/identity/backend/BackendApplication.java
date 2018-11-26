@@ -29,6 +29,7 @@ import java.util.Properties;
  * Main entry point for our msf4j backend
  */
 public class BackendApplication {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(BookingService.class);
     private static final Properties PROPERTIES = new Properties();
 
@@ -47,6 +48,7 @@ public class BackendApplication {
     }
 
     public static void main(final String[] args) {
+
         final int runningPort;
 
         if (args.length == 0) {

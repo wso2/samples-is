@@ -1,0 +1,95 @@
+openapi: 3.0.0
+info:
+  title: Backend API definition
+  version: 1.0.0
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+
+security :
+  - bearerAuth: []
+  
+paths:
+  /bookings:
+    get:
+      summary: Get all bookings
+      tags: 
+        - Booking
+      responses:
+        '200':
+          description: A JSON body with stored booking details
+          content:
+            application/json:
+              schema:
+                type : object
+                properties:
+                  bookings:
+                    type: array
+                    description : Booking detail array
+                    items:
+                      type: object
+                      description : Booking items
+                      properties:
+                        ref-id:
+                          type: string
+                          description : Reference id of the entity
+                        driver:
+                          type: string
+                          description : Name of the dirver
+                        client:
+                          type: string
+                          description : Name of the client
+                        client-phone:
+                          type: string
+                          description : Client phone number
+    post:
+      summary: Insert a booking
+      tags: 
+        - Booking
+      requestBody:
+        description: Request body
+        required: true
+        content:
+          application/json:
+            schema:
+              type : object
+              properties:
+                driver:
+                  type: string
+                  description : Name of the dirver
+                client:
+                  type: string
+                  description : Name of the client
+                client-phone:
+                  type: string
+                  description : Client phone number
+      responses:
+        '200':
+          description: A JSON body with stored bookings
+          content:
+            application/json:
+              schema:
+                type : object
+                properties:
+                  status:
+                    type: string
+                    description : Status ok
+                  ref-id:
+                    type: string
+                    description : Reference id of the entity
+        '5XX':
+          description: A JSON body with error details
+          content :
+            application/json:
+              schema:
+                type : object
+                properties:
+                  status:
+                    type: string
+                    description : Status fail
+                  error-code:
+                    type: string
+                    description : Error code from server

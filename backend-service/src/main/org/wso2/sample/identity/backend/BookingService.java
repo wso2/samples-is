@@ -39,6 +39,7 @@ import java.io.IOException;
  */
 @Path("/bookings")
 public class BookingService {
+
     private final static Logger LOGGER = LoggerFactory.getLogger(BookingService.class);
 
     // Simply store requests and response them for requests
@@ -47,6 +48,7 @@ public class BookingService {
 
     @OPTIONS
     public Response bookingsOptions() {
+
         LOGGER.info("OPTIONS /bookings");
 
         return Response
@@ -60,6 +62,7 @@ public class BookingService {
 
     @GET
     public Response bookingsGet() {
+
         LOGGER.info("GET /bookings");
 
         return Response
@@ -72,6 +75,7 @@ public class BookingService {
 
     @POST
     public Response bookingsPost(@Context Request request) throws IOException {
+
         LOGGER.info("POST /bookings");
 
         final BufferedInputStream bufferedInputStream = new BufferedInputStream(request.getMessageContentStream());
