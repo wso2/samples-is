@@ -37,10 +37,10 @@ public class JKSLoader implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         // First find jks properties
-        final InputStream jksResource = this.getClass().getClassLoader().getResourceAsStream("jks.properties");
+        final InputStream jksInputStream = this.getClass().getClassLoader().getResourceAsStream("jks.properties");
 
-        if (jksResource == null) {
-            LOGGER.log(Level.SEVERE, "jks.properties is not defined. keystore will not be set");
+        if (jksInputStream == null) {
+            LOGGER.log(Level.SEVERE, "jks.properties not found. Trust store properties will not be set.");
             return;
         }
 
@@ -48,9 +48,9 @@ public class JKSLoader implements ServletContextListener {
         final Properties jksProperties = new Properties();
 
         try {
-            jksProperties.load(jksResource);
+            jksProperties.load(jksInputStream);
         } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, "Error while loading properties", e);
+            LOGGER.log(Level.SEVERE, "Error while loading properties.", e);
             return;
         }
 
@@ -59,10 +59,10 @@ public class JKSLoader implements ServletContextListener {
 
         if (resource != null) {
             LOGGER.log(Level.INFO, "Setting trust store path to : " + resource.getPath());
-            System.setProperty("javax.net.ssl.trustStore", resource.getPath());
-            System.setProperty("javax.net.ssl.trustStorePassword", jksProperties.getProperty("keystorepassword"));
+            System.setProperty("javax.net.ssl.trustStore.", resource.getPath());
+            System.setProperty("javax.net.ssl.trustStorePassword.", jksProperties.getProperty("keystorepassword"));
         } else {
-            LOGGER.log(Level.INFO, "Unable to find JKS");
+            LOGGER.log(Level.INFO, "Unable to find JKS defined by properties. Trust store properties will not be set.");
         }
     }
 
