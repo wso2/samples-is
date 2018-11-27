@@ -15,6 +15,16 @@
 ~   See the License for the specific language governing permissions and
 ~   limitations under the License.
 -->
+<%
+    final HttpSession currentSession =  request.getSession(false);
+    if (currentSession != null
+            && currentSession.getAttribute("authenticated") != null
+                &&  (boolean)currentSession.getAttribute("authenticated")) {
+        // Logged in session. Direct to Home
+        response.sendRedirect("home.jsp");
+        return;
+    }
+%>
 <html lang="en">
 <head>
     <meta charset="utf-8">

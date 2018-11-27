@@ -15,30 +15,18 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.wso2.sample.identity.oauth2;
+package org.wso2.sample.identity.oauth2.exceptions;
 
-public class TokenData {
+public class ClientAppException extends Exception {
 
-    private String accessToken;
-    private String idToken;
+    public ClientAppException(String message) {
 
-    public String getAccessToken() {
-
-        return accessToken;
+        super(message);
     }
 
-    public void setAccessToken(String accessToken) {
+    public ClientAppException(String message, Throwable cause) {
 
-        this.accessToken = accessToken;
+        super(message, cause);
     }
 
-    public String getIdToken() {
-
-        return idToken;
-    }
-
-    public void setIdToken(String idToken) {
-
-        this.idToken = idToken;
-    }
 }

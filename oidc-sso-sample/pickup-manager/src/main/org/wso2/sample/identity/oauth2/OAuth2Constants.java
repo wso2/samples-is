@@ -15,7 +15,6 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
 package org.wso2.sample.identity.oauth2;
 
 public final class OAuth2Constants {
@@ -28,7 +27,7 @@ public final class OAuth2Constants {
 
     // application specific request parameters and session attributes
     public static final String CONSUMER_KEY = "consumerKey";
-    public static final String CALL_BACK_URL = "callbackurl";
+    public static final String CALL_BACK_URL = "callBackUrl";
     public static final String OAUTH2_GRANT_TYPE = "grantType";
     public static final String OAUTH2_AUTHZ_ENDPOINT = "authorizeEndpoint";
     public static final String OIDC_LOGOUT_ENDPOINT = "logoutEndpoint";

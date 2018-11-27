@@ -1,3 +1,4 @@
+<%@ page import="org.wso2.sample.identity.oauth2.SampleContextEventListener"%>
 <%@ page import="org.wso2.sample.identity.oauth2.OAuth2Constants" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -59,7 +60,12 @@
 </head>
 <body onload="setTimer()">
 <iframe id="opIFrame"
-        src="<%=session.getAttribute(OAuth2Constants.OIDC_SESSION_IFRAME_ENDPOINT)%>"
+        src="<%=
+            SampleContextEventListener.getProperties().getProperty(OAuth2Constants.OIDC_SESSION_IFRAME_ENDPOINT)
+            + "?"
+            + "client_id=" + SampleContextEventListener.getProperties().getProperty(OAuth2Constants.CONSUMER_KEY)
+            + "&redirect_uri="+ SampleContextEventListener.getProperties().getProperty(OAuth2Constants.CALL_BACK_URL)
+            %>"
         frameborder="0" width="0"
         height="0"></iframe>
 </body>
