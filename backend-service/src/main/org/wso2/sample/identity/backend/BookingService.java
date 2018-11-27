@@ -88,7 +88,7 @@ public class BookingService {
                 byteArrayOutputStream.write(nextByte);
             }
         } catch (final IOException e) {
-            LOGGER.error("Error while reading request body", e);
+            LOGGER.error("Error while reading request body.", e);
             throw e;
         }
 
@@ -97,7 +97,7 @@ public class BookingService {
         try {
             requestJson = new JSONObject(byteArrayOutputStream.toString());
         } catch (final JSONException e) {
-            LOGGER.error("Error while converting body to json", e);
+            LOGGER.error("Error while converting body to json.", e);
             throw e;
         }
 

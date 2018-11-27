@@ -40,7 +40,7 @@ public class BackendApplication {
 
         try {
             PROPERTIES.load(resourceAsStream);
-            LOGGER.info("Service properties loaded successfully");
+            LOGGER.info("Service properties loaded successfully.");
         } catch (final IOException e) {
             LOGGER.error("Failed to load service properties.");
             throw new RuntimeException("Service start failed due to configuration loading failure", e);
@@ -52,22 +52,21 @@ public class BackendApplication {
         final int runningPort;
 
         if (args.length == 0) {
-            LOGGER.info("No port configuration override provided. Using default properties");
+            LOGGER.info("No port configuration override provided. Using default properties.");
             runningPort = Integer.valueOf(PROPERTIES.getProperty("port"));
         } else {
             if (Constants.getPortArg().equals(args[0]) && args.length > 1) {
                 runningPort = Integer.valueOf(args[1]);
                 LOGGER.info("Running port successfully changed to " + runningPort);
             } else {
-                LOGGER.info("Invalid port configuration override. Using default properties");
+                LOGGER.info("Invalid port configuration override. Using default properties.");
                 runningPort = Integer.valueOf(PROPERTIES.getProperty("port"));
             }
         }
 
         // Start the service
-        LOGGER.info("Starting backend service");
+        LOGGER.info("Starting backend service.");
 
         new MicroservicesRunner(runningPort).deploy(new BookingService()).start();
     }
-
 }
