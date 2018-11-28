@@ -42,10 +42,11 @@ import java.util.Properties;
 import java.util.UUID;
 
 public class CommonUtils {
+
     private static final Map<String, TokenData> TOKEN_STORE = new HashMap<>();
 
-
     public static JSONObject requestToJson(final OAuthClientRequest accessRequest) {
+
         JSONObject obj = new JSONObject();
         obj.append("tokenEndPoint", accessRequest.getLocationUri());
         obj.append("request body", accessRequest.getBody());
@@ -83,6 +84,7 @@ public class CommonUtils {
 
     public static void getToken(final HttpServletRequest request, final HttpServletResponse response)
             throws OAuthProblemException, OAuthSystemException, SampleAppServerException {
+
         final Optional<Cookie> appIdCookie = getAppIdCookie(request);
         final HttpSession session = request.getSession(false);
         final Properties properties = SampleContextEventListener.getProperties();
@@ -105,7 +107,6 @@ public class CommonUtils {
 
         final OAuthClientRequest.TokenRequestBuilder oAuthTokenRequestBuilder =
                 new OAuthClientRequest.TokenRequestBuilder(properties.getProperty("tokenEndpoint"));
-
 
         final OAuthClientRequest accessRequest = oAuthTokenRequestBuilder.setGrantType(GrantType.AUTHORIZATION_CODE)
                 .setClientId(properties.getProperty("consumerKey"))
@@ -146,6 +147,7 @@ public class CommonUtils {
     }
 
     public static Optional<Cookie> getAppIdCookie(final HttpServletRequest request) {
+
         final Cookie[] cookies = request.getCookies();
 
         if (cookies != null) {
@@ -159,6 +161,7 @@ public class CommonUtils {
     }
 
     public static Optional<TokenData> getTokenDataByCookieID(final String cookieID) {
+
         if (TOKEN_STORE.containsKey(cookieID)) {
             return Optional.of(TOKEN_STORE.get(cookieID));
         }
@@ -167,12 +170,14 @@ public class CommonUtils {
     }
 
     private static void setTokenDataToSession(final HttpSession session, final TokenData storedTokenData) {
+
         session.setAttribute("authenticated", true);
         session.setAttribute("accessToken", storedTokenData.getAccessToken());
         session.setAttribute("idToken", storedTokenData.getIdToken());
     }
 
     private static HttpsURLConnection getHttpsURLConnection(final String url) throws ClientAppException {
+
         try {
             final URL requestUrl = new URL(url);
             return (HttpsURLConnection) requestUrl.openConnection();
