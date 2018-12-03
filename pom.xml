@@ -85,7 +85,7 @@
 
             <dependency>
                 <groupId>org.wso2.msf4j</groupId>
-                <artifactId>msf4j-service</artifactId>
+                <artifactId>msf4j-all</artifactId>
                 <version>${ms4f.version}</version>
             </dependency>
 
@@ -432,7 +432,7 @@
         <!--repo versions of quick-start-guide-->
         <identity.agent.sso.version>5.1.22</identity.agent.sso.version>
         <sample.oidc-sso-sample.version>1.0</sample.oidc-sso-sample.version>
-        <ms4f.version>2.6.2</ms4f.version>
+        <ms4f.version>2.6.4</ms4f.version>
         <sample.qsg.version>1.0</sample.qsg.version>
         <maven.jar.plugin.version>3.0.2</maven.jar.plugin.version>
         <maven.assembly.plugin.version>3.1.0</maven.assembly.plugin.version>
