@@ -102,5 +102,14 @@
             <source>${project.basedir}/../oidc-sso-sample/pickup-manager/target/pickup-manager.war</source>
             <outputDirectory>IS-QSG/samples/QSG-bundle/QSG/bin</outputDirectory>
         </file>
+        <file>
+            <source>${project.basedir}/../backend-service/target/backend-service.jar</source>
+            <outputDirectory>IS-QSG/samples/QSG-bundle/QSG/bin</outputDirectory>
+        </file>
+        <file>
+            <source>${project.basedir}/../common-resources/jetty-runner-9.4.9.v20180320.jar</source>
+            <outputDirectory>IS-QSG/samples/QSG-bundle/QSG/bin</outputDirectory>
+            <destName>jetty-runner.jar</destName>
+        </file>
     </files>
 </assembly>

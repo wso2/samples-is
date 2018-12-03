@@ -19,8 +19,8 @@ configure_sso_saml2 () {
 
 is_host=$1
 is_port=$2
-tomcat_host=$3
-tomcat_port=$4
+server_host=$3
+server_port=$4
 
 # Add users in wso2-is.
 add_user admin admin Common ${is_host} ${is_port}
@@ -30,11 +30,11 @@ add_service_provider dispatch Common urn:createApplication https://${is_host}:${
 add_service_provider manager Common urn:createApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
 
 # Configure SAML for the service providers   
-configure_saml dispatch 02 urn:addRPServiceProvider https://${is_host}:${is_port}/services/IdentitySAMLSSOConfigService.IdentitySAMLSSOConfigServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
-configure_saml manager 02 urn:addRPServiceProvider https://${is_host}:${is_port}/services/IdentitySAMLSSOConfigService.IdentitySAMLSSOConfigServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
+configure_saml dispatch 02 urn:addRPServiceProvider https://${is_host}:${is_port}/services/IdentitySAMLSSOConfigService.IdentitySAMLSSOConfigServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port} ${server_host} ${server_port}
+configure_saml manager 02 urn:addRPServiceProvider https://${is_host}:${is_port}/services/IdentitySAMLSSOConfigService.IdentitySAMLSSOConfigServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port} ${server_host} ${server_port}
 
-create_updateapp_saml dispatch Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
-create_updateapp_saml manager Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
+create_updateapp_saml dispatch Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port} ${server_host} ${server_port}
+create_updateapp_saml manager Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port} ${server_host} ${server_port}
 	
 update_application_saml dispatch 02 urn:updateApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
 update_application_saml manager 02 urn:updateApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
@@ -46,8 +46,8 @@ configure_sso_oidc() {
 
 is_host=$1
 is_port=$2
-tomcat_host=$3
-tomcat_port=$4
+server_host=$3
+server_port=$4
 
 # Add users in the wso2-is.
 add_user admin admin Common ${is_host} ${is_port}
@@ -57,8 +57,8 @@ add_service_provider dispatch Common urn:createApplication https://${is_host}:${
 add_service_provider manager Common urn:createApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
 
 # Configure OIDC for the Service Providers
-configure_oidc dispatch 03 urn:registerOAuthApplicationData https://${is_host}:${is_port}/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
-configure_oidc manager 03 urn:registerOAuthApplicationData https://${is_host}:${is_port}/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
+configure_oidc dispatch 03 urn:registerOAuthApplicationData https://${is_host}:${is_port}/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port} ${server_host} ${server_port}
+configure_oidc manager 03 urn:registerOAuthApplicationData https://${is_host}:${is_port}/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port} ${server_host} ${server_port}
 
 create_updateapp_oidc dispatch Y2FtZXJvbjpjYW1lcm9uMTIz ZGlzcGF0Y2g= ZGlzcGF0Y2gxMjM0 ${is_host} ${is_port}
 create_updateapp_oidc manager Y2FtZXJvbjpjYW1lcm9uMTIz c3dpZnRhcHA= c3dpZnRhcHAxMjM= ${is_host} ${is_port}
@@ -73,8 +73,8 @@ configure_federated_auth() {
 
 is_host=$1
 is_port=$2
-tomcat_host=$3
-tomcat_port=$4
+server_host=$3
+server_port=$4
 
 echo
 echo "-------------------------------------------------------------------"
@@ -97,9 +97,9 @@ read user
 case ${user} in
     [Yy]* )
 
-    add_identity_provider admin admin 05 ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
+    add_identity_provider admin admin 05 ${is_host} ${is_port} ${server_host} ${server_port}
 
-    configure_sso_saml2 ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
+    configure_sso_saml2 ${is_host} ${is_port} ${server_host} ${server_port}
 
     create_updateapp_fed_auth dispatch Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
     create_updateapp_fed_auth manager Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
@@ -120,8 +120,8 @@ cd ${QSG}/QSG/bin
 
 is_host=$1
 is_port=$2
-tomcat_host=$3
-tomcat_port=$4
+server_host=$3
+server_port=$4
 
 echo
 echo "-----------------------------------------------------------------------"
@@ -200,7 +200,7 @@ esac
 add_service_provider dispatch Common urn:createApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4= ${is_host} ${is_port}
 
 # Configure OIDC for the Service Providers
-configure_oidc dispatch 03 urn:registerOAuthApplicationData https://${is_host}:${is_port}/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4= ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
+configure_oidc dispatch 03 urn:registerOAuthApplicationData https://${is_host}:${is_port}/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4= ${is_host} ${is_port} ${server_host} ${server_port}
 
 create_updateapp_oidc dispatch YWRtaW46YWRtaW4= ZGlzcGF0Y2g= ZGlzcGF0Y2gxMjM0 ${is_host} ${is_port}
 update_application_oidc dispatch 03 urn:updateApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4= ${is_host} ${is_port}
@@ -212,7 +212,7 @@ echo "|  To tryout self registration please log into the sample                 
 echo "|  app below.                                                                   |"
 echo "|  *** Please press ctrl button and click on the link ***                       |"
 echo "|                                                                               |"
-echo "|  pickup-dispatch - http://${tomcat_host}:${tomcat_port}/pickup-dispatch/      |"
+echo "|  pickup-dispatch - http://${server_host}:${server_port}/pickup-dispatch/      |"
 echo "|                                                                               |"
 echo "|  Click on the ** Register now ** link in the login page.                      |"
 echo "|  Fill in the user details form and create an account.                         |"
@@ -245,8 +245,8 @@ return 0;
 create_workflow() {
 is_host=$1
 is_port=$2
-tomcat_host=$3
-tomcat_port=$4
+server_host=$3
+server_port=$4
 
 cd ${QSG}/QSG/bin
 
@@ -266,7 +266,7 @@ update_idp_selfsignup urn:updateResidentIdP https://${is_host}:${is_port}/servic
 add_service_provider dispatch Common urn:createApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4= ${is_host} ${is_port}
 
 # Configure OIDC for the Service Providers
-configure_oidc dispatch 03 urn:registerOAuthApplicationData https://${is_host}:${is_port}/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4= ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
+configure_oidc dispatch 03 urn:registerOAuthApplicationData https://${is_host}:${is_port}/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4= ${is_host} ${is_port} ${server_host} ${server_port}
 
 create_updateapp_oidc dispatch YWRtaW46YWRtaW4= ZGlzcGF0Y2g= ZGlzcGF0Y2gxMjM0 ${is_host} ${is_port}
 update_application_oidc dispatch 03 urn:updateApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4= ${is_host} ${is_port}
@@ -288,7 +288,7 @@ echo "|    To tryout the workflow please log into the sample                    
 echo "|    app below.                                                                      |"
 echo "|    *** Please press ctrl button and click on the link ***                          |"
 echo "|                                                                                    |"
-echo "|    pickup-dispatch - http://${tomcat_host}:${tomcat_port}/pickup-dispatch/         |"
+echo "|    pickup-dispatch - http://${server_host}:${server_port}/pickup-dispatch/         |"
 echo "|                                                                                    |"
 echo "|    Click on the ** Register now ** link in the login page                          |"
 echo "|    Fill in the user details form and create an account.                            |"
@@ -310,7 +310,7 @@ echo "|      Password: cameron123                                               
 echo "|                                                                                    |"
 echo "|    Now you can use your new user credentials to log into                           |"
 echo "|    the app pickup-dispatch:                                                        |"
-echo "|        http://${tomcat_host}:${tomcat_port}/pickup-dispatch/                       |"
+echo "|        http://${server_host}:${server_port}/pickup-dispatch/                       |"
 echo "|                                                                                    |"
 echo "--------------------------------------------------------------------------------------"
 echo
@@ -863,9 +863,9 @@ echo "|    You can find the sample web apps on the following URLs.              
 echo "|    *** Please press ctrl button and click on the links ***                          |"
 echo "|                                                                                     |"
 echo "|    pickup-dispatch -                                                                |"
-echo "|        http://${tomcat_host}:${tomcat_port}/${dispatch_url}/                        |"
-echo "|    pick-manager     -                                                               |"
-echo "|        http://${tomcat_host}:${tomcat_port}/${manager_url}/                         |"
+echo "|        http://${server_host}:${server_port}/${dispatch_url}/                        |"
+echo "|    pick-manager -                                                                   |"
+echo "|        http://${server_host}:${server_port}/${manager_url}/                         |"
 echo "|                                                                                     |"
 echo "|    Please use the user credentials to log in.                                       |"
 echo "|                                                                                     |"
@@ -895,8 +895,8 @@ create_multifactor_auth() {
 
 is_host=$1
 is_port=$2
-tomcat_host=$3
-tomcat_port=$4
+server_host=$3
+server_port=$4
 
 echo
 echo "-------------------------------------------------------------------"
@@ -922,7 +922,7 @@ case ${user} in
 
     add_identity_provider admin admin 05 ${is_host} ${is_port}
 
-    configure_sso_saml2 ${is_host} ${is_port} ${tomcat_host} ${tomcat_port}
+    configure_sso_saml2 ${is_host} ${is_port} ${server_host} ${server_port}
 
     create_updateapp_multi dispatch Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
     create_updateapp_multi manager Y2FtZXJvbjpjYW1lcm9uMTIz ${is_host} ${is_port}
@@ -1076,7 +1076,7 @@ getProperty() {
 }
 
 setup_servers() {
-
+# Check whether the wso2-is is available
 PROPERTY_FILE=server.properties
 echo "Reading server paths from $PROPERTY_FILE"
 WSO2_PATH=$(getProperty "wso2is.location")
@@ -1088,51 +1088,9 @@ if [ ! -d "${WSO2_PATH}" ]
     return -1
  fi
 
-TOMCAT_PATH=$(getProperty "tomcat.location")
-
 cd ../..
 QSG=`pwd`
 echo
-
-if [ ! -d "${TOMCAT_PATH}" ]
-  then
-  # Ask for user permission.
-  # Download Tomcat 8.
-    echo "Tomcat server does not exist in the given location ${TOMCAT_PATH}."
-    echo "Do you want to download Tomcat server?"
-    echo
-    echo "Press y - YES"
-    echo "Press n - NO"
-    echo
-    read input
-
-  case ${input} in
-        [Yy]* )
-	    echo "Downloading apache-tomcat-8.0.49..."
-        wget http://www-eu.apache.org/dist/tomcat/tomcat-8/v8.0.49/bin/apache-tomcat-8.0.49.tar.gz
-        tar xvzf apache-tomcat-8.0.49.tar.gz
-        cd binaries
-        cp saml2-web-app-pickup-dispatch.com.war ${QSG}/apache-tomcat-8.0.49/webapps
-        echo "** Web application pickup-dispatch successfully deployed. **"
-        cp saml2-web-app-pickup-manager.com.war ${QSG}/apache-tomcat-8.0.49/webapps
-        echo "** Web application pickup-manager successfully deployed. **"
-	    ;;
-        [Nn]* )
-        echo "Please install Tomcat and restart the script."
-        exit;;
-        * ) echo "Please answer yes or no.";;
-  esac
-
-
- fi
-
- if [ ! -f "${TOMCAT_PATH}/webapps/saml2-web-app-pickup-dispatch.com.war" ]
-  then
-   cp ${QSG}/QSG/bin/saml2-web-app-pickup-dispatch.com.war ${TOMCAT_PATH}/webapps
-   echo "** Web application pickup-dispatch successfully deployed. **"
-   cp ${QSG}/QSG/bin/saml2-web-app-pickup-manager.com.war ${TOMCAT_PATH}/webapps
-   echo "** Web application pickup-manager successfully deployed. **"
- fi
 
 cd ..
 }
@@ -1651,8 +1609,8 @@ endpoint=$4
 auth=$5
 is_host=$6
 is_port=$7
-tomcat_host=$8
-tomcat_port=$9
+server_host=$8
+server_port=$9
 
 # Update the sso-config xml file with correct host names and port values
 cd ${scenario}
@@ -1668,7 +1626,7 @@ echo " <soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelop
          <!--Optional:-->
          <xsd:spDto>
             <!--Zero or more repetitions:-->
-            <xsd1:assertionConsumerUrls>http://${tomcat_host}:${tomcat_port}/saml2-web-app-pickup-${sp_name}.com/home.jsp</xsd1:assertionConsumerUrls>
+            <xsd1:assertionConsumerUrls>http://${server_host}:${server_port}/saml2-web-app-pickup-${sp_name}.com/home.jsp</xsd1:assertionConsumerUrls>
             <!--Optional:-->
             <xsd1:assertionQueryRequestProfileEnabled>false</xsd1:assertionQueryRequestProfileEnabled>
             <!--Optional:-->
@@ -1676,7 +1634,7 @@ echo " <soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelop
             <!--Optional:-->
             <xsd1:certAlias>wso2carbon</xsd1:certAlias>
             <!--Optional:-->
-            <xsd1:defaultAssertionConsumerUrl>http://${tomcat_host}:${tomcat_port}/saml2-web-app-pickup-${sp_name}.com/home.jsp</xsd1:defaultAssertionConsumerUrl>
+            <xsd1:defaultAssertionConsumerUrl>http://${server_host}:${server_port}/saml2-web-app-pickup-${sp_name}.com/home.jsp</xsd1:defaultAssertionConsumerUrl>
             <!--Optional:-->
             <xsd1:digestAlgorithmURI>http://www.w3.org/2000/09/xmldsig#sha1</xsd1:digestAlgorithmURI>
             <!--Optional:-->
@@ -1698,7 +1656,7 @@ echo " <soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelop
             <!--Optional:-->
             <xsd1:idPInitSSOEnabled>true</xsd1:idPInitSSOEnabled>
             <!--Zero or more repetitions:-->
-            <xsd1:idpInitSLOReturnToURLs>http://${tomcat_host}:${tomcat_port}/saml2-web-app-pickup-${sp_name}.com/home.jsp</xsd1:idpInitSLOReturnToURLs>
+            <xsd1:idpInitSLOReturnToURLs>http://${server_host}:${server_port}/saml2-web-app-pickup-${sp_name}.com/home.jsp</xsd1:idpInitSLOReturnToURLs>
             <!--Optional:-->
             <xsd1:issuer>saml2-web-app-pickup-${sp_name}.com</xsd1:issuer>
             <!--Optional:-->
@@ -1762,8 +1720,8 @@ endpoint=$4
 auth=$5
 is_host=$6
 is_port=$7
-tomcat_host=$8
-tomcat_port=$9
+server_host=$8
+server_port=$9
 dispatch="dispatch"
 manager="manager"
 
@@ -1799,7 +1757,7 @@ echo "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope
             <!--Optional:-->
             <xsd1:applicationName>${sp_name}</xsd1:applicationName>
             <!--Optional:-->
-            <xsd1:callbackUrl>http://${tomcat_host}:${tomcat_port}/${cap_spName}/oauth2client</xsd1:callbackUrl>
+            <xsd1:callbackUrl>http://${server_host}:${server_port}/${cap_spName}/oauth2client</xsd1:callbackUrl>
             <!--Optional:-->
             <xsd1:grantTypes>refresh_token urn:ietf:params:oauth:grant-type:saml2-bearer implicit password client_credentials iwa:ntlm authorization_code</xsd1:grantTypes>
             <!--Optional:-->
@@ -1855,8 +1813,8 @@ request_data="get-app-${sp_name}.xml"
 auth=$2
 is_host=$3
 is_port=$4
-tomcat_host=$5
-tomcat_port=$6
+server_host=$5
+server_port=$6
  
  if [ ! -f "$request_data" ]
   then
@@ -2405,9 +2363,8 @@ start_the_flow() {
     read scenario
     case $scenario in
         1)
-        # Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
         setup_servers
-        configure_sso_saml2 ${IS_DOMAIN} ${IS_PORT} ${TOMCAT_DOMAIN} ${TOMCAT_PORT}
+        configure_sso_saml2 ${IS_DOMAIN} ${IS_PORT} ${SERVER_DOMAIN} ${SERVER_PORT}
         end_message saml2-web-app-pickup-dispatch.com saml2-web-app-pickup-manager.com
         if [ "$?" -ne "0" ]; then
           echo "Sorry, we had a problem there!"
@@ -2415,9 +2372,8 @@ start_the_flow() {
         ;;
 
         2)
-        # Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
         setup_servers
-        configure_sso_oidc ${IS_DOMAIN} ${IS_PORT} ${TOMCAT_DOMAIN} ${TOMCAT_PORT}
+        configure_sso_oidc ${IS_DOMAIN} ${IS_PORT} ${SERVER_DOMAIN} ${SERVER_PORT}
         end_message pickup-dispatch pickup-manager
         if [ "$?" -ne "0" ]; then
           echo "Sorry, we had a problem there!"
@@ -2425,17 +2381,15 @@ start_the_flow() {
         ;;
 
         3)
-        # Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
         setup_servers
-        create_multifactor_auth ${IS_DOMAIN} ${IS_PORT} ${TOMCAT_DOMAIN} ${TOMCAT_PORT}
+        create_multifactor_auth ${IS_DOMAIN} ${IS_PORT} ${SERVER_DOMAIN} ${SERVER_PORT}
         end_message saml2-web-app-pickup-dispatch.com saml2-web-app-pickup-manager.com
         delete_idp 05 urn:deleteIdP https://${is_host}:${is_port}/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/
         ;;
 
         4)
-        # Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
         setup_servers
-        configure_federated_auth ${IS_DOMAIN} ${IS_PORT} ${TOMCAT_DOMAIN} ${TOMCAT_PORT}
+        configure_federated_auth ${IS_DOMAIN} ${IS_PORT} ${SERVER_DOMAIN} ${SERVER_PORT}
         end_message saml2-web-app-pickup-dispatch.com saml2-web-app-pickup-manager.com
         delete_idp 05 urn:deleteIdP https://${is_host}:${is_port}/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/
         if [ "$?" -ne "0" ]; then
@@ -2444,14 +2398,13 @@ start_the_flow() {
         ;;
 
         5)
-        # Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
         setup_servers
-        configure_self_signup ${IS_DOMAIN} ${IS_PORT} ${TOMCAT_DOMAIN} ${TOMCAT_PORT}
+        configure_self_signup ${IS_DOMAIN} ${IS_PORT} ${SERVER_DOMAIN} ${SERVER_PORT}
         ;;
 
         6)
         setup_servers
-        create_workflow ${IS_DOMAIN} ${IS_PORT} ${TOMCAT_DOMAIN} ${TOMCAT_PORT}
+        create_workflow ${IS_DOMAIN} ${IS_PORT} ${SERVER_DOMAIN} ${SERVER_PORT}
         ;;
 
         *)
@@ -2463,9 +2416,11 @@ start_the_flow() {
 
 #=================The start of the script:============================================
 
+# Test detached shell
+
 echo "Before Run: Make sure the following -                                         "
 echo "  * Added server details to the server.properties file in the QSG/bin folder  "
-echo "  * Your WSO2 IS 5.7.0 and Tomcat is running.                                 "
+echo "  * Your WSO2 IS 5.7.0 and applications are running.                          "
 echo "  * Configure the running domains/ips and ports in server.properties file     "
 echo "   in the QSG/bin folder.                                                     "
 echo "                                                                              "
@@ -2494,27 +2449,27 @@ case $continueState in
             return -1
         fi
 
-        TOMCAT_DOMAIN=$(getProperty "tomcat.host.domain")
-        #echo "tomcat port ${TOMCAT_DOMAIN}"
+        SERVER_DOMAIN=$(getProperty "server.host.domain")
+        #echo "server port ${SERVER_DOMAIN}"
 
-        if [ -z "${TOMCAT_DOMAIN}" ]
+        if [ -z "${SERVER_DOMAIN}" ]
         then
-            echo "Tomcat host domain is not configured. Please configure that and Try again"
+            echo "Server host domain is not configured. Please configure that and Try again"
             return -1
         fi
 
-        TOMCAT_PORT=$(getProperty "tomcat.host.port")
-        #echo "tomcat port ${TOMCAT_PORT}"
-        if [ -z "${TOMCAT_PORT}" ]
+        SERVER_PORT=$(getProperty "server.host.port")
+        #echo "Server port ${SERVER_PORT}"
+        if [ -z "${SERVER_PORT}" ]
         then
-            echo "Tomcat host port is not configured. Please configure that and Try again"
+            echo "Server host port is not configured. Please configure that and Try again"
             return -1
         fi
         start_the_flow
         ;;
 
       [Nn]*)
-         echo "Please install Tomcat and restart the script."
+         echo "Please start server and restart the script."
          exit;;
       *)
          echo "Please answer yes or no."
