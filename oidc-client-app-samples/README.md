@@ -1,6 +1,6 @@
 # Introduction
 
-This contains sample apps for browser client, Android app client and IPhone app client. Those sample apps will explain how to integrate WSO2-IAM with OpenID connect for authentication and authorization of your client apps' users.
+This contains sample apps for browser client, Android app client, IPhone app client and Cordova app client. Those sample apps will explain how to integrate WSO2-IAM with OpenID connect for authentication and authorization of your client apps' users.
 
 # Usage
 

@@ -1,0 +1,87 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://org.apache.axis2/xsd" xmlns:xsd1="http://model.common.application.identity.carbon.wso2.org/xsd">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <ns3:updateApplication xmlns:ns3="http://org.apache.axis2/xsd">
+            <ns3:serviceProvider>
+                <ns1:applicationID xmlns:ns1="http://model.common.application.identity.carbon.wso2.org/xsd">14</ns1:applicationID>
+                <ns1:applicationName xmlns:ns1="http://model.common.application.identity.carbon.wso2.org/xsd">pickup-manager</ns1:applicationName>
+                <claimConfig xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <alwaysSendMappedLocalSubjectId>false</alwaysSendMappedLocalSubjectId>
+                    <localClaimDialect>true</localClaimDialect>
+                    <roleClaimURI/>
+                </claimConfig>
+                <ns1:description xmlns:ns1="http://model.common.application.identity.carbon.wso2.org/xsd">sample service provider</ns1:description>
+                <inboundAuthenticationConfig xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <inboundAuthenticationRequestConfigs>
+                        <inboundAuthKey>saml2-web-app-pickup-dispatch.com</inboundAuthKey>
+                        <inboundAuthType>samlsso</inboundAuthType>
+                        <properties>
+                            <name>attrConsumServiceIndex</name>
+                            <value>1223160755</value>
+                        </properties>
+                    </inboundAuthenticationRequestConfigs>
+                    <inboundAuthenticationRequestConfigs>
+                        <inboundAuthKey/>
+                        <inboundAuthType>passivests</inboundAuthType>
+                    </inboundAuthenticationRequestConfigs>
+                    <inboundAuthenticationRequestConfigs>
+                        <inboundAuthKey/>
+                        <inboundAuthType>openid</inboundAuthType>
+                    </inboundAuthenticationRequestConfigs>
+                </inboundAuthenticationConfig>
+                <inboundProvisioningConfig xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <dumbMode>false</dumbMode>
+                    <provisioningUserStore>PRIMARY</provisioningUserStore>
+                </inboundProvisioningConfig>
+                <localAndOutBoundAuthenticationConfig xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <alwaysSendBackAuthenticatedListOfIdPs>false</alwaysSendBackAuthenticatedListOfIdPs>
+                    <authenticationScriptConfig>
+                        <ns2:content xmlns:ns2="http://script.model.common.application.identity.carbon.wso2.org/xsd"/>
+                        <ns2:enabled xmlns:ns2="http://script.model.common.application.identity.carbon.wso2.org/xsd">false</ns2:enabled>
+                    </authenticationScriptConfig>
+                    <authenticationStepForAttributes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="1"/>
+                    <authenticationStepForSubject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="1"/>
+                    <authenticationSteps>
+                        <attributeStep>true</attributeStep>
+                        <localAuthenticatorConfigs>
+                            <displayName>basic</displayName>
+                            <name>BasicAuthenticator</name>
+                        </localAuthenticatorConfigs>
+                        <stepOrder>1</stepOrder>
+                        <subjectStep>true</subjectStep>
+                    </authenticationSteps>
+                    <authenticationSteps>
+                        <attributeStep>false</attributeStep>
+                        <federatedIdentityProviders>
+                            <defaultAuthenticatorConfig>
+                                <displayName>twitter</displayName>
+                                <name>TwitterAuthenticator</name>
+                            </defaultAuthenticatorConfig>
+                            <federatedAuthenticatorConfigs>
+                                <displayName>twitter</displayName>
+                                <name>TwitterAuthenticator</name>
+                            </federatedAuthenticatorConfigs>
+                            <identityProviderName>IDP-twitter</identityProviderName>
+                        </federatedIdentityProviders>
+                        <stepOrder>2</stepOrder>
+                        <subjectStep>false</subjectStep>
+                    </authenticationSteps>
+                    <authenticationType>flow</authenticationType>
+                    <enableAuthorization>false</enableAuthorization>
+                    <subjectClaimUri xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="1"/>
+                    <useTenantDomainInLocalSubjectIdentifier>false</useTenantDomainInLocalSubjectIdentifier>
+                    <useUserstoreDomainInLocalSubjectIdentifier>false</useUserstoreDomainInLocalSubjectIdentifier>
+                </localAndOutBoundAuthenticationConfig>
+                <outboundProvisioningConfig xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"/>
+                <owner xmlns="http://model.common.application.identity.carbon.wso2.org/xsd">
+                    <tenantDomain>carbon.super</tenantDomain>
+                    <userName>cameron</userName>
+                    <userStoreDomain>PRIMARY</userStoreDomain>
+                </owner>
+                <permissionAndRoleConfig xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"/>
+                <ns1:requestPathAuthenticatorConfigs xmlns:ns1="http://model.common.application.identity.carbon.wso2.org/xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="1"/>
+                <ns1:saasApp xmlns:ns1="http://model.common.application.identity.carbon.wso2.org/xsd">false</ns1:saasApp>
+            </ns3:serviceProvider>
+        </ns3:updateApplication>
+    </soapenv:Body>
+</soapenv:Envelope>

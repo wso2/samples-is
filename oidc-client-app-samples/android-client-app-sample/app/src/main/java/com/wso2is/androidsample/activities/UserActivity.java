@@ -31,21 +31,24 @@ import com.wso2is.androidsample.mgt.AuthStateManager;
 import com.wso2is.androidsample.mgt.ConfigManager;
 import com.wso2is.androidsample.R;
 import com.wso2is.androidsample.models.User;
-import com.wso2is.androidsample.openid.LogoutRequest;
-import com.wso2is.androidsample.openid.UserInfoRequest;
+import com.wso2is.androidsample.oidc.LogoutRequest;
+import com.wso2is.androidsample.oidc.UserInfoRequest;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
 
 import net.openid.appauth.AppAuthConfiguration;
 import net.openid.appauth.AuthorizationException;
 import net.openid.appauth.AuthorizationResponse;
 import net.openid.appauth.AuthorizationService;
 import net.openid.appauth.ClientAuthentication;
+import net.openid.appauth.TokenRequest;
 import net.openid.appauth.TokenResponse;
 
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicReference;
+import static com.wso2is.androidsample.utils.Constants.APP_NAME;
 
 /**
  * This activity will exchange the authorization code for an access token if not
@@ -99,15 +102,17 @@ public class UserActivity extends AppCompatActivity {
             if (response != null || ex != null) {
                 stateManager.updateAfterAuthorization(response, ex);
                 if (response != null && response.authorizationCode != null) {
-                    // authorization code exchange is required
+                    // Authorization code exchange is required.
                     exchangeAuthorizationCode(response);
                 } else if (ex != null) {
                     Log.e(TAG, "Authorization request failed: " + ex.getMessage());
+                    Toast.makeText(this, "Authorization request failed!", Toast.LENGTH_SHORT).show();
                     LogoutRequest.getInstance().signOut(this);
                     finish();
                 }
             } else {
                 Log.e(TAG, "No authorization state retained - re-authorization required.");
+                Toast.makeText(this, "Re-authorization required!", Toast.LENGTH_SHORT).show();
                 LogoutRequest.getInstance().signOut(this);
                 finish();
             }
@@ -122,14 +127,16 @@ public class UserActivity extends AppCompatActivity {
     }
 
     /**
-     * Once the access token is obtained the User content view will be set.
+     * Once the access token is obtained the user profile view will be set.
      */
     private void displayAuthorized() {
 
+        // Fetches the user information from the userinfo endpoint of the WSO2 IS.
         boolean val = UserInfoRequest.getInstance().fetchUserInfo(accessToken, this, user);
+
         if (val) {
             setContentView(R.layout.activity_user);
-            getSupportActionBar().setTitle("PICKUP");
+            getSupportActionBar().setTitle(APP_NAME);
             (findViewById(R.id.bLogout)).setOnClickListener((View view) -> {
                 LogoutRequest.getInstance().signOut(this);
                 finish();
@@ -152,10 +159,11 @@ public class UserActivity extends AppCompatActivity {
      */
     private void exchangeAuthorizationCode(AuthorizationResponse authorizationResponse) {
 
-        // making the extra http parameters for access token request
+        // Makes the extra parameters for access token request.
         Map<String, String> additionalParameters = new HashMap<>();
         additionalParameters.put("client_secret", configuration.getClientSecret());
-        // state is stored to generate the logout endpoint request
+
+        // State is stored to generate the logout endpoint request.
         state = authorizationResponse.state;
 
         performTokenRequest(authorizationResponse.createTokenExchangeRequest(additionalParameters),
@@ -168,11 +176,11 @@ public class UserActivity extends AppCompatActivity {
      * @param request  Token request.
      * @param callback Token response callback.
      */
-    private void performTokenRequest(net.openid.appauth.TokenRequest request,
+    private void performTokenRequest(TokenRequest request,
                                      AuthorizationService.TokenResponseCallback callback) {
 
         ClientAuthentication clientAuthentication;
-        // checks the authentication state of the client
+
         try {
             clientAuthentication = stateManager.getCurrentState().getClientAuthentication();
         } catch (ClientAuthentication.UnsupportedAuthenticationMethod ex) {
@@ -193,6 +201,7 @@ public class UserActivity extends AppCompatActivity {
                                             @Nullable AuthorizationException authException) {
 
         stateManager.updateAfterTokenResponse(tokenResponse, authException);
+
         if (!stateManager.getCurrentState().isAuthorized()) {
             Log.e(TAG, "Authorization code exchange failed.");
         } else {

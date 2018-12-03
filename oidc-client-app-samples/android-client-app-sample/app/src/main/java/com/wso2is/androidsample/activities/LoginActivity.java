@@ -28,13 +28,12 @@ import android.widget.Toast;
 import com.wso2is.androidsample.mgt.AuthStateManager;
 import com.wso2is.androidsample.mgt.ConfigManager;
 import com.wso2is.androidsample.R;
-import com.wso2is.androidsample.openid.AuthRequest;
+import com.wso2is.androidsample.oidc.AuthRequest;
 
 import net.openid.appauth.AuthState;
 
 /**
- * This application demonstrates the integration of WSO2 IS with Android applications.
- * ConfigManager properties can be altered by changing the values in res/raw/config.json file.
+ * This activity will handle the login view of the application.
  */
 public class LoginActivity extends AppCompatActivity {
 
@@ -48,31 +47,31 @@ public class LoginActivity extends AppCompatActivity {
         AuthStateManager authStateManager = AuthStateManager.getInstance(this);
         ConfigManager configuration = ConfigManager.getInstance(this);
 
-        // if the user is already authorized the UserActivity will be launched
+        // If the user is authorized, the UserActivity view will be launched.
         if (authStateManager.getCurrentState().isAuthorized() && !configuration.hasConfigurationChanged()) {
             Log.i(TAG, "User is already authorized, proceeding to user activity.");
             startActivity(new Intent(this, UserActivity.class));
             finish();
         } else {
-            // if not the user will be directed to the Login View
+            // If the user is not authorized, the LoginActivity view will be launched.
             setContentView(R.layout.activity_login);
             getSupportActionBar().setTitle("");
-            findViewById(R.id.bLogin).setOnClickListener((View view) -> AuthRequest.getInstance(this).doAuth());
 
-            // checking if the configuration is valid
+            // Checks if the configuration is valid.
             if (!configuration.isValid()) {
                 Log.e(TAG, "Configuration is not valid: " + configuration.getConfigurationError());
                 Toast.makeText(this, "Configuration is not valid!", Toast.LENGTH_SHORT).show();
                 finish();
             } else {
-                // discarding any existing authorization state due to the change of configuration
+                // Discards any existing authorization state due to the change of configuration.
                 if (configuration.hasConfigurationChanged()) {
                     Log.i(TAG, "Configuration change detected, discarding the old state.");
                     authStateManager.replaceState(new AuthState());
-                    // stores the current configuration as the last known valid configuration
+                    // Stores the current configuration as the last known valid configuration.
                     configuration.acceptConfiguration();
                 }
             }
+            findViewById(R.id.bLogin).setOnClickListener((View view) -> AuthRequest.getInstance(this).doAuth());
         }
     }
 }

@@ -27,7 +27,7 @@
     <artifactId>samples-is</artifactId>
     <packaging>pom</packaging>
     <description>WSO2 Identity Server Samples</description>
-    <version>2.0.0-m4-SNAPSHOT</version>
+    <version>3.0.0-m2-SNAPSHOT</version>
 
     <scm>
         <url>https://github.com/wso2/samples-is.git</url>
@@ -39,6 +39,7 @@
     <modules>
         <module>saml2-sso-sample</module>
         <module>oidc-sso-sample</module>
+        <module>pickup-sample-app</module>
         <module>quick-start-guide</module>
         <module>gdpr-samples</module>
         <module>distribution</module>
@@ -309,7 +310,6 @@
                 <version>${maven.dependency.plugin.version}</version>
             </dependency>
 
-
         </dependencies>
     </dependencyManagement>
 
@@ -350,6 +350,11 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>${maven.assembly.plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>${maven.war.plugin.version}</version>
             </plugin>
             <!--plugins for oauth-sample-client-authenticator -->
             <plugin>
@@ -423,6 +428,7 @@
         <sample.qsg.version>1.0</sample.qsg.version>
         <maven.jar.plugin.version>3.0.2</maven.jar.plugin.version>
         <maven.assembly.plugin.version>3.1.0</maven.assembly.plugin.version>
+        <maven.war.plugin.version>3.2.2</maven.war.plugin.version>
 
         <!--=============================================================================-->
 
@@ -480,7 +486,7 @@
         <maven.bundle.plugin.version>2.4.0</maven.bundle.plugin.version>
         <maven.buildnumber.plugin.version>1.4</maven.buildnumber.plugin.version>
         <http.client.version>4.5.3</http.client.version>
-        <http.core.version>4.4.6</http.core.version>
+        <http.core.version>4.4.8</http.core.version>
         <commons-logging.version>1.2</commons-logging.version>
 
         <!--=============================================================================-->

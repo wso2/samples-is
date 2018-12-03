@@ -15,6 +15,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 package com.wso2is.androidsample.mgt;
 
 import android.content.Context;
@@ -29,19 +30,19 @@ import android.text.TextUtils;
 import com.wso2is.androidsample.utils.ConnectionBuilderForTesting;
 import com.wso2is.androidsample.R;
 
-import net.openid.appauth.connectivity.ConnectionBuilder;
-import net.openid.appauth.connectivity.DefaultConnectionBuilder;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.nio.charset.Charset;
 
+import net.openid.appauth.connectivity.ConnectionBuilder;
+import net.openid.appauth.connectivity.DefaultConnectionBuilder;
+
 import okio.Buffer;
 import okio.BufferedSource;
 import okio.Okio;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import static com.wso2is.androidsample.utils.Constants.HTTP;
 import static com.wso2is.androidsample.utils.Constants.HTTPS;
@@ -90,7 +91,7 @@ public class ConfigManager {
      * Gives an instance of the ConfigManager class.
      *
      * @param context Context object with information about the current state of the application.
-     * @return A ConfigManager instance.
+     * @return ConfigManager instance.
      */
     public static ConfigManager getInstance(Context context) {
 
@@ -106,7 +107,7 @@ public class ConfigManager {
     /**
      * Indicates whether the configuration has changed from the last known valid state.
      *
-     * @return Gives a true if the last known configuration has changed, no if it is the same.
+     * @return Gives a true if the last known configuration has changed, false if it has not changed.
      */
     public boolean hasConfigurationChanged() {
 
@@ -167,7 +168,7 @@ public class ConfigManager {
     }
 
     /**
-     * Returns the redirect uri specified in the res/raw/config.json file.
+     * Returns the redirect URI specified in the res/raw/config.json file.
      *
      * @return Redirect URI.
      */
@@ -178,7 +179,7 @@ public class ConfigManager {
     }
 
     /**
-     * Returns the authorization endpoint uri specified in the res/raw/config.json file.
+     * Returns the authorization endpoint URI specified in the res/raw/config.json file.
      *
      * @return Authorization Endpoint URI.
      */
@@ -189,7 +190,7 @@ public class ConfigManager {
     }
 
     /**
-     * Returns the token endpoint uri specified in the res/raw/config.json file.
+     * Returns the token endpoint URI specified in the res/raw/config.json file.
      *
      * @return Token Endpoint URI.
      */
@@ -200,7 +201,7 @@ public class ConfigManager {
     }
 
     /**
-     * Returns the user info endpoint uri specified in the res/raw/config.json file.
+     * Returns the user info endpoint URI specified in the res/raw/config.json file.
      *
      * @return User Info Endpoint URI.
      */
@@ -211,7 +212,7 @@ public class ConfigManager {
     }
 
     /**
-     * Returns the logout endpoint uri specified in the res/raw/config.json file.
+     * Returns the logout endpoint URI specified in the res/raw/config.json file.
      *
      * @return LogoutRequest Endpoint URI.
      */
@@ -224,7 +225,7 @@ public class ConfigManager {
     /**
      * Returns the client secret specified in the res/raw/config.json file.
      *
-     * @return Client Secret.
+     * @return Client secret.
      */
     @Nullable
     public String getClientSecret() {
@@ -236,9 +237,8 @@ public class ConfigManager {
      * Returns the boolean specified in the res/raw/config.json for https_required.
      * This can be made false to test the application without SSL Certification.
      *
-     * @return True if https is required, false if not required.
+     * @return True if https is required, false if https is not required.
      */
-
     public boolean isHttpsRequired() {
 
         return httpsRequired;
@@ -261,7 +261,7 @@ public class ConfigManager {
     /**
      * Returns the last known config hash.
      *
-     * @return Config Hash
+     * @return Config hash.
      */
     private String getLastKnownConfigHash() {
 
@@ -271,7 +271,7 @@ public class ConfigManager {
     /**
      * Reads the configuration values.
      *
-     * @throws InvalidConfigurationException Invalid Configuration Exception.
+     * @throws InvalidConfigurationException Invalid configuration exception.
      */
     private void readConfiguration() throws InvalidConfigurationException {
 
@@ -333,7 +333,7 @@ public class ConfigManager {
      *
      * @param propName Property name.
      * @return Property value.
-     * @throws InvalidConfigurationException Invalid Configuration Exception.
+     * @throws InvalidConfigurationException Invalid configuration exception.
      */
     @NonNull
     private String getRequiredConfigString(String propName) throws InvalidConfigurationException {
@@ -352,7 +352,7 @@ public class ConfigManager {
      *
      * @param propName Property name.
      * @return Config URI.
-     * @throws InvalidConfigurationException Invalid Configuration Exception.
+     * @throws InvalidConfigurationException Invalid configuration exception.
      */
     @NonNull
     private Uri getRequiredConfigUri(String propName) throws InvalidConfigurationException {
@@ -390,7 +390,7 @@ public class ConfigManager {
      *
      * @param propName Property name.
      * @return Config Web URI.
-     * @throws InvalidConfigurationException Invalid Configuration Exception.
+     * @throws InvalidConfigurationException Invalid configuration exception.
      */
     private Uri getRequiredConfigWebUri(String propName) throws InvalidConfigurationException {
 
