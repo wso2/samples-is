@@ -18,24 +18,15 @@ REM  limitations under the License.
 
 REM ===============script starts here ===============================================
 
-FOR /F "eol=; tokens=6,2 delims==" %%i IN ('findstr "server.host.domain" server.properties') DO SET SERVER_DOMAIN_NEW=%%i
-REM echo %SERVER_DOMAIN_NEW%
+FOR /F "eol=; tokens=6,2 delims==" %%i IN ('findstr "server.host.domain" server.properties') DO SET SERVER_DOMAIN=%%i
+REM echo %SERVER_DOMAIN%
 
 FOR /F "eol=; tokens=6,2 delims==" %%i IN ('findstr "server.host.port" server.properties') DO SET SERVER_PORT=%%i
 REM echo %SERVER_PORT%
 
-
-echo ""
 echo "   Stating sample apps.. "
 echo ""
-echo "      Using Host : %HOST% "
-echo "      Using Port : %PORT% "
-echo ""
+echo "      Using Host : %SERVER_DOMAIN% "
+echo "      Using Port : %SERVER_PORT% "
 
-
-java -jar jetty-runner.jar \
-                    --host %HOST% --port %PORT% \
-                    pickup-dispatch.war \
-                    pickup-manager.war \
-                    saml2-web-app-pickup-dispatch.com.war \
-                    saml2-web-app-pickup-manager.com.war
+java -jar jetty-runner.jar --host %SERVER_DOMAIN% --port %SERVER_PORT% pickup-dispatch.war pickup-manager.war saml2-web-app-pickup-dispatch.com.war saml2-web-app-pickup-manager.com.war

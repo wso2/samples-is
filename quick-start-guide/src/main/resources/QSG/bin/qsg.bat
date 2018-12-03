@@ -19,7 +19,7 @@ REM  limitations under the License.
 REM ===============script starts here ===============================================
 echo "Before Run: Make sure the following -                                         "
 echo "  * Added server details to the server.properties file in the QSG/bin folder  "
-echo "  * Your WSO2 IS 5.7.0 and Tomcat is running.                                 "
+echo "  * Your WSO2 IS 5.7.0 and applications are running                                 "
 echo "  * Configure the running domains/ips and ports in server.properties file     "
 echo "   in the QSG/bin folder.                                                     "
 echo "                                                                              "
