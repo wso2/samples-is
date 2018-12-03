@@ -75,24 +75,21 @@ echo "--------------------------------------------------------------------------
 set /p scenario=Enter the scenario number you selected.
 
 	IF "%scenario%"=="1" (
-    	REM Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
-    	CALL :setup_servers %IS_PATH% %TOMCAT_PATH%
+    	CALL :setup_servers %IS_PATH%
     	CALL :configure_sso_saml2 %IS_DOMAIN% %IS_PORT% %SERVER_DOMAIN% %SERVER_PORT%
     	CALL :end_message saml2-web-app-pickup-dispatch.com saml2-web-app-pickup-manager.com %IS_DOMAIN% %IS_PORT% %SERVER_DOMAIN% %SERVER_PORT%
     	EXIT 0
     )
 
 	IF "%scenario%"=="2" (
-	REM Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
-	CALL :setup_servers %IS_PATH% %TOMCAT_PATH%
+	CALL :setup_servers %IS_PATH%
 	CALL :configure_sso_oidc %IS_DOMAIN% %IS_PORT% %SERVER_DOMAIN% %SERVER_PORT%
 	CALL :end_message pickup-dispatch pickup-manager %IS_DOMAIN% %IS_PORT% %SERVER_DOMAIN% %SERVER_PORT%
 	EXIT 0
     )
 
 	IF "%scenario%"=="3" (
-	REM Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
-	CALL :setup_servers %IS_PATH% %TOMCAT_PATH%
+	CALL :setup_servers %IS_PATH%
 	CALL :create_multifactor_auth %IS_DOMAIN% %IS_PORT% %SERVER_DOMAIN% %SERVER_PORT%
 	CALL :end_message saml2-web-app-pickup-dispatch.com saml2-web-app-pickup-manager.com %IS_DOMAIN% %IS_PORT% %SERVER_DOMAIN% %SERVER_PORT%
 	CALL :delete_idp 05 urn:deleteIdP https://%IS_DOMAIN%:%IS_PORT%/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/
@@ -100,8 +97,7 @@ set /p scenario=Enter the scenario number you selected.
 	)
 
 	IF "%scenario%"=="4" (
-	REM Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
-	CALL :setup_servers %IS_PATH% %TOMCAT_PATH%
+	CALL :setup_servers %IS_PATH%
 	CALL :configure_federated_auth %IS_DOMAIN% %IS_PORT% %SERVER_DOMAIN% %SERVER_PORT%
 	CALL :end_message saml2-web-app-pickup-dispatch.com saml2-web-app-pickup-manager.com %IS_DOMAIN% %IS_PORT% %SERVER_DOMAIN% %SERVER_PORT%
 	CALL :delete_idp 05 urn:deleteIdP https://%IS_DOMAIN%:%IS_PORT%/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/
@@ -109,23 +105,21 @@ set /p scenario=Enter the scenario number you selected.
     )
 
 	IF "%scenario%"=="5" (
-	REM Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
-	CALL :setup_servers %IS_PATH% %TOMCAT_PATH%
+	CALL :setup_servers %IS_PATH%
 	CALL :configure_self_signup %IS_DOMAIN% %IS_PORT% %SERVER_DOMAIN% %SERVER_PORT%
 	EXIT 0
 	)
 
 	IF "%scenario%"=="6" (
-	CALL :setup_servers %IS_PATH% %TOMCAT_PATH%
+	CALL :setup_servers %IS_PATH%
 	CALL :create_workflow %IS_DOMAIN% %IS_PORT% %SERVER_DOMAIN% %SERVER_PORT%
 	EXIT 0
 	)
 
-REM check whether the servers are working fine
+REM Check whether the wso2-is is available
 :setup_servers
 
 set is_path=%~1
-set tomcat_path=%~2
 
 echo(
 IF NOT EXIST %is_path% (
@@ -133,17 +127,6 @@ IF NOT EXIST %is_path% (
     exit -1
 )
 
-echo(
-IF NOT EXIST %tomcat_path% (
-    echo Tomcat server does not exist in the given location %tomcat_path%.
-    echo Please download and install the latest pack.
-    exit -1
-)
-
-IF NOT EXIST "%tomcat_path%/webapps/saml2-web-app-pickup-dispatch.com.war" (
-   echo Please deploy the sample webapps on the tomcat server.
-   exit -1
-)
 
 EXIT /B
 
@@ -787,7 +770,7 @@ set request_data=%~2\sso-config-%~1.xml
 set file=sso-config-%~1.xml
 
 IF "%server_domain%" == "127.0.0.1" (
-  SET tomcat_host=localhost.com
+  SET server_host=localhost.com
 )
 
 IF NOT EXIST "%QSG%\%~2" (
@@ -809,7 +792,7 @@ IF EXIST "%file%" (
 
 
 REM touch sso-config-${sp_name}.xml
-echo  ^<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://org.apache.axis2/xsd" xmlns:xsd1="http://dto.saml.sso.identity.carbon.wso2.org/xsd"^> ^<soapenv:Header/^> ^<soapenv:Body^> ^<xsd:addRPServiceProvider^> ^<xsd:spDto^> ^<xsd1:assertionConsumerUrls^>http://%tomcat_host%:%server_port%/saml2-web-app-pickup-%sp_name%.com/home.jsp^</xsd1:assertionConsumerUrls^> ^<xsd1:assertionQueryRequestProfileEnabled^>false^</xsd1:assertionQueryRequestProfileEnabled^> ^<xsd1:attributeConsumingServiceIndex^>1223160755^</xsd1:attributeConsumingServiceIndex^> ^<xsd1:certAlias^>wso2carbon^</xsd1:certAlias^> ^<xsd1:defaultAssertionConsumerUrl^>http://%tomcat_host%:%server_port%/saml2-web-app-pickup-%sp_name%.com/home.jsp^</xsd1:defaultAssertionConsumerUrl^> ^<xsd1:digestAlgorithmURI^>http://www.w3.org/2000/09/xmldsig#sha1^</xsd1:digestAlgorithmURI^> ^<xsd1:doEnableEncryptedAssertion^>false^</xsd1:doEnableEncryptedAssertion^> ^<xsd1:doSignAssertions^>true^</xsd1:doSignAssertions^> ^<xsd1:doSignResponse^>true^</xsd1:doSignResponse^> ^<xsd1:doSingleLogout^>true^</xsd1:doSingleLogout^> ^<xsd1:doValidateSignatureInRequests^>false^</xsd1:doValidateSignatureInRequests^> ^<xsd1:enableAttributeProfile^>false^</xsd1:enableAttributeProfile^> ^<xsd1:enableAttributesByDefault^>false^</xsd1:enableAttributesByDefault^> ^<xsd1:idPInitSLOEnabled^>true^</xsd1:idPInitSLOEnabled^> ^<xsd1:idPInitSSOEnabled^>true^</xsd1:idPInitSSOEnabled^> ^<xsd1:idpInitSLOReturnToURLs^>http://%server_domain%:%server_port%/saml2-web-app-pickup-%sp_name%.com/home.jsp^</xsd1:idpInitSLOReturnToURLs^> ^<xsd1:issuer^>saml2-web-app-pickup-%sp_name%.com^</xsd1:issuer^> ^<xsd1:nameIDFormat^>urn/oasis/names/tc/SAML/1.1/nameid-format/emailAddress^</xsd1:nameIDFormat^> ^<xsd1:requestedAudiences^>https://%is_domain%:%is_port%/oauth2/token^</xsd1:requestedAudiences^> ^<xsd1:requestedRecipients^>https://%is_domain%:%is_port%/oauth2/token^</xsd1:requestedRecipients^> ^<xsd1:signingAlgorithmURI^>http://www.w3.org/2000/09/xmldsig#rsa-sha1^</xsd1:signingAlgorithmURI^> ^<xsd1:sloRequestURL^>^</xsd1:sloRequestURL^> ^<xsd1:sloResponseURL^>^</xsd1:sloResponseURL^> ^</xsd:spDto^> ^</xsd:addRPServiceProvider^> ^</soapenv:Body^> ^</soapenv:Envelope^> >> %file%
+echo  ^<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://org.apache.axis2/xsd" xmlns:xsd1="http://dto.saml.sso.identity.carbon.wso2.org/xsd"^> ^<soapenv:Header/^> ^<soapenv:Body^> ^<xsd:addRPServiceProvider^> ^<xsd:spDto^> ^<xsd1:assertionConsumerUrls^>http://%server_host%:%server_port%/saml2-web-app-pickup-%sp_name%.com/home.jsp^</xsd1:assertionConsumerUrls^> ^<xsd1:assertionQueryRequestProfileEnabled^>false^</xsd1:assertionQueryRequestProfileEnabled^> ^<xsd1:attributeConsumingServiceIndex^>1223160755^</xsd1:attributeConsumingServiceIndex^> ^<xsd1:certAlias^>wso2carbon^</xsd1:certAlias^> ^<xsd1:defaultAssertionConsumerUrl^>http://%server_host%:%server_port%/saml2-web-app-pickup-%sp_name%.com/home.jsp^</xsd1:defaultAssertionConsumerUrl^> ^<xsd1:digestAlgorithmURI^>http://www.w3.org/2000/09/xmldsig#sha1^</xsd1:digestAlgorithmURI^> ^<xsd1:doEnableEncryptedAssertion^>false^</xsd1:doEnableEncryptedAssertion^> ^<xsd1:doSignAssertions^>true^</xsd1:doSignAssertions^> ^<xsd1:doSignResponse^>true^</xsd1:doSignResponse^> ^<xsd1:doSingleLogout^>true^</xsd1:doSingleLogout^> ^<xsd1:doValidateSignatureInRequests^>false^</xsd1:doValidateSignatureInRequests^> ^<xsd1:enableAttributeProfile^>false^</xsd1:enableAttributeProfile^> ^<xsd1:enableAttributesByDefault^>false^</xsd1:enableAttributesByDefault^> ^<xsd1:idPInitSLOEnabled^>true^</xsd1:idPInitSLOEnabled^> ^<xsd1:idPInitSSOEnabled^>true^</xsd1:idPInitSSOEnabled^> ^<xsd1:idpInitSLOReturnToURLs^>http://%server_domain%:%server_port%/saml2-web-app-pickup-%sp_name%.com/home.jsp^</xsd1:idpInitSLOReturnToURLs^> ^<xsd1:issuer^>saml2-web-app-pickup-%sp_name%.com^</xsd1:issuer^> ^<xsd1:nameIDFormat^>urn/oasis/names/tc/SAML/1.1/nameid-format/emailAddress^</xsd1:nameIDFormat^> ^<xsd1:requestedAudiences^>https://%is_domain%:%is_port%/oauth2/token^</xsd1:requestedAudiences^> ^<xsd1:requestedRecipients^>https://%is_domain%:%is_port%/oauth2/token^</xsd1:requestedRecipients^> ^<xsd1:signingAlgorithmURI^>http://www.w3.org/2000/09/xmldsig#rsa-sha1^</xsd1:signingAlgorithmURI^> ^<xsd1:sloRequestURL^>^</xsd1:sloRequestURL^> ^<xsd1:sloResponseURL^>^</xsd1:sloResponseURL^> ^</xsd:spDto^> ^</xsd:addRPServiceProvider^> ^</soapenv:Body^> ^</soapenv:Envelope^> >> %file%
 cd ..
 
 echo Configuring SAML2 web SSO for %~1...
@@ -924,7 +907,7 @@ set request_data=%~2\sso-config-%~1.xml
 set file=sso-config-%~1.xml
 
 IF "%server_domain%" == "127.0.0.1" (
-  SET tomcat_host=localhost.com
+  SET server_host=localhost.com
 )
 
 IF NOT EXIST "%QSG%\%~2" (
@@ -962,7 +945,7 @@ REM echo %secret%
 
 
 REM touch sso-config-${sp_name}.xml
-echo ^<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://org.apache.axis2/xsd" xmlns:xsd1="http://dto.oauth.identity.carbon.wso2.org/xsd"^> ^<soapenv:Header/^> ^<soapenv:Body^> ^<xsd:registerOAuthApplicationData^> ^<xsd:application^> ^<xsd1:OAuthVersion^>OAuth-2.0^</xsd1:OAuthVersion^> ^<xsd1:applicationName^>%sp_name%^</xsd1:applicationName^> ^<xsd1:callbackUrl^>http://%tomcat_host%:%server_port%/%sample_name%/oauth2client^</xsd1:callbackUrl^> ^<xsd1:grantTypes^>refresh_token urn:ietf:params:oauth:grant-type:saml2-bearer implicit password client_credentials iwa:ntlm authorization_code^</xsd1:grantTypes^> ^<xsd1:oauthConsumerKey^>%client_id%^</xsd1:oauthConsumerKey^> ^<xsd1:oauthConsumerSecret^>%secret%^</xsd1:oauthConsumerSecret^> ^<xsd1:pkceMandatory^>false^</xsd1:pkceMandatory^> ^</xsd:application^> ^</xsd:registerOAuthApplicationData^> ^</soapenv:Body^> ^</soapenv:Envelope^> >> %file%
+echo ^<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://org.apache.axis2/xsd" xmlns:xsd1="http://dto.oauth.identity.carbon.wso2.org/xsd"^> ^<soapenv:Header/^> ^<soapenv:Body^> ^<xsd:registerOAuthApplicationData^> ^<xsd:application^> ^<xsd1:OAuthVersion^>OAuth-2.0^</xsd1:OAuthVersion^> ^<xsd1:applicationName^>%sp_name%^</xsd1:applicationName^> ^<xsd1:callbackUrl^>http://%server_host%:%server_port%/%sample_name%/oauth2client^</xsd1:callbackUrl^> ^<xsd1:grantTypes^>refresh_token urn:ietf:params:oauth:grant-type:saml2-bearer implicit password client_credentials iwa:ntlm authorization_code^</xsd1:grantTypes^> ^<xsd1:oauthConsumerKey^>%client_id%^</xsd1:oauthConsumerKey^> ^<xsd1:oauthConsumerSecret^>%secret%^</xsd1:oauthConsumerSecret^> ^<xsd1:pkceMandatory^>false^</xsd1:pkceMandatory^> ^</xsd:application^> ^</xsd:registerOAuthApplicationData^> ^</soapenv:Body^> ^</soapenv:Envelope^> >> %file%
 cd ..
 
 echo Configuring OIDC web SSO for %~1...
