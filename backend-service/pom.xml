@@ -29,7 +29,7 @@
     <dependencies>
         <dependency>
             <groupId>org.wso2.msf4j</groupId>
-            <artifactId>msf4j-service</artifactId>
+            <artifactId>msf4j-all</artifactId>
         </dependency>
         <dependency>
             <groupId>org.json</groupId>
