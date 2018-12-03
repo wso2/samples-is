@@ -17,14 +17,16 @@
  */
 
 import React, { Component } from 'react';
-import { App } from '@openid/appauth';
 
 class Home extends Component {
 
   constructor(props) {
     super(props);
 
-    this.application = props.application;
+    this.app = props.app;
+    this.appLogout = props.appLogout;
+    this.appPKCE = props.appPKCE;
+    this.appUserInfo = props.appUserInfo;
 
     // This binding is necessary to make `this` work in the callback
     this.loginClick = this.loginClick.bind(this);
@@ -33,14 +35,23 @@ class Home extends Component {
   componentDidMount() {
 
     // Redirect completion callback method execution for authorization completion callback and end session (logout) completion callabck.
-    this.application.checkForAuthorizationResponse();
+    if(this.app.getConfiguration().flowType == "IMPLICIT") {
+      this.app.checkForAuthorizationResponse();
+    } else if (this.app.getConfiguration().flowType == "PKCE") {
+      this.appPKCE.checkForAuthorizationResponse();
+    }
+    this.appLogout.checkForAuthorizationResponse();
     
   }
 
   loginClick() {
 
     // Execute OIDC authorize requests against WSO2 IS server
-    this.application.makeAuthorizationRequest();
+    if(this.app.getConfiguration().flowType == "IMPLICIT") {
+      this.app.makeAuthorizationRequest();
+    } else if (this.app.getConfiguration().flowType == "PKCE") {
+      this.appPKCE.makeAuthorizationRequest();
+    }
   }
 
    render() {

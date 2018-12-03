@@ -19,6 +19,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { App } from '@openid/appauth';
+import { AppLogout } from '@wso2/appauth-ext-logout';
+import { AppPKCE } from '@wso2/appauth-ext-pkce';
+import { AppUserInfo } from '@wso2/appauth-ext-userinfo';
 
 import Home from './Home';
 import Profile from './Profile';
@@ -43,11 +46,16 @@ class Base extends Component {
             'postLogoutRedirectUri': 'http://localhost:7777/' // Specify the post logout redirect URL to land back after logout redirect to WSO2-IAM Server logout page
           };
       
-        this.application = new App(appConfigs);
+        this.app = new App(appConfigs);
+        this.appLogout = new AppLogout(this.app, appConfigs.postLogoutRedirectUri, appConfigs.clientId);
+        this.appPKCE = new AppPKCE(this.app, appConfigs.clientId, appConfigs.clientSecret, appConfigs.redirectUri, appConfigs.scope, appConfigs.tokenUrl);
+        this.appUserInfo = new AppUserInfo(this.app, appConfigs.userInfoUrl);
     }
 
     componentDidMount() {
-        this.application.init();
+        this.app.init();
+        this.appLogout.init();
+        this.appPKCE.init();
     }
 
     // To demonstrate SPA, 2 links with 2 pages should be added, thus in profile page, there should be a validation to check whether
@@ -56,8 +64,10 @@ class Base extends Component {
       return (
          <BrowserRouter>
             <Switch>
-                <Route exact path='/' component={(props) => <Profile application={this.application} {...props}/>} />
-                <Route exact path='/Profile' component={(props) => <Home application={this.application} {...props}/>} />
+                <Route exact path='/' component={(props) => <Profile app={this.app} appLogout={this.appLogout}
+                         appPKCE={this.appPKCE} appUserInfo={this.appUserInfo} {...props}/>} />
+                <Route exact path='/Profile' component={(props) => <Home app={this.app} appLogout={this.appLogout}
+                         appPKCE={this.appPKCE} appUserInfo={this.appUserInfo} {...props}/>} />
             </Switch>
          </BrowserRouter>
       );

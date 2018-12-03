@@ -24,12 +24,13 @@ class Profile extends Component {
     constructor(props) {
         super(props);
     
-        this.application = props.application;
+        this.app = props.app;
+        this.appLogout = props.appLogout;
+        this.appPKCE = props.appPKCE;
+        this.appUserInfo = props.appUserInfo;
     
         // This binding is necessary to make `this` work in the callback
         this.logoutClick = this.logoutClick.bind(this);
-
-
     }
 
     checkUserLoggedIn(currentComponent) {
@@ -49,16 +50,21 @@ class Profile extends Component {
 
     logoutClick() {
         // Execute OIDC end session (logout) requests against WSO2 IS server
-        this.application.makeLogoutRequest();
+        this.appLogout.makeLogoutRequest();
     }
 
     componentWillMount() {
 
         // Redirect completion callback method execution for authorization completion callback and end session (logout) completion callabck.
-        this.application.checkForAuthorizationResponse().then(this.checkUserLoggedIn(this));
+        if(this.app.getConfiguration().flowType == "IMPLICIT") {
+            this.app.checkForAuthorizationResponse().then(this.checkUserLoggedIn(this));
+        } else if (this.app.getConfiguration().flowType == "PKCE") {
+            this.appPKCE.checkForAuthorizationResponse().then(this.checkUserLoggedIn(this));
+        }
+        this.appLogout.checkForAuthorizationResponse();
 
         // userInfo route only works with only PKCE for now and have to do for implicit by decoding the id_token JWT
-        this.application.makeUserInfoRequest().then(userInfoJson => {
+        this.appUserInfo.makeUserInfoRequest().then(userInfoJson => {
             this.sub = userInfoJson.sub;
             console.log("=========" + this.sub);
             this.name = userInfoJson.name;
