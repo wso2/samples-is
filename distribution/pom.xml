@@ -25,8 +25,13 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>is-samples</artifactId>
+    <artifactId>is-samples-distribution</artifactId>
     <packaging>pom</packaging>
+
+    <properties>
+        <qsg.app.location>IS-QSG/samples/QSG-bundle/QSG/bin/apps</qsg.app.location>
+        <qsg.jar.location>IS-QSG/samples/QSG-bundle/QSG/bin/lib</qsg.jar.location>
+    </properties>
 
     <build>
         <plugins>

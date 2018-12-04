@@ -29,4 +29,4 @@ echo ""
 echo "      Using Host : %SERVER_DOMAIN% "
 echo "      Using Port : %SERVER_PORT% "
 
-java -jar jetty-runner.jar --host %SERVER_DOMAIN% --port %SERVER_PORT% pickup-dispatch.war pickup-manager.war saml2-web-app-pickup-dispatch.com.war saml2-web-app-pickup-manager.com.war
+java -jar lib\jetty-runner.jar --host %SERVER_DOMAIN% --port %SERVER_PORT% apps\pickup-dispatch.war apps\pickup-manager.war apps\saml2-web-app-pickup-dispatch.com.war apps\saml2-web-app-pickup-manager.com.war

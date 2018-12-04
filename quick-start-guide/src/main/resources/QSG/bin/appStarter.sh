@@ -34,9 +34,9 @@ echo "      Using Host : ${HOST} "
 echo "      Using Port : ${PORT} "
 echo ""
 
-java -jar jetty-runner.jar \
+java -jar lib/jetty-runner.jar \
                     --host ${HOST} --port ${PORT} \
-                    pickup-dispatch.war \
-                    pickup-manager.war \
-                    saml2-web-app-pickup-dispatch.com.war \
-                    saml2-web-app-pickup-manager.com.war
+                    apps/pickup-dispatch.war \
+                    apps/pickup-manager.war \
+                    apps/saml2-web-app-pickup-dispatch.com.war \
+                    apps/saml2-web-app-pickup-manager.com.war
