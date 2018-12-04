@@ -107,7 +107,7 @@
             <outputDirectory>IS-QSG/samples/QSG-bundle/QSG/bin</outputDirectory>
         </file>
         <file>
-            <source>${project.basedir}/../common-resources/jetty-runner-9.4.9.v20180320.jar</source>
+            <source>${project.basedir}/target/jetty-runner-${jetty.version}.jar</source>
             <outputDirectory>IS-QSG/samples/QSG-bundle/QSG/bin</outputDirectory>
             <destName>jetty-runner.jar</destName>
         </file>
