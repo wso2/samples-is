@@ -14,7 +14,8 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <parent>
         <groupId>org.wso2</groupId>
@@ -86,7 +87,7 @@
             <dependency>
                 <groupId>org.wso2.msf4j</groupId>
                 <artifactId>msf4j-all</artifactId>
-                <version>${ms4f.version}</version>
+                <version>${msf4j.version}</version>
             </dependency>
 
             <!--=============================================================================-->
@@ -432,7 +433,7 @@
         <!--repo versions of quick-start-guide-->
         <identity.agent.sso.version>5.1.22</identity.agent.sso.version>
         <sample.oidc-sso-sample.version>1.0</sample.oidc-sso-sample.version>
-        <ms4f.version>2.6.4</ms4f.version>
+        <msf4j.version>2.6.4</msf4j.version>
         <sample.qsg.version>1.0</sample.qsg.version>
         <maven.jar.plugin.version>3.0.2</maven.jar.plugin.version>
         <maven.assembly.plugin.version>3.1.0</maven.assembly.plugin.version>
