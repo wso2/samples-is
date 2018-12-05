@@ -24,9 +24,6 @@
 *.tar.gz
 *.rar
 
-# Exceptions
-!jetty-runner*.jar
-
 .DS_Store
 .DS_Store?
 .Spotlight-V100
