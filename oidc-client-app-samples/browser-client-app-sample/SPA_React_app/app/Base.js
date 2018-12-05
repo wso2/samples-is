@@ -18,7 +18,7 @@
 
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { App } from '@openid/appauth';
+import { App, FLOW_TYPE_IMPLICIT, FLOW_TYPE_PKCE, LOCAL_STORAGE } from '@openid/appauth';
 import { AppLogout } from '@wso2/appauth-ext-logout';
 import { AppPKCE } from '@wso2/appauth-ext-pkce';
 import { AppUserInfo } from '@wso2/appauth-ext-userinfo';
@@ -32,23 +32,32 @@ class Base extends Component {
         super(props);
 
         var appConfigs = {
-            'authorizeUrl': 'https://localhost:9443/oauth2/authorize', // change the https://localhost:9443 to your WSO2-IAM installation domain name in all the places of appConfigs JSON if necessary
+            // change the https://localhost:9443 to your WSO2-IAM installation domain name in all the places of appConfigs JSON if necessary
+            'authorizeUrl': 'https://localhost:9443/oauth2/authorize',
             'tokenUrl': 'https://localhost:9443/oauth2/token',
             'revokeUrl': 'https://localhost:9443/oauth2/revoke',
             'logoutUrl': 'https://localhost:9443/oidc/logout',
             'userInfoUrl': 'https://localhost:9443/oauth2/userinfo',
-            'flowType': "PKCE", // Possible values are IMPLICIT and PKCE, default is IMPLICIT
-            'userStore': "LOCAL_STORAGE", // Possible values are LOCAL_STORAGE and SESSION_STORAGE, default is LOCAL_STORAGE and SESSION_STORAGE is not not supported yet
-            'clientId': '0Ob7gGlPWWoCMx4qrGNSWjRgnMwa', // Get this value from WSO2-IAM Server Service Provider (SP) definition
-            'clientSecret': '4jjZU5nke4iovlq5seaSPVxnqBMa', // Get this value from WSO2-IAM Server Service Provider (SP) definition
-            'redirectUri': 'http://localhost:7777/', // Specify the redirect URL to land back after login redirect to WSO2-IAM Server login page
-            'scope': 'openid', // This is to specify that you are using openID Connect
-            'postLogoutRedirectUri': 'http://localhost:7777/' // Specify the post logout redirect URL to land back after logout redirect to WSO2-IAM Server logout page
+            // Possible values are FLOW_TYPE_IMPLICIT and FLOW_TYPE_PKCE, default is FLOW_TYPE_IMPLICIT
+            'flowType': FLOW_TYPE_PKCE,
+            // Possible values are LOCAL_STORAGE and SESSION_STORAGE, default is LOCAL_STORAGE and SESSION_STORAGE is not not supported yet
+            'userStore': LOCAL_STORAGE,
+            // Get this value from WSO2-IAM Server Service Provider (SP) definition
+            'clientId': '0Ob7gGlPWWoCMx4qrGNSWjRgnMwa',
+            // Get this value from WSO2-IAM Server Service Provider (SP) definition
+            'clientSecret': '4jjZU5nke4iovlq5seaSPVxnqBMa',
+            // Specify the redirect URL to land back after login redirect to WSO2-IAM Server login page
+            'redirectUri': 'http://localhost:7777/',
+            // This is to specify that you are using openID Connect
+            'scope': 'openid',
+            // Specify the post logout redirect URL to land back after logout redirect to WSO2-IAM Server logout page
+            'postLogoutRedirectUri': 'http://localhost:7777/'
           };
       
         this.app = new App(appConfigs);
         this.appLogout = new AppLogout(this.app, appConfigs.postLogoutRedirectUri, appConfigs.clientId);
-        this.appPKCE = new AppPKCE(this.app, appConfigs.clientId, appConfigs.clientSecret, appConfigs.redirectUri, appConfigs.scope, appConfigs.tokenUrl);
+        this.appPKCE = new AppPKCE(this.app, appConfigs.clientId, appConfigs.clientSecret, appConfigs.redirectUri, 
+            appConfigs.scope, appConfigs.tokenUrl);
         this.appUserInfo = new AppUserInfo(this.app, appConfigs.userInfoUrl);
     }
 

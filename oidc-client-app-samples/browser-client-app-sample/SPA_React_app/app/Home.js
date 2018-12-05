@@ -18,6 +18,8 @@
 
 import React, { Component } from 'react';
 
+import { FLOW_TYPE_IMPLICIT, FLOW_TYPE_PKCE } from '@openid/appauth';
+
 class Home extends Component {
 
   constructor(props) {
@@ -35,9 +37,9 @@ class Home extends Component {
   componentDidMount() {
 
     // Redirect completion callback method execution for authorization completion callback and end session (logout) completion callabck.
-    if(this.app.getConfiguration().flowType == "IMPLICIT") {
+    if (this.app.getConfiguration().flowType == FLOW_TYPE_IMPLICIT) {
       this.app.checkForAuthorizationResponse();
-    } else if (this.app.getConfiguration().flowType == "PKCE") {
+    } else if (this.app.getConfiguration().flowType == FLOW_TYPE_PKCE) {
       this.appPKCE.checkForAuthorizationResponse();
     }
     this.appLogout.checkForAuthorizationResponse();
@@ -47,9 +49,9 @@ class Home extends Component {
   loginClick() {
 
     // Execute OIDC authorize requests against WSO2 IS server
-    if(this.app.getConfiguration().flowType == "IMPLICIT") {
+    if (this.app.getConfiguration().flowType == FLOW_TYPE_IMPLICIT) {
       this.app.makeAuthorizationRequest();
-    } else if (this.app.getConfiguration().flowType == "PKCE") {
+    } else if (this.app.getConfiguration().flowType == FLOW_TYPE_PKCE) {
       this.appPKCE.makeAuthorizationRequest();
     }
   }

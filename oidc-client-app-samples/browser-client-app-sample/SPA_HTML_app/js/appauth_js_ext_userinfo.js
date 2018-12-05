@@ -218,14 +218,14 @@ var crypto_utils_1 = require("../crypto_utils");
  */
 var App = /** @class */ (function () {
     function App(_a) {
-        var _b = _a === void 0 ? {} : _a, _c = _b.authorizeUrl, authorizeUrl = _c === void 0 ? '' : _c, _d = _b.tokenUrl, tokenUrl = _d === void 0 ? '' : _d, _e = _b.revokeUrl, revokeUrl = _e === void 0 ? '' : _e, _f = _b.logoutUrl, logoutUrl = _f === void 0 ? '' : _f, _g = _b.userInfoUrl, userInfoUrl = _g === void 0 ? '' : _g, _h = _b.flowType, flowType = _h === void 0 ? "IMPLICIT" : _h, _j = _b.userStore, userStore = _j === void 0 ? "LOCAL_STORAGE" : _j, _k = _b.clientId, clientId = _k === void 0 ? '511828570984-7nmej36h9j2tebiqmpqh835naet4vci4.apps.googleusercontent.com' : _k, _l = _b.clientSecret, clientSecret = _l === void 0 ? '' : _l, _m = _b.redirectUri, redirectUri = _m === void 0 ? 'http://localhost:8080/app/' : _m, _o = _b.scope, scope = _o === void 0 ? 'openid' : _o, _p = _b.postLogoutRedirectUri, postLogoutRedirectUri = _p === void 0 ? 'http://localhost:8080/app/' : _p, _q = _b.discoveryUri, discoveryUri = _q === void 0 ? 'https://accounts.google.com' : _q;
+        var _b = _a === void 0 ? {} : _a, _c = _b.authorizeUrl, authorizeUrl = _c === void 0 ? '' : _c, _d = _b.tokenUrl, tokenUrl = _d === void 0 ? '' : _d, _e = _b.revokeUrl, revokeUrl = _e === void 0 ? '' : _e, _f = _b.logoutUrl, logoutUrl = _f === void 0 ? '' : _f, _g = _b.userInfoUrl, userInfoUrl = _g === void 0 ? '' : _g, _h = _b.flowType, flowType = _h === void 0 ? types_1.FLOW_TYPE_IMPLICIT : _h, _j = _b.userStore, userStore = _j === void 0 ? types_1.LOCAL_STORAGE : _j, _k = _b.clientId, clientId = _k === void 0 ? '511828570984-7nmej36h9j2tebiqmpqh835naet4vci4.apps.googleusercontent.com' : _k, _l = _b.clientSecret, clientSecret = _l === void 0 ? '' : _l, _m = _b.redirectUri, redirectUri = _m === void 0 ? 'http://localhost:8080/app/' : _m, _o = _b.scope, scope = _o === void 0 ? 'openid' : _o, _p = _b.postLogoutRedirectUri, postLogoutRedirectUri = _p === void 0 ? 'http://localhost:8080/app/' : _p, _q = _b.discoveryUri, discoveryUri = _q === void 0 ? 'https://accounts.google.com' : _q;
         this.authorizeUrl = authorizeUrl;
         this.tokenUrl = tokenUrl;
         this.revokeUrl = revokeUrl;
         this.logoutUrl = logoutUrl;
         this.userInfoUrl = userInfoUrl;
         this.flowTypeInternal = types_1.FLOW_TYPE_IMPLICIT;
-        if (flowType == "PKCE") {
+        if (flowType == types_1.FLOW_TYPE_PKCE) {
             this.flowTypeInternal = types_1.FLOW_TYPE_PKCE;
         }
         this.clientId = clientId;
@@ -234,7 +234,7 @@ var App = /** @class */ (function () {
         this.redirectUri = redirectUri;
         this.postLogoutRedirectUri = postLogoutRedirectUri;
         this.discoveryUri = discoveryUri;
-        if (userStore == "LOCAL_STORAGE") {
+        if (userStore == types_1.LOCAL_STORAGE) {
             this.userStore = new storage_1.LocalStorageBackend();
         }
         else {
@@ -768,6 +768,23 @@ exports.IS_PROFILE = false;
 
 },{}],12:[function(require,module,exports){
 "use strict";
+/*
+ * Copyright (c) 2018, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ *
+ * WSO2 Inc. licenses this file to you under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -955,6 +972,23 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
+/*
+ * Copyright (c) 2018, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ *
+ * WSO2 Inc. licenses this file to you under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
 var authorization_request_1 = require("./authorization_request");
 var authorization_request_handler_1 = require("./authorization_request_handler");
 var authorization_response_1 = require("./authorization_response");
@@ -1491,6 +1525,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 exports.FLOW_TYPE_IMPLICIT = 'IMPLICIT';
 exports.FLOW_TYPE_PKCE = 'PKCE';
+// exporting for browser JS apps
+window['FLOW_TYPE_IMPLICIT'] = exports.FLOW_TYPE_IMPLICIT;
+window['FLOW_TYPE_PKCE'] = exports.FLOW_TYPE_PKCE;
+/**
+ * Represents constants for browser storage types supported.
+ */
+exports.LOCAL_STORAGE = 'LOCAL_STORAGE';
+exports.SESSION_STORAGE = 'SESSION_STORAGE';
+// exporting for browser JS apps
+window['LOCAL_STORAGE'] = exports.LOCAL_STORAGE;
+window['SESSION_STORAGE'] = exports.SESSION_STORAGE;
 /**
  * Represents session/localstorage key for saving the authorization response for the current
  * request.

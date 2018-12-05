@@ -19,6 +19,8 @@
 import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
 
+import { FLOW_TYPE_IMPLICIT, FLOW_TYPE_PKCE } from '@openid/appauth';
+
 class Profile extends Component {
 
     constructor(props) {
@@ -41,7 +43,7 @@ class Profile extends Component {
             // Whatever you want to do after the wait
             var authResponse = localStorage.getItem('appauth_current_authorization_response');
             
-            if(!authResponse) {   
+            if (!authResponse) {   
                 currentComponent.props.history.push({pathname: '/Profile'});
             }
         }, millisecondsToWait);
@@ -56,9 +58,9 @@ class Profile extends Component {
     componentWillMount() {
 
         // Redirect completion callback method execution for authorization completion callback and end session (logout) completion callabck.
-        if(this.app.getConfiguration().flowType == "IMPLICIT") {
+        if (this.app.getConfiguration().flowType == FLOW_TYPE_IMPLICIT) {
             this.app.checkForAuthorizationResponse().then(this.checkUserLoggedIn(this));
-        } else if (this.app.getConfiguration().flowType == "PKCE") {
+        } else if (this.app.getConfiguration().flowType == FLOW_TYPE_PKCE) {
             this.appPKCE.checkForAuthorizationResponse().then(this.checkUserLoggedIn(this));
         }
         this.appLogout.checkForAuthorizationResponse();
@@ -66,7 +68,6 @@ class Profile extends Component {
         // userInfo route only works with only PKCE for now and have to do for implicit by decoding the id_token JWT
         this.appUserInfo.makeUserInfoRequest().then(userInfoJson => {
             this.sub = userInfoJson.sub;
-            console.log("=========" + this.sub);
             this.name = userInfoJson.name;
             this.given_name = userInfoJson.given_name;
             this.family_name = userInfoJson.family_name;

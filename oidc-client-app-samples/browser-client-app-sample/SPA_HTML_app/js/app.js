@@ -25,18 +25,26 @@
 */
 
 var appConfigs = {
-  'authorizeUrl': 'https://localhost:9443/oauth2/authorize', // change the https://localhost:9443 to your WSO2-IAM installation domain name in all the places of appConfigs JSON if necessary
+  // change the https://localhost:9443 to your WSO2-IAM installation domain name in all the places of appConfigs JSON if necessary
+  'authorizeUrl': 'https://localhost:9443/oauth2/authorize',
   'tokenUrl': 'https://localhost:9443/oauth2/token',
   'revokeUrl': 'https://localhost:9443/oauth2/revoke',
   'logoutUrl': 'https://localhost:9443/oidc/logout',
   'userInfoUrl': 'https://localhost:9443/oauth2/userinfo',
-  'flowType': "PKCE", // Possible values are IMPLICIT and PKCE, default is IMPLICIT
-  'userStore': "LOCAL_STORAGE", // Possible values are LOCAL_STORAGE and SESSION_STORAGE, default is LOCAL_STORAGE and SESSION_STORAGE is not not supported yet
-  'clientId': 'YDMv8lTAWH42jYiZkdvqHTocFXsa', // Get this value from WSO2-IAM Server Service Provider (SP) definition
-  'clientSecret': 'dLKJZIvPZX5H_GhTItlQ1eTNEE8a', // Get this value from WSO2-IAM Server Service Provider (SP) definition
-  'redirectUri': 'http://localhost:8080/SPA_HTML_app/', // Specify the redirect URL to land back after login redirect to WSO2-IAM Server login page
-  'scope': 'openid', // This is to specify that you are using openID Connect
-  'postLogoutRedirectUri': 'http://localhost:8080/SPA_HTML_app/' // Specify the post logout redirect URL to land back after logout redirect to WSO2-IAM Server logout page
+  // Possible values are FLOW_TYPE_IMPLICIT and FLOW_TYPE_IMPLICIT, default is FLOW_TYPE_IMPLICIT
+  'flowType': FLOW_TYPE_IMPLICIT,
+  // Possible values are LOCAL_STORAGE and SESSION_STORAGE, default is LOCAL_STORAGE and SESSION_STORAGE is not not supported yet
+  'userStore': LOCAL_STORAGE,
+  // Get this value from WSO2-IAM Server Service Provider (SP) definition
+  'clientId': 'YDMv8lTAWH42jYiZkdvqHTocFXsa',
+  // Get this value from WSO2-IAM Server Service Provider (SP) definition
+  'clientSecret': 'dLKJZIvPZX5H_GhTItlQ1eTNEE8a',
+  // Specify the redirect URL to land back after login redirect to WSO2-IAM Server login page
+  'redirectUri': 'http://localhost:8080/SPA_HTML_app/',
+  // This is to specify that you are using openID Connect
+  'scope': 'openid',
+  // Specify the post logout redirect URL to land back after logout redirect to WSO2-IAM Server logout page
+  'postLogoutRedirectUri': 'http://localhost:8080/SPA_HTML_app/'
 };
 
 var app = null;
@@ -49,7 +57,8 @@ var init = function (authCompletionCallback, logoutCompletionCallback) {
   // Remove any object initialization of you are not using and remove the respective js library file in js folder.
   app = new App(appConfigs);
   appLogout = new AppLogout(app, appConfigs.postLogoutRedirectUri, appConfigs.clientId);
-  appPKCE = new AppPKCE(app, appConfigs.clientId, appConfigs.clientSecret, appConfigs.redirectUri, appConfigs.scope, appConfigs.tokenUrl);
+  appPKCE = new AppPKCE(app, appConfigs.clientId, appConfigs.clientSecret, appConfigs.redirectUri, 
+    appConfigs.scope, appConfigs.tokenUrl);
   appUserInfo = new AppUserInfo(app, appConfigs.userInfoUrl);
 
   var appArray = [app, appLogout, appPKCE, appUserInfo];
@@ -60,9 +69,9 @@ var init = function (authCompletionCallback, logoutCompletionCallback) {
   // There is no init function in AppUserInfo class
 
   // check for authorization response if available.
-  if(appConfigs.flowType == "IMPLICIT") {
+  if (appConfigs.flowType == FLOW_TYPE_IMPLICIT) {
     app.checkForAuthorizationResponse();
-  } else if (appConfigs.flowType == "PKCE") {
+  } else if (appConfigs.flowType == FLOW_TYPE_PKCE) {
     appPKCE.checkForAuthorizationResponse();
   }
   appLogout.checkForAuthorizationResponse();
@@ -71,9 +80,9 @@ var init = function (authCompletionCallback, logoutCompletionCallback) {
 }
 
 var makeAuthorizationRequest = function () {
-  if(appConfigs.flowType == "IMPLICIT") {
+  if (appConfigs.flowType == FLOW_TYPE_IMPLICIT) {
     app.makeAuthorizationRequest();
-  } else if (appConfigs.flowType == "PKCE") {
+  } else if (appConfigs.flowType == FLOW_TYPE_PKCE) {
     appPKCE.makeAuthorizationRequest();
   }
 }
