@@ -69,9 +69,9 @@ var init = function (authCompletionCallback, logoutCompletionCallback) {
   // There is no init function in AppUserInfo class
 
   // check for authorization response if available.
-  if (appConfigs.flowType == FLOW_TYPE_IMPLICIT) {
+  if (FLOW_TYPE_IMPLICIT == appConfigs.flowType) {
     app.checkForAuthorizationResponse();
-  } else if (appConfigs.flowType == FLOW_TYPE_PKCE) {
+  } else if (FLOW_TYPE_PKCE == appConfigs.flowType) {
     appPKCE.checkForAuthorizationResponse();
   }
   appLogout.checkForAuthorizationResponse();
@@ -80,9 +80,9 @@ var init = function (authCompletionCallback, logoutCompletionCallback) {
 }
 
 var makeAuthorizationRequest = function () {
-  if (appConfigs.flowType == FLOW_TYPE_IMPLICIT) {
+  if (FLOW_TYPE_IMPLICIT == appConfigs.flowType) {
     app.makeAuthorizationRequest();
-  } else if (appConfigs.flowType == FLOW_TYPE_PKCE) {
+  } else if (FLOW_TYPE_PKCE == appConfigs.flowType) {
     appPKCE.makeAuthorizationRequest();
   }
 }

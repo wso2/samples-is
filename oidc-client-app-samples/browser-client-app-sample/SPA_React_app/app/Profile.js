@@ -58,9 +58,9 @@ class Profile extends Component {
     componentWillMount() {
 
         // Redirect completion callback method execution for authorization completion callback and end session (logout) completion callabck.
-        if (this.app.getConfiguration().flowType == FLOW_TYPE_IMPLICIT) {
+        if (FLOW_TYPE_IMPLICIT == this.app.getConfiguration().flowType) {
             this.app.checkForAuthorizationResponse().then(this.checkUserLoggedIn(this));
-        } else if (this.app.getConfiguration().flowType == FLOW_TYPE_PKCE) {
+        } else if (FLOW_TYPE_PKCE == this.app.getConfiguration().flowType) {
             this.appPKCE.checkForAuthorizationResponse().then(this.checkUserLoggedIn(this));
         }
         this.appLogout.checkForAuthorizationResponse();
