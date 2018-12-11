@@ -19,17 +19,20 @@
 import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
 
+import { FLOW_TYPE_IMPLICIT, FLOW_TYPE_PKCE } from '@openid/appauth';
+
 class Profile extends Component {
 
     constructor(props) {
         super(props);
     
-        this.application = props.application;
+        this.app = props.app;
+        this.appLogout = props.appLogout;
+        this.appPKCE = props.appPKCE;
+        this.appUserInfo = props.appUserInfo;
     
         // This binding is necessary to make `this` work in the callback
         this.logoutClick = this.logoutClick.bind(this);
-
-
     }
 
     checkUserLoggedIn(currentComponent) {
@@ -40,7 +43,7 @@ class Profile extends Component {
             // Whatever you want to do after the wait
             var authResponse = localStorage.getItem('appauth_current_authorization_response');
             
-            if(!authResponse) {   
+            if (!authResponse) {   
                 currentComponent.props.history.push({pathname: '/Profile'});
             }
         }, millisecondsToWait);
@@ -49,18 +52,22 @@ class Profile extends Component {
 
     logoutClick() {
         // Execute OIDC end session (logout) requests against WSO2 IS server
-        this.application.makeLogoutRequest();
+        this.appLogout.makeLogoutRequest();
     }
 
     componentWillMount() {
 
         // Redirect completion callback method execution for authorization completion callback and end session (logout) completion callabck.
-        this.application.checkForAuthorizationResponse().then(this.checkUserLoggedIn(this));
+        if (FLOW_TYPE_IMPLICIT == this.app.getConfiguration().flowType) {
+            this.app.checkForAuthorizationResponse().then(this.checkUserLoggedIn(this));
+        } else if (FLOW_TYPE_PKCE == this.app.getConfiguration().flowType) {
+            this.appPKCE.checkForAuthorizationResponse().then(this.checkUserLoggedIn(this));
+        }
+        this.appLogout.checkForAuthorizationResponse();
 
         // userInfo route only works with only PKCE for now and have to do for implicit by decoding the id_token JWT
-        this.application.makeUserInfoRequest().then(userInfoJson => {
+        this.appUserInfo.makeUserInfoRequest().then(userInfoJson => {
             this.sub = userInfoJson.sub;
-            console.log("=========" + this.sub);
             this.name = userInfoJson.name;
             this.given_name = userInfoJson.given_name;
             this.family_name = userInfoJson.family_name;
