@@ -27,38 +27,8 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>is-samples-distribution</artifactId>
     <packaging>pom</packaging>
-
-    <properties>
-        <qsg.app.location>IS-QSG/samples/QSG-bundle/QSG/bin/apps</qsg.app.location>
-        <qsg.jar.location>IS-QSG/samples/QSG-bundle/QSG/bin/lib</qsg.jar.location>
-    </properties>
-
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.1.1</version>
-                <executions>
-                    <execution>
-                        <id>copy</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <artifactItems>
-                        <artifactItem>
-                            <groupId>org.eclipse.jetty</groupId>
-                            <artifactId>jetty-runner</artifactId>
-                        </artifactItem>
-                    </artifactItems>
-                    <outputDirectory>${project.build.directory}/</outputDirectory>
-                    <excludeTransitive>true</excludeTransitive>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>

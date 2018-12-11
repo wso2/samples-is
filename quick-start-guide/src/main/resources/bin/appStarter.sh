@@ -22,7 +22,12 @@ getProperty() {
    echo $PROP_VALUE
 }
 
-PROPERTY_FILE=server.properties
+# Relative directory paths
+CONF_DIR=../conf
+APP_DIR=../webApps
+LIB_DIR=../lib
+
+PROPERTY_FILE=${CONF_DIR}/server.properties
 
 HOST=$(getProperty "server.host.domain")
 PORT=$(getProperty "server.host.port")
@@ -34,9 +39,9 @@ echo "      Using Host : ${HOST} "
 echo "      Using Port : ${PORT} "
 echo ""
 
-java -jar lib/jetty-runner.jar \
+java -jar ${LIB_DIR}/jetty-runner.jar \
                     --host ${HOST} --port ${PORT} \
-                    apps/pickup-dispatch.war \
-                    apps/pickup-manager.war \
-                    apps/saml2-web-app-pickup-dispatch.com.war \
-                    apps/saml2-web-app-pickup-manager.com.war
+                    ${APP_DIR}/pickup-dispatch.war \
+                    ${APP_DIR}/pickup-manager.war \
+                    ${APP_DIR}/saml2-web-app-pickup-dispatch.com.war \
+                    ${APP_DIR}/saml2-web-app-pickup-manager.com.war
