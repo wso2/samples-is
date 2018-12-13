@@ -21,6 +21,9 @@ SET APP_DIR=..\webApps
 SET LIB_DIR=..\lib
 SET SCENARIO_DIR=..\scenarios
 
+REM This is used to navigate back and forth between executables
+SET REL_ROOT=%cd%
+
 echo "Before Run: Make sure the following -                                         "
 echo "  * Added server details to the server.properties file in the QSG/bin folder  "
 echo "  * Your WSO2 IS 5.7.0 and applications are running                                 "
@@ -110,6 +113,11 @@ set /p scenario=Enter the scenario number you selected.
         EXIT 0
 	)
 
+:jump_to_location
+cd %~1
+
+:jump_to_relative_root
+cd %REL_ROOT
 
 REM Configure OIDC for OIDC samples
 :configure_sso_oidc
@@ -867,8 +875,15 @@ IF %ERRORLEVEL% NEQ 0 (
 FOR /F "tokens=*" %%A IN ('dir /b %SCENARIO_DIR%\02\QSG-*.jar') DO SET jarname=%%A
 FOR /L %%b IN (1,1,2) DO IF "!jarname:~-1!"==" " SET jarname=!jarname:~0,-1!
 
-FOR /F "tokens=*" %%A IN ('java -jar %SCENARIO_DIR%\02\%jarname%') DO SET app_id=%%A
+REM Perform jar execution from jar location
+jump_to_location %SCENARIO_DIR%\03
+
+FOR /F "tokens=*" %%A IN ('java -jar %jarname%') DO SET app_id=%%A
 FOR /L %%b IN (1,1,2) DO IF "!app_id:~-1!"==" " SET app_id=!app_id:~0,-1!
+
+REM Go back to relative root
+jump_to_relative_root
+
 echo(
 echo Updating application %~1...
 
@@ -982,8 +997,15 @@ IF %ERRORLEVEL% NEQ 0 (
 FOR /F "tokens=*" %%A IN ('dir /b %SCENARIO_DIR%\03\QSG-*.jar') DO SET jarname=%%A
 FOR /L %%b IN (1,1,2) DO IF "!jarname:~-1!"==" " SET jarname=!jarname:~0,-1!
 
-FOR /F "tokens=*" %%A IN ('java -jar %SCENARIO_DIR%\03\%jarname%') DO SET app_id=%%A
+REM Perform jar execution from jar location
+jump_to_location %SCENARIO_DIR%\03
+
+FOR /F "tokens=*" %%A IN ('java -jar %jarname%') DO SET app_id=%%A
 FOR /L %%b IN (1,1,2) DO IF "!app_id:~-1!"==" " SET app_id=!app_id:~0,-1!
+
+REM Go back to relative root
+jump_to_relative_root
+
 echo(
 echo Updating application %~1...
 echo %app_id%
@@ -1047,8 +1069,15 @@ IF %ERRORLEVEL% NEQ 0 (
 FOR /F "tokens=*" %%A IN ('dir /b %SCENARIO_DIR%\04\QSG-*.jar') DO SET jarname=%%A
 FOR /L %%b IN (1,1,2) DO IF "!jarname:~-1!"==" " SET jarname=!jarname:~0,-1!
 
-FOR /F "tokens=*" %%A IN ('java -jar %SCENARIO_DIR%\04\%jarname%') DO SET app_id=%%A
+REM Perform jar execution from jar location
+jump_to_location %SCENARIO_DIR%\03
+
+FOR /F "tokens=*" %%A IN ('java -jar %jarname%') DO SET app_id=%%A
 FOR /L %%b IN (1,1,2) DO IF "!app_id:~-1!"==" " SET app_id=!app_id:~0,-1!
+
+REM Go back to relative root
+jump_to_relative_root
+
 echo(
 
 echo Updating application %~1...
@@ -1099,8 +1128,15 @@ IF %ERRORLEVEL% NEQ 0 (
 FOR /F "tokens=*" %%A IN ('dir /b %SCENARIO_DIR%\05\QSG-*.jar') DO SET jarname=%%A
 FOR /L %%b IN (1,1,2) DO IF "!jarname:~-1!"==" " SET jarname=!jarname:~0,-1!
 
-FOR /F "tokens=*" %%A IN ('java -jar %SCENARIO_DIR%\05\%jarname%') DO SET app_id=%%A
+REM Perform jar execution from jar location
+jump_to_location %SCENARIO_DIR%\03
+
+FOR /F "tokens=*" %%A IN ('java -jar %jarname%') DO SET app_id=%%A
 FOR /L %%b IN (1,1,2) DO IF "!app_id:~-1!"==" " SET app_id=!app_id:~0,-1!
+
+REM Go back to relative root
+jump_to_relative_root
+
 echo(
 
 echo Updating application %~1...
