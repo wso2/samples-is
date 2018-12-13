@@ -365,7 +365,7 @@ set is_port=%~4
 set request_data=%SCENARIO_DIR%\%scenario%\add-association.xml
 
 IF NOT EXIST "%SCENARIO_DIR%\%scenario%" (
-    echo "%~1 Directory does not exists."
+    echo "%SCENARIO_DIR%\%scenario% Directory does not exists."
     exit -1
 )
 
@@ -542,7 +542,7 @@ echo(
 echo Creating a user named cameron...
 
 REM The following command can be used to create a user cameron.
-curl -s -k --user %is_user_name:%is_user_pass% --data "{"schemas":[],"name":{"familyName":"Smith","givenName":"Cameron"},"userName":"cameron","password":"cameron123","emails":"cameron@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://%is_domain%:%is_port%/wso2/scim/Users
+curl -s -k --user %is_user_name%:%is_user_pass% --data "{"schemas":[],"name":{"familyName":"Smith","givenName":"Cameron"},"userName":"cameron","password":"cameron123","emails":"cameron@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://%is_domain%:%is_port%/wso2/scim/Users
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while creating user cameron. !!
@@ -555,7 +555,7 @@ echo(
 echo Creating a user named alex...
 
 REM The following command can be used to create a user alex.
-curl -s -k --user %is_user_name:%is_user_pass% --data "{"schemas":[],"name":{"familyName":"Miller","givenName":"Alex"},"userName":"alex","password":"alex123","emails":"alex@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://%is_domain%:%is_port%/wso2/scim/Users
+curl -s -k --user %is_user_name%:%is_user_pass% --data "{"schemas":[],"name":{"familyName":"Miller","givenName":"Alex"},"userName":"alex","password":"alex123","emails":"alex@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://%is_domain%:%is_port%/wso2/scim/Users
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while creating user alex. !!
@@ -570,7 +570,7 @@ echo(
 echo Creating a role named Manager...
 
 REM The following command will add a role to the user.
-curl -s -k --user %is_user_name:%is_user_pass% -d @%request_data% -H "Content-Type: text/xml" -H "SOAPAction: urn:addRole" -o NUL https://%is_domain%:%is_port%/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k --user %is_user_name%:%is_user_pass% -d @%request_data% -H "Content-Type: text/xml" -H "SOAPAction: urn:addRole" -o NUL https://%is_domain%:%is_port%/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while creating role manager. !!
@@ -779,7 +779,6 @@ IF EXIST "%file%" (
 
 REM touch sso-config-${sp_name}.xml
 echo  ^<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://org.apache.axis2/xsd" xmlns:xsd1="http://dto.saml.sso.identity.carbon.wso2.org/xsd"^> ^<soapenv:Header/^> ^<soapenv:Body^> ^<xsd:addRPServiceProvider^> ^<xsd:spDto^> ^<xsd1:assertionConsumerUrls^>http://%server_host%:%server_port%/saml2-web-app-pickup-%sp_name%.com/home.jsp^</xsd1:assertionConsumerUrls^> ^<xsd1:assertionQueryRequestProfileEnabled^>false^</xsd1:assertionQueryRequestProfileEnabled^> ^<xsd1:attributeConsumingServiceIndex^>1223160755^</xsd1:attributeConsumingServiceIndex^> ^<xsd1:certAlias^>wso2carbon^</xsd1:certAlias^> ^<xsd1:defaultAssertionConsumerUrl^>http://%server_host%:%server_port%/saml2-web-app-pickup-%sp_name%.com/home.jsp^</xsd1:defaultAssertionConsumerUrl^> ^<xsd1:digestAlgorithmURI^>http://www.w3.org/2000/09/xmldsig#sha1^</xsd1:digestAlgorithmURI^> ^<xsd1:doEnableEncryptedAssertion^>false^</xsd1:doEnableEncryptedAssertion^> ^<xsd1:doSignAssertions^>true^</xsd1:doSignAssertions^> ^<xsd1:doSignResponse^>true^</xsd1:doSignResponse^> ^<xsd1:doSingleLogout^>true^</xsd1:doSingleLogout^> ^<xsd1:doValidateSignatureInRequests^>false^</xsd1:doValidateSignatureInRequests^> ^<xsd1:enableAttributeProfile^>false^</xsd1:enableAttributeProfile^> ^<xsd1:enableAttributesByDefault^>false^</xsd1:enableAttributesByDefault^> ^<xsd1:idPInitSLOEnabled^>true^</xsd1:idPInitSLOEnabled^> ^<xsd1:idPInitSSOEnabled^>true^</xsd1:idPInitSSOEnabled^> ^<xsd1:idpInitSLOReturnToURLs^>http://%server_domain%:%server_port%/saml2-web-app-pickup-%sp_name%.com/home.jsp^</xsd1:idpInitSLOReturnToURLs^> ^<xsd1:issuer^>saml2-web-app-pickup-%sp_name%.com^</xsd1:issuer^> ^<xsd1:nameIDFormat^>urn/oasis/names/tc/SAML/1.1/nameid-format/emailAddress^</xsd1:nameIDFormat^> ^<xsd1:requestedAudiences^>https://%is_domain%:%is_port%/oauth2/token^</xsd1:requestedAudiences^> ^<xsd1:requestedRecipients^>https://%is_domain%:%is_port%/oauth2/token^</xsd1:requestedRecipients^> ^<xsd1:signingAlgorithmURI^>http://www.w3.org/2000/09/xmldsig#rsa-sha1^</xsd1:signingAlgorithmURI^> ^<xsd1:sloRequestURL^>^</xsd1:sloRequestURL^> ^<xsd1:sloResponseURL^>^</xsd1:sloResponseURL^> ^</xsd:spDto^> ^</xsd:addRPServiceProvider^> ^</soapenv:Body^> ^</soapenv:Envelope^> >> %file%
-cd ..
 
 echo Configuring SAML2 web SSO for %~1...
 
@@ -876,7 +875,7 @@ echo Updating application %~1...
 REM Send the SOAP request to Update the Application.
 curl -s -k -H "Authorization: Basic %~2" -H "Content-Type: text/xml" -H "SOAPAction: %~3" -o NUL %~4 -d "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelope/"\" xmlns:xsd="\"http://org.apache.axis2/xsd"\" xmlns:xsd1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><soapenv:Header/><soapenv:Body><xsd:updateApplication><xsd:serviceProvider><xsd1:applicationID>%app_id%</xsd1:applicationID><xsd1:applicationName>%~1</xsd1:applicationName><xsd1:claimConfig><xsd1:alwaysSendMappedLocalSubjectId>false</xsd1:alwaysSendMappedLocalSubjectId><xsd1:localClaimDialect>true</xsd1:localClaimDialect></xsd1:claimConfig><xsd1:description>sample service provider</xsd1:description><xsd1:inboundAuthenticationConfig><xsd1:inboundAuthenticationRequestConfigs><xsd1:inboundAuthKey>saml2-web-app-pickup-%~1.com</xsd1:inboundAuthKey><xsd1:inboundAuthType>samlsso</xsd1:inboundAuthType><xsd1:properties><xsd1:name>attrConsumServiceIndex</xsd1:name><xsd1:value>1223160755</xsd1:value></xsd1:properties></xsd1:inboundAuthenticationRequestConfigs></xsd1:inboundAuthenticationConfig><xsd1:inboundProvisioningConfig><xsd1:provisioningEnabled>false</xsd1:provisioningEnabled><xsd1:provisioningUserStore>PRIMARY</xsd1:provisioningUserStore></xsd1:inboundProvisioningConfig><xsd1:localAndOutBoundAuthenticationConfig><xsd1:alwaysSendBackAuthenticatedListOfIdPs>false</xsd1:alwaysSendBackAuthenticatedListOfIdPs><xsd1:authenticationStepForAttributes></xsd1:authenticationStepForAttributes><xsd1:authenticationStepForSubject></xsd1:authenticationStepForSubject><xsd1:authenticationType>default</xsd1:authenticationType><xsd1:subjectClaimUri>http://wso2.org/claims/fullname</xsd1:subjectClaimUri></xsd1:localAndOutBoundAuthenticationConfig><xsd1:outboundProvisioningConfig><xsd1:provisionByRoleList></xsd1:provisionByRoleList></xsd1:outboundProvisioningConfig><xsd1:permissionAndRoleConfig></xsd1:permissionAndRoleConfig><xsd1:saasApp>false</xsd1:saasApp></xsd:serviceProvider></xsd:updateApplication></soapenv:Body></soapenv:Envelope>"
 echo ** Successfully updated the application %~1. **
-cd ..
+
 EXIT /B
 
 REM Configure OIDC for sample apps
@@ -935,7 +934,6 @@ REM echo %secret%
 
 REM touch sso-config-${sp_name}.xml
 echo ^<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://org.apache.axis2/xsd" xmlns:xsd1="http://dto.oauth.identity.carbon.wso2.org/xsd"^> ^<soapenv:Header/^> ^<soapenv:Body^> ^<xsd:registerOAuthApplicationData^> ^<xsd:application^> ^<xsd1:OAuthVersion^>OAuth-2.0^</xsd1:OAuthVersion^> ^<xsd1:applicationName^>%sp_name%^</xsd1:applicationName^> ^<xsd1:callbackUrl^>http://%server_host%:%server_port%/%sample_name%/oauth2client^</xsd1:callbackUrl^> ^<xsd1:grantTypes^>refresh_token urn:ietf:params:oauth:grant-type:saml2-bearer implicit password client_credentials iwa:ntlm authorization_code^</xsd1:grantTypes^> ^<xsd1:oauthConsumerKey^>%client_id%^</xsd1:oauthConsumerKey^> ^<xsd1:oauthConsumerSecret^>%secret%^</xsd1:oauthConsumerSecret^> ^<xsd1:pkceMandatory^>false^</xsd1:pkceMandatory^> ^</xsd:application^> ^</xsd:registerOAuthApplicationData^> ^</soapenv:Body^> ^</soapenv:Envelope^> >> %file%
-cd ..
 
 echo Configuring OIDC web SSO for %~1...
 
@@ -1004,7 +1002,7 @@ IF %ERRORLEVEL% NEQ 0 (
 )
 
 echo ** Successfully updated the application %~1. **
-cd ..
+
 EXIT /B
 
 REM Update multi-step of sample apps
@@ -1038,7 +1036,6 @@ curl -s -k -d @%request_data% -H "Authorization: Basic %auth%" -H "Content-Type:
 IF %ERRORLEVEL% NEQ 0 (
   echo(
   echo "!! Problem occurred while getting application details for %sp_name%.... !!"
-  cd ..
   echo(
   CALL :delete_sp dispatch Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
   CALL :delete_sp manager Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
@@ -1060,7 +1057,7 @@ echo app id is %app_id%
 REM Send the SOAP request to Update the Application.
 curl -s -k -H "Authorization: Basic %~2" -H "Content-Type: text/xml" -H "SOAPAction: %soap_action%" -o NUL %endpoint% -d "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelope/"\" xmlns:xsd="\"http://org.apache.axis2/xsd"\" xmlns:xsd1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><soapenv:Header/><soapenv:Body><ns3:updateApplication xmlns:ns3="\"http://org.apache.axis2/xsd"\"><ns3:serviceProvider><ns1:applicationID xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">%app_id%</ns1:applicationID><ns1:applicationName xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">%~1</ns1:applicationName><claimConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><alwaysSendMappedLocalSubjectId>false</alwaysSendMappedLocalSubjectId><localClaimDialect>true</localClaimDialect><roleClaimURI/></claimConfig><ns1:description xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">sample service provider</ns1:description><inboundAuthenticationConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><inboundAuthenticationRequestConfigs><inboundAuthKey>saml2-web-app-pickup-%sp_name%.com</inboundAuthKey><inboundAuthType>samlsso</inboundAuthType><properties><name>attrConsumServiceIndex</name><value>1223160755</value></properties></inboundAuthenticationRequestConfigs><inboundAuthenticationRequestConfigs><inboundAuthKey/><inboundAuthType>passivests</inboundAuthType></inboundAuthenticationRequestConfigs><inboundAuthenticationRequestConfigs><inboundAuthKey/><inboundAuthType>openid</inboundAuthType></inboundAuthenticationRequestConfigs></inboundAuthenticationConfig><inboundProvisioningConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><dumbMode>false</dumbMode><provisioningUserStore>PRIMARY</provisioningUserStore></inboundProvisioningConfig><localAndOutBoundAuthenticationConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><alwaysSendBackAuthenticatedListOfIdPs>false</alwaysSendBackAuthenticatedListOfIdPs><authenticationScriptConfig><ns2:content xmlns:ns2="\"http://script.model.common.application.identity.carbon.wso2.org/xsd"\"/><ns2:enabled xmlns:ns2="\"http://script.model.common.application.identity.carbon.wso2.org/xsd"\">false</ns2:enabled></authenticationScriptConfig><authenticationStepForAttributes xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><authenticationStepForSubject xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><authenticationSteps><attributeStep>true</attributeStep><localAuthenticatorConfigs><displayName>basic</displayName><name>BasicAuthenticator</name></localAuthenticatorConfigs><stepOrder>1</stepOrder><subjectStep>true</subjectStep></authenticationSteps><authenticationSteps><attributeStep>false</attributeStep><federatedIdentityProviders><defaultAuthenticatorConfig><displayName>twitter</displayName><name>TwitterAuthenticator</name></defaultAuthenticatorConfig><federatedAuthenticatorConfigs><displayName>twitter</displayName><name>TwitterAuthenticator</name></federatedAuthenticatorConfigs><identityProviderName>IDP-twitter</identityProviderName></federatedIdentityProviders><stepOrder>2</stepOrder><subjectStep>false</subjectStep></authenticationSteps><authenticationType>flow</authenticationType><enableAuthorization>false</enableAuthorization><subjectClaimUri xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><useTenantDomainInLocalSubjectIdentifier>false</useTenantDomainInLocalSubjectIdentifier><useUserstoreDomainInLocalSubjectIdentifier>false</useUserstoreDomainInLocalSubjectIdentifier></localAndOutBoundAuthenticationConfig><outboundProvisioningConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"/><permissionAndRoleConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"/><ns1:requestPathAuthenticatorConfigs xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><ns1:saasApp xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">false</ns1:saasApp></ns3:serviceProvider></ns3:updateApplication></soapenv:Body></soapenv:Envelope>"
 echo ** Successfully updated the application %~1. **
-cd ..
+
 EXIT /B
 
 REM Update federated authentication of sample apps
@@ -1090,7 +1087,7 @@ curl -s -k -d @%request_data% -H "Authorization: Basic %auth%" -H "Content-Type:
 
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while getting application details for %sp_name%.... !!"
-  cd ..
+
   echo(
   CALL :delete_sp dispatch Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
   CALL :delete_sp manager Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
@@ -1111,7 +1108,7 @@ echo Updating application %~1...
 REM Send the SOAP request to Update the Application.
 curl -s -k -H "Authorization: Basic %~2" -H "Content-Type: text/xml" -H "SOAPAction: %~3" -o NUL %~4 -d "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelope/"\" xmlns:xsd="\"http://org.apache.axis2/xsd"\" xmlns:xsd1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><soapenv:Header/><soapenv:Body><ns3:updateApplication xmlns:ns3="\"http://org.apache.axis2/xsd"\"><ns3:serviceProvider><ns1:applicationID xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">%app_id%</ns1:applicationID><ns1:applicationName xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">%sp_name%</ns1:applicationName><claimConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><alwaysSendMappedLocalSubjectId>false</alwaysSendMappedLocalSubjectId><localClaimDialect>true</localClaimDialect><roleClaimURI/></claimConfig><ns1:description xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">sample service provider</ns1:description><inboundAuthenticationConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><inboundAuthenticationRequestConfigs><inboundAuthKey>saml2-web-app-pickup-%sp_name%.com</inboundAuthKey><inboundAuthType>samlsso</inboundAuthType><properties><name>attrConsumServiceIndex</name><value>1223160755</value></properties></inboundAuthenticationRequestConfigs><inboundAuthenticationRequestConfigs><inboundAuthKey/><inboundAuthType>passivests</inboundAuthType></inboundAuthenticationRequestConfigs><inboundAuthenticationRequestConfigs><inboundAuthKey/><inboundAuthType>openid</inboundAuthType></inboundAuthenticationRequestConfigs></inboundAuthenticationConfig><inboundProvisioningConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><dumbMode>false</dumbMode><provisioningUserStore>PRIMARY</provisioningUserStore></inboundProvisioningConfig><localAndOutBoundAuthenticationConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><alwaysSendBackAuthenticatedListOfIdPs>false</alwaysSendBackAuthenticatedListOfIdPs><authenticationStepForAttributes xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><authenticationStepForSubject xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><authenticationSteps><federatedIdentityProviders><identityProviderName>IDP-twitter</identityProviderName></federatedIdentityProviders></authenticationSteps><authenticationType>federated</authenticationType><enableAuthorization>false</enableAuthorization><subjectClaimUri>http://wso2.org/claims/fullname</subjectClaimUri><useTenantDomainInLocalSubjectIdentifier>false</useTenantDomainInLocalSubjectIdentifier><useUserstoreDomainInLocalSubjectIdentifier>false</useUserstoreDomainInLocalSubjectIdentifier></localAndOutBoundAuthenticationConfig><outboundProvisioningConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"/><permissionAndRoleConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"/><ns1:requestPathAuthenticatorConfigs xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><ns1:saasApp xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">false</ns1:saasApp></ns3:serviceProvider></ns3:updateApplication></soapenv:Body></soapenv:Envelope>"
 echo ** Successfully updated the application %~1. **
-cd ..
+
 EXIT /B
 
 REM delete users created.
