@@ -116,8 +116,12 @@ set /p scenario=Enter the scenario number you selected.
 :jump_to_location
 cd %~1
 
+EXIT /B
+
 :jump_to_relative_root
 cd %REL_ROOT
+
+EXIT /B
 
 REM Configure OIDC for OIDC samples
 :configure_sso_oidc
@@ -876,13 +880,13 @@ FOR /F "tokens=*" %%A IN ('dir /b %SCENARIO_DIR%\02\QSG-*.jar') DO SET jarname=%
 FOR /L %%b IN (1,1,2) DO IF "!jarname:~-1!"==" " SET jarname=!jarname:~0,-1!
 
 REM Perform jar execution from jar location
-jump_to_location %SCENARIO_DIR%\03
+call :jump_to_location %SCENARIO_DIR%\03
 
 FOR /F "tokens=*" %%A IN ('java -jar %jarname%') DO SET app_id=%%A
 FOR /L %%b IN (1,1,2) DO IF "!app_id:~-1!"==" " SET app_id=!app_id:~0,-1!
 
 REM Go back to relative root
-jump_to_relative_root
+call :jump_to_relative_root
 
 echo(
 echo Updating application %~1...
@@ -998,13 +1002,13 @@ FOR /F "tokens=*" %%A IN ('dir /b %SCENARIO_DIR%\03\QSG-*.jar') DO SET jarname=%
 FOR /L %%b IN (1,1,2) DO IF "!jarname:~-1!"==" " SET jarname=!jarname:~0,-1!
 
 REM Perform jar execution from jar location
-jump_to_location %SCENARIO_DIR%\03
+call :jump_to_location %SCENARIO_DIR%\03
 
 FOR /F "tokens=*" %%A IN ('java -jar %jarname%') DO SET app_id=%%A
 FOR /L %%b IN (1,1,2) DO IF "!app_id:~-1!"==" " SET app_id=!app_id:~0,-1!
 
 REM Go back to relative root
-jump_to_relative_root
+call :jump_to_relative_root
 
 echo(
 echo Updating application %~1...
@@ -1070,13 +1074,13 @@ FOR /F "tokens=*" %%A IN ('dir /b %SCENARIO_DIR%\04\QSG-*.jar') DO SET jarname=%
 FOR /L %%b IN (1,1,2) DO IF "!jarname:~-1!"==" " SET jarname=!jarname:~0,-1!
 
 REM Perform jar execution from jar location
-jump_to_location %SCENARIO_DIR%\03
+call :jump_to_location %SCENARIO_DIR%\03
 
 FOR /F "tokens=*" %%A IN ('java -jar %jarname%') DO SET app_id=%%A
 FOR /L %%b IN (1,1,2) DO IF "!app_id:~-1!"==" " SET app_id=!app_id:~0,-1!
 
 REM Go back to relative root
-jump_to_relative_root
+call :jump_to_relative_root
 
 echo(
 
@@ -1129,13 +1133,13 @@ FOR /F "tokens=*" %%A IN ('dir /b %SCENARIO_DIR%\05\QSG-*.jar') DO SET jarname=%
 FOR /L %%b IN (1,1,2) DO IF "!jarname:~-1!"==" " SET jarname=!jarname:~0,-1!
 
 REM Perform jar execution from jar location
-jump_to_location %SCENARIO_DIR%\03
+call :jump_to_location %SCENARIO_DIR%\03
 
 FOR /F "tokens=*" %%A IN ('java -jar %jarname%') DO SET app_id=%%A
 FOR /L %%b IN (1,1,2) DO IF "!app_id:~-1!"==" " SET app_id=!app_id:~0,-1!
 
 REM Go back to relative root
-jump_to_relative_root
+call :jump_to_relative_root
 
 echo(
 
