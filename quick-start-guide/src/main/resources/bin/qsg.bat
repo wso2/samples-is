@@ -1,5 +1,4 @@
 @echo off
-set QSG=%cd%
 SetLocal EnableDelayedExpansion
 REM ----------------------------------------------------------------------------
 REM  Copyright 2018 WSO2, Inc. http://www.wso2.org
@@ -17,6 +16,11 @@ REM  See the License for the specific language governing permissions and
 REM  limitations under the License.
 
 REM ===============script starts here ===============================================
+SET CONF_DIR=..\conf
+SET APP_DIR=..\webApps
+SET LIB_DIR=..\lib
+SET SCENARIO_DIR=..\scenarios
+
 echo "Before Run: Make sure the following -                                         "
 echo "  * Added server details to the server.properties file in the QSG/bin folder  "
 echo "  * Your WSO2 IS 5.7.0 and applications are running                                 "
@@ -37,20 +41,16 @@ set /p input="Please enter your answer..."
         exit -1
     )
 
-echo "Reading server paths from %PROPERTY_FILE%"
-FOR /F "eol=; tokens=6,2 delims==" %%i IN ('findstr "wso2is.location" server.properties') DO SET IS_PATH=%%i
-REM echo %IS_PATH%
-
-FOR /F "eol=; tokens=6,2 delims==" %%i IN ('findstr "wso2is.host.domain" server.properties') DO SET IS_DOMAIN_NEW=%%i
+FOR /F "eol=; tokens=6,2 delims==" %%i IN ('findstr "wso2is.host.domain" %CONF_DIR%\server.properties') DO SET IS_DOMAIN_NEW=%%i
 REM echo %IS_DOMAIN_NEW%
 
-FOR /F "eol=; tokens=6,2 delims==" %%i IN ('findstr "wso2is.host.port" server.properties') DO SET IS_PORT=%%i
+FOR /F "eol=; tokens=6,2 delims==" %%i IN ('findstr "wso2is.host.port" %CONF_DIR%\server.properties') DO SET IS_PORT=%%i
 REM echo %IS_PORT%
 
-FOR /F "eol=; tokens=6,2 delims==" %%i IN ('findstr "server.host.domain" server.properties') DO SET SERVER_DOMAIN_NEW=%%i
+FOR /F "eol=; tokens=6,2 delims==" %%i IN ('findstr "server.host.domain" %CONF_DIR%\server.properties') DO SET SERVER_DOMAIN_NEW=%%i
 REM echo %SERVER_DOMAIN_NEW%
 
-FOR /F "eol=; tokens=6,2 delims==" %%i IN ('findstr "server.host.port" server.properties') DO SET SERVER_PORT=%%i
+FOR /F "eol=; tokens=6,2 delims==" %%i IN ('findstr "server.host.port" %CONF_DIR%\server.properties') DO SET SERVER_PORT=%%i
 REM echo %SERVER_PORT%
 
 IF "%IS_DOMAIN_NEW%"=="localhost.com" (
@@ -75,60 +75,41 @@ echo "--------------------------------------------------------------------------
 set /p scenario=Enter the scenario number you selected.
 
 	IF "%scenario%"=="1" (
-    	CALL :setup_servers %IS_PATH%
     	CALL :configure_sso_saml2 %IS_DOMAIN% %IS_PORT% %SERVER_DOMAIN% %SERVER_PORT%
     	CALL :end_message saml2-web-app-pickup-dispatch.com saml2-web-app-pickup-manager.com %IS_DOMAIN% %IS_PORT% %SERVER_DOMAIN% %SERVER_PORT%
     	EXIT 0
     )
 
 	IF "%scenario%"=="2" (
-	CALL :setup_servers %IS_PATH%
-	CALL :configure_sso_oidc %IS_DOMAIN% %IS_PORT% %SERVER_DOMAIN% %SERVER_PORT%
-	CALL :end_message pickup-dispatch pickup-manager %IS_DOMAIN% %IS_PORT% %SERVER_DOMAIN% %SERVER_PORT%
-	EXIT 0
+        CALL :configure_sso_oidc %IS_DOMAIN% %IS_PORT% %SERVER_DOMAIN% %SERVER_PORT%
+        CALL :end_message pickup-dispatch pickup-manager %IS_DOMAIN% %IS_PORT% %SERVER_DOMAIN% %SERVER_PORT%
+        EXIT 0
     )
 
 	IF "%scenario%"=="3" (
-	CALL :setup_servers %IS_PATH%
-	CALL :create_multifactor_auth %IS_DOMAIN% %IS_PORT% %SERVER_DOMAIN% %SERVER_PORT%
-	CALL :end_message saml2-web-app-pickup-dispatch.com saml2-web-app-pickup-manager.com %IS_DOMAIN% %IS_PORT% %SERVER_DOMAIN% %SERVER_PORT%
-	CALL :delete_idp 05 urn:deleteIdP https://%IS_DOMAIN%:%IS_PORT%/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/
-	EXIT 0
+        CALL :create_multifactor_auth %IS_DOMAIN% %IS_PORT% %SERVER_DOMAIN% %SERVER_PORT%
+        CALL :end_message saml2-web-app-pickup-dispatch.com saml2-web-app-pickup-manager.com %IS_DOMAIN% %IS_PORT% %SERVER_DOMAIN% %SERVER_PORT%
+        CALL :delete_idp 05 urn:deleteIdP https://%IS_DOMAIN%:%IS_PORT%/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/
+        EXIT 0
 	)
 
 	IF "%scenario%"=="4" (
-	CALL :setup_servers %IS_PATH%
-	CALL :configure_federated_auth %IS_DOMAIN% %IS_PORT% %SERVER_DOMAIN% %SERVER_PORT%
-	CALL :end_message saml2-web-app-pickup-dispatch.com saml2-web-app-pickup-manager.com %IS_DOMAIN% %IS_PORT% %SERVER_DOMAIN% %SERVER_PORT%
-	CALL :delete_idp 05 urn:deleteIdP https://%IS_DOMAIN%:%IS_PORT%/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/
-	EXIT 0
+        CALL :configure_federated_auth %IS_DOMAIN% %IS_PORT% %SERVER_DOMAIN% %SERVER_PORT%
+        CALL :end_message saml2-web-app-pickup-dispatch.com saml2-web-app-pickup-manager.com %IS_DOMAIN% %IS_PORT% %SERVER_DOMAIN% %SERVER_PORT%
+        CALL :delete_idp 05 urn:deleteIdP https://%IS_DOMAIN%:%IS_PORT%/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/
+        EXIT 0
     )
 
 	IF "%scenario%"=="5" (
-	CALL :setup_servers %IS_PATH%
-	CALL :configure_self_signup %IS_DOMAIN% %IS_PORT% %SERVER_DOMAIN% %SERVER_PORT%
-	EXIT 0
+        CALL :configure_self_signup %IS_DOMAIN% %IS_PORT% %SERVER_DOMAIN% %SERVER_PORT%
+        EXIT 0
 	)
 
 	IF "%scenario%"=="6" (
-	CALL :setup_servers %IS_PATH%
-	CALL :create_workflow %IS_DOMAIN% %IS_PORT% %SERVER_DOMAIN% %SERVER_PORT%
-	EXIT 0
+        CALL :create_workflow %IS_DOMAIN% %IS_PORT% %SERVER_DOMAIN% %SERVER_PORT%
+        EXIT 0
 	)
 
-REM Check whether the wso2-is is available
-:setup_servers
-
-set is_path=%~1
-
-echo(
-IF NOT EXIST %is_path% (
-    echo "%is_path% Directory does not exists. Please download and install the latest pack."
-    exit -1
-)
-
-
-EXIT /B
 
 REM Configure OIDC for OIDC samples
 :configure_sso_oidc
@@ -380,19 +361,20 @@ set scenario=%~1
 set auth=%~2
 set is_domain=%~3
 set is_port=%~4
-set request_data=%~1\add-association.xml
 
-IF NOT EXIST "%QSG%\%~1" (
+set request_data=%SCENARIO_DIR%\%scenario%\add-association.xml
+
+IF NOT EXIST "%SCENARIO_DIR%\%scenario%" (
     echo "%~1 Directory does not exists."
     exit -1
 )
 
-IF NOT EXIST "%QSG%\%request_data%" (
+IF NOT EXIST "%request_data%" (
     echo "%request_data% File does not exists."
     exit -1
 )
 
-curl -s -k -d @%QSG%\%request_data% -H "Authorization: Basic %auth%" -H "Content-Type: text/xml" -H "SOAPAction: urn:addAssociation" -o NUL https://%is_domain%:%is_port%/services/WorkflowAdminService.WorkflowAdminServiceHttpsSoap11Endpoint/
+curl -s -k -d @%request_data% -H "Authorization: Basic %auth%" -H "Content-Type: text/xml" -H "SOAPAction: urn:addAssociation" -o NUL https://%is_domain%:%is_port%/services/WorkflowAdminService.WorkflowAdminServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while creating the workflow association. !!"
@@ -511,31 +493,30 @@ set is_domain=%~6
 set is_port=%~7
 set server_domain=%~8
 set server_port=%~9
-set file=update-idp-%~5.xml
-set request_data=%~4/update-idp-%~5.xml
 
-IF NOT EXIST "%~4" (
-    echo "%~4 Directory does not exists."
+set file=%SCENARIO_DIR%\%scenario%\update-idp-%~5.xml
+set request_data=%SCENARIO_DIR%\%scenario%\update-idp-%~5.xml
+
+IF NOT EXIST "%SCENARIO_DIR%\%scenario%" (
+    echo "%SCENARIO_DIR%\%scenario%Directory does not exists."
     exit -1
 )
 
 REM Update the update-idp-config xml file with correct host names and port values
-echo %scenario%
-cd %scenario%
+
 IF EXIST "%file%" (
   echo "the file exists"
   del %file%
 )
+
 set regexvalue="^[a-zA-Z]"
 
 
-echo ^<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mgt="http://mgt.idp.carbon.wso2.org" xmlns:xsd="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<soapenv:Header/^> ^<soapenv:Body^> ^<mgt:updateResidentIdP^> ^<mgt:identityProvider^> ^<xsd:federatedAuthenticatorConfigs^> ^<xsd:name^>samlsso^</xsd:name^> ^<xsd:properties^> ^<xsd:name^>IdpEntityId^</xsd:name^> ^<xsd:value^>localhost^</xsd:value^> ^</xsd:properties^> ^<xsd:properties^> ^<xsd:name^>DestinationURI.1^</xsd:name^> ^<xsd:value^>https://%is_domain%:%is_port%/samlsso^</xsd:value^> ^</xsd:properties^> ^</xsd:federatedAuthenticatorConfigs^> ^<xsd:federatedAuthenticatorConfigs xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>passivests^</xsd:name^> ^<xsd:properties^> ^<xsd:name^>IdPEntityId^</xsd:name^> ^<xsd:value^>localhost^</xsd:value^> ^</xsd:properties^> ^</xsd:federatedAuthenticatorConfigs^> ^<xsd:federatedAuthenticatorConfigs xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>openidconnect^</xsd:name^> ^<xsd:properties^> ^<xsd:name^>IdPEntityId^</xsd:name^> ^<xsd:value^>https://%is_domain%:%is_port%/oauth2/token^</xsd:value^> ^</xsd:properties^> ^</xsd:federatedAuthenticatorConfigs^> ^<xsd:homeRealmId^>localhost^</xsd:homeRealmId^> ^<xsd:identityProviderName^>LOCAL^</xsd:identityProviderName^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>passwordHistory.enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>passwordHistory.count^</xsd:name^> ^<xsd:value^>5^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>passwordPolicy.enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>passwordPolicy.min.length^</xsd:name^> ^<xsd:value^>6^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>passwordPolicy.max.length^</xsd:name^> ^<xsd:value^>12^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>passwordPolicy.pattern^</xsd:name^> ^<xsd:value^>%regexvalue% ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>passwordPolicy.errorMsg^</xsd:name^> ^<xsd:value^>'Password pattern policy violated. Password should contain only letters.' ^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>sso.login.recaptcha.enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>sso.login.recaptcha.on.max.failed.attempts^</xsd:name^> ^<xsd:value^>3^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>account.lock.handler.enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>account.lock.handler.On.Failure.Max.Attempts^</xsd:name^> ^<xsd:value^>5^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>account.lock.handler.Time^</xsd:name^> ^<xsd:value^>5^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>account.lock.handler.login.fail.timeout.ratio^</xsd:name^> ^<xsd:value^>2^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>account.lock.handler.notification.manageInternally^</xsd:name^> ^<xsd:value^>true^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>account.disable.handler.enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>account.disable.handler.notification.manageInternally^</xsd:name^> ^<xsd:value^>true^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>suspension.notification.enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>suspension.notification.account.disable.delay^</xsd:name^> ^<xsd:value^>90^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>suspension.notification.delays^</xsd:name^> ^<xsd:value^>30,45,60,75^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.Notification.Password.Enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.Question.Password.Enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.Question.Password.MinAnswers^</xsd:name^> ^<xsd:value^>2^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.Question.Password.ReCaptcha.Enable^</xsd:name^> ^<xsd:value^>true^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.Question.Password.ReCaptcha.MaxFailedAttempts^</xsd:name^> ^<xsd:value^>2^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.Notification.Username.Enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.Notification.InternallyManage^</xsd:name^> ^<xsd:value^>true^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.NotifySuccess^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.Question.Password.NotifyStart^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.ExpiryTime^</xsd:name^> ^<xsd:value^>1440^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>SelfRegistration.Enable^</xsd:name^> ^<xsd:value^>true^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>SelfRegistration.LockOnCreation^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>SelfRegistration.Notification.InternallyManage^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>SelfRegistration.ReCaptcha^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>SelfRegistration.VerificationCode.ExpiryTime^</xsd:name^> ^<xsd:value^>1440^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>EmailVerification.Enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>EmailVerification.LockOnCreation^</xsd:name^> ^<xsd:value^>true^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>EmailVerification.Notification.InternallyManage^</xsd:name^> ^<xsd:value^>true^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>EmailVerification.ExpiryTime^</xsd:name^> ^<xsd:value^>1440^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>EmailVerification.AskPassword.ExpiryTime^</xsd:name^> ^<xsd:value^>1440^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>EmailVerification.AskPassword.PasswordGenerator^</xsd:name^> ^<xsd:value^>org.wso2.carbon.user.mgt.common.DefaultPasswordGenerator^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.AdminPasswordReset.RecoveryLink^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.AdminPasswordReset.OTP^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.AdminPasswordReset.Offline^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>SessionIdleTimeout^</xsd:name^> ^<xsd:value^>15^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>RememberMeTimeout^</xsd:name^> ^<xsd:value^>20160^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:primary^>true^</xsd:primary^> ^</mgt:identityProvider^> ^</mgt:updateResidentIdP^> ^</soapenv:Body^> ^</soapenv:Envelope^>  >> update-idp-selfsignup.xml
+echo ^<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mgt="http://mgt.idp.carbon.wso2.org" xmlns:xsd="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<soapenv:Header/^> ^<soapenv:Body^> ^<mgt:updateResidentIdP^> ^<mgt:identityProvider^> ^<xsd:federatedAuthenticatorConfigs^> ^<xsd:name^>samlsso^</xsd:name^> ^<xsd:properties^> ^<xsd:name^>IdpEntityId^</xsd:name^> ^<xsd:value^>localhost^</xsd:value^> ^</xsd:properties^> ^<xsd:properties^> ^<xsd:name^>DestinationURI.1^</xsd:name^> ^<xsd:value^>https://%is_domain%:%is_port%/samlsso^</xsd:value^> ^</xsd:properties^> ^</xsd:federatedAuthenticatorConfigs^> ^<xsd:federatedAuthenticatorConfigs xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>passivests^</xsd:name^> ^<xsd:properties^> ^<xsd:name^>IdPEntityId^</xsd:name^> ^<xsd:value^>localhost^</xsd:value^> ^</xsd:properties^> ^</xsd:federatedAuthenticatorConfigs^> ^<xsd:federatedAuthenticatorConfigs xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>openidconnect^</xsd:name^> ^<xsd:properties^> ^<xsd:name^>IdPEntityId^</xsd:name^> ^<xsd:value^>https://%is_domain%:%is_port%/oauth2/token^</xsd:value^> ^</xsd:properties^> ^</xsd:federatedAuthenticatorConfigs^> ^<xsd:homeRealmId^>localhost^</xsd:homeRealmId^> ^<xsd:identityProviderName^>LOCAL^</xsd:identityProviderName^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>passwordHistory.enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>passwordHistory.count^</xsd:name^> ^<xsd:value^>5^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>passwordPolicy.enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>passwordPolicy.min.length^</xsd:name^> ^<xsd:value^>6^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>passwordPolicy.max.length^</xsd:name^> ^<xsd:value^>12^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>passwordPolicy.pattern^</xsd:name^> ^<xsd:value^>%regexvalue% ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>passwordPolicy.errorMsg^</xsd:name^> ^<xsd:value^>'Password pattern policy violated. Password should contain only letters.' ^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>sso.login.recaptcha.enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>sso.login.recaptcha.on.max.failed.attempts^</xsd:name^> ^<xsd:value^>3^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>account.lock.handler.enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>account.lock.handler.On.Failure.Max.Attempts^</xsd:name^> ^<xsd:value^>5^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>account.lock.handler.Time^</xsd:name^> ^<xsd:value^>5^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>account.lock.handler.login.fail.timeout.ratio^</xsd:name^> ^<xsd:value^>2^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>account.lock.handler.notification.manageInternally^</xsd:name^> ^<xsd:value^>true^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>account.disable.handler.enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>account.disable.handler.notification.manageInternally^</xsd:name^> ^<xsd:value^>true^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>suspension.notification.enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>suspension.notification.account.disable.delay^</xsd:name^> ^<xsd:value^>90^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>suspension.notification.delays^</xsd:name^> ^<xsd:value^>30,45,60,75^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.Notification.Password.Enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.Question.Password.Enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.Question.Password.MinAnswers^</xsd:name^> ^<xsd:value^>2^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.Question.Password.ReCaptcha.Enable^</xsd:name^> ^<xsd:value^>true^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.Question.Password.ReCaptcha.MaxFailedAttempts^</xsd:name^> ^<xsd:value^>2^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.Notification.Username.Enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.Notification.InternallyManage^</xsd:name^> ^<xsd:value^>true^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.NotifySuccess^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.Question.Password.NotifyStart^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.ExpiryTime^</xsd:name^> ^<xsd:value^>1440^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>SelfRegistration.Enable^</xsd:name^> ^<xsd:value^>true^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>SelfRegistration.LockOnCreation^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>SelfRegistration.Notification.InternallyManage^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>SelfRegistration.ReCaptcha^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>SelfRegistration.VerificationCode.ExpiryTime^</xsd:name^> ^<xsd:value^>1440^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>EmailVerification.Enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>EmailVerification.LockOnCreation^</xsd:name^> ^<xsd:value^>true^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>EmailVerification.Notification.InternallyManage^</xsd:name^> ^<xsd:value^>true^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>EmailVerification.ExpiryTime^</xsd:name^> ^<xsd:value^>1440^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>EmailVerification.AskPassword.ExpiryTime^</xsd:name^> ^<xsd:value^>1440^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>EmailVerification.AskPassword.PasswordGenerator^</xsd:name^> ^<xsd:value^>org.wso2.carbon.user.mgt.common.DefaultPasswordGenerator^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.AdminPasswordReset.RecoveryLink^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.AdminPasswordReset.OTP^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.AdminPasswordReset.Offline^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>SessionIdleTimeout^</xsd:name^> ^<xsd:value^>15^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>RememberMeTimeout^</xsd:name^> ^<xsd:value^>20160^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:primary^>true^</xsd:primary^> ^</mgt:identityProvider^> ^</mgt:updateResidentIdP^> ^</soapenv:Body^> ^</soapenv:Envelope^>  >> %SCENARIO_DIR%\%scenario%\update-idp-selfsignup.xml
 
 
-echo ^<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mgt="http://mgt.idp.carbon.wso2.org" xmlns:xsd="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<soapenv:Header/^> ^<soapenv:Body^> ^<mgt:updateResidentIdP^> ^<mgt:identityProvider^> ^<xsd:federatedAuthenticatorConfigs^> ^<xsd:name^>samlsso^</xsd:name^> ^<xsd:properties^> ^<xsd:name^>IdpEntityId^</xsd:name^> ^<xsd:value^>localhost^</xsd:value^> ^</xsd:properties^> ^<xsd:properties^> ^<xsd:name^>DestinationURI.1^</xsd:name^> ^<xsd:value^>https://%is_domain%:%is_port%/samlsso^</xsd:value^> ^</xsd:properties^> ^</xsd:federatedAuthenticatorConfigs^> ^<xsd:federatedAuthenticatorConfigs xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>passivests^</xsd:name^> ^<xsd:properties^> ^<xsd:name^>IdPEntityId^</xsd:name^> ^<xsd:value^>localhost^</xsd:value^> ^</xsd:properties^> ^</xsd:federatedAuthenticatorConfigs^> ^<xsd:federatedAuthenticatorConfigs xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>openidconnect^</xsd:name^> ^<xsd:properties^> ^<xsd:name^>IdPEntityId^</xsd:name^> ^<xsd:value^>https://%is_domain%:%is_port%/oauth2/token^</xsd:value^> ^</xsd:properties^> ^</xsd:federatedAuthenticatorConfigs^> ^<xsd:homeRealmId^>localhost^</xsd:homeRealmId^> ^<xsd:identityProviderName^>LOCAL^</xsd:identityProviderName^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>passwordHistory.enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>passwordHistory.count^</xsd:name^> ^<xsd:value^>5^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>passwordPolicy.enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>passwordPolicy.min.length^</xsd:name^> ^<xsd:value^>6^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>passwordPolicy.max.length^</xsd:name^> ^<xsd:value^>12^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>passwordPolicy.pattern^</xsd:name^> ^<xsd:value^>%regexvalue%^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>passwordPolicy.errorMsg^</xsd:name^> ^<xsd:value^>'Password pattern policy violated. should contain only letters' ^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>sso.login.recaptcha.enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>sso.login.recaptcha.on.max.failed.attempts^</xsd:name^> ^<xsd:value^>3^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>account.lock.handler.enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>account.lock.handler.On.Failure.Max.Attempts^</xsd:name^> ^<xsd:value^>5^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>account.lock.handler.Time^</xsd:name^> ^<xsd:value^>5^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>account.lock.handler.login.fail.timeout.ratio^</xsd:name^> ^<xsd:value^>2^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>account.lock.handler.notification.manageInternally^</xsd:name^> ^<xsd:value^>true^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>account.disable.handler.enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>account.disable.handler.notification.manageInternally^</xsd:name^> ^<xsd:value^>true^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>suspension.notification.enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>suspension.notification.account.disable.delay^</xsd:name^> ^<xsd:value^>90^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>suspension.notification.delays^</xsd:name^> ^<xsd:value^>30,45,60,75^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.Notification.Password.Enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.Question.Password.Enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.Question.Password.MinAnswers^</xsd:name^> ^<xsd:value^>2^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.Question.Password.ReCaptcha.Enable^</xsd:name^> ^<xsd:value^>true^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.Question.Password.ReCaptcha.MaxFailedAttempts^</xsd:name^> ^<xsd:value^>2^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.Notification.Username.Enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.Notification.InternallyManage^</xsd:name^> ^<xsd:value^>true^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.NotifySuccess^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.Question.Password.NotifyStart^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.ExpiryTime^</xsd:name^> ^<xsd:value^>1440^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>SelfRegistration.Enable^</xsd:name^> ^<xsd:value^>true^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>SelfRegistration.LockOnCreation^</xsd:name^> ^<xsd:value^>true^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>SelfRegistration.Notification.InternallyManage^</xsd:name^> ^<xsd:value^>true^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>SelfRegistration.ReCaptcha^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>SelfRegistration.VerificationCode.ExpiryTime^</xsd:name^> ^<xsd:value^>1440^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>EmailVerification.Enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>EmailVerification.LockOnCreation^</xsd:name^> ^<xsd:value^>true^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>EmailVerification.Notification.InternallyManage^</xsd:name^> ^<xsd:value^>true^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>EmailVerification.ExpiryTime^</xsd:name^> ^<xsd:value^>1440^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>EmailVerification.AskPassword.ExpiryTime^</xsd:name^> ^<xsd:value^>1440^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>EmailVerification.AskPassword.PasswordGenerator^</xsd:name^> ^<xsd:value^>org.wso2.carbon.user.mgt.common.DefaultPasswordGenerator^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.AdminPasswordReset.RecoveryLink^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.AdminPasswordReset.OTP^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.AdminPasswordReset.Offline^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>SessionIdleTimeout^</xsd:name^> ^<xsd:value^>15^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>RememberMeTimeout^</xsd:name^> ^<xsd:value^>20160^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:primary^>true^</xsd:primary^> ^</mgt:identityProvider^> ^</mgt:updateResidentIdP^> ^</soapenv:Body^> ^</soapenv:Envelope^> >> update-idp-lockon.xml
+echo ^<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mgt="http://mgt.idp.carbon.wso2.org" xmlns:xsd="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<soapenv:Header/^> ^<soapenv:Body^> ^<mgt:updateResidentIdP^> ^<mgt:identityProvider^> ^<xsd:federatedAuthenticatorConfigs^> ^<xsd:name^>samlsso^</xsd:name^> ^<xsd:properties^> ^<xsd:name^>IdpEntityId^</xsd:name^> ^<xsd:value^>localhost^</xsd:value^> ^</xsd:properties^> ^<xsd:properties^> ^<xsd:name^>DestinationURI.1^</xsd:name^> ^<xsd:value^>https://%is_domain%:%is_port%/samlsso^</xsd:value^> ^</xsd:properties^> ^</xsd:federatedAuthenticatorConfigs^> ^<xsd:federatedAuthenticatorConfigs xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>passivests^</xsd:name^> ^<xsd:properties^> ^<xsd:name^>IdPEntityId^</xsd:name^> ^<xsd:value^>localhost^</xsd:value^> ^</xsd:properties^> ^</xsd:federatedAuthenticatorConfigs^> ^<xsd:federatedAuthenticatorConfigs xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>openidconnect^</xsd:name^> ^<xsd:properties^> ^<xsd:name^>IdPEntityId^</xsd:name^> ^<xsd:value^>https://%is_domain%:%is_port%/oauth2/token^</xsd:value^> ^</xsd:properties^> ^</xsd:federatedAuthenticatorConfigs^> ^<xsd:homeRealmId^>localhost^</xsd:homeRealmId^> ^<xsd:identityProviderName^>LOCAL^</xsd:identityProviderName^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>passwordHistory.enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>passwordHistory.count^</xsd:name^> ^<xsd:value^>5^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>passwordPolicy.enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>passwordPolicy.min.length^</xsd:name^> ^<xsd:value^>6^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>passwordPolicy.max.length^</xsd:name^> ^<xsd:value^>12^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>passwordPolicy.pattern^</xsd:name^> ^<xsd:value^>%regexvalue%^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>passwordPolicy.errorMsg^</xsd:name^> ^<xsd:value^>'Password pattern policy violated. should contain only letters' ^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>sso.login.recaptcha.enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>sso.login.recaptcha.on.max.failed.attempts^</xsd:name^> ^<xsd:value^>3^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>account.lock.handler.enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>account.lock.handler.On.Failure.Max.Attempts^</xsd:name^> ^<xsd:value^>5^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>account.lock.handler.Time^</xsd:name^> ^<xsd:value^>5^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>account.lock.handler.login.fail.timeout.ratio^</xsd:name^> ^<xsd:value^>2^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>account.lock.handler.notification.manageInternally^</xsd:name^> ^<xsd:value^>true^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>account.disable.handler.enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>account.disable.handler.notification.manageInternally^</xsd:name^> ^<xsd:value^>true^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>suspension.notification.enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>suspension.notification.account.disable.delay^</xsd:name^> ^<xsd:value^>90^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>suspension.notification.delays^</xsd:name^> ^<xsd:value^>30,45,60,75^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.Notification.Password.Enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.Question.Password.Enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.Question.Password.MinAnswers^</xsd:name^> ^<xsd:value^>2^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.Question.Password.ReCaptcha.Enable^</xsd:name^> ^<xsd:value^>true^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.Question.Password.ReCaptcha.MaxFailedAttempts^</xsd:name^> ^<xsd:value^>2^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.Notification.Username.Enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.Notification.InternallyManage^</xsd:name^> ^<xsd:value^>true^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.NotifySuccess^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.Question.Password.NotifyStart^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.ExpiryTime^</xsd:name^> ^<xsd:value^>1440^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>SelfRegistration.Enable^</xsd:name^> ^<xsd:value^>true^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>SelfRegistration.LockOnCreation^</xsd:name^> ^<xsd:value^>true^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>SelfRegistration.Notification.InternallyManage^</xsd:name^> ^<xsd:value^>true^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>SelfRegistration.ReCaptcha^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>SelfRegistration.VerificationCode.ExpiryTime^</xsd:name^> ^<xsd:value^>1440^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>EmailVerification.Enable^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>EmailVerification.LockOnCreation^</xsd:name^> ^<xsd:value^>true^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>EmailVerification.Notification.InternallyManage^</xsd:name^> ^<xsd:value^>true^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>EmailVerification.ExpiryTime^</xsd:name^> ^<xsd:value^>1440^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>EmailVerification.AskPassword.ExpiryTime^</xsd:name^> ^<xsd:value^>1440^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>EmailVerification.AskPassword.PasswordGenerator^</xsd:name^> ^<xsd:value^>org.wso2.carbon.user.mgt.common.DefaultPasswordGenerator^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.AdminPasswordReset.RecoveryLink^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.AdminPasswordReset.OTP^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>Recovery.AdminPasswordReset.Offline^</xsd:name^> ^<xsd:value^>false^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>SessionIdleTimeout^</xsd:name^> ^<xsd:value^>15^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:idpProperties xmlns="http://model.common.application.identity.carbon.wso2.org/xsd"^> ^<xsd:name^>RememberMeTimeout^</xsd:name^> ^<xsd:value^>20160^</xsd:value^> ^</xsd:idpProperties^> ^<xsd:primary^>true^</xsd:primary^> ^</mgt:identityProvider^> ^</mgt:updateResidentIdP^> ^</soapenv:Body^> ^</soapenv:Envelope^> >> %SCENARIO_DIR%\%scenario%\update-idp-lockon.xml
 
-echo %config%
-cd ..
 
 echo Configuring OIDC web SSO for %~1...
 
@@ -549,17 +530,19 @@ EXIT /B
 
 :add_user
 
-set IS_name=%~1
-set IS_pass=%~2
+set is_user_name=%~1
+set is_user_pass=%~2
 set scenario=%~3
 set is_domain=%~4
 set is_port=%~5
-set request_data=%~3\add-role.xml
+
+set request_data=%SCENARIO_DIR%\%scenario%\add-role.xml
+
 echo(
 echo Creating a user named cameron...
 
 REM The following command can be used to create a user cameron.
-curl -s -k --user %~1:%~2 --data "{"schemas":[],"name":{"familyName":"Smith","givenName":"Cameron"},"userName":"cameron","password":"cameron123","emails":"cameron@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://%is_domain%:%is_port%/wso2/scim/Users
+curl -s -k --user %is_user_name:%is_user_pass% --data "{"schemas":[],"name":{"familyName":"Smith","givenName":"Cameron"},"userName":"cameron","password":"cameron123","emails":"cameron@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://%is_domain%:%is_port%/wso2/scim/Users
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while creating user cameron. !!
@@ -572,7 +555,7 @@ echo(
 echo Creating a user named alex...
 
 REM The following command can be used to create a user alex.
-curl -s -k --user %~1:%~2 --data "{"schemas":[],"name":{"familyName":"Miller","givenName":"Alex"},"userName":"alex","password":"alex123","emails":"alex@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://%is_domain%:%is_port%/wso2/scim/Users
+curl -s -k --user %is_user_name:%is_user_pass% --data "{"schemas":[],"name":{"familyName":"Miller","givenName":"Alex"},"userName":"alex","password":"alex123","emails":"alex@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://%is_domain%:%is_port%/wso2/scim/Users
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while creating user alex. !!
@@ -587,7 +570,7 @@ echo(
 echo Creating a role named Manager...
 
 REM The following command will add a role to the user.
-curl -s -k --user %~1:%~2 -d @%QSG%\%request_data% -H "Content-Type: text/xml" -H "SOAPAction: urn:addRole" -o NUL https://%is_domain%:%is_port%/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k --user %is_user_name:%is_user_pass% -d @%request_data% -H "Content-Type: text/xml" -H "SOAPAction: urn:addRole" -o NUL https://%is_domain%:%is_port%/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while creating role manager. !!
@@ -607,20 +590,21 @@ set IS_pass=%~2
 set scenario=%~3
 set is_domain=%~4
 set is_port=%~5
-set request_data1=%~3/add-role-senior.xml
-set request_data2=%~3/add-role-junior.xml
 
-IF NOT EXIST "%QSG%\%~3" (
-    echo "%~3 Directory does not exists."
+set request_data1=%SCENARIO_DIR%\%scenario%\add-role-senior.xml
+set request_data2=%SCENARIO_DIR%\%scenario%\add-role-junior.xml
+
+IF NOT EXIST "%SCENARIO_DIR%\%scenario%" (
+    echo "%SCENARIO_DIR%\%scenario% Directory does not exists."
     exit -1
 )
 
-IF NOT EXIST "%QSG%\%request_data1%" (
+IF NOT EXIST "%request_data1%" (
     echo "%request_data1% File does not exists."
     exit -1
 )
 
-IF NOT EXIST "%QSG%\%request_data2%" (
+IF NOT EXIST "%request_data2%" (
     echo "%request_data2% File does not exists."
     exit -1
 )
@@ -629,7 +613,7 @@ echo(
 echo "Creating a user named cameron..."
 
 REM The following command can be used to create a user.
-curl -s -k --user %~1:%~2 --data "{"schemas":[],"name":{"familyName":"Smith","givenName":"Cameron"},"userName":"cameron","password":"cameron123","emails":"cameron@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://%is_domain%:%is_port%/wso2/scim/Users
+curl -s -k --user %IS_name%:%IS_pass% --data "{"schemas":[],"name":{"familyName":"Smith","givenName":"Cameron"},"userName":"cameron","password":"cameron123","emails":"cameron@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://%is_domain%:%is_port%/wso2/scim/Users
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while creating user cameron. !!"
   echo(
@@ -644,7 +628,7 @@ REM The following command can be used to create a user.
 
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while creating user alex. !!"
-  echo(curl -s -k --user %~1:%~2 --data "{"schemas":[],"name":{"familyName":"Miller","givenName":"Alex"},"userName":"alex","password":"alex123","emails":"alex@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://%is_domain%:%is_port%/wso2/scim/Users
+  echo(curl -s -k --user %IS_name%:%IS_pass% --data "{"schemas":[],"name":{"familyName":"Miller","givenName":"Alex"},"userName":"alex","password":"alex123","emails":"alex@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://%is_domain%:%is_port%/wso2/scim/Users
 
   CALL :delete_user %is_domain% %is_port%
   echo(
@@ -656,7 +640,7 @@ echo(
 echo "Creating a role named senior_manager..."
 
 REM The following command will add a role to the user.
-curl -s -k --user %~1:%~2 -d @%QSG%\%request_data1% -H "Content-Type: text/xml" -H "SOAPAction: urn:addRole" https://%is_domain%:%is_port%/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k --user %IS_name%:%IS_pass% -d @%request_data1% -H "Content-Type: text/xml" -H "SOAPAction: urn:addRole" https://%is_domain%:%is_port%/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while creating role senior_manager. !!"
@@ -671,7 +655,7 @@ echo(
 echo "Creating a role named junior_manager..."
 
 REM The following command will add a role to the user.
-curl -s -k --user %~1:%~2 -d @%QSG%\%request_data2% -H "Content-Type: text/xml" -H "SOAPAction: urn:addRole" https://%is_domain%:%is_port%/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k --user %IS_name%:%IS_pass% -d @%request_data2% -H "Content-Type: text/xml" -H "SOAPAction: urn:addRole" https://%is_domain%:%is_port%/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while creating role junior_manager. !!"
@@ -694,14 +678,15 @@ set endpoint=%~4
 set auth=%~5
 set is_domain=%~6
 set is_port=%~7
-set request_data=%~2\create-sp-%~1.xml
 
-IF NOT EXIST "%QSG%\%~2" (
-    echo "%~2 Directory not exists."
+set request_data=%SCENARIO_DIR%\%scenario%\create-sp-%~1.xml
+
+IF NOT EXIST "%SCENARIO_DIR%\%scenario%" (
+    echo "%SCENARIO_DIR%\%scenario% Directory not exists."
     exit -1
 )
 
-IF NOT EXIST "%QSG%\%request_data%" (
+IF NOT EXIST "%request_data%" (
     echo "%request_data% File does not exists."
     exit -1
 )
@@ -709,7 +694,7 @@ IF NOT EXIST "%QSG%\%request_data%" (
 echo Creating Service Provider %~1...
 
 REM Send the SOAP request to create the new SP.
-curl -s -k -d @%QSG%\%request_data% -H "Authorization: Basic %~5" -H "Content-Type: text/xml" -H "SOAPAction: %~3" -o NUL %~4
+curl -s -k -d @%request_data% -H "Authorization: Basic %~5" -H "Content-Type: text/xml" -H "SOAPAction: %~3" -o NUL %~4
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while creating the service provider. !!
@@ -726,7 +711,7 @@ EXIT /B
 
 REM Add a Twitter Identity Provider
 :add_identity_provider
-cd %QSG%
+
 set IS_name=%~1
 set IS_pass=%~2
 set is_domain=%~3
@@ -745,7 +730,7 @@ echo(
 
 echo "Creating Identity Provider..."
 
-curl -s -k --user %~1:%~2 -H "Content-Type: text/xml" -H "SOAPAction: urn:addIdP" -o NUL https://%is_domain%:%is_port%/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/ -d "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelope/"\" xmlns:mgt="\"http://mgt.idp.carbon.wso2.org"\" xmlns:xsd="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><soapenv:Header/><soapenv:Body><ns4:addIdP xmlns:ns4="\"http://mgt.idp.carbon.wso2.org"\"><ns4:identityProvider><ns1:alias xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">https://%is_domain%:%is_port%/oauth2/token</ns1:alias><ns1:certificate xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><claimConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><localClaimDialect>true</localClaimDialect><roleClaimURI>http://wso2.org/claims/role</roleClaimURI><userClaimURI xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/></claimConfig><defaultAuthenticatorConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><displayName>twitterIDP</displayName><enabled>true</enabled><name>TwitterAuthenticator</name><properties><name>APIKey</name><value>%key%</value></properties><properties><name>APISecret</name><value>%secret%</value></properties><properties><name>callbackUrl</name><value>https://%is_host%:%is_port%/commonauth</value></properties></defaultAuthenticatorConfig><ns1:displayName xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><ns1:enable xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">false</ns1:enable><federatedAuthenticatorConfigs xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><displayName>twitter</displayName><enabled>true</enabled><name>TwitterAuthenticator</name><properties><name>APIKey</name><value>%key%</value></properties><properties><name>APISecret</name><value>%secret%</value></properties><properties><name>callbackUrl</name><value>https://%is_domain%:%is_port%/commonauth</value></properties></federatedAuthenticatorConfigs><ns1:federationHub xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">false</ns1:federationHub><ns1:homeRealmId xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><ns1:identityProviderDescription xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><ns1:identityProviderName xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">IDP-twitter</ns1:identityProviderName><permissionAndRoleConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"/><ns1:provisioningRole xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/></ns4:identityProvider></ns4:addIdP></soapenv:Body></soapenv:Envelope>"
+curl -s -k --user %IS_name%:%IS_pass% -H "Content-Type: text/xml" -H "SOAPAction: urn:addIdP" -o NUL https://%is_domain%:%is_port%/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/ -d "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelope/"\" xmlns:mgt="\"http://mgt.idp.carbon.wso2.org"\" xmlns:xsd="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><soapenv:Header/><soapenv:Body><ns4:addIdP xmlns:ns4="\"http://mgt.idp.carbon.wso2.org"\"><ns4:identityProvider><ns1:alias xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">https://%is_domain%:%is_port%/oauth2/token</ns1:alias><ns1:certificate xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><claimConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><localClaimDialect>true</localClaimDialect><roleClaimURI>http://wso2.org/claims/role</roleClaimURI><userClaimURI xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/></claimConfig><defaultAuthenticatorConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><displayName>twitterIDP</displayName><enabled>true</enabled><name>TwitterAuthenticator</name><properties><name>APIKey</name><value>%key%</value></properties><properties><name>APISecret</name><value>%secret%</value></properties><properties><name>callbackUrl</name><value>https://%is_host%:%is_port%/commonauth</value></properties></defaultAuthenticatorConfig><ns1:displayName xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><ns1:enable xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">false</ns1:enable><federatedAuthenticatorConfigs xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><displayName>twitter</displayName><enabled>true</enabled><name>TwitterAuthenticator</name><properties><name>APIKey</name><value>%key%</value></properties><properties><name>APISecret</name><value>%secret%</value></properties><properties><name>callbackUrl</name><value>https://%is_domain%:%is_port%/commonauth</value></properties></federatedAuthenticatorConfigs><ns1:federationHub xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">false</ns1:federationHub><ns1:homeRealmId xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><ns1:identityProviderDescription xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/><ns1:identityProviderName xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">IDP-twitter</ns1:identityProviderName><permissionAndRoleConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"/><ns1:provisioningRole xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/></ns4:identityProvider></ns4:addIdP></soapenv:Body></soapenv:Envelope>"
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while creating the identity provider. !!"
   echo(
@@ -766,25 +751,26 @@ set is_domain=%~6
 set is_port=%~7
 set server_domain=%~8
 set server_port=%~9
-set request_data=%~2\sso-config-%~1.xml
-set file=sso-config-%~1.xml
+
+set request_data=%SCENARIO_DIR%\%scenario%\sso-config-%~1.xml
+set file=%SCENARIO_DIR%\%scenario%\sso-config-%~1.xml
 
 IF "%server_domain%" == "127.0.0.1" (
   SET server_host=localhost.com
 )
 
-IF NOT EXIST "%QSG%\%~2" (
-    echo %~2 Directory does not exists.
+IF NOT EXIST "%SCENARIO_DIR%\%scenario%" (
+    echo %SCENARIO_DIR%\%scenario% Directory does not exists.
     exit -1
 )
 
-IF NOT EXIST "%QSG%\%request_data%" (
+IF NOT EXIST "%request_data%" (
     echo "%request_data% File does not exists."
     exit -1
 )
 
 REM Update the sso-config xml file with correct host names and port values
-cd %scenario%
+
 IF EXIST "%file%" (
   echo "the file exists"
   del %file%
@@ -819,19 +805,20 @@ set scenario=%~1
 set auth=%~2
 set is_domain=%~3
 set is_port=%~4
-set request_data=%~1\add-definition.xml
 
-IF NOT EXIST "%QSG%\%~1" (
-    echo "%~1 Directory does not exists."
+set request_data=%SCENARIO_DIR%\%scenario%\add-definition.xml
+
+IF NOT EXIST "%SCENARIO_DIR%\%scenario%" (
+    echo "%SCENARIO_DIR%\%scenario% Directory does not exists."
     exit -1
 )
 
-IF NOT EXIST "%QSG%\%request_data%" (
+IF NOT EXIST "%request_data%" (
     echo "%request_data% File does not exists."
     exit -1
 )
 
-curl -s -k -d @%QSG%\%request_data% -H "Authorization: Basic %~2" -H "Content-Type: text/xml" -H "SOAPAction: urn:addWorkflow" -o NUL https://%is_domain%:%is_port%/services/WorkflowAdminService.WorkflowAdminServiceHttpsSoap11Endpoint/
+curl -s -k -d @%request_data% -H "Authorization: Basic %~2" -H "Content-Type: text/xml" -H "SOAPAction: urn:addWorkflow" -o NUL https://%is_domain%:%is_port%/services/WorkflowAdminService.WorkflowAdminServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while creating the workflow definition. !!"
@@ -845,9 +832,8 @@ echo(
 EXIT /B
 
 :update_application_saml
-cd %QSG%\02
+
 set sp_name=%~1
-set request_data=get-app-%~1.xml
 set auth=%~2
 set soap_action=%~3
 set endpoint=%~4
@@ -856,16 +842,18 @@ set is_port=%~6
 set server_domain=%~7
 set server_port=%~8
 
+set request_data=%SCENARIO_DIR%\02\get-app-%~1.xml
+
 IF NOT EXIST "%request_data%" (
     echo %request_data% File does not exists.
     exit -1
 )
 
-IF EXIST "response_unformatted.xml" (
-   DEL response_unformatted.xml
+IF EXIST "%SCENARIO_DIR%\02\response_unformatted.xml" (
+   DEL %SCENARIO_DIR%\02\response_unformatted.xml
 )
 
-curl -s -k -d @%request_data% -H "Authorization: Basic %~2" -H "Content-Type: text/xml" -H "SOAPAction: urn:getApplication" https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ > response_unformatted.xml
+curl -s -k -d @%request_data% -H "Authorization: Basic %~2" -H "Content-Type: text/xml" -H "SOAPAction: urn:getApplication" https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ > %SCENARIO_DIR%\02\response_unformatted.xml
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while getting application details for %~1.... !!
@@ -877,10 +865,10 @@ IF %ERRORLEVEL% NEQ 0 (
   exit -1
 )
 
-FOR /F "tokens=*" %%A IN ('dir /b QSG-*.jar') DO SET jarname=%%A
+FOR /F "tokens=*" %%A IN ('dir /b %SCENARIO_DIR%\02\QSG-*.jar') DO SET jarname=%%A
 FOR /L %%b IN (1,1,2) DO IF "!jarname:~-1!"==" " SET jarname=!jarname:~0,-1!
 
-FOR /F "tokens=*" %%A IN ('java -jar %jarname%') DO SET app_id=%%A
+FOR /F "tokens=*" %%A IN ('java -jar %SCENARIO_DIR%\02\%jarname%') DO SET app_id=%%A
 FOR /L %%b IN (1,1,2) DO IF "!app_id:~-1!"==" " SET app_id=!app_id:~0,-1!
 echo(
 echo Updating application %~1...
@@ -893,6 +881,7 @@ EXIT /B
 
 REM Configure OIDC for sample apps
 :configure_oidc
+
 set sp_name=%~1
 REM folder 3
 set scenario=%~2
@@ -903,25 +892,25 @@ set is_domain=%~6
 set is_port=%~7
 set server_domain=%~8
 set server_port=%~9
-set request_data=%~2\sso-config-%~1.xml
-set file=sso-config-%~1.xml
+
+set request_data=%SCENARIO_DIR%\%scenario%\sso-config-%~1.xml
+set file=%SCENARIO_DIR%\%scenario%\sso-config-%~1.xml
 
 IF "%server_domain%" == "127.0.0.1" (
   SET server_host=localhost.com
 )
 
-IF NOT EXIST "%QSG%\%~2" (
-    echo %~2 Directory does not exists.
+IF NOT EXIST "%SCENARIO_DIR%\%scenario%" (
+    echo %SCENARIO_DIR%\%scenario% Directory does not exists.
     exit -1
 )
 
-IF NOT EXIST "%QSG%\%request_data%" (
+IF NOT EXIST "%request_data%" (
     echo "%request_data% File does not exists."
     exit -1
 )
 
 REM Update the sso-config xml file with correct host names and port values
-cd %scenario%
 IF EXIST "%file%" (
   echo "the file exists"
   del %file%
@@ -959,7 +948,7 @@ EXIT /B
 
 REM Update OIDC application
 :update_application_oidc
-cd %QSG%\03
+
 set sp_name=%~1
 set auth=%~2
 set key=%~3
@@ -968,18 +957,19 @@ set soap_action=%~5
 set endpoint=%~6
 set is_domain=%~7
 set is_port=%~8
-set request_data=get-app-%sp_name%.xml
+
+set request_data=%SCENARIO_DIR%\03\get-app-%sp_name%.xml
 
 IF NOT EXIST "%request_data%" (
     echo "%request_data% File does not exists."
     exit -1
 )
 
-IF EXIST "response_unformatted.xml" (
-   DEL response_unformatted.xml
+IF EXIST "%SCENARIO_DIR%\03\response_unformatted.xml" (
+   DEL %SCENARIO_DIR%\03\response_unformatted.xml
 )
 
-curl -s -k -d @%request_data% -H "Authorization: Basic %auth%" -H "Content-Type: text/xml" -H "SOAPAction: urn:getApplication" https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ > response_unformatted.xml
+curl -s -k -d @%request_data% -H "Authorization: Basic %auth%" -H "Content-Type: text/xml" -H "SOAPAction: urn:getApplication" https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ > %SCENARIO_DIR%\03\response_unformatted.xml
 
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while getting application details for %sp_name%.... !!"
@@ -991,10 +981,10 @@ IF %ERRORLEVEL% NEQ 0 (
   exit -1
 )
 
-FOR /F "tokens=*" %%A IN ('dir /b QSG-*.jar') DO SET jarname=%%A
+FOR /F "tokens=*" %%A IN ('dir /b %SCENARIO_DIR%\03\QSG-*.jar') DO SET jarname=%%A
 FOR /L %%b IN (1,1,2) DO IF "!jarname:~-1!"==" " SET jarname=!jarname:~0,-1!
 
-FOR /F "tokens=*" %%A IN ('java -jar %jarname%') DO SET app_id=%%A
+FOR /F "tokens=*" %%A IN ('java -jar %SCENARIO_DIR%\03\%jarname%') DO SET app_id=%%A
 FOR /L %%b IN (1,1,2) DO IF "!app_id:~-1!"==" " SET app_id=!app_id:~0,-1!
 echo(
 echo Updating application %~1...
@@ -1019,7 +1009,7 @@ EXIT /B
 
 REM Update multi-step of sample apps
 :updateapp_multi
-cd %QSG%\04
+
 set sp_name=%~1
 set auth=%~2
 set soap_action=%~3
@@ -1028,7 +1018,8 @@ set is_domain=%~5
 set is_port=%~6
 set server_domain=%~7
 set server_port=%~8
-set request_data=get-app-%~1.xml
+
+set request_data=%SCENARIO_DIR%\04\get-app-%~1.xml
 
 
 IF NOT EXIST %request_data% (
@@ -1036,13 +1027,13 @@ IF NOT EXIST %request_data% (
     exit -1
 )
 
-IF EXIST "response_unformatted.xml" (
-   DEL response_unformatted.xml
+IF EXIST "%SCENARIO_DIR%\04\response_unformatted.xml" (
+   DEL %SCENARIO_DIR%\04\response_unformatted.xml
 )
 echo %request_data%
 echo %is_domain%
 
-curl -s -k -d @%request_data% -H "Authorization: Basic %auth%" -H "Content-Type: text/xml" -H "SOAPAction: urn:getApplication" https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ >> response_unformatted.xml
+curl -s -k -d @%request_data% -H "Authorization: Basic %auth%" -H "Content-Type: text/xml" -H "SOAPAction: urn:getApplication" https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ >> %SCENARIO_DIR%\04\response_unformatted.xml
 
 IF %ERRORLEVEL% NEQ 0 (
   echo(
@@ -1056,10 +1047,10 @@ IF %ERRORLEVEL% NEQ 0 (
   exit -1
 )
 
-FOR /F "tokens=*" %%A IN ('dir /b QSG-*.jar') DO SET jarname=%%A
+FOR /F "tokens=*" %%A IN ('dir /b %SCENARIO_DIR%\04\QSG-*.jar') DO SET jarname=%%A
 FOR /L %%b IN (1,1,2) DO IF "!jarname:~-1!"==" " SET jarname=!jarname:~0,-1!
 
-FOR /F "tokens=*" %%A IN ('java -jar %jarname%') DO SET app_id=%%A
+FOR /F "tokens=*" %%A IN ('java -jar %SCENARIO_DIR%\04\%jarname%') DO SET app_id=%%A
 FOR /L %%b IN (1,1,2) DO IF "!app_id:~-1!"==" " SET app_id=!app_id:~0,-1!
 echo(
 
@@ -1074,7 +1065,7 @@ EXIT /B
 
 REM Update federated authentication of sample apps
 :updateapp_fed_auth
-cd %QSG%\05
+
 set sp_name=%~1
 set auth=%~2
 set soap_action=%~3
@@ -1083,18 +1074,19 @@ set is_domain=%~5
 set is_port=%~6
 set server_domain=%~7
 set server_port=%~8
-set request_data=get-app-%~1.xml
+
+set request_data=%SCENARIO_DIR%\05\get-app-%~1.xml
 
 IF NOT EXIST "%request_data%" (
     echo "%request_data% File does not exists."
     exit -1
 )
 
-IF EXIST "response_unformatted.xml" (
-   DEL response_unformatted.xml
+IF EXIST "%SCENARIO_DIR%\05\response_unformatted.xml" (
+   DEL %SCENARIO_DIR%\05\response_unformatted.xml
 )
 
-curl -s -k -d @%request_data% -H "Authorization: Basic %auth%" -H "Content-Type: text/xml" -H "SOAPAction: urn:getApplication" https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ > response_unformatted.xml
+curl -s -k -d @%request_data% -H "Authorization: Basic %auth%" -H "Content-Type: text/xml" -H "SOAPAction: urn:getApplication" https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ > %SCENARIO_DIR%\05\response_unformatted.xml
 
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while getting application details for %sp_name%.... !!"
@@ -1107,10 +1099,10 @@ IF %ERRORLEVEL% NEQ 0 (
   exit -1
 )
 
-FOR /F "tokens=*" %%A IN ('dir /b QSG-*.jar') DO SET jarname=%%A
+FOR /F "tokens=*" %%A IN ('dir /b %SCENARIO_DIR%\05\QSG-*.jar') DO SET jarname=%%A
 FOR /L %%b IN (1,1,2) DO IF "!jarname:~-1!"==" " SET jarname=!jarname:~0,-1!
 
-FOR /F "tokens=*" %%A IN ('java -jar %jarname%') DO SET app_id=%%A
+FOR /F "tokens=*" %%A IN ('java -jar %SCENARIO_DIR%\05\%jarname%') DO SET app_id=%%A
 FOR /L %%b IN (1,1,2) DO IF "!app_id:~-1!"==" " SET app_id=!app_id:~0,-1!
 echo(
 
@@ -1124,12 +1116,13 @@ EXIT /B
 
 REM delete users created.
 :delete_user
-cd %QSG%
+
 set is_domain=%~1
 set is_port=%~2
-set request_data1=Common\delete-cameron.xml
-set request_data2=Common\delete-alex.xml
-set request_data3=Common\delete-role.xml
+
+set request_data1=%SCENARIO_DIR%\Common\delete-cameron.xml
+set request_data2=%SCENARIO_DIR%\Common\delete-alex.xml
+set request_data3=%SCENARIO_DIR%\Common\delete-role.xml
 echo(
 echo "Deleting the user named cameron..."
 
@@ -1158,7 +1151,7 @@ echo(
 echo "Deleting the role named Manager..."
 
 REM Send the SOAP request to delete the role manager.
-curl -s -k -d @%QSG%\%request_data3% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteRole" -o NUL https://%is_domain%:%is_port%/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @%request_data3% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteRole" -o NUL https://%is_domain%:%is_port%/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while deleting the role Manager. !!
@@ -1176,14 +1169,15 @@ set scenario=%~2
 set soap_action=%~3
 set endpoint=%~4
 set auth=%~5
-set request_data=%~2\delete-sp-%~1.xml
 
-IF NOT EXIST "%~2" (
-    echo %~2 Directory not exists.
+set request_data=%SCENARIO_DIR%\%scenario%\delete-sp-%~1.xml
+
+IF NOT EXIST "%SCENARIO_DIR%\%scenario%" (
+    echo %SCENARIO_DIR%\%scenario% Directory not exists.
     exit -1
 )
 
-IF NOT EXIST "%QSG%\%request_data%" (
+IF NOT EXIST "%request_data%" (
     echo %request_data% File does not exists.
     exit -1
 )
@@ -1191,7 +1185,7 @@ echo(
 echo Deleting Service Provider %~1...
 
 REM Send the SOAP request to delete a SP.
-curl -s -k -d @%QSG%\%request_data% -H "Authorization: Basic %~5" -H "Content-Type: text/xml" -H "SOAPAction: %~3" -o NUL %~4
+curl -s -k -d @%request_data% -H "Authorization: Basic %~5" -H "Content-Type: text/xml" -H "SOAPAction: %~3" -o NUL %~4
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while deleting the service provider. !!
@@ -1205,16 +1199,16 @@ EXIT /B
 
 set is_domain=%~1
 set is_port=%~2
-set request_data1=Common\delete-cameron.xml
-set request_data2=Common\delete-alex.xml
-set request_data3=07\delete-role-senior.xml
-set request_data4=07\delete-role-junior.xml
+set request_data1=%SCENARIO_DIR%\Common\delete-cameron.xml
+set request_data2=%SCENARIO_DIR%\Common\delete-alex.xml
+set request_data3=%SCENARIO_DIR%\07\delete-role-senior.xml
+set request_data4=%SCENARIO_DIR%\07\delete-role-junior.xml
 
 echo(
 echo "Deleting the user named cameron..."
 
 REM Send the SOAP request to delete the user.
-curl -s -k -d @%QSG%\%request_data1% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://%is_domain%:%is_port%/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @%request_data1% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://%is_domain%:%is_port%/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while deleting the user cameron. !!"
@@ -1226,7 +1220,7 @@ echo(
 echo "Deleting the user named alex..."
 
 REM Send the SOAP request to delete the user.
-curl -s -k -d @%QSG%\%request_data2% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://%is_domain%:%is_port%/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @%request_data2% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o NUL https://%is_domain%:%is_port%/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while deleting the user alex. !!"
@@ -1238,7 +1232,7 @@ echo(
 
 echo "Deleting the role named senior-manager"
 REM Send the SOAP request to delete the role.
-curl -s -k -d @%QSG%\%request_data3% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteRole" -o NUL https://%is_domain%:%is_port%/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @%request_data3% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteRole" -o NUL https://%is_domain%:%is_port%/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while deleting the role senior-manager. !!"
@@ -1249,7 +1243,7 @@ echo "** The role senior-manager was successfully deleted. **"
 echo(
 echo "Deleting the role named junior-manager"
 REM Send the SOAP request to delete the role.
-curl -s -k -d @%QSG%\%request_data4% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteRole" -o NUL https://%is_domain%:%is_port%/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
+curl -s -k -d @%request_data4% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteRole" -o NUL https://%is_domain%:%is_port%/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while deleting the role junior-manager. !!"
@@ -1267,19 +1261,20 @@ set scenario=%~1
 set auth=%~2
 set is_domain=%~3
 set is_port=%~4
-set request_data=%~1\delete-definition.xml
 
-IF NOT EXIST "%QSG%\%~1" (
-    echo "%scenario% Directory does not exists."
+set request_data=%SCENARIO_DIR%\%scenario%\delete-definition.xml
+
+IF NOT EXIST "%SCENARIO_DIR%\%scenario%" (
+    echo %SCENARIO_DIR%\%scenario% Directory does not exists."
     exit -1
 )
 
-IF NOT EXIST "%QSG%\%request_data%" (
+IF NOT EXIST "%request_data%" (
     echo "%request_data% File does not exists."
     exit -1
 )
 
-curl -s -k -d @%QSG%\%request_data% -H "Authorization: Basic %~2" -H "Content-Type: text/xml" -H "SOAPAction: urn:removeWorkflow" -o NUL https://%is_domain%:%is_port%/services/WorkflowAdminService.WorkflowAdminServiceHttpsSoap11Endpoint/
+curl -s -k -d @%request_data% -H "Authorization: Basic %~2" -H "Content-Type: text/xml" -H "SOAPAction: urn:removeWorkflow" -o NUL https://%is_domain%:%is_port%/services/WorkflowAdminService.WorkflowAdminServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while deleting the workflow definition. !!"
@@ -1297,19 +1292,20 @@ set scenario=%~1
 set auth=%~2
 set is_domain=%~3
 set is_port=%~4
-set request_data=%~1\delete-association.xml
 
-IF NOT EXIST "%QSG%\%~1" (
+set request_data=%SCENARIO_DIR%\%scenario%\delete-association.xml
+
+IF NOT EXIST "%SCENARIO_DIR%\%scenario%" (
     echo "%scenario% Directory does not exists."
     exit -1
 )
 
-IF NOT EXIST "%QSG%\%request_data%" (
+IF NOT EXIST "%request_data%" (
     echo "%request_data% File does not exists."
     exit -1
 )
 
-curl -s -k -d @%QSG%\%request_data% -H "Authorization: Basic %~2" -H "Content-Type: text/xml" -H "SOAPAction: urn:removeAssociation" -o NULs https://%is_domain%:%is_port%/services/WorkflowAdminService.WorkflowAdminServiceHttpsSoap11Endpoint/
+curl -s -k -d @%request_data% -H "Authorization: Basic %~2" -H "Content-Type: text/xml" -H "SOAPAction: urn:removeAssociation" -o NULs https://%is_domain%:%is_port%/services/WorkflowAdminService.WorkflowAdminServiceHttpsSoap11Endpoint/
 
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while deleting the workflow association. !!"
@@ -1326,9 +1322,10 @@ EXIT /B
 set scenario=%~1
 set soap_action=%~2
 set endpoint=%~3
-set request_data=%~1/delete-idp-twitter.xml
 
-IF NOT EXIST "%~1" (
+set request_data=%SCENARIO_DIR%\%scenario%\delete-idp-twitter.xml
+
+IF NOT EXIST "%SCENARIO_DIR%\%scenario%" (
     echo "%~1 Directory not exists."
     exit -1
 )
@@ -1342,7 +1339,7 @@ echo(
 echo "Deleting Identity Provider IDP-twitter..."
 
 REM Send the SOAP request to delete twitter Idp.
-curl -s -k -d @%QSG%\%request_data% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: %~2" -o NUL %~3
+curl -s -k -d @%request_data% -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: %~2" -o NUL %~3
 
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while deleting the service provider. !!"
