@@ -119,7 +119,7 @@ cd %~1
 EXIT /B
 
 :jump_to_relative_root
-cd %REL_ROOT
+cd %REL_ROOT%
 
 EXIT /B
 
@@ -880,7 +880,7 @@ FOR /F "tokens=*" %%A IN ('dir /b %SCENARIO_DIR%\02\QSG-*.jar') DO SET jarname=%
 FOR /L %%b IN (1,1,2) DO IF "!jarname:~-1!"==" " SET jarname=!jarname:~0,-1!
 
 REM Perform jar execution from jar location
-call :jump_to_location %SCENARIO_DIR%\03
+call :jump_to_location %SCENARIO_DIR%\02
 
 FOR /F "tokens=*" %%A IN ('java -jar %jarname%') DO SET app_id=%%A
 FOR /L %%b IN (1,1,2) DO IF "!app_id:~-1!"==" " SET app_id=!app_id:~0,-1!
@@ -1012,7 +1012,6 @@ call :jump_to_relative_root
 
 echo(
 echo Updating application %~1...
-echo %app_id%
 
 REM Send the SOAP request to Update the Application.
 curl -s -k -H "Authorization: Basic %auth%" -H "Content-Type: text/xml" -H "SOAPAction: %soap_action%" -o NUL %endpoint% -d "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelope/"\" xmlns:xsd="\"http://org.apache.axis2/xsd"\" xmlns:xsd1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"><soapenv:Header/><soapenv:Body><xsd:updateApplication><xsd:serviceProvider><xsd1:applicationID>%app_id%</xsd1:applicationID><xsd1:applicationName>%sp_name%</xsd1:applicationName><xsd1:claimConfig><xsd1:alwaysSendMappedLocalSubjectId>false</xsd1:alwaysSendMappedLocalSubjectId><xsd1:localClaimDialect>true</xsd1:localClaimDialect></xsd1:claimConfig><xsd1:description>oauth application</xsd1:description><xsd1:inboundAuthenticationConfig><xsd1:inboundAuthenticationRequestConfigs><xsd1:inboundAuthKey>%key%</xsd1:inboundAuthKey><xsd1:inboundAuthType>oauth2</xsd1:inboundAuthType><xsd1:properties><xsd1:advanced>false</xsd1:advanced><xsd1:confidential>false</xsd1:confidential><xsd1:defaultValue></xsd1:defaultValue><xsd1:description></xsd1:description><xsd1:displayName></xsd1:displayName><xsd1:name>oauthConsumerSecret</xsd1:name><xsd1:required>false</xsd1:required><xsd1:value>%secret%</xsd1:value></xsd1:properties></xsd1:inboundAuthenticationRequestConfigs></xsd1:inboundAuthenticationConfig><xsd1:inboundProvisioningConfig><xsd1:provisioningEnabled>false</xsd1:provisioningEnabled><xsd1:provisioningUserStore>PRIMARY</xsd1:provisioningUserStore></xsd1:inboundProvisioningConfig><xsd1:localAndOutBoundAuthenticationConfig><xsd1:alwaysSendBackAuthenticatedListOfIdPs>false</xsd1:alwaysSendBackAuthenticatedListOfIdPs><xsd1:authenticationStepForAttributes></xsd1:authenticationStepForAttributes><xsd1:authenticationStepForSubject></xsd1:authenticationStepForSubject><xsd1:authenticationType>default</xsd1:authenticationType><xsd1:subjectClaimUri>http://wso2.org/claims/fullname</xsd1:subjectClaimUri></xsd1:localAndOutBoundAuthenticationConfig><xsd1:outboundProvisioningConfig><xsd1:provisionByRoleList></xsd1:provisionByRoleList></xsd1:outboundProvisioningConfig><xsd1:permissionAndRoleConfig></xsd1:permissionAndRoleConfig><xsd1:saasApp>false</xsd1:saasApp></xsd:serviceProvider></xsd:updateApplication></soapenv:Body></soapenv:Envelope>"
@@ -1074,7 +1073,7 @@ FOR /F "tokens=*" %%A IN ('dir /b %SCENARIO_DIR%\04\QSG-*.jar') DO SET jarname=%
 FOR /L %%b IN (1,1,2) DO IF "!jarname:~-1!"==" " SET jarname=!jarname:~0,-1!
 
 REM Perform jar execution from jar location
-call :jump_to_location %SCENARIO_DIR%\03
+call :jump_to_location %SCENARIO_DIR%\04
 
 FOR /F "tokens=*" %%A IN ('java -jar %jarname%') DO SET app_id=%%A
 FOR /L %%b IN (1,1,2) DO IF "!app_id:~-1!"==" " SET app_id=!app_id:~0,-1!
@@ -1133,7 +1132,7 @@ FOR /F "tokens=*" %%A IN ('dir /b %SCENARIO_DIR%\05\QSG-*.jar') DO SET jarname=%
 FOR /L %%b IN (1,1,2) DO IF "!jarname:~-1!"==" " SET jarname=!jarname:~0,-1!
 
 REM Perform jar execution from jar location
-call :jump_to_location %SCENARIO_DIR%\03
+call :jump_to_location %SCENARIO_DIR%\05
 
 FOR /F "tokens=*" %%A IN ('java -jar %jarname%') DO SET app_id=%%A
 FOR /L %%b IN (1,1,2) DO IF "!app_id:~-1!"==" " SET app_id=!app_id:~0,-1!
