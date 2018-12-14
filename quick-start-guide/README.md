@@ -13,16 +13,16 @@ Identity server using scenarios given below.
 ## Table of contents
 
 - [Getting started](#getting-started)
-- [Download the distribution](#download-and-install)
+- [Download the distribution](#Download-the-distribution)
 - [SAML2 sso sample](https://github.com/wso2/samples-is/tree/master/saml2-sso-sample)
 - [OIDC sso sample](https://github.com/wso2/samples-is/tree/master/oidc-sso-sample)
 
 ## Getting started
 
-1. Download and unzip the [distribution](https://github.com/wso2/samples-is/releases/latest) is-samples-<VERSION>.zip
-2. Start your WSO2 Identity server.
-3. Start applications by running sh appStarter.sh/appStarter.bat command from IS-QSG/bin folder
-4. Start QDG by running sh qsg.sh/qsg.bat from IS-QSG/bin folder
+1. Download and unzip the [distribution](https://github.com/wso2/samples-is/releases/latest) is-samples-*.zip
+2. Start your WSO2 Identity Server.
+3. Start applications by running `sh appStarter.sh`or `appStarter.bat` command from IS-QSG/bin folder
+4. Start QSG by running `sh qsg.sh` or `qsg.bat` from IS-QSG/bin folder
 
 ### Download the distribution
 
@@ -30,7 +30,7 @@ You can download the IAM Quick Start Guide binaries at [link](https://github.com
 
 ### Install from source
 
-Alternatively, you can install the Quick Start Guide from the source using the following instructions.
+Alternatively, you can build the Quick Start Guide from the source using the following instructions.
 
 #### Prerequisites
 
