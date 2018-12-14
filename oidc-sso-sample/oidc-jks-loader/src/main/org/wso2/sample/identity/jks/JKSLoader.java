@@ -59,8 +59,8 @@ public class JKSLoader implements ServletContextListener {
 
         if (resource != null) {
             LOGGER.log(Level.INFO, "Setting trust store path to : " + resource.getPath());
-            System.setProperty("javax.net.ssl.trustStore.", resource.getPath());
-            System.setProperty("javax.net.ssl.trustStorePassword.", jksProperties.getProperty("keystorepassword"));
+            System.setProperty("javax.net.ssl.trustStore", resource.getPath());
+            System.setProperty("javax.net.ssl.trustStorePassword", jksProperties.getProperty("keystorepassword"));
         } else {
             LOGGER.log(Level.INFO, "Unable to find JKS defined by properties. Trust store properties will not be set.");
         }
