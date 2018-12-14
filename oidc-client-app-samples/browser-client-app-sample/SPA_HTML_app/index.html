@@ -393,15 +393,6 @@
       appArray = init(authCompletionCallback, logoutCompletionCallback);
     });
 
-    // fetch configuration handler
-    // This is for discovery route implementation. Which will use the discoveryUri field in the application.
-    // Uncomment if you are using the discovery route to get the WSO2-IAM configurations for the WSP2-IAM Server.
-    /*var fetchConfiguration = document.querySelector('#fetchConfig');
-    fetchConfiguration.addEventListener('click', function () {
-      application.fetchServiceConfiguration();
-      event.preventDefault();
-    });*/
-
     // show home page
     var showHomePage = document.querySelector('#showHomePage');
     showHomePage.addEventListener('click', function (event) {

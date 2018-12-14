@@ -31,7 +31,7 @@ var appConfigs = {
   'revokeUrl': 'https://localhost:9443/oauth2/revoke',
   'logoutUrl': 'https://localhost:9443/oidc/logout',
   'userInfoUrl': 'https://localhost:9443/oauth2/userinfo',
-  // Possible values are FLOW_TYPE_IMPLICIT and FLOW_TYPE_IMPLICIT, default is FLOW_TYPE_IMPLICIT
+  // Possible values are FLOW_TYPE_IMPLICIT and FLOW_TYPE_PKCE, default is FLOW_TYPE_IMPLICIT
   'flowType': FLOW_TYPE_IMPLICIT,
   // Possible values are LOCAL_STORAGE and SESSION_STORAGE, default is LOCAL_STORAGE and SESSION_STORAGE is not not supported yet
   'userStore': LOCAL_STORAGE,
