@@ -418,7 +418,7 @@ REM Create a workflow association
 CALL :add_workflow_association "07" "YWRtaW46YWRtaW4=" %is_domain% %is_port%
 
 REM Update resident IDP
-CALL :update_idp_selfsignup "urn:updateResidentIdP" "https://%is_domain%:%is_port%/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4=" "06" "selfsignup" %is_domain% %is_port%
+CALL :update_idp_selfsignup "urn:updateResidentIdP" "https://%is_domain%:%is_port%/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4=" "06" "selfsignup" %is_domain% %is_port% %server_domain% %server_port%
 
 REM Add a service provider in wso2-is
 CALL :add_service_provider "dispatch" "Common" "urn:createApplication" "https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4=" %is_domain% %is_port%
@@ -629,6 +629,7 @@ REM The following command can be used to create a user.
 curl -s -k --user %IS_name%:%IS_pass% --data "{"schemas":[],"name":{"familyName":"Smith","givenName":"Cameron"},"userName":"cameron","password":"cameron123","emails":"cameron@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://%is_domain%:%is_port%/wso2/scim/Users
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while creating user cameron. !!"
+  CALL :delete_user %is_domain% %is_port%
   echo(
   exit -1
 )
@@ -638,11 +639,9 @@ echo(
 echo "Creating a user named alex..."
 
 REM The following command can be used to create a user.
-
+curl -s -k --user %IS_name%:%IS_pass% --data "{"schemas":[],"name":{"familyName":"Miller","givenName":"Alex"},"userName":"alex","password":"alex123","emails":"alex@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://%is_domain%:%is_port%/wso2/scim/Users
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while creating user alex. !!"
-  echo(curl -s -k --user %IS_name%:%IS_pass% --data "{"schemas":[],"name":{"familyName":"Miller","givenName":"Alex"},"userName":"alex","password":"alex123","emails":"alex@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://%is_domain%:%is_port%/wso2/scim/Users
-
   CALL :delete_user %is_domain% %is_port%
   echo(
   exit -1
@@ -769,7 +768,7 @@ set request_data=%SCENARIO_DIR%\%scenario%\sso-config-%~1.xml
 set file=%SCENARIO_DIR%\%scenario%\sso-config-%~1.xml
 
 IF "%server_domain%" == "127.0.0.1" (
-  SET server_host=localhost.com
+  SET server_domain=localhost.com
 )
 
 IF NOT EXIST "%SCENARIO_DIR%\%scenario%" (
@@ -785,7 +784,7 @@ IF NOT EXIST "%request_data%" (
 REM Update the sso-config xml file with correct host names and port values
 
 REM touch sso-config-${sp_name}.xml
-echo  ^<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://org.apache.axis2/xsd" xmlns:xsd1="http://dto.saml.sso.identity.carbon.wso2.org/xsd"^> ^<soapenv:Header/^> ^<soapenv:Body^> ^<xsd:addRPServiceProvider^> ^<xsd:spDto^> ^<xsd1:assertionConsumerUrls^>http://%server_host%:%server_port%/saml2-web-app-pickup-%sp_name%.com/home.jsp^</xsd1:assertionConsumerUrls^> ^<xsd1:assertionQueryRequestProfileEnabled^>false^</xsd1:assertionQueryRequestProfileEnabled^> ^<xsd1:attributeConsumingServiceIndex^>1223160755^</xsd1:attributeConsumingServiceIndex^> ^<xsd1:certAlias^>wso2carbon^</xsd1:certAlias^> ^<xsd1:defaultAssertionConsumerUrl^>http://%server_host%:%server_port%/saml2-web-app-pickup-%sp_name%.com/home.jsp^</xsd1:defaultAssertionConsumerUrl^> ^<xsd1:digestAlgorithmURI^>http://www.w3.org/2000/09/xmldsig#sha1^</xsd1:digestAlgorithmURI^> ^<xsd1:doEnableEncryptedAssertion^>false^</xsd1:doEnableEncryptedAssertion^> ^<xsd1:doSignAssertions^>true^</xsd1:doSignAssertions^> ^<xsd1:doSignResponse^>true^</xsd1:doSignResponse^> ^<xsd1:doSingleLogout^>true^</xsd1:doSingleLogout^> ^<xsd1:doValidateSignatureInRequests^>false^</xsd1:doValidateSignatureInRequests^> ^<xsd1:enableAttributeProfile^>false^</xsd1:enableAttributeProfile^> ^<xsd1:enableAttributesByDefault^>false^</xsd1:enableAttributesByDefault^> ^<xsd1:idPInitSLOEnabled^>true^</xsd1:idPInitSLOEnabled^> ^<xsd1:idPInitSSOEnabled^>true^</xsd1:idPInitSSOEnabled^> ^<xsd1:idpInitSLOReturnToURLs^>http://%server_domain%:%server_port%/saml2-web-app-pickup-%sp_name%.com/home.jsp^</xsd1:idpInitSLOReturnToURLs^> ^<xsd1:issuer^>saml2-web-app-pickup-%sp_name%.com^</xsd1:issuer^> ^<xsd1:nameIDFormat^>urn/oasis/names/tc/SAML/1.1/nameid-format/emailAddress^</xsd1:nameIDFormat^> ^<xsd1:requestedAudiences^>https://%is_domain%:%is_port%/oauth2/token^</xsd1:requestedAudiences^> ^<xsd1:requestedRecipients^>https://%is_domain%:%is_port%/oauth2/token^</xsd1:requestedRecipients^> ^<xsd1:signingAlgorithmURI^>http://www.w3.org/2000/09/xmldsig#rsa-sha1^</xsd1:signingAlgorithmURI^> ^<xsd1:sloRequestURL^>^</xsd1:sloRequestURL^> ^<xsd1:sloResponseURL^>^</xsd1:sloResponseURL^> ^</xsd:spDto^> ^</xsd:addRPServiceProvider^> ^</soapenv:Body^> ^</soapenv:Envelope^> > %file%
+echo  ^<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://org.apache.axis2/xsd" xmlns:xsd1="http://dto.saml.sso.identity.carbon.wso2.org/xsd"^> ^<soapenv:Header/^> ^<soapenv:Body^> ^<xsd:addRPServiceProvider^> ^<xsd:spDto^> ^<xsd1:assertionConsumerUrls^>http://%server_domain%:%server_port%/saml2-web-app-pickup-%sp_name%.com/home.jsp^</xsd1:assertionConsumerUrls^> ^<xsd1:assertionQueryRequestProfileEnabled^>false^</xsd1:assertionQueryRequestProfileEnabled^> ^<xsd1:attributeConsumingServiceIndex^>1223160755^</xsd1:attributeConsumingServiceIndex^> ^<xsd1:certAlias^>wso2carbon^</xsd1:certAlias^> ^<xsd1:defaultAssertionConsumerUrl^>http://%server_domain%:%server_port%/saml2-web-app-pickup-%sp_name%.com/home.jsp^</xsd1:defaultAssertionConsumerUrl^> ^<xsd1:digestAlgorithmURI^>http://www.w3.org/2000/09/xmldsig#sha1^</xsd1:digestAlgorithmURI^> ^<xsd1:doEnableEncryptedAssertion^>false^</xsd1:doEnableEncryptedAssertion^> ^<xsd1:doSignAssertions^>true^</xsd1:doSignAssertions^> ^<xsd1:doSignResponse^>true^</xsd1:doSignResponse^> ^<xsd1:doSingleLogout^>true^</xsd1:doSingleLogout^> ^<xsd1:doValidateSignatureInRequests^>false^</xsd1:doValidateSignatureInRequests^> ^<xsd1:enableAttributeProfile^>false^</xsd1:enableAttributeProfile^> ^<xsd1:enableAttributesByDefault^>false^</xsd1:enableAttributesByDefault^> ^<xsd1:idPInitSLOEnabled^>true^</xsd1:idPInitSLOEnabled^> ^<xsd1:idPInitSSOEnabled^>true^</xsd1:idPInitSSOEnabled^> ^<xsd1:idpInitSLOReturnToURLs^>http://%server_domain%:%server_port%/saml2-web-app-pickup-%sp_name%.com/home.jsp^</xsd1:idpInitSLOReturnToURLs^> ^<xsd1:issuer^>saml2-web-app-pickup-%sp_name%.com^</xsd1:issuer^> ^<xsd1:nameIDFormat^>urn/oasis/names/tc/SAML/1.1/nameid-format/emailAddress^</xsd1:nameIDFormat^> ^<xsd1:requestedAudiences^>https://%is_domain%:%is_port%/oauth2/token^</xsd1:requestedAudiences^> ^<xsd1:requestedRecipients^>https://%is_domain%:%is_port%/oauth2/token^</xsd1:requestedRecipients^> ^<xsd1:signingAlgorithmURI^>http://www.w3.org/2000/09/xmldsig#rsa-sha1^</xsd1:signingAlgorithmURI^> ^<xsd1:sloRequestURL^>^</xsd1:sloRequestURL^> ^<xsd1:sloResponseURL^>^</xsd1:sloResponseURL^> ^</xsd:spDto^> ^</xsd:addRPServiceProvider^> ^</soapenv:Body^> ^</soapenv:Envelope^> > %file%
 
 echo Configuring SAML2 web SSO for %~1...
 
@@ -903,10 +902,9 @@ set server_domain=%~8
 set server_port=%~9
 
 set request_data=%SCENARIO_DIR%\%scenario%\sso-config-%~1.xml
-set file=%SCENARIO_DIR%\%scenario%\sso-config-%~1.xml
 
 IF "%server_domain%" == "127.0.0.1" (
-  SET server_host=localhost.com
+  SET server_domain=localhost.com
 )
 
 IF NOT EXIST "%SCENARIO_DIR%\%scenario%" (
@@ -939,7 +937,7 @@ REM echo %secret%
 
 
 REM touch sso-config-${sp_name}.xml
-echo ^<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://org.apache.axis2/xsd" xmlns:xsd1="http://dto.oauth.identity.carbon.wso2.org/xsd"^> ^<soapenv:Header/^> ^<soapenv:Body^> ^<xsd:registerOAuthApplicationData^> ^<xsd:application^> ^<xsd1:OAuthVersion^>OAuth-2.0^</xsd1:OAuthVersion^> ^<xsd1:applicationName^>%sp_name%^</xsd1:applicationName^> ^<xsd1:callbackUrl^>http://%server_host%:%server_port%/%sample_name%/oauth2client^</xsd1:callbackUrl^> ^<xsd1:grantTypes^>refresh_token urn:ietf:params:oauth:grant-type:saml2-bearer implicit password client_credentials iwa:ntlm authorization_code^</xsd1:grantTypes^> ^<xsd1:oauthConsumerKey^>%client_id%^</xsd1:oauthConsumerKey^> ^<xsd1:oauthConsumerSecret^>%secret%^</xsd1:oauthConsumerSecret^> ^<xsd1:pkceMandatory^>false^</xsd1:pkceMandatory^> ^</xsd:application^> ^</xsd:registerOAuthApplicationData^> ^</soapenv:Body^> ^</soapenv:Envelope^> > %file%
+echo ^<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://org.apache.axis2/xsd" xmlns:xsd1="http://dto.oauth.identity.carbon.wso2.org/xsd"^> ^<soapenv:Header/^> ^<soapenv:Body^> ^<xsd:registerOAuthApplicationData^> ^<xsd:application^> ^<xsd1:OAuthVersion^>OAuth-2.0^</xsd1:OAuthVersion^> ^<xsd1:applicationName^>%sp_name%^</xsd1:applicationName^> ^<xsd1:callbackUrl^>http://%server_domain%:%server_port%/%sample_name%/oauth2client^</xsd1:callbackUrl^> ^<xsd1:grantTypes^>refresh_token urn:ietf:params:oauth:grant-type:saml2-bearer implicit password client_credentials iwa:ntlm authorization_code^</xsd1:grantTypes^> ^<xsd1:oauthConsumerKey^>%client_id%^</xsd1:oauthConsumerKey^> ^<xsd1:oauthConsumerSecret^>%secret%^</xsd1:oauthConsumerSecret^> ^<xsd1:pkceMandatory^>false^</xsd1:pkceMandatory^> ^</xsd:application^> ^</xsd:registerOAuthApplicationData^> ^</soapenv:Body^> ^</soapenv:Envelope^> > %request_data%
 
 echo Configuring OIDC web SSO for %~1...
 
