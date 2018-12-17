@@ -1334,11 +1334,11 @@ scenario=$1
 auth=$2
 is_host=$3
 is_port=$4
-request_data="${scenario}/delete-association.xml"
+request_data="${SCENARIO_DIR}/${scenario}/delete-association.xml"
 
-if [ ! -d "$scenario" ]
+if [ ! -d "${SCENARIO_DIR}/${scenario}" ]
   then
-    echo "$scenario Directory does not exists."
+    echo "${SCENARIO_DIR}/${scenario} Directory does not exists."
     return -1
   fi
 

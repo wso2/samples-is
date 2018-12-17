@@ -41,12 +41,12 @@
         <module>saml2-sso-sample</module>
         <module>oidc-sso-sample</module>
         <module>pickup-sample-app</module>
-        <module>gdpr-samples</module>
         <module>oauth-sample-client-authenticator</module>
         <module>sample-post-authentication-handler</module>
         <module>conditional-auth-sample</module>
         <module>backend-service</module>
         <module>quick-start-guide</module>
+        <module>gdpr-samples</module>
         <module>distribution</module>
     </modules>
 
