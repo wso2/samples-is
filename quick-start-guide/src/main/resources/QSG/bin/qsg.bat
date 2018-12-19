@@ -19,7 +19,7 @@ REM  limitations under the License.
 REM ===============script starts here ===============================================
 echo "Before Run: Make sure the following -                                         "
 echo "  * Added server details to the server.properties file in the QSG/bin folder  "
-echo "  * Your WSO2 IS 5.7.0 and Tomcat is running.                                 "
+echo "  * Your WSO2 IS 5.7.0 and applications are running                                 "
 echo "  * Configure the running domains/ips and ports in server.properties file     "
 echo "   in the QSG/bin folder.                                                     "
 echo "                                                                              "
@@ -41,30 +41,27 @@ echo "Reading server paths from %PROPERTY_FILE%"
 FOR /F "eol=; tokens=6,2 delims==" %%i IN ('findstr "wso2is.location" server.properties') DO SET IS_PATH=%%i
 REM echo %IS_PATH%
 
-FOR /F "eol=; tokens=6,2 delims==" %%i IN ('findstr "tomcat.location" server.properties') DO SET TOMCAT_PATH=%%i
-REM echo %TOMCAT_PATH%
-
 FOR /F "eol=; tokens=6,2 delims==" %%i IN ('findstr "wso2is.host.domain" server.properties') DO SET IS_DOMAIN_NEW=%%i
 REM echo %IS_DOMAIN_NEW%
 
 FOR /F "eol=; tokens=6,2 delims==" %%i IN ('findstr "wso2is.host.port" server.properties') DO SET IS_PORT=%%i
 REM echo %IS_PORT%
 
-FOR /F "eol=; tokens=6,2 delims==" %%i IN ('findstr "tomcat.host.domain" server.properties') DO SET TOMCAT_DOMAIN_NEW=%%i
-REM echo %TOMCAT_DOMAIN_NEW%
+FOR /F "eol=; tokens=6,2 delims==" %%i IN ('findstr "server.host.domain" server.properties') DO SET SERVER_DOMAIN_NEW=%%i
+REM echo %SERVER_DOMAIN_NEW%
 
-FOR /F "eol=; tokens=6,2 delims==" %%i IN ('findstr "tomcat.host.port" server.properties') DO SET TOMCAT_PORT=%%i
-REM echo %TOMCAT_PORT%
+FOR /F "eol=; tokens=6,2 delims==" %%i IN ('findstr "server.host.port" server.properties') DO SET SERVER_PORT=%%i
+REM echo %SERVER_PORT%
 
 IF "%IS_DOMAIN_NEW%"=="localhost.com" (
  set IS_DOMAIN=127.0.0.1
  )
 REM echo %IS_DOMAIN%
 
-IF "%TOMCAT_DOMAIN_NEW%"=="localhost.com" (
- set TOMCAT_DOMAIN=127.0.0.1
+IF "%SERVER_DOMAIN_NEW%"=="localhost.com" (
+ set SERVER_DOMAIN=127.0.0.1
 )
-REM echo %TOMCAT_DOMAIN%
+REM echo %SERVER_DOMAIN%
 
 echo "Please pick a scenario from the following."
 echo "-----------------------------------------------------------------------------"
@@ -78,57 +75,51 @@ echo "--------------------------------------------------------------------------
 set /p scenario=Enter the scenario number you selected.
 
 	IF "%scenario%"=="1" (
-    	REM Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
-    	CALL :setup_servers %IS_PATH% %TOMCAT_PATH%
-    	CALL :configure_sso_saml2 %IS_DOMAIN% %IS_PORT% %TOMCAT_DOMAIN% %TOMCAT_PORT%
-    	CALL :end_message saml2-web-app-pickup-dispatch.com saml2-web-app-pickup-manager.com %IS_DOMAIN% %IS_PORT% %TOMCAT_DOMAIN% %TOMCAT_PORT%
+    	CALL :setup_servers %IS_PATH%
+    	CALL :configure_sso_saml2 %IS_DOMAIN% %IS_PORT% %SERVER_DOMAIN% %SERVER_PORT%
+    	CALL :end_message saml2-web-app-pickup-dispatch.com saml2-web-app-pickup-manager.com %IS_DOMAIN% %IS_PORT% %SERVER_DOMAIN% %SERVER_PORT%
     	EXIT 0
     )
 
 	IF "%scenario%"=="2" (
-	REM Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
-	CALL :setup_servers %IS_PATH% %TOMCAT_PATH%
-	CALL :configure_sso_oidc %IS_DOMAIN% %IS_PORT% %TOMCAT_DOMAIN% %TOMCAT_PORT%
-	CALL :end_message pickup-dispatch pickup-manager %IS_DOMAIN% %IS_PORT% %TOMCAT_DOMAIN% %TOMCAT_PORT%
+	CALL :setup_servers %IS_PATH%
+	CALL :configure_sso_oidc %IS_DOMAIN% %IS_PORT% %SERVER_DOMAIN% %SERVER_PORT%
+	CALL :end_message pickup-dispatch pickup-manager %IS_DOMAIN% %IS_PORT% %SERVER_DOMAIN% %SERVER_PORT%
 	EXIT 0
     )
 
 	IF "%scenario%"=="3" (
-	REM Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
-	CALL :setup_servers %IS_PATH% %TOMCAT_PATH%
-	CALL :create_multifactor_auth %IS_DOMAIN% %IS_PORT% %TOMCAT_DOMAIN% %TOMCAT_PORT%
-	CALL :end_message saml2-web-app-pickup-dispatch.com saml2-web-app-pickup-manager.com %IS_DOMAIN% %IS_PORT% %TOMCAT_DOMAIN% %TOMCAT_PORT%
+	CALL :setup_servers %IS_PATH%
+	CALL :create_multifactor_auth %IS_DOMAIN% %IS_PORT% %SERVER_DOMAIN% %SERVER_PORT%
+	CALL :end_message saml2-web-app-pickup-dispatch.com saml2-web-app-pickup-manager.com %IS_DOMAIN% %IS_PORT% %SERVER_DOMAIN% %SERVER_PORT%
 	CALL :delete_idp 05 urn:deleteIdP https://%IS_DOMAIN%:%IS_PORT%/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/
 	EXIT 0
 	)
 
 	IF "%scenario%"=="4" (
-	REM Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
-	CALL :setup_servers %IS_PATH% %TOMCAT_PATH%
-	CALL :configure_federated_auth %IS_DOMAIN% %IS_PORT% %TOMCAT_DOMAIN% %TOMCAT_PORT%
-	CALL :end_message saml2-web-app-pickup-dispatch.com saml2-web-app-pickup-manager.com %IS_DOMAIN% %IS_PORT% %TOMCAT_DOMAIN% %TOMCAT_PORT%
+	CALL :setup_servers %IS_PATH%
+	CALL :configure_federated_auth %IS_DOMAIN% %IS_PORT% %SERVER_DOMAIN% %SERVER_PORT%
+	CALL :end_message saml2-web-app-pickup-dispatch.com saml2-web-app-pickup-manager.com %IS_DOMAIN% %IS_PORT% %SERVER_DOMAIN% %SERVER_PORT%
 	CALL :delete_idp 05 urn:deleteIdP https://%IS_DOMAIN%:%IS_PORT%/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/
 	EXIT 0
     )
 
 	IF "%scenario%"=="5" (
-	REM Check whether the wso2-is and tomcat servers exits and if they don't download and install them.
-	CALL :setup_servers %IS_PATH% %TOMCAT_PATH%
-	CALL :configure_self_signup %IS_DOMAIN% %IS_PORT% %TOMCAT_DOMAIN% %TOMCAT_PORT%
+	CALL :setup_servers %IS_PATH%
+	CALL :configure_self_signup %IS_DOMAIN% %IS_PORT% %SERVER_DOMAIN% %SERVER_PORT%
 	EXIT 0
 	)
 
 	IF "%scenario%"=="6" (
-	CALL :setup_servers %IS_PATH% %TOMCAT_PATH%
-	CALL :create_workflow %IS_DOMAIN% %IS_PORT% %TOMCAT_DOMAIN% %TOMCAT_PORT%
+	CALL :setup_servers %IS_PATH%
+	CALL :create_workflow %IS_DOMAIN% %IS_PORT% %SERVER_DOMAIN% %SERVER_PORT%
 	EXIT 0
 	)
 
-REM check whether the servers are working fine
+REM Check whether the wso2-is is available
 :setup_servers
 
 set is_path=%~1
-set tomcat_path=%~2
 
 echo(
 IF NOT EXIST %is_path% (
@@ -136,17 +127,6 @@ IF NOT EXIST %is_path% (
     exit -1
 )
 
-echo(
-IF NOT EXIST %tomcat_path% (
-    echo Tomcat server does not exist in the given location %tomcat_path%.
-    echo Please download and install the latest pack.
-    exit -1
-)
-
-IF NOT EXIST "%tomcat_path%/webapps/saml2-web-app-pickup-dispatch.com.war" (
-   echo Please deploy the sample webapps on the tomcat server.
-   exit -1
-)
 
 EXIT /B
 
@@ -155,8 +135,8 @@ REM Configure OIDC for OIDC samples
 
 set is_domain=%~1
 set is_port=%~2
-set tomcat_domain=%~3
-set tomcat_port=%~4
+set server_domain=%~3
+set server_port=%~4
 
 REM Add users in the wso2-is.
 CALL :add_user admin admin Common %is_domain% %is_port%
@@ -166,8 +146,8 @@ CALL :add_service_provider dispatch Common urn:createApplication https://%is_dom
 CALL :add_service_provider manager Common urn:createApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz %is_domain% %is_port%
 
 REM Configure OIDC for the Service Providers
-CALL :configure_oidc "manager" "03" "urn:registerOAuthApplicationData" "https://%is_domain%:%is_port%/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/" "Y2FtZXJvbjpjYW1lcm9uMTIz" %is_domain% %is_port% %tomcat_domain% %tomcat_port%
-CALL :configure_oidc "dispatch" "03" "urn:registerOAuthApplicationData" "https://%is_domain%:%is_port%/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/" "Y2FtZXJvbjpjYW1lcm9uMTIz" %is_domain% %is_port% %tomcat_domain% %tomcat_port%
+CALL :configure_oidc "manager" "03" "urn:registerOAuthApplicationData" "https://%is_domain%:%is_port%/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/" "Y2FtZXJvbjpjYW1lcm9uMTIz" %is_domain% %is_port% %server_domain% %server_port%
+CALL :configure_oidc "dispatch" "03" "urn:registerOAuthApplicationData" "https://%is_domain%:%is_port%/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/" "Y2FtZXJvbjpjYW1lcm9uMTIz" %is_domain% %is_port% %server_domain% %server_port%
 
 CALL :update_application_oidc "dispatch" "Y2FtZXJvbjpjYW1lcm9uMTIz" "ZGlzcGF0Y2g=" "ZGlzcGF0Y2gxMjM0" "urn:updateApplication" "https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" %is_domain% %is_port%
 CALL :update_application_oidc "manager" "Y2FtZXJvbjpjYW1lcm9uMTIz" "c3dpZnRhcHA=" "c3dpZnRhcHAxMjM=" "urn:updateApplication" "https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" %is_domain% %is_port%
@@ -179,8 +159,8 @@ REM Configure SAML for SAML samples
 
 set is_domain=%~1
 set is_port=%~2
-set tomcat_domain=%~3
-set tomcat_port=%~4
+set server_domain=%~3
+set server_port=%~4
 
 REM Add users in wso2-is.
 CALL :add_user admin admin Common %is_domain% %is_port%
@@ -190,11 +170,11 @@ CALL :add_service_provider dispatch Common urn:createApplication https://%is_dom
 CALL :add_service_provider manager Common urn:createApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz %is_domain% %is_port%
 
 REM Configure SAML for the service providers in the cameron account
-CALL :configure_saml dispatch 02 urn:addRPServiceProvider https://%is_domain%:%is_port%/services/IdentitySAMLSSOConfigService.IdentitySAMLSSOConfigServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz %is_domain% %is_port% %tomcat_domain% %tomcat_port%
-CALL :configure_saml manager 02 urn:addRPServiceProvider  https://%is_domain%:%is_port%/services/IdentitySAMLSSOConfigService.IdentitySAMLSSOConfigServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz %is_domain% %is_port% %tomcat_domain% %tomcat_port%
+CALL :configure_saml dispatch 02 urn:addRPServiceProvider https://%is_domain%:%is_port%/services/IdentitySAMLSSOConfigService.IdentitySAMLSSOConfigServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz %is_domain% %is_port% %server_domain% %server_port%
+CALL :configure_saml manager 02 urn:addRPServiceProvider  https://%is_domain%:%is_port%/services/IdentitySAMLSSOConfigService.IdentitySAMLSSOConfigServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz %is_domain% %is_port% %server_domain% %server_port%
 
-CALL :update_application_saml dispatch Y2FtZXJvbjpjYW1lcm9uMTIz urn:updateApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ %is_domain% %is_port% %tomcat_domain% %tomcat_port%
-CALL :update_application_saml manager Y2FtZXJvbjpjYW1lcm9uMTIz urn:updateApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ %is_domain% %is_port% %tomcat_domain% %tomcat_port%
+CALL :update_application_saml dispatch Y2FtZXJvbjpjYW1lcm9uMTIz urn:updateApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ %is_domain% %is_port% %server_domain% %server_port%
+CALL :update_application_saml manager Y2FtZXJvbjpjYW1lcm9uMTIz urn:updateApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ %is_domain% %is_port% %server_domain% %server_port%
 
 EXIT /B
 
@@ -202,8 +182,8 @@ REM Configure Multifactor auth with basic and twitter
 :create_multifactor_auth
 set is_domain=%~1
 set is_port=%~2
-set tomcat_domain=%~3
-set tomcat_port=%~4
+set server_domain=%~3
+set server_port=%~4
 echo(
 echo "-------------------------------------------------------------------"
 echo "|                                                                 |"
@@ -226,10 +206,10 @@ set /p input="Please enter your answer..."
      IF "%input%"=="y" set result=true
      IF "%input%"=="Y" set result=true
      IF "%result%" == "true" (
-        CALL :configure_sso_saml2  %is_domain% %is_port% %tomcat_domain% %tomcat_port%
+        CALL :configure_sso_saml2  %is_domain% %is_port% %server_domain% %server_port%
         CALL :add_identity_provider admin admin %is_domain% %is_port%
-        CALL :updateapp_multi "dispatch" "Y2FtZXJvbjpjYW1lcm9uMTIz" "urn:updateApplication" "https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" %is_domain% %is_port% %tomcat_domain% %tomcat_port%
-        CALL :updateapp_multi "manager" "Y2FtZXJvbjpjYW1lcm9uMTIz" "urn:updateApplication" "https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" %is_domain% %is_port% %tomcat_domain% %tomcat_port%
+        CALL :updateapp_multi "dispatch" "Y2FtZXJvbjpjYW1lcm9uMTIz" "urn:updateApplication" "https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" %is_domain% %is_port% %server_domain% %server_port%
+        CALL :updateapp_multi "manager" "Y2FtZXJvbjpjYW1lcm9uMTIz" "urn:updateApplication" "https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" %is_domain% %is_port% %server_domain% %server_port%
      )
      IF "%result%" == "false" (
         echo Please register a Twitter application and restart the script.
@@ -242,8 +222,8 @@ REM Configure Federated auth for sample SAML apps
 
 set is_domain=%~1
 set is_port=%~2
-set tomcat_domain=%~3
-set tomcat_port=%~4
+set server_domain=%~3
+set server_port=%~4
 
 echo(
 echo "-------------------------------------------------------------------"
@@ -266,10 +246,10 @@ set result=false
 IF "%user%"=="y" set result=true
 IF "%user%"=="Y" set result=true
 IF "%result%" == "true" (
-    CALL :configure_sso_saml2 %is_domain% %is_port% %tomcat_domain% %tomcat_port%
+    CALL :configure_sso_saml2 %is_domain% %is_port% %server_domain% %server_port%
     CALL :add_identity_provider admin admin %is_domain% %is_port%
-    CALL :updateapp_fed_auth dispatch Y2FtZXJvbjpjYW1lcm9uMTIz urn:updateApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ %is_domain% %is_port% %tomcat_domain% %tomcat_port%
-    CALL :updateapp_fed_auth manager Y2FtZXJvbjpjYW1lcm9uMTIz urn:updateApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ %is_domain% %is_port% %tomcat_domain% %tomcat_port%
+    CALL :updateapp_fed_auth dispatch Y2FtZXJvbjpjYW1lcm9uMTIz urn:updateApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ %is_domain% %is_port% %server_domain% %server_port%
+    CALL :updateapp_fed_auth manager Y2FtZXJvbjpjYW1lcm9uMTIz urn:updateApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ %is_domain% %is_port% %server_domain% %server_port%
 )
 
 IF "%result%" == "false" (
@@ -282,8 +262,8 @@ EXIT /B
 
 set is_domain=%~1
 set is_port=%~2
-set tomcat_domain=%~3
-set tomcat_port=%~4
+set server_domain=%~3
+set server_port=%~4
 
 echo(
 echo "-----------------------------------------------------------------------"
@@ -341,18 +321,18 @@ echo(
 set /p user="Please enter the number you selected... "
 
 IF "%user%"=="1" (
-     CALL :update_idp_selfsignup "urn:updateResidentIdP" "https://%is_domain%:%is_port%/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4=" "06" "selfsignup" %is_domain% %is_port% %tomcat_domain% %tomcat_port%
+     CALL :update_idp_selfsignup "urn:updateResidentIdP" "https://%is_domain%:%is_port%/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4=" "06" "selfsignup" %is_domain% %is_port% %server_domain% %server_port%
 )
 
 IF "%user%"=="2" (
-    CALL :update_idp_selfsignup "urn:updateResidentIdP" "https://%is_domain%:%is_port%/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4=" "06" "lockon" %is_domain% %is_port% %tomcat_domain% %tomcat_port%
+    CALL :update_idp_selfsignup "urn:updateResidentIdP" "https://%is_domain%:%is_port%/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4=" "06" "lockon" %is_domain% %is_port% %server_domain% %server_port%
 )
 
 REM Add a service provider in wso2-is
 CALL :add_service_provider "dispatch" "Common" "urn:createApplication" "https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4=" %is_domain% %is_port%
 
 REM Configure OIDC for the Service Providers
-CALL :configure_oidc "dispatch" "03" "urn:registerOAuthApplicationData" "https://%is_domain%:%is_port%/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4=" %is_domain% %is_port% %tomcat_domain% %tomcat_port%
+CALL :configure_oidc "dispatch" "03" "urn:registerOAuthApplicationData" "https://%is_domain%:%is_port%/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4=" %is_domain% %is_port% %server_domain% %server_port%
 
 CALL :update_application_oidc "dispatch" "YWRtaW46YWRtaW4=" "ZGlzcGF0Y2g=" "ZGlzcGF0Y2gxMjM0" "urn:updateApplication" "https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" %is_domain% %is_port%
 
@@ -363,7 +343,7 @@ echo "|  To tryout self registration please log into the sample                 
 echo "|  app below.                                                                   |"
 echo "|  *** Please press ctrl button and click on the link ***                       |"
 echo "|                                                                               |"
-echo "|  pickup-dispatch - http://%tomcat_domain%:%tomcat_port%/pickup-dispatch/      |"
+echo "|  pickup-dispatch - http://%server_domain%:%server_port%/pickup-dispatch/      |"
 echo "|                                                                               |"
 echo "|  Click on the ** Register now ** link in the login page.                      |"
 echo "|  Fill in the user details form and create an account.                         |"
@@ -431,8 +411,8 @@ EXIT /B
 
 set is_domain=%~1
 set is_port=%~2
-set tomcat_domain=%~3
-set tomcat_port=%~4
+set server_domain=%~3
+set server_port=%~4
 
 REM Add users and the relevant roles in wso2-is.
 CALL :add_users_workflow admin admin 07 %is_domain% %is_port%
@@ -450,7 +430,7 @@ REM Add a service provider in wso2-is
 CALL :add_service_provider "dispatch" "Common" "urn:createApplication" "https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4=" %is_domain% %is_port%
 
 REM Configure OIDC for the Service Providers
-CALL :configure_oidc "dispatch" "03" "urn:registerOAuthApplicationData" "https://%is_domain%:%is_port%/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4=" %is_domain% %is_port% %tomcat_domain% %tomcat_port%
+CALL :configure_oidc "dispatch" "03" "urn:registerOAuthApplicationData" "https://%is_domain%:%is_port%/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4=" %is_domain% %is_port% %server_domain% %server_port%
 
 CALL :update_application_oidc "dispatch" "YWRtaW46YWRtaW4=" "ZGlzcGF0Y2g=" "ZGlzcGF0Y2gxMjM0" "urn:updateApplication" "https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" %is_domain% %is_port%
 
@@ -529,8 +509,8 @@ set scenario=%~4
 set config=%~5
 set is_domain=%~6
 set is_port=%~7
-set tomcat_domain=%~8
-set tomcat_port=%~9
+set server_domain=%~8
+set server_port=%~9
 set file=update-idp-%~5.xml
 set request_data=%~4/update-idp-%~5.xml
 
@@ -784,13 +764,13 @@ set endpoint=%~4
 set auth=%~5
 set is_domain=%~6
 set is_port=%~7
-set tomcat_domain=%~8
-set tomcat_port=%~9
+set server_domain=%~8
+set server_port=%~9
 set request_data=%~2\sso-config-%~1.xml
 set file=sso-config-%~1.xml
 
-IF "%tomcat_domain%" == "127.0.0.1" (
-  SET tomcat_host=localhost.com
+IF "%server_domain%" == "127.0.0.1" (
+  SET server_host=localhost.com
 )
 
 IF NOT EXIST "%QSG%\%~2" (
@@ -812,7 +792,7 @@ IF EXIST "%file%" (
 
 
 REM touch sso-config-${sp_name}.xml
-echo  ^<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://org.apache.axis2/xsd" xmlns:xsd1="http://dto.saml.sso.identity.carbon.wso2.org/xsd"^> ^<soapenv:Header/^> ^<soapenv:Body^> ^<xsd:addRPServiceProvider^> ^<xsd:spDto^> ^<xsd1:assertionConsumerUrls^>http://%tomcat_host%:%tomcat_port%/saml2-web-app-pickup-%sp_name%.com/home.jsp^</xsd1:assertionConsumerUrls^> ^<xsd1:assertionQueryRequestProfileEnabled^>false^</xsd1:assertionQueryRequestProfileEnabled^> ^<xsd1:attributeConsumingServiceIndex^>1223160755^</xsd1:attributeConsumingServiceIndex^> ^<xsd1:certAlias^>wso2carbon^</xsd1:certAlias^> ^<xsd1:defaultAssertionConsumerUrl^>http://%tomcat_host%:%tomcat_port%/saml2-web-app-pickup-%sp_name%.com/home.jsp^</xsd1:defaultAssertionConsumerUrl^> ^<xsd1:digestAlgorithmURI^>http://www.w3.org/2000/09/xmldsig#sha1^</xsd1:digestAlgorithmURI^> ^<xsd1:doEnableEncryptedAssertion^>false^</xsd1:doEnableEncryptedAssertion^> ^<xsd1:doSignAssertions^>true^</xsd1:doSignAssertions^> ^<xsd1:doSignResponse^>true^</xsd1:doSignResponse^> ^<xsd1:doSingleLogout^>true^</xsd1:doSingleLogout^> ^<xsd1:doValidateSignatureInRequests^>false^</xsd1:doValidateSignatureInRequests^> ^<xsd1:enableAttributeProfile^>false^</xsd1:enableAttributeProfile^> ^<xsd1:enableAttributesByDefault^>false^</xsd1:enableAttributesByDefault^> ^<xsd1:idPInitSLOEnabled^>true^</xsd1:idPInitSLOEnabled^> ^<xsd1:idPInitSSOEnabled^>true^</xsd1:idPInitSSOEnabled^> ^<xsd1:idpInitSLOReturnToURLs^>http://%tomcat_domain%:%tomcat_port%/saml2-web-app-pickup-%sp_name%.com/home.jsp^</xsd1:idpInitSLOReturnToURLs^> ^<xsd1:issuer^>saml2-web-app-pickup-%sp_name%.com^</xsd1:issuer^> ^<xsd1:nameIDFormat^>urn/oasis/names/tc/SAML/1.1/nameid-format/emailAddress^</xsd1:nameIDFormat^> ^<xsd1:requestedAudiences^>https://%is_domain%:%is_port%/oauth2/token^</xsd1:requestedAudiences^> ^<xsd1:requestedRecipients^>https://%is_domain%:%is_port%/oauth2/token^</xsd1:requestedRecipients^> ^<xsd1:signingAlgorithmURI^>http://www.w3.org/2000/09/xmldsig#rsa-sha1^</xsd1:signingAlgorithmURI^> ^<xsd1:sloRequestURL^>^</xsd1:sloRequestURL^> ^<xsd1:sloResponseURL^>^</xsd1:sloResponseURL^> ^</xsd:spDto^> ^</xsd:addRPServiceProvider^> ^</soapenv:Body^> ^</soapenv:Envelope^> >> %file%
+echo  ^<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://org.apache.axis2/xsd" xmlns:xsd1="http://dto.saml.sso.identity.carbon.wso2.org/xsd"^> ^<soapenv:Header/^> ^<soapenv:Body^> ^<xsd:addRPServiceProvider^> ^<xsd:spDto^> ^<xsd1:assertionConsumerUrls^>http://%server_host%:%server_port%/saml2-web-app-pickup-%sp_name%.com/home.jsp^</xsd1:assertionConsumerUrls^> ^<xsd1:assertionQueryRequestProfileEnabled^>false^</xsd1:assertionQueryRequestProfileEnabled^> ^<xsd1:attributeConsumingServiceIndex^>1223160755^</xsd1:attributeConsumingServiceIndex^> ^<xsd1:certAlias^>wso2carbon^</xsd1:certAlias^> ^<xsd1:defaultAssertionConsumerUrl^>http://%server_host%:%server_port%/saml2-web-app-pickup-%sp_name%.com/home.jsp^</xsd1:defaultAssertionConsumerUrl^> ^<xsd1:digestAlgorithmURI^>http://www.w3.org/2000/09/xmldsig#sha1^</xsd1:digestAlgorithmURI^> ^<xsd1:doEnableEncryptedAssertion^>false^</xsd1:doEnableEncryptedAssertion^> ^<xsd1:doSignAssertions^>true^</xsd1:doSignAssertions^> ^<xsd1:doSignResponse^>true^</xsd1:doSignResponse^> ^<xsd1:doSingleLogout^>true^</xsd1:doSingleLogout^> ^<xsd1:doValidateSignatureInRequests^>false^</xsd1:doValidateSignatureInRequests^> ^<xsd1:enableAttributeProfile^>false^</xsd1:enableAttributeProfile^> ^<xsd1:enableAttributesByDefault^>false^</xsd1:enableAttributesByDefault^> ^<xsd1:idPInitSLOEnabled^>true^</xsd1:idPInitSLOEnabled^> ^<xsd1:idPInitSSOEnabled^>true^</xsd1:idPInitSSOEnabled^> ^<xsd1:idpInitSLOReturnToURLs^>http://%server_domain%:%server_port%/saml2-web-app-pickup-%sp_name%.com/home.jsp^</xsd1:idpInitSLOReturnToURLs^> ^<xsd1:issuer^>saml2-web-app-pickup-%sp_name%.com^</xsd1:issuer^> ^<xsd1:nameIDFormat^>urn/oasis/names/tc/SAML/1.1/nameid-format/emailAddress^</xsd1:nameIDFormat^> ^<xsd1:requestedAudiences^>https://%is_domain%:%is_port%/oauth2/token^</xsd1:requestedAudiences^> ^<xsd1:requestedRecipients^>https://%is_domain%:%is_port%/oauth2/token^</xsd1:requestedRecipients^> ^<xsd1:signingAlgorithmURI^>http://www.w3.org/2000/09/xmldsig#rsa-sha1^</xsd1:signingAlgorithmURI^> ^<xsd1:sloRequestURL^>^</xsd1:sloRequestURL^> ^<xsd1:sloResponseURL^>^</xsd1:sloResponseURL^> ^</xsd:spDto^> ^</xsd:addRPServiceProvider^> ^</soapenv:Body^> ^</soapenv:Envelope^> >> %file%
 cd ..
 
 echo Configuring SAML2 web SSO for %~1...
@@ -873,8 +853,8 @@ set soap_action=%~3
 set endpoint=%~4
 set is_domain=%~5
 set is_port=%~6
-set tomcat_domain=%~7
-set tomcat_port=%~8
+set server_domain=%~7
+set server_port=%~8
 
 IF NOT EXIST "%request_data%" (
     echo %request_data% File does not exists.
@@ -921,13 +901,13 @@ set endpoint=%~4
 set auth=%~5
 set is_domain=%~6
 set is_port=%~7
-set tomcat_domain=%~8
-set tomcat_port=%~9
+set server_domain=%~8
+set server_port=%~9
 set request_data=%~2\sso-config-%~1.xml
 set file=sso-config-%~1.xml
 
-IF "%tomcat_domain%" == "127.0.0.1" (
-  SET tomcat_host=localhost.com
+IF "%server_domain%" == "127.0.0.1" (
+  SET server_host=localhost.com
 )
 
 IF NOT EXIST "%QSG%\%~2" (
@@ -965,7 +945,7 @@ REM echo %secret%
 
 
 REM touch sso-config-${sp_name}.xml
-echo ^<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://org.apache.axis2/xsd" xmlns:xsd1="http://dto.oauth.identity.carbon.wso2.org/xsd"^> ^<soapenv:Header/^> ^<soapenv:Body^> ^<xsd:registerOAuthApplicationData^> ^<xsd:application^> ^<xsd1:OAuthVersion^>OAuth-2.0^</xsd1:OAuthVersion^> ^<xsd1:applicationName^>%sp_name%^</xsd1:applicationName^> ^<xsd1:callbackUrl^>http://%tomcat_host%:%tomcat_port%/%sample_name%/oauth2client^</xsd1:callbackUrl^> ^<xsd1:grantTypes^>refresh_token urn:ietf:params:oauth:grant-type:saml2-bearer implicit password client_credentials iwa:ntlm authorization_code^</xsd1:grantTypes^> ^<xsd1:oauthConsumerKey^>%client_id%^</xsd1:oauthConsumerKey^> ^<xsd1:oauthConsumerSecret^>%secret%^</xsd1:oauthConsumerSecret^> ^<xsd1:pkceMandatory^>false^</xsd1:pkceMandatory^> ^</xsd:application^> ^</xsd:registerOAuthApplicationData^> ^</soapenv:Body^> ^</soapenv:Envelope^> >> %file%
+echo ^<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://org.apache.axis2/xsd" xmlns:xsd1="http://dto.oauth.identity.carbon.wso2.org/xsd"^> ^<soapenv:Header/^> ^<soapenv:Body^> ^<xsd:registerOAuthApplicationData^> ^<xsd:application^> ^<xsd1:OAuthVersion^>OAuth-2.0^</xsd1:OAuthVersion^> ^<xsd1:applicationName^>%sp_name%^</xsd1:applicationName^> ^<xsd1:callbackUrl^>http://%server_host%:%server_port%/%sample_name%/oauth2client^</xsd1:callbackUrl^> ^<xsd1:grantTypes^>refresh_token urn:ietf:params:oauth:grant-type:saml2-bearer implicit password client_credentials iwa:ntlm authorization_code^</xsd1:grantTypes^> ^<xsd1:oauthConsumerKey^>%client_id%^</xsd1:oauthConsumerKey^> ^<xsd1:oauthConsumerSecret^>%secret%^</xsd1:oauthConsumerSecret^> ^<xsd1:pkceMandatory^>false^</xsd1:pkceMandatory^> ^</xsd:application^> ^</xsd:registerOAuthApplicationData^> ^</soapenv:Body^> ^</soapenv:Envelope^> >> %file%
 cd ..
 
 echo Configuring OIDC web SSO for %~1...
@@ -1046,8 +1026,8 @@ set soap_action=%~3
 set endpoint=%~4
 set is_domain=%~5
 set is_port=%~6
-set tomcat_domain=%~7
-set tomcat_port=%~8
+set server_domain=%~7
+set server_port=%~8
 set request_data=get-app-%~1.xml
 
 
@@ -1101,8 +1081,8 @@ set soap_action=%~3
 set endpoint=%~4
 set is_domain=%~5
 set is_port=%~6
-set tomcat_domain=%~7
-set tomcat_port=%~8
+set server_domain=%~7
+set server_port=%~8
 set request_data=get-app-%~1.xml
 
 IF NOT EXIST "%request_data%" (
@@ -1379,8 +1359,8 @@ set dispatch_url=%~1
 set manager_url=%~2
 set is_domain=%~3
 set is_port=%~4
-set tomcat_domain=%~5
-set tomcat_port=%~6
+set server_domain=%~5
+set server_port=%~6
 
 echo(
 echo "---------------------------------------------------------------------------------"
@@ -1388,8 +1368,8 @@ echo "|                                                                         
 echo "|    You can find the sample web apps on the following URLs.                    |"
 echo "|    *** Please press ctrl button and click on the links ***                    |"
 echo "|                                                                               |"
-echo "|    pickup-dispatch - http://%tomcat_domain%:%tomcat_port%/%~1/                |"
-echo "|    pickup-manager - http://%tomcat_domain%:%tomcat_port%/%~2/                 |"
+echo "|    pickup-dispatch - http://%server_domain%:%server_port%/%~1/                |"
+echo "|    pickup-manager - http://%server_domain%:%server_port%/%~2/                 |"
 echo "|                                                                               |"
 echo "|    Please use the user credentials to log in.                                 |"
 echo "|                                                                               |"

@@ -43,11 +43,11 @@
         <module>pickup-sample-app</module>
         <module>quick-start-guide</module>
         <module>gdpr-samples</module>
-        <module>distribution</module>
         <module>oauth-sample-client-authenticator</module>
         <module>sample-post-authentication-handler</module>
         <module>conditional-auth-sample</module>
         <module>backend-service</module>
+        <module>distribution</module>
     </modules>
 
     <licenses>
@@ -90,6 +90,17 @@
                 <version>${msf4j.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-runner</artifactId>
+                <version>${jetty.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${javax.servlet.api.version}</version>
+            </dependency>
             <!--=============================================================================-->
 
             <!--dependencies of the saml2-sso-sample-->
@@ -433,11 +444,13 @@
         <!--repo versions of quick-start-guide-->
         <identity.agent.sso.version>5.1.22</identity.agent.sso.version>
         <sample.oidc-sso-sample.version>1.0</sample.oidc-sso-sample.version>
-        <msf4j.version>2.6.4</msf4j.version>
         <sample.qsg.version>1.0</sample.qsg.version>
         <maven.jar.plugin.version>3.0.2</maven.jar.plugin.version>
         <maven.assembly.plugin.version>3.1.0</maven.assembly.plugin.version>
         <maven.war.plugin.version>3.2.2</maven.war.plugin.version>
+        <msf4j.version>2.6.4</msf4j.version>
+        <jetty.version>9.4.11.v20180605</jetty.version>
+        <javax.servlet.api.version>3.1.0</javax.servlet.api.version>
 
         <!--=============================================================================-->
 
