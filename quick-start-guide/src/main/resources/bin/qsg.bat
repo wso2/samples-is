@@ -24,13 +24,11 @@ SET SCENARIO_DIR=..\scenarios
 REM This is used to navigate back and forth between executables
 SET REL_ROOT=%cd%
 
-echo "Before Run: Make sure the following -                                         "
+echo "Before Running make sure the following -                                      "
 echo "  * Added server details to the server.properties file in the QSG/bin folder  "
-echo "  * Your WSO2 IS 5.7.0 and applications are running                                 "
+echo "  * Your WSO2 IS 5.7.0 and applications are running.                          "
 echo "  * Configure the running domains/ips and ports in server.properties file     "
 echo "   in the QSG/bin folder.                                                     "
-echo "                                                                              "
-echo " Note: Some bash commands will not work unless you run using "bash ./qsg.sh"  "
 echo "                                                                              "
 echo " If okay to continue, Please press 'Y' else press 'N'                         "
 echo(
@@ -258,38 +256,6 @@ set is_port=%~2
 set server_domain=%~3
 set server_port=%~4
 
-echo(
-echo "-----------------------------------------------------------------------"
-echo "|                                                                     |"
-echo "|  Please do the following before trying self signup.                 |"
-echo "|                                                                     |"
-echo "|  1. Open the file: output-event-adapters.xml in the path,           |"
-echo "|     (Your WSO2-IS)/repository/conf.                                 |"
-echo "|     Ex: WSO2IS-Home/repository/conf/output-event-adapters.xml.      |"
-echo "|                                                                     |"
-echo "|  2. Find the adapter configuration for emails and change the        |"
-echo "|     email address, username, password values.                       |"
-echo "|                                                                     |"
-echo "|  3. Finally, restart the server.                                    |"
-echo "|                                                                     |"
-echo "-----------------------------------------------------------------------"
-echo(
-echo "Have you make the above mentioned configurations?"
-echo(
-echo    "Press y - YES"
-echo    "Press n - NO"
-echo(
-set /p input="Please enter your answer..."
-    set result=false
-    IF "%input%"=="n" ( set result=true )
-    IF "%input%"=="N" ( set result=true )
-    IF "%result%" == "true" (
-        echo "Please make the necessary configurations and restart the script."
-        echo(
-        exit -1
-    )
-
-echo(
 echo "-----------------------------------------------------------------------"
 echo "|                                                                     |"
 echo "|  You can configure self signup in WSO2 IS in two different ways.    |"
@@ -318,6 +284,37 @@ IF "%user%"=="1" (
 )
 
 IF "%user%"=="2" (
+    echo(
+    echo "-----------------------------------------------------------------------"
+    echo "|                                                                     |"
+    echo "|  Please do the following before trying self signup.                 |"
+    echo "|                                                                     |"
+    echo "|  1. Open the file: output-event-adapters.xml in the path,           |"
+    echo "|     (Your WSO2-IS)/repository/conf.                                 |"
+    echo "|     Ex: WSO2IS-Home/repository/conf/output-event-adapters.xml.      |"
+    echo "|                                                                     |"
+    echo "|  2. Find the adapter configuration for emails and change the        |"
+    echo "|     email address, username, password values.                       |"
+    echo "|                                                                     |"
+    echo "|  3. Finally, restart the server.                                    |"
+    echo "|                                                                     |"
+    echo "-----------------------------------------------------------------------"
+    echo(
+    echo "Have you make the above mentioned configurations?"
+    echo(
+    echo    "Press y - YES"
+    echo    "Press n - NO"
+    echo(
+    set /p input="Please enter your answer..."
+        set result=false
+        IF "%input%"=="n" ( set result=true )
+        IF "%input%"=="N" ( set result=true )
+        IF "%result%" == "true" (
+            echo "Please make the necessary configurations and restart the script."
+            echo(
+            exit -1
+            )
+    echo(
     CALL :update_idp_selfsignup "urn:updateResidentIdP" "https://%is_domain%:%is_port%/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/" "YWRtaW46YWRtaW4=" "06" "lockon" %is_domain% %is_port% %server_domain% %server_port%
 )
 
@@ -1375,9 +1372,15 @@ echo "|                                                                         
 echo "|    pickup-dispatch - http://%server_domain%:%server_port%/%~1/                |"
 echo "|    pickup-manager - http://%server_domain%:%server_port%/%~2/                 |"
 echo "|                                                                               |"
-echo "|    Please use the user credentials to log in.                                 |"
+echo "|    Please use one of the following user credentials to log in.                |"
 echo "|                                                                               |"
+echo "|    Junior Manager                                                             |"
+echo "|      Username: alex                                                           |"
+echo "|      Password: alex123                                                        |"
 echo "|                                                                               |"
+echo "|    Senior Manager                                                             |"
+echo "|      Username: cameron                                                        |"
+echo "|      Password: cameron123                                                     |"
 echo "---------------------------------------------------------------------------------"
 echo(
 echo "If you have finished trying out the sample web apps, you can clean the process now."

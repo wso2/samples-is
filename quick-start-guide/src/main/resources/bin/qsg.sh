@@ -863,8 +863,15 @@ echo "|        http://${server_host}:${server_port}/${dispatch_url}/            
 echo "|    pick-manager -                                                                   |"
 echo "|        http://${server_host}:${server_port}/${manager_url}/                         |"
 echo "|                                                                                     |"
-echo "|    Please use the user credentials to log in.                                       |"
+echo "|    Please use one of the following user credentials to log in.                      |"
 echo "|                                                                                     |"
+echo "|    Junior Manager                                                                   |"
+echo "|      Username: alex                                                                 |"
+echo "|      Password: alex123                                                              |"
+echo "|                                                                                     |"
+echo "|    Senior Manager                                                                   |"
+echo "|      Username: cameron                                                              |"
+echo "|      Password: cameron123                                                           |"
 echo "---------------------------------------------------------------------------------------"
 echo
 echo "If you have finished trying out the sample web apps, you can clean the process now."
@@ -2391,7 +2398,7 @@ SCENARIO_DIR=../scenarios
 # Property file for the script
 PROPERTY_FILE=${CONF_DIR}/server.properties
 
-echo "Before Run: Make sure the following -                                         "
+echo "Before Running make sure the following -                                      "
 echo "  * Added server details to the server.properties file in the QSG/bin folder  "
 echo "  * Your WSO2 IS 5.7.0 and applications are running.                          "
 echo "  * Configure the running domains/ips and ports in server.properties file     "
