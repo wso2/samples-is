@@ -363,6 +363,9 @@
   <!-- Bootstrap Core JavaScript -->
   <script src="libs/bootstrap_3.3.7/js/bootstrap.min.js"></script>
   <script src="./js/bundle.js"></script>
+  <script src="./js/appauth_js_ext_logout.js"></script>
+  <script src="./js/appauth_js_ext_pkce.js"></script>
+  <script src="./js/appauth_js_ext_userinfo.js"></script>
   <script src="./js/app.js"></script>
   <script type="text/javascript">
 
@@ -378,7 +381,7 @@
       $('#profilePage').hide();
     }
 
-    var application = null;
+    var appArray = null;
     // initialize app when MDL is ready to go.
     window.addEventListener('load', function () {
       console.log('Initializing App.');
@@ -387,17 +390,8 @@
       $('#homePage').hide();
       $('#profilePage').hide();
 
-      application = init(authCompletionCallback, logoutCompletionCallback);
+      appArray = init(authCompletionCallback, logoutCompletionCallback);
     });
-
-    // fetch configuration handler
-    // This is for discovery route implementation. Which will use the discoveryUri field in the application.
-    // Uncomment if you are using the discovery route to get the WSO2-IAM configurations for the WSP2-IAM Server.
-    /*var fetchConfiguration = document.querySelector('#fetchConfig');
-    fetchConfiguration.addEventListener('click', function () {
-      application.fetchServiceConfiguration();
-      event.preventDefault();
-    });*/
 
     // show home page
     var showHomePage = document.querySelector('#showHomePage');
@@ -414,7 +408,7 @@
     showProfilePage.addEventListener('click', function (event) {
 
       // userInfo route only works with only PKCE for now and have to do for implicit by decoding the id_token JWT
-      application.makeUserInfoRequest().then(userInfoJson => {
+      appArray[3].makeUserInfoRequest().then(userInfoJson => {
         $("#sub").text(userInfoJson.sub);
         $("#name").text(userInfoJson.name);
         $("#given_name").text(userInfoJson.given_name);
@@ -434,13 +428,13 @@
     // authorize request handler
     var authorize = document.querySelector('#authorize');
     authorize.addEventListener('click', function (event) {
-      application.makeAuthorizationRequest();
+      makeAuthorizationRequest();
       event.preventDefault();
     });
 
     // logout request handler
     function makeLogoutRequest(event) {
-        application.makeLogoutRequest();
+        appArray[1].makeLogoutRequest();
         event.preventDefault();
     }
 

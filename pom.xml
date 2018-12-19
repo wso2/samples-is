@@ -89,6 +89,7 @@
                 <artifactId>msf4j-all</artifactId>
                 <version>${msf4j.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-runner</artifactId>

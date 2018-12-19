@@ -1,6 +1,196 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 "use strict";
 /*
+ * Copyright (c) 2018, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ *
+ * WSO2 Inc. licenses this file to you under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+var appauth_1 = require("@openid/appauth");
+var user_info_request_handler_1 = require("../user_info_request_handler");
+/**
+ * The wrapper appication.
+ */
+var AppUserInfo = /** @class */ (function () {
+    function AppUserInfo(app, userInfoEndpoint) {
+        this.userStore = new appauth_1.LocalStorageBackend();
+        this.configuration = app.getConfiguration();
+        if (userInfoEndpoint) {
+            this.configuration.userInfoEndpoint = userInfoEndpoint;
+        }
+        this.userInfoRequestHandler = new user_info_request_handler_1.BaseUserInfoRequestHandler(this.userStore);
+    }
+    AppUserInfo.prototype.makeUserInfoRequest = function () {
+        if (this.configuration.oauthFlowType == appauth_1.FLOW_TYPE_PKCE) {
+            return this.userInfoRequestHandler.performUserInfoRequest(this.configuration)
+                .then(function (userInfoResponse) {
+                return userInfoResponse.toJson();
+            });
+        }
+        else {
+            console.log("To get user info, access token must be sent. Thus PKCE flow should be used");
+        }
+    };
+    return AppUserInfo;
+}());
+exports.AppUserInfo = AppUserInfo;
+// export AppUserInfo
+window['AppUserInfo'] = AppUserInfo;
+
+},{"../user_info_request_handler":2,"@openid/appauth":12}],2:[function(require,module,exports){
+"use strict";
+/*
+ * Copyright (c) 2018, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ *
+ * WSO2 Inc. licenses this file to you under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+var appauth_1 = require("@openid/appauth");
+var user_info_response_1 = require("./user_info_response");
+/**
+ * The default user info request handler.
+ */
+var BaseUserInfoRequestHandler = /** @class */ (function () {
+    function BaseUserInfoRequestHandler(storageBackend) {
+        if (storageBackend === void 0) { storageBackend = new appauth_1.LocalStorageBackend(); }
+        this.storageBackend = storageBackend;
+        this.requestor = new appauth_1.JQueryRequestor();
+        this.utils = new appauth_1.BasicQueryStringUtils();
+        this.storageBackend = storageBackend;
+    }
+    BaseUserInfoRequestHandler.prototype.isUserInfoResponse = function (response) {
+        return response.error === undefined;
+    };
+    BaseUserInfoRequestHandler.prototype.performUserInfoRequest = function (configuration, request) {
+        var _this = this;
+        return this.storageBackend.getItem(appauth_1.AUTHORIZATION_RESPONSE_HANDLE_KEY).then(function (result) {
+            var tokenResponseJson = JSON.parse(result);
+            var tokenResponse = appauth_1.TokenResponse.fromJson(tokenResponseJson);
+            var userInfoResponse = _this.requestor.xhr({
+                url: configuration.userInfoEndpoint,
+                method: 'POST',
+                dataType: 'json',
+                crossDomain: true,
+                headers: { 'Authorization': 'Bearer ' + tokenResponse.accessToken }
+            });
+            return userInfoResponse.then(function (response) {
+                if (_this.isUserInfoResponse(response)) {
+                    return user_info_response_1.UserInfoResponse.fromJson(response);
+                }
+                else {
+                    return Promise.reject(new appauth_1.AppAuthError(response.error, user_info_response_1.UserInfoError.fromJson(response)));
+                }
+            });
+        });
+    };
+    return BaseUserInfoRequestHandler;
+}());
+exports.BaseUserInfoRequestHandler = BaseUserInfoRequestHandler;
+
+},{"./user_info_response":3,"@openid/appauth":12}],3:[function(require,module,exports){
+"use strict";
+/*
+ * Copyright (c) 2018, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ *
+ * WSO2 Inc. licenses this file to you under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Represents the UserInfo Response type.
+ * For more information look at:
+ * http://openid.net/specs/openid-connect-core-1_0.html#UserInfoResponse
+ *
+ * TODO: UserInfo response vlidation as of
+ * http://openid.net/specs/openid-connect-core-1_0.html#UserInfoResponseValidation
+ */
+var UserInfoResponse = /** @class */ (function () {
+    function UserInfoResponse(sub, name, given_name, family_name, preferred_username, email, picture) {
+        this.sub = sub;
+        this.name = name;
+        this.given_name = given_name;
+        this.family_name = family_name;
+        this.preferred_username = preferred_username;
+        this.email = email;
+        this.picture = picture;
+    }
+    UserInfoResponse.prototype.toJson = function () {
+        return {
+            sub: this.sub,
+            name: this.name,
+            given_name: this.given_name,
+            family_name: this.family_name,
+            preferred_username: this.preferred_username,
+            email: this.email,
+            picture: this.picture
+        };
+    };
+    UserInfoResponse.fromJson = function (input) {
+        return new UserInfoResponse(input.sub, input.name, input.given_name, input.family_name, input.preferred_username, input.email, input.picture);
+    };
+    return UserInfoResponse;
+}());
+exports.UserInfoResponse = UserInfoResponse;
+/**
+ * Represents the UserInfo Error type.
+ * For more information look at:
+ * http://openid.net/specs/openid-connect-core-1_0.html#UserInfoError
+ */
+var UserInfoError = /** @class */ (function () {
+    function UserInfoError(error, errorDescription) {
+        this.error = error;
+        this.errorDescription = errorDescription;
+    }
+    UserInfoError.prototype.toJson = function () {
+        return {
+            error: this.error, error_description: this.errorDescription
+        };
+    };
+    UserInfoError.fromJson = function (input) {
+        return new UserInfoError(input.error, input.error_description);
+    };
+    return UserInfoError;
+}());
+exports.UserInfoError = UserInfoError;
+
+},{}],4:[function(require,module,exports){
+"use strict";
+/*
  * Copyright 2017 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
@@ -158,7 +348,7 @@ exports.App = App;
 // export App
 window['App'] = App;
 
-},{"../authorization_request":2,"../authorization_request_handler":3,"../authorization_service_configuration":5,"../crypto_utils":6,"../logger":9,"../redirect_based_handler":11,"../storage":12,"../types":13}],2:[function(require,module,exports){
+},{"../authorization_request":5,"../authorization_request_handler":6,"../authorization_service_configuration":8,"../crypto_utils":9,"../logger":13,"../redirect_based_handler":15,"../storage":17,"../types":21}],5:[function(require,module,exports){
 "use strict";
 /*
  * Copyright 2017 Google Inc.
@@ -236,7 +426,7 @@ var AuthorizationRequest = /** @class */ (function () {
 }());
 exports.AuthorizationRequest = AuthorizationRequest;
 
-},{"./crypto_utils":6}],3:[function(require,module,exports){
+},{"./crypto_utils":9}],6:[function(require,module,exports){
 "use strict";
 /*
  * Copyright 2017 Google Inc.
@@ -351,7 +541,7 @@ var AuthorizationRequestHandler = /** @class */ (function () {
 }());
 exports.AuthorizationRequestHandler = AuthorizationRequestHandler;
 
-},{"./logger":9}],4:[function(require,module,exports){
+},{"./logger":13}],7:[function(require,module,exports){
 "use strict";
 /*
  * Copyright 2017 Google Inc.
@@ -414,7 +604,7 @@ var AuthorizationError = /** @class */ (function () {
 }());
 exports.AuthorizationError = AuthorizationError;
 
-},{}],5:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 "use strict";
 /*
  * Copyright 2017 Google Inc.
@@ -483,7 +673,7 @@ var AuthorizationServiceConfiguration = /** @class */ (function () {
 }());
 exports.AuthorizationServiceConfiguration = AuthorizationServiceConfiguration;
 
-},{"./types":13,"./xhr":14}],6:[function(require,module,exports){
+},{"./types":21,"./xhr":22}],9:[function(require,module,exports){
 "use strict";
 /*
  * Copyright 2017 Google Inc.
@@ -526,7 +716,7 @@ exports.cryptoGenerateRandom = function (sizeInBytes) {
     return bufferToString(buffer);
 };
 
-},{}],7:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 "use strict";
 /*
  * Copyright 2017 Google Inc.
@@ -554,7 +744,7 @@ var AppAuthError = /** @class */ (function () {
 }());
 exports.AppAuthError = AppAuthError;
 
-},{}],8:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 "use strict";
 /*
  * Copyright 2017 Google Inc.
@@ -576,7 +766,49 @@ exports.IS_LOG = true;
 /* Profiling turned on ? */
 exports.IS_PROFILE = false;
 
-},{}],9:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
+"use strict";
+/*
+ * Copyright (c) 2018, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ *
+ * WSO2 Inc. licenses this file to you under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(require("./authorization_request"));
+__export(require("./authorization_request_handler"));
+__export(require("./authorization_response"));
+__export(require("./authorization_service_configuration"));
+__export(require("./crypto_utils"));
+__export(require("./errors"));
+__export(require("./flags"));
+__export(require("./logger"));
+__export(require("./query_string_utils"));
+__export(require("./redirect_based_handler"));
+__export(require("./revoke_token_request"));
+__export(require("./storage"));
+__export(require("./token_request"));
+__export(require("./token_request_handler"));
+__export(require("./token_response"));
+__export(require("./types"));
+__export(require("./xhr"));
+__export(require("./app/index"));
+
+},{"./app/index":4,"./authorization_request":5,"./authorization_request_handler":6,"./authorization_response":7,"./authorization_service_configuration":8,"./crypto_utils":9,"./errors":10,"./flags":11,"./logger":13,"./query_string_utils":14,"./redirect_based_handler":15,"./revoke_token_request":16,"./storage":17,"./token_request":18,"./token_request_handler":19,"./token_response":20,"./types":21,"./xhr":22}],13:[function(require,module,exports){
 "use strict";
 /*
  * Copyright 2017 Google Inc.
@@ -656,7 +888,7 @@ function performProfile(target, propertyKey, descriptor) {
     return descriptor;
 }
 
-},{"./flags":8}],10:[function(require,module,exports){
+},{"./flags":11}],14:[function(require,module,exports){
 "use strict";
 /*
  * Copyright 2017 Google Inc.
@@ -714,7 +946,7 @@ var BasicQueryStringUtils = /** @class */ (function () {
 }());
 exports.BasicQueryStringUtils = BasicQueryStringUtils;
 
-},{}],11:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 "use strict";
 /*
  * Copyright 2017 Google Inc.
@@ -901,7 +1133,58 @@ var RedirectRequestHandler = /** @class */ (function (_super) {
 }(authorization_request_handler_1.AuthorizationRequestHandler));
 exports.RedirectRequestHandler = RedirectRequestHandler;
 
-},{"./authorization_request":2,"./authorization_request_handler":3,"./authorization_response":4,"./authorization_service_configuration":5,"./crypto_utils":6,"./logger":9,"./query_string_utils":10,"./storage":12,"./types":13}],12:[function(require,module,exports){
+},{"./authorization_request":5,"./authorization_request_handler":6,"./authorization_response":7,"./authorization_service_configuration":8,"./crypto_utils":9,"./logger":13,"./query_string_utils":14,"./storage":17,"./types":21}],16:[function(require,module,exports){
+"use strict";
+/*
+ * Copyright 2017 Google Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Represents a revoke token request.
+ * For more information look at:
+ * https://tools.ietf.org/html/rfc7009#section-2.1
+ */
+var RevokeTokenRequest = /** @class */ (function () {
+    function RevokeTokenRequest(token, tokenTypeHint, clientId, clientSecret) {
+        this.token = token;
+        this.tokenTypeHint = tokenTypeHint;
+        this.clientId = clientId;
+        this.clientSecret = clientSecret;
+    }
+    /**
+     * Serializes a TokenRequest to a JavaScript object.
+     */
+    RevokeTokenRequest.prototype.toJson = function () {
+        var json = { token: this.token };
+        if (this.tokenTypeHint) {
+            json['token_type_hint'] = this.tokenTypeHint;
+        }
+        if (this.clientId) {
+            json['client_id'] = this.clientId;
+        }
+        if (this.clientSecret) {
+            json['client_secret'] = this.clientSecret;
+        }
+        return json;
+    };
+    RevokeTokenRequest.fromJson = function (input) {
+        return new RevokeTokenRequest(input.token, input.token_type_hint, input.client_id, input.client_secret);
+    };
+    return RevokeTokenRequest;
+}());
+exports.RevokeTokenRequest = RevokeTokenRequest;
+
+},{}],17:[function(require,module,exports){
 "use strict";
 /*
  * Copyright 2017 Google Inc.
@@ -985,7 +1268,243 @@ var LocalStorageBackend = /** @class */ (function (_super) {
 }(StorageBackend));
 exports.LocalStorageBackend = LocalStorageBackend;
 
-},{}],13:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
+"use strict";
+/*
+ * Copyright 2017 Google Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.GRANT_TYPE_AUTHORIZATION_CODE = 'authorization_code';
+exports.GRANT_TYPE_REFRESH_TOKEN = 'refresh_token';
+/**
+ * Represents an Access Token request.
+ * For more information look at:
+ * https://tools.ietf.org/html/rfc6749#section-4.1.3
+ */
+var TokenRequest = /** @class */ (function () {
+    function TokenRequest(clientId, redirectUri, 
+    // TODO(rahulrav@): Add the ability to infer grant types.
+    grantType, code, refreshToken, extras) {
+        this.clientId = clientId;
+        this.redirectUri = redirectUri;
+        this.grantType = grantType;
+        this.code = code;
+        this.refreshToken = refreshToken;
+        this.extras = extras;
+    }
+    /**
+     * Serializes a TokenRequest to a JavaScript object.
+     */
+    TokenRequest.prototype.toJson = function () {
+        return {
+            grant_type: this.grantType,
+            code: this.code,
+            refresh_token: this.refreshToken,
+            redirect_uri: this.redirectUri,
+            client_id: this.clientId,
+            extras: this.extras
+        };
+    };
+    TokenRequest.prototype.toStringMap = function () {
+        var map = {
+            grant_type: this.grantType,
+            client_id: this.clientId,
+            redirect_uri: this.redirectUri
+        };
+        if (this.code) {
+            map['code'] = this.code;
+        }
+        if (this.refreshToken) {
+            map['refresh_token'] = this.refreshToken;
+        }
+        // copy over extras
+        if (this.extras) {
+            for (var extra in this.extras) {
+                if (this.extras.hasOwnProperty(extra) && !map.hasOwnProperty(extra)) {
+                    // check before inserting to requestMap
+                    map[extra] = this.extras[extra];
+                }
+            }
+        }
+        return map;
+    };
+    TokenRequest.fromJson = function (input) {
+        return new TokenRequest(input.client_id, input.redirect_uri, input.grant_type, input.code, input.refresh_token, input.extras);
+    };
+    TokenRequest.prototype.setExtrasField = function (key, value) {
+        if (this.extras) {
+            this.extras[key] = value;
+        }
+    };
+    return TokenRequest;
+}());
+exports.TokenRequest = TokenRequest;
+
+},{}],19:[function(require,module,exports){
+"use strict";
+/*
+ * Copyright 2017 Google Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+var errors_1 = require("./errors");
+var query_string_utils_1 = require("./query_string_utils");
+var token_response_1 = require("./token_response");
+var xhr_1 = require("./xhr");
+/**
+ * The default token request handler.
+ */
+var BaseTokenRequestHandler = /** @class */ (function () {
+    function BaseTokenRequestHandler(requestor, utils) {
+        if (requestor === void 0) { requestor = new xhr_1.JQueryRequestor(); }
+        if (utils === void 0) { utils = new query_string_utils_1.BasicQueryStringUtils(); }
+        this.requestor = requestor;
+        this.utils = utils;
+    }
+    BaseTokenRequestHandler.prototype.isTokenResponse = function (response) {
+        return response.error === undefined;
+    };
+    BaseTokenRequestHandler.prototype.performRevokeTokenRequest = function (configuration, request) {
+        var revokeTokenResponse = this.requestor.xhr({
+            url: configuration.revocationEndpoint,
+            method: 'POST',
+            dataType: 'json',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            data: request.toJson()
+        });
+        return revokeTokenResponse.then(function (response) {
+            return true;
+        });
+    };
+    BaseTokenRequestHandler.prototype.performTokenRequest = function (configuration, request) {
+        var _this = this;
+        var tokenResponse = this.requestor.xhr({
+            url: configuration.tokenEndpoint,
+            method: 'POST',
+            dataType: 'json',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            data: this.utils.stringify(request.toStringMap())
+        });
+        return tokenResponse.then(function (response) {
+            if (_this.isTokenResponse(response)) {
+                return token_response_1.TokenResponse.fromJson(response);
+            }
+            else {
+                return Promise.reject(new errors_1.AppAuthError(response.error, token_response_1.TokenError.fromJson(response)));
+            }
+        });
+    };
+    return BaseTokenRequestHandler;
+}());
+exports.BaseTokenRequestHandler = BaseTokenRequestHandler;
+
+},{"./errors":10,"./query_string_utils":14,"./token_response":20,"./xhr":22}],20:[function(require,module,exports){
+"use strict";
+/*
+ * Copyright 2017 Google Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Returns the instant of time in seconds.
+ */
+var nowInSeconds = function () { return Math.round(new Date().getTime() / 1000); };
+/**
+ * Represents the Token Response type.
+ * For more information look at:
+ * https://tools.ietf.org/html/rfc6749#section-5.1
+ */
+var TokenResponse = /** @class */ (function () {
+    function TokenResponse(accessToken, idToken, refreshToken, scope, tokenType, issuedAt, expiresIn) {
+        if (tokenType === void 0) { tokenType = 'bearer'; }
+        if (issuedAt === void 0) { issuedAt = nowInSeconds(); }
+        this.accessToken = accessToken;
+        this.idToken = idToken;
+        this.refreshToken = refreshToken;
+        this.scope = scope;
+        this.tokenType = tokenType;
+        this.issuedAt = issuedAt;
+        this.expiresIn = expiresIn;
+    }
+    TokenResponse.prototype.toJson = function () {
+        return {
+            access_token: this.accessToken,
+            id_token: this.idToken,
+            refresh_token: this.refreshToken,
+            scope: this.scope,
+            token_type: this.tokenType,
+            issued_at: this.issuedAt,
+            expires_in: this.expiresIn
+        };
+    };
+    TokenResponse.prototype.isValid = function () {
+        if (this.expiresIn) {
+            var now = nowInSeconds();
+            return now < this.issuedAt + this.expiresIn;
+        }
+        else {
+            return true;
+        }
+    };
+    TokenResponse.fromJson = function (input) {
+        var issuedAt = !input.issued_at ? nowInSeconds() : input.issued_at;
+        return new TokenResponse(input.access_token, input.id_token, input.refresh_token, input.scope, input.token_type, issuedAt, input.expires_in);
+    };
+    return TokenResponse;
+}());
+exports.TokenResponse = TokenResponse;
+/**
+ * Represents the Token Error type.
+ * For more information look at:
+ * https://tools.ietf.org/html/rfc6749#section-5.2
+ */
+var TokenError = /** @class */ (function () {
+    function TokenError(error, errorDescription, errorUri) {
+        this.error = error;
+        this.errorDescription = errorDescription;
+        this.errorUri = errorUri;
+    }
+    TokenError.prototype.toJson = function () {
+        return {
+            error: this.error, error_description: this.errorDescription, error_uri: this.errorUri
+        };
+    };
+    TokenError.fromJson = function (input) {
+        return new TokenError(input.error, input.error_description, input.error_uri);
+    };
+    return TokenError;
+}());
+exports.TokenError = TokenError;
+
+},{}],21:[function(require,module,exports){
 "use strict";
 /*
  * Copyright 2017 Google Inc.
@@ -1023,7 +1542,7 @@ window['SESSION_STORAGE'] = exports.SESSION_STORAGE;
  */
 exports.AUTHORIZATION_RESPONSE_HANDLE_KEY = 'appauth_current_authorization_response';
 
-},{}],14:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 "use strict";
 /*
  * Copyright 2017 Google Inc.
@@ -1100,4 +1619,4 @@ var TestRequestor = /** @class */ (function (_super) {
 }(Requestor));
 exports.TestRequestor = TestRequestor;
 
-},{"./errors":7}]},{},[1]);
+},{"./errors":10}]},{},[1]);
