@@ -30,8 +30,8 @@ import java.util.Properties;
  */
 public class BackendApplication {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(BookingService.class);
-    private static final Properties PROPERTIES = new Properties();
+    private static final Logger logger = LoggerFactory.getLogger(BookingService.class);
+    private static final Properties properties = new Properties();
 
     // Perform property loading
     static {
@@ -39,10 +39,10 @@ public class BackendApplication {
                 BackendApplication.class.getClassLoader().getResourceAsStream("service.properties");
 
         try {
-            PROPERTIES.load(resourceAsStream);
-            LOGGER.info("Service properties loaded successfully.");
+            properties.load(resourceAsStream);
+            logger.info("Service properties loaded successfully.");
         } catch (final IOException e) {
-            LOGGER.error("Failed to load service properties.");
+            logger.error("Failed to load service properties.");
             throw new RuntimeException("Service start failed due to configuration loading failure", e);
         }
     }
@@ -52,20 +52,20 @@ public class BackendApplication {
         final int runningPort;
 
         if (args.length == 0) {
-            LOGGER.info("No port configuration override provided. Using default properties.");
-            runningPort = Integer.valueOf(PROPERTIES.getProperty("port"));
+            logger.info("No port configuration override provided. Using default properties.");
+            runningPort = Integer.valueOf(properties.getProperty("port"));
         } else {
             if (Constants.getPortArg().equals(args[0]) && args.length > 1) {
                 runningPort = Integer.valueOf(args[1]);
-                LOGGER.info("Running port successfully changed to " + runningPort);
+                logger.info("Running port successfully changed to " + runningPort);
             } else {
-                LOGGER.info("Invalid port configuration override. Using default properties.");
-                runningPort = Integer.valueOf(PROPERTIES.getProperty("port"));
+                logger.info("Invalid port configuration override. Using default properties.");
+                runningPort = Integer.valueOf(properties.getProperty("port"));
             }
         }
 
         // Start the service
-        LOGGER.info("Starting backend service.");
+        logger.info("Starting backend service.");
 
         new MicroservicesRunner(runningPort).deploy(new BookingService()).start();
     }

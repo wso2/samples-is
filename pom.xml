@@ -89,12 +89,18 @@
                 <artifactId>msf4j-all</artifactId>
                 <version>${msf4j.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-runner</artifactId>
                 <version>${jetty.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${javax.servlet.api.version}</version>
+            </dependency>
             <!--=============================================================================-->
 
             <!--dependencies of the saml2-sso-sample-->
@@ -444,6 +450,7 @@
         <maven.war.plugin.version>3.2.2</maven.war.plugin.version>
         <msf4j.version>2.6.4</msf4j.version>
         <jetty.version>9.4.11.v20180605</jetty.version>
+        <javax.servlet.api.version>3.1.0</javax.servlet.api.version>
 
         <!--=============================================================================-->
 
