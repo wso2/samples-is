@@ -87,7 +87,7 @@ var config = {
                 title: "title",
                 type: 'component',
                 componentName: 'viewContainer',
-                componentState: {text: "text"},
+                componentState: { text: "text" },
                 width: 0
             }
         ]
@@ -226,3 +226,191 @@ clipboard.on('success', function (e) {
 $(window).resize(function () {
     myLayout.updateSize();
 });
+
+function loadMetadata() {
+    var xReq = new XMLHttpRequest();
+    xReq.open("GET", "service");
+
+    xReq.onload = function () {
+        if (xReq.status == 200) {
+            // Set token value
+            var json_data = JSON.parse(xReq.response);
+            localStorage.setItem("ACCESS_TOKEN", json_data.AccessToken);
+            localStorage.setItem("API_ENDPOINT", json_data.ApiEndpoint);
+        } else {
+            swal("Metadata retrieval failed", " S : " + xReq.response, "error");
+        }
+    };
+
+    xReq.onerror = function () {
+        swal("Metadata retrieval failed", " Cause : " + xReq.response, "error");
+    };
+
+    xReq.send();
+}
+
+function toggleBackend() {
+    // onClick triggered when checkbox click is finished. So check the current status and execute logic
+    // Get current value of checkbox
+    if (document.getElementById("backendToggleCheckBox").checked) {
+        swal("Backend calls enabled.", "Please make sure service is running on " + localStorage.getItem("API_ENDPOINT"), "warning");
+    } else {
+        swal("Backend calls disabled.");
+        setDummyData();
+    }
+}
+
+// API call related functions
+async function addData() {
+    //  Check for backend enabled status
+    if (!document.getElementById("backendToggleCheckBox").checked) {
+        swal("Backend is not enabled. Inputs will not be stored.");
+        return
+    }
+
+    // Do a pre-check
+    if (document.getElementById("drivers").selectedIndex == 0) {
+        swal("Incorrect input", "Driver must be selected.", "warning");
+        return;
+    }
+
+    if (!document.getElementById("passengerName").value) {
+        swal("Incorrect input", "Please enter passenger name.", "warning");
+        return;
+    }
+
+    if (!document.getElementById("contactNumber").value) {
+        swal("Incorrect input", "Please enter contact number.", "warning");
+        return;
+    }
+
+    var data = {
+        "driver": document.getElementById("drivers").value,
+        "client": document.getElementById("passengerName").value,
+        "client-phone": document.getElementById("contactNumber").value
+    };
+
+    var response = await post_data(data, localStorage.getItem("API_ENDPOINT"));
+
+    try {
+        var response_json = JSON.parse(response);
+        if (response_json.status == "ok") {
+            document.getElementById("drivers").selectedIndex = 0;
+            document.getElementById("passengerName").value = "";
+            document.getElementById("contactNumber").value = "";
+            swal("Record created", "ID : " + response_json["ref-id"], "success");
+        } else {
+            swal("Something went wrong", "Cause : " + response_json["error-code"], "error");
+        }
+    } catch (error) {
+        swal("Something went wrong", "Cause : " + error + "\n Response : " + response, "error");
+        return;
+    }
+}
+
+async function fetchBookings() {
+    //  Check for backend enabled status
+    if (!document.getElementById("backendToggleCheckBox").checked) {
+        swal("Backend is not enabled. Dummy data will be loaded.").then(setDummyData());
+        return;
+    }
+
+    try {
+        var response = await get_data(localStorage.getItem("API_ENDPOINT"));
+        refreshTable(JSON.parse(response));
+    } catch (error) {
+        swal("Something went wrong", "Cause : " + error + "\n Response : " + response, "error");
+        return;
+    }
+}
+
+function setDummyData() {
+    refreshTable({
+        "bookings": [
+            {
+                "ref-id": "43252525",
+                "driver": "Tiger Nixon",
+                "client": "Alex Smith",
+                "client-phone": "0777123456"
+            }, {
+                "ref-id": "43252526",
+                "driver": "Lucas Thiyago",
+                "client": "Xing Wu",
+                "client-phone": "0777123456"
+            }
+        ]
+    })
+}
+
+function refreshTable(jsonPayload) {
+    // Rewrite booking tab and append with data fetched from back-end
+    var oldTBody = document.getElementById('bookingTab').getElementsByTagName('tbody')[0];
+
+    // New table body
+    var newTBody = document.createElement('tbody');
+    oldTBody.parentNode.replaceChild(newTBody, oldTBody);
+
+    // Check for empty json or invalid payload
+    if (!jsonPayload["bookings"]) {
+        return;
+    }
+
+    // Iterate and append to body
+    jsonPayload["bookings"].forEach(entry => {
+        var row = newTBody.insertRow(newTBody.rows.length);
+
+        var cell = row.insertCell(0);
+        var text = document.createTextNode(entry["ref-id"]);
+        cell.appendChild(text);
+
+        var cell = row.insertCell(1);
+        var text = document.createTextNode(entry["driver"]);
+        cell.appendChild(text);
+
+        var cell = row.insertCell(2);
+        var text = document.createTextNode(entry["client"]);
+        cell.appendChild(text);
+
+        var cell = row.insertCell(3);
+        var text = document.createTextNode(entry["client-phone"]);
+        cell.appendChild(text);
+    });
+}
+
+function get_data(url) {
+    return new Promise(function (resolve, reject) {
+        var xReq = new XMLHttpRequest();
+        xReq.open("GET", url);
+        xReq.setRequestHeader("Authorization", get_auth_header());
+
+        xReq.onload = function () {
+            resolve(xReq.response);
+        };
+
+        xReq.onerror = reject;
+
+        xReq.send();
+    });
+}
+
+function post_data(data, url) {
+    return new Promise(function (resolve, reject) {
+        var xReq = new XMLHttpRequest();
+        xReq.open("POST", url);
+        xReq.setRequestHeader("Authorization", get_auth_header());
+        xReq.setRequestHeader("Content-Type", "application/json");
+
+        xReq.onload = function () {
+            resolve(xReq.response);
+        };
+
+        xReq.onerror = reject;
+
+        xReq.send(JSON.stringify(data));
+    });
+}
+
+function get_auth_header() {
+    var acc_token = localStorage.getItem("ACCESS_TOKEN");
+    return "Bearer " + acc_token;
+}

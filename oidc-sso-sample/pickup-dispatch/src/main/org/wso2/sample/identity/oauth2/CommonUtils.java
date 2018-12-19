@@ -43,7 +43,7 @@ import java.util.UUID;
 
 public class CommonUtils {
 
-    private static final Map<String, TokenData> tokenStore = new HashMap<>();
+    private static final Map<String, TokenData> TOKEN_STORE = new HashMap<>();
 
     public static JSONObject requestToJson(final OAuthClientRequest accessRequest) {
 
@@ -74,7 +74,7 @@ public class CommonUtils {
         final Optional<Cookie> appIdCookie = getAppIdCookie(request);
 
         if (appIdCookie.isPresent()) {
-            tokenStore.remove(appIdCookie.get().getValue());
+            TOKEN_STORE.remove(appIdCookie.get().getValue());
             appIdCookie.get().setMaxAge(0);
             response.addCookie(appIdCookie.get());
             return true;
@@ -92,7 +92,7 @@ public class CommonUtils {
         final TokenData storedTokenData;
 
         if (appIdCookie.isPresent()) {
-            storedTokenData = tokenStore.get(appIdCookie.get().getValue());
+            storedTokenData = TOKEN_STORE.get(appIdCookie.get().getValue());
             if (storedTokenData != null) {
                 setTokenDataToSession(session, storedTokenData);
                 return;
@@ -136,7 +136,7 @@ public class CommonUtils {
             tokenData.setIdToken(idToken);
 
             final String sessionId = UUID.randomUUID().toString();
-            tokenStore.put(sessionId, tokenData);
+            TOKEN_STORE.put(sessionId, tokenData);
             final Cookie cookie = new Cookie("AppID", sessionId);
             cookie.setMaxAge(-1);
             cookie.setPath("/");
@@ -146,7 +146,7 @@ public class CommonUtils {
         }
     }
 
-    private static Optional<Cookie> getAppIdCookie(final HttpServletRequest request) {
+    public static Optional<Cookie> getAppIdCookie(final HttpServletRequest request) {
 
         final Cookie[] cookies = request.getCookies();
 
@@ -157,6 +157,15 @@ public class CommonUtils {
                 }
             }
         }
+        return Optional.empty();
+    }
+
+    public static Optional<TokenData> getTokenDataByCookieID(final String cookieID) {
+
+        if (TOKEN_STORE.containsKey(cookieID)) {
+            return Optional.of(TOKEN_STORE.get(cookieID));
+        }
+
         return Optional.empty();
     }
 
