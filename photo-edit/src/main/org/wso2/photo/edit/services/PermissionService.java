@@ -31,9 +31,7 @@ public class PermissionService extends HttpServlet {
         // Properties
 
         final String photoId = jsonObject.getString("photoId");
-        final boolean familyEdit = (boolean) jsonObject.get("familyEdit");
         final boolean familyView = (boolean) jsonObject.get("familyView");
-        final boolean friendEdit = (boolean) jsonObject.get("friendEdit");
         final boolean friendView = (boolean) jsonObject.get("friendView");
 
         System.out.println("Retrieved");

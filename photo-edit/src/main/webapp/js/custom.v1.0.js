@@ -261,17 +261,12 @@ async function sendPermission(){
 
     var photo_id = item.options[item.selectedIndex].text;
 
-    var family_edit = document.getElementById("family_edit").checked;
     var family_view = document.getElementById("family_view").checked;
-
-    var friend_edit = document.getElementById("friend_edit").checked;
     var friend_view = document.getElementById("friend_view").checked;
 
     var json_data = {
         photoId : photo_id,
-        familyEdit: family_edit,
         familyView: family_view,
-        friendEdit: friend_edit,
         friendView: friend_view
     }
 

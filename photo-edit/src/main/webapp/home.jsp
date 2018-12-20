@@ -160,10 +160,6 @@
                                 <td>Family</td>
                                 <td>
                                     <label class="form-check-label">
-                                        <input type="checkbox" class="form-check-input" id="family_edit">Edit
-                                    </label>
-                                    </br>
-                                    <label class="form-check-label">
                                         <input type="checkbox" class="form-check-input" id="family_view">View
                                     </label>
                                 </td>
@@ -171,10 +167,6 @@
                             <tr>
                                 <td>Friend</td>
                                 <td>
-                                    <label class="form-check-label">
-                                          <input type="checkbox" class="form-check-input" id="friend_edit">Edit
-                                    </label>
-                                    </br>
                                     <label class="form-check-label">
                                           <input type="checkbox" class="form-check-input" id="friend_view">View
                                     </label>
