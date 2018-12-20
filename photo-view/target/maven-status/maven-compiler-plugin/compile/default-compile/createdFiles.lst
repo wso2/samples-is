@@ -1,7 +1,0 @@
-org/wso2/photo/view/CommonUtils.class
-org/wso2/photo/view/SampleContextEventListener.class
-org/wso2/photo/view/SampleAppServerException.class
-org/wso2/photo/view/OAuth2Constants.class
-org/wso2/photo/view/TokenData.class
-org/wso2/photo/view/ClientAppException.class
-org/wso2/photo/view/ManagerClientServlet.class
