@@ -40,6 +40,12 @@ public class SampleContextEventListener implements ServletContextListener {
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, e.getMessage(), e);
         }
+
+        try {
+            DCRUtility.performDCR();
+        } catch (SampleAppServerException e) {
+            throw new RuntimeException("Something went wrong", e);
+        }
     }
 
     public void contextDestroyed(ServletContextEvent servletContextEvent) {

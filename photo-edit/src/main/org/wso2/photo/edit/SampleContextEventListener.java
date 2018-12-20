@@ -17,6 +17,8 @@
  */
 package org.wso2.photo.edit;
 
+import org.wso2.photo.edit.exceptions.SampleAppServerException;
+
 import java.io.IOException;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -39,6 +41,12 @@ public class SampleContextEventListener implements ServletContextListener {
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, e.getMessage(), e);
         }
+
+        try {
+            DCRUtility.performDCR();
+        } catch (SampleAppServerException e) {
+            throw new RuntimeException("Something went wrong", e);
+        }
     }
 
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
@@ -51,10 +59,12 @@ public class SampleContextEventListener implements ServletContextListener {
      * @return Properties
      */
     public static Properties getProperties() {
+
         return properties;
     }
 
     public static String getPropertyByKey(final String key) {
+
         return properties.getProperty(key);
     }
 }
