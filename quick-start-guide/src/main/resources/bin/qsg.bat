@@ -24,11 +24,9 @@ SET SCENARIO_DIR=..\scenarios
 REM This is used to navigate back and forth between executables
 SET REL_ROOT=%cd%
 
-echo "Before Running make sure the following -                                      "
-echo "  * Added server details to the server.properties file in the QSG/bin folder  "
-echo "  * Your WSO2 IS 5.7.0 and applications are running.                          "
-echo "  * Configure the running domains/ips and ports in server.properties file     "
-echo "   in the QSG/bin folder.                                                     "
+echo "Before running samples make sure the following                                "
+echo "  * Added correct details to the server.properties                            "
+echo "  * Your WSO2 IS 5.7.0 and sample applications are running.                   "
 echo "                                                                              "
 echo " If okay to continue, Please press 'Y' else press 'N'                         "
 echo(
