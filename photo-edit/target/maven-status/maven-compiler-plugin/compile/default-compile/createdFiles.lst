@@ -1,0 +1,9 @@
+org/wso2/photo/edit/services/MetadataServlet.class
+org/wso2/photo/edit/OAuth2Constants.class
+org/wso2/photo/edit/exceptions/ClientAppException.class
+org/wso2/photo/edit/services/ServiceFilter.class
+org/wso2/photo/edit/TokenData.class
+org/wso2/photo/edit/DispatchClientServlet.class
+org/wso2/photo/edit/SampleContextEventListener.class
+org/wso2/photo/edit/exceptions/SampleAppServerException.class
+org/wso2/photo/edit/CommonUtils.class
