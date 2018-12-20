@@ -227,28 +227,6 @@ $(window).resize(function () {
     myLayout.updateSize();
 });
 
-function loadMetadata() {
-    var xReq = new XMLHttpRequest();
-    xReq.open("GET", "services/MetadataService");
-
-    xReq.onload = function () {
-        if (xReq.status == 200) {
-            // Set token value
-            var json_data = JSON.parse(xReq.response);
-            localStorage.setItem("ACCESS_TOKEN", json_data.AccessToken);
-            localStorage.setItem("API_ENDPOINT", json_data.ApiEndpoint);
-        } else {
-            swal("Metadata retrieval failed", " S : " + xReq.response, "error");
-        }
-    };
-
-    xReq.onerror = function () {
-        swal("Metadata retrieval failed", " Cause : " + xReq.response, "error");
-    };
-
-    xReq.send();
-}
-
 async function sendPermission(){
 
     // Extract data

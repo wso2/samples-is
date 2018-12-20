@@ -16,8 +16,8 @@ public class PhotoRetrieveService extends HttpServlet {
     private final static List<String> imageArray = new ArrayList<>();
 
     static {
-        imageArray.add("eagle.jpg");
-        imageArray.add("flower.jpg");
+        imageArray.add("http://localhost.com:8080/photo-edit/res/eagleAlbum.png");
+        imageArray.add("http://localhost.com:8080/photo-edit/res/flowerAlbum.png");
     }
 
     @Override

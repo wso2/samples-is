@@ -67,9 +67,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="PICKUP MANAGER - Management Application">
+    <meta name="description" content="Photo View Application">
 
-    <title>PICKUP MANAGER</title>
+    <title>Photo View</title>
 
     <!-- Bootstrap Material Design CSS -->
     <link href="libs/bootstrap-material-design_4.0.0/css/bootstrap-material-design.min.css" rel="stylesheet">
@@ -135,7 +135,7 @@
 
                   <button type="button"
                          class="btn btn-outline-primary btn-create content-btn mt-4 d-block mx-auto"
-                         onclick="loadImages()">View images
+                         onclick="loadImages()">View Album
                   </button>
                 </div>
 

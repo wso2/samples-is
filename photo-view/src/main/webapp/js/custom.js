@@ -234,12 +234,15 @@ async function loadImages(){
    try {
        var response_json = JSON.parse(response);
 
-       response_json.forEach(imageName =>
+       // first clear all childs
+       document.getElementById("image-holder").innerHTML = '';
+
+       response_json.forEach(imageUrl =>
             {
               // Append images
               // <img src="res/eagle.jpg" class="img-thumbnail small-image">
               var image_element = document.createElement("img");
-              image_element.setAttribute("src", "res/" + imageName);
+              image_element.setAttribute("src", imageUrl);
               image_element.setAttribute("class", "img-thumbnail small-image");
 
               document.getElementById("image-holder").append(image_element);

@@ -63,9 +63,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="PICKUP DISPATCH - Vehicle allocation application">
+    <meta name="description" content="Photo Edit Application">
 
-    <title>Pickup-Dispatch</title>
+    <title>Photo-Edit</title>
 
     <!-- Bootstrap Material Design CSS -->
     <link href="libs/bootstrap-material-design_4.0.0/css/bootstrap-material-design.min.css" rel="stylesheet">
@@ -135,8 +135,8 @@
             </section>
 
             <div class="text-center">
-               <img src="res/eagle.jpg" class="img-thumbnail small-image">
-               <img src="res/flower.jpg" class="img-thumbnail small-image">
+               <img src="res/eagleAlbum.png" class="img-thumbnail small-image">
+               <img src="res/flowerAlbum.png" class="img-thumbnail small-image">
             </div>
 
 
@@ -147,12 +147,12 @@
                         <table class="table">
                           <tbody>
                             <tr>
-                                <td>Photo ID</td>
+                                <td>Album ID</td>
                                 <td>
                                     <select class="form-control" id="photo_id">
-                                        <option selected>Select photo ID</option>
-                                        <option>eagle.jpg</option>
-                                        <option>flower.jpg</option>
+                                        <option selected>Select Album ID</option>
+                                        <option>Eagle Album</option>
+                                        <option>Flower Album</option>
                                     </select>
                                 </td>
                             </tr>
@@ -267,10 +267,6 @@
 <script src="js/custom.v1.0.js"></script>
 <!-- SweetAlerts -->
 <script src="libs/sweetalerts/sweetalert.2.1.2.min.js"></script>
-<script>
-    hljs.initHighlightingOnLoad();
-    loadMetadata();
-</script>
 
 </body>
 </html>
