@@ -31,7 +31,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="PICKUP MANAGER - Login">
+    <meta name="description" content="Photo Viewer - Login">
 
     <title>PickUp Manager Login</title>
 
@@ -53,7 +53,7 @@
                 <div class="app-icon d-block mx-auto">
                     <img src="img/manager.png" class="login-img"/>
                 </div>
-                <div class="app-name text-center">PICKUP MANAGER</div>
+                <div class="app-name text-center">Photo Viewer</div>
                 <form class="app-login-form" role="form" action="oauth2-authorize-user.jsp?reset=true" method="post" id="login-form"
                       autocomplete="off">
                     <input type="submit" id="btn-login" class="btn btn-login" value="LOGIN"/>

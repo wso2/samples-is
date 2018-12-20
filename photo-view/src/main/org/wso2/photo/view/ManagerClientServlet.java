@@ -20,6 +20,7 @@ package org.wso2.photo.view;
 import org.apache.commons.lang.StringUtils;
 import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
+import org.wso2.photo.view.exceptions.SampleAppServerException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

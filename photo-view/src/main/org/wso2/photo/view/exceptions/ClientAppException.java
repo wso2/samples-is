@@ -15,20 +15,18 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.wso2.photo.view;
+package org.wso2.photo.view.exceptions;
 
-/**
- * Exception that is used to handle server-side anomalies
- */
-public class SampleAppServerException extends Exception {
+public class ClientAppException extends Exception {
 
-    public SampleAppServerException(final String message) {
+    public ClientAppException(String message) {
 
         super(message);
     }
 
-    public SampleAppServerException(final String message, final Throwable ex) {
+    public ClientAppException(String message, Throwable cause) {
 
-        super(message, ex);
+        super(message, cause);
     }
+
 }

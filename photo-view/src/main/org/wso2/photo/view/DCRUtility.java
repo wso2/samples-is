@@ -19,6 +19,7 @@ package org.wso2.photo.view;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.wso2.photo.view.exceptions.SampleAppServerException;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;

@@ -226,3 +226,44 @@ clipboard.on('success', function (e) {
 $(window).resize(function () {
     myLayout.updateSize();
 });
+
+
+async function loadImages(){
+   var response =  await get_data("services/PhotoRetrieveService");
+
+   try {
+       var response_json = JSON.parse(response);
+
+       response_json.forEach(imageName =>
+            {
+              // Append images
+              // <img src="res/eagle.jpg" class="img-thumbnail small-image">
+              var image_element = document.createElement("img");
+              image_element.setAttribute("src", "res/" + imageName);
+              image_element.setAttribute("class", "img-thumbnail small-image");
+
+              document.getElementById("image-holder").append(image_element);
+            }
+       );
+
+   } catch (error) {
+       swal("Something went wrong", "Cause : " + error + "\n Response : " + response, "error");
+       return;
+   }
+
+}
+
+function get_data(url) {
+    return new Promise(function (resolve, reject) {
+        var xReq = new XMLHttpRequest();
+        xReq.open("GET", url);
+
+        xReq.onload = function () {
+            resolve(xReq.response);
+        };
+
+        xReq.onerror = reject;
+
+        xReq.send();
+    });
+}

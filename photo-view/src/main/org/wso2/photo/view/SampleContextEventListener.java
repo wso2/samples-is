@@ -18,6 +18,8 @@
 package org.wso2.photo.view;
 
 
+import org.wso2.photo.view.exceptions.SampleAppServerException;
+
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import java.io.IOException;

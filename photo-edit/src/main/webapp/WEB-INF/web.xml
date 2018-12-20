@@ -47,10 +47,10 @@
     </filter-mapping>
 
     <listener>
-        <listener-class>org.wso2.photo.edit.SampleContextEventListener</listener-class>
+        <listener-class>org.wso2.jks.JKSLoader</listener-class>
     </listener>
     <listener>
-        <listener-class>org.wso2.jks.JKSLoader</listener-class>
+        <listener-class>org.wso2.photo.edit.SampleContextEventListener</listener-class>
     </listener>
 
 </web-app>

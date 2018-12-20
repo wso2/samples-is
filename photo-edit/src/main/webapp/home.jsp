@@ -157,19 +157,15 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>Family</td>
+                                <td>Album sharing options</td>
                                 <td>
-                                    <label class="form-check-label">
-                                        <input type="checkbox" class="form-check-input" id="family_view">View
-                                    </label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Friend</td>
-                                <td>
-                                    <label class="form-check-label">
-                                          <input type="checkbox" class="form-check-input" id="friend_view">View
-                                    </label>
+                                     <label class="form-check-label">
+                                          <input type="checkbox" class="form-check-input" id="friend_view">Family
+                                     </label>
+                                     </br>
+                                     <label class="form-check-label">
+                                         <input type="checkbox" class="form-check-input" id="family_view">Friend
+                                     </label>
                                 </td>
                             </tr>
                           </tbody>
@@ -180,7 +176,6 @@
                                 onclick="sendPermission()">Set Permission
                         </button>
                     </form>
-
                 </div>
             </div>
         </div>

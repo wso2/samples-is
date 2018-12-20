@@ -85,6 +85,12 @@
     <link href="css/spinner.css" rel="stylesheet">
     <link href="css/custom.css" rel="stylesheet">
     <link href="css/manager.css" rel="stylesheet">
+
+    <style>
+        .small-image {
+          width: 200px;
+        }
+    </style>
 </head>
 
 <body class="app-home">
@@ -93,7 +99,7 @@
 
 <div id="actionContainer">
     <nav class="navbar navbar-expand-lg navbar-dark app-navbar justify-content-between">
-        <a class="navbar-brand" href="home.jsp"><i class="fas fa-taxi"></i> PICKUP MANAGER</a>
+        <a class="navbar-brand" href="home.jsp"><i class="fas fa-tasks"></i> Photo Viewer</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -111,11 +117,6 @@
                             Logout</a>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="toggleView" href="#" data-toggle="tooltip" data-placement="bottom" title="Console">
-                        <i class="fa fa-cogs"></i>
-                    </a>
-                </li>
             </ul>
         </div>
     </nav>
@@ -124,313 +125,23 @@
         <div id="main-content">
             <section class="jumbotron text-center">
                 <div class="container">
-                    <div class="jumbotron-heading">PICKUP MANAGER</div>
-                    <p class="lead text-muted">Management Application</p>
+                    <div class="jumbotron-heading">Photo View</div>
+                    <p class="lead text-muted">View photos shared with you</p>
                 </div>
             </section>
+
             <div class="container">
-                <section id="tabs">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <nav>
-                                <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                                    <a class="nav-item nav-link active" id="nav-overview-tab" data-toggle="tab"
-                                       href="#nav-overview" role="tab" aria-controls="nav-overview" aria-selected="true">Overview</a>
-                                    <a class="nav-item nav-link" id="nav-drivers-tab" data-toggle="tab" href="#nav-drivers"
-                                       role="tab" aria-controls="nav-drivers" aria-selected="false">Drivers</a>
-                                    <a class="nav-item nav-link" id="nav-vehicles-tab" data-toggle="tab" href="#nav-vehicles"
-                                       role="tab" aria-controls="nav-vehicles" aria-selected="false">Vehicles</a>
-                                    <a class="nav-item nav-link" id="nav-passengers-tab" data-toggle="tab"
-                                       href="#nav-passengers"
-                                       role="tab" aria-controls="nav-passengers" aria-selected="false">Passengers</a>
-                                </div>
-                            </nav>
-                            <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
-                                <div class="tab-pane fade show active" id="nav-overview" role="tabpanel"
-                                     aria-labelledby="nav-overview-tab">
-                                    <div class="row">
-                                        <div class="col-md-4 mb-5 mt-5 text-center">
-                                            <i class="fas fa-users fa-3x green-text"></i>
-                                            <h4 class="my-4 tab-title">Drivers</h4>
-                                            <h4 class="grey-text">30</h4>
-                                        </div>
-                                        <div class="col-md-4 mb-1 mt-5 text-center">
-                                            <i class="fa fa-car fa-3x green-text"></i>
-                                            <h4 class="my-4 tab-title">Vehicles</h4>
-                                            <h4 class="grey-text">40</h4>
-                                        </div>
-                                        <div class="col-md-4 mb-1 mt-5 text-center">
-                                            <i class="fa fa-users fa-3x green-text"></i>
-                                            <h4 class="my-4 tab-title">Passengers</h4>
-                                            <h4 class="grey-text">250</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="nav-drivers" role="tabpanel" aria-labelledby="nav-drivers-tab">
-                                    <div class="table-responsive content-table">
-                                        <table class="table">
-                                            <thead>
-                                            <tr>
-                                                <th>Driver ID</th>
-                                                <th>Name</th>
-                                                <th>Age</th>
-                                                <th>Registration date</th>
-                                                <th>Salary</th>
-                                                <th></th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <td>D0072</td>
-                                                <td>Tiger Nixon</td>
-                                                <td>40</td>
-                                                <td class="date-time"></td>
-                                                <td>$120,800</td>
-                                                <td><a href="#" data-toggle="modal" data-target="#sampleModal"><i
-                                                        class="fas fa-trash-alt"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>D0053</td>
-                                                <td>Joshua Winters</td>
-                                                <td>33</td>
-                                                <td class="date-time"></td>
-                                                <td>$110,750</td>
-                                                <td><a href="#" data-toggle="modal" data-target="#sampleModal"><i
-                                                        class="fas fa-trash-alt"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>D0046</td>
-                                                <td>Lucas Thiyago</td>
-                                                <td>23</td>
-                                                <td class="date-time"></td>
-                                                <td>$106,000</td>
-                                                <td><a href="#" data-toggle="modal" data-target="#sampleModal"><i
-                                                        class="fas fa-trash-alt"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>D0027</td>
-                                                <td>Woo Jin</td>
-                                                <td>22</td>
-                                                <td class="date-time"></td>
-                                                <td>$113,060</td>
-                                                <td><a href="#" data-toggle="modal" data-target="#sampleModal"><i
-                                                        class="fas fa-trash-alt"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>D0013</td>
-                                                <td>Airi Satou</td>
-                                                <td>43</td>
-                                                <td class="date-time"></td>
-                                                <td>$112,700</td>
-                                                <td><a href="#" data-toggle="modal" data-target="#sampleModal"><i
-                                                        class="fas fa-trash-alt"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>D0009</td>
-                                                <td>Brielle Williamson</td>
-                                                <td>34</td>
-                                                <td class="date-time"></td>
-                                                <td>$107,000</td>
-                                                <td><a href="#" data-toggle="modal" data-target="#sampleModal"><i
-                                                        class="fas fa-trash-alt"></i></a></td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <button type="button" class="btn btn-outline-primary content-btn d-block mx-auto"
-                                            data-toggle="modal" data-target="#sampleModal">Add
-                                    </button>
-                                </div>
-                                <div class="tab-pane fade" id="nav-vehicles" role="tabpanel" aria-labelledby="nav-contact-tab">
-                                    <div class="table-responsive content-table">
-                                        <table class="table">
-                                            <thead>
-                                            <tr>
-                                                <th>Vehicle No</th>
-                                                <th>Owner</th>
-                                                <th>Vehicle Type</th>
-                                                <th>Registration date</th>
-                                                <th></th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <td>CAS 234</td>
-                                                <td>Tiger Nixon</td>
-                                                <td>Car</td>
-                                                <td class="date-time"></td>
-                                                <td><a href="#" data-toggle="modal" data-target="#sampleModal"><i
-                                                        class="fas fa-trash-alt"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>KNW 456</td>
-                                                <td>Lucas Thiyago</td>
-                                                <td>Van</td>
-                                                <td class="date-time"></td>
-                                                <td><a href="#" data-toggle="modal" data-target="#sampleModal"><i
-                                                        class="fas fa-trash-alt"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>JDQ 887</td>
-                                                <td>Joshua Winters</td>
-                                                <td>Car</td>
-                                                <td class="date-time"></td>
-                                                <td><a href="#" data-toggle="modal" data-target="#sampleModal"><i
-                                                        class="fas fa-trash-alt"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>HGY 423</td>
-                                                <td>Woo Jin</td>
-                                                <td>Car</td>
-                                                <td class="date-time"></td>
-                                                <td><a href="#" data-toggle="modal" data-target="#sampleModal"><i
-                                                        class="fas fa-trash-alt"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>DBL 090</td>
-                                                <td>Airi Satou</td>
-                                                <td>Car</td>
-                                                <td class="date-time"></td>
-                                                <td><a href="#" data-toggle="modal" data-target="#sampleModal"><i
-                                                        class="fas fa-trash-alt"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>SAH 5555</td>
-                                                <td>Brielle Williamson</td>
-                                                <td>Van</td>
-                                                <td class="date-time"></td>
-                                                <td><a href="#" data-toggle="modal" data-target="#sampleModal"><i
-                                                        class="fas fa-trash-alt"></i></a></td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <button type="button" class="btn btn-outline-primary content-btn d-block mx-auto"
-                                            data-toggle="modal" data-target="#sampleModal">Add
-                                    </button>
-                                </div>
-                                <div class="tab-pane fade" id="nav-passengers" role="tabpanel"
-                                     aria-labelledby="nav-passengers-tab">
-                                    <div class="table-responsive content-table">
-                                        <table class="table">
-                                            <thead>
-                                            <tr>
-                                                <th>Passenger ID</th>
-                                                <th>Name</th>
-                                                <th>Registration Date</th>
-                                                <th>No of Trips</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <td>P0064</td>
-                                                <td>James Easton</td>
-                                                <td class="date-time"></td>
-                                                <td>03</td>
-                                            </tr>
-                                            <tr>
-                                                <td>P0052</td>
-                                                <td>Ryan Martin</td>
-                                                <td class="date-time"></td>
-                                                <td>10</td>
-                                            </tr>
-                                            <tr>
-                                                <td>P0048</td>
-                                                <td>Zofia Cox</td>
-                                                <td class="date-time"></td>
-                                                <td>08</td>
-                                            </tr>
-                                            <tr>
-                                                <td>P0037</td>
-                                                <td>Kelly Carter</td>
-                                                <td class="date-time"></td>
-                                                <td>03</td>
-                                            </tr>
-                                            <tr>
-                                                <td>P0022</td>
-                                                <td>Xing Wu</td>
-                                                <td class="date-time"></td>
-                                                <td>15</td>
-                                            </tr>
-                                            <tr>
-                                                <td>P0015</td>
-                                                <td>Mariana Davis</td>
-                                                <td class="date-time"></td>
-                                                <td>21</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <button type="button" class="btn btn-outline-primary content-btn d-block mx-auto"
-                                            data-toggle="modal" data-target="#sampleModal">Add
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-        </div>
-        <div id="profile-content">
-            <section class="jumbotron text-center">
-                <div class="container">
-                    <div class="user-icon">
-                        <i class="fas fa-user-circle fa-5x"></i>
-                    </div>
-                    <div class="jumbotron-heading"><%=name%></div>
+                 <div class="col-md-6 mb-5 mt-5 d-block mx-auto">
+
+                  <button type="button"
+                         class="btn btn-outline-primary btn-create content-btn mt-4 d-block mx-auto"
+                         onclick="loadImages()">View images
+                  </button>
                 </div>
-            </section>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 d-block mx-auto">
-                        <div class="card card-body table-container">
-                            <div class="table-responsive content-table">
-                                <%
-                                    if (claimsSet != null) {
-                                        Map<String, Object> hashmap = new HashMap<>();
-                                        hashmap = claimsSet.getCustomClaims();
 
-                                        if (!hashmap.isEmpty()) {
-                                %>
-                                <table class="table">
-                                    <thead>
-                                    <tr>
-                                        <th rowspan="2">User Details</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <%
-                                        for (String key : hashmap.keySet()){
-                                            if (!(key.equals("at_hash") || key.equals("c_hash") || key.equals("azp")
-                                                    || key.equals("amr") || key.equals("sid"))) {
-                                    %>
-                                    <tr>
-                                        <td><%=key%></td>
-                                        <td><%=hashmap.get(key).toString()%></td>
-                                    </tr>
-                                    <%
-                                            }
-                                        }
-                                    %>
-                                    </tbody>
-                                </table>
-                                <%
-                                } else {
-
-                                %>
-                                <p align="center">No user details Available. Configure SP Claim Configurations.</p>
-
-                                <%
-
-                                        }
-                                    }
-                                %>
-                            </div>
-                        </div>
-                    </div>
+                <div class="text-center" id="image-holder">
                 </div>
             </div>
-        </div>
     </main>
     <footer class="text-muted footer text-center">
         <span>Copyright &copy;  <a href="http://wso2.com/" target="_blank">
@@ -438,86 +149,6 @@
         </span>
     </footer>
 
-    <!-- sample application actions message -->
-    <div class="modal fade" id="sampleModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="myModalLabel">You cannot perform this action</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Sample application functionalities are added for display purposes only.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div id="viewContainer">
-    <section class="actions">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12 console-headers">
-                    <span id="console-close" class="float-right console-action">
-                        <span data-toggle="tooltip" data-placement="bottom" title="Close"><i
-                                class="fas fa-times"></i></span>
-                    </span>
-                    <span id="toggleLayout" class="float-right console-action">
-                        <span data-toggle="tooltip" data-placement="bottom" title="Dock to bottom"><i
-                                class="fas fa-window-maximize"></i></span>
-                    </span>
-                    <span id="clearAll" class="float-right console-action">
-                        <span data-toggle="tooltip" data-placement="bottom" title="Clear All"><i class="fas fa-ban"></i></span>
-                    </span>
-
-                </div>
-                <div class="col-md-12">
-                    <div id="timeline-content">
-                        <ul class="timeline">
-                            <li class="event sent">
-                                <div class="request-response-infos">
-                                    <h1 class='request-response-title'>Request <span class="float-right"><i
-                                            class="fas fa-angle-down"></i></span></h1>
-                                    <div class="request-response-details mt-3">
-                                        <h2>Data:</h2>
-                                        <div class="code-container mb-3">
-                                            <button class="btn btn-primary btn-clipboard"
-                                                    data-clipboard-target=".copy-target1"><i
-                                                    class="fa fa-clipboard"></i></button>
-                                            <p class="copied">Copied..!</p>
-                                            <pre><code class="copy-target1 JSON pt-3 pb-3"><%=requestObject.toString(4)%></code></pre>
-                                        </div>
-                                    </div>
-                                </div>
-                                <input type="hidden" id="request" value="<%=requestObject.toString()%>"/>
-                            </li>
-                            <li class="event received">
-                                <div class="request-response-infos">
-                                    <h1 class='request-response-title'>Response <span class="float-right"><i
-                                            class="fa fa-angle-down"></i></span></h1>
-                                    <div class="request-response-details mt-3">
-                                        <h2>Data:</h2>
-                                        <div class="code-container mb-3">
-                                            <button class="btn btn-primary btn-clipboard"
-                                                    data-clipboard-target=".copy-target3"><i
-                                                    class="fa fa-clipboard"></i></button>
-                                            <p class="copied">Copied..!</p>
-                                            <pre><code class="copy-target3 JSON pt-3 pb-3 requestContent"><%=responseObject.toString(4)%></code></pre>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 </div>
 
 <!-- JQuery -->
@@ -536,6 +167,8 @@
 <script src="libs/clipboard/clipboard.min.js"></script>
 <!-- Custom Js -->
 <script src="js/custom.js"></script>
+<!-- SweetAlerts -->
+<script src="libs/sweetalerts/sweetalert.2.1.2.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 
 </body>
