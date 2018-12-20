@@ -229,7 +229,7 @@ $(window).resize(function () {
 
 function loadMetadata() {
     var xReq = new XMLHttpRequest();
-    xReq.open("GET", "service");
+    xReq.open("GET", "services/MetadataService");
 
     xReq.onload = function () {
         if (xReq.status == 200) {
@@ -248,6 +248,38 @@ function loadMetadata() {
 
     xReq.send();
 }
+
+async function sendPermission(){
+
+    // Extract data
+    if (document.getElementById("photo_id").selectedIndex == 0) {
+        swal("Incorrect input", "Photo ID must be selected.", "warning");
+        return;
+    }
+
+    var item = document.getElementById("photo_id");
+
+    var photo_id = item.options[item.selectedIndex].text;
+
+    var family_edit = document.getElementById("family_edit").checked;
+    var family_view = document.getElementById("family_view").checked;
+
+    var friend_edit = document.getElementById("friend_edit").checked;
+    var friend_view = document.getElementById("friend_view").checked;
+
+    var json_data = {
+        photoId : photo_id,
+        familyEdit: family_edit,
+        familyView: family_view,
+        friendEdit: friend_edit,
+        friendView: friend_view
+    }
+
+    await post_data(json_data, "services/PermissionService");
+
+    swal("Done", "Permission set successfully" , "success");
+}
+
 
 function toggleBackend() {
     // onClick triggered when checkbox click is finished. So check the current status and execute logic

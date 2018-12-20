@@ -81,6 +81,12 @@
     <link href="css/spinner.css" rel="stylesheet">
     <link href="css/custom.css" rel="stylesheet">
     <link href="css/dispatch.css" rel="stylesheet">
+
+    <style>
+        .small-image {
+          width: 200px;
+        }
+    </style>
 </head>
 
 <body class="app-home dispatch">
@@ -89,7 +95,7 @@
 
 <div id="actionContainer">
     <nav class="navbar navbar-expand-lg navbar-dark app-navbar justify-content-between">
-        <a class="navbar-brand" href="home.jsp"><i class="fas fa-taxi"></i> PICKUP DISPATCH</a>
+        <a class="navbar-brand" href="home.jsp"><i class="fas fa-tasks"></i> Photo Editor</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -115,12 +121,6 @@
                             Logout</a>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="toggleView" href="#" data-toggle="tooltip" data-placement="bottom"
-                       title="Console">
-                        <i class="fa fa-cogs"></i>
-                    </a>
-                </li>
             </ul>
         </div>
     </nav>
@@ -129,151 +129,70 @@
         <div id="main-content">
             <section class="jumbotron text-center">
                 <div class="container">
-                    <div class="jumbotron-heading">PICKUP DISPATCH</div>
-                    <p class="lead text-muted">Vehicle Booking Application</p>
+                    <div class="jumbotron-heading">Photo Editor</div>
+                    <p class="lead text-muted">Set permissions to your images</p>
                 </div>
             </section>
-            <div class="container">
-                <section id="tabs">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <nav>
-                                <div class="col-md-6 d-block mx-auto">
-                                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                                        <a class="nav-item nav-link active" id="nav-overview-tab" data-toggle="tab"
-                                           href="#nav-overview" role="tab" aria-controls="nav-overview"
-                                           aria-selected="true"><i
-                                                class="fas fa-edit"></i> &nbsp;Make a Booking</a>
-                                        <a class="nav-item nav-link" id="nav-drivers-tab" data-toggle="tab"
-                                           href="#nav-drivers"
-                                           role="tab" aria-controls="nav-drivers" aria-selected="false" onclick="fetchBookings()"><i
-                                                class="fas fa-list"></i> &nbsp;View Bookings</a>
-                                    </div>
-                                </div>
-                            </nav>
-                            <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
-                                <div class="tab-pane fade show active" id="nav-overview" role="tabpanel"
-                                     aria-labelledby="nav-overview-tab">
-                                    <div class="row">
-                                        <div class="col-md-6 mb-5 mt-5 d-block mx-auto">
-                                            <form>
-                                                <div class="form-group">
-                                                    <label for="drivers" class="bmd-label-floating">Driver</label>
-                                                    <select class="form-control" id="drivers">
-                                                        <option selected>Select a driver</option>
-                                                        <option>Tiger Nixon (D0072)</option>
-                                                        <option>Joshua Winters (D0053)</option>
-                                                        <option>Lucas Thiyago (D0046)</option>
-                                                        <option>Woo Jin (D0027)</option>
-                                                        <option>Airi Satou (D0013)</option>
-                                                        <option>Brielle Williamson (D0009)</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="passenger" class="bmd-label-floating">Passenger</label>
-                                                    <input type="text" class="form-control" id="passengerName">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="contactNumber" class="bmd-label-floating">Contact Number</label>
-                                                    <input type="text" class="form-control" id="contactNumber">
-                                                </div>
-                                                <div class="form-group mt-5">
-                                                    <button type="button"
-                                                            class="btn btn-outline-primary btn-create content-btn mt-4 d-block mx-auto"
-                                                            onclick="addData()">Add
-                                                    </button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="nav-drivers" role="tabpanel"
-                                     aria-labelledby="nav-drivers-tab">
-                                    <div class="table-responsive content-table">
-                                        <table class="table" id = "bookingTab">
-                                            <thead>
-                                            <tr>
-                                                <th>Ref-id</th>
-                                                <th>Driver</th>
-                                                <th>Client</th>
-                                                <th>Client phone</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+
+            <div class="text-center">
+               <img src="res/eagle.jpg" class="img-thumbnail small-image">
+               <img src="res/flower.jpg" class="img-thumbnail small-image">
             </div>
-        </div>
-        <div id="profile-content">
-            <section class="jumbotron text-center">
-                <div class="container">
-                    <div class="user-icon">
-                        <i class="fas fa-user-circle fa-5x"></i>
-                    </div>
-                    <div class="jumbotron-heading"><%=name%>
-                    </div>
-                </div>
-            </section>
+
+
             <div class="container">
-                <div class="row">
-                    <div class="col-md-6 d-block mx-auto">
-                        <div class="card card-body table-container">
-                            <div class="table-responsive content-table">
-                                <%
-                                    if (claimsSet != null) {
-                                        Map<String, Object> hashmap = new HashMap<>();
-                                        hashmap = claimsSet.getCustomClaims();
+                 <div class="col-md-6 mb-5 mt-5 d-block mx-auto">
 
-                                        if (!hashmap.isEmpty()) {
-                                %>
-                                <table class="table">
-                                    <thead>
-                                    <tr>
-                                        <th rowspan="2">User Details</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <%
-                                        for (String key : hashmap.keySet()) {
-                                            if (!(key.equals("at_hash") || key.equals("c_hash") || key.equals("azp")
-                                                    || key.equals("amr") || key.equals("sid"))) {
-                                    %>
-                                    <tr>
-                                        <td><%=key%>
-                                        </td>
-                                        <td><%=hashmap.get(key).toString()%>
-                                        </td>
-                                    </tr>
-                                    <%
-                                            }
-                                        }
-                                    %>
-                                    </tbody>
-                                </table>
-                                <%
-                                } else {
+                    <form>
+                        <table class="table">
+                          <tbody>
+                            <tr>
+                                <td>Photo ID</td>
+                                <td>
+                                    <select class="form-control" id="photo_id">
+                                        <option selected>Select photo ID</option>
+                                        <option>eagle.jpg</option>
+                                        <option>flower.jpg</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Family</td>
+                                <td>
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input" id="family_edit">Edit
+                                    </label>
+                                    </br>
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input" id="family_view">View
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Friend</td>
+                                <td>
+                                    <label class="form-check-label">
+                                          <input type="checkbox" class="form-check-input" id="friend_edit">Edit
+                                    </label>
+                                    </br>
+                                    <label class="form-check-label">
+                                          <input type="checkbox" class="form-check-input" id="friend_view">View
+                                    </label>
+                                </td>
+                            </tr>
+                          </tbody>
+                        </table>
 
-                                %>
-                                <p align="center">No user details Available. Configure SP Claim Configurations.</p>
+                        <button type="button"
+                                class="btn btn-outline-primary btn-create content-btn mt-4 d-block mx-auto"
+                                onclick="sendPermission()">Set Permission
+                        </button>
+                    </form>
 
-                                <%
-
-                                        }
-                                    }
-                                %>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
-    </main><!-- /.container -->
+    </main>
     <footer class="text-muted footer text-center">
         <span>Copyright &copy;  <a href="http://wso2.com/" target="_blank">
             <img src="img/wso2-dark.svg" class="wso2-logo" alt="wso2-logo"></a> &nbsp;<span class="year"></span>

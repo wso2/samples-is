@@ -100,12 +100,12 @@ public class DCRUtility {
     private static void readFromResponse(final URLConnection urlConnection) throws SampleAppServerException {
 
         try {
-            final BufferedReader bufferedInputStream = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+            final BufferedReader BufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 
             final StringBuilder stringBuilder = new StringBuilder();
 
             String line;
-            while ((line = bufferedInputStream.readLine()) != null) {
+            while ((line = BufferedReader.readLine()) != null) {
                 stringBuilder.append(line);
             }
 

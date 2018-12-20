@@ -30,7 +30,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="PICKUP DISPATCH - Login">
+    <meta name="description" content="Photo Editor - Login">
 
     <title>Dispatch Login</title>
 
@@ -54,7 +54,7 @@
                     <!--<i class="fas fa-taxi fa-4x"></i>-->
                     <img src="img/dispatch.png" class="login-img"/>
                 </div>
-                <div class="app-name text-center">PICKUP DISPATCH</div>
+                <div class="app-name text-center">Photo Editor</div>
                 <form class="app-login-form" role="form" action="oauth2-authorize-user.jsp?reset=true" method="post" id="login-form"
                       autocomplete="off">
                     <input type="submit" id="btn-login" class="btn btn-login" value="LOGIN"/>
