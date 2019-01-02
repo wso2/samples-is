@@ -29,7 +29,7 @@
         </fileSet>
         <fileSet>
             <directory>
-                ${project.basedir}/../quick-start-guide/target/org.wso2.samples.is.qsg-${project.version}-bundle/
+                ${project.basedir}/../quick-start-guide/target/quick-start-guide-${project.version}-bundle/
             </directory>
             <outputDirectory>IS-QSG/</outputDirectory>
             <useDefaultExcludes>true</useDefaultExcludes>

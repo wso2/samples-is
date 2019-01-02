@@ -50,28 +50,28 @@
         <!-- Packing sample applications-->
         <file>
             <source>
-                ${project.basedir}/../saml2-sso-sample/components/SAML2/saml2-web-app-pickup-dispatch/target/saml2-web-app-pickup-dispatch.com.war
+                ${project.basedir}/../sso-samples/saml2-sso-sample/components/SAML2/saml2-web-app-pickup-dispatch/target/saml2-web-app-pickup-dispatch.com.war
             </source>
             <outputDirectory>${qsg.app.location}</outputDirectory>
         </file>
         <file>
             <source>
-                ${project.basedir}/../saml2-sso-sample/components/SAML2/saml2-web-app-pickup-manager/target/saml2-web-app-pickup-manager.com.war
+                ${project.basedir}/../sso-samples/saml2-sso-sample/components/SAML2/saml2-web-app-pickup-manager/target/saml2-web-app-pickup-manager.com.war
             </source>
             <outputDirectory>${qsg.app.location}</outputDirectory>
         </file>
         <file>
-            <source>${project.basedir}/../oidc-sso-sample/pickup-dispatch/target/pickup-dispatch.war</source>
+            <source>${project.basedir}/../sso-samples/oidc-sso-sample/pickup-dispatch/target/pickup-dispatch.war</source>
             <outputDirectory>${qsg.app.location}</outputDirectory>
         </file>
         <file>
-            <source>${project.basedir}/../oidc-sso-sample/pickup-manager/target/pickup-manager.war</source>
+            <source>${project.basedir}/../sso-samples/oidc-sso-sample/pickup-manager/target/pickup-manager.war</source>
             <outputDirectory>${qsg.app.location}</outputDirectory>
         </file>
 
         <!-- Packing libs-->
         <file>
-            <source>${project.basedir}/../backend-service/target/backend-service.jar</source>
+            <source>${project.basedir}/../etc/backend-service/target/backend-service.jar</source>
             <outputDirectory>${qsg.jar.location}</outputDirectory>
         </file>
         <file>

@@ -47,7 +47,7 @@
                             <finalName>ConditionalAuthSamples</finalName>
                             <appendAssemblyId>false</appendAssemblyId>
                             <descriptors>
-                                <descriptor>${project.basedir}/src/main/resources/assembly/dist.xml</descriptor>
+                                <descriptor>src/main/resources/assembly/dist.xml</descriptor>
                             </descriptors>
                         </configuration>
                     </execution>

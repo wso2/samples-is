@@ -21,21 +21,17 @@
         <groupId>org.wso2.samples.is</groupId>
         <artifactId>samples-is</artifactId>
         <version>4.0.0-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>org.wso2.carbon.identity.oauth.client.auth.sample</artifactId>
+    <artifactId>org.wso2.carbon.identity.post.authn.handler.disclaimer</artifactId>
     <packaging>bundle</packaging>
 
     <dependencies>
         <dependency>
-            <groupId>org.wso2.carbon.identity.inbound.auth.oauth2</groupId>
-            <artifactId>org.wso2.carbon.identity.oauth.common</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.wso2.carbon.identity.inbound.auth.oauth2</groupId>
-            <artifactId>org.wso2.carbon.identity.oauth</artifactId>
+            <groupId>org.wso2.carbon.identity.framework</groupId>
+            <artifactId>org.wso2.carbon.identity.application.authentication.framework</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.felix</groupId>
@@ -74,19 +70,22 @@
                     <instructions>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Name>${project.artifactId}</Bundle-Name>
-                        <Export-Package>!org.wso2.carbon.identity.oauth.client.auth.sample.internal,
-                            org.wso2.carbon.identity.oauth.client.auth.sample.*;
+                        <Export-Package>!org.wso2.carbon.identity.post.authn.handler.disclaimer.internal,
+                            org.wso2.carbon.identity.post.authn.handler.disclaimer.*;
                             version="${project.version}"
                         </Export-Package>
                         <Import-Package>
                             javax.servlet.http,
-                            org.wso2.carbon.identity.base,
-                            org.wso2.carbon.identity.oauth,
-                            org.wso2.carbon.identity.oauth.common.exception,
-                            org.wso2.carbon.identity.oauth2,
-                            org.wso2.carbon.identity.oauth2.bean,
-                            org.wso2.carbon.identity.oauth2.client.authentication,
-                            org.wso2.carbon.identity.oauth2.util,
+                            org.apache.commons.logging,
+                            org.osgi.framework,
+                            org.osgi.service.component,
+                            org.wso2.carbon.identity.application.authentication.framework.config,
+                            org.wso2.carbon.identity.application.authentication.framework.config.model,
+                            org.wso2.carbon.identity.application.authentication.framework.context,
+                            org.wso2.carbon.identity.application.authentication.framework.exception,
+                            org.wso2.carbon.identity.application.authentication.framework.handler.request,
+                            org.wso2.carbon.identity.application.authentication.framework.model,
+                            org.wso2.carbon.identity.core.util,
                         </Import-Package>
                     </instructions>
                 </configuration>
