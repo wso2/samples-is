@@ -20,7 +20,7 @@
     <parent>
         <groupId>org.wso2.samples.is</groupId>
         <artifactId>samples-is</artifactId>
-        <version>3.0.0-m2-SNAPSHOT</version>
+        <version>4.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -32,7 +32,7 @@
     </dependencies>
 
     <properties>
-        <qsg.app.location>./webApps</qsg.app.location>
+        <qsg.app.location>./webapps</qsg.app.location>
         <qsg.jar.location>./lib</qsg.jar.location>
     </properties>
 

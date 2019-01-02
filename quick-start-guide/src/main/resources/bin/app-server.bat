@@ -18,7 +18,7 @@ REM  limitations under the License.
 REM ===============script starts here ===============================================
 
 SET CONF_DIR=..\conf
-SET APP_DIR=..\webApps
+SET APP_DIR=..\webapps
 SET LIB_DIR=..\lib
 
 FOR /F "eol=; tokens=6,2 delims==" %%i IN ('findstr "server.host.domain" %CONF_DIR%\server.properties') DO SET SERVER_DOMAIN=%%i
