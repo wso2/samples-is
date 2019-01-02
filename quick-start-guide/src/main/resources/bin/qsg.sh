@@ -2391,7 +2391,7 @@ start_the_flow() {
 #=================The start of the script:============================================
 # Relative directory paths to this script
 CONF_DIR=../conf
-APP_DIR=../webApps
+APP_DIR=../webapps
 LIB_DIR=../lib
 SCENARIO_DIR=../scenarios
 

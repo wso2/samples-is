@@ -17,7 +17,7 @@ REM  limitations under the License.
 
 REM ===============script starts here ===============================================
 SET CONF_DIR=..\conf
-SET APP_DIR=..\webApps
+SET APP_DIR=..\webapps
 SET LIB_DIR=..\lib
 SET SCENARIO_DIR=..\scenarios
 

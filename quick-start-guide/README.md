@@ -21,7 +21,7 @@ Identity server using scenarios given below.
 
 1. Download and unzip the [distribution](https://github.com/wso2/samples-is/releases/latest) is-samples-*.zip
 2. Start your WSO2 Identity Server.
-3. Start applications by running `sh appServer.sh`or `appServer.bat` command from IS-QSG/bin folder
+3. Start applications by running `sh app-server.sh`or `app-server.bat` command from IS-QSG/bin folder
 4. Start QSG by running `sh qsg.sh` or `qsg.bat` from IS-QSG/bin folder
 
 ### Download the distribution
