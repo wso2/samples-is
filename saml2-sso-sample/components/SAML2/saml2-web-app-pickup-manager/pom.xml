@@ -115,7 +115,7 @@
                 <configuration>
                     <webResources>
                         <resource>
-                            <directory>${project.parent.parent.basedir}/common-resources/</directory>
+                            <directory>${project.parent.parent.basedir}/etc/resources/</directory>
                             <targetPath>WEB-INF/classes</targetPath>
                             <includes>
                                 <include>wso2carbon.jks</include>
