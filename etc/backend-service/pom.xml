@@ -44,7 +44,7 @@
 
     <build>
         <sourceDirectory>src/main</sourceDirectory>
-        <finalName>${artifactId}</finalName>
+        <finalName>${project.artifactId}</finalName>
 
         <plugins>
             <plugin>

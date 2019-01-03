@@ -328,6 +328,12 @@
                 <artifactId>maven-dependency-plugin</artifactId>
                 <version>${maven.dependency.plugin.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.owasp.esapi</groupId>
+                <artifactId>esapi</artifactId>
+                <version>${org.owasp.esapi.version}</version>
+                <scope>compile</scope>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
@@ -516,6 +522,7 @@
         <!--repo versions of gdpr-samples-->
         <org.json.version>20180130</org.json.version>
         <maven.dependency.plugin.version>3.1.0</maven.dependency.plugin.version>
+        <org.owasp.esapi.version>2.1.0.1</org.owasp.esapi.version>
 
     </properties>
 
