@@ -36,13 +36,13 @@
         </fileSet>
         <fileSet>
             <directory>
-                ${project.basedir}/../gdpr-samples/gdpr-qsg/target/gdpr-qsg-${project.version}-bundle/QSG-bundle
+                ${project.basedir}/../etc/gdpr-samples/gdpr-qsg/target/gdpr-qsg-${project.version}-bundle/QSG-bundle
             </directory>
             <outputDirectory>GDPR-QSG</outputDirectory>
             <useDefaultExcludes>true</useDefaultExcludes>
         </fileSet>
         <fileSet>
-            <directory>${project.basedir}/../gdpr-samples/gdpr-qsg/target/lib</directory>
+            <directory>${project.basedir}/../etc/gdpr-samples/gdpr-qsg/target/lib</directory>
             <outputDirectory>GDPR-QSG/resources/lib</outputDirectory>
             <useDefaultExcludes>true</useDefaultExcludes>
         </fileSet>
@@ -51,13 +51,13 @@
     <files>
         <file>
             <source>
-                ${project.basedir}/../pickup-sample-app/pickup-oidc/target/pickup.war
+                ${project.basedir}/../etc/pickup-sample-app/pickup-oidc/target/pickup.war
             </source>
             <outputDirectory>GDPR-QSG/sample-apps</outputDirectory>
         </file>
         <file>
             <source>
-                ${project.basedir}/../gdpr-samples/notification-center/target/notification.war
+                ${project.basedir}/../etc/gdpr-samples/notification-center/target/notification.war
             </source>
             <outputDirectory>GDPR-QSG/sample-apps</outputDirectory>
         </file>

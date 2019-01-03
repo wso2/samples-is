@@ -40,13 +40,13 @@
     <modules>
         <module>sso-samples/saml2-sso-sample</module>
         <module>sso-samples/oidc-sso-sample</module>
-        <module>pickup-sample-app</module>
+        <module>etc/pickup-sample-app</module>
         <module>etc/oauth-sample-client-authenticator</module>
         <module>etc/sample-post-authentication-handler</module>
         <module>etc/conditional-auth-sample</module>
         <module>etc/backend-service</module>
         <module>quick-start-guide</module>
-        <module>gdpr-samples</module>
+        <module>etc/gdpr-samples</module>
         <module>distribution</module>
     </modules>
 

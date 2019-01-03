@@ -35,7 +35,7 @@
             <outputDirectory>QSG-bundle/resources</outputDirectory>
         </file>
         <file>
-            <source>${project.basedir}/../../quick-start-guide/target/QSG-${project.version}.jar</source>
+            <source>${project.basedir}/../../../quick-start-guide/target/QSG-${project.version}.jar</source>
             <outputDirectory>QSG-bundle/resources</outputDirectory>
         </file>
     </files>
