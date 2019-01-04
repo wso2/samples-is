@@ -14,19 +14,20 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>org.wso2.samples.is</groupId>
         <artifactId>saml2-sso-sample</artifactId>
         <version>4.0.0-SNAPSHOT</version>
-        <relativePath>../../../pom.xml</relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <modelVersion>4.0.0</modelVersion>
-    <artifactId>saml2-web-app-pickup-dispatch</artifactId>
+    <artifactId>saml2-web-app-pickup-manager</artifactId>
     <packaging>war</packaging>
-    <name>saml2-web-app-pickup-dispatch Maven Webapp</name>
+    <name>saml2-web-app-pickup-manger Maven Webapp</name>
 
     <dependencies>
         <dependency>
@@ -98,7 +99,7 @@
     </dependencies>
 
     <build>
-        <finalName>saml2-web-app-pickup-dispatch.com</finalName>
+        <finalName>saml2-web-app-pickup-manager.com</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

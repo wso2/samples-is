@@ -50,13 +50,13 @@
         <!-- Packing sample applications-->
         <file>
             <source>
-                ${project.basedir}/../sso-samples/saml2-sso-sample/components/SAML2/saml2-web-app-pickup-dispatch/target/saml2-web-app-pickup-dispatch.com.war
+                ${project.basedir}/../sso-samples/saml2-sso-sample/saml2-web-app-pickup-dispatch/target/saml2-web-app-pickup-dispatch.com.war
             </source>
             <outputDirectory>${qsg.app.location}</outputDirectory>
         </file>
         <file>
             <source>
-                ${project.basedir}/../sso-samples/saml2-sso-sample/components/SAML2/saml2-web-app-pickup-manager/target/saml2-web-app-pickup-manager.com.war
+                ${project.basedir}/../sso-samples/saml2-sso-sample/saml2-web-app-pickup-manager/target/saml2-web-app-pickup-manager.com.war
             </source>
             <outputDirectory>${qsg.app.location}</outputDirectory>
         </file>

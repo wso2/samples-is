@@ -1,48 +1,55 @@
 # WSO2 IAM - Quick Start Guide #
 
 This Quick Start Guide(QSG) is used to demonstrate key features of WSO2
-Identity server using scenarios given below.
+Identity server(IS) using scenarios given below.
 
-       1 - Configuring Single-Sign-On with SAML2
-       2 - Configuring Single-Sign-On with OIDC
-       3 - Configuring Multi-Factor Authentication
-       4 - Configuring Twitter as a Federated Authenticator
-       5 - Setting up Self-Signup
-       6 - Creating a workflow
+    1 - Configuring Single-Sign-On with SAML2
+    2 - Configuring Single-Sign-On with OIDC
+    3 - Configuring Multi-Factor Authentication
+    4 - Configuring Twitter as a Federated Authenticator
+    5 - Setting up Self-Signup
+    6 - Creating a workflow
        
 ## Table of contents
 
 - [Getting started](#getting-started)
-- [Download the distribution](#Download-the-distribution)
-- [SAML2 sso sample](https://github.com/wso2/samples-is/tree/master/saml2-sso-sample)
-- [OIDC sso sample](https://github.com/wso2/samples-is/tree/master/oidc-sso-sample)
+- [Building the distribution from source](#building-the-distribution-from-source)
 
-## Getting started
+### Getting started
 
-1. Download and unzip the [distribution](https://github.com/wso2/samples-is/releases/latest) is-samples-*.zip
-2. Start your WSO2 Identity Server.
-3. Start applications by running `sh app-server.sh`or `app-server.bat` command from IS-QSG/bin folder
-4. Start QSG by running `sh qsg.sh` or `qsg.bat` from IS-QSG/bin folder
+#### Prerequisites
 
-### Download the distribution
+Make sure you have following installed/available in your system,
 
-You can download the IAM Quick Start Guide binaries at [link](https://github.com/wso2/samples-is/releases/latest) .
+* [WSO2 Identity Server](https://wso2.com/identity-and-access-management)
+* [cURL](https://curl.haxx.se/download.html)
 
-### Install from source
+cURL is required to run QSG only. It is not a requirement for WSO2 IS.
 
-Alternatively, you can build the Quick Start Guide from the source using the following instructions.
+#### Running samples
+
+1. Download and unzip the WSO2 IS QSG [distribution](https://github.com/wso2/samples-is/releases/latest).
+   Distribution is named `is-samples-<version>.zip`
+   
+   In the following instructions, `<IS_SAMPLE_HOME>` is the directory which contains the downloaded distribution.
+2. Start your WSO2 IS.
+3. Start applications by running `sh app-server.sh` or `app-server.bat` command from `<IS_SAMPLE_HOME>/IS-QSG/bin` folder
+4. Start QSG by running `sh qsg.sh` or `qsg.bat` from `<IS_SAMPLE_HOME>/IS-QSG/bin` folder
+
+### Building the distribution from source
+
+Alternatively, you can build the QSG from the source code using the following instructions.
 
 #### Prerequisites
 
 * [Maven](https://maven.apache.org/download.cgi)
 * [Java](http://www.oracle.com/technetwork/java/javase/downloads)
-* [WSO2 Identity Server](https://wso2.com/identity-and-access-management)
-* [cURL](https://curl.haxx.se/download.html)
 
 #### Building from source
 
-1. Get a clone or download source of [WSO2 sample-is repository](https://github.com/wso2/samples-is). We will refer this directory as <IS_SAMPLE_HOME> here onwards.
-2. Run the Maven command `mvn clean install` from <IS_SAMPLE_HOME> directory.
+1. Get a clone or download source of [WSO2 sample-is repository](https://github.com/wso2/samples-is).
+   We will refer this directory as `<IS_SAMPLE_HOME>` here onwards.
+2. Run the Maven command `mvn clean install` from `<IS_SAMPLE_HOME>` directory.
 
-Distribution can be found at <IS_SAMPLE_HOME>/distribution/target/ directory. You can use this distribution to follow
+    Distribution can be found at `<IS_SAMPLE_HOME>/distribution/target/` directory. You can use this distribution to follow
 [Getting started](#getting-started) guide.
