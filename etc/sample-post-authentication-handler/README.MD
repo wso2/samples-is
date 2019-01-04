@@ -1,10 +1,10 @@
 # Disclaimer Post Authentication Handler
 
-Post authentication handlers are a set of handlers which executes upon successful authentication through WSO2
-authentication framework. ie If you do an SSO your applicaion through an IS instance or any WSO2 product which supports
-SSO authentication then upon successful authentication these handlers will get executed.
+Post authentication handlers are a set of handlers which executes upon successful authentication through WSO2 Identity Server (IS)
+authentication framework. For example, if you do a Single Sign On(SSO) your application through an IS instance or any WSO2 
+product which supports SSO authentication then upon successful authentication these handlers will get executed.
 
-An important fact you need to keep in mind is even though you successfully finished your authenticaion steps (basic,
+An important fact you need to keep in mind is even though you successfully finished your authentication steps (basic,
 totp etc) you will still not be an authenticated person until you pass the post authentication flow. Existing post
 authenticators are AuthorizationHandler and missing mandatory claim handler which are getting executed upon successful
 authentication.
@@ -36,22 +36,22 @@ is
 
 ## Getting started
 
-1. Clone the sample-post-authentication-handler from this git repo.
-2. Navigate to directory sample-post-authentication-hanlder and build it using below command
+In the following instructions, WSO2 IS installation directory will be referred as `<IS_HOME>`
 
-    ```bash
-    mvn clean install
-    ```
-    
-3. Get the jar upon building which is in the target directory with name org.wso2.carbon.identity.post.authn.handler
-.disclaimer-1.0-SNAPSHOT.jar and place it in the <IS_HOME>/repository/components/dropins directory.
+1. Get a clone or download source of [WSO2 sample-is repository](https://github.com/wso2/samples-is).
+   
+   We will refer this directory as `<IS_SAMPLE_REPO>` here onwards
+2. Run the Maven command `mvn clean install` from `<IS_SAMPLE_REPO>/etc/sample-post-authentication-hanlder` directory
+3. Get the jar which can be found at 
+`<IS_SAMPLE_REPO>/etc/sample-post-authentication-hanlder/target/org.wso2.carbon.identity.post.authn.handler.disclaimer-1.0-SNAPSHOT.jar` 
+and place it in the `<IS_HOME>/repository/components/dropins` directory.
 
-4. Copy the disclaimer.jsp file inside resources folder of this project into
-<IS_HOME>/repository/deployment/server/webapps/authenticationendpoint/ directory.
+4. Copy the `disclaimer.jsp` file inside resources folder of this project into
+`<IS_HOME>/repository/deployment/server/webapps/authenticationendpoint/` directory.
 
-5. Start the Identity server.
+5. Start WSO2 IS.
 
-6. Create a service provider for travelocity and try to login to travelocity.
+6. Create a service provider for `travelocity` application and try to login to `travelocity`.
 
 Upon successful authentication you will be prompted a consent page giving the below message
 

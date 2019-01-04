@@ -15,9 +15,9 @@ Identity server(IS) using scenarios given below.
 - [Getting started](#getting-started)
 - [Building the distribution from source](#building-the-distribution-from-source)
 
-### Getting started
+## Getting started
 
-#### Prerequisites
+### Prerequisites
 
 Make sure you have following installed/available in your system,
 
@@ -26,30 +26,30 @@ Make sure you have following installed/available in your system,
 
 cURL is required to run QSG only. It is not a requirement for WSO2 IS.
 
-#### Running samples
+### Running samples
 
 1. Download and unzip the WSO2 IS QSG [distribution](https://github.com/wso2/samples-is/releases/latest).
    Distribution is named `is-samples-<version>.zip`
    
-   In the following instructions, `<IS_SAMPLE_HOME>` is the directory which contains the downloaded distribution.
+   In the following instructions, `<IS_SAMPLE_DISTRO>` is the directory which contains the downloaded distribution.
 2. Start your WSO2 IS.
-3. Start applications by running `sh app-server.sh` or `app-server.bat` command from `<IS_SAMPLE_HOME>/IS-QSG/bin` folder
-4. Start QSG by running `sh qsg.sh` or `qsg.bat` from `<IS_SAMPLE_HOME>/IS-QSG/bin` folder
+3. Start applications by running `sh app-server.sh` or `app-server.bat` command from `<IS_SAMPLE_DISTRO>/IS-QSG/bin` folder
+4. Start QSG by running `sh qsg.sh` or `qsg.bat` from `<IS_SAMPLE_DISTRO>/IS-QSG/bin` folder
 
-### Building the distribution from source
+## Building the distribution from source
 
 Alternatively, you can build the QSG from the source code using the following instructions.
 
-#### Prerequisites
+### Prerequisites
 
 * [Maven](https://maven.apache.org/download.cgi)
 * [Java](http://www.oracle.com/technetwork/java/javase/downloads)
 
-#### Building from source
+### Building from source
 
 1. Get a clone or download source of [WSO2 sample-is repository](https://github.com/wso2/samples-is).
-   We will refer this directory as `<IS_SAMPLE_HOME>` here onwards.
-2. Run the Maven command `mvn clean install` from `<IS_SAMPLE_HOME>` directory.
+   We will refer this directory as `<IS_SAMPLE_REPO>` here onwards.
+2. Run the Maven command `mvn clean install` from `<IS_SAMPLE_REPO>` directory.
 
-    Distribution can be found at `<IS_SAMPLE_HOME>/distribution/target/` directory. You can use this distribution to follow
+    Distribution can be found at `<IS_SAMPLE_REPO>/distribution/target/` directory. You can use this distribution to follow
 [Getting started](#getting-started) guide.

@@ -29,18 +29,18 @@ gets notified when the session state of the user changes.
 
 1. Get a clone or download source of [WSO2 sample-is repository](https://github.com/wso2/samples-is).
    
-   We will refer this directory as `<IS_SAMPLE_HOME>` here onwards.
-2. Run the Maven command `mvn clean install` from the `<IS_SAMPLE_HOME>/oidc-sso-sample` directory.
+   We will refer this directory as `<IS_SAMPLE_REPO>` here onwards.
+2. Run the Maven command `mvn clean install` from the `<IS_SAMPLE_REPO>/oidc-sso-sample` directory.
 
-You can find SSO sample applications in `target` directory of `<IS_SAMPLE_HOME>/oidc-sso-sample/pickup-dispatch`
-and `<IS_SAMPLE_HOME>/oidc-sso-sample/pickup-manager` directories. Application distributions are named `pickup-dispatch.war` 
+You can find SSO sample applications in `target` directory of `<IS_SAMPLE_REPO>/oidc-sso-sample/pickup-dispatch`
+and `<IS_SAMPLE_REPO>/oidc-sso-sample/pickup-manager` directories. Application distributions are named `pickup-dispatch.war` 
 and `pickup-manager.war` respectively.
 
 ## Running sample applications
 
 To run samples, you require to alter parameters found in application property file. These property files are embedded in
 sample application codes. For example you can find the `pickup-dispatch` property file in 
-`<IS_SAMPLE_HOME>/oidc-sso-sample/pickup-dispatch/src/main/resources/dispatch.properties`
+`<IS_SAMPLE_REPO>/oidc-sso-sample/pickup-dispatch/src/main/resources/dispatch.properties`
 
 In order to check SSO using OIDC, please follow these steps
 

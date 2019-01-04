@@ -21,11 +21,11 @@ SSO with WSO2 Identity Server(IS).
 
 1. Get a clone or download source of [WSO2 sample-is repository](https://github.com/wso2/samples-is).
 
-   We will refer this directory as `<IS_SAMPLE_HOME>` here onwards.
-2. Run the Maven command `mvn clean install` from the `<IS_SAMPLE_HOME>/saml2-sso-sample` directory.
+   We will refer this directory as `<IS_SAMPLE_REPO>` here onwards.
+2. Run the Maven command `mvn clean install` from the `<IS_SAMPLE_REPO>/saml2-sso-sample` directory.
 
-You can find SSO sample applications in `target` directory of `<IS_SAMPLE_HOME>/saml2-sso-sample/saml2-web-app-pickup-dispatch`
-and `<IS_SAMPLE_HOME>/saml2-sso-sample/saml2-web-app-pickup-manager` directories.
+You can find SSO sample applications in `target` directory of `<IS_SAMPLE_REPO>/saml2-sso-sample/saml2-web-app-pickup-dispatch`
+and `<IS_SAMPLE_REPO>/saml2-sso-sample/saml2-web-app-pickup-manager` directories.
 Application distributions are named `saml2-web-app-pickup-dispatch.com.war` and `saml2-web-app-pickup-manager.com.war` respectively.
 
 ## Running sample applications

@@ -7,51 +7,53 @@ to build any GDPR compliant solution.
 
 The following consent management concepts will be demonstrated by these samples.
 
-1. Purpose registration and granting consent
-2. Individual right
-3. Consent based data sharing
-4. Partner application integration
-5. Portability of personal data
-6. Forget me 
+    1. Purpose registration and granting consent
+    2. Individual right
+    3. Consent based data sharing
+    4. Partner application integration
+    5. Portability of personal data
+    6. Forget me 
 
 ## Table of contents
 
-- [Download and install](#download-and-install)
 - [Getting started](#getting-started)
+- [Building the distribution from source](#building-the-distribution-from-source)
 
 ## Getting started
 
-1. Download and unzip the is-samples-1.0.0.zip
-2. Navigate GDPR-QSG/sample-apps
-3. Deploy the sample web apps on the tomcat server.
-4. Start your WSO2 Identity server.
-5. Start your Tomcat server.
-6. Run sh gdpr.sh/gdpr.bat from GDPR-QSG/resources.
+* [WSO2 Identity Server](https://wso2.com/identity-and-access-management)
+* [Apache Tomcat server](https://tomcat.apache.org/download-80.cgi)
+* [cURL](https://curl.haxx.se/download.html)
 
-## Download and install
+cURL is required to run QSG only. It is not a requirement for WSO2 IS.
 
-### Download the binary
+### Running samples
 
-You can download the IAM Quick Start Guide binaries at link.
+1. Download and unzip the WSO2 IS QSG [distribution](https://github.com/wso2/samples-is/releases/latest).
+   Distribution is named `is-samples-<version>.zip`
+   
+   In the following instructions, `<IS_SAMPLE_DISTRO>` is the directory which contains the downloaded distribution.
+2. Start your WSO2 IS.
+3. Start your Tomcat server.
+4. Deploy the sample web apps on Apache Tomcat server.
 
-### Install from source
+   Sample webb apps can be found at `<IS_SAMPLE_DISTRO>/GDPR-QSG/sample-apps` directory.
+5. Run `sh gdpr.sh` or `gdpr.bat` from `<IS_SAMPLE_DISTRO>/GDPR-QSG/resources` directory.
 
-Alternatively, you can install the Quick Start Guide from the source using the following instructions.
+## Building the distribution from source
 
-#### Prerequisites
+Alternatively, you can build the distribution from the source code using following instructions.
+
+### Prerequisites
 
 * [Maven](https://maven.apache.org/download.cgi)
 * [Java](http://www.oracle.com/technetwork/java/javase/downloads)
-* [WSO2 Identity Server](https://wso2.com/identity-and-access-management)
-* [Apache Tomcat server](https://tomcat.apache.org/download-80.cgi)
 
-#### Building the source
+### Building from source
 
-1. Get a clone or download source from this repository
-2. Run the Maven command mvn clean install from within the samples-is directory.
-3. Unzip the is-samples-1.0.0.zip
-4. Navigate to samples-is/distribution/target/is-samples-1.0.0/GDPR-QSG/sample-apps
-5. Deploy the sample web apps on the tomcat server.
-6. Start your WSO2 Identity server.
-7. Start your Tomcat server.
-8. Run sh gdpr.sh/gdpr.bat from GDPR-QSG/resources.
+1. Get a clone or download source of [WSO2 sample-is repository](https://github.com/wso2/samples-is).
+   We will refer this directory as `<IS_SAMPLE_REPO>` here onwards.
+2. Run the Maven command `mvn clean install` from `<IS_SAMPLE_REPO>` directory.
+
+    Distribution can be found at `<IS_SAMPLE_REPO>/distribution/target/` directory. You can use this distribution to follow
+[Getting started](#getting-started) guide.
