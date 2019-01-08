@@ -24,7 +24,7 @@ getProperty() {
 
 # Relative directory paths
 CONF_DIR=../conf
-APP_DIR=../webApps
+APP_DIR=../webapps
 LIB_DIR=../lib
 
 PROPERTY_FILE=${CONF_DIR}/server.properties
