@@ -1626,9 +1626,9 @@ echo " <soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelop
             <!--Optional:-->
             <xsd1:doValidateSignatureInRequests>false</xsd1:doValidateSignatureInRequests>
             <!--Optional:-->
-            <xsd1:enableAttributeProfile>false</xsd1:enableAttributeProfile>
+            <xsd1:enableAttributeProfile>true</xsd1:enableAttributeProfile>
             <!--Optional:-->
-            <xsd1:enableAttributesByDefault>false</xsd1:enableAttributesByDefault>
+            <xsd1:enableAttributesByDefault>true</xsd1:enableAttributesByDefault>
             <!--Optional:-->
             <xsd1:idPInitSLOEnabled>true</xsd1:idPInitSLOEnabled>
             <!--Optional:-->
@@ -1841,6 +1841,38 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
                     <xsd1:alwaysSendMappedLocalSubjectId>false</xsd1:alwaysSendMappedLocalSubjectId>
                     <!--Optional:-->
                     <xsd1:localClaimDialect>true</xsd1:localClaimDialect>
+                     <xsd1:claimMappings>
+                        <!--Optional:-->
+                        <xsd1:localClaim>
+                            <!--Optional:-->
+                            <xsd1:claimUri>http://wso2.org/claims/fullname</xsd1:claimUri>
+                        </xsd1:localClaim>
+                        <!--Optional:-->
+                        <xsd1:mandatory>true</xsd1:mandatory>
+                        <!--Optional:-->
+                        <xsd1:remoteClaim>
+                            <!--Optional:-->
+                            <xsd1:claimUri>http://wso2.org/claims/fullname</xsd1:claimUri>
+                        </xsd1:remoteClaim>
+                        <!--Optional:-->
+                        <xsd1:requested>true</xsd1:requested>
+                    </xsd1:claimMappings>
+                    <xsd1:claimMappings>
+                        <!--Optional:-->
+                        <xsd1:localClaim>
+                            <!--Optional:-->
+                            <xsd1:claimUri>http://wso2.org/claims/emailaddress</xsd1:claimUri>
+                        </xsd1:localClaim>
+                        <!--Optional:-->
+                        <xsd1:mandatory>true</xsd1:mandatory>
+                        <!--Optional:-->
+                        <xsd1:remoteClaim>
+                            <!--Optional:-->
+                            <xsd1:claimUri>http://wso2.org/claims/emailaddress</xsd1:claimUri>
+                        </xsd1:remoteClaim>
+                        <!--Optional:-->
+                        <xsd1:requested>true</xsd1:requested>
+                    </xsd1:claimMappings>
                 </xsd1:claimConfig>
                 <!--Optional:-->
                 <xsd1:description>sample service provider</xsd1:description>
