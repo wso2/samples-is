@@ -12,13 +12,14 @@ import org.w3c.dom.bootstrap.DOMImplementationRegistry;
 import org.w3c.dom.ls.DOMImplementationLS;
 import org.w3c.dom.ls.LSOutput;
 import org.w3c.dom.ls.LSSerializer;
-
+import org.wso2.carbon.identity.sso.agent.bean.LoggedInSessionBean;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import java.nio.charset.StandardCharsets;
-
+import java.util.HashMap;
+import java.util.Map;
 
 public class CommonUtil {
 
@@ -33,33 +34,49 @@ public class CommonUtil {
      */
     public static String marshall(XMLObject xmlObject) throws Exception {
 
-        ByteArrayOutputStream byteArrayOutputStrm = null;
+        ByteArrayOutputStream byteArrayOutputStream = null;
         try {
 
             MarshallerFactory marshallerFactory = org.opensaml.xml.Configuration.getMarshallerFactory();
             Marshaller marshaller = marshallerFactory.getMarshaller(xmlObject);
             Element element = marshaller.marshall(xmlObject);
 
-            byteArrayOutputStrm = new ByteArrayOutputStream();
+            byteArrayOutputStream = new ByteArrayOutputStream();
             DOMImplementationRegistry registry = DOMImplementationRegistry.newInstance();
             DOMImplementationLS impl = (DOMImplementationLS) registry.getDOMImplementation("LS");
             LSSerializer writer = impl.createLSSerializer();
             LSOutput output = impl.createLSOutput();
-            output.setByteStream(byteArrayOutputStrm);
+            output.setByteStream(byteArrayOutputStream);
             writer.write(element, output);
-            return byteArrayOutputStrm.toString("UTF-8");
+            return byteArrayOutputStream.toString("UTF-8");
         } catch (Exception e) {
             log.error("Error Serializing the SAML Response");
             throw new Exception("Error Serializing the SAML Response", e);
         } finally {
-            if (byteArrayOutputStrm != null) {
+            if (byteArrayOutputStream != null) {
                 try {
-                    byteArrayOutputStrm.close();
+                    byteArrayOutputStream.close();
                 } catch (IOException e) {
                     log.error("Error while closing the stream", e);
                 }
             }
         }
+    }
+
+    public static Map<String, String> getClaimValueMap(final LoggedInSessionBean loggedInSessionBean) {
+
+        final Map<String, String> samlClaimValuePairs = new HashMap<>();
+
+        final Map<String, String> subjectAttributes = loggedInSessionBean.getSAML2SSO().getSubjectAttributes();
+
+        for (String localClaimKey : subjectAttributes.keySet()) {
+            String claimValue = subjectAttributes.get(localClaimKey);
+            // Extract the last string literal from local claim key
+            String[] splits = localClaimKey.split("/");
+            samlClaimValuePairs.put(splits[splits.length - 1], claimValue);
+        }
+
+        return samlClaimValuePairs;
     }
 
     /**
@@ -77,3 +94,4 @@ public class CommonUtil {
     }
 
 }
+

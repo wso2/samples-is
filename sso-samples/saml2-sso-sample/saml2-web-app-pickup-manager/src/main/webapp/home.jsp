@@ -46,7 +46,6 @@
 </head>
 <%
     String subjectId = null;
-    Map<String, String> saml2SSOAttributes = null;
     final String SAML_SSO_URL = "samlsso";
     final String SAML_LOGOUT_URL = "logout";
     String samlResponse = "";
@@ -66,6 +65,7 @@
         return;
     }
     LoggedInSessionBean sessionBean = (LoggedInSessionBean) session.getAttribute(SSOAgentConstants.SESSION_BEAN_NAME);
+    Map<String, String> saml2SSOAttributes = CommonUtil.getClaimValueMap(sessionBean);
     if(sessionBean != null && sessionBean.getSAML2SSO() != null) {
         subjectId = sessionBean.getSAML2SSO().getSubjectId();
         samlResponse =  CommonUtil.marshall(sessionBean.getSAML2SSO().getSAMLResponse());
