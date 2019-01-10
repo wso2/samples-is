@@ -28,11 +28,6 @@ import org.json.JSONObject;
 import org.wso2.sample.identity.oauth2.exceptions.ClientAppException;
 import org.wso2.sample.identity.oauth2.exceptions.SampleAppServerException;
 
-import javax.net.ssl.HttpsURLConnection;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
@@ -40,6 +35,11 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Properties;
 import java.util.UUID;
+import javax.net.ssl.HttpsURLConnection;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class CommonUtils {
 
