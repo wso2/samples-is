@@ -15,6 +15,7 @@
 ~ See the License for the specific language governing permissions and
 ~ limitations under the License.
 -->
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.logging.Level"%>
@@ -23,6 +24,7 @@
 <%@page import="org.json.JSONObject"%>
 <%@page import="java.util.Properties"%>
 <%@page import="org.wso2.sample.identity.oauth2.SampleContextEventListener"%>
+<%@page import="org.wso2.sample.identity.oauth2.CommonUtils"%>
 <%@page import="com.nimbusds.jwt.ReadOnlyJWTClaimsSet"%>
 <%@page import="java.util.logging.Logger"%>
 
@@ -46,13 +48,20 @@
     
     final String idToken = (String) currentSession.getAttribute("idToken");
     
-    ReadOnlyJWTClaimsSet claimsSet = null;
     String name = "";
+    
+    Map<String, Object> customClaimValueMap = new HashMap<>();
+    Map<String, String> oidcClaimDisplayValueMap = new HashMap();
     
     if (idToken != null) {
         try {
             name = SignedJWT.parse(idToken).getJWTClaimsSet().getSubject();
-            claimsSet = SignedJWT.parse(idToken).getJWTClaimsSet();
+            ReadOnlyJWTClaimsSet claimsSet = SignedJWT.parse(idToken).getJWTClaimsSet();
+            
+            customClaimValueMap = claimsSet.getCustomClaims();
+            oidcClaimDisplayValueMap =
+                    CommonUtils.getOidcClaimDisplayNameMapping(new ArrayList<>(claimsSet.getCustomClaims().keySet()));
+
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error when getting id_token details.", e);
         }
@@ -225,13 +234,7 @@
                     <div class="col-md-6 d-block mx-auto">
                         <div class="card card-body table-container">
                             <div class="table-responsive content-table">
-                                <%
-                                    if (claimsSet != null) {
-                                        Map<String, Object> hashmap = new HashMap<>();
-                                        hashmap = claimsSet.getCustomClaims();
-
-                                        if (!hashmap.isEmpty()) {
-                                %>
+                            <%if (!oidcClaimDisplayValueMap.isEmpty()) {%>
                                 <table class="table">
                                     <thead>
                                     <tr>
@@ -239,34 +242,17 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <%
-                                        for (String key : hashmap.keySet()) {
-                                            if (!(key.equals("at_hash") || key.equals("c_hash") || key.equals("azp")
-                                                    || key.equals("amr") || key.equals("sid"))) {
-                                    %>
-                                    <tr>
-                                        <td><%=key%>
-                                        </td>
-                                        <td><%=hashmap.get(key).toString()%>
-                                        </td>
-                                    </tr>
-                                    <%
-                                            }
-                                        }
-                                    %>
+                                        <%for(String claim:oidcClaimDisplayValueMap.keySet()){%>   
+                                            <tr>
+                                                <td><%=oidcClaimDisplayValueMap.get(claim)%> </td>
+                                                <td><%=customClaimValueMap.get(claim).toString() %> </td>
+                                            </tr>
+                                        <% } %>
                                     </tbody>
                                 </table>
-                                <%
-                                } else {
-
-                                %>
-                                <p align="center">No user details Available. Configure SP Claim Configurations.</p>
-
-                                <%
-
-                                        }
-                                    }
-                                %>
+                            <%  } else {%>
+                                    <p align="center">No user details Available. Configure SP Claim Configurations.</p>
+                            <%  } %>
                             </div>
                         </div>
                     </div>

@@ -116,7 +116,7 @@ public class CommonUtil {
         return encodedRequestMessage.trim();
     }
 
-    private static Map<String, String> getClaimMappingsDisplayValue(final List<String> claimURI) {
+    private static Map<String, String> getClaimMappingsDisplayValue(final List<String> claimURIList) {
 
         final Map<String, String> claimDisplayValueMap = new HashMap<>();
 
@@ -184,7 +184,7 @@ public class CommonUtil {
                 String claimUri = localClaimUriElement.item(0).getTextContent();
 
                 //  Check for local claim URI matching
-                if (localClaimUriElement.getLength() == 1 && claimURI.contains(claimUri)) {
+                if (localClaimUriElement.getLength() == 1 && claimURIList.contains(claimUri)) {
 
                     String displayValue =
                             getDisplayValueFromNodeList(nsElement.getElementsByTagName(prefix + ":claimProperties"));
