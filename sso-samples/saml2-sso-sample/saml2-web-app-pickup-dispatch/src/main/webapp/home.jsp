@@ -1,4 +1,3 @@
-<%@ page import="java.util.Map" %>
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <!--
@@ -20,6 +19,10 @@
 <%@ page import="org.wso2.carbon.identity.sso.agent.util.SSOAgentConstants" %>
 <%@ page import="org.json.JSONObject" %>
 <%@ page import="org.wso2.qsg.webapp.pickup.dispatch.CommonUtil" %>
+<%@page import="org.wso2.samples.claims.manager.ClaimManager"%>
+<%@page import="java.util.ArrayList"%>
+<%@ page import="java.util.Map" %>
+
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -45,44 +48,55 @@
     <link href="css/custom.css" rel="stylesheet">
     <link href="css/dispatch.css" rel="stylesheet">
 </head>
-<%
-    String subjectId = null;
-    final String SAML_SSO_URL = "samlsso";
-    final String SAML_LOGOUT_URL = "logout";
-    String samlResponse = "";
+    <%
+        String subjectId = null;
+        final String SAML_SSO_URL = "samlsso";
+        final String SAML_LOGOUT_URL = "logout";
+        String samlResponse = "";
 
-    // if web-browser session is there but no session bean set,
-    // invalidate session and direct back to login page
-    JSONObject requestObject = new JSONObject();
-    requestObject.append("requestEndpoint", request.getRequestURI());
-    if (request.getSession(false) != null
-            && request.getSession(false).getAttribute(SSOAgentConstants.SESSION_BEAN_NAME) == null) {
-        request.getSession().invalidate();
-%>
-<script type="text/javascript">
-    location.href = <%=SAML_SSO_URL%>;
-</script>
-<%
-        return;
-    }
-    LoggedInSessionBean sessionBean = (LoggedInSessionBean) session.getAttribute(SSOAgentConstants.SESSION_BEAN_NAME);
-    Map<String, String> saml2SSOAttributes = CommonUtil.getClaimValueMap(sessionBean);
-    if(sessionBean != null && sessionBean.getSAML2SSO() != null) {
-        subjectId = sessionBean.getSAML2SSO().getSubjectId();
-        samlResponse =  CommonUtil.marshall(sessionBean.getSAML2SSO().getSAMLResponse());
-        samlResponse = samlResponse.replace("<", "&lt;");
-        samlResponse = samlResponse.replace(">", "&gt;");
+        // if web-browser session is there but no session bean set,
+        // invalidate session and direct back to login page
+        JSONObject requestObject = new JSONObject();
+        requestObject.append("requestEndpoint", request.getRequestURI());
+        if (request.getSession(false) != null
+                && request.getSession(false).getAttribute(SSOAgentConstants.SESSION_BEAN_NAME) == null) {
+            request.getSession().invalidate();
+    %>
+            <script type="text/javascript">
+                location.href = <%=SAML_SSO_URL%>;
+            </script>
+    <%
+            return;
+        }
 
-    } else {
-%>
-<script type="text/javascript">
-    location.href = <%=SAML_SSO_URL%>;
-</script>
-<%
-        return;
-    }
+        LoggedInSessionBean sessionBean = (LoggedInSessionBean) session.getAttribute(SSOAgentConstants.SESSION_BEAN_NAME);
 
-%>
+        final Map<String, String> subjectAttributeValueMap = sessionBean.getSAML2SSO().getSubjectAttributes();
+
+        final ClaimManager claimManager=
+                        ClaimManager.getClaimManagerInstance(
+                            CommonUtil.getPropertyByKey("claimManagementEndpoint"),
+                            CommonUtil.getPropertyByKey("adminUsername"),
+                            CommonUtil.getPropertyByKey("adminPassword"));
+
+        final Map<String, String> subjectAttributeDisplayValueMap =
+                        claimManager.getLocalClaimUriMappingsDisplayValue(new ArrayList<>(subjectAttributeValueMap.keySet()));
+
+        if(sessionBean != null && sessionBean.getSAML2SSO() != null) {
+            subjectId = sessionBean.getSAML2SSO().getSubjectId();
+            samlResponse =  CommonUtil.marshall(sessionBean.getSAML2SSO().getSAMLResponse());
+            samlResponse = samlResponse.replace("<", "&lt;");
+            samlResponse = samlResponse.replace(">", "&gt;");
+        } else {
+    %>
+            <script type="text/javascript">
+                location.href = <%=SAML_SSO_URL%>;
+            </script>
+    <%
+            return;
+        }
+    %>
+
 <body class="app-home dispatch">
 
 <div id="wrapper" class="wrapper"></div>
@@ -269,40 +283,29 @@
                     <div class="col-md-6 d-block mx-auto">
                         <div class="card card-body table-container">
                             <div class="table-responsive content-table">
-                                <table class="table">
-                                    <%
-                                        if (saml2SSOAttributes != null && !saml2SSOAttributes.isEmpty()) {
-                                    %>
-                                    <thead>
-                                    <tr>
-                                        <th rowspan="2">User Details</th>
-                                    </tr>
-                                    </thead>
-
-                                    <tbody>
-
-                                    <%
-                                        for (Map.Entry<String, String> entry:saml2SSOAttributes.entrySet()) {
-                                    %>
-                                    <tr>
-                                        <td><%=entry.getKey()%></td>
-                                        <td><%=entry.getValue()%></td>
-                                    </tr>
-
-                                    <%
-                                        }
-                                    } else {
-                                    %>
-                                    <tr>
-                                        <h3 align="center" >There are no user details to show.</h3><br/>
-                                        <p align="center"> Please configure claim mapping in SP configurations.</p>
-                                    </tr>
-                                    <%
-                                        }
-                                    %>
-                                    </tbody>
-                                </table>
-
+                                <% if (!subjectAttributeValueMap.isEmpty()) { %>
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th rowspan="2">User Details</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            <%for(String attribute:subjectAttributeValueMap.keySet()){%>
+                                                <tr>
+                                                    <% if(subjectAttributeDisplayValueMap.containsKey(attribute)){ %>
+                                                        <td><%=subjectAttributeDisplayValueMap.get(attribute)%> </td>
+                                                    <% } else { %>
+                                                        <td><%=attribute%> </td>
+                                                    <% } %>
+                                                    <td><%=subjectAttributeValueMap.get(attribute).toString() %> </td>
+                                                </tr>
+                                            <% } %>
+                                        </tbody>
+                                    </table>
+                                <%  } else {%>
+                                        <p align="center">No user details Available. Configure SP Claim Configurations.</p>
+                                <%  } %>
                             </div>
                         </div>
                         <!--</div>-->

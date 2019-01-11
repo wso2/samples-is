@@ -27,6 +27,7 @@
 <%@page import="org.wso2.sample.identity.oauth2.CommonUtils"%>
 <%@page import="com.nimbusds.jwt.ReadOnlyJWTClaimsSet"%>
 <%@page import="java.util.logging.Logger"%>
+<%@page import="org.wso2.samples.claims.manager.ClaimManager"%>
 
 <%
     final Logger logger = Logger.getLogger(getClass().getName());
@@ -58,9 +59,16 @@
             name = SignedJWT.parse(idToken).getJWTClaimsSet().getSubject();
             ReadOnlyJWTClaimsSet claimsSet = SignedJWT.parse(idToken).getJWTClaimsSet();
             
+            final ClaimManager claimManager= 
+                    ClaimManager.getClaimManagerInstance(
+                        SampleContextEventListener.getPropertyByKey("claimManagementEndpoint"),
+                        SampleContextEventListener.getPropertyByKey("adminUsername"),
+                        SampleContextEventListener.getPropertyByKey("adminPassword"));
+
             customClaimValueMap = claimsSet.getCustomClaims();
+            
             oidcClaimDisplayValueMap =
-                    CommonUtils.getOidcClaimDisplayNameMapping(new ArrayList<>(claimsSet.getCustomClaims().keySet()));
+                    claimManager.getOidcClaimDisplayNameMapping(new ArrayList<>(customClaimValueMap.keySet()));
 
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error when getting id_token details.", e);

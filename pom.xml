@@ -38,6 +38,7 @@
     </scm>
 
     <modules>
+        <module>etc/claim-manager</module>
         <module>sso-samples/saml2-sso-sample</module>
         <module>sso-samples/oidc-sso-sample</module>
         <module>etc/pickup-sample-app</module>

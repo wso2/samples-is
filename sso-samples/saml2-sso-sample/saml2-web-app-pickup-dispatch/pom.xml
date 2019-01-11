@@ -96,8 +96,9 @@
             <artifactId>org.wso2.carbon.user.api</artifactId>
         </dependency>
         <dependency>
-            <groupId>xerces</groupId>
-            <artifactId>xercesImpl</artifactId>
+            <groupId>org.wso2.samples.is</groupId>
+            <artifactId>claim-manager</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 
