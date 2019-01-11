@@ -85,8 +85,10 @@ public class ClaimManager {
 
         if (claimManagerInstance == null) {
             synchronized (ClaimManager.class) {
-                claimManagerInstance =
-                        new ClaimManager(claimManagementUrl, identityServerUsername, identityServerPassword);
+                if (claimManagerInstance == null) {
+                    claimManagerInstance =
+                            new ClaimManager(claimManagementUrl, identityServerUsername, identityServerPassword);
+                }
             }
         }
 
