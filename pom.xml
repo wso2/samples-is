@@ -38,15 +38,15 @@
     </scm>
 
     <modules>
-        <module>saml2-sso-sample</module>
-        <module>oidc-sso-sample</module>
-        <module>pickup-sample-app</module>
-        <module>oauth-sample-client-authenticator</module>
-        <module>sample-post-authentication-handler</module>
-        <module>conditional-auth-sample</module>
-        <module>backend-service</module>
+        <module>sso-samples/saml2-sso-sample</module>
+        <module>sso-samples/oidc-sso-sample</module>
+        <module>etc/pickup-sample-app</module>
+        <module>etc/oauth-sample-client-authenticator</module>
+        <module>etc/sample-post-authentication-handler</module>
+        <module>etc/conditional-auth-sample</module>
+        <module>etc/backend-service</module>
         <module>quick-start-guide</module>
-        <module>gdpr-samples</module>
+        <module>etc/gdpr-samples</module>
         <module>distribution</module>
     </modules>
 
@@ -328,6 +328,12 @@
                 <artifactId>maven-dependency-plugin</artifactId>
                 <version>${maven.dependency.plugin.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.owasp.esapi</groupId>
+                <artifactId>esapi</artifactId>
+                <version>${org.owasp.esapi.version}</version>
+                <scope>compile</scope>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
@@ -516,6 +522,7 @@
         <!--repo versions of gdpr-samples-->
         <org.json.version>20180130</org.json.version>
         <maven.dependency.plugin.version>3.1.0</maven.dependency.plugin.version>
+        <org.owasp.esapi.version>2.1.0.1</org.owasp.esapi.version>
 
     </properties>
 

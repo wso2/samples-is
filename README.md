@@ -1,32 +1,33 @@
 # samples-is
 
-samples-is repository contains the sample applications that are integrated with [WSO2 Identity Sever](https://wso2.com/library/articles/2017/08/what-is-wso2-identity-server/). 
+samples-is a repository containing applications and guides that demonstrate capabilities of
+[WSO2 Identity Sever](https://wso2.com/library/articles/2017/08/what-is-wso2-identity-server/). 
 
 ## Table of contents
 
 - [Getting started](#getting-started)
 - [Download and install](#download-and-install)
-- [Contributing to samples-is]()
 - [License]()
 
 ## Getting started
 
 * [Quick Start Guide](https://github.com/wso2/samples-is/tree/master/quick-start-guide)
-* [SAML2 SSO sample application](https://github.com/wso2/samples-is/tree/master/saml2-sso-sample)
-* [OIDC SSO sample application](https://github.com/wso2/samples-is/tree/master/oidc-sso-sample)
-* [Sample post authentication handler](https://github.com/wso2/samples-is/tree/master/sample-post-authentication-handler)
-* [Oauth sample client authenticator](https://github.com/wso2/samples-is/tree/master/oauth-sample-client-authenticator)
-* [Conditional authentication sample](https://github.com/wso2/samples-is/tree/master/conditional-auth-sample)
+* [SAML2 SSO sample application](https://github.com/wso2/samples-is/tree/master/sso-samples/saml2-sso-sample)
+* [OIDC SSO sample application](https://github.com/wso2/samples-is/tree/master/sso-samples/oidc-sso-sample)
+* [Sample post authentication handler](https://github.com/wso2/samples-is/tree/master/etc/sample-post-authentication-handler)
+* [Oauth sample client authenticator](https://github.com/wso2/samples-is/tree/master/etc/oauth-sample-client-authenticator)
+* [Conditional authentication sample](https://github.com/wso2/samples-is/tree/master/etc/conditional-auth-sample)
 
 ## Download and install
 
 ### Download the binary
 
-You can download the samples-is distribution at [link](https://github.com/wso2/samples-is/releases/latest).
+You can download the samples-is distribution from this [link](https://github.com/wso2/samples-is/releases/latest).
+Distribution is named `is-samples-<version>.zip`
 
 ### Install from source
 
-Alternatively, you can install samples-is from the source using the following instructions.
+Alternatively, you can build the distribution from the source code using the following instructions.
 
 #### Prerequisites
 
@@ -35,8 +36,8 @@ Alternatively, you can install samples-is from the source using the following in
 
 #### Building the source
 
-1. Get a clone or download source from this repository
-2. Run the Maven command mvn clean install from within the distribution directory.
+1. Get a clone or download source of this repository
+2. Run the Maven command `mvn clean install` from source directory
 
 ## License
 
