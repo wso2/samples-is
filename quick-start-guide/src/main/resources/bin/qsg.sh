@@ -2453,11 +2453,12 @@ start_the_flow() {
 }
 
 #=================The start of the script:============================================
-# Relative directory paths to this script
-CONF_DIR=../conf
-APP_DIR=../webapps
-LIB_DIR=../lib
-SCENARIO_DIR=../scenarios
+BASE_DIR="$(cd "$(dirname "$0")"; pwd)";
+
+CONF_DIR=${BASE_DIR}/../conf
+APP_DIR=${BASE_DIR}/../webapps
+LIB_DIR=${BASE_DIR}/../lib
+SCENARIO_DIR=${BASE_DIR}/../scenarios
 
 # Property file for the script
 PROPERTY_FILE=${CONF_DIR}/server.properties
