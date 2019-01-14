@@ -198,15 +198,16 @@ public class ClaimManager {
 
     private List<Node> getOIDCDialectNodes() {
 
-        final String oidcDilectSoapBody = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" " +
-                "xmlns:xsd=\"http://org.apache.axis2/xsd\">\n" +
-                "   <soapenv:Header/>\n" +
-                "   <soapenv:Body>\n" +
-                "      <xsd:getExternalClaims>\n" +
-                "         <xsd:externalClaimDialectURI>http://wso2.org/oidc/claim</xsd:externalClaimDialectURI>\n" +
-                "      </xsd:getExternalClaims>\n" +
-                "   </soapenv:Body>\n" +
-                "</soapenv:Envelope>";
+        final String oidcDilectSoapBody =
+                "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" " +
+                        "xmlns:xsd=\"http://org.apache.axis2/xsd\">\n" +
+                        "   <soapenv:Header/>\n" +
+                        "   <soapenv:Body>\n" +
+                        "      <xsd:getExternalClaims>\n" +
+                        "         <xsd:externalClaimDialectURI>http://wso2.org/oidc/claim</xsd:externalClaimDialectURI>\n" +
+                        "      </xsd:getExternalClaims>\n" +
+                        "   </soapenv:Body>\n" +
+                        "</soapenv:Envelope>";
 
         final String claimManagementResponse = getClaimManagementResponse(oidcDilectSoapBody, externalClaimSoapAction);
 
@@ -232,13 +233,14 @@ public class ClaimManager {
 
     private List<Node> getLocalClaimNodes() {
 
-        final String localClaimSoapBody = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"" +
-                " xmlns:xsd=\"http://org.apache.axis2/xsd\">\n" +
-                "   <soapenv:Header/>\n" +
-                "   <soapenv:Body>\n" +
-                "      <xsd:getLocalClaims/>\n" +
-                "   </soapenv:Body>\n" +
-                "</soapenv:Envelope>";
+        final String localClaimSoapBody =
+                "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"" +
+                        " xmlns:xsd=\"http://org.apache.axis2/xsd\">\n" +
+                        "   <soapenv:Header/>\n" +
+                        "   <soapenv:Body>\n" +
+                        "      <xsd:getLocalClaims/>\n" +
+                        "   </soapenv:Body>\n" +
+                        "</soapenv:Envelope>";
 
         final String claimManagementResponse = getClaimManagementResponse(localClaimSoapBody, localClaimSoapAction);
 
