@@ -1,5 +1,4 @@
 @echo off
-set QSG=%cd%
 SetLocal EnableDelayedExpansion
 REM ----------------------------------------------------------------------------
 REM  Copyright 2018 WSO2, Inc. http://www.wso2.org
@@ -18,10 +17,14 @@ REM  limitations under the License.
 
 REM ===============script starts here ===============================================
 
-FOR /F "eol=; tokens=6,2 delims==" %%i IN ('findstr "server.host.domain" server.properties') DO SET SERVER_DOMAIN=%%i
+SET CONF_DIR=..\conf
+SET APP_DIR=..\webapps
+SET LIB_DIR=..\lib
+
+FOR /F "eol=; tokens=6,2 delims==" %%i IN ('findstr "server.host.domain" %CONF_DIR%\server.properties') DO SET SERVER_DOMAIN=%%i
 REM echo %SERVER_DOMAIN%
 
-FOR /F "eol=; tokens=6,2 delims==" %%i IN ('findstr "server.host.port" server.properties') DO SET SERVER_PORT=%%i
+FOR /F "eol=; tokens=6,2 delims==" %%i IN ('findstr "server.host.port" %CONF_DIR%\server.properties') DO SET SERVER_PORT=%%i
 REM echo %SERVER_PORT%
 
 echo "   Stating sample apps.. "
@@ -29,4 +32,4 @@ echo ""
 echo "      Using Host : %SERVER_DOMAIN% "
 echo "      Using Port : %SERVER_PORT% "
 
-java -jar lib\jetty-runner.jar --host %SERVER_DOMAIN% --port %SERVER_PORT% apps\pickup-dispatch.war apps\pickup-manager.war apps\saml2-web-app-pickup-dispatch.com.war apps\saml2-web-app-pickup-manager.com.war
+java -jar %LIB_DIR%\jetty-runner.jar --host %SERVER_DOMAIN% --port %SERVER_PORT% %APP_DIR%\pickup-dispatch.war %APP_DIR%\pickup-manager.war %APP_DIR%\saml2-web-app-pickup-dispatch.com.war %APP_DIR%\saml2-web-app-pickup-manager.com.war

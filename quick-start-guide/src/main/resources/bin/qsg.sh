@@ -97,7 +97,7 @@ read user
 case ${user} in
     [Yy]* )
 
-    add_identity_provider admin admin 05 ${is_host} ${is_port} ${server_host} ${server_port}
+    add_identity_provider admin admin 05 ${is_host} ${is_port}
 
     configure_sso_saml2 ${is_host} ${is_port} ${server_host} ${server_port}
 
@@ -116,7 +116,6 @@ return 0;
 }
 
 configure_self_signup (){
-cd ${QSG}/QSG/bin
 
 is_host=$1
 is_port=$2
@@ -238,7 +237,6 @@ case ${clean} in
         * ) echo "Please answer yes or no.";;
     esac
 
-cd ..
 return 0;
 }
 
@@ -247,8 +245,6 @@ is_host=$1
 is_port=$2
 server_host=$3
 server_port=$4
-
-cd ${QSG}/QSG/bin
 
 # Add users and the relevant roles in wso2-is.
 add_users_workflow admin admin 07 ${is_host} ${is_port}
@@ -333,7 +329,7 @@ case ${input} in
         [Nn]* ) exit;;
          * ) echo "Please answer yes or no.";;
          esac
-cd ..
+
 return 0;
 }
 
@@ -348,13 +344,13 @@ is_host=$6
 is_port=$7
 selfsignup="selfsignup"
 lockon="lockon"
+
 # Update the sso-config xml file with correct host names and port values
-cd ${scenario}
-if [ -f "update-idp-${config}.xml" ]
+if [ -f "${SCENARIO_DIR}/${scenario}/update-idp-${config}.xml" ]
 then
-   rm -r update-idp-${config}.xml
+   rm -r ${SCENARIO_DIR}/${scenario}/update-idp-${config}.xml
 fi
-touch update-idp-${config}.xml
+touch ${SCENARIO_DIR}/${scenario}/update-idp-${config}.xml
 
 if [ "$config" = "$selfsignup" ];
 then
@@ -587,7 +583,7 @@ echo " <soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelop
             </mgt:identityProvider>
         </mgt:updateResidentIdP>
     </soapenv:Body>
-</soapenv:Envelope>" >> update-idp-${config}.xml
+</soapenv:Envelope>" >> ${SCENARIO_DIR}/${scenario}/update-idp-${config}.xml
 fi
 
 if [ "$config" = "$lockon" ];
@@ -821,15 +817,14 @@ echo " <soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelop
             </mgt:identityProvider>
         </mgt:updateResidentIdP>
     </soapenv:Body>
-</soapenv:Envelope>" >> update-idp-${config}.xml
+</soapenv:Envelope>" >> ${SCENARIO_DIR}/${scenario}/update-idp-${config}.xml
 fi
-cd ..
 
-request_data="${scenario}/update-idp-${config}.xml"
+request_data="${SCENARIO_DIR}/${scenario}/update-idp-${config}.xml"
 
-if [ ! -d "$scenario" ]
+if [ ! -d "${SCENARIO_DIR}/${scenario}" ]
   then
-    echo "$scenario Directory does not exists."
+    echo "${SCENARIO_DIR}/${scenario} Directory does not exists."
     return -1
   fi
 
@@ -846,6 +841,7 @@ res=$?
   echo
   return -1
  fi
+
 echo "** Identity Provider successfully updated. **"
 echo
 return 0;
@@ -867,8 +863,15 @@ echo "|        http://${server_host}:${server_port}/${dispatch_url}/            
 echo "|    pick-manager -                                                                   |"
 echo "|        http://${server_host}:${server_port}/${manager_url}/                         |"
 echo "|                                                                                     |"
-echo "|    Please use the user credentials to log in.                                       |"
+echo "|    Please use one of the following user credentials to log in.                      |"
 echo "|                                                                                     |"
+echo "|    Junior Manager                                                                   |"
+echo "|      Username: alex                                                                 |"
+echo "|      Password: alex123                                                              |"
+echo "|                                                                                     |"
+echo "|    Senior Manager                                                                   |"
+echo "|      Username: cameron                                                              |"
+echo "|      Password: cameron123                                                           |"
 echo "---------------------------------------------------------------------------------------"
 echo
 echo "If you have finished trying out the sample web apps, you can clean the process now."
@@ -939,12 +942,14 @@ return 0;
 }
 
 create_updateapp_multi() {
-cd ${QSG}/QSG/bin/04
+
 sp_name=$1
-request_data="get-app-${sp_name}.xml"
 auth=$2
 is_host=$3
 is_port=$4
+scenario=04
+
+request_data="${SCENARIO_DIR}/${scenario}/get-app-${sp_name}.xml"
 
  if [ ! -f "$request_data" ]
   then
@@ -952,12 +957,12 @@ is_port=$4
     return -1
   fi
 
- if [ -f "response_unformatted.xml" ]
+ if [ -f "${SCENARIO_DIR}/${scenario}/response_unformatted.xml" ]
   then
-   rm -r response_unformatted.xml
+   rm -r ${SCENARIO_DIR}/${scenario}/response_unformatted.xml
  fi
 
-touch response_unformatted.xml
+touch ${SCENARIO_DIR}/${scenario}/response_unformatted.xml
 curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type: text/xml" -H "SOAPAction: urn:getApplication" https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ > response_unformatted.xml
 res=$?
  if test "${res}" != "0"; then
@@ -970,14 +975,14 @@ res=$?
   return -1
  fi
 
-app_id=`java -jar QSG-*.jar`
+app_id=`java -jar ${SCENARIO_DIR}/${scenario}/QSG-*.jar`
 
- if [ -f "update-app-${sp_name}.xml" ]
+ if [ -f "${SCENARIO_DIR}/${scenario}/update-app-${sp_name}.xml" ]
   then
-   rm -r update-app-${sp_name}.xml
+   rm -r ${SCENARIO_DIR}/${scenario}/update-app-${sp_name}.xml
  fi
 
-touch update-app-${sp_name}.xml
+touch ${SCENARIO_DIR}/${scenario}/update-app-${sp_name}.xml
 echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelope/"\" xmlns:xsd="\"http://org.apache.axis2/xsd"\" xmlns:xsd1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">
    <soapenv:Header/>
    <soapenv:Body>
@@ -1064,7 +1069,7 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
   </ns3:serviceProvider>
 </ns3:updateApplication>
    </soapenv:Body>
-</soapenv:Envelope>" >> update-app-${sp_name}.xml
+</soapenv:Envelope>" >> ${SCENARIO_DIR}/${scenario}/update-app-${sp_name}.xml
 
 return 0;
 }
@@ -1075,26 +1080,6 @@ getProperty() {
    echo $PROP_VALUE
 }
 
-setup_servers() {
-# Check whether the wso2-is is available
-PROPERTY_FILE=server.properties
-echo "Reading server paths from $PROPERTY_FILE"
-WSO2_PATH=$(getProperty "wso2is.location")
-echo
-
-if [ ! -d "${WSO2_PATH}" ]
-  then
-    echo "${WSO2_PATH} Directory does not exists. Please download and install the latest pack."
-    return -1
- fi
-
-cd ../..
-QSG=`pwd`
-echo
-
-cd ..
-}
-
 add_users_workflow() {
 
 IS_name=$1
@@ -1102,12 +1087,12 @@ IS_pass=$2
 scenario=$3
 is_host=$4
 is_port=$5
-request_data1="${scenario}/add-role-senior.xml"
-request_data2="${scenario}/add-role-junior.xml"
+request_data1="${SCENARIO_DIR}/${scenario}/add-role-senior.xml"
+request_data2="${SCENARIO_DIR}/${scenario}/add-role-junior.xml"
 
-if [ ! -d "$scenario" ]
+if [ ! -d "${SCENARIO_DIR}/${scenario}" ]
   then
-    echo "$scenario Directory does not exists."
+    echo "${SCENARIO_DIR}/${scenario} Directory does not exists."
     return -1
   fi
 
@@ -1189,10 +1174,10 @@ delete_users_workflow() {
 
 is_host=$1
 is_port=$2
-request_data1="Common/delete-cameron.xml"
-request_data2="Common/delete-alex.xml"
-request_data3="07/delete-role-senior.xml"
-request_data4="07/delete-role-junior.xml"
+request_data1="${SCENARIO_DIR}/Common/delete-cameron.xml"
+request_data2="${SCENARIO_DIR}/Common/delete-alex.xml"
+request_data3="${SCENARIO_DIR}/07/delete-role-senior.xml"
+request_data4="${SCENARIO_DIR}/07/delete-role-junior.xml"
 
 echo
 echo "Deleting the user named cameron..."
@@ -1252,11 +1237,11 @@ scenario=$1
 auth=$2
 is_host=$3
 is_port=$4
-request_data="${scenario}/add-definition.xml"
+request_data="${SCENARIO_DIR}/${scenario}/add-definition.xml"
 
-if [ ! -d "$scenario" ]
+if [ ! -d "${SCENARIO_DIR}/${scenario}" ]
   then
-    echo "$scenario Directory does not exists."
+    echo "${SCENARIO_DIR}/${scenario} Directory does not exists."
     return -1
   fi
 
@@ -1287,11 +1272,11 @@ scenario=$1
 auth=$2
 is_host=$3
 is_port=$4
-request_data="${scenario}/delete-definition.xml"
+request_data="${SCENARIO_DIR}/${scenario}/delete-definition.xml"
 
-if [ ! -d "$scenario" ]
+if [ ! -d "${SCENARIO_DIR}/${scenario}" ]
   then
-    echo "$scenario Directory does not exists."
+    echo "${SCENARIO_DIR}/${scenario} Directory does not exists."
     return -1
   fi
 
@@ -1320,11 +1305,11 @@ scenario=$1
 auth=$2
 is_host=$3
 is_port=$4
-request_data="${scenario}/add-association.xml"
+request_data="${SCENARIO_DIR}/${scenario}/add-association.xml"
 
-if [ ! -d "$scenario" ]
+if [ ! -d "${SCENARIO_DIR}/${scenario}" ]
   then
-    echo "$scenario Directory does not exists."
+    echo "${SCENARIO_DIR}/${scenario} Directory does not exists."
     return -1
   fi
 
@@ -1356,11 +1341,11 @@ scenario=$1
 auth=$2
 is_host=$3
 is_port=$4
-request_data="${scenario}/delete-association.xml"
+request_data="${SCENARIO_DIR}/${scenario}/delete-association.xml"
 
-if [ ! -d "$scenario" ]
+if [ ! -d "${SCENARIO_DIR}/${scenario}" ]
   then
-    echo "$scenario Directory does not exists."
+    echo "${SCENARIO_DIR}/${scenario} Directory does not exists."
     return -1
   fi
 
@@ -1390,7 +1375,7 @@ IS_pass=$2
 scenario=$3
 is_host=$4
 is_port=$5
-request_data="${scenario}/add-role.xml"
+request_data="${SCENARIO_DIR}/${scenario}/add-role.xml"
 echo
 echo "Creating a user named cameron..."
 
@@ -1422,7 +1407,6 @@ echo
 
 echo "Creating a role named Manager..."
 
-cd ${QSG}/QSG/bin
 #The following command will add a role to the user.
 curl -s -k --user ${IS_name}:${IS_pass} -d @$request_data -H "Content-Type: text/xml" -H "SOAPAction: urn:addRole" -o /dev/null https://${is_host}:${is_port}/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
 res=$?
@@ -1435,11 +1419,9 @@ res=$?
  fi
 echo "** The role Manager was successfully created. **"
 echo
-cd ..
 }
 
 add_service_provider() {
-cd ${QSG}/QSG/bin
 sp_name=$1
 scenario=$2
 soap_action=$3
@@ -1447,11 +1429,11 @@ endpoint=$4
 auth=$5
 is_host=$6
 is_port=$7
-request_data="${scenario}/create-sp-${sp_name}.xml"
+request_data="${SCENARIO_DIR}/${scenario}/create-sp-${sp_name}.xml"
 
- if [ ! -d "$scenario" ]
+  if [ ! -d "${SCENARIO_DIR}/${scenario}" ]
   then
-    echo "$scenario Directory not exists."
+    echo "${SCENARIO_DIR}/${scenario} Directory not exists."
     return -1
   fi
 
@@ -1477,7 +1459,6 @@ res=$?
  fi
 echo "** Service Provider $sp_name successfully created. **"
 echo
-cd ..
 return 0;
 }
 
@@ -1485,10 +1466,10 @@ delete_user() {
 
 is_host=$1
 is_port=$2
-cd ${QSG}/QSG/bin
-request_data1="Common/delete-cameron.xml"
-request_data2="Common/delete-alex.xml"
-request_data3="Common/delete-role.xml"
+
+request_data1="${SCENARIO_DIR}/Common/delete-cameron.xml"
+request_data2="${SCENARIO_DIR}/Common/delete-alex.xml"
+request_data3="${SCENARIO_DIR}/Common/delete-role.xml"
 echo
 echo "Deleting the user named cameron..."
 
@@ -1526,21 +1507,19 @@ res=$?
  fi
 echo "** The role Manager was successfully deleted. **"
 echo
-cd ..
 }
 
 delete_sp() {
-cd ${QSG}/QSG/bin
 sp_name=$1
 scenario=$2
 soap_action=$3
 endpoint=$4
 auth=$5
-request_data="${scenario}/delete-sp-${sp_name}.xml"
+request_data="${SCENARIO_DIR}/${scenario}/delete-sp-${sp_name}.xml"
 
- if [ ! -d "$scenario" ]
+ if [ ! -d "${SCENARIO_DIR}/${scenario}" ]
   then
-    echo "$scenario Directory not exists."
+    echo "${SCENARIO_DIR}/${scenario} Directory not exists."
     return -1
   fi
 
@@ -1561,20 +1540,20 @@ res=$?
   return -1
  fi
 echo "** Service Provider $sp_name successfully deleted. **"
-cd ..
+
 return 0;
 }
 
 delete_idp() {
-cd ${QSG}/QSG/bin
+
 scenario=$1
 soap_action=$2
 endpoint=$3
-request_data="${scenario}/delete-idp-twitter.xml"
+request_data="${SCENARIO_DIR}/${scenario}/delete-idp-twitter.xml"
 
- if [ ! -d "$scenario" ]
+ if [ ! -d "${SCENARIO_DIR}/${scenario}" ]
   then
-    echo "$scenario Directory not exists."
+    echo "${SCENARIO_DIR}/${scenario} Directory not exists."
     return -1
   fi
 
@@ -1595,13 +1574,13 @@ res=$?
   echo
   return -1
  fi
+
 echo "** Identity Provider IDP-twitter successfully deleted. **"
-cd ..
+
 return 0;
 }
 
 configure_saml() {
-cd ${QSG}/QSG/bin
 sp_name=$1
 scenario=$2
 soap_action=$3
@@ -1613,12 +1592,11 @@ server_host=$8
 server_port=$9
 
 # Update the sso-config xml file with correct host names and port values
-cd ${scenario}
-if [ -f "sso-config-${sp_name}.xml" ]
+if [ -f "${SCENARIO_DIR}/${scenario}/sso-config-${sp_name}.xml" ]
 then
-   rm -r sso-config-${sp_name}.xml
+   rm -r ${SCENARIO_DIR}/${scenario}/sso-config-${sp_name}.xml
 fi
-touch sso-config-${sp_name}.xml
+touch ${SCENARIO_DIR}/${scenario}/sso-config-${sp_name}.xml
 echo " <soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:xsd=\"http://org.apache.axis2/xsd\" xmlns:xsd1=\"http://dto.saml.sso.identity.carbon.wso2.org/xsd\">
    <soapenv:Header/>
    <soapenv:Body>
@@ -1674,13 +1652,12 @@ echo " <soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelop
          </xsd:spDto>
       </xsd:addRPServiceProvider>
    </soapenv:Body>
-</soapenv:Envelope>" >> sso-config-${sp_name}.xml
-cd ..
+</soapenv:Envelope>" >> ${SCENARIO_DIR}/${scenario}/sso-config-${sp_name}.xml
 
 # Configure sso for Service Provider
-request_data="${scenario}/sso-config-${sp_name}.xml"
+request_data="${SCENARIO_DIR}/${scenario}/sso-config-${sp_name}.xml"
 
- if [ ! -d "$scenario" ]
+ if [ ! -d "${SCENARIO_DIR}/${scenario}" ]
   then
     echo "$scenario Directory does not exists."
     return -1
@@ -1712,7 +1689,6 @@ return 0;
 }
 
 configure_oidc() {
-cd ${QSG}/QSG/bin
 sp_name=$1
 scenario=$2
 soap_action=$3
@@ -1739,12 +1715,12 @@ then
     cap_spName="pickup-manager"
 fi
 
-cd ${scenario}
- if [ -f "sso-config-${sp_name}.xml" ]
+
+if [ -f "${SCENARIO_DIR}/${scenario}/sso-config-${sp_name}.xml" ]
   then
-   rm -r sso-config-${sp_name}.xml
- fi
-touch sso-config-${sp_name}.xml
+   rm -r ${SCENARIO_DIR}/${scenario}/sso-config-${sp_name}.xml
+fi
+touch ${SCENARIO_DIR}/${scenario}/sso-config-${sp_name}.xml
 
 echo "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:xsd=\"http://org.apache.axis2/xsd\" xmlns:xsd1=\"http://dto.oauth.identity.carbon.wso2.org/xsd\">
    <soapenv:Header/>
@@ -1769,15 +1745,14 @@ echo "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope
          </xsd:application>
       </xsd:registerOAuthApplicationData>
    </soapenv:Body>
-</soapenv:Envelope>" >> sso-config-${sp_name}.xml
-cd ..
+</soapenv:Envelope>" >> ${SCENARIO_DIR}/${scenario}/sso-config-${sp_name}.xml
 
 # Configure sso for Service Provider
-request_data="${scenario}/sso-config-${sp_name}.xml"
+request_data="${SCENARIO_DIR}/${scenario}/sso-config-${sp_name}.xml"
 
- if [ ! -d "$scenario" ]
+ if [ ! -d "${SCENARIO_DIR}/${scenario}" ]
   then
-   echo "$scenario Directory does not exists."
+   echo "${SCENARIO_DIR}/${scenario} Directory does not exists."
    return -1
  fi
 
@@ -1801,20 +1776,22 @@ res=$?
   echo
   return -1
  fi
+
 echo "** OIDC successfully configured for the Service Provider $sp_name. **"
 echo
 return 0;
 }
 
 create_updateapp_saml() {
-cd ${QSG}/QSG/bin/02
 sp_name=$1
-request_data="get-app-${sp_name}.xml"
 auth=$2
 is_host=$3
 is_port=$4
 server_host=$5
 server_port=$6
+
+scenario=02
+request_data="${SCENARIO_DIR}/${scenario}/get-app-${sp_name}.xml"
  
  if [ ! -f "$request_data" ]
   then
@@ -1822,12 +1799,12 @@ server_port=$6
     return -1
   fi
 
- if [ -f "response_unformatted.xml" ] 
+ if [ -f "${SCENARIO_DIR}/${scenario}/response_unformatted.xml" ]
   then
-   rm -r response_unformatted.xml
+   rm -r ${SCENARIO_DIR}/${scenario}/response_unformatted.xml
  fi
 
-touch response_unformatted.xml
+touch ${SCENARIO_DIR}/${scenario}/response_unformatted.xml
 curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type: text/xml" -H "SOAPAction: urn:getApplication" https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ > response_unformatted.xml
 res=$?
  if test "${res}" != "0"; then
@@ -1840,14 +1817,14 @@ res=$?
   return -1
  fi
 
-app_id=`java -jar QSG-*.jar`
+app_id=`java -jar ${SCENARIO_DIR}/${scenario}/QSG-*.jar`
 
- if [ -f "update-app-${sp_name}.xml" ]
+ if [ -f "${SCENARIO_DIR}/${scenario}/update-app-${sp_name}.xml" ]
   then 
-   rm -r update-app-${sp_name}.xml
+   rm -r ${SCENARIO_DIR}/${scenario}/update-app-${sp_name}.xml
  fi
    
-touch update-app-${sp_name}.xml
+touch ${SCENARIO_DIR}/${scenario}/update-app-${sp_name}.xml
 echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelope/"\" xmlns:xsd="\"http://org.apache.axis2/xsd"\" xmlns:xsd1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">
     <soapenv:Header/>
     <soapenv:Body>
@@ -1915,19 +1892,19 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
             </xsd:serviceProvider>
         </xsd:updateApplication>
     </soapenv:Body>
-</soapenv:Envelope>" >> update-app-${sp_name}.xml
-cd .. 
+</soapenv:Envelope>" >> ${SCENARIO_DIR}/${scenario}/update-app-${sp_name}.xml
 }
 
 create_updateapp_oidc() {
-cd ${QSG}/QSG/bin/03
 sp_name=$1
-request_data="get-app-${sp_name}.xml"
 auth=$2
 key=$3
 secret=$4
 is_host=$5
 is_port=$6
+
+scenario=03
+request_data="${SCENARIO_DIR}/${scenario}/get-app-${sp_name}.xml"
  
  if [ ! -f "$request_data" ]
   then
@@ -1935,12 +1912,12 @@ is_port=$6
     return -1
   fi
 
- if [ -f "response_unformatted.xml" ] 
+ if [ -f "${SCENARIO_DIR}/${scenario}/response_unformatted.xml" ]
   then
-   rm -r response_unformatted.xml
+   rm -r ${SCENARIO_DIR}/${scenario}/response_unformatted.xml
  fi
 
-touch response_unformatted.xml
+touch ${SCENARIO_DIR}/${scenario}/response_unformatted.xml
 
 curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type: text/xml" -H "SOAPAction: urn:getApplication" https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ > response_unformatted.xml
 res=$?
@@ -1954,14 +1931,14 @@ res=$?
   return -1
  fi
 
-app_id=`java -jar QSG-*.jar`
+app_id=`java -jar ${SCENARIO_DIR}/${scenario}/QSG-*.jar`
 
- if [ -f "update-app-${sp_name}.xml" ]
+ if [ -f "${SCENARIO_DIR}/${scenario}/update-app-${sp_name}.xml" ]
   then 
-   rm -r update-app-${sp_name}.xml
+   rm -r ${SCENARIO_DIR}/${scenario}/update-app-${sp_name}.xml
  fi
    
-touch update-app-${sp_name}.xml
+touch ${SCENARIO_DIR}/${scenario}/update-app-${sp_name}.xml
 echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelope/"\" xmlns:xsd="\"http://org.apache.axis2/xsd"\" xmlns:xsd1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">
    <soapenv:Header/>
    <soapenv:Body>
@@ -2041,16 +2018,18 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
          </xsd:serviceProvider>
       </xsd:updateApplication>
    </soapenv:Body>
-</soapenv:Envelope>" >> update-app-${sp_name}.xml
+</soapenv:Envelope>" >> ${SCENARIO_DIR}/${scenario}/update-app-${sp_name}.xml
 }
 
 create_updateapp_fed_auth() {
-cd ${QSG}/QSG/bin/05
+
 sp_name=$1
-request_data="get-app-${sp_name}.xml"
 auth=$2
 is_host=$3
 is_port=$4
+
+scenario=05
+request_data="${SCENARIO_DIR}/${scenario}/get-app-${sp_name}.xml"
 
  if [ ! -f "$request_data" ]
   then
@@ -2058,12 +2037,12 @@ is_port=$4
     return -1
   fi
 
- if [ -f "response_unformatted.xml" ]
+ if [ -f "${SCENARIO_DIR}/${scenario}/response_unformatted.xml" ]
   then
-   rm -r response_unformatted.xml
+   rm -r ${SCENARIO_DIR}/${scenario}/response_unformatted.xml
  fi
 
-touch response_unformatted.xml
+touch ${SCENARIO_DIR}/${scenario}/response_unformatted.xml
 curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type: text/xml" -H "SOAPAction: urn:getApplication" https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ > response_unformatted.xml
 res=$?
  if test "${res}" != "0"; then
@@ -2076,14 +2055,14 @@ res=$?
   return -1
  fi
 
-app_id=`java -jar QSG-*.jar`
+app_id=`java -jar ${SCENARIO_DIR}/${scenario}/QSG-*.jar`
 
- if [ -f "update-app-${sp_name}.xml" ]
+ if [ -f "${SCENARIO_DIR}/${scenario}/update-app-${sp_name}.xml" ]
   then
-   rm -r update-app-${sp_name}.xml
+   rm -r ${SCENARIO_DIR}/${scenario}/update-app-${sp_name}.xml
  fi
 
-touch update-app-${sp_name}.xml
+touch ${SCENARIO_DIR}/${scenario}/update-app-${sp_name}.xml
 echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelope/"\" xmlns:xsd="\"http://org.apache.axis2/xsd"\" xmlns:xsd1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">
    <soapenv:Header/>
    <soapenv:Body>
@@ -2146,11 +2125,10 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
   </ns3:serviceProvider>
 </ns3:updateApplication>
    </soapenv:Body>
-</soapenv:Envelope>" >> update-app-${sp_name}.xml
+</soapenv:Envelope>" >> ${SCENARIO_DIR}/${scenario}/update-app-${sp_name}.xml
 }
 
 update_application_saml() {
-cd ${QSG}/QSG/bin
 sp_name=$1
 scenario=$2
 soap_action=$3
@@ -2158,11 +2136,12 @@ endpoint=$4
 auth=$5
 is_host=$6
 is_port=$7
-request_data="${scenario}/update-app-${sp_name}.xml"
 
- if [ ! -d "$scenario" ]
+request_data="${SCENARIO_DIR}/${scenario}/update-app-${sp_name}.xml"
+
+ if [ ! -d "${SCENARIO_DIR}/${scenario}" ]
   then
-    echo "$scenario Directory does not exists."
+    echo "${SCENARIO_DIR}/${scenario} Directory does not exists."
     return -1
   fi
 
@@ -2188,12 +2167,11 @@ res=$?
   return -1
  fi
 echo "** Successfully updated the application ${sp_name}. **"
-cd ..
+
 return 0;
 }
 
 update_application_oidc() {
-cd ${QSG}/QSG/bin
 sp_name=$1
 scenario=$2
 soap_action=$3
@@ -2202,11 +2180,11 @@ auth=$5
 is_host=$6
 is_port=$7
 
-request_data="${scenario}/update-app-${sp_name}.xml"
+request_data="${SCENARIO_DIR}/${scenario}/update-app-${sp_name}.xml"
 
- if [ ! -d "$scenario" ]
+ if [ ! -d "${SCENARIO_DIR}/${scenario}" ]
   then
-   echo "$scenario Directory does not exists."
+   echo "${SCENARIO_DIR}/${scenario} Directory does not exists."
    return -1
  fi
 
@@ -2228,23 +2206,24 @@ res=$?
   echo
   return -1
  fi
+
 echo "** Successfully updated the application ${sp_name}. **"
 return 0;
 }
 
 add_identity_provider() {
-cd ${QSG}/QSG/bin
+
 IS_name=$1
 IS_pass=$2
 scenario=$3
 is_host=$4
 is_port=$5
 
-request_data="${scenario}/create-idp.xml"
+request_data="${SCENARIO_DIR}/${scenario}/create-idp.xml"
 
- if [ ! -d "$scenario" ]
+ if [ ! -d "${SCENARIO_DIR}/${scenario}" ]
   then
-   echo "$scenario Directory does not exists."
+   echo "${SCENARIO_DIR}/${scenario} Directory does not exists."
    return -1
  fi
 
@@ -2254,7 +2233,6 @@ request_data="${scenario}/create-idp.xml"
    return -1
  fi
 
-cd 05
 echo
 echo "Please enter your API key"
 echo "(This can be found in the Keys and Access token section in the Application settings)"
@@ -2267,13 +2245,15 @@ echo
 read secret
 echo
 
- if [ -f "create-idp.xml" ]
+next_scenario=05
+
+ if [ -f "${SCENARIO_DIR}/${next_scenario}/create-idp.xml" ]
   then
-   rm -r create-idp.xml
+   rm -r ${SCENARIO_DIR}/${next_scenario}/create-idp.xml
  fi
 
 echo "Creating Identity Provider..."
-touch create-idp.xml
+touch ${SCENARIO_DIR}/${next_scenario}/create-idp.xml
 echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelope/"\" xmlns:mgt="\"http://mgt.idp.carbon.wso2.org"\" xmlns:xsd="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">
    <soapenv:Header/>
    <soapenv:Body>
@@ -2331,8 +2311,8 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
   </ns4:identityProvider>
 </ns4:addIdP>
 </soapenv:Body>
-</soapenv:Envelope>" >> create-idp.xml
-cd ..
+</soapenv:Envelope>" >> ${SCENARIO_DIR}/${next_scenario}/create-idp.xml
+
 curl -s -k --user ${IS_name}:${IS_pass} -d @$request_data -H "Content-Type: text/xml" -H "SOAPAction: urn:addIdP" -o /dev/null https://${is_host}:${is_port}/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/
 res=$?
  if test "${res}" != "0"; then
@@ -2342,7 +2322,7 @@ res=$?
  fi
 echo "** The identity provider was successfully created. **"
 echo
-cd ..
+
 return 0;
 }
 
@@ -2363,7 +2343,6 @@ start_the_flow() {
     read scenario
     case $scenario in
         1)
-        setup_servers
         configure_sso_saml2 ${IS_DOMAIN} ${IS_PORT} ${SERVER_DOMAIN} ${SERVER_PORT}
         end_message saml2-web-app-pickup-dispatch.com saml2-web-app-pickup-manager.com
         if [ "$?" -ne "0" ]; then
@@ -2372,7 +2351,6 @@ start_the_flow() {
         ;;
 
         2)
-        setup_servers
         configure_sso_oidc ${IS_DOMAIN} ${IS_PORT} ${SERVER_DOMAIN} ${SERVER_PORT}
         end_message pickup-dispatch pickup-manager
         if [ "$?" -ne "0" ]; then
@@ -2381,14 +2359,12 @@ start_the_flow() {
         ;;
 
         3)
-        setup_servers
         create_multifactor_auth ${IS_DOMAIN} ${IS_PORT} ${SERVER_DOMAIN} ${SERVER_PORT}
         end_message saml2-web-app-pickup-dispatch.com saml2-web-app-pickup-manager.com
         delete_idp 05 urn:deleteIdP https://${is_host}:${is_port}/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/
         ;;
 
         4)
-        setup_servers
         configure_federated_auth ${IS_DOMAIN} ${IS_PORT} ${SERVER_DOMAIN} ${SERVER_PORT}
         end_message saml2-web-app-pickup-dispatch.com saml2-web-app-pickup-manager.com
         delete_idp 05 urn:deleteIdP https://${is_host}:${is_port}/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/
@@ -2398,12 +2374,10 @@ start_the_flow() {
         ;;
 
         5)
-        setup_servers
         configure_self_signup ${IS_DOMAIN} ${IS_PORT} ${SERVER_DOMAIN} ${SERVER_PORT}
         ;;
 
         6)
-        setup_servers
         create_workflow ${IS_DOMAIN} ${IS_PORT} ${SERVER_DOMAIN} ${SERVER_PORT}
         ;;
 
@@ -2415,21 +2389,24 @@ start_the_flow() {
 }
 
 #=================The start of the script:============================================
+# Relative directory paths to this script
+CONF_DIR=../conf
+APP_DIR=../webapps
+LIB_DIR=../lib
+SCENARIO_DIR=../scenarios
 
-# Test detached shell
+# Property file for the script
+PROPERTY_FILE=${CONF_DIR}/server.properties
 
-echo "Before Run: Make sure the following -                                         "
-echo "  * Added server details to the server.properties file in the QSG/bin folder  "
-echo "  * Your WSO2 IS 5.7.0 and applications are running.                          "
-echo "  * Configure the running domains/ips and ports in server.properties file     "
-echo "   in the QSG/bin folder.                                                     "
+echo "Before running samples make sure the following                                "
+echo "  * Added correct details to the server.properties                            "
+echo "  * Your WSO2 IS 5.7.0 and sample applications are running.                   "
 echo "                                                                              "
 echo " If okay to continue, Please press 'Y' else press 'N'                         "
 read continueState
 case $continueState in
       [Yy]*)
-        # Read domians/ips and ports from server.properties file
-        PROPERTY_FILE=server.properties
+
         echo "Reading server paths from $PROPERTY_FILE"
         IS_DOMAIN=$(getProperty "wso2is.host.domain")
         #echo ${IS_DOMAIN}

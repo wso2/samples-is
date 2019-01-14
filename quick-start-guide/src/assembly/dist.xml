@@ -23,8 +23,8 @@
     <includeBaseDirectory>false</includeBaseDirectory>
     <fileSets>
         <fileSet>
-            <directory>${project.basedir}/src/main/resources/QSG</directory>
-            <outputDirectory>QSG-bundle/QSG</outputDirectory>
+            <directory>${project.basedir}/src/main/resources/</directory>
+            <outputDirectory>./</outputDirectory>
             <useDefaultExcludes>true</useDefaultExcludes>
         </fileSet>
     </fileSets>
@@ -32,27 +32,52 @@
     <files>
         <file>
             <source>${project.basedir}/target/QSG-${project.version}.jar</source>
-            <outputDirectory>QSG-bundle/QSG/bin/02</outputDirectory>
+            <outputDirectory>./scenarios/02</outputDirectory>
         </file>
         <file>
             <source>${project.basedir}/target/QSG-${project.version}.jar</source>
-            <outputDirectory>QSG-bundle/QSG/bin/03</outputDirectory>
+            <outputDirectory>./scenarios/03</outputDirectory>
         </file>
         <file>
             <source>${project.basedir}/target/QSG-${project.version}.jar</source>
-            <outputDirectory>QSG-bundle/QSG/bin/04</outputDirectory>
+            <outputDirectory>./scenarios/04</outputDirectory>
         </file>
         <file>
             <source>${project.basedir}/target/QSG-${project.version}.jar</source>
-            <outputDirectory>QSG-bundle/QSG/bin/05</outputDirectory>
+            <outputDirectory>./scenarios/05</outputDirectory>
+        </file>
+
+        <!-- Packing sample applications-->
+        <file>
+            <source>
+                ${project.basedir}/../saml2-sso-sample/components/SAML2/saml2-web-app-pickup-dispatch/target/saml2-web-app-pickup-dispatch.com.war
+            </source>
+            <outputDirectory>${qsg.app.location}</outputDirectory>
         </file>
         <file>
-            <source>${project.basedir}/target/QSG-${project.version}.jar</source>
-            <outputDirectory>QSG-bundle/QSG/bin/08</outputDirectory>
+            <source>
+                ${project.basedir}/../saml2-sso-sample/components/SAML2/saml2-web-app-pickup-manager/target/saml2-web-app-pickup-manager.com.war
+            </source>
+            <outputDirectory>${qsg.app.location}</outputDirectory>
         </file>
         <file>
-            <source>${project.basedir}/target/QSG-${project.version}.jar</source>
-            <outputDirectory>QSG-bundle/QSG/bin/09</outputDirectory>
+            <source>${project.basedir}/../oidc-sso-sample/pickup-dispatch/target/pickup-dispatch.war</source>
+            <outputDirectory>${qsg.app.location}</outputDirectory>
+        </file>
+        <file>
+            <source>${project.basedir}/../oidc-sso-sample/pickup-manager/target/pickup-manager.war</source>
+            <outputDirectory>${qsg.app.location}</outputDirectory>
+        </file>
+
+        <!-- Packing libs-->
+        <file>
+            <source>${project.basedir}/../backend-service/target/backend-service.jar</source>
+            <outputDirectory>${qsg.jar.location}</outputDirectory>
+        </file>
+        <file>
+            <source>${project.basedir}/target/jetty-runner-${jetty.version}.jar</source>
+            <outputDirectory>${qsg.jar.location}</outputDirectory>
+            <destName>jetty-runner.jar</destName>
         </file>
     </files>
 </assembly>

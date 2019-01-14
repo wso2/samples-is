@@ -28,7 +28,7 @@
     <artifactId>samples-is</artifactId>
     <packaging>pom</packaging>
     <description>WSO2 Identity Server Samples</description>
-    <version>3.0.0-m2-SNAPSHOT</version>
+    <version>4.0.0-SNAPSHOT</version>
 
     <scm>
         <url>https://github.com/wso2/samples-is.git</url>
@@ -41,12 +41,12 @@
         <module>saml2-sso-sample</module>
         <module>oidc-sso-sample</module>
         <module>pickup-sample-app</module>
-        <module>quick-start-guide</module>
-        <module>gdpr-samples</module>
         <module>oauth-sample-client-authenticator</module>
         <module>sample-post-authentication-handler</module>
         <module>conditional-auth-sample</module>
         <module>backend-service</module>
+        <module>quick-start-guide</module>
+        <module>gdpr-samples</module>
         <module>distribution</module>
     </modules>
 
