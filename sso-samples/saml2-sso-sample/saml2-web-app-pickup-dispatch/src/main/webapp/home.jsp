@@ -80,7 +80,7 @@
                             CommonUtil.getPropertyByKey("adminPassword"));
 
         final Map<String, String> subjectAttributeDisplayValueMap =
-                        claimManager.getLocalClaimUriMappingsDisplayValue(new ArrayList<>(subjectAttributeValueMap.keySet()));
+                        claimManager.getLocalClaimUriDisplayValueMapping(new ArrayList<>(subjectAttributeValueMap.keySet()));
 
         if(sessionBean != null && sessionBean.getSAML2SSO() != null) {
             subjectId = sessionBean.getSAML2SSO().getSubjectId();

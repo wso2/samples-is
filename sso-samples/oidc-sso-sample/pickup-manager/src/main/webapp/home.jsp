@@ -406,7 +406,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        <%for(String claim:oidcClaimDisplayValueMap.keySet()){%>
+                                        <% for(String claim:oidcClaimDisplayValueMap.keySet()){ %>
                                             <tr>
                                                 <td><%=oidcClaimDisplayValueMap.get(claim)%> </td>
                                                 <td><%=customClaimValueMap.get(claim).toString() %> </td>
@@ -414,7 +414,7 @@
                                         <% } %>
                                     </tbody>
                                 </table>
-                            <%  } else {%>
+                            <%  } else { %>
                                     <p align="center">No user details Available. Configure SP Claim Configurations.</p>
                             <%  } %>
                             </div>

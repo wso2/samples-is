@@ -129,7 +129,7 @@ public class ClaimManager {
 
         // Obtain display based on local claim mapping
         final Map<String, String> claimUriDisplayValueMappings =
-                getLocalClaimUriMappingsDisplayValue(new ArrayList<>(oidcClaimToLocalUriClaimMapping.values()));
+                getLocalClaimUriDisplayValueMapping(new ArrayList<>(oidcClaimToLocalUriClaimMapping.values()));
 
         // Map claims against display values
         for (final String claim : oidcClaimToLocalUriClaimMapping.keySet()) {
@@ -142,7 +142,7 @@ public class ClaimManager {
         return oidcClaimDisplayValueMap;
     }
 
-    public Map<String, String> getLocalClaimUriMappingsDisplayValue(final List<String> localClaimUriList) {
+    public Map<String, String> getLocalClaimUriDisplayValueMapping(final List<String> localClaimUriList) {
 
         final Map<String, String> claimDisplayValueMap = new HashMap<>();
 
