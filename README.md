@@ -7,7 +7,7 @@ samples-is a repository containing applications and guides that demonstrate capa
 
 - [Getting started](#getting-started)
 - [Download and install](#download-and-install)
-- [License]()
+- [License](#license)
 
 ## Getting started
 
