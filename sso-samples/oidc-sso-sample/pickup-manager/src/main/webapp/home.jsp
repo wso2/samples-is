@@ -398,7 +398,7 @@
                     <div class="col-md-6 d-block mx-auto">
                         <div class="card card-body table-container">
                             <div class="table-responsive content-table">
-                            <%if (!oidcClaimDisplayValueMap.isEmpty()) {%>
+                            <%if (!oidcClaimDisplayValueMap.isEmpty()) { %>
                                 <table class="table">
                                     <thead>
                                     <tr>
@@ -406,10 +406,10 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        <% for(String claim:oidcClaimDisplayValueMap.keySet()){ %>
+                                        <% for(String claim:oidcClaimDisplayValueMap.keySet()) { %>
                                             <tr>
                                                 <td><%=oidcClaimDisplayValueMap.get(claim)%> </td>
-                                                <td><%=customClaimValueMap.get(claim).toString() %> </td>
+                                                <td><%=customClaimValueMap.get(claim).toString()%> </td>
                                             </tr>
                                         <% } %>
                                     </tbody>

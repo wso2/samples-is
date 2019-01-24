@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <!--
-    ~   Copyright (c) 2018 WSO2 Inc. (http://wso2.com) All Rights Reserved.
-    ~
-    ~   Licensed under the Apache License, Version 2.0 (the "License");
-    ~   you may not use this file except in compliance with the License.
-    ~   You may obtain a copy of the License at
-    ~
-    ~        http://www.apache.org/licenses/LICENSE-2.0
-    ~
-    ~   Unless required by applicable law or agreed to in writing, software
-    ~   distributed under the License is distributed on an "AS IS" BASIS,
-    ~   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    ~   See the License for the specific language governing permissions and
-    ~   limitations under the License.
-    -->
+~   Copyright (c) 2018 WSO2 Inc. (http://wso2.com) All Rights Reserved.
+~
+~   Licensed under the Apache License, Version 2.0 (the "License");
+~   you may not use this file except in compliance with the License.
+~   You may obtain a copy of the License at
+~
+~        http://www.apache.org/licenses/LICENSE-2.0
+~
+~   Unless required by applicable law or agreed to in writing, software
+~   distributed under the License is distributed on an "AS IS" BASIS,
+~   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+~   See the License for the specific language governing permissions and
+~   limitations under the License.
+-->
 <%@ page import="org.wso2.carbon.identity.sso.agent.bean.LoggedInSessionBean" %>
 <%@ page import="org.wso2.carbon.identity.sso.agent.util.SSOAgentConstants" %>
 <%@ page import="org.json.JSONObject" %>
 <%@ page import="org.wso2.qsg.webapp.pickup.dispatch.CommonUtil" %>
-<%@page import="org.wso2.samples.claims.manager.ClaimManager"%>
-<%@page import="java.util.ArrayList"%>
+<%@ page import="org.wso2.samples.claims.manager.ClaimManager"%>
+<%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.Map" %>
+<%@ page import="org.apache.commons.lang.StringEscapeUtils"%>
 
 <html lang="en">
 <head>
@@ -85,8 +86,7 @@
         if(sessionBean != null && sessionBean.getSAML2SSO() != null) {
             subjectId = sessionBean.getSAML2SSO().getSubjectId();
             samlResponse =  CommonUtil.marshall(sessionBean.getSAML2SSO().getSAMLResponse());
-            samlResponse = samlResponse.replace("<", "&lt;");
-            samlResponse = samlResponse.replace(">", "&gt;");
+            samlResponse = StringEscapeUtils.escapeXml(samlResponse);
         } else {
     %>
             <script type="text/javascript">
@@ -291,7 +291,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                            <%for(String attribute:subjectAttributeValueMap.keySet()){%>
+                                            <% for(String attribute:subjectAttributeValueMap.keySet()) {%>
                                                 <tr>
                                                     <% if(subjectAttributeDisplayValueMap.containsKey(attribute)){ %>
                                                         <td><%=subjectAttributeDisplayValueMap.get(attribute)%> </td>

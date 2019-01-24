@@ -20,8 +20,9 @@
 <%@ page import="org.json.JSONObject" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="org.wso2.qsg.webapp.pickup.manager.CommonUtil" %>
-<%@page import="java.util.ArrayList"%>
-<%@page import="org.wso2.samples.claims.manager.ClaimManager"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="org.wso2.samples.claims.manager.ClaimManager"%>
+<%@ page import="org.apache.commons.lang.StringEscapeUtils"%>
 
 <html lang="en">
 <head>
@@ -84,8 +85,7 @@
         if(sessionBean != null && sessionBean.getSAML2SSO() != null) {
             subjectId = sessionBean.getSAML2SSO().getSubjectId();
             samlResponse =  CommonUtil.marshall(sessionBean.getSAML2SSO().getSAMLResponse());
-            samlResponse = samlResponse.replace("<", "&lt;");
-            samlResponse = samlResponse.replace(">", "&gt;");
+            samlResponse = StringEscapeUtils.escapeXml(samlResponse);
         } else {
     %>
             <script type="text/javascript">
@@ -401,9 +401,9 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                            <%for(String attribute:subjectAttributeValueMap.keySet()){%>
+                                            <%for(String attribute:subjectAttributeValueMap.keySet()) { %>
                                                 <tr>
-                                                    <% if(subjectAttributeDisplayValueMap.containsKey(attribute)){ %>
+                                                    <% if(subjectAttributeDisplayValueMap.containsKey(attribute)) { %>
                                                         <td><%=subjectAttributeDisplayValueMap.get(attribute)%> </td>
                                                     <% } else { %>
                                                         <td><%=attribute%> </td>
