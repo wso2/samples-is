@@ -33,30 +33,13 @@ import org.w3c.dom.ls.LSSerializer;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.Properties;
 
 public class CommonUtil {
 
     private static final Log log = LogFactory.getLog(CommonUtil.class);
 
-    private static final Properties properties;
-
-    static {
-        properties = new Properties();
-        try {
-            properties.load(CommonUtil.class.getClassLoader().getResourceAsStream("sso.properties"));
-        } catch (IOException e) {
-            log.error("Error while loading properties", e);
-        }
-    }
-
     private CommonUtil() {
 
-    }
-
-    public static String getPropertyByKey(final String propertyKey) {
-
-        return properties.getProperty(propertyKey);
     }
 
     /**

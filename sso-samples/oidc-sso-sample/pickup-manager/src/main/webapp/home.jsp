@@ -27,7 +27,7 @@
 <%@page import="java.util.logging.Logger"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
-<%@page import="org.wso2.samples.claims.manager.ClaimManager"%>
+<%@page import="org.wso2.samples.claims.manager.ClaimManagerProxy"%>
 
 <%
     final Logger logger = Logger.getLogger(getClass().getName());
@@ -59,16 +59,12 @@
             name = SignedJWT.parse(idToken).getJWTClaimsSet().getSubject();
             ReadOnlyJWTClaimsSet claimsSet = SignedJWT.parse(idToken).getJWTClaimsSet();
 
-            final ClaimManager claimManager= 
-                    ClaimManager.getClaimManagerInstance(
-                        SampleContextEventListener.getPropertyByKey("claimManagementEndpoint"),
-                        SampleContextEventListener.getPropertyByKey("adminUsername"),
-                        SampleContextEventListener.getPropertyByKey("adminPassword"));
+            ClaimManagerProxy claimManagerProxy = (ClaimManagerProxy) application.getAttribute("claimManagerProxyInstance");
 
             customClaimValueMap = claimsSet.getCustomClaims();
             
             oidcClaimDisplayValueMap =
-                    claimManager.getOidcClaimDisplayNameMapping(new ArrayList<>(customClaimValueMap.keySet()));
+                    claimManagerProxy.getOidcClaimDisplayNameMapping(new ArrayList<>(customClaimValueMap.keySet()));
 
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error when getting id_token details.", e);

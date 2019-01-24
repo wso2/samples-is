@@ -21,8 +21,8 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="org.wso2.qsg.webapp.pickup.manager.CommonUtil" %>
 <%@ page import="java.util.ArrayList"%>
-<%@ page import="org.wso2.samples.claims.manager.ClaimManager"%>
 <%@ page import="org.apache.commons.lang.StringEscapeUtils"%>
+<%@page import="org.wso2.samples.claims.manager.ClaimManagerProxy"%>
 
 <html lang="en">
 <head>
@@ -73,14 +73,10 @@
 
         final Map<String, String> subjectAttributeValueMap = sessionBean.getSAML2SSO().getSubjectAttributes();
 
-        final ClaimManager claimManager=
-                        ClaimManager.getClaimManagerInstance(
-                            CommonUtil.getPropertyByKey("claimManagementEndpoint"),
-                            CommonUtil.getPropertyByKey("adminUsername"),
-                            CommonUtil.getPropertyByKey("adminPassword"));
+        ClaimManagerProxy claimManagerProxy = (ClaimManagerProxy) application.getAttribute("claimManagerProxyInstance");
 
         final Map<String, String> subjectAttributeDisplayValueMap =
-                        claimManager.getLocalClaimUriDisplayValueMapping(new ArrayList<>(subjectAttributeValueMap.keySet()));
+                        claimManagerProxy.getLocalClaimUriDisplayValueMapping(new ArrayList<>(subjectAttributeValueMap.keySet()));
 
         if(sessionBean != null && sessionBean.getSAML2SSO() != null) {
             subjectId = sessionBean.getSAML2SSO().getSubjectId();

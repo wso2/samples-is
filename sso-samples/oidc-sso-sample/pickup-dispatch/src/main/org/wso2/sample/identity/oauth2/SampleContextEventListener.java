@@ -17,6 +17,8 @@
  */
 package org.wso2.sample.identity.oauth2;
 
+import org.wso2.samples.claims.manager.ClaimManagerProxy;
+
 import java.io.IOException;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -39,6 +41,15 @@ public class SampleContextEventListener implements ServletContextListener {
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, e.getMessage(), e);
         }
+
+        // Obtain a claim manager instance for this application and set it to servlet context
+        ClaimManagerProxy claimManagerProxy =
+                new ClaimManagerProxy(
+                        properties.getProperty("claimManagementEndpoint"),
+                        properties.getProperty("adminUsername"),
+                        properties.getProperty("adminPassword"));
+
+        servletContextEvent.getServletContext().setAttribute("claimManagerProxyInstance", claimManagerProxy);
     }
 
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
@@ -51,10 +62,12 @@ public class SampleContextEventListener implements ServletContextListener {
      * @return Properties
      */
     public static Properties getProperties() {
+
         return properties;
     }
 
     public static String getPropertyByKey(final String key) {
+
         return properties.getProperty(key);
     }
 }
