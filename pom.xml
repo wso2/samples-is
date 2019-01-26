@@ -45,6 +45,7 @@
         <module>etc/sample-post-authentication-handler</module>
         <module>etc/conditional-auth-sample</module>
         <module>etc/backend-service</module>
+        <module>etc/sample-step-handler</module>
         <module>quick-start-guide</module>
         <module>etc/gdpr-samples</module>
         <module>distribution</module>
