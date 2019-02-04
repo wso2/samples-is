@@ -79,7 +79,7 @@
         final Map<String, String> subjectAttributeDisplayValueMap =
                         claimManagerProxy.getLocalClaimUriDisplayValueMapping(new ArrayList<>(subjectAttributeValueMap.keySet()));
 
-        if(sessionBean != null && sessionBean.getSAML2SSO() != null) {
+        if (sessionBean != null && sessionBean.getSAML2SSO() != null) {
             subjectId = sessionBean.getSAML2SSO().getSubjectId();
             samlResponse =  CommonUtil.marshall(sessionBean.getSAML2SSO().getSAMLResponse());
             samlResponse = StringEscapeUtils.escapeXml(samlResponse);
@@ -287,9 +287,9 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                            <% for(String attribute:subjectAttributeValueMap.keySet()) {%>
+                                            <% for (String attribute:subjectAttributeValueMap.keySet()) { %>
                                                 <tr>
-                                                    <% if(subjectAttributeDisplayValueMap.containsKey(attribute)){ %>
+                                                    <% if (subjectAttributeDisplayValueMap.containsKey(attribute)) { %>
                                                         <td><%=subjectAttributeDisplayValueMap.get(attribute)%> </td>
                                                     <% } else { %>
                                                         <td><%=attribute%> </td>
