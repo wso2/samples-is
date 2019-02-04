@@ -62,6 +62,11 @@
             <artifactId>oidc-jks-loader</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.wso2.samples.is</groupId>
+            <artifactId>claim-manager</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

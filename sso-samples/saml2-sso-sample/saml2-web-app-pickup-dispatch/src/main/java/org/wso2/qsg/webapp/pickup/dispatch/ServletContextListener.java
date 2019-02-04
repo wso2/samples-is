@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ * Copyright (c) 2019, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
  * WSO2 Inc. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
@@ -15,31 +15,30 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.wso2.sample.identity.oauth2;
+
+package org.wso2.qsg.webapp.pickup.dispatch;
 
 import org.wso2.samples.claims.manager.ClaimManagerProxy;
 
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.ServletContextEvent;
 
-public class SampleContextEventListener implements ServletContextListener {
+public class ServletContextListener implements javax.servlet.ServletContextListener {
 
-    private static Logger LOGGER = Logger.getLogger("org.wso2.sample.is.sso.agent");
+    private final static Logger logger = Logger.getLogger(ServletContextListener.class.getName());
 
-    private static Properties properties;
-
+    @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
 
-        properties = new Properties();
+        Properties properties = new Properties();
+
         try {
-            properties.load(servletContextEvent.getServletContext().
-                    getResourceAsStream("/WEB-INF/classes/manager.properties"));
+            properties.load(CommonUtil.class.getClassLoader().getResourceAsStream("sso.properties"));
         } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, e.getMessage(), e);
+            logger.log(Level.WARNING, "Error while loading properties", e);
         }
 
         // Obtain a claim manager instance for this application and set it to servlet context
@@ -52,22 +51,8 @@ public class SampleContextEventListener implements ServletContextListener {
         servletContextEvent.getServletContext().setAttribute("claimManagerProxyInstance", claimManagerProxy);
     }
 
+    @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
 
-    }
-
-    /**
-     * Get the properties of the sample
-     *
-     * @return Properties
-     */
-    public static Properties getProperties() {
-
-        return properties;
-    }
-
-    public static String getPropertyByKey(final String key) {
-
-        return properties.getProperty(key);
     }
 }
