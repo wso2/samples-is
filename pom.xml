@@ -27,13 +27,13 @@
     <artifactId>samples-is</artifactId>
     <packaging>pom</packaging>
     <description>WSO2 Identity Server Samples</description>
-    <version>4.0.0</version>
+    <version>4.0.1-SNAPSHOT</version>
 
     <scm>
         <url>https://github.com/wso2/samples-is.git</url>
         <developerConnection>scm:git:https://github.com/wso2/samples-is.git</developerConnection>
         <connection>scm:git:https://github.com/wso2/samples-is.git</connection>
-        <tag>v4.0.0</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <modules>
