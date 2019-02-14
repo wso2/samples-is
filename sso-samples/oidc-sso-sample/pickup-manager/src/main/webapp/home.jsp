@@ -40,9 +40,7 @@
     }
     
     final Properties properties = SampleContextEventListener.getProperties();
-    final String sessionState = request.getParameter(OAuth2Constants.SESSION_STATE);
-    
-    currentSession.setAttribute(OAuth2Constants.SESSION_STATE, sessionState);
+    final String sessionState = (String) currentSession.getAttribute(OAuth2Constants.SESSION_STATE);
    
     final JSONObject requestObject = (JSONObject) currentSession.getAttribute("requestObject");
     final JSONObject responseObject = (JSONObject) currentSession.getAttribute("responseObject");
