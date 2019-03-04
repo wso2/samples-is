@@ -1,6 +1,6 @@
 # Backend service
 
-### Building from source
+### Introduction
 
 A simple, [msf4j](https://github.com/wso2/msf4j) based backend service to store and retrieve 
 [is-sample bookings](https://github.com/wso2/samples-is/tree/master/sso-samples).
