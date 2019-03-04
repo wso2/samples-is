@@ -33,6 +33,7 @@ import javax.ws.rs.core.Response;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Properties;
 
 /**
  * Booking service
@@ -40,11 +41,24 @@ import java.io.IOException;
 @Path("/bookings")
 public class BookingService {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(BookingService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(BookingService.class);
 
     // Simply store requests and response them for requests
     private static final JSONObject JSON_OBJECT = new JSONObject();
     private static int index = 0;
+
+    // Config properties
+    private final Properties properties;
+    private final IntrospectionHandler introspectionHandler;
+
+    public BookingService(final Properties properties) {
+
+        this.properties = properties;
+        this.introspectionHandler =
+                new IntrospectionHandler(
+                        properties.getProperty("introspectionEndpoint"),
+                        Boolean.parseBoolean(properties.getProperty("introspectionEnabled")));
+    }
 
     @OPTIONS
     public Response bookingsOptions() {
@@ -61,9 +75,17 @@ public class BookingService {
     }
 
     @GET
-    public Response bookingsGet() {
+    public Response bookingsGet(@Context Request request) {
 
         LOGGER.info("GET /bookings");
+
+        // Validate for authorization
+        if (!this.introspectionHandler.isValid(request.getHeader("Authorization"))) {
+            return Response
+                    .status(Response.Status.UNAUTHORIZED)
+                    .header("Access-Control-Allow-Origin", "*")
+                    .build();
+        }
 
         return Response
                 .status(Response.Status.OK)
@@ -77,6 +99,14 @@ public class BookingService {
     public Response bookingsPost(@Context Request request) throws IOException {
 
         LOGGER.info("POST /bookings");
+
+        // Validate for authorization
+        if (!this.introspectionHandler.isValid(request.getHeader("Authorization"))) {
+            return Response
+                    .status(Response.Status.UNAUTHORIZED)
+                    .header("Access-Control-Allow-Origin", "*")
+                    .build();
+        }
 
         final BufferedInputStream bufferedInputStream = new BufferedInputStream(request.getMessageContentStream());
         final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();

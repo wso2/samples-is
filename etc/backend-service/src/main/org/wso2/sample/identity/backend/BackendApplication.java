@@ -21,8 +21,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.wso2.msf4j.MicroservicesRunner;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -33,7 +37,7 @@ public class BackendApplication {
     private static final Logger logger = LoggerFactory.getLogger(BookingService.class);
     private static final Properties properties = new Properties();
 
-    // Perform property loading
+    // Perform property loading and JKS setup
     static {
         final InputStream resourceAsStream =
                 BackendApplication.class.getClassLoader().getResourceAsStream("service.properties");
@@ -45,28 +49,70 @@ public class BackendApplication {
             logger.error("Failed to load service properties.");
             throw new RuntimeException("Service start failed due to configuration loading failure", e);
         }
+
+        setupJKS();
+    }
+
+    private static void setupJKS() {
+        // First find jks properties
+        final InputStream jksInputStream = BackendApplication.class.getClassLoader().getResourceAsStream("jks.properties");
+
+        if (jksInputStream == null) {
+            logger.error("jks.properties not found. Trust store properties will not be set.");
+            return;
+        }
+
+        // Load properties
+        final Properties jksProperties = new Properties();
+
+        try {
+            jksProperties.load(jksInputStream);
+        } catch (IOException e) {
+            logger.error("Error while loading properties.", e);
+            return;
+        }
+
+        // Find and store JKS required for SSL communication on a temporary location
+        final InputStream keyStoreAsStream = BackendApplication.class.getClassLoader().getResourceAsStream(jksProperties.getProperty("keystorename"));
+
+        try {
+            File keystoreTempFile = File.createTempFile(jksProperties.getProperty("keystorename"), "");
+            keystoreTempFile.deleteOnExit();
+
+            Files.copy(keyStoreAsStream, keystoreTempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+            logger.info("Setting trust store path to : " + keystoreTempFile.getPath());
+            System.setProperty("javax.net.ssl.trustStore", keystoreTempFile.getPath());
+            System.setProperty("javax.net.ssl.trustStorePassword", jksProperties.getProperty("keystorepassword"));
+        } catch (IOException e) {
+            logger.error("Error while setting trust store", e);
+            throw new RuntimeException(e);
+        }
     }
 
     public static void main(final String[] args) {
 
-        final int runningPort;
+        if (args.length > 0) {
+            final List<String> argList = Constants.getArgList();
 
-        if (args.length == 0) {
-            logger.info("No port configuration override provided. Using default properties.");
-            runningPort = Integer.valueOf(properties.getProperty("port"));
-        } else {
-            if (Constants.getPortArg().equals(args[0]) && args.length > 1) {
-                runningPort = Integer.valueOf(args[1]);
-                logger.info("Running port successfully changed to " + runningPort);
-            } else {
-                logger.info("Invalid port configuration override. Using default properties.");
-                runningPort = Integer.valueOf(properties.getProperty("port"));
+            for (int i = 0; i < args.length; ) {
+                if (argList.contains(args[i]) && args.length > (i + 1)) {
+                    properties.setProperty(Constants.getPropertyForArg(args[i]), args[i + 1]);
+                    i += 2;
+                } else {
+                    i += 1;
+                }
             }
         }
 
         // Start the service
         logger.info("Starting backend service.");
+        logger.info("Configurations : ");
 
-        new MicroservicesRunner(runningPort).deploy(new BookingService()).start();
+        for (String name : properties.stringPropertyNames()) {
+            logger.info(String.format("\t %s: %s", name, properties.getProperty(name)));
+        }
+
+        new MicroservicesRunner(Integer.parseInt(properties.getProperty("port"))).deploy(new BookingService(properties)).start();
     }
 }
