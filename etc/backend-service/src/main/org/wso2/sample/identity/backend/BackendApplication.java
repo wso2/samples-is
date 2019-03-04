@@ -76,7 +76,7 @@ public class BackendApplication {
         final InputStream keyStoreAsStream = BackendApplication.class.getClassLoader().getResourceAsStream(jksProperties.getProperty("keystorename"));
 
         try {
-            File keystoreTempFile = File.createTempFile(jksProperties.getProperty("keystorename"), "");
+            final File keystoreTempFile = File.createTempFile(jksProperties.getProperty("keystorename"), "");
             keystoreTempFile.deleteOnExit();
 
             Files.copy(keyStoreAsStream, keystoreTempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);

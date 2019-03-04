@@ -105,7 +105,7 @@ public class IntrospectionHandler {
             return new JSONObject(responseBuilder.toString());
         } catch (IOException e) {
             logger.error("Error while calling token introspection endpoint", e);
-            return new JSONObject();
+            throw new RuntimeException(e);
         }
 
     }
