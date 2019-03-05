@@ -80,7 +80,7 @@ public class BookingService {
         LOGGER.info("GET /bookings");
 
         // Validate for authorization
-        if (!this.introspectionHandler.isValid(request.getHeader("Authorization"))) {
+        if (!this.introspectionHandler.isAuthorized(request.getHeader("Authorization"))) {
             return Response
                     .status(Response.Status.UNAUTHORIZED)
                     .header("Access-Control-Allow-Origin", "*")
@@ -101,7 +101,7 @@ public class BookingService {
         LOGGER.info("POST /bookings");
 
         // Validate for authorization
-        if (!this.introspectionHandler.isValid(request.getHeader("Authorization"))) {
+        if (!this.introspectionHandler.isAuthorized(request.getHeader("Authorization"))) {
             return Response
                     .status(Response.Status.UNAUTHORIZED)
                     .header("Access-Control-Allow-Origin", "*")

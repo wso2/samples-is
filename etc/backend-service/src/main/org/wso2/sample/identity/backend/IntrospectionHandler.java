@@ -44,12 +44,14 @@ public class IntrospectionHandler {
         this.introspectionEnabled = introspectionEnabled;
     }
 
-    public boolean isValid(final String authHeader) {
+    public boolean isAuthorized(final String authHeader) {
 
+        // Ignore introspection if this is not enabled
         if (!introspectionEnabled) {
             return true;
         }
 
+        // Verify for correct auth header : Bearer access_token
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             return false;
         }
@@ -60,9 +62,7 @@ public class IntrospectionHandler {
             return false;
         }
 
-        final String bearerToken = splits[1];
-
-        final JSONObject introspectionResponse = getIntrospectionResponse(bearerToken);
+        final JSONObject introspectionResponse = getIntrospectionResponse(splits[1]);
 
         try {
             return introspectionResponse.getBoolean("active");
