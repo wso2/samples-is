@@ -40,9 +40,9 @@ import java.util.Map;
 @Extension(
         name = "restrictedAreaBasedRisk",
         namespace = "geovelocity",
-        // add more to the description
         description = "Returns risk score based on the restricted area " +
-                "combinations considering the previous login and the current login attempt",
+                "combinations considering the previous login and the current login attempt." +
+                "Login geo-velocity between restricted area comination is tested.",
         parameters = {
                 @Parameter(
                         name = "current.login.city",
