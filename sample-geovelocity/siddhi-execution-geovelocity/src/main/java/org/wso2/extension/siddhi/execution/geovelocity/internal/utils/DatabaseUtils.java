@@ -1,21 +1,18 @@
 /*
- *  Copyright (c) 2018, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ * Copyright (c) 2019, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
- *  WSO2 Inc. licenses this file to you under the Apache License,
- *  Version 2.0 (the "License"); you may not use this file except
- *  in compliance with the License.
- *  You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *    http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
-
 package org.wso2.extension.siddhi.execution.geovelocity.internal.utils;
 
 import com.zaxxer.hikari.HikariDataSource;
@@ -38,6 +35,7 @@ import javax.sql.DataSource;
  * This class provides Database Util functionality.
  */
 public class DatabaseUtils {
+
     private static final DatabaseUtils instance = new DatabaseUtils();
     private static final Log log = LogFactory.getLog(DatabaseUtils.class);
 
@@ -52,9 +50,11 @@ public class DatabaseUtils {
     }
 
     public void initialize(String dataSourceName) throws GeoVelocityException {
+
         try {
             BundleContext bundleContext = FrameworkUtil.getBundle(DataSourceService.class).getBundleContext();
-            ServiceReference<DataSourceService> serviceRef = bundleContext.getServiceReference(DataSourceService.class);
+            ServiceReference<DataSourceService> serviceRef = bundleContext.
+                    getServiceReference(DataSourceService.class);
             if (serviceRef == null) {
                 throw new GeoVelocityException("Cannot find the datasourceService '" +
                         DataSourceService.class.getName() + "'");
@@ -72,12 +72,13 @@ public class DatabaseUtils {
     }
 
     /**
-     * Utility method to get a new database connection
+     * Utility method to get a new database connection.
      *
      * @return Connection
      * @throws SQLException if failed to get Connection
      */
     public Connection getConnection() throws SQLException {
+
         if (dataSource != null) {
             return dataSource.getConnection();
         }
@@ -93,17 +94,19 @@ public class DatabaseUtils {
      */
     public void closeAllConnections(PreparedStatement preparedStatement, Connection connection,
                                     ResultSet resultSet) {
+
         closeResultSet(resultSet);
         closeStatement(preparedStatement);
         closeConnection(connection);
     }
 
     /**
-     * Close Connection
+     * Close Connection.
      *
      * @param dbConnection Connection
      */
     private void closeConnection(Connection dbConnection) {
+
         if (dbConnection != null) {
             try {
                 dbConnection.close();
@@ -114,11 +117,12 @@ public class DatabaseUtils {
     }
 
     /**
-     * Close ResultSet
+     * Close ResultSet.
      *
      * @param resultSet ResultSet
      */
     private void closeResultSet(ResultSet resultSet) {
+
         if (resultSet != null) {
             try {
                 resultSet.close();
@@ -130,7 +134,7 @@ public class DatabaseUtils {
     }
 
     /**
-     * Close PreparedStatement
+     * Close PreparedStatement.
      *
      * @param preparedStatement PreparedStatement
      */

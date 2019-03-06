@@ -1,21 +1,18 @@
 /*
- *  Copyright (c) 2018, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ * Copyright (c) 2019, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
- *  WSO2 Inc. licenses this file to you under the Apache License,
- *  Version 2.0 (the "License"); you may not use this file except
- *  in compliance with the License.
- *  You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *    http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
-
 package org.wso2.extension.siddhi.execution.geovelocity.internal.impl;
 
 import org.wso2.extension.siddhi.execution.geovelocity.api.GeoVelocityData;
@@ -30,18 +27,21 @@ public class DefaultDBBasedGeoVelocityDataResolver implements GeoVelocityDataRes
 
     @Override
     public void init(ConfigReader configReader) throws GeoVelocityException {
+
         RDBMSGeoVelocityDataResolver.getInstance().init(configReader);
     }
 
     /**
      * Calls external system or database database to find the geovelocity data.
      * Can be used by an extended class.
+     *
      * @param username username
      * @param city city
      * @return geoVelocityData with last login time
      */
     @Override
     public GeoVelocityData getGeoVelocityInfo(String username, String city) {
+
         GeoVelocityData geoVelocityData = RDBMSGeoVelocityDataResolver.getInstance().getGeoVelocityData
                 (username, city);
         return geoVelocityData != null ? geoVelocityData : new GeoVelocityData(0L, 0);
@@ -59,6 +59,7 @@ public class DefaultDBBasedGeoVelocityDataResolver implements GeoVelocityDataRes
     @Override
     public GeoVelocityData checkLoginLocationValidity(String currentCity, String previousCity,
                                                       String currentCountry, String previousCountry) {
+
         GeoVelocityData geoVelocityData = RDBMSGeoVelocityDataResolver.getInstance()
                 .getRestrictedLocations(currentCity, previousCity,
                         currentCountry, previousCountry);
