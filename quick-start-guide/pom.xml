@@ -19,21 +19,35 @@
     <parent>
         <groupId>org.wso2.samples.is</groupId>
         <artifactId>samples-is</artifactId>
-        <version>3.0.0-m2-SNAPSHOT</version>
+        <version>4.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <dependencies>
-    <dependency>
-        <groupId>org.apache.felix</groupId>
-        <artifactId>org.apache.felix.scr.ds-annotations</artifactId>
-    </dependency>
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.scr.ds-annotations</artifactId>
+        </dependency>
     </dependencies>
 
+    <properties>
+        <qsg.app.location>./webapps</qsg.app.location>
+        <qsg.jar.location>./lib</qsg.jar.location>
+    </properties>
+
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>org.wso2.samples.is.qsg</artifactId>
+    <artifactId>quick-start-guide</artifactId>
 
     <build>
+        <!-- JAR should not contain anything in resources directory-->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>**/*</exclude>
+                </excludes>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -47,6 +61,29 @@
                         </manifest>
                     </archive>
                     <finalName>QSG-${project.version}</finalName>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <artifactItems>
+                        <artifactItem>
+                            <groupId>org.eclipse.jetty</groupId>
+                            <artifactId>jetty-runner</artifactId>
+                        </artifactItem>
+                    </artifactItems>
+                    <outputDirectory>${project.build.directory}/</outputDirectory>
+                    <excludeTransitive>true</excludeTransitive>
                 </configuration>
             </plugin>
             <plugin>

@@ -24,83 +24,42 @@
     <fileSets>
         <fileSet>
             <directory>${project.basedir}/src/main/resources</directory>
-            <outputDirectory>IS-QSG/src</outputDirectory>
+            <outputDirectory>IS-QSG/bin/</outputDirectory>
             <useDefaultExcludes>true</useDefaultExcludes>
         </fileSet>
         <fileSet>
-            <directory>${project.basedir}/../quick-start-guide/target/org.wso2.samples.is.qsg-${project.version}-bundle</directory>
-            <outputDirectory>IS-QSG/samples</outputDirectory>
+            <directory>
+                ${project.basedir}/../quick-start-guide/target/quick-start-guide-${project.version}-bundle/
+            </directory>
+            <outputDirectory>IS-QSG/</outputDirectory>
             <useDefaultExcludes>true</useDefaultExcludes>
         </fileSet>
         <fileSet>
-            <directory>${project.basedir}/../gdpr-samples/gdpr-qsg/target/gdpr-qsg-${project.version}-bundle/QSG-bundle</directory>
+            <directory>
+                ${project.basedir}/../etc/gdpr-samples/gdpr-qsg/target/gdpr-qsg-${project.version}-bundle/QSG-bundle
+            </directory>
             <outputDirectory>GDPR-QSG</outputDirectory>
             <useDefaultExcludes>true</useDefaultExcludes>
         </fileSet>
         <fileSet>
-            <directory>${project.basedir}/../gdpr-samples/gdpr-qsg/target/lib</directory>
+            <directory>${project.basedir}/../etc/gdpr-samples/gdpr-qsg/target/lib</directory>
             <outputDirectory>GDPR-QSG/resources/lib</outputDirectory>
             <useDefaultExcludes>true</useDefaultExcludes>
         </fileSet>
-        <!--<fileSet>-->
-            <!--<directory>${project.basedir}/../conditional-auth-sample/target/ConditionalAuthSamples</directory>-->
-            <!--<outputDirectory>samples/ConditionalAuthSamples</outputDirectory>-->
-            <!--<useDefaultExcludes>true</useDefaultExcludes>-->
-        <!--</fileSet>-->
     </fileSets>
 
     <files>
         <file>
             <source>
-                ${project.basedir}/../pickup-sample-app/pickup-oidc/target/pickup.war
+                ${project.basedir}/../etc/pickup-sample-app/pickup-oidc/target/pickup.war
             </source>
             <outputDirectory>GDPR-QSG/sample-apps</outputDirectory>
         </file>
         <file>
             <source>
-                ${project.basedir}/../gdpr-samples/notification-center/target/notification.war
+                ${project.basedir}/../etc/gdpr-samples/notification-center/target/notification.war
             </source>
             <outputDirectory>GDPR-QSG/sample-apps</outputDirectory>
-        </file>
-        <file>
-            <source>
-                ${project.basedir}/../saml2-sso-sample/components/SAML2/saml2-web-app-pickup-dispatch/target/saml2-web-app-pickup-dispatch.com.war
-            </source>
-            <outputDirectory>IS-QSG/samples/SAML2-APPS</outputDirectory>
-        </file>
-        <file>
-            <source>
-                ${project.basedir}/../saml2-sso-sample/components/SAML2/saml2-web-app-pickup-manager/target/saml2-web-app-pickup-manager.com.war
-            </source>
-            <outputDirectory>IS-QSG/samples/SAML2-APPS</outputDirectory>
-        </file>
-        <file>
-            <source>${project.basedir}/../oidc-sso-sample/pickup-dispatch/target/pickup-dispatch.war</source>
-            <outputDirectory>IS-QSG/samples/OIDC-APPS</outputDirectory>
-        </file>
-        <file>
-            <source>${project.basedir}/../oidc-sso-sample/pickup-manager/target/pickup-manager.war</source>
-            <outputDirectory>IS-QSG/samples/OIDC-APPS</outputDirectory>
-        </file>
-        <file>
-            <source>
-                ${project.basedir}/../saml2-sso-sample/components/SAML2/saml2-web-app-pickup-dispatch/target/saml2-web-app-pickup-dispatch.com.war
-            </source>
-            <outputDirectory>IS-QSG/samples/QSG-bundle/QSG/bin</outputDirectory>
-        </file>
-        <file>
-            <source>
-                ${project.basedir}/../saml2-sso-sample/components/SAML2/saml2-web-app-pickup-manager/target/saml2-web-app-pickup-manager.com.war
-            </source>
-            <outputDirectory>IS-QSG/samples/QSG-bundle/QSG/bin</outputDirectory>
-        </file>
-        <file>
-            <source>${project.basedir}/../oidc-sso-sample/pickup-dispatch/target/pickup-dispatch.war</source>
-            <outputDirectory>IS-QSG/samples/QSG-bundle/QSG/bin</outputDirectory>
-        </file>
-        <file>
-            <source>${project.basedir}/../oidc-sso-sample/pickup-manager/target/pickup-manager.war</source>
-            <outputDirectory>IS-QSG/samples/QSG-bundle/QSG/bin</outputDirectory>
         </file>
     </files>
 </assembly>

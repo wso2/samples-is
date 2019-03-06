@@ -7,7 +7,6 @@
 
 # Log file
 *.log
-*.sql
 *.sqlite
 
 # BlueJ files

@@ -19,14 +19,13 @@
     <parent>
         <groupId>org.wso2.samples.is</groupId>
         <artifactId>samples-is</artifactId>
-        <version>3.0.0-m2-SNAPSHOT</version>
+        <version>4.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>is-samples</artifactId>
+    <artifactId>is-samples-distribution</artifactId>
     <packaging>pom</packaging>
-
     <build>
         <plugins>
             <plugin>

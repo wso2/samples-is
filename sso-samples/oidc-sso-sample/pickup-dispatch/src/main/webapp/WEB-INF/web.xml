@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+		  http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
+
+    <display-name>QSG Web Application Pickup-Dispatch</display-name>
+
+    <servlet>
+        <servlet-name>OAuth2ClientServlet</servlet-name>
+        <servlet-class>org.wso2.sample.identity.oauth2.DispatchClientServlet</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>BackendServiceServlet</servlet-name>
+        <servlet-class>org.wso2.sample.identity.oauth2.services.MetadataServlet</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>OAuth2ClientServlet</servlet-name>
+        <url-pattern>/oauth2client</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>BackendServiceServlet</servlet-name>
+        <url-pattern>/service</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>org.wso2.sample.identity.oauth2.services.ServiceFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>/service</url-pattern>
+    </filter-mapping>
+
+    <listener>
+        <listener-class>org.wso2.sample.identity.jks.JKSLoader</listener-class>
+    </listener>
+    <listener>
+        <listener-class>org.wso2.sample.identity.oauth2.SampleContextEventListener</listener-class>
+    </listener>
+
+</web-app>
