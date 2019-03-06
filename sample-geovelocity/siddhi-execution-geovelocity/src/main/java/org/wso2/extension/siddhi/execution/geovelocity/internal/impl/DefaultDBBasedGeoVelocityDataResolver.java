@@ -50,6 +50,7 @@ public class DefaultDBBasedGeoVelocityDataResolver implements GeoVelocityDataRes
     /**
      * Calls external system or database database to find the geovelocity data.
      * Can be used by an extended class.
+     * 
      * @param currentCity User's current login city
      * @param previousCity User's previous login city
      * @param currentCountry User's current login Country
