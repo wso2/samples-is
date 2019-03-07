@@ -17,6 +17,9 @@
  */
 package org.wso2.sample.identity.backend;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Simple class to store constants for backend services
  */
@@ -24,8 +27,17 @@ public class Constants {
 
     private static final String PORT_ARG = "-port";
 
-    static String getPortArg() {
+    private static final String INTROSPECT_ARG = "-introspectionEnabled";
 
-        return PORT_ARG;
+    private static final String INTROSPECT_EP = "-introspectionEndpoint";
+
+    static List<String> getArgList() {
+
+        return Arrays.asList(PORT_ARG, INTROSPECT_ARG, INTROSPECT_EP);
+    }
+
+    static String getPropertyForArg(final String argString) {
+
+        return argString.substring(1);
     }
 }
