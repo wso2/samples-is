@@ -205,7 +205,7 @@ public class ClaimManagerProxy {
             }
 
         } catch (ParserConfigurationException | SAXException | IOException e) {
-            logger.log(Level.SEVERE, "Error while parsing claim SOAP response. Response will be ignored", e);
+            logger.log(Level.SEVERE, "Error while parsing claim SOAP response. Response will be ignored.", e);
         }
 
         return oidcNodes;
@@ -238,7 +238,7 @@ public class ClaimManagerProxy {
             }
 
         } catch (ParserConfigurationException | SAXException | IOException e) {
-            logger.log(Level.SEVERE, "Error while parsing claim SOAP response. Response will be ignored", e);
+            logger.log(Level.SEVERE, "Error while parsing claim SOAP response. Response will be ignored.", e);
         }
 
         return localClaimNodes;
@@ -276,8 +276,8 @@ public class ClaimManagerProxy {
 
             return soapResponseBuilder.toString();
         } catch (final IOException e) {
-            logger.log(Level.SEVERE, "Error while retrieving response", e);
-            throw new RuntimeException("Error while retrieving response", e);
+            logger.log(Level.SEVERE, "Error while retrieving response.", e);
+            return "";
         }
     }
 
