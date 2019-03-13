@@ -232,25 +232,35 @@ async function loadImages(){
    var response =  await get_data("services/PhotoRetrieveService");
 
    try {
-       var response_json = JSON.parse(response);
+       if (response) {
+           var response_json = JSON.parse(response);
 
-       // first clear all childs
-       document.getElementById("image-holder").innerHTML = '';
+           // first clear all childs
+           document.getElementById("image-holder").innerHTML = '';
 
-       response_json.forEach(imageUrl =>
-            {
-              // Append images
-              // <img src="res/eagle.jpg" class="img-thumbnail small-image">
-              var image_element = document.createElement("img");
-              image_element.setAttribute("src", imageUrl);
-              image_element.setAttribute("class", "img-thumbnail small-image");
+           response_json.forEach(imageUrl =>
+                {
+                  // Append images
+                  // <img src="res/eagle.jpg" class="img-thumbnail small-image">
+                  var image_element = document.createElement("img");
+                  image_element.setAttribute("src", imageUrl);
+                  image_element.setAttribute("class", "img-thumbnail small-image");
 
-              document.getElementById("image-holder").append(image_element);
-            }
-       );
+                  document.getElementById("image-holder").append(image_element);
+
+                  var fig_cap = document.createElement("figcaption");
+                  var text_elem = document.createTextNode("Sri Lanka");
+                  fig_cap.append(text_elem);
+                  document.getElementById("image-holder").append(fig_cap);
+                }
+           );
+       } else {
+            swal("Nothing yet", "No photo albums to display for now.", "info");
+       }
 
    } catch (error) {
-       swal("Something went wrong", "Cause : " + error + "\n Response : " + response, "error");
+       console.log(error);
+       swal("Aw Snap!", "Something went wrong.", "error");
        return;
    }
 

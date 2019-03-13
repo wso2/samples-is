@@ -230,17 +230,15 @@ $(window).resize(function () {
 async function sendPermission(){
 
     // Extract data
-    if (document.getElementById("photo_id").selectedIndex == 0) {
-        swal("Incorrect input", "Photo ID must be selected.", "warning");
-        return;
-    }
 
-    var item = document.getElementById("photo_id");
-
-    var photo_id = item.options[item.selectedIndex].text;
-
+    var photo_id = '09c4e7c6-04b7-11e9-8eb2-f2801f1b9fd1';
     var family_view = document.getElementById("family_view").checked;
     var friend_view = document.getElementById("friend_view").checked;
+
+    if (!friend_view && !family_view) {
+        swal("Incorrect input", "Please select friends to share the album", "warning");
+        return;
+    }
 
     var json_data = {
         photoId : photo_id,

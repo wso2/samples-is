@@ -20,6 +20,11 @@ package org.wso2.photo.edit;
 import org.wso2.photo.edit.exceptions.SampleAppServerException;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,12 +37,17 @@ public class SampleContextEventListener implements ServletContextListener {
 
     private static Properties properties;
 
+    private static String propertyFilePath;
+
     public void contextInitialized(ServletContextEvent servletContextEvent) {
 
         properties = new Properties();
         try {
+            propertyFilePath = servletContextEvent.getServletContext().getRealPath("/WEB-INF/classes/appone.properties");
             properties.load(servletContextEvent.getServletContext().
                     getResourceAsStream("/WEB-INF/classes/appone.properties"));
+            // Clear the resource info for every app startup.
+            clearResourceInfo();
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, e.getMessage(), e);
         }
@@ -53,6 +63,16 @@ public class SampleContextEventListener implements ServletContextListener {
 
     }
 
+    private void clearResourceInfo() {
+
+        properties.remove("resource_id");
+        try (OutputStream outputStream = Files.newOutputStream(Paths.get(propertyFilePath))) {
+            properties.store(outputStream, null);
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
+        }
+
+    }
     /**
      * Get the properties of the sample
      *
@@ -66,5 +86,10 @@ public class SampleContextEventListener implements ServletContextListener {
     public static String getPropertyByKey(final String key) {
 
         return properties.getProperty(key);
+    }
+
+    public static String getPropertyFilePath() {
+
+        return propertyFilePath;
     }
 }

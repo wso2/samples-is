@@ -71,6 +71,7 @@ public class DCRUtility {
 
         final JSONArray grantTypeArray = new JSONArray();
         grantTypeArray.put("authorization_code");
+        grantTypeArray.put("urn:ietf:params:oauth:grant-type:uma-ticket");
 
         jsonObject.put("redirect_uris", callBackArray);
         jsonObject.put("client_name", appName);

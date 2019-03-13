@@ -22,6 +22,11 @@
         <servlet-class>org.wso2.photo.edit.services.PermissionService</servlet-class>
         <load-on-startup>0</load-on-startup>
     </servlet>
+    <servlet>
+        <servlet-name>ResourceServlet</servlet-name>
+        <servlet-class>org.wso2.photo.edit.services.ResourceServlet</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>OAuth2ClientServlet</servlet-name>
@@ -34,6 +39,10 @@
     <servlet-mapping>
         <servlet-name>PermissionServlet</servlet-name>
         <url-pattern>/services/PermissionService</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResourceServlet</servlet-name>
+        <url-pattern>/resource/*</url-pattern>
     </servlet-mapping>
 
     <filter>

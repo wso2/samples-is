@@ -28,23 +28,32 @@ import org.apache.oltu.oauth2.common.message.types.GrantType;
 import org.json.JSONObject;
 import org.wso2.photo.edit.exceptions.ClientAppException;
 import org.wso2.photo.edit.exceptions.SampleAppServerException;
+import org.wso2.photo.edit.services.ResourceTokenData;
 
-import javax.net.ssl.HttpsURLConnection;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
+import java.net.URLConnection;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Properties;
 import java.util.UUID;
+import java.util.logging.Logger;
+import javax.net.ssl.HttpsURLConnection;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class CommonUtils {
 
     private static final Map<String, TokenData> TOKEN_STORE = new HashMap<>();
+    private static final Map<String, ResourceTokenData> RESOURCE_MAPPING = new HashMap<>();
+    private static final Logger LOGGER = Logger.getLogger(CommonUtils.class.getName());
+
 
     public static JSONObject requestToJson(final OAuthClientRequest accessRequest) {
 
@@ -170,6 +179,30 @@ public class CommonUtils {
         return Optional.empty();
     }
 
+    public static String getAuthHeader() {
+
+        final String username = SampleContextEventListener.getProperties().getProperty("isUser");
+        final String password = SampleContextEventListener.getProperties().getProperty("isPass");
+
+        final String encodedCredentials =
+                new String(Base64.getEncoder().encode(String.join(":", username, password).getBytes()));
+
+        return "Basic " + encodedCredentials;
+    }
+
+    public static String getBearerHeader(HttpServletRequest req) {
+
+        HttpSession session = req.getSession(false);
+        String accessToken = (String) session.getAttribute("accessToken");
+
+        return "Bearer " + accessToken;
+    }
+
+    public static String getBearerHeader(String accessToken) {
+
+        return "Bearer " + accessToken;
+    }
+
     private static void setTokenDataToSession(final HttpSession session, final TokenData storedTokenData) {
 
         session.setAttribute("authenticated", true);
@@ -187,4 +220,36 @@ public class CommonUtils {
         }
     }
 
+    public static void addToResourceMap(String albumId, ResourceTokenData resourceTokenData) {
+
+        LOGGER.fine("Adding to resource map. Album ID: " + albumId + ", Token data: " + resourceTokenData);
+        RESOURCE_MAPPING.put(albumId, resourceTokenData);
+    }
+
+    public static ResourceTokenData getFromResourceMap(String albumId) {
+
+        ResourceTokenData resourceTokenData = RESOURCE_MAPPING.get(albumId);
+
+        LOGGER.fine("Retrieving from resource map. Album ID: " + albumId + ", Token data: " + resourceTokenData);
+        return resourceTokenData;
+    }
+
+    public static String getIdpUrl() {
+
+        return SampleContextEventListener.getProperties().getProperty("idp_url", "https://localhost:9443");
+    }
+
+    public static String readFromResponse(final URLConnection urlConnection) throws IOException {
+
+        final BufferedReader BufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+
+        final StringBuilder stringBuilder = new StringBuilder();
+
+        String line;
+        while ((line = BufferedReader.readLine()) != null) {
+            stringBuilder.append(line);
+        }
+
+        return stringBuilder.toString();
+    }
 }

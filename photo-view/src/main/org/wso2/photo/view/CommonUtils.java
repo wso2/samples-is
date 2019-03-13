@@ -28,8 +28,12 @@ import org.json.JSONObject;
 import org.wso2.photo.view.exceptions.ClientAppException;
 import org.wso2.photo.view.exceptions.SampleAppServerException;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -175,5 +179,38 @@ public class CommonUtils {
         } catch (IOException e) {
             throw new ClientAppException("Error while creating connection to: " + url, e);
         }
+    }
+
+    public static String getIdpUrl() {
+
+        return SampleContextEventListener.getProperties().getProperty("idp_url", "https://localhost:9443");
+    }
+
+    public static String readFromResponse(final URLConnection urlConnection) throws IOException {
+
+        final BufferedReader BufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+
+        final StringBuilder stringBuilder = new StringBuilder();
+
+        String line;
+        while ((line = BufferedReader.readLine()) != null) {
+            stringBuilder.append(line);
+        }
+
+        return stringBuilder.toString();
+    }
+
+    public static String readFromError(final HttpURLConnection urlConnection) throws IOException {
+
+        final BufferedReader BufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getErrorStream()));
+
+        final StringBuilder stringBuilder = new StringBuilder();
+
+        String line;
+        while ((line = BufferedReader.readLine()) != null) {
+            stringBuilder.append(line);
+        }
+
+        return stringBuilder.toString();
     }
 }

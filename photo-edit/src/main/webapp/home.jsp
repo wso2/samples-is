@@ -95,7 +95,7 @@
 
 <div id="actionContainer">
     <nav class="navbar navbar-expand-lg navbar-dark app-navbar justify-content-between">
-        <a class="navbar-brand" href="home.jsp"><i class="fas fa-tasks"></i> Photo Editor</a>
+        <a class="navbar-brand" href="home.jsp"><i class="fas fa-tasks"></i> Photo Manager</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -129,14 +129,14 @@
         <div id="main-content">
             <section class="jumbotron text-center">
                 <div class="container">
-                    <div class="jumbotron-heading">Photo Editor</div>
-                    <p class="lead text-muted">Set permissions to your images</p>
+                    <div class="jumbotron-heading">Photo Manager</div>
+                    <p class="lead text-muted">Manage sharing for your albums</p>
                 </div>
             </section>
 
             <div class="text-center">
-               <img src="res/eagleAlbum.png" class="img-thumbnail small-image">
-               <img src="res/flowerAlbum.png" class="img-thumbnail small-image">
+               <img src="res/sri_lanka.jpg" class="img-thumbnail small-image">
+               <figcaption>Sri Lanka</figcaption>
             </div>
 
 
@@ -147,24 +147,14 @@
                         <table class="table">
                           <tbody>
                             <tr>
-                                <td>Album ID</td>
+                                <td>Share this album with you friends</td>
                                 <td>
-                                    <select class="form-control" id="photo_id">
-                                        <option selected>Select Album ID</option>
-                                        <option>Eagle Album</option>
-                                        <option>Flower Album</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Album sharing options</td>
-                                <td>
-                                     <label class="form-check-label">
-                                          <input type="checkbox" class="form-check-input" id="friend_view">Family
+                                     <label>
+                                          <input type="checkbox" id="family_view">   Oliver Smith
                                      </label>
                                      </br>
-                                     <label class="form-check-label">
-                                         <input type="checkbox" class="form-check-input" id="family_view">Friend
+                                     <label>
+                                         <input type="checkbox" id="friend_view">   Pam Davis
                                      </label>
                                 </td>
                             </tr>
@@ -173,7 +163,7 @@
 
                         <button type="button"
                                 class="btn btn-outline-primary btn-create content-btn mt-4 d-block mx-auto"
-                                onclick="sendPermission()">Set Permission
+                                onclick="sendPermission()">Share
                         </button>
                     </form>
                 </div>
