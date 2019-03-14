@@ -38,16 +38,18 @@ public class PhotoRetrieveService extends HttpServlet {
         urlConnection.setRequestMethod("GET");
 
         int responseCode = urlConnection.getResponseCode();
-        LOGGER.fine("Response code from resource server for the resource request: " + responseCode);
+        LOGGER.warning("Response code from resource server for the resource request: " + responseCode);
+        System.out.println("Response code from resource server for the resource request: " + responseCode);
 
         if (responseCode == 401) {
             String res = CommonUtils.readFromError(urlConnection);
             String ticketParam = res.split("&")[1];
             String ticket = ticketParam.substring(ticketParam.indexOf("=") + 1);
-            LOGGER.fine("Permission Ticket: " + ticket);
-
+            LOGGER.warning("Permission Ticket: " + ticket);
+            System.out.println("Permission Ticket: " + ticket);
             String rpt = getRPT(req, ticket);
-            LOGGER.fine("RPT: " + rpt);
+            LOGGER.warning("RPT: " + rpt);
+            System.out.println("RPT: " + rpt);
 
             if (rpt != null) {
                 urlConnection = (HttpURLConnection) new URL(resourceURL).openConnection();
@@ -55,23 +57,29 @@ public class PhotoRetrieveService extends HttpServlet {
                 urlConnection.setRequestProperty("Authorization", "Bearer " + rpt);
 
                 responseCode = urlConnection.getResponseCode();
-                LOGGER.fine("Resource request response code: " + responseCode);
+                LOGGER.warning("Resource request response code: " + responseCode);
+                System.out.println("Resource request response code: " + responseCode);
                 if (responseCode == 401) {
                     res = CommonUtils.readFromError(urlConnection);
-                    LOGGER.fine("Resource request error response: " + res);
+                    LOGGER.warning("Resource request error response: " + res);
+                    System.out.println("Resource request error response: " + res);
                     resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                 } else if (responseCode == 200) {
                     String resp1 = readFromResponse(urlConnection);
                     resp.setStatus(HttpServletResponse.SC_OK);
                     JSONArray jsonArray = new JSONArray(resp1);
-                    LOGGER.fine("Resource request success response: " + resp1);
+                    LOGGER.warning("Resource request success response: " + resp1);
+                    System.out.println("Resource request success response: " + resp1);
                     final ServletOutputStream outputStream = resp.getOutputStream();
                     outputStream.print(jsonArray.toString());
                     outputStream.close();
                 }
             } else {
+                System.out.println("RPT is null");
                 resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             }
+        } else {
+            System.out.println("Resource server resp code: " + responseCode);
         }
     }
 
@@ -104,11 +112,13 @@ public class PhotoRetrieveService extends HttpServlet {
         String jsonresp;
         if (urlConnection1.getResponseCode() >= 400) {
             jsonresp = readFromError(urlConnection1);
-            LOGGER.fine("RPT request error response: " + jsonresp);
+            LOGGER.warning("RPT request error response: " + jsonresp);
+            System.out.println("RPT request error response: " + jsonresp);
             return null;
         } else {
             jsonresp = readFromResponse(urlConnection1);
             JSONObject json = new JSONObject(jsonresp);
+            System.out.println(jsonresp);
             return json.getString("access_token");
         }
     }
