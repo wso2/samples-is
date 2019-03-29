@@ -488,7 +488,7 @@
         <axiom.wso2.version>1.2.11.wso2v10</axiom.wso2.version>
         <identity.inbound.auth.oauth.version>5.5.6</identity.inbound.auth.oauth.version>
         <carbon.kernel.version>4.4.17</carbon.kernel.version>
-        <json.simple.version>1.1</json.simple.version>
+        <json.simple.version>1.1.1</json.simple.version>
         <nimbusds.version>2.26.1</nimbusds.version>
         <XmlSchema.version>1.4.7.wso2v3</XmlSchema.version>
         <wsdl4j.version>1.6.2.wso2v2</wsdl4j.version>
