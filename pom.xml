@@ -521,7 +521,7 @@
         <maven.scr.plugin.version>1.22.0</maven.scr.plugin.version>
         <maven.bundle.plugin.version>2.4.0</maven.bundle.plugin.version>
         <maven.buildnumber.plugin.version>1.4</maven.buildnumber.plugin.version>
-        <http.client.version>4.5.3</http.client.version>
+        <http.client.version>4.5.8</http.client.version>
         <http.core.version>4.4.8</http.core.version>
         <commons-logging.version>1.2</commons-logging.version>
 
