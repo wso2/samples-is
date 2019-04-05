@@ -475,7 +475,7 @@
         <xmltooling.version>1.3.1</xmltooling.version>
         <openws.version>1.5.4</openws.version>
         <identity.agent.sso.version.range>[5.0.0, 6.0.0)</identity.agent.sso.version.range>
-        <joda.wso2.version>2.8.2.wso2v1</joda.wso2.version>
+        <joda.wso2.version>2.9.4.wso2v1</joda.wso2.version>
         <axiom.impl.version>1.2.12</axiom.impl.version>
         <commons-collections.version>3.2.2</commons-collections.version>
 
