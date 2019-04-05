@@ -464,7 +464,7 @@
         <msf4j.version>2.6.4</msf4j.version>
         <jetty.version>9.4.11.v20180605</jetty.version>
         <javax.servlet.api.version>3.1.0</javax.servlet.api.version>
-        <xerces.xercesImpl>2.11.0</xerces.xercesImpl>
+        <xerces.xercesImpl>2.12.0</xerces.xercesImpl>
 
         <!--=============================================================================-->
 
