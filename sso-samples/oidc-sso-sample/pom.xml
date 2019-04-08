@@ -64,7 +64,7 @@
             <plugin>
                 <inherited>false</inherited>
                 <artifactId>maven-clean-plugin</artifactId>
-                <version>2.1</version>
+                <version>3.1.0</version>
             </plugin>
         </plugins>
     </build>
