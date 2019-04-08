@@ -511,7 +511,7 @@
 
         <!--repo versions of oauth-sample-client-authenticator-->
         <identity.inbound.oauth.version>5.6.10</identity.inbound.oauth.version>
-        <apache.felix.scr.ds.annotations.version>1.2.4</apache.felix.scr.ds.annotations.version>
+        <apache.felix.scr.ds.annotations.version>1.2.10</apache.felix.scr.ds.annotations.version>
 
         <!--=============================================================================-->
 
