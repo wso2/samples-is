@@ -490,7 +490,7 @@
         <carbon.kernel.version>4.4.17</carbon.kernel.version>
         <json.simple.version>1.1</json.simple.version>
         <nimbusds.version>2.26.1</nimbusds.version>
-        <XmlSchema.version>1.4.7.wso2v3</XmlSchema.version>
+        <XmlSchema.version>1.4.7-wso2v5</XmlSchema.version>
         <wsdl4j.version>1.6.2.wso2v2</wsdl4j.version>
         <neethi.wso2.version>2.0.4.wso2v5</neethi.wso2.version>
         <httpcore.wso2.version>4.3.3.wso2v1</httpcore.wso2.version>
