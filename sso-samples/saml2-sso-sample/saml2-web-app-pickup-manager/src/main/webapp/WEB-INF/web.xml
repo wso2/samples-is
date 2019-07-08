@@ -66,6 +66,9 @@
     <listener>
         <listener-class>org.wso2.carbon.identity.sso.agent.session.management.SSOAgentHttpSessionListener</listener-class>
     </listener>
+    <listener>
+        <listener-class>org.wso2.qsg.webapp.pickup.manager.ServletContextListener</listener-class>
+    </listener>
 
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>

@@ -71,6 +71,10 @@ public class ManagerClientServlet extends HttpServlet {
             return;
         }
 
+        // Obtain and store session_state against this session
+        request.getSession(false)
+                .setAttribute(OAuth2Constants.SESSION_STATE, request.getParameter(OAuth2Constants.SESSION_STATE));
+
         try {
             // Obtain token response
             CommonUtils.getToken(request, response);

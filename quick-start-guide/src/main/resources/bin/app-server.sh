@@ -22,10 +22,12 @@ getProperty() {
    echo $PROP_VALUE
 }
 
-# Relative directory paths
-CONF_DIR=../conf
-APP_DIR=../webapps
-LIB_DIR=../lib
+BASE_DIR="$(cd "$(dirname "$0")"; pwd)";
+
+CONF_DIR=${BASE_DIR}/../conf
+APP_DIR=${BASE_DIR}/../webapps
+LIB_DIR=${BASE_DIR}/../lib
+SCENARIO_DIR=${BASE_DIR}/../scenarios
 
 PROPERTY_FILE=${CONF_DIR}/server.properties
 

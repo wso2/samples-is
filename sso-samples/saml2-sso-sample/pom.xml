@@ -20,7 +20,7 @@
     <parent>
         <groupId>org.wso2.samples.is</groupId>
         <artifactId>samples-is</artifactId>
-        <version>4.0.0-SNAPSHOT</version>
+        <version>4.0.1-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
@@ -34,5 +34,18 @@
         <module>saml2-web-app-pickup-manager</module>
         <module>saml2-web-app-pickup-dispatch</module>
     </modules>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
