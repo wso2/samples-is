@@ -85,7 +85,8 @@ public class IPRangeDataHolder {
 
         if (Files.exists(Paths.get(CustomStepHandlerConstants.IP_CONFIG_FILE_PATH))) {
             StringBuilder stringBuilder = new StringBuilder();
-            try (BufferedReader in = new BufferedReader(new FileReader(CustomStepHandlerConstants.IP_CONFIG_FILE_PATH))) {
+            try (BufferedReader in = new BufferedReader(new FileReader(CustomStepHandlerConstants
+                    .IP_CONFIG_FILE_PATH))) {
                 String str;
                 while ((str = in.readLine()) != null) {
                     stringBuilder.append(str);

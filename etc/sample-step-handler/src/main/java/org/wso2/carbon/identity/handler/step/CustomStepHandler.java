@@ -77,6 +77,13 @@ public class CustomStepHandler extends DefaultStepHandler {
 
     }
 
+    /**
+     * This method modifies the authentication step config, by identifying the client IP address.
+     *
+     * @param request HTTP Servlet request.
+     * @param context Authentication context.
+     * @param stepConfig Authentication Step Config.
+     */
     private void updateStepConfig(HttpServletRequest request, AuthenticationContext context, StepConfig
             stepConfig) {
 
@@ -103,7 +110,8 @@ public class CustomStepHandler extends DefaultStepHandler {
             if (log.isDebugEnabled()) {
                 String spName = context.getServiceProviderName();
                 int currentStep = context.getCurrentStep();
-                log.debug("authConfigList is empty in the step : " + currentStep + " of service provider : " + spName);
+                log.debug("'AuthConfigList' is empty in the step : " + currentStep + " of service provider : " +
+                        spName);
             }
         }
 
@@ -120,13 +128,14 @@ public class CustomStepHandler extends DefaultStepHandler {
         if (isInternalIP) {
             if (locatedIWAAuthenticatorConfig != null) {
                 if (log.isDebugEnabled()) {
-                    log.debug("Client IP address is from internal range. Hence modifying the authConfigList to include " +
-                            "IWA Kerberos Authenticator for internal network users.");
+                    log.debug("Client IP address is from internal range. Hence modifying the authConfigList to " +
+                            "include IWA Kerberos Authenticator for internal network users.");
                 }
                 filteredAuthConfigList.add(locatedIWAAuthenticatorConfig);
             } else {
                 if (log.isDebugEnabled()) {
-                    log.debug("Client IP address is from internal range but IWA not available in Auth Config list.");
+                    log.debug("Client IP address is from internal range but IWA is not configured in Auth Config " +
+                            "list.");
                 }
             }
         } else {
