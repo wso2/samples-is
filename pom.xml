@@ -45,6 +45,7 @@
         <module>etc/sample-post-authentication-handler</module>
         <module>etc/conditional-auth-sample</module>
         <module>etc/backend-service</module>
+        <module>etc/sample-step-handler</module>
         <module>quick-start-guide</module>
         <module>etc/gdpr-samples</module>
         <module>distribution</module>
@@ -172,6 +173,11 @@
                 <groupId>commons-collections</groupId>
                 <artifactId>commons-collections</artifactId>
                 <version>${commons-collections.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-net</groupId>
+                <artifactId>commons-net</artifactId>
+                <version>${commons-net.version}</version>
             </dependency>
 
             <!--=============================================================================-->
@@ -524,6 +530,7 @@
         <http.client.version>4.5.8</http.client.version>
         <http.core.version>4.4.8</http.core.version>
         <commons-logging.version>1.2</commons-logging.version>
+        <commons-net.version>3.6</commons-net.version>
 
         <!--=============================================================================-->
 
