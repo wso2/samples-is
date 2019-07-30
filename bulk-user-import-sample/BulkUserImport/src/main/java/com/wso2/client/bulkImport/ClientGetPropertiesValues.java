@@ -16,7 +16,7 @@
  * under the License.
  */
 
-package com.wso2.csa;
+package com.wso2.client.bulkImport;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

@@ -16,7 +16,7 @@
  * under the License.
  */
 
-package com.wso2.csa;
+package com.wso2.client.bulkImport;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.LineIterator;

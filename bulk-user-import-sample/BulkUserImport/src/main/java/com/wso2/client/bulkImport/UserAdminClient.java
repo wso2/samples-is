@@ -16,7 +16,7 @@
  * under the License.
  */
 
-package com.wso2.csa;
+package com.wso2.client.bulkImport;
 
 import org.apache.axis2.AxisFault;
 import org.apache.axis2.client.Options;
@@ -66,4 +66,5 @@ class UserAdminClient {
         UserAdminStub.bulkImportUsers(userStoreName,fileName,file,defaultPassword);
     }
 }
+
 

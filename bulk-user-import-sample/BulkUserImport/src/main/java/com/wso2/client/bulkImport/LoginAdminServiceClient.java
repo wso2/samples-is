@@ -16,7 +16,7 @@
  * under the License.
  */
 
-package com.wso2.csa;
+package com.wso2.client.bulkImport;
 
 import org.apache.axis2.AxisFault;
 import org.apache.axis2.context.ServiceContext;
@@ -66,3 +66,4 @@ class LoginAdminServiceClient {
         authenticationAdminStub.logout();
     }
 }
+
