@@ -17,6 +17,7 @@ samples-is a repository containing applications and guides that demonstrate capa
 * [Sample post authentication handler](https://github.com/wso2/samples-is/tree/master/etc/sample-post-authentication-handler)
 * [Oauth sample client authenticator](https://github.com/wso2/samples-is/tree/master/etc/oauth-sample-client-authenticator)
 * [Conditional authentication sample](https://github.com/wso2/samples-is/tree/master/etc/conditional-auth-sample)
+* [Bulk User Import sample client]
 
 ## Download and install
 
