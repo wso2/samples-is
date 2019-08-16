@@ -51,7 +51,7 @@ import static org.wso2.carbon.identity.securitycode.migration.MigrationConstants
 
 public class SecurityCodeMigrationService {
 
-    private static Log log = LogFactory.getLog(SecurityCodeMigrationService.class);
+    private static final Log log = LogFactory.getLog(SecurityCodeMigrationService.class);
 
     public void migrateAllTenants() {
 
