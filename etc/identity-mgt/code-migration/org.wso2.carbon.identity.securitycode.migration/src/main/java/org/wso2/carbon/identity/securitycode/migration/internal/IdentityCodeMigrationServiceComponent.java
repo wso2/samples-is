@@ -44,7 +44,7 @@ import static org.wso2.carbon.identity.securitycode.migration.MigrationConstants
 )
 public class IdentityCodeMigrationServiceComponent {
 
-    private static Log log = LogFactory.getLog(IdentityCodeMigrationServiceComponent.class);
+    private static final Log log = LogFactory.getLog(IdentityCodeMigrationServiceComponent.class);
 
     @Activate
     protected void activate(ComponentContext context) {

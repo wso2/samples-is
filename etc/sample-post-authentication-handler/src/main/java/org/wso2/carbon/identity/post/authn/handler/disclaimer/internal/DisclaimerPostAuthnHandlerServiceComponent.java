@@ -36,7 +36,7 @@ import org.wso2.carbon.identity.post.authn.handler.disclaimer.DisclaimerPostAuth
 )
 public class DisclaimerPostAuthnHandlerServiceComponent {
 
-    private static Log log = LogFactory.getLog(DisclaimerPostAuthnHandlerServiceComponent.class);
+    private static final Log log = LogFactory.getLog(DisclaimerPostAuthnHandlerServiceComponent.class);
 
     @Activate
     protected void activate(ComponentContext context) {

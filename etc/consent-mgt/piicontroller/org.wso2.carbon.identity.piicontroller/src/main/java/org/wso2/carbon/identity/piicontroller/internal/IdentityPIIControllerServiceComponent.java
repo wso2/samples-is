@@ -33,7 +33,7 @@ import org.wso2.carbon.identity.piicontroller.connector.ConsentMgtConfigImpl;
  */
 public class IdentityPIIControllerServiceComponent {
 
-    private static Log log = LogFactory.getLog(IdentityPIIControllerServiceComponent.class);
+    private static final Log log = LogFactory.getLog(IdentityPIIControllerServiceComponent.class);
     private IdentityGovernanceService identityGovernanceService;
 
     protected void activate(ComponentContext context) {

@@ -36,7 +36,7 @@ import org.wso2.carbon.identity.oauth2.client.authentication.OAuthClientAuthenti
 )
 public class OAuth2SampleClientAuthnServiceComponent {
 
-    private static Log log = LogFactory.getLog(OAuth2SampleClientAuthnServiceComponent.class);
+    private static final Log log = LogFactory.getLog(OAuth2SampleClientAuthnServiceComponent.class);
 
     @Activate
     protected void activate(ComponentContext context) {
