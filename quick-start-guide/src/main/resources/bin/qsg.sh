@@ -77,20 +77,27 @@ server_host=$3
 server_port=$4
 
 echo
-echo "-------------------------------------------------------------------"
-echo "|                                                                 |"
-echo "|  To configure Twitter as a federated authenticator you          |"
-echo "|  have to register an application in https://apps.twitter.com/   |"
-echo "|                                                                 |"
-echo "|  So please make sure you have registered an application before  |"
-echo "|  continuing the script.                                         |"
-echo "|                                                                 |"
-echo "|  Do you want to continue?                                       |"
-echo "|                                                                 |"
-echo "|  Press y - YES                                                  |"
-echo "|  Press n - NO                                                   |"
-echo "|                                                                 |"
-echo "-------------------------------------------------------------------"
+echo "-----------------------------------------------------------------------"
+echo "|                                                                      |"
+echo "|  To configure google as a federated authenticator you should         |"
+echo "|                                                                      |"
+echo "|  Register OAuth 2.0 Application in Google                            |"
+echo "|                                                                      |"
+echo "|                                                                      |"
+echo "|          For Register OAuth 2.0 Application in Google                |"
+echo "|     *** Please press ctrl button and click on the link ***           |"
+echo "| https://is.docs.wso2.com/en/5.9.0/getting-started/quick-start-guide/ |"
+echo "| and go to the Register OAuth 2.0 Application in Google. section      |"
+echo "|         Note down the API key and secret for later use.              |"
+echo "|                      if it is complete .                             |"
+echo "|  continue the script.                                                |"
+echo "|                                                                      |"
+echo "|  Do you want to continue?                                            |"
+echo "|                                                                      |"
+echo "|  Press y - YES                                                       |"
+echo "|  Press n - NO                                                        |"
+echo "|                                                                      |"
+echo "------------------------------------------------------------------------"
 echo
 read user
 
@@ -158,9 +165,9 @@ case ${user} in
      echo "|  Please do the following before trying self signup with account     |"
      echo "|  lock on creation enabled.                                          |"
      echo "|                                                                     |"
-     echo "|  1. Open the file: output-event-adapters.xml in the path,           |"
+     echo "|  1. Open the file: deployment.toml in the path,                     |"
      echo "|     (Your WSO2-IS)/repository/conf.                                 |"
-     echo "|     Ex: wso2is-5.4.1/repository/conf/output-event-adapters.xml.     |"
+     echo "|     Ex: wso2is-5.9.0/repository/conf/deployment.toml.               |"
      echo "|                                                                     |"
      echo "|  2. Find the adapter configuration for emails and change the        |"
      echo "|     email address, username, password values.                       |"
@@ -902,28 +909,30 @@ server_host=$3
 server_port=$4
 
 echo
-echo "-------------------------------------------------------------------"
-echo "|                                                                 |"
-echo "|  We are configuring Twitter as the second authentication        |"
-echo "|  factor. Therefore, you have to register an application         |"
-echo "|  in https://apps.twitter.com/                                   |"
-echo "|                                                                 |"
-echo "|  So please make sure you have registered an application before  |"
-echo "|  continuing the script.                                         |"
-echo "|                                                                 |"
-echo "|  Do you want to continue?                                       |"
-echo "|                                                                 |"
-echo "|  Press y - YES                                                  |"
-echo "|  Press n - NO                                                   |"
-echo "|                                                                 |"
-echo "-------------------------------------------------------------------"
+echo "-------------------------------------------------------------------------"
+echo "|                                                                       |"
+echo "|  To configure Hardware key as a second authentication factor,         |"
+echo "|  Please make sure you have put the                                    |"
+echo "|                                                                       |"
+echo "|  org.wso2.carbon.identity.sample.extension.authenticators-5.7.0.jar   |"
+echo "|  into the  <IS_HOME>/repository/components/dropins directory          |"
+echo "|                                                                       |"
+echo "|  and  sample-auth.war                                                 |"
+echo "|  into <IS_HOME>/repository/deployment/server/webapps folder           |"
+echo "|  to continuing the script.                                            |"
+echo "|  And restart the IS server                                            |"
+echo "|                                                                       |"
+echo "|  Do you want to continue?                                             |"
+echo "|                                                                       |"
+echo "|  Press y - YES                                                        |"
+echo "|  Press n - NO                                                         |"
+echo "|                                                                       |"
+echo "-------------------------------------------------------------------------"
 echo
 read user
 
 case ${user} in
     [Yy]* )
-
-    add_identity_provider admin admin 05 ${is_host} ${is_port}
 
     configure_sso_saml2 ${is_host} ${is_port} ${server_host} ${server_port}
 
@@ -1037,19 +1046,12 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
       </authenticationSteps>
       <authenticationSteps>
         <attributeStep>false</attributeStep>
-        <federatedIdentityProviders>
-          <defaultAuthenticatorConfig>
-            <displayName>twitter</displayName>
-            <name>TwitterAuthenticator</name>
-          </defaultAuthenticatorConfig>
-          <federatedAuthenticatorConfigs>
-            <displayName>twitter</displayName>
-            <name>TwitterAuthenticator</name>
-          </federatedAuthenticatorConfigs>
-          <identityProviderName>IDP-twitter</identityProviderName>
-        </federatedIdentityProviders>
+        <localAuthenticatorConfigs>
+          <displayName>Demo HardwareKey Authenticator</displayName>
+          <name>DemoHardwareKeyAuthenticator</name>
+        </localAuthenticatorConfigs>
         <stepOrder>2</stepOrder>
-        <subjectStep>false</subjectStep>
+        <subjectStep>true</subjectStep>
       </authenticationSteps>
       <authenticationType>flow</authenticationType>
       <enableAuthorization>false</enableAuthorization>
@@ -1549,7 +1551,7 @@ delete_idp() {
 scenario=$1
 soap_action=$2
 endpoint=$3
-request_data="${SCENARIO_DIR}/${scenario}/delete-idp-twitter.xml"
+request_data="${SCENARIO_DIR}/${scenario}/delete-idp-google.xml"
 
  if [ ! -d "${SCENARIO_DIR}/${scenario}" ]
   then
@@ -1564,7 +1566,7 @@ request_data="${SCENARIO_DIR}/${scenario}/delete-idp-twitter.xml"
   fi
 
 echo
-echo "Deleting Identity Provider IDP-twitter..."
+echo "Deleting Identity Provider IDP-google..."
 
 # Send the SOAP request to delete a SP.
 curl -s -k -d @$request_data -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: ${soap_action}" -o /dev/null $endpoint
@@ -1575,7 +1577,7 @@ res=$?
   return -1
  fi
 
-echo "** Identity Provider IDP-twitter successfully deleted. **"
+echo "** Identity Provider IDP-google successfully deleted. **"
 
 return 0;
 }
@@ -2168,7 +2170,7 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
       <authenticationStepForSubject xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/>
       <authenticationSteps>
         <federatedIdentityProviders>
-          <identityProviderName>IDP-twitter</identityProviderName>
+          <identityProviderName>IDP-google</identityProviderName>
         </federatedIdentityProviders>
       </authenticationSteps>
       <authenticationType>federated</authenticationType>
@@ -2298,13 +2300,13 @@ request_data="${SCENARIO_DIR}/${scenario}/create-idp.xml"
  fi
 
 echo
-echo "Please enter your API key"
-echo "(This can be found in the Keys and Access token section in the Application settings)"
+echo "Please enter your CLIENT_ID"
+echo "(This can be found in the Google API Credentials section)"
 echo
 read key
 echo
-echo "Please enter your API secret"
-echo "(This can be found in the Keys and Access token section in the Application settings)"
+echo "Please enter your CLIENT_SECRET"
+echo "(This can be found in the Google API Credentials section)"
 echo
 read secret
 echo
@@ -2331,15 +2333,15 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
       <userClaimURI xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/>
     </claimConfig>
     <defaultAuthenticatorConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">
-      <displayName>twitterIDP</displayName>
+      <displayName>google</displayName>
       <enabled>true</enabled>
-      <name>TwitterAuthenticator</name>
+      <name>GoogleOIDCAuthenticator</name>
       <properties>
-        <name>APIKey</name>
+        <name>ClientId</name>
         <value>${key}</value>
       </properties>
       <properties>
-        <name>APISecret</name>
+        <name>ClientSecret</name>
         <value>${secret}</value>
       </properties>
       <properties>
@@ -2350,15 +2352,15 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
     <ns1:displayName xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/>
     <ns1:enable xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">false</ns1:enable>
     <federatedAuthenticatorConfigs xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">
-      <displayName>twitter</displayName>
+      <displayName>google</displayName>
       <enabled>true</enabled>
-      <name>TwitterAuthenticator</name>
+      <name>GoogleOIDCAuthenticator</name>
       <properties>
-        <name>APIKey</name>
+        <name>ClientId</name>
         <value>${key}</value>
       </properties>
       <properties>
-        <name>APISecret</name>
+        <name>ClientSecret</name>
         <value>${secret}</value>
       </properties>
       <properties>
@@ -2369,7 +2371,7 @@ echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelop
     <ns1:federationHub xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">false</ns1:federationHub>
     <ns1:homeRealmId xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/>
     <ns1:identityProviderDescription xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/>
-    <ns1:identityProviderName xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">IDP-twitter</ns1:identityProviderName>
+    <ns1:identityProviderName xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">IDP-google</ns1:identityProviderName>
     <permissionAndRoleConfig xmlns="\"http://model.common.application.identity.carbon.wso2.org/xsd"\"/>
     <ns1:provisioningRole xmlns:ns1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\" xmlns:xsi="\"http://www.w3.org/2001/XMLSchema-instance"\" xsi:nil="\"1"\"/>
   </ns4:identityProvider>
@@ -2396,7 +2398,7 @@ start_the_flow() {
     echo "|  Scenario 1 - Configuring Single-Sign-On with SAML2                       |"
     echo "|  Scenario 2 - Configuring Single-Sign-On with OIDC                        |"
     echo "|  Scenario 3 - Configuring Multi-Factor Authentication                     |"
-    echo "|  Scenario 4 - Configuring Twitter as a Federated Authenticator            |"
+    echo "|  Scenario 4 - Configuring Google as a Federated Authenticator             |"
     echo "|  Scenario 5 - Configuring Self-Signup                                     |"
     echo "|  Scenario 6 - Creating a workflow                                         |"
     echo "-----------------------------------------------------------------------------"
@@ -2425,7 +2427,6 @@ start_the_flow() {
         3)
         create_multifactor_auth ${IS_DOMAIN} ${IS_PORT} ${SERVER_DOMAIN} ${SERVER_PORT}
         end_message saml2-web-app-pickup-dispatch.com saml2-web-app-pickup-manager.com
-        delete_idp 05 urn:deleteIdP https://${is_host}:${is_port}/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/
         ;;
 
         4)
@@ -2465,7 +2466,7 @@ PROPERTY_FILE=${CONF_DIR}/server.properties
 
 echo "Before running samples make sure the following                                "
 echo "  * Added correct details to the server.properties                            "
-echo "  * Your WSO2 IS 5.7.0 and sample applications are running.                   "
+echo "  * Your WSO2 IS 5.9.0 and sample applications are running.                   "
 echo "                                                                              "
 echo " If okay to continue, Please press 'Y' else press 'N'                         "
 read continueState
