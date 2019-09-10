@@ -159,7 +159,7 @@ case ${user} in
      echo "|                                                                     |"
      echo "|  1. Open the file: deployment.toml in the path,           |"
      echo "|     (Your WSO2-IS)/repository/conf.                                 |"
-     echo "|     Ex: wso2is-5.4.1/repository/conf/deployment.toml.     |"
+     echo "|     Ex: wso2is-5.9.0/repository/conf/deployment.toml.     |"
      echo "|                                                                     |"
      echo "|  2. Find the adapter configuration for emails and change the        |"
      echo "|     email address, username, password values.                       |"
