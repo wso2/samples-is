@@ -1,0 +1,442 @@
+{
+	"info": {
+		"_postman_id": "dbcd7337-6584-47ed-be47-561050a53e63",
+		"name": "WSO2 Identity Server - User's Challenge Questions and Answers API Definition.",
+		"description": "This is the RESTful API for managing challenge questions and answers of a user in WSO2 Identity Server",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "me",
+			"item": [
+				{
+					"name": "Retrieve challenges available for the authenticated user.",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://localhost:9443/t/carbon.super/api/users/v1/me/challenges?",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "9443",
+							"path": [
+								"t",
+								"carbon.super",
+								"api",
+								"users",
+								"v1",
+								"me",
+								"challenges"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "offset",
+									"value": "{{offset}}",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Retrieves the available challenges in the system for the authenticated user. In the response challenge questions are grouped as **challenge set**s.\n\n<b>Permission required:</b>\n * /permission/admin/login\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Get user's answered challenges.",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://localhost:9443/t/carbon.super/api/users/v1/me/challenge-answers",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "9443",
+							"path": [
+								"t",
+								"carbon.super",
+								"api",
+								"users",
+								"v1",
+								"me",
+								"challenge-answers"
+							]
+						},
+						"description": "Get previously answered challenge(s) in the system by the authenticated user.\n\n  <b>Permission required:</b>\n   * /permission/admin/login\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Answer new challenge question combination over existing answers.",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n  {\n    \"questionSetId\": \"challengeQuestion1\",\n    \"challengeQuestion\": {\n      \"locale\": \"en_US\",\n      \"question\": \"City where you were born ?\",\n      \"questionId\": \"question1\"\n    },\n    \"answer\": \"Colombo\"\n  }\n]"
+						},
+						"url": {
+							"raw": "https://localhost:9443/t/carbon.super/api/users/v1/me/challenge-answers",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "9443",
+							"path": [
+								"t",
+								"carbon.super",
+								"api",
+								"users",
+								"v1",
+								"me",
+								"challenge-answers"
+							]
+						},
+						"description": "Overrides the *already answered challenges* in the system with a set of *new challenge question answers* for logged In user. A user can pick at maximum one question from each set to answer. A user may answer **one or more distinct** challenge question **sets**.\n\n<b>Permission required:</b>\n * /permission/admin/login\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Answer to a collection of new challenges.",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n  {\n    \"questionSetId\": \"challengeQuestion1\",\n    \"challengeQuestion\": {\n      \"locale\": \"en_US\",\n      \"question\": \"Favorite vacation location ?\",\n      \"questionId\": \"question4\"\n    },\n    \"answer\": \"Colombo\"\n  }\n]"
+						},
+						"url": {
+							"raw": "https://localhost:9443/t/carbon.super/api/users/v1/me/challenge-answers",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "9443",
+							"path": [
+								"t",
+								"carbon.super",
+								"api",
+								"users",
+								"v1",
+								"me",
+								"challenge-answers"
+							]
+						},
+						"description": "Provide answer(s) to one or more candidate challenge question set(s) available in the system for the authenticated user. A user can pick at maximum one question from each set to answer. A user may answer **one or more distinct** challenge question **set(s)**.\n\n<b>Permission required:</b>\n * /permission/admin/login\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Remove challenge question answers.",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "https://localhost:9443/t/carbon.super/api/users/v1/me/challenge-answers",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "9443",
+							"path": [
+								"t",
+								"carbon.super",
+								"api",
+								"users",
+								"v1",
+								"me",
+								"challenge-answers"
+							]
+						},
+						"description": "Removes all the existing challenge answers of the authenticated user.\n\n<b>Permission required:</b>\n * /permission/admin/login\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Update challenge answer of an already answered challenge.",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"challengeQuestion\": {\n    \"locale\": \"en_US\",\n    \"question\": \"What is your favorite travel destination ?\",\n    \"questionId\": \"question1\"\n  },\n  \"answer\": \"Colombo\"\n}"
+						},
+						"url": {
+							"raw": "https://localhost:9443/t/carbon.super/api/users/v1/me/challenge-answers/:challenge-set-id",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "9443",
+							"path": [
+								"t",
+								"carbon.super",
+								"api",
+								"users",
+								"v1",
+								"me",
+								"challenge-answers",
+								":challenge-set-id"
+							],
+							"variable": [
+								{
+									"key": "challenge-set-id",
+									"value": "challengeQuestion1"
+								}
+							]
+						},
+						"description": "Update challenge answer in a specific challenge for authenticated user.\n\n<b>Permission required:</b>\n * /permission/admin/login\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Answers a specific new challenge.",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"challengeQuestion\": {\n      \"locale\": \"en_US\",\n      \"question\": \"Favorite sport ?\",\n      \"questionId\": \"question4\"\n    },\n    \"answer\": \"Tennis\"\n  }"
+						},
+						"url": {
+							"raw": "https://localhost:9443/t/carbon.super/api/users/v1/me/challenge-answers/:challenge-set-id",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "9443",
+							"path": [
+								"t",
+								"carbon.super",
+								"api",
+								"users",
+								"v1",
+								"me",
+								"challenge-answers",
+								":challenge-set-id"
+							],
+							"variable": [
+								{
+									"key": "challenge-set-id",
+									"value": "challengeQuestion2"
+								}
+							]
+						},
+						"description": "Provide an **answer** to **a specific challenge** in the system for loggedin user. The user can at most select one question from a challenge set of interest.\n\n<b>Permission required:</b>\n * /permission/admin/login\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Remove a challenge question answer.",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "https://localhost:9443/t/carbon.super/api/users/v1/me/challenge-answers/:challenge-set-id",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "9443",
+							"path": [
+								"t",
+								"carbon.super",
+								"api",
+								"users",
+								"v1",
+								"me",
+								"challenge-answers",
+								":challenge-set-id"
+							],
+							"variable": [
+								{
+									"key": "challenge-set-id",
+									"value": "challengeQuestion2"
+								}
+							]
+						},
+						"description": "Removes existing answer provided by the authenticated user to a specific challenge.\n\n<b>Permission required:</b>\n * /permission/admin/login\n"
+					},
+					"response": []
+				}
+			],
+			"description": "Folder for me"
+		}
+	]
+}
