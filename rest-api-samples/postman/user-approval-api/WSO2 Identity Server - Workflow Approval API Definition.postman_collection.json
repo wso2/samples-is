@@ -1,0 +1,199 @@
+{
+	"info": {
+		"_postman_id": "9985709f-c364-41de-a9ad-e14b94bd07a6",
+		"name": "WSO2 Identity Server - Workflow Approval API Definition",
+		"description": "This is the RESTful API for a user to manage his/her pending approvals in WSO2 Identity Server.\n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "me",
+			"item": [
+				{
+					"name": "Retrieves available approvals for the authenticated user",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://localhost:9443/t/carbon.super/api/users/v1/me/approval-tasks?limit=5&offset=0&status=COMPLETE,READY",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "9443",
+							"path": [
+								"t",
+								"carbon.super",
+								"api",
+								"users",
+								"v1",
+								"me",
+								"approval-tasks"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "status",
+									"value": "COMPLETE,READY"
+								}
+							]
+						},
+						"description": "Retrieve the available approval tasks in the system for the authenticated user. This API returns the following types of approvals:\n  * READY - Tasks that are _claimable_ by the user. User is eligible to assign the task to himself and complete it, if a particular task is in READY state.\n  * RESERVED -  Tasks that are _assigned_ to the user and to be approved by this user.\n  * COMPLETED - Tasks that are already _completed_ (approved or denied) by this user.\n\n<b>Permission required:</b>\n * /permission/admin/manage/humantask/viewtasks\n\n A user can also invoke the endpoint with the following query parameters.\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieves an approval task by the task-id",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://localhost:9443/t/carbon.super/api/users/v1/me/approval-tasks/:task-id",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "9443",
+							"path": [
+								"t",
+								"carbon.super",
+								"api",
+								"users",
+								"v1",
+								"me",
+								"approval-tasks",
+								":task-id"
+							],
+							"variable": [
+								{
+									"key": "task-id",
+									"value": "451"
+								}
+							]
+						},
+						"description": "Retrieves information of a specific approval task identified by the task-id <br/>\n<b>Permission required:</b>\n * /permission/admin/manage/humantask/viewtasks\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Changes the state of an approval task",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"action\": \"APPROVE\"\n}"
+						},
+						"url": {
+							"raw": "https://localhost:9443/t/carbon.super/api/users/v1/me/approval-tasks/:task-id/state",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "9443",
+							"path": [
+								"t",
+								"carbon.super",
+								"api",
+								"users",
+								"v1",
+								"me",
+								"approval-tasks",
+								":task-id",
+								"state"
+							],
+							"variable": [
+								{
+									"key": "task-id",
+									"value": "452"
+								}
+							]
+						},
+						"description": "Update the approval task status by defining one of the following actions:\n * CLAIM - Reserve the task for the user. Status of the task will be changed from READY to RESERVED.\n * RELEASE - Release the task for other users to claim. Status of the task will be changed from RESERVED to READY.\n * APPROVE - Approve the task. Status of the task will be changed to COMPLETED.\n * REJECT - Deny the task. Status of the task will be changed to COMPLETED.\n <br/>\n\n<b>Permission required:</b>\n * /permission/admin/manage/humantask/viewtasks\n"
+					},
+					"response": []
+				}
+			],
+			"description": "Folder for me"
+		}
+	]
+}
