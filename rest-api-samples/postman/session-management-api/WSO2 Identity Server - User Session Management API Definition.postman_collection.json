@@ -1,0 +1,154 @@
+{
+	"info": {
+		"_postman_id": "2b25c730-4087-423a-94b8-049a5955d6e3",
+		"name": "WSO2 Identity Server - User Session Management API Definition",
+		"description": "This is the RESTful API for managing user sessions in WSO2 Identity Server",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "me",
+			"item": [
+				{
+					"name": "Retrieve active sessions of the authenticated user",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://localhost:9443/t/carbon.super/api/users/v1/me/sessions",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "9443",
+							"path": [
+								"t",
+								"carbon.super",
+								"api",
+								"users",
+								"v1",
+								"me",
+								"sessions"
+							]
+						},
+						"description": "A user can have multiple active sessions. This API retrieves information of all the active sessions of the authenticated user.\n<b>Permission required:</b>\n * /permission/admin/login\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Terminate all the active sessions of the authenticated user",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "https://localhost:9443/t/carbon.super/api/users/v1/me/sessions",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "9443",
+							"path": [
+								"t",
+								"carbon.super",
+								"api",
+								"users",
+								"v1",
+								"me",
+								"sessions"
+							]
+						},
+						"description": "A user has multiple active sessions. This API terminates all the active sessions of the authenticated user.\n<b>Permission required:</b>\n * /permission/admin/login\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Terminate a given session of the authenticated user",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "https://localhost:9443/t/carbon.super/api/users/v1/me/sessions/:session-id",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "9443",
+							"path": [
+								"t",
+								"carbon.super",
+								"api",
+								"users",
+								"v1",
+								"me",
+								"sessions",
+								":session-id"
+							],
+							"variable": [
+								{
+									"key": "session-id",
+									"value": ""
+								}
+							]
+						},
+						"description": "A user has multiple active sessions. This API terminates a specific session of the authenticated user identified by the session-id.\n<b>Permission required:</b>\n * /permission/admin/login\n"
+					},
+					"response": []
+				}
+			],
+			"description": "Folder for me"
+		}
+	]
+}
