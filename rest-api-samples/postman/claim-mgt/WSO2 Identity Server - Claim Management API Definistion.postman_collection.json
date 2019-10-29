@@ -1,0 +1,2309 @@
+{
+	"info": {
+		"_postman_id": "14bfadcd-9337-4cc2-a465-f386b01332f0",
+		"name": "WSO2 Identity Server - Claim Management API Definistion",
+		"description": "This is the RESTful API for managing claims in WSO2 Identity Server",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get all claim dialects",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:9443/t/:tenant-domain/api/server/v1/claim-dialects",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9443",
+					"path": [
+						"t",
+						":tenant-domain",
+						"api",
+						"server",
+						"v1",
+						"claim-dialects"
+					],
+					"variable": [
+						{
+							"key": "tenant-domain",
+							"value": "carbon.super"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add a claim dialect",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"dialectURI\": \"http://dummy.org/claim\"\n}"
+				},
+				"url": {
+					"raw": "https://localhost:9443/t/:tenant-domain/api/server/v1/claim-dialects",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9443",
+					"path": [
+						"t",
+						":tenant-domain",
+						"api",
+						"server",
+						"v1",
+						"claim-dialects"
+					],
+					"variable": [
+						{
+							"key": "tenant-domain",
+							"value": "carbon.super"
+						}
+					]
+				},
+				"description": "Add a new claim dialect."
+			},
+			"response": [
+				{
+					"name": "Resource Forbidden.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dialectURI\": \"<string>\"\n}"
+						},
+						"url": {
+							"raw": "https://is.wso2.com/t/{{tenant-domain}}/api/server/v1//claim-dialects",
+							"protocol": "https",
+							"host": [
+								"is",
+								"wso2",
+								"com"
+							],
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"",
+								"claim-dialects"
+							]
+						}
+					},
+					"status": "Forbidden",
+					"code": 403,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Internal Server Error.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dialectURI\": \"<string>\"\n}"
+						},
+						"url": {
+							"raw": "https://is.wso2.com/t/{{tenant-domain}}/api/server/v1//claim-dialects",
+							"protocol": "https",
+							"host": [
+								"is",
+								"wso2",
+								"com"
+							],
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"",
+								"claim-dialects"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Item Created.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dialectURI\": \"<string>\"\n}"
+						},
+						"url": {
+							"raw": "https://is.wso2.com/t/{{tenant-domain}}/api/server/v1//claim-dialects",
+							"protocol": "https",
+							"host": [
+								"is",
+								"wso2",
+								"com"
+							],
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"",
+								"claim-dialects"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Location",
+							"value": "<string>",
+							"description": "URI of the created resource."
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Invalid input request.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dialectURI\": \"<string>\"\n}"
+						},
+						"url": {
+							"raw": "https://is.wso2.com/t/{{tenant-domain}}/api/server/v1//claim-dialects",
+							"protocol": "https",
+							"host": [
+								"is",
+								"wso2",
+								"com"
+							],
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"",
+								"claim-dialects"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Element Already Exists.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dialectURI\": \"<string>\"\n}"
+						},
+						"url": {
+							"raw": "https://is.wso2.com/t/{{tenant-domain}}/api/server/v1//claim-dialects",
+							"protocol": "https",
+							"host": [
+								"is",
+								"wso2",
+								"com"
+							],
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"",
+								"claim-dialects"
+							]
+						}
+					},
+					"status": "Conflict",
+					"code": 409,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Unauthorized.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dialectURI\": \"<string>\"\n}"
+						},
+						"url": {
+							"raw": "https://is.wso2.com/t/{{tenant-domain}}/api/server/v1//claim-dialects",
+							"protocol": "https",
+							"host": [
+								"is",
+								"wso2",
+								"com"
+							],
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"",
+								"claim-dialects"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Get local claims",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:9443/t/:tenant-domain/api/server/v1/claim-dialects/local/claims",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9443",
+					"path": [
+						"t",
+						":tenant-domain",
+						"api",
+						"server",
+						"v1",
+						"claim-dialects",
+						"local",
+						"claims"
+					],
+					"variable": [
+						{
+							"key": "tenant-domain",
+							"value": "carbon.super"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get local claim",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:9443/t/:tenant-domain/api/server/v1/claim-dialects/local/claims/:claim-id",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9443",
+					"path": [
+						"t",
+						":tenant-domain",
+						"api",
+						"server",
+						"v1",
+						"claim-dialects",
+						"local",
+						"claims",
+						":claim-id"
+					],
+					"variable": [
+						{
+							"key": "tenant-domain",
+							"value": "carbon.super"
+						},
+						{
+							"key": "claim-id",
+							"value": "aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add local claim",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"claimURI\": \"http://wso2.org/claims/dummyemailaddress\",\n  \"description\": \"Dummy Email Address\",\n  \"displayOrder\": 6,\n  \"displayName\": \"Dummy Email\",\n  \"readOnly\": false,\n  \"regEx\": \"^\\\\S+@\\\\S+$\",\n  \"required\": true,\n  \"supportedByDefault\": true,\n  \"attributeMapping\": [\n    {\n      \"mappedAttribute\": \"dummymail\",\n      \"userstore\": \"PRIMARY\"\n    }\n  ],\n  \"properties\": [\n    {\n      \"key\": \"isVerifiable\",\n      \"value\": \"true\"\n    }\n  ]\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:9443/t/:tenant-domain/api/server/v1/claim-dialects/local/claims",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9443",
+					"path": [
+						"t",
+						":tenant-domain",
+						"api",
+						"server",
+						"v1",
+						"claim-dialects",
+						"local",
+						"claims"
+					],
+					"variable": [
+						{
+							"key": "tenant-domain",
+							"value": "carbon.super"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update local claim",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"claimURI\": \"http://wso2.org/claims/dummyemailaddress\",\n  \"description\": \"Updated Dummy Email Address\",\n  \"displayOrder\": 7,\n  \"displayName\": \"Updated Dummy Email\",\n  \"readOnly\": false,\n  \"regEx\": \"\",\n  \"required\": true,\n  \"supportedByDefault\": true,\n  \"attributeMapping\": [\n    {\n      \"mappedAttribute\": \"dummymail\",\n      \"userstore\": \"PRIMARY\"\n    }\n  ],\n  \"properties\": [\n    {\n      \"key\": \"isVerifiable\",\n      \"value\": \"true\"\n    }\n  ]\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:9443/t/:tenant-domain/api/server/v1/claim-dialects/local/claims/:claim-id",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9443",
+					"path": [
+						"t",
+						":tenant-domain",
+						"api",
+						"server",
+						"v1",
+						"claim-dialects",
+						"local",
+						"claims",
+						":claim-id"
+					],
+					"variable": [
+						{
+							"key": "tenant-domain",
+							"value": "carbon.super"
+						},
+						{
+							"key": "claim-id",
+							"value": "aHR0cDovL3dzbzIub3JnL2NsYWltcy9kdW1teWVtYWlsYWRkcmVzcw"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a local claim",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:9443/t/:tenant-domain/api/server/v1/claim-dialects/local/claims/:claim-id",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9443",
+					"path": [
+						"t",
+						":tenant-domain",
+						"api",
+						"server",
+						"v1",
+						"claim-dialects",
+						"local",
+						"claims",
+						":claim-id"
+					],
+					"variable": [
+						{
+							"key": "tenant-domain",
+							"value": "carbon.super"
+						},
+						{
+							"key": "claim-id",
+							"value": "aHR0cDovL3dzbzIub3JnL2NsYWltcy9kdW1teWVtYWlsYWRkcmVzcw",
+							"description": "Id of the claim."
+						}
+					]
+				},
+				"description": "Delete a claim by claim id."
+			},
+			"response": [
+				{
+					"name": "Invalid input request.",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://is.wso2.com/t/{{tenant-domain}}/api/server/v1//claim-dialects/local/claims/<string>",
+							"protocol": "https",
+							"host": [
+								"is",
+								"wso2",
+								"com"
+							],
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"",
+								"claim-dialects",
+								"local",
+								"claims",
+								"<string>"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Internal Server Error.",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://is.wso2.com/t/{{tenant-domain}}/api/server/v1//claim-dialects/local/claims/<string>",
+							"protocol": "https",
+							"host": [
+								"is",
+								"wso2",
+								"com"
+							],
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"",
+								"claim-dialects",
+								"local",
+								"claims",
+								"<string>"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "No Content.",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://is.wso2.com/t/{{tenant-domain}}/api/server/v1//claim-dialects/local/claims/<string>",
+							"protocol": "https",
+							"host": [
+								"is",
+								"wso2",
+								"com"
+							],
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"",
+								"claim-dialects",
+								"local",
+								"claims",
+								"<string>"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Unauthorized.",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://is.wso2.com/t/{{tenant-domain}}/api/server/v1//claim-dialects/local/claims/<string>",
+							"protocol": "https",
+							"host": [
+								"is",
+								"wso2",
+								"com"
+							],
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"",
+								"claim-dialects",
+								"local",
+								"claims",
+								"<string>"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Resource Forbidden.",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://is.wso2.com/t/{{tenant-domain}}/api/server/v1//claim-dialects/local/claims/<string>",
+							"protocol": "https",
+							"host": [
+								"is",
+								"wso2",
+								"com"
+							],
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"",
+								"claim-dialects",
+								"local",
+								"claims",
+								"<string>"
+							]
+						}
+					},
+					"status": "Forbidden",
+					"code": 403,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Get external claim dialect",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:9443/t/:tenant-domain/api/server/v1/claim-dialects/:dialect-id",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9443",
+					"path": [
+						"t",
+						":tenant-domain",
+						"api",
+						"server",
+						"v1",
+						"claim-dialects",
+						":dialect-id"
+					],
+					"variable": [
+						{
+							"key": "tenant-domain",
+							"value": "carbon.super"
+						},
+						{
+							"key": "dialect-id",
+							"value": "aHR0cDovL2R1bW15Lm9yZy9jbGFpbQ"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update external claim dialect",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"dialectURI\": \"http://dummy.org/updatedclaim\"\n}"
+				},
+				"url": {
+					"raw": "https://localhost:9443/t/:tenant-domain/api/server/v1/claim-dialects/:dialect-id",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9443",
+					"path": [
+						"t",
+						":tenant-domain",
+						"api",
+						"server",
+						"v1",
+						"claim-dialects",
+						":dialect-id"
+					],
+					"variable": [
+						{
+							"key": "tenant-domain",
+							"value": "carbon.super"
+						},
+						{
+							"key": "dialect-id",
+							"value": "aHR0cDovL3dzbzIub3JnL29pZGMvY2xhaW0",
+							"description": "Id of the claim dialect."
+						}
+					]
+				},
+				"description": "Update a claim dialect."
+			},
+			"response": [
+				{
+					"name": "Unauthorized.",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dialectURI\": \"<string>\"\n}"
+						},
+						"url": {
+							"raw": "https://is.wso2.com/t/{{tenant-domain}}/api/server/v1//claim-dialects/<string>",
+							"protocol": "https",
+							"host": [
+								"is",
+								"wso2",
+								"com"
+							],
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"",
+								"claim-dialects",
+								"<string>"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Internal Server Error.",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dialectURI\": \"<string>\"\n}"
+						},
+						"url": {
+							"raw": "https://is.wso2.com/t/{{tenant-domain}}/api/server/v1//claim-dialects/<string>",
+							"protocol": "https",
+							"host": [
+								"is",
+								"wso2",
+								"com"
+							],
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"",
+								"claim-dialects",
+								"<string>"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "OK.",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dialectURI\": \"<string>\"\n}"
+						},
+						"url": {
+							"raw": "https://is.wso2.com/t/{{tenant-domain}}/api/server/v1//claim-dialects/<string>",
+							"protocol": "https",
+							"host": [
+								"is",
+								"wso2",
+								"com"
+							],
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"",
+								"claim-dialects",
+								"<string>"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Invalid input request.",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dialectURI\": \"<string>\"\n}"
+						},
+						"url": {
+							"raw": "https://is.wso2.com/t/{{tenant-domain}}/api/server/v1//claim-dialects/<string>",
+							"protocol": "https",
+							"host": [
+								"is",
+								"wso2",
+								"com"
+							],
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"",
+								"claim-dialects",
+								"<string>"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Resource Forbidden.",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dialectURI\": \"<string>\"\n}"
+						},
+						"url": {
+							"raw": "https://is.wso2.com/t/{{tenant-domain}}/api/server/v1//claim-dialects/<string>",
+							"protocol": "https",
+							"host": [
+								"is",
+								"wso2",
+								"com"
+							],
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"",
+								"claim-dialects",
+								"<string>"
+							]
+						}
+					},
+					"status": "Forbidden",
+					"code": 403,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Add external claim",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"claimURI\": \"http://updateddummy.org/claim/emailaddress\",\n  \"mappedLocalClaimURI\": \"http://wso2.org/claims/emailaddress\"\n}"
+				},
+				"url": {
+					"raw": "https://localhost:9443/t/:tenant-domain/api/server/v1/claim-dialects/:dialect-id/claims",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9443",
+					"path": [
+						"t",
+						":tenant-domain",
+						"api",
+						"server",
+						"v1",
+						"claim-dialects",
+						":dialect-id",
+						"claims"
+					],
+					"variable": [
+						{
+							"key": "tenant-domain",
+							"value": "carbon.super"
+						},
+						{
+							"key": "dialect-id",
+							"value": "aHR0cDovL2R1bW15Lm9yZy9jbGFpbQ",
+							"description": "Id of the claim dialect."
+						}
+					]
+				},
+				"description": "Add a new external claim."
+			},
+			"response": [
+				{
+					"name": "Invalid input request.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"claimURI\": \"<string>\",\n    \"mappedLocalClaimURI\": \"<string>\"\n}"
+						},
+						"url": {
+							"raw": "https://is.wso2.com/t/{{tenant-domain}}/api/server/v1//claim-dialects/<string>/claims",
+							"protocol": "https",
+							"host": [
+								"is",
+								"wso2",
+								"com"
+							],
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"",
+								"claim-dialects",
+								"<string>",
+								"claims"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Resource Forbidden.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"claimURI\": \"<string>\",\n    \"mappedLocalClaimURI\": \"<string>\"\n}"
+						},
+						"url": {
+							"raw": "https://is.wso2.com/t/{{tenant-domain}}/api/server/v1//claim-dialects/<string>/claims",
+							"protocol": "https",
+							"host": [
+								"is",
+								"wso2",
+								"com"
+							],
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"",
+								"claim-dialects",
+								"<string>",
+								"claims"
+							]
+						}
+					},
+					"status": "Forbidden",
+					"code": 403,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Unauthorized.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"claimURI\": \"<string>\",\n    \"mappedLocalClaimURI\": \"<string>\"\n}"
+						},
+						"url": {
+							"raw": "https://is.wso2.com/t/{{tenant-domain}}/api/server/v1//claim-dialects/<string>/claims",
+							"protocol": "https",
+							"host": [
+								"is",
+								"wso2",
+								"com"
+							],
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"",
+								"claim-dialects",
+								"<string>",
+								"claims"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Element Already Exists.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"claimURI\": \"<string>\",\n    \"mappedLocalClaimURI\": \"<string>\"\n}"
+						},
+						"url": {
+							"raw": "https://is.wso2.com/t/{{tenant-domain}}/api/server/v1//claim-dialects/<string>/claims",
+							"protocol": "https",
+							"host": [
+								"is",
+								"wso2",
+								"com"
+							],
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"",
+								"claim-dialects",
+								"<string>",
+								"claims"
+							]
+						}
+					},
+					"status": "Conflict",
+					"code": 409,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Item Created.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"claimURI\": \"<string>\",\n    \"mappedLocalClaimURI\": \"<string>\"\n}"
+						},
+						"url": {
+							"raw": "https://is.wso2.com/t/{{tenant-domain}}/api/server/v1//claim-dialects/<string>/claims",
+							"protocol": "https",
+							"host": [
+								"is",
+								"wso2",
+								"com"
+							],
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"",
+								"claim-dialects",
+								"<string>",
+								"claims"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Location",
+							"value": "<string>",
+							"description": "URI of the created resource."
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Internal Server Error.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"claimURI\": \"<string>\",\n    \"mappedLocalClaimURI\": \"<string>\"\n}"
+						},
+						"url": {
+							"raw": "https://is.wso2.com/t/{{tenant-domain}}/api/server/v1//claim-dialects/<string>/claims",
+							"protocol": "https",
+							"host": [
+								"is",
+								"wso2",
+								"com"
+							],
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"",
+								"claim-dialects",
+								"<string>",
+								"claims"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Get claims of external claim dialect",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:9443/t/:tenant-domain/api/server/v1/claim-dialects/:dialect-id/claims",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9443",
+					"path": [
+						"t",
+						":tenant-domain",
+						"api",
+						"server",
+						"v1",
+						"claim-dialects",
+						":dialect-id",
+						"claims"
+					],
+					"variable": [
+						{
+							"key": "tenant-domain",
+							"value": "carbon.super"
+						},
+						{
+							"key": "dialect-id",
+							"value": "aHR0cDovL2R1bW15Lm9yZy9jbGFpbQ"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get external claim",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:9443/t/:tenant-domain/api/server/v1/claim-dialects/:dialect-id/claims/:claim-id",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9443",
+					"path": [
+						"t",
+						":tenant-domain",
+						"api",
+						"server",
+						"v1",
+						"claim-dialects",
+						":dialect-id",
+						"claims",
+						":claim-id"
+					],
+					"variable": [
+						{
+							"key": "tenant-domain",
+							"value": "carbon.super"
+						},
+						{
+							"key": "dialect-id",
+							"value": "aHR0cDovL2R1bW15Lm9yZy9jbGFpbQ"
+						},
+						{
+							"key": "claim-id",
+							"value": "aHR0cDovL3VwZGF0ZWRkdW1teS5vcmcvY2xhaW0vZW1haWxhZGRyZXNz"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update external claim",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"claimURI\": \"http://updateddummy.org/claim/emailaddress\",\n  \"mappedLocalClaimURI\": \"http://wso2.org/claims/dummyemailaddress\"\n}"
+				},
+				"url": {
+					"raw": "https://localhost:9443/t/:tenant-domain/api/server/v1/claim-dialects/:dialect-id/claims/:claim-id",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9443",
+					"path": [
+						"t",
+						":tenant-domain",
+						"api",
+						"server",
+						"v1",
+						"claim-dialects",
+						":dialect-id",
+						"claims",
+						":claim-id"
+					],
+					"variable": [
+						{
+							"key": "tenant-domain",
+							"value": "carbon.super"
+						},
+						{
+							"key": "dialect-id",
+							"value": "aHR0cDovL2R1bW15Lm9yZy9jbGFpbQ",
+							"description": "Id of the claim dialect."
+						},
+						{
+							"key": "claim-id",
+							"value": "aHR0cDovL3VwZGF0ZWRkdW1teS5vcmcvY2xhaW0vZW1haWxhZGRyZXNz",
+							"description": "Id of the claim."
+						}
+					]
+				},
+				"description": "Update an external claim."
+			},
+			"response": [
+				{
+					"name": "Unauthorized.",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"claimURI\": \"<string>\",\n    \"mappedLocalClaimURI\": \"<string>\"\n}"
+						},
+						"url": {
+							"raw": "https://is.wso2.com/t/{{tenant-domain}}/api/server/v1//claim-dialects/<string>/claims/<string>",
+							"protocol": "https",
+							"host": [
+								"is",
+								"wso2",
+								"com"
+							],
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"",
+								"claim-dialects",
+								"<string>",
+								"claims",
+								"<string>"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Invalid input request.",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"claimURI\": \"<string>\",\n    \"mappedLocalClaimURI\": \"<string>\"\n}"
+						},
+						"url": {
+							"raw": "https://is.wso2.com/t/{{tenant-domain}}/api/server/v1//claim-dialects/<string>/claims/<string>",
+							"protocol": "https",
+							"host": [
+								"is",
+								"wso2",
+								"com"
+							],
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"",
+								"claim-dialects",
+								"<string>",
+								"claims",
+								"<string>"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Element Already Exists.",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"claimURI\": \"<string>\",\n    \"mappedLocalClaimURI\": \"<string>\"\n}"
+						},
+						"url": {
+							"raw": "https://is.wso2.com/t/{{tenant-domain}}/api/server/v1//claim-dialects/<string>/claims/<string>",
+							"protocol": "https",
+							"host": [
+								"is",
+								"wso2",
+								"com"
+							],
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"",
+								"claim-dialects",
+								"<string>",
+								"claims",
+								"<string>"
+							]
+						}
+					},
+					"status": "Conflict",
+					"code": 409,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Internal Server Error.",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"claimURI\": \"<string>\",\n    \"mappedLocalClaimURI\": \"<string>\"\n}"
+						},
+						"url": {
+							"raw": "https://is.wso2.com/t/{{tenant-domain}}/api/server/v1//claim-dialects/<string>/claims/<string>",
+							"protocol": "https",
+							"host": [
+								"is",
+								"wso2",
+								"com"
+							],
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"",
+								"claim-dialects",
+								"<string>",
+								"claims",
+								"<string>"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Resource Forbidden.",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"claimURI\": \"<string>\",\n    \"mappedLocalClaimURI\": \"<string>\"\n}"
+						},
+						"url": {
+							"raw": "https://is.wso2.com/t/{{tenant-domain}}/api/server/v1//claim-dialects/<string>/claims/<string>",
+							"protocol": "https",
+							"host": [
+								"is",
+								"wso2",
+								"com"
+							],
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"",
+								"claim-dialects",
+								"<string>",
+								"claims",
+								"<string>"
+							]
+						}
+					},
+					"status": "Forbidden",
+					"code": 403,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "OK.",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"claimURI\": \"<string>\",\n    \"mappedLocalClaimURI\": \"<string>\"\n}"
+						},
+						"url": {
+							"raw": "https://is.wso2.com/t/{{tenant-domain}}/api/server/v1//claim-dialects/<string>/claims/<string>",
+							"protocol": "https",
+							"host": [
+								"is",
+								"wso2",
+								"com"
+							],
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"",
+								"claim-dialects",
+								"<string>",
+								"claims",
+								"<string>"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Delete external claim",
+			"request": {
+				"auth": {
+					"type": "basic"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:9443/t/:tenant-domain/api/server/v1/claim-dialects/:dialect-id/claims/:claim-id",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9443",
+					"path": [
+						"t",
+						":tenant-domain",
+						"api",
+						"server",
+						"v1",
+						"claim-dialects",
+						":dialect-id",
+						"claims",
+						":claim-id"
+					],
+					"variable": [
+						{
+							"key": "tenant-domain",
+							"value": "carbon.super"
+						},
+						{
+							"key": "dialect-id",
+							"value": "aHR0cDovL2R1bW15Lm9yZy9jbGFpbQ",
+							"description": "Id of the claim dialect."
+						},
+						{
+							"key": "claim-id",
+							"value": "aHR0cDovL3VwZGF0ZWRkdW1teS5vcmcvY2xhaW0vZW1haWxhZGRyZXNz",
+							"description": "Id of the claim."
+						}
+					]
+				},
+				"description": "Delete a claim by dialect id and claim id."
+			},
+			"response": [
+				{
+					"name": "Invalid input request.",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://is.wso2.com/t/{{tenant-domain}}/api/server/v1//claim-dialects/<string>/claims/<string>",
+							"protocol": "https",
+							"host": [
+								"is",
+								"wso2",
+								"com"
+							],
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"",
+								"claim-dialects",
+								"<string>",
+								"claims",
+								"<string>"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Internal Server Error.",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://is.wso2.com/t/{{tenant-domain}}/api/server/v1//claim-dialects/<string>/claims/<string>",
+							"protocol": "https",
+							"host": [
+								"is",
+								"wso2",
+								"com"
+							],
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"",
+								"claim-dialects",
+								"<string>",
+								"claims",
+								"<string>"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Resource Forbidden.",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://is.wso2.com/t/{{tenant-domain}}/api/server/v1//claim-dialects/<string>/claims/<string>",
+							"protocol": "https",
+							"host": [
+								"is",
+								"wso2",
+								"com"
+							],
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"",
+								"claim-dialects",
+								"<string>",
+								"claims",
+								"<string>"
+							]
+						}
+					},
+					"status": "Forbidden",
+					"code": 403,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "No Content.",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://is.wso2.com/t/{{tenant-domain}}/api/server/v1//claim-dialects/<string>/claims/<string>",
+							"protocol": "https",
+							"host": [
+								"is",
+								"wso2",
+								"com"
+							],
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"",
+								"claim-dialects",
+								"<string>",
+								"claims",
+								"<string>"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Unauthorized.",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://is.wso2.com/t/{{tenant-domain}}/api/server/v1//claim-dialects/<string>/claims/<string>",
+							"protocol": "https",
+							"host": [
+								"is",
+								"wso2",
+								"com"
+							],
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"",
+								"claim-dialects",
+								"<string>",
+								"claims",
+								"<string>"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Delete external claim dialect",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:9443/t/:tenant-domain/api/server/v1/claim-dialects/:dialect-id",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9443",
+					"path": [
+						"t",
+						":tenant-domain",
+						"api",
+						"server",
+						"v1",
+						"claim-dialects",
+						":dialect-id"
+					],
+					"variable": [
+						{
+							"key": "tenant-domain",
+							"value": "carbon.super"
+						},
+						{
+							"key": "dialect-id",
+							"value": "aHR0cDovL2R1bW15Lm9yZy9jbGFpbQ",
+							"description": "Id of the claim dialect."
+						}
+					]
+				},
+				"description": "Delete a claim dialect by claim id."
+			},
+			"response": [
+				{
+					"name": "Internal Server Error.",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://is.wso2.com/t/{{tenant-domain}}/api/server/v1//claim-dialects/<string>",
+							"protocol": "https",
+							"host": [
+								"is",
+								"wso2",
+								"com"
+							],
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"",
+								"claim-dialects",
+								"<string>"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Resource Forbidden.",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://is.wso2.com/t/{{tenant-domain}}/api/server/v1//claim-dialects/<string>",
+							"protocol": "https",
+							"host": [
+								"is",
+								"wso2",
+								"com"
+							],
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"",
+								"claim-dialects",
+								"<string>"
+							]
+						}
+					},
+					"status": "Forbidden",
+					"code": 403,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Invalid input request.",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://is.wso2.com/t/{{tenant-domain}}/api/server/v1//claim-dialects/<string>",
+							"protocol": "https",
+							"host": [
+								"is",
+								"wso2",
+								"com"
+							],
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"",
+								"claim-dialects",
+								"<string>"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Unauthorized.",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://is.wso2.com/t/{{tenant-domain}}/api/server/v1//claim-dialects/<string>",
+							"protocol": "https",
+							"host": [
+								"is",
+								"wso2",
+								"com"
+							],
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"",
+								"claim-dialects",
+								"<string>"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "*/*"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "No Content.",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://is.wso2.com/t/{{tenant-domain}}/api/server/v1//claim-dialects/<string>",
+							"protocol": "https",
+							"host": [
+								"is",
+								"wso2",
+								"com"
+							],
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"",
+								"claim-dialects",
+								"<string>"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "text",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "admin",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "admin",
+				"type": "string"
+			}
+		]
+	},
+	"protocolProfileBehavior": {}
+}
