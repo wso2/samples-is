@@ -1,0 +1,508 @@
+{
+	"info": {
+		"_postman_id": "7421ce30-f5bf-4031-ab22-de6d98fe806e",
+		"name": "WSO2 Identity Server - Email Templates REST API Definition",
+		"description": "This is the RESTful API for managing Email Templates in the WSO2 Identity Server",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Email Template Types",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic YWRtaW46YWRtaW4="
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "reqcode",
+							"value": "",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://localhost:9443/t/carbon.super/api/server/v1/email/template-types",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9443",
+					"path": [
+						"t",
+						"carbon.super",
+						"api",
+						"server",
+						"v1",
+						"email",
+						"template-types"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Templates List of Email Template Type",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic YWRtaW46YWRtaW4="
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "reqcode",
+							"value": "",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://localhost:9443/t/carbon.super/api/server/v1/email/template-types/QWNjb3VudEVuYWJsZQ/templates",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9443",
+					"path": [
+						"t",
+						"carbon.super",
+						"api",
+						"server",
+						"v1",
+						"email",
+						"template-types",
+						"QWNjb3VudEVuYWJsZQ",
+						"templates"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Email Template Type",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic YWRtaW46YWRtaW4="
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "reqcode",
+							"value": "",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://localhost:9443/t/carbon.super/api/server/v1/email/template-types/QWNjb3VudEVuYWJsZQ",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9443",
+					"path": [
+						"t",
+						"carbon.super",
+						"api",
+						"server",
+						"v1",
+						"email",
+						"template-types",
+						"QWNjb3VudEVuYWJsZQ"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Specific Email Template",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic YWRtaW46YWRtaW4="
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "reqcode",
+							"value": "",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://localhost:9443/t/carbon.super/api/server/v1/email/template-types/QWNjb3VudEVuYWJsZQ/templates/en_US",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9443",
+					"path": [
+						"t",
+						"carbon.super",
+						"api",
+						"server",
+						"v1",
+						"email",
+						"template-types",
+						"QWNjb3VudEVuYWJsZQ",
+						"templates",
+						"en_US"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add new Email Template Type",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic YWRtaW46YWRtaW4="
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"displayName\": \"New Account Confirmation\",\n  \"templates\": [\n    {\n      \"contentType\": \"text/html\",\n      \"subject\": \"WSO2 - New Account Confirmation\",\n      \"body\": \"HTML Body\",\n      \"footer\": \"WSO2 Identity Server Team\",\n      \"id\": \"en_US\"\n    }\n  ]\n}"
+				},
+				"url": {
+					"raw": "https://localhost:9443/t/carbon.super/api/server/v1/email/template-types",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9443",
+					"path": [
+						"t",
+						"carbon.super",
+						"api",
+						"server",
+						"v1",
+						"email",
+						"template-types"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add new Email Template",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic YWRtaW46YWRtaW4="
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"contentType\": \"text/html\",\n\t\"subject\": \"WSO2 - Account Confirmation - GB\",\n\t\"body\": \"HTML Body - GB\",\n\t\"footer\": \"WSO2 Identity Server Team - GB\",\n\t\"id\": \"en_GB\"\n}"
+				},
+				"url": {
+					"raw": "https://localhost:9443/t/carbon.super/api/server/v1/email/template-types/QWNjb3VudEVuYWJsZQ",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9443",
+					"path": [
+						"t",
+						"carbon.super",
+						"api",
+						"server",
+						"v1",
+						"email",
+						"template-types",
+						"QWNjb3VudEVuYWJsZQ"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Email Template Type",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic YWRtaW46YWRtaW4="
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n\t{\n\t\t\"contentType\": \"text/html\",\n\t\t\"subject\": \"WSO2 - Account Confirmation\",\n\t\t\"body\": \"HTML Body\",\n\t\t\"footer\": \"WSO2 Identity Server Team\",\n\t\t\"id\": \"en_US\"\n\t},\n\t{\n\t\t\"contentType\": \"text/html\",\n\t\t\"subject\": \"WSO2 - Account Confirmation - GB\",\n\t\t\"body\": \"HTML Body - GB\",\n\t\t\"footer\": \"WSO2 Identity Server Team - GB\",\n\t\t\"id\": \"en_GB\"\n\t}\n]"
+				},
+				"url": {
+					"raw": "https://localhost:9443/t/carbon.super/api/server/v1/email/template-types/QWNjb3VudEVuYWJsZQ",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9443",
+					"path": [
+						"t",
+						"carbon.super",
+						"api",
+						"server",
+						"v1",
+						"email",
+						"template-types",
+						"QWNjb3VudEVuYWJsZQ"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Specific Email Template",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic YWRtaW46YWRtaW4="
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"contentType\": \"text/html\",\n\t\"subject\": \"WSO2 - Account Confirmation - GB - updated\",\n\t\"body\": \"HTML Body - GB - updated\",\n\t\"footer\": \"WSO2 Identity Server Team - GB - updated\",\n\t\"id\": \"en_GB\"\n}"
+				},
+				"url": {
+					"raw": "https://localhost:9443/t/carbon.super/api/server/v1/email/template-types/QWNjb3VudEVuYWJsZQ/templates/en_GB",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9443",
+					"path": [
+						"t",
+						"carbon.super",
+						"api",
+						"server",
+						"v1",
+						"email",
+						"template-types",
+						"QWNjb3VudEVuYWJsZQ",
+						"templates",
+						"en_GB"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Email Template Type",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "reqcode",
+							"value": "",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "https://localhost:9443/t/carbon.super/api/server/v1/email/template-types/QWNjb3VudEVuYWJsZQ",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9443",
+					"path": [
+						"t",
+						"carbon.super",
+						"api",
+						"server",
+						"v1",
+						"email",
+						"template-types",
+						"QWNjb3VudEVuYWJsZQ"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Specific Email Template",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic YWRtaW46YWRtaW4="
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "https://localhost:9443/t/carbon.super/api/server/v1/email/template-types/QWNjb3VudEVuYWJsZQ/templates/en_GB",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "9443",
+					"path": [
+						"t",
+						"carbon.super",
+						"api",
+						"server",
+						"v1",
+						"email",
+						"template-types",
+						"QWNjb3VudEVuYWJsZQ",
+						"templates",
+						"en_GB"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "82bed08e-b04b-4edc-abbf-03a994fb3478",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "0e3d757b-7e00-4bd3-afb8-6933a2f29212",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
