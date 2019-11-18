@@ -28,8 +28,7 @@ export WEB_APP_LIB=${WEB_APP_HOME}/accountrecoveryendpoint/WEB-INF/lib/
 
 rm -rf ${WEB_APP_HOME}/accountrecoveryendpoint
 
-cp $IS_HOME/repository/deployment/server/webapps/accountrecoveryendpoint.war ${WEB_APP_HOME}
-unzip ${WEB_APP_HOME}/accountrecoveryendpoint.war -d ${WEB_APP_HOME}/accountrecoveryendpoint/
+cp -r $IS_HOME/repository/deployment/server/webapps/accountrecoveryendpoint ${WEB_APP_HOME}
 
 rm ${WEB_APP_HOME}/accountrecoveryendpoint.war
 
