@@ -1,6 +1,6 @@
 echo "---------- Start Setting up authenticationendpoint in a web server ----------"
 echo "Please enter the path to your WSO2-IS installation."
-echo "Example: /home/downloads/WSO2_Products/wso2is-5.4.0"
+echo "Example: /home/downloads/WSO2_Products/wso2is-5.9.0"
 read WSO2_PATH
 
 echo
@@ -28,8 +28,7 @@ export WEB_APP_LIB=${WEB_APP_HOME}/authenticationendpoint/WEB-INF/lib/
 
 rm -rf ${WEB_APP_HOME}/authenticationendpoint
 
-cp $IS_HOME/repository/deployment/server/webapps/authenticationendpoint.war ${WEB_APP_HOME}
-unzip ${WEB_APP_HOME}/authenticationendpoint.war -d ${WEB_APP_HOME}/authenticationendpoint/
+cp -r $IS_HOME/repository/deployment/server/webapps/authenticationendpoint ${WEB_APP_HOME}
 
 cp $IS_HOME/repository/components/plugins/abdera_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/ant_*.jar $WEB_APP_LIB
@@ -51,12 +50,14 @@ cp $IS_HOME/repository/components/plugins/hazelcast_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/httpclient_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/httpcore_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/javax.cache.wso2_*.jar $WEB_APP_LIB
-cp $IS_HOME/repository/components/plugins/jdbc-pool_*.wso2v2.jar $WEB_APP_LIB
+cp $IS_HOME/repository/components/plugins/jdbc-pool_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/joda-time_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/json_*.jar $WEB_APP_LIB
+cp $IS_HOME/repository/components/plugins/jstl_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/neethi_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/opensaml_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.eclipse.equinox.http.helper_*.jar $WEB_APP_LIB
+cp $IS_HOME/repository/components/plugins/org.eclipse.osgi_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.base_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.eclipse.osgi_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.eclipse.osgi.services_*.jar $WEB_APP_LIB
@@ -67,7 +68,6 @@ cp $IS_HOME/repository/components/plugins/org.wso2.carbon.database.utils_*.jar $
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.application.common_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.base_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.template.mgt_*.jar $WEB_APP_LIB
-cp $IS_HOME/repository/components/plugins/org.wso2.carbon.logging_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.queuing_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.registry.api_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.registry.core_*.jar $WEB_APP_LIB
@@ -98,13 +98,13 @@ cp $IS_HOME/lib/runtimes/cxf3/cxf-rt-transports-http-*.jar $WEB_APP_LIB
 cp $IS_HOME/bin/org.wso2.carbon.bootstrap-*.jar $WEB_APP_LIB
 cp $IS_HOME/bin/tomcat-juli-*.jar $WEB_APP_LIB
 cp $IS_HOME/lib/xercesImpl-*.jar $WEB_APP_LIB
-cp $IS_HOME/lib/endorsed/geronimo-jta_*.jar $WEB_APP_LIB
-cp $IS_HOME/lib/endorsed/stax2-api-*.jar $WEB_APP_LIB
-cp $IS_HOME/lib/endorsed/woodstox-core-asl-*.jar $WEB_APP_LIB
+cp $IS_HOME/lib/geronimo-jta_*.jar $WEB_APP_LIB
+cp $IS_HOME/lib/stax2-api-*.jar $WEB_APP_LIB
+cp $IS_HOME/lib/woodstox-core-asl-*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/tools/forget-me/lib/log4j-*.jar $WEB_APP_LIB
+cp $IS_HOME/repository/components/tools/forget-me/lib/pax-logging-api-*.jar $WEB_APP_LIB
 
 
-rm -rf ${WEB_APP_HOME}/authenticationendpoint.war
 
 echo
 echo "Please Open ${WEB_APP_HOME}/authenticationendpoint/WEB-INF/web.xml file and make"
