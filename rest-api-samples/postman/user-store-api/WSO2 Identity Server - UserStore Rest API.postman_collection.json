@@ -1,0 +1,2502 @@
+{
+	"info": {
+		"_postman_id": "204130d9-675f-4dd3-a709-25c5f2fa636c",
+		"name": "WSO2 Identity Server - UserStore Rest API",
+		"description": "This is the RESTful API for user store management related operations in WSO2 Identity Server\n\n\nContact Support:\n Name: WSO2 Identity Server\n Email: architecture@wso2.org",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "userstores",
+			"item": [
+				{
+					"name": "{userstore-domain-id}",
+					"item": [
+						{
+							"name": "Retrieve the configurations of secondary user store based on its domain id.",
+							"request": {
+								"auth": {
+									"type": "basic"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/:userstore-domain-id",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"carbon.super",
+										"api",
+										"server",
+										"v1",
+										"userstores",
+										":userstore-domain-id"
+									],
+									"variable": [
+										{
+											"key": "tenant-domain",
+											"value": "{{tenant-domain}}",
+											"description": {
+												"content": "",
+												"type": "text/plain"
+											}
+										},
+										{
+											"key": "userstore-domain-id",
+											"value": "<string>",
+											"description": "The unique name of the user store domain"
+										}
+									]
+								},
+								"description": "This API provides the capability to retrieve the configurations of secondary user store based on its domain id.\n\n  <b>Permission required:</b>\n*/permission/admin\n"
+							},
+							"response": [
+								{
+									"name": "Unauthorized.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/<string>",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"carbon.super",
+												"api",
+												"server",
+												"v1",
+												"userstores",
+												"<string>"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"code\": \"<string>\",\n \"message\": \"<string>\",\n \"description\": \"<string>\"\n}"
+								},
+								{
+									"name": "Successful response.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/<string>",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"carbon.super",
+												"api",
+												"server",
+												"v1",
+												"userstores",
+												"<string>"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"typeName\": \"<string>\",\n \"typeId\": \"<string>\",\n \"name\": \"<string>\",\n \"description\": \"<string>\",\n \"className\": \"<string>\",\n \"properties\": [\n  {\n   \"name\": \"<string>\",\n   \"value\": \"<string>\"\n  },\n  {\n   \"name\": \"<string>\",\n   \"value\": \"<string>\"\n  }\n ]\n}"
+								},
+								{
+									"name": "Internal Server Error.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/<string>",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"carbon.super",
+												"api",
+												"server",
+												"v1",
+												"userstores",
+												"<string>"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"code\": \"<string>\",\n \"message\": \"<string>\",\n \"description\": \"<string>\"\n}"
+								},
+								{
+									"name": "The specified resource is not found.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/<string>",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"carbon.super",
+												"api",
+												"server",
+												"v1",
+												"userstores",
+												"<string>"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"code\": \"<string>\",\n \"message\": \"<string>\",\n \"description\": \"<string>\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Delete a secondary user store.",
+							"request": {
+								"auth": {
+									"type": "basic"
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/:userstore-domain-id",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"carbon.super",
+										"api",
+										"server",
+										"v1",
+										"userstores",
+										":userstore-domain-id"
+									],
+									"variable": [
+										{
+											"key": "tenant-domain",
+											"value": "{{tenant-domain}}",
+											"description": {
+												"content": "",
+												"type": "text/plain"
+											}
+										},
+										{
+											"key": "userstore-domain-id",
+											"value": "<string>",
+											"description": "The unique name of the user store domain"
+										}
+									]
+								},
+								"description": "This API provides the capability to delete a secondary user store matching to the given user store domain id.\n\n <b>Permission required:</b>\n */permission/admin\n"
+							},
+							"response": [
+								{
+									"name": "Resource Forbidden.",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/<string>",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"carbon.super",
+												"api",
+												"server",
+												"v1",
+												"userstores",
+												"<string>"
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Unauthorized.",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/<string>",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"carbon.super",
+												"api",
+												"server",
+												"v1",
+												"userstores",
+												"<string>"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"code\": \"<string>\",\n \"message\": \"<string>\",\n \"description\": \"<string>\"\n}"
+								},
+								{
+									"name": "Internal Server Error.",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/<string>",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"carbon.super",
+												"api",
+												"server",
+												"v1",
+												"userstores",
+												"<string>"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"code\": \"<string>\",\n \"message\": \"<string>\",\n \"description\": \"<string>\"\n}"
+								},
+								{
+									"name": "The specified resource is not found.",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/<string>",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"carbon.super",
+												"api",
+												"server",
+												"v1",
+												"userstores",
+												"<string>"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"code\": \"<string>\",\n \"message\": \"<string>\",\n \"description\": \"<string>\"\n}"
+								},
+								{
+									"name": "No Content.",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/<string>",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"carbon.super",
+												"api",
+												"server",
+												"v1",
+												"userstores",
+												"<string>"
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Update a user store by its domain id.",
+							"request": {
+								"auth": {
+									"type": "basic"
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"typeId\": \"<string>\",\n    \"description\": \"<string>\",\n    \"name\": \"<string>\",\n    \"properties\": [\n        {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n        },\n        {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n        }\n    ]\n}"
+								},
+								"url": {
+									"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/:userstore-domain-id",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"carbon.super",
+										"api",
+										"server",
+										"v1",
+										"userstores",
+										":userstore-domain-id"
+									],
+									"variable": [
+										{
+											"key": "tenant-domain",
+											"value": "{{tenant-domain}}",
+											"description": {
+												"content": "",
+												"type": "text/plain"
+											}
+										},
+										{
+											"key": "userstore-domain-id",
+											"value": "<string>",
+											"description": "Current domain id of the user store"
+										}
+									]
+								},
+								"description": "This API provides the capability to edit a user store based on its domain id.\n\n <b>Permission required:</b>\n  */permission/admin\n"
+							},
+							"response": [
+								{
+									"name": "Resource Forbidden.",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"typeId\": \"<string>\",\n    \"description\": \"<string>\",\n    \"name\": \"<string>\",\n    \"properties\": [\n        {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n        },\n        {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n        }\n    ]\n}"
+										},
+										"url": {
+											"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/<string>",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"carbon.super",
+												"api",
+												"server",
+												"v1",
+												"userstores",
+												"<string>"
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Internal Server Error.",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"typeId\": \"<string>\",\n    \"description\": \"<string>\",\n    \"name\": \"<string>\",\n    \"properties\": [\n        {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n        },\n        {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n        }\n    ]\n}"
+										},
+										"url": {
+											"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/<string>",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"carbon.super",
+												"api",
+												"server",
+												"v1",
+												"userstores",
+												"<string>"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"code\": \"<string>\",\n \"message\": \"<string>\",\n \"description\": \"<string>\"\n}"
+								},
+								{
+									"name": "Invalid input request.",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"typeId\": \"<string>\",\n    \"description\": \"<string>\",\n    \"name\": \"<string>\",\n    \"properties\": [\n        {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n        },\n        {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n        }\n    ]\n}"
+										},
+										"url": {
+											"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/<string>",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"carbon.super",
+												"api",
+												"server",
+												"v1",
+												"userstores",
+												"<string>"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"code\": \"<string>\",\n \"message\": \"<string>\",\n \"description\": \"<string>\"\n}"
+								},
+								{
+									"name": "Successful response.",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"typeId\": \"<string>\",\n    \"description\": \"<string>\",\n    \"name\": \"<string>\",\n    \"properties\": [\n        {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n        },\n        {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n        }\n    ]\n}"
+										},
+										"url": {
+											"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/<string>",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"carbon.super",
+												"api",
+												"server",
+												"v1",
+												"userstores",
+												"<string>"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"id\": \"<string>\",\n \"name\": \"<string>\",\n \"typeName\": \"<string>\",\n \"typeId\": \"<string>\",\n \"description\": \"<string>\",\n \"properties\": [\n  {\n   \"name\": \"<string>\",\n   \"value\": \"<string>\"\n  },\n  {\n   \"name\": \"<string>\",\n   \"value\": \"<string>\"\n  }\n ]\n}"
+								},
+								{
+									"name": "The specified resource is not found.",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"typeId\": \"<string>\",\n    \"description\": \"<string>\",\n    \"name\": \"<string>\",\n    \"properties\": [\n        {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n        },\n        {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n        }\n    ]\n}"
+										},
+										"url": {
+											"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/<string>",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"carbon.super",
+												"api",
+												"server",
+												"v1",
+												"userstores",
+												"<string>"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"code\": \"<string>\",\n \"message\": \"<string>\",\n \"description\": \"<string>\"\n}"
+								},
+								{
+									"name": "Unauthorized.",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"typeId\": \"<string>\",\n    \"description\": \"<string>\",\n    \"name\": \"<string>\",\n    \"properties\": [\n        {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n        },\n        {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n        }\n    ]\n}"
+										},
+										"url": {
+											"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/<string>",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"carbon.super",
+												"api",
+												"server",
+												"v1",
+												"userstores",
+												"<string>"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"code\": \"<string>\",\n \"message\": \"<string>\",\n \"description\": \"<string>\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Patch the secondary user store by it's domain id.",
+							"request": {
+								"auth": {
+									"type": "basic"
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    {\n        \"operation\": \"<string>\",\n        \"path\": \"<string>\",\n        \"value\": \"<string>\"\n    },\n    {\n        \"operation\": \"<string>\",\n        \"path\": \"<string>\",\n        \"value\": \"<string>\"\n    }\n]"
+								},
+								"url": {
+									"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/:userstore-domain-id",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"carbon.super",
+										"api",
+										"server",
+										"v1",
+										"userstores",
+										":userstore-domain-id"
+									],
+									"variable": [
+										{
+											"key": "tenant-domain",
+											"value": "{{tenant-domain}}",
+											"description": {
+												"content": "",
+												"type": "text/plain"
+											}
+										},
+										{
+											"key": "userstore-domain-id",
+											"value": "<string>",
+											"description": "The unique name of the user store domain"
+										}
+									]
+								},
+								"description": "This API provides the capability to update the secondary user store's property using patch request by using it's domain id.\n\n <b>Permission required:</b>\n */permission/admin\n"
+							},
+							"response": [
+								{
+									"name": "The specified resource is not found.",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "[\n    {\n        \"operation\": \"<string>\",\n        \"path\": \"<string>\",\n        \"value\": \"<string>\"\n    },\n    {\n        \"operation\": \"<string>\",\n        \"path\": \"<string>\",\n        \"value\": \"<string>\"\n    }\n]"
+										},
+										"url": {
+											"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/<string>",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"carbon.super",
+												"api",
+												"server",
+												"v1",
+												"userstores",
+												"<string>"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"code\": \"<string>\",\n \"message\": \"<string>\",\n \"description\": \"<string>\"\n}"
+								},
+								{
+									"name": "Internal Server Error.",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "[\n    {\n        \"operation\": \"<string>\",\n        \"path\": \"<string>\",\n        \"value\": \"<string>\"\n    },\n    {\n        \"operation\": \"<string>\",\n        \"path\": \"<string>\",\n        \"value\": \"<string>\"\n    }\n]"
+										},
+										"url": {
+											"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/<string>",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"carbon.super",
+												"api",
+												"server",
+												"v1",
+												"userstores",
+												"<string>"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"code\": \"<string>\",\n \"message\": \"<string>\",\n \"description\": \"<string>\"\n}"
+								},
+								{
+									"name": "Invalid input request.",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "[\n    {\n        \"operation\": \"<string>\",\n        \"path\": \"<string>\",\n        \"value\": \"<string>\"\n    },\n    {\n        \"operation\": \"<string>\",\n        \"path\": \"<string>\",\n        \"value\": \"<string>\"\n    }\n]"
+										},
+										"url": {
+											"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/<string>",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"carbon.super",
+												"api",
+												"server",
+												"v1",
+												"userstores",
+												"<string>"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"code\": \"<string>\",\n \"message\": \"<string>\",\n \"description\": \"<string>\"\n}"
+								},
+								{
+									"name": "Resource Forbidden.",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "[\n    {\n        \"operation\": \"<string>\",\n        \"path\": \"<string>\",\n        \"value\": \"<string>\"\n    },\n    {\n        \"operation\": \"<string>\",\n        \"path\": \"<string>\",\n        \"value\": \"<string>\"\n    }\n]"
+										},
+										"url": {
+											"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/<string>",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"carbon.super",
+												"api",
+												"server",
+												"v1",
+												"userstores",
+												"<string>"
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Successful response.",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "[\n    {\n        \"operation\": \"<string>\",\n        \"path\": \"<string>\",\n        \"value\": \"<string>\"\n    },\n    {\n        \"operation\": \"<string>\",\n        \"path\": \"<string>\",\n        \"value\": \"<string>\"\n    }\n]"
+										},
+										"url": {
+											"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/<string>",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"carbon.super",
+												"api",
+												"server",
+												"v1",
+												"userstores",
+												"<string>"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"id\": \"<string>\",\n \"name\": \"<string>\",\n \"typeName\": \"<string>\",\n \"typeId\": \"<string>\",\n \"description\": \"<string>\",\n \"properties\": [\n  {\n   \"name\": \"<string>\",\n   \"value\": \"<string>\"\n  },\n  {\n   \"name\": \"<string>\",\n   \"value\": \"<string>\"\n  }\n ]\n}"
+								},
+								{
+									"name": "Unauthorized.",
+									"originalRequest": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "[\n    {\n        \"operation\": \"<string>\",\n        \"path\": \"<string>\",\n        \"value\": \"<string>\"\n    },\n    {\n        \"operation\": \"<string>\",\n        \"path\": \"<string>\",\n        \"value\": \"<string>\"\n    }\n]"
+										},
+										"url": {
+											"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/<string>",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"carbon.super",
+												"api",
+												"server",
+												"v1",
+												"userstores",
+												"<string>"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"code\": \"<string>\",\n \"message\": \"<string>\",\n \"description\": \"<string>\"\n}"
+								}
+							]
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "meta",
+					"item": [
+						{
+							"name": "types",
+							"item": [
+								{
+									"name": "Retrieve the available user store classes/types.",
+									"request": {
+										"auth": {
+											"type": "basic"
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/meta/types",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"carbon.super",
+												"api",
+												"server",
+												"v1",
+												"userstores",
+												"meta",
+												"types"
+											],
+											"variable": [
+												{
+													"key": "tenant-domain",
+													"value": "{{tenant-domain}}",
+													"description": {
+														"content": "",
+														"type": "text/plain"
+													}
+												}
+											]
+										},
+										"description": "This API provides the capability to retrieve the available user store types.\n\n <b>Permission required:</b>\n\n*/permission/admin\n"
+									},
+									"response": [
+										{
+											"name": "Successful Response.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/meta/types",
+													"protocol": "https",
+													"host": [
+														"localhost"
+													],
+													"port": "9443",
+													"path": [
+														"t",
+														"carbon.super",
+														"api",
+														"server",
+														"v1",
+														"userstores",
+														"meta",
+														"types"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n {\n  \"typeId\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"className\": \"<string>\"\n },\n {\n  \"typeId\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"className\": \"<string>\"\n }\n]"
+										},
+										{
+											"name": "Unauthorized.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/meta/types",
+													"protocol": "https",
+													"host": [
+														"localhost"
+													],
+													"port": "9443",
+													"path": [
+														"t",
+														"carbon.super",
+														"api",
+														"server",
+														"v1",
+														"userstores",
+														"meta",
+														"types"
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"code\": \"<string>\",\n \"message\": \"<string>\",\n \"description\": \"<string>\"\n}"
+										},
+										{
+											"name": "Internal Server Error.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/meta/types",
+													"protocol": "https",
+													"host": [
+														"localhost"
+													],
+													"port": "9443",
+													"path": [
+														"t",
+														"carbon.super",
+														"api",
+														"server",
+														"v1",
+														"userstores",
+														"meta",
+														"types"
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"code\": \"<string>\",\n \"message\": \"<string>\",\n \"description\": \"<string>\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Retrieve the properties of secondary user store of a given user store type.",
+									"request": {
+										"auth": {
+											"type": "basic"
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/meta/types/:type-id?limit=<integer>&offset=<integer>&filter=<string>&sort=<string>",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"carbon.super",
+												"api",
+												"server",
+												"v1",
+												"userstores",
+												"meta",
+												"types",
+												":type-id"
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "<integer>",
+													"description": "maximum number of records to return"
+												},
+												{
+													"key": "offset",
+													"value": "<integer>",
+													"description": "number of records to skip for pagination"
+												},
+												{
+													"key": "filter",
+													"value": "<string>",
+													"description": "Condition to filter the retrival of records."
+												},
+												{
+													"key": "sort",
+													"value": "<string>",
+													"description": "Define the order how the retrieved records should be sorted."
+												}
+											],
+											"variable": [
+												{
+													"key": "tenant-domain",
+													"value": "{{tenant-domain}}",
+													"description": {
+														"content": "",
+														"type": "text/plain"
+													}
+												},
+												{
+													"key": "type-id",
+													"value": "<string>",
+													"description": "Id of the user store type"
+												}
+											]
+										},
+										"description": "This API provides the capability to retrieve the properties of secondary user store of a given class name.\n\n <b>Permission required:</b>\n\n*/permission/admin\n"
+									},
+									"response": [
+										{
+											"name": "Successful response.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/meta/types/<string>?limit=<integer>&offset=<integer>&filter=<string>&sort=<string>",
+													"protocol": "https",
+													"host": [
+														"localhost"
+													],
+													"port": "9443",
+													"path": [
+														"t",
+														"carbon.super",
+														"api",
+														"server",
+														"v1",
+														"userstores",
+														"meta",
+														"types",
+														"<string>"
+													],
+													"query": [
+														{
+															"key": "limit",
+															"value": "<integer>"
+														},
+														{
+															"key": "offset",
+															"value": "<integer>"
+														},
+														{
+															"key": "filter",
+															"value": "<string>"
+														},
+														{
+															"key": "sort",
+															"value": "<string>"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n {\n  \"name\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"typeId\": \"<string>\",\n  \"className\": \"<string>\",\n  \"description\": \"<string>\",\n  \"properties\": {\n   \"Mandatory\": [\n    {\n     \"name\": \"<string>\",\n     \"defaultValue\": \"<string>\",\n     \"description\": \"<string>\"\n    },\n    {\n     \"name\": \"<string>\",\n     \"defaultValue\": \"<string>\",\n     \"description\": \"<string>\"\n    }\n   ],\n   \"Optional\": [\n    {\n     \"name\": \"<string>\",\n     \"defaultValue\": \"<string>\",\n     \"description\": \"<string>\"\n    },\n    {\n     \"name\": \"<string>\",\n     \"defaultValue\": \"<string>\",\n     \"description\": \"<string>\"\n    }\n   ],\n   \"Advanced\": [\n    {\n     \"name\": \"<string>\",\n     \"defaultValue\": \"<string>\",\n     \"description\": \"<string>\"\n    },\n    {\n     \"name\": \"<string>\",\n     \"defaultValue\": \"<string>\",\n     \"description\": \"<string>\"\n    }\n   ]\n  }\n },\n {\n  \"name\": \"<string>\",\n  \"typeName\": \"<string>\",\n  \"typeId\": \"<string>\",\n  \"className\": \"<string>\",\n  \"description\": \"<string>\",\n  \"properties\": {\n   \"Mandatory\": [\n    {\n     \"name\": \"<string>\",\n     \"defaultValue\": \"<string>\",\n     \"description\": \"<string>\"\n    },\n    {\n     \"name\": \"<string>\",\n     \"defaultValue\": \"<string>\",\n     \"description\": \"<string>\"\n    }\n   ],\n   \"Optional\": [\n    {\n     \"name\": \"<string>\",\n     \"defaultValue\": \"<string>\",\n     \"description\": \"<string>\"\n    },\n    {\n     \"name\": \"<string>\",\n     \"defaultValue\": \"<string>\",\n     \"description\": \"<string>\"\n    }\n   ],\n   \"Advanced\": [\n    {\n     \"name\": \"<string>\",\n     \"defaultValue\": \"<string>\",\n     \"description\": \"<string>\"\n    },\n    {\n     \"name\": \"<string>\",\n     \"defaultValue\": \"<string>\",\n     \"description\": \"<string>\"\n    }\n   ]\n  }\n }\n]"
+										},
+										{
+											"name": "The specified resource is not found.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/meta/types/<string>?limit=<integer>&offset=<integer>&filter=<string>&sort=<string>",
+													"protocol": "https",
+													"host": [
+														"localhost"
+													],
+													"port": "9443",
+													"path": [
+														"t",
+														"carbon.super",
+														"api",
+														"server",
+														"v1",
+														"userstores",
+														"meta",
+														"types",
+														"<string>"
+													],
+													"query": [
+														{
+															"key": "limit",
+															"value": "<integer>"
+														},
+														{
+															"key": "offset",
+															"value": "<integer>"
+														},
+														{
+															"key": "filter",
+															"value": "<string>"
+														},
+														{
+															"key": "sort",
+															"value": "<string>"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"code\": \"<string>\",\n \"message\": \"<string>\",\n \"description\": \"<string>\"\n}"
+										},
+										{
+											"name": "Unauthorized.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/meta/types/<string>?limit=<integer>&offset=<integer>&filter=<string>&sort=<string>",
+													"protocol": "https",
+													"host": [
+														"localhost"
+													],
+													"port": "9443",
+													"path": [
+														"t",
+														"carbon.super",
+														"api",
+														"server",
+														"v1",
+														"userstores",
+														"meta",
+														"types",
+														"<string>"
+													],
+													"query": [
+														{
+															"key": "limit",
+															"value": "<integer>"
+														},
+														{
+															"key": "offset",
+															"value": "<integer>"
+														},
+														{
+															"key": "filter",
+															"value": "<string>"
+														},
+														{
+															"key": "sort",
+															"value": "<string>"
+														}
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"code\": \"<string>\",\n \"message\": \"<string>\",\n \"description\": \"<string>\"\n}"
+										},
+										{
+											"name": "Not Implemented.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/meta/types/<string>?limit=<integer>&offset=<integer>&filter=<string>&sort=<string>",
+													"protocol": "https",
+													"host": [
+														"localhost"
+													],
+													"port": "9443",
+													"path": [
+														"t",
+														"carbon.super",
+														"api",
+														"server",
+														"v1",
+														"userstores",
+														"meta",
+														"types",
+														"<string>"
+													],
+													"query": [
+														{
+															"key": "limit",
+															"value": "<integer>"
+														},
+														{
+															"key": "offset",
+															"value": "<integer>"
+														},
+														{
+															"key": "filter",
+															"value": "<string>"
+														},
+														{
+															"key": "sort",
+															"value": "<string>"
+														}
+													]
+												}
+											},
+											"status": "Not Implemented",
+											"code": 501,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"code\": \"<string>\",\n \"message\": \"<string>\",\n \"description\": \"<string>\"\n}"
+										},
+										{
+											"name": "Invalid input request.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/meta/types/<string>?limit=<integer>&offset=<integer>&filter=<string>&sort=<string>",
+													"protocol": "https",
+													"host": [
+														"localhost"
+													],
+													"port": "9443",
+													"path": [
+														"t",
+														"carbon.super",
+														"api",
+														"server",
+														"v1",
+														"userstores",
+														"meta",
+														"types",
+														"<string>"
+													],
+													"query": [
+														{
+															"key": "limit",
+															"value": "<integer>"
+														},
+														{
+															"key": "offset",
+															"value": "<integer>"
+														},
+														{
+															"key": "filter",
+															"value": "<string>"
+														},
+														{
+															"key": "sort",
+															"value": "<string>"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"code\": \"<string>\",\n \"message\": \"<string>\",\n \"description\": \"<string>\"\n}"
+										},
+										{
+											"name": "Internal Server Error.",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/meta/types/<string>?limit=<integer>&offset=<integer>&filter=<string>&sort=<string>",
+													"protocol": "https",
+													"host": [
+														"localhost"
+													],
+													"port": "9443",
+													"path": [
+														"t",
+														"carbon.super",
+														"api",
+														"server",
+														"v1",
+														"userstores",
+														"meta",
+														"types",
+														"<string>"
+													],
+													"query": [
+														{
+															"key": "limit",
+															"value": "<integer>"
+														},
+														{
+															"key": "offset",
+															"value": "<integer>"
+														},
+														{
+															"key": "filter",
+															"value": "<string>"
+														},
+														{
+															"key": "sort",
+															"value": "<string>"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"code\": \"<string>\",\n \"message\": \"<string>\",\n \"description\": \"<string>\"\n}"
+										}
+									]
+								}
+							],
+							"protocolProfileBehavior": {},
+							"_postman_isSubFolder": true
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Add a secondary user store.",
+					"request": {
+						"auth": {
+							"type": "basic"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"typeId\": \"<string>\",\n    \"description\": \"<string>\",\n    \"name\": \"<string>\",\n    \"properties\": [\n        {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n        },\n        {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "9443",
+							"path": [
+								"t",
+								"carbon.super",
+								"api",
+								"server",
+								"v1",
+								"userstores"
+							],
+							"variable": [
+								{
+									"key": "tenant-domain",
+									"value": "{{tenant-domain}}",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							]
+						},
+						"description": "This API provides the capability to add a secondary user store.\n\n <b>Permission required:</b>\n  */permission/admin\n"
+					},
+					"response": [
+						{
+							"name": "Element Already Exists.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"typeId\": \"<string>\",\n    \"description\": \"<string>\",\n    \"name\": \"<string>\",\n    \"properties\": [\n        {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n        },\n        {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n        }\n    ]\n}"
+								},
+								"url": {
+									"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"carbon.super",
+										"api",
+										"server",
+										"v1",
+										"userstores"
+									]
+								}
+							},
+							"status": "Conflict",
+							"code": 409,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"code\": \"<string>\",\n \"message\": \"<string>\",\n \"description\": \"<string>\"\n}"
+						},
+						{
+							"name": "Successful response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"typeId\": \"<string>\",\n    \"description\": \"<string>\",\n    \"name\": \"<string>\",\n    \"properties\": [\n        {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n        },\n        {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n        }\n    ]\n}"
+								},
+								"url": {
+									"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"carbon.super",
+										"api",
+										"server",
+										"v1",
+										"userstores"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Location",
+									"value": "<string>",
+									"description": "Location of the newly created secondary userstore. userstore id is generated as base-64-url-encoded(domain-name) value."
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"id\": \"<string>\",\n \"name\": \"<string>\",\n \"typeName\": \"<string>\",\n \"typeId\": \"<string>\",\n \"description\": \"<string>\",\n \"properties\": [\n  {\n   \"name\": \"<string>\",\n   \"value\": \"<string>\"\n  },\n  {\n   \"name\": \"<string>\",\n   \"value\": \"<string>\"\n  }\n ]\n}"
+						},
+						{
+							"name": "Unauthorized.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"typeId\": \"<string>\",\n    \"description\": \"<string>\",\n    \"name\": \"<string>\",\n    \"properties\": [\n        {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n        },\n        {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n        }\n    ]\n}"
+								},
+								"url": {
+									"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"carbon.super",
+										"api",
+										"server",
+										"v1",
+										"userstores"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"code\": \"<string>\",\n \"message\": \"<string>\",\n \"description\": \"<string>\"\n}"
+						},
+						{
+							"name": "Resource Forbidden.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"typeId\": \"<string>\",\n    \"description\": \"<string>\",\n    \"name\": \"<string>\",\n    \"properties\": [\n        {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n        },\n        {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n        }\n    ]\n}"
+								},
+								"url": {
+									"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"carbon.super",
+										"api",
+										"server",
+										"v1",
+										"userstores"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Invalid input request.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"typeId\": \"<string>\",\n    \"description\": \"<string>\",\n    \"name\": \"<string>\",\n    \"properties\": [\n        {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n        },\n        {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n        }\n    ]\n}"
+								},
+								"url": {
+									"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"carbon.super",
+										"api",
+										"server",
+										"v1",
+										"userstores"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"code\": \"<string>\",\n \"message\": \"<string>\",\n \"description\": \"<string>\"\n}"
+						},
+						{
+							"name": "Internal Server Error.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"typeId\": \"<string>\",\n    \"description\": \"<string>\",\n    \"name\": \"<string>\",\n    \"properties\": [\n        {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n        },\n        {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n        }\n    ]\n}"
+								},
+								"url": {
+									"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"carbon.super",
+										"api",
+										"server",
+										"v1",
+										"userstores"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"code\": \"<string>\",\n \"message\": \"<string>\",\n \"description\": \"<string>\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Retrieve or List the configured secondary user stores.",
+					"request": {
+						"auth": {
+							"type": "basic"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores?limit=<integer>&offset=<integer>&filter=<string>&sort=<string>",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "9443",
+							"path": [
+								"t",
+								"carbon.super",
+								"api",
+								"server",
+								"v1",
+								"userstores"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "<integer>",
+									"description": "maximum number of records to return"
+								},
+								{
+									"key": "offset",
+									"value": "<integer>",
+									"description": "number of records to skip for pagination"
+								},
+								{
+									"key": "filter",
+									"value": "<string>",
+									"description": "Condition to filter the retrival of records."
+								},
+								{
+									"key": "sort",
+									"value": "<string>",
+									"description": "Define the order how the retrieved records should be sorted."
+								}
+							],
+							"variable": [
+								{
+									"key": "tenant-domain",
+									"value": "{{tenant-domain}}",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							]
+						},
+						"description": "This API provides the capability to list the configured secondary userstores. <b>Permission required:</b> */permission/admin\n"
+					},
+					"response": [
+						{
+							"name": "The specified resource is not found.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores?limit=<integer>&offset=<integer>&filter=<string>&sort=<string>",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"carbon.super",
+										"api",
+										"server",
+										"v1",
+										"userstores"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "<integer>"
+										},
+										{
+											"key": "offset",
+											"value": "<integer>"
+										},
+										{
+											"key": "filter",
+											"value": "<string>"
+										},
+										{
+											"key": "sort",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"code\": \"<string>\",\n \"message\": \"<string>\",\n \"description\": \"<string>\"\n}"
+						},
+						{
+							"name": "Unauthorized.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores?limit=<integer>&offset=<integer>&filter=<string>&sort=<string>",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"carbon.super",
+										"api",
+										"server",
+										"v1",
+										"userstores"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "<integer>"
+										},
+										{
+											"key": "offset",
+											"value": "<integer>"
+										},
+										{
+											"key": "filter",
+											"value": "<string>"
+										},
+										{
+											"key": "sort",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"code\": \"<string>\",\n \"message\": \"<string>\",\n \"description\": \"<string>\"\n}"
+						},
+						{
+							"name": "Not Implemented.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores?limit=<integer>&offset=<integer>&filter=<string>&sort=<string>",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"carbon.super",
+										"api",
+										"server",
+										"v1",
+										"userstores"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "<integer>"
+										},
+										{
+											"key": "offset",
+											"value": "<integer>"
+										},
+										{
+											"key": "filter",
+											"value": "<string>"
+										},
+										{
+											"key": "sort",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"status": "Not Implemented",
+							"code": 501,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"code\": \"<string>\",\n \"message\": \"<string>\",\n \"description\": \"<string>\"\n}"
+						},
+						{
+							"name": "Internal Server Error.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores?limit=<integer>&offset=<integer>&filter=<string>&sort=<string>",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"carbon.super",
+										"api",
+										"server",
+										"v1",
+										"userstores"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "<integer>"
+										},
+										{
+											"key": "offset",
+											"value": "<integer>"
+										},
+										{
+											"key": "filter",
+											"value": "<string>"
+										},
+										{
+											"key": "sort",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"code\": \"<string>\",\n \"message\": \"<string>\",\n \"description\": \"<string>\"\n}"
+						},
+						{
+							"name": "Successful response.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores?limit=<integer>&offset=<integer>&filter=<string>&sort=<string>",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"carbon.super",
+										"api",
+										"server",
+										"v1",
+										"userstores"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "<integer>"
+										},
+										{
+											"key": "offset",
+											"value": "<integer>"
+										},
+										{
+											"key": "filter",
+											"value": "<string>"
+										},
+										{
+											"key": "sort",
+											"value": "<string>"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n {\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"self\": \"<string>\"\n },\n {\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"self\": \"<string>\"\n }\n]"
+						}
+					]
+				},
+				{
+					"name": "Test the connection to the datasource used by a JDBC user store manager.",
+					"request": {
+						"auth": {
+							"type": "basic"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"driverName\": \"<string>\",\n    \"connectionURL\": \"<string>\",\n    \"username\": \"<string>\",\n    \"connectionPassword\": \"<string>\"\n}"
+						},
+						"url": {
+							"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/test-connection",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "9443",
+							"path": [
+								"t",
+								"carbon.super",
+								"api",
+								"server",
+								"v1",
+								"userstores",
+								"test-connection"
+							],
+							"variable": [
+								{
+									"key": "tenant-domain",
+									"value": "{{tenant-domain}}",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							]
+						},
+						"description": "This API provides the capability to test the connection to the datasource used by a JDBC user store manager.\n\n  <b>Permission required:</b>\n  */permission/admin\n"
+					},
+					"response": [
+						{
+							"name": "Successful response.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"driverName\": \"<string>\",\n    \"connectionURL\": \"<string>\",\n    \"username\": \"<string>\",\n    \"connectionPassword\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/test-connection",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"carbon.super",
+										"api",
+										"server",
+										"v1",
+										"userstores",
+										"test-connection"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"connection\": \"<boolean>\"\n}"
+						},
+						{
+							"name": "Internal Server Error.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"driverName\": \"<string>\",\n    \"connectionURL\": \"<string>\",\n    \"username\": \"<string>\",\n    \"connectionPassword\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/test-connection",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"carbon.super",
+										"api",
+										"server",
+										"v1",
+										"userstores",
+										"test-connection"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"code\": \"<string>\",\n \"message\": \"<string>\",\n \"description\": \"<string>\"\n}"
+						},
+						{
+							"name": "Invalid input request.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"driverName\": \"<string>\",\n    \"connectionURL\": \"<string>\",\n    \"username\": \"<string>\",\n    \"connectionPassword\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/test-connection",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"carbon.super",
+										"api",
+										"server",
+										"v1",
+										"userstores",
+										"test-connection"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"code\": \"<string>\",\n \"message\": \"<string>\",\n \"description\": \"<string>\"\n}"
+						},
+						{
+							"name": "Unauthorized.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"driverName\": \"<string>\",\n    \"connectionURL\": \"<string>\",\n    \"username\": \"<string>\",\n    \"connectionPassword\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "https://localhost:9443/t/carbon.super/api/server/v1/userstores/test-connection",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"carbon.super",
+										"api",
+										"server",
+										"v1",
+										"userstores",
+										"test-connection"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"code\": \"<string>\",\n \"message\": \"<string>\",\n \"description\": \"<string>\"\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"variable": [
+		{
+			"id": "tenant-domain",
+			"key": "tenant-domain",
+			"value": "carbon.super",
+			"type": "any",
+			"description": {
+				"content": "undefined",
+				"type": "text/plain"
+			}
+		},
+		{
+			"id": "baseUrl",
+			"key": "baseUrl",
+			"value": "https://localhost:9443/t/carbon.super/api/server/v1",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
