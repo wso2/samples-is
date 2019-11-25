@@ -147,7 +147,7 @@
             <dependency>
                 <groupId>org.wso2.carbon.identity.agent.sso.java</groupId>
                 <artifactId>org.wso2.carbon.identity.sso.agent</artifactId>
-                <version>${identity.agent.sso.version.range}</version>
+                <version>${identity.agent.sso.version}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>opensaml.wso2</groupId>
