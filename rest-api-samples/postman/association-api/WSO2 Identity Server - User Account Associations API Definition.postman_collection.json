@@ -1,0 +1,610 @@
+{
+	"info": {
+		"_postman_id": "3ecc48ce-4e6e-4724-b03d-1d2b31ef2f2a",
+		"name": "WSO2 Identity Server - User Account Associations API Definition",
+		"description": "This document specifies a **RESTful API** for WSO2 **Identity Server** .\nIt is written with [swagger 2](http://swagger.io/).\n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "me",
+			"description": "Folder for me",
+			"item": [
+				{
+					"name": "Retrive the associations of the authenticated user.",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://localhost:9443/t/carbon.super/api/users/v1/me/associations",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "9443",
+							"path": [
+								"t",
+								"carbon.super",
+								"api",
+								"users",
+								"v1",
+								"me",
+								"associations"
+							]
+						},
+						"description": "This API is used to retrieve the associations of the authenticated user.\n\n  <b>Permission required:</b>\n\n  * /permission/admin/login\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Associate a user to the authenticated user\n",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userId\": \"john\",\n  \"password\": \"pass123\",\n  \"properties\": [\n    {\n      \"key\": \"test-key\",\n      \"value\": \"test-value\"\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "https://localhost:9443/t/carbon.super/api/users/v1/me/associations",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "9443",
+							"path": [
+								"t",
+								"carbon.super",
+								"api",
+								"users",
+								"v1",
+								"me",
+								"associations"
+							]
+						},
+						"description": "This API is used to associate a user to the authenticated user. For example if it is required associate  my user account to the user account of 'john', this endpoint can be used. userId and the password are required to associate the accounts.\n\n <b>Permission required:</b>\n * /permission/admin/login\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete all my user associations",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://localhost:9443/t/carbon.super/api/users/v1/me/associations",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "9443",
+							"path": [
+								"t",
+								"carbon.super",
+								"api",
+								"users",
+								"v1",
+								"me",
+								"associations"
+							]
+						},
+						"description": "This API is used to delete all associations of the auhtentiated user.\n\n  <b>Permission required:</b>\n\n  * /permission/admin/login\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete given user account from my user associations",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://localhost:9443/t/carbon.super/api/users/v1/me/associations/UFJJTUFSWS9qb2hu",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "9443",
+							"path": [
+								"t",
+								"carbon.super",
+								"api",
+								"users",
+								"v1",
+								"me",
+								"associations",
+								"UFJJTUFSWS9qb2hu"
+							]
+						},
+						"description": "This API is used to delete the given user account from the associations of the auhtentiated user.\n\n  <b>Permission required:</b>\n\n  * /permission/admin/login\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Retrive the federated associations of the authenticated user.",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://localhost:9443/t/carbon.super/api/users/v1/me/federated-associations",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "9443",
+							"path": [
+								"t",
+								"carbon.super",
+								"api",
+								"users",
+								"v1",
+								"me",
+								"federated-associations"
+							]
+						},
+						"description": "This API is used to retrieve the federated associations of the authenticated user.\n\n  <b>Permission required:</b>\n\n  * /permission/admin/login\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete all my federated user associations",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://localhost:9443/t/carbon.super/api/users/v1/me/federated-associations",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "9443",
+							"path": [
+								"t",
+								"carbon.super",
+								"api",
+								"users",
+								"v1",
+								"me",
+								"federated-associations"
+							]
+						},
+						"description": "This API is used to delete all federated associations of the auhtentiated user.\n\n  <b>Permission required:</b>\n\n  * /permission/admin/login\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete my federated association",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://localhost:9443/t/carbon.super/api/users/v1/me/federated-associations/2e053351-0d69-476e-81df-04a9cfdfb50e",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "9443",
+							"path": [
+								"t",
+								"carbon.super",
+								"api",
+								"users",
+								"v1",
+								"me",
+								"federated-associations",
+								"2e053351-0d69-476e-81df-04a9cfdfb50e"
+							]
+						},
+						"description": "This API is used to delete a federated association of the auhtentiated user.\n\n<b>Permission required:</b>\n  * /permission/admin/manage/identity/user/association/delete\n"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "{user-id}",
+			"description": "Folder for {user-id}",
+			"item": [
+				{
+					"name": "Get user's associations",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://localhost:9443/t/carbon.super/api/users/v1/UFJJTUFSWS9qb2hu/associations",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "9443",
+							"path": [
+								"t",
+								"carbon.super",
+								"api",
+								"users",
+								"v1",
+								"UFJJTUFSWS9qb2hu",
+								"associations"
+							]
+						},
+						"description": "This API is used to retrieve the associations of the user.\n\n  <b>Permission required:</b>\n* /permission/admin/manage/identity/user/association/view\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user's all user associations",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://localhost:9443/t/carbon.super/api/users/v1/UFJJTUFSWS9qb2hu/associations",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "9443",
+							"path": [
+								"t",
+								"carbon.super",
+								"api",
+								"users",
+								"v1",
+								"UFJJTUFSWS9qb2hu",
+								"associations"
+							]
+						},
+						"description": "This API is used to delete all associations of the  user.\n\n<b>Permission required:</b>\n  * /permission/admin/manage/identity/user/association/delete\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Get user's federated associations",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://localhost:9443/t/carbon.super/api/users/v1/2e053351-0d69-476e-81df-04a9cfdfb50e/federated-associations",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "9443",
+							"path": [
+								"t",
+								"carbon.super",
+								"api",
+								"users",
+								"v1",
+								"2e053351-0d69-476e-81df-04a9cfdfb50e",
+								"federated-associations"
+							]
+						},
+						"description": "This API is used to retrieve the federated associations of the user.\n\n  <b>Permission required:</b>\n* /permission/admin/manage/identity/user/association/view\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user's all user federated associations",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://localhost:9443/t/carbon.super/api/users/v1/UFJJTUFSWS9qb2hu/federated-associations",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "9443",
+							"path": [
+								"t",
+								"carbon.super",
+								"api",
+								"users",
+								"v1",
+								"UFJJTUFSWS9qb2hu",
+								"federated-associations"
+							]
+						},
+						"description": "This API is used to delete all federated associations of the  user.\n\n<b>Permission required:</b>\n  * /permission/admin/manage/identity/user/association/delete\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user's federated association",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://localhost:9443/t/carbon.super/api/users/v1/UFJJTUFSWS9qb2hu/federated-associations/UFJJTUFSWS9qb2hu",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "9443",
+							"path": [
+								"t",
+								"carbon.super",
+								"api",
+								"users",
+								"v1",
+								"UFJJTUFSWS9qb2hu",
+								"federated-associations",
+								"UFJJTUFSWS9qb2hu"
+							]
+						},
+						"description": "This API is used to delete a federated association of the user.\n\n<b>Permission required:</b>\n  * /permission/admin/manage/identity/user/association/delete\n"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
