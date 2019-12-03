@@ -45,8 +45,9 @@ public class TestUtils {
 
     public static void setSystemProperties() {
 
-        String trustStore = (new File("")).getAbsolutePath() + File.separator + "src" + File.separator +
-                "test" + File.separator + "resources" + File.separator + TRUST_STORE;
+        String trustStore = (new File("")).getAbsolutePath() + File.separator + "sample-saml-query-profile" +
+                File.separator + "saml-query-profile-client" + File.separator + "src" + File.separator + "test" +
+                File.separator + "resources" + File.separator + TRUST_STORE;
 
         System.setProperty("javax.net.ssl.trustStore", trustStore);
         System.setProperty("javax.net.ssl.trustStorePassword", TRUST_STORE_PASSWORD);

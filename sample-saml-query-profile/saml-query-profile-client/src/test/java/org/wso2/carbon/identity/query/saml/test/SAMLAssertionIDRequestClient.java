@@ -46,7 +46,7 @@ public class SAMLAssertionIDRequestClient {
     private static final String DIGEST_METHOD_ALGO = "http://www.w3.org/2000/09/xmldsig#rsa-sha1";
     private static final String SIGNING_ALGO = "http://www.w3.org/2000/09/xmldsig#sha1";
     private static final String ISSUER_ID = "travelocity.com";
-    private static final String ASSERTION_ID = "_8661169b40aef52a9872577092351220";
+    private static final String ASSERTION_ID = "_1fa5d5ad740020a3c1dc4226325876e4";
 
     public static void main(String[] ags) throws Exception {
 
