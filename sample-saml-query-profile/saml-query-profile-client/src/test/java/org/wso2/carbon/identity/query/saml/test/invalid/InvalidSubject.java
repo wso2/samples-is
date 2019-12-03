@@ -18,7 +18,7 @@
  *
  */
 
-package org.wso2.carbon.identity.query.saml.test.errordemo;
+package org.wso2.carbon.identity.query.saml.test.invalid;
 
 import org.apache.axiom.om.OMElement;
 import org.apache.axis2.client.ServiceClient;

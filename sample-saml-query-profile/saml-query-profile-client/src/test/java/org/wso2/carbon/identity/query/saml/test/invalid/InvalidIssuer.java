@@ -18,8 +18,7 @@
  *
  */
 
-package org.wso2.carbon.identity.query.saml.test.errordemo;
-
+package org.wso2.carbon.identity.query.saml.test.invalid;
 
 import org.apache.axiom.om.OMElement;
 import org.apache.axis2.client.ServiceClient;
@@ -27,13 +26,20 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.joda.time.DateTime;
 import org.opensaml.saml.common.SAMLVersion;
-import org.opensaml.saml.saml2.core.AssertionIDRef;
-import org.opensaml.saml.saml2.core.AssertionIDRequest;
+import org.opensaml.saml.saml1.core.NameIdentifier;
+import org.opensaml.saml.saml2.core.AttributeQuery;
 import org.opensaml.saml.saml2.core.Issuer;
+import org.opensaml.saml.saml2.core.NameID;
 import org.opensaml.saml.saml2.core.NameIDType;
-import org.opensaml.saml.saml2.core.impl.AssertionIDRefBuilder;
-import org.opensaml.saml.saml2.core.impl.AssertionIDRequestBuilder;
+import org.opensaml.saml.saml2.core.Subject;
+import org.opensaml.saml.saml2.core.SubjectConfirmation;
+import org.opensaml.saml.saml2.core.SubjectConfirmationData;
+import org.opensaml.saml.saml2.core.impl.AttributeQueryBuilder;
 import org.opensaml.saml.saml2.core.impl.IssuerBuilder;
+import org.opensaml.saml.saml2.core.impl.NameIDBuilder;
+import org.opensaml.saml.saml2.core.impl.SubjectBuilder;
+import org.opensaml.saml.saml2.core.impl.SubjectConfirmationBuilder;
+import org.opensaml.saml.saml2.core.impl.SubjectConfirmationDataBuilder;
 import org.wso2.carbon.identity.query.saml.exception.IdentitySAML2QueryException;
 import org.wso2.carbon.identity.query.saml.test.SPSignKeyDataHolder;
 import org.wso2.carbon.identity.query.saml.test.TestUtils;
@@ -42,14 +48,15 @@ import org.wso2.carbon.identity.query.saml.util.SAMLQueryRequestUtil;
 
 import java.util.UUID;
 
-public class InvalidAssertionID {
 
-    private final static Log log = LogFactory.getLog(InvalidAssertionID.class);
+public class InvalidIssuer {
+
+    private final static Log log = LogFactory.getLog(InvalidIssuer.class);
 
     private static final String DIGEST_METHOD_ALGO = "http://www.w3.org/2000/09/xmldsig#rsa-sha1";
     private static final String SIGNING_ALGO = "http://www.w3.org/2000/09/xmldsig#sha1";
-    private static final String ISSUER_ID = "travelocity.com";
-    private static final String ASSERTION_ID = "455435747476658";
+    private static final String ISSUER_ID = "travelocity1.com";
+    private static final String NAME_ID = "admin";
 
     public static void main(String[] ags) throws Exception {
 
@@ -64,24 +71,38 @@ public class InvalidAssertionID {
         issuer.setValue(ISSUER_ID);
         issuer.setFormat(NameIDType.ENTITY);
 
-        AssertionIDRef assertionIDRef = new AssertionIDRefBuilder().buildObject();
-        assertionIDRef.setAssertionID(ASSERTION_ID);
+        NameID nameID = new NameIDBuilder().buildObject();
+        nameID.setValue(NAME_ID);
+        nameID.setFormat(NameIdentifier.EMAIL);
 
-        AssertionIDRequest idRequest = new AssertionIDRequestBuilder().buildObject();
-        idRequest.setVersion(SAMLVersion.VERSION_20);
-        idRequest.setID(REQUEST_ID);
-        idRequest.setIssueInstant(issueInstant);
-        idRequest.setIssuer(issuer);
-        idRequest.getAssertionIDRefs().add(assertionIDRef);
+        SubjectConfirmation subjectConfirmation = new SubjectConfirmationBuilder().buildObject();
+        SubjectConfirmationData subjectConfirmationData =
+                new SubjectConfirmationDataBuilder().buildObject();
+        subjectConfirmationData.setNotOnOrAfter(notOnOrAfter);
+        subjectConfirmation.setSubjectConfirmationData(subjectConfirmationData);
+        subjectConfirmation.setMethod(SubjectConfirmation.METHOD_BEARER);
+
+        Subject subject = new SubjectBuilder().buildObject();
+        subject.getSubjectConfirmations().add(subjectConfirmation);
+        subject.setNameID(nameID);
+
+        // AttributeQuery Request
+        AttributeQuery attributeQuery = new AttributeQueryBuilder().buildObject();
+        attributeQuery.setVersion(SAMLVersion.VERSION_20);
+        attributeQuery.setID(REQUEST_ID);
+        attributeQuery.setIssueInstant(issueInstant);
+        attributeQuery.setIssuer(issuer);
+        attributeQuery.setSubject(subject);
+        /*End of AttributeQuery Request*/
 
         SAMLQueryRequestUtil.doBootstrap();
 
-        OpenSAML3Util.setSSOSignature(idRequest, DIGEST_METHOD_ALGO,
+        OpenSAML3Util.setSSOSignature(attributeQuery, DIGEST_METHOD_ALGO,
                 SIGNING_ALGO, new SPSignKeyDataHolder());
 
         try {
-            body = SAMLQueryRequestUtil.marshall(idRequest);
-            System.out.println("----Sample AssertionIDRequest  Message----\n" + body);
+            body = SAMLQueryRequestUtil.marshall(attributeQuery);
+            System.out.println("----Sample AttributeQuery Request Message----\n" + body);
         } catch (Exception e) {
             log.error(e.getMessage());
             throw new IdentitySAML2QueryException("Error while marshalling the request.", e);
@@ -107,9 +128,8 @@ public class InvalidAssertionID {
         // Set message to service.
         OMElement result = TestUtils.receiveResultFromServiceClient(serviceClient, body);
 
-        // printing return message.
+        // Printing return message.
         if (result != null) {
-            log.info("------Response Message From WSO2 Identity Server-----\n" + result.toString());
             System.out.println("------Response Message From WSO2 Identity Server-----\n" + result.toString());
         } else {
             log.error("Response message is null");
