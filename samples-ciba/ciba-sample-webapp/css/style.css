@@ -1,12 +1,12 @@
 /* [Master Stylesheet v-1.0.0] */
 /* :: :: 1.0 Import Fonts */
-@import url(../css/bootstrap.min.css);
-@import url(../css/owl.carousel.css);
-@import url(../css/animate.css);
-@import url(../css/magnific-popup.css);
-@import url(../css/jquery-ui.min.css);
-@import url(../css/nice-select.css);
-@import url(../css/font-awesome.min.css);
+@import url(bootstrap.min.css);
+@import url(owl.carousel.css);
+@import url(animate.css);
+@import url(magnific-popup.css);
+@import url(jquery-ui.min.css);
+@import url(nice-select.css);
+@import url(font-awesome.min.css);
 @font-face {
   font-family: 'helveticaneuebold';
   src: url("../fonts/helvetica_neu_bold-webfont.woff2") format("woff2"), url("../fonts/helvetica_neu_bold-webfont.woff") format("woff");

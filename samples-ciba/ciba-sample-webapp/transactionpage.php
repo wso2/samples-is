@@ -78,7 +78,7 @@ oFormObject.elements["binding_message"].value=text;
 						
 					</div>
 						<div class="d-flex justify-content-center form_container">
-	                                      <form action=authenticationpage.php id="cibaForms"  method="get">
+	                                      <form action=authenticationpage.php id="cibaForms" method="get">
 
 <div style = "position:absolute; left:180px; top:250px;">
 
