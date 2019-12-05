@@ -1,0 +1,12 @@
+---
+#config_file
+appName: payhere
+clientId: ZzxmDqqK8YYfjtlOh9vw85qnNVoa
+clientSecret: ZkaeWpAW3RztIm4hKAgmf251LdAa
+storeConnectorType: JDBC
+database: ArtifactStore
+dbUserName: root
+flowMode: poll
+clientNotificationEndpoint: http://localhost/PayHere/clientNotificationEnd
+dbUserPassword:
+

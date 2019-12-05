@@ -1,0 +1,150 @@
+{
+	"info": {
+		"_postman_id": "5fe88042-e76f-4976-be10-7d92b001186e",
+		"name": "CIBA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "AuthenticationPropoerRequest",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": [
+				{
+					"name": "AuthenticationPropoerRequest",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/CIBAEndPoint?request=eyJraWQiOiJsdGFjZXNidyIsImFsZyI6IlJTMjU2In0.eyJpc3MiOiJz\n   NkJoZFJrcXQzIiwiYXVkIjoiaHR0cHM6Ly9zZXJ2ZXIuZXhhbXBsZS5jb20iLCJl\n   eHAiOjE1Mzc4MjAwODYsImlhdCI6MTUzNzgxOTQ4NiwibmJmIjoxNTM3ODE4ODg2\n   LCJqdGkiOiI0TFRDcUFDQzJFU0M1QldDbk4zajU4RW5BIiwic2NvcGUiOiJvcGVu\n   aWQgZW1haWwgZXhhbXBsZS1zY29wZSIsImNsaWVudF9ub3RpZmljYXRpb25fdG9r\n   ZW4iOiI4ZDY3ZGM3OC03ZmFhLTRkNDEtYWFiZC02NzcwN2IzNzQyNTUiLCJiaW5k\n   aW5nX21lc3NhZ2UiOiJXNFNDVCIsImxvZ2luX2hpbnRfdG9rZW4iOiJleUpyYVdR\n   aU9pSnNkR0ZqWlhOaWR5SXNJbUZzWnlJNklsSlRNalUySW4wLmV5SnpkV0pxWldO\n   MElqcDdJbk4xWW1wbFkzUmZkSGx3WlNJNkluQm9iMjVsSWl3aWNHaHZibVVpT2lJ\n   ck1UTXpNREk0TVRnd01EUWlmWDAuWUI4XzhPa3NKZDFGd2ZWc0lVbEgtcnM5Y1Bo\n   a0lhMERVaTdPVldfRGE5Z1A2aHVCeGY3YVNEbDNxS1hBMjB1VDF6VGh1U2lZejBi\n   ZHo4Sl9LUFJIdUM2dndvRmx6OXlCSjlrc1dPUDI4c0hQUGkxOV80LXhpZHduYjhQ\n   MTItUm9Yd1kyZUFGODJfTkFuMnZtcHZxVWpsdW9XeU5IYXk4dmd1Q2hJdXRxemlW\n   MGJGbC03b2F4cDM2aTRlbGJ2VF9EWWVnMjBhMGp6NHdJQktjXzQ2SzhJMjhFcmt3\n   Ykk1TzM1R2ZFbFBYbC00SjU1Tkhra09zRHh1VVlRdFdqU00zd21lMTk3MzVYV3Ey\n   RElUMm5tTEZpNEh6elQyN1cwY25KZzdMX2FpOXVOTkJ2SXhfTXA1QWJjbWtSODNh\n   cFI0anhuUXVFNVhmMjNxeVJwQWhhd2U3SVBRIn0.IBuxW3F_L9tj9f6fGC7FnVsH\n   9B9RoJYA8QyxtnxgOgMc1kcnufyGxdtd7lU1TjPCVNsbkR0vfGasCmoMYSMohPOb\n   nwAlkm8Yf0uglhxM83B0dj_I10vwlMGnVFvydaH9wnacM4Ln7E-JIYOxtZa33abf\n   1PB3fLs29GKOBmgNPn3NrxJ0iCLb0F243556Ypzdhcyj7vM8ukNzkKT3eQ0ZWJ1v\n   VRToThgKyIN-HvLFpeSfJtSH5ycMYOjob-qXUgKpQryUbgbpqsM1XnUV-8aBD5d8\n   VF5fQoz0PQWq63B_zpC22nstIFxNmfxztSFpnW0vgX0htNKOtL_HMwFRfwh71g",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"CIBAEndPoint"
+							],
+							"query": [
+								{
+									"key": "request",
+									"value": "eyJraWQiOiJsdGFjZXNidyIsImFsZyI6IlJTMjU2In0.eyJpc3MiOiJz\n   NkJoZFJrcXQzIiwiYXVkIjoiaHR0cHM6Ly9zZXJ2ZXIuZXhhbXBsZS5jb20iLCJl\n   eHAiOjE1Mzc4MjAwODYsImlhdCI6MTUzNzgxOTQ4NiwibmJmIjoxNTM3ODE4ODg2\n   LCJqdGkiOiI0TFRDcUFDQzJFU0M1QldDbk4zajU4RW5BIiwic2NvcGUiOiJvcGVu\n   aWQgZW1haWwgZXhhbXBsZS1zY29wZSIsImNsaWVudF9ub3RpZmljYXRpb25fdG9r\n   ZW4iOiI4ZDY3ZGM3OC03ZmFhLTRkNDEtYWFiZC02NzcwN2IzNzQyNTUiLCJiaW5k\n   aW5nX21lc3NhZ2UiOiJXNFNDVCIsImxvZ2luX2hpbnRfdG9rZW4iOiJleUpyYVdR\n   aU9pSnNkR0ZqWlhOaWR5SXNJbUZzWnlJNklsSlRNalUySW4wLmV5SnpkV0pxWldO\n   MElqcDdJbk4xWW1wbFkzUmZkSGx3WlNJNkluQm9iMjVsSWl3aWNHaHZibVVpT2lJ\n   ck1UTXpNREk0TVRnd01EUWlmWDAuWUI4XzhPa3NKZDFGd2ZWc0lVbEgtcnM5Y1Bo\n   a0lhMERVaTdPVldfRGE5Z1A2aHVCeGY3YVNEbDNxS1hBMjB1VDF6VGh1U2lZejBi\n   ZHo4Sl9LUFJIdUM2dndvRmx6OXlCSjlrc1dPUDI4c0hQUGkxOV80LXhpZHduYjhQ\n   MTItUm9Yd1kyZUFGODJfTkFuMnZtcHZxVWpsdW9XeU5IYXk4dmd1Q2hJdXRxemlW\n   MGJGbC03b2F4cDM2aTRlbGJ2VF9EWWVnMjBhMGp6NHdJQktjXzQ2SzhJMjhFcmt3\n   Ykk1TzM1R2ZFbFBYbC00SjU1Tkhra09zRHh1VVlRdFdqU00zd21lMTk3MzVYV3Ey\n   RElUMm5tTEZpNEh6elQyN1cwY25KZzdMX2FpOXVOTkJ2SXhfTXA1QWJjbWtSODNh\n   cFI0anhuUXVFNVhmMjNxeVJwQWhhd2U3SVBRIn0.IBuxW3F_L9tj9f6fGC7FnVsH\n   9B9RoJYA8QyxtnxgOgMc1kcnufyGxdtd7lU1TjPCVNsbkR0vfGasCmoMYSMohPOb\n   nwAlkm8Yf0uglhxM83B0dj_I10vwlMGnVFvydaH9wnacM4Ln7E-JIYOxtZa33abf\n   1PB3fLs29GKOBmgNPn3NrxJ0iCLb0F243556Ypzdhcyj7vM8ukNzkKT3eQ0ZWJ1v\n   VRToThgKyIN-HvLFpeSfJtSH5ycMYOjob-qXUgKpQryUbgbpqsM1XnUV-8aBD5d8\n   VF5fQoz0PQWq63B_zpC22nstIFxNmfxztSFpnW0vgX0htNKOtL_HMwFRfwh71g"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "85"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 04 Aug 2019 04:28:07 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\"auth_req_id\":\"1c266114-a1be-4252-8ad1-04986c5b9ac1\",\"interval\":2,\"expires_in\":3600}"
+				}
+			]
+		},
+		{
+			"name": "AuthenticationInvalidRequest",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TokenProperRequest",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/TokenEndPoint?auth_req_id=89445498-2fcd-4e9d-aa8c-2cfd515fb3cf&grant_type=urn:openid:params:grant-type:ciba",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"TokenEndPoint"
+					],
+					"query": [
+						{
+							"key": "auth_req_id",
+							"value": "89445498-2fcd-4e9d-aa8c-2cfd515fb3cf"
+						},
+						{
+							"key": "grant_type",
+							"value": "urn:openid:params:grant-type:ciba"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TokenInvalidRequest",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TokenInvalidRequest2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		}
+	]
+}
