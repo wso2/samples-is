@@ -1,0 +1,55 @@
+
+/* Pen-specific styles */
+* {
+  box-sizing: border-box;
+}
+body {
+  font-size: 1.25rem;
+  font-family: sans-serif;
+  line-height: 150%;
+
+}
+
+section {
+  
+  text-align: left;
+
+
+}
+
+div {
+  height: 100%;
+}
+
+
+h1 {
+  font-size: 1.75rem;
+ text-align: center;
+}
+  
+}
+
+/* Pattern styles */
+.container {
+  display: table;
+  width: 100%;
+}
+
+.left-half {
+  background-color:#FFFFFF;
+  position: absolute;
+  left: 0px;
+  width: 50%;
+}
+
+.right-half {
+
+  position: absolute;
+  right: 0px;
+  width: 50%;
+}
+h3{
+color: black;
+}
+
+
