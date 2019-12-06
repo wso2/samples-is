@@ -16,7 +16,7 @@
  * under the License.
  */
 
-package org.wso2.carbon.identity.query.saml.test;
+package org.wso2.carbon.identity.saml.query.profile.test;
 
 import org.apache.xml.security.signature.XMLSignature;
 import org.opensaml.security.credential.Credential;
@@ -52,9 +52,9 @@ public class SPSignKeyDataHolder implements X509Credential {
 
     public SPSignKeyDataHolder() throws IdentityException {
 
-        String keyStorePath = (new File("")).getAbsolutePath() + File.separator + "sample-saml-query-profile" +
-                File.separator + "saml-query-profile-client" + File.separator + "src" + File.separator + "test" +
-                File.separator + "resources" + File.separator + "wso2carbon.jks";
+        ClassLoader loader = SPSignKeyDataHolder.class.getClassLoader();
+        String keyStorePath = new File(loader.getResource("wso2carbon.jks").getPath()).getAbsolutePath();
+        System.out.println("Key store path : " + keyStorePath);
         String keyAlias = "wso2carbon";
         String password = "wso2carbon";
         Certificate[] certificates;

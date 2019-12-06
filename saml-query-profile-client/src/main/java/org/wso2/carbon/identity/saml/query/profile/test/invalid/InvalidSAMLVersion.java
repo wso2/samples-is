@@ -16,7 +16,7 @@
  * under the License.
  */
 
-package org.wso2.carbon.identity.query.saml.test.invalid;
+package org.wso2.carbon.identity.saml.query.profile.test.invalid;
 
 import org.apache.axiom.om.OMElement;
 import org.apache.axis2.client.ServiceClient;
@@ -39,21 +39,21 @@ import org.opensaml.saml.saml2.core.impl.SubjectBuilder;
 import org.opensaml.saml.saml2.core.impl.SubjectConfirmationBuilder;
 import org.opensaml.saml.saml2.core.impl.SubjectConfirmationDataBuilder;
 import org.wso2.carbon.identity.query.saml.exception.IdentitySAML2QueryException;
-import org.wso2.carbon.identity.query.saml.test.SPSignKeyDataHolder;
-import org.wso2.carbon.identity.query.saml.test.TestUtils;
+import org.wso2.carbon.identity.saml.query.profile.test.SPSignKeyDataHolder;
+import org.wso2.carbon.identity.saml.query.profile.test.TestUtils;
 import org.wso2.carbon.identity.query.saml.util.OpenSAML3Util;
 import org.wso2.carbon.identity.query.saml.util.SAMLQueryRequestUtil;
 
 import java.util.UUID;
 
 
-public class InvalidIssuer {
+public class InvalidSAMLVersion {
 
-    private final static Log log = LogFactory.getLog(InvalidIssuer.class);
+    private final static Log log = LogFactory.getLog(InvalidSAMLVersion.class);
 
     private static final String DIGEST_METHOD_ALGO = "http://www.w3.org/2000/09/xmldsig#rsa-sha1";
     private static final String SIGNING_ALGO = "http://www.w3.org/2000/09/xmldsig#sha1";
-    private static final String ISSUER_ID = "travelocity1.com";
+    private static final String ISSUER_ID = "travelocity.com";
     private static final String NAME_ID = "admin";
 
     public static void main(String[] ags) throws Exception {
@@ -86,12 +86,12 @@ public class InvalidIssuer {
 
         // AttributeQuery Request
         AttributeQuery attributeQuery = new AttributeQueryBuilder().buildObject();
-        attributeQuery.setVersion(SAMLVersion.VERSION_20);
+        attributeQuery.setVersion(SAMLVersion.VERSION_10);
         attributeQuery.setID(REQUEST_ID);
         attributeQuery.setIssueInstant(issueInstant);
         attributeQuery.setIssuer(issuer);
         attributeQuery.setSubject(subject);
-        /*End of AttributeQuery Request*/
+        // End of AttributeQuery Request
 
         SAMLQueryRequestUtil.doBootstrap();
 

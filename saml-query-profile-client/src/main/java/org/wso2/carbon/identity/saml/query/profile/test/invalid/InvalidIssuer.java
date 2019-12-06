@@ -16,7 +16,7 @@
  * under the License.
  */
 
-package org.wso2.carbon.identity.query.saml.test;
+package org.wso2.carbon.identity.saml.query.profile.test.invalid;
 
 import org.apache.axiom.om.OMElement;
 import org.apache.axis2.client.ServiceClient;
@@ -25,46 +25,36 @@ import org.apache.commons.logging.LogFactory;
 import org.joda.time.DateTime;
 import org.opensaml.saml.common.SAMLVersion;
 import org.opensaml.saml.saml1.core.NameIdentifier;
-import org.opensaml.saml.saml2.core.Action;
-import org.opensaml.saml.saml2.core.AssertionIDRef;
-import org.opensaml.saml.saml2.core.AuthzDecisionQuery;
-import org.opensaml.saml.saml2.core.Evidence;
+import org.opensaml.saml.saml2.core.AttributeQuery;
 import org.opensaml.saml.saml2.core.Issuer;
 import org.opensaml.saml.saml2.core.NameID;
 import org.opensaml.saml.saml2.core.NameIDType;
 import org.opensaml.saml.saml2.core.Subject;
 import org.opensaml.saml.saml2.core.SubjectConfirmation;
 import org.opensaml.saml.saml2.core.SubjectConfirmationData;
-import org.opensaml.saml.saml2.core.impl.ActionBuilder;
-import org.opensaml.saml.saml2.core.impl.AssertionIDRefBuilder;
-import org.opensaml.saml.saml2.core.impl.AuthzDecisionQueryBuilder;
-import org.opensaml.saml.saml2.core.impl.EvidenceBuilder;
+import org.opensaml.saml.saml2.core.impl.AttributeQueryBuilder;
 import org.opensaml.saml.saml2.core.impl.IssuerBuilder;
 import org.opensaml.saml.saml2.core.impl.NameIDBuilder;
 import org.opensaml.saml.saml2.core.impl.SubjectBuilder;
 import org.opensaml.saml.saml2.core.impl.SubjectConfirmationBuilder;
 import org.opensaml.saml.saml2.core.impl.SubjectConfirmationDataBuilder;
 import org.wso2.carbon.identity.query.saml.exception.IdentitySAML2QueryException;
-import org.wso2.carbon.identity.query.saml.util.SAMLQueryRequestUtil;
+import org.wso2.carbon.identity.saml.query.profile.test.SPSignKeyDataHolder;
+import org.wso2.carbon.identity.saml.query.profile.test.TestUtils;
 import org.wso2.carbon.identity.query.saml.util.OpenSAML3Util;
+import org.wso2.carbon.identity.query.saml.util.SAMLQueryRequestUtil;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 
-public class AuthzDecisionQueryClient {
+public class InvalidIssuer {
 
-    private final static Log log = LogFactory.getLog(AuthzDecisionQueryClient.class);
+    private final static Log log = LogFactory.getLog(InvalidIssuer.class);
 
     private static final String DIGEST_METHOD_ALGO = "http://www.w3.org/2000/09/xmldsig#rsa-sha1";
     private static final String SIGNING_ALGO = "http://www.w3.org/2000/09/xmldsig#sha1";
-    private static final String ISSUER_ID = "travelocity.com";
+    private static final String ISSUER_ID = "travelocity1.com";
     private static final String NAME_ID = "admin";
-    private static final String RESOURCE_URI = "http://velozity.com";
-    private static final String ACTION_1 = "read";
-    private static final String ASSERTION_ID = "fgdopmbllhhkmmpihlbopajhchobkkjmonolikig";
-
 
     public static void main(String[] ags) throws Exception {
 
@@ -94,38 +84,23 @@ public class AuthzDecisionQueryClient {
         subject.getSubjectConfirmations().add(subjectConfirmation);
         subject.setNameID(nameID);
 
-        AuthzDecisionQuery authzDecisionQuery = new AuthzDecisionQueryBuilder().buildObject();
-        authzDecisionQuery.setVersion(SAMLVersion.VERSION_20);
-        authzDecisionQuery.setID(REQUEST_ID);
-        authzDecisionQuery.setIssueInstant(issueInstant);
-        authzDecisionQuery.setIssuer(issuer);
-        authzDecisionQuery.setSubject(subject);
-        authzDecisionQuery.setResource(RESOURCE_URI);
-
-        List<Action> actionList = new ArrayList<Action>();
-        Action action1 = new ActionBuilder().buildObject();
-        action1.setAction(ACTION_1);
-        actionList.add(action1);
-
-        authzDecisionQuery.getActions().addAll(actionList);
-
-        Evidence evidence = new EvidenceBuilder().buildObject();
-
-        AssertionIDRef assertionIDRef = new AssertionIDRefBuilder().buildObject();
-        assertionIDRef.setAssertionID(ASSERTION_ID);
-
-        evidence.getAssertionIDReferences().add(assertionIDRef);
-
-        authzDecisionQuery.setEvidence(evidence);
+        // AttributeQuery Request
+        AttributeQuery attributeQuery = new AttributeQueryBuilder().buildObject();
+        attributeQuery.setVersion(SAMLVersion.VERSION_20);
+        attributeQuery.setID(REQUEST_ID);
+        attributeQuery.setIssueInstant(issueInstant);
+        attributeQuery.setIssuer(issuer);
+        attributeQuery.setSubject(subject);
+        /*End of AttributeQuery Request*/
 
         SAMLQueryRequestUtil.doBootstrap();
 
-        OpenSAML3Util.setSSOSignature(authzDecisionQuery, DIGEST_METHOD_ALGO,
+        OpenSAML3Util.setSSOSignature(attributeQuery, DIGEST_METHOD_ALGO,
                 SIGNING_ALGO, new SPSignKeyDataHolder());
 
         try {
-            body = SAMLQueryRequestUtil.marshall(authzDecisionQuery);
-            System.out.println("----Sample AuthzDecisionQuery Request Message----\n" + body);
+            body = SAMLQueryRequestUtil.marshall(attributeQuery);
+            System.out.println("----Sample AttributeQuery Request Message----\n" + body);
         } catch (Exception e) {
             log.error(e.getMessage());
             throw new IdentitySAML2QueryException("Error while marshalling the request.", e);

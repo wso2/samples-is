@@ -16,7 +16,7 @@
  * under the License.
  */
 
-package org.wso2.carbon.identity.query.saml.test;
+package org.wso2.carbon.identity.saml.query.profile.test;
 
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.util.AXIOMUtil;
@@ -43,9 +43,8 @@ public class TestUtils {
 
     public static void setSystemProperties() {
 
-        String trustStore = (new File("")).getAbsolutePath() + File.separator + "sample-saml-query-profile" +
-                File.separator + "saml-query-profile-client" + File.separator + "src" + File.separator + "test" +
-                File.separator + "resources" + File.separator + TRUST_STORE;
+        ClassLoader loader = TestUtils.class.getClassLoader();
+        String trustStore = new File(loader.getResource(TRUST_STORE).getPath()).getAbsolutePath();
 
         System.setProperty("javax.net.ssl.trustStore", trustStore);
         System.setProperty("javax.net.ssl.trustStorePassword", TRUST_STORE_PASSWORD);

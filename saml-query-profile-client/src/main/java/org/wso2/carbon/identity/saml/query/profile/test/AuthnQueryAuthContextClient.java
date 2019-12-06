@@ -16,8 +16,7 @@
  * under the License.
  */
 
-package org.wso2.carbon.identity.query.saml.test.invalid;
-
+package org.wso2.carbon.identity.saml.query.profile.test;
 
 import org.apache.axiom.om.OMElement;
 import org.apache.axis2.client.ServiceClient;
@@ -25,29 +24,42 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.joda.time.DateTime;
 import org.opensaml.saml.common.SAMLVersion;
-import org.opensaml.saml.saml2.core.AssertionIDRef;
-import org.opensaml.saml.saml2.core.AssertionIDRequest;
+import org.opensaml.saml.saml1.core.NameIdentifier;
+import org.opensaml.saml.saml2.core.AuthnContextClassRef;
+import org.opensaml.saml.saml2.core.AuthnContextComparisonTypeEnumeration;
+import org.opensaml.saml.saml2.core.AuthnQuery;
 import org.opensaml.saml.saml2.core.Issuer;
+import org.opensaml.saml.saml2.core.NameID;
 import org.opensaml.saml.saml2.core.NameIDType;
-import org.opensaml.saml.saml2.core.impl.AssertionIDRefBuilder;
-import org.opensaml.saml.saml2.core.impl.AssertionIDRequestBuilder;
+import org.opensaml.saml.saml2.core.RequestedAuthnContext;
+import org.opensaml.saml.saml2.core.Subject;
+import org.opensaml.saml.saml2.core.SubjectConfirmation;
+import org.opensaml.saml.saml2.core.SubjectConfirmationData;
+import org.opensaml.saml.saml2.core.impl.AuthnContextClassRefBuilder;
+import org.opensaml.saml.saml2.core.impl.AuthnQueryBuilder;
 import org.opensaml.saml.saml2.core.impl.IssuerBuilder;
+import org.opensaml.saml.saml2.core.impl.NameIDBuilder;
+import org.opensaml.saml.saml2.core.impl.SubjectBuilder;
+import org.opensaml.saml.saml2.core.impl.SubjectConfirmationBuilder;
+import org.opensaml.saml.saml2.core.impl.SubjectConfirmationDataBuilder;
+import org.opensaml.saml.saml2.core.impl.RequestedAuthnContextBuilder;
 import org.wso2.carbon.identity.query.saml.exception.IdentitySAML2QueryException;
-import org.wso2.carbon.identity.query.saml.test.SPSignKeyDataHolder;
-import org.wso2.carbon.identity.query.saml.test.TestUtils;
-import org.wso2.carbon.identity.query.saml.util.OpenSAML3Util;
 import org.wso2.carbon.identity.query.saml.util.SAMLQueryRequestUtil;
+import org.wso2.carbon.identity.query.saml.util.OpenSAML3Util;
 
 import java.util.UUID;
 
-public class InvalidAssertionID {
 
-    private final static Log log = LogFactory.getLog(InvalidAssertionID.class);
+public class AuthnQueryAuthContextClient {
+
+    private final static Log log = LogFactory.getLog(AuthnQueryAuthContextClient.class);
 
     private static final String DIGEST_METHOD_ALGO = "http://www.w3.org/2000/09/xmldsig#rsa-sha1";
     private static final String SIGNING_ALGO = "http://www.w3.org/2000/09/xmldsig#sha1";
     private static final String ISSUER_ID = "travelocity.com";
-    private static final String ASSERTION_ID = "455435747476658";
+    private static final String NAME_ID = "admin";
+    private static final String SESSION_INDEX = "b6d2b2ff-ca11-4727-91d0-ec2a60be892d";
+    private static final String AUTH_CONTEXT_CLASS_REF = "urn:oasis:names:tc:SAML:2.0:ac:classes:Password";
 
     public static void main(String[] ags) throws Exception {
 
@@ -62,24 +74,47 @@ public class InvalidAssertionID {
         issuer.setValue(ISSUER_ID);
         issuer.setFormat(NameIDType.ENTITY);
 
-        AssertionIDRef assertionIDRef = new AssertionIDRefBuilder().buildObject();
-        assertionIDRef.setAssertionID(ASSERTION_ID);
+        NameID nameID = new NameIDBuilder().buildObject();
+        nameID.setValue(NAME_ID);
+        nameID.setFormat(NameIdentifier.EMAIL);
 
-        AssertionIDRequest idRequest = new AssertionIDRequestBuilder().buildObject();
-        idRequest.setVersion(SAMLVersion.VERSION_20);
-        idRequest.setID(REQUEST_ID);
-        idRequest.setIssueInstant(issueInstant);
-        idRequest.setIssuer(issuer);
-        idRequest.getAssertionIDRefs().add(assertionIDRef);
+        SubjectConfirmation subjectConfirmation = new SubjectConfirmationBuilder().buildObject();
+        SubjectConfirmationData subjectConfirmationData =
+                new SubjectConfirmationDataBuilder().buildObject();
+        subjectConfirmationData.setNotOnOrAfter(notOnOrAfter);
+        subjectConfirmation.setSubjectConfirmationData(subjectConfirmationData);
+        subjectConfirmation.setMethod(SubjectConfirmation.METHOD_BEARER);
+
+        Subject subject = new SubjectBuilder().buildObject();
+        subject.getSubjectConfirmations().add(subjectConfirmation);
+        subject.setNameID(nameID);
+
+        AuthnQuery authnQuery = new AuthnQueryBuilder().buildObject();
+        authnQuery.setVersion(SAMLVersion.VERSION_20);
+        authnQuery.setID(REQUEST_ID);
+        authnQuery.setIssueInstant(issueInstant);
+        authnQuery.setIssuer(issuer);
+        authnQuery.setSubject(subject);
+
+        RequestedAuthnContext requestedAuthnContext = new RequestedAuthnContextBuilder().buildObject();
+        requestedAuthnContext.setComparison(AuthnContextComparisonTypeEnumeration.BETTER);
+
+        AuthnContextClassRef authnContextClassRef = new AuthnContextClassRefBuilder().buildObject();
+        authnContextClassRef.setAuthnContextClassRef(AUTH_CONTEXT_CLASS_REF);
+
+        requestedAuthnContext.getAuthnContextClassRefs().add(authnContextClassRef);
+
+        authnQuery.setRequestedAuthnContext(requestedAuthnContext);
+        authnQuery.setSessionIndex(SESSION_INDEX);
 
         SAMLQueryRequestUtil.doBootstrap();
 
-        OpenSAML3Util.setSSOSignature(idRequest, DIGEST_METHOD_ALGO,
+        OpenSAML3Util.setSSOSignature(authnQuery, DIGEST_METHOD_ALGO,
                 SIGNING_ALGO, new SPSignKeyDataHolder());
 
         try {
-            body = SAMLQueryRequestUtil.marshall(idRequest);
-            System.out.println("----Sample AssertionIDRequest  Message----\n" + body);
+            body = SAMLQueryRequestUtil.marshall(authnQuery);
+            System.out.println("----Sample AuthnQuery Request Message----\n" + body);
         } catch (Exception e) {
             log.error(e.getMessage());
             throw new IdentitySAML2QueryException("Error while marshalling the request.", e);
@@ -105,9 +140,8 @@ public class InvalidAssertionID {
         // Set message to service.
         OMElement result = TestUtils.receiveResultFromServiceClient(serviceClient, body);
 
-        // printing return message.
+        // Printing return message.
         if (result != null) {
-            log.info("------Response Message From WSO2 Identity Server-----\n" + result.toString());
             System.out.println("------Response Message From WSO2 Identity Server-----\n" + result.toString());
         } else {
             log.error("Response message is null");

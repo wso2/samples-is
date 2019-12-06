@@ -49,7 +49,7 @@
         <module>quick-start-guide</module>
         <module>etc/gdpr-samples</module>
         <module>distribution</module>
-        <module>sample-saml-query-profile/saml-query-profile-client</module>
+        <module>saml-query-profile-client</module>
     </modules>
 
     <licenses>
@@ -349,15 +349,6 @@
                 <scope>compile</scope>
             </dependency>
 
-            <!--=============================================================================-->
-
-            <!--dependencies of saml-query-profile-samples-->
-            <dependency>
-                <groupId>org.wso2.carbon.identity.inbound.auth.saml2</groupId>
-                <artifactId>org.wso2.carbon.identity.query.saml</artifactId>
-                <version>${saml.query.profile.version}</version>
-            </dependency>
-
         </dependencies>
     </dependencyManagement>
 
@@ -548,11 +539,6 @@
         <org.json.version>20180813</org.json.version>
         <maven.dependency.plugin.version>3.1.0</maven.dependency.plugin.version>
         <org.owasp.esapi.version>2.1.0.1</org.owasp.esapi.version>
-
-        <!--=============================================================================-->
-
-        <!--repo versions of saml-query-profile-samples-->
-        <saml.query.profile.version>5.7.7</saml.query.profile.version>
 
     </properties>
 
