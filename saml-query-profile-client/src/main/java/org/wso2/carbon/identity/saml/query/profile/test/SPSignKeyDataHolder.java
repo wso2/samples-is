@@ -16,7 +16,7 @@
  * under the License.
  */
 
-package org.wso2.carbon.identity.query.saml.test;
+package org.wso2.carbon.identity.saml.query.profile.test;
 
 import org.apache.xml.security.signature.XMLSignature;
 import org.opensaml.security.credential.Credential;
