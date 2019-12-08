@@ -79,7 +79,7 @@ public class AuthRequest {
 
         AuthRequest authRequest = instance.get();
         if (authRequest == null) {
-            authRequest = new AuthRequest(context.getApplicationContext());
+            authRequest = new AuthRequest(context);
             instance = new WeakReference<>(authRequest);
             authStateManager = AuthStateManager.getInstance(context);
         }
