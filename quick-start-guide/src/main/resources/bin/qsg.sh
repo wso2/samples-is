@@ -79,18 +79,18 @@ server_port=$4
 echo
 echo "-----------------------------------------------------------------------"
 echo "|                                                                      |"
-echo "|  To configure google as a federated authenticator you should         |"
+echo "|  To configure Google as a federated authenticator you should         |"
 echo "|                                                                      |"
 echo "|  Register OAuth 2.0 Application in Google                            |"
 echo "|                                                                      |"
 echo "|                                                                      |"
-echo "|          For Register OAuth 2.0 Application in Google                |"
+echo "|           To register OAuth 2.0 application in Google                |"
 echo "|     *** Please press ctrl button and click on the link ***           |"
-echo "| https://is.docs.wso2.com/en/5.9.0/getting-started/quick-start-guide/ |"
-echo "| and go to the Register OAuth 2.0 Application in Google. section      |"
+echo "|  https://is.docs.wso2.com/en/latest/get-started/quick-start-guide/   |"
+echo "| and go to the Register OAuth 2.0 Application in the Google section.  |"
 echo "|         Note down the API key and secret for later use.              |"
-echo "|                      if it is complete .                             |"
-echo "|  continue the script.                                                |"
+echo "|                                                                      |"
+echo "|  Continue the script when this is completed.                         |"
 echo "|                                                                      |"
 echo "|  Do you want to continue?                                            |"
 echo "|                                                                      |"
@@ -176,7 +176,7 @@ case ${user} in
      echo "|                                                                     |"
      echo "-----------------------------------------------------------------------"
      echo
-     echo "Have you make the above mentioned configurations?"
+     echo "Have you made the above mentioned configurations?"
      echo
      echo    "Press y - YES"
      echo    "Press n - NO"
@@ -220,7 +220,7 @@ echo "|  *** Please press ctrl button and click on the link ***                 
 echo "|                                                                               |"
 echo "|  pickup-dispatch - http://${server_host}:${server_port}/pickup-dispatch/      |"
 echo "|                                                                               |"
-echo "|  Click on the ** Register now ** link in the login page.                      |"
+echo "|  Click on the ** Create Account ** button in the login page.                  |"
 echo "|  Fill in the user details form and create an account.                         |"
 echo "|                                                                               |"
 echo "|  You can now use the username and password you provided, to                   |"
@@ -293,17 +293,17 @@ echo "|    *** Please press ctrl button and click on the link ***               
 echo "|                                                                                    |"
 echo "|    pickup-dispatch - http://${server_host}:${server_port}/pickup-dispatch/         |"
 echo "|                                                                                    |"
-echo "|    Click on the ** Register now ** link in the login page                          |"
+echo "|    Click on the ** Create Account ** button in the login page                      |"
 echo "|    Fill in the user details form and create an account.                            |"
 echo "|                                                                                    |"
-echo "|    But the new user you created will be disabled.                                  |"
-echo "|    So to enable the user please log into the WSO2 dashboard                        |"
+echo "|    The new user you created will be disabled.                                      |"
+echo "|    To enable the user please log into the WSO2 User Portal                         |"
 echo "|    using the following credentials and approve the pending                         |"
 echo "|    workflow requests.                                                              |"
 echo "|                                                                                    |"
-echo "|    WSO2 Dashboard: https://${is_host}:${is_port}/dashboard                         |"
+echo "|    WSO2 User Portal: https://${is_host}:${is_port}/user-portal/                    |"
 echo "|                                                                                    |"
-echo "|    First login with Junior Manager                                                 |"
+echo "|    First, login with Junior Manager                                                |"
 echo "|      Username: alex                                                                |"
 echo "|      Password: alex123                                                             |"
 echo "|                                                                                    |"
@@ -919,8 +919,8 @@ echo "|  into the  <IS_HOME>/repository/components/dropins directory            
 echo "|                                                                                   |"
 echo "|  and  sample-auth.war                                                             |"
 echo "|  into <IS_HOME>/repository/deployment/server/webapps folder                       |"
-echo "|  to continuing the script.                                                        |"
-echo "|  And restart the IS server                                                        |"
+echo "|  to continue the script.                                                          |"
+echo "|  Restart the IS server when done.                                                 |"
 echo "|                                                                                   |"
 echo "|  Do you want to continue?                                                         |"
 echo "|                                                                                   |"
@@ -962,7 +962,7 @@ request_data="${SCENARIO_DIR}/${scenario}/get-app-${sp_name}.xml"
 
  if [ ! -f "$request_data" ]
   then
-    echo "$request_data File does not exists."
+    echo "$request_data File does not exist."
     return -1
   fi
 
@@ -1094,19 +1094,19 @@ request_data2="${SCENARIO_DIR}/${scenario}/add-role-junior.xml"
 
 if [ ! -d "${SCENARIO_DIR}/${scenario}" ]
   then
-    echo "${SCENARIO_DIR}/${scenario} Directory does not exists."
+    echo "${SCENARIO_DIR}/${scenario} Directory does not exist."
     return -1
   fi
 
   if [ ! -f "$request_data1" ]
    then
-    echo "$request_data1 File does not exists."
+    echo "$request_data1 File does not exist."
     return -1
   fi
 
   if [ ! -f "$request_data2" ]
    then
-    echo "$request_data2 File does not exists."
+    echo "$request_data2 File does not exist."
     return -1
   fi
 
@@ -1249,7 +1249,7 @@ if [ ! -d "${SCENARIO_DIR}/${scenario}" ]
 
   if [ ! -f "$request_data" ]
    then
-    echo "$request_data File does not exists."
+    echo "$request_data File does not exist."
     return -1
   fi
 
@@ -1278,13 +1278,13 @@ request_data="${SCENARIO_DIR}/${scenario}/delete-definition.xml"
 
 if [ ! -d "${SCENARIO_DIR}/${scenario}" ]
   then
-    echo "${SCENARIO_DIR}/${scenario} Directory does not exists."
+    echo "${SCENARIO_DIR}/${scenario} Directory does not exist."
     return -1
   fi
 
   if [ ! -f "$request_data" ]
    then
-    echo "$request_data File does not exists."
+    echo "$request_data File does not exist."
     return -1
   fi
 
@@ -1311,13 +1311,13 @@ request_data="${SCENARIO_DIR}/${scenario}/add-association.xml"
 
 if [ ! -d "${SCENARIO_DIR}/${scenario}" ]
   then
-    echo "${SCENARIO_DIR}/${scenario} Directory does not exists."
+    echo "${SCENARIO_DIR}/${scenario} Directory does not exist."
     return -1
   fi
 
   if [ ! -f "$request_data" ]
    then
-    echo "$request_data File does not exists."
+    echo "$request_data File does not exist."
     return -1
   fi
 
@@ -1347,13 +1347,13 @@ request_data="${SCENARIO_DIR}/${scenario}/delete-association.xml"
 
 if [ ! -d "${SCENARIO_DIR}/${scenario}" ]
   then
-    echo "${SCENARIO_DIR}/${scenario} Directory does not exists."
+    echo "${SCENARIO_DIR}/${scenario} Directory does not exist."
     return -1
   fi
 
   if [ ! -f "$request_data" ]
    then
-    echo "$request_data File does not exists."
+    echo "$request_data File does not exist."
     return -1
   fi
 
@@ -1435,13 +1435,13 @@ request_data="${SCENARIO_DIR}/${scenario}/create-sp-${sp_name}.xml"
 
   if [ ! -d "${SCENARIO_DIR}/${scenario}" ]
   then
-    echo "${SCENARIO_DIR}/${scenario} Directory not exists."
+    echo "${SCENARIO_DIR}/${scenario} Directory not exist."
     return -1
   fi
 
   if [ ! -f "$request_data" ]
    then
-    echo "$request_data File does not exists."
+    echo "$request_data File does not exist."
     return -1
   fi
 
@@ -1521,13 +1521,13 @@ request_data="${SCENARIO_DIR}/${scenario}/delete-sp-${sp_name}.xml"
 
  if [ ! -d "${SCENARIO_DIR}/${scenario}" ]
   then
-    echo "${SCENARIO_DIR}/${scenario} Directory not exists."
+    echo "${SCENARIO_DIR}/${scenario} Directory not exist."
     return -1
   fi
 
   if [ ! -f "$request_data" ]
    then
-    echo "$request_data File does not exists."
+    echo "$request_data File does not exist."
     return -1
   fi
 echo
@@ -1555,13 +1555,13 @@ request_data="${SCENARIO_DIR}/${scenario}/delete-idp-google.xml"
 
  if [ ! -d "${SCENARIO_DIR}/${scenario}" ]
   then
-    echo "${SCENARIO_DIR}/${scenario} Directory not exists."
+    echo "${SCENARIO_DIR}/${scenario} Directory not exist."
     return -1
   fi
 
   if [ ! -f "$request_data" ]
    then
-    echo "$request_data File does not exists."
+    echo "$request_data File does not exist."
     return -1
   fi
 
@@ -1661,13 +1661,13 @@ request_data="${SCENARIO_DIR}/${scenario}/sso-config-${sp_name}.xml"
 
  if [ ! -d "${SCENARIO_DIR}/${scenario}" ]
   then
-    echo "$scenario Directory does not exists."
+    echo "$scenario Directory does not exist."
     return -1
   fi
 
   if [ ! -f "$request_data" ]
    then
-    echo "$request_data File does not exists."
+    echo "$request_data File does not exist."
     return -1
   fi
 
@@ -1754,13 +1754,13 @@ request_data="${SCENARIO_DIR}/${scenario}/sso-config-${sp_name}.xml"
 
  if [ ! -d "${SCENARIO_DIR}/${scenario}" ]
   then
-   echo "${SCENARIO_DIR}/${scenario} Directory does not exists."
+   echo "${SCENARIO_DIR}/${scenario} Directory does not exist."
    return -1
  fi
 
  if [ ! -f "$request_data" ]
   then
-   echo "$request_data File does not exists."
+   echo "$request_data File does not exist."
    return -1
  fi
 
@@ -1797,7 +1797,7 @@ request_data="${SCENARIO_DIR}/${scenario}/get-app-${sp_name}.xml"
  
  if [ ! -f "$request_data" ]
   then
-    echo "$request_data File does not exists."
+    echo "$request_data File does not exist."
     return -1
   fi
 
@@ -2099,7 +2099,7 @@ request_data="${SCENARIO_DIR}/${scenario}/get-app-${sp_name}.xml"
 
  if [ ! -f "$request_data" ]
   then
-    echo "$request_data File does not exists."
+    echo "$request_data File does not exist."
     return -1
   fi
 
@@ -2207,13 +2207,13 @@ request_data="${SCENARIO_DIR}/${scenario}/update-app-${sp_name}.xml"
 
  if [ ! -d "${SCENARIO_DIR}/${scenario}" ]
   then
-    echo "${SCENARIO_DIR}/${scenario} Directory does not exists."
+    echo "${SCENARIO_DIR}/${scenario} Directory does not exist."
     return -1
   fi
 
   if [ ! -f "$request_data" ]
    then
-    echo "$request_data File does not exists."
+    echo "$request_data File does not exist."
     return -1
   fi
 
@@ -2250,13 +2250,13 @@ request_data="${SCENARIO_DIR}/${scenario}/update-app-${sp_name}.xml"
 
  if [ ! -d "${SCENARIO_DIR}/${scenario}" ]
   then
-   echo "${SCENARIO_DIR}/${scenario} Directory does not exists."
+   echo "${SCENARIO_DIR}/${scenario} Directory does not exist."
    return -1
  fi
 
  if [ ! -f "$request_data" ]
   then
-   echo "$request_data File does not exists."
+   echo "$request_data File does not exist."
    return -1
  fi
 
@@ -2289,13 +2289,13 @@ request_data="${SCENARIO_DIR}/${scenario}/create-idp.xml"
 
  if [ ! -d "${SCENARIO_DIR}/${scenario}" ]
   then
-   echo "${SCENARIO_DIR}/${scenario} Directory does not exists."
+   echo "${SCENARIO_DIR}/${scenario} Directory does not exist."
    return -1
  fi
 
  if [ ! -f "$request_data" ]
   then
-   echo "$request_data File does not exists."
+   echo "$request_data File does not exist."
    return -1
  fi
 
