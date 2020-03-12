@@ -167,7 +167,7 @@ case ${user} in
      echo "|                                                                     |"
      echo "|  1. Open the file: deployment.toml in the path,                     |"
      echo "|     (Your WSO2-IS)/repository/conf.                                 |"
-     echo "|     Ex: wso2is-5.9.0/repository/conf/deployment.toml.               |"
+     echo "|     Ex: wso2is-5.10.0/repository/conf/deployment.toml.               |"
      echo "|                                                                     |"
      echo "|  2. Find the adapter configuration for emails and change the        |"
      echo "|     email address, username, password values.                       |"
@@ -2466,7 +2466,7 @@ PROPERTY_FILE=${CONF_DIR}/server.properties
 
 echo "Before running samples make sure the following                                "
 echo "  * Added correct details to the server.properties                            "
-echo "  * Your WSO2 IS 5.9.0 and sample applications are running.                   "
+echo "  * Your WSO2 IS and sample applications are running.                         "
 echo "                                                                              "
 echo " If okay to continue, Please press 'Y' else press 'N'                         "
 read continueState
