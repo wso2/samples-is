@@ -58,9 +58,6 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="org.wso2.identity.sdk.oidc">
-      <HintPath>..\..\OIDC-SDK\org.wso2.identity.sdk.oidc\bin\Debug\netstandard2.0\org.wso2.identity.sdk.oidc.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -71,6 +68,7 @@
     </Reference>
     <Reference Include="System.Management" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -201,6 +199,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\WSO2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\OIDC-SDK\org.wso2.identity.sdk.oidc\org.wso2.identity.sdk.oidc.csproj">
+      <Project>{228e25ab-fb85-42c7-a0cd-fb046790c160}</Project>
+      <Name>org.wso2.identity.sdk.oidc</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitignore" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
