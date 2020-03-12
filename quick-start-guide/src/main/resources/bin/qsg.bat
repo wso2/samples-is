@@ -26,7 +26,7 @@ SET REL_ROOT=%cd%
 
 echo "Before running samples make sure the following                                "
 echo "  * Added correct details to the server.properties                            "
-echo "  * Your WSO2 IS 5.7.0 and sample applications are running.                   "
+echo "  * Your WSO2 IS and sample applications are running.                         "
 echo "                                                                              "
 echo " If okay to continue, Please press 'Y' else press 'N'                         "
 echo(

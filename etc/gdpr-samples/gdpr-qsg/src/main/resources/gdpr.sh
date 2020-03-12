@@ -1506,7 +1506,7 @@ echo Please start from step 1:.
 echo "----------------------------------------------------------------"
 echo "| This is the Quick Start Guide for GDPR demonstrations.        |"
 echo "| =====================================================         |"
-echo "| Before run this make sure your WSO2 IS 5.7.0 and Tomcat is    |"
+echo "| Before run this make sure your WSO2 IS and Tomcat is          |"
 echo "| running in default ports.                                     |"
 echo "|                                                               |"
 echo "| Furthermore, make sure you have correct hostnames and ports   |"
