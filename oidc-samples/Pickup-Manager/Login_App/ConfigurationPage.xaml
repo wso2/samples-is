@@ -1,0 +1,78 @@
+﻿<!--Copyright (c) 2019, WSO2 Inc. (http://wso2.com) All Rights Reserved.
+    
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    
+    http://www.apache.org/licenses/LICENSE-2.0
+    
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License. -->
+
+<Window x:Class="org.wso2.identity.sample.PickupManager.ConfigurationPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:org.wso2.identity.sample.PickupManager"
+        mc:Ignorable="d"
+        Title="Pickup Manager - Authorization" Height="725" Width="1000" Background="White" HorizontalAlignment=
+        "Center"  ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <TextBlock HorizontalAlignment="Left" Background="Black" Foreground="White" Height="84" TextWrapping="Wrap"
+                   VerticalAlignment="Top" Width="994" Margin="0,0,-0.4,0"><Run/><LineBreak/><Run/><LineBreak/><Run 
+                       FontSize="14" Text="   "/><LineBreak/><Run FontSize="14" Text="    "/><Run FontSize="18" Text=
+                       "IDENTITY SERVER"/></TextBlock>
+        <Image HorizontalAlignment="Left" Height="31" VerticalAlignment="Top" Width="69" Margin="10,10,0,0" Source=
+               "Assets/wso2.png" Stretch="Fill" Cursor="None" RenderTransformOrigin="0.437,3.423"/>
+        <TextBlock HorizontalAlignment="Right" Margin="-1,669,-0.4,0" TextWrapping="Wrap" Foreground="White" Background
+                   ="Black" VerticalAlignment="Top" Height="26" Width="995" Text="    WSO2 Identity Server | 
+                   © 2019 Inc. All rights reserved"/>
+        <Button x:Name="update" Content="UPDATE" HorizontalAlignment="Left" Margin="233,565,0,0" VerticalAlignment=
+                "Top" Width="180" Height="47" FontFamily="Segoe UI Black" FontSize="14" Click="UpdateButton_Click" 
+                Background="Black" Foreground="White"/>
+        <Label Content="Client ID" HorizontalAlignment="Left" Margin="19,155,0,0" VerticalAlignment="Top" Width="98" 
+               FontWeight="Bold"/>
+        <TextBox x:Name="idTxt" HorizontalAlignment="Left" Height="26" Margin="194,155,0,0" TextWrapping="Wrap" Text=""
+                 VerticalAlignment="Top" Width="393"/>
+        <Label Content="Client Secret" HorizontalAlignment="Left" Margin="19,202,0,0" VerticalAlignment="Top" 
+               Width="98" FontWeight="Bold"/>
+        <PasswordBox x:Name="clientSecretTxt" HorizontalAlignment="Left" Height="26" Margin="194,202,0,0" 
+                     VerticalAlignment="Top" Width="393"/>
+        <Label Content="Authorize Endpoint" HorizontalAlignment="Left" Margin="19,248,0,0" VerticalAlignment="Top" 
+               Width="152" FontWeight="Bold" RenderTransformOrigin="0.484,1.805"/>
+        <TextBox x:Name="authenticationTxt" HorizontalAlignment="Left" Height="26" Margin="194,248,0,0" TextWrapping=
+                 "Wrap" Text="" VerticalAlignment="Top" Width="393"/>
+        <Label Content="Token Endpoint" HorizontalAlignment="Left" Margin="19,291,0,0" VerticalAlignment="Top" Width=
+               "98" FontWeight="Bold"/>
+        <TextBox x:Name="tokenTxt" HorizontalAlignment="Left" Height="26" Margin="194,291,0,0" TextWrapping="Wrap" Text
+                 ="" VerticalAlignment="Top" Width="393"/>
+        <Label Content="UserInfo Endpoint" HorizontalAlignment="Left" Margin="19,334,0,0" VerticalAlignment="Top" Width
+               ="128" FontWeight="Bold"/>
+        <TextBox x:Name="userinfoTxt" HorizontalAlignment="Left" Height="26" Margin="194,334,0,0" TextWrapping="Wrap" 
+                 Text="" VerticalAlignment="Top" Width="393"/>
+        <Label Content="Logout Endpoint" HorizontalAlignment="Left" Margin="19,378,0,0" VerticalAlignment="Top" Width=
+               "111" FontWeight="Bold"/>
+        <TextBox x:Name="logoutTxt" HorizontalAlignment="Left" Height="26" Margin="194,377,0,0" TextWrapping="Wrap" 
+                 Text="" VerticalAlignment="Top" Width="393"/>
+        <Label Content="Callback URL" HorizontalAlignment="Left" Margin="19,418,0,0" VerticalAlignment="Top" Width="98"
+               RenderTransformOrigin="0.545,1.953" FontWeight="Bold"/>
+        <TextBox x:Name="callbackTxt" HorizontalAlignment="Left" Height="26" Margin="194,418,0,0" TextWrapping="Wrap" 
+                 Text="" VerticalAlignment="Top" Width="393"/>
+        <Label Content="** Info : Update following Configuration Details." HorizontalAlignment="Left" 
+               Margin="0,98,-0.4,0" VerticalAlignment="Top" Width="994" Height="32" RenderTransformOrigin="0.5,0.5" 
+               FontWeight="Bold" FontStyle="Italic" FontSize="11" Background="#FFCB8484"/>
+        <Label Content="PostLogout" HorizontalAlignment="Left" Margin="19,461,0,0" VerticalAlignment="Top" Width="98" 
+               RenderTransformOrigin="0.545,1.953" FontWeight="Bold"/>
+        <TextBox x:Name="postLogoutTxt" HorizontalAlignment="Left" Height="26" Margin="194,461,0,0" TextWrapping="Wrap"
+                 Text="" VerticalAlignment="Top" Width="393"/>
+        <Image HorizontalAlignment="Left" Height="348" Margin="632,155,0,0" VerticalAlignment="Top" Width="320" Source=
+               "Assets/Configuration.png" Stretch="Fill" Cursor="None"/>
+        <CheckBox x:Name="SSLcheckbox" Content=" Enable SSL verification." HorizontalAlignment="Left" Margin="19,532,0,0" VerticalAlignment=
+                  "Top" FontSize="14" Height="33" Width="568" IsChecked="True" FontWeight="Bold"/>
+    </Grid>
+</Window>
