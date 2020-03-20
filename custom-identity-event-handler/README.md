@@ -8,7 +8,7 @@ Steps
 4. Restart the server. 
 ```
 
-[event_handler]]
+[[event_handler]]
 name= "customUserSelfRegistration"
 subscriptions =["POST_ADD_USER"]
 
