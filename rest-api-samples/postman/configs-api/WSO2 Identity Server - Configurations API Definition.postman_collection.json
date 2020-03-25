@@ -1,0 +1,612 @@
+{
+	"info": {
+		"_postman_id": "b6ff3e2d-893c-4853-9d53-895515dbf73c",
+		"name": "WSO2 Identity Server - Configurations API Definition",
+		"description": "This document specifies a **RESTful API** for **WSO2 Identity Server Configurations**\n\nContact Support:\n Name: WSO2\n Email: architecture@wso2.org",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "configs/authenticators",
+			"item": [
+				{
+					"name": "List local authenticators in the server",
+					"request": {
+						"auth": {
+							"type": "basic"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "9443",
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"configs",
+								"authenticators"
+							],
+							"variable": [
+								{
+									"key": "tenant-domain",
+									"value": "{{tenant-domain}}",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							]
+						},
+						"description": "List available local authenticators of the server\n"
+					},
+					"response": [
+						{
+							"name": "Not Implemented",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"{{tenant-domain}}",
+										"api",
+										"server",
+										"v1",
+										"configs",
+										"authenticators"
+									]
+								}
+							},
+							"status": "Not Implemented",
+							"code": 501,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+						},
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"{{tenant-domain}}",
+										"api",
+										"server",
+										"v1",
+										"configs",
+										"authenticators"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n {\n  \"id\": \"QmFzaWNBdXRoZW50aWNhdG9y\",\n  \"name\": \"BasicAuthenticator\",\n  \"displayName\": \"basic\",\n  \"isEnabled\": true,\n  \"self\": \"/t/carbon.super/api/server/v1/configs/authenticators/QmFzaWNBdXRoZW50aWNhdG9y\"\n },\n {\n  \"id\": \"QmFzaWNBdXRoZW50aWNhdG9y\",\n  \"name\": \"BasicAuthenticator\",\n  \"displayName\": \"basic\",\n  \"isEnabled\": true,\n  \"self\": \"/t/carbon.super/api/server/v1/configs/authenticators/QmFzaWNBdXRoZW50aWNhdG9y\"\n }\n]"
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"{{tenant-domain}}",
+										"api",
+										"server",
+										"v1",
+										"configs",
+										"authenticators"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+						},
+						{
+							"name": "Bad Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"{{tenant-domain}}",
+										"api",
+										"server",
+										"v1",
+										"configs",
+										"authenticators"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"{{tenant-domain}}",
+										"api",
+										"server",
+										"v1",
+										"configs",
+										"authenticators"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+						},
+						{
+							"name": "Server Error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"{{tenant-domain}}",
+										"api",
+										"server",
+										"v1",
+										"configs",
+										"authenticators"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"{{tenant-domain}}",
+										"api",
+										"server",
+										"v1",
+										"configs",
+										"authenticators"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get authenticator by ID",
+					"request": {
+						"auth": {
+							"type": "basic"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators/:authenticator-id",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "9443",
+							"path": [
+								"t",
+								"{{tenant-domain}}",
+								"api",
+								"server",
+								"v1",
+								"configs",
+								"authenticators",
+								":authenticator-id"
+							],
+							"variable": [
+								{
+									"key": "tenant-domain",
+									"value": "{{tenant-domain}}",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								},
+								{
+									"key": "authenticator-id",
+									"value": "<string>",
+									"description": "ID of an authenticator"
+								}
+							]
+						},
+						"description": "By passing in the appropriate authenticator ID, you can retrieve authenticator details\n"
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators/:authenticator-id",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"{{tenant-domain}}",
+										"api",
+										"server",
+										"v1",
+										"configs",
+										"authenticators",
+										":authenticator-id"
+									],
+									"variable": [
+										{
+											"key": "authenticator-id"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"name\": \"BasicAuthenticator\",\n \"displayName\": \"basic\",\n \"id\": \"QmFzaWNBdXRoZW50aWNhdG9y\",\n \"isEnabled\": true,\n \"properties\": [\n  {\n   \"key\": \"AuthMechanism\",\n   \"value\": \"basic\"\n  },\n  {\n   \"key\": \"AuthMechanism\",\n   \"value\": \"basic\"\n  }\n ]\n}"
+						},
+						{
+							"name": "Bad Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators/:authenticator-id",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"{{tenant-domain}}",
+										"api",
+										"server",
+										"v1",
+										"configs",
+										"authenticators",
+										":authenticator-id"
+									],
+									"variable": [
+										{
+											"key": "authenticator-id"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators/:authenticator-id",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"{{tenant-domain}}",
+										"api",
+										"server",
+										"v1",
+										"configs",
+										"authenticators",
+										":authenticator-id"
+									],
+									"variable": [
+										{
+											"key": "authenticator-id"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+						},
+						{
+							"name": "Server Error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators/:authenticator-id",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"{{tenant-domain}}",
+										"api",
+										"server",
+										"v1",
+										"configs",
+										"authenticators",
+										":authenticator-id"
+									],
+									"variable": [
+										{
+											"key": "authenticator-id"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators/:authenticator-id",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"{{tenant-domain}}",
+										"api",
+										"server",
+										"v1",
+										"configs",
+										"authenticators",
+										":authenticator-id"
+									],
+									"variable": [
+										{
+											"key": "authenticator-id"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators/:authenticator-id",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"{{tenant-domain}}",
+										"api",
+										"server",
+										"v1",
+										"configs",
+										"authenticators",
+										":authenticator-id"
+									],
+									"variable": [
+										{
+											"key": "authenticator-id"
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"variable": [
+		{
+			"id": "tenant-domain",
+			"key": "tenant-domain",
+			"value": "carbon.super",
+			"type": "any",
+			"description": {
+				"content": "undefined",
+				"type": "text/plain"
+			}
+		},
+		{
+			"id": "baseUrl",
+			"key": "baseUrl",
+			"value": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
