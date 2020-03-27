@@ -6212,6 +6212,1645 @@
 					"_postman_isSubFolder": true
 				},
 				{
+					"name": "templates",
+					"item": [
+						{
+							"name": "{template-id}",
+							"item": [
+								{
+									"name": "Retrieve identity provider template by id\n",
+									"request": {
+										"auth": {
+											"type": "basic",
+											"basic": [
+												{
+													"key": "password",
+													"value": "admin",
+													"type": "string"
+												},
+												{
+													"key": "username",
+													"value": "admin",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/identity-providers/templates/:template-id",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"identity-providers",
+												"templates",
+												":template-id"
+											],
+											"variable": [
+												{
+													"key": "template-id",
+													"value": "81b00779-b290-4542-a6e0-7744089505b1",
+													"type": "string",
+													"description": "(Required) Id of the IDP template"
+												}
+											]
+										},
+										"description": "This API provides the capability to retrieve an indentity provider template using it's id.\n"
+									},
+									"response": [
+										{
+											"name": "Successful response",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/identity-providers/templates/:template-id",
+													"protocol": "https",
+													"host": [
+														"localhost"
+													],
+													"port": "9443",
+													"path": [
+														"t",
+														"{{tenant-domain}}",
+														"api",
+														"server",
+														"v1",
+														"identity-providers",
+														"templates",
+														":template-id"
+													],
+													"variable": [
+														{
+															"key": "template-id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"name\": \"google\",\n \"idp\": {\n  \"name\": \"google\",\n  \"description\": \"IDP for Google Federation\",\n  \"image\": \"google-logo-url\",\n  \"isPrimary\": false,\n  \"isFederationHub\": false,\n  \"homeRealmIdentifier\": \"localhost\",\n  \"certificate\": {\n   \"certificates\": [\n    \"<string>\",\n    \"<string>\"\n   ],\n   \"jwksUri\": \"https://localhost:9444/oauth2/jwks\"\n  },\n  \"alias\": \"https://localhost:9444/oauth2/token\",\n  \"claims\": {\n   \"userIdClaim\": {\n    \"uri\": \"http://wso2.org/claims/username\",\n    \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n    \"displayName\": \"Username\"\n   },\n   \"roleClaim\": {\n    \"uri\": \"http://wso2.org/claims/username\",\n    \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n    \"displayName\": \"Username\"\n   },\n   \"mappings\": [\n    {\n     \"idpClaim\": \"country\",\n     \"localClaim\": {\n      \"uri\": \"http://wso2.org/claims/username\",\n      \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n      \"displayName\": \"Username\"\n     }\n    },\n    {\n     \"idpClaim\": \"country\",\n     \"localClaim\": {\n      \"uri\": \"http://wso2.org/claims/username\",\n      \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n      \"displayName\": \"Username\"\n     }\n    }\n   ],\n   \"provisioningClaims\": [\n    {\n     \"claim\": {\n      \"uri\": \"http://wso2.org/claims/username\",\n      \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n      \"displayName\": \"Username\"\n     },\n     \"defaultValue\": \"sathya\"\n    },\n    {\n     \"claim\": {\n      \"uri\": \"http://wso2.org/claims/username\",\n      \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n      \"displayName\": \"Username\"\n     },\n     \"defaultValue\": \"sathya\"\n    }\n   ]\n  },\n  \"roles\": {\n   \"mappings\": [\n    {\n     \"idpRole\": \"google-manager\",\n     \"localRole\": \"manager\"\n    },\n    {\n     \"idpRole\": \"google-manager\",\n     \"localRole\": \"manager\"\n    }\n   ],\n   \"outboundProvisioningRoles\": [\n    \"manager\",\n    \"hr-admin\"\n   ]\n  },\n  \"federatedAuthenticators\": {\n   \"defaultAuthenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n   \"authenticators\": [\n    {\n     \"authenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n     \"isEnabled\": true,\n     \"isDefault\": false,\n     \"properties\": [\n      {\n       \"key\": \"somePropertyKey\",\n       \"value\": \"somePropertyValue\"\n      },\n      {\n       \"key\": \"somePropertyKey\",\n       \"value\": \"somePropertyValue\"\n      }\n     ]\n    },\n    {\n     \"authenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n     \"isEnabled\": true,\n     \"isDefault\": false,\n     \"properties\": [\n      {\n       \"key\": \"somePropertyKey\",\n       \"value\": \"somePropertyValue\"\n      },\n      {\n       \"key\": \"somePropertyKey\",\n       \"value\": \"somePropertyValue\"\n      }\n     ]\n    }\n   ]\n  },\n  \"provisioning\": {\n   \"jit\": {\n    \"isEnabled\": true,\n    \"scheme\": \"PROVISION_SILENTLY\",\n    \"userstore\": \"PRIMARY\"\n   },\n   \"outboundConnectors\": {\n    \"defaultConnectorId\": \"U0NJTQ\",\n    \"connectors\": [\n     {\n      \"connectorId\": \"U0NJTQ\",\n      \"isEnabled\": true,\n      \"isDefault\": false,\n      \"blockingEnabled\": false,\n      \"rulesEnabled\": false,\n      \"properties\": [\n       {\n        \"key\": \"somePropertyKey\",\n        \"value\": \"somePropertyValue\"\n       },\n       {\n        \"key\": \"somePropertyKey\",\n        \"value\": \"somePropertyValue\"\n       }\n      ]\n     },\n     {\n      \"connectorId\": \"U0NJTQ\",\n      \"isEnabled\": true,\n      \"isDefault\": false,\n      \"blockingEnabled\": false,\n      \"rulesEnabled\": false,\n      \"properties\": [\n       {\n        \"key\": \"somePropertyKey\",\n        \"value\": \"somePropertyValue\"\n       },\n       {\n        \"key\": \"somePropertyKey\",\n        \"value\": \"somePropertyValue\"\n       }\n      ]\n     }\n    ]\n   }\n  }\n },\n \"id\": \"123e4567-e89b-12d3-a456-556642440000\",\n \"description\": \"Google federated connector\",\n \"image\": \"google-logo-url\",\n \"category\": \"DEFAULT\",\n \"displayOrder\": 10\n}"
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/identity-providers/templates/:template-id",
+													"protocol": "https",
+													"host": [
+														"localhost"
+													],
+													"port": "9443",
+													"path": [
+														"t",
+														"{{tenant-domain}}",
+														"api",
+														"server",
+														"v1",
+														"identity-providers",
+														"templates",
+														":template-id"
+													],
+													"variable": [
+														{
+															"key": "template-id"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+										},
+										{
+											"name": "Server Error",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/identity-providers/templates/:template-id",
+													"protocol": "https",
+													"host": [
+														"localhost"
+													],
+													"port": "9443",
+													"path": [
+														"t",
+														"{{tenant-domain}}",
+														"api",
+														"server",
+														"v1",
+														"identity-providers",
+														"templates",
+														":template-id"
+													],
+													"variable": [
+														{
+															"key": "template-id"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+										},
+										{
+											"name": "Forbidden",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/identity-providers/templates/:template-id",
+													"protocol": "https",
+													"host": [
+														"localhost"
+													],
+													"port": "9443",
+													"path": [
+														"t",
+														"{{tenant-domain}}",
+														"api",
+														"server",
+														"v1",
+														"identity-providers",
+														"templates",
+														":template-id"
+													],
+													"variable": [
+														{
+															"key": "template-id"
+														}
+													]
+												}
+											},
+											"status": "Forbidden",
+											"code": 403,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/identity-providers/templates/:template-id",
+													"protocol": "https",
+													"host": [
+														"localhost"
+													],
+													"port": "9443",
+													"path": [
+														"t",
+														"{{tenant-domain}}",
+														"api",
+														"server",
+														"v1",
+														"identity-providers",
+														"templates",
+														":template-id"
+													],
+													"variable": [
+														{
+															"key": "template-id"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+										},
+										{
+											"name": "Unauthorized",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/identity-providers/templates/:template-id",
+													"protocol": "https",
+													"host": [
+														"localhost"
+													],
+													"port": "9443",
+													"path": [
+														"t",
+														"{{tenant-domain}}",
+														"api",
+														"server",
+														"v1",
+														"identity-providers",
+														"templates",
+														":template-id"
+													],
+													"variable": [
+														{
+															"key": "template-id"
+														}
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								},
+								{
+									"name": "Update the IDP template of a given template id.\n",
+									"request": {
+										"auth": {
+											"type": "basic",
+											"basic": [
+												{
+													"key": "password",
+													"value": "admin",
+													"type": "string"
+												},
+												{
+													"key": "username",
+													"value": "admin",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"Facebook\",\n  \"description\": \"Template for facebook IdPs.\",\n  \"image\": \"facebook-logo-url\",\n  \"category\": \"DEFAULT\",\n  \"displayOrder\": 10,\n  \"idp\": {\n    \"name\": \"facebook\",\n    \"description\": \"IDP for facebook Federation\",\n    \"image\": \"facebook-logo-url\",\n    \"isPrimary\": false,\n    \"isFederationHub\": false,\n    \"homeRealmIdentifier\": \"localhost\",\n    \"certificate\": {\n      \"certificates\": [\n        \"LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURzRENDQXBpZ0F3SUJBZ0lKQUs0eml2ckVsYzBJTUEwR0NTcUdTSWIzRFFFQkN3VUFNSUdETVJFd0R3WUQKVlFRRERBaENkV1JrYUdsdFlURUxNQWtHQTFVRUJoTUNVMHd4RURBT0JnTlZCQWdNQjFkbGMzUmxjbTR4RURBTwpCZ05WQkFjTUIwTnZiRzl0WW04eERUQUxCZ05WQkFvTUJGZFRUekl4Q3pBSkJnTlZCQXNNQWxGQk1TRXdId1lKCktvWklodmNOQVFrQkZoSmlkV1JrYUdsdFlYVkFkM052TWk1amIyMHdJQmNOTVRrd056RTJNRFF5TXpFd1doZ1AKTXpBeE9ERXhNVFl3TkRJek1UQmFNSUdETVJFd0R3WURWUVFEREFoQ2RXUmthR2x0WVRFTE1Ba0dBMVVFQmhNQwpVMHd4RURBT0JnTlZCQWdNQjFkbGMzUmxjbTR4RURBT0JnTlZCQWNNQjBOdmJHOXRZbTh4RFRBTEJnTlZCQW9NCkJGZFRUekl4Q3pBSkJnTlZCQXNNQWxGQk1TRXdId1lKS29aSWh2Y05BUWtCRmhKaWRXUmthR2x0WVhWQWQzTnYKTWk1amIyMHdnZ0VpTUEwR0NTcUdTSWIzRFFFQkFRVUFBNElCRHdBd2dnRUtBb0lCQVFDcFo3V09VMTZpeGpiQwpiWGR3R3JhTW5xbmxnb2kzMDN5aVFxbHAySzlWTmZHT21nTlFhdFdlbjB0MVVWcjYxd0Y4eVlHaDJyc1lnbithCjhwYXVmUVVQQ1laeFRFR1FpT2RPZ0RNcE5tWW82ZHU2K2MvenJqcHNncGh5SHIxNEZPVHAxaVRDSXBmanVwVjEKd1BUeXJveURySGRvMkpuOHI3V3F1cklJVTRBYllBN2NrdVVqL0tqYUovTTZrZitwRFd5SVJvaDBKTFJlWWM4UQp5bmhYcjdrQWp5RnFqNitnWndBYkh4ckhrckVzYTJoVjQ0UFJXWjFQUERxTCswVU8veE1hQW5udndsdGd4QlVpCkhLUTFXWDVwdVVPaC9kQTQ5b0RsbEpraHpxd2d5eDQxc1FYbFNhVmdKaklUZVdSQmdvNnh6ajNmd3VvenBGS1gKbzRaeXBITDNBZ01CQUFHakl6QWhNQjhHQTFVZEVRUVlNQmFDQkhkemJ6S0NDSGR6YnpJdVkyOXRnZ1IzYzI4eQpNQTBHQ1NxR1NJYjNEUUVCQ3dVQUE0SUJBUUJTSzBKa1pyYlpvYmRDNHhZSG1IcnlVbkZVbkZZWUFvZmc0TFVGCkJRbWxDY0NKR0ZwR1BtN2ZDWHM0Y0h4Z0hPVTN5SkhtQ2pYaU9FRTc2dzhIU0NRcVhkNmROSEwxRkxtN0pqQTUKTEZmbHhiWXNOcmVVNVpJTmREVGZvWmxSSXR0Mkd4MlpIa3pjQVRJZm1yUFNwODV2WDhGem1mbTNBVTVpM3FXZQo4a2YyZk5nQjlMbE5XRFk1V09paVlHUWMrRk13WWdLcDJkNGM3dzMrWnRTUXJWRy9YdGpqYTJYV09Xdm1sV3dLCnB4b3pyNjIvTTdUUmVkc3hJNU90bzJvWExGZXp1MUdCWHdpNEFaempMSFVsNWpSR2hMbkNZa05qdWZGZi9EQ0cKeUFWdnpMVXQwZ2F0b0dJdTV2eG9la05JVWV5YTZpRzJBaG9jSmM0SEJMT3l4TXE3Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K\"\n      ]\n    },\n    \"alias\": \"https://localhost:9444/oauth2/token\",\n    \"claims\": {\n      \"userIdClaim\": {\n        \"uri\": \"http://wso2.org/claims/username\"\n      },\n      \"roleClaim\": {\n        \"uri\": \"http://wso2.org/claims/role\"\n      },\n      \"provisioningClaims\": [\n        {\n          \"claim\": {\n            \"uri\": \"http://wso2.org/claims/username\"\n          },\n          \"defaultValue\": \"sathya\"\n        }\n      ]\n    },\n    \"roles\": {\n      \"mappings\": [\n        {\n          \"idpRole\": \"facebook-manager\",\n          \"localRole\": \"admin\"\n        }\n      ],\n      \"outboundProvisioningRoles\": [\n        \"admin\"\n      ]\n    },\n    \"federatedAuthenticators\": {\n      \"defaultAuthenticatorId\": \"R29vZ2xlT0lEQ0F1dGhlbnRpY2F0b3I\",\n      \"authenticators\": [\n        {\n          \"authenticatorId\": \"R29vZ2xlT0lEQ0F1dGhlbnRpY2F0b3I\",\n          \"isEnabled\": true,\n          \"properties\": [\n            {\n              \"key\": \"AdditionalQueryParameters\",\n              \"value\": \"scope=openid email profile\"\n            },\n            {\n              \"key\": \"ClientId\",\n              \"value\": \"165474950684-7mvqd8m6hieb8mdnffcarnku2aua0tpl.apps.facebookusercontent.com\"\n            },\n            {\n              \"key\": \"ClientSecret\",\n              \"value\": \"testclientsecret\"\n            },\n            {\n              \"key\": \"callbackUrl\",\n              \"value\": \"https://mydomain2.com:9443/commonauth\"\n            }\n          ]\n        }\n      ]\n    },\n    \"provisioning\": {\n      \"jit\": {\n        \"isEnabled\": true,\n        \"scheme\": \"PROVISION_SILENTLY\",\n        \"userstore\": \"PRIMARY\"\n      },\n      \"outboundConnectors\": {\n        \"defaultConnectorId\": \"c2NpbQ\",\n        \"connectors\": [\n          {\n            \"connectorId\": \"c2NpbQ\",\n            \"isEnabled\": true,\n            \"blockingEnabled\": false,\n            \"rulesEnabled\": false,\n            \"properties\": [\n              {\n                \"key\": \"scim-user-ep\",\n                \"value\": \"https://localhost:9445/userinfo\"\n              },\n              {\n                \"key\": \"scim-username\",\n                \"value\": \"admin\"\n              },\n              {\n                \"key\": \"scim-enable-pwd-provisioning\",\n                \"value\": \"true\"\n              },\n              {\n                \"key\": \"scim-password\",\n                \"value\": \"admin\"\n              }\n            ]\n          }\n        ]\n      }\n    }\n  }\n}\n",
+											"options": {
+												"raw": {}
+											}
+										},
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/identity-providers/templates/:template-id",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"identity-providers",
+												"templates",
+												":template-id"
+											],
+											"variable": [
+												{
+													"key": "template-id",
+													"value": "81b00779-b290-4542-a6e0-7744089505b1",
+													"type": "string",
+													"description": "(Required) Id of the IDP template"
+												}
+											]
+										},
+										"description": "This API provides the capability to update the IDP template of a given template id.\n"
+									},
+									"response": [
+										{
+											"name": "Forbidden",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\": \"google\",\n    \"idp\": {\n        \"name\": \"google\",\n        \"description\": \"IDP for Google Federation\",\n        \"image\": \"google-logo-url\",\n        \"isPrimary\": false,\n        \"isFederationHub\": false,\n        \"homeRealmIdentifier\": \"localhost\",\n        \"certificate\": {\n            \"certificates\": [\n                \"<string>\",\n                \"<string>\"\n            ],\n            \"jwksUri\": \"https://localhost:9444/oauth2/jwks\"\n        },\n        \"alias\": \"https://localhost:9444/oauth2/token\",\n        \"claims\": {\n            \"userIdClaim\": {\n                \"uri\": \"http://wso2.org/claims/username\",\n                \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                \"displayName\": \"Username\"\n            },\n            \"roleClaim\": {\n                \"uri\": \"http://wso2.org/claims/username\",\n                \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                \"displayName\": \"Username\"\n            },\n            \"mappings\": [\n                {\n                    \"idpClaim\": \"country\",\n                    \"localClaim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    }\n                },\n                {\n                    \"idpClaim\": \"country\",\n                    \"localClaim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    }\n                }\n            ],\n            \"provisioningClaims\": [\n                {\n                    \"claim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    },\n                    \"defaultValue\": \"sathya\"\n                },\n                {\n                    \"claim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    },\n                    \"defaultValue\": \"sathya\"\n                }\n            ]\n        },\n        \"roles\": {\n            \"mappings\": [\n                {\n                    \"idpRole\": \"google-manager\",\n                    \"localRole\": \"manager\"\n                },\n                {\n                    \"idpRole\": \"google-manager\",\n                    \"localRole\": \"manager\"\n                }\n            ],\n            \"outboundProvisioningRoles\": [\n                \"manager\",\n                \"hr-admin\"\n            ]\n        },\n        \"federatedAuthenticators\": {\n            \"defaultAuthenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n            \"authenticators\": [\n                {\n                    \"authenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n                    \"isEnabled\": true,\n                    \"isDefault\": false,\n                    \"properties\": [\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        },\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        }\n                    ]\n                },\n                {\n                    \"authenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n                    \"isEnabled\": true,\n                    \"isDefault\": false,\n                    \"properties\": [\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        },\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        }\n                    ]\n                }\n            ]\n        },\n        \"provisioning\": {\n            \"jit\": {\n                \"isEnabled\": true,\n                \"scheme\": \"PROVISION_SILENTLY\",\n                \"userstore\": \"PRIMARY\"\n            },\n            \"outboundConnectors\": {\n                \"defaultConnectorId\": \"U0NJTQ\",\n                \"connectors\": [\n                    {\n                        \"connectorId\": \"U0NJTQ\",\n                        \"isEnabled\": true,\n                        \"isDefault\": false,\n                        \"blockingEnabled\": false,\n                        \"rulesEnabled\": false,\n                        \"properties\": [\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            },\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            }\n                        ]\n                    },\n                    {\n                        \"connectorId\": \"U0NJTQ\",\n                        \"isEnabled\": true,\n                        \"isDefault\": false,\n                        \"blockingEnabled\": false,\n                        \"rulesEnabled\": false,\n                        \"properties\": [\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            },\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            }\n                        ]\n                    }\n                ]\n            }\n        }\n    },\n    \"description\": \"Google federated connector\",\n    \"image\": \"google-logo-url\",\n    \"category\": \"DEFAULT\",\n    \"displayOrder\": 10\n}"
+												},
+												"url": {
+													"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/identity-providers/templates/:template-id",
+													"protocol": "https",
+													"host": [
+														"localhost"
+													],
+													"port": "9443",
+													"path": [
+														"t",
+														"{{tenant-domain}}",
+														"api",
+														"server",
+														"v1",
+														"identity-providers",
+														"templates",
+														":template-id"
+													],
+													"variable": [
+														{
+															"key": "template-id"
+														}
+													]
+												}
+											},
+											"status": "Forbidden",
+											"code": 403,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Unauthorized",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\": \"google\",\n    \"idp\": {\n        \"name\": \"google\",\n        \"description\": \"IDP for Google Federation\",\n        \"image\": \"google-logo-url\",\n        \"isPrimary\": false,\n        \"isFederationHub\": false,\n        \"homeRealmIdentifier\": \"localhost\",\n        \"certificate\": {\n            \"certificates\": [\n                \"<string>\",\n                \"<string>\"\n            ],\n            \"jwksUri\": \"https://localhost:9444/oauth2/jwks\"\n        },\n        \"alias\": \"https://localhost:9444/oauth2/token\",\n        \"claims\": {\n            \"userIdClaim\": {\n                \"uri\": \"http://wso2.org/claims/username\",\n                \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                \"displayName\": \"Username\"\n            },\n            \"roleClaim\": {\n                \"uri\": \"http://wso2.org/claims/username\",\n                \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                \"displayName\": \"Username\"\n            },\n            \"mappings\": [\n                {\n                    \"idpClaim\": \"country\",\n                    \"localClaim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    }\n                },\n                {\n                    \"idpClaim\": \"country\",\n                    \"localClaim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    }\n                }\n            ],\n            \"provisioningClaims\": [\n                {\n                    \"claim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    },\n                    \"defaultValue\": \"sathya\"\n                },\n                {\n                    \"claim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    },\n                    \"defaultValue\": \"sathya\"\n                }\n            ]\n        },\n        \"roles\": {\n            \"mappings\": [\n                {\n                    \"idpRole\": \"google-manager\",\n                    \"localRole\": \"manager\"\n                },\n                {\n                    \"idpRole\": \"google-manager\",\n                    \"localRole\": \"manager\"\n                }\n            ],\n            \"outboundProvisioningRoles\": [\n                \"manager\",\n                \"hr-admin\"\n            ]\n        },\n        \"federatedAuthenticators\": {\n            \"defaultAuthenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n            \"authenticators\": [\n                {\n                    \"authenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n                    \"isEnabled\": true,\n                    \"isDefault\": false,\n                    \"properties\": [\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        },\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        }\n                    ]\n                },\n                {\n                    \"authenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n                    \"isEnabled\": true,\n                    \"isDefault\": false,\n                    \"properties\": [\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        },\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        }\n                    ]\n                }\n            ]\n        },\n        \"provisioning\": {\n            \"jit\": {\n                \"isEnabled\": true,\n                \"scheme\": \"PROVISION_SILENTLY\",\n                \"userstore\": \"PRIMARY\"\n            },\n            \"outboundConnectors\": {\n                \"defaultConnectorId\": \"U0NJTQ\",\n                \"connectors\": [\n                    {\n                        \"connectorId\": \"U0NJTQ\",\n                        \"isEnabled\": true,\n                        \"isDefault\": false,\n                        \"blockingEnabled\": false,\n                        \"rulesEnabled\": false,\n                        \"properties\": [\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            },\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            }\n                        ]\n                    },\n                    {\n                        \"connectorId\": \"U0NJTQ\",\n                        \"isEnabled\": true,\n                        \"isDefault\": false,\n                        \"blockingEnabled\": false,\n                        \"rulesEnabled\": false,\n                        \"properties\": [\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            },\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            }\n                        ]\n                    }\n                ]\n            }\n        }\n    },\n    \"description\": \"Google federated connector\",\n    \"image\": \"google-logo-url\",\n    \"category\": \"DEFAULT\",\n    \"displayOrder\": 10\n}"
+												},
+												"url": {
+													"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/identity-providers/templates/:template-id",
+													"protocol": "https",
+													"host": [
+														"localhost"
+													],
+													"port": "9443",
+													"path": [
+														"t",
+														"{{tenant-domain}}",
+														"api",
+														"server",
+														"v1",
+														"identity-providers",
+														"templates",
+														":template-id"
+													],
+													"variable": [
+														{
+															"key": "template-id"
+														}
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Conflict",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\": \"google\",\n    \"idp\": {\n        \"name\": \"google\",\n        \"description\": \"IDP for Google Federation\",\n        \"image\": \"google-logo-url\",\n        \"isPrimary\": false,\n        \"isFederationHub\": false,\n        \"homeRealmIdentifier\": \"localhost\",\n        \"certificate\": {\n            \"certificates\": [\n                \"<string>\",\n                \"<string>\"\n            ],\n            \"jwksUri\": \"https://localhost:9444/oauth2/jwks\"\n        },\n        \"alias\": \"https://localhost:9444/oauth2/token\",\n        \"claims\": {\n            \"userIdClaim\": {\n                \"uri\": \"http://wso2.org/claims/username\",\n                \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                \"displayName\": \"Username\"\n            },\n            \"roleClaim\": {\n                \"uri\": \"http://wso2.org/claims/username\",\n                \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                \"displayName\": \"Username\"\n            },\n            \"mappings\": [\n                {\n                    \"idpClaim\": \"country\",\n                    \"localClaim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    }\n                },\n                {\n                    \"idpClaim\": \"country\",\n                    \"localClaim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    }\n                }\n            ],\n            \"provisioningClaims\": [\n                {\n                    \"claim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    },\n                    \"defaultValue\": \"sathya\"\n                },\n                {\n                    \"claim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    },\n                    \"defaultValue\": \"sathya\"\n                }\n            ]\n        },\n        \"roles\": {\n            \"mappings\": [\n                {\n                    \"idpRole\": \"google-manager\",\n                    \"localRole\": \"manager\"\n                },\n                {\n                    \"idpRole\": \"google-manager\",\n                    \"localRole\": \"manager\"\n                }\n            ],\n            \"outboundProvisioningRoles\": [\n                \"manager\",\n                \"hr-admin\"\n            ]\n        },\n        \"federatedAuthenticators\": {\n            \"defaultAuthenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n            \"authenticators\": [\n                {\n                    \"authenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n                    \"isEnabled\": true,\n                    \"isDefault\": false,\n                    \"properties\": [\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        },\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        }\n                    ]\n                },\n                {\n                    \"authenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n                    \"isEnabled\": true,\n                    \"isDefault\": false,\n                    \"properties\": [\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        },\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        }\n                    ]\n                }\n            ]\n        },\n        \"provisioning\": {\n            \"jit\": {\n                \"isEnabled\": true,\n                \"scheme\": \"PROVISION_SILENTLY\",\n                \"userstore\": \"PRIMARY\"\n            },\n            \"outboundConnectors\": {\n                \"defaultConnectorId\": \"U0NJTQ\",\n                \"connectors\": [\n                    {\n                        \"connectorId\": \"U0NJTQ\",\n                        \"isEnabled\": true,\n                        \"isDefault\": false,\n                        \"blockingEnabled\": false,\n                        \"rulesEnabled\": false,\n                        \"properties\": [\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            },\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            }\n                        ]\n                    },\n                    {\n                        \"connectorId\": \"U0NJTQ\",\n                        \"isEnabled\": true,\n                        \"isDefault\": false,\n                        \"blockingEnabled\": false,\n                        \"rulesEnabled\": false,\n                        \"properties\": [\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            },\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            }\n                        ]\n                    }\n                ]\n            }\n        }\n    },\n    \"description\": \"Google federated connector\",\n    \"image\": \"google-logo-url\",\n    \"category\": \"DEFAULT\",\n    \"displayOrder\": 10\n}"
+												},
+												"url": {
+													"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/identity-providers/templates/:template-id",
+													"protocol": "https",
+													"host": [
+														"localhost"
+													],
+													"port": "9443",
+													"path": [
+														"t",
+														"{{tenant-domain}}",
+														"api",
+														"server",
+														"v1",
+														"identity-providers",
+														"templates",
+														":template-id"
+													],
+													"variable": [
+														{
+															"key": "template-id"
+														}
+													]
+												}
+											},
+											"status": "Conflict",
+											"code": 409,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\": \"google\",\n    \"idp\": {\n        \"name\": \"google\",\n        \"description\": \"IDP for Google Federation\",\n        \"image\": \"google-logo-url\",\n        \"isPrimary\": false,\n        \"isFederationHub\": false,\n        \"homeRealmIdentifier\": \"localhost\",\n        \"certificate\": {\n            \"certificates\": [\n                \"<string>\",\n                \"<string>\"\n            ],\n            \"jwksUri\": \"https://localhost:9444/oauth2/jwks\"\n        },\n        \"alias\": \"https://localhost:9444/oauth2/token\",\n        \"claims\": {\n            \"userIdClaim\": {\n                \"uri\": \"http://wso2.org/claims/username\",\n                \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                \"displayName\": \"Username\"\n            },\n            \"roleClaim\": {\n                \"uri\": \"http://wso2.org/claims/username\",\n                \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                \"displayName\": \"Username\"\n            },\n            \"mappings\": [\n                {\n                    \"idpClaim\": \"country\",\n                    \"localClaim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    }\n                },\n                {\n                    \"idpClaim\": \"country\",\n                    \"localClaim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    }\n                }\n            ],\n            \"provisioningClaims\": [\n                {\n                    \"claim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    },\n                    \"defaultValue\": \"sathya\"\n                },\n                {\n                    \"claim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    },\n                    \"defaultValue\": \"sathya\"\n                }\n            ]\n        },\n        \"roles\": {\n            \"mappings\": [\n                {\n                    \"idpRole\": \"google-manager\",\n                    \"localRole\": \"manager\"\n                },\n                {\n                    \"idpRole\": \"google-manager\",\n                    \"localRole\": \"manager\"\n                }\n            ],\n            \"outboundProvisioningRoles\": [\n                \"manager\",\n                \"hr-admin\"\n            ]\n        },\n        \"federatedAuthenticators\": {\n            \"defaultAuthenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n            \"authenticators\": [\n                {\n                    \"authenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n                    \"isEnabled\": true,\n                    \"isDefault\": false,\n                    \"properties\": [\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        },\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        }\n                    ]\n                },\n                {\n                    \"authenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n                    \"isEnabled\": true,\n                    \"isDefault\": false,\n                    \"properties\": [\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        },\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        }\n                    ]\n                }\n            ]\n        },\n        \"provisioning\": {\n            \"jit\": {\n                \"isEnabled\": true,\n                \"scheme\": \"PROVISION_SILENTLY\",\n                \"userstore\": \"PRIMARY\"\n            },\n            \"outboundConnectors\": {\n                \"defaultConnectorId\": \"U0NJTQ\",\n                \"connectors\": [\n                    {\n                        \"connectorId\": \"U0NJTQ\",\n                        \"isEnabled\": true,\n                        \"isDefault\": false,\n                        \"blockingEnabled\": false,\n                        \"rulesEnabled\": false,\n                        \"properties\": [\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            },\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            }\n                        ]\n                    },\n                    {\n                        \"connectorId\": \"U0NJTQ\",\n                        \"isEnabled\": true,\n                        \"isDefault\": false,\n                        \"blockingEnabled\": false,\n                        \"rulesEnabled\": false,\n                        \"properties\": [\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            },\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            }\n                        ]\n                    }\n                ]\n            }\n        }\n    },\n    \"description\": \"Google federated connector\",\n    \"image\": \"google-logo-url\",\n    \"category\": \"DEFAULT\",\n    \"displayOrder\": 10\n}"
+												},
+												"url": {
+													"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/identity-providers/templates/:template-id",
+													"protocol": "https",
+													"host": [
+														"localhost"
+													],
+													"port": "9443",
+													"path": [
+														"t",
+														"{{tenant-domain}}",
+														"api",
+														"server",
+														"v1",
+														"identity-providers",
+														"templates",
+														":template-id"
+													],
+													"variable": [
+														{
+															"key": "template-id"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+										},
+										{
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\": \"google\",\n    \"idp\": {\n        \"name\": \"google\",\n        \"description\": \"IDP for Google Federation\",\n        \"image\": \"google-logo-url\",\n        \"isPrimary\": false,\n        \"isFederationHub\": false,\n        \"homeRealmIdentifier\": \"localhost\",\n        \"certificate\": {\n            \"certificates\": [\n                \"<string>\",\n                \"<string>\"\n            ],\n            \"jwksUri\": \"https://localhost:9444/oauth2/jwks\"\n        },\n        \"alias\": \"https://localhost:9444/oauth2/token\",\n        \"claims\": {\n            \"userIdClaim\": {\n                \"uri\": \"http://wso2.org/claims/username\",\n                \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                \"displayName\": \"Username\"\n            },\n            \"roleClaim\": {\n                \"uri\": \"http://wso2.org/claims/username\",\n                \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                \"displayName\": \"Username\"\n            },\n            \"mappings\": [\n                {\n                    \"idpClaim\": \"country\",\n                    \"localClaim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    }\n                },\n                {\n                    \"idpClaim\": \"country\",\n                    \"localClaim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    }\n                }\n            ],\n            \"provisioningClaims\": [\n                {\n                    \"claim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    },\n                    \"defaultValue\": \"sathya\"\n                },\n                {\n                    \"claim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    },\n                    \"defaultValue\": \"sathya\"\n                }\n            ]\n        },\n        \"roles\": {\n            \"mappings\": [\n                {\n                    \"idpRole\": \"google-manager\",\n                    \"localRole\": \"manager\"\n                },\n                {\n                    \"idpRole\": \"google-manager\",\n                    \"localRole\": \"manager\"\n                }\n            ],\n            \"outboundProvisioningRoles\": [\n                \"manager\",\n                \"hr-admin\"\n            ]\n        },\n        \"federatedAuthenticators\": {\n            \"defaultAuthenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n            \"authenticators\": [\n                {\n                    \"authenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n                    \"isEnabled\": true,\n                    \"isDefault\": false,\n                    \"properties\": [\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        },\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        }\n                    ]\n                },\n                {\n                    \"authenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n                    \"isEnabled\": true,\n                    \"isDefault\": false,\n                    \"properties\": [\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        },\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        }\n                    ]\n                }\n            ]\n        },\n        \"provisioning\": {\n            \"jit\": {\n                \"isEnabled\": true,\n                \"scheme\": \"PROVISION_SILENTLY\",\n                \"userstore\": \"PRIMARY\"\n            },\n            \"outboundConnectors\": {\n                \"defaultConnectorId\": \"U0NJTQ\",\n                \"connectors\": [\n                    {\n                        \"connectorId\": \"U0NJTQ\",\n                        \"isEnabled\": true,\n                        \"isDefault\": false,\n                        \"blockingEnabled\": false,\n                        \"rulesEnabled\": false,\n                        \"properties\": [\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            },\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            }\n                        ]\n                    },\n                    {\n                        \"connectorId\": \"U0NJTQ\",\n                        \"isEnabled\": true,\n                        \"isDefault\": false,\n                        \"blockingEnabled\": false,\n                        \"rulesEnabled\": false,\n                        \"properties\": [\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            },\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            }\n                        ]\n                    }\n                ]\n            }\n        }\n    },\n    \"description\": \"Google federated connector\",\n    \"image\": \"google-logo-url\",\n    \"category\": \"DEFAULT\",\n    \"displayOrder\": 10\n}"
+												},
+												"url": {
+													"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/identity-providers/templates/:template-id",
+													"protocol": "https",
+													"host": [
+														"localhost"
+													],
+													"port": "9443",
+													"path": [
+														"t",
+														"{{tenant-domain}}",
+														"api",
+														"server",
+														"v1",
+														"identity-providers",
+														"templates",
+														":template-id"
+													],
+													"variable": [
+														{
+															"key": "template-id"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+										},
+										{
+											"name": "Server Error",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\": \"google\",\n    \"idp\": {\n        \"name\": \"google\",\n        \"description\": \"IDP for Google Federation\",\n        \"image\": \"google-logo-url\",\n        \"isPrimary\": false,\n        \"isFederationHub\": false,\n        \"homeRealmIdentifier\": \"localhost\",\n        \"certificate\": {\n            \"certificates\": [\n                \"<string>\",\n                \"<string>\"\n            ],\n            \"jwksUri\": \"https://localhost:9444/oauth2/jwks\"\n        },\n        \"alias\": \"https://localhost:9444/oauth2/token\",\n        \"claims\": {\n            \"userIdClaim\": {\n                \"uri\": \"http://wso2.org/claims/username\",\n                \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                \"displayName\": \"Username\"\n            },\n            \"roleClaim\": {\n                \"uri\": \"http://wso2.org/claims/username\",\n                \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                \"displayName\": \"Username\"\n            },\n            \"mappings\": [\n                {\n                    \"idpClaim\": \"country\",\n                    \"localClaim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    }\n                },\n                {\n                    \"idpClaim\": \"country\",\n                    \"localClaim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    }\n                }\n            ],\n            \"provisioningClaims\": [\n                {\n                    \"claim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    },\n                    \"defaultValue\": \"sathya\"\n                },\n                {\n                    \"claim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    },\n                    \"defaultValue\": \"sathya\"\n                }\n            ]\n        },\n        \"roles\": {\n            \"mappings\": [\n                {\n                    \"idpRole\": \"google-manager\",\n                    \"localRole\": \"manager\"\n                },\n                {\n                    \"idpRole\": \"google-manager\",\n                    \"localRole\": \"manager\"\n                }\n            ],\n            \"outboundProvisioningRoles\": [\n                \"manager\",\n                \"hr-admin\"\n            ]\n        },\n        \"federatedAuthenticators\": {\n            \"defaultAuthenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n            \"authenticators\": [\n                {\n                    \"authenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n                    \"isEnabled\": true,\n                    \"isDefault\": false,\n                    \"properties\": [\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        },\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        }\n                    ]\n                },\n                {\n                    \"authenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n                    \"isEnabled\": true,\n                    \"isDefault\": false,\n                    \"properties\": [\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        },\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        }\n                    ]\n                }\n            ]\n        },\n        \"provisioning\": {\n            \"jit\": {\n                \"isEnabled\": true,\n                \"scheme\": \"PROVISION_SILENTLY\",\n                \"userstore\": \"PRIMARY\"\n            },\n            \"outboundConnectors\": {\n                \"defaultConnectorId\": \"U0NJTQ\",\n                \"connectors\": [\n                    {\n                        \"connectorId\": \"U0NJTQ\",\n                        \"isEnabled\": true,\n                        \"isDefault\": false,\n                        \"blockingEnabled\": false,\n                        \"rulesEnabled\": false,\n                        \"properties\": [\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            },\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            }\n                        ]\n                    },\n                    {\n                        \"connectorId\": \"U0NJTQ\",\n                        \"isEnabled\": true,\n                        \"isDefault\": false,\n                        \"blockingEnabled\": false,\n                        \"rulesEnabled\": false,\n                        \"properties\": [\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            },\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            }\n                        ]\n                    }\n                ]\n            }\n        }\n    },\n    \"description\": \"Google federated connector\",\n    \"image\": \"google-logo-url\",\n    \"category\": \"DEFAULT\",\n    \"displayOrder\": 10\n}"
+												},
+												"url": {
+													"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/identity-providers/templates/:template-id",
+													"protocol": "https",
+													"host": [
+														"localhost"
+													],
+													"port": "9443",
+													"path": [
+														"t",
+														"{{tenant-domain}}",
+														"api",
+														"server",
+														"v1",
+														"identity-providers",
+														"templates",
+														":template-id"
+													],
+													"variable": [
+														{
+															"key": "template-id"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+										},
+										{
+											"name": "Successfully updated",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"name\": \"google\",\n    \"idp\": {\n        \"name\": \"google\",\n        \"description\": \"IDP for Google Federation\",\n        \"image\": \"google-logo-url\",\n        \"isPrimary\": false,\n        \"isFederationHub\": false,\n        \"homeRealmIdentifier\": \"localhost\",\n        \"certificate\": {\n            \"certificates\": [\n                \"<string>\",\n                \"<string>\"\n            ],\n            \"jwksUri\": \"https://localhost:9444/oauth2/jwks\"\n        },\n        \"alias\": \"https://localhost:9444/oauth2/token\",\n        \"claims\": {\n            \"userIdClaim\": {\n                \"uri\": \"http://wso2.org/claims/username\",\n                \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                \"displayName\": \"Username\"\n            },\n            \"roleClaim\": {\n                \"uri\": \"http://wso2.org/claims/username\",\n                \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                \"displayName\": \"Username\"\n            },\n            \"mappings\": [\n                {\n                    \"idpClaim\": \"country\",\n                    \"localClaim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    }\n                },\n                {\n                    \"idpClaim\": \"country\",\n                    \"localClaim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    }\n                }\n            ],\n            \"provisioningClaims\": [\n                {\n                    \"claim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    },\n                    \"defaultValue\": \"sathya\"\n                },\n                {\n                    \"claim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    },\n                    \"defaultValue\": \"sathya\"\n                }\n            ]\n        },\n        \"roles\": {\n            \"mappings\": [\n                {\n                    \"idpRole\": \"google-manager\",\n                    \"localRole\": \"manager\"\n                },\n                {\n                    \"idpRole\": \"google-manager\",\n                    \"localRole\": \"manager\"\n                }\n            ],\n            \"outboundProvisioningRoles\": [\n                \"manager\",\n                \"hr-admin\"\n            ]\n        },\n        \"federatedAuthenticators\": {\n            \"defaultAuthenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n            \"authenticators\": [\n                {\n                    \"authenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n                    \"isEnabled\": true,\n                    \"isDefault\": false,\n                    \"properties\": [\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        },\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        }\n                    ]\n                },\n                {\n                    \"authenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n                    \"isEnabled\": true,\n                    \"isDefault\": false,\n                    \"properties\": [\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        },\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        }\n                    ]\n                }\n            ]\n        },\n        \"provisioning\": {\n            \"jit\": {\n                \"isEnabled\": true,\n                \"scheme\": \"PROVISION_SILENTLY\",\n                \"userstore\": \"PRIMARY\"\n            },\n            \"outboundConnectors\": {\n                \"defaultConnectorId\": \"U0NJTQ\",\n                \"connectors\": [\n                    {\n                        \"connectorId\": \"U0NJTQ\",\n                        \"isEnabled\": true,\n                        \"isDefault\": false,\n                        \"blockingEnabled\": false,\n                        \"rulesEnabled\": false,\n                        \"properties\": [\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            },\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            }\n                        ]\n                    },\n                    {\n                        \"connectorId\": \"U0NJTQ\",\n                        \"isEnabled\": true,\n                        \"isDefault\": false,\n                        \"blockingEnabled\": false,\n                        \"rulesEnabled\": false,\n                        \"properties\": [\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            },\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            }\n                        ]\n                    }\n                ]\n            }\n        }\n    },\n    \"description\": \"Google federated connector\",\n    \"image\": \"google-logo-url\",\n    \"category\": \"DEFAULT\",\n    \"displayOrder\": 10\n}"
+												},
+												"url": {
+													"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/identity-providers/templates/:template-id",
+													"protocol": "https",
+													"host": [
+														"localhost"
+													],
+													"port": "9443",
+													"path": [
+														"t",
+														"{{tenant-domain}}",
+														"api",
+														"server",
+														"v1",
+														"identity-providers",
+														"templates",
+														":template-id"
+													],
+													"variable": [
+														{
+															"key": "template-id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								},
+								{
+									"name": "Delete a IDP template using the template Id.\n",
+									"request": {
+										"auth": {
+											"type": "basic",
+											"basic": [
+												{
+													"key": "password",
+													"value": "admin",
+													"type": "string"
+												},
+												{
+													"key": "username",
+													"value": "admin",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/identity-providers/templates/:template-id",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"identity-providers",
+												"templates",
+												":template-id"
+											],
+											"variable": [
+												{
+													"key": "template-id",
+													"value": "81b00779-b290-4542-a6e0-7744089505b1",
+													"type": "string",
+													"description": "(Required) Id of the IDP template"
+												}
+											]
+										},
+										"description": "This API provides the capability to delete a IDP template using the template Id.\n"
+									},
+									"response": [
+										{
+											"name": "Server Error",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/identity-providers/templates/:template-id",
+													"protocol": "https",
+													"host": [
+														"localhost"
+													],
+													"port": "9443",
+													"path": [
+														"t",
+														"{{tenant-domain}}",
+														"api",
+														"server",
+														"v1",
+														"identity-providers",
+														"templates",
+														":template-id"
+													],
+													"variable": [
+														{
+															"key": "template-id"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+										},
+										{
+											"name": "Successfully Deleted",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/identity-providers/templates/:template-id",
+													"protocol": "https",
+													"host": [
+														"localhost"
+													],
+													"port": "9443",
+													"path": [
+														"t",
+														"{{tenant-domain}}",
+														"api",
+														"server",
+														"v1",
+														"identity-providers",
+														"templates",
+														":template-id"
+													],
+													"variable": [
+														{
+															"key": "template-id"
+														}
+													]
+												}
+											},
+											"status": "No Content",
+											"code": 204,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Unauthorized",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/identity-providers/templates/:template-id",
+													"protocol": "https",
+													"host": [
+														"localhost"
+													],
+													"port": "9443",
+													"path": [
+														"t",
+														"{{tenant-domain}}",
+														"api",
+														"server",
+														"v1",
+														"identity-providers",
+														"templates",
+														":template-id"
+													],
+													"variable": [
+														{
+															"key": "template-id"
+														}
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Bad Request",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/identity-providers/templates/:template-id",
+													"protocol": "https",
+													"host": [
+														"localhost"
+													],
+													"port": "9443",
+													"path": [
+														"t",
+														"{{tenant-domain}}",
+														"api",
+														"server",
+														"v1",
+														"identity-providers",
+														"templates",
+														":template-id"
+													],
+													"variable": [
+														{
+															"key": "template-id"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/identity-providers/templates/:template-id",
+													"protocol": "https",
+													"host": [
+														"localhost"
+													],
+													"port": "9443",
+													"path": [
+														"t",
+														"{{tenant-domain}}",
+														"api",
+														"server",
+														"v1",
+														"identity-providers",
+														"templates",
+														":template-id"
+													],
+													"variable": [
+														{
+															"key": "template-id"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+										},
+										{
+											"name": "Forbidden",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/identity-providers/templates/:template-id",
+													"protocol": "https",
+													"host": [
+														"localhost"
+													],
+													"port": "9443",
+													"path": [
+														"t",
+														"{{tenant-domain}}",
+														"api",
+														"server",
+														"v1",
+														"identity-providers",
+														"templates",
+														":template-id"
+													],
+													"variable": [
+														{
+															"key": "template-id"
+														}
+													]
+												}
+											},
+											"status": "Forbidden",
+											"code": 403,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							],
+							"protocolProfileBehavior": {},
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "List identity provider templates\n",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/identity-providers/templates",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"{{tenant-domain}}",
+										"api",
+										"server",
+										"v1",
+										"identity-providers",
+										"templates"
+									],
+									"variable": [
+										{
+											"id": "96f8cc26-d02f-46fb-84e8-3dbc0ceb6114",
+											"key": "tenant-domain",
+											"value": "{{tenant-domain}}",
+											"type": "string",
+											"description": {
+												"content": "",
+												"type": "text/plain"
+											}
+										}
+									]
+								},
+								"description": "This API provides the list of available identity provider templates.\n"
+							},
+							"response": [
+								{
+									"name": "Successful response",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/identity-providers/templates?limit=<integer>&offset=<integer>&filter=<string>",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"identity-providers",
+												"templates"
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "<integer>"
+												},
+												{
+													"key": "offset",
+													"value": "<integer>"
+												},
+												{
+													"key": "filter",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"totalResults\": 10,\n \"startIndex\": 1,\n \"count\": 10,\n \"links\": [\n  {\n   \"href\": \"identity-provider/templates?offset=50&limit=10\",\n   \"rel\": \"next\"\n  },\n  {\n   \"href\": \"identity-provider/templates?offset=30&limit=10\",\n   \"rel\": \"previous\"\n  }\n ],\n \"templates\": [\n  {\n   \"id\": \"123e4567-e89b-12d3-a456-556642440000\",\n   \"name\": \"google\",\n   \"description\": \"Identity provider template for google federation\",\n   \"image\": \"google-logo-url\",\n   \"category\": \"DEFAULT\",\n   \"displayOrder\": 10,\n   \"self\": \"/t/carbon.super/api/server/v1/identity-providers/templates/123e4567-e89b-12d3-a456-556642440000\"\n  },\n  {\n   \"id\": \"123e4567-e89b-12d3-a456-556642440000\",\n   \"name\": \"google\",\n   \"description\": \"Identity provider template for google federation\",\n   \"image\": \"google-logo-url\",\n   \"category\": \"DEFAULT\",\n   \"displayOrder\": 10,\n   \"self\": \"/t/carbon.super/api/server/v1/identity-providers/templates/123e4567-e89b-12d3-a456-556642440000\"\n  }\n ]\n}"
+								},
+								{
+									"name": "Forbidden",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/identity-providers/templates?limit=<integer>&offset=<integer>&filter=<string>",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"identity-providers",
+												"templates"
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "<integer>"
+												},
+												{
+													"key": "offset",
+													"value": "<integer>"
+												},
+												{
+													"key": "filter",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/identity-providers/templates?limit=<integer>&offset=<integer>&filter=<string>",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"identity-providers",
+												"templates"
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "<integer>"
+												},
+												{
+													"key": "offset",
+													"value": "<integer>"
+												},
+												{
+													"key": "filter",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/identity-providers/templates?limit=<integer>&offset=<integer>&filter=<string>",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"identity-providers",
+												"templates"
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "<integer>"
+												},
+												{
+													"key": "offset",
+													"value": "<integer>"
+												},
+												{
+													"key": "filter",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+								},
+								{
+									"name": "Server Error",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/identity-providers/templates?limit=<integer>&offset=<integer>&filter=<string>",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"identity-providers",
+												"templates"
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "<integer>"
+												},
+												{
+													"key": "offset",
+													"value": "<integer>"
+												},
+												{
+													"key": "filter",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/identity-providers/templates?limit=<integer>&offset=<integer>&filter=<string>",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"identity-providers",
+												"templates"
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "<integer>"
+												},
+												{
+													"key": "offset",
+													"value": "<integer>"
+												},
+												{
+													"key": "filter",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Create a new IDP template\n",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Google\",\n  \"description\": \"Template for google IdPs.\",\n  \"image\": \"google-logo-url\",\n  \"category\": \"DEFAULT\",\n  \"displayOrder\": 10,\n  \"idp\": {\n    \"name\": \"Google\",\n    \"description\": \"IDP for Google Federation\",\n    \"image\": \"google-logo-url\",\n    \"isPrimary\": false,\n    \"isFederationHub\": false,\n    \"homeRealmIdentifier\": \"localhost\",\n    \"certificate\": {\n      \"certificates\": [\n        \"LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURzRENDQXBpZ0F3SUJBZ0lKQUs0eml2ckVsYzBJTUEwR0NTcUdTSWIzRFFFQkN3VUFNSUdETVJFd0R3WUQKVlFRRERBaENkV1JrYUdsdFlURUxNQWtHQTFVRUJoTUNVMHd4RURBT0JnTlZCQWdNQjFkbGMzUmxjbTR4RURBTwpCZ05WQkFjTUIwTnZiRzl0WW04eERUQUxCZ05WQkFvTUJGZFRUekl4Q3pBSkJnTlZCQXNNQWxGQk1TRXdId1lKCktvWklodmNOQVFrQkZoSmlkV1JrYUdsdFlYVkFkM052TWk1amIyMHdJQmNOTVRrd056RTJNRFF5TXpFd1doZ1AKTXpBeE9ERXhNVFl3TkRJek1UQmFNSUdETVJFd0R3WURWUVFEREFoQ2RXUmthR2x0WVRFTE1Ba0dBMVVFQmhNQwpVMHd4RURBT0JnTlZCQWdNQjFkbGMzUmxjbTR4RURBT0JnTlZCQWNNQjBOdmJHOXRZbTh4RFRBTEJnTlZCQW9NCkJGZFRUekl4Q3pBSkJnTlZCQXNNQWxGQk1TRXdId1lKS29aSWh2Y05BUWtCRmhKaWRXUmthR2x0WVhWQWQzTnYKTWk1amIyMHdnZ0VpTUEwR0NTcUdTSWIzRFFFQkFRVUFBNElCRHdBd2dnRUtBb0lCQVFDcFo3V09VMTZpeGpiQwpiWGR3R3JhTW5xbmxnb2kzMDN5aVFxbHAySzlWTmZHT21nTlFhdFdlbjB0MVVWcjYxd0Y4eVlHaDJyc1lnbithCjhwYXVmUVVQQ1laeFRFR1FpT2RPZ0RNcE5tWW82ZHU2K2MvenJqcHNncGh5SHIxNEZPVHAxaVRDSXBmanVwVjEKd1BUeXJveURySGRvMkpuOHI3V3F1cklJVTRBYllBN2NrdVVqL0tqYUovTTZrZitwRFd5SVJvaDBKTFJlWWM4UQp5bmhYcjdrQWp5RnFqNitnWndBYkh4ckhrckVzYTJoVjQ0UFJXWjFQUERxTCswVU8veE1hQW5udndsdGd4QlVpCkhLUTFXWDVwdVVPaC9kQTQ5b0RsbEpraHpxd2d5eDQxc1FYbFNhVmdKaklUZVdSQmdvNnh6ajNmd3VvenBGS1gKbzRaeXBITDNBZ01CQUFHakl6QWhNQjhHQTFVZEVRUVlNQmFDQkhkemJ6S0NDSGR6YnpJdVkyOXRnZ1IzYzI4eQpNQTBHQ1NxR1NJYjNEUUVCQ3dVQUE0SUJBUUJTSzBKa1pyYlpvYmRDNHhZSG1IcnlVbkZVbkZZWUFvZmc0TFVGCkJRbWxDY0NKR0ZwR1BtN2ZDWHM0Y0h4Z0hPVTN5SkhtQ2pYaU9FRTc2dzhIU0NRcVhkNmROSEwxRkxtN0pqQTUKTEZmbHhiWXNOcmVVNVpJTmREVGZvWmxSSXR0Mkd4MlpIa3pjQVRJZm1yUFNwODV2WDhGem1mbTNBVTVpM3FXZQo4a2YyZk5nQjlMbE5XRFk1V09paVlHUWMrRk13WWdLcDJkNGM3dzMrWnRTUXJWRy9YdGpqYTJYV09Xdm1sV3dLCnB4b3pyNjIvTTdUUmVkc3hJNU90bzJvWExGZXp1MUdCWHdpNEFaempMSFVsNWpSR2hMbkNZa05qdWZGZi9EQ0cKeUFWdnpMVXQwZ2F0b0dJdTV2eG9la05JVWV5YTZpRzJBaG9jSmM0SEJMT3l4TXE3Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K\"\n      ]\n    },\n    \"alias\": \"https://localhost:9444/oauth2/token\",\n    \"claims\": {\n      \"userIdClaim\": {\n        \"uri\": \"http://wso2.org/claims/username\"\n      },\n      \"roleClaim\": {\n        \"uri\": \"http://wso2.org/claims/role\"\n      },\n      \"provisioningClaims\": [\n        {\n          \"claim\": {\n            \"uri\": \"http://wso2.org/claims/username\"\n          },\n          \"defaultValue\": \"sathya\"\n        }\n      ]\n    },\n    \"roles\": {\n      \"mappings\": [\n        {\n          \"idpRole\": \"google-manager\",\n          \"localRole\": \"admin\"\n        }\n      ],\n      \"outboundProvisioningRoles\": [\n        \"admin\"\n      ]\n    },\n    \"federatedAuthenticators\": {\n      \"defaultAuthenticatorId\": \"R29vZ2xlT0lEQ0F1dGhlbnRpY2F0b3I\",\n      \"authenticators\": [\n        {\n          \"authenticatorId\": \"R29vZ2xlT0lEQ0F1dGhlbnRpY2F0b3I\",\n          \"isEnabled\": true,\n          \"properties\": [\n            {\n              \"key\": \"AdditionalQueryParameters\",\n              \"value\": \"scope=openid email profile\"\n            },\n            {\n              \"key\": \"ClientId\",\n              \"value\": \"165474950684-7mvqd8m6hieb8mdnffcarnku2aua0tpl.apps.googleusercontent.com\"\n            },\n            {\n              \"key\": \"ClientSecret\",\n              \"value\": \"testclientsecret\"\n            },\n            {\n              \"key\": \"callbackUrl\",\n              \"value\": \"https://mydomain2.com:9443/commonauth\"\n            }\n          ]\n        }\n      ]\n    },\n    \"provisioning\": {\n      \"jit\": {\n        \"isEnabled\": true,\n        \"scheme\": \"PROVISION_SILENTLY\",\n        \"userstore\": \"PRIMARY\"\n      },\n      \"outboundConnectors\": {\n        \"defaultConnectorId\": \"c2NpbQ\",\n        \"connectors\": [\n          {\n            \"connectorId\": \"c2NpbQ\",\n            \"isEnabled\": true,\n            \"blockingEnabled\": false,\n            \"rulesEnabled\": false,\n            \"properties\": [\n              {\n                \"key\": \"scim-user-ep\",\n                \"value\": \"https://localhost:9445/userinfo\"\n              },\n              {\n                \"key\": \"scim-username\",\n                \"value\": \"admin\"\n              },\n              {\n                \"key\": \"scim-enable-pwd-provisioning\",\n                \"value\": \"true\"\n              },\n              {\n                \"key\": \"scim-password\",\n                \"value\": \"admin\"\n              }\n            ]\n          }\n        ]\n      }\n    }\n  }\n}\n",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/identity-providers/templates",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"{{tenant-domain}}",
+										"api",
+										"server",
+										"v1",
+										"identity-providers",
+										"templates"
+									],
+									"variable": [
+										{
+											"id": "725269ec-63e5-47b2-9e75-3b7c18eae39a",
+											"key": "tenant-domain",
+											"value": "{{tenant-domain}}",
+											"type": "string",
+											"description": {
+												"content": "",
+												"type": "text/plain"
+											}
+										}
+									]
+								},
+								"description": "This API provides the capability to create a new IDP template.\n"
+							},
+							"response": [
+								{
+									"name": "Forbidden",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"google\",\n    \"idp\": {\n        \"name\": \"google\",\n        \"description\": \"IDP for Google Federation\",\n        \"image\": \"google-logo-url\",\n        \"isPrimary\": false,\n        \"isFederationHub\": false,\n        \"homeRealmIdentifier\": \"localhost\",\n        \"certificate\": {\n            \"certificates\": [\n                \"<string>\",\n                \"<string>\"\n            ],\n            \"jwksUri\": \"https://localhost:9444/oauth2/jwks\"\n        },\n        \"alias\": \"https://localhost:9444/oauth2/token\",\n        \"claims\": {\n            \"userIdClaim\": {\n                \"uri\": \"http://wso2.org/claims/username\",\n                \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                \"displayName\": \"Username\"\n            },\n            \"roleClaim\": {\n                \"uri\": \"http://wso2.org/claims/username\",\n                \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                \"displayName\": \"Username\"\n            },\n            \"mappings\": [\n                {\n                    \"idpClaim\": \"country\",\n                    \"localClaim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    }\n                },\n                {\n                    \"idpClaim\": \"country\",\n                    \"localClaim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    }\n                }\n            ],\n            \"provisioningClaims\": [\n                {\n                    \"claim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    },\n                    \"defaultValue\": \"sathya\"\n                },\n                {\n                    \"claim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    },\n                    \"defaultValue\": \"sathya\"\n                }\n            ]\n        },\n        \"roles\": {\n            \"mappings\": [\n                {\n                    \"idpRole\": \"google-manager\",\n                    \"localRole\": \"manager\"\n                },\n                {\n                    \"idpRole\": \"google-manager\",\n                    \"localRole\": \"manager\"\n                }\n            ],\n            \"outboundProvisioningRoles\": [\n                \"manager\",\n                \"hr-admin\"\n            ]\n        },\n        \"federatedAuthenticators\": {\n            \"defaultAuthenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n            \"authenticators\": [\n                {\n                    \"authenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n                    \"isEnabled\": true,\n                    \"isDefault\": false,\n                    \"properties\": [\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        },\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        }\n                    ]\n                },\n                {\n                    \"authenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n                    \"isEnabled\": true,\n                    \"isDefault\": false,\n                    \"properties\": [\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        },\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        }\n                    ]\n                }\n            ]\n        },\n        \"provisioning\": {\n            \"jit\": {\n                \"isEnabled\": true,\n                \"scheme\": \"PROVISION_SILENTLY\",\n                \"userstore\": \"PRIMARY\"\n            },\n            \"outboundConnectors\": {\n                \"defaultConnectorId\": \"U0NJTQ\",\n                \"connectors\": [\n                    {\n                        \"connectorId\": \"U0NJTQ\",\n                        \"isEnabled\": true,\n                        \"isDefault\": false,\n                        \"blockingEnabled\": false,\n                        \"rulesEnabled\": false,\n                        \"properties\": [\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            },\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            }\n                        ]\n                    },\n                    {\n                        \"connectorId\": \"U0NJTQ\",\n                        \"isEnabled\": true,\n                        \"isDefault\": false,\n                        \"blockingEnabled\": false,\n                        \"rulesEnabled\": false,\n                        \"properties\": [\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            },\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            }\n                        ]\n                    }\n                ]\n            }\n        }\n    },\n    \"description\": \"Google federated connector\",\n    \"image\": \"google-logo-url\",\n    \"category\": \"DEFAULT\",\n    \"displayOrder\": 10\n}"
+										},
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/identity-providers/templates",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"identity-providers",
+												"templates"
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"google\",\n    \"idp\": {\n        \"name\": \"google\",\n        \"description\": \"IDP for Google Federation\",\n        \"image\": \"google-logo-url\",\n        \"isPrimary\": false,\n        \"isFederationHub\": false,\n        \"homeRealmIdentifier\": \"localhost\",\n        \"certificate\": {\n            \"certificates\": [\n                \"<string>\",\n                \"<string>\"\n            ],\n            \"jwksUri\": \"https://localhost:9444/oauth2/jwks\"\n        },\n        \"alias\": \"https://localhost:9444/oauth2/token\",\n        \"claims\": {\n            \"userIdClaim\": {\n                \"uri\": \"http://wso2.org/claims/username\",\n                \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                \"displayName\": \"Username\"\n            },\n            \"roleClaim\": {\n                \"uri\": \"http://wso2.org/claims/username\",\n                \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                \"displayName\": \"Username\"\n            },\n            \"mappings\": [\n                {\n                    \"idpClaim\": \"country\",\n                    \"localClaim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    }\n                },\n                {\n                    \"idpClaim\": \"country\",\n                    \"localClaim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    }\n                }\n            ],\n            \"provisioningClaims\": [\n                {\n                    \"claim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    },\n                    \"defaultValue\": \"sathya\"\n                },\n                {\n                    \"claim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    },\n                    \"defaultValue\": \"sathya\"\n                }\n            ]\n        },\n        \"roles\": {\n            \"mappings\": [\n                {\n                    \"idpRole\": \"google-manager\",\n                    \"localRole\": \"manager\"\n                },\n                {\n                    \"idpRole\": \"google-manager\",\n                    \"localRole\": \"manager\"\n                }\n            ],\n            \"outboundProvisioningRoles\": [\n                \"manager\",\n                \"hr-admin\"\n            ]\n        },\n        \"federatedAuthenticators\": {\n            \"defaultAuthenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n            \"authenticators\": [\n                {\n                    \"authenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n                    \"isEnabled\": true,\n                    \"isDefault\": false,\n                    \"properties\": [\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        },\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        }\n                    ]\n                },\n                {\n                    \"authenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n                    \"isEnabled\": true,\n                    \"isDefault\": false,\n                    \"properties\": [\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        },\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        }\n                    ]\n                }\n            ]\n        },\n        \"provisioning\": {\n            \"jit\": {\n                \"isEnabled\": true,\n                \"scheme\": \"PROVISION_SILENTLY\",\n                \"userstore\": \"PRIMARY\"\n            },\n            \"outboundConnectors\": {\n                \"defaultConnectorId\": \"U0NJTQ\",\n                \"connectors\": [\n                    {\n                        \"connectorId\": \"U0NJTQ\",\n                        \"isEnabled\": true,\n                        \"isDefault\": false,\n                        \"blockingEnabled\": false,\n                        \"rulesEnabled\": false,\n                        \"properties\": [\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            },\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            }\n                        ]\n                    },\n                    {\n                        \"connectorId\": \"U0NJTQ\",\n                        \"isEnabled\": true,\n                        \"isDefault\": false,\n                        \"blockingEnabled\": false,\n                        \"rulesEnabled\": false,\n                        \"properties\": [\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            },\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            }\n                        ]\n                    }\n                ]\n            }\n        }\n    },\n    \"description\": \"Google federated connector\",\n    \"image\": \"google-logo-url\",\n    \"category\": \"DEFAULT\",\n    \"displayOrder\": 10\n}"
+										},
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/identity-providers/templates",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"identity-providers",
+												"templates"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Server Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"google\",\n    \"idp\": {\n        \"name\": \"google\",\n        \"description\": \"IDP for Google Federation\",\n        \"image\": \"google-logo-url\",\n        \"isPrimary\": false,\n        \"isFederationHub\": false,\n        \"homeRealmIdentifier\": \"localhost\",\n        \"certificate\": {\n            \"certificates\": [\n                \"<string>\",\n                \"<string>\"\n            ],\n            \"jwksUri\": \"https://localhost:9444/oauth2/jwks\"\n        },\n        \"alias\": \"https://localhost:9444/oauth2/token\",\n        \"claims\": {\n            \"userIdClaim\": {\n                \"uri\": \"http://wso2.org/claims/username\",\n                \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                \"displayName\": \"Username\"\n            },\n            \"roleClaim\": {\n                \"uri\": \"http://wso2.org/claims/username\",\n                \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                \"displayName\": \"Username\"\n            },\n            \"mappings\": [\n                {\n                    \"idpClaim\": \"country\",\n                    \"localClaim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    }\n                },\n                {\n                    \"idpClaim\": \"country\",\n                    \"localClaim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    }\n                }\n            ],\n            \"provisioningClaims\": [\n                {\n                    \"claim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    },\n                    \"defaultValue\": \"sathya\"\n                },\n                {\n                    \"claim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    },\n                    \"defaultValue\": \"sathya\"\n                }\n            ]\n        },\n        \"roles\": {\n            \"mappings\": [\n                {\n                    \"idpRole\": \"google-manager\",\n                    \"localRole\": \"manager\"\n                },\n                {\n                    \"idpRole\": \"google-manager\",\n                    \"localRole\": \"manager\"\n                }\n            ],\n            \"outboundProvisioningRoles\": [\n                \"manager\",\n                \"hr-admin\"\n            ]\n        },\n        \"federatedAuthenticators\": {\n            \"defaultAuthenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n            \"authenticators\": [\n                {\n                    \"authenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n                    \"isEnabled\": true,\n                    \"isDefault\": false,\n                    \"properties\": [\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        },\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        }\n                    ]\n                },\n                {\n                    \"authenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n                    \"isEnabled\": true,\n                    \"isDefault\": false,\n                    \"properties\": [\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        },\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        }\n                    ]\n                }\n            ]\n        },\n        \"provisioning\": {\n            \"jit\": {\n                \"isEnabled\": true,\n                \"scheme\": \"PROVISION_SILENTLY\",\n                \"userstore\": \"PRIMARY\"\n            },\n            \"outboundConnectors\": {\n                \"defaultConnectorId\": \"U0NJTQ\",\n                \"connectors\": [\n                    {\n                        \"connectorId\": \"U0NJTQ\",\n                        \"isEnabled\": true,\n                        \"isDefault\": false,\n                        \"blockingEnabled\": false,\n                        \"rulesEnabled\": false,\n                        \"properties\": [\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            },\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            }\n                        ]\n                    },\n                    {\n                        \"connectorId\": \"U0NJTQ\",\n                        \"isEnabled\": true,\n                        \"isDefault\": false,\n                        \"blockingEnabled\": false,\n                        \"rulesEnabled\": false,\n                        \"properties\": [\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            },\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            }\n                        ]\n                    }\n                ]\n            }\n        }\n    },\n    \"description\": \"Google federated connector\",\n    \"image\": \"google-logo-url\",\n    \"category\": \"DEFAULT\",\n    \"displayOrder\": 10\n}"
+										},
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/identity-providers/templates",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"identity-providers",
+												"templates"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+								},
+								{
+									"name": "Conflict",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"google\",\n    \"idp\": {\n        \"name\": \"google\",\n        \"description\": \"IDP for Google Federation\",\n        \"image\": \"google-logo-url\",\n        \"isPrimary\": false,\n        \"isFederationHub\": false,\n        \"homeRealmIdentifier\": \"localhost\",\n        \"certificate\": {\n            \"certificates\": [\n                \"<string>\",\n                \"<string>\"\n            ],\n            \"jwksUri\": \"https://localhost:9444/oauth2/jwks\"\n        },\n        \"alias\": \"https://localhost:9444/oauth2/token\",\n        \"claims\": {\n            \"userIdClaim\": {\n                \"uri\": \"http://wso2.org/claims/username\",\n                \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                \"displayName\": \"Username\"\n            },\n            \"roleClaim\": {\n                \"uri\": \"http://wso2.org/claims/username\",\n                \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                \"displayName\": \"Username\"\n            },\n            \"mappings\": [\n                {\n                    \"idpClaim\": \"country\",\n                    \"localClaim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    }\n                },\n                {\n                    \"idpClaim\": \"country\",\n                    \"localClaim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    }\n                }\n            ],\n            \"provisioningClaims\": [\n                {\n                    \"claim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    },\n                    \"defaultValue\": \"sathya\"\n                },\n                {\n                    \"claim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    },\n                    \"defaultValue\": \"sathya\"\n                }\n            ]\n        },\n        \"roles\": {\n            \"mappings\": [\n                {\n                    \"idpRole\": \"google-manager\",\n                    \"localRole\": \"manager\"\n                },\n                {\n                    \"idpRole\": \"google-manager\",\n                    \"localRole\": \"manager\"\n                }\n            ],\n            \"outboundProvisioningRoles\": [\n                \"manager\",\n                \"hr-admin\"\n            ]\n        },\n        \"federatedAuthenticators\": {\n            \"defaultAuthenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n            \"authenticators\": [\n                {\n                    \"authenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n                    \"isEnabled\": true,\n                    \"isDefault\": false,\n                    \"properties\": [\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        },\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        }\n                    ]\n                },\n                {\n                    \"authenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n                    \"isEnabled\": true,\n                    \"isDefault\": false,\n                    \"properties\": [\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        },\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        }\n                    ]\n                }\n            ]\n        },\n        \"provisioning\": {\n            \"jit\": {\n                \"isEnabled\": true,\n                \"scheme\": \"PROVISION_SILENTLY\",\n                \"userstore\": \"PRIMARY\"\n            },\n            \"outboundConnectors\": {\n                \"defaultConnectorId\": \"U0NJTQ\",\n                \"connectors\": [\n                    {\n                        \"connectorId\": \"U0NJTQ\",\n                        \"isEnabled\": true,\n                        \"isDefault\": false,\n                        \"blockingEnabled\": false,\n                        \"rulesEnabled\": false,\n                        \"properties\": [\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            },\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            }\n                        ]\n                    },\n                    {\n                        \"connectorId\": \"U0NJTQ\",\n                        \"isEnabled\": true,\n                        \"isDefault\": false,\n                        \"blockingEnabled\": false,\n                        \"rulesEnabled\": false,\n                        \"properties\": [\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            },\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            }\n                        ]\n                    }\n                ]\n            }\n        }\n    },\n    \"description\": \"Google federated connector\",\n    \"image\": \"google-logo-url\",\n    \"category\": \"DEFAULT\",\n    \"displayOrder\": 10\n}"
+										},
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/identity-providers/templates",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"identity-providers",
+												"templates"
+											]
+										}
+									},
+									"status": "Conflict",
+									"code": 409,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+								},
+								{
+									"name": "Successful response",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"google\",\n    \"idp\": {\n        \"name\": \"google\",\n        \"description\": \"IDP for Google Federation\",\n        \"image\": \"google-logo-url\",\n        \"isPrimary\": false,\n        \"isFederationHub\": false,\n        \"homeRealmIdentifier\": \"localhost\",\n        \"certificate\": {\n            \"certificates\": [\n                \"<string>\",\n                \"<string>\"\n            ],\n            \"jwksUri\": \"https://localhost:9444/oauth2/jwks\"\n        },\n        \"alias\": \"https://localhost:9444/oauth2/token\",\n        \"claims\": {\n            \"userIdClaim\": {\n                \"uri\": \"http://wso2.org/claims/username\",\n                \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                \"displayName\": \"Username\"\n            },\n            \"roleClaim\": {\n                \"uri\": \"http://wso2.org/claims/username\",\n                \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                \"displayName\": \"Username\"\n            },\n            \"mappings\": [\n                {\n                    \"idpClaim\": \"country\",\n                    \"localClaim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    }\n                },\n                {\n                    \"idpClaim\": \"country\",\n                    \"localClaim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    }\n                }\n            ],\n            \"provisioningClaims\": [\n                {\n                    \"claim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    },\n                    \"defaultValue\": \"sathya\"\n                },\n                {\n                    \"claim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    },\n                    \"defaultValue\": \"sathya\"\n                }\n            ]\n        },\n        \"roles\": {\n            \"mappings\": [\n                {\n                    \"idpRole\": \"google-manager\",\n                    \"localRole\": \"manager\"\n                },\n                {\n                    \"idpRole\": \"google-manager\",\n                    \"localRole\": \"manager\"\n                }\n            ],\n            \"outboundProvisioningRoles\": [\n                \"manager\",\n                \"hr-admin\"\n            ]\n        },\n        \"federatedAuthenticators\": {\n            \"defaultAuthenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n            \"authenticators\": [\n                {\n                    \"authenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n                    \"isEnabled\": true,\n                    \"isDefault\": false,\n                    \"properties\": [\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        },\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        }\n                    ]\n                },\n                {\n                    \"authenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n                    \"isEnabled\": true,\n                    \"isDefault\": false,\n                    \"properties\": [\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        },\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        }\n                    ]\n                }\n            ]\n        },\n        \"provisioning\": {\n            \"jit\": {\n                \"isEnabled\": true,\n                \"scheme\": \"PROVISION_SILENTLY\",\n                \"userstore\": \"PRIMARY\"\n            },\n            \"outboundConnectors\": {\n                \"defaultConnectorId\": \"U0NJTQ\",\n                \"connectors\": [\n                    {\n                        \"connectorId\": \"U0NJTQ\",\n                        \"isEnabled\": true,\n                        \"isDefault\": false,\n                        \"blockingEnabled\": false,\n                        \"rulesEnabled\": false,\n                        \"properties\": [\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            },\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            }\n                        ]\n                    },\n                    {\n                        \"connectorId\": \"U0NJTQ\",\n                        \"isEnabled\": true,\n                        \"isDefault\": false,\n                        \"blockingEnabled\": false,\n                        \"rulesEnabled\": false,\n                        \"properties\": [\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            },\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            }\n                        ]\n                    }\n                ]\n            }\n        }\n    },\n    \"description\": \"Google federated connector\",\n    \"image\": \"google-logo-url\",\n    \"category\": \"DEFAULT\",\n    \"displayOrder\": 10\n}"
+										},
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/identity-providers/templates",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"identity-providers",
+												"templates"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Location",
+											"value": "<string>",
+											"description": "Location of the newly created identity provider template"
+										},
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"google\",\n    \"idp\": {\n        \"name\": \"google\",\n        \"description\": \"IDP for Google Federation\",\n        \"image\": \"google-logo-url\",\n        \"isPrimary\": false,\n        \"isFederationHub\": false,\n        \"homeRealmIdentifier\": \"localhost\",\n        \"certificate\": {\n            \"certificates\": [\n                \"<string>\",\n                \"<string>\"\n            ],\n            \"jwksUri\": \"https://localhost:9444/oauth2/jwks\"\n        },\n        \"alias\": \"https://localhost:9444/oauth2/token\",\n        \"claims\": {\n            \"userIdClaim\": {\n                \"uri\": \"http://wso2.org/claims/username\",\n                \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                \"displayName\": \"Username\"\n            },\n            \"roleClaim\": {\n                \"uri\": \"http://wso2.org/claims/username\",\n                \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                \"displayName\": \"Username\"\n            },\n            \"mappings\": [\n                {\n                    \"idpClaim\": \"country\",\n                    \"localClaim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    }\n                },\n                {\n                    \"idpClaim\": \"country\",\n                    \"localClaim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    }\n                }\n            ],\n            \"provisioningClaims\": [\n                {\n                    \"claim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    },\n                    \"defaultValue\": \"sathya\"\n                },\n                {\n                    \"claim\": {\n                        \"uri\": \"http://wso2.org/claims/username\",\n                        \"id\": \"aHR0cDovL3dzbzIub3JnL2NsYWltcy91c2VybmFtZQ\",\n                        \"displayName\": \"Username\"\n                    },\n                    \"defaultValue\": \"sathya\"\n                }\n            ]\n        },\n        \"roles\": {\n            \"mappings\": [\n                {\n                    \"idpRole\": \"google-manager\",\n                    \"localRole\": \"manager\"\n                },\n                {\n                    \"idpRole\": \"google-manager\",\n                    \"localRole\": \"manager\"\n                }\n            ],\n            \"outboundProvisioningRoles\": [\n                \"manager\",\n                \"hr-admin\"\n            ]\n        },\n        \"federatedAuthenticators\": {\n            \"defaultAuthenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n            \"authenticators\": [\n                {\n                    \"authenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n                    \"isEnabled\": true,\n                    \"isDefault\": false,\n                    \"properties\": [\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        },\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        }\n                    ]\n                },\n                {\n                    \"authenticatorId\": \"U0FNTDJBdXRoZW50aWNhdG9y\",\n                    \"isEnabled\": true,\n                    \"isDefault\": false,\n                    \"properties\": [\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        },\n                        {\n                            \"key\": \"somePropertyKey\",\n                            \"value\": \"somePropertyValue\"\n                        }\n                    ]\n                }\n            ]\n        },\n        \"provisioning\": {\n            \"jit\": {\n                \"isEnabled\": true,\n                \"scheme\": \"PROVISION_SILENTLY\",\n                \"userstore\": \"PRIMARY\"\n            },\n            \"outboundConnectors\": {\n                \"defaultConnectorId\": \"U0NJTQ\",\n                \"connectors\": [\n                    {\n                        \"connectorId\": \"U0NJTQ\",\n                        \"isEnabled\": true,\n                        \"isDefault\": false,\n                        \"blockingEnabled\": false,\n                        \"rulesEnabled\": false,\n                        \"properties\": [\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            },\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            }\n                        ]\n                    },\n                    {\n                        \"connectorId\": \"U0NJTQ\",\n                        \"isEnabled\": true,\n                        \"isDefault\": false,\n                        \"blockingEnabled\": false,\n                        \"rulesEnabled\": false,\n                        \"properties\": [\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            },\n                            {\n                                \"key\": \"somePropertyKey\",\n                                \"value\": \"somePropertyValue\"\n                            }\n                        ]\n                    }\n                ]\n            }\n        }\n    },\n    \"description\": \"Google federated connector\",\n    \"image\": \"google-logo-url\",\n    \"category\": \"DEFAULT\",\n    \"displayOrder\": 10\n}"
+										},
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/identity-providers/templates",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"identity-providers",
+												"templates"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+								}
+							]
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
 					"name": "List identity providers\n",
 					"request": {
 						"auth": {
