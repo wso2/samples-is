@@ -20,7 +20,7 @@
     <parent>
         <groupId>org.wso2.samples.is</groupId>
         <artifactId>saml2-sso-sample</artifactId>
-        <version>4.1.1-SNAPSHOT</version>
+        <version>4.2.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 

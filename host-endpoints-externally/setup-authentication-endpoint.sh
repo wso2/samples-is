@@ -1,6 +1,6 @@
 echo "---------- Start Setting up authenticationendpoint in a web server ----------"
 echo "Please enter the path to your WSO2-IS installation."
-echo "Example: /home/downloads/WSO2_Products/wso2is-5.9.0"
+echo "Example: /home/downloads/WSO2_Products/wso2is-5.10.0"
 read WSO2_PATH
 
 echo

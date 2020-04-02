@@ -19,7 +19,7 @@
     <parent>
         <groupId>org.wso2</groupId>
         <artifactId>wso2</artifactId>
-        <version>1</version>
+        <version>1.2</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -27,7 +27,7 @@
     <artifactId>samples-is</artifactId>
     <packaging>pom</packaging>
     <description>WSO2 Identity Server Samples</description>
-    <version>4.1.1-SNAPSHOT</version>
+    <version>4.2.1-SNAPSHOT</version>
 
     <scm>
         <url>https://github.com/wso2/samples-is.git</url>
@@ -49,6 +49,7 @@
         <module>quick-start-guide</module>
         <module>etc/gdpr-samples</module>
         <module>distribution</module>
+        <module>saml-query-profile-client</module>
     </modules>
 
     <licenses>
@@ -147,7 +148,7 @@
             <dependency>
                 <groupId>org.wso2.carbon.identity.agent.sso.java</groupId>
                 <artifactId>org.wso2.carbon.identity.sso.agent</artifactId>
-                <version>${identity.agent.sso.version.range}</version>
+                <version>${identity.agent.sso.version}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>opensaml.wso2</groupId>
