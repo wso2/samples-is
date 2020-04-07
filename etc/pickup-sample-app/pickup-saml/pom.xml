@@ -97,16 +97,6 @@
         <dependency>
             <groupId>org.wso2.carbon.identity.agent.sso.java</groupId>
             <artifactId>org.wso2.carbon.identity.sso.agent</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.wso2.orbit.org.opensaml</groupId>
-                    <artifactId>opensaml</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>commons-collections.wso2</groupId>
-                    <artifactId>commons-collections</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.wso2.orbit.joda-time</groupId>
