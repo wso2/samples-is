@@ -115,14 +115,98 @@
             <!--dependencies of the saml2-sso-sample-->
             <dependency>
                 <groupId>org.opensaml</groupId>
-                <artifactId>opensaml</artifactId>
-                <version>${opensaml.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>commons-collections</groupId>
-                        <artifactId>commons-collections</artifactId>
-                    </exclusion>
-                </exclusions>
+                <artifactId>opensaml-core</artifactId>
+                <version>${opensaml3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.opensaml</groupId>
+                <artifactId>opensaml-soap-api</artifactId>
+                <version>${opensaml3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.opensaml</groupId>
+                <artifactId>opensaml-soap-impl</artifactId>
+                <version>${opensaml3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.opensaml</groupId>
+                <artifactId>opensaml-profile-api</artifactId>
+                <version>${opensaml3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.opensaml</groupId>
+                <artifactId>opensaml-profile-impl</artifactId>
+                <version>${opensaml3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.opensaml</groupId>
+                <artifactId>opensaml-saml-api</artifactId>
+                <version>${opensaml3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.opensaml</groupId>
+                <artifactId>opensaml-saml-impl</artifactId>
+                <version>${opensaml3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.opensaml</groupId>
+                <artifactId>opensaml-messaging-api</artifactId>
+                <version>${opensaml3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.opensaml</groupId>
+                <artifactId>opensaml-messaging-impl</artifactId>
+                <version>${opensaml3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.opensaml</groupId>
+                <artifactId>opensaml-security-api</artifactId>
+                <version>${opensaml3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.opensaml</groupId>
+                <artifactId>opensaml-security-impl</artifactId>
+                <version>${opensaml3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.opensaml</groupId>
+                <artifactId>opensaml-storage-api</artifactId>
+                <version>${opensaml3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.opensaml</groupId>
+                <artifactId>opensaml-storage-impl</artifactId>
+                <version>${opensaml3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.opensaml</groupId>
+                <artifactId>opensaml-xacml-api</artifactId>
+                <version>${opensaml3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.opensaml</groupId>
+                <artifactId>opensaml-xacml-impl</artifactId>
+                <version>${opensaml3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.opensaml</groupId>
+                <artifactId>opensaml-xacml-saml-api</artifactId>
+                <version>${opensaml3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.opensaml</groupId>
+                <artifactId>opensaml-xacml-saml-impl</artifactId>
+                <version>${opensaml3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.opensaml</groupId>
+                <artifactId>opensaml-xmlsec-api</artifactId>
+                <version>${opensaml3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.opensaml</groupId>
+                <artifactId>opensaml-xmlsec-impl</artifactId>
+                <version>${opensaml3.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.santuario</groupId>
@@ -130,29 +214,13 @@
                 <version>${xmlsec.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.opensaml</groupId>
-                <artifactId>xmltooling</artifactId>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.bouncycastle</groupId>
-                        <artifactId>bcprov-jdk15</artifactId>
-                    </exclusion>
-                </exclusions>
-                <version>${xmltooling.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.opensaml</groupId>
-                <artifactId>openws</artifactId>
-                <version>${openws.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>org.wso2.carbon.identity.agent.sso.java</groupId>
                 <artifactId>org.wso2.carbon.identity.sso.agent</artifactId>
                 <version>${identity.agent.sso.version}</version>
                 <exclusions>
                     <exclusion>
-                        <groupId>opensaml.wso2</groupId>
-                        <artifactId>opensaml2</artifactId>
+                        <groupId>org.wso2.orbit.org.opensaml</groupId>
+                        <artifactId>opensaml</artifactId>
                     </exclusion>
                     <exclusion>
                         <groupId>commons-collections.wso2</groupId>
@@ -262,7 +330,6 @@
                 <artifactId>servlet-api</artifactId>
                 <version>${sevlet.api.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>org.apache.oltu.oauth2</groupId>
                 <artifactId>org.apache.oltu.oauth2.client</artifactId>
@@ -306,8 +373,6 @@
                 <artifactId>org.wso2.carbon.identity.application.authentication.framework</artifactId>
                 <version>${identity.framework.version}</version>
             </dependency>
-
-
             <dependency>
                 <groupId>org.apache.httpcomponents</groupId>
                 <artifactId>httpclient</artifactId>
@@ -462,7 +527,7 @@
 
     <properties>
         <!--repo versions of quick-start-guide-->
-        <identity.agent.sso.version>5.1.22</identity.agent.sso.version>
+        <identity.agent.sso.version>5.3.4</identity.agent.sso.version>
         <sample.oidc-sso-sample.version>1.0</sample.oidc-sso-sample.version>
         <sample.qsg.version>1.0</sample.qsg.version>
         <maven.jar.plugin.version>3.0.2</maven.jar.plugin.version>
@@ -476,11 +541,9 @@
         <!--=============================================================================-->
 
         <!--repo versions of saml2-sso-sample-->
+        <opensaml3.version>3.3.1</opensaml3.version>
         <junit.version>3.8.1</junit.version>
-        <opensaml.version>2.6.4</opensaml.version>
         <xmlsec.version>1.4.4</xmlsec.version>
-        <xmltooling.version>1.3.1</xmltooling.version>
-        <openws.version>1.5.4</openws.version>
         <identity.agent.sso.version.range>[5.0.0, 6.0.0)</identity.agent.sso.version.range>
         <joda.wso2.version>2.9.4.wso2v1</joda.wso2.version>
         <axiom.impl.version>1.2.12</axiom.impl.version>

@@ -64,7 +64,7 @@
             request.getSession().invalidate();
     %>
             <script type="text/javascript">
-                location.href = <%=SAML_SSO_URL%>;
+                location.href = "index.jsp";
             </script>
     <%
             return;

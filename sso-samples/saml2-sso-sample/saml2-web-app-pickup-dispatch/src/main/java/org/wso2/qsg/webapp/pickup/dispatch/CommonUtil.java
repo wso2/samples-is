@@ -20,10 +20,11 @@ package org.wso2.qsg.webapp.pickup.dispatch;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.opensaml.xml.XMLObject;
-import org.opensaml.xml.io.Marshaller;
-import org.opensaml.xml.io.MarshallerFactory;
-import org.opensaml.xml.util.Base64;
+import org.apache.commons.codec.binary.Base64;
+import org.opensaml.core.xml.XMLObject;
+import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
+import org.opensaml.core.xml.io.Marshaller;
+import org.opensaml.core.xml.io.MarshallerFactory;
 import org.w3c.dom.Element;
 import org.w3c.dom.bootstrap.DOMImplementationRegistry;
 import org.w3c.dom.ls.DOMImplementationLS;
@@ -53,7 +54,7 @@ public class CommonUtil {
         ByteArrayOutputStream byteArrayOutputStream = null;
         try {
 
-            MarshallerFactory marshallerFactory = org.opensaml.xml.Configuration.getMarshallerFactory();
+            MarshallerFactory marshallerFactory = XMLObjectProviderRegistrySupport.getMarshallerFactory();
             Marshaller marshaller = marshallerFactory.getMarshaller(xmlObject);
             Element element = marshaller.marshall(xmlObject);
 
@@ -88,8 +89,7 @@ public class CommonUtil {
     public static String encode(String xmlString) {
         // Encoding the message
         String encodedRequestMessage =
-                Base64.encodeBytes(xmlString.getBytes(StandardCharsets.UTF_8),
-                        Base64.DONT_BREAK_LINES);
+                Base64.encodeBase64String(xmlString.getBytes(StandardCharsets.UTF_8));
         return encodedRequestMessage.trim();
     }
 
