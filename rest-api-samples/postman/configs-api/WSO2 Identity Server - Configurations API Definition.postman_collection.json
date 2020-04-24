@@ -1,24 +1,1216 @@
 {
 	"info": {
-		"_postman_id": "b6ff3e2d-893c-4853-9d53-895515dbf73c",
-		"name": "WSO2 Identity Server - Configurations API Definition",
+		"_postman_id": "a978effc-be37-4d80-b014-70e19dd62836",
+		"name": "WSO2 Identity Server - Configurations API Definition copy",
 		"description": "This document specifies a **RESTful API** for **WSO2 Identity Server Configurations**\n\nContact Support:\n Name: WSO2\n Email: architecture@wso2.org",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "configs/authenticators",
+			"name": "configs",
 			"item": [
 				{
-					"name": "List local authenticators in the server",
+					"name": "provisioning/inbound/scim",
+					"item": [
+						{
+							"name": "Retrieve Server Inbound SCIM configs",
+							"request": {
+								"auth": {
+									"type": "basic"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/provisioning/inbound/scim",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"{{tenant-domain}}",
+										"api",
+										"server",
+										"v1",
+										"configs",
+										"provisioning",
+										"inbound",
+										"scim"
+									],
+									"variable": [
+										{
+											"key": "tenant-domain",
+											"value": "{{tenant-domain}}",
+											"description": {
+												"content": "",
+												"type": "text/plain"
+											}
+										}
+									]
+								},
+								"description": "Retrieve Server Inbound SCIM Configs\n"
+							},
+							"response": [
+								{
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/provisioning/inbound/scim",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"configs",
+												"provisioning",
+												"inbound",
+												"scim"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Successful Response",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/provisioning/inbound/scim",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"configs",
+												"provisioning",
+												"inbound",
+												"scim"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"provisioningUserstore\": \"PRIMARY\",\n \"enableProxyMode\": false\n}"
+								},
+								{
+									"name": "Server Error",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/provisioning/inbound/scim",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"configs",
+												"provisioning",
+												"inbound",
+												"scim"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+								},
+								{
+									"name": "Forbidden",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/provisioning/inbound/scim",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"configs",
+												"provisioning",
+												"inbound",
+												"scim"
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/provisioning/inbound/scim",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"configs",
+												"provisioning",
+												"inbound",
+												"scim"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/provisioning/inbound/scim",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"configs",
+												"provisioning",
+												"inbound",
+												"scim"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Update Server Inbound SCIM configs",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"provisioningUserstore\": \"PRIMARY\",\n    \"enableProxyMode\": false\n}"
+								},
+								"url": {
+									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/provisioning/inbound/scim",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"{{tenant-domain}}",
+										"api",
+										"server",
+										"v1",
+										"configs",
+										"provisioning",
+										"inbound",
+										"scim"
+									],
+									"variable": [
+										{
+											"key": "tenant-domain",
+											"value": "{{tenant-domain}}",
+											"description": {
+												"content": "",
+												"type": "text/plain"
+											}
+										}
+									]
+								},
+								"description": "Update Server Inbound SCIM configs\n"
+							},
+							"response": [
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"provisioningUserstore\": \"PRIMARY\",\n    \"enableProxyMode\": false\n}"
+										},
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/provisioning/inbound/scim",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"configs",
+												"provisioning",
+												"inbound",
+												"scim"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+								},
+								{
+									"name": "Server Error",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"provisioningUserstore\": \"PRIMARY\",\n    \"enableProxyMode\": false\n}"
+										},
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/provisioning/inbound/scim",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"configs",
+												"provisioning",
+												"inbound",
+												"scim"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+								},
+								{
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"provisioningUserstore\": \"PRIMARY\",\n    \"enableProxyMode\": false\n}"
+										},
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/provisioning/inbound/scim",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"configs",
+												"provisioning",
+												"inbound",
+												"scim"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+								},
+								{
+									"name": "Successful Response",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"provisioningUserstore\": \"PRIMARY\",\n    \"enableProxyMode\": false\n}"
+										},
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/provisioning/inbound/scim",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"configs",
+												"provisioning",
+												"inbound",
+												"scim"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Forbidden",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"provisioningUserstore\": \"PRIMARY\",\n    \"enableProxyMode\": false\n}"
+										},
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/provisioning/inbound/scim",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"configs",
+												"provisioning",
+												"inbound",
+												"scim"
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"provisioningUserstore\": \"PRIMARY\",\n    \"enableProxyMode\": false\n}"
+										},
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/provisioning/inbound/scim",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"configs",
+												"provisioning",
+												"inbound",
+												"scim"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "authenticators",
+					"item": [
+						{
+							"name": "List local authenticators in the server",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"{{tenant-domain}}",
+										"api",
+										"server",
+										"v1",
+										"configs",
+										"authenticators"
+									],
+									"variable": [
+										{
+											"key": "tenant-domain",
+											"value": "{{tenant-domain}}",
+											"description": {
+												"content": "",
+												"type": "text/plain"
+											}
+										}
+									]
+								},
+								"description": "List available local authenticators of the server\n"
+							},
+							"response": [
+								{
+									"name": "Server Error",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"configs",
+												"authenticators"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+								},
+								{
+									"name": "Successful Response",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"configs",
+												"authenticators"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n {\n  \"id\": \"QmFzaWNBdXRoZW50aWNhdG9y\",\n  \"name\": \"BasicAuthenticator\",\n  \"displayName\": \"basic\",\n  \"isEnabled\": true,\n  \"self\": \"/t/carbon.super/api/server/v1/configs/authenticators/QmFzaWNBdXRoZW50aWNhdG9y\"\n },\n {\n  \"id\": \"QmFzaWNBdXRoZW50aWNhdG9y\",\n  \"name\": \"BasicAuthenticator\",\n  \"displayName\": \"basic\",\n  \"isEnabled\": true,\n  \"self\": \"/t/carbon.super/api/server/v1/configs/authenticators/QmFzaWNBdXRoZW50aWNhdG9y\"\n }\n]"
+								},
+								{
+									"name": "Forbidden",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"configs",
+												"authenticators"
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"configs",
+												"authenticators"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"configs",
+												"authenticators"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"configs",
+												"authenticators"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+								},
+								{
+									"name": "Not Implemented",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"configs",
+												"authenticators"
+											]
+										}
+									},
+									"status": "Not Implemented",
+									"code": 501,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Get authenticator by ID",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators/:authenticator-id",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"{{tenant-domain}}",
+										"api",
+										"server",
+										"v1",
+										"configs",
+										"authenticators",
+										":authenticator-id"
+									],
+									"variable": [
+										{
+											"key": "authenticator-id",
+											"value": "QmFzaWNBdXRoZW50aWNhdG9y",
+											"description": "(Required) ID of an authenticator"
+										}
+									]
+								},
+								"description": "By passing in the appropriate authenticator ID, you can retrieve authenticator details\n"
+							},
+							"response": [
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators/:authenticator-id",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"configs",
+												"authenticators",
+												":authenticator-id"
+											],
+											"variable": [
+												{
+													"key": "authenticator-id"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+								},
+								{
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators/:authenticator-id",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"configs",
+												"authenticators",
+												":authenticator-id"
+											],
+											"variable": [
+												{
+													"key": "authenticator-id"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+								},
+								{
+									"name": "Forbidden",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators/:authenticator-id",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"configs",
+												"authenticators",
+												":authenticator-id"
+											],
+											"variable": [
+												{
+													"key": "authenticator-id"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators/:authenticator-id",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"configs",
+												"authenticators",
+												":authenticator-id"
+											],
+											"variable": [
+												{
+													"key": "authenticator-id"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Successful Response",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators/:authenticator-id",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"configs",
+												"authenticators",
+												":authenticator-id"
+											],
+											"variable": [
+												{
+													"key": "authenticator-id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"name\": \"BasicAuthenticator\",\n \"displayName\": \"basic\",\n \"id\": \"QmFzaWNBdXRoZW50aWNhdG9y\",\n \"isEnabled\": true,\n \"properties\": [\n  {\n   \"key\": \"AuthMechanism\",\n   \"value\": \"basic\"\n  },\n  {\n   \"key\": \"AuthMechanism\",\n   \"value\": \"basic\"\n  }\n ]\n}"
+								},
+								{
+									"name": "Server Error",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators/:authenticator-id",
+											"protocol": "https",
+											"host": [
+												"localhost"
+											],
+											"port": "9443",
+											"path": [
+												"t",
+												"{{tenant-domain}}",
+												"api",
+												"server",
+												"v1",
+												"configs",
+												"authenticators",
+												":authenticator-id"
+											],
+											"variable": [
+												{
+													"key": "authenticator-id"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+								}
+							]
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Retrieve Server Configs",
 					"request": {
 						"auth": {
-							"type": "basic"
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators",
+							"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -30,8 +1222,7 @@
 								"api",
 								"server",
 								"v1",
-								"configs",
-								"authenticators"
+								"configs"
 							],
 							"variable": [
 								{
@@ -44,121 +1235,16 @@
 								}
 							]
 						},
-						"description": "List available local authenticators of the server\n"
+						"description": "Retrieve Server Configs\n"
 					},
 					"response": [
-						{
-							"name": "Not Implemented",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators",
-									"protocol": "https",
-									"host": [
-										"localhost"
-									],
-									"port": "9443",
-									"path": [
-										"t",
-										"{{tenant-domain}}",
-										"api",
-										"server",
-										"v1",
-										"configs",
-										"authenticators"
-									]
-								}
-							},
-							"status": "Not Implemented",
-							"code": 501,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								}
-							],
-							"cookie": [],
-							"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
-						},
-						{
-							"name": "Successful Response",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators",
-									"protocol": "https",
-									"host": [
-										"localhost"
-									],
-									"port": "9443",
-									"path": [
-										"t",
-										"{{tenant-domain}}",
-										"api",
-										"server",
-										"v1",
-										"configs",
-										"authenticators"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								}
-							],
-							"cookie": [],
-							"body": "[\n {\n  \"id\": \"QmFzaWNBdXRoZW50aWNhdG9y\",\n  \"name\": \"BasicAuthenticator\",\n  \"displayName\": \"basic\",\n  \"isEnabled\": true,\n  \"self\": \"/t/carbon.super/api/server/v1/configs/authenticators/QmFzaWNBdXRoZW50aWNhdG9y\"\n },\n {\n  \"id\": \"QmFzaWNBdXRoZW50aWNhdG9y\",\n  \"name\": \"BasicAuthenticator\",\n  \"displayName\": \"basic\",\n  \"isEnabled\": true,\n  \"self\": \"/t/carbon.super/api/server/v1/configs/authenticators/QmFzaWNBdXRoZW50aWNhdG9y\"\n }\n]"
-						},
-						{
-							"name": "Unauthorized",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators",
-									"protocol": "https",
-									"host": [
-										"localhost"
-									],
-									"port": "9443",
-									"path": [
-										"t",
-										"{{tenant-domain}}",
-										"api",
-										"server",
-										"v1",
-										"configs",
-										"authenticators"
-									]
-								}
-							},
-							"status": "Unauthorized",
-							"code": 401,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								}
-							],
-							"cookie": [],
-							"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
-						},
 						{
 							"name": "Bad Request",
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators",
+									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs",
 									"protocol": "https",
 									"host": [
 										"localhost"
@@ -170,8 +1256,7 @@
 										"api",
 										"server",
 										"v1",
-										"configs",
-										"authenticators"
+										"configs"
 									]
 								}
 							},
@@ -188,12 +1273,12 @@
 							"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
 						},
 						{
-							"name": "Forbidden",
+							"name": "Unauthorized",
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators",
+									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs",
 									"protocol": "https",
 									"host": [
 										"localhost"
@@ -205,13 +1290,46 @@
 										"api",
 										"server",
 										"v1",
-										"configs",
-										"authenticators"
+										"configs"
 									]
 								}
 							},
-							"status": "Forbidden",
-							"code": 403,
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"{{tenant-domain}}",
+										"api",
+										"server",
+										"v1",
+										"configs"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
 							"_postman_previewlanguage": "json",
 							"header": [
 								{
@@ -223,12 +1341,12 @@
 							"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
 						},
 						{
-							"name": "Server Error",
+							"name": "Successful Response",
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators",
+									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs",
 									"protocol": "https",
 									"host": [
 										"localhost"
@@ -240,8 +1358,41 @@
 										"api",
 										"server",
 										"v1",
-										"configs",
-										"authenticators"
+										"configs"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"homeRealmIdentifiers\": [\n  \"localhost\",\n  \"localhost\"\n ],\n \"idleSessionTimeoutPeriod\": \"15\",\n \"rememberMePeriod\": \"20160\",\n \"provisioning\": {\n  \"inbound\": {\n   \"scim\": {\n    \"provisioningUserstore\": \"PRIMARY\",\n    \"enableProxyMode\": false\n   }\n  }\n },\n \"authenticators\": [\n  {\n   \"id\": \"QmFzaWNBdXRoZW50aWNhdG9y\",\n   \"name\": \"BasicAuthenticator\",\n   \"displayName\": \"basic\",\n   \"isEnabled\": true,\n   \"self\": \"/t/carbon.super/api/server/v1/configs/authenticators/QmFzaWNBdXRoZW50aWNhdG9y\"\n  },\n  {\n   \"id\": \"QmFzaWNBdXRoZW50aWNhdG9y\",\n   \"name\": \"BasicAuthenticator\",\n   \"displayName\": \"basic\",\n   \"isEnabled\": true,\n   \"self\": \"/t/carbon.super/api/server/v1/configs/authenticators/QmFzaWNBdXRoZW50aWNhdG9y\"\n  }\n ]\n}"
+						},
+						{
+							"name": "Server Error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"{{tenant-domain}}",
+										"api",
+										"server",
+										"v1",
+										"configs"
 									]
 								}
 							},
@@ -258,12 +1409,12 @@
 							"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
 						},
 						{
-							"name": "Not Found",
+							"name": "Forbidden",
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators",
+									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs",
 									"protocol": "https",
 									"host": [
 										"localhost"
@@ -275,35 +1426,55 @@
 										"api",
 										"server",
 										"v1",
-										"configs",
-										"authenticators"
+										"configs"
 									]
 								}
 							},
-							"status": "Not Found",
-							"code": 404,
-							"_postman_previewlanguage": "json",
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "text",
 							"header": [
 								{
 									"key": "Content-Type",
-									"value": "application/json"
+									"value": "text/plain"
 								}
 							],
 							"cookie": [],
-							"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+							"body": ""
 						}
 					]
 				},
 				{
-					"name": "Get authenticator by ID",
+					"name": "Patch Server Configs",
 					"request": {
 						"auth": {
-							"type": "basic"
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
 						},
-						"method": "GET",
-						"header": [],
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"operation\": \"REPLACE\",\n        \"path\": \"/idleSessionTimeoutPeriod\",\n        \"value\": \"20\"\n    },\n    {\n        \"operation\": \"ADD\",\n        \"path\": \"/homeRealmIdentifiers/1\",\n        \"value\": \"test-realm\"\n    }\n]"
+						},
 						"url": {
-							"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators/:authenticator-id",
+							"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -315,9 +1486,7 @@
 								"api",
 								"server",
 								"v1",
-								"configs",
-								"authenticators",
-								":authenticator-id"
+								"configs"
 							],
 							"variable": [
 								{
@@ -327,24 +1496,23 @@
 										"content": "",
 										"type": "text/plain"
 									}
-								},
-								{
-									"key": "authenticator-id",
-									"value": "<string>",
-									"description": "ID of an authenticator"
 								}
 							]
 						},
-						"description": "By passing in the appropriate authenticator ID, you can retrieve authenticator details\n"
+						"description": "Patch Server Configs. Patch operation is supported only for primary attributes (homeRealmIdentifier, idleSessionTimeoutPeriod and rememberMePeriod)\n"
 					},
 					"response": [
 						{
-							"name": "Successful Response",
+							"name": "Successful response",
 							"originalRequest": {
-								"method": "GET",
+								"method": "PATCH",
 								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    {\n        \"operation\": \"REPLACE\",\n        \"path\": \"/idleSessionTimeoutPeriod\",\n        \"value\": \"30\"\n    },\n    {\n        \"operation\": \"REPLACE\",\n        \"path\": \"/idleSessionTimeoutPeriod\",\n        \"value\": \"30\"\n    }\n]"
+								},
 								"url": {
-									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators/:authenticator-id",
+									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs",
 									"protocol": "https",
 									"host": [
 										"localhost"
@@ -356,159 +1524,33 @@
 										"api",
 										"server",
 										"v1",
-										"configs",
-										"authenticators",
-										":authenticator-id"
-									],
-									"variable": [
-										{
-											"key": "authenticator-id"
-										}
+										"configs"
 									]
 								}
 							},
 							"status": "OK",
 							"code": 200,
-							"_postman_previewlanguage": "json",
+							"_postman_previewlanguage": "text",
 							"header": [
 								{
 									"key": "Content-Type",
-									"value": "application/json"
+									"value": "text/plain"
 								}
 							],
 							"cookie": [],
-							"body": "{\n \"name\": \"BasicAuthenticator\",\n \"displayName\": \"basic\",\n \"id\": \"QmFzaWNBdXRoZW50aWNhdG9y\",\n \"isEnabled\": true,\n \"properties\": [\n  {\n   \"key\": \"AuthMechanism\",\n   \"value\": \"basic\"\n  },\n  {\n   \"key\": \"AuthMechanism\",\n   \"value\": \"basic\"\n  }\n ]\n}"
-						},
-						{
-							"name": "Bad Request",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators/:authenticator-id",
-									"protocol": "https",
-									"host": [
-										"localhost"
-									],
-									"port": "9443",
-									"path": [
-										"t",
-										"{{tenant-domain}}",
-										"api",
-										"server",
-										"v1",
-										"configs",
-										"authenticators",
-										":authenticator-id"
-									],
-									"variable": [
-										{
-											"key": "authenticator-id"
-										}
-									]
-								}
-							},
-							"status": "Bad Request",
-							"code": 400,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								}
-							],
-							"cookie": [],
-							"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
-						},
-						{
-							"name": "Unauthorized",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators/:authenticator-id",
-									"protocol": "https",
-									"host": [
-										"localhost"
-									],
-									"port": "9443",
-									"path": [
-										"t",
-										"{{tenant-domain}}",
-										"api",
-										"server",
-										"v1",
-										"configs",
-										"authenticators",
-										":authenticator-id"
-									],
-									"variable": [
-										{
-											"key": "authenticator-id"
-										}
-									]
-								}
-							},
-							"status": "Unauthorized",
-							"code": 401,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								}
-							],
-							"cookie": [],
-							"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
-						},
-						{
-							"name": "Server Error",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators/:authenticator-id",
-									"protocol": "https",
-									"host": [
-										"localhost"
-									],
-									"port": "9443",
-									"path": [
-										"t",
-										"{{tenant-domain}}",
-										"api",
-										"server",
-										"v1",
-										"configs",
-										"authenticators",
-										":authenticator-id"
-									],
-									"variable": [
-										{
-											"key": "authenticator-id"
-										}
-									]
-								}
-							},
-							"status": "Internal Server Error",
-							"code": 500,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								}
-							],
-							"cookie": [],
-							"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+							"body": ""
 						},
 						{
 							"name": "Not Found",
 							"originalRequest": {
-								"method": "GET",
+								"method": "PATCH",
 								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    {\n        \"operation\": \"REPLACE\",\n        \"path\": \"/idleSessionTimeoutPeriod\",\n        \"value\": \"30\"\n    },\n    {\n        \"operation\": \"REPLACE\",\n        \"path\": \"/idleSessionTimeoutPeriod\",\n        \"value\": \"30\"\n    }\n]"
+								},
 								"url": {
-									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators/:authenticator-id",
+									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs",
 									"protocol": "https",
 									"host": [
 										"localhost"
@@ -520,14 +1562,7 @@
 										"api",
 										"server",
 										"v1",
-										"configs",
-										"authenticators",
-										":authenticator-id"
-									],
-									"variable": [
-										{
-											"key": "authenticator-id"
-										}
+										"configs"
 									]
 								}
 							},
@@ -544,12 +1579,16 @@
 							"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
 						},
 						{
-							"name": "Forbidden",
+							"name": "Server Error",
 							"originalRequest": {
-								"method": "GET",
+								"method": "PATCH",
 								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    {\n        \"operation\": \"REPLACE\",\n        \"path\": \"/idleSessionTimeoutPeriod\",\n        \"value\": \"30\"\n    },\n    {\n        \"operation\": \"REPLACE\",\n        \"path\": \"/idleSessionTimeoutPeriod\",\n        \"value\": \"30\"\n    }\n]"
+								},
 								"url": {
-									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs/authenticators/:authenticator-id",
+									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs",
 									"protocol": "https",
 									"host": [
 										"localhost"
@@ -561,19 +1600,126 @@
 										"api",
 										"server",
 										"v1",
-										"configs",
-										"authenticators",
-										":authenticator-id"
+										"configs"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"code\": \"AAA-00000\",\n \"message\": \"Some Error Message\",\n \"description\": \"Some Error Description\",\n \"traceId\": \"e0fbcfeb-3617-43c4-8dd0-7b7d38e13047\"\n}"
+						},
+						{
+							"name": "Forbidden",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    {\n        \"operation\": \"REPLACE\",\n        \"path\": \"/idleSessionTimeoutPeriod\",\n        \"value\": \"30\"\n    },\n    {\n        \"operation\": \"REPLACE\",\n        \"path\": \"/idleSessionTimeoutPeriod\",\n        \"value\": \"30\"\n    }\n]"
+								},
+								"url": {
+									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs",
+									"protocol": "https",
+									"host": [
+										"localhost"
 									],
-									"variable": [
-										{
-											"key": "authenticator-id"
-										}
+									"port": "9443",
+									"path": [
+										"t",
+										"{{tenant-domain}}",
+										"api",
+										"server",
+										"v1",
+										"configs"
 									]
 								}
 							},
 							"status": "Forbidden",
 							"code": 403,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    {\n        \"operation\": \"REPLACE\",\n        \"path\": \"/idleSessionTimeoutPeriod\",\n        \"value\": \"30\"\n    },\n    {\n        \"operation\": \"REPLACE\",\n        \"path\": \"/idleSessionTimeoutPeriod\",\n        \"value\": \"30\"\n    }\n]"
+								},
+								"url": {
+									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"{{tenant-domain}}",
+										"api",
+										"server",
+										"v1",
+										"configs"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Bad Request",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    {\n        \"operation\": \"REPLACE\",\n        \"path\": \"/idleSessionTimeoutPeriod\",\n        \"value\": \"30\"\n    },\n    {\n        \"operation\": \"REPLACE\",\n        \"path\": \"/idleSessionTimeoutPeriod\",\n        \"value\": \"30\"\n    }\n]"
+								},
+								"url": {
+									"raw": "https://localhost:9443/t/{{tenant-domain}}/api/server/v1/configs",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "9443",
+									"path": [
+										"t",
+										"{{tenant-domain}}",
+										"api",
+										"server",
+										"v1",
+										"configs"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
 							"_postman_previewlanguage": "json",
 							"header": [
 								{
@@ -597,7 +1743,7 @@
 			"value": "carbon.super",
 			"type": "any",
 			"description": {
-				"content": "undefined",
+				"content": "",
 				"type": "text/plain"
 			}
 		},
