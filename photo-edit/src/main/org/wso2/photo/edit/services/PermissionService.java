@@ -128,7 +128,7 @@ public class PermissionService extends HttpServlet {
                                              "               <Match " +
                                              "MatchId=\"urn:oasis:names:tc:xacml:1.0:function:string-equal\">\n" +
                                              "                  <AttributeValue DataType=\"http://www" +
-                                             ".w3.org/2001/XMLSchema#string\">oliver.uma.demo</AttributeValue>\n" +
+                                             ".w3.org/2001/XMLSchema#string\">oliver</AttributeValue>\n" +
                                              "                  <AttributeDesignator " +
                                              "AttributeId=\"http://wso2.org/identity/user/username\" " +
                                              "Category=\"http://wso2.org/identity/user\" DataType=\"http://www" +
@@ -192,9 +192,9 @@ public class PermissionService extends HttpServlet {
         if (familyView && friendView) {
             target = policyDualTarget;
         } else if (familyView) {
-            target = policySingleTarget.replaceAll("\\$\\{authz-user}", "oliver.uma.demo");
+            target = policySingleTarget.replaceAll("\\$\\{authz-user}", "oliver");
         } else if (friendView) {
-            target = policySingleTarget.replaceAll("\\$\\{authz-user}", "pam.uma.demo");
+            target = policySingleTarget.replaceAll("\\$\\{authz-user}", "pam");
         }
 
         HttpSession session = req.getSession(false);

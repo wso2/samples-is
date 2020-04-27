@@ -31,12 +31,15 @@ public class ResourceServlet extends HttpServlet {
 
         String authorizationHeader = req.getHeader("Authorization");
 
+        try {
         if (StringUtils.isNotBlank(authorizationHeader) && authorizationHeader.contains("Bearer ")) {
             String token = authorizationHeader.split("Bearer ")[1];
 
             if (StringUtils.isNotBlank(token)) {
-                JSONObject introspect = introspect(token);
 
+
+                JSONObject introspect = introspect(token);
+                System.out.println("Intro response json:" + introspect.toString());
                 boolean isActive = introspect.getBoolean("active");
 
                 if (isActive) {
@@ -46,6 +49,8 @@ public class ResourceServlet extends HttpServlet {
 
                     ResourceTokenData resourceTokenData = CommonUtils.getFromResourceMap(req.getPathInfo().substring
                             (1));
+                    System.out.println("resourceTokenData rec_id: " + resourceTokenData.getResourceId() + ", " +
+                            "Introspect rec_id: " + resource_id);
                     if (resource_id.equals(resourceTokenData.getResourceId())) {
 
                         LOGGER.fine("Matching resource ID found: " + resource_id);
@@ -68,11 +73,15 @@ public class ResourceServlet extends HttpServlet {
         } else {
             sendPTResponse(req, resp);
         }
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
     }
 
     private void sendPTResponse(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String pt = getPT(req.getPathInfo().substring(1));
-        LOGGER.fine("Permission ticket: " + pt);
+        LOGGER.warning("Permission ticket: " + pt);
+        System.out.println("Permission ticket: " + pt);
         if (pt == null) {
             resp.sendError(HttpServletResponse.SC_NOT_FOUND);
         } else {
@@ -96,6 +105,8 @@ public class ResourceServlet extends HttpServlet {
 
         String resourceId = resourceTokenData.getResourceId();
         String token = resourceTokenData.getToken();
+
+        System.out.println("Resource ID: " + resourceId + ", Token: " + token);
 
         String idpUrl = CommonUtils.getIdpUrl();
         String permissionEp = idpUrl + "/api/identity/oauth2/uma/permission/v1.0/permission";
@@ -148,7 +159,8 @@ public class ResourceServlet extends HttpServlet {
 
         dataOutputStream.writeBytes(payload);
         String res = readFromResponse(urlConnection);
-        LOGGER.fine("Introspection response: " + res);
+        LOGGER.warning("Introspection response: " + res);
+        System.out.println("Introspection response: " + res);
         return new JSONObject(res);
     }
 }
