@@ -50,6 +50,7 @@
         <module>etc/gdpr-samples</module>
         <module>distribution</module>
         <module>saml-query-profile-client</module>
+        <module>oidc-uma-samples</module>
     </modules>
 
     <licenses>
@@ -324,7 +325,7 @@
 
             <!--=============================================================================-->
 
-            <!--dependencies of the oidc-sso-sample-->
+            <!--dependencies of the oidc-sso-sample and oidc-uma-samples-->
             <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>servlet-api</artifactId>
