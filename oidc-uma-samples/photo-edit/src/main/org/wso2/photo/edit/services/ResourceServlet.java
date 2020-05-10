@@ -39,7 +39,7 @@ public class ResourceServlet extends HttpServlet {
 
 
                 JSONObject introspect = introspect(token);
-                System.out.println("Intro response json:" + introspect.toString());
+                LOGGER.info("Intro response json:" + introspect.toString());
                 boolean isActive = introspect.getBoolean("active");
 
                 if (isActive) {
@@ -49,7 +49,7 @@ public class ResourceServlet extends HttpServlet {
 
                     ResourceTokenData resourceTokenData = CommonUtils.getFromResourceMap(req.getPathInfo().substring
                             (1));
-                    System.out.println("resourceTokenData rec_id: " + resourceTokenData.getResourceId() + ", " +
+                    LOGGER.info("resourceTokenData rec_id: " + resourceTokenData.getResourceId() + ", " +
                             "Introspect rec_id: " + resource_id);
                     if (resource_id.equals(resourceTokenData.getResourceId())) {
 
@@ -74,14 +74,13 @@ public class ResourceServlet extends HttpServlet {
             sendPTResponse(req, resp);
         }
         } catch (Throwable e) {
-            e.printStackTrace();
+            LOGGER.severe("Error fetching resource: " + e);
         }
     }
 
     private void sendPTResponse(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String pt = getPT(req.getPathInfo().substring(1));
         LOGGER.warning("Permission ticket: " + pt);
-        System.out.println("Permission ticket: " + pt);
         if (pt == null) {
             resp.sendError(HttpServletResponse.SC_NOT_FOUND);
         } else {
@@ -105,9 +104,6 @@ public class ResourceServlet extends HttpServlet {
 
         String resourceId = resourceTokenData.getResourceId();
         String token = resourceTokenData.getToken();
-
-        System.out.println("Resource ID: " + resourceId + ", Token: " + token);
-
         String idpUrl = CommonUtils.getIdpUrl();
         String permissionEp = idpUrl + "/api/identity/oauth2/uma/permission/v1.0/permission";
 
@@ -160,7 +156,6 @@ public class ResourceServlet extends HttpServlet {
         dataOutputStream.writeBytes(payload);
         String res = readFromResponse(urlConnection);
         LOGGER.warning("Introspection response: " + res);
-        System.out.println("Introspection response: " + res);
         return new JSONObject(res);
     }
 }
