@@ -4,8 +4,8 @@ Java client that can export a bulk of users as a comma-separated values (.csv) u
 
 ## Table of contents
 
-- [Download and build](#download-and-build)
 - [Exporting user data from WSO2 IS](#exporting-user-data-from-wso2-is)
+- [Download and build](#download-and-build)
 
 ## Download and build
 
@@ -31,10 +31,9 @@ Follow these steps to export user data from WSO2 IS
 
 1. Start the WSO2 IS. (Note : This should SCIM 2.0 supported and enabled IS version(5.3.0 or higher))
 2. Build the tool from source by following steps in [Building from source](#building-from-source).
-3. Copy `scim-bulk-user-export-tool-LATEST-jar-with-dependencies.jar` inside `target` directory to scripts 
-directory and inside `<IS_SAMPLE_REPO>/bulk-user-export-tool/scim-bulk-user-export-tool` directory.
-4. Rename copied jar `scim-bulk-user-export-tool-LATEST-jar-with-dependencies.jar` to `scim-bulk-user-export-tool.jar`
-5. Run `sh start.sh` inside `<IS_SAMPLE_REPO>/bulk-user-export-tool/scim-bulk-user-export-tool/scripts` directory.
+3. Download the latest jar in sample-is releases().
+4. Extract the downloaded .zip file.
+5. Run `sh start.sh` inside extracted directory.
 6. Provide the host address of the Identity Server instance.
 [Note : If you’re getting user data from the super-tenant you only need to provide the host address 
 of the instance(ex : For a local instance https://localhost:9443). If you’re getting data from a tenant you need 
