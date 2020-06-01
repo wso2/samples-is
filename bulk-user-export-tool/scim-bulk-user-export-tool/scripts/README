@@ -1,0 +1,6 @@
+<=============== Prerequisites ===============>
+1. Java 8 or higher
+
+<=============== How to Run ===============>
+1. Go to scim-user-export-tool directory.
+2. Run the command `sh start.sh` in the terminal.

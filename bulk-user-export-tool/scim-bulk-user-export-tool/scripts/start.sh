@@ -16,4 +16,4 @@ read -p "Attributes to filter (Optional) (ex: id,username,emails) : " attributes
 read -p "Attributes to exclude (Optional) (ex:groups, name_givenName) : " excludedAttributes
 [ -z "$excludedAttributes" ] && { excludedAttributes=none; }
 
-java -jar scim-bulk-user-export-tool.jar $host $username $password $csv $attributes $excludedAttributes
+java -jar $(find . -name "*scim-bulk-user-export-tool*") $host $username $password $csv $attributes $excludedAttributes

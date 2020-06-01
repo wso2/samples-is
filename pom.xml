@@ -51,6 +51,7 @@
         <module>distribution</module>
         <module>saml-query-profile-client</module>
         <module>oidc-uma-samples</module>
+        <module>bulk-user-export-tool/scim-bulk-user-export-tool</module>
     </modules>
 
     <licenses>
