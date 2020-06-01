@@ -22,26 +22,33 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>org.wso2.samples.is</groupId>
+        <artifactId>samples-is</artifactId>
+        <version>4.3.1-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
+
     <groupId>org.wso2.scim.bulk.export</groupId>
     <artifactId>scim-bulk-user-export-tool</artifactId>
-    <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-csv</artifactId>
-            <version>${com.fasterxml.jackson.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>${com.fasterxml.jackson.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>${apache.httpcomponents.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.scr.ds-annotations</artifactId>
         </dependency>
     </dependencies>
 
@@ -90,11 +97,5 @@
             </plugin>
         </plugins>
     </build>
-
-    <properties>
-            <com.fasterxml.jackson.version>2.10.4</com.fasterxml.jackson.version>
-            <apache.httpcomponents.version>4.5.12</apache.httpcomponents.version>
-            <com.json.flattener.version>0.2.2</com.json.flattener.version>
-    </properties>
 
 </project>
