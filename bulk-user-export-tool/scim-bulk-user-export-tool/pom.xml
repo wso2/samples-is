@@ -24,7 +24,7 @@
 
     <groupId>org.wso2.scim.bulk.export</groupId>
     <artifactId>scim-bulk-user-export-tool</artifactId>
-    <version>1.0</version>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <dependencies>
