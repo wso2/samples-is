@@ -416,6 +416,20 @@
                 <scope>compile</scope>
             </dependency>
 
+            <!--=============================================================================-->
+
+            <!--dependencies of bulk-user-export-tool-->
+            <dependency>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-csv</artifactId>
+                <version>${com.fasterxml.jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${com.fasterxml.jackson.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -604,6 +618,12 @@
         <org.json.version>20180813</org.json.version>
         <maven.dependency.plugin.version>3.1.0</maven.dependency.plugin.version>
         <org.owasp.esapi.version>2.1.0.1</org.owasp.esapi.version>
+
+        <!--=============================================================================-->
+
+        <!--repo versions of bulk-user-export-tool-->
+        <com.fasterxml.jackson.version>2.10.4</com.fasterxml.jackson.version>
+        <com.json.flattener.version>0.2.2</com.json.flattener.version>
 
     </properties>
 
