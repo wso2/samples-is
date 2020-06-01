@@ -7,24 +7,6 @@ Java client that can export a bulk of users as a comma-separated values (.csv) u
 - [Exporting user data from WSO2 IS](#exporting-user-data-from-wso2-is)
 - [Download and build](#download-and-build)
 
-## Download and build
-
-### Prerequisites
-
-* [Maven](https://maven.apache.org/download.cgi)
-* [Java](http://www.oracle.com/technetwork/java/javase/downloads)
-
-### Building from source
-
-1. Get a clone or download source of [WSO2 sample-is repository](https://github.com/wso2/samples-is).
-
-   We will refer this directory as `<IS_SAMPLE_REPO>` here onwards.
-2. Run the Maven command `mvn clean install` from the `<IS_SAMPLE_REPO>/bulk-user-export-tool/scim-bulk-user-export-tool` directory.
-
-You can find the tool in `target` directory of `<IS_SAMPLE_REPO>/bulk-user-export-tool/scim-bulk-user-export-tool`
-directory.
-Application distributions are named as `scim-bulk-user-export-tool-LATEST-jar-with-dependencies.jar`.
-
 ## Exporting user data from WSO2 IS
 
 Follow these steps to export user data from WSO2 IS
@@ -45,3 +27,22 @@ This is also an **optional** input.
 9. Provide attributes that needs to be excluded when creating the CSV. Attributes provided here won’t be in the CSV. 
 This is also an **optional** input.
 10. Now you've successfully created the CSV file containing user data.
+
+## Download and build
+
+### Prerequisites
+
+* [Maven](https://maven.apache.org/download.cgi)
+* [Java](http://www.oracle.com/technetwork/java/javase/downloads)
+
+### Building from source
+
+1. Get a clone or download source of [WSO2 sample-is repository](https://github.com/wso2/samples-is).
+
+   We will refer this directory as `<IS_SAMPLE_REPO>` here onwards.
+2. Run the Maven command `mvn clean install` from the `<IS_SAMPLE_REPO>/bulk-user-export-tool/scim-bulk-user-export-tool` directory.
+
+You can find the tool in `target` directory of `<IS_SAMPLE_REPO>/bulk-user-export-tool/scim-bulk-user-export-tool`
+directory.
+Application distributions are named as `scim-bulk-user-export-tool-LATEST.jar`.
+Tool can be found as a .zip file in `target` directory `scim-bulk-user-export-tool-LATEST.zip`
