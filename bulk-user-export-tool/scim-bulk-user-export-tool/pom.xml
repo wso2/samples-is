@@ -29,7 +29,7 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>scim-bulk-user-export-tool</artifactId>
+    <artifactId>scim.bulk.user.export.tool</artifactId>
 
     <dependencies>
         <dependency>
