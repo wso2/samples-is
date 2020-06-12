@@ -59,6 +59,7 @@ cp $IS_HOME/repository/components/plugins/commons-collections_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.mgt_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.tomcat.ext_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/XmlSchema_*.jar $WEB_APP_LIB
+cp $IS_HOME/repository/components/plugins/org.wso2.orbit.javax.xml.bind.jaxb-api_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/axiom_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/commons-httpclient_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/commons-lang3_*.jar $WEB_APP_LIB
