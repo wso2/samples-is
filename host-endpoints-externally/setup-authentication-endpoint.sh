@@ -86,6 +86,11 @@ cp $IS_HOME/repository/components/plugins/org.wso2.carbon.ui_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.application.authentication.endpoint.util_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.core_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.user.registration.stub_*.jar $WEB_APP_LIB
+cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.mgt.stub_*.jar $WEB_APP_LIB
+cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.mgt_*.jar $WEB_APP_LIB
+cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.mgt.ui_*.jar $WEB_APP_LIB
+cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.oauth_*.jar $WEB_APP_LIB
+cp $IS_HOME/repository/components/features/org.wso2.carbon.identity.application.authentication.framework.server_*/runtimes/cxf3/org.wso2.carbon.identity.application.authentication.endpoint.util-*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/jettison_*.jar $WEB_APP_LIB
 cp $IS_HOME/lib/runtimes/cxf3/javax.ws.rs-api-*.jar $WEB_APP_LIB
 cp $IS_HOME/lib/runtimes/cxf3/cxf-core-*.jar $WEB_APP_LIB
