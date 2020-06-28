@@ -63,7 +63,7 @@
         <module>microprofile</module>
         <module>helloworld</module>
         <module>identity-mgt</module>
-
+        <module>authenticators</module>
     </modules>
 
     <licenses>
@@ -503,11 +503,6 @@
             </dependency>
             <dependency>
                 <groupId>org.wso2.carbon.identity.user.ws</groupId>
-                <artifactId>org.wso2.carbon.um.ws.api.stub</artifactId>
-                <version>${identity.user.ws.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.wso2.carbon.identity.user.ws</groupId>
                 <artifactId>org.wso2.carbon.um.ws.api</artifactId>
                 <version>${identity.user.ws.version}</version>
             </dependency>
@@ -645,6 +640,11 @@
                 <artifactId>opensaml</artifactId>
                 <version>${opensaml2.wso2.version}</version>
             </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>jsp-api</artifactId>
+                <version>${jsp.api.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -715,6 +715,16 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>buildnumber-maven-plugin</artifactId>
                 <version>${maven.buildnumber.plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>net.wasdev.wlp.maven.plugins</groupId>
+                <artifactId>liberty-maven-plugin</artifactId>
+                <version>${liberty.maven.plugin.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${maven.checkstyle.plugin.version}</version>
             </plugin>
         </plugins>
     </build>
@@ -864,7 +874,9 @@
         <nimbusds.wso2.version>7.3.0.wso2v1</nimbusds.wso2.version>
         <eclipse.microprofile.version>1.2</eclipse.microprofile.version>
         <opensaml2.wso2.version>2.6.6.wso2v3</opensaml2.wso2.version>
-
+        <liberty.maven.plugin.version>2.2</liberty.maven.plugin.version>
+        <maven.checkstyle.plugin.version>3.1.1</maven.checkstyle.plugin.version>
+        <jsp.api.version>2.0</jsp.api.version>
     </properties>
 
 </project>
