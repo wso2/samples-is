@@ -3,9 +3,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.wso2.is</groupId>
+        <groupId>org.wso2.samples.is</groupId>
         <artifactId>wso2is-identity-samples-passivests</artifactId>
-        <version>5.11.0-m24-SNAPSHOT</version>
+        <version>4.3.4-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 

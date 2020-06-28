@@ -18,12 +18,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.wso2.is</groupId>
+        <groupId>org.wso2.samples.is</groupId>
         <artifactId>helloworld</artifactId>
-        <version>5.7.0-beta2-SNAPSHOT</version>
+        <version>4.3.4-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-
     <artifactId>is-helloworld-app</artifactId>
     <packaging>war</packaging>
 
