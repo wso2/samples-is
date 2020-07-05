@@ -64,6 +64,7 @@
         <module>helloworld</module>
         <module>identity-mgt</module>
         <module>authenticators</module>
+        <module>passive-sts</module>
     </modules>
 
     <licenses>
@@ -645,6 +646,11 @@
                 <artifactId>jsp-api</artifactId>
                 <version>${jsp.api.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>org.apache.felix.scr.ds-annotations</artifactId>
+                <version>${ds-annotations.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -877,6 +883,7 @@
         <liberty.maven.plugin.version>2.2</liberty.maven.plugin.version>
         <maven.checkstyle.plugin.version>3.1.1</maven.checkstyle.plugin.version>
         <jsp.api.version>2.0</jsp.api.version>
+        <ds-annotations.version>1.2.10</ds-annotations.version>
     </properties>
 
 </project>
