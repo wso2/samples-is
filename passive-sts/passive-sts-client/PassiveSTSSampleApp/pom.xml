@@ -39,8 +39,9 @@
             <artifactId>commons-lang</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.wso2.is</groupId>
+            <groupId>org.wso2.samples.is</groupId>
             <artifactId>org.wso2.identity.passivests.filter</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.ops4j.pax.logging</groupId>
