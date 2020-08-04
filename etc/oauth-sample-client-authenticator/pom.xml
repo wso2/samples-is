@@ -79,14 +79,19 @@
                             version="${project.version}"
                         </Export-Package>
                         <Import-Package>
+                            org.osgi.service.component,
+                            org.osgi.framework,
                             javax.servlet.http,
-                            org.wso2.carbon.identity.base,
-                            org.wso2.carbon.identity.oauth,
-                            org.wso2.carbon.identity.oauth.common.exception,
-                            org.wso2.carbon.identity.oauth2,
-                            org.wso2.carbon.identity.oauth2.bean,
-                            org.wso2.carbon.identity.oauth2.client.authentication,
-                            org.wso2.carbon.identity.oauth2.util,
+                            org.wso2.carbon.identity.base; version="${identity.framework.version.range}",
+                            org.wso2.carbon.identity.core.util; version="${identity.framework.version.range}",
+                            org.wso2.carbon.identity.oauth; version="${identity.inbound.oauth.version.range}",
+                            org.wso2.carbon.identity.oauth.common.exception;
+                            version="${identity.inbound.oauth.version.range}",
+                            org.wso2.carbon.identity.oauth2; version="${identity.inbound.oauth.version.range}",
+                            org.wso2.carbon.identity.oauth2.bean; version="${identity.inbound.oauth.version.range}",
+                            org.wso2.carbon.identity.oauth2.client.authentication;
+                            version="${identity.inbound.oauth.version.range}",
+                            org.wso2.carbon.identity.oauth2.util; version="${identity.inbound.oauth.version.range}",
                         </Import-Package>
                     </instructions>
                 </configuration>
@@ -97,5 +102,10 @@
             </plugin>
         </plugins>
     </build>
+
+    <properties>
+        <identity.framework.version.range>[5.0.0, 6.0.0)</identity.framework.version.range>
+        <identity.inbound.oauth.version.range>[6.0.0, 7.0.0)</identity.inbound.oauth.version.range>
+    </properties>
 
 </project>
