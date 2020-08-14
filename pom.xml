@@ -803,7 +803,7 @@
         <gdata.core.wso2.version>1.47.0.wso2v1</gdata.core.wso2.version>
         <google.collect.wso2.version>1.0.0.wso2v2</google.collect.wso2.version>
         <axiom.wso2.version>1.2.11.wso2v10</axiom.wso2.version>
-        <identity.inbound.auth.oauth.version>5.5.6</identity.inbound.auth.oauth.version>
+        <identity.inbound.auth.oauth.version>6.4.49</identity.inbound.auth.oauth.version>
         <carbon.kernel.version>4.4.17</carbon.kernel.version>
         <json.simple.version>1.1</json.simple.version>
         <nimbusds.version>2.26.1</nimbusds.version>
