@@ -851,7 +851,7 @@
         <identity.framework.version>5.11.19</identity.framework.version>
         <maven.compiler.plugin.version>3.6.1</maven.compiler.plugin.version>
         <maven.scr.plugin.version>1.22.0</maven.scr.plugin.version>
-        <maven.bundle.plugin.version>2.4.0</maven.bundle.plugin.version>
+        <maven.bundle.plugin.version>3.2.0</maven.bundle.plugin.version>
         <maven.buildnumber.plugin.version>1.4</maven.buildnumber.plugin.version>
         <http.client.version>4.5.8</http.client.version>
         <http.core.version>4.4.8</http.core.version>
@@ -900,6 +900,12 @@
         <jsp.api.version>2.0</jsp.api.version>
         <ds-annotations.version>1.2.10</ds-annotations.version>
         <maven.javadoc.version>2.10.1</maven.javadoc.version>
+
+        <osgi.framework.imp.pkg.version.range>[1.7.0, 2.0.0)</osgi.framework.imp.pkg.version.range>
+        <osgi.service.component.imp.pkg.version.range>[1.2.0, 2.0.0)</osgi.service.component.imp.pkg.version.range>
+        <commons.logging.version.range>[1.2.0,2.0.0)</commons.logging.version.range>
+        <commons-lang.wso2.version>2.6.0.wso2v1</commons-lang.wso2.version>
+        <carbon.identity.framework.version.range>[5.14.67, 6.0.0]</carbon.identity.framework.version.range>
     </properties>
 
 </project>

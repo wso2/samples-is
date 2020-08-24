@@ -69,7 +69,7 @@
                             org.wso2.carbon.identity.base; version="${carbon.identity.framework.version.range}",
                             org.wso2.carbon.identity.core.*; version="${carbon.identity.framework.version.range}",
                             org.apache.commons.logging; version="${commons.logging.version.range}",
-                            org.apache.commons.lang; version="${commons.lang.version}",
+                            org.apache.commons.lang; version="${commons-lang.version}",
                             javax.servlet.http.*; version="${sevlet.api.version}",
                             org.wso2.carbon.base,
                             org.wso2.carbon.user.core.*,
