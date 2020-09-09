@@ -36,7 +36,7 @@ public class DefaultDBBasedGeoVelocityDataResolver implements GeoVelocityDataRes
      * Can be used by an extended class.
      *
      * @param username username
-     * @param city city
+     * @param city     city
      * @return geoVelocityData with last login time
      */
     @Override
@@ -50,10 +50,10 @@ public class DefaultDBBasedGeoVelocityDataResolver implements GeoVelocityDataRes
     /**
      * Calls external system or database database to find the geovelocity data.
      * Can be used by an extended class.
-     * 
-     * @param currentCity User's current login city
-     * @param previousCity User's previous login city
-     * @param currentCountry User's current login Country
+     *
+     * @param currentCity     User's current login city
+     * @param previousCity    User's previous login city
+     * @param currentCountry  User's current login Country
      * @param previousCountry User's previous login Country
      * @return risk based on restricted location combinations
      */

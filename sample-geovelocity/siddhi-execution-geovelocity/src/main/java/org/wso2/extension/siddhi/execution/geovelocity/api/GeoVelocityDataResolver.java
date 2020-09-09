@@ -27,7 +27,7 @@ public interface GeoVelocityDataResolver {
      * This method will provide the login behaviour based information related to the given login details.
      *
      * @param username username
-     * @param city logincity
+     * @param city     logincity
      * @return last login time at the given city of the given use
      */
     public GeoVelocityData getGeoVelocityInfo(String username, String city);
@@ -36,7 +36,7 @@ public interface GeoVelocityDataResolver {
      * This method will check validity of the location of login
      * according to restricted location combination.
      *
-     * @param currentCity current login location
+     * @param currentCity  current login location
      * @param previousCity last login location
      * @return 0 or 1 as the count of the restricted location combinations
      */
@@ -46,7 +46,7 @@ public interface GeoVelocityDataResolver {
     /**
      * This method will be invoked after the initializing the extension. You can do any initial configuration here.
      *
-     * @param configReader  this hold the extensions configuration reader
+     * @param configReader this hold the extensions configuration reader
      * @throws GeoVelocityException this will throws a GeoVelocityException.
      */
     public void init(ConfigReader configReader) throws GeoVelocityException;

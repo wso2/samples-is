@@ -24,6 +24,7 @@ import org.osgi.framework.ServiceReference;
 import org.wso2.carbon.datasource.core.api.DataSourceService;
 import org.wso2.carbon.datasource.core.exception.DataSourceException;
 import org.wso2.extension.siddhi.execution.geovelocity.internal.exception.GeoVelocityException;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -43,9 +44,11 @@ public class DatabaseUtils {
     private String dataSourceName;
 
     private DatabaseUtils() {
+
     }
 
     public static DatabaseUtils getInstance() {
+
         return instance;
     }
 
@@ -130,7 +133,6 @@ public class DatabaseUtils {
                 log.error("Couldn't close ResultSet", e);
             }
         }
-
     }
 
     /**
@@ -139,6 +141,7 @@ public class DatabaseUtils {
      * @param preparedStatement PreparedStatement
      */
     private void closeStatement(Statement preparedStatement) {
+
         if (preparedStatement != null) {
             try {
                 preparedStatement.close();
@@ -146,6 +149,5 @@ public class DatabaseUtils {
                 log.error("Couldn't close Statement", e);
             }
         }
-
     }
 }

@@ -30,11 +30,12 @@ public class GeoVelocityData {
     }
 
     public Long getLoginBehaviourBasedRisk() {
+
         return lastLoginTime;
     }
 
     public Integer checkSuspiciousLogin() {
+
         return ristrictedLocationCombination;
     }
-
 }

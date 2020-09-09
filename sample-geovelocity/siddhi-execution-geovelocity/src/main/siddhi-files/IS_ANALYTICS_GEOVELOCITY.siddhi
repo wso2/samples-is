@@ -2,7 +2,7 @@
 @App:description("Description of the plan")
 
 -- Input stream with the Geovelocity data of usernaem,login ip and login time.
-@Source(type = 'http-request', source.id='testsource', receiver.url="https://localhost:8280/IS_ANALYTICS_GEOVELOCITY/InputStream",@map(type='json', @attributes(messageId='trp:messageId', username='$.event.username', loginTime='$.event.loginTime', loginIp = '$.event.loginIp')))
+@Source(type = 'http-request', source.id = 'testsource', receiver.url = "https://localhost:8280/IS_ANALYTICS_GEOVELOCITY/InputStream",@map(type='json', @attributes(messageId = 'trp:messageId', username = '$.event.username', loginTime = '$.event.loginTime', loginIp = '$.event.loginIp')))
 define stream InputStream (
     messageId string,
     username string,
@@ -10,7 +10,7 @@ define stream InputStream (
 	loginTime long);
 
 -- Output stream with risk value of the current login attempt.
-@sink(type='http-response', source.id='testsource', message.id='{{messageId}}', @map(type='json'))
+@sink(type = 'http-response', source.id = 'testsource', message.id = '{{messageId}}', @map(type = 'json'))
 define stream OutputStream (
     messageId string,
     username string,
@@ -30,7 +30,7 @@ define table GEOVELOCITY_INFO(
     authenticationSuccess bool);
 
 -- OverallAuthTableTable for all the authentication data.
-@store(type='rdbms', datasource='IS_ANALYTICS_DB', 'field.length=serviceProvider:100, identityProvider:100, userStoreDomain:50, region:45')
+@store(type = 'rdbms', datasource = 'IS_ANALYTICS_DB', 'field.length = serviceProvider:100, identityProvider:100, userStoreDomain:50, region:45')
 @primaryKey('meta_tenantId', 'eventId', 'eventType')
 define table OverallAuthTable (
     meta_tenantId int,
@@ -63,7 +63,7 @@ define table OverallAuthTable (
 -- TravelRestrictedAreas database table to store restricted location combinations.
 @primaryKey('Id')
 @index('Id')
-@store(type='rdbms', datasource='IS_ANALYTICS_DB', 'field.length=username:20, loginTime:20, loginIp:20, city:20')
+@store(type = 'rdbms', datasource = 'IS_ANALYTICS_DB', 'field.length = username:20, loginTime:20, loginIp:20, city:20')
 define table TRAVELRESTRICTEDAREAS(
     Id int,
     currentLocation string,
@@ -71,7 +71,7 @@ define table TRAVELRESTRICTEDAREAS(
 
 -- Function to calculate time gap between last login and current login attempt.
 define function timeGapFn[javascript] return int{
-    var timeGap = Math.floor(parseInt(data[0])-parseInt(data[1]));
+    var timeGap = Math.floor(parseInt(data[0]) - parseInt(data[1]));
     return timeGap
 };
 
@@ -107,7 +107,7 @@ update GEOVELOCITY_INFO
 
 -- Get login details of last successful login and the current login attempt.
 from FinalLoginDetailsStream#window.length(1) join GEOVELOCITY_INFO
-on  FinalLoginDetailsStream.username==GEOVELOCITY_INFO.username and GEOVELOCITY_INFO.authenticationSuccess == true
+on  FinalLoginDetailsStream.username == GEOVELOCITY_INFO.username and GEOVELOCITY_INFO.authenticationSuccess == true
 select FinalLoginDetailsStream.messageId as messageId,
     FinalLoginDetailsStream.username as username,
     FinalLoginDetailsStream.loginTime as currentLoginTime,
@@ -141,14 +141,14 @@ select messageId,
 	timeGap,
 	geovelocity:loginbehaviourbasedrisk(username, currentLoginCity, currentLoginTime) as loginBehaviourBasedRisk,
 	geovelocity:restrictedareabasedrisk(currentLoginCity, lastLoginCity, currentLoginCountry, lastLoginCountry) as forbiddenAreaBasedLoginRisk,
-	ifThenElse(distance==0,0.0,(distance/timeGap))  as velocity
+	ifThenElse(distance == 0,0.0,(distance/timeGap))  as velocity
 insert into RiskValueStream;
 
 -- Get the risk value based on velocity, loginBehaviourBasedRisk, forbiddenAreaBasedLoginRisk.
 from RiskValueStream#window.length(1)
 select messageId,
     username,
-    ifThenElse(velocity==0,0.0,ifThenElse(velocity>0.025, 1.0 , ifThenElse(forbiddenAreaBasedLoginRisk==1,0.5,ifThenElse(loginBehaviourBasedRisk>0.5, 0.3, 0.0)))) as risk
+    ifThenElse(velocity == 0,0.0,ifThenElse(velocity>0.025, 1.0 , ifThenElse(forbiddenAreaBasedLoginRisk == 1,0.5,ifThenElse(loginBehaviourBasedRisk>0.5, 0.3, 0.0)))) as risk
 insert into OutputStream;
 
 -- update GEOVELOCITY_INFO database.
@@ -165,10 +165,10 @@ select
 update or insert into GEOVELOCITY_INFO
 set GEOVELOCITY_INFO.username = username,
     GEOVELOCITY_INFO.loginTime = loginTime,
-    GEOVELOCITY_INFO.loginIp=loginIp,
-    GEOVELOCITY_INFO.latitude=latitude,
-    GEOVELOCITY_INFO.longitude=longitude,
-    GEOVELOCITY_INFO.city=city,
-    GEOVELOCITY_INFO.country=country,
-    GEOVELOCITY_INFO.authenticationSuccess=authenticationSuccess
+    GEOVELOCITY_INFO.loginIp = loginIp,
+    GEOVELOCITY_INFO.latitude = latitude,
+    GEOVELOCITY_INFO.longitude = longitude,
+    GEOVELOCITY_INFO.city = city,
+    GEOVELOCITY_INFO.country = country,
+    GEOVELOCITY_INFO.authenticationSuccess = authenticationSuccess
 on GEOVELOCITY_INFO.username == username;

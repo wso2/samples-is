@@ -34,8 +34,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
- * This class is to get the risk of login based on
- * the user's login behaviour.
+ * This class is to get the risk of login based on the user's login behaviour.
  */
 @Extension(
         name = "loginBehaviourBasedRisk",
@@ -75,7 +74,6 @@ import java.util.concurrent.TimeUnit;
                         "currentlogintime) as loginbehaviourbasedrisk \n" +
                         "insert into outputStream;")
 )
-
 public class GetLoginBehaviourRisk extends FunctionExecutor {
 
     private static final String DEFAULT_GEOVELOCITY_RESOLVER_CLASSNAME =
@@ -121,9 +119,9 @@ public class GetLoginBehaviourRisk extends FunctionExecutor {
         Long lastLoginTime = geoVelocityData.getLoginBehaviourBasedRisk();
         double risk;
         if (lastLoginTime != 0L) {
-            //Time difference is converted to days.
+            // Time difference is converted to days.
             long timeDifference = TimeUnit.MILLISECONDS.toDays(currentLoginTime - lastLoginTime);
-            //Risk was calculated by using the formula of (1 - e^(-t)). t = Time difference.
+            // Risk was calculated by using the formula of (1 - e^(-t)). t = Time difference.
             risk = 1 - Math.pow(Math.E, -timeDifference);
         } else {
             risk = 0.5;
@@ -133,16 +131,19 @@ public class GetLoginBehaviourRisk extends FunctionExecutor {
 
     @Override
     protected Object execute(Object data) {
+
         return null;
     }
 
     @Override
     public Attribute.Type getReturnType() {
+
         return Attribute.Type.DOUBLE;
     }
 
     @Override
     public Map<String, Object> currentState() {
+
         return null;
     }
 

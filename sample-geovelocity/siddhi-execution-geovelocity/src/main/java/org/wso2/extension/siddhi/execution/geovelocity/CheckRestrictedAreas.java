@@ -104,23 +104,23 @@ public class CheckRestrictedAreas extends FunctionExecutor {
                     "argument current.login.city of geovelocity:loginbehaviourbasedrisk() function, required "
                     + Attribute.Type.STRING + ", but found " + attributeType.toString());
         }
-        Attribute.Type secondattributeType = attributeExpressionExecutors[1].getReturnType();
-        if (secondattributeType != Attribute.Type.STRING) {
+        Attribute.Type secondAttributeType = attributeExpressionExecutors[1].getReturnType();
+        if (secondAttributeType != Attribute.Type.STRING) {
             throw new SiddhiAppValidationException("Invalid parameter type found for second argument " +
                     "previous.login.city of geovelocity:loginbehaviourbasedrisk() function, required " +
-                    Attribute.Type.STRING + ", but found " + secondattributeType.toString());
+                    Attribute.Type.STRING + ", but found " + secondAttributeType.toString());
         }
-        Attribute.Type thirdattributeType = attributeExpressionExecutors[2].getReturnType();
-        if (thirdattributeType != Attribute.Type.STRING) {
+        Attribute.Type thirdAttributeType = attributeExpressionExecutors[2].getReturnType();
+        if (thirdAttributeType != Attribute.Type.STRING) {
             throw new SiddhiAppValidationException("Invalid parameter type found for third argument " +
                     "current.login.country of geovelocity:loginbehaviourbasedrisk() function, required "
-                    + Attribute.Type.STRING + ", but found " + thirdattributeType.toString());
+                    + Attribute.Type.STRING + ", but found " + thirdAttributeType.toString());
         }
-        Attribute.Type fourthattributeType = attributeExpressionExecutors[3].getReturnType();
-        if (fourthattributeType != Attribute.Type.STRING) {
+        Attribute.Type fourthAttributeType = attributeExpressionExecutors[3].getReturnType();
+        if (fourthAttributeType != Attribute.Type.STRING) {
             throw new SiddhiAppValidationException("Invalid parameter type found for fourth argument " +
                     "previous.login.country of geovelocity:loginbehaviourbasedrisk() function, required "
-                    + Attribute.Type.STRING + ", but found " + fourthattributeType.toString());
+                    + Attribute.Type.STRING + ", but found " + fourthAttributeType.toString());
         }
     }
 
@@ -165,13 +165,13 @@ public class CheckRestrictedAreas extends FunctionExecutor {
                     "GeoVelocityDataResolver implementation class '"
                     + geovelocityResolverImplClassName + "' given in the configuration", e);
         } catch (InstantiationException e) {
-            throw new SiddhiAppValidationException("Cannot instantiate GeoCoordinateResolverHolder holder class '"
+            throw new SiddhiAppValidationException("Cannot instantiate GeoCoordinateResolverHolder holder class: "
                     + geovelocityResolverImplClassName , e);
         } catch (IllegalAccessException e) {
-            throw new SiddhiAppValidationException("Cannot access GeoCoordinateResolverHolder holder class '"
+            throw new SiddhiAppValidationException("Cannot access GeoCoordinateResolverHolder holder class: "
                     + geovelocityResolverImplClassName , e);
         } catch (ClassNotFoundException e) {
-            throw new SiddhiAppValidationException("Cannot find GeoCoordinateResolverHolder holder class '"
+            throw new SiddhiAppValidationException("Cannot find GeoCoordinateResolverHolder holder class: "
                     + geovelocityResolverImplClassName , e);
         }
     }
