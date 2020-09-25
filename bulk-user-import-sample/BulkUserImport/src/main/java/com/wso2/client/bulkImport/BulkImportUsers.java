@@ -18,17 +18,29 @@
 
 package com.wso2.client.bulkImport;
 
+import au.com.bytecode.opencsv.CSVReader;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.LineIterator;
+import org.apache.commons.lang.StringUtils;
 import org.wso2.carbon.authenticator.stub.LoginAuthenticationExceptionException;
 import org.wso2.carbon.authenticator.stub.LogoutAuthenticationExceptionException;
+import org.wso2.carbon.um.ws.api.stub.ClaimDTO;
+import org.wso2.carbon.um.ws.api.stub.ClaimValue;
+import org.wso2.carbon.um.ws.api.stub.RemoteUserStoreManagerServiceUserStoreExceptionException;
 import org.wso2.carbon.user.mgt.stub.UserAdminUserAdminException;
 import javax.activation.DataHandler;
 import javax.mail.util.ByteArrayDataSource;
+
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.rmi.RemoteException;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.HashMap;
+import java.util.Map;
 
 import static java.lang.System.out;
 
@@ -49,6 +61,8 @@ public class BulkImportUsers {
         LoginAdminServiceClient login = new LoginAdminServiceClient(productUrl);
         String session = login.authenticate(authUser, authPwd, remoteAddress);
         UserAdminClient userAdminClient = new UserAdminClient(productUrl, session);
+        RemoteUserStoreServiceAdminClient remoteUserStoreServiceAdminClient = new RemoteUserStoreServiceAdminClient(
+                productUrl, session);
 
         //Uncomment these lines to hardcode the file to be uploaded - For testing purposes
         //String filePath = "path/to/your/csv/file";
@@ -97,12 +111,25 @@ public class BulkImportUsers {
                 byte[] content = newLine.getBytes();
                 DataHandler file = new DataHandler(new ByteArrayDataSource(content, "application/octet-stream"));
 
-                try {
-                    userAdminClient.BulkImportUsers(userStoreName, defaultPassword, file, fileName);
-                } catch (UserAdminUserAdminException e) {
-                    e.printStackTrace();
-                    out.println("User where error occurred: \n" + line);
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(file.getInputStream(),
+                        StandardCharsets.UTF_8));
+                CSVReader csvReader = new CSVReader(bufferedReader, ',', '"', 1);
+
+                String[] userEntry = csvReader.readNext();
+                while (userEntry != null && userEntry.length > 0) {
+                    String userName = userEntry[0];
+                    if (userName != null && !userName.isEmpty()) {
+                        userName = "PATRON/" + userName;
+                        try {
+                            updateAccountCreatedTimeAndValidateUser(remoteUserStoreServiceAdminClient, userName, userEntry);
+                        } catch (UserAdminUserAdminException e) {
+                            e.printStackTrace();
+                            out.println("User where error occurred: \n" + line);
+                        }
+                    }
+                    userEntry = csvReader.readNext();
                 }
+                out.println("User count : " + lines);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -121,13 +148,87 @@ public class BulkImportUsers {
         long seconds = (millis / 1000) % 60;
         millis = millis - 1000 * seconds;
 
-
-
-        out.println("Users import time: " +
+        out.println("Update created time and users verification time: " +
                 minutes + "m " + seconds + "s " + millis + "ms");
 
-        out.println("Import process finished");
+        out.println("Update created time and users verification process finished");
 
         login.logOut();
+    }
+
+    private static void updateAccountCreatedTimeAndValidateUser(
+            RemoteUserStoreServiceAdminClient remoteUserStoreServiceAdminClient, String username, String[] line)
+            throws UserAdminUserAdminException {
+
+        String roleString = null;
+        String[] roles = null;
+        String password = line[1];
+        Map<String, String> claims = new HashMap<>();
+        for (int i = 2; i < line.length; i++) {
+            if (StringUtils.isNotBlank(line[i])) {
+                String[] claimStrings = line[i].split("=");
+                if (claimStrings.length != 2) {
+                    throw new IllegalArgumentException("Claims and values are not in correct format");
+                } else {
+                    String claimURI = claimStrings[0];
+                    String claimValue = claimStrings[1];
+                    if (claimURI.contains("role")) {
+                        roleString = claimValue;
+                    } else {
+                        if (!claimURI.isEmpty()) {
+                            // Not trimming the claim values as we should not restrict the claim values not to have
+                            // leading or trailing whitespaces.
+                            claims.put(claimURI.trim(), claimValue);
+                        }
+                    }
+                }
+            }
+        }
+
+        if (StringUtils.isNotBlank(roleString)) {
+            roles = roleString.split(":");
+        }
+
+        // Update created time.
+        String accountCreatedClaimURI = "http://wso2.org/claims/created";
+        if (StringUtils.isNotEmpty(claims.get(accountCreatedClaimURI))) {
+            ClaimValue accountCreatedClaimValue = new ClaimValue();
+            accountCreatedClaimValue.setClaimURI(accountCreatedClaimURI);
+            accountCreatedClaimValue.setValue(claims.get(accountCreatedClaimURI));
+
+            ClaimValue[] claimValues = new ClaimValue[]{accountCreatedClaimValue};
+            try {
+                remoteUserStoreServiceAdminClient.setUserClaimValues(username, claimValues, "default");
+            } catch (RemoteUserStoreManagerServiceUserStoreExceptionException | RemoteException e) {
+                throw new UserAdminUserAdminException("Unable to update created time for the user : " + username, e);
+            }
+        }
+
+        // Validate entries.
+        ClaimDTO[] userClaims;
+        try {
+            userClaims = remoteUserStoreServiceAdminClient.getUserClaimValues(username, "default");
+        } catch (RemoteUserStoreManagerServiceUserStoreExceptionException | RemoteException e) {
+            throw new UserAdminUserAdminException("Unable get user claims for the user : " + username, e);
+        }
+
+        Map<String, String> userClaimsMap = new HashMap<>();
+        for (ClaimDTO claimDTO : userClaims) {
+            userClaimsMap.put(claimDTO.getClaimUri(), claimDTO.getValue());
+        }
+        for (Map.Entry<String, String> csvClaimValueEntry : claims.entrySet()) {
+            if (userClaimsMap.get(csvClaimValueEntry.getKey()) == null || !userClaimsMap.get(
+                    csvClaimValueEntry.getKey()).equals(csvClaimValueEntry.getValue())) {
+
+                // Skipping empty created time.
+                if (csvClaimValueEntry.getKey().contains("/created") && StringUtils.isBlank(csvClaimValueEntry.getValue())) {
+                    continue;
+                }
+
+                throw new UserAdminUserAdminException("User validation failed for the user : " + username + ". " +
+                        "Expected value for the claim uri : " + csvClaimValueEntry.getKey() + ", is "
+                        + csvClaimValueEntry.getValue() + ", but got " + userClaimsMap.get(csvClaimValueEntry.getKey()));
+            }
+        }
     }
 }
