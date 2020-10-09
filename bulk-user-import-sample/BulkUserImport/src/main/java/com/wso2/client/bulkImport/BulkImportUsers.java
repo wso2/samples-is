@@ -50,24 +50,24 @@ public class BulkImportUsers {
         String session = login.authenticate(authUser, authPwd, remoteAddress);
         UserAdminClient userAdminClient = new UserAdminClient(productUrl, session);
 
-        //Uncomment these lines to hardcode the file to be uploaded - For testing purposes
+        // Uncomment these lines to hardcode the file to be uploaded - For testing purposes
         //String filePath = "path/to/your/csv/file";
         //File f = new File(filePath);
 
-        //Uncomment this line to be able to pass the file path as the first parameter of the .jar app
+        // Uncomment this line to be able to pass the file path as the first parameter of the .jar app
         File f = new File(props.getFilePath());
 
-        // get the initial time of the process
+        // Get the initial time of the process
         Instant lineCountStart = Instant.now();
 
-        // initiate the variable that count the lines of the .csv file
+        // Initiate the variable that count the lines of the .csv file
         int lines = 0;
 
         // It will receive the file lines
         String line = "";
 
 
-        //Iterator that will read the file line by line
+        // Iterator that will read the file line by line
         LineIterator it = FileUtils.lineIterator(f, "UTF-8");
 
         try {
@@ -86,12 +86,12 @@ public class BulkImportUsers {
             // Looping through the file lines
             while (it.hasNext()) {
 
-                //Just counting lines
+                // Just counting lines
                 lines++;
 
                 line = it.nextLine();
 
-                //userAdminClient.BulkImportUsers always ignore the first line, that's the \n purpose
+                // userAdminClient.BulkImportUsers always ignore the first line, that's the \n purpose
                 String newLine = "\n" + line;
 
                 byte[] content = newLine.getBytes();
@@ -120,8 +120,6 @@ public class BulkImportUsers {
         millis = millis - 60000 * minutes;
         long seconds = (millis / 1000) % 60;
         millis = millis - 1000 * seconds;
-
-
 
         out.println("Users import time: " +
                 minutes + "m " + seconds + "s " + millis + "ms");
