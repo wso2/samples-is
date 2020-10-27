@@ -34,7 +34,7 @@ public final class OAuth2Constants {
     public static final String OIDC_LOGOUT_ENDPOINT = "logoutEndpoint";
     public static final String OIDC_SESSION_IFRAME_ENDPOINT = "sessionIFrameEndpoint";
     public static final String NAME = "name";
-    //OIDC Backchannel logout related constants.
+    // OIDC Backchannel logout related constants.
     public static final String SID = "sid";
     public static final String LOGOUT_TOKEN = "logout_token";
 
