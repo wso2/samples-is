@@ -28,6 +28,7 @@
 <%@page import="com.nimbusds.jwt.ReadOnlyJWTClaimsSet"%>
 <%@page import="java.util.logging.Logger"%>
 <%@page import="org.wso2.samples.claims.manager.ClaimManagerProxy"%>
+<%@ page import="org.wso2.sample.identity.oauth2.logout.SessionIdStore" %>
 
 <%
     final Logger logger = Logger.getLogger(getClass().getName());
@@ -56,6 +57,19 @@
         try {
             name = SignedJWT.parse(idToken).getJWTClaimsSet().getSubject();
             ReadOnlyJWTClaimsSet claimsSet = SignedJWT.parse(idToken).getJWTClaimsSet();
+
+            // If back-channel logout is enabled, then store the sid claim against the application's session.
+            boolean enableOIDCBackchannelLogout = false;
+            if (session.getAttribute(OAuth2Constants.OIDC_BACK_CHANNEL_LOGOUT_ENABLED) != null) {
+                enableOIDCBackchannelLogout = (boolean) session.getAttribute(OAuth2Constants.OIDC_BACK_CHANNEL_LOGOUT_ENABLED);
+            }
+            if (enableOIDCBackchannelLogout) {
+                logger.info("BackChannel logout is enabled");
+                String sid = SessionIdStore.getSid(idToken);
+                if (sid != null) {
+                    SessionIdStore.storeSession(sid, session);
+                }
+            }
             
             ClaimManagerProxy claimManagerProxy = (ClaimManagerProxy) application.getAttribute("claimManagerProxyInstance");
 
@@ -349,7 +363,17 @@
 <script src="js/custom.v1.0.js"></script>
 <!-- SweetAlerts -->
 <script src="libs/sweetalerts/sweetalert.2.1.2.min.js"></script>
+<%
+    boolean enableOIDCSessionManagement = true;
+    if (session.getAttribute(OAuth2Constants.OIDC_SESSION_MANAGEMENT_ENABLED) != null){
+        enableOIDCSessionManagement = (boolean)session.getAttribute(OAuth2Constants.OIDC_SESSION_MANAGEMENT_ENABLED);
+    }
+    if(enableOIDCSessionManagement){
+%>
 <iframe id="rpIFrame" src="rpIFrame.jsp" frameborder="0" width="0" height="0"></iframe>
+<%
+    }
+%>
 <script>
     hljs.initHighlightingOnLoad();
     loadMetadata();

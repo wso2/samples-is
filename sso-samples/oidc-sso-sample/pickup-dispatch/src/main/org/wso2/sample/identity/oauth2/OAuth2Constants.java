@@ -34,6 +34,9 @@ public final class OAuth2Constants {
     public static final String OIDC_LOGOUT_ENDPOINT = "logoutEndpoint";
     public static final String OIDC_SESSION_IFRAME_ENDPOINT = "sessionIFrameEndpoint";
     public static final String NAME = "name";
+    // OIDC Backchannel logout related constants.
+    public static final String SID = "sid";
+    public static final String LOGOUT_TOKEN = "logout_token";
 
     // application specific session attributes
     public static final String CODE = "code";
@@ -41,4 +44,8 @@ public final class OAuth2Constants {
     // request headers
     public static final String REFERER = "referer";
 
+    // Enable or disable OIDCSessionManagement logout.
+    public static final String OIDC_SESSION_MANAGEMENT_ENABLED = "enableOIDCSessionManagement";
+    // Enable or disable OIDCBackchannel logout.
+    public static final String OIDC_BACK_CHANNEL_LOGOUT_ENABLED = "enableOIDCBackchannelLogout";
 }

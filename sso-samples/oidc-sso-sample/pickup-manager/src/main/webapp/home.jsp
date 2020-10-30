@@ -28,6 +28,7 @@
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page import="org.wso2.samples.claims.manager.ClaimManagerProxy"%>
+<%@ page import="org.wso2.sample.identity.oauth2.logout.SessionIdStore" %>
 
 <%
     final Logger logger = Logger.getLogger(getClass().getName());
@@ -56,6 +57,19 @@
         try {
             name = SignedJWT.parse(idToken).getJWTClaimsSet().getSubject();
             ReadOnlyJWTClaimsSet claimsSet = SignedJWT.parse(idToken).getJWTClaimsSet();
+
+            // If back-channel logout is enabled, then store the sid claim against the application's session.
+            boolean enableOIDCBackchannelLogout = false;
+            if (session.getAttribute(OAuth2Constants.OIDC_BACK_CHANNEL_LOGOUT_ENABLED) != null) {
+                enableOIDCBackchannelLogout = (boolean) session.getAttribute(OAuth2Constants.OIDC_BACK_CHANNEL_LOGOUT_ENABLED);
+            }
+            if (enableOIDCBackchannelLogout) {
+                logger.info("BackChannel logout is enabled");
+                String sid = SessionIdStore.getSid(idToken);
+                if (sid != null) {
+                    SessionIdStore.storeSession(sid, session);
+                }
+            }
 
             ClaimManagerProxy claimManagerProxy = (ClaimManagerProxy) application.getAttribute("claimManagerProxyInstance");
 
@@ -522,7 +536,17 @@
 <script src="libs/clipboard/clipboard.min.js"></script>
 <!-- Custom Js -->
 <script src="js/custom.js"></script>
+<%
+    boolean enableOIDCSessionManagement = true;
+    if (session.getAttribute(OAuth2Constants.OIDC_SESSION_MANAGEMENT_ENABLED) != null){
+        enableOIDCSessionManagement = (boolean)session.getAttribute(OAuth2Constants.OIDC_SESSION_MANAGEMENT_ENABLED);
+    }
+    if(enableOIDCSessionManagement){
+%>
 <iframe id="rpIFrame" src="rpIFrame.jsp" frameborder="0" width="0" height="0"></iframe>
+<%
+    }
+%>
 <script>hljs.initHighlightingOnLoad();</script>
 
 </body>
