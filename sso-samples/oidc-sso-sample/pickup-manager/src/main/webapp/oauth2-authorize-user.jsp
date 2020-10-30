@@ -16,7 +16,7 @@
     String OIDC_LOGOUT_ENDPOINT = properties.getProperty("OIDC_LOGOUT_ENDPOINT");
     String sessionIFrameEndpoint = properties.getProperty("sessionIFrameEndpoint");
     boolean enableOIDCSessionManagement = Boolean.parseBoolean(properties.getProperty("enableOIDCSessionManagement"));
-    boolean enableOIDCBCLogout = Boolean.parseBoolean(properties.getProperty("enableOIDCBCLogout"));
+    boolean enableOIDCBackchannelLogout = Boolean.parseBoolean(properties.getProperty("enableOIDCBackchannelLogout"));
 
     session.setAttribute(OAuth2Constants.OAUTH2_GRANT_TYPE, authzGrantType);
     session.setAttribute(OAuth2Constants.CONSUMER_KEY, consumerKey);
@@ -26,7 +26,7 @@
     session.setAttribute(OAuth2Constants.OIDC_LOGOUT_ENDPOINT, OIDC_LOGOUT_ENDPOINT);
     session.setAttribute(OAuth2Constants.OIDC_SESSION_IFRAME_ENDPOINT, sessionIFrameEndpoint);
     session.setAttribute(OAuth2Constants.OIDC_SESSION_MANAGEMENT_ENABLED, enableOIDCSessionManagement);
-    session.setAttribute(OAuth2Constants.OIDC_BACK_CHANNEL_LOGOUT_ENABLED, enableOIDCBCLogout);
+    session.setAttribute(OAuth2Constants.OIDC_BACK_CHANNEL_LOGOUT_ENABLED, enableOIDCBackchannelLogout);
 
     OAuthClientRequest.AuthenticationRequestBuilder oAuthAuthenticationRequestBuilder =
             new OAuthClientRequest.AuthenticationRequestBuilder(authzEndpoint);

@@ -59,11 +59,11 @@
             ReadOnlyJWTClaimsSet claimsSet = SignedJWT.parse(idToken).getJWTClaimsSet();
 
             // If back-channel logout is enabled, then store the sid claim against the application's session.
-            boolean enableOIDCBCLogout = false;
+            boolean enableOIDCBackchannelLogout = false;
             if (session.getAttribute(OAuth2Constants.OIDC_BACK_CHANNEL_LOGOUT_ENABLED) != null) {
-                enableOIDCBCLogout = (boolean) session.getAttribute(OAuth2Constants.OIDC_BACK_CHANNEL_LOGOUT_ENABLED);
+                enableOIDCBackchannelLogout = (boolean) session.getAttribute(OAuth2Constants.OIDC_BACK_CHANNEL_LOGOUT_ENABLED);
             }
-            if (enableOIDCBCLogout) {
+            if (enableOIDCBackchannelLogout) {
                 logger.info("BackChannel logout is enabled");
                 String sid = SessionIdStore.getSid(idToken);
                 if (sid != null) {

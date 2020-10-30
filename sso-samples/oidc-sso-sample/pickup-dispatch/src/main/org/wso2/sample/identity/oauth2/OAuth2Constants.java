@@ -47,5 +47,5 @@ public final class OAuth2Constants {
     // Enable or disable OIDCSessionManagement logout.
     public static final String OIDC_SESSION_MANAGEMENT_ENABLED = "enableOIDCSessionManagement";
     // Enable or disable OIDCBackchannel logout.
-    public static final String OIDC_BACK_CHANNEL_LOGOUT_ENABLED = "enableOIDCBCLogout";
+    public static final String OIDC_BACK_CHANNEL_LOGOUT_ENABLED = "enableOIDCBackchannelLogout";
 }
