@@ -21,6 +21,7 @@ import org.wso2.extension.siddhi.execution.geovelocity.api.GeoVelocityData;
 import org.wso2.extension.siddhi.execution.geovelocity.internal.exception.GeoVelocityException;
 import org.wso2.extension.siddhi.execution.geovelocity.internal.utils.DatabaseUtils;
 import org.wso2.siddhi.core.util.config.ConfigReader;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -48,9 +49,16 @@ public class RDBMSGeoVelocityDataResolver {
             "OR (currentlocation = ? AND lastlocation = ?)";
 
     public static RDBMSGeoVelocityDataResolver getInstance() {
+
         return instance;
     }
 
+    /**
+     * Initialization for RDBMS Geo-velocity data resolver.
+     *
+     * @param configReader Config reader.
+     * @throws GeoVelocityException If error occurs while initializing the RDBMSGeoVelocityDataResolver.
+     */
     public void init(ConfigReader configReader) throws GeoVelocityException {
 
         if (isInitialized.get()) {
@@ -63,6 +71,13 @@ public class RDBMSGeoVelocityDataResolver {
         isInitialized.set(true);
     }
 
+    /**
+     * To get Geo-velocity data.
+     *
+     * @param username Username
+     * @param city     City
+     * @return GeoVelocityData
+     */
     public GeoVelocityData getGeoVelocityData(String username, String city) {
 
         GeoVelocityData geoVelocityData = null;
@@ -79,6 +94,15 @@ public class RDBMSGeoVelocityDataResolver {
         return geoVelocityData;
     }
 
+    /**
+     * To get restricted locations.
+     *
+     * @param currentCity     Current city.
+     * @param previousCity    Previous city.
+     * @param currentCountry  Current country.
+     * @param previousCountry Previous country.
+     * @return GeoVelocityData
+     */
     public GeoVelocityData getRestrictedLocations(String currentCity, String previousCity,
                                                   String currentCountry, String previousCountry) {
 
@@ -86,8 +110,7 @@ public class RDBMSGeoVelocityDataResolver {
         Connection connection = null;
         try {
             connection = dbUtils.getConnection();
-            geoVelocityData = loadLoginData(currentCity, previousCity,
-                    currentCountry, previousCountry, connection);
+            geoVelocityData = loadLoginData(currentCity, previousCity, currentCountry, previousCountry, connection);
         } catch (SQLException e) {
             log.error("Cannot retrieve the restricted location combinations from database", e);
         } finally {
@@ -100,10 +123,10 @@ public class RDBMSGeoVelocityDataResolver {
      * Calls external system or database database to find the geovelocity data.
      * Can be used by an extended class.
      *
-     * @param username username
-     * @param city city
-     * @param connection the Db connection to be used. Do not close this connection within this method.
-     * @return geoVelocityData with last login time
+     * @param username   Username
+     * @param city       City
+     * @param connection The Db connection to be used. Do not close this connection within this method.
+     * @return GeoVelocityData with last login time
      */
     private GeoVelocityData loadGeoVelocityData(String username, String city,
                                                 Connection connection) throws SQLException {
@@ -131,12 +154,12 @@ public class RDBMSGeoVelocityDataResolver {
      * Calls external system or database database to find restricted area based data.
      * Can be used by an extended class.
      *
-     * @param currentCity city of current login
-     * @param previousCity city of last login
-     * @param currentCountry country of current login
-     * @param previousCountry country of last login
-     * @param connection the Db connection to be used. Do not close this connection within this method.
-     * @return geoVelocityData with last login time
+     * @param currentCity     City of current login
+     * @param previousCity    City of last login
+     * @param currentCountry  Country of current login
+     * @param previousCountry Country of last login
+     * @param connection      The Db connection to be used. Do not close this connection within this method.
+     * @return GeoVelocityData with last login time
      */
     private GeoVelocityData loadLoginData(String currentCity, String previousCity,
                                           String currentCountry, String previousCountry,
