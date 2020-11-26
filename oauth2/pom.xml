@@ -32,7 +32,6 @@
     <modules>
         <module>playground2</module>
         <module>custom-grant</module>
-        <module>custom-token</module>
     </modules>
 
 </project>
