@@ -9,8 +9,8 @@ Sample Maven Project :
 Create a  maven project with custom class extends JWTTokenIssuer and Override the createJWTClaimSet method.
 Add the dependencies in pom.xml
 Build the claimset by using the JWTClaimsSet.Builder instance
-Build the maven project “mvn clean install”
-Copy the jar from target folder into  $IS_HOME/repository/components/lib-location
+Build the maven project mvn clean install
+Copy the jar from target folder into  $IS_HOME/repository/components/lib location
 
 Add Configuration in deployment.toml
 
@@ -63,8 +63,3 @@ DECODED JWT
   "iat": 1606302930,
   "jti": "540449c8-c6f4-4488-9c3c-e1bbab2aeff0"
 }
-
-
-
-
-

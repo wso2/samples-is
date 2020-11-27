@@ -26,8 +26,8 @@
     </parent>
    
   <modelVersion>4.0.0</modelVersion>
-  <groupId>CustomToken</groupId>
-  <artifactId>org.wso2.carbon.identity.extensions</artifactId>
+  
+  <artifactId>org.wso2.carbon.identity.extensions.jwt.token.issuer</artifactId>
   <version>1.0.0-SNAPSHOT</version>
 
   <dependencies>
