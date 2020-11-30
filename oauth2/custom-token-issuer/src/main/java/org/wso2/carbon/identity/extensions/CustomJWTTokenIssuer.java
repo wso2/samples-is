@@ -33,11 +33,11 @@ public class CustomJWTTokenIssuer extends JWTTokenIssuer {
 	String[] scopeSplit;
 
 	public CustomJWTTokenIssuer() throws IdentityOAuth2Exception {
+
 		super();
 		if (log.isDebugEnabled()) {
 			log.debug("CustomJWT Access token Issuer is initiated");
 		}
-
 	}
 
 	@Override
@@ -62,7 +62,6 @@ public class CustomJWTTokenIssuer extends JWTTokenIssuer {
 			}
 			JWTClaimsSet.Builder jwtClaimsSetBuilder = new JWTClaimsSet.Builder(jwtClaimsSet);
 			return jwtClaimsSetBuilder.build();
-
 		}
 	}
 
