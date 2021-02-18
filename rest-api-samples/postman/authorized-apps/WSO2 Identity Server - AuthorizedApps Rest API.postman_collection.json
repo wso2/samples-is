@@ -1,0 +1,561 @@
+{
+	"info": {
+		"_postman_id": "59aa665d-38ff-42ff-99e7-4d1f3376a766",
+		"name": "WSO2 Identity Server - AuthorizedApps Rest API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Me",
+			"item": [
+				{
+					"name": "applications",
+					"item": [
+						{
+							"name": "Get apps",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "bf80af86-6ab4-4ad8-ac03-df818c089566",
+										"exec": [
+											"pm.collectionVariables.set(\"baseUrl\", \"https://localhost:9443/t/carbon.super\");",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "admin",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/users/v2/me/authorized-apps",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"v2",
+										"me",
+										"authorized-apps"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete apps",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "89903e8b-c704-4cb9-8820-8fb52310174c",
+										"exec": [
+											"pm.collectionVariables.set(\"baseUrl\", \"https://localhost:9443/t/carbon.super\");",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/users/v2/me/authorized-apps",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"v2",
+										"me",
+										"authorized-apps"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "{application Id}",
+					"item": [
+						{
+							"name": "Get app by appid",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "b540df73-b51b-47c0-b7c6-4875948ca819",
+										"exec": [
+											"pm.collectionVariables.set(\"baseUrl\", \"https://localhost:9443/t/carbon.super\");",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "admin",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/users/v2/me/authorized-apps/:application-id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"v2",
+										"me",
+										"authorized-apps",
+										":application-id"
+									],
+									"variable": [
+										{
+											"key": "application-id",
+											"value": "6a33104a-fbb5-464f-8ffd-712be4ba67a7",
+											"type": "text",
+											"enabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete by appId",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "a64c0aa8-083b-4099-af18-b9c96212cfce",
+										"exec": [
+											"pm.collectionVariables.set(\"baseUrl\", \"https://localhost:9443/t/carbon.super\");",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "admin",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/users/v2/me/authorized-apps/:application-id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"v2",
+										"me",
+										"authorized-apps",
+										":application-id"
+									],
+									"variable": [
+										{
+											"key": "application-id",
+											"value": "6a33104a-fbb5-464f-8ffd-712be4ba67a7"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "UserId",
+			"item": [
+				{
+					"name": "applications",
+					"item": [
+						{
+							"name": "Get apps by UserId",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "747363bc-ff86-4ed1-8969-06c03f29af52",
+										"exec": [
+											"pm.collectionVariables.set(\"baseUrl\", \"https://localhost:9443/t/carbon.super\");",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "admin",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/users/v2/:userId/authorized-apps",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"v2",
+										":userId",
+										"authorized-apps"
+									],
+									"variable": [
+										{
+											"key": "userId",
+											"value": "e943f398-826c-4a63-8dd1-865debfca6bc"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete apps by UserId",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "4b3aa8c2-d59a-4d6b-bccf-3e3f67251217",
+										"exec": [
+											"pm.collectionVariables.set(\"baseUrl\", \"https://localhost:9443/t/carbon.super\");",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/users/v2/:user-id/authorized-apps",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"v2",
+										":user-id",
+										"authorized-apps"
+									],
+									"variable": [
+										{
+											"key": "user-id",
+											"value": "e943f398-826c-4a63-8dd1-865debfca6bc"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "{application Id}",
+					"item": [
+						{
+							"name": "Get app by UserId",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "ed1055e0-1c36-4034-8df2-6312c47b6d8c",
+										"exec": [
+											"pm.collectionVariables.set(\"baseUrl\", \"https://localhost:9443/t/carbon.super\");",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "admin",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/users/v2/:user-id/authorized-apps/:application-id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"v2",
+										":user-id",
+										"authorized-apps",
+										":application-id"
+									],
+									"variable": [
+										{
+											"key": "user-id",
+											"value": "e943f398-826c-4a63-8dd1-865debfca6bc"
+										},
+										{
+											"key": "application-id",
+											"value": "2c9069bf-b46c-4cc4-a352-bf64e2486b12",
+											"type": "text",
+											"enabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete app by UserId",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "844ab92d-3751-4470-960e-7a440b96516e",
+										"exec": [
+											"pm.collectionVariables.set(\"baseUrl\", \"https://localhost:9443/t/carbon.super\");",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "admin",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/users/v2/:user-id/authorized-apps/:application-id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"v2",
+										":user-id",
+										"authorized-apps",
+										":application-id"
+									],
+									"variable": [
+										{
+											"key": "user-id",
+											"value": "2c9069bf-b46c-4cc4-a352-bf64e2486b12"
+										},
+										{
+											"key": "application-id",
+											"value": "2c9069bf-b46c-4cc4-a352-bf64e2486b12"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"variable": [
+		{
+			"id": "e85a7de0-6e22-4c3b-a264-03fd0a877a68",
+			"key": "server-url",
+			"value": "-url}}/t/{{"
+		},
+		{
+			"id": "d3ad22fb-7575-41c9-b236-5aa09ea03973",
+			"key": "server-url",
+			"value": ""
+		},
+		{
+			"id": "e5dd7bbd-c1a2-4044-8043-99c2b0270823",
+			"key": "baseUrl",
+			"value": ""
+		}
+	],
+	"protocolProfileBehavior": {}
+}
