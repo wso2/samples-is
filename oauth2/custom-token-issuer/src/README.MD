@@ -1,11 +1,30 @@
 ## Custom JWT Token Issuer
 
-To change the decoded JWT scope format from string to array
+An extended implementation of the JWT token issuer to format the 'scope' claim from a space separated string to a JSON array.
 
-Default Scope format in string as follows :
+##### Default format of the JWT token issuer
+```
 "scope": "claims.read claims.write customerProfile.read customerProfile.write customerServices.read customerServices.write healthCareProviders.read healthCareProviders.write notifications.read policyAdmin.read"
+```
 
-### Sample Maven Project :
+##### Expected format from the extended JWT token issuer
+```
+  "scope": [
+    "claims.read",
+    "claims.write",
+    "customerProfile.read",
+    "customerProfile.write",
+    "customerServices.read",
+    "customerServices.write",
+    "healthCareProviders.read",
+    "healthCareProviders.write",
+    "notifications.read",
+    "policyAdmin.read"
+  ]
+```
+
+### Steps
+1. Implement and build the sample
 
 - Create a  maven project with custom class extends JWTTokenIssuer and Override the createJWTClaimSet method.
 - Add the dependencies in pom.xml
@@ -13,7 +32,7 @@ Default Scope format in string as follows :
 - Build the maven project `mvn clean install`
 - Copy the jar from target folder into  $IS_HOME/repository/components/lib location
 
-### Add Configuration in deployment.toml
+2. Add Configuration in deployment.toml
 
 Add the below configuration to deployment.toml file found under $IS_HOME/repository/conf directory
 
@@ -24,8 +43,9 @@ issuer="org.wso2.carbon.identity.extensions.CustomJWTTokenIssuer"
 persist_access_token_alias=true
 ```
 
-- Replace org.wso2.carbon.identity.extensions.CustomJWTTokenIssuer with your custom class name.
-- Restart the WSO2 Identity Server.
+3. Replace org.wso2.carbon.identity.extensions.CustomJWTTokenIssuer with your custom class name.
+4. Restart the WSO2 Identity Server.
+
 
 ### Command use to generate JWT
 
