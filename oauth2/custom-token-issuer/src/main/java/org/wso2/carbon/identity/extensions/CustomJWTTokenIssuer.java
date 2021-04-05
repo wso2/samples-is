@@ -26,12 +26,14 @@ import org.wso2.carbon.identity.oauth2.token.OAuthTokenReqMessageContext;
 
 import com.nimbusds.jwt.JWTClaimsSet;
 
+/**
+ * An extended JWT token issuer which formats the 'scope' claim as a JSON array.
+ */
 public class CustomJWTTokenIssuer extends JWTTokenIssuer {
+	
 	private static final Log log = LogFactory.getLog(CustomJWTTokenIssuer.class);
-	private static final String SCOPE = "scope";
-	String scope;
-	String[] scopeSplit;
-
+	private static final String SCOPE_CLAIM_NAME = "scope";
+	
 	public CustomJWTTokenIssuer() throws IdentityOAuth2Exception {
 
 		super();
@@ -42,19 +44,19 @@ public class CustomJWTTokenIssuer extends JWTTokenIssuer {
 
 	@Override
 	protected JWTClaimsSet createJWTClaimSet(OAuthAuthzReqMessageContext authAuthzReqMessageContext,
-			OAuthTokenReqMessageContext tokenReqMessageContext, String consumerKey) throws IdentityOAuth2Exception {
-		// TODO Auto-generated method stub
+	OAuthTokenReqMessageContext tokenReqMessageContext, String consumerKey) throws IdentityOAuth2Exception {
 
 		JWTClaimsSet jwtClaimsSet = super.createJWTClaimSet(authAuthzReqMessageContext, tokenReqMessageContext,
 				consumerKey);
-		scope = (String) jwtClaimsSet.getClaim(SCOPE);
+				
+		String scope = (String) jwtClaimsSet.getClaim(SCOPE_CLAIM_NAME);
 		if (scope != null && !scope.isEmpty()) {
 			if (log.isDebugEnabled()) {
 				log.debug("Scope Exist for the jwt access token");
 			}
-			scopeSplit = scope.split("\\s");
+			String[] scopeSplit = scope.split("\\s");
 			JWTClaimsSet.Builder jwtClaimsSetBuilder = new JWTClaimsSet.Builder(jwtClaimsSet);
-			jwtClaimsSetBuilder.claim(SCOPE, scopeSplit);
+			jwtClaimsSetBuilder.claim(SCOPE_CLAIM_NAME, scopeSplit);
 			return jwtClaimsSetBuilder.build();
 		} else {
 			if (log.isDebugEnabled()) {
