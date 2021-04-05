@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright (c) 2020, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+  ~ Copyright (c) 2021, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
   ~
   ~ WSO2 Inc. licenses this file to you under the Apache License,
   ~ Version 2.0 (the "License"); you may not use this file except
@@ -16,54 +16,54 @@
   ~ under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-   <parent>
+    <parent>
         <groupId>org.wso2.samples.is</groupId>
         <artifactId>wso2is-identity-samples-oauth2</artifactId>
         <version>4.3.6-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-   
-  <name>OAuth 2.0 Custom JWT Token Issuer</name>
-  <modelVersion>4.0.0</modelVersion>  
-  <artifactId>org.wso2.carbon.identity.extensions.jwt.token.issuer</artifactId>
-  <packaging>jar</packaging>
 
-  <dependencies>
-    <dependency>
-        <groupId>org.wso2.carbon.identity.inbound.auth.oauth2</groupId>
-        <artifactId>org.wso2.carbon.identity.oauth</artifactId>
-        <version>6.4.2</version>
-    </dependency>
-  </dependencies>
-  
-  <repositories>
-    <repository>
-        <id>wso2-nexus</id>
-        <name>WSO2 internal Repository</name>
-        <url>https://maven.wso2.org/nexus/content/groups/wso2-public/</url>
-        <releases>
-            <enabled>true</enabled>
-            <updatePolicy>daily</updatePolicy>
-            <checksumPolicy>ignore</checksumPolicy>
-        </releases>
-    </repository>
-</repositories>
+    <name>OAuth 2.0 Custom JWT Token Issuer</name>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>org.wso2.carbon.identity.extensions.jwt.token.issuer</artifactId>
+    <packaging>jar</packaging>
 
-  <build>
-  <sourceDirectory>src/main/java</sourceDirectory>
-      <plugins>        
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <configuration>
-                <source>1.8</source>
-                <target>1.8</target>
-            </configuration>
-        </plugin>
-      </plugins>
-  
-  </build>
-  
+    <dependencies>
+        <dependency>
+            <groupId>org.wso2.carbon.identity.inbound.auth.oauth2</groupId>
+            <artifactId>org.wso2.carbon.identity.oauth</artifactId>
+            <version>6.4.2</version>
+        </dependency>
+    </dependencies>
+
+    <repositories>
+        <repository>
+            <id>wso2-nexus</id>
+            <name>WSO2 internal Repository</name>
+            <url>https://maven.wso2.org/nexus/content/groups/wso2-public/</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>ignore</checksumPolicy>
+            </releases>
+        </repository>
+    </repositories>
+
+    <build>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
