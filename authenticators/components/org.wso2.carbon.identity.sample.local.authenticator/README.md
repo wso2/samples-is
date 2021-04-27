@@ -45,7 +45,7 @@ AuthenticationResult authenticateWithID(String preferredUserNameClaim, String pr
 ```
 
 **initiateAuthenticationrequest():** redirects the user to the login page in order to authenticate.
-* In our sample, the user is redirected to the default WSO2 IS login
+* In our sample, the user is redirected to the default WSO2 IS login.
 
 **getContextIdentifier():** gets the Context identifier sent with the request. This identifier is used to retrieve the state of the authentication/logout flow.
 
