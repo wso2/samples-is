@@ -65,7 +65,7 @@ Now you have successfully implemented the custom authentication logic.
 3. Create a service provider for the application. (We will use the OIDC sample application pickup-dispatch and it is already deployed in the tomcat server locally.)
 4. In the service provider configuration, under the **Inbound Authentication Configuration** section, click **OAuth/OpenID Connect Configuration > Configure**. OAuth/OpenID Connect Configuration option. (Refer to the [official documentation](https://is.docs.wso2.com/en/latest/learn/deploying-the-sample-app/#deploying-the-pickup-dispatch-webapp) for more details)
 5. Provide the **callback URL** and register it as an OAuth2 client app. For the pickup-dispatch application, the callback URL is _http://localhost.com:8080/pickup-dispatch/oauth2client_
-6. Under **Local & Outbound Authentication Configuration**, select **Local authentication** radio button and sample authenticator that we deployed from the drop-down menu.
+6. Under **Local & Outbound Authentication Configuration**, for the **Authentication Type**, select **Local Authentication** radio button and sample authenticator that we deployed from the drop-down menu.
 
 ![configuring the application in the console](./resources/configuringCustomLocalAuth.gif)
 
