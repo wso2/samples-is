@@ -44,7 +44,7 @@ The customization and configuration details of this guide and the sample are giv
 AuthenticationResult authenticateWithID(String preferredUserNameClaim, String preferredUserNameValue, Object credential, String profileName) throws UserStoreException;
 ```
 
-**initiateAuthenticationrequest():** redirects the user to the login page in order to authenticate
+**initiateAuthenticationrequest():** redirects the user to the login page in order to authenticate.
 * In our sample, the user is redirected to the default WSO2 IS login
 
 **getContextIdentifier():** gets the Context identifier sent with the request. This identifier is used to retrieve the state of the authentication/logout flow.
