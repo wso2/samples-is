@@ -39,7 +39,7 @@ The customization and configuration details of this guide and the sample are giv
 * For example, you can check if the username and password is ‘not null’ in the canHandle method. If that succeeds, the authentication flow will continue (to have the user authenticated).
 
 **processAuthenticationResponse():** Implementation of custom authentication logic happens inside this method.
-* In our example, we use the following API where the user claim used as the username is passed along with the value and authenticate the user. Since we are using the telephone number as the login identifier, the prefferedUsernameClaim is http://wso2.org/claims/telephone.
+* In our example, we use the following API where the user claim used as the username is passed along with the value and authenticate the user. Since we are using the telephone number as the login identifier, the preferredUsernameClaim is http://wso2.org/claims/telephone.
 ```
 AuthenticationResult authenticateWithID(String preferredUserNameClaim, String preferredUserNameValue, Object credential, String profileName) throws UserStoreException;
 ```
