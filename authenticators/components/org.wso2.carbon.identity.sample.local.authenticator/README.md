@@ -31,7 +31,7 @@ The customization and configuration details of this guide and the sample are giv
 ### Methods that need to be implemented,
 
 **getFriendlyName():** returns the name you want to display for your custom authenticator.
-* Our sample custom local authenticator is named as sample-local-authenticator
+* Our sample custom local authenticator is named as sample-local-authenticator.
 
 **getname():** get the name of the authenticator.
 
