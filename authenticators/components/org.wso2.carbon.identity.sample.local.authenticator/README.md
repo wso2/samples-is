@@ -55,7 +55,7 @@ Now you have successfully implemented the custom authentication logic.
 
 ## Deploy the custom local authenticator in WSO2 IS
 
-1. Once the project is successfully built, you can find the compiled jar file insider `<sample-local-authenticator>/target`.
+1. Once the project is successfully built, you can find the compiled jar file inside the`<sample-local-authenticator>/target` directory.
 2. Copy the jar file; in our sample **org.wso2.carbon.identity.sample.local.authenticator-1.0.0.jar** file to the _<IS_HOME>/repository/components/dropins_.
 
 ## Configure an application with the custom authenticator
