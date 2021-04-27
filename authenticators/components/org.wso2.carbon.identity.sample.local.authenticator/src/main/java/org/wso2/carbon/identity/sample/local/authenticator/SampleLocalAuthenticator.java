@@ -63,17 +63,13 @@ public class SampleLocalAuthenticator extends AbstractApplicationAuthenticator i
     }
 
     @Override
-    protected void initiateAuthenticationRequest(HttpServletRequest request,
-                                                 HttpServletResponse response,
-                                                 AuthenticationContext context)
-            throws AuthenticationFailedException {
+    protected void initiateAuthenticationRequest(HttpServletRequest request, HttpServletResponse response,
+                                                 AuthenticationContext context) throws AuthenticationFailedException {
 
         String loginPage = ConfigurationFacade.getInstance().getAuthenticationEndpointURL();
         // This is the default WSO2 IS login page. If you can create your custom login page you can use that instead.
-        String queryParams =
-                FrameworkUtils.getQueryStringWithFrameworkContextId(context.getQueryParams(),
-                        context.getCallerSessionKey(),
-                        context.getContextIdentifier());
+        String queryParams = FrameworkUtils.getQueryStringWithFrameworkContextId(context.getQueryParams(),
+                context.getCallerSessionKey(), context.getContextIdentifier());
 
         try {
             String retryParam = "";
@@ -93,7 +89,6 @@ public class SampleLocalAuthenticator extends AbstractApplicationAuthenticator i
     protected void processAuthenticationResponse(HttpServletRequest httpServletRequest, HttpServletResponse
             httpServletResponse, AuthenticationContext authenticationContext) throws AuthenticationFailedException {
 
-
         String username = httpServletRequest.getParameter(USERNAME);
         String password = httpServletRequest.getParameter(PASSWORD);
 
@@ -101,7 +96,7 @@ public class SampleLocalAuthenticator extends AbstractApplicationAuthenticator i
 
         boolean isAuthenticated = false;
 
-        // Check the authentication
+        // Check the authentication.
         try {
             int tenantId = IdentityTenantUtil.getTenantIdOfUser(username);
             UserRealm userRealm = SampleLocalAuthenticatorServiceComponent.getRealmService()
@@ -111,25 +106,28 @@ public class SampleLocalAuthenticator extends AbstractApplicationAuthenticator i
 
                 // This custom local authenticator is using the telephone number as the username.
                 // Therefore the login identifier claim is http://wso2.org/claims/telephone.
-                    AuthenticationResult authenticationResult = userStoreManager.
-                            authenticateWithID(MOBILE_CLAIM_URL, username, password, UserCoreConstants.DEFAULT_PROFILE);
-                    if (AuthenticationResult.AuthenticationStatus.SUCCESS == authenticationResult
-                            .getAuthenticationStatus()) {
-                        user = authenticationResult.getAuthenticatedUser();
-                        isAuthenticated = true;
-                    }
+                AuthenticationResult authenticationResult = userStoreManager.
+                        authenticateWithID(MOBILE_CLAIM_URL, username, password, UserCoreConstants.DEFAULT_PROFILE);
+                if (AuthenticationResult.AuthenticationStatus.SUCCESS == authenticationResult.getAuthenticationStatus()) {
+                    user = authenticationResult.getAuthenticatedUser();
+                    isAuthenticated = true;
+                }
             } else {
+                if (log.isDebugEnabled()) {
+                    log.debug("Custom authentication failed since the user realm for the given tenant, " +
+                            tenantId + " is null.");
+                }
                 throw new AuthenticationFailedException("Cannot find the user realm for the given tenant: " + tenantId,
                         User.getUserFromUserName(username));
             }
         } catch (IdentityRuntimeException e) {
             if (log.isDebugEnabled()) {
-                log.debug("BasicAuthentication failed while trying to get the tenant ID of the user " + username, e);
+                log.debug("Custom authentication failed while trying to get the tenant ID of the user " + username, e);
             }
             throw new AuthenticationFailedException(e.getMessage(), e);
         } catch (org.wso2.carbon.user.api.UserStoreException e) {
             if (log.isDebugEnabled()) {
-                log.debug("BasicAuthentication failed while trying to authenticate the user " + username, e);
+                log.debug("Custom authentication failed while trying to authenticate the user " + username, e);
             }
             throw new AuthenticationFailedException(e.getMessage(), e);
         }

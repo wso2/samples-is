@@ -51,7 +51,11 @@ AuthenticationResult authenticateWithID(String preferredUserNameClaim, String pr
 
 Now you have successfully implemented the custom authentication logic.
 
-4. To compile the service, go to the root of your project where the pom.xml file is located and run the following command
+4. To compile the service, go to the root of your project where the pom.xml file is located and run the following command.
+
+```
+mvn clean install
+```
 
 ## Deploy the custom local authenticator in WSO2 IS
 
@@ -73,9 +77,9 @@ Now you have successfully implemented the custom authentication logic.
 
 1. Create a user called with the username **alex**.
 2. Since we are trying to login with the user’s mobile number, provide a valid telephone number in the default user profile.
-3. Access the sample application. (http://localhost:8080/pickup-dispatch/ for the application that is described here)
-4. Click on the Login button
-5. Provide the configured telephone number as the username and the corresponding password of the user
+3. Access the sample application. (http://localhost:8080/pickup-dispatch/ for the application that is described here.)
+4. Click on the Login button.
+5. Provide the configured telephone number as the username and the corresponding password of the user.
 6. You will be successfully authenticated to the application.
 
 ![trying out with the sample application](./resources/tryOutCustomLocalAuth.gif)
