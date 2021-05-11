@@ -13,7 +13,7 @@ This guide discusses the three main steps required when introducing custom local
 
 ## Sample scenario
 
-Let’s say we need to log in to an application using our telephone number(http://wso2.org/claims/telephone) instead of the username. Therefore if the user enters his/her mobile number as the username, the authentication logic should validate the credentials of the user identified by the given telephone number.
+Let’s say we need to log in to an application using our telephone number(http://wso2.org/claims/telephone) instead of the username. Therefore if the user enters his/her telephone number as the username, the authentication logic should validate the credentials of the user identified by the given telephone number.
 
 <br>
 
@@ -76,7 +76,7 @@ mvn clean install
 ## Try out the custom authenticator
 
 1. Create a user called with the username **alex**.
-2. Since we are trying to login with the user’s mobile number, provide a valid telephone number in the default user profile.
+2. Since we are trying to login with the user’s telephone number, provide a valid telephone number in the default user profile.
 3. Access the sample application. (http://localhost:8080/pickup-dispatch/ for the application that is described here.)
 4. Click on the Login button.
 5. Provide the configured telephone number as the username and the corresponding password of the user.
