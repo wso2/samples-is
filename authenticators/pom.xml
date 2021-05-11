@@ -35,6 +35,7 @@
         <module>components/org.wso2.carbon.identity.sample.extension.authenticators</module>
         <module>components/org.wso2.carbon.identity.sample.extension.auth.endpoint</module>
         <module>components/org.wso2.carbon.identity.sample.federated.authenticator</module>
+        <module>components/org.wso2.carbon.identity.sample.local.authenticator</module>
     </modules>
 
 </project>
