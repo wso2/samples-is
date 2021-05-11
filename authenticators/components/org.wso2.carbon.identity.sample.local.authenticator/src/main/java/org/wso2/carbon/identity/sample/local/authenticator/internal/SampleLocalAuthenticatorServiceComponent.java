@@ -51,7 +51,7 @@ public class SampleLocalAuthenticatorServiceComponent {
                 log.debug("SampleLocalAuthenticator bundle is activated");
             }
         } catch (Throwable e) {
-            log.error("SampleLocalAuthenticator bundle activation Failed", e);
+            log.error("SampleLocalAuthenticator bundle activation failed.", e);
         }
     }
 
