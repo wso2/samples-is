@@ -822,7 +822,7 @@
         <identity.inbound.auth.oauth.version>6.4.49</identity.inbound.auth.oauth.version>
         <carbon.kernel.version>4.4.17</carbon.kernel.version>
         <json.simple.version>1.1</json.simple.version>
-        <nimbusds.version>2.26.1</nimbusds.version>
+        <nimbusds.version>7.9</nimbusds.version>
         <XmlSchema.version>1.4.7-wso2v5</XmlSchema.version>
         <wsdl4j.version>1.6.2.wso2v2</wsdl4j.version>
         <neethi.wso2.version>2.0.4.wso2v5</neethi.wso2.version>
