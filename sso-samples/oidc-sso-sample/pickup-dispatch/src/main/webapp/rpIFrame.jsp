@@ -11,15 +11,12 @@
         var mes = client_id + " " + session_state;
         var targetOrigin = '<%=session.getAttribute(OAuth2Constants.OIDC_SESSION_IFRAME_ENDPOINT)%>';
         var authorizationEndpoint = '<%=session.getAttribute(OAuth2Constants.OAUTH2_AUTHZ_ENDPOINT)%>';
-        var enableSessionManagement = properties.getProperty("enableSessionManagement");
 
         function check_session() {
-            if (enableSessionManagement) {
-                if (client_id !== null && client_id.length !== 0 && client_id !== 'null' && session_state !== null &&
-                        session_state.length !== 0 && session_state !== 'null') {
-                    var win = document.getElementById("opIFrame").contentWindow;
-                    win.postMessage(mes, targetOrigin);
-                }
+            if (client_id !== null && client_id.length !== 0 && client_id !== 'null' && session_state !== null &&
+                session_state.length !== 0 && session_state !== 'null') {
+                var win = document.getElementById("opIFrame").contentWindow;
+                win.postMessage(mes, targetOrigin);
             }
         }
 
