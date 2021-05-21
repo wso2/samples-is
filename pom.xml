@@ -805,7 +805,7 @@
 
         <!--repo versions of saml2-sso-sample-->
         <opensaml3.version>3.3.1</opensaml3.version>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <xmlsec.version>1.4.4</xmlsec.version>
         <identity.agent.sso.version.range>[5.0.0, 6.0.0)</identity.agent.sso.version.range>
         <joda.wso2.version>2.9.4.wso2v1</joda.wso2.version>
