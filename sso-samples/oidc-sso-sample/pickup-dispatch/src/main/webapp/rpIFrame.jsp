@@ -14,7 +14,7 @@
 
         function check_session() {
             if (client_id !== null && client_id.length !== 0 && client_id !== 'null' && session_state !== null &&
-                session_state.length !== 0 && session_state !== 'null') {
+                    session_state.length !== 0 && session_state !== 'null') {
                 var win = document.getElementById("opIFrame").contentWindow;
                 win.postMessage(mes, targetOrigin);
             }
