@@ -539,7 +539,7 @@
 <%
     boolean enableOIDCSessionManagement = true;
     if (session.getAttribute(OAuth2Constants.OIDC_SESSION_MANAGEMENT_ENABLED) != null) {
-        enableOIDCSessionManagement = (boolean)session.getAttribute(OAuth2Constants.OIDC_SESSION_MANAGEMENT_ENABLED);
+        enableOIDCSessionManagement = (boolean) session.getAttribute(OAuth2Constants.OIDC_SESSION_MANAGEMENT_ENABLED);
     }
     if (enableOIDCSessionManagement) {
 %>
@@ -550,7 +550,7 @@
 <%
     boolean enableOIDCBackchannelLogout = true;
     if (session.getAttribute(OAuth2Constants.OIDC_BACK_CHANNEL_LOGOUT_ENABLED) != null) {
-        enableOIDCBackchannelLogout = (boolean)session.getAttribute(OAuth2Constants.OIDC_BACK_CHANNEL_LOGOUT_ENABLED);
+        enableOIDCBackchannelLogout = (boolean) session.getAttribute(OAuth2Constants.OIDC_BACK_CHANNEL_LOGOUT_ENABLED);
     }
     if (enableOIDCBackchannelLogout) {
 %>
