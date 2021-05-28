@@ -20,4 +20,4 @@ read -p "Batch Count (Optional) [100]: " batchCount
 read -p "Maximum Count (Optional) [-1]: " maxCount
 [ -z "$maxCount" ] && { maxCount=none; }
 
-java -Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005 -jar $(find . -name "*scim.bulk.user.export.tool*") $host $username $password $csv $attributes $excludedAttributes $batchCount $maxCount
+java -jar $(find . -name "*scim.bulk.user.export.tool*") $host $username $password $csv $attributes $excludedAttributes $batchCount $maxCount

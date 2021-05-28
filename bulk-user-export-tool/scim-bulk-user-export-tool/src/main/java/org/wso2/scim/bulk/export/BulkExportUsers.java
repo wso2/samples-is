@@ -105,11 +105,13 @@ public class BulkExportUsers {
 
         while (true) {
             if (maxCount != -1 && maxCount < startIndex) {
+                LOGGER.log(Level.INFO, "Maximum count: " + maxCount + " reached.");
                 break;
             }
             if (attributes != null) {
                 builder.setParameter("attributes", attributes);
             }
+            LOGGER.log(Level.INFO, "Retrieving " + count + " users starting from: " + startIndex);
             builder.setParameter("startIndex", Integer.toString(startIndex));
             builder.setParameter("count", Integer.toString(count));
             startIndex += count;
@@ -141,6 +143,7 @@ public class BulkExportUsers {
                                     arrayElement, null, attributesToExclude));
                         }
                     } else {
+                        LOGGER.log(Level.INFO, "End of results reached.");
                         break;
                     }
 
