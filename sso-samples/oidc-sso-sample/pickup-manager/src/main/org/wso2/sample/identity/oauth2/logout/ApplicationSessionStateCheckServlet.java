@@ -28,11 +28,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet for checking Backchannel logout.
+ * Servlet for checking Application Session State.
  */
-public class LogoutCheckServlet extends HttpServlet {
+public class ApplicationSessionStateCheckServlet extends HttpServlet {
 
-    private static final Logger LOGGER = Logger.getLogger(LogoutCheckServlet.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ApplicationSessionStateCheckServlet.class.getName());
 
     public void init(ServletConfig config) throws SecurityException {
 

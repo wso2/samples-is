@@ -20,8 +20,8 @@
     </servlet>
 
     <servlet>
-        <servlet-name>LogoutCheckServlet</servlet-name>
-        <servlet-class>org.wso2.sample.identity.oauth2.logout.LogoutCheckServlet</servlet-class>
+        <servlet-name>ApplicationSessionStateCheckServlet</servlet-name>
+        <servlet-class>org.wso2.sample.identity.oauth2.logout.ApplicationSessionStateCheckServlet</servlet-class>
         <load-on-startup>0</load-on-startup>
     </servlet>
 
@@ -36,8 +36,8 @@
     </servlet-mapping>
 
     <servlet-mapping>
-        <servlet-name>LogoutCheckServlet</servlet-name>
-        <url-pattern>/checkBclogout</url-pattern>
+        <servlet-name>ApplicationSessionStateCheckServlet</servlet-name>
+        <url-pattern>/check-bc-logout</url-pattern>
     </servlet-mapping>
 
     <listener>

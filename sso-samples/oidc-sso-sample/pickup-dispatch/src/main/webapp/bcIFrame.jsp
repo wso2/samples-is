@@ -1,13 +1,13 @@
 <html>
 <head>
-    <title>Back channel Logout Session Management RP IFrame</title>
+    <title>Backchannel Logout Session Management RP IFrame</title>
     <!-- JQuery -->
     <script src="libs/jquery_3.3.1/jquery.min.js"></script>
     <script language="JavaScript" type="text/javascript">
 
     function check_session() {
         $.ajax({
-            url:'checkBclogout',
+            url:'check-bc-logout',
             type:'GET',
             contentType: 'application/json; charset=utf-8',
             error:function() {
