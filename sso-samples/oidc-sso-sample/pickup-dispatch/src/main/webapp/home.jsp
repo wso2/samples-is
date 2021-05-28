@@ -374,6 +374,17 @@
 <%
     }
 %>
+<%
+    boolean enableOIDCBackchannelLogout = true;
+    if (session.getAttribute(OAuth2Constants.OIDC_BACK_CHANNEL_LOGOUT_ENABLED) != null){
+        enableOIDCBackchannelLogout = (boolean)session.getAttribute(OAuth2Constants.OIDC_BACK_CHANNEL_LOGOUT_ENABLED);
+    }
+    if(enableOIDCBackchannelLogout){
+%>
+<iframe id="bcIFrame" src="bcIFrame.jsp" frameborder="0" width="0" height="0"></iframe>
+<%
+    }
+%>
 <script>
     hljs.initHighlightingOnLoad();
     loadMetadata();
