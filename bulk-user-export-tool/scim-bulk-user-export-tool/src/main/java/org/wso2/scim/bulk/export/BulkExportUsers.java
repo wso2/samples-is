@@ -93,11 +93,15 @@ public class BulkExportUsers {
         }
 
         if (!NONE.equals(args[6])) {
-            count = Integer.parseInt(args[6]);
+            startIndex = Integer.parseInt(args[6]);
         }
 
         if (!NONE.equals(args[7])) {
-            maxCount = Integer.parseInt(args[7]);
+            count = Integer.parseInt(args[7]);
+        }
+
+        if (!NONE.equals(args[8])) {
+            maxCount = Integer.parseInt(args[8]);
         }
 
         // Create a get request to retrieve list users from SCIM 2.0
@@ -142,6 +146,10 @@ public class BulkExportUsers {
                             JsonNode arrayElement = arrayNode.get(i);
                             usersArrayNode.add(JSONFlattener.generateFlatJSON(new ObjectMapper().createObjectNode(),
                                     arrayElement, null, Collections.emptySet()));
+                        }
+                        if (arrayNode.size() < count) {
+                            LOGGER.log(Level.INFO, "End of results reached.");
+                            break;
                         }
                     } else {
                         LOGGER.log(Level.INFO, "End of results reached.");
