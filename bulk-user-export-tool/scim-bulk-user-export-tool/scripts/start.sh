@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-read -p "Enter host address of WSO2 IS (Required) (ex: https://localhost/9443) : " host
-[ -z "$host" ] && { echo "Error: Host address can't be empty!"; exit 1; }
+read -p "Enter host address of WSO2 IS (Required) [https://localhost:9443] : " host
+[ -z "$host" ] && { host="https://localhost:9443"; }
 read -p "Enter username (Required) : " username
 [ -z "$username" ] && { echo "Error: username can't be empty!"; exit 1; }
 stty -echo
@@ -15,5 +15,9 @@ read -p "Attributes to filter (Optional) (ex: id,username,emails) : " attributes
 [ -z "$attributes" ] && { attributes=none; }
 read -p "Attributes to exclude (Optional) (ex:groups, name_givenName) : " excludedAttributes
 [ -z "$excludedAttributes" ] && { excludedAttributes=none; }
+read -p "Batch Count (Optional) [100]: " batchCount
+[ -z "$batchCount" ] && { batchCount=none; }
+read -p "Maximum Count (Optional) [-1]: " maxCount
+[ -z "$maxCount" ] && { maxCount=none; }
 
-java -jar $(find . -name "*scim.bulk.user.export.tool*") $host $username $password $csv $attributes $excludedAttributes
+java -Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005 -jar $(find . -name "*scim.bulk.user.export.tool*") $host $username $password $csv $attributes $excludedAttributes $batchCount $maxCount

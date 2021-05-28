@@ -51,6 +51,9 @@ public class BulkExportUsers {
     private static final String PATH_SEPARATOR = "/";
     private static final String NONE = "none";
     private static final String DEFAULT_CSV_FILE = "users.csv";
+    private static final int START_INDEX = 1;
+    private static final int DEFAULT_COUNT = 100;
+    private static final int MAX_COUNT = -1;
 
     private static final Logger LOGGER = Logger.getLogger(BulkExportUsers.class.getName());
 
@@ -63,12 +66,18 @@ public class BulkExportUsers {
             return;
         }
 
+        // ArrayNode to store flattened user information.
+        ArrayNode usersArrayNode = new ObjectMapper().createArrayNode();
+
         Set<String> attributesToExclude = new HashSet<>(Arrays.asList("schemas", "meta_location",
                 "meta_lastModified", "meta_resourceType"));
         String hostAddress = args[0];
         String username = args[1];
         String password = args[2];
         String csvDirectory = DEFAULT_CSV_FILE;
+        int startIndex = START_INDEX;
+        int count = DEFAULT_COUNT;
+        int maxCount = MAX_COUNT;
 
         if (!NONE.equals(args[3])) {
             csvDirectory = args[3];
@@ -83,65 +92,82 @@ public class BulkExportUsers {
             attributesToExclude.addAll(Arrays.asList(args[5].split(",")));
         }
 
+        if (!NONE.equals(args[6])) {
+            count = Integer.parseInt(args[6]);
+        }
+
+        if (!NONE.equals(args[7])) {
+            maxCount = Integer.parseInt(args[7]);
+        }
+
         // Create a get request to retrieve list users from SCIM 2.0
         URIBuilder builder = new URIBuilder(hostAddress + PATH_SEPARATOR + SCIM_USER_ENDPOINT);
-        if (attributes != null) {
-            builder.setParameter("attributes", attributes);
-        }
 
-        HttpGet request = HttpClient.createGetHttpRequest(builder, username, password);
+        while (true) {
+            if (maxCount != -1 && maxCount < startIndex) {
+                break;
+            }
+            if (attributes != null) {
+                builder.setParameter("attributes", attributes);
+            }
+            builder.setParameter("startIndex", Integer.toString(startIndex));
+            builder.setParameter("count", Integer.toString(count));
+            startIndex += count;
 
-        final SSLContext sslContext = new SSLContextBuilder()
-                .loadTrustMaterial(null, (x509CertChain, authType) -> true)
-                .build();
+            HttpGet request = HttpClient.createGetHttpRequest(builder, username, password);
 
-        try (CloseableHttpClient client = HttpClientBuilder.create()
-                .setSSLContext(sslContext)
-                .build();) {
-            HttpResponse response = client.execute(request);
+            final SSLContext sslContext = new SSLContextBuilder()
+                    .loadTrustMaterial(null, (x509CertChain, authType) -> true)
+                    .build();
 
+            try (CloseableHttpClient client = HttpClientBuilder.create()
+                    .setSSLContext(sslContext)
+                    .build();) {
+                HttpResponse response = client.execute(request);
 
-            String stringResponse;
-            // Check response status code is OK
-            if (HttpStatus.SC_OK == response.getStatusLine().getStatusCode()) {
-                stringResponse = EntityUtils.toString(response.getEntity(), "UTF-8");
-                JsonNode jsonTree = new ObjectMapper().readTree(stringResponse);
-                JsonNode usersNode = jsonTree.at("/Resources");
+                String stringResponse;
+                // Check response status code is OK
+                if (HttpStatus.SC_OK == response.getStatusLine().getStatusCode()) {
+                    stringResponse = EntityUtils.toString(response.getEntity(), "UTF-8");
+                    JsonNode jsonTree = new ObjectMapper().readTree(stringResponse);
+                    JsonNode usersNode = jsonTree.at("/Resources");
 
-                // ArrayNode to store flattened user information.
-                ArrayNode usersArrayNode = new ObjectMapper().createArrayNode();
-
-                // Create a flattened user information array.
-                if (usersNode.isArray()) {
-                    ArrayNode arrayNode = (ArrayNode) usersNode;
-                    for (int i = 0; i < arrayNode.size(); i++) {
-                        JsonNode arrayElement = arrayNode.get(i);
-                        usersArrayNode.add(JSONFlattener.generateFlatJSON(new ObjectMapper().createObjectNode(),
-                                arrayElement, null, attributesToExclude));
+                    // Create a flattened user information array.
+                    if (usersNode.isArray()) {
+                        ArrayNode arrayNode = (ArrayNode) usersNode;
+                        for (int i = 0; i < arrayNode.size(); i++) {
+                            JsonNode arrayElement = arrayNode.get(i);
+                            usersArrayNode.add(JSONFlattener.generateFlatJSON(new ObjectMapper().createObjectNode(),
+                                    arrayElement, null, attributesToExclude));
+                        }
+                    } else {
+                        break;
                     }
-                }
 
-                // Create a csv schema and generate the csv file containing user information.
-                CsvSchema.Builder csvSchemaBuilder = CsvSchema.builder();
-                for (int i = 0; i < usersArrayNode.size(); i++) {
-                    usersArrayNode.get(i).fieldNames().forEachRemaining(
-                            fieldName -> {
-                                if (!csvSchemaBuilder.hasColumn(fieldName)) {
-                                    csvSchemaBuilder.addColumn(fieldName);
-                                }
-                            });
+                } else {
+                    LOGGER.log(Level.INFO, request.getMethod() + " Request to " + request.getURI().toString() +
+                            " returned the status code : " + response.getStatusLine());
+                    return;
                 }
-                CsvSchema csvSchema = csvSchemaBuilder.build().withHeader();
-
-                CsvMapper csvMapper = new CsvMapper();
-                csvMapper.writerFor(ArrayNode.class)
-                        .with(csvSchema)
-                        .writeValue(new File(csvDirectory), usersArrayNode);
-                LOGGER.log(Level.INFO, "User information was successfully written to : " + csvDirectory + " file.");
-            } else {
-                LOGGER.log(Level.INFO, request.getMethod() + " Request to " + request.getURI().toString() +
-                        " returned the status code : " + response.getStatusLine());
             }
         }
+
+        // Create a csv schema and generate the csv file containing user information.
+        CsvSchema.Builder csvSchemaBuilder = CsvSchema.builder();
+        for (int i = 0; i < usersArrayNode.size(); i++) {
+            usersArrayNode.get(i).fieldNames().forEachRemaining(
+                    fieldName -> {
+                        if (!csvSchemaBuilder.hasColumn(fieldName)) {
+                            csvSchemaBuilder.addColumn(fieldName);
+                        }
+                    });
+        }
+        CsvSchema csvSchema = csvSchemaBuilder.build().withHeader();
+
+        CsvMapper csvMapper = new CsvMapper();
+        csvMapper.writerFor(ArrayNode.class)
+                .with(csvSchema)
+                .writeValue(new File(csvDirectory), usersArrayNode);
+        LOGGER.log(Level.INFO, "User information was successfully written to : " + csvDirectory + " file.");
     }
 }
