@@ -25,10 +25,12 @@ append `t/<tenant-domain>` to host address (ex: `https://localhost:9443/t/wso2`)
 This is an **optional** input.
 9. Provide attributes that needs to be excluded when creating the CSV. Attributes provided here won’t be in the CSV. 
 This is an **optional** input.
-10. Provide the start index to retrieve the users. *Default: 1*
-11. Provide the batch count to retrieve the users. *Default: 100*
-12. Provide the maximum count of users to be retrieved. *Default: unlimited*
-13. Now you've successfully created the CSV file containing user data.
+10. Provide the userstore domain to be filtered. Created CSV will only have the users from the specified userstore.
+This is an **optional** input.
+11. Provide the start index to retrieve the users. *Default: 1*
+12. Provide the batch count to retrieve the users. *Default: 100*
+13. Provide the maximum count of users to be retrieved. *Default: unlimited*
+14. Now you've successfully created the CSV file containing user data.
 
 ## Download and build
 

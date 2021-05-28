@@ -39,10 +39,7 @@ import java.net.URISyntaxException;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -71,6 +68,7 @@ public class BulkExportUsers {
         ArrayNode usersArrayNode = new ObjectMapper().createArrayNode();
 
         String attributesToExclude = "schemas,meta_location,meta_lastModified,meta_resourceType";
+        String userstoreDomain = null;
         String hostAddress = args[0];
         String username = args[1];
         String password = args[2];
@@ -93,15 +91,19 @@ public class BulkExportUsers {
         }
 
         if (!NONE.equals(args[6])) {
-            startIndex = Integer.parseInt(args[6]);
+            userstoreDomain = args[6];
         }
 
         if (!NONE.equals(args[7])) {
-            count = Integer.parseInt(args[7]);
+            startIndex = Integer.parseInt(args[7]);
         }
 
         if (!NONE.equals(args[8])) {
-            maxCount = Integer.parseInt(args[8]);
+            count = Integer.parseInt(args[8]);
+        }
+
+        if (!NONE.equals(args[9])) {
+            maxCount = Integer.parseInt(args[9]);
         }
 
         // Create a get request to retrieve list users from SCIM 2.0
@@ -112,9 +114,15 @@ public class BulkExportUsers {
                 LOGGER.log(Level.INFO, "Maximum count: " + maxCount + " reached.");
                 break;
             }
+
             if (attributes != null) {
                 builder.setParameter("attributes", attributes);
             }
+
+            if (userstoreDomain != null) {
+                builder.setParameter("domain", userstoreDomain);
+            }
+
             LOGGER.log(Level.INFO, "Retrieving " + count + " users starting from: " + startIndex);
             builder.setParameter("excludedAttributes", attributesToExclude);
             builder.setParameter("startIndex", Integer.toString(startIndex));

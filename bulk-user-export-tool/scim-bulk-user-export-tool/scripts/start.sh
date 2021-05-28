@@ -15,6 +15,8 @@ read -p "Attributes to filter (Optional) (ex: id,username,emails) : " attributes
 [ -z "$attributes" ] && { attributes=none; }
 read -p "Attributes to exclude (Optional) (ex:groups,emails,name.givenName) : " excludedAttributes
 [ -z "$excludedAttributes" ] && { excludedAttributes=none; }
+read -p "Userstore domain to filteer (Optional) (ex:PRIMARY) : " userstoreDomain
+[ -z "$userstoreDomain" ] && { userstoreDomain=none; }
 read -p "Start Index (Optional) [1]: " startIndex
 [ -z "$startIndex" ] && { startIndex=none; }
 read -p "Batch Count (Optional) [100]: " batchCount
@@ -22,4 +24,4 @@ read -p "Batch Count (Optional) [100]: " batchCount
 read -p "Maximum Count (Optional) [-1]: " maxCount
 [ -z "$maxCount" ] && { maxCount=none; }
 
-java -jar $(find . -name "*scim.bulk.user.export.tool*") $host $username $password $csv $attributes $excludedAttributes $startIndex $batchCount $maxCount
+java -jar $(find . -name "*scim.bulk.user.export.tool*") $host $username $password $csv $attributes $excludedAttributes $userstoreDomain $startIndex $batchCount $maxCount
