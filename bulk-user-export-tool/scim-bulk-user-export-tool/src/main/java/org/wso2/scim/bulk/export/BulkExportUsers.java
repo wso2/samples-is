@@ -40,6 +40,7 @@ import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Level;
@@ -69,8 +70,7 @@ public class BulkExportUsers {
         // ArrayNode to store flattened user information.
         ArrayNode usersArrayNode = new ObjectMapper().createArrayNode();
 
-        Set<String> attributesToExclude = new HashSet<>(Arrays.asList("schemas", "meta_location",
-                "meta_lastModified", "meta_resourceType"));
+        String attributesToExclude = "schemas,meta_location,meta_lastModified,meta_resourceType";
         String hostAddress = args[0];
         String username = args[1];
         String password = args[2];
@@ -89,7 +89,7 @@ public class BulkExportUsers {
         }
 
         if (!NONE.equals(args[5])) {
-            attributesToExclude.addAll(Arrays.asList(args[5].split(",")));
+            attributesToExclude += "," + args[5];
         }
 
         if (!NONE.equals(args[6])) {
@@ -112,6 +112,7 @@ public class BulkExportUsers {
                 builder.setParameter("attributes", attributes);
             }
             LOGGER.log(Level.INFO, "Retrieving " + count + " users starting from: " + startIndex);
+            builder.setParameter("excludedAttributes", attributesToExclude);
             builder.setParameter("startIndex", Integer.toString(startIndex));
             builder.setParameter("count", Integer.toString(count));
             startIndex += count;
@@ -140,7 +141,7 @@ public class BulkExportUsers {
                         for (int i = 0; i < arrayNode.size(); i++) {
                             JsonNode arrayElement = arrayNode.get(i);
                             usersArrayNode.add(JSONFlattener.generateFlatJSON(new ObjectMapper().createObjectNode(),
-                                    arrayElement, null, attributesToExclude));
+                                    arrayElement, null, Collections.emptySet()));
                         }
                     } else {
                         LOGGER.log(Level.INFO, "End of results reached.");

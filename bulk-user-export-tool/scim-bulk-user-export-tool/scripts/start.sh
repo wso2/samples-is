@@ -13,7 +13,7 @@ read -p "CSV file location (Optional) (ex: path/to/users.csv): " csv
 [ -z "$csv" ] && { csv=none; }
 read -p "Attributes to filter (Optional) (ex: id,username,emails) : " attributes
 [ -z "$attributes" ] && { attributes=none; }
-read -p "Attributes to exclude (Optional) (ex:groups, name_givenName) : " excludedAttributes
+read -p "Attributes to exclude (Optional) (ex:groups,emails,name.givenName) : " excludedAttributes
 [ -z "$excludedAttributes" ] && { excludedAttributes=none; }
 read -p "Batch Count (Optional) [100]: " batchCount
 [ -z "$batchCount" ] && { batchCount=none; }
