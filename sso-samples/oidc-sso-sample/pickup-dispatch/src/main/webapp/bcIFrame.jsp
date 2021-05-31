@@ -7,9 +7,9 @@
 
     function check_session() {
         $.ajax({
-            url: 'check-bc-logout',
-            type: 'GET',
-            contentType: 'application/json; charset=utf-8',
+            url: "check-bc-logout",
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
             error: function() {
                 console.log("Session has been expired");
                 window.top.location.href = "index.jsp";
