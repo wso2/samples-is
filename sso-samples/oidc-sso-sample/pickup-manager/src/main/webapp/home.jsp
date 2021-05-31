@@ -28,7 +28,7 @@
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page import="org.wso2.samples.claims.manager.ClaimManagerProxy"%>
-<%@ page import="org.wso2.sample.identity.oauth2.logout.SessionIdStore" %>
+<%@page import="org.wso2.sample.identity.oauth2.logout.SessionIdStore" %>
 
 <%
     final Logger logger = Logger.getLogger(getClass().getName());
@@ -538,12 +538,23 @@
 <script src="js/custom.js"></script>
 <%
     boolean enableOIDCSessionManagement = true;
-    if (session.getAttribute(OAuth2Constants.OIDC_SESSION_MANAGEMENT_ENABLED) != null){
-        enableOIDCSessionManagement = (boolean)session.getAttribute(OAuth2Constants.OIDC_SESSION_MANAGEMENT_ENABLED);
+    if (session.getAttribute(OAuth2Constants.OIDC_SESSION_MANAGEMENT_ENABLED) != null) {
+        enableOIDCSessionManagement = (boolean) session.getAttribute(OAuth2Constants.OIDC_SESSION_MANAGEMENT_ENABLED);
     }
-    if(enableOIDCSessionManagement){
+    if (enableOIDCSessionManagement) {
 %>
 <iframe id="rpIFrame" src="rpIFrame.jsp" frameborder="0" width="0" height="0"></iframe>
+<%
+    }
+%>
+<%
+    boolean enableOIDCBackchannelLogout = true;
+    if (session.getAttribute(OAuth2Constants.OIDC_BACK_CHANNEL_LOGOUT_ENABLED) != null) {
+        enableOIDCBackchannelLogout = (boolean) session.getAttribute(OAuth2Constants.OIDC_BACK_CHANNEL_LOGOUT_ENABLED);
+    }
+    if (enableOIDCBackchannelLogout) {
+%>
+<iframe id="bcIFrame" src="bcIFrame.jsp" frameborder="0" width="0" height="0"></iframe>
 <%
     }
 %>
