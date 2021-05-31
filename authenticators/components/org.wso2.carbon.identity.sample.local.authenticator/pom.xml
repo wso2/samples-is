@@ -20,12 +20,19 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <groupId>org.wso2.samples.is</groupId>
-    <artifactId>org.wso2.carbon.identity.sample.local.authenticator</artifactId>
-    <version>1.0.0</version>
-    <name>WSO2 Carbon - Sample Local Authenticator</name>
+
+    <parent>
+        <groupId>org.wso2.samples.is</groupId>
+        <artifactId>wso2is-identity-samples-authenticators</artifactId>
+        <version>4.3.6-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
+
     <modelVersion>4.0.0</modelVersion>
+    <artifactId>org.wso2.carbon.identity.sample.local.authenticator</artifactId>
     <packaging>bundle</packaging>
+    <name>WSO2 Carbon - Sample Local Authenticator</name>
+    <url>http://wso2.org</url>
 
     <dependencies>
         <dependency>
@@ -97,26 +104,6 @@
             </plugin>
         </plugins>
     </build>
-
-    <repositories>
-        <repository>
-            <id>wso2-nexus</id>
-            <name>WSO2 internal Repository</name>
-            <url>http://maven.wso2.org/nexus/content/groups/wso2-public/</url>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>daily</updatePolicy>
-                <checksumPolicy>ignore</checksumPolicy>
-            </releases>
-        </repository>
-    </repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>wso2-maven2-repository</id>
-            <url>http://dist.wso2.org/maven2</url>
-        </pluginRepository>
-    </pluginRepositories>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
