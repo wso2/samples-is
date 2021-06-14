@@ -7,11 +7,6 @@
 	<url>http://maven.apache.org</url>
 	<dependencies>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.openid4java</groupId>
 			<artifactId>openid4java-consumer</artifactId>
 			<version>1.0.0</version>
