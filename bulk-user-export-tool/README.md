@@ -17,16 +17,20 @@ Follow these steps to export user data from WSO2 IS
 4. Run `sh start.sh` inside extracted directory.
 5. Provide the host address of the Identity Server instance.
 [Note : If you’re getting user data from the super-tenant you only need to provide the host address 
-of the instance(ex : For a local instance https://localhost:9443). If you’re getting data from a tenant you need 
-append `t/<tenant-domain>` to host address (ex: https://localhost:9443/t/wso2).]
+of the instance(ex : For a local instance `https://localhost:9443`). If you’re getting data from a tenant you need 
+append `t/<tenant-domain>` to host address (ex: `https://localhost:9443/t/wso2`).] *Default: `https://localhost:9443`*
 6. Provide user credentials of a user with required permissions to call SCIM 2.0 /users endpoint.
-7. Provide location of the CSV file you need to create. This is an **optional** parameter 
-and by default tool will create a users.csv in the tool directory.
+7. Provide location of the CSV file you need to create. *Default: `users.csv` in the tool directory*
 8. Provide attributes that needs to be filtered. Created CSV will only have the attributes specified. 
-This is also an **optional** input.
+This is an **optional** input.
 9. Provide attributes that needs to be excluded when creating the CSV. Attributes provided here won’t be in the CSV. 
-This is also an **optional** input.
-10. Now you've successfully created the CSV file containing user data.
+This is an **optional** input.
+10. Provide the userstore domain to be filtered. Created CSV will only have the users from the specified userstore.
+This is an **optional** input.
+11. Provide the start index to retrieve the users. *Default: 1*
+12. Provide the batch count to retrieve the users. *Default: 100*
+13. Provide the maximum count of users to be retrieved. *Default: unlimited*
+14. Now you've successfully created the CSV file containing user data.
 
 ## Download and build
 
