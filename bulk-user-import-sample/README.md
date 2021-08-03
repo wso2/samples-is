@@ -31,7 +31,7 @@ In order to import the users, please follow these steps
  
 1. Start the WSO2 IS. 
 3. Build the source code by following build commands in [Building from source](#building-from-source)
-4. Copy the file [client.properties](https://github.com/wso2/samples-is/tree/bulk-user-import-sample/bulk-user-import-sample/BulkUserImport/src/main/resources) to **the same directory** as the .jar file.
+4. Copy the file [client.properties](https://github.com/wso2/samples-is/blob/master/bulk-user-import-sample/BulkUserImport/src/main/resources/client.properties) to **the same directory** as the .jar file.
 5. Open the `client.properties` file and fill it with the information of your environment, following the comments and examples within it.
 6. Change to the directory where you placed the files and run the .jar file as follows:
 ```
