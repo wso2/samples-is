@@ -116,9 +116,8 @@ public class BulkExportUsers {
         File file = new File(csvDirectory);
 
         // ArrayNode to store flattened user information.
-        ArrayNode usersArrayNode = null;
+        ArrayNode usersArrayNode = new ObjectMapper().createArrayNode();;
 
-        boolean isSchemaInitialized = false;
         while (true) {
             if (maxCount != -1 && maxCount < startIndex) {
                 LOGGER.log(Level.INFO, "Maximum count: " + maxCount + " reached.");
@@ -158,41 +157,12 @@ public class BulkExportUsers {
                     JsonNode usersNode = jsonTree.at("/Resources");
 
                     // Create a flattened user information array.
-                    usersArrayNode = new ObjectMapper().createArrayNode();
                     if (usersNode.isArray()) {
                         ArrayNode arrayNode = (ArrayNode) usersNode;
                         for (int i = 0; i < arrayNode.size(); i++) {
                             JsonNode arrayElement = arrayNode.get(i);
                             usersArrayNode.add(JSONFlattener.generateFlatJSON(new ObjectMapper().createObjectNode(),
                                     arrayElement, null, Collections.emptySet()));
-                        }
-
-                        if (!isSchemaInitialized) {
-                            // Initialize the CSV schema only in the first iteration.
-                            for (int i = 0; i < usersArrayNode.size(); i++) {
-                                usersArrayNode.get(i).fieldNames().forEachRemaining(
-                                        fieldName -> {
-                                            if (!csvSchemaBuilder.hasColumn(fieldName)) {
-                                                csvSchemaBuilder.addColumn(fieldName);
-                                            }
-                                        });
-                            }
-                            csvSchema = csvSchemaBuilder.build().withHeader();
-
-                            // Write the user data to csv file.
-                            csvMapper.writerFor(ArrayNode.class)
-                                    .with(csvSchema)
-                                    .writeValue(new FileWriter(file), usersArrayNode);
-
-                            // Remove the header from the CSV schema
-                            csvSchema = csvSchemaBuilder.build();
-
-                            isSchemaInitialized = true;
-                        } else {
-                            // Append the user data to csv file.
-                            csvMapper.writerFor(ArrayNode.class)
-                                    .with(csvSchema)
-                                    .writeValue(new FileWriter(file, true), usersArrayNode);
                         }
 
                         if (arrayNode.size() < batchCount) {
@@ -212,10 +182,25 @@ public class BulkExportUsers {
             }
         }
 
-        if (isSchemaInitialized) {
-            LOGGER.log(Level.INFO, "User information was successfully written to : " + csvDirectory + " file.");
-        } else {
+        // Create CSV schema and file after receiving all the user data
+        for (int i = 0; i < usersArrayNode.size(); i++) {
+            usersArrayNode.get(i).fieldNames().forEachRemaining(
+                    fieldName -> {
+                        if (!csvSchemaBuilder.hasColumn(fieldName)) {
+                            csvSchemaBuilder.addColumn(fieldName);
+                        }
+                    });
+        }
+        csvSchema = csvSchemaBuilder.build().withHeader();
+
+        csvMapper.writerFor(ArrayNode.class)
+                .with(csvSchema)
+                .writeValue(new FileWriter(file), usersArrayNode);
+
+        if (usersArrayNode.size() == 0) {
             LOGGER.log(Level.WARNING, "Empty results returned. CSV file is not created.");
+        } else {
+            LOGGER.log(Level.INFO, "User information was successfully written to : " + csvDirectory + " file.");
         }
     }
 }
