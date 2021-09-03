@@ -35,10 +35,8 @@ import org.wso2.carbon.identity.application.authentication.framework.FederatedAp
 import org.wso2.carbon.identity.application.authentication.framework.context.AuthenticationContext;
 import org.wso2.carbon.identity.application.authentication.framework.exception.AuthenticationFailedException;
 import org.wso2.carbon.identity.application.authentication.framework.model.AuthenticatedUser;
-import org.wso2.carbon.identity.application.common.model.ClaimMapping;
 import org.wso2.carbon.identity.application.common.model.Property;
-import org.wso2.carbon.identity.core.ServiceURLBuilder;
-import org.wso2.carbon.identity.core.URLBuilderException;
+import org.wso2.carbon.identity.core.util.IdentityUtil;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -264,13 +262,12 @@ public class CustomFederatedAuthenticator extends AbstractApplicationAuthenticat
                     .AUTHORIZATION_CODE).setClientId(clientId).setClientSecret(clientSecret).setRedirectURI
                     (callbackUrl).setCode(authzResponse.getCode()).buildBodyMessage();
             if (accessTokenRequest != null) {
-                String serverURL = ServiceURLBuilder.create().build().getAbsolutePublicURL();
+                String serviceUrl = IdentityUtil.getServicePath();
+                String serverURL = IdentityUtil.getServerURL(serviceUrl, true, true);
                 accessTokenRequest.addHeader(CustomFederatedAuthenticatorConstants.HTTP_ORIGIN_HEADER, serverURL);
             }
         } catch (OAuthSystemException e) {
             throw new AuthenticationFailedException("Error while building access token request", e);
-        } catch (URLBuilderException e) {
-            throw new RuntimeException("Error occurred while building URL in tenant qualified mode.", e);
         }
         return accessTokenRequest;
     }
