@@ -71,12 +71,9 @@ public abstract class AbstractSampleAuthenticator extends AbstractApplicationAut
         String successParam = request.getParameter("success");
         boolean isSuccess = Boolean.parseBoolean(successParam);
         if (isSuccess) {
-            String subject = lastUser.getAuthenticatedSubjectIdentifier();
-            AuthenticatedUser authenticatedUser =
-                    AuthenticatedUser.createLocalAuthenticatedUserFromSubjectIdentifier(subject);
-            authenticatedUser.setTenantDomain(lastUser.getTenantDomain());
+            AuthenticatedUser authenticatedUser = new AuthenticatedUser(lastUser);
             context.setSubject(authenticatedUser);
-            log.info(getFriendlyName() + " successful, User : " + subject);
+            log.info(getFriendlyName() + " successful, User : " + lastUser.getAuthenticatedSubjectIdentifier());
             status = AuthenticatorFlowStatus.SUCCESS_COMPLETED;
         }
         if (status == AuthenticatorFlowStatus.FAIL_COMPLETED) {
