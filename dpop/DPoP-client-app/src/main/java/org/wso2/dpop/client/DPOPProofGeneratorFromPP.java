@@ -56,7 +56,7 @@ public class DPOPProofGeneratorFromPP {
 
         /* Generate private key. */
         PKCS8EncodedKeySpec privateKs = new PKCS8EncodedKeySpec(bytes);
-        KeyFactory privateKf = KeyFactory.getInstance(args[3]);
+        KeyFactory privateKf = KeyFactory.getInstance(keyPairType);
         PrivateKey privateKey = privateKf.generatePrivate(privateKs);
 
         /* Read all the public key bytes */
@@ -65,7 +65,7 @@ public class DPOPProofGeneratorFromPP {
 
         /* Generate public key. */
         X509EncodedKeySpec ks = new X509EncodedKeySpec(pubBytes);
-        KeyFactory kf = KeyFactory.getInstance(args[3]);
+        KeyFactory kf = KeyFactory.getInstance(keyPairType);
         PublicKey publicCert = kf.generatePublic(ks);
 
         JWK jwk = null;
