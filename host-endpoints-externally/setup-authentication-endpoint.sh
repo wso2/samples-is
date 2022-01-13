@@ -23,12 +23,15 @@ if [ ! -d "${TOMCAT_PATH}" ]
  fi
 
 export IS_HOME=${WSO2_PATH}
+export IS_WEB_APP_HOME=${WSO2_PATH}/repository/deployment/server/webapps
 export WEB_APP_HOME=${TOMCAT_PATH}
-export WEB_APP_LIB=${WEB_APP_HOME}/authenticationendpoint/WEB-INF/lib/
+export WEB_APP_LIB=${WEB_APP_HOME}/authenticationendpoint/WEB-INF/lib
+export WEB_APP_CLASSES=${WEB_APP_HOME}/authenticationendpoint/WEB-INF/classes
 
 rm -rf ${WEB_APP_HOME}/authenticationendpoint
 
-cp -r $IS_HOME/repository/deployment/server/webapps/authenticationendpoint ${WEB_APP_HOME}
+cp -r ${IS_WEB_APP_HOME}/authenticationendpoint ${WEB_APP_HOME}
+cp -r ${IS_WEB_APP_HOME}/accountrecoveryendpoint/WEB-INF/classes/RecoveryEndpointConfig.properties ${WEB_APP_CLASSES}
 
 cp $IS_HOME/repository/components/plugins/abdera_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/ant_*.jar $WEB_APP_LIB
@@ -108,7 +111,10 @@ cp $IS_HOME/lib/stax2-api-*.jar $WEB_APP_LIB
 cp $IS_HOME/lib/woodstox-core-asl-*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/tools/forget-me/lib/log4j-*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/tools/forget-me/lib/pax-logging-api-*.jar $WEB_APP_LIB
-
+cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.captcha_*.jar $WEB_APP_LIB
+cp $IS_HOME/repository/components/plugins/commons-text_*.jar $WEB_APP_LIB
+cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.governance_*.jar $WEB_APP_LIB
+cp $IS_HOME/repository/components/plugins/commons-lang3_*.jar $WEB_APP_LIB
 
 
 echo
@@ -123,7 +129,11 @@ echo "     <param-value>https://localhost:9443/accountrecoveryendpoint</param-va
 echo "   </context-param>"
 echo "   <context-param>"
 echo "      <param-name>AccountRecoveryRESTEndpointURL</param-name>"
-echo "    <param-value>https://localhost:9443/t/tenant-domain/api/identity/user/v0.9/</param-value>"
+echo "    <param-value>https://localhost:9443/t/tenant-domain/api/identity/user/v1.0/</param-value>"
+echo "   </context-param>"
+echo "   <context-param>"
+echo "      <param-name>EnableRecoveryEndpoint</param-name>"
+echo "    <param-value>true</param-value>"
 echo "   </context-param>"
 echo "..."
 echo "   <context-param>"
@@ -131,7 +141,20 @@ echo "      <param-name>IdentityServerEndpointContextURL</param-name>"
 echo "      <param-value>https://localhost:9443</param-value>"
 echo "   </context-param>"
 echo "..."
-
+echo "===================================================================================="
+echo
+echo "Navigate to ${WEB_APP_HOME}/authenticationendpoint/WEB-INF/classes/RecoveryEndpointConfig.properties file and"
+echo "uncomment the following line."
+echo "   identity.server.service.contextURL=https://localhost:9443"
+echo
+echo "===================================================================================="
+echo
+echo "Navigate to ${WEB_APP_HOME}/authenticationendpoint/WEB-INF/classes/EndpointConfig.properties file and"
+echo "change the following line,"
+echo "   identity.server.origin=\${carbon.protocol}://\${carbon.host}:\${carbon.management.port}"
+echo "as follows and update the Keystore file paths on the same file accordingly."
+echo "   identity.server.origin=https://localhost:9443"
+echo
 echo "===================================================================================="
 echo
 echo "Follow the instruction in the original guide to proceed."
