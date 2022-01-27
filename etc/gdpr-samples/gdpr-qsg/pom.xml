@@ -5,11 +5,11 @@
     <parent>
         <groupId>org.wso2.samples.is</groupId>
         <artifactId>gdpr-samples</artifactId>
-        <version>4.3.8</version>
+        <version>4.3.9-SNAPSHOT</version>
     </parent>
 
     <artifactId>gdpr-qsg</artifactId>
-    <version>4.3.8</version>
+    <version>4.3.9-SNAPSHOT</version>
 
     <dependencies>
         <dependency>
