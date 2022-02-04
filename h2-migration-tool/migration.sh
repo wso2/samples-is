@@ -22,7 +22,7 @@ for filepath in $src_dir/*.mv.db; do
 
     # Import data from the backup.zip to the new db file
     echo "Importing data..."
-    java -cp h2-2.1.210.jar org.h2.tools.RunScript -url jdbc:h2:$dest_dir/$dbname -user wso2carbon -password wso2carbon -script ./backup.zip -options compression zip
+    java -cp h2-2.1.210.jar org.h2.tools.RunScript -url jdbc:h2:$dest_dir/$dbname -user wso2carbon -password wso2carbon -script ./backup.zip -options compression zip FROM_1X
     rm -f backup.zip
 
     echo "$dbname migrated successfully"
