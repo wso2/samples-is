@@ -435,7 +435,7 @@
             <dependency>
                 <groupId>com.fasterxml.jackson.dataformat</groupId>
                 <artifactId>jackson-dataformat-csv</artifactId>
-                <version>${com.fasterxml.jackson.version}</version>
+                <version>${com.fasterxml.jackson.dataformat.csv.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
@@ -640,11 +640,6 @@
                 <artifactId>jsp-api</artifactId>
                 <version>${jsp.api.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>org.apache.felix.scr.ds-annotations</artifactId>
-                <version>${ds-annotations.version}</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -824,7 +819,8 @@
         <!--=============================================================================-->
 
         <!--repo versions of bulk-user-export-tool-->
-        <com.fasterxml.jackson.version>2.10.4</com.fasterxml.jackson.version>
+        <com.fasterxml.jackson.version>2.13.2</com.fasterxml.jackson.version>
+        <com.fasterxml.jackson.dataformat.csv.version>2.13.2</com.fasterxml.jackson.dataformat.csv.version>
         <com.json.flattener.version>0.2.2</com.json.flattener.version>
 
         <!--=============================================================================-->
@@ -854,7 +850,6 @@
         <liberty.maven.plugin.version>2.2</liberty.maven.plugin.version>
         <maven.checkstyle.plugin.version>3.1.1</maven.checkstyle.plugin.version>
         <jsp.api.version>2.0</jsp.api.version>
-        <ds-annotations.version>1.2.10</ds-annotations.version>
         <maven.javadoc.version>2.10.1</maven.javadoc.version>
 
         <osgi.framework.imp.pkg.version.range>[1.7.0, 2.0.0)</osgi.framework.imp.pkg.version.range>
