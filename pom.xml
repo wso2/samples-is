@@ -757,7 +757,7 @@
 
         <!--repo versions of saml2-sso-sample-->
         <opensaml3.version>3.3.1</opensaml3.version>
-        <xmlsec.version>1.4.4</xmlsec.version>
+        <xmlsec.version>2.1.7</xmlsec.version>
         <identity.agent.sso.version.range>[5.0.0, 6.0.0)</identity.agent.sso.version.range>
         <joda.wso2.version>2.9.4.wso2v1</joda.wso2.version>
         <axiom.impl.version>1.2.12</axiom.impl.version>
