@@ -25,7 +25,7 @@
 <%@page import="java.util.Properties"%>
 <%@page import="org.wso2.sample.identity.oauth2.SampleContextEventListener"%>
 <%@page import="org.wso2.sample.identity.oauth2.CommonUtils"%>
-<%@page import="com.nimbusds.jwt.ReadOnlyJWTClaimsSet"%>
+<%@page import="com.nimbusds.jwt.JWTClaimsSet"%>
 <%@page import="java.util.logging.Logger"%>
 <%@page import="org.wso2.samples.claims.manager.ClaimManagerProxy"%>
 <%@ page import="org.wso2.sample.identity.oauth2.logout.SessionIdStore" %>
@@ -56,7 +56,7 @@
     if (idToken != null) {
         try {
             name = SignedJWT.parse(idToken).getJWTClaimsSet().getSubject();
-            ReadOnlyJWTClaimsSet claimsSet = SignedJWT.parse(idToken).getJWTClaimsSet();
+            JWTClaimsSet claimsSet = SignedJWT.parse(idToken).getJWTClaimsSet();
 
             // If back-channel logout is enabled, then store the sid claim against the application's session.
             boolean enableOIDCBackchannelLogout = false;
@@ -73,7 +73,7 @@
             
             ClaimManagerProxy claimManagerProxy = (ClaimManagerProxy) application.getAttribute("claimManagerProxyInstance");
 
-            customClaimValueMap = claimsSet.getCustomClaims();
+            customClaimValueMap = claimsSet.getClaims();
             
             oidcClaimDisplayValueMap =
                     claimManagerProxy.getOidcClaimDisplayNameMapping(new ArrayList<>(customClaimValueMap.keySet()));

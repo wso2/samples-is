@@ -26,7 +26,7 @@
 <%@ page import="com.nimbusds.jwt.SignedJWT" %>
 <%@ page import="java.util.Properties" %>
 <%@ page import="org.wso2.sample.identity.oauth2.SampleContextEventListener" %>
-<%@ page import="com.nimbusds.jwt.ReadOnlyJWTClaimsSet" %>
+<%@ page import="com.nimbusds.jwt.JWTClaimsSet" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.HashMap" %>
 <%
@@ -37,7 +37,7 @@
     String name = null;
     Properties properties;
     properties = SampleContextEventListener.getProperties();
-    ReadOnlyJWTClaimsSet claimsSet = null;
+    JWTClaimsSet claimsSet = null;
 
     try {
         sessionState = request.getParameter(OAuth2Constants.SESSION_STATE);
@@ -295,7 +295,7 @@
                                 <%
                                     if (claimsSet != null) {
                                         Map<String, Object> hashmap = new HashMap<>();
-                                        hashmap = claimsSet.getCustomClaims();
+                                        hashmap = claimsSet.getClaims();
                                         if (!hashmap.isEmpty()) {
                                 %>
                                 <table class="table">

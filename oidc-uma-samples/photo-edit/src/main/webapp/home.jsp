@@ -23,7 +23,7 @@
 <%@page import="org.json.JSONObject"%>
 <%@page import="java.util.Properties"%>
 <%@page import="org.wso2.photo.edit.SampleContextEventListener"%>
-<%@page import="com.nimbusds.jwt.ReadOnlyJWTClaimsSet"%>
+<%@page import="com.nimbusds.jwt.JWTClaimsSet"%>
 <%@page import="java.util.logging.Logger"%>
 
 <%
@@ -46,7 +46,7 @@
     
     final String idToken = (String) currentSession.getAttribute("idToken");
     
-    ReadOnlyJWTClaimsSet claimsSet = null;
+    JWTClaimsSet claimsSet = null;
     String name = "";
     
     if (idToken != null) {
