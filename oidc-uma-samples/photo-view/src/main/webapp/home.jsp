@@ -18,7 +18,7 @@
 
 <%@page import="java.util.logging.Level"%>
 <%@page import="com.nimbusds.jwt.SignedJWT"%>
-<%@page import="com.nimbusds.jwt.ReadOnlyJWTClaimsSet"%>
+<%@page import="com.nimbusds.jwt.JWTClaimsSet"%>
 <%@page import="org.json.JSONObject"%>
 <%@page import="org.wso2.photo.view.OAuth2Constants"%>
 <%@page import="java.util.Properties"%>
@@ -47,7 +47,7 @@
     
     final String idToken = (String) currentSession.getAttribute("idToken");
     
-    ReadOnlyJWTClaimsSet claimsSet = null;
+    JWTClaimsSet claimsSet = null;
     String name = "";
     
     if (idToken != null) {
