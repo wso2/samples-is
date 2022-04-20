@@ -31,6 +31,3 @@ INSTRUCTIONS
       Eg. < path>/new-databases
    
 5. Copy the database files from the created location and replace the files inside the <IS-HOME>/repository/database directory.
-
-
-
