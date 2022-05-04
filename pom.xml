@@ -828,7 +828,7 @@
         <!--=============================================================================-->
 
         <!--repo versions of bulk-user-export-tool-->
-        <com.fasterxml.jackson.version>2.13.2</com.fasterxml.jackson.version>
+        <com.fasterxml.jackson.version>2.13.2.1</com.fasterxml.jackson.version>
         <com.fasterxml.jackson.dataformat.csv.version>2.13.2</com.fasterxml.jackson.dataformat.csv.version>
         <com.json.flattener.version>0.2.2</com.json.flattener.version>
 
