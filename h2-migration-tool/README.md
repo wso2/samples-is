@@ -17,7 +17,7 @@ INSTRUCTIONS
 -----------------------
 1. Download the `migration.sh` script.
 
-2. Run the migration script using `sh migration.sh`.
+2. Run the migration script using `bash migration.sh`.
 
 3. Provide the paths to the older db files and to the directory to store the newly created db files.
 
