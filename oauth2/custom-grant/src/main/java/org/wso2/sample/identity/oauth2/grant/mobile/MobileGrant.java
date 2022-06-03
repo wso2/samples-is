@@ -26,6 +26,7 @@ import org.wso2.carbon.identity.oauth2.ResponseHeader;
 import org.wso2.carbon.identity.oauth2.model.RequestParameter;
 import org.wso2.carbon.identity.oauth2.token.OAuthTokenReqMessageContext;
 import org.wso2.carbon.identity.oauth2.token.handlers.grant.AbstractAuthorizationGrantHandler;
+import org.wso2.carbon.utils.multitenancy.MultitenantUtils;
 
 /**
  * New grant type for Identity Server
@@ -64,8 +65,11 @@ public class MobileGrant extends AbstractAuthorizationGrantHandler  {
 
             if(authStatus) {
                 // if valid set authorized mobile number as grant user
+                String tenantDomain = MultitenantUtils.getTenantDomain(mobileNumber);
+                String tenantAwareUsername = MultitenantUtils.getTenantAwareUsername(mobileNumber);
                 AuthenticatedUser mobileUser = new AuthenticatedUser();
-                mobileUser.setUserName(mobileNumber);
+                mobileUser.setUserName(tenantAwareUsername);
+                mobileUser.setTenantDomain(tenantDomain);
                 mobileUser.setAuthenticatedSubjectIdentifier(mobileNumber);
                 mobileUser.setFederatedUser(true);
                 oAuthTokenReqMessageContext.setAuthorizedUser(mobileUser);
