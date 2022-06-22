@@ -23,9 +23,12 @@ import org.apache.commons.logging.LogFactory;
 import org.wso2.carbon.identity.application.authentication.framework.model.AuthenticatedUser;
 import org.wso2.carbon.identity.oauth2.IdentityOAuth2Exception;
 import org.wso2.carbon.identity.oauth2.ResponseHeader;
+import org.wso2.carbon.identity.oauth2.dto.OAuth2AccessTokenRespDTO;
 import org.wso2.carbon.identity.oauth2.model.RequestParameter;
 import org.wso2.carbon.identity.oauth2.token.OAuthTokenReqMessageContext;
 import org.wso2.carbon.identity.oauth2.token.handlers.grant.AbstractAuthorizationGrantHandler;
+
+import java.util.UUID;
 
 /**
  * New grant type for Identity Server
@@ -82,6 +85,16 @@ public class MobileGrant extends AbstractAuthorizationGrantHandler  {
         return authStatus;
     }
 
+    @Override
+    public OAuth2AccessTokenRespDTO issue(OAuthTokenReqMessageContext tokReqMsgCtx) throws IdentityOAuth2Exception {
+
+        OAuth2AccessTokenRespDTO tokenRespDTO = new OAuth2AccessTokenRespDTO();
+        tokenRespDTO.setExpiresIn(tokReqMsgCtx.getAccessTokenIssuedTime() + 10000);
+        tokenRespDTO.setAccessToken(UUID.randomUUID().toString());
+        tokenRespDTO.setRefreshToken(UUID.randomUUID().toString());
+        tokenRespDTO.setTokenType("mobile");
+        return tokenRespDTO;
+    }
 
     public boolean authorizeAccessDelegation(OAuthTokenReqMessageContext tokReqMsgCtx)
             throws IdentityOAuth2Exception {
