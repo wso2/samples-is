@@ -65,6 +65,7 @@
         <module>identity-mgt</module>
         <module>authenticators</module>
         <module>passive-sts</module>
+        <module>dpop/DPoP-client-app</module>
     </modules>
 
     <licenses>
