@@ -2,12 +2,12 @@ package org.wso2.carbon.identity.customhandler.internal;
 
 import org.wso2.carbon.user.core.service.RealmService;
 
-public class CustomUserSelfRegistrationHandlerDataHolder {
+public class UserRegistrationCustomEventHandlerDataHolder {
 
-    private static CustomUserSelfRegistrationHandlerDataHolder instance = new CustomUserSelfRegistrationHandlerDataHolder();
+    private static UserRegistrationCustomEventHandlerDataHolder instance = new UserRegistrationCustomEventHandlerDataHolder();
     private RealmService realmService;
 
-    public static CustomUserSelfRegistrationHandlerDataHolder getInstance() {
+    public static UserRegistrationCustomEventHandlerDataHolder getInstance() {
         return instance;
     }
 
