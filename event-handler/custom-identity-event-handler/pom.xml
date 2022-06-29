@@ -19,6 +19,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <parent>
+        <groupId>org.wso2.samples.is</groupId>
+        <artifactId>samples-is</artifactId>
+        <version>4.4.2-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
+
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.wso2.carbon.identity</groupId>
@@ -27,11 +35,6 @@
     <version>1.0.0</version>
 
     <dependencies>
-        <dependency>
-            <groupId>org.wso2.carbon.identity.governance</groupId>
-            <artifactId>org.wso2.carbon.identity.recovery</artifactId>
-            <version>1.4.1</version>
-        </dependency>
         <dependency>
             <groupId>org.wso2.carbon.identity.framework</groupId>
             <artifactId>org.wso2.carbon.identity.event</artifactId>
@@ -90,15 +93,5 @@
             </plugin>
         </plugins>
     </build>
-    <properties>
-        <osgi.framework.imp.pkg.version.range>[1.7.0, 2.0.0)</osgi.framework.imp.pkg.version.range>
-        <osgi.service.component.imp.pkg.version.range>[1.2.0, 2.0.0)</osgi.service.component.imp.pkg.version.range>
-        <carbon.identity.framework.imp.pkg.version.range>[5.7.0, 6.0.0)
-        </carbon.identity.framework.imp.pkg.version.range>
-        <carbon.identity.framework.version>5.17.5</carbon.identity.framework.version>
-        <maven.compiler.plugin.version>2.3.1</maven.compiler.plugin.version>
-        <maven.scr.plugin.version>1.7.2</maven.scr.plugin.version>
-        <maven.bundle.plugin.version>2.4.0</maven.bundle.plugin.version>
-    </properties>
 
 </project>
