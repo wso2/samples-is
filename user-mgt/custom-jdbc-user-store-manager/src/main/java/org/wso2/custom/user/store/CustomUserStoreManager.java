@@ -22,9 +22,14 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 import org.wso2.carbon.user.api.RealmConfiguration;
+import org.wso2.carbon.user.core.UserCoreConstants;
 import org.wso2.carbon.user.core.UserRealm;
 import org.wso2.carbon.user.core.UserStoreException;
 import org.wso2.carbon.user.core.claim.ClaimManager;
+import org.wso2.carbon.user.core.common.AuthenticationResult;
+import org.wso2.carbon.user.core.common.FailureReason;
+import org.wso2.carbon.user.core.common.User;
+import org.wso2.carbon.user.core.jdbc.JDBCRealmConstants;
 import org.wso2.carbon.user.core.jdbc.UniqueIDJDBCUserStoreManager;
 import org.wso2.carbon.user.core.profile.ProfileConfigurationManager;
 import org.wso2.carbon.utils.Secret;
@@ -60,61 +65,93 @@ public class CustomUserStoreManager extends UniqueIDJDBCUserStoreManager {
         log.info("CustomUserStoreManager initialized...");
     }
 
+
     @Override
-    public boolean doAuthenticate(String userName, Object credential) throws UserStoreException {
+    public AuthenticationResult doAuthenticateWithUserName(String userName, Object credential)
+            throws UserStoreException {
+
         boolean isAuthenticated = false;
-        if (userName != null && credential != null) {
-            try {
-                String candidatePassword = String.copyValueOf(((Secret) credential).getChars());
-
-                Connection dbConnection = null;
-                ResultSet rs = null;
-                PreparedStatement prepStmt = null;
-                String sql = null;
-                dbConnection = this.getDBConnection();
-                dbConnection.setAutoCommit(false);
-                // get the SQL statement used to select user details
-                sql = this.realmConfig.getUserStoreProperty("SelectUserSQL");
-                if (log.isDebugEnabled()) {
-                    log.debug(sql);
-                }
-
-                prepStmt = dbConnection.prepareStatement(sql);
-                prepStmt.setString(1, userName);
-                // check whether tenant id is used
-                if (sql.contains("UM_TENANT_ID")) {
-                    prepStmt.setInt(2, this.tenantId);
-                }
-
-                rs = prepStmt.executeQuery();
-                if (rs.next()) {
-                    String storedPassword = rs.getString(3);
-
-                    // check whether password is expired or not
-                    boolean requireChange = rs.getBoolean(5);
-                    Timestamp changedTime = rs.getTimestamp(6);
-                    GregorianCalendar gc = new GregorianCalendar();
-                    gc.add(GregorianCalendar.HOUR, -24);
-                    Date date = gc.getTime();
-                    if (!(requireChange && changedTime.before(date))) {
-                        // compare the given password with stored password using jasypt
-                        isAuthenticated = passwordEncryptor.checkPassword(candidatePassword, storedPassword);
-                    }
-                }
-                dbConnection.commit();
-                log.info(userName + " is authenticated? " + isAuthenticated);
-            } catch (SQLException exp) {
-                try {
-                    this.getDBConnection().rollback();
-                } catch (SQLException e1) {
-                    throw new UserStoreException("Transaction rollback connection error occurred while" +
-                            " retrieving user authentication info. Authentication Failure.", e1);
-                }
-                log.error("Error occurred while retrieving user authentication info.", exp);
-                throw new UserStoreException("Authentication Failure");
+        String userID = null;
+        User user;
+        // In order to avoid unnecessary db queries.
+        if (!isValidUserName(userName)) {
+            String reason = "Username validation failed.";
+            if (log.isDebugEnabled()) {
+                log.debug(reason);
             }
+            return getAuthenticationResult(reason);
         }
-        return isAuthenticated;
+
+        if (!isValidCredentials(credential)) {
+            String reason = "Password validation failed.";
+            if (log.isDebugEnabled()) {
+                log.debug(reason);
+            }
+            return getAuthenticationResult(reason);
+        }
+
+        try {
+            String candidatePassword = String.copyValueOf(((Secret) credential).getChars());
+
+            Connection dbConnection = null;
+            ResultSet rs = null;
+            PreparedStatement prepStmt = null;
+            String sql = null;
+            dbConnection = this.getDBConnection();
+            dbConnection.setAutoCommit(false);
+            // get the SQL statement used to select user details
+            sql = this.realmConfig.getUserStoreProperty(JDBCRealmConstants.SELECT_USER_NAME);
+            if (log.isDebugEnabled()) {
+                log.debug(sql);
+            }
+
+            prepStmt = dbConnection.prepareStatement(sql);
+            prepStmt.setString(1, userName);
+            // check whether tenant id is used
+            if (sql.contains(UserCoreConstants.UM_TENANT_COLUMN)) {
+                prepStmt.setInt(2, this.tenantId);
+            }
+
+            rs = prepStmt.executeQuery();
+            if (rs.next()) {
+                userID = rs.getString(1);
+                String storedPassword = rs.getString(3);
+
+                // check whether password is expired or not
+                boolean requireChange = rs.getBoolean(5);
+                Timestamp changedTime = rs.getTimestamp(6);
+                GregorianCalendar gc = new GregorianCalendar();
+                gc.add(GregorianCalendar.HOUR, -24);
+                Date date = gc.getTime();
+                if (!(requireChange && changedTime.before(date))) {
+                    // compare the given password with stored password using jasypt
+                    isAuthenticated = passwordEncryptor.checkPassword(candidatePassword, storedPassword);
+                }
+            }
+            dbConnection.commit();
+            log.info(userName + " is authenticated? " + isAuthenticated);
+        } catch (SQLException exp) {
+            try {
+                this.getDBConnection().rollback();
+            } catch (SQLException e1) {
+                throw new UserStoreException("Transaction rollback connection error occurred while" +
+                        " retrieving user authentication info. Authentication Failure.", e1);
+            }
+            log.error("Error occurred while retrieving user authentication info.", exp);
+            throw new UserStoreException("Authentication Failure");
+        }
+        if (isAuthenticated) {
+            user = getUser(userID, userName);
+            AuthenticationResult authenticationResult = new AuthenticationResult(
+                    AuthenticationResult.AuthenticationStatus.SUCCESS);
+            authenticationResult.setAuthenticatedUser(user);
+            return authenticationResult;
+        } else {
+            AuthenticationResult authenticationResult = new AuthenticationResult(
+                    AuthenticationResult.AuthenticationStatus.FAIL);
+            authenticationResult.setFailureReason(new FailureReason("Invalid credentials."));
+            return authenticationResult;
+        }
     }
 
     @Override
@@ -128,5 +165,13 @@ public class CustomUserStoreManager extends UniqueIDJDBCUserStoreManager {
             log.error("Password cannot be null");
             throw new UserStoreException("Authentication Failure");
         }
+    }
+
+    private AuthenticationResult getAuthenticationResult(String reason) {
+
+        AuthenticationResult authenticationResult = new AuthenticationResult(
+                AuthenticationResult.AuthenticationStatus.FAIL);
+        authenticationResult.setFailureReason(new FailureReason(reason));
+        return authenticationResult;
     }
 }
