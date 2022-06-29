@@ -65,6 +65,7 @@
         <module>identity-mgt</module>
         <module>authenticators</module>
         <module>passive-sts</module>
+        <module>event-handler/custom-identity-event-handler</module>
     </modules>
 
     <licenses>
