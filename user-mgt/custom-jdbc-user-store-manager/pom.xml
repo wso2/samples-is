@@ -93,7 +93,7 @@
         <dependency>
             <groupId>org.jasypt</groupId>
             <artifactId>jasypt</artifactId>
-            <version>1.9.2</version>
+            <version>${org.jasypt.version}</version>
         </dependency>
         <dependency>
             <groupId>commons-logging</groupId>
@@ -170,5 +170,6 @@
         <commons-logging.osgi.version.range>[1.2,2.0)</commons-logging.osgi.version.range>
         <apache.felix.scr.ds.annotations.version>1.2.4</apache.felix.scr.ds.annotations.version>
         <equinox.osgi.services.version>3.5.100.v20160504-1419</equinox.osgi.services.version>
+        <org.jasypt.version>1.9.2</org.jasypt.version>
     </properties>
 </project>
