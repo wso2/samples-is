@@ -73,5 +73,4 @@ public class CustomScopeValidatorServiceComponent {
 
         CustomScopeValidatorDataHolder.getInstance().setRealmService(null);
     }
-
 }

@@ -74,8 +74,8 @@ public class CustomScopeValidator implements ScopeValidator {
 
     @Override
     public String getName() {
+
         return "CustomScopeValidator";
     }
-
 
 }
