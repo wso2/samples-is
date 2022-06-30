@@ -2,7 +2,7 @@
 
 *Steps to deploy*
 - Build the sample using maven `mvn clean install`
-- Copy the `org.wso2.custom.auth.functions-1.0.0` binary file from `target` directory into into 
+- Copy the `org.wso2.custom.auth.functions-1.0.0` binary file from `target` directory into 
   `<IS_HOME>/repository/components/dropins` directory
 - Restart WSO2 IS
 
