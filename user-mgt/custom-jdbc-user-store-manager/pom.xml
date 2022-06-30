@@ -29,9 +29,10 @@
     <version>1.0.0</version>
 
     <parent>
-        <groupId>org.wso2</groupId>
-        <artifactId>wso2</artifactId>
-        <version>5</version>
+        <groupId>org.wso2.samples.is</groupId>
+        <artifactId>wso2is-identity-samples-usermgt</artifactId>
+        <version>4.4.2-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <repositories>
@@ -90,6 +91,11 @@
             <version>${carbon.kernel.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.jasypt</groupId>
+            <artifactId>jasypt</artifactId>
+            <version>${org.jasypt.version}</version>
+        </dependency>
+        <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
             <version>${commons-logging.version}</version>
@@ -117,10 +123,11 @@
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Name>${project.artifactId}</Bundle-Name>
                         <Private-Package>
-                            org.wso2.custom.user.store.internal.*
+                            org.wso2.custom.user.store.internal.*,
+                            org.jasypt.*
                         </Private-Package>
                         <Export-Package>
-                            !org.wso2.custom.user.store.internal.*,
+                            !org.wso2.custom.user.store.internal,
                             org.wso2.custom.user.store.*; version="${wso2.custom.components.exp.pkg.version}"
                         </Export-Package>
                         <Import-Package>
@@ -133,6 +140,8 @@
 
                             org.wso2.carbon.user.core.*; version="${carbon.kernel.package.import.version.range}",
                             org.wso2.carbon.user.api.*; version="${carbon.user.api.imp.pkg.version.range}",
+                            org.wso2.carbon.utils.*; version="${carbon.kernel.package.import.version.range}",
+                            *;resolution:=optional
                         </Import-Package>
                     </instructions>
                 </configuration>
@@ -146,7 +155,7 @@
         <wso2.custom.componets.imp.pkg.version.range>[1.0.0, 2.0.0)</wso2.custom.componets.imp.pkg.version.range>
 
         <!--Carbon Kernel Version-->
-        <carbon.kernel.version>4.6.0</carbon.kernel.version>
+        <carbon.kernel.version>4.6.2</carbon.kernel.version>
         <carbon.kernel.package.import.version.range>[4.6.0, 5.0.0)</carbon.kernel.package.import.version.range>
         <carbon.user.api.imp.pkg.version.range>[1.0.1, 2.0.0)</carbon.user.api.imp.pkg.version.range>
 
@@ -161,5 +170,6 @@
         <commons-logging.osgi.version.range>[1.2,2.0)</commons-logging.osgi.version.range>
         <apache.felix.scr.ds.annotations.version>1.2.4</apache.felix.scr.ds.annotations.version>
         <equinox.osgi.services.version>3.5.100.v20160504-1419</equinox.osgi.services.version>
+        <org.jasypt.version>1.9.2</org.jasypt.version>
     </properties>
 </project>
