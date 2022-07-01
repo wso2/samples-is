@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.xacmlinfo</groupId>
+    <artifactId>org.xacmlinfo.xacml.sample.webfilter</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+    <name>WSO2 Entitlement Sample Online Trading</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.xacmlinfo</groupId>
+            <artifactId>org.xacmlinfo.xacml.pep.agent</artifactId>
+            <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${user.dir}/lib/org.xacmlinfo.xacml.pep.agent-1.0.0.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.ws.commons.axiom.wso2</groupId>
+            <artifactId>axiom</artifactId>
+            <version>1.2.11.wso2v1</version>
+            <scope>system</scope>
+            <systemPath>${user.dir}/lib/axiom-1.2.11.wso2v1.jar</systemPath>
+        </dependency>
+    </dependencies>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+       </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>wso2-maven2-repository</id>
+            <url>http://dist.wso2.org/maven2</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>tlc</id>
+            <name>TLC Repository</name>
+
+            <url>http://commons.ucalgary.ca/pub/m2</url>
+        </pluginRepository>
+
+        <pluginRepository>
+            <id>wso2-maven2-repository</id>
+            <url>http://dist.wso2.org/maven2</url>
+        </pluginRepository>
+    </pluginRepositories>
+</project>

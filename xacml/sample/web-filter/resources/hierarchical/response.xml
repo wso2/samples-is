@@ -1,0 +1,57 @@
+<Response>
+<Result>
+<Decision>Permit</Decision>
+<Status>
+<StatusCode Value="urn:oasis:names:tc:xacml:1.0:status:ok"/>
+</Status>
+<Attributes Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action">
+<Attribute AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" IncludeInResult="true">
+<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">view-welcome</AttributeValue>
+</Attribute>
+</Attributes>
+</Result>
+<Result>
+<Decision>Deny</Decision>
+<Status>
+<StatusCode Value="urn:oasis:names:tc:xacml:1.0:status:ok"/>
+</Status>
+<Attributes Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action">
+<Attribute AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" IncludeInResult="true">
+<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">modify-summary</AttributeValue>
+</Attribute>
+</Attributes>
+</Result>
+<Result>
+<Decision>Permit</Decision>
+<Status>
+<StatusCode Value="urn:oasis:names:tc:xacml:1.0:status:ok"/>
+</Status>
+<Attributes Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action">
+<Attribute AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" IncludeInResult="true">
+<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">view-summary</AttributeValue>
+</Attribute>
+</Attributes>
+</Result>
+<Result>
+<Decision>Permit</Decision>
+<Status>
+<StatusCode Value="urn:oasis:names:tc:xacml:1.0:status:ok"/>
+</Status>
+<Attributes Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action">
+<Attribute AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" IncludeInResult="true">
+<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">view-status</AttributeValue>
+</Attribute>
+</Attributes>
+</Result>
+<Result>
+<Decision>Deny</Decision>
+<Status>
+<StatusCode Value="urn:oasis:names:tc:xacml:1.0:status:ok"/>
+</Status>
+<Attributes Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action">
+<Attribute AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" IncludeInResult="true">
+<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">modify-welcome</AttributeValue>
+</Attribute>
+</Attributes>
+</Result>
+</Response> 
