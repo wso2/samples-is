@@ -68,6 +68,7 @@
         <module>event-handler/custom-identity-event-handler</module>
         <module>user-mgt/custom-jdbc-user-store-manager</module>
         <module>adaptive-authentication/org.wso2.custom.auth.functions</module>
+        <module>scope-validator/sample.scope.validator</module>
     </modules>
 
     <licenses>
