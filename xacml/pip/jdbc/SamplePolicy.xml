@@ -1,0 +1,41 @@
+<Policy PolicyId="SimplePolicyForDemo1" RuleCombiningAlgId="urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:first-applicable" xmlns="urn:oasis:names:tc:xacml:2.0:policy:schema:os">
+  <Target>
+    <Resources>
+      <Resource>
+        <ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+          <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">foo/bar</AttributeValue>
+          <ResourceAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+        </ResourceMatch>
+      </Resource>
+    </Resources>
+  </Target>
+  <Rule Effect="Permit" RuleId="Rule1">
+    <Target>
+      <Actions>
+        <Action>
+          <ActionMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+            <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">GET</AttributeValue>
+            <ActionAttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" DataType="http://www.w3.org/2001/XMLSchema#string"/>
+          </ActionMatch>
+        </Action>
+      </Actions>
+    </Target>
+    <Condition>
+      <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:and">
+        <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:integer-greater-than-or-equal">
+          <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:integer-one-and-only">
+            <SubjectAttributeDesignator AttributeId="AgeOfUser" DataType="http://www.w3.org/2001/XMLSchema#integer"/>
+          </Apply>
+          <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#integer">18</AttributeValue>
+        </Apply>
+        <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:integer-less-than-or-equal">
+          <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:integer-one-and-only">
+            <SubjectAttributeDesignator AttributeId="AgeOfUser" DataType="http://www.w3.org/2001/XMLSchema#integer"/>
+          </Apply>
+          <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#integer">30</AttributeValue>
+        </Apply>
+      </Apply>
+    </Condition>
+  </Rule>
+  <Rule Effect="Deny" RuleId="Rule2"/>
+</Policy>
