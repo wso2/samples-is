@@ -16,14 +16,14 @@
   ~ under the License.
   --%>
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Avis Login Form</title>
     <link rel="stylesheet" href="css/avis.css">
 </head>
 
-<body translate="no" >
+<body translate="no">
 <div class="wrapper">
     <div class="container">
         <h1>Welcome</h1>
@@ -39,7 +39,6 @@
             <button type="submit" id="login-button">Login</button>
         </form>
     </div>
-
     <ul class="bg-bubbles">
         <li></li>
         <li></li>
@@ -53,9 +52,5 @@
         <li></li>
     </ul>
 </div>
-
-
 </body>
-
 </html>
-

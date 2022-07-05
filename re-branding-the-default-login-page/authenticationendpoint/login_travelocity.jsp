@@ -30,7 +30,7 @@
 <body translate="no">
 <div class='login'>
     <div class='login_title'>
-        <span>Login to your account</span>
+        <span>Log in to your account</span>
     </div>
     <div class='login_fields'>
         <form action="../../commonauth" method="POST">
@@ -73,4 +73,3 @@
 </div>
 </body>
 </html>
-

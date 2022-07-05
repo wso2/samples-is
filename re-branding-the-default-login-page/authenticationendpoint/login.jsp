@@ -15,6 +15,7 @@
   ~ specific language governing permissions and limitations
   ~ under the License.
   --%>
+
 <%
     String relyingParty = request.getParameter("relyingParty");
     if (relyingParty.equals("travelocity.com")) {
