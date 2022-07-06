@@ -110,6 +110,7 @@ SAMPLES_HOME
 │       ├── PassiveSTSFilter
 │       └── PassiveSTSSampleApp
 ├── quick-start-guide
+├── re-branding-the-default-login-page
 ├── rest-api-samples
 ├── saml-query-profile-client
 ├── saml-query-profile-target
