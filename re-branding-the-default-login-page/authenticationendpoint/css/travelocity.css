@@ -119,7 +119,7 @@ body .login {
     margin: auto;
     top: 0;
     bottom: 0;
-    padding: 100px 40px 40px 40px;
+    padding: 50px 40px 40px 40px;
     background: #35394a;
     /* Old browsers */
     /* FF3.6+ */
@@ -145,7 +145,7 @@ body .login .disclaimer {
     position: absolute;
     bottom: 20px;
     left: 35px;
-    width: 250px;
+    width: 90%;
 }
 
 body .login_title {
@@ -195,7 +195,7 @@ body .login_fields__user, body .login_fields__password {
 
 body .login_fields__submit {
     position: relative;
-    top: 35px;
+    top: 20px;
     left: 0;
     width: 80%;
     right: 0;
@@ -223,6 +223,7 @@ body .login_fields__submit input {
     font-size: 11px;
     transition-property: background, color;
     transition-duration: 0.2s;
+    margin-top: 5px;
 }
 
 body .login_fields__submit input:focus {
@@ -284,4 +285,5 @@ a {
     padding-left: 28px;
     padding-top: 20px;
     color: #afb1be;
+    font-size: 12px;
 }
