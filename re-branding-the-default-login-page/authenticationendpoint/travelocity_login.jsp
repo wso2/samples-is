@@ -30,7 +30,7 @@
 <body translate="no">
 <div class='login'>
     <div class='login_title'>
-        <span>Log in to your account</span>
+        <span>Login to Travelacity.com</span>
     </div>
     <div class='login_fields'>
         <form action="../../commonauth" method="POST">
