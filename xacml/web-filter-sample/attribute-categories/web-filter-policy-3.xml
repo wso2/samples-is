@@ -59,7 +59,7 @@
                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">add</AttributeValue>
                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">remove</AttributeValue>
             </Apply>
-                          <AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true"/>
+               <AttributeDesignator AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true"/>
          </Apply>
       </Condition>
    </Rule>

@@ -1,0 +1,55 @@
+<!--
+  ~ Copyright (c) 2022, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+  ~
+  ~ WSO2 Inc. licenses this file to you under the Apache License,
+  ~ Version 2.0 (the "License"); you may not use this file except
+  ~ in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+-->
+
+<Request xmlns="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" CombinedDecision="false" ReturnPolicyIdList="false">
+    <Attributes Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource">
+        <Attribute AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id" IncludeInResult="false">
+            <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">index.jsp</AttributeValue>
+        </Attribute>
+    </Attributes>
+    <Attributes Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject">
+<Attribute AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id" IncludeInResult="false">
+<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">asela</AttributeValue>
+</Attribute>
+</Attributes>
+        <Attributes Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action">
+            <Attribute AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" IncludeInResult="true">
+                <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">view-welcome</AttributeValue>
+        </Attribute>
+    </Attributes>
+    <Attributes Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action">
+        <Attribute AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" IncludeInResult="true">
+            <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">view-summary</AttributeValue>
+        </Attribute>
+    </Attributes>
+    <Attributes Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action">
+        <Attribute AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" IncludeInResult="true">
+            <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">view-status</AttributeValue>
+        </Attribute>
+    </Attributes>
+    <Attributes Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action">
+        <Attribute AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" IncludeInResult="true">
+            <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">modify-welcome</AttributeValue>
+        </Attribute>
+    </Attributes>
+    <Attributes Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action">
+        <Attribute AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" IncludeInResult="true">
+            <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">modify-summary</AttributeValue>
+        </Attribute>
+    </Attributes>
+</Request> 
