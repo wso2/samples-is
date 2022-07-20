@@ -35,13 +35,14 @@ import java.util.Set;
  */
 public class SampleAttributeFinder extends AbstractPIPAttributeFinder {
 
-    private static final Log log = LogFactory.getLog(SampleAttributeFinder.class);
+    private static final Log LOG = LogFactory.getLog(SampleAttributeFinder.class);
     private static final String USER_PERMISSION_CLAIM_URI = "https://sample.com/claims/permission";
 
     /**
      * The required properties should be defined against the registered module in the deployment.toml.
      * This method reads the properties and initiate the module.
      */
+    @Override
     public void init(Properties properties) throws Exception {
 
         // Here you can write the logic to initialize your module. Any properties that
@@ -54,30 +55,31 @@ public class SampleAttributeFinder extends AbstractPIPAttributeFinder {
         // You can add required properties here.
     }
 
+    @Override
     public Set<String> getAttributeValues(String subjectId, String resourceId, String actionId,
                                           String environmentId, String attributeId, String issuer) throws
             Exception {
 
-        Set<String> attr_values = new HashSet<>();
+        Set<String> attributeValues = new HashSet<>();
 
-        if (log.isDebugEnabled()) {
-            log.debug("Retrieving attribute values of subjectId " + subjectId + " with attributeId " +
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Retrieving attribute values of subjectId " + subjectId + " with attributeId " +
                     attributeId );
         }
 
         if (StringUtils.isEmpty(subjectId)) {
-            if (log.isDebugEnabled()) {
-                log.debug("subjectId value is null or empty. Returning empty attribute set");
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("subjectId value is null or empty. Returning empty attribute set");
             }
-            return attr_values;
+            return attributeValues;
         }
 
         // This logic depends on the customization that you need to achieve. Here we return the
         // hardcoded attribute values. You can customize the logic with any other way you want.
-        attr_values.add("View");
-        attr_values.add("Edit");
+        attributeValues.add("View");
+        attributeValues.add("Edit");
 
-        return attr_values;
+        return attributeValues;
     }
 
     @Override
