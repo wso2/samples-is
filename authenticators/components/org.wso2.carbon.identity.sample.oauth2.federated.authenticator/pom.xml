@@ -107,11 +107,13 @@
                             org.wso2.carbon.identity.sample.oauth2.federated.authenticator.*; version=${project.version}
                         </Export-Package>
                         <Import-Package>
-                            com.nimbusds.jose.util;version="${nimbusds.osgi.version.range}",
-                            net.minidev.json;version="${json-smart.version.range}"
-                            org.wso2.carbon.identity.application.authentication.framework.*;version="${carbon.identity.framework.version.range}",
+                            org.apache.commons.logging; version="${commons.logging.version.range}",
+                            org.osgi.service.component; version="${osgi.service.component.imp.pkg.version.range}",
+                            org.osgi.framework; version="${osgi.framework.imp.pkg.version.range}",
+                            org.wso2.carbon.identity.application.authenticator.oauth2; version="${oauth2.outbound.version.range}",
+                            org.wso2.carbon.identity.application.common.model; version="${commons.model.version.range}",
+                            org.wso2.carbon.identity.application.authentication.framework.*;version="${carbon.identity.framework.version.range}"
                         </Import-Package>
-                        <DynamicImport-Package>*</DynamicImport-Package>
                     </instructions>
                 </configuration>
             </plugin>

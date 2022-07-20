@@ -23,7 +23,8 @@ import org.wso2.carbon.identity.application.common.model.Property;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+
+import static org.wso2.carbon.identity.sample.oauth2.federated.authenticator.OAuth2CustomAuthenticatorConstants.*;
 
 /***
  * OAuth2 Custom Authenticator is an outbound authenticator
@@ -36,31 +37,13 @@ public class OAuth2CustomAuthenticator extends Oauth2GenericAuthenticator {
     @Override
     public String getFriendlyName() {
 
-        return OAuth2CustomAuthenticatorConstants.AUTHENTICATOR_FRIENDLY_NAME;
+        return AUTHENTICATOR_FRIENDLY_NAME;
     }
 
     @Override
     public String getName() {
 
-        return OAuth2CustomAuthenticatorConstants.AUTHENTICATOR_NAME;
-    }
-
-    @Override
-    protected String getTokenEndpoint(Map<String, String> authenticatorProperties) {
-
-        return OAuth2CustomAuthenticatorConstants.TOKEN_URL;
-    }
-
-    @Override
-    protected String getAuthorizationServerEndpoint(Map<String, String> authenticatorProperties) {
-
-        return OAuth2CustomAuthenticatorConstants.AUTH_URL;
-    }
-
-    @Override
-    protected String getUserInfoEndpoint(Map<String, String> authenticatorProperties) {
-
-        return OAuth2CustomAuthenticatorConstants.INFO_URL;
+        return AUTHENTICATOR_NAME;
     }
 
     // TODO: Override buildClaims to match the response of respective OAuth2 identity provider
@@ -71,26 +54,53 @@ public class OAuth2CustomAuthenticator extends Oauth2GenericAuthenticator {
         List<Property> configProperties = new ArrayList<>();
 
         Property clientId = new Property();
-        clientId.setName(OAuth2CustomAuthenticatorConstants.CLIENT_ID);
-        clientId.setDisplayName("Client Id");
+        clientId.setName(CLIENT_ID);
+        clientId.setDisplayName(CLIENT_ID_DP);
         clientId.setRequired(true);
-        clientId.setDescription("Enter client identifier value");
+        clientId.setDescription(CLIENT_ID_DESC);
+        clientId.setDisplayOrder(1);
         configProperties.add(clientId);
 
         Property clientSecret = new Property();
-        clientSecret.setName(OAuth2CustomAuthenticatorConstants.CLIENT_SECRET);
-        clientSecret.setDisplayName("Client Secret");
+        clientSecret.setName(CLIENT_SECRET);
+        clientSecret.setDisplayName(CLIENT_SECRET_DP);
         clientSecret.setRequired(true);
         clientSecret.setConfidential(true);
-        clientSecret.setDescription("Enter client secret value");
+        clientSecret.setDescription(CLIENT_SECRET_DESC);
+        clientSecret.setDisplayOrder(2);
         configProperties.add(clientSecret);
 
         Property callbackUrl = new Property();
-        callbackUrl.setName(OAuth2CustomAuthenticatorConstants.CALLBACK_URL);
-        callbackUrl.setDisplayName("Callback Url");
+        callbackUrl.setName(CALLBACK_URL);
+        callbackUrl.setDisplayName(CALLBACK_URL_DP);
         callbackUrl.setRequired(true);
-        callbackUrl.setDescription("Enter callback url");
+        callbackUrl.setDescription(CALLBACK_URL_DESC);
+        callbackUrl.setDisplayOrder(3);
         configProperties.add(callbackUrl);
+
+        Property authorizationUrl = new Property();
+        authorizationUrl.setName(AUTHZ_URL);
+        authorizationUrl.setDisplayName(AUTHZ_URL_DP);
+        authorizationUrl.setRequired(true);
+        authorizationUrl.setDescription(AUTHZ_URL_DESC);
+        authorizationUrl.setDisplayOrder(4);
+        configProperties.add(authorizationUrl);
+
+        Property tokenUrl = new Property();
+        tokenUrl.setName(TOKEN_URL);
+        tokenUrl.setDisplayName(TOKEN_URL_DP);
+        tokenUrl.setRequired(true);
+        tokenUrl.setDescription(TOKEN_URL_DESC);
+        tokenUrl.setDisplayOrder(5);
+        configProperties.add(tokenUrl);
+
+        Property userInfoUrl = new Property();
+        userInfoUrl.setName(USER_INFO_URL);
+        userInfoUrl.setDisplayName(USER_INFO_URL_DP);
+        userInfoUrl.setRequired(true);
+        userInfoUrl.setDescription(USER_INFO_URL_DESC);
+        userInfoUrl.setDisplayOrder(6);
+        configProperties.add(userInfoUrl);
 
         return configProperties;
     }

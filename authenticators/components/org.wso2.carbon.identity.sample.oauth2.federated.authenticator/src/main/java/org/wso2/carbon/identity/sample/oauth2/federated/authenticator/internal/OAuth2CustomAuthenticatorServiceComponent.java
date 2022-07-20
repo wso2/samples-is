@@ -29,7 +29,7 @@ import org.wso2.carbon.identity.sample.oauth2.federated.authenticator.OAuth2Cust
 
 import java.util.Hashtable;
 
-@Component(name = "OAuth2ServiceComponent", immediate = true)
+@Component(name = "custom.oauth2.federated.authenticator", immediate = true)
 public class OAuth2CustomAuthenticatorServiceComponent {
 
     private static final Log logger = LogFactory.getLog(OAuth2CustomAuthenticatorServiceComponent.class);
@@ -43,11 +43,11 @@ public class OAuth2CustomAuthenticatorServiceComponent {
             ctxt.getBundleContext().registerService(ApplicationAuthenticator.class.getName(), oAuth2CustomAuthenticator,
                     props);
             if (logger.isDebugEnabled()) {
-                logger.debug("----OAuth2 Custom Authenticator is activated----");
+                logger.debug("OAuth2 Custom Authenticator is activated");
             }
 
         } catch (Throwable e) {
-            logger.error("----Error while activating OAuth2 Custom Authenticator----", e);
+            logger.error("Error while activating OAuth2 Custom Authenticator", e);
         }
     }
 
@@ -55,7 +55,7 @@ public class OAuth2CustomAuthenticatorServiceComponent {
     protected void deactivate(ComponentContext ctxt) {
 
         if (logger.isDebugEnabled()) {
-            logger.debug("----OAuth2 Custom Authenticator is deactivated----");
+            logger.debug("OAuth2 Custom Authenticator is deactivated");
         }
     }
 

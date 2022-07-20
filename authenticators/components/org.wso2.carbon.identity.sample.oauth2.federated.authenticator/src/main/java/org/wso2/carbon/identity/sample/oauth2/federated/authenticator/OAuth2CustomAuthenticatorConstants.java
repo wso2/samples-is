@@ -22,13 +22,29 @@ public class OAuth2CustomAuthenticatorConstants {
 
     public static final String AUTHENTICATOR_NAME = "OAuth2CustomAuthenticator";
     public static final String AUTHENTICATOR_FRIENDLY_NAME = "OAuth2 Custom Authenticator";
-    public static final String CLIENT_ID = "ClientId";
-    public static final String CLIENT_SECRET = "ClientSecret";
-    public static final String CALLBACK_URL = "CallbackUrl";
 
-    // TODO: Change URLs to match the identity provider
-    public static final String AUTH_URL = "https://kauth.kakao.com/oauth/authorize";
-    public static final String TOKEN_URL = "https://kauth.kakao.com/oauth/token";
-    public static final String INFO_URL = "https://kapi.kakao.com/v2/user/me";
+    public static final String CLIENT_ID = "ClientId";
+    public static final String CLIENT_ID_DP = "Client Id";
+    public static final String CLIENT_ID_DESC = "Enter client identifier value";
+
+    public static final String CLIENT_SECRET = "ClientSecret";
+    public static final String CLIENT_SECRET_DP = "Client Secret";
+    public static final String CLIENT_SECRET_DESC = "Enter client secret value";
+
+    public static final String CALLBACK_URL = "CallbackUrl";
+    public static final String CALLBACK_URL_DP = "Callback URL";
+    public static final String CALLBACK_URL_DESC = "Enter callback URL";
+
+    public static final String AUTHZ_URL = "AuthEndpoint";
+    public static final String AUTHZ_URL_DP = "Authorization Endpoint URL";
+    public static final String AUTHZ_URL_DESC = "Enter authorization endpoint URL";
+
+    public static final String TOKEN_URL = "AuthTokenEndpoint";
+    public static final String TOKEN_URL_DP = "Token Endpoint URL";
+    public static final String TOKEN_URL_DESC = "Enter token endpoint URL";
+
+    public static final String USER_INFO_URL = "UserInfoEndpoint";
+    public static final String USER_INFO_URL_DP = "User Information Endpoint URL";
+    public static final String USER_INFO_URL_DESC = "Enter user information endpoint URL";
 }
 
