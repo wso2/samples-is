@@ -1,3 +1,22 @@
+/*
+ *  Copyright (c) 2022, WSO2 LLC (http://www.wso2.org) All Rights Reserved.
+ *
+ *  WSO2 LLC licenses this file to you under the Apache license,
+ *  Version 2.0 (the "license"); you may not use this file except
+ *  in compliance with the license.
+ *  You may obtain a copy of the license at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing,
+ *  software distributed under the License is distributed on an
+ *  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ *  KIND, either express or implied.  See the License for the
+ *  specific language governing permissions and limitations
+ *  under the License.
+ *
+ */
+
 package org.wso2.dpop.client;
 
 import com.nimbusds.jose.JOSEException;
@@ -11,6 +30,8 @@ import com.nimbusds.jose.jwk.JWK;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.security.InvalidAlgorithmParameterException;
 import java.security.KeyPair;
@@ -26,7 +47,12 @@ import java.util.UUID;
 import static com.nimbusds.jose.JWSAlgorithm.ES256;
 import static com.nimbusds.jose.JWSAlgorithm.RS384;
 
+/**
+ *  DPOPProofGenerator will generate per request private and public keypair.
+ */
 public class DPOPProofGenerator {
+
+    private static final Log log = LogFactory.getLog(DPOPProofGenerator.class);
 
     public static void main(String args[]) throws NoSuchAlgorithmException, JOSEException, ParseException,
             InvalidAlgorithmParameterException {
@@ -42,7 +68,7 @@ public class DPOPProofGenerator {
         KeyPairGenerator gen = KeyPairGenerator.getInstance(keyPairType);
         KeyPair keyPair;
         JWK jwk = null;
-        if (keyPairType.equals("EC")) {
+        if ("EC".equals(keyPairType)) {
             gen.initialize(Curve.P_256.toECParameterSpec());
             keyPair = gen.generateKeyPair();
             jwk = new ECKey.Builder(Curve.P_256, (ECPublicKey) keyPair.getPublic())
@@ -54,9 +80,9 @@ public class DPOPProofGenerator {
             jwk = new RSAKey.Builder((RSAPublicKey) keyPair.getPublic()).build();
         }
 
-        System.out.println("jwk: " + jwk);
-        System.out.println("publicKey: " + keyPair.getPublic());
-        System.out.println("private: " + keyPair.getPrivate());
+        log.info("jwk: " + jwk);
+        log.info("publicKey: " + keyPair.getPublic());
+        log.info("private: " + keyPair.getPrivate());
 
         JWTClaimsSet.Builder jwtClaimsSetBuilder = new JWTClaimsSet.Builder();
         jwtClaimsSetBuilder.issuer("issuer");
@@ -68,7 +94,7 @@ public class DPOPProofGenerator {
         jwtClaimsSetBuilder.claim("htu", httpUrl);
 
         JWSHeader.Builder headerBuilder;
-        if (keyPairType.equals("EC")) {
+        if ("EC".equals(keyPairType)) {
             headerBuilder = new JWSHeader.Builder(ES256);
         } else {
             headerBuilder = new JWSHeader.Builder(RS384);
@@ -77,7 +103,7 @@ public class DPOPProofGenerator {
         headerBuilder.jwk(jwk);
         SignedJWT signedJWT = new SignedJWT(headerBuilder.build(), jwtClaimsSetBuilder.build());
 
-        if (keyPairType.equals("EC")) {
+        if ("EC".equals(keyPairType)) {
             ECDSASigner ecdsaSigner = new ECDSASigner(keyPair.getPrivate(), Curve.P_256);
             signedJWT.sign(ecdsaSigner);
         } else {
@@ -85,14 +111,14 @@ public class DPOPProofGenerator {
             signedJWT.sign(rsassaSigner);
         }
 
-        System.out.println("[Signed JWT] : " + signedJWT.serialize());
+        log.info("[Signed JWT] : " + signedJWT.serialize());
         JWK parseJwk = JWK.parse(String.valueOf(jwk));
-        if (keyPairType.equals("EC")) {
+        if ("EC".equals(keyPairType)) {
             ECKey ecKey = (ECKey) parseJwk;
-            System.out.println("[ThumbPrint] : " + ecKey.computeThumbprint().toString());
+            log.info("[ThumbPrint] : " + ecKey.computeThumbprint().toString());
         } else {
             RSAKey rsaKey = (RSAKey) parseJwk;
-            System.out.println("[ThumbPrint] : " + rsaKey.computeThumbprint().toString());
+            log.info("[ThumbPrint] : " + rsaKey.computeThumbprint().toString());
         }
     }
 }
