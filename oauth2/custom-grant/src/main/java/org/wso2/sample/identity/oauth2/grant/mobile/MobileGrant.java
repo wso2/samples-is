@@ -27,6 +27,7 @@ import org.wso2.carbon.identity.oauth2.dto.OAuth2AccessTokenRespDTO;
 import org.wso2.carbon.identity.oauth2.model.RequestParameter;
 import org.wso2.carbon.identity.oauth2.token.OAuthTokenReqMessageContext;
 import org.wso2.carbon.identity.oauth2.token.handlers.grant.AbstractAuthorizationGrantHandler;
+import org.wso2.carbon.utils.multitenancy.MultitenantUtils;
 
 import java.util.UUID;
 
@@ -67,10 +68,16 @@ public class MobileGrant extends AbstractAuthorizationGrantHandler  {
 
             if(authStatus) {
                 // if valid set authorized mobile number as grant user
-                AuthenticatedUser mobileUser = new AuthenticatedUser();
-                mobileUser.setUserName(mobileNumber);
-                mobileUser.setAuthenticatedSubjectIdentifier(mobileNumber);
-                mobileUser.setFederatedUser(true);
+                String tenantAwareUsername = MultitenantUtils.getTenantAwareUsername(mobileNumber);
+                /*
+                    Please use AuthenticatedUser.createFederateAuthenticatedUserFromSubjectIdentifier() if a federated
+                    user is involved with this custom grant.
+                 */
+                AuthenticatedUser mobileUser = AuthenticatedUser.createLocalAuthenticatedUserFromSubjectIdentifier(
+                        tenantAwareUsername);
+                // Set the federated IdP name if a federated user is involved with this custom grant.
+                // mobileUser.setFederatedIdPName(FrameworkConstants.LOCAL_IDP_NAME);
+
                 oAuthTokenReqMessageContext.setAuthorizedUser(mobileUser);
                 oAuthTokenReqMessageContext.setScope(oAuthTokenReqMessageContext.getOauth2AccessTokenReqDTO().getScope());
             } else{
