@@ -27,7 +27,7 @@
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>sample.scope.validator</artifactId>
+  <artifactId>org.wso2.carbon.identity.sample.scope.validator</artifactId>
   <packaging>bundle</packaging>
   <name>Identity Server - Sample Scope Validators</name>
   <url>http://maven.apache.org</url>

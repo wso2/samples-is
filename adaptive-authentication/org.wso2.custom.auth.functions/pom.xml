@@ -27,7 +27,7 @@
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>org.wso2.custom.auth.functions</artifactId>
+  <artifactId>org.wso2.carbon.identity.custom.auth.functions</artifactId>
   <packaging>bundle</packaging>
   <name>Conditional Authentication - Custom Functions</name>
   <url>http://maven.apache.org</url>
