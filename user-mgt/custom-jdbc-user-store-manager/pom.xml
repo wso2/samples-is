@@ -21,19 +21,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <modelVersion>4.0.0</modelVersion>
-    <artifactId>org.wso2.custom.user.store</artifactId>
-    <packaging>bundle</packaging>
-    <name>Custom JDBC User-store Manager</name>
-    <description>Custom JDBC User-store Manager</description>
-    <version>1.0.0</version>
-
     <parent>
         <groupId>org.wso2.samples.is</groupId>
         <artifactId>wso2is-identity-samples-usermgt</artifactId>
         <version>4.4.2-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>org.wso2.custom.user.store</artifactId>
+    <packaging>bundle</packaging>
+    <name>Custom JDBC User-store Manager</name>
+    <description>Custom JDBC User-store Manager</description>
 
     <repositories>
         <repository>
