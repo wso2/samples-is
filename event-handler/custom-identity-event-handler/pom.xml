@@ -28,11 +28,9 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>org.wso2.carbon.identity</groupId>
     <artifactId>org.wso2.carbon.identity.customhandler</artifactId>
     <packaging>bundle</packaging>
-    <version>1.0.0</version>
 
     <dependencies>
         <dependency>
