@@ -1,0 +1,67 @@
+{
+  "name": "@asgardeo/auth-react-native",
+  "description": "Asgardeo Auth React Native SDK for Mobile Applications.",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+  },
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/asgardeo/asgardeo-react-native-oidc-sdk.git"
+  },
+  "keywords": [
+    "Asgardeo",
+    "OIDC",
+    "OAuth2",
+    "Authentication",
+    "Authorization",
+    "React Native"
+  ],
+  "author": "Asgardeo",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/asgardeo/asgardeo-react-native-oidc-sdk/issues"
+  },
+  "homepage": "https://github.com/asgardeo/asgardeo-react-native-oidc-sdk#readme",
+  "dependencies": {
+    "@asgardeo/auth-js": "^1.0.0",
+    "@react-native-async-storage/async-storage": "^1.17.0",
+    "@types/crypto-js": "^4.0.1",
+    "base-64": "^1.0.0",
+    "crypto-js": "^3.3.0",
+    "jsrsasign": "^10.5.1",
+    "jsrsasign-util": "^1.0.5",
+    "react": "17.0.2",
+    "react-native": "^0.67.1",
+    "react-native-gesture-handler": "^2.4.2",
+    "url": "^0.11.0"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  },
+  "deprecated": false,
+  "devDependencies": {
+    "react": "^16.13.1",
+    "react-native": "^0.63.4",
+    "@babel/core": "^7.8.4",
+    "@babel/runtime": "^7.8.4",
+    "@types/jest": "^26.0.16",
+    "@types/react": "^17.0.0",
+    "@types/react-native": "^0.66.15",
+    "@types/react-test-renderer": "^17.0.1",
+    "@typescript-eslint/eslint-plugin": "^4.33.0",
+    "@typescript-eslint/parser": "^4.33.0",
+    "babel-jest": "^25.1.0",
+    "eslint": "^7.32.0",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-react": "^7.27.1",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "metro-react-native-babel-preset": "^0.65.1",
+    "react-test-renderer": "17.0.2",
+    "text-encoding-polyfill": "^0.6.7",
+    "typescript": "^4.1.2"
+  }
+}
