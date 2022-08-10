@@ -21,14 +21,14 @@
   <groupId>org.wso2.sample.scope.validator</groupId>
   <artifactId>sample.scope.validator</artifactId>
   <packaging>bundle</packaging>
-  <version>4.5.0</version>
+  <version>4.5.1-SNAPSHOT</version>
   <name>sample.scope.validator</name>
   <url>http://maven.apache.org</url>
 
   <parent>
     <groupId>org.wso2.samples.is</groupId>
     <artifactId>samples-is</artifactId>
-    <version>4.5.0</version>
+    <version>4.5.1-SNAPSHOT</version>
     <relativePath>../../pom.xml</relativePath>
   </parent>
 

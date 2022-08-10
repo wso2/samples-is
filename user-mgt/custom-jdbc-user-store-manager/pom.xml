@@ -24,12 +24,12 @@
     <packaging>bundle</packaging>
     <name>Custom JDBC User-store Manager</name>
     <description>Custom JDBC User-store Manager</description>
-    <version>4.5.0</version>
+    <version>4.5.1-SNAPSHOT</version>
 
     <parent>
         <groupId>org.wso2.samples.is</groupId>
         <artifactId>wso2is-identity-samples-usermgt</artifactId>
-        <version>4.5.0</version>
+        <version>4.5.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
