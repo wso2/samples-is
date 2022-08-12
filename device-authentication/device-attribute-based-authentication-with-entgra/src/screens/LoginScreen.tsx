@@ -29,7 +29,6 @@ import {
 import 'text-encoding-polyfill';
 import {
   useAuthContext,
-  AuthResponseErrorCode,
 } from '@asgardeo/auth-react-native';
 import {GetAuthURLConfig} from '@asgardeo/auth-js';
 import {styles} from '../theme/styles';
@@ -87,8 +86,7 @@ const LoginScreen = (props: {
           text: 'OK',
           onPress: async () => {
             if (
-              state.authResponseError?.errorCode ==
-              AuthResponseErrorCode.DEVICE_NOT_ENROLLED
+              state.authResponseError?.errorCode == "DEVICE_NOT_ENROLLED"
             ) {
               setLoginState(initialState);
               clearAuthResponseError();

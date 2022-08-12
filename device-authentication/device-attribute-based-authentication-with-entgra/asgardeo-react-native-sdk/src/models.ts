@@ -35,7 +35,7 @@ export interface AuthStateInterface {
     refreshToken: string;
     tokenType: string;
     isAuthenticated: boolean;
-    authResponseError?: {errorCode?: AuthResponseErrorCode, errorMessage?: string};
+    authResponseError?: {errorCode?: string, errorMessage?: string};
 }
 
 export interface AuthContextInterface {
@@ -63,12 +63,3 @@ export interface AuthContextInterface {
 export type AuthUrl = {
     url: string
 }
-
-// Error codes in the response when authentication fails
-export enum AuthResponseErrorCode {
-    ACCESS_DENIED = "ACCESS_DENIED",
-    DEVICE_NOT_ENROLLED = "DEVICE_NOT_ENROLLED",
-    DEVICE_NOT_ENROLLED_UNDER_CURRENT_USER = "DEVICE_NOT_ENROLLED_UNDER_CURRENT_USER",
-    NETWORK_ERROR = "NETWORK_ERROR",
-    INTERNAL_SERVER_ERROR = "INTERNAL_SERVER_ERROR",
-  }

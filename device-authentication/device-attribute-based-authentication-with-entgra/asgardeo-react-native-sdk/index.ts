@@ -16,6 +16,5 @@
  * under the License.
  */
 import { AuthClient, AuthProvider, useAuthContext } from "./src/authenticate";
-import { AuthResponseErrorCode } from "./src/models";
 
-export { AuthClient, AuthProvider, useAuthContext, AuthResponseErrorCode };
+export { AuthClient, AuthProvider, useAuthContext };

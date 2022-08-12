@@ -32,7 +32,7 @@ import { AsgardeoAuthException } from "@asgardeo/auth-js/src/exception";
 import React, { FunctionComponent, useContext, useEffect, useState } from "react";
 import { Linking } from "react-native";
 import { ReactNativeCryptoUtils } from "./crypto-utils";
-import { AuthContextInterface, AuthStateInterface, AuthUrl, AuthResponseErrorCode } from "./models";
+import { AuthContextInterface, AuthStateInterface, AuthUrl } from "./models";
 import { LocalStorage } from "./store";
 
 const initialState: AuthStateInterface = {
@@ -514,7 +514,7 @@ const AuthProvider: FunctionComponent = (
                 const errorCode = dataList[2].split("=")[1];
                 const errorMessage = errorDescription.split("+").join(" ");
                 
-                const error = { errorCode: errorCode as unknown as AuthResponseErrorCode, errorMessage };
+                const error = { errorCode, errorMessage };
                 setState({ ...state, authResponseError: error });
             } else {
                     // TODO: Add logs when a logger is available.
