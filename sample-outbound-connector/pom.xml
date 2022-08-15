@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-~ Copyright (c) 2022, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+~ Copyright (c) 2022, WSO2 LLC. (http://www.wso2.org) All Rights Reserved.
 ~
-~ WSO2 Inc. licenses this file to you under the Apache License,
+~ WSO2 LLC. licenses this file to you under the Apache License,
 ~ Version 2.0 (the "License"); you may not use this file except
 ~ in compliance with the License.
 ~ You may obtain a copy of the License at
@@ -34,20 +34,6 @@
     <packaging>bundle</packaging>
     <name>WSO2 Carbon - Sample outbound provisioning connector</name>
     <url>http://wso2.org</url>
-
-    <properties>
-        <identity.framework.version>5.12.387</identity.framework.version>
-        <carbon.kernel.version>4.4.40</carbon.kernel.version>
-        <commons-logging.version>4.2.0</commons-logging.version>
-        <maven.scr.plugin.version>1.24.0</maven.scr.plugin.version>
-        <maven.bundle.plugin.version>2.4.0</maven.bundle.plugin.version>
-        <maven.compiler.plugin.version>2.3.1</maven.compiler.plugin.version>
-        <apache.felix.scr.ds.annotations.version>1.2.8</apache.felix.scr.ds.annotations.version>
-        <equinox.osgi.services.version>3.5.100.v20160504-1419</equinox.osgi.services.version>
-        <osgi.framework.imp.pkg.version.range>[1.7.0, 2.0.0)</osgi.framework.imp.pkg.version.range>
-        <osgi.service.component.imp.pkg.version.range>[1.2.0, 2.0.0)</osgi.service.component.imp.pkg.version.range>
-        <commons-logging.osgi.version.range>[1.2,2.0)</commons-logging.osgi.version.range>
-    </properties>
 
     <dependencies>
         <dependency>
@@ -165,4 +151,17 @@
         </repository>
     </repositories>
 
+    <properties>
+        <identity.framework.version>5.23.14</identity.framework.version>
+        <carbon.kernel.version>4.7.0</carbon.kernel.version>
+        <commons-logging.version>4.2.0</commons-logging.version>
+        <maven.scr.plugin.version>1.24.0</maven.scr.plugin.version>
+        <maven.bundle.plugin.version>2.4.0</maven.bundle.plugin.version>
+        <maven.compiler.plugin.version>2.3.1</maven.compiler.plugin.version>
+        <apache.felix.scr.ds.annotations.version>1.2.8</apache.felix.scr.ds.annotations.version>
+        <equinox.osgi.services.version>3.5.100.v20160504-1419</equinox.osgi.services.version>
+        <osgi.framework.imp.pkg.version.range>[1.7.0, 2.0.0)</osgi.framework.imp.pkg.version.range>
+        <osgi.service.component.imp.pkg.version.range>[1.2.0, 2.0.0)</osgi.service.component.imp.pkg.version.range>
+        <commons-logging.osgi.version.range>[1.2,2.0)</commons-logging.osgi.version.range>
+    </properties>
 </project>

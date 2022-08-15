@@ -1,7 +1,7 @@
 /*
- * Copyright (c) 2022, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ * Copyright (c) 2022, WSO2 LLC. (http://www.wso2.org) All Rights Reserved.
  *
- * WSO2 Inc. licenses this file to you under the Apache License,
+ * WSO2 LLC. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License.
  * You may obtain a copy of the License at
@@ -33,7 +33,7 @@ import java.util.List;
  */
 public class SampleProvisioningConnectorFactory extends AbstractProvisioningConnectorFactory {
 
-    private static final Log log = LogFactory.getLog(SampleProvisioningConnectorFactory.class);
+    private static final Log LOG = LogFactory.getLog(SampleProvisioningConnectorFactory.class);
     private static final String CONNECTOR_TYPE = "Sample";
 
     @Override
@@ -42,8 +42,8 @@ public class SampleProvisioningConnectorFactory extends AbstractProvisioningConn
 
         SampleProvisioningConnector connector = new SampleProvisioningConnector();
         connector.init(provisioningProperties);
-        if (log.isDebugEnabled()) {
-            log.debug("Sample provisioning connector created successfully.");
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Sample provisioning connector created successfully.");
         }
         return connector;
     }

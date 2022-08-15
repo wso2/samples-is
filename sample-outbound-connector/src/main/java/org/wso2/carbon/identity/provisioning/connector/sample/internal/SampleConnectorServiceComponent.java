@@ -1,7 +1,7 @@
 /*
- * Copyright (c) 2022, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ * Copyright (c) 2022, WSO2 LLC. (http://www.wso2.org) All Rights Reserved.
  *
- * WSO2 Inc. licenses this file to you under the Apache License,
+ * WSO2 LLC. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License.
  * You may obtain a copy of the License at
@@ -35,23 +35,24 @@ import org.wso2.carbon.identity.provisioning.connector.sample.SampleProvisioning
 )
 public class SampleConnectorServiceComponent {
 
-    private static Log log = LogFactory.getLog(SampleConnectorServiceComponent.class);
+    private static Log LOG = LogFactory.getLog(SampleConnectorServiceComponent.class);
 
     @Activate
     protected void activate(ComponentContext context) {
-        if (log.isDebugEnabled()) {
-            log.debug("Activating SampleConnectorServiceComponent");
+
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Activating SampleConnectorServiceComponent");
         }
         try {
             SampleProvisioningConnectorFactory provisioningConnectorFactory = new
                     SampleProvisioningConnectorFactory();
             context.getBundleContext().registerService(AbstractProvisioningConnectorFactory.class.getName(),
                     provisioningConnectorFactory, null);
-            if (log.isDebugEnabled()) {
-                log.debug("Sample Outbound Provisioning Connector bundle is activated");
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Sample Outbound Provisioning Connector bundle is activated");
             }
         } catch (Throwable e) {
-            log.error("Error while activating Sample Identity Provisioning Connector ", e);
+            LOG.error("Error while activating Sample Identity Provisioning Connector ", e);
         }
     }
 }

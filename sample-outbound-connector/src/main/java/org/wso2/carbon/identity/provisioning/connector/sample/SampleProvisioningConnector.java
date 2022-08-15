@@ -1,7 +1,7 @@
 /*
- * Copyright (c) 2022, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ * Copyright (c) 2022, WSO2 LLC. (http://www.wso2.org) All Rights Reserved.
  *
- * WSO2 Inc. licenses this file to you under the Apache License,
+ * WSO2 LLC. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License.
  * You may obtain a copy of the License at
@@ -36,7 +36,7 @@ import java.util.Properties;
  */
 public class SampleProvisioningConnector extends AbstractOutboundProvisioningConnector {
 
-    private static final Log log = LogFactory.getLog(SampleProvisioningConnector.class);
+    private static final Log LOG = LogFactory.getLog(SampleProvisioningConnector.class);
     private SampleProvisioningConnectorConfig configHolder;
 
     @Override
@@ -66,7 +66,7 @@ public class SampleProvisioningConnector extends AbstractOutboundProvisioningCon
         if (provisioningEntity != null) {
 
             if (provisioningEntity.isJitProvisioning() && !isJitProvisioningEnabled()) {
-                log.debug("JIT provisioning disabled for Office365 connector");
+                LOG.debug("JIT provisioning disabled for Office365 connector");
                 return null;
             }
 
@@ -78,11 +78,11 @@ public class SampleProvisioningConnector extends AbstractOutboundProvisioningCon
                 } else if (ProvisioningOperation.PUT == provisioningEntity.getOperation()) {
                     updateUser(provisioningEntity);
                 } else {
-                    log.warn("Unsupported provisioning operation " + provisioningEntity.getOperation() +
+                    LOG.warn("Unsupported provisioning operation " + provisioningEntity.getOperation() +
                             " for entity type " + provisioningEntity.getEntityType());
                 }
             } else {
-                log.warn("Unsupported provisioning entity type " + provisioningEntity.getEntityType());
+                LOG.warn("Unsupported provisioning entity type " + provisioningEntity.getEntityType());
             }
         }
 
@@ -96,19 +96,19 @@ public class SampleProvisioningConnector extends AbstractOutboundProvisioningCon
 
         // Implement user creation logic.
         String provisionedId = null;
-        log.info("Creating the copy of the user in the external system.");
+        LOG.info("Creating the copy of the user in the external system.");
         return provisionedId;
     }
 
     private void deleteUser(ProvisioningEntity provisioningEntity) {
 
         // Implement user deletion logic.
-        log.info("Delete the user account from the external system.");
+        LOG.info("Delete the user account from the external system.");
     }
 
     private void updateUser(ProvisioningEntity provisioningEntity) {
 
         // Implement user update logic.
-        log.info("Update user account in the external system.");
+        LOG.info("Update user account in the external system.");
     }
 }
