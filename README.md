@@ -55,8 +55,8 @@ SAMPLES_HOME
 │   └── scim-bulk-user-export-tool
 ├── bulk-user-import-sample
 │   └── BulkUserImport
-├── bulk-user-import-sample
-│   └── BulkUserImport
+├── b2b-samples
+│   └── guardio-insurance-sample-application
 ├── client-samples
 │   ├── dotnet
 │   │   ├── dotnet-agent-oidc-sso
