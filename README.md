@@ -55,6 +55,8 @@ SAMPLES_HOME
 │   └── scim-bulk-user-export-tool
 ├── bulk-user-import-sample
 │   └── BulkUserImport
+├── bulk-user-import-sample
+│   └── BulkUserImport
 ├── client-samples
 │   ├── dotnet
 │   │   ├── dotnet-agent-oidc-sso

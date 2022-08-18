@@ -1,0 +1,38 @@
+{
+    "WSO2IS_HOST": "https://localhost:9443",
+    "WSO2IS_TENANT_NAME": "carbon.super",
+    "WSO2IS_CLIENT_URL": "https://localhost:3000",
+    "WSO2IS_CLIENT_ID": "vA9fTQQoHjWVdTpl7Q84wnoQp0Qa",
+    "WSO2IS_CLIENT_SECRET": "Y3VtqqligcZrunQu1P69ZQ3iVKQa",
+    "WSO2IS_SCOPES": [
+        "openid",
+        "email",
+        "profile",
+        "internal_login",
+        "internal_user_mgt_view",
+        "internal_user_mgt_list",
+        "internal_user_mgt_update",
+        "internal_user_mgt_delete",
+        "internal_user_mgt_create",
+        "internal_idp_view",
+        "internal_idp_create",
+        "internal_idp_update",
+        "internal_idp_delete",
+        "internal_application_mgt_view",
+        "internal_application_mgt_update"
+    ],
+    "SAMPLE_ORGS": [
+        {
+            "id": "6b9e7717-036f-4457-ab2b-318c54da9a7e",
+            "routerQuery": "best",
+            "name": "Best Auto Mart",
+            "colorTheme": "blue"
+        },
+        {
+            "id": "b9a130be-e4fd-4655-8f6b-cb47c8edf558",
+            "routerQuery": "car",
+            "name": "Car Traders",
+            "colorTheme": "yellow"
+        }
+    ]
+}

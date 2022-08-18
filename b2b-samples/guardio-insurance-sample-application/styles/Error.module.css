@@ -1,0 +1,17 @@
+.errorMainContent {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.errorMainDiv {
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    flex-direction: column;
+    gap: 40px;
+    position: relative;
+    top: -30px
+}
+
