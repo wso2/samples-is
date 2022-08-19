@@ -1,0 +1,38 @@
+{
+    "WSO2IS_HOST": "https://localhost:9443",
+    "WSO2IS_TENANT_NAME": "carbon.super",
+    "WSO2IS_CLIENT_URL": "http://localhost:3000",
+    "WSO2IS_CLIENT_ID": "<CLIENT ID OF THE APPLICATION>",
+    "WSO2IS_CLIENT_SECRET": "<CLIENT SECRET OF THE APPLICATION>",
+    "WSO2IS_SCOPES": [
+        "openid",
+        "email",
+        "profile",
+        "internal_login",
+        "internal_user_mgt_view",
+        "internal_user_mgt_list",
+        "internal_user_mgt_update",
+        "internal_user_mgt_delete",
+        "internal_user_mgt_create",
+        "internal_idp_view",
+        "internal_idp_create",
+        "internal_idp_update",
+        "internal_idp_delete",
+        "internal_application_mgt_view",
+        "internal_application_mgt_update"
+    ],
+    "SAMPLE_ORGS": [
+        {
+            "id": "<ORGANIZATION ID OF THE BEST AUTO MART>",
+            "routerQuery": "best",
+            "name": "Best Auto Mart",
+            "colorTheme": "blue"
+        },
+        {
+            "id": "<ORGANIZATION ID OF THE CAR TRADERS>",
+            "routerQuery": "car",
+            "name": "Car Traders",
+            "colorTheme": "yellow"
+        }
+    ]
+}

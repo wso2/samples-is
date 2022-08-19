@@ -1,0 +1,149 @@
+.signinOuter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: #0071f303;
+}
+
+.signinInner {
+    border: 1px solid #0071f321;
+    height: 30vw;
+    width: 35vw;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 10px 0;
+    box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.05);
+    gap: 30px;
+}
+
+.signInTextDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    top: -15px;
+}
+
+.signinText {
+    font-size: 26px;
+    position: relative;
+}
+
+.signinTag {
+    font-size: 16px;
+    position: relative;
+}
+
+.signinDropdownDiv {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    gap: 0;
+    margin-top: 2rem;
+}
+
+.signinDropdownDiv p {
+    font-size: 16px;
+    position: relative;
+    top: -35px;
+    color: rgba(200, 28, 28, 0.756);
+}
+
+.signinDropdown {
+    width: 100%;
+    position: relative;
+    top: -40px;
+}
+
+.signinDropdown button {
+    border: 1px solid #0071f37b;
+    border-radius: 5px;
+    height: 50px;
+    width: 100%;
+    background-color: #57575708;
+}
+
+.signinDropdown button svg {
+    top: 0.9rem;
+}
+
+.signinDropdown ul {
+    width: 100%;
+    box-shadow: 0
+}
+
+.buttonCarousell {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    width: 60%
+}
+
+.nextButton {
+    width: 30%
+}
+
+@media (max-width: 1300px) {
+    .signinInner {
+        height: 35vw;
+        width: 40vw;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 1140px) {
+    .signinInner {
+        height: 45vw;
+        width: 50vw;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .signinInner {
+        height: 45vw;
+        width: 50vw;
+        gap: 30px;
+    }
+    .signInTextDiv {
+        top: -17px;
+    }
+
+    .signinText {
+        font-size: 22px;
+    }
+
+    .signinTag {
+        font-size: 14px;
+    }
+
+    .signinDropdownDiv {
+        width: 55%;
+        margin-top: 1.6rem;
+    }
+
+    .signinDropdownDiv p {
+        font-size: 14px;
+        top: -35px;
+        text-align: center;
+    }
+
+    .buttonCarousell {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row-reverse;
+        width: 70%
+    }
+
+    .nextButton {
+        width: 30%
+    }
+}

@@ -1,0 +1,132 @@
+.mainDiv {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    overflow-x: hidden;
+}
+
+.sideNavDiv {
+    width: 20%;
+}
+
+.sideNav {
+    height: 100%;
+    width: 18%;
+    position:fixed;
+}
+
+.nextButtonDiv{
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    height: 100%;
+    padding-bottom: 2rem;
+}
+
+.logoDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 200px;
+    flex-direction: column;
+}
+
+.logoDiv hr {
+    margin: 12px;
+    align-self: stretch;
+}
+
+.mainPanelDiv {
+    height: 100vh;
+    width: 100%;
+    padding: 4rem;
+}
+
+.homeMainPanelDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.homePanel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 2rem;
+}
+
+.homePanel hr {
+    margin: 12px;
+    align-self: stretch;
+}
+
+#userDetails {
+    height: 100%;
+}
+
+.userNullText {
+    text-align: center;
+}
+
+.userDetails {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    flex-direction: row;
+    gap: 24px;
+    display: '';
+}
+
+
+.userDetailsBody {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-grow: 4;
+}
+
+.profileImage{
+    width: 0.5%;  
+    flex-grow: 1;
+}
+
+.tableMainPanelDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    height: 100%;
+}
+
+.tableMainPanelDiv .rs-table-body-row-wrapper {
+    height: 100vh;
+}
+
+.addUserMainDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.addUserFormDiv{
+    padding: -15px;
+}
+
+.addUserForm {
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.addUserForm hr {
+    margin: 10px;
+    align-self: stretch;
+    border-top: 1px solid #8c8b8b4c;
+  }
+
+.addUserButton{
+    width: 25%;
+}

@@ -1,0 +1,43 @@
+
+.idp__template__list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.idp__template__card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: whitesmoke 1px solid;
+    border-radius: 5px;
+    padding: 8px;
+    width: 100%;
+}
+
+.idp__template__card:hover {
+    background-color: whitesmoke;
+    transition: background-color 10ms linear;
+    cursor: pointer;
+}
+
+.idp__list {
+    width: 100%;
+}
+
+.idp__list__item {
+    background-color: #fafafa;
+    padding: 10px;
+    width: 100%;
+    font-weight: bold;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.idp__list__item small {
+    font-weight: lighter;
+    font-size: 12px;
+}
