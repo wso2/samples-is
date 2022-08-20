@@ -1,7 +1,7 @@
 import { getSession } from 'next-auth/react';
-import React from 'react'
-import { redirect } from '../../util/util';
+import React from 'react';
 import config from '../../config.json';
+import { redirect } from '../../util/util/routerUtil/routerUtil';
 
 
 export async function getServerSideProps(context) {

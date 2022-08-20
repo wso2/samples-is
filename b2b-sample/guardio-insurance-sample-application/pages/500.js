@@ -5,7 +5,7 @@ import style from '../styles/Error.module.css';
 import { useRouter } from 'next/router';
 import { Button, Col, Grid, Row } from 'rsuite';
 import error500Image from '../public/500.svg';
-import { orgSignout } from '../util/util';
+import { orgSignout } from '../util/util/routerUtil/routerUtil';
 
 
 export default function Custom500() {

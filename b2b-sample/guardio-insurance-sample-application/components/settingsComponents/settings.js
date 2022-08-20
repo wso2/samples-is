@@ -7,7 +7,8 @@ import styles from '../../styles/Settings.module.css';
 
 import { useSession } from 'next-auth/react';
 import "rsuite/dist/rsuite.min.css";
-import { checkCustomization, hideBasedOnScopes, orgSignout } from '../../util/util';
+import { checkCustomization, hideBasedOnScopes } from '../../util/util/frontendUtil/frontendUtil';
+import { orgSignout } from '../../util/util/routerUtil/routerUtil';
 import AddUserComponent from './addUserComponent';
 import Application from "./application/application";
 import HomeComponent from './homeComponet/homeComponent';

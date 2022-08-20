@@ -2,8 +2,8 @@ import React from 'react';
 
 import { getSession } from 'next-auth/react';
 import Settings from '../../components/settingsComponents/settings';
-import { emptySession, parseCookies, redirect } from '../../util/util';
 import { getOrg, getRouterQuery } from '../../util/util/orgUtil/orgUtil';
+import { emptySession, parseCookies, redirect } from '../../util/util/routerUtil/routerUtil';
 
 export async function getServerSideProps(context) {
 
