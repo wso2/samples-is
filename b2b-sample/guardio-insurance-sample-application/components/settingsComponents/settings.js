@@ -48,7 +48,7 @@ export default function Settings(props) {
     useEffect(() => {
         document.body.className = checkCustomization(props.colorTheme)
     }, [props.colorTheme]);
-    // rs-theme-dark classrs-theme-high-contrast
+    
     return (
 
         <div className={styles.mainDiv}>

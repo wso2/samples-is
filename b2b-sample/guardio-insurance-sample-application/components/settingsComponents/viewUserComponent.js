@@ -13,7 +13,6 @@ export default function ViewUserComponent(props) {
     const [openUser, setOpenUser] = useState({});
 
     const fetchData = async () => {
-        //const res = await usersDetails(props.session);
         const res = await decodeViewUsers(props.session);
         setUsers(res);
     }

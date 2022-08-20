@@ -12,7 +12,6 @@ export default async function me(req , res) {
 
     try {
         const fetchData = await fetch(
-            // `${config.WSO2IS_HOST}/t/${config.WSO2IS_TENANT_NAME}/scim2/Me`,
             `${config.WSO2IS_HOST}/o/${subOrgId}/scim2/Users/${session.userId}`,
             getDataHeader(session)
         );
