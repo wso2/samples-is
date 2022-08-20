@@ -1,5 +1,5 @@
 import config from '../../config.json';
-import { consoleLogDebug, consoleLogError, parseCookies } from "../util";
+import { parseCookies } from '../../util/util/routerUtil/routerUtil';
 
 const SWITCH_API_CALL = "Switch API Call";
 
@@ -33,7 +33,6 @@ function getSwitchBody(oId, accessToken) {
         'switching_organization': oId,
         'token': accessToken
     }
-    consoleLogDebug(SWITCH_API_CALL, new URLSearchParams(body));
     return body;
 }
 
@@ -43,7 +42,6 @@ function getSwitchResponse(oId, accessToken) {
         headers: getSwitchHeader(),
         body: new URLSearchParams(getSwitchBody(oId, accessToken)).toString()
     }
-    consoleLogDebug(SWITCH_API_CALL, request)
     return request;
 }
 
@@ -62,11 +60,9 @@ async function switchOrg(request, accessToken) {
             getSwitchResponse(setOrgId(request), accessToken)
         );
         const data = await res.json();
-        consoleLogDebug(SWITCH_API_CALL, data);
 
         return data;
     } catch (err) {
-        consoleLogError(SWITCH_API_CALL, err);
         return null;
     }
 }

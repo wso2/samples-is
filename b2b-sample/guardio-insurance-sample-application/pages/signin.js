@@ -7,7 +7,7 @@ import styles from '../styles/Signin.module.css';
 
 import "rsuite/dist/rsuite.min.css";
 import Logo from '../components/logo/logo';
-import { stringIsEmpty } from '../util/util';
+import { stringIsEmpty } from '../util/util/common/common';
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from '../util/util/frontendUtil/frontendUtil';
 import { getRouterQuery } from '../util/util/orgUtil/orgUtil';
 

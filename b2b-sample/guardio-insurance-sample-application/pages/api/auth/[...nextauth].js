@@ -1,7 +1,7 @@
-import NextAuth from "next-auth"
-import { consoleLogDebug, getLoggedUserId, getLoginOrgId,getLoggedUser,getLoggedUserFromProfile } from "../../../util/util";
+import NextAuth from "next-auth";
 import config from '../../../config.json';
 import { switchOrg } from '../../../util/apiCall/switchApiCall';
+import { getLoggedUserFromProfile, getLoggedUserId } from '../../../util/util/routerUtil/routerUtil';
 
 const wso2ISProvider = (req, res) => NextAuth(req, res, {
 
@@ -21,7 +21,6 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
         }
       },
       profile(profile) {
-        consoleLogDebug('profile2',profile);
         return {
           id: profile.sub
         }
@@ -48,6 +47,7 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
         session.expires = true
       }
       else {
+        getLoggedUserFromProfile
         session.accessToken = orgSession.access_token
         session.idToken = orgSession.id_token
         session.scope = orgSession.scope

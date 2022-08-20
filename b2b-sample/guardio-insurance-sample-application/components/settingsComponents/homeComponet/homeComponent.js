@@ -4,8 +4,8 @@ import styles from '../../../styles/Settings.module.css';
 import Logo from '../../logo/logo';
 
 import React, { useEffect, useState } from 'react';
-import { meDetails } from '../../../util/apiDecode';
 
+import decodeMe from '../../../util/apiDecode/dashboard/decodeMe';
 import LatestNewsComponent from './latestNewsComponent';
 import UserDetails from './userDetails';
 
@@ -15,7 +15,7 @@ export default function HomeComponent(props) {
 
     useEffect(() => {
         async function fetchData() {
-            const res = await meDetails(props.session);
+            const res = await decodeMe(props.session);
             setMe(res);
         }
         fetchData();
