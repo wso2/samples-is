@@ -27,14 +27,23 @@ read dest_dir
 
 wget -c https://repo1.maven.org/maven2/com/h2database/h2/2.1.210/h2-2.1.210.jar || exit 1
 wget -c https://repo1.maven.org/maven2/com/h2database/h2/1.4.199/h2-1.4.199.jar || exit 1
+wget -c https://repo1.maven.org/maven2/com/h2database/h2/1.3.175/h2-1.3.175.jar || exit 1
 
-db_files=("$src_dir"/*.mv.db)
+db_files=("$src_dir"/*.mv.db "$src_dir"/*.h2.db)
 for filepath in "${db_files[@]}"; do
-    dbname=$(basename "$filepath" .mv.db)
+    if [[ "$filepath" == *"*.mv.db" || "$filepath" == *"*.h2.db" ]]; then
+        continue
+    elif [[ "$filepath" == *".mv.db" ]]; then
+        dbname=$(basename "$filepath" .mv.db)
+        h2_1x_jar="h2-1.4.199.jar"
+    elif [[ "$filepath" == *".h2.db" ]]; then
+        dbname=$(basename "$filepath" .h2.db)
+        h2_1x_jar="h2-1.3.175.jar"
+    fi
 
     # Export data from old db file to backup.zip
     echo "Exporting database..."
-    java -cp h2-1.4.199.jar org.h2.tools.Script -url "jdbc:h2:$src_dir/$dbname" -user wso2carbon -password wso2carbon -script backup.zip -options compression zip || exit 1
+    java -cp $h2_1x_jar org.h2.tools.Script -url "jdbc:h2:$src_dir/$dbname" -user wso2carbon -password wso2carbon -script backup.zip -options compression zip || exit 1
     rm -f $dest_dir/$dbname.mv.db
 
     # Import data from the backup.zip to the new db file
@@ -45,6 +54,7 @@ for filepath in "${db_files[@]}"; do
     echo "$dbname migrated successfully"
 done
 
+rm -f h2-1.3.175.jar
 rm -f h2-1.4.199.jar
 rm -f h2-2.1.210.jar
 
