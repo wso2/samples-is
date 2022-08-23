@@ -2,8 +2,8 @@
     "WSO2IS_HOST": "https://localhost:9443",
     "WSO2IS_TENANT_NAME": "carbon.super",
     "WSO2IS_CLIENT_URL": "http://localhost:3000",
-    "WSO2IS_CLIENT_ID": "Cl9yFmPOxoTDYd74yryUNx9qJGwa",
-    "WSO2IS_CLIENT_SECRET": "GazfJgFqzUoVGjCfNijW9bieTSwa",
+    "WSO2IS_CLIENT_ID": "<APPLICATION CLIENT ID>",
+    "WSO2IS_CLIENT_SECRET": "<APPLICATION CLIENT SECRET>",
     "WSO2IS_SCOPES": [
         "openid",
         "email",
@@ -23,13 +23,13 @@
     ],
     "SAMPLE_ORGS": [
         {
-            "id": "1e3b6305-12eb-4743-926b-1e9cd69001b4",
+            "id": "<ORGANIZATION ID OF BEST AUTO MART>",
             "routerQuery": "best",
             "name": "Best Auto Mart",
             "colorTheme": "blue"
         },
         {
-            "id": "8b2f9ca2-7cb4-4a0a-bbe6-395ce23ba9de",
+            "id": "<ORGANIZATION ID OF CAR TRADERS>",
             "routerQuery": "car",
             "name": "Car Traders",
             "colorTheme": "yellow"
