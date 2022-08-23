@@ -1,6 +1,6 @@
 # WSO2 B2B Organization Samples
 
-Here are a list of sample applications to try out B2B Scenarios.
+Here is a list of sample applications to try out B2B Scenarios.
 
 ## Guardio Insurance
 

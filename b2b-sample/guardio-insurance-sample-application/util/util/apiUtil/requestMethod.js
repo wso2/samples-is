@@ -15,6 +15,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 const RequestMethod = {
     POST : 'POST',
     PATCH : 'PATCH'

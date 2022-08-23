@@ -15,6 +15,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 import Image from 'next/image';
 import React from 'react';
 import style from '../styles/Error.module.css';
@@ -24,12 +25,10 @@ import { Button, Col, Grid, Row } from 'rsuite';
 import error500Image from '../public/500.svg';
 import { orgSignout } from '../util/util/routerUtil/routerUtil';
 
-
 export default function Custom500() {
 
   const router = useRouter()
   const goBack = () => orgSignout();
-
 
   return (
     <div className={style.errorMainContent}>
@@ -47,7 +46,9 @@ export default function Custom500() {
                 textAlign: 'center',
                 position: 'relative',
                 top: -100
-              }}><b>It looks like you have been inactive for a long time.</b> <br />When you click on <i>Go back</i>, we will try to recover the session if it exists. <br />If you don&apos;t have an active session, you will be redirected to the login page.</p>
+              }}><b>It looks like you have been inactive for a long time.</b> <br />
+                When you click on <i>Go back</i>, we will try to recover the session if it exists. <br />
+                If you don&apos;t have an active session, you will be redirected to the login page.</p>
               <Button style={{
                 textAlign: 'center',
                 position: 'relative',

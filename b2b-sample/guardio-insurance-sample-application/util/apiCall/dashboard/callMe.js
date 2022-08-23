@@ -15,6 +15,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 import Cookie from 'js-cookie';
 import config from '../../../config.json';
 import { getInternalApiRequestOptions } from '../../util/apiUtil/getInteralApiRequestOptions';
@@ -30,8 +31,8 @@ export default async function callMe(session) {
         const data = await res.json();
 
         return data;
+        
     } catch (err) {
-
         return null;
     }
 }

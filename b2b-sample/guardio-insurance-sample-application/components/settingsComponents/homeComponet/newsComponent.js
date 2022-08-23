@@ -15,6 +15,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 import Image from 'next/image';
 import React from 'react';
 import { Panel } from 'rsuite';

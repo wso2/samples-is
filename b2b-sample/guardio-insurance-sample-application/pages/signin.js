@@ -15,6 +15,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 import Cookie from 'js-cookie';
 import { getSession, signIn } from 'next-auth/react';
 import React, { useEffect, useState } from 'react';
@@ -132,7 +133,8 @@ export default function Signin(props) {
         </div>
 
         <div className={styles.buttonCarousell}>
-          <Button className={styles.nextButton} size="lg" appearance='primary' onClick={(event) => nextOnClick(event)}>Next</Button>
+          <Button className={styles.nextButton} size="lg" appearance='primary'
+            onClick={(event) => nextOnClick(event)}>Next</Button>
           <Button size="lg" appearance="link">Register</Button>
         </div>
       </div>

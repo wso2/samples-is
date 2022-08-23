@@ -15,6 +15,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 import Image from 'next/image';
 import { Panel } from 'rsuite';
 import "rsuite/dist/rsuite.min.css";

@@ -15,6 +15,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 import AppSelectIcon from '@rsuite/icons/AppSelect';
 import Edit from '@rsuite/icons/Edit';
 import Trash from '@rsuite/icons/Trash';
@@ -39,7 +40,7 @@ export default function IdentityProviders() {
     const [idpList, setIdpList] = useState([]);
     const [openAddModal, setOpenAddModal] = useState(false);
     const [selectedTemplate, setSelectedTemplate] = useState(undefined);
-    const {data: session} = useSession();
+    const { data: session } = useSession();
 
     const templates = useMemo(() => {
         return [
@@ -77,7 +78,7 @@ export default function IdentityProviders() {
     const onIdPSave = async (formValues, template) => {
 
         const FIRST_ENTRY = 0;
-        let model = {...template.idp};
+        let model = { ...template.idp };
 
         model.name = formValues.application_name.toString();
 
@@ -138,7 +139,7 @@ export default function IdentityProviders() {
 
         model.federatedAuthenticators.authenticators[FIRST_ENTRY].isEnabled = true;
 
-        const response = await createIdentityProvider({model, session});
+        const response = await createIdentityProvider({ model, session });
 
         setIdpList([
             ...idpList,
@@ -160,14 +161,14 @@ export default function IdentityProviders() {
                 {idpList.length > 0 && (
                     <Stack>
                         <Button appearance="primary" size="lg"
-                                onClick={onAddIdentityProviderClick}>
+                            onClick={onAddIdentityProviderClick}>
                             Add Identity Provider
                         </Button>
                     </Stack>
                 )}
             </Stack>
             <FlexboxGrid
-                style={{width: "100%", height: "60vh", marginTop: "24px"}}
+                style={{ width: "100%", height: "60vh", marginTop: "24px" }}
                 justify={idpList.length === 0 ? "center" : "start"}
                 align={idpList.length === 0 ? "middle" : "top"}>
                 {idpList.length === 0
@@ -199,7 +200,7 @@ export default function IdentityProviders() {
                         onSave={onIdPSave}
                         onCancel={onCreationDismiss}
                         openModal={!!selectedTemplate}
-                        template={selectedTemplate}/>
+                        template={selectedTemplate} />
                 )
             }
         </Container>
@@ -207,37 +208,36 @@ export default function IdentityProviders() {
 
 }
 
-const IdentityProviderList = ({idpList, fetchAllIdPs}) => {
+const IdentityProviderList = ({ idpList, fetchAllIdPs }) => {
 
-    const {data: session} = useSession();
+    const { data: session } = useSession();
 
     const onIdPEditClick = (ignoredId) => {
         alert("NOT IMPLEMENTED");
     };
 
     const onIdPDeleteClick = (id) => {
-        deleteIdentityProvider({id, session})
+        deleteIdentityProvider({ id, session })
             .finally(() => {
                 fetchAllIdPs().finally();
             })
     };
 
-
     return (
         <List className={styles.idp__list}>
-            {idpList.map(({id, name}) => (
+            {idpList.map(({ id, name }) => (
                 <List.Item key={id} className={styles.idp__list__item}>
                     <div>
                         <p>{name}</p>
                         <small>{id}</small>
                     </div>
                     <div>
-                        <IconButton icon={<Trash/>}
-                                    onClick={() => onIdPDeleteClick(id)}
-                                    appearance="subtle"/>
-                        <IconButton icon={<Edit/>}
-                                    onClick={() => onIdPEditClick(id)}
-                                    appearance="primary"/>
+                        <IconButton icon={<Trash />}
+                            onClick={() => onIdPDeleteClick(id)}
+                            appearance="subtle" />
+                        <IconButton icon={<Edit />}
+                            onClick={() => onIdPEditClick(id)}
+                            appearance="primary" />
                     </div>
                 </List.Item>
             ))}
@@ -245,7 +245,7 @@ const IdentityProviderList = ({idpList, fetchAllIdPs}) => {
     );
 };
 
-const AddIdentityProviderModal = ({openModal, onClose, templates, onTemplateSelected}) => {
+const AddIdentityProviderModal = ({ openModal, onClose, templates, onTemplateSelected }) => {
 
     const resolveIconName = (template) => {
         if (GOOGLE_ID === template.templateId) {
@@ -262,8 +262,8 @@ const AddIdentityProviderModal = ({openModal, onClose, templates, onTemplateSele
 
     return (
         <Modal open={openModal}
-               onClose={onClose}
-               onBackdropClick={onClose}>
+            onClose={onClose}
+            onBackdropClick={onClose}>
             <Modal.Header>
                 <Modal.Title>Select Identity Provider</Modal.Title>
                 <p>Choose one of the following identity providers.</p>
@@ -281,7 +281,7 @@ const AddIdentityProviderModal = ({openModal, onClose, templates, onTemplateSele
                                         <h5>{template.name}</h5>
                                         <small>{template.description}</small>
                                     </div>
-                                    <Avatar src={`/icons/${resolveIconName(template)}`}/>
+                                    <Avatar src={`/icons/${resolveIconName(template)}`} />
                                 </div>
                             )
                         })}
@@ -293,17 +293,17 @@ const AddIdentityProviderModal = ({openModal, onClose, templates, onTemplateSele
 
 };
 
-const EmptyIdentityProviderList = ({onAddIdentityProviderClick}) => {
+const EmptyIdentityProviderList = ({ onAddIdentityProviderClick }) => {
 
     return (
         <Stack alignItems="center" direction="column">
-            <AppSelectIcon style={{opacity: .2}} width="150px" height="150px"/>
-            <p style={{marginTop: "20px", fontSize: 14}}>
+            <AppSelectIcon style={{ opacity: .2 }} width="150px" height="150px" />
+            <p style={{ marginTop: "20px", fontSize: 14 }}>
                 There are no identity providers available at the moment.
             </p>
             <Button appearance="primary"
-                    onClick={onAddIdentityProviderClick}
-                    size="md" style={{marginTop: "12px"}}>
+                onClick={onAddIdentityProviderClick}
+                size="md" style={{ marginTop: "12px" }}>
                 Add Identity Provider
             </Button>
         </Stack>
@@ -311,7 +311,7 @@ const EmptyIdentityProviderList = ({onAddIdentityProviderClick}) => {
 
 };
 
-const IdPCreationModal = ({openModal, onSave, onCancel, template}) => {
+const IdPCreationModal = ({ openModal, onSave, onCancel, template }) => {
 
     const [formValues, setFormValues] = useState({});
 
@@ -329,27 +329,27 @@ const IdPCreationModal = ({openModal, onSave, onCancel, template}) => {
                 return (
                     <GoogleIdentityProvider
                         formValues={formValues}
-                        onFormValuesChange={setFormValues}/>
+                        onFormValuesChange={setFormValues} />
                 )
             case FACEBOOK_ID:
                 return (
                     <FacebookIdentityProvider
                         formValues={formValues}
-                        onFormValuesChange={setFormValues}/>
+                        onFormValuesChange={setFormValues} />
                 )
             case ENTERPRISE_ID:
                 return (
                     <EnterpriseIdentityProvider
                         formValues={formValues}
-                        onFormValuesChange={setFormValues}/>
+                        onFormValuesChange={setFormValues} />
                 )
         }
     };
 
     return (
         <Modal open={openModal}
-               onClose={handleModalClose}
-               onBackdropClick={handleModalClose}>
+            onClose={handleModalClose}
+            onBackdropClick={handleModalClose}>
             <Modal.Header>
                 <Modal.Title>{template.name}</Modal.Title>
                 <p>{template.description}</p>
@@ -359,11 +359,11 @@ const IdPCreationModal = ({openModal, onSave, onCancel, template}) => {
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={handleCreate}
-                        appearance="primary">
+                    appearance="primary">
                     Create
                 </Button>
                 <Button onClick={handleModalClose}
-                        appearance="subtle">
+                    appearance="subtle">
                     Cancel
                 </Button>
             </Modal.Footer>
@@ -372,23 +372,23 @@ const IdPCreationModal = ({openModal, onSave, onCancel, template}) => {
 
 };
 
-const FacebookIdentityProvider = ({onFormValuesChange, formValues}) => {
+const FacebookIdentityProvider = ({ onFormValuesChange, formValues }) => {
 
     return (
         <Form onChange={onFormValuesChange} formValue={formValues}>
             <Form.Group controlId="application_name">
                 <Form.ControlLabel>Application Name</Form.ControlLabel>
-                <Form.Control name="application_name"/>
+                <Form.Control name="application_name" />
                 <Form.HelpText tooltip>Application Name is Required</Form.HelpText>
             </Form.Group>
             <Form.Group controlId="application_id">
                 <Form.ControlLabel>Application ID</Form.ControlLabel>
-                <Form.Control name="application_id" type="text" autoComplete="off"/>
+                <Form.Control name="application_id" type="text" autoComplete="off" />
                 <Form.HelpText tooltip>Application ID is Required</Form.HelpText>
             </Form.Group>
             <Form.Group controlId="application_secret">
                 <Form.ControlLabel>Application Secret</Form.ControlLabel>
-                <Form.Control name="application_secret" type="password" autoComplete="off"/>
+                <Form.Control name="application_secret" type="password" autoComplete="off" />
                 <Form.HelpText tooltip>Application Secret is Required</Form.HelpText>
             </Form.Group>
         </Form>
@@ -396,23 +396,23 @@ const FacebookIdentityProvider = ({onFormValuesChange, formValues}) => {
 
 }
 
-const GoogleIdentityProvider = ({onFormValuesChange, formValues}) => {
+const GoogleIdentityProvider = ({ onFormValuesChange, formValues }) => {
 
     return (
         <Form onChange={onFormValuesChange} formValue={formValues}>
             <Form.Group controlId="application_name">
                 <Form.ControlLabel>Application Name</Form.ControlLabel>
-                <Form.Control name="application_name"/>
+                <Form.Control name="application_name" />
                 <Form.HelpText tooltip>Application Name is Required</Form.HelpText>
             </Form.Group>
             <Form.Group controlId="client_id">
                 <Form.ControlLabel>Client ID</Form.ControlLabel>
-                <Form.Control name="client_id" type="text" autoComplete="off"/>
+                <Form.Control name="client_id" type="text" autoComplete="off" />
                 <Form.HelpText tooltip>Client ID is Required</Form.HelpText>
             </Form.Group>
             <Form.Group controlId="client_secret">
                 <Form.ControlLabel>Client Secret</Form.ControlLabel>
-                <Form.Control name="client_secret" type="password" autoComplete="off"/>
+                <Form.Control name="client_secret" type="password" autoComplete="off" />
                 <Form.HelpText tooltip>Client Secret is Required</Form.HelpText>
             </Form.Group>
         </Form>
@@ -420,38 +420,38 @@ const GoogleIdentityProvider = ({onFormValuesChange, formValues}) => {
 
 };
 
-const EnterpriseIdentityProvider = ({onFormValuesChange, formValues}) => {
+const EnterpriseIdentityProvider = ({ onFormValuesChange, formValues }) => {
 
     return (
         <Form onChange={onFormValuesChange} formValue={formValues}>
             <Form.Group controlId="application_name">
                 <Form.ControlLabel>Application Name</Form.ControlLabel>
-                <Form.Control name="application_name"/>
+                <Form.Control name="application_name" />
                 <Form.HelpText tooltip>Application Name is Required</Form.HelpText>
             </Form.Group>
             <Form.Group controlId="client_id">
                 <Form.ControlLabel>Client ID</Form.ControlLabel>
-                <Form.Control name="client_id" type="text" autoComplete="off"/>
+                <Form.Control name="client_id" type="text" autoComplete="off" />
                 <Form.HelpText tooltip>Client ID is Required</Form.HelpText>
             </Form.Group>
             <Form.Group controlId="client_secret">
                 <Form.ControlLabel>Client Secret</Form.ControlLabel>
-                <Form.Control name="client_secret" type="password" autoComplete="off"/>
+                <Form.Control name="client_secret" type="password" autoComplete="off" />
                 <Form.HelpText tooltip>Client Secret is Required</Form.HelpText>
             </Form.Group>
             <Form.Group controlId="authorization_endpoint_url">
                 <Form.ControlLabel>Authorization Endpoint URL</Form.ControlLabel>
-                <Form.Control name="authorization_endpoint_url" type="text"/>
+                <Form.Control name="authorization_endpoint_url" type="text" />
                 <Form.HelpText tooltip>Authorization Endpoint URL is Required</Form.HelpText>
             </Form.Group>
             <Form.Group controlId="token_endpoint_url">
                 <Form.ControlLabel>Token Endpoint URL</Form.ControlLabel>
-                <Form.Control name="token_endpoint_url" type="text"/>
+                <Form.Control name="token_endpoint_url" type="text" />
                 <Form.HelpText tooltip>Token Endpoint URL is Required</Form.HelpText>
             </Form.Group>
             <Form.Group controlId="certificate">
                 <Form.ControlLabel>IdP Certificate (PEM)</Form.ControlLabel>
-                <Form.Control name="certificate" type="text"/>
+                <Form.Control name="certificate" type="text" />
                 <Form.HelpText tooltip>
                     WSO2 Identity Server will use this certificate to
                     verify the signed responses from your external IdP.

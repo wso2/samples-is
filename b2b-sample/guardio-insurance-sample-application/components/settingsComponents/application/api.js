@@ -15,9 +15,10 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 import config from "../../../config.json";
 
-export const listApplications = async ({limit, offset, filter = null, session}) => {
+export const listApplications = async ({ limit, offset, filter = null, session }) => {
 
     const DEFAULT_FILTER = filter || "name co *";
     const q = `limit=${limit}&offset=${offset}&filter=${DEFAULT_FILTER}`;
@@ -43,10 +44,9 @@ export const listApplications = async ({limit, offset, filter = null, session}) 
         console.error(err);
         return null;
     }
-
 };
 
-export const getApplicationDetails = async ({id, session}) => {
+export const getApplicationDetails = async ({ id, session }) => {
 
     try {
         const res = await fetch(
@@ -65,10 +65,9 @@ export const getApplicationDetails = async ({id, session}) => {
         console.error(err);
         return null;
     }
-
 };
 
-export const patchApplication = async ({id, partial, session}) => {
+export const patchApplication = async ({ id, partial, session }) => {
 
     try {
         const res = await fetch(
@@ -88,5 +87,4 @@ export const patchApplication = async ({id, partial, session}) => {
         console.error(err);
         return null;
     }
-
 }

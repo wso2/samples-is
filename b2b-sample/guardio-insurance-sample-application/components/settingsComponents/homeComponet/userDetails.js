@@ -15,6 +15,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 import Image from 'next/image';
 import React from 'react';
 import profileImage from '../../../public/profile.svg';
@@ -32,7 +33,6 @@ export default function UserDetails(props) {
             <div className={styles.profileImage}>
                 <Image src={profileImage} alt="profile image" />
             </div>
-
         </div>
     )
 }

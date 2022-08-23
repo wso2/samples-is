@@ -15,6 +15,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 import React, { useState } from 'react';
 import { Field, Form } from 'react-final-form';
 import { Button, ButtonToolbar, Loader, Modal, useToaster } from 'rsuite';
@@ -93,7 +94,8 @@ export default function EditUserComponent(props) {
                     <Form
                         onSubmit={onSubmit}
                         validate={validate}
-                        initialValues={{ name: props.user.name, email: props.user.email, username: props.user.username }}
+                        initialValues={{ name: props.user.name, email: props.user.email, 
+                            username: props.user.username }}
                         render={({ handleSubmit, form, submitting, pristine, values }) => (
                             <FormSuite ayout="vertical" className={styles.addUserForm}
                                 onSubmit={event => { handleSubmit(event).then(form.restart); }} fluid>

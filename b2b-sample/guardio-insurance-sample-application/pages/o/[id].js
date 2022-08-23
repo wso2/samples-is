@@ -15,6 +15,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 import React from 'react';
 
 import { getSession } from 'next-auth/react';
@@ -27,11 +28,11 @@ export async function getServerSideProps(context) {
   const session = await getSession(context);
   let setOrg = {};
 
-  if(session == null || session == undefined){
+  if (session == null || session == undefined) {
     return emptySession(session);
   }
 
-  if(session.expires){
+  if (session.expires) {
     return redirect('/500');
   }
 
@@ -44,9 +45,9 @@ export async function getServerSideProps(context) {
     const routerQuery = context.query.id;
     if (routerQuery != getRouterQuery(subOrgId)) {
       return redirect('/404');
-    } else if(session.error){
+    } else if (session.error) {
       return redirect('/500');
-    } 
+    }
     else {
       setOrg = getOrg(subOrgId);
     }
@@ -55,11 +56,11 @@ export async function getServerSideProps(context) {
   return {
     props: { session, setOrg },
   }
-
 }
-export default function Org(props) {
 
+export default function Org(props) {
   return (
-    <Settings orgId={props.setOrg.id} routerQuery={props.setOrg.routerQuery} name={props.setOrg.name} colorTheme={props.setOrg.colorTheme} />
+    <Settings orgId={props.setOrg.id} routerQuery={props.setOrg.routerQuery} name={props.setOrg.name}
+      colorTheme={props.setOrg.colorTheme} />
   )
 }

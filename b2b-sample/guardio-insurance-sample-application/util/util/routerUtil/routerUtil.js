@@ -15,6 +15,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 import cookie from "cookie";
 import FrontCookie from 'js-cookie';
 import { signOut } from 'next-auth/react';

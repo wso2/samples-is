@@ -36,7 +36,7 @@ export default function Application() {
     const [steps, setSteps] = useState([]);
     const [idpList, setIdpList] = useState([]);
     const [loading, setLoading] = useState(false);
-    const {data: session} = useSession();
+    const { data: session } = useSession();
 
     useEffect(() => {
         fetchApplication().finally();
@@ -110,7 +110,7 @@ export default function Application() {
     const onIdPSelected = async (idp) => {
 
         const FIRST_AUTHENTICATOR = 0;
-        const details = await getDetailedIdentityProvider({id: idp.id, session});
+        const details = await getDetailedIdentityProvider({ id: idp.id, session });
         const authenticator = details.federatedAuthenticators.authenticators[FIRST_AUTHENTICATOR];
 
         /**
@@ -118,11 +118,11 @@ export default function Application() {
          * steps which are added from other APIs/Dashboards.
          * @type {*[]}
          */
-        const authenticationSequence = {...application.authenticationSequence};
+        const authenticationSequence = { ...application.authenticationSequence };
 
         const existingProvidersInFirstStep = new Set(
             authenticationSequence.steps[0].options
-                .map(({idp}) => idp)
+                .map(({ idp }) => idp)
                 .filter(name => name !== "LOCAL")
         );
 
@@ -136,8 +136,8 @@ export default function Application() {
                 {
                     id: 1,
                     options: [
-                        {idp: 'LOCAL', authenticator: 'BasicAuthenticator'},
-                        {idp: idp.name, authenticator: authenticator.name}
+                        { idp: 'LOCAL', authenticator: 'BasicAuthenticator' },
+                        { idp: idp.name, authenticator: authenticator.name }
                     ],
                 }
             ]
@@ -156,7 +156,7 @@ export default function Application() {
 
     const onIdPRemovedFromSequence = (step, option) => {
 
-        const authenticationSequence = {...application.authenticationSequence};
+        const authenticationSequence = { ...application.authenticationSequence };
         const updatedOptions = step.options.filter(o => o.idp !== option.idp);
 
         const updatedSequence = Object.assign(authenticationSequence, {
@@ -196,8 +196,8 @@ export default function Application() {
                     <p>Configure sign-on methods and advanced settings.</p>
                 </Stack>
             </Stack>
-            <div style={{marginTop: '24px'}}>
-                <Nav activeKey={active} onSelect={setActive} style={{marginBottom: 50}} appearance="tabs">
+            <div style={{ marginTop: '24px' }}>
+                <Nav activeKey={active} onSelect={setActive} style={{ marginBottom: 50 }} appearance="tabs">
                     <Nav.Item eventKey="sign-on-methods">Sign-on Methods</Nav.Item>
                     <Nav.Item eventKey="advanced">Advanced</Nav.Item>
                 </Nav>
@@ -205,7 +205,7 @@ export default function Application() {
             <div>
                 {
                     (application && steps?.length) && steps
-                        .filter(({options}) => options.length > 0)
+                        .filter(({ options }) => options.length > 0)
                         .map((step) => (
                             <Step
                                 key={step.id}
@@ -220,7 +220,7 @@ export default function Application() {
                         ))
                 }
             </div>
-            <Stack style={{marginTop: 20}}>
+            <Stack style={{ marginTop: 20 }}>
                 <Button
                     onClick={onUpdateAuthenticationSeqClick}
                     appearance="primary" size="lg">
@@ -235,21 +235,21 @@ export default function Application() {
             />
             {loading && <Loader
                 backdrop size="lg"
-                style={{zIndex: 1000}}
+                style={{ zIndex: 1000 }}
                 content="loading..."
-                vertical/>
+                vertical />
             }
         </Container>
     );
 
 };
 
-export const AuthenticatorSelectionModal = ({openModal, handleModalClose, idpList, handleAdd}) => {
+export const AuthenticatorSelectionModal = ({ openModal, handleModalClose, idpList, handleAdd }) => {
 
     return (
         <Modal open={openModal}
-               onClose={handleModalClose}
-               onBackdropClick={handleModalClose}>
+            onClose={handleModalClose}
+            onBackdropClick={handleModalClose}>
             <Modal.Header>
                 <Modal.Title>Add Authentication</Modal.Title>
             </Modal.Header>
@@ -272,7 +272,7 @@ export const AuthenticatorSelectionModal = ({openModal, handleModalClose, idpLis
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={handleModalClose}
-                        appearance="subtle">
+                    appearance="subtle">
                     Cancel
                 </Button>
             </Modal.Footer>
@@ -281,7 +281,7 @@ export const AuthenticatorSelectionModal = ({openModal, handleModalClose, idpLis
 
 };
 
-export const Step = ({application: _, step, onOptionDelete, onOptionsAdd}) => {
+export const Step = ({ application: _, step, onOptionDelete, onOptionsAdd }) => {
 
     return (
         <div className={styles.step_wrapper}>
@@ -294,11 +294,11 @@ export const Step = ({application: _, step, onOptionDelete, onOptionsAdd}) => {
                             {option.idp !== "LOCAL" && <IconButton
                                 onClick={() => onOptionDelete(option, index)}
                                 size="xs"
-                                icon={<Trash/>}
+                                icon={<Trash />}
                             />}
                         </div>
                         {index < step.options.length - 1 && (
-                            <span style={{fontSize: "12px"}}>OR</span>
+                            <span style={{ fontSize: "12px" }}>OR</span>
                         )}
                     </div>
                 ))}
@@ -306,12 +306,9 @@ export const Step = ({application: _, step, onOptionDelete, onOptionsAdd}) => {
             <div
                 className={styles.option_add_button}
                 onClick={() => onOptionsAdd(step)}>
-                <Plus/>
+                <Plus />
             </div>
         </div>
     );
 
 };
-
-
-

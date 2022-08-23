@@ -15,6 +15,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 import config from '../../../../config.json';
 import { getSentDataRequestOptions } from '../../../../util/util/apiUtil/getSentDataRequestOptions';
 import { RequestMethod } from '../../../../util/util/apiUtil/requestMethod';
