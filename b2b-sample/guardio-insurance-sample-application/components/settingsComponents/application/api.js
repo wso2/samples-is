@@ -84,7 +84,6 @@ export const patchApplication = async ({ id, partial, session }) => {
         );
         return await res.json();
     } catch (err) {
-        console.error(err);
         return null;
     }
 }

@@ -50,18 +50,16 @@ export default function HomeComponent(props) {
                 </div>
             </Panel>
             {
-                me == null ?
-                    <Panel bordered>
+                me == null
+                    ? <Panel bordered>
                         <div>Add the user attributes in created the application to display user details</div>
                     </Panel>
-                    :
-                    <Panel header="User Details" bordered>
+                    : <Panel header="User Details" bordered>
                         <div id="userDetails" className={styles.homePanel}>
                             <UserDetails me={me} session={props.session} />
                         </div>
                     </Panel>
             }
-
             <LatestNewsComponent />
         </div>
     );

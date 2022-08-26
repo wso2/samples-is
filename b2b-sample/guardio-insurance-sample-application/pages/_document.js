@@ -23,7 +23,9 @@ export default class MyDocument extends Document {
     const pageProps = this.props?.__NEXT_DATA__?.props?.pageProps;
     return (
       <Html>
-        <Head />
+        <Head>
+          <link rel="shortcut icon" href="/favicon.png" />
+        </Head>
         <body className={pageProps.session ? 'dark-mode' : 'light-mode'}>
           <Main />
           <NextScript />

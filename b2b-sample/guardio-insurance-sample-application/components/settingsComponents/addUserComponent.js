@@ -209,13 +209,10 @@ export default function AddUserComponent(props) {
                                 </FormSuite.Group>
 
                             </div>
-
-                            {/* <pre>{JSON.stringify(values, 0, 2)}</pre> */}
                         </FormSuite>
                     )}
                 />
             </div>
-
             <div style={loadingDisplay}>
                 <Loader size="lg" backdrop content="User is adding" vertical />
             </div>

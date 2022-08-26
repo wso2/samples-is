@@ -16,21 +16,16 @@
  * under the License.
  */
 
-@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap");
-
-html,
-body {
-    padding: 0;
-    margin: 0;
+function error404(res, msg) {
+    return res.status(404).json(msg);
 }
 
-a {
-    color: inherit;
-    text-decoration: none;
+function notPostError(res) {
+    return error404(res, 'Cannot request data directyly.');
 }
 
-* {
-    box-sizing: border-box;
-    font-family: "Nunito Sans", Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-        Bitstream Vera Sans Mono, Courier New, monospace;
+function dataNotRecievedError(res) {
+    return error404(res, 'Error occured when requesting data.');
 }
+
+module.exports = { notPostError, dataNotRecievedError }

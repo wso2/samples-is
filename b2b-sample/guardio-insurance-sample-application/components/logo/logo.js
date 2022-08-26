@@ -25,7 +25,7 @@ export default function Logo(props) {
                 fontSize: props.fontSize,
                 letterSpacing: props.letterSpacing,
                 wordSpacing: props.wordSpacing,
-                fontFamily: `'Times New Roman', Times, serif`,
+                fontFamily: `"Times New Roman", Times, serif;`,
                 color: `black`
             }}>
                 <span style={{
