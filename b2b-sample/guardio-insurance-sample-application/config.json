@@ -1,5 +1,5 @@
 {
-    "WSO2IS_HOST": "https://localhost:9443",
+    "WSO2IS_HOST": "<WSO2 IS HOST URL>",
     "WSO2IS_TENANT_NAME": "carbon.super",
     "WSO2IS_CLIENT_URL": "http://localhost:3000",
     "WSO2IS_CLIENT_ID": "<APPLICATION CLIENT ID>",
