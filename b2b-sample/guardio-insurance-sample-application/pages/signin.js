@@ -16,8 +16,7 @@
  * under the License.
  */
 
-import Cookie from 'js-cookie';
-import { getSession, signIn } from 'next-auth/react';
+import { getSession } from 'next-auth/react';
 import React, { useEffect, useState } from 'react';
 import { Button, Dropdown } from 'rsuite';
 import config from '../config.json';
@@ -27,7 +26,7 @@ import "rsuite/dist/rsuite.min.css";
 import Logo from '../components/logo/logo';
 import { stringIsEmpty } from '../util/util/common/common';
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from '../util/util/frontendUtil/frontendUtil';
-import { getRouterQuery } from '../util/util/orgUtil/orgUtil';
+import { orgSignin } from '../util/util/routerUtil/routerUtil';
 
 export async function getServerSideProps(context) {
   const session = await getSession(context)
@@ -100,9 +99,7 @@ export default function Signin(props) {
     }
     setShowError(LOADING_DISPLAY_NONE);
 
-    Cookie.set("orgId", subOrgId);
-
-    signIn("wso2is", { callbackUrl: `/o/${getRouterQuery(subOrgId)}` }, { orgId: subOrgId });
+    orgSignin(subOrgId);
   }
 
   const showDropDownItems = () => {
@@ -118,10 +115,11 @@ export default function Signin(props) {
         <Logo fontSize={28} letterSpacing={-2} wordSpacing={-3} />
         <div className={styles.signInTextDiv}>
           <p className={styles.signinText}>Sign in</p>
-          <p className={styles.signinTag}>Select your organization to proceed</p>
+          <p className={styles.signinTag}>Enter your organization to proceed</p>
         </div>
 
         <div className={styles.signinDropdownDiv}>
+
           <Dropdown activeKey={subOrgId} className={styles.signinDropdown} title={title} trigger={['click', 'hover']}
             onSelect={(event) => orgSelect(event)}>
 

@@ -57,6 +57,16 @@ function getOrgIdfromRouterQuery(routerQuery) {
     return undefined;
 }
 
+function getOrgIdFromQuery(query) {
+    for (var i = 0; i < config.SAMPLE_ORGS.length; i++) {
+        if (config.SAMPLE_ORGS[i].routerQuery == query) {
+            return config.SAMPLE_ORGS[i].id;
+        }
+    }
+
+    return null;
+}
+
 module.exports = {
-    checkAdmin, getRouterQuery, getOrg, getOrgIdfromRouterQuery
+    checkAdmin, getRouterQuery, getOrg, getOrgIdfromRouterQuery, getOrgIdFromQuery
 };

@@ -18,7 +18,8 @@
 
 import cookie from "cookie";
 import FrontCookie from 'js-cookie';
-import { signOut } from 'next-auth/react';
+import { signIn, signOut } from 'next-auth/react';
+import { getRouterQuery } from '../orgUtil/orgUtil';
 
 function redirect(path) {
     return {
@@ -31,6 +32,12 @@ function redirect(path) {
 
 function parseCookies(req) {
     return cookie.parse(req ? req.headers.cookie || "" : document.cookie);
+}
+
+function orgSignin(subOrgId) {
+    FrontCookie.set("orgId", subOrgId);
+
+    signIn("wso2is", { callbackUrl: `/o/${getRouterQuery(subOrgId)}` }, { orgId: subOrgId });
 }
 
 function orgSignout() {
@@ -52,15 +59,15 @@ function getLoggedUserId(token) {
     return parseJwt(token).sub;
 }
 
-function getLoggedUserFromProfile(profile){
+function getLoggedUserFromProfile(profile) {
     const user = {};
     try {
         user.id = profile.sub;
         user.name = { "givenName": profile.given_name };
         user.emails = [profile.email];
         user.userName = profile.username;
-        
-        if (user.name=={}|| !user.emails[0] || !user.userName) {
+
+        if (user.name == {} || !user.emails[0] || !user.userName) {
             return null
         }
         return user;
@@ -70,5 +77,5 @@ function getLoggedUserFromProfile(profile){
 }
 
 module.exports = {
-     redirect, parseCookies, orgSignout, emptySession, getLoggedUserId, getLoggedUserFromProfile
+    redirect, parseCookies, orgSignin, orgSignout, emptySession, getLoggedUserId, getLoggedUserFromProfile
 };
