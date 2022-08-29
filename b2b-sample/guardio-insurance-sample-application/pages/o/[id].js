@@ -32,14 +32,16 @@ export async function getServerSideProps(context) {
   const cookies = parseCookies(context.req);
   const subOrgId = cookies.orgId;
 
-  if(routerQuery == getRouterQuery(subOrgId)) {
+  if (session == null || session == undefined || session.expires || session.error
+    || routerQuery != getRouterQuery(subOrgId)) {
+    return redirect(`/o/moveOrg?o=${routerQuery}`);
+  } else {
     setOrg = getOrg(subOrgId);
     return {
       props: { session, setOrg },
     }
-  } else {
-    return redirect(`/o/moveOrg?o=${routerQuery}`);
   }
+
 }
 
 export default function Org(props) {
