@@ -15,6 +15,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 import CheckOutlineIcon from '@rsuite/icons/CheckOutline';
 import React from 'react';
 import { Button, Modal } from 'rsuite';

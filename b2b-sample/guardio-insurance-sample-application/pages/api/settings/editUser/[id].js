@@ -15,13 +15,15 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 import config from '../../../../config.json';
 import { getSentDataRequestOptions } from '../../../../util/util/apiUtil/getSentDataRequestOptions';
+import { dataNotRecievedError, notPostError } from '../../../../util/util/apiUtil/localResErrors';
 import { RequestMethod } from '../../../../util/util/apiUtil/requestMethod';
 
 export default async function editUser(req, res) {
     if (req.method !== 'POST') {
-        res.status(404).json('meData');
+        notPostError(res);
     }
 
     const body = JSON.parse(req.body);
@@ -39,6 +41,6 @@ export default async function editUser(req, res) {
         const data = await fetchData.json();
         res.status(200).json(data);    
     } catch (err) {
-        res.status(404).json('meData');
+        dataNotRecievedError(res);
     }
 }

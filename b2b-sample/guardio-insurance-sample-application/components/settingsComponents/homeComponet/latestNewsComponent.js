@@ -15,6 +15,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 import React from 'react'
 import { FlexboxGrid, Panel } from 'rsuite'
 import newsList from '../../../util/news/news.json'
@@ -50,6 +51,5 @@ export default function LatestNewsComponent() {
                 }
             </FlexboxGrid>
         </div>
-
     )
 }

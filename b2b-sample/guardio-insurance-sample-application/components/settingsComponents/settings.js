@@ -15,12 +15,12 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 import DashboardIcon from '@rsuite/icons/legacy/Dashboard';
 import GearCircleIcon from '@rsuite/icons/legacy/GearCircle';
 import React, { useEffect, useState } from 'react';
 import { Button, Nav, Sidenav } from 'rsuite';
 import styles from '../../styles/Settings.module.css';
-
 
 import { useSession } from 'next-auth/react';
 import "rsuite/dist/rsuite.min.css";
@@ -65,7 +65,7 @@ export default function Settings(props) {
     useEffect(() => {
         document.body.className = checkCustomization(props.colorTheme)
     }, [props.colorTheme]);
-    
+
     return (
 
         <div className={styles.mainDiv}>
@@ -76,14 +76,21 @@ export default function Settings(props) {
                     </Sidenav.Header>
                     <Sidenav.Body>
                         <Nav activeKey={activeKeySideNav}>
-                            <Nav.Item eventKey="1" icon={<DashboardIcon />} onSelect={(eventKey) => activeKeySideNavSelect(eventKey)}>
+                            <Nav.Item eventKey="1" icon={<DashboardIcon />}
+                                onSelect={(eventKey) => activeKeySideNavSelect(eventKey)}>
                                 Dashboard
                             </Nav.Item>
                             <Nav.Menu eventKey="2" title="Settings" icon={<GearCircleIcon />}
                                 style={hideBasedOnScopes(session.scope)}>
-                                <Nav.Item eventKey="2-1" onSelect={(eventKey) => activeKeySideNavSelect(eventKey)}>Manage Users</Nav.Item>
-                                <Nav.Item eventKey="2-2" onSelect={(eventKey) => activeKeySideNavSelect(eventKey)}>Add User</Nav.Item>
-                                <Nav.Item eventKey="2-3" onSelect={(eventKey) => activeKeySideNavSelect(eventKey)}>Identity Providers</Nav.Item>
+                                <Nav.Item eventKey="2-1"
+                                    onSelect={(eventKey) => activeKeySideNavSelect(eventKey)}>
+                                    Manage Users</Nav.Item>
+                                <Nav.Item eventKey="2-2"
+                                    onSelect={(eventKey) => activeKeySideNavSelect(eventKey)}>
+                                    Add User</Nav.Item>
+                                <Nav.Item eventKey="2-3"
+                                    onSelect={(eventKey) => activeKeySideNavSelect(eventKey)}>
+                                    Identity Providers</Nav.Item>
                                 <Nav.Item
                                     eventKey="3-1"
                                     onSelect={(eventKey) => activeKeySideNavSelect(eventKey)}>
@@ -100,8 +107,6 @@ export default function Settings(props) {
             <div className={styles.mainPanelDiv}>
                 {mainPanelComponenet(activeKeySideNav, session)}
             </div>
-
         </div>
-
     )
 }

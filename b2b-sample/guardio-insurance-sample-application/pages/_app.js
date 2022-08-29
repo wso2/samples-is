@@ -15,6 +15,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 import { SessionProvider } from "next-auth/react";
 import Head from "next/head";
 import "rsuite/dist/rsuite.min.css";
@@ -33,4 +34,4 @@ function MyApp({ Component, pageProps }) {
   )
 }
 
-export default MyApp
+export default MyApp;

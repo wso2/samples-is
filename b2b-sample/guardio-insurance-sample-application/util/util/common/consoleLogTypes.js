@@ -15,6 +15,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 function consoleLogInfo(title, message) {
     console.log(`\n INFO : ${title} : ${JSON.stringify(message, null, '\t')}`);
 }

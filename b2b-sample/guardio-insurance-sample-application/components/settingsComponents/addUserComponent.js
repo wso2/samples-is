@@ -15,6 +15,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 import React, { useState } from 'react';
 import { Field, Form } from 'react-final-form';
 import { Button, ButtonToolbar, Loader, useToaster } from 'rsuite';
@@ -208,13 +209,10 @@ export default function AddUserComponent(props) {
                                 </FormSuite.Group>
 
                             </div>
-
-                            {/* <pre>{JSON.stringify(values, 0, 2)}</pre> */}
                         </FormSuite>
                     )}
                 />
             </div>
-
             <div style={loadingDisplay}>
                 <Loader size="lg" backdrop content="User is adding" vertical />
             </div>

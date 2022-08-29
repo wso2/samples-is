@@ -15,6 +15,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 import Cookie from 'js-cookie';
 import config from '../../../config.json';
 import { getInternalApiRequestOptions } from '../../util/apiUtil/getInteralApiRequestOptions';

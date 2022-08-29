@@ -15,6 +15,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 import React, { useState } from 'react';
 import { Field, Form } from 'react-final-form';
 import { Button, ButtonToolbar, Loader, Modal, useToaster } from 'rsuite';
@@ -62,7 +63,7 @@ export default function EditUserComponent(props) {
         return errors
     }
 
-    const onDataSubmit = (response,form) => {
+    const onDataSubmit = (response, form) => {
         if (response) {
             successTypeDialog(toaster, "Changes Saved Successfully", "User details edited successfully.");
             props.onClose();
@@ -71,7 +72,7 @@ export default function EditUserComponent(props) {
         }
     }
 
-    const onSubmit = async (values ,form)=> {
+    const onSubmit = async (values, form) => {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
         decodeEditUser(props.session, props.user.id, values.name, values.email,
             values.username)
@@ -81,7 +82,7 @@ export default function EditUserComponent(props) {
 
     return (
         <Modal backdrop="static" role="alertdialog" open={props.open} onClose={props.onClose} size="xs">
-            
+
             <Modal.Header>
                 <Modal.Title>
                     <b>Edit User</b>
@@ -93,7 +94,10 @@ export default function EditUserComponent(props) {
                     <Form
                         onSubmit={onSubmit}
                         validate={validate}
-                        initialValues={{ name: props.user.name, email: props.user.email, username: props.user.username }}
+                        initialValues={{
+                            name: props.user.name, email: props.user.email,
+                            username: props.user.username
+                        }}
                         render={({ handleSubmit, form, submitting, pristine, values }) => (
                             <FormSuite ayout="vertical" className={styles.addUserForm}
                                 onSubmit={event => { handleSubmit(event).then(form.restart); }} fluid>
@@ -152,9 +156,7 @@ export default function EditUserComponent(props) {
                                                 type='button' onClick={props.onClose}>Cancel</Button>
                                         </ButtonToolbar>
                                     </FormSuite.Group>
-
                                 </div>
-                                {/* <pre>{JSON.stringify(values, 0, 2)}</pre> */}
                             </FormSuite>
                         )}
                     />

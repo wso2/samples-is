@@ -16,11 +16,16 @@
  * under the License.
  */
 
-export default function decodeUser(user) {
-    return {
-        "id": user.id,
-        "username": user.userName,
-        "name": user.name != undefined ? user.name.givenName : "Not Defined",
-        "email": user.emails != undefined ? user.emails[0] : "Not Defined"
-    };
+function error404(res, msg) {
+    return res.status(404).json(msg);
 }
+
+function notPostError(res) {
+    return error404(res, 'Cannot request data directyly.');
+}
+
+function dataNotRecievedError(res) {
+    return error404(res, 'Error occured when requesting data.');
+}
+
+module.exports = { notPostError, dataNotRecievedError }

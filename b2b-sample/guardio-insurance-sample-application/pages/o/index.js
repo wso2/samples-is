@@ -20,7 +20,6 @@ import React from 'react';
 import config from '../../config.json';
 import { redirect } from '../../util/util/routerUtil/routerUtil';
 
-
 export async function getServerSideProps(context) {
     
     const session = await getSession(context);

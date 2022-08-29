@@ -15,12 +15,14 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 import config from '../../../config.json';
 import getDataHeader from '../../../util/util/apiUtil/getDataHeader';
+import { dataNotRecievedError, notPostError } from '../../../util/util/apiUtil/localResErrors';
 
 export default async function me(req , res) {
     if(req.method !== 'POST'){
-        res.status(404).json('meData');
+        notPostError(res);
     }
 
     const body = JSON.parse(req.body);
@@ -35,6 +37,6 @@ export default async function me(req , res) {
         const meData = await fetchData.json();
         res.status(200).json(meData);
     } catch (err) {
-        res.status(404).json('meData');
+        dataNotRecievedError(res);
     }
 }

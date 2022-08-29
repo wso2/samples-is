@@ -15,9 +15,10 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 import config from "../../../config.json";
 
-export const createIdentityProvider = async ({model, session}) => {
+export const createIdentityProvider = async ({ model, session }) => {
 
     try {
         const res = await fetch(
@@ -41,7 +42,7 @@ export const createIdentityProvider = async ({model, session}) => {
 
 }
 
-export const listAllIdentityProviders = async ({limit, offset, session}) => {
+export const listAllIdentityProviders = async ({ limit, offset, session }) => {
 
     const q = encodeURIComponent(`limit=${limit}&offset=${offset}`)
 
@@ -63,7 +64,7 @@ export const listAllIdentityProviders = async ({limit, offset, session}) => {
 
 }
 
-export const deleteIdentityProvider = async ({id, session}) => {
+export const deleteIdentityProvider = async ({ id, session }) => {
 
     try {
         const res = await fetch(
@@ -84,7 +85,7 @@ export const deleteIdentityProvider = async ({id, session}) => {
 
 }
 
-export const getDetailedIdentityProvider = async ({id, session}) => {
+export const getDetailedIdentityProvider = async ({ id, session }) => {
 
     try {
         const res = await fetch(

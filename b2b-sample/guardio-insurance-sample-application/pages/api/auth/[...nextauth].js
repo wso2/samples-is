@@ -15,6 +15,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 import NextAuth from "next-auth";
 import config from '../../../config.json';
 import { switchOrg } from '../../../util/apiCall/switchApiCall';
@@ -30,8 +31,9 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
       clientSecret: config.WSO2IS_CLIENT_SECRET,
       type: "oauth",
       secret: process.env.SECRET,
-      wellKnown: config.WSO2IS_HOST + "/t/" + config.WSO2IS_TENANT_NAME + "/oauth2/token/.well-known/openid-configuration",
-      userinfo: config.WSO2IS_HOST+"/t/"+config.WSO2IS_TENANT_NAME+"/oauth2/userinfo",
+      wellKnown: config.WSO2IS_HOST + "/t/" + config.WSO2IS_TENANT_NAME
+        + "/oauth2/token/.well-known/openid-configuration",
+      userinfo: config.WSO2IS_HOST + "/t/" + config.WSO2IS_TENANT_NAME + "/oauth2/userinfo",
       authorization: {
         params: {
           scope: config.WSO2IS_SCOPES.join(" "),
@@ -57,10 +59,10 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
       return token
     },
     async session({ session, token, user }) {
-      const orgSession = await switchOrg(req, token.accessToken); 
-      if(!orgSession){
+      const orgSession = await switchOrg(req, token.accessToken);
+      if (!orgSession) {
         session.error = true;
-      } else if(orgSession.expiresIn<=0){
+      } else if (orgSession.expiresIn <= 0) {
         session.expires = true
       }
       else {

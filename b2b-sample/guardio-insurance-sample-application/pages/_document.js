@@ -15,6 +15,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 import Document, { Head, Html, Main, NextScript } from 'next/document';
 
 export default class MyDocument extends Document {
@@ -22,7 +23,9 @@ export default class MyDocument extends Document {
     const pageProps = this.props?.__NEXT_DATA__?.props?.pageProps;
     return (
       <Html>
-        <Head />
+        <Head>
+          <link rel="shortcut icon" href="/favicon.png" />
+        </Head>
         <body className={pageProps.session ? 'dark-mode' : 'light-mode'}>
           <Main />
           <NextScript />

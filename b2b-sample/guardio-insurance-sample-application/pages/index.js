@@ -15,6 +15,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 import Image from 'next/image'
 import { Button } from 'rsuite'
 import Logo from '../components/logo/logo'
@@ -49,7 +50,8 @@ export default function Home() {
           <p className={styles.nameTag}>A relationship for life </p>
           <hr />
           <p className={styles.buttonTag}>Let&apos;s get your journey started. </p>
-          <Button className={styles.signInDivButton} size="lg" appearance='primary' onClick={signinOnClick}>Sign In</Button>
+          <Button className={styles.signInDivButton} size="lg" appearance='primary'
+            onClick={signinOnClick}>Sign In</Button>
         </div>
 
       </main>
