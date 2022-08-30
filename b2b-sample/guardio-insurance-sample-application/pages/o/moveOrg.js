@@ -55,13 +55,11 @@ export default function Org(props) {
 
     useEffect(() => {
         if (redirectSeconds <= 0) {
-            console.log(props);
             orgSignin(props.orgIdFromQuery);
             return;
         }
 
         setTimeout(() => {
-            console.log(redirectSeconds);
             setRedirectSeconds((redirectSeconds) => redirectSeconds - 1);
         }, moveTime)
     }, [redirectSeconds]);

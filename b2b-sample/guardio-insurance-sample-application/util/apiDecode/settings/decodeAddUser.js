@@ -38,7 +38,6 @@ export default async function decodeAddUser(session, name, email, username, pass
         await callAddUser(session, addUserEncode);
         return true;
     } catch (err) {
-        console.log(err);
         return false;
     }
 }

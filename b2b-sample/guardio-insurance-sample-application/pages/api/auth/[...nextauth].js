@@ -66,7 +66,6 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
         session.expires = true
       }
       else {
-        getLoggedUserFromProfile
         session.accessToken = orgSession.access_token
         session.idToken = orgSession.id_token
         session.scope = orgSession.scope

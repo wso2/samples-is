@@ -17,6 +17,11 @@
  */
 
 export default function decodeUser(user) {
+
+    if(user.id==undefined || user.userName==undefined || user.name==undefined || user.emails==undefined ) {
+        return null;
+    }
+
     return {
         "id": user.id,
         "username": user.userName,

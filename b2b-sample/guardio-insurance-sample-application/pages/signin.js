@@ -115,11 +115,10 @@ export default function Signin(props) {
         <Logo fontSize={28} letterSpacing={-2} wordSpacing={-3} />
         <div className={styles.signInTextDiv}>
           <p className={styles.signinText}>Sign in</p>
-          <p className={styles.signinTag}>Enter your organization to proceed</p>
+          <p className={styles.signinTag}>Select your organization to proceed</p>
         </div>
 
         <div className={styles.signinDropdownDiv}>
-
           <Dropdown activeKey={subOrgId} className={styles.signinDropdown} title={title} trigger={['click', 'hover']}
             onSelect={(event) => orgSelect(event)}>
 
