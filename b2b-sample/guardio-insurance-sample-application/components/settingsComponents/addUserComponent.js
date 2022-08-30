@@ -38,9 +38,16 @@ export default function AddUserComponent(props) {
 
     const toaster = useToaster();
 
-    const nameValidate = (name, errors) => {
-        if (!name) {
-            errors.name = 'This field cannot be empty'
+    const firstNameValidate = (firstName, errors) => {
+        if (!firstName) {
+            errors.firstName = 'This field cannot be empty'
+        }
+        return errors;
+    }
+
+    const familyNameValidate = (familyName, errors) => {
+        if (!familyName) {
+            errors.familyName = 'This field cannot be empty'
         }
         return errors;
     }
@@ -75,12 +82,13 @@ export default function AddUserComponent(props) {
 
     const validate = values => {
         const errors = {}
-        errors = nameValidate(values.name, errors);
+        errors = firstNameValidate(values.firstName, errors);
+        errors = familyNameValidate(values.familyName, errors);
         errors = emailValidate(values.email, errors);
         errors = usernameValidate(values.username, errors)
         errors = passwordValidate(values.password, errors);
         errors = repasswordValidate(values.repassword, errors);
-
+        console.log(errors);
         return errors
     }
 
@@ -94,8 +102,9 @@ export default function AddUserComponent(props) {
     }
 
     const onSubmit = async (values, form) => {
+        console.log('values');
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
-        decodeAddUser(props.session, values.name, values.email,
+        decodeAddUser(props.session, values.firstName, values.familyName, values.email,
             values.username, values.password)
             .then((response) => onDataSubmit(response, form))
             .finally((response) => setLoadingDisplay(LOADING_DISPLAY_NONE))
@@ -119,10 +128,10 @@ export default function AddUserComponent(props) {
                         <FormSuite ayout="vertical" className={styles.addUserForm}
                             onSubmit={handleSubmit} fluid>
                             <Field
-                                name="name"
+                                name="firstName"
                                 render={({ input, meta }) => (
                                     <FormSuite.Group controlId="name-6">
-                                        <FormSuite.ControlLabel>Name</FormSuite.ControlLabel>
+                                        <FormSuite.ControlLabel>First Name</FormSuite.ControlLabel>
                                         <FormSuite.Control
                                             {...input}
                                         />
@@ -132,6 +141,22 @@ export default function AddUserComponent(props) {
                                     </FormSuite.Group>
                                 )}
                             />
+
+                            <Field
+                                name="familyName"
+                                render={({ input, meta }) => (
+                                    <FormSuite.Group controlId="name-6">
+                                        <FormSuite.ControlLabel>Last Name</FormSuite.ControlLabel>
+                                        <FormSuite.Control
+                                            {...input}
+                                        />
+                                        {meta.error && meta.touched && <FormSuite.ErrorMessage show={true}  >
+                                            {meta.error}
+                                        </FormSuite.ErrorMessage>}
+                                    </FormSuite.Group>
+                                )}
+                            />
+
 
                             <Field
                                 name="email"
