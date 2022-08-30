@@ -16,21 +16,16 @@
  * under the License.
  */
 
-import callMe from "../../apiCall/dashboard/callMe";
-import decodeMeObject from "../../util/apiUtil/decodeMeObject";
+ export default function decodeMeObject(user) {
 
-export default async function decodeMe(session) {
-    try {
-        var meData;
-        if(session.user.id==undefined || session.user.userName==undefined || session.user.name==undefined 
-            || session.user.emails==undefined ) {
-                meData = await callMe(session);
-        }
-        meData = session.user;
-        const meReturn = decodeMeObject(meData);
-
-        return meReturn;
-    } catch (err) {
-        return null
+    if(user.id==undefined || user.userName==undefined || user.name==undefined || user.emails==undefined ) {
+        return null;
     }
+
+    return {
+        "id": user.id,
+        "username": user.userName,
+        "name": user.name != undefined ? user.name.givenName : "Not Defined",
+        "email": user.emails != undefined ? user.emails[0] : "Not Defined"
+    };
 }
