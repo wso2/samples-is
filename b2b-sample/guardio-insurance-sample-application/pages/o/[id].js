@@ -21,41 +21,27 @@ import React from 'react';
 import { getSession } from 'next-auth/react';
 import Settings from '../../components/settingsComponents/settings';
 import { getOrg, getRouterQuery } from '../../util/util/orgUtil/orgUtil';
-import { emptySession, parseCookies, redirect } from '../../util/util/routerUtil/routerUtil';
+import { parseCookies, redirect } from '../../util/util/routerUtil/routerUtil';
 
 export async function getServerSideProps(context) {
 
+  const routerQuery = context.query.id;
   const session = await getSession(context);
   let setOrg = {};
-
-  if (session == null || session == undefined) {
-    return emptySession(session);
-  }
-
-  if (session.expires) {
-    return redirect('/500');
-  }
 
   const cookies = parseCookies(context.req);
   const subOrgId = cookies.orgId;
 
-  if (subOrgId == undefined) {
-    return redirect('/signin');
+  if (session == null || session == undefined || session.expires || session.error
+    || routerQuery != getRouterQuery(subOrgId)) {
+    return redirect(`/o/moveOrg?o=${routerQuery}`);
   } else {
-    const routerQuery = context.query.id;
-    if (routerQuery != getRouterQuery(subOrgId)) {
-      return redirect('/404');
-    } else if (session.error) {
-      return redirect('/500');
-    }
-    else {
-      setOrg = getOrg(subOrgId);
+    setOrg = getOrg(subOrgId);
+    return {
+      props: { session, setOrg },
     }
   }
 
-  return {
-    props: { session, setOrg },
-  }
 }
 
 export default function Org(props) {

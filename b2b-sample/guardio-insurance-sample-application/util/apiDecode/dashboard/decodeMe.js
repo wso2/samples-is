@@ -21,7 +21,12 @@ import decodeUser from "../../util/apiUtil/decodeUser";
 
 export default async function decodeMe(session) {
     try {
-        const meData = await callMe(session);
+        var meData;
+        if(session.user.id==undefined || session.user.userName==undefined || session.user.name==undefined 
+            || session.user.emails==undefined ) {
+                meData = await callMe(session);
+        }
+        meData = session.user;
         const meReturn = decodeUser(meData);
 
         return meReturn;
