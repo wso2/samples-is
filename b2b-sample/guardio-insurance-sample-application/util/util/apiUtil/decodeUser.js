@@ -26,6 +26,7 @@ export default function decodeUser(user) {
         "id": user.id,
         "username": user.userName,
         "name": user.name != undefined ? user.name.givenName : "Not Defined",
+        "familyName": user.name != undefined ? user.name.familyName : "Not Defined",
         "email": user.emails != undefined ? user.emails[0] : "Not Defined"
     };
 }

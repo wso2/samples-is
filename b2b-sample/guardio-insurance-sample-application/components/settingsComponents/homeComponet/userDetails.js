@@ -26,7 +26,7 @@ export default function UserDetails(props) {
         <div className={styles.userDetails}>
             <div className={styles.userDetailsBody}>
                 <p><b>First Name : </b>{props.me.name}</p>
-                <p><b>ID : </b>{props.me.id}</p>
+                <p><b>Last Name : </b>{props.me.familyName}</p>
                 <p><b>Username : </b>{props.me.username}</p>
                 <p><b>Email : </b>{props.me.email}</p>
             </div>

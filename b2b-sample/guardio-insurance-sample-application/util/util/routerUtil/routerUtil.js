@@ -63,7 +63,7 @@ function getLoggedUserFromProfile(profile) {
     const user = {};
     try {
         user.id = profile.sub;
-        user.name = { "givenName": profile.given_name };
+        user.name = { "givenName": profile.given_name, "familyName": profile.family_name };
         user.emails = [profile.email];
         user.userName = profile.username;
 
