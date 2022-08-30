@@ -17,7 +17,7 @@
  */
 
 import callMe from "../../apiCall/dashboard/callMe";
-import decodeMeObject from "../../util/apiUtil/decodeMeObject";
+import decodeUser from "../../util/apiUtil/decodeUser";
 
 export default async function decodeMe(session) {
     try {
@@ -27,7 +27,7 @@ export default async function decodeMe(session) {
                 meData = await callMe(session);
         }
         meData = session.user;
-        const meReturn = decodeMeObject(meData);
+        const meReturn = decodeUser(meData);
 
         return meReturn;
     } catch (err) {

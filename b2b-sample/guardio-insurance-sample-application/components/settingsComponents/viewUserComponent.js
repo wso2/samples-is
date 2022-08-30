@@ -71,10 +71,15 @@ export default function ViewUserComponent(props) {
             >
                 <Column width={200} align="center">
                     <HeaderCell><h6>First Name</h6></HeaderCell>
-                    <Cell dataKey="name" />
+                    <Cell dataKey="firstName" />
                 </Column>
 
-                <Column width={300} align="center" fixed>
+                <Column width={200} align="center">
+                    <HeaderCell><h6>Last Name</h6></HeaderCell>
+                    <Cell dataKey="familyName" />
+                </Column>
+
+                <Column width={300} align="center">
                     <HeaderCell><h6>Id</h6></HeaderCell>
                     <Cell dataKey="id" />
                 </Column>

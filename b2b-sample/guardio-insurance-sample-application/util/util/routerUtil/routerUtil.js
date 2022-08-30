@@ -63,13 +63,17 @@ function getLoggedUserFromProfile(profile) {
     const user = {};
     try {
         user.id = profile.sub;
-        user.name = { "givenName": profile.given_name };
+        user.name = {
+            "givenName": profile.given_name ? profile.given_name : "-"
+            , "familyName": profile.family_name ? profile.family_name : "-"
+        };
         user.emails = [profile.email];
         user.userName = profile.username;
 
         if (user.name == {} || !user.emails[0] || !user.userName) {
             return null
         }
+        console.log(user);
         return user;
     } catch (err) {
         return null

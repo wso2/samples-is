@@ -33,9 +33,16 @@ export default function EditUserComponent(props) {
 
     const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
 
-    const nameValidate = (name, errors) => {
-        if (!name) {
-            errors.name = 'This field cannot be empty'
+    const firstNameValidate = (firstName, errors) => {
+        if (!firstName) {
+            errors.firstName = 'This field cannot be empty'
+        }
+        return errors;
+    }
+
+    const familyNameValidate = (familyName, errors) => {
+        if (!familyName) {
+            errors.familyName = 'This field cannot be empty'
         }
         return errors;
     }
@@ -56,7 +63,8 @@ export default function EditUserComponent(props) {
 
     const validate = values => {
         const errors = {}
-        errors = nameValidate(values.name, errors);
+        errors = firstNameValidate(values.firstName, errors);
+        errors = familyNameValidate(values.familyName, errors);
         errors = emailValidate(values.email, errors);
         errors = usernameValidate(values.username, errors)
 
@@ -74,7 +82,7 @@ export default function EditUserComponent(props) {
 
     const onSubmit = async (values, form) => {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
-        decodeEditUser(props.session, props.user.id, values.name, values.email,
+        decodeEditUser(props.session, props.user.id, values.firstName, values.familyName, values.email,
             values.username)
             .then((response) => onDataSubmit(response, form))
             .finally((response) => setLoadingDisplay(LOADING_DISPLAY_NONE))
@@ -95,17 +103,34 @@ export default function EditUserComponent(props) {
                         onSubmit={onSubmit}
                         validate={validate}
                         initialValues={{
-                            name: props.user.name, email: props.user.email,
+                            firstName: props.user.firstName, 
+                            familyName: props.user.familyName, 
+                            email: props.user.email,
                             username: props.user.username
                         }}
                         render={({ handleSubmit, form, submitting, pristine, values }) => (
                             <FormSuite ayout="vertical" className={styles.addUserForm}
                                 onSubmit={event => { handleSubmit(event).then(form.restart); }} fluid>
                                 <Field
-                                    name="name"
+                                    name="firstName"
                                     render={({ input, meta }) => (
                                         <FormSuite.Group controlId="name-6">
-                                            <FormSuite.ControlLabel>Name</FormSuite.ControlLabel>
+                                            <FormSuite.ControlLabel>First Name</FormSuite.ControlLabel>
+                                            <FormSuite.Control
+                                                {...input}
+                                            />
+                                            {meta.error && meta.touched && <FormSuite.ErrorMessage show={true}  >
+                                                {meta.error}
+                                            </FormSuite.ErrorMessage>}
+                                        </FormSuite.Group>
+                                    )}
+                                />
+
+                                <Field
+                                    name="familyName"
+                                    render={({ input, meta }) => (
+                                        <FormSuite.Group controlId="name-6">
+                                            <FormSuite.ControlLabel>Last Name</FormSuite.ControlLabel>
                                             <FormSuite.Control
                                                 {...input}
                                             />
