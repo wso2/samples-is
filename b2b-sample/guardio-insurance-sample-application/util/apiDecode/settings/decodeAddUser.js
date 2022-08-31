@@ -18,11 +18,12 @@
 
 import callAddUser from "../../apiCall/settings/callAddUser";
 
-export default async function decodeAddUser(session, name, email, username, password) {
+export default async function decodeAddUser(session, firstName, familyName, email, username, password) {
     const addUserEncode = {
         "schemas": [],
         "name": {
-            "givenName": name
+            "givenName": firstName,
+            "familyName": familyName
         },
         "userName": username,
         "password": password,
@@ -33,6 +34,8 @@ export default async function decodeAddUser(session, name, email, username, pass
             }
         ]
     }
+
+    console.log(addUserEncode);
 
     try {
         await callAddUser(session, addUserEncode);

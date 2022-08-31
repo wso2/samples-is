@@ -36,6 +36,7 @@ export default async function addUser(req, res) {
             `${config.WSO2IS_HOST}/o/${subOrgId}/scim2/Users`,
             getSentDataRequestOptions(session, RequestMethod.POST, user)
         );
+        console.log(user);
         const data = await fetchData.json();
         res.status(200).json(data);
     } catch (err) {

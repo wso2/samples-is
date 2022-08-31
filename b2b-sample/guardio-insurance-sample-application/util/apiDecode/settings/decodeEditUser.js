@@ -18,7 +18,7 @@
 
 import callEditUser from "../../apiCall/settings/callEditUser";
 
-export default async function decodeEditUser(session, id, name, email, username) {
+export default async function decodeEditUser(session, id, firstName, familyName, email, username) {
     const editUserEncode = {
         "schemas": [
             "urn:ietf:params:scim:api:messages:2.0:PatchOp"
@@ -28,7 +28,8 @@ export default async function decodeEditUser(session, id, name, email, username)
                 "op": "replace",
                 "value": {
                     "name": {
-                        "givenName": name
+                        "givenName": firstName,
+                        "familyName": familyName
                     },
                     "userName": username,
                     "emails": [
@@ -43,7 +44,7 @@ export default async function decodeEditUser(session, id, name, email, username)
     }
 
     try {
-        const usersData = await callEditUser(session,id,editUserEncode);
+        const usersData = await callEditUser(session, id, editUserEncode);
         return true;
     } catch (err) {
         return false

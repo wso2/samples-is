@@ -16,7 +16,7 @@
  * under the License.
  */
 
-export default function decodeUser(user) {
+ export default function decodeMeObject(user) {
 
     if(user.id==undefined || user.userName==undefined || user.name==undefined || user.emails==undefined ) {
         return null;
@@ -25,8 +25,7 @@ export default function decodeUser(user) {
     return {
         "id": user.id,
         "username": user.userName,
-        "firstName": user.name != undefined ? user.name.givenName : "-",
-        "familyName": user.name != undefined ? user.name.familyName : "-",
-        "email": user.emails != undefined ? user.emails[0] : "-"
+        "name": user.name != undefined ? user.name.givenName : "Not Defined",
+        "email": user.emails != undefined ? user.emails[0] : "Not Defined"
     };
 }
