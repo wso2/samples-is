@@ -30,7 +30,7 @@ export default function LatestNewsComponent() {
                 {
                     newsList.news.map(news => {
                         return (
-                            <FlexboxGrid.Item key={1} colspan={12}>
+                            <FlexboxGrid.Item key={news.id*-1} colspan={12}>
                                 <Panel>
                                     <NewsComponent imgSrc={news.image} header={news.header} body={news.body}/>
                                 </Panel>
@@ -41,7 +41,7 @@ export default function LatestNewsComponent() {
                  {
                     newsList.news.map(news => {
                         return (
-                            <FlexboxGrid.Item key={2} colspan={12}>
+                            <FlexboxGrid.Item key={news.id*1} colspan={12}>
                                 <Panel>
                                     <NewsComponent imgSrc={news.image} header={news.header} body={news.body}/>
                                 </Panel>
