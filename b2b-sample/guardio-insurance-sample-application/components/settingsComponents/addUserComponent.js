@@ -128,7 +128,7 @@ export default function AddUserComponent(props) {
                             <Field
                                 name="firstName"
                                 render={({ input, meta }) => (
-                                    <FormSuite.Group controlId="name-6">
+                                    <FormSuite.Group controlId="firstName">
                                         <FormSuite.ControlLabel>First Name</FormSuite.ControlLabel>
                                         <FormSuite.Control
                                             {...input}
@@ -143,7 +143,7 @@ export default function AddUserComponent(props) {
                             <Field
                                 name="familyName"
                                 render={({ input, meta }) => (
-                                    <FormSuite.Group controlId="name-6">
+                                    <FormSuite.Group controlId="familyName">
                                         <FormSuite.ControlLabel>Last Name</FormSuite.ControlLabel>
                                         <FormSuite.Control
                                             {...input}
@@ -158,7 +158,7 @@ export default function AddUserComponent(props) {
                             <Field
                                 name="email"
                                 render={({ input, meta }) => (
-                                    <FormSuite.Group controlId="name-6">
+                                    <FormSuite.Group controlId="email">
                                         <FormSuite.ControlLabel>Email</FormSuite.ControlLabel>
                                         <FormSuite.Control
                                             {...input}
@@ -176,7 +176,7 @@ export default function AddUserComponent(props) {
                             <Field
                                 name="username"
                                 render={({ input, meta }) => (
-                                    <FormSuite.Group controlId="name-6">
+                                    <FormSuite.Group controlId="username">
                                         <FormSuite.ControlLabel>Username</FormSuite.ControlLabel>
                                         <FormSuite.Control
                                             {...input}
@@ -191,7 +191,7 @@ export default function AddUserComponent(props) {
                             <Field
                                 name="password"
                                 render={({ input, meta }) => (
-                                    <FormSuite.Group controlId="name-6">
+                                    <FormSuite.Group controlId="password">
                                         <FormSuite.ControlLabel>Password</FormSuite.ControlLabel>
                                         <FormSuite.Control
                                             {...input}
@@ -208,7 +208,7 @@ export default function AddUserComponent(props) {
                             <Field
                                 name="repassword"
                                 render={({ input, meta }) => (
-                                    <FormSuite.Group controlId="name-6">
+                                    <FormSuite.Group controlId="repassword">
                                         <FormSuite.ControlLabel>Re enter password</FormSuite.ControlLabel>
                                         <FormSuite.Control
                                             {...input}
