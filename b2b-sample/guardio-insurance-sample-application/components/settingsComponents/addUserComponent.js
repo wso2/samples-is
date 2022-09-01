@@ -88,7 +88,6 @@ export default function AddUserComponent(props) {
         errors = usernameValidate(values.username, errors)
         errors = passwordValidate(values.password, errors);
         errors = repasswordValidate(values.repassword, errors);
-        console.log(errors);
         return errors
     }
 
@@ -102,7 +101,6 @@ export default function AddUserComponent(props) {
     }
 
     const onSubmit = async (values, form) => {
-        console.log('values');
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
         decodeAddUser(props.session, values.firstName, values.familyName, values.email,
             values.username, values.password)
