@@ -16,29 +16,24 @@
  * under the License.
  */
 
-import callAddUser from "../../apiCall/settings/callAddUser";
+import config from '../../../config.json';
+import { getInternalApiRequestOptionsWithParam } from '../../util/apiUtil/getInteralApiRequestOptions';
 
-export default async function decodeAddUser(session, firstName, familyName, email, username, password) {
-    const addUserEncode = {
-        "schemas": [],
-        "name": {
-            "givenName": firstName,
-            "familyName": familyName
-        },
-        "userName": username,
-        "password": password,
-        "emails": [
-            {
-                "value": email,
-                "primary": true
-            }
-        ]
-    }
+export default async function callSwitchOrg(subOrgId, accessToken) {
 
     try {
-        await callAddUser(session, addUserEncode);
-        return true;
+        const res = await fetch(
+            `${config.WSO2IS_CLIENT_URL}/api/settings/switchOrg`,
+            getInternalApiRequestOptionsWithParam(null, subOrgId, accessToken)
+        );
+
+        if (res.status != 200) {
+            return null;
+        }
+
+        const data = await res.json();
+        return data;
     } catch (err) {
-        return false;
+        return null;
     }
 }

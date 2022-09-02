@@ -18,7 +18,7 @@
 
 import NextAuth from "next-auth";
 import config from '../../../config.json';
-import { switchOrg } from '../../../util/apiCall/switchApiCall';
+import decodeSwitchOrg from "../../../util/apiDecode/settings/decodeSwitchOrg";
 import { getLoggedUserFromProfile, getLoggedUserId } from '../../../util/util/routerUtil/routerUtil';
 
 const wso2ISProvider = (req, res) => NextAuth(req, res, {
@@ -59,7 +59,7 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
       return token
     },
     async session({ session, token, user }) {
-      const orgSession = await switchOrg(req, token.accessToken);
+      const orgSession = await decodeSwitchOrg(req, token);
       if (!orgSession) {
         session.error = true;
       } else if (orgSession.expiresIn <= 0) {
