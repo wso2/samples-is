@@ -20,10 +20,11 @@
 <%@ page import="java.net.URLDecoder" %>
 <%@ page import="java.nio.charset.StandardCharsets" %>
 <%@ page import="org.wso2.carbon.identity.application.authentication.framework.util.FrameworkUtils" %>
-<%@page import="org.apache.log4j.Logger"%>
+<%@ page import="org.apache.logging.log4j.Logger"%>
+<%@ page import="org.apache.logging.log4j.LogManager"%>
 
 <%
-    Logger logger = Logger.getLogger(this.getClass());
+    Logger logger = LogManager.getLogger(this.getClass());
     String reqNumberStr = request.getParameter("timeBasedId");
     String callbackUrl = request.getParameter("callbackUrl");
     String oldNumStr = request.getParameter("oldNum");
