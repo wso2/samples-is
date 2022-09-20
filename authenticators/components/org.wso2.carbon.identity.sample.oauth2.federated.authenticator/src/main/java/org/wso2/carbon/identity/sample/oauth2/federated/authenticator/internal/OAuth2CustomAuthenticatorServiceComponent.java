@@ -43,11 +43,11 @@ public class OAuth2CustomAuthenticatorServiceComponent {
             ctxt.getBundleContext().registerService(ApplicationAuthenticator.class.getName(), oAuth2CustomAuthenticator,
                     props);
             if (logger.isDebugEnabled()) {
-                logger.debug("OAuth2 Custom Authenticator is activated");
+                logger.debug("OAuth2 Custom Authenticator is activated.");
             }
 
         } catch (Throwable e) {
-            logger.error("Error while activating OAuth2 Custom Authenticator", e);
+            logger.error("Error while activating OAuth2 Custom Authenticator.", e);
         }
     }
 
@@ -55,7 +55,7 @@ public class OAuth2CustomAuthenticatorServiceComponent {
     protected void deactivate(ComponentContext ctxt) {
 
         if (logger.isDebugEnabled()) {
-            logger.debug("OAuth2 Custom Authenticator is deactivated");
+            logger.debug("OAuth2 Custom Authenticator is deactivated.");
         }
     }
 

@@ -47,4 +47,3 @@ public class OAuth2CustomAuthenticatorConstants {
     public static final String USER_INFO_URL_DP = "User Information Endpoint URL";
     public static final String USER_INFO_URL_DESC = "Enter user information endpoint URL";
 }
-
