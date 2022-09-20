@@ -26,9 +26,8 @@ import java.util.List;
 
 import static org.wso2.carbon.identity.sample.oauth2.federated.authenticator.OAuth2CustomAuthenticatorConstants.*;
 
-/***
- * OAuth2 Custom Authenticator is an outbound authenticator
- * This extends OAuth2 Generic Authenticator implementation
+/**
+ * This class is used to create an OAuth2 Custom Authenticator as an outbound authenticator.
  */
 public class OAuth2CustomAuthenticator extends Oauth2GenericAuthenticator {
 
