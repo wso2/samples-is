@@ -29,6 +29,7 @@ import Facebook from "../../data/templates/facebook.json";
 import Google from "../../data/templates/google.json";
 import { createIdentityProvider, deleteIdentityProvider, listAllIdentityProviders } from "./api";
 import styles from "../../../styles/idp.module.css";
+import {setIdpTemplate} from "../../../util/util/idpUtil/idpUtil";
 
 const GOOGLE_ID = "google-idp";
 const FACEBOOK_ID = "facebook-idp";
@@ -77,67 +78,13 @@ export default function IdentityProviders() {
 
     const onIdPSave = async (formValues, template) => {
 
-        const FIRST_ENTRY = 0;
         let model = { ...template.idp };
 
-        model.name = formValues.application_name.toString();
+        let name = formValues.application_name.toString();
+        let clientId = formValues.client_id.toString();
+        let clientSecret = formValues.client_secret.toString();
 
-        if (FACEBOOK_ID === template.templateId) {
-            model.federatedAuthenticators.authenticators[FIRST_ENTRY].properties = [
-                {
-                    "key": "ClientId",
-                    "value": formValues.application_id.toString()
-                },
-                {
-                    "key": "ClientSecret",
-                    "value": formValues.application_secret.toString()
-                },
-                {
-                    "key": "callBackUrl",
-                    "value": `${config.WSO2IS_HOST}/t/${config.WSO2IS_TENANT_NAME}/commonauth`
-                }
-            ];
-        } else if (GOOGLE_ID === template.templateId) {
-            model.federatedAuthenticators.authenticators[FIRST_ENTRY].properties = [
-                {
-                    "key": "ClientId",
-                    "value": formValues.client_id.toString()
-                },
-                {
-                    "key": "ClientSecret",
-                    "value": formValues.client_secret.toString()
-                },
-                {
-                    "key": "callBackUrl",
-                    "value": `${config.WSO2IS_HOST}/t/${config.WSO2IS_TENANT_NAME}/commonauth`
-                },
-                {
-                    "key": "AdditionalQueryParameters",
-                    "value": "scope=email openid profile"
-                }
-            ];
-        } else {
-            model.federatedAuthenticators.authenticators[FIRST_ENTRY].properties = [
-                {
-                    "key": "ClientId",
-                    "value": formValues.client_id.toString()
-                },
-                {
-                    "key": "ClientSecret",
-                    "value": formValues.client_secret.toString()
-                },
-                {
-                    "key": "callBackUrl",
-                    "value": `${config.WSO2IS_HOST}/t/${config.WSO2IS_TENANT_NAME}/commonauth`
-                },
-                {
-                    "key": "AdditionalQueryParameters",
-                    "value": "scope=email openid profile"
-                }
-            ];
-        }
-
-        model.federatedAuthenticators.authenticators[FIRST_ENTRY].isEnabled = true;
+        model = setIdpTemplate(model, template.templateId, name, clientId, clientSecret);
 
         const response = await createIdentityProvider({ model, session });
 

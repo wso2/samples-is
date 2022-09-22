@@ -14,7 +14,7 @@
         "uri": ""
       }
     },
-    "description": "",
+    "description": "Enable login for users with their accounts in your existing identity providers via standard authentication protocols.",
     "federatedAuthenticators": {
       "authenticators": [],
       "defaultAuthenticatorId": ""

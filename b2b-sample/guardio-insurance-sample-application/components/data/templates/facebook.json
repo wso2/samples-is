@@ -11,7 +11,7 @@
   ],
   "idp": {
     "name": "Facebook",
-    "description": "",
+    "description": "Enable login for users with existing Facebook accounts.",
     "image": "",
     "isPrimary": false,
     "isFederationHub": false,
