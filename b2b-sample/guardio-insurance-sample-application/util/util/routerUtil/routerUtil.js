@@ -73,7 +73,6 @@ function getLoggedUserFromProfile(profile) {
         if (user.name == {} || !user.emails[0] || !user.userName) {
             return null
         }
-        console.log(user);
         return user;
     } catch (err) {
         return null

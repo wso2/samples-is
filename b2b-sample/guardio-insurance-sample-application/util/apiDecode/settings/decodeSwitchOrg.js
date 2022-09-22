@@ -16,29 +16,25 @@
  * under the License.
  */
 
-import callAddUser from "../../apiCall/settings/callAddUser";
+import callSwitchOrg from "../../apiCall/settings/callSwitchOrg";
+import { parseCookies } from '../../util/routerUtil/routerUtil';
 
-export default async function decodeAddUser(session, firstName, familyName, email, username, password) {
-    const addUserEncode = {
-        "schemas": [],
-        "name": {
-            "givenName": firstName,
-            "familyName": familyName
-        },
-        "userName": username,
-        "password": password,
-        "emails": [
-            {
-                "value": email,
-                "primary": true
-            }
-        ]
-    }
+function getSubOrgId(request) {
+    const cookies = parseCookies(request);
+    const subOrgId = cookies.orgId;
+
+    return subOrgId;
+}
+
+export default async function decodeSwitchOrg(request, token) {
+
+    const subOrgId = getSubOrgId(request);
+    const accessToken = token.accessToken;
 
     try {
-        await callAddUser(session, addUserEncode);
-        return true;
+        const orgSession = await callSwitchOrg(subOrgId, accessToken);
+        return orgSession;
     } catch (err) {
-        return false;
+        return null;
     }
 }
