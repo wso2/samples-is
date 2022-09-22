@@ -33,7 +33,7 @@
 }
 
 .idp__template__card:hover {
-    background-color: whitesmoke;
+    background-color: rgba(245, 245, 245, 0.2);
     transition: background-color 10ms linear;
     cursor: pointer;
 }
@@ -43,7 +43,6 @@
 }
 
 .idp__list__item {
-    background-color: #fafafa;
     padding: 10px;
     width: 100%;
     font-weight: bold;

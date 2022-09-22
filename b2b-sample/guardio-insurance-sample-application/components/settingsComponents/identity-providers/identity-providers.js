@@ -212,7 +212,7 @@ const AddIdentityProviderModal = ({ openModal, onClose, templates, onTemplateSel
             onClose={onClose}
             onBackdropClick={onClose}>
             <Modal.Header>
-                <Modal.Title>Select Identity Provider</Modal.Title>
+                <Modal.Title><b>Select Identity Provider</b></Modal.Title>
                 <p>Choose one of the following identity providers.</p>
             </Modal.Header>
             <Modal.Body>
