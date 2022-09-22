@@ -3,7 +3,6 @@ import { ENTERPRISE_ID, FACEBOOK_ID, GOOGLE_ID } from '../common/common';
 
 function setIdpTemplate(model, templateId, name, clientId, clientSecret) {
     model.name = name;
-    console.log(clientId);
 
     switch (templateId) {
         case FACEBOOK_ID:

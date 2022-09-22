@@ -23,8 +23,6 @@ const subOrgId = Cookie.get("orgId");
 
 export const createIdentityProvider = async ({ model, session }) => {
 
-    console.log(model);
-
     try {
         const res = await fetch(
             `${config.WSO2IS_HOST}/o/${subOrgId}/api/server/v1/identity-providers`,
@@ -49,7 +47,7 @@ export const createIdentityProvider = async ({ model, session }) => {
 
 export const listAllIdentityProviders = async ({ limit, offset, session }) => {
 
-    const q = encodeURIComponent(`limit=${limit}&offset=${offset}`)
+    const q = encodeURIComponent(`limit=${limit}&offset=${offset}`);
 
     try {
         const res = await fetch(
@@ -83,7 +81,7 @@ export const deleteIdentityProvider = async ({ id, session }) => {
                 }
             },
         );
-        return await res.json();
+        return res;
     } catch (err) {
         console.error(err);
         return null;

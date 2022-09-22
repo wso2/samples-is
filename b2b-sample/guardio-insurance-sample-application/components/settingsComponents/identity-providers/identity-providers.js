@@ -20,16 +20,17 @@ import AppSelectIcon from '@rsuite/icons/AppSelect';
 import Edit from '@rsuite/icons/Edit';
 import Trash from '@rsuite/icons/Trash';
 import React, { useEffect, useMemo, useState } from "react";
-import { Avatar, Button, Container, FlexboxGrid, Form, IconButton, List, Modal, Stack } from "rsuite";
+import { Avatar, Button, Container, FlexboxGrid, Form, IconButton, List, Modal, Stack, useToaster } from "rsuite";
 
 import { useSession } from "next-auth/react";
-import config from "../../../config.json";
+import styles from "../../../styles/idp.module.css";
+import { setIdpTemplate } from "../../../util/util/idpUtil/idpUtil";
 import Enterprise from "../../data/templates/enterprise-identity-provider.json";
 import Facebook from "../../data/templates/facebook.json";
 import Google from "../../data/templates/google.json";
+import { errorTypeDialog, successTypeDialog } from "../../util/dialog";
 import { createIdentityProvider, deleteIdentityProvider, listAllIdentityProviders } from "./api";
-import styles from "../../../styles/idp.module.css";
-import {setIdpTemplate} from "../../../util/util/idpUtil/idpUtil";
+import IdentityProviderList from './identityProviderList';
 
 const GOOGLE_ID = "google-idp";
 const FACEBOOK_ID = "facebook-idp";
@@ -37,6 +38,8 @@ const ENTERPRISE_ID = "enterprise-idp";
 const EMPTY_STRING = "";
 
 export default function IdentityProviders() {
+
+    const toaster = useToaster();
 
     const [idpList, setIdpList] = useState([]);
     const [openAddModal, setOpenAddModal] = useState(false);
@@ -76,6 +79,22 @@ export default function IdentityProviders() {
         setSelectedTemplate(undefined)
     };
 
+    const onIdpCreated = (response) => {
+        if (response) {
+            successTypeDialog(toaster, "Success", "Identity Provider Created Successfully");
+
+            setIdpList([
+                ...idpList,
+                response
+            ]);
+
+            setOpenAddModal(false);
+            setSelectedTemplate(undefined);
+        } else {
+            errorTypeDialog(toaster, "Error Occured", "Error occured while creating the identity provider. Try again.");
+        }
+    }
+
     const onIdPSave = async (formValues, template) => {
 
         let model = { ...template.idp };
@@ -86,15 +105,8 @@ export default function IdentityProviders() {
 
         model = setIdpTemplate(model, template.templateId, name, clientId, clientSecret);
 
-        const response = await createIdentityProvider({ model, session });
-
-        setIdpList([
-            ...idpList,
-            response
-        ]);
-
-        setOpenAddModal(false);
-        setSelectedTemplate(undefined);
+        createIdentityProvider({ model, session })
+            .then((response) => onIdpCreated(response))
 
     };
 
@@ -154,43 +166,6 @@ export default function IdentityProviders() {
     );
 
 }
-
-const IdentityProviderList = ({ idpList, fetchAllIdPs }) => {
-
-    const { data: session } = useSession();
-
-    const onIdPEditClick = (ignoredId) => {
-        alert("NOT IMPLEMENTED");
-    };
-
-    const onIdPDeleteClick = (id) => {
-        deleteIdentityProvider({ id, session })
-            .finally(() => {
-                fetchAllIdPs().finally();
-            })
-    };
-
-    return (
-        <List className={styles.idp__list}>
-            {idpList.map(({ id, name }) => (
-                <List.Item key={id} className={styles.idp__list__item}>
-                    <div>
-                        <p>{name}</p>
-                        <small>{id}</small>
-                    </div>
-                    <div>
-                        <IconButton icon={<Trash />}
-                            onClick={() => onIdPDeleteClick(id)}
-                            appearance="subtle" />
-                        <IconButton icon={<Edit />}
-                            onClick={() => onIdPEditClick(id)}
-                            appearance="primary" />
-                    </div>
-                </List.Item>
-            ))}
-        </List>
-    );
-};
 
 const AddIdentityProviderModal = ({ openModal, onClose, templates, onTemplateSelected }) => {
 
