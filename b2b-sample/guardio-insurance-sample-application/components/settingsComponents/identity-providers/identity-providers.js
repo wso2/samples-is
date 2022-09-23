@@ -273,7 +273,7 @@ const IdPCreationModal = ({ openModal, onSave, onCancel, template }) => {
             onClose={handleModalClose}
             onBackdropClick={handleModalClose}>
             <Modal.Header>
-                <Modal.Title>{template.name}</Modal.Title>
+                <Modal.Title><b>{template.name}</b></Modal.Title>
                 <p>{template.description}</p>
             </Modal.Header>
             <Modal.Body>
