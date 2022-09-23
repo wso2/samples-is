@@ -123,6 +123,7 @@
 
 .addUserMainDiv {
     display: flex;
+    overflow: hidden;
     flex-direction: column;
     gap: 32px;
 }

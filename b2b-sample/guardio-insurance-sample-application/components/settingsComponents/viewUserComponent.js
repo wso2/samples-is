@@ -23,6 +23,7 @@ import styles from '../../styles/Settings.module.css';
 import decodeViewUsers from '../../util/apiDecode/settings/decodeViewUsers';
 import EditUserComponent from '../editUser/editUserComponent';
 import SettingsTitle from '../util/settingsTitle';
+import AddUserComponent from './addUserComponent';
 
 export default function ViewUserComponent(props) {
     const [users, setUsers] = useState([]);
@@ -37,10 +38,10 @@ export default function ViewUserComponent(props) {
     }, [props.session])
 
     useEffect(() => {
-        if (!editUserOpen) {
+        if (!editUserOpen || !addUserOpen) {
             fetchData()
         }
-    }, [editUserOpen, fetchData]);
+    }, [editUserOpen, addUserOpen, fetchData]);
 
     useEffect(() => {
         fetchData();
@@ -58,14 +59,25 @@ export default function ViewUserComponent(props) {
         setEditUserOpen(true);
     }
 
+    const closeAddUserDialog = () => {
+        setAddUserOpen(false);
+    }
+
+    const onAddUserClick = (user) => {
+        setAddUserOpen(true);
+    }
+
     return (
         <div className={styles.tableMainPanelDiv}>
             <EditUserComponent session={props.session} open={editUserOpen}
                 onClose={closeEditDialog} user={openUser} />
 
+            <AddUserComponent orgName={props.orgName} orgId={props.orgId} session={props.session}
+                open={addUserOpen} onClose={closeAddUserDialog} />
+
             <Stack direction="row" justifyContent="space-between">
                 <SettingsTitle title="Manage Users" subtitle="Manage users in the organisation" />
-                <Button appearance="primary" size="lg">
+                <Button appearance="primary" size="lg" onClick={onAddUserClick}>
                     Add User
                 </Button>
             </Stack>

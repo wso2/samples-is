@@ -109,7 +109,7 @@ export default function EditUserComponent(props) {
                             username: props.user.username
                         }}
                         render={({ handleSubmit, form, submitting, pristine, values }) => (
-                            <FormSuite ayout="vertical" className={styles.addUserForm}
+                            <FormSuite layout="vertical" className={styles.addUserForm}
                                 onSubmit={event => { handleSubmit(event).then(form.restart); }} fluid>
                                 <Field
                                     name="firstName"
