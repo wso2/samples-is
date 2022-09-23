@@ -16,10 +16,14 @@
  * under the License.
  */
 
-const RequestMethod = {
-    POST : 'POST',
-    PATCH : 'PATCH',
-    DELETE: 'DELETE'
-}
+import callDeleteIdentityProvider from "../../../apiCall/settings/identityProvider/callDeleteIdentityProvider";
 
-module.exports = { RequestMethod }
+export default async function decodeDeleteIdentityProvider(session, id) {
+
+    try {
+        const res = await callDeleteIdentityProvider(session, id);
+        return res;
+    } catch (err) {
+        return null;
+    }
+}

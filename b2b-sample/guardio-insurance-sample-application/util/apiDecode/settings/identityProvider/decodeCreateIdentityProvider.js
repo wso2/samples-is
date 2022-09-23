@@ -16,10 +16,19 @@
  * under the License.
  */
 
-const RequestMethod = {
-    POST : 'POST',
-    PATCH : 'PATCH',
-    DELETE: 'DELETE'
-}
+import { setIdpTemplate } from "../../../../util/util/idpUtil/idpUtil";
+import callCreateIdentityProvider from "../../../apiCall/settings/identityProvider/callCreateIdentityProvider";
 
-module.exports = { RequestMethod }
+export default async function decodeCreateIdentityProvider(session, template, name, clientId, clientSecret) {
+
+    let model = { ...template.idp };
+
+    model = setIdpTemplate(model, template.templateId, name, clientId, clientSecret);
+    
+    try {
+        const res = await callCreateIdentityProvider(session, model);
+        return res;
+    } catch (err) {
+        return null;
+    }
+}

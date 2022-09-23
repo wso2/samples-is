@@ -20,8 +20,8 @@ import config from '../../../config.json';
 
 function sentDataHeader(session) {
     const headers = {
-        "accept": "application/scim+json",
-        "content-type": "application/scim+json",
+        "accept": "application/json",
+        "content-type": "application/json",
         "authorization": "Bearer " + session.accessToken,
         "access-control-allow-origin": config.WSO2IS_CLIENT_URL
     }

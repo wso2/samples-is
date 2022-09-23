@@ -17,21 +17,20 @@
  */
 
 import AppSelectIcon from '@rsuite/icons/AppSelect';
-import Edit from '@rsuite/icons/Edit';
-import Trash from '@rsuite/icons/Trash';
 import React, { useEffect, useMemo, useState } from "react";
-import { Avatar, Button, Container, FlexboxGrid, Form, IconButton, List, Modal, Stack, useToaster } from "rsuite";
+import { Avatar, Button, Container, FlexboxGrid, Form, Modal, Stack, useToaster } from "rsuite";
 
 import { useSession } from "next-auth/react";
 import styles from "../../../styles/idp.module.css";
+import decodeCreateIdentityProvider from '../../../util/apiDecode/settings/identityProvider/decodeCreateIdentityProvider';
+import decodeListAllIdentityProviders from '../../../util/apiDecode/settings/identityProvider/decodeListAllIdentityProviders';
 import { setIdpTemplate } from "../../../util/util/idpUtil/idpUtil";
 import Enterprise from "../../data/templates/enterprise-identity-provider.json";
 import Facebook from "../../data/templates/facebook.json";
 import Google from "../../data/templates/google.json";
 import { errorTypeDialog, successTypeDialog } from "../../util/dialog";
-import { createIdentityProvider, deleteIdentityProvider, listAllIdentityProviders } from "./api";
-import IdentityProviderList from './identityProviderList';
 import SettingsTitle from '../../util/settingsTitle';
+import IdentityProviderList from './identityProviderList';
 
 const GOOGLE_ID = "google-idp";
 const FACEBOOK_ID = "facebook-idp";
@@ -60,11 +59,8 @@ export default function IdentityProviders() {
     }, []);
 
     const fetchAllIdPs = async () => {
-        const res = await listAllIdentityProviders({
-            limit: 10,
-            offset: 0,
-            session
-        });
+
+        const res = await decodeListAllIdentityProviders(session);
         if (res && res.identityProviders) {
             setIdpList(res.identityProviders);
         } else {
@@ -98,15 +94,11 @@ export default function IdentityProviders() {
 
     const onIdPSave = async (formValues, template) => {
 
-        let model = { ...template.idp };
-
         let name = formValues.application_name.toString();
         let clientId = formValues.client_id.toString();
         let clientSecret = formValues.client_secret.toString();
 
-        model = setIdpTemplate(model, template.templateId, name, clientId, clientSecret);
-
-        createIdentityProvider({ model, session })
+        decodeCreateIdentityProvider(session, template, name, clientId, clientSecret)
             .then((response) => onIdpCreated(response))
 
     };

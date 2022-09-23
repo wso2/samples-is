@@ -5,8 +5,8 @@ import { IconButton, List, useToaster } from "rsuite";
 
 import { useSession } from "next-auth/react";
 import styles from "../../../styles/idp.module.css";
+import decodeDeleteIdentityProvider from '../../../util/apiDecode/settings/identityProvider/decodeDeleteIdentityProvider';
 import { errorTypeDialog, successTypeDialog } from "../../util/dialog";
-import { deleteIdentityProvider } from "./api";
 
 export default function IdentityProviderList({ idpList, fetchAllIdPs }) {
     const { data: session } = useSession();
@@ -25,7 +25,7 @@ export default function IdentityProviderList({ idpList, fetchAllIdPs }) {
     }
 
     const onIdPDeleteClick = (id) => {
-        deleteIdentityProvider({ id, session })
+        decodeDeleteIdentityProvider(session, id)
             .then((response) => onIdpDelete(response))
             .finally(() => {
                 fetchAllIdPs().finally();

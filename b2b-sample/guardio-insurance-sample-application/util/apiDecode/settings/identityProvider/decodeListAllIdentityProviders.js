@@ -16,10 +16,15 @@
  * under the License.
  */
 
-const RequestMethod = {
-    POST : 'POST',
-    PATCH : 'PATCH',
-    DELETE: 'DELETE'
-}
+ import callListAllIdentityProviders from "../../../apiCall/settings/identityProvider/callListAllIdentityProviders";
 
-module.exports = { RequestMethod }
+ export default async function decodeListAllIdentityProviders(session) {
+   
+     try {
+         const res = await callListAllIdentityProviders(session);
+         return res;
+     } catch (err) {
+         return null;
+     }
+ }
+ 
