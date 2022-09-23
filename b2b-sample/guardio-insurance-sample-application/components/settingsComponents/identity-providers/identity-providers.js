@@ -31,6 +31,7 @@ import Google from "../../data/templates/google.json";
 import { errorTypeDialog, successTypeDialog } from "../../util/dialog";
 import { createIdentityProvider, deleteIdentityProvider, listAllIdentityProviders } from "./api";
 import IdentityProviderList from './identityProviderList';
+import SettingsTitle from '../../util/settingsTitle';
 
 const GOOGLE_ID = "google-idp";
 const FACEBOOK_ID = "facebook-idp";
@@ -112,20 +113,10 @@ export default function IdentityProviders() {
 
     return (
         <Container>
-            <Stack justifyContent="space-between">
-                <Stack direction="column" alignItems="flex-start">
-                    <h2>Identity Providers</h2>
-                    <p>Manage identity providers to allow users to log in to your application through them.</p>
-                </Stack>
-                {idpList.length > 0 && (
-                    <Stack>
-                        <Button appearance="primary" size="lg"
-                            onClick={onAddIdentityProviderClick}>
-                            Add Identity Provider
-                        </Button>
-                    </Stack>
-                )}
-            </Stack>
+            
+            <SettingsTitle title="Identity Providers"
+                subtitle="Manage identity providers to allow users to log in to your application through them." />
+
             <FlexboxGrid
                 style={{ width: "100%", height: "60vh", marginTop: "24px" }}
                 justify={idpList.length === 0 ? "center" : "start"}
