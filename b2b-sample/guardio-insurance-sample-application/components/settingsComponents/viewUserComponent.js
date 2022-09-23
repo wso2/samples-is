@@ -17,7 +17,7 @@
  */
 
 import React, { useCallback, useEffect, useState } from 'react';
-import { Table } from 'rsuite';
+import { Button, Stack, Table } from 'rsuite';
 
 import styles from '../../styles/Settings.module.css';
 import decodeViewUsers from '../../util/apiDecode/settings/decodeViewUsers';
@@ -27,19 +27,20 @@ import SettingsTitle from '../util/settingsTitle';
 export default function ViewUserComponent(props) {
     const [users, setUsers] = useState([]);
     const [editUserOpen, setEditUserOpen] = useState(false);
+    const [addUserOpen, setAddUserOpen] = useState(false);
 
     const [openUser, setOpenUser] = useState({});
 
     const fetchData = useCallback(async () => {
         const res = await decodeViewUsers(props.session);
         setUsers(res);
-    },[props.session])
+    }, [props.session])
 
     useEffect(() => {
         if (!editUserOpen) {
             fetchData()
         }
-    }, [editUserOpen,fetchData]);
+    }, [editUserOpen, fetchData]);
 
     useEffect(() => {
         fetchData();
@@ -62,11 +63,15 @@ export default function ViewUserComponent(props) {
             <EditUserComponent session={props.session} open={editUserOpen}
                 onClose={closeEditDialog} user={openUser} />
 
-            <SettingsTitle title="Manage Users" subtitle="Manage users in the organisation" />
+            <Stack direction="row" justifyContent="space-between">
+                <SettingsTitle title="Manage Users" subtitle="Manage users in the organisation" />
+                <Button appearance="primary" size="lg">
+                    Add User
+                </Button>
+            </Stack>
 
             <Table
                 height={900}
-                width={1150}
                 data={users}
             >
                 <Column width={200} align="center">
@@ -89,11 +94,11 @@ export default function ViewUserComponent(props) {
                     <Cell dataKey="username" />
                 </Column>
 
-                <Column width={300} align="center">
+                <Column flexGrow={2} align="center">
                     <HeaderCell><h6>Email</h6></HeaderCell>
                     <Cell dataKey="email" />
                 </Column>
-                <Column width={150} align="center" fixed="right">
+                <Column flexGrow={1} align="center" fixed="right">
                     <HeaderCell><h6>Edit User</h6></HeaderCell>
 
                     <Cell>
