@@ -24,7 +24,6 @@ import { useSession } from "next-auth/react";
 import styles from "../../../styles/idp.module.css";
 import decodeCreateIdentityProvider from '../../../util/apiDecode/settings/identityProvider/decodeCreateIdentityProvider';
 import decodeListAllIdentityProviders from '../../../util/apiDecode/settings/identityProvider/decodeListAllIdentityProviders';
-import { setIdpTemplate } from "../../../util/util/idpUtil/idpUtil";
 import Enterprise from "../../data/templates/enterprise-identity-provider.json";
 import Facebook from "../../data/templates/facebook.json";
 import Google from "../../data/templates/google.json";
