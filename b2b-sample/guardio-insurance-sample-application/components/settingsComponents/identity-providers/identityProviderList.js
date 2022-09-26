@@ -1,12 +1,13 @@
 import Edit from '@rsuite/icons/Edit';
 import Trash from '@rsuite/icons/Trash';
 import React from "react";
-import { IconButton, List, useToaster } from "rsuite";
+import { IconButton, List, PanelGroup, useToaster } from "rsuite";
 
 import { useSession } from "next-auth/react";
 import styles from "../../../styles/idp.module.css";
 import decodeDeleteIdentityProvider from '../../../util/apiDecode/settings/identityProvider/decodeDeleteIdentityProvider';
 import { errorTypeDialog, successTypeDialog } from "../../util/dialog";
+import IdentityProviderDetails from './identityProviderDetails';
 
 export default function IdentityProviderList({ idpList, fetchAllIdPs }) {
     const { data: session } = useSession();
@@ -33,23 +34,13 @@ export default function IdentityProviderList({ idpList, fetchAllIdPs }) {
     };
 
     return (
-        <List className={styles.idp__list}>
-            {idpList.map(({ id, name }) => (
-                <List.Item key={id} className={styles.idp__list__item}>
-                    <div>
-                        <p>{name}</p>
-                        <small>{id}</small>
-                    </div>
-                    <div>
-                        <IconButton icon={<Trash />}
-                            onClick={() => onIdPDeleteClick(id)}
-                            appearance="subtle" />
-                        <IconButton icon={<Edit />}
-                            onClick={() => onIdPEditClick(id)}
-                            appearance="primary" />
-                    </div>
-                </List.Item>
-            ))}
-        </List>
+        <div className={styles.idp__list}>
+            <PanelGroup accordion defaultActiveKey={idpList[0].id} bordered>
+                {idpList.map(({ id, name }) => (
+                    <IdentityProviderDetails session={session} id={id} />
+                ))}
+            </PanelGroup>
+        </div>
+
     );
 }
