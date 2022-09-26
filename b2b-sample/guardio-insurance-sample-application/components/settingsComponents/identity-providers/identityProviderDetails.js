@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { Avatar, Button, ButtonGroup, Panel, Placeholder, Stack, useToaster } from 'rsuite';
-import decodeGetDetailedIdentityProvider from
-  '../../../util/apiDecode/settings/identityProvider/decodeGetDetailedIdentityProvider';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Avatar, Nav, Panel, Stack, useToaster } from 'rsuite';
 import styles from "../../../styles/idp.module.css";
+import decodeGetDetailedIdentityProvider from '../../../util/apiDecode/settings/identityProvider/decodeGetDetailedIdentityProvider';
+import ButtonGroupIdentityProviderDetails from './buttonGroupIdentityProviderDetails';
 
 export default function IdentityProviderDetails(props) {
 
@@ -22,15 +22,23 @@ export default function IdentityProviderDetails(props) {
     <Panel header={
       <IdentityProviderDetailsHeader idpDetails={idpDetails} />
     } eventKey={props.id} id={props.id}>
-      <pre className={styles.idp__item__json__pre}> {JSON.stringify(idpDetails, null, 2)}</pre>
+      <Stack direction='column' alignItems='left'>
+        <ButtonGroupIdentityProviderDetails id={props.id} fetchAllIdPs={props.fetchAllIdPs}/>
+        <Nav appearance="subtle" activeKey="home" style={{ marginBottom: 10 }}>
+          <Nav.Item eventKey="general">General</Nav.Item>
+          <Nav.Item eventKey="settings">Settings</Nav.Item>
+          <Nav.Item eventKey="raw">Raw</Nav.Item>
+        </Nav>
+        <pre className={styles.idp__item__json__pre}> {JSON.stringify(idpDetails, null, 2)}</pre>
+      </Stack>
     </Panel>
   )
 }
 
 function IdentityProviderDetailsHeader(props) {
   return (
-    <Stack justifyContent="space-between">
-      <Stack justifyContent="space-between">
+    <Stack>
+      <Stack>
         <Avatar
           style={{ background: '#000', marginRight: "20px" }}
           size="lg"
@@ -43,8 +51,20 @@ function IdentityProviderDetailsHeader(props) {
           <p>{props.idpDetails.description}</p>
         </Stack>
       </Stack>
-      <Button>Add to Login Flow</Button>
+
     </Stack>
   )
 }
 
+/**
+ * {
+ *  General : {
+ *              Name : "", Desc: ""
+ *            },
+ *  Settings : {
+ *              Client Id, Client Secret, Authorized redirect URI, Additional Query Parameters
+ *            }
+ *  Raw : Full JSON object
+ * }
+ * 
+ */
