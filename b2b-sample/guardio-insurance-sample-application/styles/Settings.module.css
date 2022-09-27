@@ -126,6 +126,9 @@
     overflow: hidden;
     flex-direction: column;
     gap: 32px;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .addUserFormDiv{
