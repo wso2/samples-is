@@ -3,11 +3,13 @@ import { Avatar, Nav, Panel, Stack, useToaster } from 'rsuite';
 import styles from "../../../styles/idp.module.css";
 import decodeGetDetailedIdentityProvider from '../../../util/apiDecode/settings/identityProvider/decodeGetDetailedIdentityProvider';
 import ButtonGroupIdentityProviderDetails from './buttonGroupIdentityProviderDetails';
+import Raw from './idpDetailsSections/raw';
 
 export default function IdentityProviderDetails(props) {
 
   const toaster = useToaster();
   const [idpDetails, setIdpDetails] = useState({});
+  const [activeKeyNav, setActiveKeyNav] = useState('1');
 
   const fetchData = useCallback(async () => {
     const res = await decodeGetDetailedIdentityProvider(props.session, props.id);
@@ -18,18 +20,33 @@ export default function IdentityProviderDetails(props) {
     fetchData();
   }, [fetchData]);
 
+  const activeKeyNavSelect = (eventKey) => {
+    setActiveKeyNav(eventKey);
+  }
+
+  const idpDetailsComponent = (activeKey) => {
+    switch (activeKey) {
+      case '1':
+        return <Raw idpDetails={idpDetails} />;
+      case '2':
+        return <Raw idpDetails={idpDetails} />;
+      case '3':
+        return <Raw idpDetails={idpDetails} />;
+    }
+  }
+
   return (
     <Panel header={
       <IdentityProviderDetailsHeader idpDetails={idpDetails} />
     } eventKey={props.id} id={props.id}>
       <Stack direction='column' alignItems='left'>
-        <ButtonGroupIdentityProviderDetails id={props.id} fetchAllIdPs={props.fetchAllIdPs}/>
-        <Nav appearance="subtle" activeKey="home" style={{ marginBottom: 10 }}>
-          <Nav.Item eventKey="general">General</Nav.Item>
-          <Nav.Item eventKey="settings">Settings</Nav.Item>
-          <Nav.Item eventKey="raw">Raw</Nav.Item>
-        </Nav>
-        <pre className={styles.idp__item__json__pre}> {JSON.stringify(idpDetails, null, 2)}</pre>
+        <ButtonGroupIdentityProviderDetails id={props.id} fetchAllIdPs={props.fetchAllIdPs} />
+        <IdentityProviderDetailsNav activeKeyNav={activeKeyNav} activeKeyNavSelect={activeKeyNavSelect} />
+
+        <div>
+          {idpDetailsComponent(activeKeyNav)}
+        </div>
+
       </Stack>
     </Panel>
   )
@@ -54,6 +71,19 @@ function IdentityProviderDetailsHeader(props) {
 
     </Stack>
   )
+}
+
+function IdentityProviderDetailsNav(props) {
+  return (
+    <Nav appearance="subtle" activeKey={props.activeKeyNav} style={{ marginBottom: 10 }}>
+      <Nav.Item eventKey="1"
+        onSelect={(eventKey) => props.activeKeyNavSelect(eventKey)}>General</Nav.Item>
+      <Nav.Item eventKey="2"
+        onSelect={(eventKey) => props.activeKeyNavSelect(eventKey)}>Settings</Nav.Item>
+      <Nav.Item eventKey="3"
+        onSelect={(eventKey) => props.activeKeyNavSelect(eventKey)}>Raw</Nav.Item>
+    </Nav>
+  );
 }
 
 /**
