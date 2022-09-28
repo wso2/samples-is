@@ -41,19 +41,6 @@
           "isEnabled": true,
           "properties": [
             {
-              "key": "AdditionalQueryParameters",
-              "displayName": "Additional Query Parameters",
-              "description": "Additional query parameters. e.g: paramName1=value1",
-              "type": "STRING",
-              "displayOrder": 4,
-              "regex": ".*",
-              "isMandatory": false,
-              "isConfidential": false,
-              "options": [],
-              "defaultValue": "",
-              "subProperties": []
-            },
-            {
               "key": "ClientId",
               "displayName": "Client ID",
               "description": "Enter Google IDP client identifier value",
@@ -75,6 +62,32 @@
               "regex": ".*",
               "isMandatory": true,
               "isConfidential": true,
+              "options": [],
+              "defaultValue": "",
+              "subProperties": []
+            },
+            {
+              "key": "callbackUrl",
+              "displayName": "Callback URL",
+              "description": "The callback URL used to obtain Google credentials.",
+              "type": "STRING",
+              "displayOrder": 3,
+              "regex": ".*",
+              "isMandatory": false,
+              "isConfidential": false,
+              "options": [],
+              "defaultValue": "",
+              "subProperties": []
+            },
+            {
+              "key": "AdditionalQueryParameters",
+              "displayName": "Additional Query Parameters",
+              "description": "Additional query parameters. e.g: paramName1=value1",
+              "type": "STRING",
+              "displayOrder": 4,
+              "regex": ".*",
+              "isMandatory": false,
+              "isConfidential": false,
               "options": [],
               "defaultValue": "",
               "subProperties": []

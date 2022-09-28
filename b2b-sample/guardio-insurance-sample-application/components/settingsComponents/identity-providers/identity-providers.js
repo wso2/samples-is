@@ -24,17 +24,13 @@ import { useSession } from "next-auth/react";
 import styles from "../../../styles/idp.module.css";
 import decodeCreateIdentityProvider from '../../../util/apiDecode/settings/identityProvider/decodeCreateIdentityProvider';
 import decodeListAllIdentityProviders from '../../../util/apiDecode/settings/identityProvider/decodeListAllIdentityProviders';
+import { EMPTY_STRING, ENTERPRISE_ID, FACEBOOK_ID, GOOGLE_ID } from '../../../util/util/common/common';
 import Enterprise from "../../data/templates/enterprise-identity-provider.json";
 import Facebook from "../../data/templates/facebook.json";
 import Google from "../../data/templates/google.json";
 import { errorTypeDialog, successTypeDialog } from "../../util/dialog";
 import SettingsTitle from '../../util/settingsTitle';
 import IdentityProviderList from './identityProviderList';
-
-const GOOGLE_ID = "google-idp";
-const FACEBOOK_ID = "facebook-idp";
-const ENTERPRISE_ID = "enterprise-idp";
-const EMPTY_STRING = "";
 
 export default function IdentityProviders() {
 

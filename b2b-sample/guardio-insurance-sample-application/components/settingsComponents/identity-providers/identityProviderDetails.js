@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Avatar, Nav, Panel, Stack, useToaster } from 'rsuite';
-import styles from "../../../styles/idp.module.css";
 import decodeGetDetailedIdentityProvider from '../../../util/apiDecode/settings/identityProvider/decodeGetDetailedIdentityProvider';
 import ButtonGroupIdentityProviderDetails from './buttonGroupIdentityProviderDetails';
 import General from './idpDetailsSections/general';
 import Raw from './idpDetailsSections/raw';
+import Settings from './idpDetailsSections/settings';
 
 export default function IdentityProviderDetails(props) {
 
@@ -30,7 +30,7 @@ export default function IdentityProviderDetails(props) {
       case '1':
         return <General idpDetails={idpDetails} />;
       case '2':
-        return <Raw idpDetails={idpDetails} />;
+        return <Settings session={props.session} idpDetails={idpDetails} />;
       case '3':
         return <Raw idpDetails={idpDetails} />;
     }

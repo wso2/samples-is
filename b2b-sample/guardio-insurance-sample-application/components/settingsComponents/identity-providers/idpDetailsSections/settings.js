@@ -16,43 +16,69 @@
  * under the License.
  */
 
-import React, { useState } from 'react';
-import { Field, Form } from 'react-final-form';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Form } from 'react-final-form';
 import { Button, ButtonToolbar, Loader, useToaster } from 'rsuite';
 import FormSuite from 'rsuite/Form';
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from '../../../../util/util/frontendUtil/frontendUtil';
 import { errorTypeDialog, successTypeDialog } from '../../../util/dialog';
 
 import styles from '../../../../styles/Settings.module.css';
-import HelperText from '../../../util/helperText';
+import SettingsFormSelection from './settingsFormSection/settingsFormSelection';
+import decodeGetFederatedAuthenticators from '../../../../util/apiDecode/settings/identityProvider/decodeGetFederatedAuthenticators';
 
-export default function General(props) {
-
+export default function Settings(props) {
 
     const [successDialogOpen, setSuccessDialogOpen] = useState(false);
-
     const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
-
+    const [federatedAuthenticators, setFederatedAuthenticators] = useState({});
     const toaster = useToaster();
 
-    const nameValidate = (name, errors) => {
-        if (!name) {
-            errors.name = 'This field cannot be empty'
+    const fetchData = useCallback(async () => {
+        decodeGetFederatedAuthenticators(
+            props.session, props.idpDetails.id, props.idpDetails.federatedAuthenticators.defaultAuthenticatorId
+        ).then((res) => setFederatedAuthenticators(res));
+    }, [props])
+
+    useEffect(() => {
+        fetchData();
+    }, [fetchData]);
+
+
+    const clientIdValidate = (clientId, errors) => {
+        if (!clientId) {
+            errors.clientId = 'This field cannot be empty'
         }
         return errors;
     }
 
-    const descriptionValidate = (description, errors) => {
-        if (!description) {
-            errors.description = 'This field cannot be empty'
+    const clientSecretValidate = (clientSecret, errors) => {
+        if (!clientSecret) {
+            errors.clientSecret = 'This field cannot be empty'
+        }
+        return errors;
+    }
+
+    const redirectURIValidate = (redirectURI, errors) => {
+        if (!redirectURI) {
+            errors.redirectURI = 'This field cannot be empty'
+        }
+        return errors;
+    }
+
+    const queryParamValidate = (queryParam, errors) => {
+        if (!queryParam) {
+            errors.queryParam = 'This field cannot be empty'
         }
         return errors;
     }
 
     const validate = values => {
         const errors = {}
-        errors = nameValidate(values.name, errors);
-        errors = descriptionValidate(values.description, errors);
+        errors = clientIdValidate(values.clientId, errors);
+        errors = clientSecretValidate(values.clientSecret, errors);
+        errors = redirectURIValidate(values.redirectURI, errors);
+        errors = queryParamValidate(values.queryParam, errors);
         return errors
     }
 
@@ -87,50 +113,15 @@ export default function General(props) {
                 <Form
                     onSubmit={onSubmit}
                     validate={validate}
-                    initialValues={{
-                        name: props.idpDetails.name,
-                        description: props.idpDetails.description
-                    }}
                     render={({ handleSubmit, form, submitting, pristine, values }) => (
                         <FormSuite layout="vertical" className={styles.addUserForm}
                             onSubmit={event => { handleSubmit(event).then(form.restart); }} fluid>
-                            <Field
-                                name="name"
-                                render={({ input, meta }) => (
-                                    <FormSuite.Group controlId="name">
-                                        <FormSuite.ControlLabel>Name</FormSuite.ControlLabel>
 
-                                        <FormSuite.Control
-                                            {...input}
-                                        />
-
-                                        <HelperText text="A text description of the identity provider." />
-
-                                        {meta.error && meta.touched && <FormSuite.ErrorMessage show={true}  >
-                                            {meta.error}
-                                        </FormSuite.ErrorMessage>}
-                                    </FormSuite.Group>
-                                )}
-                            />
-
-                            <Field
-                                name="description"
-                                render={({ input, meta }) => (
-                                    <FormSuite.Group controlId="description">
-                                        <FormSuite.ControlLabel>Description</FormSuite.ControlLabel>
-                                        <FormSuite.Control
-                                            {...input}
-                                        />
-                                        
-                                        <HelperText text="A text description of the identity provider." />
-
-                                        {meta.error && meta.touched && <FormSuite.ErrorMessage show={true}  >
-                                            {meta.error}
-                                        </FormSuite.ErrorMessage>}
-
-                                    </FormSuite.Group>
-                                )}
-                            />
+                            {federatedAuthenticators.properties
+                                ? <SettingsFormSelection federatedAuthenticators={federatedAuthenticators.properties}
+                                    templateId={props.idpDetails.templateId} />
+                                : <></>
+                            }
 
                             <div className="buttons">
                                 <FormSuite.Group>
