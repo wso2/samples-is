@@ -12,7 +12,7 @@ export default function IdentityProviderList({ idpList, fetchAllIdPs }) {
         <div className={styles.idp__list}>
             <PanelGroup accordion defaultActiveKey={idpList[0].id} bordered>
                 {idpList.map(({ id, name }) => (
-                    <IdentityProviderDetails session={session} id={id} fetchAllIdPs={fetchAllIdPs} />
+                    <IdentityProviderDetails key={id} session={session} id={id} fetchAllIdPs={fetchAllIdPs} />
                 ))}
             </PanelGroup>
         </div>

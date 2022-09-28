@@ -23,7 +23,6 @@ export default function SettingsFormSelection(props) {
     };
 
     const selectedValue = (key) => {
-        console.log(federatedAuthenticators);
         return federatedAuthenticators.filter((obj) => obj.key === key)[0].value;
     }
     return (
@@ -31,6 +30,7 @@ export default function SettingsFormSelection(props) {
             {
                 propList().map((prop) => (
                     <Field
+                        key={prop.key}
                         name={prop.key}
                         defaultValue={selectedValue(prop.key)}
                         render={({ input, meta }) => (

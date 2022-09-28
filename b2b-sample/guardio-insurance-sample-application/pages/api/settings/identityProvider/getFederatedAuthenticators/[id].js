@@ -40,7 +40,6 @@ export default async function getFederatedAuthenticators(req, res) {
         const data = await fetchData.json();
         res.status(200).json(data);
     } catch (err) {
-        console.log(err);
         dataNotRecievedError(res);
     }
 }

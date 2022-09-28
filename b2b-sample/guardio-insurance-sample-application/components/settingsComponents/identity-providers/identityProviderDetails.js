@@ -40,7 +40,7 @@ export default function IdentityProviderDetails(props) {
     <Panel header={
       <IdentityProviderDetailsHeader idpDetails={idpDetails} />
     } eventKey={props.id} id={props.id}>
-      <Stack direction='column' alignItems='left'>
+      <Stack direction='column' alignItems='stretch'>
         <ButtonGroupIdentityProviderDetails id={props.id} fetchAllIdPs={props.fetchAllIdPs} />
         <IdentityProviderDetailsNav activeKeyNav={activeKeyNav} activeKeyNavSelect={activeKeyNavSelect} />
 
@@ -64,7 +64,7 @@ function IdentityProviderDetailsHeader(props) {
           src={props.idpDetails.image}
           alt="IDP image"
         />
-        <Stack direction='column' justifyContent='flex-start' alignItems='left'>
+        <Stack direction='column' justifyContent='flex-start' alignItems='stretch'>
           <h4>{props.idpDetails.name}</h4>
           <p>{props.idpDetails.description}</p>
         </Stack>
@@ -86,16 +86,3 @@ function IdentityProviderDetailsNav(props) {
     </Nav>
   );
 }
-
-/**
- * {
- *  General : {
- *              Name : "", Desc: ""
- *            },
- *  Settings : {
- *              Client Id, Client Secret, Authorized redirect URI, Additional Query Parameters
- *            }
- *  Raw : Full JSON object
- * }
- * 
- */
