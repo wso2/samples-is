@@ -40,15 +40,18 @@ export default function IdentityProviderDetails(props) {
     <Panel header={
       <IdentityProviderDetailsHeader idpDetails={idpDetails} />
     } eventKey={props.id} id={props.id}>
-      <Stack direction='column' alignItems='stretch'>
-        <ButtonGroupIdentityProviderDetails id={props.id} fetchAllIdPs={props.fetchAllIdPs} />
-        <IdentityProviderDetailsNav activeKeyNav={activeKeyNav} activeKeyNavSelect={activeKeyNavSelect} />
+      <div style={{ marginLeft: "25px",marginRight: "25px" }}>
+        <Stack direction='column' alignItems='stretch'>
+          <ButtonGroupIdentityProviderDetails id={props.id} fetchAllIdPs={props.fetchAllIdPs} />
+          <IdentityProviderDetailsNav activeKeyNav={activeKeyNav} activeKeyNavSelect={activeKeyNavSelect} />
 
-        <div>
-          {idpDetailsComponent(activeKeyNav)}
-        </div>
+          <div>
+            {idpDetailsComponent(activeKeyNav)}
+          </div>
 
-      </Stack>
+        </Stack>
+      </div>
+
     </Panel>
   )
 }

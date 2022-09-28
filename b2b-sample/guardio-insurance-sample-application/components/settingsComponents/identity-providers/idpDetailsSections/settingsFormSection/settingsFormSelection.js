@@ -32,7 +32,7 @@ export default function SettingsFormSelection(props) {
                     <Field
                         key={prop.key}
                         name={prop.key}
-                        defaultValue={selectedValue(prop.key)}
+                        initialValue={selectedValue(prop.key)}
                         render={({ input, meta }) => (
                             <FormSuite.Group controlId={prop.key}>
                                 <FormSuite.ControlLabel>{prop.displayName}</FormSuite.ControlLabel>
