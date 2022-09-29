@@ -1,3 +1,5 @@
+
+
 /*
  * Copyright (c) 2022 WSO2 LLC. (http://www.wso2.com).
  *
@@ -16,11 +18,20 @@
  * under the License.
  */
 
-const RequestMethod = {
-    POST : 'POST',
-    PATCH : 'PATCH',
-    DELETE: 'DELETE',
-    PATCH: 'PATCH'
-}
+import callPatchGeneralSettingsIdp from "../../../apiCall/settings/identityProvider/callPatchGeneralSettingsIdp";
 
-module.exports = { RequestMethod }
+export default async function decodePatchGeneralSettingsIdp(session, name, description, idpId) {
+
+    let body = [
+        { "operation": "REPLACE", "path": "/description", "value": description },
+        { "operation": "REPLACE", "path": "/isPrimary", "value": false },
+        { "operation": "REPLACE", "path": "/name", "value": name }
+    ];
+
+    try {
+        const res = await callPatchGeneralSettingsIdp(session, idpId, body);
+        return res;
+    } catch (err) {
+        return null;
+    }
+}

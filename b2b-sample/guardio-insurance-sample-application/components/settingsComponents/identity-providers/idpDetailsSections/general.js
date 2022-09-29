@@ -24,12 +24,10 @@ import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from '../../../../util/ut
 import { errorTypeDialog, successTypeDialog } from '../../../util/dialog';
 
 import styles from '../../../../styles/Settings.module.css';
+import decodePatchGeneralSettingsIdp from '../../../../util/apiDecode/settings/identityProvider/decodePatchGeneralSettingsIdp';
 import HelperText from '../../../util/helperText';
 
 export default function General(props) {
-
-
-    const [successDialogOpen, setSuccessDialogOpen] = useState(false);
 
     const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
 
@@ -58,25 +56,19 @@ export default function General(props) {
 
     const onDataSubmit = (response, form) => {
         if (response) {
-            successTypeDialog(toaster, "Changes Saved Successfully", "User add to the organization successfully.");
+            successTypeDialog(toaster, "Changes Saved Successfully", "Idp updated successfully.");
+            props.fetchData();
             form.restart();
-            props.onClose();
         } else {
-            errorTypeDialog(toaster, "Error Occured", "Error occured while adding the user. Try again.");
+            errorTypeDialog(toaster, "Error Occured", "Error occured while updating the Idp. Try again.");
         }
     }
 
-    const onSubmit = async (values, form) => {
+    const onUpdate = async (values, form) => {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
-        onDataSubmit(true, form);
-        // decodeAddUser(props.session, values.firstName, values.familyName, values.email,
-        //     values.username, values.password)
-        //     .then((response) => onDataSubmit(response, form))
-        //     .finally((response) => setLoadingDisplay(LOADING_DISPLAY_NONE))
-    }
-
-    const closeSuccessDialog = () => {
-        setSuccessDialogOpen(false);
+        decodePatchGeneralSettingsIdp(props.session, values.name, values.description, props.idpDetails.id)
+            .then((response) => onDataSubmit(response, form))
+            .finally((response) => setLoadingDisplay(LOADING_DISPLAY_NONE))
     }
 
     return (
@@ -85,7 +77,7 @@ export default function General(props) {
             <div>
 
                 <Form
-                    onSubmit={onSubmit}
+                    onSubmit={onUpdate}
                     validate={validate}
                     initialValues={{
                         name: props.idpDetails.name,
@@ -121,7 +113,7 @@ export default function General(props) {
                                         <FormSuite.Control
                                             {...input}
                                         />
-                                        
+
                                         <HelperText text="A text description of the identity provider." />
 
                                         {meta.error && meta.touched && <FormSuite.ErrorMessage show={true}  >
@@ -136,7 +128,7 @@ export default function General(props) {
                                 <FormSuite.Group>
                                     <ButtonToolbar>
                                         <Button className={styles.addUserButton} size="lg" appearance="primary"
-                                            type='submit' disabled={submitting || pristine}>Submit</Button>
+                                            type='submit' disabled={submitting || pristine}>Update</Button>
                                     </ButtonToolbar>
                                 </FormSuite.Group>
 
