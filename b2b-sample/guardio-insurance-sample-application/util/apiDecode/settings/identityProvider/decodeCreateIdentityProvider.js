@@ -24,7 +24,7 @@ export default async function decodeCreateIdentityProvider(session, template, na
     let model = { ...template.idp };
 
     model = setIdpTemplate(model, template.templateId, name, clientId, clientSecret);
-    
+
     try {
         const res = await callCreateIdentityProvider(session, model);
         return res;

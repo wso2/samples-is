@@ -16,25 +16,24 @@
  * under the License.
  */
 
- import Cookie from 'js-cookie';
- import config from '../../../../config.json';
- import { getInternalApiRequestOptionsWithParam } from '../../../util/apiUtil/getInteralApiRequestOptions';
- 
- const subOrgId = Cookie.get("orgId");
- 
- export default async function callCreateIdentityProvider(session, model) {
- 
-     try {
-         const res = await fetch(
-             `${config.WSO2IS_CLIENT_URL}/api/settings/identityProvider/createIdentityProvider`,
-             getInternalApiRequestOptionsWithParam(session, subOrgId, model)
-         );
- 
-         const data = await res.json();
- 
-         return data;
-     } catch (err) {
-         return null;
-     }
- }
- 
+import Cookie from 'js-cookie';
+import config from '../../../../config.json';
+import { getInternalApiRequestOptionsWithParam } from '../../../util/apiUtil/getInteralApiRequestOptions';
+
+const subOrgId = Cookie.get("orgId");
+
+export default async function callCreateIdentityProvider(session, model) {
+
+    try {
+        const res = await fetch(
+            `${config.WSO2IS_CLIENT_URL}/api/settings/identityProvider/createIdentityProvider`,
+            getInternalApiRequestOptionsWithParam(session, subOrgId, model)
+        );
+
+        const data = await res.json();
+
+        return data;
+    } catch (err) {
+        return null;
+    }
+}

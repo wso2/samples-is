@@ -40,6 +40,6 @@ export default async function deleteIdentityProvider(req, res) {
         const data = await fetchData.json();
         res.status(200).json(data);
     } catch (err) {
-        dataNotRecievedError(res);
+        return dataNotRecievedError(res);
     }
 }
