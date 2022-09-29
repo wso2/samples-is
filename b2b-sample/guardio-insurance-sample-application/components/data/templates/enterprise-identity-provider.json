@@ -24,7 +24,7 @@
             {
               "key": "ClientId",
               "displayName": "Client Id",
-              "description": "Enter Facebook client identifier value",
+              "description": "The client identifier value of the identity provider.",
               "type": "STRING",
               "displayOrder": 1,
               "regex": ".*",
@@ -37,7 +37,7 @@
             {
               "key": "ClientSecret",
               "displayName": "Client Secret",
-              "description": "Enter Facebook client secret value",
+              "description": "The client secret value of the identity provider.",
               "type": "STRING",
               "displayOrder": 2,
               "regex": ".*",
@@ -50,7 +50,7 @@
             {
               "key": "OAuth2AuthzEPUrl",
               "displayName": "Authorization Endpoint URL",
-              "description": "Enter OAuth2/OpenID Connect authorization endpoint URL value",
+              "description": "The standard authorization endpoint URL obtained from the identity provider.",
               "type": "STRING",
               "displayOrder": 3,
               "regex": ".*",
@@ -63,7 +63,7 @@
             {
               "key": "OAuth2TokenEPUrl",
               "displayName": "Token Endpoint URL",
-              "description": "Enter OAuth2/OpenID Connect token endpoint URL value",
+              "description": "The standard token endpoint URL obtained from the identity provider.",
               "type": "STRING",
               "displayOrder": 4,
               "regex": ".*",
@@ -76,7 +76,7 @@
             {
               "key": "callbackUrl",
               "displayName": "Callback Url",
-              "description": "Enter value corresponding to callback url",
+              "description": "The WSO2 Identity Server URL to which the user needs to be redirected after completing the authentication at the identity provider. The identity provider needs to send the authorization code to this URL upon successful authentication.",
               "type": "STRING",
               "displayOrder": 5,
               "regex": ".*",
@@ -84,7 +84,8 @@
               "isConfidential": false,
               "options": [],
               "defaultValue": "",
-              "subProperties": []
+              "subProperties": [],
+              "readOnly": true
             }
           ]
         }

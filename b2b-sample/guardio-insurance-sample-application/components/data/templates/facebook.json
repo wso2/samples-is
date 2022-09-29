@@ -106,8 +106,8 @@
           "properties": [
             {
               "key": "ClientId",
-              "displayName": "Client Id",
-              "description": "Enter Facebook client identifier value",
+              "displayName": "App ID",
+              "description": "The generated unique ID which is generated when the Facebook OAuth app is created.",
               "type": "STRING",
               "displayOrder": 1,
               "regex": ".*",
@@ -119,8 +119,8 @@
             },
             {
               "key": "ClientSecret",
-              "displayName": "Client Secret",
-              "description": "Enter Facebook client secret value",
+              "displayName": "App secret",
+              "description": "The App secret value of the Facebook OAuth app.",
               "type": "STRING",
               "displayOrder": 2,
               "regex": ".*",
@@ -132,8 +132,8 @@
             },
             {
               "key": "callBackUrl",
-              "displayName": "Callback Url",
-              "description": "Enter value corresponding to callback url",
+              "displayName": "Valid OAuth redirect URI",
+              "description": "The redirect URI specified as valid in the Facebook OAuth app.",
               "type": "STRING",
               "displayOrder": 5,
               "regex": ".*",
@@ -141,33 +141,8 @@
               "isConfidential": false,
               "options": [],
               "defaultValue": "",
-              "subProperties": []
-            },
-            {
-              "key": "Scope",
-              "displayName": "Scope",
-              "description": "Enter a comma separated list of permissions to request from the user",
-              "type": "STRING",
-              "displayOrder": 3,
-              "regex": ".*",
-              "isMandatory": false,
-              "isConfidential": false,
-              "options": [],
-              "defaultValue": "email",
-              "subProperties": []
-            },
-            {
-              "key": "UserInfoFields",
-              "displayName": "User Information Fields",
-              "description": "Enter comma-separated user information fields you want to retrieve",
-              "type": "STRING",
-              "displayOrder": 4,
-              "regex": ".*",
-              "isMandatory": false,
-              "isConfidential": false,
-              "options": [],
-              "defaultValue": "",
-              "subProperties": []
+              "subProperties": [],
+              "readOnly": true
             }
           ]
         }

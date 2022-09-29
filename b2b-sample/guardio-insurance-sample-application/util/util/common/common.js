@@ -31,11 +31,15 @@ function getCurrentDate() {
     return today;
 }
 
+function copyTheTextToClipboard(text) {
+    navigator.clipboard.writeText(text);
+}
+
 const GOOGLE_ID = "google-idp";
 const FACEBOOK_ID = "facebook-idp";
 const ENTERPRISE_ID = "enterprise-idp";
 const EMPTY_STRING = "";
 
 module.exports = {
-    stringIsEmpty, getCurrentDate, GOOGLE_ID, FACEBOOK_ID, ENTERPRISE_ID, EMPTY_STRING
+    stringIsEmpty, getCurrentDate, copyTheTextToClipboard, GOOGLE_ID, FACEBOOK_ID, ENTERPRISE_ID, EMPTY_STRING
 };

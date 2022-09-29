@@ -29,7 +29,6 @@ import decodeGetFederatedAuthenticators from '../../../../util/apiDecode/setting
 
 export default function Settings(props) {
 
-    const [successDialogOpen, setSuccessDialogOpen] = useState(false);
     const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
     const [federatedAuthenticators, setFederatedAuthenticators] = useState({});
     const toaster = useToaster();
@@ -92,7 +91,7 @@ export default function Settings(props) {
         }
     }
 
-    const onSubmit = async (values, form) => {
+    const onUpdate = async (values, form) => {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
         onDataSubmit(true, form);
         // decodeAddUser(props.session, values.firstName, values.familyName, values.email,
@@ -101,9 +100,6 @@ export default function Settings(props) {
         //     .finally((response) => setLoadingDisplay(LOADING_DISPLAY_NONE))
     }
 
-    const closeSuccessDialog = () => {
-        setSuccessDialogOpen(false);
-    }
 
     return (
         <div className={styles.addUserMainDiv}>
@@ -111,7 +107,7 @@ export default function Settings(props) {
             <div>
 
                 <Form
-                    onSubmit={onSubmit}
+                    onSubmit={onUpdate}
                     validate={validate}
                     render={({ handleSubmit, form, submitting, pristine, values }) => (
                         <FormSuite layout="vertical" className={styles.addUserForm}
@@ -127,7 +123,7 @@ export default function Settings(props) {
                                 <FormSuite.Group>
                                     <ButtonToolbar>
                                         <Button className={styles.addUserButton} size="lg" appearance="primary"
-                                            type='submit' disabled={submitting || pristine}>Submit</Button>
+                                            type='submit' disabled={submitting || pristine}>Update</Button>
                                     </ButtonToolbar>
                                 </FormSuite.Group>
 
@@ -139,7 +135,7 @@ export default function Settings(props) {
             </div>
 
             <div style={loadingDisplay}>
-                <Loader size="lg" backdrop content="User is adding" vertical />
+                <Loader size="lg" backdrop content="Idp is updating" vertical />
             </div>
         </div>
 

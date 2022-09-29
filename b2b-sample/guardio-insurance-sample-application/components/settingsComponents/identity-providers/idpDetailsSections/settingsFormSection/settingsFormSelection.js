@@ -1,15 +1,19 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import CopyIcon from '@rsuite/icons/Copy';
+import React, { useState } from 'react';
 import { Field } from 'react-final-form';
+import { InputGroup, useToaster } from 'rsuite';
 import FormSuite from 'rsuite/Form';
-import { ENTERPRISE_ID, FACEBOOK_ID, GOOGLE_ID } from '../../../../../util/util/common/common';
+import { copyTheTextToClipboard, ENTERPRISE_ID, FACEBOOK_ID, GOOGLE_ID } from '../../../../../util/util/common/common';
 import enterpriseFederatedAuthenticators from '../../../../data/templates/enterprise-identity-provider.json';
 import facebookFederatedAuthenticators from '../../../../data/templates/facebook.json';
 import googleFederatedAuthenticators from '../../../../data/templates/google.json';
+import { infoTypeDialog } from '../../../../util/dialog';
 import HelperText from '../../../../util/helperText';
 
 export default function SettingsFormSelection(props) {
 
     const [federatedAuthenticators, setFederatedAuthenticators] = useState(props.federatedAuthenticators);
+    const toaster = useToaster();
 
     const propList = () => {
         switch (props.templateId) {
@@ -25,6 +29,12 @@ export default function SettingsFormSelection(props) {
     const selectedValue = (key) => {
         return federatedAuthenticators.filter((obj) => obj.key === key)[0].value;
     }
+
+    const copyValueToClipboard = (text) => {
+        copyTheTextToClipboard(text);
+        infoTypeDialog(toaster, "Text copied to clipboard")
+    }
+
     return (
         <>
             {
@@ -36,17 +46,30 @@ export default function SettingsFormSelection(props) {
                         render={({ input, meta }) => (
                             <FormSuite.Group controlId={prop.key}>
                                 <FormSuite.ControlLabel>{prop.displayName}</FormSuite.ControlLabel>
+                                <InputGroup inside style={{ width: "100%" }}>
 
-                                <FormSuite.Control
-                                    {...input}
-                                />
+                                    <FormSuite.Control
+                                        readOnly={prop.readOnly ? prop.readOnly : false}
+                                        {...input}
+                                    />
 
+                                    {
+                                        prop.readOnly
+                                            ? <InputGroup.Button
+                                                onClick={() => copyValueToClipboard(selectedValue(prop.key))}>
+                                                <CopyIcon />
+                                            </InputGroup.Button>
+                                            : <></>
+                                    }
+
+                                </InputGroup>
                                 <HelperText
                                     text={prop.description} />
 
                                 {meta.error && meta.touched && <FormSuite.ErrorMessage show={true}  >
                                     {meta.error}
                                 </FormSuite.ErrorMessage>}
+
                             </FormSuite.Group>
                         )}
                     />
