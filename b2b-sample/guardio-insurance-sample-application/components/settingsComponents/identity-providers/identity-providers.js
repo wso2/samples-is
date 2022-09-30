@@ -17,7 +17,7 @@
  */
 
 import AppSelectIcon from '@rsuite/icons/AppSelect';
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Avatar, Button, Container, FlexboxGrid, Form, Modal, Stack, useToaster } from "rsuite";
 
 import { useSession } from "next-auth/react";
@@ -43,19 +43,19 @@ export default function IdentityProviders() {
     const [selectedTemplate, setSelectedTemplate] = useState(undefined);
     const { data: session } = useSession();
 
-    const templates = useMemo(() => {
+    const templates = () => {
         return [
             Enterprise,
             Google,
             Facebook,
         ];
-    });
+    };
 
     useEffect(() => {
         fetchAllIdPs().finally();
-    }, []);
+    }, [fetchAllIdPs]);
 
-    const fetchAllIdPs = async () => {
+    const fetchAllIdPs = useCallback(async () => {
 
         const res = await decodeListAllIdentityProviders(session);
         if (res && res.identityProviders) {
@@ -63,7 +63,7 @@ export default function IdentityProviders() {
         } else {
             setIdpList([]);
         }
-    };
+    },[session]);
 
     const onAddIdentityProviderClick = () => {
         setOpenAddModal(true);

@@ -32,9 +32,12 @@ export default async function getFederatedAuthenticators(req, res) {
 
     const id = req.query.id;
 
+    const url = `${config.WSO2IS_HOST}/o/${subOrgId}/api/server/v1/identity-providers/${idpId}` +
+        `/federated-authenticators/${id}`;
+
     try {
         const fetchData = await fetch(
-            `${config.WSO2IS_HOST}/o/${subOrgId}/api/server/v1/identity-providers/${idpId}/federated-authenticators/${id}`,
+           url,
             getDataHeader(session)
         );
         const data = await fetchData.json();

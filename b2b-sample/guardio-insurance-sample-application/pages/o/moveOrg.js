@@ -62,7 +62,7 @@ export default function Org(props) {
         setTimeout(() => {
             setRedirectSeconds((redirectSeconds) => redirectSeconds - 1);
         }, moveTime)
-    }, [redirectSeconds]);
+    }, [redirectSeconds, props.orgIdFromQuery]);
 
     return (
         <div style={
