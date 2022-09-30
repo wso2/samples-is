@@ -49,8 +49,8 @@ export default function Settings(props) {
                 return <ViewUserComponent orgName={props.name} orgId={props.orgId} session={session} />;
             case '2-3':
                 return <IdentityProviders orgName={props.name} orgId={props.orgId} session={session} />;
-            case '3-1':
-                return <Application orgName={props.name} session={session} />
+            // case '3-1':
+            //     return <Application orgName={props.name} session={session} />
         }
     }
 
@@ -102,11 +102,11 @@ function SideNavSection(props) {
                         <Nav.Item eventKey="2-3"
                             onSelect={(eventKey) => props.activeKeySideNavSelect(eventKey)}>
                             Identity Providers</Nav.Item>
-                        <Nav.Item
+                        {/* <Nav.Item
                             eventKey="3-1"
                             onSelect={(eventKey) => props.activeKeySideNavSelect(eventKey)}>
                             Manage Application
-                        </Nav.Item>
+                        </Nav.Item> */}
                     </Nav.Menu>
                 </Nav>
             </Sidenav.Body>
