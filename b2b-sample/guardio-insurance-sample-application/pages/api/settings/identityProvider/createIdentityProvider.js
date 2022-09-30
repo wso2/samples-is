@@ -42,4 +42,3 @@
         return dataNotRecievedError(res);
      }
  }
- 

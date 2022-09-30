@@ -24,11 +24,12 @@ import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from '../../../../util/ut
 import { errorTypeDialog, successTypeDialog } from '../../../util/dialog';
 
 import styles from '../../../../styles/Settings.module.css';
-import decodeGetFederatedAuthenticators from '../../../../util/apiDecode/settings/identityProvider/decodeGetFederatedAuthenticators';
-import decodeUpdateFederatedAuthenticators from '../../../../util/apiDecode/settings/identityProvider/decodeUpdateFederatedAuthenticators';
+import decodeGetFederatedAuthenticators from
+    '../../../../util/apiDecode/settings/identityProvider/decodeGetFederatedAuthenticators';
+import decodeUpdateFederatedAuthenticators from
+    '../../../../util/apiDecode/settings/identityProvider/decodeUpdateFederatedAuthenticators';
 import { checkIfJSONisEmpty } from '../../../../util/util/common/common';
 import SettingsFormSelection from './settingsFormSection/settingsFormSelection';
-
 
 export default function General(props) {
 
@@ -101,7 +102,10 @@ export default function General(props) {
                                 <FormSuite.Group>
                                     <ButtonToolbar>
                                         <Button className={styles.addUserButton} size="lg" appearance="primary"
-                                            type='submit' disabled={submitting || pristine || !checkIfJSONisEmpty(errors)}>Update</Button>
+                                            type='submit'
+                                            disabled={submitting || pristine || !checkIfJSONisEmpty(errors)}>
+                                            Update
+                                        </Button>
                                     </ButtonToolbar>
                                 </FormSuite.Group>
                             </div>

@@ -104,8 +104,8 @@ export default function EditUserComponent(props) {
                         onSubmit={onSubmit}
                         validate={validate}
                         initialValues={{
-                            firstName: props.user.firstName, 
-                            familyName: props.user.familyName, 
+                            firstName: props.user.firstName,
+                            familyName: props.user.familyName,
                             email: props.user.email,
                             username: props.user.username
                         }}
@@ -176,7 +176,10 @@ export default function EditUserComponent(props) {
                                     <FormSuite.Group>
                                         <ButtonToolbar>
                                             <Button className={styles.addUserButton} size="lg" appearance="primary"
-                                                type='submit' disabled={submitting || pristine || !checkIfJSONisEmpty(errors)}>Submit</Button>
+                                                type='submit'
+                                                disabled={submitting || pristine || !checkIfJSONisEmpty(errors)}>
+                                                Submit
+                                            </Button>
 
                                             <Button className={styles.addUserButton} size="lg" appearance="ghost"
                                                 type='button' onClick={props.onClose}>Cancel</Button>

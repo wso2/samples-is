@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Avatar, Nav, Panel, Stack, useToaster } from 'rsuite';
-import decodeGetDetailedIdentityProvider from '../../../util/apiDecode/settings/identityProvider/decodeGetDetailedIdentityProvider';
+import decodeGetDetailedIdentityProvider from
+  '../../../util/apiDecode/settings/identityProvider/decodeGetDetailedIdentityProvider';
 import ButtonGroupIdentityProviderDetails from './buttonGroupIdentityProviderDetails';
 import General from './idpDetailsSections/general';
 import Raw from './idpDetailsSections/raw';
@@ -28,7 +29,7 @@ export default function IdentityProviderDetails(props) {
   const idpDetailsComponent = (activeKey) => {
     switch (activeKey) {
       case '1':
-        return <General session={props.session}  idpDetails={idpDetails} fetchData={fetchData} />;
+        return <General session={props.session} idpDetails={idpDetails} fetchData={fetchData} />;
       case '2':
         return <Settings session={props.session} idpDetails={idpDetails} />;
       case '3':
@@ -40,7 +41,7 @@ export default function IdentityProviderDetails(props) {
     <Panel header={
       <IdentityProviderDetailsHeader idpDetails={idpDetails} />
     } eventKey={props.id} id={props.id}>
-      <div style={{ marginLeft: "25px",marginRight: "25px" }}>
+      <div style={{ marginLeft: "25px", marginRight: "25px" }}>
         <Stack direction='column' alignItems='stretch'>
           <ButtonGroupIdentityProviderDetails id={props.id} fetchAllIdPs={props.fetchAllIdPs} />
           <IdentityProviderDetailsNav activeKeyNav={activeKeyNav} activeKeyNavSelect={activeKeyNavSelect} />

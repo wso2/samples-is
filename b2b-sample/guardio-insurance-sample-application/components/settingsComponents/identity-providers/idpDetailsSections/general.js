@@ -24,7 +24,8 @@ import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from '../../../../util/ut
 import { errorTypeDialog, successTypeDialog } from '../../../util/dialog';
 
 import styles from '../../../../styles/Settings.module.css';
-import decodePatchGeneralSettingsIdp from '../../../../util/apiDecode/settings/identityProvider/decodePatchGeneralSettingsIdp';
+import decodePatchGeneralSettingsIdp from
+    '../../../../util/apiDecode/settings/identityProvider/decodePatchGeneralSettingsIdp';
 import HelperText from '../../../util/helperText';
 import { checkIfJSONisEmpty } from '../../../../util/util/common/common';
 
@@ -129,7 +130,10 @@ export default function General(props) {
                                 <FormSuite.Group>
                                     <ButtonToolbar>
                                         <Button className={styles.addUserButton} size="lg" appearance="primary"
-                                            type='submit' disabled={submitting || pristine || !checkIfJSONisEmpty(errors)}>Update</Button>
+                                            type='submit'
+                                            disabled={submitting || pristine || !checkIfJSONisEmpty(errors)}>
+                                            Update
+                                        </Button>
                                     </ButtonToolbar>
                                 </FormSuite.Group>
 

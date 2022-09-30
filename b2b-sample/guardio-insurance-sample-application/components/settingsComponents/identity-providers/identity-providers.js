@@ -22,8 +22,10 @@ import { Avatar, Button, Container, FlexboxGrid, Form, Modal, Stack, useToaster 
 
 import { useSession } from "next-auth/react";
 import styles from "../../../styles/idp.module.css";
-import decodeCreateIdentityProvider from '../../../util/apiDecode/settings/identityProvider/decodeCreateIdentityProvider';
-import decodeListAllIdentityProviders from '../../../util/apiDecode/settings/identityProvider/decodeListAllIdentityProviders';
+import decodeCreateIdentityProvider from
+    '../../../util/apiDecode/settings/identityProvider/decodeCreateIdentityProvider';
+import decodeListAllIdentityProviders from
+    '../../../util/apiDecode/settings/identityProvider/decodeListAllIdentityProviders';
 import { EMPTY_STRING, ENTERPRISE_ID, FACEBOOK_ID, GOOGLE_ID } from '../../../util/util/common/common';
 import Enterprise from "../../data/templates/enterprise-identity-provider.json";
 import Facebook from "../../data/templates/facebook.json";
@@ -100,7 +102,7 @@ export default function IdentityProviders() {
 
     return (
         <Container>
-            
+
             <SettingsTitle title="Identity Providers"
                 subtitle="Manage identity providers to allow users to log in to your application through them." />
 

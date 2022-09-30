@@ -133,7 +133,7 @@ export default function AddUserComponent(props) {
                             validate={validate}
                             render={({ handleSubmit, form, submitting, pristine, errors, values }) => (
                                 <FormSuite layout="vertical" className={styles.addUserForm}
-                                    onSubmit={event => { handleSubmit(event).then(form.restart);}} fluid>
+                                    onSubmit={event => { handleSubmit(event).then(form.restart); }} fluid>
                                     <Field
                                         name="firstName"
                                         render={({ input, meta }) => (
@@ -235,7 +235,10 @@ export default function AddUserComponent(props) {
                                         <FormSuite.Group>
                                             <ButtonToolbar>
                                                 <Button className={styles.addUserButton} size="lg" appearance="primary"
-                                                    type='submit' disabled={submitting || pristine || !checkIfJSONisEmpty(errors)}>Submit</Button>
+                                                    type='submit'
+                                                    disabled={submitting || pristine || !checkIfJSONisEmpty(errors)}>
+                                                    Submit
+                                                </Button>
 
                                                 <Button className={styles.addUserButton} size="lg" appearance="ghost"
                                                     type='button' onClick={props.onClose}>Cancel</Button>
