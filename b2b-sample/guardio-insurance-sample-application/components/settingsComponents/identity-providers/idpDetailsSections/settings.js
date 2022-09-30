@@ -24,10 +24,10 @@ import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from '../../../../util/ut
 import { errorTypeDialog, successTypeDialog } from '../../../util/dialog';
 
 import styles from '../../../../styles/Settings.module.css';
-import decodeUpdateFederatedAuthenticators from '../../../../util/apiDecode/settings/identityProvider/decodeUpdateFederatedAuthenticators';
 import decodeGetFederatedAuthenticators from '../../../../util/apiDecode/settings/identityProvider/decodeGetFederatedAuthenticators';
-import SettingsFormSelection from './settingsFormSection/settingsFormSelection';
+import decodeUpdateFederatedAuthenticators from '../../../../util/apiDecode/settings/identityProvider/decodeUpdateFederatedAuthenticators';
 import { checkIfJSONisEmpty } from '../../../../util/util/common/common';
+import SettingsFormSelection from './settingsFormSection/settingsFormSelection';
 
 
 export default function General(props) {
@@ -39,9 +39,10 @@ export default function General(props) {
 
     const fetchData = useCallback(async () => {
 
-        decodeGetFederatedAuthenticators(
+        const res = await decodeGetFederatedAuthenticators(
             props.session, props.idpDetails.id, props.idpDetails.federatedAuthenticators.defaultAuthenticatorId
-        ).then((res) => setFederatedAuthenticators(res));
+        );
+        await setFederatedAuthenticators(res);
     }, [props])
 
     useEffect(() => {
@@ -51,17 +52,12 @@ export default function General(props) {
     const validate = values => {
         let errors = {}
         if (federatedAuthenticators.properties) {
-            console.log('aasasa');
             federatedAuthenticators.properties.filter((property) => {
-                console.log(eval(property.key));
                 if (!eval(property.key).value) {
-                    console.log(property.key);
                     errors[property.key] = 'This field cannot be empty';
                 }
             })
         }
-
-        console.log(errors);
 
         return errors
     }
@@ -69,31 +65,17 @@ export default function General(props) {
     const onDataSubmit = (response, form) => {
         if (response) {
             successTypeDialog(toaster, "Changes Saved Successfully", "Idp updated successfully.");
-            //props.fetchData();
-            form.restart();
+            fetchData();
         } else {
             errorTypeDialog(toaster, "Error Occured", "Error occured while updating the Idp. Try again.");
         }
     }
 
     const onUpdate = async (values, form) => {
-        //setLoadingDisplay(LOADING_DISPLAY_BLOCK);
-        decodeUpdateFederatedAuthenticators(props.session, federatedAuthenticators, [{
-            "key": "ClientId",
-            "value": "xxxxxxx"
-        },
-        {
-            "key": "callbackUrl",
-            "value": "https://localhost:9443/commonauth"
-        },
-        {
-            "key": "AdditionalQueryParameters",
-            "value": "scope=email openid profile"
-        },
-        {
-            "key": "ClientSecret",
-            "value": "yyyyyyy"
-        }]);
+        setLoadingDisplay(LOADING_DISPLAY_BLOCK);
+        decodeUpdateFederatedAuthenticators(props.session, props.idpDetails.id, federatedAuthenticators, values)
+            .then((response) => onDataSubmit(response, form))
+            .finally((response) => setLoadingDisplay(LOADING_DISPLAY_NONE))
     }
 
     return (
@@ -107,7 +89,7 @@ export default function General(props) {
 
                     render={({ handleSubmit, form, submitting, pristine, errors, values }) => (
                         <FormSuite layout="vertical" className={styles.addUserForm}
-                            onSubmit={event => { event === undefined ? null : handleSubmit(event).then(form.restart); }} fluid>
+                            onSubmit={handleSubmit} fluid>
 
                             {federatedAuthenticators.properties
                                 ? <SettingsFormSelection federatedAuthenticators={federatedAuthenticators.properties}
@@ -122,7 +104,6 @@ export default function General(props) {
                                             type='submit' disabled={submitting || pristine || !checkIfJSONisEmpty(errors)}>Update</Button>
                                     </ButtonToolbar>
                                 </FormSuite.Group>
-
                             </div>
                         </FormSuite>
                     )}

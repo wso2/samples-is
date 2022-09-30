@@ -18,7 +18,7 @@
  * under the License.
  */
 
-import callPatchGeneralSettingsIdp from "../../../apiCall/settings/identityProvider/callPatchGeneralSettingsIdp";
+import callUpdateFederatedAuthenticators from "../../../apiCall/settings/identityProvider/callUpdateFederatedAuthenticators";
 
 function refactorFederatedAuthenticatorsForUpdate(federatedAuthenticators) {
     delete federatedAuthenticators.authenticatorId;
@@ -26,42 +26,25 @@ function refactorFederatedAuthenticatorsForUpdate(federatedAuthenticators) {
     return federatedAuthenticators;
 }
 
-function updateProperties(federatedAuthenticators, changedProperty) {
-    federatedAuthenticators.properties.filter((obj)=>obj.key===changedProperty.key)[0].value = changedProperty.value;
+function updateProperties(federatedAuthenticators, keyProperty, valueProperty) {
+    federatedAuthenticators.properties.filter((obj) => obj.key === keyProperty)[0].value = valueProperty;
     return federatedAuthenticators;
 }
 
-export default async function decodeUpdateFederatedAuthenticators(session, federatedAuthenticators, changedValues) {
-    console.log(federatedAuthenticators);
+export default async function decodeUpdateFederatedAuthenticators(session, idpId, federatedAuthenticators, changedValues) {
+    let federatedAuthenticatorId = federatedAuthenticators.authenticatorId;
     federatedAuthenticators = refactorFederatedAuthenticatorsForUpdate(federatedAuthenticators);
-    changedValues.filter((property)=>{
-        federatedAuthenticators = updateProperties(federatedAuthenticators, property);
-    });
+    Object.keys(changedValues).filter((key)=>{
+        federatedAuthenticators = updateProperties(federatedAuthenticators, key, changedValues[key]);
+    })
 
-    console.log(federatedAuthenticators);
-//     let x = {
-//         "name": "GoogleOIDCAuthenticator",
-//         "isEnabled": true,
-//         "isDefault": true,
-//         "properties": [
-//             { "key": "ClientId", "value": "asd112" },
-//             { "key": "callbackUrl", "value": "https://localhost:9443/commonauth" },
-//             { "key": "AdditionalQueryParameters", "value": "scope=email openid profile" },
-//             { "key": "ClientSecret", "value": "asd12" }
-//         ]
-//     }
+    let body = [federatedAuthenticatorId, federatedAuthenticators];
 
-//     let body = [
-//         { "operation": "REPLACE", "path": "/description", "value": description },
-//         { "operation": "REPLACE", "path": "/isPrimary", "value": false },
-//         { "operation": "REPLACE", "path": "/name", "value": name }
-//     ];
-
-//     try {
-//         const res = await callPatchGeneralSettingsIdp(session, idpId, body);
-//         return res;
-//     } catch (err) {
-//         return null;
-//     }
- }
+    try {
+        const res = await callUpdateFederatedAuthenticators(session, idpId, body);
+        return res;
+    } catch (err) {
+        return null;
+    }
+}
 

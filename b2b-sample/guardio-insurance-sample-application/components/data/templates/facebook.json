@@ -143,6 +143,34 @@
               "defaultValue": "",
               "subProperties": [],
               "readOnly": true
+            },
+            {
+              "key": "Scope",
+              "displayName": "Scope",
+              "description": "Enter a comma separated list of permissions to request from the user",
+              "type": "STRING",
+              "displayOrder": 3,
+              "regex": ".*",
+              "isMandatory": false,
+              "isConfidential": false,
+              "options": [],
+              "defaultValue": "email",
+              "subProperties": [],
+              "readOnly": true
+            },
+            {
+              "key": "UserInfoFields",
+              "displayName": "User Information Fields",
+              "description": "Enter comma-separated user information fields you want to retrieve",
+              "type": "STRING",
+              "displayOrder": 4,
+              "regex": ".*",
+              "isMandatory": false,
+              "isConfidential": false,
+              "options": [],
+              "defaultValue": "",
+              "subProperties": [],
+              "readOnly": true
             }
           ]
         }

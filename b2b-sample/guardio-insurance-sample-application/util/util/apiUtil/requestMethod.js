@@ -20,7 +20,8 @@ const RequestMethod = {
     POST : 'POST',
     PATCH : 'PATCH',
     DELETE: 'DELETE',
-    PATCH: 'PATCH'
+    PATCH: 'PATCH',
+    PUT: 'PUT'
 }
 
 module.exports = { RequestMethod }
