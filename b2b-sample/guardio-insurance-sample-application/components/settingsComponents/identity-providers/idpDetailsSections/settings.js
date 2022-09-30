@@ -24,16 +24,21 @@ import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from '../../../../util/ut
 import { errorTypeDialog, successTypeDialog } from '../../../util/dialog';
 
 import styles from '../../../../styles/Settings.module.css';
-import SettingsFormSelection from './settingsFormSection/settingsFormSelection';
+import decodeUpdateFederatedAuthenticators from '../../../../util/apiDecode/settings/identityProvider/decodeUpdateFederatedAuthenticators';
 import decodeGetFederatedAuthenticators from '../../../../util/apiDecode/settings/identityProvider/decodeGetFederatedAuthenticators';
+import SettingsFormSelection from './settingsFormSection/settingsFormSelection';
+import { checkIfJSONisEmpty } from '../../../../util/util/common/common';
 
-export default function Settings(props) {
+
+export default function General(props) {
 
     const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
     const [federatedAuthenticators, setFederatedAuthenticators] = useState({});
+
     const toaster = useToaster();
 
     const fetchData = useCallback(async () => {
+
         decodeGetFederatedAuthenticators(
             props.session, props.idpDetails.id, props.idpDetails.federatedAuthenticators.defaultAuthenticatorId
         ).then((res) => setFederatedAuthenticators(res));
@@ -43,63 +48,53 @@ export default function Settings(props) {
         fetchData();
     }, [fetchData]);
 
-
-    const clientIdValidate = (clientId, errors) => {
-        if (!clientId) {
-            errors.clientId = 'This field cannot be empty'
-        }
-        return errors;
-    }
-
-    const clientSecretValidate = (clientSecret, errors) => {
-        if (!clientSecret) {
-            errors.clientSecret = 'This field cannot be empty'
-        }
-        return errors;
-    }
-
-    const redirectURIValidate = (redirectURI, errors) => {
-        if (!redirectURI) {
-            errors.redirectURI = 'This field cannot be empty'
-        }
-        return errors;
-    }
-
-    const queryParamValidate = (queryParam, errors) => {
-        if (!queryParam) {
-            errors.queryParam = 'This field cannot be empty'
-        }
-        return errors;
-    }
-
     const validate = values => {
-        const errors = {}
-        errors = clientIdValidate(values.clientId, errors);
-        errors = clientSecretValidate(values.clientSecret, errors);
-        errors = redirectURIValidate(values.redirectURI, errors);
-        errors = queryParamValidate(values.queryParam, errors);
+        let errors = {}
+        if (federatedAuthenticators.properties) {
+            console.log('aasasa');
+            federatedAuthenticators.properties.filter((property) => {
+                console.log(eval(property.key));
+                if (!eval(property.key).value) {
+                    console.log(property.key);
+                    errors[property.key] = 'This field cannot be empty';
+                }
+            })
+        }
+
+        console.log(errors);
+
         return errors
     }
 
     const onDataSubmit = (response, form) => {
         if (response) {
-            successTypeDialog(toaster, "Changes Saved Successfully", "User add to the organization successfully.");
+            successTypeDialog(toaster, "Changes Saved Successfully", "Idp updated successfully.");
+            //props.fetchData();
             form.restart();
-            props.onClose();
         } else {
-            errorTypeDialog(toaster, "Error Occured", "Error occured while adding the user. Try again.");
+            errorTypeDialog(toaster, "Error Occured", "Error occured while updating the Idp. Try again.");
         }
     }
 
     const onUpdate = async (values, form) => {
-        setLoadingDisplay(LOADING_DISPLAY_BLOCK);
-        onDataSubmit(true, form);
-        // decodeAddUser(props.session, values.firstName, values.familyName, values.email,
-        //     values.username, values.password)
-        //     .then((response) => onDataSubmit(response, form))
-        //     .finally((response) => setLoadingDisplay(LOADING_DISPLAY_NONE))
+        //setLoadingDisplay(LOADING_DISPLAY_BLOCK);
+        decodeUpdateFederatedAuthenticators(props.session, federatedAuthenticators, [{
+            "key": "ClientId",
+            "value": "xxxxxxx"
+        },
+        {
+            "key": "callbackUrl",
+            "value": "https://localhost:9443/commonauth"
+        },
+        {
+            "key": "AdditionalQueryParameters",
+            "value": "scope=email openid profile"
+        },
+        {
+            "key": "ClientSecret",
+            "value": "yyyyyyy"
+        }]);
     }
-
 
     return (
         <div className={styles.addUserMainDiv}>
@@ -109,9 +104,10 @@ export default function Settings(props) {
                 <Form
                     onSubmit={onUpdate}
                     validate={validate}
-                    render={({ handleSubmit, form, submitting, pristine, values }) => (
+
+                    render={({ handleSubmit, form, submitting, pristine, errors, values }) => (
                         <FormSuite layout="vertical" className={styles.addUserForm}
-                            onSubmit={event => { handleSubmit(event).then(form.restart); }} fluid>
+                            onSubmit={event => { event === undefined ? null : handleSubmit(event).then(form.restart); }} fluid>
 
                             {federatedAuthenticators.properties
                                 ? <SettingsFormSelection federatedAuthenticators={federatedAuthenticators.properties}
@@ -123,7 +119,7 @@ export default function Settings(props) {
                                 <FormSuite.Group>
                                     <ButtonToolbar>
                                         <Button className={styles.addUserButton} size="lg" appearance="primary"
-                                            type='submit' disabled={submitting || pristine}>Update</Button>
+                                            type='submit' disabled={submitting || pristine || !checkIfJSONisEmpty(errors)}>Update</Button>
                                     </ButtonToolbar>
                                 </FormSuite.Group>
 
@@ -135,7 +131,7 @@ export default function Settings(props) {
             </div>
 
             <div style={loadingDisplay}>
-                <Loader size="lg" backdrop content="Idp is updating" vertical />
+                <Loader size="lg" backdrop content="User is adding" vertical />
             </div>
         </div>
 

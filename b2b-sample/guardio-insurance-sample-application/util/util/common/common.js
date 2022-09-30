@@ -31,6 +31,10 @@ function getCurrentDate() {
     return today;
 }
 
+function checkIfJSONisEmpty(obj){
+    return Object.keys(obj).length === 0;
+}
+
 function copyTheTextToClipboard(text) {
     navigator.clipboard.writeText(text);
 }
@@ -41,5 +45,5 @@ const ENTERPRISE_ID = "enterprise-idp";
 const EMPTY_STRING = "";
 
 module.exports = {
-    stringIsEmpty, getCurrentDate, copyTheTextToClipboard, GOOGLE_ID, FACEBOOK_ID, ENTERPRISE_ID, EMPTY_STRING
+    stringIsEmpty, getCurrentDate, copyTheTextToClipboard, checkIfJSONisEmpty, GOOGLE_ID, FACEBOOK_ID, ENTERPRISE_ID, EMPTY_STRING
 };

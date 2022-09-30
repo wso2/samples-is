@@ -26,6 +26,7 @@ import { errorTypeDialog, successTypeDialog } from '../util/dialog';
 import stylesSettings from '../../styles/Settings.module.css';
 import styles from '../../styles/util.module.css';
 import decodeEditUser from '../../util/apiDecode/settings/decodeEditUser';
+import { checkIfJSONisEmpty } from '../../util/util/common/common';
 
 export default function EditUserComponent(props) {
 
@@ -62,7 +63,7 @@ export default function EditUserComponent(props) {
     }
 
     const validate = values => {
-        const errors = {}
+        let errors = {}
         errors = firstNameValidate(values.firstName, errors);
         errors = familyNameValidate(values.familyName, errors);
         errors = emailValidate(values.email, errors);
@@ -108,7 +109,7 @@ export default function EditUserComponent(props) {
                             email: props.user.email,
                             username: props.user.username
                         }}
-                        render={({ handleSubmit, form, submitting, pristine, values }) => (
+                        render={({ hhandleSubmit, form, submitting, pristine, errors, values }) => (
                             <FormSuite layout="vertical" className={styles.addUserForm}
                                 onSubmit={event => { handleSubmit(event).then(form.restart); }} fluid>
                                 <Field
@@ -175,7 +176,7 @@ export default function EditUserComponent(props) {
                                     <FormSuite.Group>
                                         <ButtonToolbar>
                                             <Button className={styles.addUserButton} size="lg" appearance="primary"
-                                                type='submit' disabled={submitting || pristine}>Submit</Button>
+                                                type='submit' disabled={submitting || pristine || !checkIfJSONisEmpty(errors)}>Submit</Button>
 
                                             <Button className={styles.addUserButton} size="lg" appearance="ghost"
                                                 type='button' onClick={props.onClose}>Cancel</Button>

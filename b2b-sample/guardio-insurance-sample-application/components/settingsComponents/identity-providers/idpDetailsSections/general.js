@@ -26,6 +26,7 @@ import { errorTypeDialog, successTypeDialog } from '../../../util/dialog';
 import styles from '../../../../styles/Settings.module.css';
 import decodePatchGeneralSettingsIdp from '../../../../util/apiDecode/settings/identityProvider/decodePatchGeneralSettingsIdp';
 import HelperText from '../../../util/helperText';
+import { checkIfJSONisEmpty } from '../../../../util/util/common/common';
 
 export default function General(props) {
 
@@ -48,7 +49,7 @@ export default function General(props) {
     }
 
     const validate = values => {
-        const errors = {}
+        let errors = {}
         errors = nameValidate(values.name, errors);
         errors = descriptionValidate(values.description, errors);
         return errors
@@ -83,7 +84,7 @@ export default function General(props) {
                         name: props.idpDetails.name,
                         description: props.idpDetails.description
                     }}
-                    render={({ handleSubmit, form, submitting, pristine, values }) => (
+                    render={({ handleSubmit, form, submitting, pristine, errors, values }) => (
                         <FormSuite layout="vertical" className={styles.addUserForm}
                             onSubmit={event => { handleSubmit(event).then(form.restart); }} fluid>
                             <Field
@@ -128,7 +129,7 @@ export default function General(props) {
                                 <FormSuite.Group>
                                     <ButtonToolbar>
                                         <Button className={styles.addUserButton} size="lg" appearance="primary"
-                                            type='submit' disabled={submitting || pristine}>Update</Button>
+                                            type='submit' disabled={submitting || pristine || !checkIfJSONisEmpty(errors)}>Update</Button>
                                     </ButtonToolbar>
                                 </FormSuite.Group>
 

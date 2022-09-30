@@ -25,6 +25,7 @@ import { errorTypeDialog, successTypeDialog } from '../util/dialog';
 
 import styles from '../../styles/Settings.module.css';
 import decodeAddUser from '../../util/apiDecode/settings/decodeAddUser';
+import { checkIfJSONisEmpty } from '../../util/util/common/common';
 import SuccessDialog from '../util/successDialog';
 
 export default function AddUserComponent(props) {
@@ -80,7 +81,7 @@ export default function AddUserComponent(props) {
     }
 
     const validate = values => {
-        const errors = {}
+        let errors = {}
         errors = firstNameValidate(values.firstName, errors);
         errors = familyNameValidate(values.familyName, errors);
         errors = emailValidate(values.email, errors);
@@ -130,7 +131,7 @@ export default function AddUserComponent(props) {
                         <Form
                             onSubmit={onSubmit}
                             validate={validate}
-                            render={({ handleSubmit, form, submitting, pristine, values }) => (
+                            render={({ handleSubmit, form, submitting, pristine, errors, values }) => (
                                 <FormSuite layout="vertical" className={styles.addUserForm}
                                     onSubmit={event => { handleSubmit(event).then(form.restart);}} fluid>
                                     <Field
@@ -234,7 +235,7 @@ export default function AddUserComponent(props) {
                                         <FormSuite.Group>
                                             <ButtonToolbar>
                                                 <Button className={styles.addUserButton} size="lg" appearance="primary"
-                                                    type='submit' disabled={submitting || pristine}>Submit</Button>
+                                                    type='submit' disabled={submitting || pristine || !checkIfJSONisEmpty(errors)}>Submit</Button>
 
                                                 <Button className={styles.addUserButton} size="lg" appearance="ghost"
                                                     type='button' onClick={props.onClose}>Cancel</Button>

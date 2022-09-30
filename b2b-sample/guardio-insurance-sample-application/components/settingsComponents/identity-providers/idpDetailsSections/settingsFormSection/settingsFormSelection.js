@@ -66,7 +66,7 @@ export default function SettingsFormSelection(props) {
                                 <HelperText
                                     text={prop.description} />
 
-                                {meta.error && meta.touched && <FormSuite.ErrorMessage show={true}  >
+                                {meta.error && meta.touched && <FormSuite.ErrorMessage show={true} >
                                     {meta.error}
                                 </FormSuite.ErrorMessage>}
 
