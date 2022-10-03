@@ -37,7 +37,6 @@ export default async function listAllApplications(req, res) {
         const data = await fetchData.json();
         res.status(200).json(data);
     } catch (err) {
-        console.log(err);
         return dataNotRecievedError(res);
     }
 }

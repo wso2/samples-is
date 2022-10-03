@@ -18,16 +18,19 @@
 
 import Trash from '@rsuite/icons/Trash';
 import { useSession } from 'next-auth/react';
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, IconButton, Stack, useToaster } from 'rsuite';
-import decodeDeleteIdentityProvider 
-from '../../../util/apiDecode/settings/identityProvider/decodeDeleteIdentityProvider.JS';
-import {successTypeDialog, errorTypeDialog} from '../../util/dialog'
+import decodeDeleteIdentityProvider
+    from '../../../util/apiDecode/settings/identityProvider/decodeDeleteIdentityProvider.JS';
+import { successTypeDialog, errorTypeDialog } from '../../util/dialog'
+import SelectApplicationModal from '../application/selectApplicationModal';
 
 export default function ButtonGroupIdentityProviderDetails(props) {
 
     const { data: session } = useSession();
     const toaster = useToaster();
+
+    const [openListAppicationModal, setOpenListAppicationModal] = useState(false);
 
     const onIdpDelete = (response) => {
         if (response) {
@@ -45,9 +48,19 @@ export default function ButtonGroupIdentityProviderDetails(props) {
             })
     };
 
+    const onAddToLoginFlowClick = () => {
+        setOpenListAppicationModal(true);
+    }
+
+    const onCloseListAllApplicaitonModal = () => {
+        setOpenListAppicationModal(false);
+    }
+
     return (
         <Stack justifyContent='flex-end' alignItems='stretch'>
-            {/* <Button>Add to Login Flow</Button> */}
+            <SelectApplicationModal session={props.session} openModal={openListAppicationModal}
+                onModalClose={onCloseListAllApplicaitonModal} />
+            <Button onClick={onAddToLoginFlowClick}>Add to Login Flow</Button>
             <IconButton icon={<Trash />}
                 style={{ marginLeft: "10px" }}
                 onClick={() => onIdPDeleteClick(props.id)}

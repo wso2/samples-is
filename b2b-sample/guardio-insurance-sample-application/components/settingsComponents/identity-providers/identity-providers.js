@@ -43,14 +43,11 @@ export default function IdentityProviders() {
     const [selectedTemplate, setSelectedTemplate] = useState(undefined);
     const { data: session } = useSession();
 
-    const templates = () => {
-
-        return [
-            Enterprise,
-            Google,
-            Facebook,
-        ];
-    };
+    const templates = [
+        Enterprise,
+        Google,
+        Facebook,
+    ];
 
     useEffect(() => {
         fetchAllIdPs().finally();

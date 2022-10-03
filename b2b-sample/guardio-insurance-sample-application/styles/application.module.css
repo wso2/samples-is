@@ -1,0 +1,29 @@
+.select__app__empty__card {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: space-between;
+    border: whitesmoke 0.5px solid;
+    border-radius: 5px;
+    padding: 8px;
+    width: 100%;
+}
+
+.select__app__list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.select__app__list_item__card {
+    border: whitesmoke 0.5px solid;
+    border-radius: 5px;
+    padding: 8px;
+    width: 100%;
+}
+
+.select__app__list_item__card:hover {
+    background-color: rgba(245, 245, 245, 0.2);
+    transition: background-color 10ms linear;
+    cursor: pointer;
+}
