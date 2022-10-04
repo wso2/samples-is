@@ -19,11 +19,11 @@
 import { setIdpTemplate } from "../../../../util/util/idpUtil/idpUtil";
 import callCreateIdentityProvider from "../../../apiCall/settings/identityProvider/callCreateIdentityProvider";
 
-export default async function decodeCreateIdentityProvider(session, template, name, clientId, clientSecret) {
+export default async function decodeCreateIdentityProvider(session, template, formValues) {
 
-    let model = { ...template.idp };
+    let model = JSON.parse(JSON.stringify(template.idp));
 
-    model = setIdpTemplate(model, template.templateId, name, clientId, clientSecret);
+    model = setIdpTemplate(model, template.templateId, formValues);
 
     try {
         const res = await callCreateIdentityProvider(session, model);

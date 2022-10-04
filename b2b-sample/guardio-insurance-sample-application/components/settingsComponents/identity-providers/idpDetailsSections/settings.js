@@ -29,7 +29,7 @@ import decodeUpdateFederatedAuthenticators from '../../../../util/apiDecode/sett
 import { checkIfJSONisEmpty } from '../../../../util/util/common/common';
 import SettingsFormSelection from './settingsFormSection/settingsFormSelection';
 
-export default function General(props) {
+export default function Settings(props) {
 
     const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
     const [federatedAuthenticators, setFederatedAuthenticators] = useState({});

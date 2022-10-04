@@ -48,8 +48,8 @@ export default function SettingsFormSelection(props) {
     };
 
     const selectedValue = (key) => {
-        
-        return federatedAuthenticators.filter((obj) => obj.key === key)[0].value;
+
+        return props.federatedAuthenticators.filter((obj) => obj.key === key)[0].value;
     }
 
     const copyValueToClipboard = (text) => {
@@ -60,8 +60,8 @@ export default function SettingsFormSelection(props) {
     return (
         <>
             {
-                propList().map((prop) => (
-                    <Field
+                propList().map((prop) => {
+                    return (<Field
                         key={prop.key}
                         name={prop.key}
                         initialValue={selectedValue(prop.key)}
@@ -94,8 +94,10 @@ export default function SettingsFormSelection(props) {
 
                             </FormSuite.Group>
                         )}
-                    />
-                ))
+                    />);
+                }
+
+                )
             }
         </>
     )

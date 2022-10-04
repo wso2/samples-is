@@ -32,7 +32,6 @@ export default function SelectApplicationModal(props) {
     }, [props]);
 
     useEffect(() => {
-        console.log(allApplications);
         fetchData();
     }, [fetchData]);
 
