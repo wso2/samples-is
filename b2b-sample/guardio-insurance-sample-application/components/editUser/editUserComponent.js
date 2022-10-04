@@ -176,7 +176,7 @@ export default function EditUserComponent(props) {
                                     <FormSuite.Group>
                                         <ButtonToolbar>
                                             <Button className={styles.addUserButton} size="lg" appearance="primary"
-                                                type='submit'
+                                                type="submit"
                                                 disabled={submitting || pristine || !checkIfJSONisEmpty(errors)}>
                                                 Submit
                                             </Button>

@@ -34,6 +34,7 @@
  
          return data;
      } catch (err) {
+        
          return null;
      }
  }

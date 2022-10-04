@@ -39,6 +39,7 @@ export default function General(props) {
         if (!name) {
             errors.name = 'This field cannot be empty'
         }
+
         return errors;
     }
 
@@ -46,6 +47,7 @@ export default function General(props) {
         if (!description) {
             errors.description = 'This field cannot be empty'
         }
+
         return errors;
     }
 
@@ -53,6 +55,7 @@ export default function General(props) {
         let errors = {}
         errors = nameValidate(values.name, errors);
         errors = descriptionValidate(values.description, errors);
+        
         return errors
     }
 

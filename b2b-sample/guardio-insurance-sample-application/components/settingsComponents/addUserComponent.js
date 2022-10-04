@@ -119,7 +119,7 @@ export default function AddUserComponent(props) {
             <Modal.Header>
                 <Modal.Title>
                     <b>Add User</b>
-                    <p>Add a new user</p>
+                    <p>Add a New User to the Organization</p>
                 </Modal.Title>
             </Modal.Header>
 
