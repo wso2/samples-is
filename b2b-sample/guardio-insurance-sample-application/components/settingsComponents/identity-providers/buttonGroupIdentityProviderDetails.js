@@ -62,7 +62,7 @@ export default function ButtonGroupIdentityProviderDetails(props) {
 
     return (
         <Stack justifyContent='flex-end' alignItems='stretch'>
-            <ConfirmAddLoginFlowModal session={props.session} openModal={openListAppicationModal}
+            <ConfirmAddLoginFlowModal session={props.session} id={props.id} openModal={openListAppicationModal}
                 onModalClose={onCloseListAllApplicaitonModal} />
             <Button onClick={onAddToLoginFlowClick}>Add to Login Flow</Button>
             <IconButton icon={<Trash />}

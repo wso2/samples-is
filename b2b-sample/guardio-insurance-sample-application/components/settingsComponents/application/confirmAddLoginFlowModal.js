@@ -17,14 +17,17 @@
  */
 
 import React, { useCallback, useEffect, useState } from 'react';
-import { Avatar, Button, Col, Grid, Modal, Row } from 'rsuite';
+import { Avatar, Button, Col, Grid, Loader, Modal, Row } from 'rsuite';
 import stylesSettings from '../../../styles/Settings.module.css';
+import decodeGetApplication from '../../../util/apiDecode/settings/application/decodeGetApplication';
 import decodeListCurrentApplication from '../../../util/apiDecode/settings/application/decodeListCurrentApplication';
 import { checkIfJSONisEmpty } from '../../../util/util/common/common';
+import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from '../../../util/util/frontendUtil/frontendUtil';
 
 export default function ConfirmAddLoginFlowModal(props) {
 
     const [allApplications, setAllApplications] = useState({});
+    const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
 
     const fetchData = useCallback(async () => {
         const res = await decodeListCurrentApplication(props.session);
@@ -34,6 +37,18 @@ export default function ConfirmAddLoginFlowModal(props) {
     useEffect(() => {
         fetchData();
     }, [fetchData]);
+
+    const onSubmit = async () => {
+        allApplications.applications[0].name
+        setLoadingDisplay(LOADING_DISPLAY_BLOCK);
+        decodeGetApplication(props.session,  allApplications.applications[0].id)
+            .then((response) => console.log(response))
+            .finally((response)=> setLoadingDisplay(LOADING_DISPLAY_NONE))
+        // decodeEditUser(props.session, props.user.id, values.firstName, values.familyName, values.email,
+        //     values.username)
+        //     .then((response) => onDataSubmit(response, form))
+        //     .finally((response) => setLoadingDisplay(LOADING_DISPLAY_NONE))
+    }
 
     return (
         <Modal
@@ -50,13 +65,18 @@ export default function ConfirmAddLoginFlowModal(props) {
                 }
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={props.onModalClose} className={stylesSettings.addUserButton} appearance="primary">
+                <Button onClick={onSubmit} className={stylesSettings.addUserButton} appearance="primary">
                     Confirm
                 </Button>
                 <Button onClick={props.onModalClose} className={stylesSettings.addUserButton} appearance="ghost">
                     Cancel
                 </Button>
             </Modal.Footer>
+
+            <div style={loadingDisplay}>
+                <Loader size="lg" backdrop content="Idp is adding to the login flow" vertical />
+            </div>
+
         </Modal >
     )
 }
