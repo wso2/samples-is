@@ -18,6 +18,7 @@
 
 import React, { useCallback, useEffect, useState } from 'react';
 import { Avatar, Nav, Panel, Stack, useToaster } from 'rsuite';
+import CodeIcon from '@rsuite/icons/Code';
 import decodeGetDetailedIdentityProvider from
 	'../../../util/apiDecode/settings/identityProvider/decodeGetDetailedIdentityProvider';
 import ButtonGroupIdentityProviderDetails from './buttonGroupIdentityProviderDetails';
@@ -102,14 +103,23 @@ function IdentityProviderDetailsHeader(props) {
 
 function IdentityProviderDetailsNav(props) {
 
-	return (
-		<Nav appearance="subtle" activeKey={props.activeKeyNav} style={{ marginBottom: 10 }}>
-			<Nav.Item eventKey="1"
-				onSelect={(eventKey) => props.activeKeyNavSelect(eventKey)}>General</Nav.Item>
-			<Nav.Item eventKey="2"
-				onSelect={(eventKey) => props.activeKeyNavSelect(eventKey)}>Settings</Nav.Item>
-			<Nav.Item eventKey="3"
-				onSelect={(eventKey) => props.activeKeyNavSelect(eventKey)}>Raw</Nav.Item>
-		</Nav>
-	);
+  return (
+    <Nav appearance="subtle" activeKey={props.activeKeyNav} style={{ marginBottom: 10, marginTop: 15 }}>
+      <div style={{
+        display: "flex",
+        alignItems: "stretch"
+      }}>
+        <Nav.Item eventKey="1"
+          onSelect={(eventKey) => props.activeKeyNavSelect(eventKey)}>General</Nav.Item>
+        <Nav.Item eventKey="2"
+          onSelect={(eventKey) => props.activeKeyNavSelect(eventKey)}>Settings</Nav.Item>
+
+        <div style={{ flexGrow: "1" }}></div>
+
+        <Nav.Item eventKey="3"
+          onSelect={(eventKey) => props.activeKeyNavSelect(eventKey)} icon={<CodeIcon />}>Developer Tools</Nav.Item>
+      </div>
+
+    </Nav>
+  );
 }
