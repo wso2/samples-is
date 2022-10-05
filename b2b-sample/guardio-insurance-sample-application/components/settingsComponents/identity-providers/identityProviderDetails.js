@@ -16,11 +16,10 @@
  * under the License.
  */
 
+import CodeIcon from '@rsuite/icons/Code';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Avatar, Nav, Panel, Stack, useToaster } from 'rsuite';
-import CodeIcon from '@rsuite/icons/Code';
-import decodeGetDetailedIdentityProvider from
-	'../../../util/apiDecode/settings/identityProvider/decodeGetDetailedIdentityProvider';
+import decodeGetDetailedIdentityProvider from '../../../util/apiDecode/settings/identityProvider/decodeGetDetailedIdentityProvider';
 import ButtonGroupIdentityProviderDetails from './buttonGroupIdentityProviderDetails';
 import General from './idpDetailsSections/general';
 import Raw from './idpDetailsSections/raw';
@@ -54,7 +53,7 @@ export default function IdentityProviderDetails(props) {
 
 				return <Settings session={props.session} idpDetails={idpDetails} />;
 			case '3':
-				
+
 				return <Raw idpDetails={idpDetails} />;
 		}
 	}
@@ -62,10 +61,11 @@ export default function IdentityProviderDetails(props) {
 	return (
 		<Panel header={
 			<IdentityProviderDetailsHeader idpDetails={idpDetails} />
-		} eventKey={props.id} id={props.id}>
+		} eventKey={props.id} id={props.id}>∏
 			<div style={{ marginLeft: "25px", marginRight: "25px" }}>
 				<Stack direction='column' alignItems='stretch'>
-					<ButtonGroupIdentityProviderDetails id={props.id} fetchAllIdPs={props.fetchAllIdPs} />
+					<ButtonGroupIdentityProviderDetails session={props.session} id={props.id}
+						fetchAllIdPs={props.fetchAllIdPs} />
 					<IdentityProviderDetailsNav activeKeyNav={activeKeyNav} activeKeyNavSelect={activeKeyNavSelect} />
 
 					<div>
@@ -80,7 +80,7 @@ export default function IdentityProviderDetails(props) {
 }
 
 function IdentityProviderDetailsHeader(props) {
-	
+
 	return (
 		<Stack>
 			<Stack>
@@ -103,23 +103,23 @@ function IdentityProviderDetailsHeader(props) {
 
 function IdentityProviderDetailsNav(props) {
 
-  return (
-    <Nav appearance="subtle" activeKey={props.activeKeyNav} style={{ marginBottom: 10, marginTop: 15 }}>
-      <div style={{
-        display: "flex",
-        alignItems: "stretch"
-      }}>
-        <Nav.Item eventKey="1"
-          onSelect={(eventKey) => props.activeKeyNavSelect(eventKey)}>General</Nav.Item>
-        <Nav.Item eventKey="2"
-          onSelect={(eventKey) => props.activeKeyNavSelect(eventKey)}>Settings</Nav.Item>
+	return (
+		<Nav appearance="subtle" activeKey={props.activeKeyNav} style={{ marginBottom: 10, marginTop: 15 }}>
+			<div style={{
+				display: "flex",
+				alignItems: "stretch"
+			}}>
+				<Nav.Item eventKey="1"
+					onSelect={(eventKey) => props.activeKeyNavSelect(eventKey)}>General</Nav.Item>
+				<Nav.Item eventKey="2"
+					onSelect={(eventKey) => props.activeKeyNavSelect(eventKey)}>Settings</Nav.Item>
 
-        <div style={{ flexGrow: "1" }}></div>
+				<div style={{ flexGrow: "1" }}></div>
 
-        <Nav.Item eventKey="3"
-          onSelect={(eventKey) => props.activeKeyNavSelect(eventKey)} icon={<CodeIcon />}>Developer Tools</Nav.Item>
-      </div>
+				<Nav.Item eventKey="3"
+					onSelect={(eventKey) => props.activeKeyNavSelect(eventKey)} icon={<CodeIcon />}>Developer Tools</Nav.Item>
+			</div>
 
-    </Nav>
-  );
+		</Nav>
+	);
 }
