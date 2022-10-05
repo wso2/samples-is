@@ -44,6 +44,7 @@ export default function IdentityProviders() {
     const { data: session } = useSession();
 
     const templates = () => {
+
         return [
             Enterprise,
             Google,
@@ -151,14 +152,18 @@ const AddIdentityProviderModal = ({ openModal, onClose, templates, onTemplateSel
 
     const resolveIconName = (template) => {
         if (GOOGLE_ID === template.templateId) {
+
             return "google.svg";
         }
         if (FACEBOOK_ID === template.templateId) {
+
             return "facebook.svg";
         }
         if (ENTERPRISE_ID === template.templateId) {
+
             return "enterprise.svg";
         }
+
         return EMPTY_STRING;
     };
 
@@ -174,6 +179,7 @@ const AddIdentityProviderModal = ({ openModal, onClose, templates, onTemplateSel
                 <div>
                     <div className={styles.idp__template__list}>
                         {templates.map((template) => {
+
                             return (
                                 <div
                                     key={template.id}
@@ -227,19 +233,23 @@ const IdPCreationModal = ({ openModal, onSave, onCancel, template }) => {
 
     const resolveTemplateForm = () => {
         switch (template.templateId) {
+
             case GOOGLE_ID:
+
                 return (
                     <GoogleIdentityProvider
                         formValues={formValues}
                         onFormValuesChange={setFormValues} />
                 )
             case FACEBOOK_ID:
+
                 return (
                     <FacebookIdentityProvider
                         formValues={formValues}
                         onFormValuesChange={setFormValues} />
                 )
             case ENTERPRISE_ID:
+                
                 return (
                     <EnterpriseIdentityProvider
                         formValues={formValues}

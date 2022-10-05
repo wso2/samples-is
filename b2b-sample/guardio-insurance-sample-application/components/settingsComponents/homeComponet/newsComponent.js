@@ -26,6 +26,7 @@ import image4 from '../../../public/news4.jpeg';
 import { getCurrentDate } from '../../../util/util/common/common';
 
 export default function NewsComponent(props) {
+
     return (
         <div>
             <Panel>
@@ -42,5 +43,6 @@ export default function NewsComponent(props) {
 
 function selectImage(){
     var imageList = [image1,image2,image3,image4];
+    
     return imageList[imageList.length * Math.random() | 0];
 }

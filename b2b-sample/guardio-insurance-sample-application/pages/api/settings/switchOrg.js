@@ -22,6 +22,7 @@ import { dataNotRecievedError, notPostError } from '../../../util/util/apiUtil/l
 const SWITCH_API_CALL = "Switch API Call";
 
 function getBasicAuth() {
+
     return Buffer.from(`${config.WSO2IS_CLIENT_ID}:${config.WSO2IS_CLIENT_SECRET}`).toString('base64');
 }
 
@@ -34,6 +35,7 @@ function getSwitchHeader() {
         "Access-Control-Allow-Credentials": true,
         "Access-Control-Allow-Origin": config.WSO2IS_CLIENT_URL
     }
+
     return headers;
 }
 
@@ -44,6 +46,7 @@ function getSwitchBody(subOrgId, accessToken) {
         'switching_organization': subOrgId,
         'token': accessToken
     }
+
     return body;
 }
 
@@ -53,6 +56,7 @@ function getSwitchResponse(subOrgId, accessToken) {
         headers: getSwitchHeader(),
         body: new URLSearchParams(getSwitchBody(subOrgId, accessToken)).toString()
     }
+
     return request;
 }
 
@@ -60,6 +64,7 @@ function getSwitchEndpoint() {
     if (config.WSO2IS_TENANT_NAME == 'carbon.super') {
         return `${config.WSO2IS_HOST}/oauth2/token`
     }
+
     return `${config.WSO2IS_HOST}/o/${config.WSO2IS_TENANT_NAME}/oauth2/token`
 }
 
@@ -83,6 +88,7 @@ export default async function switchOrg(req, res) {
         const data = await fetchData.json();
         res.status(200).json(data);
     } catch (err) {
+        
         return dataNotRecievedError(res);
     }
 }

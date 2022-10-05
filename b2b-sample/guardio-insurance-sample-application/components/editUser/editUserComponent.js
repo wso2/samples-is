@@ -38,6 +38,7 @@ export default function EditUserComponent(props) {
         if (!firstName) {
             errors.firstName = 'This field cannot be empty'
         }
+
         return errors;
     }
 
@@ -45,6 +46,7 @@ export default function EditUserComponent(props) {
         if (!familyName) {
             errors.familyName = 'This field cannot be empty'
         }
+
         return errors;
     }
 
@@ -52,6 +54,7 @@ export default function EditUserComponent(props) {
         if (!email) {
             errors.email = 'This field cannot be empty'
         }
+        
         return errors;
     }
 

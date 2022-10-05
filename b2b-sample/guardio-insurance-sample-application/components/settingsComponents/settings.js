@@ -44,10 +44,13 @@ export default function Settings(props) {
     const mainPanelComponenet = (activeKey, session) => {
         switch (activeKey) {
             case '1':
+
                 return <HomeComponent orgName={props.name} orgId={props.orgId} session={session} />;
             case '2-1':
+
                 return <ViewUserComponent orgName={props.name} orgId={props.orgId} session={session} />;
             case '2-3':
+                
                 return <IdentityProviders orgName={props.name} orgId={props.orgId} session={session} />;
             // case '3-1':
             //     return <Application orgName={props.name} session={session} />

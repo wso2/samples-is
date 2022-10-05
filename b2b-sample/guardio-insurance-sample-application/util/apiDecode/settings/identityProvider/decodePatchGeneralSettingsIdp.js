@@ -28,8 +28,10 @@ export default async function decodePatchGeneralSettingsIdp(session, name, descr
 
     try {
         const res = await callPatchGeneralSettingsIdp(session, idpId, body);
+
         return res;
     } catch (err) {
+        
         return null;
     }
 }

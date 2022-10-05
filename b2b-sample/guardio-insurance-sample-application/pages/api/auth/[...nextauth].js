@@ -40,6 +40,7 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
         }
       },
       profile(profile) {
+
         return {
           id: profile.sub
         }
@@ -56,6 +57,7 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
         token.scope = account.scope
         token.user = profile
       }
+      
       return token
     },
     async session({ session, token, user }) {

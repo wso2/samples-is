@@ -37,6 +37,7 @@ export default async function viewUsers(req , res) {
         const users = await fetchData.json();
         res.status(200).json(users);
     } catch (err) {
+        
         return dataNotRecievedError(res);
     }
 }

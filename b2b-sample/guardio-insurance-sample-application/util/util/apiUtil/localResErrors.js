@@ -17,14 +17,17 @@
  */
 
 function error404(res, msg) {
+
     return res.status(404).json(msg);
 }
 
 function notPostError(res) {
+
     return error404(res, 'Cannot request data directyly.');
 }
 
 function dataNotRecievedError(res) {
+
     return error404(res, 'Error occured when requesting data.');
 }
 

@@ -23,6 +23,7 @@ function sentDataHeader(session) {
         "accept": "application/json",
         "content-type": "application/json",
         "authorization": "Bearer " + session.accessToken,
+        
         "access-control-allow-origin": config.WSO2IS_CLIENT_URL
     }
     return headers;
@@ -34,6 +35,7 @@ function getSentDataRequestOptions(session, method, body) {
         headers: sentDataHeader(session),
         body: JSON.stringify(body)
     }
+    
     return request;
 }
 

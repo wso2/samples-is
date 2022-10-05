@@ -22,8 +22,10 @@ export default async function decodeGetFederatedAuthenticators(session, idpId, i
 
     try {
         const res = await callGetFederatedAuthenticators(session, idpId, id);
+
         return res;
     } catch (err) {
+        
         return null;
     }
 }

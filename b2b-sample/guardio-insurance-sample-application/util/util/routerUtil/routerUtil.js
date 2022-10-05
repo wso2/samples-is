@@ -22,6 +22,7 @@ import { signIn, signOut } from 'next-auth/react';
 import { getRouterQuery } from '../orgUtil/orgUtil';
 
 function redirect(path) {
+
     return {
         redirect: {
             destination: path,
@@ -31,6 +32,7 @@ function redirect(path) {
 }
 
 function parseCookies(req) {
+
     return cookie.parse(req ? req.headers.cookie || "" : document.cookie);
 }
 
@@ -47,15 +49,18 @@ function orgSignout() {
 
 function emptySession(session) {
     if (session == null || session == undefined) {
+
         return redirect('/signin');
     }
 }
 
 function parseJwt(token) {
+
     return JSON.parse(Buffer.from(token.split('.')[1], 'base64'));
 }
 
 function getLoggedUserId(token) {
+
     return parseJwt(token).sub;
 }
 
@@ -71,10 +76,13 @@ function getLoggedUserFromProfile(profile) {
         user.userName = profile.username;
 
         if (user.name == {} || !user.emails[0] || !user.userName) {
+
             return null
         }
+
         return user;
     } catch (err) {
+
         return null
     }
 }

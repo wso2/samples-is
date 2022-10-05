@@ -24,6 +24,7 @@ function checkAdmin(scopes) {
 
     for (let i = 0; i < adminScopes.length; i++) {
         if (!scopes.includes(adminScopes[i])) {
+
             return false;
         }
     }
@@ -34,6 +35,7 @@ function checkAdmin(scopes) {
 function getRouterQuery(orgid) {
     for (var i = 0; i < config.SAMPLE_ORGS.length; i++) {
         if (config.SAMPLE_ORGS[i].id == orgid) {
+
             return config.SAMPLE_ORGS[i].routerQuery;
         }
     }
@@ -42,6 +44,7 @@ function getRouterQuery(orgid) {
 function getOrg(orgId) {
     for (var i = 0; i < config.SAMPLE_ORGS.length; i++) {
         if (config.SAMPLE_ORGS[i].id == orgId) {
+
             return config.SAMPLE_ORGS[i];
         }
     }
@@ -51,6 +54,7 @@ function getOrg(orgId) {
 function getOrgIdfromRouterQuery(routerQuery) {
     for (var i = 0; i < config.SAMPLE_ORGS.length; i++) {
         if (config.SAMPLE_ORGS[i].routerQuery == routerQuery) {
+
             return config.SAMPLE_ORGS[i].id;
         }
     }
@@ -60,6 +64,7 @@ function getOrgIdfromRouterQuery(routerQuery) {
 function getOrgIdFromQuery(query) {
     for (var i = 0; i < config.SAMPLE_ORGS.length; i++) {
         if (config.SAMPLE_ORGS[i].routerQuery == query) {
+            
             return config.SAMPLE_ORGS[i].id;
         }
     }

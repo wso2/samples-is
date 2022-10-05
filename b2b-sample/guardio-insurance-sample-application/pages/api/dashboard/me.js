@@ -37,6 +37,7 @@ export default async function me(req , res) {
         const meData = await fetchData.json();
         res.status(200).json(meData);
     } catch (err) {
+        
         return dataNotRecievedError(res);
     }
 }

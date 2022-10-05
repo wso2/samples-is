@@ -27,8 +27,10 @@ export default async function decodeCreateIdentityProvider(session, template, na
 
     try {
         const res = await callCreateIdentityProvider(session, model);
+
         return res;
     } catch (err) {
+        
         return null;
     }
 }

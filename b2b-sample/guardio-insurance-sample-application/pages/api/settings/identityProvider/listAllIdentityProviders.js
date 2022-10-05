@@ -37,6 +37,7 @@ export default async function listAllIdentityProviders(req, res) {
         const data = await fetchData.json();
         res.status(200).json(data);
     } catch (err) {
+        
         return dataNotRecievedError(res);
     }
 }

@@ -21,11 +21,13 @@ import callUpdateFederatedAuthenticators from "../../../apiCall/settings/identit
 function refactorFederatedAuthenticatorsForUpdate(federatedAuthenticators) {
     delete federatedAuthenticators.authenticatorId;
     delete federatedAuthenticators.tags;
+
     return federatedAuthenticators;
 }
 
 function updateProperties(federatedAuthenticators, keyProperty, valueProperty) {
     federatedAuthenticators.properties.filter((obj) => obj.key === keyProperty)[0].value = valueProperty;
+
     return federatedAuthenticators;
 }
 
@@ -40,8 +42,10 @@ export default async function decodeUpdateFederatedAuthenticators(session, idpId
 
     try {
         const res = await callUpdateFederatedAuthenticators(session, idpId, body);
+
         return res;
     } catch (err) {
+        
         return null;
     }
 }

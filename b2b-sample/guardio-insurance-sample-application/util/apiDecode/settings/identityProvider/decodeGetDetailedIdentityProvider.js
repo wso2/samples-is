@@ -23,8 +23,10 @@ export default async function decodeGetDetailedIdentityProvider(session, id) {
 
     try {
         const res = await callGetDetailedIdentityProvider(session, id);
+
         return res;
     } catch (err) {
+        
         return null;
     }
 }

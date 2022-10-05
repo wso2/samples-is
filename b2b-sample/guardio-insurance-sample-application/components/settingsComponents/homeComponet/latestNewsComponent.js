@@ -22,6 +22,7 @@ import newsList from '../../../util/news/news.json'
 import NewsComponent from './newsComponent'
 
 export default function LatestNewsComponent() {
+
     return (
         <div>
             <br />
@@ -29,6 +30,7 @@ export default function LatestNewsComponent() {
             <FlexboxGrid justify="start">
                 {
                     newsList.news.map(news => {
+
                         return (
                             <FlexboxGrid.Item key={news.id*-1} colspan={12}>
                                 <Panel>
@@ -40,6 +42,7 @@ export default function LatestNewsComponent() {
                 }
                  {
                     newsList.news.map(news => {
+                        
                         return (
                             <FlexboxGrid.Item key={news.id*1} colspan={12}>
                                 <Panel>

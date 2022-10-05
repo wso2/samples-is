@@ -22,6 +22,7 @@ import profileImage from '../../../public/profile.svg';
 import styles from '../../../styles/Settings.module.css';
 
 export default function UserDetails(props) {
+    
     return (
         <div className={styles.userDetails}>
             <div className={styles.userDetailsBody}>

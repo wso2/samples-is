@@ -34,6 +34,7 @@ export default async function callListAllIdentityProviders(session) {
 
         return data;
     } catch (err) {
+        
         return null;
     }
 }

@@ -31,6 +31,7 @@ export default async function decodeMe(session) {
 
         return meReturn;
     } catch (err) {
+        
         return null
     }
 }

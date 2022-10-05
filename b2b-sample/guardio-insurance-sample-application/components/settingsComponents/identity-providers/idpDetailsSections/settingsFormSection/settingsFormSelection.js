@@ -36,15 +36,19 @@ export default function SettingsFormSelection(props) {
     const propList = () => {
         switch (props.templateId) {
             case GOOGLE_ID:
+
                 return googleFederatedAuthenticators.idp.federatedAuthenticators.authenticators[0].properties;
             case FACEBOOK_ID:
+
                 return facebookFederatedAuthenticators.idp.federatedAuthenticators.authenticators[0].properties;
             case ENTERPRISE_ID:
+
                 return enterpriseFederatedAuthenticators.idp.federatedAuthenticators.authenticators[0].properties;
         }
     };
 
     const selectedValue = (key) => {
+        
         return federatedAuthenticators.filter((obj) => obj.key === key)[0].value;
     }
 

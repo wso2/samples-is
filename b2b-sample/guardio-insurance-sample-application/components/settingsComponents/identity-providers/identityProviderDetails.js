@@ -47,10 +47,13 @@ export default function IdentityProviderDetails(props) {
 	const idpDetailsComponent = (activeKey) => {
 		switch (activeKey) {
 			case '1':
+
 				return <General session={props.session} idpDetails={idpDetails} fetchData={fetchData} />;
 			case '2':
+
 				return <Settings session={props.session} idpDetails={idpDetails} />;
 			case '3':
+				
 				return <Raw idpDetails={idpDetails} />;
 		}
 	}
@@ -98,6 +101,7 @@ function IdentityProviderDetailsHeader(props) {
 }
 
 function IdentityProviderDetailsNav(props) {
+
 	return (
 		<Nav appearance="subtle" activeKey={props.activeKeyNav} style={{ marginBottom: 10 }}>
 			<Nav.Item eventKey="1"

@@ -34,6 +34,7 @@ export default async function callGetFederatedAuthenticators(session, idpid, id)
 
         return data;
     } catch (err) {
+        
         return null;
     }
 }

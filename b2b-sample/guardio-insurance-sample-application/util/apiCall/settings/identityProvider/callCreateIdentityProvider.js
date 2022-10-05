@@ -34,6 +34,7 @@ export default async function callCreateIdentityProvider(session, model) {
 
         return data;
     } catch (err) {
+        
         return null;
     }
 }

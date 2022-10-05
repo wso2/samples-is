@@ -28,12 +28,15 @@ export default async function callSwitchOrg(subOrgId, accessToken) {
         );
 
         if (res.status != 200) {
+
             return null;
         }
 
         const data = await res.json();
+
         return data;
     } catch (err) {
+        
         return null;
     }
 }

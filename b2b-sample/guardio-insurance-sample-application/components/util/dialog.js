@@ -20,6 +20,7 @@ import React from 'react';
 import { Notification } from 'rsuite';
 
 function Dialog(props) {
+    
     return (
         <Notification type={props.type} header={props.header} closable>
             {props.body}

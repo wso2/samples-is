@@ -34,6 +34,7 @@ export default async function callDeleteIdentityProvider(session, id) {
 
         return data;
     } catch (err) {
+        
         return null;
     }
 }

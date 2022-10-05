@@ -33,8 +33,10 @@ export default async function decodeSwitchOrg(request, token) {
 
     try {
         const orgSession = await callSwitchOrg(subOrgId, accessToken);
+
         return orgSession;
     } catch (err) {
+        
         return null;
     }
 }

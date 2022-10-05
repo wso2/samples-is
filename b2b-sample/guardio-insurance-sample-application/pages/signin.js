@@ -32,6 +32,7 @@ export async function getServerSideProps(context) {
   const session = await getSession(context)
 
   if (session) {
+
     return {
       redirect: {
         destination: '/o',
@@ -95,6 +96,7 @@ export default function Signin(props) {
   let nextOnClick = (event) => {
     if (stringIsEmpty(subOrgId)) {
       setShowError(LOADING_DISPLAY_BLOCK);
+
       return;
     }
     setShowError(LOADING_DISPLAY_NONE);
@@ -103,6 +105,7 @@ export default function Signin(props) {
   }
 
   const showDropDownItems = () => {
+    
     return props.org_list.map((org) => (
       <Dropdown.Item key={org.id} eventKey={org.id} className={styles.signinDropdownItem}
         onSelect={(event) => orgSelect(event)}>{org.name}</Dropdown.Item>

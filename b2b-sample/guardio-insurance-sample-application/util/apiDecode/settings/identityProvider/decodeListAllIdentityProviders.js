@@ -22,8 +22,10 @@ export default async function decodeListAllIdentityProviders(session) {
 
     try {
         const res = await callListAllIdentityProviders(session);
+
         return res;
     } catch (err) {
+        
         return null;
     }
 }

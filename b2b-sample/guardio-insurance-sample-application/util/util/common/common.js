@@ -17,6 +17,7 @@
  */
 
 function stringIsEmpty(str) {
+
     return (str === "");
 }
 
@@ -32,6 +33,7 @@ function getCurrentDate() {
 }
 
 function checkIfJSONisEmpty(obj){
+    
     return Object.keys(obj).length === 0;
 }
 

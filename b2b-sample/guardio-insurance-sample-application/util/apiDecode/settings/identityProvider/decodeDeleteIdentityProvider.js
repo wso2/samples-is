@@ -22,8 +22,10 @@ export default async function decodeDeleteIdentityProvider(session, id) {
 
     try {
         const res = await callDeleteIdentityProvider(session, id);
+
         return res;
     } catch (err) {
+        
         return null;
     }
 }

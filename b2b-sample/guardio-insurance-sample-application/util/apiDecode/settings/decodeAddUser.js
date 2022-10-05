@@ -37,8 +37,10 @@ export default async function decodeAddUser(session, firstName, familyName, emai
 
     try {
         await callAddUser(session, addUserEncode);
+
         return true;
     } catch (err) {
+        
         return false;
     }
 }

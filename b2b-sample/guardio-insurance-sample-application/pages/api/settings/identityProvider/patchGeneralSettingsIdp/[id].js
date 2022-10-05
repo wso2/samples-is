@@ -41,6 +41,7 @@ export default async function patchGeneralSettingsIdp(req, res) {
         const data = await fetchData.json();
         res.status(200).json(data);
     } catch (err) {
+        
         return dataNotRecievedError(res);
     }
 }

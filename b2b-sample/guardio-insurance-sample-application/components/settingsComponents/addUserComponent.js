@@ -42,6 +42,7 @@ export default function AddUserComponent(props) {
         if (!firstName) {
             errors.firstName = 'This field cannot be empty'
         }
+
         return errors;
     }
 
@@ -49,6 +50,7 @@ export default function AddUserComponent(props) {
         if (!familyName) {
             errors.familyName = 'This field cannot be empty'
         }
+
         return errors;
     }
 
@@ -56,6 +58,7 @@ export default function AddUserComponent(props) {
         if (!email) {
             errors.email = 'This field cannot be empty'
         }
+
         return errors;
     }
 
@@ -63,6 +66,7 @@ export default function AddUserComponent(props) {
         if (!username) {
             errors.username = 'This field cannot be empty'
         }
+
         return errors;
     }
 
@@ -70,6 +74,7 @@ export default function AddUserComponent(props) {
         if (!password) {
             errors.password = 'This field cannot be empty'
         }
+
         return errors;
     }
 
@@ -88,6 +93,7 @@ export default function AddUserComponent(props) {
         errors = usernameValidate(values.username, errors)
         errors = passwordValidate(values.password, errors);
         errors = repasswordValidate(values.repassword, errors);
+        
         return errors
     }
 

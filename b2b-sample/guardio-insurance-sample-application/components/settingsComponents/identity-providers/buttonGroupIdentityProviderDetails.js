@@ -46,7 +46,6 @@ export default function ButtonGroupIdentityProviderDetails(props) {
     };
 
     return (
-
         <Stack justifyContent='flex-end' alignItems='stretch'>
             {/* <Button>Add to Login Flow</Button> */}
             <IconButton icon={<Trash />}
