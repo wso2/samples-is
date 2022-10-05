@@ -61,7 +61,7 @@ export default function IdentityProviderDetails(props) {
 	return (
 		<Panel header={
 			<IdentityProviderDetailsHeader idpDetails={idpDetails} />
-		} eventKey={props.id} id={props.id}>∏
+		} eventKey={props.id} id={props.id}>
 			<div style={{ marginLeft: "25px", marginRight: "25px" }}>
 				<Stack direction='column' alignItems='stretch'>
 					<ButtonGroupIdentityProviderDetails session={props.session} id={props.id}
