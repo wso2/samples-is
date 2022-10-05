@@ -33,6 +33,7 @@ export default async function callMe(session) {
         return data;
         
     } catch (err) {
+        
         return null;
     }
 }

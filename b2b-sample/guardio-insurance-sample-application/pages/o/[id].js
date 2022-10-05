@@ -34,9 +34,11 @@ export async function getServerSideProps(context) {
 
   if (session == null || session == undefined || session.expires || session.error
     || routerQuery != getRouterQuery(subOrgId)) {
+
     return redirect(`/o/moveOrg?o=${routerQuery}`);
   } else {
     setOrg = getOrg(subOrgId);
+
     return {
       props: { session, setOrg },
     }
@@ -45,6 +47,7 @@ export async function getServerSideProps(context) {
 }
 
 export default function Org(props) {
+
   return (
     <Settings orgId={props.setOrg.id} routerQuery={props.setOrg.routerQuery} name={props.setOrg.name}
       colorTheme={props.setOrg.colorTheme} />

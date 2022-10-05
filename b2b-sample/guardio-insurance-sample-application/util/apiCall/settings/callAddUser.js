@@ -33,6 +33,7 @@ export default async function callAddUser(session, user) {
 
         return data;
     } catch (err) {
+        
         return null;
     }
 }

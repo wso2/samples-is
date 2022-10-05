@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 WSO2 LLC. (http://www.wso2.com).
+ * Copyright (c) 2022 WSO2 LLC. (https://www.wso2.com).
  *
  * WSO2 LLC. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
@@ -26,6 +26,7 @@ import { errorTypeDialog, successTypeDialog } from '../util/dialog';
 import stylesSettings from '../../styles/Settings.module.css';
 import styles from '../../styles/util.module.css';
 import decodeEditUser from '../../util/apiDecode/settings/decodeEditUser';
+import { checkIfJSONisEmpty } from '../../util/util/common/common';
 
 export default function EditUserComponent(props) {
 
@@ -37,6 +38,7 @@ export default function EditUserComponent(props) {
         if (!firstName) {
             errors.firstName = 'This field cannot be empty'
         }
+
         return errors;
     }
 
@@ -44,6 +46,7 @@ export default function EditUserComponent(props) {
         if (!familyName) {
             errors.familyName = 'This field cannot be empty'
         }
+
         return errors;
     }
 
@@ -51,6 +54,7 @@ export default function EditUserComponent(props) {
         if (!email) {
             errors.email = 'This field cannot be empty'
         }
+        
         return errors;
     }
 
@@ -62,7 +66,7 @@ export default function EditUserComponent(props) {
     }
 
     const validate = values => {
-        const errors = {}
+        let errors = {}
         errors = firstNameValidate(values.firstName, errors);
         errors = familyNameValidate(values.familyName, errors);
         errors = emailValidate(values.email, errors);
@@ -103,13 +107,13 @@ export default function EditUserComponent(props) {
                         onSubmit={onSubmit}
                         validate={validate}
                         initialValues={{
-                            firstName: props.user.firstName, 
-                            familyName: props.user.familyName, 
+                            firstName: props.user.firstName,
+                            familyName: props.user.familyName,
                             email: props.user.email,
                             username: props.user.username
                         }}
-                        render={({ handleSubmit, form, submitting, pristine, values }) => (
-                            <FormSuite ayout="vertical" className={styles.addUserForm}
+                        render={({ handleSubmit, form, submitting, pristine, errors, values }) => (
+                            <FormSuite layout="vertical" className={styles.addUserForm}
                                 onSubmit={event => { handleSubmit(event).then(form.restart); }} fluid>
                                 <Field
                                     name="firstName"
@@ -175,7 +179,10 @@ export default function EditUserComponent(props) {
                                     <FormSuite.Group>
                                         <ButtonToolbar>
                                             <Button className={styles.addUserButton} size="lg" appearance="primary"
-                                                type='submit' disabled={submitting || pristine}>Submit</Button>
+                                                type="submit"
+                                                disabled={submitting || pristine || !checkIfJSONisEmpty(errors)}>
+                                                Submit
+                                            </Button>
 
                                             <Button className={styles.addUserButton} size="lg" appearance="ghost"
                                                 type='button' onClick={props.onClose}>Cancel</Button>

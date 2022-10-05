@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 WSO2 LLC. (http://www.wso2.com).
+ * Copyright (c) 2022 WSO2 LLC. (https://www.wso2.com).
  *
  * WSO2 LLC. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
@@ -17,55 +17,54 @@
  */
 
 import AppSelectIcon from '@rsuite/icons/AppSelect';
-import Edit from '@rsuite/icons/Edit';
-import Trash from '@rsuite/icons/Trash';
-import React, { useEffect, useMemo, useState } from "react";
-import { Avatar, Button, Container, FlexboxGrid, Form, IconButton, List, Modal, Stack } from "rsuite";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { Avatar, Button, Container, FlexboxGrid, Form, Modal, Stack, useToaster } from "rsuite";
 
 import { useSession } from "next-auth/react";
-import config from "../../../config.json";
+import styles from "../../../styles/idp.module.css";
+import decodeCreateIdentityProvider from
+    '../../../util/apiDecode/settings/identityProvider/decodeCreateIdentityProvider';
+import decodeListAllIdentityProviders from
+    '../../../util/apiDecode/settings/identityProvider/decodeListAllIdentityProviders';
+import { EMPTY_STRING, ENTERPRISE_ID, FACEBOOK_ID, GOOGLE_ID } from '../../../util/util/common/common';
 import Enterprise from "../../data/templates/enterprise-identity-provider.json";
 import Facebook from "../../data/templates/facebook.json";
 import Google from "../../data/templates/google.json";
-import { createIdentityProvider, deleteIdentityProvider, listAllIdentityProviders } from "./api";
-import styles from "../../../styles/idp.module.css";
-
-const GOOGLE_ID = "google-idp";
-const FACEBOOK_ID = "facebook-idp";
-const ENTERPRISE_ID = "enterprise-idp";
-const EMPTY_STRING = "";
+import { errorTypeDialog, successTypeDialog } from "../../util/dialog";
+import SettingsTitle from '../../util/settingsTitle';
+import IdentityProviderList from './identityProviderList';
 
 export default function IdentityProviders() {
+
+    const toaster = useToaster();
 
     const [idpList, setIdpList] = useState([]);
     const [openAddModal, setOpenAddModal] = useState(false);
     const [selectedTemplate, setSelectedTemplate] = useState(undefined);
     const { data: session } = useSession();
 
-    const templates = useMemo(() => {
+    const templates = () => {
+
         return [
             Enterprise,
             Google,
             Facebook,
         ];
-    });
+    };
 
     useEffect(() => {
         fetchAllIdPs().finally();
-    }, []);
+    }, [fetchAllIdPs]);
 
-    const fetchAllIdPs = async () => {
-        const res = await listAllIdentityProviders({
-            limit: 10,
-            offset: 0,
-            session
-        });
+    const fetchAllIdPs = useCallback(async () => {
+
+        const res = await decodeListAllIdentityProviders(session);
         if (res && res.identityProviders) {
             setIdpList(res.identityProviders);
         } else {
             setIdpList([]);
         }
-    };
+    },[session]);
 
     const onAddIdentityProviderClick = () => {
         setOpenAddModal(true);
@@ -75,98 +74,39 @@ export default function IdentityProviders() {
         setSelectedTemplate(undefined)
     };
 
+    const onIdpCreated = (response) => {
+        if (response) {
+            successTypeDialog(toaster, "Success", "Identity Provider Created Successfully");
+
+            setIdpList([
+                ...idpList,
+                response
+            ]);
+
+            setOpenAddModal(false);
+            setSelectedTemplate(undefined);
+        } else {
+            errorTypeDialog(toaster, "Error Occured", "Error occured while creating the identity provider. Try again.");
+        }
+    }
+
     const onIdPSave = async (formValues, template) => {
 
-        const FIRST_ENTRY = 0;
-        let model = { ...template.idp };
+        let name = formValues.application_name.toString();
+        let clientId = formValues.client_id.toString();
+        let clientSecret = formValues.client_secret.toString();
 
-        model.name = formValues.application_name.toString();
-
-        if (FACEBOOK_ID === template.templateId) {
-            model.federatedAuthenticators.authenticators[FIRST_ENTRY].properties = [
-                {
-                    "key": "ClientId",
-                    "value": formValues.application_id.toString()
-                },
-                {
-                    "key": "ClientSecret",
-                    "value": formValues.application_secret.toString()
-                },
-                {
-                    "key": "callBackUrl",
-                    "value": `${config.WSO2IS_HOST}/t/${config.WSO2IS_TENANT_NAME}/commonauth`
-                }
-            ];
-        } else if (GOOGLE_ID === template.templateId) {
-            model.federatedAuthenticators.authenticators[FIRST_ENTRY].properties = [
-                {
-                    "key": "ClientId",
-                    "value": formValues.client_id.toString()
-                },
-                {
-                    "key": "ClientSecret",
-                    "value": formValues.client_secret.toString()
-                },
-                {
-                    "key": "callBackUrl",
-                    "value": `${config.WSO2IS_HOST}/t/${config.WSO2IS_TENANT_NAME}/commonauth`
-                },
-                {
-                    "key": "AdditionalQueryParameters",
-                    "value": "scope=email openid profile"
-                }
-            ];
-        } else {
-            model.federatedAuthenticators.authenticators[FIRST_ENTRY].properties = [
-                {
-                    "key": "ClientId",
-                    "value": formValues.client_id.toString()
-                },
-                {
-                    "key": "ClientSecret",
-                    "value": formValues.client_secret.toString()
-                },
-                {
-                    "key": "callBackUrl",
-                    "value": `${config.WSO2IS_HOST}/t/${config.WSO2IS_TENANT_NAME}/commonauth`
-                },
-                {
-                    "key": "AdditionalQueryParameters",
-                    "value": "scope=email openid profile"
-                }
-            ];
-        }
-
-        model.federatedAuthenticators.authenticators[FIRST_ENTRY].isEnabled = true;
-
-        const response = await createIdentityProvider({ model, session });
-
-        setIdpList([
-            ...idpList,
-            response
-        ]);
-
-        setOpenAddModal(false);
-        setSelectedTemplate(undefined);
+        decodeCreateIdentityProvider(session, template, name, clientId, clientSecret)
+            .then((response) => onIdpCreated(response))
 
     };
 
     return (
         <Container>
-            <Stack justifyContent="space-between">
-                <Stack direction="column" alignItems="flex-start">
-                    <h2>Identity Providers</h2>
-                    <p>Manage identity providers to allow users to log in to your application through them.</p>
-                </Stack>
-                {idpList.length > 0 && (
-                    <Stack>
-                        <Button appearance="primary" size="lg"
-                            onClick={onAddIdentityProviderClick}>
-                            Add Identity Provider
-                        </Button>
-                    </Stack>
-                )}
-            </Stack>
+
+            <SettingsTitle title="Identity Providers"
+                subtitle="Manage identity providers to allow users to log in to your application through them." />
+
             <FlexboxGrid
                 style={{ width: "100%", height: "60vh", marginTop: "24px" }}
                 justify={idpList.length === 0 ? "center" : "start"}
@@ -208,55 +148,22 @@ export default function IdentityProviders() {
 
 }
 
-const IdentityProviderList = ({ idpList, fetchAllIdPs }) => {
-
-    const { data: session } = useSession();
-
-    const onIdPEditClick = (ignoredId) => {
-        alert("NOT IMPLEMENTED");
-    };
-
-    const onIdPDeleteClick = (id) => {
-        deleteIdentityProvider({ id, session })
-            .finally(() => {
-                fetchAllIdPs().finally();
-            })
-    };
-
-    return (
-        <List className={styles.idp__list}>
-            {idpList.map(({ id, name }) => (
-                <List.Item key={id} className={styles.idp__list__item}>
-                    <div>
-                        <p>{name}</p>
-                        <small>{id}</small>
-                    </div>
-                    <div>
-                        <IconButton icon={<Trash />}
-                            onClick={() => onIdPDeleteClick(id)}
-                            appearance="subtle" />
-                        <IconButton icon={<Edit />}
-                            onClick={() => onIdPEditClick(id)}
-                            appearance="primary" />
-                    </div>
-                </List.Item>
-            ))}
-        </List>
-    );
-};
-
 const AddIdentityProviderModal = ({ openModal, onClose, templates, onTemplateSelected }) => {
 
     const resolveIconName = (template) => {
         if (GOOGLE_ID === template.templateId) {
+
             return "google.svg";
         }
         if (FACEBOOK_ID === template.templateId) {
+
             return "facebook.svg";
         }
         if (ENTERPRISE_ID === template.templateId) {
+
             return "enterprise.svg";
         }
+
         return EMPTY_STRING;
     };
 
@@ -265,13 +172,14 @@ const AddIdentityProviderModal = ({ openModal, onClose, templates, onTemplateSel
             onClose={onClose}
             onBackdropClick={onClose}>
             <Modal.Header>
-                <Modal.Title>Select Identity Provider</Modal.Title>
+                <Modal.Title><b>Select Identity Provider</b></Modal.Title>
                 <p>Choose one of the following identity providers.</p>
             </Modal.Header>
             <Modal.Body>
                 <div>
                     <div className={styles.idp__template__list}>
                         {templates.map((template) => {
+
                             return (
                                 <div
                                     key={template.id}
@@ -325,19 +233,23 @@ const IdPCreationModal = ({ openModal, onSave, onCancel, template }) => {
 
     const resolveTemplateForm = () => {
         switch (template.templateId) {
+
             case GOOGLE_ID:
+
                 return (
                     <GoogleIdentityProvider
                         formValues={formValues}
                         onFormValuesChange={setFormValues} />
                 )
             case FACEBOOK_ID:
+
                 return (
                     <FacebookIdentityProvider
                         formValues={formValues}
                         onFormValuesChange={setFormValues} />
                 )
             case ENTERPRISE_ID:
+                
                 return (
                     <EnterpriseIdentityProvider
                         formValues={formValues}
@@ -351,7 +263,7 @@ const IdPCreationModal = ({ openModal, onSave, onCancel, template }) => {
             onClose={handleModalClose}
             onBackdropClick={handleModalClose}>
             <Modal.Header>
-                <Modal.Title>{template.name}</Modal.Title>
+                <Modal.Title><b>{template.name}</b></Modal.Title>
                 <p>{template.description}</p>
             </Modal.Header>
             <Modal.Body>

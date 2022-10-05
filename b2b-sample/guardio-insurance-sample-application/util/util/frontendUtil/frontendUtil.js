@@ -26,14 +26,17 @@ const LOADING_DISPLAY_BLOCK = {
 };
 
 function checkCustomization(colorTheme) {
+
     return colorTheme == "blue" ? "rs-theme-dark" : "rs-theme-high-contrast";
 }
 
 function hideBasedOnScopes(scopes) {
-    
+
     if (checkAdmin(scopes)) {
+
         return LOADING_DISPLAY_BLOCK;
     } else {
+
         return LOADING_DISPLAY_NONE
     }
 }

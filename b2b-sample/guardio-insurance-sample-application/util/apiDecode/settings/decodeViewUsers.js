@@ -31,6 +31,7 @@ export default async function decodeViewUsers(session) {
 
         return usersReturn;
     } catch (err) {
+        
         return null
     }
 }

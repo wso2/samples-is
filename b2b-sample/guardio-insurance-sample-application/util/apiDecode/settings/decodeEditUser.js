@@ -45,8 +45,10 @@ export default async function decodeEditUser(session, id, firstName, familyName,
 
     try {
         const usersData = await callEditUser(session, id, editUserEncode);
+
         return true;
     } catch (err) {
+        
         return false
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 WSO2 LLC. (http://www.wso2.com).
+ * Copyright (c) 2022 WSO2 LLC. (https://www.wso2.com).
  *
  * WSO2 LLC. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
@@ -17,29 +17,31 @@
  */
 
 import React, { useCallback, useEffect, useState } from 'react';
-import { Table } from 'rsuite';
+import { Button, Stack, Table } from 'rsuite';
 
 import styles from '../../styles/Settings.module.css';
 import decodeViewUsers from '../../util/apiDecode/settings/decodeViewUsers';
 import EditUserComponent from '../editUser/editUserComponent';
 import SettingsTitle from '../util/settingsTitle';
+import AddUserComponent from './addUserComponent';
 
 export default function ViewUserComponent(props) {
     const [users, setUsers] = useState([]);
     const [editUserOpen, setEditUserOpen] = useState(false);
+    const [addUserOpen, setAddUserOpen] = useState(false);
 
     const [openUser, setOpenUser] = useState({});
 
     const fetchData = useCallback(async () => {
         const res = await decodeViewUsers(props.session);
         setUsers(res);
-    },[props.session])
+    }, [props.session])
 
     useEffect(() => {
-        if (!editUserOpen) {
+        if (!editUserOpen || !addUserOpen) {
             fetchData()
         }
-    }, [editUserOpen,fetchData]);
+    }, [editUserOpen, addUserOpen, fetchData]);
 
     useEffect(() => {
         fetchData();
@@ -57,16 +59,31 @@ export default function ViewUserComponent(props) {
         setEditUserOpen(true);
     }
 
+    const closeAddUserDialog = () => {
+        setAddUserOpen(false);
+    }
+
+    const onAddUserClick = (user) => {
+        setAddUserOpen(true);
+    }
+
     return (
         <div className={styles.tableMainPanelDiv}>
             <EditUserComponent session={props.session} open={editUserOpen}
                 onClose={closeEditDialog} user={openUser} />
 
-            <SettingsTitle title="Manage Users" subtitle="Manage users in the organisation" />
+            <AddUserComponent orgName={props.orgName} orgId={props.orgId} session={props.session}
+                open={addUserOpen} onClose={closeAddUserDialog} />
+
+            <Stack direction="row" justifyContent="space-between">
+                <SettingsTitle title="Manage Users" subtitle="Manage users in the organisation" />
+                <Button appearance="primary" size="lg" onClick={onAddUserClick}>
+                    Add User
+                </Button>
+            </Stack>
 
             <Table
                 height={900}
-                width={1150}
                 data={users}
             >
                 <Column width={200} align="center">
@@ -89,11 +106,11 @@ export default function ViewUserComponent(props) {
                     <Cell dataKey="username" />
                 </Column>
 
-                <Column width={300} align="center">
+                <Column flexGrow={2} align="center">
                     <HeaderCell><h6>Email</h6></HeaderCell>
                     <Cell dataKey="email" />
                 </Column>
-                <Column width={150} align="center" fixed="right">
+                <Column flexGrow={1} align="center" fixed="right">
                     <HeaderCell><h6>Edit User</h6></HeaderCell>
 
                     <Cell>

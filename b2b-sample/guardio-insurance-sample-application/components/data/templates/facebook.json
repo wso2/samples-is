@@ -11,7 +11,7 @@
   ],
   "idp": {
     "name": "Facebook",
-    "description": "",
+    "description": "Enable login for users with existing Facebook accounts.",
     "image": "",
     "isPrimary": false,
     "isFederationHub": false,
@@ -105,15 +105,44 @@
           "isEnabled": true,
           "properties": [
             {
-              "key": "AuthnEndpoint",
+              "key": "ClientId",
+              "displayName": "App ID",
+              "description": "The generated unique ID which is generated when the Facebook OAuth app is created.",
               "type": "STRING",
-              "displayOrder": 0,
+              "displayOrder": 1,
+              "regex": ".*",
+              "isMandatory": true,
+              "isConfidential": false,
+              "options": [],
+              "defaultValue": "",
+              "subProperties": []
+            },
+            {
+              "key": "ClientSecret",
+              "displayName": "App secret",
+              "description": "The App secret value of the Facebook OAuth app.",
+              "type": "STRING",
+              "displayOrder": 2,
+              "regex": ".*",
+              "isMandatory": true,
+              "isConfidential": true,
+              "options": [],
+              "defaultValue": "",
+              "subProperties": []
+            },
+            {
+              "key": "callBackUrl",
+              "displayName": "Valid OAuth redirect URI",
+              "description": "The redirect URI specified as valid in the Facebook OAuth app.",
+              "type": "STRING",
+              "displayOrder": 5,
               "regex": ".*",
               "isMandatory": false,
               "isConfidential": false,
               "options": [],
               "defaultValue": "",
-              "subProperties": []
+              "subProperties": [],
+              "readOnly": true
             },
             {
               "key": "Scope",
@@ -126,7 +155,8 @@
               "isConfidential": false,
               "options": [],
               "defaultValue": "email",
-              "subProperties": []
+              "subProperties": [],
+              "readOnly": true
             },
             {
               "key": "UserInfoFields",
@@ -139,68 +169,8 @@
               "isConfidential": false,
               "options": [],
               "defaultValue": "",
-              "subProperties": []
-            },
-            {
-              "key": "ClientId",
-              "displayName": "Client Id",
-              "description": "Enter Facebook client identifier value",
-              "type": "STRING",
-              "displayOrder": 1,
-              "regex": ".*",
-              "isMandatory": true,
-              "isConfidential": false,
-              "options": [],
-              "defaultValue": "",
-              "subProperties": []
-            },
-            {
-              "key": "UserInfoEndpoint",
-              "type": "STRING",
-              "displayOrder": 0,
-              "regex": ".*",
-              "isMandatory": false,
-              "isConfidential": false,
-              "options": [],
-              "defaultValue": "",
-              "subProperties": []
-            },
-            {
-              "key": "AuthTokenEndpoint",
-              "type": "STRING",
-              "displayOrder": 0,
-              "regex": ".*",
-              "isMandatory": false,
-              "isConfidential": false,
-              "options": [],
-              "defaultValue": "",
-              "subProperties": []
-            },
-            {
-              "key": "callBackUrl",
-              "displayName": "Callback Url",
-              "description": "Enter value corresponding to callback url",
-              "type": "STRING",
-              "displayOrder": 5,
-              "regex": ".*",
-              "isMandatory": false,
-              "isConfidential": false,
-              "options": [],
-              "defaultValue": "",
-              "subProperties": []
-            },
-            {
-              "key": "ClientSecret",
-              "displayName": "Client Secret",
-              "description": "Enter Facebook client secret value",
-              "type": "STRING",
-              "displayOrder": 2,
-              "regex": ".*",
-              "isMandatory": true,
-              "isConfidential": true,
-              "options": [],
-              "defaultValue": "",
-              "subProperties": []
+              "subProperties": [],
+              "readOnly": true
             }
           ]
         }

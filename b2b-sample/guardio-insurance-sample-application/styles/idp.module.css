@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 WSO2 LLC. (http://www.wso2.com).
+ * Copyright (c) 2022 WSO2 LLC. (https://www.wso2.com).
  *
  * WSO2 LLC. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
@@ -33,21 +33,19 @@
 }
 
 .idp__template__card:hover {
-    background-color: whitesmoke;
+    background-color: rgba(245, 245, 245, 0.2);
     transition: background-color 10ms linear;
     cursor: pointer;
 }
 
 .idp__list {
     width: 100%;
+    margin-top: 10px;
 }
 
 .idp__list__item {
-    background-color: #fafafa;
     padding: 10px;
-    width: 100%;
-    font-weight: bold;
-    font-size: 16px;
+    width: 100vw;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -57,4 +55,12 @@
 .idp__list__item small {
     font-weight: lighter;
     font-size: 12px;
+}
+
+.idp__item__details {
+    width: 100px;
+}
+
+.idp__item__json__pre {
+    max-width: 50vw;
 }

@@ -33,6 +33,7 @@ export default async function callEditUser(session, id, user) {
 
         return data;
     } catch (err) {
+        
         return null;
     }
 }

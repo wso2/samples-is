@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 WSO2 LLC. (http://www.wso2.com).
+ * Copyright (c) 2022 WSO2 LLC. (https://www.wso2.com).
  *
  * WSO2 LLC. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
@@ -123,12 +123,16 @@
 
 .addUserMainDiv {
     display: flex;
+    overflow: hidden;
     flex-direction: column;
     gap: 32px;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .addUserFormDiv{
-    padding: -15px;
+    padding: 0px;
 }
 
 .addUserForm {

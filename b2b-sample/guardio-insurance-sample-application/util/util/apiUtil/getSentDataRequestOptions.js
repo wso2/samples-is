@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 WSO2 LLC. (http://www.wso2.com).
+ * Copyright (c) 2022 WSO2 LLC. (https://www.wso2.com).
  *
  * WSO2 LLC. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
@@ -20,9 +20,10 @@ import config from '../../../config.json';
 
 function sentDataHeader(session) {
     const headers = {
-        "accept": "application/scim+json",
-        "content-type": "application/scim+json",
+        "accept": "application/json",
+        "content-type": "application/json",
         "authorization": "Bearer " + session.accessToken,
+        
         "access-control-allow-origin": config.WSO2IS_CLIENT_URL
     }
     return headers;
@@ -34,6 +35,7 @@ function getSentDataRequestOptions(session, method, body) {
         headers: sentDataHeader(session),
         body: JSON.stringify(body)
     }
+    
     return request;
 }
 

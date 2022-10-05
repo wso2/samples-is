@@ -23,6 +23,7 @@ function getInternalApibBody(session, subOrgId) {
         session: session,
         subOrgId: subOrgId
     }
+
     return body;
 }
 
@@ -38,6 +39,7 @@ function getInternalApiRequestOptions(session, subOrgId) {
         method: RequestMethod.POST,
         body: JSON.stringify(getInternalApibBody(session, subOrgId))
     }
+
     return request;
 }
 
@@ -46,6 +48,7 @@ function getInternalApiRequestOptionsWithParam(session, subOrgId, param) {
         method: RequestMethod.POST,
         body: JSON.stringify(getInternalApibBodyWithParam(session, subOrgId, param))
     }
+    
     return request;
 }
 

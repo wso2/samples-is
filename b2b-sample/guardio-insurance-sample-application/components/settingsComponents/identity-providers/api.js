@@ -16,13 +16,16 @@
  * under the License.
  */
 
-import config from "../../../config.json";
+import Cookie from 'js-cookie';
+import config from '../../../config.json';
+
+const subOrgId = Cookie.get("orgId");
 
 export const createIdentityProvider = async ({ model, session }) => {
 
     try {
         const res = await fetch(
-            `${config.WSO2IS_HOST}/t/${config.WSO2IS_TENANT_NAME}/api/server/v1/identity-providers`,
+            `${config.WSO2IS_HOST}/o/${subOrgId}/api/server/v1/identity-providers`,
             {
                 method: "POST",
                 body: JSON.stringify(model),
@@ -44,13 +47,14 @@ export const createIdentityProvider = async ({ model, session }) => {
 
 export const listAllIdentityProviders = async ({ limit, offset, session }) => {
 
-    const q = encodeURIComponent(`limit=${limit}&offset=${offset}`)
+    const q = encodeURIComponent(`limit=${limit}&offset=${offset}`);
 
     try {
         const res = await fetch(
-            `${config.WSO2IS_HOST}/t/${config.WSO2IS_TENANT_NAME}/api/server/v1/identity-providers?${q}`,
+            `${config.WSO2IS_HOST}/o/${subOrgId}/api/server/v1/identity-providers`,
             {
                 headers: {
+                    "accept": "application/json",
                     "Authorization": "Bearer " + session.accessToken,
                     "Access-Control-Allow-Origin": config.WSO2IS_CLIENT_URL
                 }
@@ -68,7 +72,7 @@ export const deleteIdentityProvider = async ({ id, session }) => {
 
     try {
         const res = await fetch(
-            `${config.WSO2IS_HOST}/t/${config.WSO2IS_TENANT_NAME}/api/server/v1/identity-providers/${id}`,
+            `${config.WSO2IS_HOST}/o/${subOrgId}/api/server/v1/identity-providers/${id}`,
             {
                 method: "DELETE",
                 headers: {
@@ -77,7 +81,7 @@ export const deleteIdentityProvider = async ({ id, session }) => {
                 }
             },
         );
-        return await res.json();
+        return res;
     } catch (err) {
         console.error(err);
         return null;
@@ -89,7 +93,7 @@ export const getDetailedIdentityProvider = async ({ id, session }) => {
 
     try {
         const res = await fetch(
-            `${config.WSO2IS_HOST}/t/${config.WSO2IS_TENANT_NAME}/api/server/v1/identity-providers/${id}`,
+            `${config.WSO2IS_HOST}/o/${subOrgId}/api/server/v1/identity-providers/${id}`,
             {
                 method: "GET",
                 headers: {

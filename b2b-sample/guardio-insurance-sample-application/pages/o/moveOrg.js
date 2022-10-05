@@ -31,18 +31,22 @@ export async function getServerSideProps(context) {
     let orgIdFromQuery = getOrgIdFromQuery(routerQuery);
 
     if (orgIdFromQuery == null) {
+
         return redirect('/404');
     }
 
     if (session == null || session == undefined) {
         let orgName = getOrg(orgIdFromQuery).name;
+
         return {
             props: { routerQuery, orgIdFromQuery, orgName },
         }
     } else {
         if (session.expires || session.error) {
+
             return redirect('/500');
         } else {
+
             return redirect('/404');
         }
     }
@@ -56,13 +60,14 @@ export default function Org(props) {
     useEffect(() => {
         if (redirectSeconds <= 0) {
             orgSignin(props.orgIdFromQuery);
+            
             return;
         }
 
         setTimeout(() => {
             setRedirectSeconds((redirectSeconds) => redirectSeconds - 1);
         }, moveTime)
-    }, [redirectSeconds]);
+    }, [redirectSeconds, props.orgIdFromQuery]);
 
     return (
         <div style={
