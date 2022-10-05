@@ -20,10 +20,9 @@ import Trash from '@rsuite/icons/Trash';
 import { useSession } from 'next-auth/react';
 import React, { useState } from 'react';
 import { Button, IconButton, Stack, useToaster } from 'rsuite';
-import decodeDeleteIdentityProvider
-    from '../../../util/apiDecode/settings/identityProvider/decodeDeleteIdentityProvider.JS';
-import { successTypeDialog, errorTypeDialog } from '../../util/dialog'
-import SelectApplicationModal from '../application/selectApplicationModal';
+import decodeDeleteIdentityProvider from '../../../util/apiDecode/settings/identityProvider/decodeDeleteIdentityProvider.JS';
+import { errorTypeDialog, successTypeDialog } from '../../util/dialog';
+import ConfirmAddLoginFlowModal from '../application/confirmAddLoginFlowModal';
 
 export default function ButtonGroupIdentityProviderDetails(props) {
 
@@ -55,10 +54,15 @@ export default function ButtonGroupIdentityProviderDetails(props) {
     const onCloseListAllApplicaitonModal = () => {
         setOpenListAppicationModal(false);
     }
+    
+    // need to sed out 3 API calls for this
+    // 1. get the application id
+    // 2. to get the applicaiton details
+    // 3. to PATCH the application
 
     return (
         <Stack justifyContent='flex-end' alignItems='stretch'>
-            <SelectApplicationModal session={props.session} openModal={openListAppicationModal}
+            <ConfirmAddLoginFlowModal session={props.session} openModal={openListAppicationModal}
                 onModalClose={onCloseListAllApplicaitonModal} />
             <Button onClick={onAddToLoginFlowClick}>Add to Login Flow</Button>
             <IconButton icon={<Trash />}
