@@ -17,14 +17,18 @@
  */
 
 import React, { useState } from 'react';
-import { Avatar, Button, Col, Grid, Loader, Modal, Row } from 'rsuite';
+import { Avatar, Button, Col, Grid, Loader, Modal, Row, useToaster } from 'rsuite';
 import stylesSettings from '../../../styles/Settings.module.css';
 import decodePatchApplicationAuthSteps from '../../../util/apiDecode/settings/application/decodePatchApplicationAuthSteps';
 import { PatchApplicationAuthMethod } from '../../../util/util/applicationUtil/applicationUtil';
 import { checkIfJSONisEmpty } from '../../../util/util/common/common';
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from '../../../util/util/frontendUtil/frontendUtil';
+import { errorTypeDialog, successTypeDialog } from '../../util/dialog';
 
 export default function ConfirmAddRemoveLoginFlowModal(props) {
+
+    const toaster = useToaster();
+
     const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
 
     const onSubmit = async (patchApplicationAuthMethod) => {
@@ -32,10 +36,9 @@ export default function ConfirmAddRemoveLoginFlowModal(props) {
 
         decodePatchApplicationAuthSteps(props.session, props.applicationDetail, props.idpDetails,
             patchApplicationAuthMethod)
-            .then((response) => {
-                props.fetchAllIdPs().finally();
-                props.onModalClose();
-            })
+            .then((response) => props.idpIsinAuthSequence
+                ? onIdpRemovefromLoginFlow(response)
+                : onIdpAddToLoginFlow(response))
             .finally((response) => setLoadingDisplay(LOADING_DISPLAY_NONE));
     }
 
@@ -45,6 +48,29 @@ export default function ConfirmAddRemoveLoginFlowModal(props) {
 
     const onAdd = async () => {
         await onSubmit(PatchApplicationAuthMethod.ADD);
+    }
+
+    const onSuccess = () => {
+        props.onModalClose();
+        props.fetchAllIdPs().finally();
+    }
+
+    const onIdpAddToLoginFlow = (response) => {
+        if (response) {
+            onSuccess();
+            successTypeDialog(toaster, "Success", "Identity Provider Add to the Login Flow Successfully.");
+        } else {
+            errorTypeDialog(toaster, "Error Occured", "Error occured while adding the the identity provider.");
+        }
+    }
+
+    const onIdpRemovefromLoginFlow = (response) => {
+        if (response) {
+            onSuccess();
+            successTypeDialog(toaster, "Success", "IIdentity Provider Remove from the Login Flow Successfully.");
+        } else {
+            errorTypeDialog(toaster, "Error Occured", "Error occured while removing the identity provider. Try again.");
+        }
     }
 
     return (

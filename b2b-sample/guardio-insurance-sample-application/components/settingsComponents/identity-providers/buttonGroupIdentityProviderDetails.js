@@ -17,7 +17,6 @@
  */
 
 import Trash from '@rsuite/icons/Trash';
-import { useSession } from 'next-auth/react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Button, IconButton, Stack, useToaster } from 'rsuite';
 import decodeGetApplication from '../../../util/apiDecode/settings/application/decodeGetApplication';
@@ -68,22 +67,6 @@ export default function fetchAllIdPs(props) {
             successTypeDialog(toaster, "Success", "Identity Provider Deleted Successfully");
         } else {
             errorTypeDialog(toaster, "Error Occured", "Error occured while deleting the identity provider. Try again.");
-        }
-    }
-
-    const onIdpAddToLoginFlow = (response) => {
-        if (response) {
-            successTypeDialog(toaster, "Success", "Identity Provider Add to the Login Flow Successfully.");
-        } else {
-            errorTypeDialog(toaster, "Error Occured", "Error occured while adding the the identity provider.");
-        }
-    }
-
-    const onIdpRemovefromLoginFlow = (response) => {
-        if (response) {
-            successTypeDialog(toaster, "Success", "IIdentity Provider Remove from the Login Flow Successfully.");
-        } else {
-            errorTypeDialog(toaster, "Error Occured", "Error occured while removing the identity provider. Try again.");
         }
     }
 
