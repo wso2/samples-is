@@ -25,6 +25,7 @@ import {
 function getAuthenticationSequenceModel(template) {
     let authenticationSequenceModel = template.authenticationSequence;
     delete authenticationSequenceModel.requestPathAuthenticators;
+    authenticationSequenceModel.type = "USER_DEFINED";
 
     return authenticationSequenceModel;
 }

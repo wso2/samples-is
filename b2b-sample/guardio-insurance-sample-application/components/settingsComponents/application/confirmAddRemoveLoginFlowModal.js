@@ -24,19 +24,27 @@ import { PatchApplicationAuthMethod } from '../../../util/util/applicationUtil/a
 import { checkIfJSONisEmpty } from '../../../util/util/common/common';
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from '../../../util/util/frontendUtil/frontendUtil';
 
-export default function ConfirmAddLoginFlowModal(props) {
+export default function ConfirmAddRemoveLoginFlowModal(props) {
     const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
 
-    const onSubmit = async () => {
+    const onSubmit = async (patchApplicationAuthMethod) => {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
 
         decodePatchApplicationAuthSteps(props.session, props.applicationDetail, props.idpDetails,
-            PatchApplicationAuthMethod.ADD)
+            patchApplicationAuthMethod)
             .then((response) => {
                 props.fetchAllIdPs().finally();
                 props.onModalClose();
             })
-            .finally((response) => setLoadingDisplay(LOADING_DISPLAY_NONE))
+            .finally((response) => setLoadingDisplay(LOADING_DISPLAY_NONE));
+    }
+
+    const onRemove = async () => {
+        await onSubmit(PatchApplicationAuthMethod.REMOVE);
+    }
+
+    const onAdd = async () => {
+        await onSubmit(PatchApplicationAuthMethod.ADD);
     }
 
     return (
@@ -45,17 +53,24 @@ export default function ConfirmAddLoginFlowModal(props) {
             open={props.openModal}
             onClose={props.onModalClose}>
             <Modal.Header>
-                <Modal.Title><b>Add Identity Provider to the Login Flow</b></Modal.Title>
+                <Modal.Title><b>
+                    {
+                        props.idpIsinAuthSequence
+                            ? "Remove Identity Provider from the Login Flow"
+                            : "Add Identity Provider to the Login Flow"
+                    }
+                </b></Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 {
                     checkIfJSONisEmpty(props.applicationDetail)
                         ? <EmptySelectApplicationBody />
-                        : <ApplicationListAvailable applicationDetail={props.applicationDetail} />
+                        : <ApplicationListAvailable applicationDetail={props.applicationDetail}
+                            idpIsinAuthSequence={props.idpIsinAuthSequence} />
                 }
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={onSubmit} className={stylesSettings.addUserButton} appearance="primary">
+                <Button onClick={props.idpIsinAuthSequence ? onRemove : onAdd} className={stylesSettings.addUserButton} appearance="primary">
                     Confirm
                 </Button>
                 <Button onClick={props.onModalClose} className={stylesSettings.addUserButton} appearance="ghost">
@@ -97,10 +112,18 @@ function ApplicationListAvailable(props) {
 
     return (
         <div>
-            <p>This will add the Idp as an authentication step to the authentication flow of the following
-                applicaiton</p>
+            {
+                props.idpIsinAuthSequence
+                    ? <p>This will remove the Idp as an authentication step from all applicaitons</p>
+                    : <p>This will add the Idp as an authentication step to the authentication flow of the following
+                        applicaiton</p>
+            }
 
-            <ApplicationListItem application={props.applicationDetail} />
+            {
+                props.idpIsinAuthSequence
+                    ? <></>
+                    : <ApplicationListItem application={props.applicationDetail} />
+            }
 
             <p>Please confirm your action to procced</p>
 

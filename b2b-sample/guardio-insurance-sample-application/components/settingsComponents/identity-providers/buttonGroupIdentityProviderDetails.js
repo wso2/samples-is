@@ -26,11 +26,10 @@ import decodeDeleteIdentityProvider from '../../../util/apiDecode/settings/ident
 import { checkIfIdpIsinAuthSequence } from '../../../util/util/applicationUtil/applicationUtil';
 import { checkIfJSONisEmpty } from '../../../util/util/common/common';
 import { errorTypeDialog, successTypeDialog } from '../../util/dialog';
-import ConfirmAddLoginFlowModal from '../application/confirmAddLoginFlowModal';
+import ConfirmAddRemoveLoginFlowModal from '../application/confirmAddRemoveLoginFlowModal';
 
 export default function fetchAllIdPs(props) {
 
-    const { data: session } = useSession();
     const toaster = useToaster();
 
     const [allApplications, setAllApplications] = useState({});
@@ -48,8 +47,6 @@ export default function fetchAllIdPs(props) {
             const res = await decodeGetApplication(props.session, allApplications.applications[0].id);
             await setApplicationDetail(res);
         }
-        console.log(allApplications);
-        console.log(applicationDetail);
     }, [props, allApplications])
 
     useEffect(() => {
@@ -114,12 +111,13 @@ export default function fetchAllIdPs(props) {
                     ? <></>
                     : idpIsinAuthSequence
                         ? <Button onClick={onAddToLoginFlowClick}>Remove from Login Flow</Button>
-                        : <Button onClick={onAddToLoginFlowClick}>Add to the Login Flow</Button> 
+                        : <Button onClick={onAddToLoginFlowClick}>Add to the Login Flow</Button>
             }
-            
-            <ConfirmAddLoginFlowModal session={props.session} id={props.id} openModal={openListAppicationModal}
+
+            <ConfirmAddRemoveLoginFlowModal session={props.session} id={props.id} openModal={openListAppicationModal}
                 onModalClose={onCloseListAllApplicaitonModal} fetchAllIdPs={props.fetchAllIdPs}
-                idpDetails={props.idpDetails} applicationDetail={applicationDetail} />
+                idpDetails={props.idpDetails} applicationDetail={applicationDetail}
+                idpIsinAuthSequence={idpIsinAuthSequence} />
 
             <IconButton icon={<Trash />}
                 style={{ marginLeft: "10px" }}

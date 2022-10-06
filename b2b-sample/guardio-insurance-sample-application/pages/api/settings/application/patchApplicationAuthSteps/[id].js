@@ -31,8 +31,6 @@ export default async function patchApplicationAuthSteps(req, res) {
     const subOrgId = body.subOrgId;
     const model = body.param;
 
-    console.log(model);
-
     const id = req.query.id;
 
     try {
