@@ -65,7 +65,7 @@ export default function IdentityProviderDetails(props) {
 			<div style={{ marginLeft: "25px", marginRight: "25px" }}>
 				<Stack direction='column' alignItems='stretch'>
 					<ButtonGroupIdentityProviderDetails session={props.session} id={props.id}
-						fetchAllIdPs={props.fetchAllIdPs} />
+						fetchAllIdPs={props.fetchAllIdPs} idpDetails={idpDetails} />
 					<IdentityProviderDetailsNav activeKeyNav={activeKeyNav} activeKeyNavSelect={activeKeyNavSelect} />
 
 					<div>

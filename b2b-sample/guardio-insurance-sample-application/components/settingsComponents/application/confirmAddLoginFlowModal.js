@@ -21,8 +21,10 @@ import { Avatar, Button, Col, Grid, Loader, Modal, Row } from 'rsuite';
 import stylesSettings from '../../../styles/Settings.module.css';
 import decodeGetApplication from '../../../util/apiDecode/settings/application/decodeGetApplication';
 import decodeListCurrentApplication from '../../../util/apiDecode/settings/application/decodeListCurrentApplication';
+import decodePatchApplicationAuthSteps from '../../../util/apiDecode/settings/application/decodePatchApplicationAuthSteps';
 import { checkIfJSONisEmpty } from '../../../util/util/common/common';
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from '../../../util/util/frontendUtil/frontendUtil';
+import { PatchApplicationAuthMethod } from '../../../util/util/applicationUtil/applicationUtil';
 
 export default function ConfirmAddLoginFlowModal(props) {
 
@@ -41,9 +43,15 @@ export default function ConfirmAddLoginFlowModal(props) {
     const onSubmit = async () => {
         allApplications.applications[0].name
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
-        decodeGetApplication(props.session,  allApplications.applications[0].id)
-            .then((response) => console.log(response))
-            .finally((response)=> setLoadingDisplay(LOADING_DISPLAY_NONE))
+        decodeGetApplication(props.session, allApplications.applications[0].id)
+            .then((response) => decodePatchApplicationAuthSteps(props.session, response,
+                allApplications.applications[0].id, props.idpDetails, PatchApplicationAuthMethod.ADD)
+                .then((response) => {
+                    props.fetchAllIdPs().finally();
+                    props.onModalClose();
+                })
+                .finally((response) => setLoadingDisplay(LOADING_DISPLAY_NONE)))
+
         // decodeEditUser(props.session, props.user.id, values.firstName, values.familyName, values.email,
         //     values.username)
         //     .then((response) => onDataSubmit(response, form))

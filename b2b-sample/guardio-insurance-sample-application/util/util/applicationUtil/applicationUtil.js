@@ -3,6 +3,7 @@ import enterpriseFederatedAuthenticators from '../../../components/data/template
 import facebookFederatedAuthenticators from '../../../components/data/templates/facebook.json';
 import googleFederatedAuthenticators from '../../../components/data/templates/google.json';
 
+
 function selectedTemplateBaesedonTemplateId(templateId) {
     switch (templateId) {
         case GOOGLE_ID:
@@ -20,6 +21,15 @@ function selectedTemplateBaesedonTemplateId(templateId) {
     }
 }
 
+/**
+ * PatchApplicationAuthMethod mentioned whether we are adding or removing the idp.
+ * @REMOVE Will remove the idp from every step
+ */
+const PatchApplicationAuthMethod= {
+    ADD : true,
+    REMOVE : false
+}
+
 module.exports = {
-    selectedTemplateBaesedonTemplateId
+    selectedTemplateBaesedonTemplateId, PatchApplicationAuthMethod
 }

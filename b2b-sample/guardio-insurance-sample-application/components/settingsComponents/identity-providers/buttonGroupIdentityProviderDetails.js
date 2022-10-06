@@ -24,7 +24,7 @@ import decodeDeleteIdentityProvider from '../../../util/apiDecode/settings/ident
 import { errorTypeDialog, successTypeDialog } from '../../util/dialog';
 import ConfirmAddLoginFlowModal from '../application/confirmAddLoginFlowModal';
 
-export default function ButtonGroupIdentityProviderDetails(props) {
+export default function fetchAllIdPs(props) {
 
     const { data: session } = useSession();
     const toaster = useToaster();
@@ -54,16 +54,12 @@ export default function ButtonGroupIdentityProviderDetails(props) {
     const onCloseListAllApplicaitonModal = () => {
         setOpenListAppicationModal(false);
     }
-    
-    // need to sed out 3 API calls for this
-    // 1. get the application id
-    // 2. to get the applicaiton details
-    // 3. to PATCH the application
 
     return (
         <Stack justifyContent='flex-end' alignItems='stretch'>
             <ConfirmAddLoginFlowModal session={props.session} id={props.id} openModal={openListAppicationModal}
-                onModalClose={onCloseListAllApplicaitonModal} />
+                onModalClose={onCloseListAllApplicaitonModal} fetchAllIdPs={props.fetchAllIdPs}
+                idpDetails={props.idpDetails} />
             <Button onClick={onAddToLoginFlowClick}>Add to Login Flow</Button>
             <IconButton icon={<Trash />}
                 style={{ marginLeft: "10px" }}
