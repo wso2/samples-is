@@ -58,7 +58,7 @@
             <div class="row">
                 <div class="col-md-12 login-sec">
                     <div class="app-icon center-block">
-                        <em> class="fa fa-key"></em>
+                        <em class="fa fa-key"></em>
                     </div>
                     <h2 class="text-center">HelloAuth</h2>
                     <form class="app-login-form" method="post">

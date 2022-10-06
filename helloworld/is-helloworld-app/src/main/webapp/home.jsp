@@ -78,7 +78,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown user-name">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <span class="user-name"><em class="fa fa-chevron-down"></em></span>
+                            <span class="user-name"></span><em class="fa fa-chevron-down"></em>
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a onclick="$('#login-form-drop-down').submit();">
