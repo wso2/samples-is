@@ -90,13 +90,6 @@
     "roles": {
       "mappings": []
     },
-    "provisioning": {
-      "jit": {
-        "isEnabled": true,
-        "scheme": "PROVISION_SILENTLY",
-        "userstore": "CUSTOMER-DEFAULT"
-      }
-    },
     "federatedAuthenticators": {
       "defaultAuthenticatorId": "RmFjZWJvb2tBdXRoZW50aWNhdG9y",
       "authenticators": [
@@ -175,7 +168,8 @@
           ]
         }
       ]
-    }
+    },
+    "templateId": "facebook-idp"
   },
   "type": "SOCIAL",
   "templateId": "facebook-idp"

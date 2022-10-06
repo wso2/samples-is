@@ -64,8 +64,16 @@ function facebookIdpTemplate(model, clientId, clientSecret) {
             "value": clientSecret
         },
         {
-            "key": "callbackUrl",
+            "key": "callBackUrl",
             "value": `${config.WSO2IS_HOST}/commonauth`
+        },
+        {
+            "key": "Scope",
+            "value": `email,public_profile`
+        },
+        {
+            "key": "UserInfoFields",
+            "value": `id,name,gender,email,first_name,last_name,age_range,link`
         }
     ];
 
