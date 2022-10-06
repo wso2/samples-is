@@ -21,15 +21,31 @@ function selectedTemplateBaesedonTemplateId(templateId) {
     }
 }
 
+function checkIfIdpIsinAuthSequence(template, idpDetails) {
+    let authenticationSequenceModel = template.authenticationSequence;
+    let idpName = idpDetails.name;
+    let check = false;
+
+    authenticationSequenceModel.steps.map((step) => {
+        step.options.map((option) => {
+            if (option.idp === idpName) {
+                check = true;
+            }
+        });
+    });
+
+    return check;
+}
+
 /**
  * PatchApplicationAuthMethod mentioned whether we are adding or removing the idp.
  * @REMOVE Will remove the idp from every step
  */
-const PatchApplicationAuthMethod= {
-    ADD : true,
-    REMOVE : false
+const PatchApplicationAuthMethod = {
+    ADD: true,
+    REMOVE: false
 }
 
 module.exports = {
-    selectedTemplateBaesedonTemplateId, PatchApplicationAuthMethod
+    selectedTemplateBaesedonTemplateId, checkIfIdpIsinAuthSequence, PatchApplicationAuthMethod
 }

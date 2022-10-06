@@ -16,49 +16,31 @@
  * under the License.
  */
 
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Avatar, Button, Col, Grid, Loader, Modal, Row } from 'rsuite';
 import stylesSettings from '../../../styles/Settings.module.css';
-import decodeGetApplication from '../../../util/apiDecode/settings/application/decodeGetApplication';
-import decodeListCurrentApplication from '../../../util/apiDecode/settings/application/decodeListCurrentApplication';
 import decodePatchApplicationAuthSteps from '../../../util/apiDecode/settings/application/decodePatchApplicationAuthSteps';
+import { PatchApplicationAuthMethod } from '../../../util/util/applicationUtil/applicationUtil';
 import { checkIfJSONisEmpty } from '../../../util/util/common/common';
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from '../../../util/util/frontendUtil/frontendUtil';
-import { PatchApplicationAuthMethod } from '../../../util/util/applicationUtil/applicationUtil';
 
 export default function ConfirmAddLoginFlowModal(props) {
-
-    const [allApplications, setAllApplications] = useState({});
     const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
 
-    const fetchData = useCallback(async () => {
-        const res = await decodeListCurrentApplication(props.session);
-        await setAllApplications(res);
-    }, [props]);
-
-    useEffect(() => {
-        fetchData();
-    }, [fetchData]);
-
     const onSubmit = async () => {
-        allApplications.applications[0].name
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
-        decodeGetApplication(props.session, allApplications.applications[0].id)
-            .then((response) => decodePatchApplicationAuthSteps(props.session, response,
-                allApplications.applications[0].id, props.idpDetails, PatchApplicationAuthMethod.ADD)
-                .then((response) => {
-                    props.fetchAllIdPs().finally();
-                    props.onModalClose();
-                })
-                .finally((response) => setLoadingDisplay(LOADING_DISPLAY_NONE)))
 
-        // decodeEditUser(props.session, props.user.id, values.firstName, values.familyName, values.email,
-        //     values.username)
-        //     .then((response) => onDataSubmit(response, form))
-        //     .finally((response) => setLoadingDisplay(LOADING_DISPLAY_NONE))
+        decodePatchApplicationAuthSteps(props.session, props.applicationDetail, props.idpDetails,
+            PatchApplicationAuthMethod.ADD)
+            .then((response) => {
+                props.fetchAllIdPs().finally();
+                props.onModalClose();
+            })
+            .finally((response) => setLoadingDisplay(LOADING_DISPLAY_NONE))
     }
 
     return (
+
         <Modal
             open={props.openModal}
             onClose={props.onModalClose}>
@@ -67,9 +49,9 @@ export default function ConfirmAddLoginFlowModal(props) {
             </Modal.Header>
             <Modal.Body>
                 {
-                    checkIfJSONisEmpty(allApplications) || allApplications.totalResults == 0
+                    checkIfJSONisEmpty(props.applicationDetail)
                         ? <EmptySelectApplicationBody />
-                        : <ApplicationListAvailable allApplications={allApplications} />
+                        : <ApplicationListAvailable applicationDetail={props.applicationDetail} />
                 }
             </Modal.Body>
             <Modal.Footer>
@@ -118,7 +100,7 @@ function ApplicationListAvailable(props) {
             <p>This will add the Idp as an authentication step to the authentication flow of the following
                 applicaiton</p>
 
-            <ApplicationListItem application={props.allApplications.applications[0]} />
+            <ApplicationListItem application={props.applicationDetail} />
 
             <p>Please confirm your action to procced</p>
 
@@ -126,7 +108,6 @@ function ApplicationListAvailable(props) {
     );
 
 }
-
 
 function ApplicationListItem(props) {
 

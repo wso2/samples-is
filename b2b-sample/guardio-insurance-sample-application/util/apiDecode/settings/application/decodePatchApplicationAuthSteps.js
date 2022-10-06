@@ -80,8 +80,9 @@ function addRemoveAuthSequence(template, idpTempleteId, idpName, method) {
     }
 }
 
-export default async function decodePatchApplicationAuthSteps(session, template, applicationId, idpDetails, method) {
+export default async function decodePatchApplicationAuthSteps(session, template, idpDetails, method) {
 
+    let applicationId = template.id;
     let idpName = idpDetails.name;
     let idpTempleteId = idpDetails.templateId;
 
