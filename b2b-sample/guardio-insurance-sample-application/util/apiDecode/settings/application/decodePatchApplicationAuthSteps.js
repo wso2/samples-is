@@ -70,7 +70,7 @@ function addRemoveAuthSequence(template, idpTempleteId, idpName, method) {
                 if (step.options[i].idp === idpName) {
                     step.options.splice(i, 1);
                     if (step.options.length === 0) {
-                        authenticationSequenceModel.steps(j, 1);
+                        authenticationSequenceModel.steps.splice(j, 1);
                     }
                     break;
                 }
