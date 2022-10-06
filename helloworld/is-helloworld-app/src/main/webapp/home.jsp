@@ -25,15 +25,17 @@
         response.sendRedirect("index.jsp");
         return;
     }
-	HttpSession currentSession = request.getSession(false);
+	HttpSession currentSession;
 	String accessToken = "";
 	String idToken = "";
-	
+
 	try {
         HelloWorldAppUtils.getToken(request, response);
         currentSession = request.getSession(false);
         if (currentSession == null || currentSession.getAttribute("authenticated") == null) {
-            currentSession.invalidate();
+            if (currentSession != null) {
+                currentSession.invalidate();
+            }
             response.sendRedirect("index.jsp");
         } else {
             accessToken = (String) currentSession.getAttribute("accessToken");
@@ -45,7 +47,7 @@
 	}
 
 %>
-<html lang="en">
+<!DOCTYPE html lang="en">
 <head>
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -76,7 +78,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown user-name">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <span class="user-name"></span><i class="fa fa-chevron-down"></i></span>
+                            <span class="user-name"><em class="fa fa-chevron-down"></em></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a onclick="$('#login-form-drop-down').submit();">
@@ -97,7 +99,7 @@
                 <div class="col-md-12">
                     <h2 class="text-center welcome-text">Welcome</h2>
                     <div class="app-icon center-block">
-                        <i class="fa fa-user"></i>
+                        <em class="fa fa-user"></em>
                     </div>
                 </div>
             </div>
@@ -143,5 +145,5 @@
     <script>
 
     </script>
-<body>
+</body>
 </html>

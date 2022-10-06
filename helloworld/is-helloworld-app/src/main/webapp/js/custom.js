@@ -15,31 +15,31 @@
  */
 
 $(document).ready(function () {
-    var id_token = $("#id-token").val();
-    var tokens = id_token.split('.');
-    var decoded_token1 = decodeToken(tokens[0]);
-    var decoded_token2 = decodeToken(tokens[1]);
+    let id_token = $("#id-token").val();
+    let tokens = id_token.split('.');
+    let decoded_token1 = decodeToken(tokens[0]);
+    let decoded_token2 = decodeToken(tokens[1]);
 
     $('.id-token').append("<span class='token1'> " + tokens[0] + "</span>.<span class='token2'> " + tokens[1] +
         "</span>.<span class='token3'>" + tokens[2] + "</span> ");
 
-    var decoded_token1_str = JSON.stringify(decoded_token1, null, 4);
-    var decoded_token2_str = JSON.stringify(decoded_token2, null, 4);
+    let decoded_token1_str = JSON.stringify(decoded_token1, null, 4);
+    let decoded_token2_str = JSON.stringify(decoded_token2, null, 4);
 
     $('.formatted-token pre').append("<span class='token1'>" + decoded_token1_str + "</span>");
     $('.formatted-token pre').append("<br><br><span class='token2'>" + decoded_token2_str + "</span>");
 
-    var payload = JSON.parse(window.atob(id_token.split(".")[1]));
+    let payload = JSON.parse(window.atob(id_token.split(".")[1]));
     $("span.user-name").text(payload.sub + ' ');
     $(".welcome-text").text('Welcome ' + payload.sub);
 
     $('.nav-toggle').click(function() {
         //get collapse content selector
-        var collapse_content_selector = $(this).attr('href');
+        let collapse_content_selector = $(this).attr('href');
 
-        var toggle_switch = $(this);
+        let toggle_switch = $(this);
         $(collapse_content_selector).toggle(function() {
-          if ($(this).css('display') == 'none') {
+          if ($(this).css('display') === 'none') {
             toggle_switch.html('Show Authentication Details');
           } else {
             toggle_switch.html('Hide Authentication Details');
@@ -49,6 +49,6 @@ $(document).ready(function () {
 });
 
 function decodeToken(token) {
-    var base64 = token.replace('-', '+').replace('_', '/');
+    let base64 = token.replace('-', '+').replace('_', '/');
     return JSON.parse(window.atob(base64));
-};
+}

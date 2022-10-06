@@ -31,7 +31,7 @@
     }
 %>
 
-<html lang="en">
+<!DOCTYPE html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -58,7 +58,7 @@
             <div class="row">
                 <div class="col-md-12 login-sec">
                     <div class="app-icon center-block">
-                        <i class="fa fa-key"></i>
+                        <em> class="fa fa-key"></em>
                     </div>
                     <h2 class="text-center">HelloAuth</h2>
                     <form class="app-login-form" method="post">
