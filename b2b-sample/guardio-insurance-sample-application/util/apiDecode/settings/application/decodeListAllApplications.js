@@ -24,6 +24,7 @@ export default async function decodeListAllApplications(session) {
         const res = await callListAllApplications(session);
         return res;
     } catch (err) {
+
         return null;
     }
 }

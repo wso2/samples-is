@@ -19,7 +19,8 @@
 import React, { useState } from 'react';
 import { Avatar, Button, Col, Grid, Loader, Modal, Row, useToaster } from 'rsuite';
 import stylesSettings from '../../../styles/Settings.module.css';
-import decodePatchApplicationAuthSteps from '../../../util/apiDecode/settings/application/decodePatchApplicationAuthSteps';
+import decodePatchApplicationAuthSteps from
+    '../../../util/apiDecode/settings/application/decodePatchApplicationAuthSteps';
 import { PatchApplicationAuthMethod } from '../../../util/util/applicationUtil/applicationUtil';
 import { checkIfJSONisEmpty } from '../../../util/util/common/common';
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from '../../../util/util/frontendUtil/frontendUtil';
@@ -96,7 +97,8 @@ export default function ConfirmAddRemoveLoginFlowModal(props) {
                 }
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={props.idpIsinAuthSequence ? onRemove : onAdd} className={stylesSettings.addUserButton} appearance="primary">
+                <Button onClick={props.idpIsinAuthSequence ? onRemove : onAdd} className={stylesSettings.addUserButton}
+                    appearance="primary">
                     Confirm
                 </Button>
                 <Button onClick={props.onModalClose} className={stylesSettings.addUserButton} appearance="ghost">
@@ -122,13 +124,12 @@ function EmptySelectApplicationBody() {
                 <p>For more details check out the following links</p>
                 <ul>
                     <li>
-                        <a href='https://wso2.com/asgardeo/docs/guides/applications/' target="_blank">
+                        <a href='https://wso2.com/asgardeo/docs/guides/applications/' target="_blank" rel="noreferrer">
                             Add application from Asgardeo console
                         </a>
                     </li>
                 </ul>
             </div>
-
 
         </div>
     )

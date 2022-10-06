@@ -21,13 +21,14 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Button, IconButton, Stack, useToaster } from 'rsuite';
 import decodeGetApplication from '../../../util/apiDecode/settings/application/decodeGetApplication';
 import decodeListCurrentApplication from '../../../util/apiDecode/settings/application/decodeListCurrentApplication';
-import decodeDeleteIdentityProvider from '../../../util/apiDecode/settings/identityProvider/decodeDeleteIdentityProvider.JS';
+import decodeDeleteIdentityProvider from
+    '../../../util/apiDecode/settings/identityProvider/decodeDeleteIdentityProvider.JS';
 import { checkIfIdpIsinAuthSequence } from '../../../util/util/applicationUtil/applicationUtil';
 import { checkIfJSONisEmpty } from '../../../util/util/common/common';
 import { errorTypeDialog, successTypeDialog } from '../../util/dialog';
 import ConfirmAddRemoveLoginFlowModal from '../application/confirmAddRemoveLoginFlowModal';
 
-export default function fetchAllIdPs(props) {
+export default function ButtonGroupIdentityProviderDetails(props) {
 
     const toaster = useToaster();
 

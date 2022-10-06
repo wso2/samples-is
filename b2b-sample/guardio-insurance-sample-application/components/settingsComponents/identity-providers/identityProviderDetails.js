@@ -19,7 +19,8 @@
 import CodeIcon from '@rsuite/icons/Code';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Avatar, Nav, Panel, Stack, useToaster } from 'rsuite';
-import decodeGetDetailedIdentityProvider from '../../../util/apiDecode/settings/identityProvider/decodeGetDetailedIdentityProvider';
+import decodeGetDetailedIdentityProvider from
+	'../../../util/apiDecode/settings/identityProvider/decodeGetDetailedIdentityProvider';
 import ButtonGroupIdentityProviderDetails from './buttonGroupIdentityProviderDetails';
 import General from './idpDetailsSections/general';
 import Raw from './idpDetailsSections/raw';
@@ -117,7 +118,8 @@ function IdentityProviderDetailsNav(props) {
 				<div style={{ flexGrow: "1" }}></div>
 
 				<Nav.Item eventKey="3"
-					onSelect={(eventKey) => props.activeKeyNavSelect(eventKey)} icon={<CodeIcon />}>Developer Tools</Nav.Item>
+					onSelect={(eventKey) => props.activeKeyNavSelect(eventKey)} icon={<CodeIcon />}>
+					Developer Tools</Nav.Item>
 			</div>
 
 		</Nav>

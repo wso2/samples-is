@@ -89,16 +89,6 @@ export default function IdentityProviders() {
 
     const onIdPSave = async (formValues, template) => {
 
-        // todo: move the formValues destructring to the decode function
-        // check how a different Idp behave on the sample applicaiton
-
-        let name = formValues.application_name.toString();
-        let clientId = formValues.client_id.toString();
-        let clientSecret = formValues.client_secret.toString();
-
-        // decodeCreateIdentityProvider(session, template, name, clientId, clientSecret)
-        //     .then((response) => onIdpCreated(response))
-
         decodeCreateIdentityProvider(session, template, formValues)
             .then((response) => onIdpCreated(response));
 
@@ -301,7 +291,7 @@ const FacebookIdentityProvider = ({ onFormValuesChange, formValues }) => {
                 <Form.Control name="client_id" type="text" autoComplete="off" />
                 <Form.HelpText tooltip>Application ID is Required</Form.HelpText>
             </Form.Group>
-            <Form.Group controlId="applicatioclient_secretn_secret">
+            <Form.Group controlId="client_secret">
                 <Form.ControlLabel>Application Secret</Form.ControlLabel>
                 <Form.Control name="client_secret" type="password" autoComplete="off" />
                 <Form.HelpText tooltip>Application Secret is Required</Form.HelpText>
