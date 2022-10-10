@@ -18,7 +18,7 @@
 
 import Image from 'next/image';
 import React from 'react';
-import profileImage from '../../../public/profile.svg';
+import profileImage from '../../../public/internal/profile.svg';
 import styles from '../../../styles/Settings.module.css';
 
 export default function UserDetails(props) {

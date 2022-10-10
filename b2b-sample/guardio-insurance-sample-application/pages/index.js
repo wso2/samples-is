@@ -19,7 +19,7 @@
 import Image from 'next/image'
 import { Button } from 'rsuite'
 import Logo from '../components/logo/logo'
-import homeImage from '../public/home.jpeg'
+import homeImage from '../public/internal/home.jpeg'
 import styles from '../styles/Home.module.css'
 
 import { useRouter } from 'next/router'

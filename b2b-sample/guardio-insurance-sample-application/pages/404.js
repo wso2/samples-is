@@ -22,7 +22,7 @@ import style from '../styles/Error.module.css';
 
 import { useRouter } from 'next/router';
 import { Button, Col, Grid, Row } from 'rsuite';
-import errorImage from '../public/error.svg';
+import errorImage from '../public/internal/error.svg';
 
 export default function Custom404() {
 
