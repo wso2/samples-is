@@ -16,20 +16,7 @@
  * under the License.
  */
 
-/** @type {import('next').NextConfig} */
-const withLess = require("next-with-less");
+@import '~rsuite/styles/index.less';
+@import 'custom-theme.less'; 
 
-const nextConfig = {
-  reactStrictMode: true,
-  swcMinify: true,
-}
-
-module.exports = nextConfig
-
-module.exports = withLess({
-  lessLoaderOptions: {
-    lessOptions: {
-      strictMath: true,
-    }
-  }
-});
+@primary-color: #0070f3;

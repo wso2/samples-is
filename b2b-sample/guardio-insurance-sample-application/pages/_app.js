@@ -20,6 +20,7 @@ import { SessionProvider } from "next-auth/react";
 import Head from "next/head";
 import "rsuite/dist/rsuite.min.css";
 import '../styles/globals.css';
+import '../styles/custom-theme.less'
 
 function MyApp({ Component, pageProps }) {
 
