@@ -17,7 +17,7 @@
  */
 
 import AppSelectIcon from '@rsuite/icons/AppSelect';
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Avatar, Button, Container, FlexboxGrid, Form, Modal, Stack, useToaster } from "rsuite";
 
 import { useSession } from "next-auth/react";
@@ -242,7 +242,7 @@ const IdPCreationModal = ({ openModal, onSave, onCancel, template }) => {
                         onFormValuesChange={setFormValues} />
                 )
             case ENTERPRISE_ID:
-                
+
                 return (
                     <EnterpriseIdentityProvider
                         formValues={formValues}
@@ -346,17 +346,17 @@ const EnterpriseIdentityProvider = ({ onFormValuesChange, formValues }) => {
             </Form.Group>
             <Form.Group controlId="authorization_endpoint_url">
                 <Form.ControlLabel>Authorization Endpoint URL</Form.ControlLabel>
-                <Form.Control name="authorization_endpoint_url" type="text" />
+                <Form.Control name="authorization_endpoint_url" type="url" />
                 <Form.HelpText tooltip>Authorization Endpoint URL is Required</Form.HelpText>
             </Form.Group>
             <Form.Group controlId="token_endpoint_url">
                 <Form.ControlLabel>Token Endpoint URL</Form.ControlLabel>
-                <Form.Control name="token_endpoint_url" type="text" />
+                <Form.Control name="token_endpoint_url" type="url" />
                 <Form.HelpText tooltip>Token Endpoint URL is Required</Form.HelpText>
             </Form.Group>
             <Form.Group controlId="certificate">
-                <Form.ControlLabel>IdP Certificate (PEM)</Form.ControlLabel>
-                <Form.Control name="certificate" type="text" />
+                <Form.ControlLabel>JWKS endpoint</Form.ControlLabel>
+                <Form.Control name="certificate" type="url" />
                 <Form.HelpText tooltip>
                     WSO2 Identity Server will use this certificate to
                     verify the signed responses from your external IdP.

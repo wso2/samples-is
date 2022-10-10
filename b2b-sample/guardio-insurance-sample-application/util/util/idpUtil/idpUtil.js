@@ -113,6 +113,7 @@ function enterpriseIdpTemplate(model, clientId, clientSecret, formValues) {
 
     let authorizationEndpointUrl = formValues.authorization_endpoint_url.toString();
     let tokenEndpointUrl = formValues.token_endpoint_url.toString();
+    let certificate = formValues.certificate.toString();
 
     model.image =
         `${config.WSO2IS_HOST}/console/libs/themes/default/assets/images/identity-providers/enterprise-idp-illustration.svg`;
@@ -139,6 +140,8 @@ function enterpriseIdpTemplate(model, clientId, clientSecret, formValues) {
             "value": `${config.WSO2IS_HOST}/commonauth`
         }
     ];
+
+    model.certificate.jwksUri = certificate;
 
     return model;
 }
