@@ -18,13 +18,13 @@
 
 import Image from 'next/image'
 import { Button } from 'rsuite'
-import Logo from '../components/logo/logo'
 import homeImage from '../public/internal/home.jpeg'
 import styles from '../styles/Home.module.css'
 
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import "rsuite/dist/rsuite.min.css"
+import LogoComponent from '../components/settingsComponents/logoComponent'
 
 export default function Home() {
 
@@ -46,8 +46,8 @@ export default function Home() {
         </div>
 
         <div className={styles.signInDiv}>
-          <Logo fontSize={72} letterSpacing={-3} wordSpacing={`normal`} />
-          <p className={styles.nameTag}>A relationship for life </p>
+          <LogoComponent imageSize='x-large' />
+
           <hr />
           <p className={styles.buttonTag}>Let&apos;s get your journey started. </p>
           <Button className={styles.signInDivButton} size="lg" appearance='primary'

@@ -16,31 +16,32 @@
  * under the License.
  */
 
-import React from 'react'
+import Image from 'next/image';
+import React from 'react';
+import logoImage from '../../public/logo.png';
 
 export default function Logo(props) {
-    
-    return (
-        <div>
-            <h1 style={{
-                fontSize: props.fontSize,
-                letterSpacing: props.letterSpacing,
-                wordSpacing: props.wordSpacing,
-                fontFamily: `'Times New Roman', Times, serif`,
-                color: `black`
-            }}>
-                <span style={{
-                    color: `#0070f3`
-                }}>
-                    Guardio
-                </span>
-                <span style={{
-                    color: `#a5a9b2`
-                }}>
-                    Insurance
-                </span>
+    console.log(props);
+    function switchImageSize(size) {
+        console.log(size);
+        switch (size) {
+            case 'small':
+                return { width: '200px' }
+            case 'medium':
+                return { width: '250px' }
+            case 'large':
+                return { width: '600px' }
+            case 'x-large':
+                return { width: '600px' }
+            default:
+                break;
+        }
+    }
 
-            </h1>
+    return (
+        <div style={switchImageSize(props.imageSize)}>
+            <Image src={logoImage}
+                alt="404 image" />
         </div>
     )
 }

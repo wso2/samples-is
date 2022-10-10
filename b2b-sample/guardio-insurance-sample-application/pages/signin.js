@@ -105,7 +105,7 @@ export default function Signin(props) {
   }
 
   const showDropDownItems = () => {
-    
+
     return props.org_list.map((org) => (
       <Dropdown.Item key={org.id} eventKey={org.id} className={styles.signinDropdownItem}
         onSelect={(event) => orgSelect(event)}>{org.name}</Dropdown.Item>
@@ -115,7 +115,7 @@ export default function Signin(props) {
   return (
     <div className={styles.signinOuter}>
       <div className={styles.signinInner}>
-        <Logo fontSize={28} letterSpacing={-2} wordSpacing={-3} />
+        <Logo imageSize='medium' />
         <div className={styles.signInTextDiv}>
           <p className={styles.signinText}>Sign in</p>
           <p className={styles.signinTag}>Select your organization to proceed</p>
