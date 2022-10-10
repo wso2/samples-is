@@ -20,15 +20,16 @@ import { SessionProvider } from "next-auth/react";
 import Head from "next/head";
 import "rsuite/dist/rsuite.min.css";
 import '../styles/globals.css';
-import '../styles/custom-theme.less'
+import '../styles/custom-theme.less';
+import config from '../config.json';
 
 function MyApp({ Component, pageProps }) {
 
 	return (
 		<SessionProvider session={pageProps?.session}>
 			<Head>
-				<title>Guardio Insurance</title>
-				<meta name="description" content="Guardio Insurance" />
+				<title>{config.CUSTOMIZATION.name}</title>
+				<meta name="description" content={config.CUSTOMIZATION.name} />
 			</Head>
 
 			<Component {...pageProps} />
