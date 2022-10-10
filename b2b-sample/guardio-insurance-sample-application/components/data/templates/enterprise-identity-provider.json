@@ -79,7 +79,7 @@
               "subProperties": []
             },
             {
-              "key": "callBackUrl",
+              "key": "callbackUrl",
               "displayName": "Callback Url",
               "description": "The WSO2 Identity Server URL to which the user needs to be redirected after completing the authentication at the identity provider. The identity provider needs to send the authorization code to this URL upon successful authentication.",
               "type": "STRING",

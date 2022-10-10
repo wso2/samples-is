@@ -37,7 +37,9 @@ export default function SettingsFormSelection(props) {
 
     const selectedValue = (key) => {
 
-        return props.federatedAuthenticators.filter((obj) => obj.key === key)[0].value;
+        let keyFederatedAuthenticator = props.federatedAuthenticators.filter((obj) => obj.key === key)[0];
+
+        return keyFederatedAuthenticator ? keyFederatedAuthenticator.value : "";
     }
 
     const copyValueToClipboard = (text) => {

@@ -135,7 +135,7 @@ function enterpriseIdpTemplate(model, clientId, clientSecret, formValues) {
             "value": tokenEndpointUrl
         },
         {
-            "key": "callBackUrl",
+            "key": "callbackUrl",
             "value": `${config.WSO2IS_HOST}/commonauth`
         }
     ];
