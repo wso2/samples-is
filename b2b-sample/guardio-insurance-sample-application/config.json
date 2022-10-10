@@ -35,5 +35,9 @@
             "name": "Car Traders",
             "colorTheme": "yellow"
         }
-    ]
+    ],
+    "CUSTOMIZATION": {
+        "name": "Guardio Insurance",
+        "tag": "A relationship for life"
+    }
 }
