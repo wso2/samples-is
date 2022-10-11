@@ -23,8 +23,8 @@ export default async function decodeMe(session) {
     try {
         var meData;
 
-        if (session.user == undefined || session.user.id == undefined || session.user.userName == undefined
-            || session.user.name == undefined || session.user.emails == undefined) {
+        if (session.user === undefined || session.user.id === undefined || session.user.userName === undefined
+            || session.user.name === undefined || session.user.emails === undefined) {
             meData = await callMe(session);
         } else {
             meData = session.user;

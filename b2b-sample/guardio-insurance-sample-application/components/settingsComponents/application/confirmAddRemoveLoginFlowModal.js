@@ -75,7 +75,6 @@ export default function ConfirmAddRemoveLoginFlowModal(props) {
     }
 
     return (
-
         <Modal
             open={props.openModal}
             onClose={props.onModalClose}>

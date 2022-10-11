@@ -32,8 +32,8 @@ export async function getServerSideProps(context) {
   const cookies = parseCookies(context.req);
   const subOrgId = cookies.orgId;
 
-  if (session == null || session == undefined || session.expires || session.error
-    || routerQuery != getRouterQuery(subOrgId)) {
+  if (session === null || session === undefined || session.expires || session.error
+    || routerQuery !== getRouterQuery(subOrgId)) {
 
     return redirect(`/o/moveOrg?o=${routerQuery}`);
   } else {

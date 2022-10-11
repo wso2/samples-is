@@ -27,7 +27,7 @@ const LOADING_DISPLAY_BLOCK = {
 
 function checkCustomization(colorTheme) {
 
-    return colorTheme == "blue" ? "rs-theme-dark" : "rs-theme-high-contrast";
+    return colorTheme === "blue" ? "rs-theme-dark" : "rs-theme-high-contrast";
 }
 
 function hideBasedOnScopes(scopes) {

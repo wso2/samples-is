@@ -50,7 +50,7 @@ export default function HomeComponent(props) {
                 </div>
             </Panel>
             {
-                me == null
+                me === null
                     ? <Panel bordered>
                         <div>Add the user attributes in created the application to display user details</div>
                     </Panel>
