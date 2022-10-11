@@ -22,16 +22,19 @@ import decodeUser from "../../util/apiUtil/decodeUser";
 export default async function decodeMe(session) {
     try {
         var meData;
-        if(session.user.id==undefined || session.user.userName==undefined || session.user.name==undefined 
-            || session.user.emails==undefined ) {
-                meData = await callMe(session);
+
+        if (session.user == undefined || session.user.id == undefined || session.user.userName == undefined
+            || session.user.name == undefined || session.user.emails == undefined) {
+            meData = await callMe(session);
+        } else {
+            meData = session.user;
         }
-        meData = session.user;
+
         const meReturn = decodeUser(meData);
 
         return meReturn;
     } catch (err) {
-        
+
         return null
     }
 }
