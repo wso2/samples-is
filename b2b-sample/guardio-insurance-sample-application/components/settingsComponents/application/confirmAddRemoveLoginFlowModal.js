@@ -125,7 +125,7 @@ function EmptySelectApplicationBody() {
                 <ul>
                     <li>
                         <a href='https://wso2.com/asgardeo/docs/guides/applications/' target="_blank" rel="noreferrer">
-                            Add application from Asgardeo console
+                            Add application from Asgardeo Console
                         </a>
                     </li>
                 </ul>
