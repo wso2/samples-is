@@ -120,7 +120,7 @@ function EmptySelectApplicationBody() {
         <div >
             <p>No Application Available</p>
             <div style={{ marginLeft: "5px" }}>
-                <div>Create an application from the WSO2 IS or Asgardeo console to add authentication.</div>
+                <div>Create an application from the WSO2 IS or Asgardeo Console app to add authentication.</div>
                 <p>For more details check out the following links</p>
                 <ul>
                     <li>
