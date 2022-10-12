@@ -19,15 +19,15 @@
 import { getSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { getOrg, getOrgIdFromQuery, setOrgId, setOrgName } from '../../util/util/orgUtil/orgUtil';
-import { orgSignin, redirect } from '../../util/util/routerUtil/routerUtil';
+import { setOrgId } from '../../util/util/orgUtil/orgUtil';
+import { redirect } from '../../util/util/routerUtil/routerUtil';
 
 
 export async function getServerSideProps(context) {
 
     const session = await getSession(context);
 
-    if (session !== null || session !== undefined) {
+    if (session) {
 
         if (session.expires || session.error) {
 
@@ -124,7 +124,7 @@ export default function MoveOrg(props) {
                 {
                     fontSize: '2em'
                 }
-            }>You will be redirected to the {props.orgName}</p>
+            }>You will be redirected to {props.orgName}</p>
         </div>
 
     )

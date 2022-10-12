@@ -16,27 +16,25 @@
  * under the License.
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { getSession } from 'next-auth/react';
 import Settings from '../../components/settingsComponents/settings';
-import { getOrg, getRouterQuery } from '../../util/util/orgUtil/orgUtil';
-import { parseCookies, redirect, orgSignin } from '../../util/util/routerUtil/routerUtil';
+import { orgSignin, redirect } from '../../util/util/routerUtil/routerUtil';
 
 export async function getServerSideProps(context) {
 
 	const routerQuery = context.query.id;
 	const session = await getSession(context);
 
-	const cookies = parseCookies(context.req);
-
-	const orgId = cookies.orgId;
-
 	if (session === null || session === undefined) {
-		orgSignin(orgId);
-		return
+
+		return {
+			props: { routerQuery },
+		};
 	} else {
-		if (routerQuery !== orgId || orgId !== session.orgId) {
+		if (routerQuery !== session.orgId) {
+
 			return redirect('/404');
 		} else {
 
@@ -71,7 +69,16 @@ export async function getServerSideProps(context) {
 
 export default function Org(props) {
 
+	useEffect(() => {
+		if (props.routerQuery) {
+			orgSignin(props.routerQuery);
+			return;
+		}
+	}, [props.orgId]);
+
 	return (
-		<Settings orgId={props.session.orgId} name={props.session.name} colorTheme={'blue'} />
+		props.session
+			? <Settings orgId={props.session.orgId} name={props.session.name} colorTheme={'blue'} />
+			: <></>
 	)
 }
