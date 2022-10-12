@@ -39,7 +39,7 @@ export default async function callSwitchOrg(subOrgId, accessToken) {
 
         return data;
     } catch (err) {
-        console.log(err);
+
         return null;
     }
 }
