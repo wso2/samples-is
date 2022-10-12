@@ -17,17 +17,51 @@
  */
 
 import Trash from '@rsuite/icons/Trash';
-import { useSession } from 'next-auth/react';
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Button, IconButton, Stack, useToaster } from 'rsuite';
-import decodeDeleteIdentityProvider 
-from '../../../util/apiDecode/settings/identityProvider/decodeDeleteIdentityProvider.JS';
-import {successTypeDialog, errorTypeDialog} from '../../util/dialog'
+import decodeGetApplication from '../../../util/apiDecode/settings/application/decodeGetApplication';
+import decodeListCurrentApplication from '../../../util/apiDecode/settings/application/decodeListCurrentApplication';
+import decodeDeleteIdentityProvider from
+    '../../../util/apiDecode/settings/identityProvider/decodeDeleteIdentityProvider';
+import { checkIfIdpIsinAuthSequence } from '../../../util/util/applicationUtil/applicationUtil';
+import { checkIfJSONisEmpty } from '../../../util/util/common/common';
+import { errorTypeDialog, successTypeDialog } from '../../util/dialog';
+import ConfirmAddRemoveLoginFlowModal from '../application/confirmAddRemoveLoginFlowModal';
 
 export default function ButtonGroupIdentityProviderDetails(props) {
 
-    const { data: session } = useSession();
     const toaster = useToaster();
+
+    const [allApplications, setAllApplications] = useState({});
+    const [applicationDetail, setApplicationDetail] = useState({});
+    const [idpIsinAuthSequence, setIdpIsinAuthSequence] = useState(null);
+    const [openListAppicationModal, setOpenListAppicationModal] = useState(false);
+
+    const fetchData = useCallback(async () => {
+        const res = await decodeListCurrentApplication(props.session);
+        await setAllApplications(res);
+    }, [props]);
+
+    const fetchApplicatioDetails = useCallback(async () => {
+        if (!checkIfJSONisEmpty(allApplications) && allApplications.totalResults !== 0) {
+            const res = await decodeGetApplication(props.session, allApplications.applications[0].id);
+            await setApplicationDetail(res);
+        }
+    }, [props, allApplications])
+
+    useEffect(() => {
+        fetchData();
+    }, [fetchData]);
+
+    useEffect(() => {
+        fetchApplicatioDetails();
+    }, [fetchApplicatioDetails]);
+
+    useEffect(() => {
+        if (!checkIfJSONisEmpty(applicationDetail)) {
+            setIdpIsinAuthSequence(checkIfIdpIsinAuthSequence(applicationDetail, props.idpDetails));
+        }
+    }, [props, applicationDetail]);
 
     const onIdpDelete = (response) => {
         if (response) {
@@ -38,16 +72,37 @@ export default function ButtonGroupIdentityProviderDetails(props) {
     }
 
     const onIdPDeleteClick = (id) => {
-        decodeDeleteIdentityProvider(session, id)
+        decodeDeleteIdentityProvider(props.session, id)
             .then((response) => onIdpDelete(response))
             .finally(() => {
                 props.fetchAllIdPs().finally();
             })
     };
 
+    const onAddToLoginFlowClick = () => {
+        setOpenListAppicationModal(true);
+    }
+
+    const onCloseListAllApplicaitonModal = () => {
+        setOpenListAppicationModal(false);
+    }
+
     return (
+
         <Stack justifyContent='flex-end' alignItems='stretch'>
-            {/* <Button>Add to Login Flow</Button> */}
+            {
+                idpIsinAuthSequence === null
+                    ? <></>
+                    : idpIsinAuthSequence
+                        ? <Button onClick={onAddToLoginFlowClick}>Remove from Login Flow</Button>
+                        : <Button onClick={onAddToLoginFlowClick}>Add to the Login Flow</Button>
+            }
+
+            <ConfirmAddRemoveLoginFlowModal session={props.session} id={props.id} openModal={openListAppicationModal}
+                onModalClose={onCloseListAllApplicaitonModal} fetchAllIdPs={props.fetchAllIdPs}
+                idpDetails={props.idpDetails} applicationDetail={applicationDetail}
+                idpIsinAuthSequence={idpIsinAuthSequence} />
+
             <IconButton icon={<Trash />}
                 style={{ marginLeft: "10px" }}
                 onClick={() => onIdPDeleteClick(props.id)}

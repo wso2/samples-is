@@ -31,7 +31,7 @@ import decodeUpdateFederatedAuthenticators from
 import { checkIfJSONisEmpty } from '../../../../util/util/common/common';
 import SettingsFormSelection from './settingsFormSection/settingsFormSelection';
 
-export default function General(props) {
+export default function Settings(props) {
 
     const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
     const [federatedAuthenticators, setFederatedAuthenticators] = useState({});
@@ -39,7 +39,6 @@ export default function General(props) {
     const toaster = useToaster();
 
     const fetchData = useCallback(async () => {
-
         const res = await decodeGetFederatedAuthenticators(
             props.session, props.idpDetails.id, props.idpDetails.federatedAuthenticators.defaultAuthenticatorId
         );
@@ -54,7 +53,7 @@ export default function General(props) {
         let errors = {}
         if (federatedAuthenticators.properties) {
             federatedAuthenticators.properties.filter((property) => {
-                if (!eval(property.key).value) {
+                if (!eval(property.key) && !eval(property.key).value) {
                     errors[property.key] = 'This field cannot be empty';
                 }
             })

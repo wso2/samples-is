@@ -34,7 +34,7 @@ export default function ViewUserComponent(props) {
 
     const fetchData = useCallback(async () => {
         const res = await decodeViewUsers(props.session);
-        setUsers(res);
+        await setUsers(res);
     }, [props.session])
 
     useEffect(() => {

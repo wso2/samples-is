@@ -4,7 +4,12 @@
   "displayOrder": 3,
   "id": "enterprise-idp",
   "idp": {
-    "certificate": {},
+    "certificate": {
+      "jwksUri": "",
+      "certificates": [
+        ""
+      ]
+    },
     "claims": {
       "provisioningClaims": [],
       "roleClaim": {
@@ -18,7 +23,7 @@
     "federatedAuthenticators": {
       "authenticators": [
         {
-          "authenticatorId": "RmFjZWJvb2tBdXRoZW50aWNhdG9y",
+          "authenticatorId": "T3BlbklEQ29ubmVjdEF1dGhlbnRpY2F0b3I",
           "isEnabled": true,
           "properties": [
             {
@@ -90,7 +95,7 @@
           ]
         }
       ],
-      "defaultAuthenticatorId": ""
+      "defaultAuthenticatorId": "T3BlbklEQ29ubmVjdEF1dGhlbnRpY2F0b3I"
     },
     "homeRealmIdentifier": "",
     "image": "",
@@ -101,7 +106,8 @@
     "roles": {
       "mappings": [],
       "outboundProvisioningRoles": []
-    }
+    },
+    "templateId": "enterprise-idp"
   },
   "image": "enterprise",
   "name": "Enterprise",

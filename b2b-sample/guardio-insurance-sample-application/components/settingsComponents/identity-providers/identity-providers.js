@@ -17,7 +17,7 @@
  */
 
 import AppSelectIcon from '@rsuite/icons/AppSelect';
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Avatar, Button, Container, FlexboxGrid, Form, Modal, Stack, useToaster } from "rsuite";
 
 import { useSession } from "next-auth/react";
@@ -43,14 +43,11 @@ export default function IdentityProviders() {
     const [selectedTemplate, setSelectedTemplate] = useState(undefined);
     const { data: session } = useSession();
 
-    const templates = () => {
-
-        return [
-            Enterprise,
-            Google,
-            Facebook,
-        ];
-    };
+    const templates = [
+        Enterprise,
+        Google,
+        Facebook,
+    ];
 
     useEffect(() => {
         fetchAllIdPs().finally();
@@ -64,7 +61,7 @@ export default function IdentityProviders() {
         } else {
             setIdpList([]);
         }
-    },[session]);
+    }, [session]);
 
     const onAddIdentityProviderClick = () => {
         setOpenAddModal(true);
@@ -92,12 +89,8 @@ export default function IdentityProviders() {
 
     const onIdPSave = async (formValues, template) => {
 
-        let name = formValues.application_name.toString();
-        let clientId = formValues.client_id.toString();
-        let clientSecret = formValues.client_secret.toString();
-
-        decodeCreateIdentityProvider(session, template, name, clientId, clientSecret)
-            .then((response) => onIdpCreated(response))
+        decodeCreateIdentityProvider(session, template, formValues)
+            .then((response) => onIdpCreated(response));
 
     };
 
@@ -249,7 +242,7 @@ const IdPCreationModal = ({ openModal, onSave, onCancel, template }) => {
                         onFormValuesChange={setFormValues} />
                 )
             case ENTERPRISE_ID:
-                
+
                 return (
                     <EnterpriseIdentityProvider
                         formValues={formValues}
@@ -293,14 +286,14 @@ const FacebookIdentityProvider = ({ onFormValuesChange, formValues }) => {
                 <Form.Control name="application_name" />
                 <Form.HelpText tooltip>Application Name is Required</Form.HelpText>
             </Form.Group>
-            <Form.Group controlId="application_id">
+            <Form.Group controlId="client_id">
                 <Form.ControlLabel>Application ID</Form.ControlLabel>
-                <Form.Control name="application_id" type="text" autoComplete="off" />
+                <Form.Control name="client_id" type="text" autoComplete="off" />
                 <Form.HelpText tooltip>Application ID is Required</Form.HelpText>
             </Form.Group>
-            <Form.Group controlId="application_secret">
+            <Form.Group controlId="client_secret">
                 <Form.ControlLabel>Application Secret</Form.ControlLabel>
-                <Form.Control name="application_secret" type="password" autoComplete="off" />
+                <Form.Control name="client_secret" type="password" autoComplete="off" />
                 <Form.HelpText tooltip>Application Secret is Required</Form.HelpText>
             </Form.Group>
         </Form>
@@ -353,17 +346,17 @@ const EnterpriseIdentityProvider = ({ onFormValuesChange, formValues }) => {
             </Form.Group>
             <Form.Group controlId="authorization_endpoint_url">
                 <Form.ControlLabel>Authorization Endpoint URL</Form.ControlLabel>
-                <Form.Control name="authorization_endpoint_url" type="text" />
+                <Form.Control name="authorization_endpoint_url" type="url" />
                 <Form.HelpText tooltip>Authorization Endpoint URL is Required</Form.HelpText>
             </Form.Group>
             <Form.Group controlId="token_endpoint_url">
                 <Form.ControlLabel>Token Endpoint URL</Form.ControlLabel>
-                <Form.Control name="token_endpoint_url" type="text" />
+                <Form.Control name="token_endpoint_url" type="url" />
                 <Form.HelpText tooltip>Token Endpoint URL is Required</Form.HelpText>
             </Form.Group>
             <Form.Group controlId="certificate">
-                <Form.ControlLabel>IdP Certificate (PEM)</Form.ControlLabel>
-                <Form.Control name="certificate" type="text" />
+                <Form.ControlLabel>JWKS endpoint</Form.ControlLabel>
+                <Form.Control name="certificate" type="url" />
                 <Form.HelpText tooltip>
                     WSO2 Identity Server will use this certificate to
                     verify the signed responses from your external IdP.

@@ -16,21 +16,15 @@
  * under the License.
  */
 
-import { setIdpTemplate } from "../../../../util/util/idpUtil/idpUtil";
-import callCreateIdentityProvider from "../../../apiCall/settings/identityProvider/callCreateIdentityProvider";
+import callListAllApplications from "../../../apiCall/settings/application/callListAllApplications";
 
-export default async function decodeCreateIdentityProvider(session, template, formValues) {
-
-    let model = JSON.parse(JSON.stringify(template.idp));
-
-    model = setIdpTemplate(model, template.templateId, formValues);
+export default async function decodeListAllApplications(session) {
 
     try {
-        const res = await callCreateIdentityProvider(session, model);
-
+        const res = await callListAllApplications(session);
         return res;
     } catch (err) {
-        
+
         return null;
     }
 }

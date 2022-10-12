@@ -16,21 +16,25 @@
  * under the License.
  */
 
-import { setIdpTemplate } from "../../../../util/util/idpUtil/idpUtil";
-import callCreateIdentityProvider from "../../../apiCall/settings/identityProvider/callCreateIdentityProvider";
+import Cookie from 'js-cookie';
+import config from '../../../../config.json';
+import { getInternalApiRequestOptionsWithParam } from '../../../util/apiUtil/getInteralApiRequestOptions';
 
-export default async function decodeCreateIdentityProvider(session, template, formValues) {
+const subOrgId = Cookie.get("orgId");
 
-    let model = JSON.parse(JSON.stringify(template.idp));
-
-    model = setIdpTemplate(model, template.templateId, formValues);
+export default async function callPatchApplicationAuthSteps(session, applicationId, model) {
 
     try {
-        const res = await callCreateIdentityProvider(session, model);
+        const res = await fetch(
+            `${config.WSO2IS_CLIENT_URL}/api/settings/application/patchApplicationAuthSteps/${applicationId}`,
+            getInternalApiRequestOptionsWithParam(session, subOrgId, model)
+        );
 
-        return res;
+        const data = await res.json();
+
+        return data;
     } catch (err) {
-        
+
         return null;
     }
 }

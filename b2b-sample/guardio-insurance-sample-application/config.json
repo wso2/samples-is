@@ -4,6 +4,7 @@
     "WSO2IS_CLIENT_URL": "http://localhost:3000",
     "WSO2IS_CLIENT_ID": "<APPLICATION CLIENT ID>",
     "WSO2IS_CLIENT_SECRET": "<APPLICATION CLIENT SECRET>",
+    "WSO2IS_APP_NAME": "<APPLICATION NAME>",
     "WSO2IS_SCOPES": [
         "openid",
         "email",

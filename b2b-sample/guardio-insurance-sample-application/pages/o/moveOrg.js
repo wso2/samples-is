@@ -30,12 +30,12 @@ export async function getServerSideProps(context) {
     const routerQuery = context.query.o;
     let orgIdFromQuery = getOrgIdFromQuery(routerQuery);
 
-    if (orgIdFromQuery == null) {
+    if (orgIdFromQuery === null) {
 
         return redirect('/404');
     }
 
-    if (session == null || session == undefined) {
+    if (session === null || session === undefined) {
         let orgName = getOrg(orgIdFromQuery).name;
 
         return {

@@ -32,8 +32,11 @@ function getCurrentDate() {
     return today;
 }
 
-function checkIfJSONisEmpty(obj){
-    
+/**
+ *  @return true if JSON is empty else false
+ */
+function checkIfJSONisEmpty(obj) {
+
     return Object.keys(obj).length === 0;
 }
 
@@ -46,6 +49,11 @@ const FACEBOOK_ID = "facebook-idp";
 const ENTERPRISE_ID = "enterprise-idp";
 const EMPTY_STRING = "";
 
+const GOOGLE_AUTHENTICATOR_ID = "GoogleOIDCAuthenticator";
+const FACEBOOK_AUTHENTICATOR_ID = "FacebookAuthenticator";
+const ENTERPRISE_AUTHENTICATOR_ID = "OpenIDConnectAuthenticator";
+
 module.exports = {
-    stringIsEmpty, getCurrentDate, copyTheTextToClipboard, checkIfJSONisEmpty, GOOGLE_ID, FACEBOOK_ID, ENTERPRISE_ID, EMPTY_STRING
+    stringIsEmpty, getCurrentDate, copyTheTextToClipboard, checkIfJSONisEmpty, GOOGLE_ID, FACEBOOK_ID,
+    ENTERPRISE_ID, EMPTY_STRING, GOOGLE_AUTHENTICATOR_ID, FACEBOOK_AUTHENTICATOR_ID, ENTERPRISE_AUTHENTICATOR_ID
 };

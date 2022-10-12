@@ -61,7 +61,7 @@ function getSwitchResponse(subOrgId, accessToken) {
 }
 
 function getSwitchEndpoint() {
-    if (config.WSO2IS_TENANT_NAME == 'carbon.super') {
+    if (config.WSO2IS_TENANT_NAME === 'carbon.super') {
         return `${config.WSO2IS_HOST}/oauth2/token`
     }
 
