@@ -18,35 +18,35 @@
 
 import { RequestMethod } from './requestMethod';
 
-function getInternalApibBody(session, subOrgId) {
+function getInternalApibBody(session) {
     const body = {
         session: session,
-        subOrgId: subOrgId
+        subOrgId: session ? session.orgId : null
     }
 
     return body;
 }
 
-function getInternalApibBodyWithParam(session, subOrgId, param){
-    var body = getInternalApibBody(session,subOrgId);
+function getInternalApibBodyWithParam(session, param){
+    var body = getInternalApibBody(session);
     body.param = param;
 
     return body;
 }
 
-function getInternalApiRequestOptions(session, subOrgId) {
+function getInternalApiRequestOptions(session) {
     const request = {
         method: RequestMethod.POST,
-        body: JSON.stringify(getInternalApibBody(session, subOrgId))
+        body: JSON.stringify(getInternalApibBody(session))
     }
 
     return request;
 }
 
-function getInternalApiRequestOptionsWithParam(session, subOrgId, param) {
+function getInternalApiRequestOptionsWithParam(session, param) {
     const request = {
         method: RequestMethod.POST,
-        body: JSON.stringify(getInternalApibBodyWithParam(session, subOrgId, param))
+        body: JSON.stringify(getInternalApibBodyWithParam(session, param))
     }
     
     return request;

@@ -45,26 +45,6 @@ export async function getServerSideProps(context) {
 
 	}
 
-	// if (session === null || session === undefined || session.expires || session.error
-	// 	|| routerQuery !== subOrgId || subOrgId !== session.orgId) {
-
-	// 	return
-	// }
-
-
-	// // ----
-
-	// if (session == null || session == undefined || session.expires || session.error
-	// 	|| routerQuery != getRouterQuery(subOrgId)) {
-
-	// 	return redirect(`/o/moveOrg?o=${routerQuery}`);
-	// } else {
-
-	// 	return {
-	// 		props: { session, orgId, orgName },
-	// 	}
-	// }
-
 }
 
 export default function Org(props) {

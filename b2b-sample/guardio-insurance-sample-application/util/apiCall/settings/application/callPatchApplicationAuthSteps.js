@@ -16,18 +16,15 @@
  * under the License.
  */
 
-import Cookie from 'js-cookie';
 import config from '../../../../config.json';
 import { getInternalApiRequestOptionsWithParam } from '../../../util/apiUtil/getInteralApiRequestOptions';
-
-const subOrgId = Cookie.get("orgId");
 
 export default async function callPatchApplicationAuthSteps(session, applicationId, model) {
 
     try {
         const res = await fetch(
             `${config.WSO2IS_CLIENT_URL}/api/settings/application/patchApplicationAuthSteps/${applicationId}`,
-            getInternalApiRequestOptionsWithParam(session, subOrgId, model)
+            getInternalApiRequestOptionsWithParam(session, model)
         );
 
         const data = await res.json();

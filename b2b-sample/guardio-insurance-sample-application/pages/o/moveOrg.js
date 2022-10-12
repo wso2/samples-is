@@ -28,7 +28,7 @@ export async function getServerSideProps(context) {
     const session = await getSession(context);
 
     if (session) {
-
+        console.log(session);
         if (session.expires || session.error) {
 
             return redirect('/500');
@@ -47,43 +47,6 @@ export async function getServerSideProps(context) {
 
         return redirect('/404');
     }
-
-    // if (session === null || session === undefined) {
-    //     orgSignin();
-    //     return;
-    //     return redirect('/404');
-    // } else {
-
-    // }
-
-    // -----
-
-
-    // let setOrg = {};
-
-    // const routerQuery = context.query.o;
-    // let orgIdFromQuery = getOrgIdFromQuery(routerQuery);
-
-    // if (orgIdFromQuery == null) {
-
-    //     return redirect('/404');
-    // }
-
-    // if (session == null || session == undefined) {
-    //     let orgName = getOrg(orgIdFromQuery).name;
-
-    //     return {
-    //         props: { routerQuery, orgIdFromQuery, orgName },
-    //     }
-    // } else {
-    //     if (session.expires || session.error) {
-
-    //         return redirect('/500');
-    //     } else {
-
-    //         return redirect('/404');
-    //     }
-    // }
 }
 
 export default function MoveOrg(props) {

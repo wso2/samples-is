@@ -22,9 +22,12 @@ import { getInternalApiRequestOptionsWithParam } from '../../util/apiUtil/getInt
 export default async function callSwitchOrg(subOrgId, accessToken) {
 
     try {
+
+
+
         const res = await fetch(
             `${config.WSO2IS_CLIENT_URL}/api/settings/switchOrg`,
-            getInternalApiRequestOptionsWithParam(null, subOrgId, accessToken)
+            getInternalApiRequestOptionsWithParam(null, accessToken)
         );
 
         if (res.status != 200) {
@@ -36,7 +39,7 @@ export default async function callSwitchOrg(subOrgId, accessToken) {
 
         return data;
     } catch (err) {
-        
+        console.log(err);
         return null;
     }
 }

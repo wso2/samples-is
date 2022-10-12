@@ -75,7 +75,7 @@ export default async function switchOrg(req, res) {
     }
 
     const body = JSON.parse(req.body);
-    const subOrgId = body.subOrgId;
+    const subOrgId = config.SAMPLE_ORGS[0].id;
     const accessToken = body.param;
 
     try {
@@ -88,7 +88,7 @@ export default async function switchOrg(req, res) {
         const data = await fetchData.json();
         res.status(200).json(data);
     } catch (err) {
-        
+        console.log(err);
         return dataNotRecievedError(res);
     }
 }
