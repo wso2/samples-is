@@ -19,7 +19,8 @@
 import NextAuth from "next-auth";
 import config from '../../../config.json';
 import decodeSwitchOrg from "../../../util/apiDecode/settings/decodeSwitchOrg";
-import { getLoggedUserFromProfile, getLoggedUserId } from '../../../util/util/routerUtil/routerUtil';
+import { getLoggedUserFromProfile, getLoggedUserId, getOrgId, getOrgName }
+  from '../../../util/util/routerUtil/routerUtil';
 
 const wso2ISProvider = (req, res) => NextAuth(req, res, {
 
@@ -57,7 +58,7 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
         token.scope = account.scope
         token.user = profile
       }
-      
+
       return token
     },
     async session({ session, token, user }) {
@@ -65,19 +66,21 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
       if (!orgSession) {
         session.error = true;
       } else if (orgSession.expiresIn <= 0) {
-        session.expires = true
+        session.expires = true;
       }
       else {
-        session.accessToken = orgSession.access_token
-        session.idToken = orgSession.id_token
-        session.scope = orgSession.scope
-        session.refreshToken = orgSession.refresh_token
-        session.expires = false
-        session.userId = getLoggedUserId(session.idToken)
-        session.user = getLoggedUserFromProfile(token.user)
+        session.accessToken = orgSession.access_token;
+        session.idToken = orgSession.id_token;
+        session.scope = orgSession.scope;
+        session.refreshToken = orgSession.refresh_token;
+        session.expires = false;
+        session.userId = getLoggedUserId(session.idToken);
+        session.user = getLoggedUserFromProfile(token.user);
+        session.orgId = getOrgId(session.idToken);
+        session.orgName = getOrgName(session.idToken);
       }
 
-      return session
+      return session;
     }
   },
   debug: true,

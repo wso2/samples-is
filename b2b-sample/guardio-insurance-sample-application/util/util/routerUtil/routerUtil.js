@@ -64,6 +64,16 @@ function getLoggedUserId(token) {
     return parseJwt(token).sub;
 }
 
+function getOrgId(token) {
+
+    return parseJwt(token).org_id;
+}
+
+function getOrgName(token) {
+
+    return parseJwt(token).org_name;
+}
+
 function getLoggedUserFromProfile(profile) {
     const user = {};
     try {
@@ -88,5 +98,6 @@ function getLoggedUserFromProfile(profile) {
 }
 
 module.exports = {
-    redirect, parseCookies, orgSignin, orgSignout, emptySession, getLoggedUserId, getLoggedUserFromProfile
+    redirect, parseCookies, orgSignin, orgSignout, emptySession, getLoggedUserId, getLoggedUserFromProfile, getOrgId,
+    getOrgName
 };
