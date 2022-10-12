@@ -16,58 +16,98 @@
  * under the License.
  */
 
-import React, { useEffect, useState } from 'react';
-
 import { getSession } from 'next-auth/react';
-import { getOrg, getOrgIdFromQuery } from '../../util/util/orgUtil/orgUtil';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import { getOrg, getOrgIdFromQuery, setOrgId, setOrgName } from '../../util/util/orgUtil/orgUtil';
 import { orgSignin, redirect } from '../../util/util/routerUtil/routerUtil';
+
 
 export async function getServerSideProps(context) {
 
     const session = await getSession(context);
-    let setOrg = {};
 
-    const routerQuery = context.query.o;
-    let orgIdFromQuery = getOrgIdFromQuery(routerQuery);
+    if (session !== null || session !== undefined) {
 
-    if (orgIdFromQuery == null) {
-
-        return redirect('/404');
-    }
-
-    if (session == null || session == undefined) {
-        let orgName = getOrg(orgIdFromQuery).name;
-
-        return {
-            props: { routerQuery, orgIdFromQuery, orgName },
-        }
-    } else {
         if (session.expires || session.error) {
 
             return redirect('/500');
         } else {
 
-            return redirect('/404');
+            const orgId = session.orgId;
+            const orgName = session.orgName;
+
+            setOrgId(orgId);
+
+            return {
+                props: { session, orgId, orgName },
+            }
         }
+    } else {
+
+        return redirect('/404');
     }
+
+    // if (session === null || session === undefined) {
+    //     orgSignin();
+    //     return;
+    //     return redirect('/404');
+    // } else {
+
+    // }
+
+    // -----
+
+
+    // let setOrg = {};
+
+    // const routerQuery = context.query.o;
+    // let orgIdFromQuery = getOrgIdFromQuery(routerQuery);
+
+    // if (orgIdFromQuery == null) {
+
+    //     return redirect('/404');
+    // }
+
+    // if (session == null || session == undefined) {
+    //     let orgName = getOrg(orgIdFromQuery).name;
+
+    //     return {
+    //         props: { routerQuery, orgIdFromQuery, orgName },
+    //     }
+    // } else {
+    //     if (session.expires || session.error) {
+
+    //         return redirect('/500');
+    //     } else {
+
+    //         return redirect('/404');
+    //     }
+    // }
 }
 
-export default function Org(props) {
+export default function MoveOrg(props) {
+
+    const router = useRouter();
 
     const moveTime = 40;
     const [redirectSeconds, setRedirectSeconds] = useState(moveTime);
 
+    const redirectToOrg = (orgId) => {
+        router.push(`/o/${orgId}`)
+    }
+
     useEffect(() => {
-        if (redirectSeconds <= 0) {
-            orgSignin(props.orgIdFromQuery);
-            
+        if (redirectSeconds <= 1) {
+            redirectToOrg(props.orgId);
+
             return;
         }
 
         setTimeout(() => {
             setRedirectSeconds((redirectSeconds) => redirectSeconds - 1);
         }, moveTime)
-    }, [redirectSeconds, props.orgIdFromQuery]);
+    }, [redirectSeconds]);
 
     return (
         <div style={
@@ -84,7 +124,7 @@ export default function Org(props) {
                 {
                     fontSize: '2em'
                 }
-            }>You will be redirected to the {props.orgName} login page</p>
+            }>You will be redirected to the {props.orgName}</p>
         </div>
 
     )

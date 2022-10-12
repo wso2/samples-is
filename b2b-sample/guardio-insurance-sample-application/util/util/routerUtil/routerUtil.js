@@ -36,10 +36,13 @@ function parseCookies(req) {
     return cookie.parse(req ? req.headers.cookie || "" : document.cookie);
 }
 
-function orgSignin(subOrgId) {
-    FrontCookie.set("orgId", subOrgId);
-
-    signIn("wso2is", { callbackUrl: `/o/${getRouterQuery(subOrgId)}` }, { orgId: subOrgId });
+function orgSignin(orgId) {
+    if (orgId) {
+        FrontCookie.set("orgId", orgId);
+        signIn("wso2is", { callbackUrl: `/o/moveOrg` }, { orgId: orgId });
+    } else {
+        signIn("wso2is", { callbackUrl: `/o/moveOrg` });
+    }
 }
 
 function orgSignout() {

@@ -21,9 +21,8 @@ import React from 'react';
 import logoImage from '../../public/logo.png';
 
 export default function Logo(props) {
-    console.log(props);
+
     function switchImageSize(size) {
-        console.log(size);
         switch (size) {
             case 'small':
                 return { width: '200px' }

@@ -26,19 +26,14 @@ import "rsuite/dist/rsuite.min.css";
 import Logo from '../components/logo/logo';
 import { stringIsEmpty } from '../util/util/common/common';
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from '../util/util/frontendUtil/frontendUtil';
-import { orgSignin } from '../util/util/routerUtil/routerUtil';
+import { orgSignin, redirect } from '../util/util/routerUtil/routerUtil';
 
 export async function getServerSideProps(context) {
   const session = await getSession(context)
 
   if (session) {
 
-    return {
-      redirect: {
-        destination: '/o',
-        permanent: false,
-      },
-    }
+    return redirect('/o/moveOrg');
   }
 
   const org_list = config.SAMPLE_ORGS;

@@ -21,35 +21,57 @@ import React from 'react';
 import { getSession } from 'next-auth/react';
 import Settings from '../../components/settingsComponents/settings';
 import { getOrg, getRouterQuery } from '../../util/util/orgUtil/orgUtil';
-import { parseCookies, redirect } from '../../util/util/routerUtil/routerUtil';
+import { parseCookies, redirect, orgSignin } from '../../util/util/routerUtil/routerUtil';
 
 export async function getServerSideProps(context) {
 
-  const routerQuery = context.query.id;
-  const session = await getSession(context);
-  let setOrg = {};
+	const routerQuery = context.query.id;
+	const session = await getSession(context);
 
-  const cookies = parseCookies(context.req);
-  const subOrgId = cookies.orgId;
+	const cookies = parseCookies(context.req);
 
-  if (session == null || session == undefined || session.expires || session.error
-    || routerQuery != getRouterQuery(subOrgId)) {
+	const orgId = cookies.orgId;
 
-    return redirect(`/o/moveOrg?o=${routerQuery}`);
-  } else {
-    setOrg = getOrg(subOrgId);
+	if (session === null || session === undefined) {
+		orgSignin(orgId);
+		return
+	} else {
+		if (routerQuery !== orgId || orgId !== session.orgId) {
+			return redirect('/404');
+		} else {
 
-    return {
-      props: { session, setOrg },
-    }
-  }
+			return {
+				props: { session },
+			}
+		}
+
+	}
+
+	// if (session === null || session === undefined || session.expires || session.error
+	// 	|| routerQuery !== subOrgId || subOrgId !== session.orgId) {
+
+	// 	return
+	// }
+
+
+	// // ----
+
+	// if (session == null || session == undefined || session.expires || session.error
+	// 	|| routerQuery != getRouterQuery(subOrgId)) {
+
+	// 	return redirect(`/o/moveOrg?o=${routerQuery}`);
+	// } else {
+
+	// 	return {
+	// 		props: { session, orgId, orgName },
+	// 	}
+	// }
 
 }
 
 export default function Org(props) {
 
-  return (
-    <Settings orgId={props.setOrg.id} routerQuery={props.setOrg.routerQuery} name={props.setOrg.name}
-      colorTheme={props.setOrg.colorTheme} />
-  )
+	return (
+		<Settings orgId={props.session.orgId} name={props.session.name} colorTheme={'blue'} />
+	)
 }
