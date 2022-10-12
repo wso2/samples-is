@@ -247,99 +247,6 @@ case ${clean} in
 return 0;
 }
 
-create_workflow() {
-is_host=$1
-is_port=$2
-server_host=$3
-server_port=$4
-
-# Add users and the relevant roles in wso2-is.
-add_users_workflow admin admin 07 ${is_host} ${is_port}
-
-# Create the workflow definition
-add_workflow_definition 07 YWRtaW46YWRtaW4= ${is_host} ${is_port}
-
-# Create a workflow association
-add_workflow_association 07 YWRtaW46YWRtaW4= ${is_host} ${is_port}
-
-# Update resident IDP
-update_idp_selfsignup urn:updateResidentIdP https://${is_host}:${is_port}/services/IdentityProviderMgtService.IdentityProviderMgtServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4= 06 selfsignup ${is_host} ${is_port}
-
-# Add a service provider in wso2-is
-add_service_provider dispatch Common urn:createApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4= ${is_host} ${is_port}
-
-# Configure OIDC for the Service Providers
-configure_oidc dispatch 03 urn:registerOAuthApplicationData https://${is_host}:${is_port}/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4= ${is_host} ${is_port} ${server_host} ${server_port}
-
-create_updateapp_oidc dispatch YWRtaW46YWRtaW4= ZGlzcGF0Y2g= ZGlzcGF0Y2gxMjM0 ${is_host} ${is_port}
-update_application_oidc dispatch 03 urn:updateApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4= ${is_host} ${is_port}
-
-echo
-echo
-echo "--------------------------------------------------------------------------------------"
-echo "|                                                                                    |"
-echo "|    The workflow feature enables you to add more control and                        |"
-echo "|    constraints to the tasks executed within it.                                    |"
-echo "|                                                                                    |"
-echo "|    Here we are going to try out a workflow which defines an                        |"
-echo "|    approval process for new user additions.                                        |"
-echo "|                                                                                    |"
-echo "|    Use case: Senior manager and junior manager has to                              |"
-echo "|    approve each new user addition.                                                 |"
-echo "|                                                                                    |"
-echo "|    To tryout the workflow please log into the sample                               |"
-echo "|    app below.                                                                      |"
-echo "|    *** Please press ctrl button and click on the link ***                          |"
-echo "|                                                                                    |"
-echo "|    pickup-dispatch - http://${server_host}:${server_port}/pickup-dispatch/         |"
-echo "|                                                                                    |"
-echo "|    Click on the ** Create Account ** button in the login page                      |"
-echo "|    Fill in the user details form and create an account.                            |"
-echo "|                                                                                    |"
-echo "|    The new user you created will be disabled.                                      |"
-echo "|    To enable the user please log into the WSO2 User Portal                         |"
-echo "|    using the following credentials and approve the pending                         |"
-echo "|    workflow requests.                                                              |"
-echo "|                                                                                    |"
-echo "|    WSO2 User Portal: https://${is_host}:${is_port}/user-portal/                    |"
-echo "|                                                                                    |"
-echo "|    First, login with Junior Manager                                                |"
-echo "|      Username: alex                                                                |"
-echo "|      Password: alex123                                                             |"
-echo "|                                                                                    |"
-echo "|    Secondly, login with Senior Manager                                             |"
-echo "|      Username: cameron                                                             |"
-echo "|      Password: cameron123                                                          |"
-echo "|                                                                                    |"
-echo "|    Now you can use your new user credentials to log into                           |"
-echo "|    the app pickup-dispatch:                                                        |"
-echo "|        http://${server_host}:${server_port}/pickup-dispatch/                       |"
-echo "|                                                                                    |"
-echo "--------------------------------------------------------------------------------------"
-echo
-
-echo "If you have finished trying out the workflow, you can clean the process now."
-echo "Do you want to clean up the setup?"
-echo
-echo "Press y - YES"
-echo "Press n - NO"
-echo
-read input
-
-case ${input} in
-        [Yy]* )
-        delete_users_workflow ${is_host} ${is_port}
-        delete_workflow_definition 07 YWRtaW46YWRtaW4= ${is_host} ${is_port}
-        delete_workflow_association 07 YWRtaW46YWRtaW4= ${is_host} ${is_port}
-        delete_sp dispatch Common urn:deleteApplication https://${is_host}:${is_port}/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ YWRtaW46YWRtaW4=
-        ;;
-        [Nn]* ) exit;;
-         * ) echo "Please answer yes or no.";;
-         esac
-
-return 0;
-}
-
 update_idp_selfsignup() {
 
 soap_action=$1
@@ -1082,294 +989,6 @@ getProperty() {
    echo $PROP_VALUE
 }
 
-add_users_workflow() {
-
-IS_name=$1
-IS_pass=$2
-scenario=$3
-is_host=$4
-is_port=$5
-request_data1="${SCENARIO_DIR}/${scenario}/add-role-senior.xml"
-request_data2="${SCENARIO_DIR}/${scenario}/add-role-junior.xml"
-
-if [ ! -d "${SCENARIO_DIR}/${scenario}" ]
-  then
-    echo "${SCENARIO_DIR}/${scenario} Directory does not exist."
-    return -1
-  fi
-
-  if [ ! -f "$request_data1" ]
-   then
-    echo "$request_data1 File does not exist."
-    return -1
-  fi
-
-  if [ ! -f "$request_data2" ]
-   then
-    echo "$request_data2 File does not exist."
-    return -1
-  fi
-
-echo
-echo "Creating a user named cameron..."
-
-# The following command can be used to create a user.
-curl -s -k --user ${IS_name}:${IS_pass} --data '{"schemas":[],"name":{"familyName":"Smith","givenName":"Cameron"},"userName":"cameron","password":"cameron123","emails":"cameron@gmail.com","addresses":{"country":"Canada"}}' --header "Content-Type:application/json" -o /dev/null https://${is_host}:${is_port}/wso2/scim/Users
-res=$?
- if test "${res}" != "0"; then
-  echo "!! Problem occurred while creating user cameron. !!"
-  echo
-  return -1
- fi
-echo "** The user cameron was successfully created. **"
-echo
-
-echo "Creating a user named alex..."
-
-# The following command can be used to create a user.
-curl -s -k --user ${IS_name}:${IS_pass} --data '{"schemas":[],"name":{"familyName":"Miller","givenName":"Alex"},"userName":"alex","password":"alex123","emails":"alex@gmail.com","addresses":{"country":"Canada"}}' --header "Content-Type:application/json" -o /dev/null https://${is_host}:${is_port}/wso2/scim/Users
-res=$?
- if test "${res}" != "0"; then
-  echo "!! Problem occurred while creating user alex. !!"
-  echo
-  delete_user ${is_host} ${is_port}
-  echo
-  return -1
- fi
-echo "** The user alex was successfully created. **"
-echo
-
-echo "Creating a role named senior_manager..."
-
-#The following command will add a role to the user.
-curl -s -k --user ${IS_name}:${IS_pass} -d @$request_data1 -H "Content-Type: text/xml" -H "SOAPAction: urn:addRole" -o /dev/null https://${is_host}:${is_port}/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
-res=$?
- if test "${res}" != "0"; then
-  echo "!! Problem occurred while creating role senior_manager. !!"
-  echo
-  delete_user ${is_host} ${is_port}
-  echo
-  return -1
- fi
-echo "** The role senior_manager was successfully created. **"
-echo
-
-echo "Creating a role named junior_manager..."
-
-#The following command will add a role to the user.
-curl -s -k --user ${IS_name}:${IS_pass} -d @$request_data2 -H "Content-Type: text/xml" -H "SOAPAction: urn:addRole" -o /dev/null https://${is_host}:${is_port}/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
-res=$?
- if test "${res}" != "0"; then
-  echo "!! Problem occurred while creating role junior_manager. !!"
-  echo
-  delete_user ${is_host} ${is_port}
-  echo
-  return -1
- fi
-echo "** The role junior_manager was successfully created. **"
-echo
-
-return 0;
-}
-
-delete_users_workflow() {
-
-is_host=$1
-is_port=$2
-request_data1="${SCENARIO_DIR}/Common/delete-cameron.xml"
-request_data2="${SCENARIO_DIR}/Common/delete-alex.xml"
-request_data3="${SCENARIO_DIR}/07/delete-role-senior.xml"
-request_data4="${SCENARIO_DIR}/07/delete-role-junior.xml"
-
-echo
-echo "Deleting the user named cameron..."
-
-# Send the SOAP request to delete the user.
-curl -s -k -d @$request_data1 -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o /dev/null https://${is_host}:${is_port}/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
-res=$?
- if test "${res}" != "0"; then
-  echo "!! Problem occurred while deleting the user cameron. !!"
-  echo
-  return -1
- fi
-echo "** The user cameron was successfully deleted. **"
-echo
-echo "Deleting the user named alex..."
-
-# Send the SOAP request to delete the user.
-curl -s -k -d @$request_data2 -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteUser" -o /dev/null https://${is_host}:${is_port}/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
-res=$?
- if test "${res}" != "0"; then
-  echo "!! Problem occurred while deleting the user alex. !!"
-  echo
-  return -1
- fi
-echo "** The user alex was successfully deleted. **"
-echo
-
-echo "Deleting the role named senior-manager"
-# Send the SOAP request to delete the role.
-curl -s -k -d @$request_data3 -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteRole" -o /dev/null https://${is_host}:${is_port}/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
-res=$?
- if test "${res}" != "0"; then
-  echo "!! Problem occurred while deleting the role senior-manager. !!"
-  echo
-  return -1
- fi
-echo "** The role senior-manager was successfully deleted. **"
-echo
-echo "Deleting the role named junior-manager"
-# Send the SOAP request to delete the role.
-curl -s -k -d @$request_data4 -H "Authorization: Basic YWRtaW46YWRtaW4=" -H "Content-Type: text/xml" -H "SOAPAction: urn:deleteRole" -o /dev/null https://${is_host}:${is_port}/services/RemoteUserStoreManagerService.RemoteUserStoreManagerServiceHttpsSoap11Endpoint/
-res=$?
- if test "${res}" != "0"; then
-  echo "!! Problem occurred while deleting the role junior-manager. !!"
-  echo
-  return -1
- fi
-echo "** The role junior-manager was successfully deleted. **"
-echo
-
-return 0;
-}
-
-add_workflow_definition() {
-
-scenario=$1
-auth=$2
-is_host=$3
-is_port=$4
-request_data="${SCENARIO_DIR}/${scenario}/add-definition.xml"
-
-if [ ! -d "${SCENARIO_DIR}/${scenario}" ]
-  then
-    echo "${SCENARIO_DIR}/${scenario} Directory does not exists."
-    return -1
-  fi
-
-  if [ ! -f "$request_data" ]
-   then
-    echo "$request_data File does not exist."
-    return -1
-  fi
-
-curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type: text/xml" -H "SOAPAction: urn:addWorkflow" -o /dev/null https://${is_host}:${is_port}/services/WorkflowAdminService.WorkflowAdminServiceHttpsSoap11Endpoint/
-res=$?
- if test "${res}" != "0"; then
-  echo "!! Problem occurred while creating the workflow definition. !!"
-  echo
-  delete_users_workflow ${is_host} ${is_port}
-  echo
-  return -1
- fi
-echo "** The workflow definition was successfully created. **"
-echo
-
-return 0;
-}
-
-delete_workflow_definition() {
-
-scenario=$1
-auth=$2
-is_host=$3
-is_port=$4
-request_data="${SCENARIO_DIR}/${scenario}/delete-definition.xml"
-
-if [ ! -d "${SCENARIO_DIR}/${scenario}" ]
-  then
-    echo "${SCENARIO_DIR}/${scenario} Directory does not exist."
-    return -1
-  fi
-
-  if [ ! -f "$request_data" ]
-   then
-    echo "$request_data File does not exist."
-    return -1
-  fi
-
-curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type: text/xml" -H "SOAPAction: urn:removeWorkflow" -o /dev/null https://${is_host}:${is_port}/services/WorkflowAdminService.WorkflowAdminServiceHttpsSoap11Endpoint/
-res=$?
- if test "${res}" != "0"; then
-  echo "!! Problem occurred while deleting the workflow definition. !!"
-  echo
-  return -1
- fi
-echo "** The workflow definition was successfully deleted. **"
-echo
-
-return 0;
-}
-
-add_workflow_association() {
-
-scenario=$1
-auth=$2
-is_host=$3
-is_port=$4
-request_data="${SCENARIO_DIR}/${scenario}/add-association.xml"
-
-if [ ! -d "${SCENARIO_DIR}/${scenario}" ]
-  then
-    echo "${SCENARIO_DIR}/${scenario} Directory does not exist."
-    return -1
-  fi
-
-  if [ ! -f "$request_data" ]
-   then
-    echo "$request_data File does not exist."
-    return -1
-  fi
-
-curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type: text/xml" -H "SOAPAction: urn:addAssociation" -o /dev/null https://${is_host}:${is_port}/services/WorkflowAdminService.WorkflowAdminServiceHttpsSoap11Endpoint/
-res=$?
- if test "${res}" != "0"; then
-  echo "!! Problem occurred while creating the workflow association. !!"
-  echo
-  delete_users_workflow ${is_host} ${is_port}
-  delete_workflow_definition 07 YWRtaW46YWRtaW4= ${is_host} ${is_port}
-  echo
-  return -1
- fi
-echo "** The workflow association was successfully created. **"
-echo
-
-return 0;
-}
-
-delete_workflow_association() {
-
-scenario=$1
-auth=$2
-is_host=$3
-is_port=$4
-request_data="${SCENARIO_DIR}/${scenario}/delete-association.xml"
-
-if [ ! -d "${SCENARIO_DIR}/${scenario}" ]
-  then
-    echo "${SCENARIO_DIR}/${scenario} Directory does not exist."
-    return -1
-  fi
-
-  if [ ! -f "$request_data" ]
-   then
-    echo "$request_data File does not exist."
-    return -1
-  fi
-
-curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type: text/xml" -H "SOAPAction: urn:removeAssociation" -o /dev/null https://${is_host}:${is_port}/services/WorkflowAdminService.WorkflowAdminServiceHttpsSoap11Endpoint/
-res=$?
- if test "${res}" != "0"; then
-  echo "!! Problem occurred while deleting the workflow association. !!"
-  echo
-  return -1
- fi
-echo "** The workflow association was successfully deleted. **"
-echo
-
-return 0;
-}
-
 add_user() {
 
 IS_name=$1
@@ -1794,7 +1413,7 @@ server_port=$6
 
 scenario=02
 request_data="${SCENARIO_DIR}/${scenario}/get-app-${sp_name}.xml"
- 
+
  if [ ! -f "$request_data" ]
   then
     echo "$request_data File does not exist."
@@ -1822,10 +1441,10 @@ res=$?
 app_id=`java -jar ${SCENARIO_DIR}/${scenario}/QSG-*.jar`
 
  if [ -f "${SCENARIO_DIR}/${scenario}/update-app-${sp_name}.xml" ]
-  then 
+  then
    rm -r ${SCENARIO_DIR}/${scenario}/update-app-${sp_name}.xml
  fi
-   
+
 touch ${SCENARIO_DIR}/${scenario}/update-app-${sp_name}.xml
 echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelope/"\" xmlns:xsd="\"http://org.apache.axis2/xsd"\" xmlns:xsd1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">
     <soapenv:Header/>
@@ -1939,7 +1558,7 @@ is_port=$6
 
 scenario=03
 request_data="${SCENARIO_DIR}/${scenario}/get-app-${sp_name}.xml"
- 
+
  if [ ! -f "$request_data" ]
   then
     echo "$request_data File does not exists."
@@ -1968,10 +1587,10 @@ res=$?
 app_id=`java -jar ${SCENARIO_DIR}/${scenario}/QSG-*.jar`
 
  if [ -f "${SCENARIO_DIR}/${scenario}/update-app-${sp_name}.xml" ]
-  then 
+  then
    rm -r ${SCENARIO_DIR}/${scenario}/update-app-${sp_name}.xml
  fi
-   
+
 touch ${SCENARIO_DIR}/${scenario}/update-app-${sp_name}.xml
 echo "<soapenv:Envelope xmlns:soapenv="\"http://schemas.xmlsoap.org/soap/envelope/"\" xmlns:xsd="\"http://org.apache.axis2/xsd"\" xmlns:xsd1="\"http://model.common.application.identity.carbon.wso2.org/xsd"\">
    <soapenv:Header/>
@@ -2220,7 +1839,7 @@ request_data="${SCENARIO_DIR}/${scenario}/update-app-${sp_name}.xml"
 echo
 echo "Updating application ${sp_name}..."
 
-# Send the SOAP request to Update the Application. 
+# Send the SOAP request to Update the Application.
 curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type: text/xml" -H "SOAPAction: ${soap_action}" -o /dev/null $endpoint
 res=$?
  if test "${res}" != "0"; then
@@ -2260,7 +1879,7 @@ request_data="${SCENARIO_DIR}/${scenario}/update-app-${sp_name}.xml"
    return -1
  fi
 
-# Send the SOAP request to Update the Application. 
+# Send the SOAP request to Update the Application.
 curl -s -k -d @$request_data -H "Authorization: Basic ${auth}" -H "Content-Type: text/xml" -H "SOAPAction: ${soap_action}" -o /dev/null $endpoint
 res=$?
  if test "${res}" != "0"; then
@@ -2400,7 +2019,6 @@ start_the_flow() {
     echo "|  Scenario 3 - Configuring Multi-Factor Authentication                     |"
     echo "|  Scenario 4 - Configuring Google as a Federated Authenticator             |"
     echo "|  Scenario 5 - Configuring Self-Signup                                     |"
-    echo "|  Scenario 6 - Creating a workflow                                         |"
     echo "-----------------------------------------------------------------------------"
     echo "Enter the scenario number you selected."
 
@@ -2440,10 +2058,6 @@ start_the_flow() {
 
         5)
         configure_self_signup ${IS_DOMAIN} ${IS_PORT} ${SERVER_DOMAIN} ${SERVER_PORT}
-        ;;
-
-        6)
-        create_workflow ${IS_DOMAIN} ${IS_PORT} ${SERVER_DOMAIN} ${SERVER_PORT}
         ;;
 
         *)
