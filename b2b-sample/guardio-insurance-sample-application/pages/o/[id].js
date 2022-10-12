@@ -54,7 +54,7 @@ export default function Org(props) {
 			orgSignin(props.routerQuery);
 			return;
 		}
-	}, [props.orgId]);
+	}, [props.routerQuery]);
 
 	return (
 		props.session

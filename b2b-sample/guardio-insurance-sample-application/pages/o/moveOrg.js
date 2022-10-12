@@ -18,10 +18,9 @@
 
 import { getSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { setOrgId } from '../../util/util/orgUtil/orgUtil';
 import { redirect } from '../../util/util/routerUtil/routerUtil';
-
 
 export async function getServerSideProps(context) {
 
@@ -56,13 +55,13 @@ export default function MoveOrg(props) {
     const moveTime = 40;
     const [redirectSeconds, setRedirectSeconds] = useState(moveTime);
 
-    const redirectToOrg = (orgId) => {
-        router.push(`/o/${orgId}`)
-    }
+    const redirectToOrg = useCallback(() => {
+        router.push(`/o/${props.orgId}`)
+    },[props.orgId, router])
 
     useEffect(() => {
         if (redirectSeconds <= 1) {
-            redirectToOrg(props.orgId);
+            redirectToOrg();
 
             return;
         }
@@ -70,7 +69,7 @@ export default function MoveOrg(props) {
         setTimeout(() => {
             setRedirectSeconds((redirectSeconds) => redirectSeconds - 1);
         }, moveTime)
-    }, [redirectSeconds]);
+    }, [redirectSeconds, props.orgId, redirectToOrg]);
 
     return (
         <div style={
