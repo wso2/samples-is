@@ -58,7 +58,7 @@ export default function Org(props) {
 
 	return (
 		props.session
-			? <Settings orgId={props.session.orgId} name={props.session.name} colorTheme={'blue'} />
+			? <Settings orgId={props.session.orgId} name={props.session.orgName} colorTheme={'blue'} />
 			: <></>
 	)
 }
