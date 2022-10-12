@@ -28,7 +28,7 @@ export async function getServerSideProps(context) {
     const session = await getSession(context);
 
     if (session) {
-        console.log(session);
+
         if (session.expires || session.error) {
 
             return redirect('/500');
