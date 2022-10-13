@@ -62,7 +62,7 @@ export default function Signin(props) {
     <div className={styles.signinOuter}>
       <div className={styles.signinInner}>
         <LogoComponent imageSize='medium' />
-        <Loader size='lg' content='Redirecting to the organization. ' vertical/>
+        <Loader size='lg' content='Redirecting to the organization login. ' vertical/>
       </div>
     </div>
   )
