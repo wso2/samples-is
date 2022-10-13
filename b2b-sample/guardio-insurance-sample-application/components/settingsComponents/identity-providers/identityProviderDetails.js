@@ -119,7 +119,8 @@ function IdentityProviderDetailsNav(props) {
 
 				<Nav.Item eventKey="3"
 					onSelect={(eventKey) => props.activeKeyNavSelect(eventKey)} icon={<CodeIcon />}>
-					Developer Tools</Nav.Item>
+					Developer Tools
+			</Nav.Item>
 			</div>
 
 		</Nav>
