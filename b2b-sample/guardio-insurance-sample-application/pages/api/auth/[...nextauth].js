@@ -62,7 +62,7 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
       return token
     },
     async session({ session, token, user }) {
-      const orgSession = await decodeSwitchOrg(req, token);
+      const orgSession = await decodeSwitchOrg(token);
       if (!orgSession) {
         session.error = true;
       } else if (orgSession.expiresIn <= 0) {

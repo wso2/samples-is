@@ -27,7 +27,7 @@ function getInternalApibBody(session) {
     return body;
 }
 
-function getInternalApibBodyWithParam(session, param){
+function getInternalApibBodyWithParam(session, param) {
     var body = getInternalApibBody(session);
     body.param = param;
 
@@ -48,8 +48,29 @@ function getInternalApiRequestOptionsWithParam(session, param) {
         method: RequestMethod.POST,
         body: JSON.stringify(getInternalApibBodyWithParam(session, param))
     }
-    
+
     return request;
 }
 
-module.exports = { getInternalApiRequestOptions,getInternalApiRequestOptionsWithParam }
+function getInternalApibBodyForSwitchCall(subOrgId, param) {
+    const body = {
+        subOrgId: subOrgId,
+        param: param
+    }
+
+    return body;
+}
+
+function geetInternalApiRequestOptionsForSwitchCallWithParam(subOrgId, param) {
+    const request = {
+        method: RequestMethod.POST,
+        body: JSON.stringify(getInternalApibBodyForSwitchCall(subOrgId, param))
+    }
+
+    return request;
+}
+
+module.exports = {
+    getInternalApiRequestOptions, getInternalApiRequestOptionsWithParam,
+    geetInternalApiRequestOptionsForSwitchCallWithParam
+}

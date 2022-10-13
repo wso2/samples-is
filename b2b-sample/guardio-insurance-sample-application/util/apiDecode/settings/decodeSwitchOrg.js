@@ -18,17 +18,23 @@
 
 import callSwitchOrg from "../../apiCall/settings/callSwitchOrg";
 import { parseCookies } from '../../util/routerUtil/routerUtil';
+import config from '../../../config.json';
 
-function getSubOrgId(request) {
-    const cookies = parseCookies(request);
-    const subOrgId = cookies.orgId;
+function getSubOrgId(token) {
+    
+    try {
 
-    return subOrgId;
+        return config.SAMPLE_ORGS[0].id;
+    } catch (error) {
+
+        return token.user.org_id;
+    }
+
 }
 
-export default async function decodeSwitchOrg(request, token) {
+export default async function decodeSwitchOrg(token) {
 
-    const subOrgId = getSubOrgId(request);
+    const subOrgId = getSubOrgId(token);
     const accessToken = token.accessToken;
 
     try {
@@ -36,7 +42,7 @@ export default async function decodeSwitchOrg(request, token) {
 
         return orgSession;
     } catch (err) {
-        
+
         return null;
     }
 }

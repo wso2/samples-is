@@ -75,7 +75,7 @@ export default async function switchOrg(req, res) {
     }
 
     const body = JSON.parse(req.body);
-    const subOrgId = config.SAMPLE_ORGS[0].id;
+    const subOrgId = body.subOrgId;
     const accessToken = body.param;
 
     try {
