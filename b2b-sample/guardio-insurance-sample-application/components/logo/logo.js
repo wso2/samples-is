@@ -24,14 +24,14 @@ export default function Logo(props) {
     
     function switchImageSize(size) {
         switch (size) {
-            case 'small':
-                return { width: '200px' }
-            case 'medium':
-                return { width: '250px' }
-            case 'large':
-                return { width: '600px' }
-            case 'x-large':
-                return { width: '600px' }
+            case "small":
+                return { width: "200px" }
+            case "medium":
+                return { width: "250px" }
+            case "large":
+                return { width: "600px" }
+            case "x-large":
+                return { width: "600px" }
             default:
                 break;
         }
