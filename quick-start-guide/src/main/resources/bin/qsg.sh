@@ -391,13 +391,6 @@ echo " <soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelop
                         <xsd:value>localhost</xsd:value>
                     </xsd:properties>
                 </xsd:federatedAuthenticatorConfigs>
-                <xsd:federatedAuthenticatorConfigs xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
-                    <xsd:name>openidconnect</xsd:name>
-                    <xsd:properties>
-                        <xsd:name>IdPEntityId</xsd:name>
-                        <xsd:value>https://${is_host}:${is_port}/oauth2/token</xsd:value>
-                    </xsd:properties>
-                </xsd:federatedAuthenticatorConfigs>
                 <!--Optional:-->
                 <xsd:homeRealmId>localhost</xsd:homeRealmId>
                 <!--Optional:-->
@@ -623,13 +616,6 @@ echo " <soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelop
                     <xsd:properties>
                         <xsd:name>IdPEntityId</xsd:name>
                         <xsd:value>localhost</xsd:value>
-                    </xsd:properties>
-                </xsd:federatedAuthenticatorConfigs>
-                <xsd:federatedAuthenticatorConfigs xmlns=\"http://model.common.application.identity.carbon.wso2.org/xsd\">
-                    <xsd:name>openidconnect</xsd:name>
-                    <xsd:properties>
-                        <xsd:name>IdPEntityId</xsd:name>
-                        <xsd:value>https://${is_host}:${is_port}/oauth2/token</xsd:value>
                     </xsd:properties>
                 </xsd:federatedAuthenticatorConfigs>
                 <!--Optional:-->
