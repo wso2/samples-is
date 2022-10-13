@@ -75,7 +75,6 @@ export default function ConfirmAddRemoveLoginFlowModal(props) {
     }
 
     return (
-
         <Modal
             open={props.openModal}
             onClose={props.onModalClose}>
@@ -118,14 +117,14 @@ function EmptySelectApplicationBody() {
 
     return (
         <div >
-            <p>No Applications Available</p>
+            <p>No Application Available</p>
             <div style={{ marginLeft: "5px" }}>
-                <div>Create an application from the WSO2 IS or Asgardeo console to add authentication.</div>
+                <div>Create an application from the WSO2 IS or Asgardeo Console app to add authentication.</div>
                 <p>For more details check out the following links</p>
                 <ul>
                     <li>
                         <a href='https://wso2.com/asgardeo/docs/guides/applications/' target="_blank" rel="noreferrer">
-                            Add application from Asgardeo console
+                            Add application from Asgardeo Console
                         </a>
                     </li>
                 </ul>

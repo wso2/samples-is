@@ -51,7 +51,7 @@ function orgSignout() {
 }
 
 function emptySession(session) {
-    if (session == null || session == undefined) {
+    if (session === null || session === undefined) {
 
         return redirect('/signin');
     }
@@ -88,7 +88,7 @@ function getLoggedUserFromProfile(profile) {
         user.emails = [profile.email];
         user.userName = profile.username;
 
-        if (user.name == {} || !user.emails[0] || !user.userName) {
+        if (user.name === {} || !user.emails[0] || !user.userName) {
 
             return null
         }
