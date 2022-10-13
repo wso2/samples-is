@@ -62,10 +62,18 @@ function getSwitchResponse(subOrgId, accessToken) {
 
 function getSwitchEndpoint() {
     if (config.WSO2IS_TENANT_NAME == 'carbon.super') {
+
         return `${config.WSO2IS_HOST}/oauth2/token`
     }
 
-    return `${config.WSO2IS_HOST}/o/${config.WSO2IS_TENANT_NAME}/oauth2/token`
+    if(config.APP_IN_ASGARDEO_FIRST_LEVEL) {
+
+        return `${config.WSO2IS_HOST}/t/${config.WSO2IS_TENANT_NAME}/oauth2/token`;
+    } else {
+        
+        return `${config.WSO2IS_HOST}/o/${config.WSO2IS_TENANT_NAME}/oauth2/token`;
+    }
+
 }
 
 export default async function switchOrg(req, res) {
