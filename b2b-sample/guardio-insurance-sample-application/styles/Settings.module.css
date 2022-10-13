@@ -46,7 +46,7 @@
     align-items: center;
     justify-content: center;
     position: relative;
-    height: 200px;
+    height: auto;
     flex-direction: column;
 }
 

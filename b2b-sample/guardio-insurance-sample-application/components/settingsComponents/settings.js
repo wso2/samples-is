@@ -27,7 +27,6 @@ import "rsuite/dist/rsuite.min.css";
 import Custom500 from '../../pages/500';
 import { checkCustomization, hideBasedOnScopes } from '../../util/util/frontendUtil/frontendUtil';
 import { orgSignout } from '../../util/util/routerUtil/routerUtil';
-import Application from "./application/application";
 import HomeComponent from './homeComponet/homeComponent';
 import IdentityProviders from "./identity-providers/identity-providers";
 import LogoComponent from './logoComponent';
@@ -50,7 +49,7 @@ export default function Settings(props) {
 
                 return <ViewUserComponent orgName={props.name} orgId={props.orgId} session={session} />;
             case '2-3':
-                
+
                 return <IdentityProviders orgName={props.name} orgId={props.orgId} session={session} />;
             // case '3-1':
             //     return <Application orgName={props.name} session={session} />
@@ -89,7 +88,9 @@ function SideNavSection(props) {
     return (
         <Sidenav className={styles.sideNav} defaultOpenKeys={['3', '4']}>
             <Sidenav.Header>
-                <LogoComponent name={props.name} />
+                <div style={{ marginTop: '35px', marginBottom: '25px' }}>
+                    <LogoComponent imageSize='small' name={props.name} />
+                </div>
             </Sidenav.Header>
             <Sidenav.Body>
                 <Nav activeKey={props.activeKeySideNav}>
