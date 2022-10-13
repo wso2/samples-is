@@ -39,5 +39,6 @@
     "CUSTOMIZATION": {
         "name": "Guardio Insurance",
         "tag": "A relationship for life"
-    }
+    },
+    "COMMENTS" : "Check README.md file for additional details"
 }
