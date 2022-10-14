@@ -56,7 +56,7 @@ export default function Signin(props) {
     setTimeout(() => {
       setRedirectSeconds((redirectSeconds) => redirectSeconds - 1);
     }, moveTime)
-  }, [redirectSeconds, orgSignin]);
+  }, [redirectSeconds]);
 
   return (
     <div className={styles.signinOuter}>
