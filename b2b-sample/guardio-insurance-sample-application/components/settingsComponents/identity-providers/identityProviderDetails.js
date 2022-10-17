@@ -21,6 +21,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Avatar, Nav, Panel, Stack, useToaster } from 'rsuite';
 import decodeGetDetailedIdentityProvider from
 	'../../../util/apiDecode/settings/identityProvider/decodeGetDetailedIdentityProvider';
+import { selectedTemplateBaesedonTemplateId } from '../../../util/util/applicationUtil/applicationUtil';
 import ButtonGroupIdentityProviderDetails from './buttonGroupIdentityProviderDetails';
 import General from './idpDetailsSections/general';
 import Raw from './idpDetailsSections/raw';
@@ -69,7 +70,8 @@ export default function IdentityProviderDetails(props) {
 					<Stack direction='column' alignItems='stretch'>
 						<ButtonGroupIdentityProviderDetails session={props.session} id={props.id}
 							fetchAllIdPs={props.fetchAllIdPs} idpDetails={idpDetails} />
-						<IdentityProviderDetailsNav activeKeyNav={activeKeyNav} activeKeyNavSelect={activeKeyNavSelect} />
+						<IdentityProviderDetailsNav activeKeyNav={activeKeyNav} idpDetails={idpDetails}
+							activeKeyNavSelect={activeKeyNavSelect} />
 
 						<div>
 							{idpDetailsComponent(activeKeyNav)}
@@ -89,7 +91,7 @@ function IdentityProviderDetailsHeader(props) {
 		<Stack>
 			<Stack>
 				<Avatar
-					style={{ background: '#000', marginRight: "20px" }}
+					style={{ marginRight: "20px" }}
 					size="lg"
 					circle
 					src={props.idpDetails.image}
@@ -107,6 +109,15 @@ function IdentityProviderDetailsHeader(props) {
 
 function IdentityProviderDetailsNav(props) {
 
+	const templateIdCheck = () => {
+		let selectedTemplate = selectedTemplateBaesedonTemplateId(props.idpDetails.templateId);
+		if (selectedTemplate) {
+			return true;
+		} else {
+			return false;
+		}
+	};
+
 	return (
 		<Nav appearance="subtle" activeKey={props.activeKeyNav} style={{ marginBottom: 10, marginTop: 15 }}>
 			<div style={{
@@ -115,8 +126,14 @@ function IdentityProviderDetailsNav(props) {
 			}}>
 				<Nav.Item eventKey="1"
 					onSelect={(eventKey) => props.activeKeyNavSelect(eventKey)}>General</Nav.Item>
-				<Nav.Item eventKey="2"
-					onSelect={(eventKey) => props.activeKeyNavSelect(eventKey)}>Settings</Nav.Item>
+
+				{
+					templateIdCheck()
+						? <Nav.Item eventKey="2"
+							onSelect={(eventKey) => props.activeKeyNavSelect(eventKey)}>Settings</Nav.Item>
+						: <></>
+				}
+
 
 				<div style={{ flexGrow: "1" }}></div>
 

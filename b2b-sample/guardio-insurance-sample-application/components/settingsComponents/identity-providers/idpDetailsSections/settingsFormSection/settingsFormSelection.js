@@ -32,7 +32,11 @@ export default function SettingsFormSelection(props) {
 
     const propList = () => {
         let selectedTemplate = selectedTemplateBaesedonTemplateId(props.templateId);
-        return selectedTemplate.idp.federatedAuthenticators.authenticators[0].properties;
+        if (selectedTemplate) {
+            return selectedTemplate.idp.federatedAuthenticators.authenticators[0].properties;
+        } else {
+            return null;
+        }
     };
 
     const selectedValue = (key) => {
@@ -48,10 +52,11 @@ export default function SettingsFormSelection(props) {
     }
 
     return (
-        <>
-            {
-                propList().map((prop) => {
-                    return (<Field
+
+        propList()
+            ? propList().map((prop) => {
+                return (
+                    <Field
                         key={prop.key}
                         name={prop.key}
                         initialValue={selectedValue(prop.key)}
@@ -84,12 +89,11 @@ export default function SettingsFormSelection(props) {
 
                             </FormSuite.Group>
                         )}
-                    />);
-                }
+                    />)
+                    ;
+            })
+            : <p>Access the console to edit this identity provider</p>
 
-                )
-            }
-        </>
     )
 }
 
