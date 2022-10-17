@@ -89,7 +89,8 @@ export default function SettingsFormSelection(props) {
 
                             </FormSuite.Group>
                         )}
-                    />)
+                    />
+                )
                     ;
             })
             : <p>Access the console to edit this identity provider</p>
