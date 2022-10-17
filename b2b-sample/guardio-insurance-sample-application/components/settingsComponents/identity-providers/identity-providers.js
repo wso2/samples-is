@@ -20,7 +20,6 @@ import AppSelectIcon from '@rsuite/icons/AppSelect';
 import React, { useCallback, useEffect, useState } from "react";
 import { Avatar, Button, Container, FlexboxGrid, Form, Modal, Stack, useToaster } from "rsuite";
 
-import { useSession } from "next-auth/react";
 import styles from "../../../styles/idp.module.css";
 import decodeCreateIdentityProvider from
     '../../../util/apiDecode/settings/identityProvider/decodeCreateIdentityProvider';
@@ -34,14 +33,13 @@ import { errorTypeDialog, successTypeDialog } from "../../util/dialog";
 import SettingsTitle from '../../util/settingsTitle';
 import IdentityProviderList from './identityProviderList';
 
-export default function IdentityProviders() {
+export default function IdentityProviders(props) {
 
     const toaster = useToaster();
 
     const [idpList, setIdpList] = useState([]);
     const [openAddModal, setOpenAddModal] = useState(false);
     const [selectedTemplate, setSelectedTemplate] = useState(undefined);
-    const { data: session } = useSession();
 
     const templates = [
         Enterprise,
@@ -55,13 +53,13 @@ export default function IdentityProviders() {
 
     const fetchAllIdPs = useCallback(async () => {
 
-        const res = await decodeListAllIdentityProviders(session);
+        const res = await decodeListAllIdentityProviders(props.session);
         if (res && res.identityProviders) {
             setIdpList(res.identityProviders);
         } else {
             setIdpList([]);
         }
-    }, [session]);
+    }, [props.session]);
 
     const onAddIdentityProviderClick = () => {
         setOpenAddModal(true);
@@ -89,7 +87,7 @@ export default function IdentityProviders() {
 
     const onIdPSave = async (formValues, template) => {
 
-        decodeCreateIdentityProvider(session, template, formValues)
+        decodeCreateIdentityProvider(props.session, template, formValues)
             .then((response) => onIdpCreated(response));
 
     };
@@ -111,6 +109,7 @@ export default function IdentityProviders() {
                     : <IdentityProviderList
                         fetchAllIdPs={fetchAllIdPs}
                         idpList={idpList}
+                        session={props.session}
                     />
                 }
             </FlexboxGrid>
