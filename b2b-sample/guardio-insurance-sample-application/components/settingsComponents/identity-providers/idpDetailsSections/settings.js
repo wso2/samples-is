@@ -53,7 +53,6 @@ export default function Settings(props) {
         let errors = {}
         if (federatedAuthenticators.properties) {
             federatedAuthenticators.properties.filter((property) => {
-                console.log(property);
                 if (!eval(property.key) && !eval(property.key).value) {
                     errors[property.key] = 'This field cannot be empty';
                 }
