@@ -48,17 +48,23 @@ export default function IdentityProviders(props) {
     ];
 
     useEffect(() => {
-        fetchAllIdPs().finally();
+        fetchAllIdPs();
     }, [fetchAllIdPs]);
 
     const fetchAllIdPs = useCallback(async () => {
 
         const res = await decodeListAllIdentityProviders(props.session);
-        if (res && res.identityProviders) {
-            setIdpList(res.identityProviders);
+
+        if (res) {
+            if (res.identityProviders) {
+                setIdpList(res.identityProviders);
+            } else {
+                setIdpList([]);
+            }
         } else {
-            setIdpList([]);
+            setIdpList(null);
         }
+
     }, [props.session]);
 
     const onAddIdentityProviderClick = () => {
@@ -98,21 +104,27 @@ export default function IdentityProviders(props) {
             <SettingsTitle title="Identity Providers"
                 subtitle="Manage identity providers to allow users to log in to your application through them." />
 
-            <FlexboxGrid
-                style={{ width: "100%", height: "60vh", marginTop: "24px" }}
-                justify={idpList.length === 0 ? "center" : "start"}
-                align={idpList.length === 0 ? "middle" : "top"}>
-                {idpList.length === 0
-                    ? <EmptyIdentityProviderList
-                        onAddIdentityProviderClick={onAddIdentityProviderClick}
-                    />
-                    : <IdentityProviderList
-                        fetchAllIdPs={fetchAllIdPs}
-                        idpList={idpList}
-                        session={props.session}
-                    />
-                }
-            </FlexboxGrid>
+            {
+                idpList
+                    ? <FlexboxGrid
+                        style={{ width: "100%", height: "60vh", marginTop: "24px" }}
+                        justify={idpList.length === 0 ? "center" : "start"}
+                        align={idpList.length === 0 ? "middle" : "top"}>
+                        {idpList.length === 0
+                            ? <EmptyIdentityProviderList
+                                onAddIdentityProviderClick={onAddIdentityProviderClick}
+                            />
+                            : <IdentityProviderList
+                                fetchAllIdPs={fetchAllIdPs}
+                                idpList={idpList}
+                                session={props.session}
+                            />
+                        }
+                    </FlexboxGrid>
+                    : <></>
+            }
+
+
             {
                 openAddModal && (
                     <AddIdentityProviderModal

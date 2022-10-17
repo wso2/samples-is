@@ -60,23 +60,26 @@ export default function IdentityProviderDetails(props) {
 	}
 
 	return (
-		<Panel header={
-			<IdentityProviderDetailsHeader idpDetails={idpDetails} />
-		} eventKey={props.id} id={props.id}>
-			<div style={{ marginLeft: "25px", marginRight: "25px" }}>
-				<Stack direction='column' alignItems='stretch'>
-					<ButtonGroupIdentityProviderDetails session={props.session} id={props.id}
-						fetchAllIdPs={props.fetchAllIdPs} idpDetails={idpDetails} />
-					<IdentityProviderDetailsNav activeKeyNav={activeKeyNav} activeKeyNavSelect={activeKeyNavSelect} />
 
-					<div>
-						{idpDetailsComponent(activeKeyNav)}
-					</div>
+		idpDetails
+			? <Panel header={
+				<IdentityProviderDetailsHeader idpDetails={idpDetails} />
+			} eventKey={props.id} id={props.id}>
+				<div style={{ marginLeft: "25px", marginRight: "25px" }}>
+					<Stack direction='column' alignItems='stretch'>
+						<ButtonGroupIdentityProviderDetails session={props.session} id={props.id}
+							fetchAllIdPs={props.fetchAllIdPs} idpDetails={idpDetails} />
+						<IdentityProviderDetailsNav activeKeyNav={activeKeyNav} activeKeyNavSelect={activeKeyNavSelect} />
 
-				</Stack>
-			</div>
+						<div>
+							{idpDetailsComponent(activeKeyNav)}
+						</div>
 
-		</Panel>
+					</Stack>
+				</div>
+
+			</Panel>
+			: <></>
 	)
 }
 
@@ -120,7 +123,7 @@ function IdentityProviderDetailsNav(props) {
 				<Nav.Item eventKey="3"
 					onSelect={(eventKey) => props.activeKeyNavSelect(eventKey)} icon={<CodeIcon />}>
 					Developer Tools
-			</Nav.Item>
+				</Nav.Item>
 			</div>
 
 		</Nav>
