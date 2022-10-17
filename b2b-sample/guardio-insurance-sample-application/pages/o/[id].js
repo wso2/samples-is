@@ -50,6 +50,6 @@ export default function Org(props) {
 
   return (
     <Settings orgId={props.setOrg.id} routerQuery={props.setOrg.routerQuery} name={props.setOrg.name}
-      session={props.session} olorTheme={props.setOrg.colorTheme} />
+      session={props.session} colorTheme={props.setOrg.colorTheme} />
   )
 }
