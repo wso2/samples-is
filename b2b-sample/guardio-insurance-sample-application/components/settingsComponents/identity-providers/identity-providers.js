@@ -124,7 +124,6 @@ export default function IdentityProviders(props) {
                     : <></>
             }
 
-
             {
                 openAddModal && (
                     <AddIdentityProviderModal

@@ -134,7 +134,6 @@ function IdentityProviderDetailsNav(props) {
 						: <></>
 				}
 
-
 				<div style={{ flexGrow: "1" }}></div>
 
 				<Nav.Item eventKey="3"

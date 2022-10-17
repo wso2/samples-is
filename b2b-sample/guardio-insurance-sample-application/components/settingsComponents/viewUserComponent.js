@@ -128,7 +128,6 @@ export default function ViewUserComponent(props) {
                     : <></>
             }
 
-
         </div>
 
     )

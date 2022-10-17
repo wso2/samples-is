@@ -66,8 +66,8 @@ export default function Settings(props) {
             {props.session
                 ? <div className={styles.mainDiv}>
                     <div className={styles.sideNavDiv}>
-                        <SideNavSection name={props.name} scope={props.session.scope} activeKeySideNav={activeKeySideNav}
-                            activeKeySideNavSelect={activeKeySideNavSelect} />
+                        <SideNavSection name={props.name} scope={props.session.scope}
+                            activeKeySideNav={activeKeySideNav} activeKeySideNavSelect={activeKeySideNavSelect} />
                     </div>
                     <div className={styles.mainPanelDiv}>
                         {mainPanelComponenet(activeKeySideNav, props.session)}
