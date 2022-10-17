@@ -92,7 +92,7 @@ export default function ButtonGroupIdentityProviderDetails(props) {
         <Stack justifyContent='flex-end' alignItems='stretch'>
             {
                 idpIsinAuthSequence === null
-                    ? <></>
+                    ? null
                     : idpIsinAuthSequence
                         ? <Button onClick={onAddToLoginFlowClick}>Remove from Login Flow</Button>
                         : <Button onClick={onAddToLoginFlowClick}>Add to the Login Flow</Button>

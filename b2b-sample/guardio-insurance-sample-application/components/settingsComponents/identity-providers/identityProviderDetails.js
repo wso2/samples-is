@@ -81,7 +81,7 @@ export default function IdentityProviderDetails(props) {
 				</div>
 
 			</Panel>
-			: <></>
+			: null
 	)
 }
 
@@ -89,9 +89,8 @@ function IdentityProviderDetailsHeader(props) {
 
 	return (
 		<Stack>
-			<Stack>
+			<Stack spacing={20}>
 				<Avatar
-					style={{ marginRight: "20px" }}
 					size="lg"
 					circle
 					src={props.idpDetails.image}
@@ -131,7 +130,7 @@ function IdentityProviderDetailsNav(props) {
 					templateIdCheck()
 						? <Nav.Item eventKey="2"
 							onSelect={(eventKey) => props.activeKeyNavSelect(eventKey)}>Settings</Nav.Item>
-						: <></>
+						: null
 				}
 
 				<div style={{ flexGrow: "1" }}></div>

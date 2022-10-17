@@ -76,7 +76,7 @@ export default function SettingsFormSelection(props) {
                                                 onClick={() => copyValueToClipboard(selectedValue(prop.key))}>
                                                 <CopyIcon />
                                             </InputGroup.Button>
-                                            : <></>
+                                            : null
                                     }
 
                                 </InputGroup>

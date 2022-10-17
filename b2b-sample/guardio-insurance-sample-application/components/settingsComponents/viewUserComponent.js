@@ -125,9 +125,8 @@ export default function ViewUserComponent(props) {
                         </Column>
 
                     </Table>
-                    : <></>
+                    : null
             }
-
         </div>
 
     )

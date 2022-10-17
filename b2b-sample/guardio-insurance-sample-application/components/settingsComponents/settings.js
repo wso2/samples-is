@@ -63,7 +63,7 @@ export default function Settings(props) {
 
     return (
         <div>
-            {props.session
+            {props.session && props.session.scope
                 ? <div className={styles.mainDiv}>
                     <div className={styles.sideNavDiv}>
                         <SideNavSection name={props.name} scope={props.session.scope}
