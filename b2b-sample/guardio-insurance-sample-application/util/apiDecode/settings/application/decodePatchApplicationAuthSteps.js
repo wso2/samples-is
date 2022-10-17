@@ -96,7 +96,7 @@ export default async function decodePatchApplicationAuthSteps(session, template,
         const res = await commonDecode(
             () => callPatchApplicationAuthSteps(session, applicationId, authenticationSequenceModel), null);
 
-        return true;
+        return res;
     } catch (err) {
 
         return null;

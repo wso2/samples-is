@@ -82,47 +82,53 @@ export default function ViewUserComponent(props) {
                 </Button>
             </Stack>
 
-            <Table
-                height={900}
-                data={users}
-            >
-                <Column width={200} align="center">
-                    <HeaderCell><h6>First Name</h6></HeaderCell>
-                    <Cell dataKey="firstName" />
-                </Column>
+            {
+                users
+                    ? <Table
+                        height={900}
+                        data={users}
+                    >
+                        <Column width={200} align="center">
+                            <HeaderCell><h6>First Name</h6></HeaderCell>
+                            <Cell dataKey="firstName" />
+                        </Column>
 
-                <Column width={200} align="center">
-                    <HeaderCell><h6>Last Name</h6></HeaderCell>
-                    <Cell dataKey="familyName" />
-                </Column>
+                        <Column width={200} align="center">
+                            <HeaderCell><h6>Last Name</h6></HeaderCell>
+                            <Cell dataKey="familyName" />
+                        </Column>
 
-                <Column width={300} align="center">
-                    <HeaderCell><h6>Id</h6></HeaderCell>
-                    <Cell dataKey="id" />
-                </Column>
+                        <Column width={300} align="center">
+                            <HeaderCell><h6>Id</h6></HeaderCell>
+                            <Cell dataKey="id" />
+                        </Column>
 
-                <Column width={200} align="center">
-                    <HeaderCell><h6>User Name</h6></HeaderCell>
-                    <Cell dataKey="username" />
-                </Column>
+                        <Column width={200} align="center">
+                            <HeaderCell><h6>User Name</h6></HeaderCell>
+                            <Cell dataKey="username" />
+                        </Column>
 
-                <Column flexGrow={2} align="center">
-                    <HeaderCell><h6>Email</h6></HeaderCell>
-                    <Cell dataKey="email" />
-                </Column>
-                <Column flexGrow={1} align="center" fixed="right">
-                    <HeaderCell><h6>Edit User</h6></HeaderCell>
+                        <Column flexGrow={2} align="center">
+                            <HeaderCell><h6>Email</h6></HeaderCell>
+                            <Cell dataKey="email" />
+                        </Column>
+                        <Column flexGrow={1} align="center" fixed="right">
+                            <HeaderCell><h6>Edit User</h6></HeaderCell>
 
-                    <Cell>
-                        {rowData => (
-                            <span>
-                                <a onClick={() => onEditClick(rowData)} style={{ cursor: 'pointer' }}> Edit </a>
-                            </span>
-                        )}
-                    </Cell>
-                </Column>
+                            <Cell>
+                                {rowData => (
+                                    <span>
+                                        <a onClick={() => onEditClick(rowData)} style={{ cursor: 'pointer' }}> Edit </a>
+                                    </span>
+                                )}
+                            </Cell>
+                        </Column>
 
-            </Table>
+                    </Table>
+                    : <></>
+            }
+
+
         </div>
 
     )
