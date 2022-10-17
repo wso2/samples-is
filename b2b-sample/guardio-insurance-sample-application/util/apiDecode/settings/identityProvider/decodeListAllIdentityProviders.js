@@ -17,15 +17,16 @@
  */
 
 import callListAllIdentityProviders from "../../../apiCall/settings/identityProvider/callListAllIdentityProviders";
+import { commonDecode } from "../../../util/apiUtil/commonDecode";
 
 export default async function decodeListAllIdentityProviders(session) {
 
     try {
-        const res = await callListAllIdentityProviders(session);
+        const res = await commonDecode(() => callListAllIdentityProviders(session), null);
 
         return res;
     } catch (err) {
-        
+
         return null;
     }
 }

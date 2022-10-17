@@ -17,6 +17,7 @@
  */
 
 import callSwitchOrg from "../../apiCall/settings/callSwitchOrg";
+import { commonDecode } from "../../util/apiUtil/commonDecode";
 import { parseCookies } from '../../util/routerUtil/routerUtil';
 
 function getSubOrgId(request) {
@@ -32,7 +33,7 @@ export default async function decodeSwitchOrg(request, token) {
     const accessToken = token.accessToken;
 
     try {
-        const orgSession = await callSwitchOrg(subOrgId, accessToken);
+        const orgSession = await commonDecode(()=> callSwitchOrg(subOrgId, accessToken), null);
 
         return orgSession;
     } catch (err) {

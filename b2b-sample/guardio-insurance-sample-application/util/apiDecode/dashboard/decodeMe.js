@@ -17,6 +17,7 @@
  */
 
 import callMe from "../../apiCall/dashboard/callMe";
+import { commonDecode } from "../../util/apiUtil/commonDecode";
 import decodeUser from "../../util/apiUtil/decodeUser";
 
 export default async function decodeMe(session) {
@@ -25,7 +26,7 @@ export default async function decodeMe(session) {
 
         if (!session.user || session.user.id === undefined || session.user.userName === undefined
             || session.user.name === undefined || session.user.emails === undefined) {
-            meData = await callMe(session);
+            meData = await commonDecode(() => callMe(session), null);
         } else {
             meData = session.user;
         }

@@ -17,6 +17,7 @@
  */
 
 import callAddUser from "../../apiCall/settings/callAddUser";
+import { commonDecode } from "../../util/apiUtil/commonDecode";
 
 export default async function decodeAddUser(session, firstName, familyName, email, username, password) {
     const addUserEncode = {
@@ -36,9 +37,9 @@ export default async function decodeAddUser(session, firstName, familyName, emai
     }
 
     try {
-        await callAddUser(session, addUserEncode);
+        const res = await commonDecode(()=>callAddUser(session, addUserEncode), false);
 
-        return true;
+        return res;
     } catch (err) {
         
         return false;

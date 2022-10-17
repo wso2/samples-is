@@ -17,11 +17,12 @@
  */
 
 import callGetApplication from "../../../apiCall/settings/application/callGetApplication";
+import { commonDecode } from "../../../util/apiUtil/commonDecode";
 
 export default async function decodeGetApplication(session, id) {
 
     try {
-        const res = await callGetApplication(session, id);
+        const res = await commonDecode(() => callGetApplication(session, id), null);
 
         return res;
     } catch (err) {

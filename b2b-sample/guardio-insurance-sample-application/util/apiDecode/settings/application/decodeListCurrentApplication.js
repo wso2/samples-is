@@ -16,16 +16,17 @@
  * under the License.
  */
 
- import callListCurrentApplication from "../../../apiCall/settings/application/callListCurrentApplication";
+import callListCurrentApplication from "../../../apiCall/settings/application/callListCurrentApplication";
+import { commonDecode } from "../../../util/apiUtil/commonDecode";
 
- export default async function decodeListCurrentApplication(session) {
- 
-     try {
-         const res = await callListCurrentApplication(session);
+export default async function decodeListCurrentApplication(session) {
 
-         return res;
-     } catch (err) {
-        
-         return null;
-     }
- }
+    try {
+        const res = await commonDecode(() => callListCurrentApplication(session), null);
+
+        return res;
+    } catch (err) {
+
+        return null;
+    }
+}

@@ -18,15 +18,16 @@
 
 import callGetDetailedIdentityProvider from
     "../../../apiCall/settings/identityProvider/callGetDetailedIdentityProvider";
+import { commonDecode } from "../../../util/apiUtil/commonDecode";
 
 export default async function decodeGetDetailedIdentityProvider(session, id) {
 
     try {
-        const res = await callGetDetailedIdentityProvider(session, id);
+        const res = await commonDecode(() => callGetDetailedIdentityProvider(session, id), null);
 
         return res;
     } catch (err) {
-        
+
         return null;
     }
 }

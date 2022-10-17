@@ -17,6 +17,7 @@
  */
 
 import callUpdateFederatedAuthenticators from "../../../apiCall/settings/identityProvider/callUpdateFederatedAuthenticators";
+import { commonDecode } from "../../../util/apiUtil/commonDecode";
 
 function refactorFederatedAuthenticatorsForUpdate(federatedAuthenticators) {
     delete federatedAuthenticators.authenticatorId;
@@ -34,18 +35,18 @@ function updateProperties(federatedAuthenticators, keyProperty, valueProperty) {
 export default async function decodeUpdateFederatedAuthenticators(session, idpId, federatedAuthenticators, changedValues) {
     let federatedAuthenticatorId = federatedAuthenticators.authenticatorId;
     federatedAuthenticators = refactorFederatedAuthenticatorsForUpdate(federatedAuthenticators);
-    Object.keys(changedValues).filter((key)=>{
+    Object.keys(changedValues).filter((key) => {
         federatedAuthenticators = updateProperties(federatedAuthenticators, key, changedValues[key]);
     })
 
     let body = [federatedAuthenticatorId, federatedAuthenticators];
 
     try {
-        const res = await callUpdateFederatedAuthenticators(session, idpId, body);
+        const res = await commonDecode(() => callUpdateFederatedAuthenticators(session, idpId, body), null);
 
         return res;
     } catch (err) {
-        
+
         return null;
     }
 }
