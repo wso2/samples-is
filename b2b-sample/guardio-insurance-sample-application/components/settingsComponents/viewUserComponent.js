@@ -83,8 +83,8 @@ export default function ViewUserComponent(props) {
             </Stack>
 
             {
-                users
-                    ? <Table
+                users ?
+                  <Table
                         height={900}
                         data={users}
                     >
