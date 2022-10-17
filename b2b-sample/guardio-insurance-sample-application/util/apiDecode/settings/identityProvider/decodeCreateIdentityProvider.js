@@ -18,6 +18,7 @@
 
 import { setIdpTemplate } from "../../../../util/util/idpUtil/idpUtil";
 import callCreateIdentityProvider from "../../../apiCall/settings/identityProvider/callCreateIdentityProvider";
+import { commonDecode } from "../../../util/apiUtil/commonDecode";
 
 export default async function decodeCreateIdentityProvider(session, template, formValues) {
 
@@ -26,11 +27,11 @@ export default async function decodeCreateIdentityProvider(session, template, fo
     model = setIdpTemplate(model, template.templateId, formValues);
 
     try {
-        const res = await callCreateIdentityProvider(session, model);
+        const res = await commonDecode(() => callCreateIdentityProvider(session, model), null);
 
         return res;
     } catch (err) {
-        
+
         return null;
     }
 }

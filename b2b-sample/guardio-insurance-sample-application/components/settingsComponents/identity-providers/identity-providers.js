@@ -20,7 +20,6 @@ import AppSelectIcon from '@rsuite/icons/AppSelect';
 import React, { useCallback, useEffect, useState } from "react";
 import { Avatar, Button, Container, FlexboxGrid, Form, Modal, Stack, useToaster } from "rsuite";
 
-import { useSession } from "next-auth/react";
 import styles from "../../../styles/idp.module.css";
 import decodeCreateIdentityProvider from
     '../../../util/apiDecode/settings/identityProvider/decodeCreateIdentityProvider';
@@ -34,14 +33,13 @@ import { errorTypeDialog, successTypeDialog } from "../../util/dialog";
 import SettingsTitle from '../../util/settingsTitle';
 import IdentityProviderList from './identityProviderList';
 
-export default function IdentityProviders() {
+export default function IdentityProviders(props) {
 
     const toaster = useToaster();
 
     const [idpList, setIdpList] = useState([]);
     const [openAddModal, setOpenAddModal] = useState(false);
     const [selectedTemplate, setSelectedTemplate] = useState(undefined);
-    const { data: session } = useSession();
 
     const templates = [
         Enterprise,
@@ -50,18 +48,24 @@ export default function IdentityProviders() {
     ];
 
     useEffect(() => {
-        fetchAllIdPs().finally();
+        fetchAllIdPs();
     }, [fetchAllIdPs]);
 
     const fetchAllIdPs = useCallback(async () => {
 
-        const res = await decodeListAllIdentityProviders(session);
-        if (res && res.identityProviders) {
-            setIdpList(res.identityProviders);
+        const res = await decodeListAllIdentityProviders(props.session);
+
+        if (res) {
+            if (res.identityProviders) {
+                setIdpList(res.identityProviders);
+            } else {
+                setIdpList([]);
+            }
         } else {
-            setIdpList([]);
+            setIdpList(null);
         }
-    }, [session]);
+
+    }, [props.session]);
 
     const onAddIdentityProviderClick = () => {
         setOpenAddModal(true);
@@ -89,7 +93,7 @@ export default function IdentityProviders() {
 
     const onIdPSave = async (formValues, template) => {
 
-        decodeCreateIdentityProvider(session, template, formValues)
+        decodeCreateIdentityProvider(props.session, template, formValues)
             .then((response) => onIdpCreated(response));
 
     };
@@ -100,20 +104,26 @@ export default function IdentityProviders() {
             <SettingsTitle title="Identity Providers"
                 subtitle="Manage identity providers to allow users to log in to your application through them." />
 
-            <FlexboxGrid
-                style={{ width: "100%", height: "60vh", marginTop: "24px" }}
-                justify={idpList.length === 0 ? "center" : "start"}
-                align={idpList.length === 0 ? "middle" : "top"}>
-                {idpList.length === 0
-                    ? <EmptyIdentityProviderList
-                        onAddIdentityProviderClick={onAddIdentityProviderClick}
-                    />
-                    : <IdentityProviderList
-                        fetchAllIdPs={fetchAllIdPs}
-                        idpList={idpList}
-                    />
-                }
-            </FlexboxGrid>
+            {
+                idpList
+                    ? <FlexboxGrid
+                        style={{ width: "100%", height: "60vh", marginTop: "24px" }}
+                        justify={idpList.length === 0 ? "center" : "start"}
+                        align={idpList.length === 0 ? "middle" : "top"}>
+                        {idpList.length === 0
+                            ? <EmptyIdentityProviderList
+                                onAddIdentityProviderClick={onAddIdentityProviderClick}
+                            />
+                            : <IdentityProviderList
+                                fetchAllIdPs={fetchAllIdPs}
+                                idpList={idpList}
+                                session={props.session}
+                            />
+                        }
+                    </FlexboxGrid>
+                    : <></>
+            }
+
             {
                 openAddModal && (
                     <AddIdentityProviderModal

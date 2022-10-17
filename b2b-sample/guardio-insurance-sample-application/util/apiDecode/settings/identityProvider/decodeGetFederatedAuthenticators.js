@@ -17,15 +17,16 @@
  */
 
 import callGetFederatedAuthenticators from "../../../apiCall/settings/identityProvider/callGetFederatedAuthenticators";
+import { commonDecode } from "../../../util/apiUtil/commonDecode";
 
 export default async function decodeGetFederatedAuthenticators(session, idpId, id) {
 
     try {
-        const res = await callGetFederatedAuthenticators(session, idpId, id);
+        const res = await commonDecode(() => callGetFederatedAuthenticators(session, idpId, id), null);
 
         return res;
     } catch (err) {
-        
+
         return null;
     }
 }

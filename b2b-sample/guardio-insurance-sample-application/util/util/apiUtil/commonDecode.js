@@ -16,17 +16,19 @@
  * under the License.
  */
 
-import callListAllApplications from "../../../apiCall/settings/application/callListAllApplications";
-import { commonDecode } from "../../../util/apiUtil/commonDecode";
-
-export default async function decodeListAllApplications(session) {
+export async function commonDecode(callFunction, errorReturnValue) {
 
     try {
-        const res = await commonDecode(() => callListAllApplications(session), null);
+        const res = await callFunction();
+
+        if (res.error) {
+
+            return errorReturnValue;
+        }
 
         return res;
     } catch (err) {
 
-        return null;
+        return errorReturnValue;
     }
 }

@@ -36,6 +36,10 @@ function getCurrentDate() {
  *  @return true if JSON is empty else false
  */
 function checkIfJSONisEmpty(obj) {
+    if (!obj) {
+
+        return true;
+    }
 
     return Object.keys(obj).length === 0;
 }

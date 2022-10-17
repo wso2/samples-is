@@ -17,6 +17,7 @@
  */
 
 import callEditUser from "../../apiCall/settings/callEditUser";
+import { commonDecode } from "../../util/apiUtil/commonDecode";
 
 export default async function decodeEditUser(session, id, firstName, familyName, email, username) {
     const editUserEncode = {
@@ -44,9 +45,9 @@ export default async function decodeEditUser(session, id, firstName, familyName,
     }
 
     try {
-        const usersData = await callEditUser(session, id, editUserEncode);
+        const usersData = await commonDecode(()=>callEditUser(session, id, editUserEncode), false)
 
-        return true;
+        return usersData;
     } catch (err) {
         
         return false

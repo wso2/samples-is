@@ -22,7 +22,6 @@ import React, { useEffect, useState } from 'react';
 import { Button, Nav, Sidenav } from 'rsuite';
 import styles from '../../styles/Settings.module.css';
 
-import { useSession } from 'next-auth/react';
 import "rsuite/dist/rsuite.min.css";
 import Custom500 from '../../pages/500';
 import { checkCustomization, hideBasedOnScopes } from '../../util/util/frontendUtil/frontendUtil';
@@ -36,21 +35,19 @@ export default function Settings(props) {
 
     const SETTINGS_UI = "settings interface"
 
-    const { data: session, status } = useSession();
-
     const [activeKeySideNav, setActiveKeySideNav] = useState('1');
 
-    const mainPanelComponenet = (activeKey, session) => {
+    const mainPanelComponenet = (activeKey) => {
         switch (activeKey) {
             case '1':
 
-                return <HomeComponent orgName={props.name} orgId={props.orgId} session={session} />;
+                return <HomeComponent orgName={props.name} orgId={props.orgId} session={props.session} />;
             case '2-1':
 
-                return <ViewUserComponent orgName={props.name} orgId={props.orgId} session={session} />;
+                return <ViewUserComponent orgName={props.name} orgId={props.orgId} session={props.session} />;
             case '2-3':
 
-                return <IdentityProviders orgName={props.name} orgId={props.orgId} session={session} />;
+                return <IdentityProviders orgName={props.name} orgId={props.orgId} session={props.session} />;
             // case '3-1':
             //     return <Application orgName={props.name} session={session} />
         }
@@ -66,14 +63,14 @@ export default function Settings(props) {
 
     return (
         <div>
-            {session
+            {props.session
                 ? <div className={styles.mainDiv}>
                     <div className={styles.sideNavDiv}>
-                        <SideNavSection name={props.name} scope={session.scope} activeKeySideNav={activeKeySideNav}
-                            activeKeySideNavSelect={activeKeySideNavSelect} />
+                        <SideNavSection name={props.name} scope={props.session.scope}
+                            activeKeySideNav={activeKeySideNav} activeKeySideNavSelect={activeKeySideNavSelect} />
                     </div>
                     <div className={styles.mainPanelDiv}>
-                        {mainPanelComponenet(activeKeySideNav, session)}
+                        {mainPanelComponenet(activeKeySideNav, props.session)}
                     </div>
                 </div>
                 : <Custom500 />}
