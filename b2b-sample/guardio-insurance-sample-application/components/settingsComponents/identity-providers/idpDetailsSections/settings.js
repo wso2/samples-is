@@ -94,7 +94,7 @@ export default function Settings(props) {
                             {federatedAuthenticators.properties
                                 ? <SettingsFormSelection federatedAuthenticators={federatedAuthenticators.properties}
                                     templateId={props.idpDetails.templateId} />
-                                : <></>
+                                : null
                             }
 
                             <div className="buttons">

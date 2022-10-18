@@ -33,7 +33,7 @@ export default function LogoComponent(props) {
                         <h5 className={styles.nameTag}>{props.name}</h5>
                         <hr />
                     </>
-                    : <></>
+                    : null
             }
 
         </div>

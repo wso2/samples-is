@@ -76,7 +76,7 @@ export default function SettingsFormSelection(props) {
                                                 onClick={() => copyValueToClipboard(selectedValue(prop.key))}>
                                                 <CopyIcon />
                                             </InputGroup.Button>
-                                            : <></>
+                                            : null
                                     }
 
                                 </InputGroup>
@@ -89,7 +89,8 @@ export default function SettingsFormSelection(props) {
 
                             </FormSuite.Group>
                         )}
-                    />)
+                    />
+                )
                     ;
             })
             : <p>Access the console to edit this identity provider</p>

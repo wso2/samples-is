@@ -43,8 +43,7 @@ export default function IdentityProviders(props) {
 
     const templates = [
         Enterprise,
-        Google,
-        Facebook,
+        Google
     ];
 
     useEffect(() => {
@@ -121,7 +120,7 @@ export default function IdentityProviders(props) {
                             />
                         }
                     </FlexboxGrid>
-                    : <></>
+                    : null
             }
 
             {
