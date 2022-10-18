@@ -17,15 +17,16 @@
  */
 
 import callDeleteIdentityProvider from "../../../apiCall/settings/identityProvider/callDeleteIdentityProvider";
+import { commonDecode } from "../../../util/apiUtil/commonDecode";
 
 export default async function decodeDeleteIdentityProvider(session, id) {
 
     try {
-        const res = await callDeleteIdentityProvider(session, id);
+        const res = await commonDecode(() => callDeleteIdentityProvider(session, id), null);
 
-        return res;
+        return true;
     } catch (err) {
-        
+
         return null;
     }
 }

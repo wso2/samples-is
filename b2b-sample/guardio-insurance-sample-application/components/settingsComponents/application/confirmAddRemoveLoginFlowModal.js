@@ -147,7 +147,7 @@ function ApplicationListAvailable(props) {
 
             {
                 props.idpIsinAuthSequence
-                    ? <></>
+                    ? null
                     : <ApplicationListItem application={props.applicationDetail} />
             }
 

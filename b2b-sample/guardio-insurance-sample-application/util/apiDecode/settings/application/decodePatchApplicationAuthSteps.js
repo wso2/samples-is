@@ -17,6 +17,7 @@
  */
 
 import callPatchApplicationAuthSteps from "../../../apiCall/settings/application/callPatchApplicationAuthSteps";
+import { commonDecode } from "../../../util/apiUtil/commonDecode";
 import {
     ENTERPRISE_AUTHENTICATOR_ID, ENTERPRISE_ID, FACEBOOK_AUTHENTICATOR_ID, FACEBOOK_ID,
     GOOGLE_AUTHENTICATOR_ID, GOOGLE_ID
@@ -92,9 +93,10 @@ export default async function decodePatchApplicationAuthSteps(session, template,
     }
 
     try {
-        const res = await callPatchApplicationAuthSteps(session, applicationId, authenticationSequenceModel);
+        const res = await commonDecode(
+            () => callPatchApplicationAuthSteps(session, applicationId, authenticationSequenceModel), null);
 
-        return true;
+        return res;
     } catch (err) {
 
         return null;

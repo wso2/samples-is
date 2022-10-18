@@ -17,6 +17,7 @@
  */
 
 import callPatchGeneralSettingsIdp from "../../../apiCall/settings/identityProvider/callPatchGeneralSettingsIdp";
+import { commonDecode } from "../../../util/apiUtil/commonDecode";
 
 export default async function decodePatchGeneralSettingsIdp(session, name, description, idpId) {
 
@@ -27,11 +28,11 @@ export default async function decodePatchGeneralSettingsIdp(session, name, descr
     ];
 
     try {
-        const res = await callPatchGeneralSettingsIdp(session, idpId, body);
+        const res = await commonDecode(() => callPatchGeneralSettingsIdp(session, idpId, body), null);
 
         return res;
     } catch (err) {
-        
+
         return null;
     }
 }

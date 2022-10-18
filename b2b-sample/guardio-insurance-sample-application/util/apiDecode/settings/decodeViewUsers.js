@@ -17,11 +17,12 @@
  */
 
 import callViewUsers from "../../apiCall/settings/callViewUsers";
+import { commonDecode } from "../../util/apiUtil/commonDecode";
 import decodeUser from "../../util/apiUtil/decodeUser";
 
 export default async function decodeViewUsers(session) {
     try {
-        const usersData = await callViewUsers(session);
+        const usersData = await commonDecode(()=>callViewUsers(session), null);
 
         const usersReturn = [];
 

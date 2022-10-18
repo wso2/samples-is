@@ -28,7 +28,7 @@ function notPostError(res) {
 
 function dataNotRecievedError(res) {
 
-    return error404(res, 'Error occured when requesting data.');
+    return error404(res, { msg: 'Error occured when requesting data.', error: true });
 }
 
 module.exports = { notPostError, dataNotRecievedError }
