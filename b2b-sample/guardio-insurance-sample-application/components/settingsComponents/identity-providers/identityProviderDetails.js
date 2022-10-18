@@ -129,7 +129,9 @@ function IdentityProviderDetailsNav(props) {
 				{
 					templateIdCheck()
 						? <Nav.Item eventKey="2"
-							onSelect={(eventKey) => props.activeKeyNavSelect(eventKey)}>Settings</Nav.Item>
+							onSelect={(eventKey) => props.activeKeyNavSelect(eventKey)}>
+							Settings
+						</Nav.Item>
 						: null
 				}
 
