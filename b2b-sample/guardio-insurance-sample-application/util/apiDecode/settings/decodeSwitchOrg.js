@@ -28,7 +28,7 @@ function getSubOrgId(token) {
         return config.SAMPLE_ORGS[0].id;
     } catch (error) {
 
-        return token.user.org_id;
+        return token.user.federated_org;
     }
 
 }

@@ -20,6 +20,7 @@ import cookie from "cookie";
 import FrontCookie from 'js-cookie';
 import { signIn, signOut } from 'next-auth/react';
 import { getRouterQuery } from '../orgUtil/orgUtil';
+import config from '../../../config.json';
 
 function redirect(path) {
 
@@ -69,12 +70,24 @@ function getLoggedUserId(token) {
 
 function getOrgId(token) {
 
-    return parseJwt(token).org_id;
+    try {
+
+        return config.SAMPLE_ORGS[0].id;
+    } catch (error) {
+
+        return parseJwt(token).org_id;
+    }
 }
 
 function getOrgName(token) {
 
-    return parseJwt(token).org_name;
+    try {
+
+        return config.SAMPLE_ORGS[0].name;
+    } catch (error) {
+
+        return parseJwt(token).org_name;
+    }
 }
 
 function getLoggedUserFromProfile(profile) {
