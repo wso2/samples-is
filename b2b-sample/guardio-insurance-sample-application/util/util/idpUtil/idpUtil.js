@@ -19,7 +19,7 @@
 import config from '../../../config.json';
 import { ENTERPRISE_ID, FACEBOOK_ID, GOOGLE_ID } from '../common/common';
 
-function setIdpTemplate(model, templateId, formValues) {
+function setIdpTemplate(model, templateId, formValues, orgId) {
 
     let name = formValues.application_name.toString();
     let clientId = formValues.client_id.toString();
@@ -29,13 +29,13 @@ function setIdpTemplate(model, templateId, formValues) {
 
     switch (templateId) {
         case FACEBOOK_ID:
-            model = facebookIdpTemplate(model, clientId, clientSecret);
+            model = facebookIdpTemplate(model, clientId, clientSecret, orgId);
             break;
         case GOOGLE_ID:
-            model = googleIdpTemplate(model, clientId, clientSecret);
+            model = googleIdpTemplate(model, clientId, clientSecret, orgId);
             break;
         case ENTERPRISE_ID:
-            model = enterpriseIdpTemplate(model, clientId, clientSecret, formValues);
+            model = enterpriseIdpTemplate(model, clientId, clientSecret, formValues, orgId);
             break;
         default:
             break;
@@ -47,7 +47,7 @@ function setIdpTemplate(model, templateId, formValues) {
 
 }
 
-function facebookIdpTemplate(model, clientId, clientSecret) {
+function facebookIdpTemplate(model, clientId, clientSecret, orgId) {
 
     model.image =
         `${config.WSO2IS_HOST}/console/libs/themes/default/assets/images/identity-providers/facebook-idp-illustration.svg`;
@@ -65,7 +65,7 @@ function facebookIdpTemplate(model, clientId, clientSecret) {
         },
         {
             "key": "callBackUrl",
-            "value": `${config.WSO2IS_HOST}/commonauth`
+            "value": `${config.WSO2IS_HOST}/o/${orgId}/commonauth`
         },
         {
             "key": "Scope",
@@ -80,7 +80,7 @@ function facebookIdpTemplate(model, clientId, clientSecret) {
     return model;
 }
 
-function googleIdpTemplate(model, clientId, clientSecret) {
+function googleIdpTemplate(model, clientId, clientSecret, orgId) {
 
     model.image =
         `${config.WSO2IS_HOST}/console/libs/themes/default/assets/images/identity-providers/google-idp-illustration.svg`;
@@ -98,7 +98,7 @@ function googleIdpTemplate(model, clientId, clientSecret) {
         },
         {
             "key": "callbackUrl",
-            "value": `${config.WSO2IS_HOST}/commonauth`
+            "value": `${config.WSO2IS_HOST}/o/${orgId}/commonauth`
         },
         {
             "key": "AdditionalQueryParameters",
@@ -109,7 +109,7 @@ function googleIdpTemplate(model, clientId, clientSecret) {
     return model;
 }
 
-function enterpriseIdpTemplate(model, clientId, clientSecret, formValues) {
+function enterpriseIdpTemplate(model, clientId, clientSecret, formValues, orgId) {
 
     let authorizationEndpointUrl = formValues.authorization_endpoint_url.toString();
     let tokenEndpointUrl = formValues.token_endpoint_url.toString();
@@ -137,7 +137,7 @@ function enterpriseIdpTemplate(model, clientId, clientSecret, formValues) {
         },
         {
             "key": "callbackUrl",
-            "value": `${config.WSO2IS_HOST}/commonauth`
+            "value": `${config.WSO2IS_HOST}/o/${orgId}/commonauth`
         }
     ];
 
