@@ -20,7 +20,9 @@ import React from "react";
 import { Stack } from "rsuite";
 
 /**
- * Component for the title in an interface of the admin settings section
+ * 
+ * @param prop - title, subtitle
+ * @returns A component for the title in an interface of the admin settings section
  */
 export default function SettingsTitle(prop) {
     
