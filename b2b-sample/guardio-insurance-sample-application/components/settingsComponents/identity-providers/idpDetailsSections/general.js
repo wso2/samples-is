@@ -28,7 +28,14 @@ import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../util/ut
 import { errorTypeDialog, successTypeDialog } from "../../../util/dialog";
 import HelperText from "../../../util/helperText";
 
-export default function General(props) {
+/**
+ * 
+ * @param prop - fetchData (function to fetch data after form is submitted), session, idpDetails
+ * @returns The general section of an idp
+ */
+export default function General(prop) {
+
+    const { fetchData, session, idpDetails } = prop;
 
     const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
 
@@ -62,7 +69,7 @@ export default function General(props) {
     const onDataSubmit = (response, form) => {
         if (response) {
             successTypeDialog(toaster, "Changes Saved Successfully", "Idp updated successfully.");
-            props.fetchData();
+            fetchData();
             form.restart();
         } else {
             errorTypeDialog(toaster, "Error Occured", "Error occured while updating the Idp. Try again.");
@@ -71,7 +78,7 @@ export default function General(props) {
 
     const onUpdate = async (values, form) => {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
-        decodePatchGeneralSettingsIdp(props.session, values.name, values.description, props.idpDetails.id)
+        decodePatchGeneralSettingsIdp(session, values.name, values.description, idpDetails.id)
             .then((response) => onDataSubmit(response, form))
             .finally(() => setLoadingDisplay(LOADING_DISPLAY_NONE));
     };
@@ -82,15 +89,18 @@ export default function General(props) {
             <div>
 
                 <Form
-                    onSubmit={onUpdate}
-                    validate={validate}
+                    onSubmit={ onUpdate }
+                    validate={ validate }
                     initialValues={ {
-                        name: props.idpDetails.name,
-                        description: props.idpDetails.description
+                        description: idpDetails.description,
+                        name: idpDetails.name
                     } }
                     render={ ({ handleSubmit, form, submitting, pristine, errors }) => (
-                        <FormSuite layout="vertical" className={ styles.addUserForm}
-                            onSubmit={ event => { handleSubmit(event).then(form.restart); } } fluid>
+                        <FormSuite 
+                            layout="vertical" 
+                            className={ styles.addUserForm }
+                            onSubmit={ event => { handleSubmit(event).then(form.restart); } } 
+                            fluid>
                             <Field
                                 name="name"
                                 render={ ({ input, meta }) => (
@@ -103,9 +113,9 @@ export default function General(props) {
 
                                         <HelperText text="A text description of the identity provider." />
 
-                                        { meta.error && meta.touched && <FormSuite.ErrorMessage show={ true }  >
+                                        { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true }  >
                                             { meta.error }
-                                        </FormSuite.ErrorMessage> }
+                                        </FormSuite.ErrorMessage>) }
                                     </FormSuite.Group>
                                 ) }
                             />
@@ -121,9 +131,9 @@ export default function General(props) {
 
                                         <HelperText text="A text description of the identity provider." />
 
-                                        {meta.error && meta.touched && <FormSuite.ErrorMessage show={true}  >
-                                            {meta.error}
-                                        </FormSuite.ErrorMessage>}
+                                        { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true }  >
+                                            { meta.error }
+                                        </FormSuite.ErrorMessage>) }
 
                                     </FormSuite.Group>
                                 ) }
@@ -132,7 +142,10 @@ export default function General(props) {
                             <div className="buttons">
                                 <FormSuite.Group>
                                     <ButtonToolbar>
-                                        <Button className={ styles.addUserButton } size="lg" appearance="primary"
+                                        <Button 
+                                            className={ styles.addUserButton } 
+                                            size="lg" 
+                                            appearance="primary"
                                             type="submit"
                                             disabled={ submitting || pristine || !checkIfJSONisEmpty(errors) }>
                                             Update
