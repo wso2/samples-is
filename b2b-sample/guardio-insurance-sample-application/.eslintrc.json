@@ -1,6 +1,7 @@
 {
   "extends": [
-    "next/core-web-vitals"
+    "next/core-web-vitals",
+    "./.eslintrc.js"
   ],
   "rules": {
     "max-len": [
