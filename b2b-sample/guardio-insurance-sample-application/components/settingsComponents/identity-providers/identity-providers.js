@@ -1,45 +1,45 @@
-/*
- * Copyright (c) 2022 WSO2 LLC. (https://www.wso2.com).
+/**
+ * Copyright (c) 2022, WSO2 LLC. (https://www.wso2.com). All Rights Reserved.
  *
  * WSO2 LLC. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License.
  * You may obtain a copy of the License at
  *
- *http://www.apache.org/licenses/LICENSE-2.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
+ * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
  */
 
-import AppSelectIcon from '@rsuite/icons/AppSelect';
+import AppSelectIcon from "@rsuite/icons/AppSelect";
 import React, { useCallback, useEffect, useState } from "react";
 import { Avatar, Button, Container, FlexboxGrid, Form, Modal, Stack, useToaster } from "rsuite";
 
+import IdentityProviderList from "./identityProviderList";
 import styles from "../../../styles/idp.module.css";
 import decodeCreateIdentityProvider from
-    '../../../util/apiDecode/settings/identityProvider/decodeCreateIdentityProvider';
+    "../../../util/apiDecode/settings/identityProvider/decodeCreateIdentityProvider";
 import decodeListAllIdentityProviders from
-    '../../../util/apiDecode/settings/identityProvider/decodeListAllIdentityProviders';
-import { EMPTY_STRING, ENTERPRISE_ID, FACEBOOK_ID, GOOGLE_ID } from '../../../util/util/common/common';
+    "../../../util/apiDecode/settings/identityProvider/decodeListAllIdentityProviders";
+import { EMPTY_STRING, ENTERPRISE_ID, FACEBOOK_ID, GOOGLE_ID } from "../../../util/util/common/common";
 import Enterprise from "../../data/templates/enterprise-identity-provider.json";
 import Facebook from "../../data/templates/facebook.json";
 import Google from "../../data/templates/google.json";
 import { errorTypeDialog, successTypeDialog } from "../../util/dialog";
-import SettingsTitle from '../../util/settingsTitle';
-import IdentityProviderList from './identityProviderList';
+import SettingsTitle from "../../util/settingsTitle";
 
 export default function IdentityProviders(props) {
 
     const toaster = useToaster();
 
-    const [idpList, setIdpList] = useState([]);
-    const [openAddModal, setOpenAddModal] = useState(false);
-    const [selectedTemplate, setSelectedTemplate] = useState(undefined);
+    const [ idpList, setIdpList ] = useState([]);
+    const [ openAddModal, setOpenAddModal ] = useState(false);
+    const [ selectedTemplate, setSelectedTemplate ] = useState(undefined);
 
     const templates = [
         Enterprise,
@@ -48,7 +48,7 @@ export default function IdentityProviders(props) {
 
     useEffect(() => {
         fetchAllIdPs();
-    }, [fetchAllIdPs]);
+    }, [ fetchAllIdPs ]);
 
     const fetchAllIdPs = useCallback(async () => {
 
@@ -64,14 +64,14 @@ export default function IdentityProviders(props) {
             setIdpList(null);
         }
 
-    }, [props.session]);
+    }, [ props.session ]);
 
     const onAddIdentityProviderClick = () => {
         setOpenAddModal(true);
     };
 
     const onCreationDismiss = () => {
-        setSelectedTemplate(undefined)
+        setSelectedTemplate(undefined);
     };
 
     const onIdpCreated = (response) => {
@@ -88,7 +88,7 @@ export default function IdentityProviders(props) {
         } else {
             errorTypeDialog(toaster, "Error Occured", "Error occured while creating the identity provider. Try again.");
         }
-    }
+    };
 
     const onIdPSave = async (formValues, template) => {
 
@@ -100,49 +100,50 @@ export default function IdentityProviders(props) {
     return (
         <Container>
 
-            <SettingsTitle title="Identity Providers"
+            <SettingsTitle
+                title="Identity Providers"
                 subtitle="Manage identity providers to allow users to log in to your application through them." />
 
             {
                 idpList
-                    ? <FlexboxGrid
-                        style={{ width: "100%", height: "60vh", marginTop: "24px" }}
-                        justify={idpList.length === 0 ? "center" : "start"}
-                        align={idpList.length === 0 ? "middle" : "top"}>
-                        {idpList.length === 0
-                            ? <EmptyIdentityProviderList
-                                onAddIdentityProviderClick={onAddIdentityProviderClick}
-                            />
-                            : <IdentityProviderList
-                                fetchAllIdPs={fetchAllIdPs}
-                                idpList={idpList}
-                                session={props.session}
-                            />
+                    ? (<FlexboxGrid
+                        style={ { width: "100%", height: "60vh", marginTop: "24px" } }
+                        justify={ idpList.length === 0 ? "center" : "start" }
+                        align={ idpList.length === 0 ? "middle" : "top" }>
+                        { idpList.length === 0
+                            ? (<EmptyIdentityProviderList
+                                onAddIdentityProviderClick={ onAddIdentityProviderClick }
+                            />)
+                            : (<IdentityProviderList
+                                fetchAllIdPs={ fetchAllIdPs }
+                                idpList={ idpList }
+                                session={ props.session }
+                            />)
                         }
-                    </FlexboxGrid>
+                    </FlexboxGrid>)
                     : null
             }
 
             {
                 openAddModal && (
                     <AddIdentityProviderModal
-                        templates={templates}
-                        onClose={() => setOpenAddModal(false)}
-                        openModal={openAddModal}
-                        onTemplateSelected={(template) => {
+                        templates={ templates }
+                        onClose={ () => setOpenAddModal(false) }
+                        openModal={ openAddModal }
+                        onTemplateSelected={ (template) => {
                             setOpenAddModal(false);
                             setSelectedTemplate(template);
-                        }}
+                        } }
                     />
                 )
             }
             {
                 selectedTemplate && (
                     <IdPCreationModal
-                        onSave={onIdPSave}
-                        onCancel={onCreationDismiss}
-                        openModal={!!selectedTemplate}
-                        template={selectedTemplate} />
+                        onSave={ onIdPSave }
+                        onCancel={ onCreationDismiss }
+                        openModal={ !!selectedTemplate }
+                        template={ selectedTemplate } />
                 )
             }
         </Container>
@@ -170,31 +171,32 @@ const AddIdentityProviderModal = ({ openModal, onClose, templates, onTemplateSel
     };
 
     return (
-        <Modal open={openModal}
-            onClose={onClose}
-            onBackdropClick={onClose}>
+        <Modal
+            open={ openModal }
+            onClose={ onClose }
+            onBackdropClick={ onClose }>
             <Modal.Header>
                 <Modal.Title><b>Select Identity Provider</b></Modal.Title>
                 <p>Choose one of the following identity providers.</p>
             </Modal.Header>
             <Modal.Body>
                 <div>
-                    <div className={styles.idp__template__list}>
-                        {templates.map((template) => {
+                    <div className={ styles.idp__template__list }>
+                        { templates.map((template) => {
 
                             return (
                                 <div
-                                    key={template.id}
-                                    className={styles.idp__template__card}
-                                    onClick={() => onTemplateSelected(template)}>
+                                    key={ template.id }
+                                    className={ styles.idp__template__card }
+                                    onClick={ () => onTemplateSelected(template) }>
                                     <div>
-                                        <h5>{template.name}</h5>
-                                        <small>{template.description}</small>
+                                        <h5>{ template.name }</h5>
+                                        <small>{ template.description }</small>
                                     </div>
-                                    <Avatar src={`/icons/${resolveIconName(template)}`} />
+                                    <Avatar src={ `/icons/${resolveIconName(template)}` } />
                                 </div>
-                            )
-                        })}
+                            );
+                        }) }
                     </div>
                 </div>
             </Modal.Body>
@@ -207,13 +209,15 @@ const EmptyIdentityProviderList = ({ onAddIdentityProviderClick }) => {
 
     return (
         <Stack alignItems="center" direction="column">
-            <AppSelectIcon style={{ opacity: .2 }} width="150px" height="150px" />
-            <p style={{ marginTop: "20px", fontSize: 14 }}>
+            <AppSelectIcon style={ { opacity: .2 } } width="150px" height="150px" />
+            <p style={ { marginTop: "20px", fontSize: 14 } }>
                 There are no identity providers available at the moment.
             </p>
-            <Button appearance="primary"
-                onClick={onAddIdentityProviderClick}
-                size="md" style={{ marginTop: "12px" }}>
+            <Button
+                appearance="primary"
+                onClick={ onAddIdentityProviderClick }
+                size="md"
+                style={ { marginTop: "12px" } }>
                 Add Identity Provider
             </Button>
         </Stack>
@@ -223,7 +227,7 @@ const EmptyIdentityProviderList = ({ onAddIdentityProviderClick }) => {
 
 const IdPCreationModal = ({ openModal, onSave, onCancel, template }) => {
 
-    const [formValues, setFormValues] = useState({});
+    const [ formValues, setFormValues ] = useState({});
 
     const handleModalClose = () => {
         onCancel();
@@ -240,43 +244,46 @@ const IdPCreationModal = ({ openModal, onSave, onCancel, template }) => {
 
                 return (
                     <GoogleIdentityProvider
-                        formValues={formValues}
-                        onFormValuesChange={setFormValues} />
-                )
+                        formValues={ formValues }
+                        onFormValuesChange={ setFormValues } />
+                );
             case FACEBOOK_ID:
 
                 return (
                     <FacebookIdentityProvider
-                        formValues={formValues}
-                        onFormValuesChange={setFormValues} />
-                )
+                        formValues={ formValues }
+                        onFormValuesChange={ setFormValues } />
+                );
             case ENTERPRISE_ID:
 
                 return (
                     <EnterpriseIdentityProvider
-                        formValues={formValues}
-                        onFormValuesChange={setFormValues} />
-                )
+                        formValues={ formValues }
+                        onFormValuesChange={ setFormValues } />
+                );
         }
     };
 
     return (
-        <Modal open={openModal}
-            onClose={handleModalClose}
-            onBackdropClick={handleModalClose}>
+        <Modal
+            open={ openModal }
+            onClose={ handleModalClose }
+            onBackdropClick={ handleModalClose }>
             <Modal.Header>
-                <Modal.Title><b>{template.name}</b></Modal.Title>
-                <p>{template.description}</p>
+                <Modal.Title><b>{ template.name }</b></Modal.Title>
+                <p>{ template.description }</p>
             </Modal.Header>
             <Modal.Body>
-                {resolveTemplateForm()}
+                { resolveTemplateForm() }
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={handleCreate}
+                <Button
+                    onClick={ handleCreate }
                     appearance="primary">
                     Create
                 </Button>
-                <Button onClick={handleModalClose}
+                <Button
+                    onClick={ handleModalClose }
                     appearance="subtle">
                     Cancel
                 </Button>
@@ -289,7 +296,7 @@ const IdPCreationModal = ({ openModal, onSave, onCancel, template }) => {
 const FacebookIdentityProvider = ({ onFormValuesChange, formValues }) => {
 
     return (
-        <Form onChange={onFormValuesChange} formValue={formValues}>
+        <Form onChange={ onFormValuesChange } formValue={ formValues }>
             <Form.Group controlId="application_name">
                 <Form.ControlLabel>Idp Name</Form.ControlLabel>
                 <Form.Control name="application_name" />
@@ -308,12 +315,12 @@ const FacebookIdentityProvider = ({ onFormValuesChange, formValues }) => {
         </Form>
     );
 
-}
+};
 
 const GoogleIdentityProvider = ({ onFormValuesChange, formValues }) => {
 
     return (
-        <Form onChange={onFormValuesChange} formValue={formValues}>
+        <Form onChange={ onFormValuesChange } formValue={ formValues }>
             <Form.Group controlId="application_name">
                 <Form.ControlLabel>Idp Name</Form.ControlLabel>
                 <Form.Control name="application_name" />
@@ -337,7 +344,7 @@ const GoogleIdentityProvider = ({ onFormValuesChange, formValues }) => {
 const EnterpriseIdentityProvider = ({ onFormValuesChange, formValues }) => {
 
     return (
-        <Form onChange={onFormValuesChange} formValue={formValues}>
+        <Form onChange={ onFormValuesChange } formValue={ formValues }>
             <Form.Group controlId="application_name">
                 <Form.ControlLabel>Idp Name</Form.ControlLabel>
                 <Form.Control name="application_name" />
@@ -374,4 +381,4 @@ const EnterpriseIdentityProvider = ({ onFormValuesChange, formValues }) => {
         </Form>
     );
 
-}
+};
