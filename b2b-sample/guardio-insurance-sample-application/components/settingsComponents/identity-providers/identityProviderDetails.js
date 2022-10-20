@@ -27,16 +27,23 @@ import decodeGetDetailedIdentityProvider from
     "../../../util/apiDecode/settings/identityProvider/decodeGetDetailedIdentityProvider";
 import { selectedTemplateBaesedonTemplateId } from "../../../util/util/applicationUtil/applicationUtil";
 
-export default function IdentityProviderDetails(props) {
+/**
+ * 
+ * @param prop - session, id (idp id), fetchAllIdPs (function to fetch all Idps)
+ * @returns 
+ */
+export default function IdentityProviderDetails(prop) {
+
+    const { session, id, fetchAllIdPs } = prop;
 
     const [ idpDetails, setIdpDetails ] = useState({});
     const [ activeKeyNav, setActiveKeyNav ] = useState("1");
 
     const fetchData = useCallback(async () => {
-        const res = await decodeGetDetailedIdentityProvider(props.session, props.id);
+        const res = await decodeGetDetailedIdentityProvider(session, id);
 
         setIdpDetails(res);
-    }, [ props ]);
+    }, [ session, id ]);
 
     useEffect(() => {
         fetchData();
@@ -50,10 +57,10 @@ export default function IdentityProviderDetails(props) {
         switch (activeKey) {
             case "1":
 
-                return <General session={ props.session } idpDetails={ idpDetails } fetchData={ fetchData } />;
+                return <General session={ session } idpDetails={ idpDetails } fetchData={ fetchData } />;
             case "2":
 
-                return <Settings session={ props.session } idpDetails={ idpDetails } />;
+                return <Settings session={ session } idpDetails={ idpDetails } />;
             case "3":
 
                 return <Raw idpDetails={ idpDetails } />;
@@ -67,14 +74,14 @@ export default function IdentityProviderDetails(props) {
                 header={
                     <IdentityProviderDetailsHeader idpDetails={ idpDetails } />
                 }
-                eventKey={ props.id }
-                id={ props.id }>
+                eventKey={ id }
+                id={ id }>
                 <div style={ { marginLeft: "25px", marginRight: "25px" } }>
                     <Stack direction="column" alignItems="stretch">
                         <ButtonGroupIdentityProviderDetails
-                            session={ props.session }
-                            id={ props.id }
-                            fetchAllIdPs={ props.fetchAllIdPs }
+                            session={ session }
+                            id={ id }
+                            fetchAllIdPs={ fetchAllIdPs }
                             idpDetails={ idpDetails } />
                         <IdentityProviderDetailsNav
                             activeKeyNav={ activeKeyNav }
@@ -90,7 +97,9 @@ export default function IdentityProviderDetails(props) {
     );
 }
 
-function IdentityProviderDetailsHeader(props) {
+function IdentityProviderDetailsHeader(prop) {
+
+    const { idpDetails } = prop;
 
     return (
         <Stack>
@@ -98,12 +107,12 @@ function IdentityProviderDetailsHeader(props) {
                 <Avatar
                     size="lg"
                     circle
-                    src={ props.idpDetails.image }
+                    src={ idpDetails.image }
                     alt="IDP image"
                 />
                 <Stack direction="column" justifyContent="flex-start" alignItems="stretch">
-                    <h4>{ props.idpDetails.name }</h4>
-                    <p>{ props.idpDetails.description }</p>
+                    <h4>{ idpDetails.name }</h4>
+                    <p>{ idpDetails.description }</p>
                 </Stack>
             </Stack>
 
@@ -111,10 +120,12 @@ function IdentityProviderDetailsHeader(props) {
     );
 }
 
-function IdentityProviderDetailsNav(props) {
+function IdentityProviderDetailsNav(prop) {
+
+    const { idpDetails, activeKeyNav, activeKeyNavSelect } = prop;
 
     const templateIdCheck = () => {
-        let selectedTemplate = selectedTemplateBaesedonTemplateId(props.idpDetails.templateId);
+        let selectedTemplate = selectedTemplateBaesedonTemplateId(idpDetails.templateId);
 
         if (selectedTemplate) {
             return true;
@@ -124,21 +135,21 @@ function IdentityProviderDetailsNav(props) {
     };
 
     return (
-        <Nav appearance="subtle" activeKey={ props.activeKeyNav } style={ { marginBottom: 10, marginTop: 15 } }>
+        <Nav appearance="subtle" activeKey={ activeKeyNav } style={ { marginBottom: 10, marginTop: 15 } }>
             <div
                 style={ {
-                    display: "flex",
-                    alignItems: "stretch"
+                    alignItems: "stretch",
+                    display: "flex"
                 } }>
                 <Nav.Item
                     eventKey="1"
-                    onSelect={ (eventKey) => props.activeKeyNavSelect(eventKey) }>General</Nav.Item>
+                    onSelect={ (eventKey) => activeKeyNavSelect(eventKey) }>General</Nav.Item>
 
                 {
                     templateIdCheck()
                         ? (<Nav.Item
                             eventKey="2"
-                            onSelect={ (eventKey) => props.activeKeyNavSelect(eventKey) }>
+                            onSelect={ (eventKey) => activeKeyNavSelect(eventKey) }>
 							Settings
                         </Nav.Item>)
                         : null
@@ -148,7 +159,7 @@ function IdentityProviderDetailsNav(props) {
 
                 <Nav.Item
                     eventKey="3"
-                    onSelect={ (eventKey) => props.activeKeyNavSelect(eventKey) }
+                    onSelect={ (eventKey) => activeKeyNavSelect(eventKey) }
                     icon={ <CodeIcon /> }>
 					Developer Tools
                 </Nav.Item>
