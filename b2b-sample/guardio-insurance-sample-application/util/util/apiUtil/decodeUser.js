@@ -18,16 +18,16 @@
 
 export default function decodeUser(user) {
 
-    if (user.id === undefined || user.userName === undefined || user.name === undefined || user.emails === undefined) {
+    if ( !user.id || !user.userName || !user.name  || !user.emails ) {
 
         return null;
     }
 
     return {
-        "id": user.id,
-        "username": user.userName,
-        "firstName": user.name != undefined ? (user.name.givenName ? user.name.givenName : "-") : "-",
-        "familyName": user.name != undefined ? (user.name.familyName ? user.name.familyName : "-") : "-",
-        "email": user.emails != undefined ? user.emails[0] : "-"
+        "id": user.id ? user.id : "-",
+        "username": user.userName ? user.userName : "-",
+        "firstName": user.name ? (user.name.givenName ? user.name.givenName : "-") : "-",
+        "familyName": user.name ? (user.name.familyName ? user.name.familyName : "-") : "-",
+        "email": user.emails ? user.emails[0] : "-"
     };
 }
