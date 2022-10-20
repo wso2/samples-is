@@ -26,13 +26,10 @@ import { errorTypeDialog, successTypeDialog } from '../util/dialog';
 import styles from '../../styles/Settings.module.css';
 import decodeAddUser from '../../util/apiDecode/settings/decodeAddUser';
 import { checkIfJSONisEmpty } from '../../util/util/common/common';
-import SuccessDialog from '../util/successDialog';
 
 export default function AddUserComponent(props) {
 
     const ADD_USER_COMPONENT = "ADD USER COMPONENT";
-
-    const [successDialogOpen, setSuccessDialogOpen] = useState(false);
 
     const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
 
@@ -115,10 +112,6 @@ export default function AddUserComponent(props) {
             .finally((response) => setLoadingDisplay(LOADING_DISPLAY_NONE))
     }
 
-    const closeSuccessDialog = () => {
-        setSuccessDialogOpen(false);
-    }
-
     return (
         <Modal backdrop="static" role="alertdialog" open={props.open} onClose={props.onClose} >
 
@@ -131,7 +124,6 @@ export default function AddUserComponent(props) {
 
             <Modal.Body>
                 <div className={styles.addUserMainDiv}>
-                    <SuccessDialog open={successDialogOpen} onClose={closeSuccessDialog} />
 
                     <div className={styles.addUserFormDiv}>
                         <Form
