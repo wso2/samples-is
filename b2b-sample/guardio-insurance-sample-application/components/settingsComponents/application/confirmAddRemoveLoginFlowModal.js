@@ -26,7 +26,14 @@ import { checkIfJSONisEmpty } from "../../../util/util/common/common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../util/util/frontendUtil/frontendUtil";
 import { errorTypeDialog, successTypeDialog } from "../../util/dialog";
 
-export default function ConfirmAddRemoveLoginFlowModal(props) {
+/**
+ * 
+ * @param prop - session, applicationDetail, idpDetails, idpIsinAuthSequence, openModal, onModalClose, fetchAllIdPs
+ * @returns Add/Remove from login flow button
+ */
+export default function ConfirmAddRemoveLoginFlowModal(prop) {
+
+    const { session, applicationDetail, idpDetails, idpIsinAuthSequence, openModal, onModalClose, fetchAllIdPs } = prop;
 
     const toaster = useToaster();
 
@@ -35,12 +42,12 @@ export default function ConfirmAddRemoveLoginFlowModal(props) {
     const onSubmit = async (patchApplicationAuthMethod) => {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
 
-        decodePatchApplicationAuthSteps(props.session, props.applicationDetail, props.idpDetails,
+        decodePatchApplicationAuthSteps(session, applicationDetail, idpDetails,
             patchApplicationAuthMethod)
-            .then((response) => props.idpIsinAuthSequence
+            .then((response) => idpIsinAuthSequence
                 ? onIdpRemovefromLoginFlow(response)
                 : onIdpAddToLoginFlow(response))
-            .finally((response) => setLoadingDisplay(LOADING_DISPLAY_NONE));
+            .finally(() => setLoadingDisplay(LOADING_DISPLAY_NONE));
     };
 
     const onRemove = async () => {
@@ -52,8 +59,8 @@ export default function ConfirmAddRemoveLoginFlowModal(props) {
     };
 
     const onSuccess = () => {
-        props.onModalClose();
-        props.fetchAllIdPs().finally();
+        onModalClose();
+        fetchAllIdPs().finally();
     };
 
     const onIdpAddToLoginFlow = (response) => {
@@ -76,12 +83,12 @@ export default function ConfirmAddRemoveLoginFlowModal(props) {
 
     return (
         <Modal
-            open={ props.openModal }
-            onClose={ props.onModalClose }>
+            open={ openModal }
+            onClose={ onModalClose }>
             <Modal.Header>
                 <Modal.Title><b>
                     {
-                        props.idpIsinAuthSequence
+                        idpIsinAuthSequence
                             ? "Remove Identity Provider from the Login Flow"
                             : "Add Identity Provider to the Login Flow"
                     }
@@ -89,21 +96,21 @@ export default function ConfirmAddRemoveLoginFlowModal(props) {
             </Modal.Header>
             <Modal.Body>
                 {
-                    checkIfJSONisEmpty(props.applicationDetail)
+                    checkIfJSONisEmpty(applicationDetail)
                         ? <EmptySelectApplicationBody />
                         : (<ApplicationListAvailable
-                            applicationDetail={ props.applicationDetail }
-                            idpIsinAuthSequence={ props.idpIsinAuthSequence } />)
+                            applicationDetail={ applicationDetail }
+                            idpIsinAuthSequence={ idpIsinAuthSequence } />)
                 }
             </Modal.Body>
             <Modal.Footer>
                 <Button
-                    onClick={ props.idpIsinAuthSequence ? onRemove : onAdd }
+                    onClick={ idpIsinAuthSequence ? onRemove : onAdd }
                     className={ stylesSettings.addUserButton }
                     appearance="primary">
                     Confirm
                 </Button>
-                <Button onClick={ props.onModalClose } className={ stylesSettings.addUserButton } appearance="ghost">
+                <Button onClick={ onModalClose } className={ stylesSettings.addUserButton } appearance="ghost">
                     Cancel
                 </Button>
             </Modal.Footer>
@@ -116,6 +123,10 @@ export default function ConfirmAddRemoveLoginFlowModal(props) {
     );
 }
 
+/**
+ * 
+ * @returns - When then WSO2IS_APP_NAME is not the correct applicaiton, it will show this section
+ */
 function EmptySelectApplicationBody() {
 
     return (
@@ -137,21 +148,28 @@ function EmptySelectApplicationBody() {
     );
 }
 
-function ApplicationListAvailable(props) {
+/**
+ * 
+ * @param prop - idpIsinAuthSequence, applicationDetail
+ * @returns  When then WSO2IS_APP_NAME is the correct applicaiton, it will show this section 
+ */
+function ApplicationListAvailable(prop) {
+
+    const { idpIsinAuthSequence, applicationDetail } = prop;
 
     return (
         <div>
             {
-                props.idpIsinAuthSequence
+                idpIsinAuthSequence
                     ? <p>This will remove the Idp as an authentication step from all applicaitons</p>
                     : (<p>This will add the Idp as an authentication step to the authentication flow of the following
                         applicaiton</p>)
             }
 
             {
-                props.idpIsinAuthSequence
+                idpIsinAuthSequence
                     ? null
-                    : <ApplicationListItem application={ props.applicationDetail } />
+                    : <ApplicationListItem application={ applicationDetail } />
             }
 
             <p>Please confirm your action to procced</p>
@@ -161,19 +179,26 @@ function ApplicationListAvailable(props) {
 
 }
 
-function ApplicationListItem(props) {
+/**
+ * 
+ * @param prop - application
+ * @returns The component to show the applicaiton name and the description
+ */
+function ApplicationListItem(prop) {
+
+    const { application } = prop;
 
     return (
-        <div style={ { marginTop: 15, marginBottom: 15 } }>
+        <div style={ { marginBottom: 15, marginTop: 15 } }>
             <Grid fluid>
                 <Row>
                     <Col>
-                        <Avatar>{ props.application.name[0] }</Avatar>
+                        <Avatar>{ application.name[0] }</Avatar>
                     </Col>
 
                     <Col>
-                        <div>{ props.application.name }</div>
-                        <p>{ props.application.description }</p>
+                        <div>{ application.name }</div>
+                        <p>{ application.description }</p>
                     </Col>
                 </Row>
             </Grid>
