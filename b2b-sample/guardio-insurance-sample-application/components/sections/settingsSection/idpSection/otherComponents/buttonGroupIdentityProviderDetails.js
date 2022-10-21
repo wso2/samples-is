@@ -26,8 +26,8 @@ import decodeDeleteIdentityProvider from
     "../../../../../util/apiDecode/settings/identityProvider/decodeDeleteIdentityProvider";
 import { checkIfIdpIsinAuthSequence } from "../../../../../util/util/applicationUtil/applicationUtil";
 import { checkIfJSONisEmpty } from "../../../../../util/util/common/common";
-import { errorTypeDialog, successTypeDialog } from "../../../../util/dialog";
-import ConfirmAddRemoveLoginFlowModal from "../../../../settingsComponents/application/confirmAddRemoveLoginFlowModal";
+import { errorTypeDialog, successTypeDialog } from "../../../../common/dialog";
+import ConfirmAddRemoveLoginFlowModal from "./confirmAddRemoveLoginFlowModal";
 
 /**
  * 

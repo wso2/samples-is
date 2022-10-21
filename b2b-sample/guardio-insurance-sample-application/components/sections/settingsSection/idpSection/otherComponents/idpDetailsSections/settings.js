@@ -28,7 +28,7 @@ import decodeUpdateFederatedAuthenticators from
     "../../../../../../util/apiDecode/settings/identityProvider/decodeUpdateFederatedAuthenticators";
 import { checkIfJSONisEmpty } from "../../../../../../util/util/common/common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../../util/util/frontendUtil/frontendUtil";
-import { errorTypeDialog, successTypeDialog } from "../../../../../util/dialog";
+import { errorTypeDialog, successTypeDialog } from "../../../../../common/dialog";
 
 /**
  * 

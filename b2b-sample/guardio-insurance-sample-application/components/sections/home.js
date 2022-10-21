@@ -26,9 +26,9 @@ import styles from "../../styles/Settings.module.css";
 import { checkCustomization, hideBasedOnScopes } from "../../util/util/frontendUtil/frontendUtil";
 import { orgSignout } from "../../util/util/routerUtil/routerUtil";
 import LogoComponent from "../logo/logoComponent";
-import DashboardSectionComponent from "../sections/dashboardSection/dashboardSectionComponent";
-import IdpSectionComponent from "../sections/settingsSection/idpSection/idpSectionComponent";
-import ManageUserSectionComponent from "../sections/settingsSection/manageUserSection/manageUserSectionComponent";
+import DashboardSectionComponent from "./dashboardSection/dashboardSectionComponent";
+import IdpSectionComponent from "./settingsSection/idpSection/idpSectionComponent";
+import ManageUserSectionComponent from "./settingsSection/manageUserSection/manageUserSectionComponent";
 
 /**
  * 

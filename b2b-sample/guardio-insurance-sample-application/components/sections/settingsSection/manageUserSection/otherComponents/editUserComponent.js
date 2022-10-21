@@ -25,7 +25,7 @@ import styles from "../../../../../styles/util.module.css";
 import decodeEditUser from "../../../../../util/apiDecode/settings/decodeEditUser";
 import { checkIfJSONisEmpty } from "../../../../../util/util/common/common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../util/util/frontendUtil/frontendUtil";
-import { errorTypeDialog, successTypeDialog } from "../../../../util/dialog";
+import { errorTypeDialog, successTypeDialog } from "../../../../common/dialog";
 
 /**
  * 

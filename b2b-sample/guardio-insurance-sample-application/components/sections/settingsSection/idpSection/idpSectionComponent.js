@@ -26,10 +26,10 @@ import decodeCreateIdentityProvider from
 import decodeListAllIdentityProviders from
     "../../../../util/apiDecode/settings/identityProvider/decodeListAllIdentityProviders";
 import { EMPTY_STRING, ENTERPRISE_ID, FACEBOOK_ID, GOOGLE_ID } from "../../../../util/util/common/common";
-import Enterprise from "../../../data/templates/enterprise-identity-provider.json";
-import Google from "../../../data/templates/google.json";
-import { errorTypeDialog, successTypeDialog } from "../../../util/dialog";
-import SettingsTitle from "../../../util/settingsTitle";
+import Enterprise from "./data/templates/enterprise-identity-provider.json";
+import Google from "./data/templates/google.json";
+import { errorTypeDialog, successTypeDialog } from "../../../common/dialog";
+import SettingsTitle from "../../../common/settingsTitle";
 
 /**
  * 

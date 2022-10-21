@@ -18,7 +18,7 @@
 
 import { getSession } from "next-auth/react";
 import React, { useEffect } from "react";
-import Home from "../../components/settingsComponents/home";
+import Home from "../../components/sections/home";
 import { orgSignin, redirect } from "../../util/util/routerUtil/routerUtil";
 
 export async function getServerSideProps(context) {

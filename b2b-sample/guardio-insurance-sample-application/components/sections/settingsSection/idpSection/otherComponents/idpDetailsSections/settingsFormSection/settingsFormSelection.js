@@ -23,8 +23,8 @@ import { InputGroup, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
 import { selectedTemplateBaesedonTemplateId } from "../../../../../../../util/util/applicationUtil/applicationUtil";
 import { copyTheTextToClipboard } from "../../../../../../../util/util/common/common";
-import { infoTypeDialog } from "../../../../../../util/dialog";
-import HelperText from "../../../../../../util/helperText";
+import { infoTypeDialog } from "../../../../../../common/dialog";
+import HelperText from "../../../../../../common/helperText";
 
 /**
  * 
