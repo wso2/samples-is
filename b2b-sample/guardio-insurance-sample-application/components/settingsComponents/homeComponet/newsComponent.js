@@ -25,7 +25,14 @@ import image3 from "../../../public/internal/news3.jpeg";
 import image4 from "../../../public/internal/news4.jpeg";
 import { getCurrentDate } from "../../../util/util/common/common";
 
-export default function NewsComponent(props) {
+/**
+ * 
+ * @param prop - header (header text), body (body text)
+ * @returns Single news component
+ */
+export default function NewsComponent(prop) {
+
+    const { header, body } = prop;
 
     return (
         <div>
@@ -34,8 +41,8 @@ export default function NewsComponent(props) {
                 <p><br /></p>
                 <p>{ getCurrentDate() }</p>
                 <br />
-                <h4>{ props.header }</h4>
-                <p>{ props.body }</p>
+                <h4>{ header }</h4>
+                <p>{ body }</p>
             </Panel>
         </div>
     );

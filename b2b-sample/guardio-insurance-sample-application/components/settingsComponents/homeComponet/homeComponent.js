@@ -16,29 +16,34 @@
  * under the License.
  */
 
+import React, { useEffect, useState } from "react";
 import { Panel } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
 import LatestNewsComponent from "./latestNewsComponent";
 import UserDetails from "./userDetails";
 import styles from "../../../styles/Settings.module.css";
-
-import React, { useEffect, useState } from "react";
-
 import decodeMe from "../../../util/apiDecode/dashboard/decodeMe";
 import LogoComponent from "../logoComponent";
 
-export default function HomeComponent(props) {
+/**
+ * 
+ * @param prop - session, orgName
+ * @returns Dashboard interface section
+ */
+export default function HomeComponent(prop) {
+
+    const { session, orgName } = prop;
 
     const [ me, setMe ] = useState(null);
 
     useEffect(() => {
         async function fetchData() {
-            const res = await decodeMe(props.session);
+            const res = await decodeMe(session);
 
             setMe(res);
         }
         fetchData();
-    }, [ props ]);
+    }, [ session ]);
 
     return (
         <div className={ styles.homeMainPanelDiv }>
@@ -46,11 +51,11 @@ export default function HomeComponent(props) {
                 <div className={ styles.homePanel }>
                     <LogoComponent imageSize="medium" />
                     <hr />
-                    <h4 className={ styles.nameTag }>{ props.orgName }</h4>
+                    <h4 className={ styles.nameTag }>{ orgName }</h4>
                 </div>
             </Panel>
 
-            <UserDetails me={ me } session={ props.session } />
+            <UserDetails me={ me } session={ session } />
 
             <LatestNewsComponent />
         </div>
