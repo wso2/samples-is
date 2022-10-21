@@ -18,7 +18,7 @@
 
 import Image from "next/image";
 import React from "react";
-import logoImage from "../../public/logo.png";
+import logoImage from "../../../public/logo.png";
 
 /**
  * 

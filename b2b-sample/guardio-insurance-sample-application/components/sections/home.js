@@ -25,7 +25,7 @@ import Custom500 from "../../pages/500";
 import styles from "../../styles/Settings.module.css";
 import { checkCustomization, hideBasedOnScopes } from "../../util/util/frontendUtil/frontendUtil";
 import { orgSignout } from "../../util/util/routerUtil/routerUtil";
-import LogoComponent from "../logo/logoComponent";
+import LogoComponent from "../common/logo/logoComponent";
 import DashboardSectionComponent from "./dashboardSection/dashboardSectionComponent";
 import IdpSectionComponent from "./settingsSection/idpSection/idpSectionComponent";
 import ManageUserSectionComponent from "./settingsSection/manageUserSection/manageUserSectionComponent";

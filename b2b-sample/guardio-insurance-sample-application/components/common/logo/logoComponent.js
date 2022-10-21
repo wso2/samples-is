@@ -18,8 +18,8 @@
 
 import React from "react";
 import Logo from "./logo";
-import config from "../../config.json";
-import styles from "../../styles/Settings.module.css";
+import config from "../../../config.json";
+import styles from "../../../styles/Settings.module.css";
 
 /**
  * 
