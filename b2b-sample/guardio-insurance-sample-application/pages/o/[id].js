@@ -61,7 +61,7 @@ export default function Org(props) {
 			? <Settings 
 			        orgId={props.session.orgId} 
 			        name={props.session.orgName} 
-			        session={props. Session}
+			        session={props. session}
 				colorTheme={'blue'} 
 			/>
 			: null
