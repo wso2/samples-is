@@ -18,18 +18,18 @@
 
 import React, { useCallback, useEffect, useState } from "react";
 import { Button, Stack, Table } from "rsuite";
-import AddUserComponent from "./addUserComponent";
-import styles from "../../styles/Settings.module.css";
-import decodeViewUsers from "../../util/apiDecode/settings/decodeViewUsers";
-import EditUserComponent from "../editUser/editUserComponent";
-import SettingsTitle from "../util/settingsTitle";
+import AddUserComponent from "./otherComponents/addUserComponent";
+import styles from "../../../../styles/Settings.module.css";
+import decodeViewUsers from "../../../../util/apiDecode/settings/decodeViewUsers";
+import EditUserComponent from "./otherComponents/editUserComponent";
+import SettingsTitle from "../../../util/settingsTitle";
 
 /**
  * 
  * @param prop - orgName, orgId, session
  * @returns A component that will show the users in a table view
  */
-export default function ViewUserComponent(prop) {
+export default function ManageUserSectionComponent(prop) {
 
     const { orgName, orgId, session } = prop;
 

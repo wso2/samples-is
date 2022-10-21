@@ -20,12 +20,11 @@ import React, { useState } from "react";
 import { Field, Form } from "react-final-form";
 import { Button, ButtonToolbar, Loader, Modal, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
-
-import styles from "../../styles/Settings.module.css";
-import decodeAddUser from "../../util/apiDecode/settings/decodeAddUser";
-import { checkIfJSONisEmpty } from "../../util/util/common/common";
-import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../util/util/frontendUtil/frontendUtil";
-import { errorTypeDialog, successTypeDialog } from "../util/dialog";
+import styles from "../../../../../styles/Settings.module.css";
+import decodeAddUser from "../../../../../util/apiDecode/settings/decodeAddUser";
+import { checkIfJSONisEmpty } from "../../../../../util/util/common/common";
+import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../util/util/frontendUtil/frontendUtil";
+import { errorTypeDialog, successTypeDialog } from "../../../../util/dialog";
 
 /**
  * 

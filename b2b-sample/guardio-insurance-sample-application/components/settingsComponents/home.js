@@ -27,15 +27,15 @@ import { checkCustomization, hideBasedOnScopes } from "../../util/util/frontendU
 import { orgSignout } from "../../util/util/routerUtil/routerUtil";
 import LogoComponent from "../logo/logoComponent";
 import DashboardSectionComponent from "../sections/dashboardSection/dashboardSectionComponent";
+import ManageUserSectionComponent from "../sections/settingsSection/manageUserSection/manageUserSectionComponent";
 import IdentityProviders from "./identity-providers/identity-providers";
-import ViewUserComponent from "./viewUserComponent";
 
 /**
  * 
  * @param prop - orgId, name, session, colorTheme
- * @returns The admin settings section. Mainly side nav bar and the section to show other settings sections.
+ * @returns The home section. Mainly side nav bar and the section to show other settings sections.
  */
-export default function Settings(prop) {
+export default function Home(prop) {
 
     const { name, orgId, session, colorTheme } = prop;
 
@@ -48,7 +48,7 @@ export default function Settings(prop) {
                 return <DashboardSectionComponent orgName={ name } orgId={ orgId } session={ session } />;
             case "2-1":
 
-                return <ViewUserComponent orgName={ name } orgId={ orgId } session={ session } />;
+                return <ManageUserSectionComponent orgName={ name } orgId={ orgId } session={ session } />;
             case "2-3":
 
                 return <IdentityProviders orgName={ name } orgId={ orgId } session={ session } />;

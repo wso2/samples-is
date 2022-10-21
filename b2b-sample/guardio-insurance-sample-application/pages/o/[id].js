@@ -18,8 +18,7 @@
 
 import { getSession } from "next-auth/react";
 import React, { useEffect } from "react";
-
-import Settings from "../../components/settingsComponents/settings";
+import Home from "../../components/settingsComponents/home";
 import { orgSignin, redirect } from "../../util/util/routerUtil/routerUtil";
 
 export async function getServerSideProps(context) {
@@ -66,7 +65,7 @@ export default function Org(prop) {
 
     return (
         session
-            ? (<Settings
+            ? (<Home
                 orgId={ session.orgId }
                 name={ session.orgName }
                 session={ session }
