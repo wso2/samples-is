@@ -47,22 +47,29 @@ export async function getServerSideProps(context) {
 
 }
 
-export default function Org(props) {
+/**
+ * 
+ * @param prop - session, routerQuery (orgId)
+ * @returns Organization distinct interace
+ */
+export default function Org(prop) {
+
+    const { session, routerQuery } = prop;
 
     useEffect(() => {
-        if (props.routerQuery) {
-            orgSignin(props.routerQuery);
+        if (routerQuery) {
+            orgSignin(routerQuery);
 
             return;
         }
-    }, [ props.routerQuery ]);
+    }, [ routerQuery ]);
 
     return (
-        props.session
+        session
             ? (<Settings
-                orgId={ props.session.orgId }
-                name={ props.session.orgName }
-                session={ props.session }
+                orgId={ session.orgId }
+                name={ session.orgName }
+                session={ session }
                 colorTheme={ "blue" } />)
             : null
     );
