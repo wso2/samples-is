@@ -21,14 +21,14 @@ import GearCircleIcon from "@rsuite/icons/legacy/GearCircle";
 import React, { useEffect, useState } from "react";
 import { Button, Nav, Sidenav } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
+import DashboardSectionComponent from "./dashboardSection/dashboardSectionComponent";
+import IdpSectionComponent from "./settingsSection/idpSection/idpSectionComponent";
+import ManageUserSectionComponent from "./settingsSection/manageUserSection/manageUserSectionComponent";
 import Custom500 from "../../pages/500";
 import styles from "../../styles/Settings.module.css";
 import { checkCustomization, hideBasedOnScopes } from "../../util/util/frontendUtil/frontendUtil";
 import { orgSignout } from "../../util/util/routerUtil/routerUtil";
 import LogoComponent from "../common/logo/logoComponent";
-import DashboardSectionComponent from "./dashboardSection/dashboardSectionComponent";
-import IdpSectionComponent from "./settingsSection/idpSection/idpSectionComponent";
-import ManageUserSectionComponent from "./settingsSection/manageUserSection/manageUserSectionComponent";
 
 /**
  * 

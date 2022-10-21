@@ -19,9 +19,9 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Button, Stack, Table } from "rsuite";
 import AddUserComponent from "./otherComponents/addUserComponent";
+import EditUserComponent from "./otherComponents/editUserComponent";
 import styles from "../../../../styles/Settings.module.css";
 import decodeViewUsers from "../../../../util/apiDecode/settings/decodeViewUsers";
-import EditUserComponent from "./otherComponents/editUserComponent";
 import SettingsTitle from "../../../common/settingsTitle";
 
 /**

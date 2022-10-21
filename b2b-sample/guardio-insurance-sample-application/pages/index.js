@@ -21,7 +21,7 @@ import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { Button } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
-import LogoComponent from "../components/logo/logoComponent";
+import LogoComponent from "../components/common/logo/logoComponent";
 import homeImage from "../public/internal/home.jpeg";
 import styles from "../styles/Home.module.css";
 

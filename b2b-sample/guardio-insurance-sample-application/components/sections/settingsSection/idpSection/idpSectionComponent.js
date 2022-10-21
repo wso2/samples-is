@@ -19,6 +19,8 @@
 import AppSelectIcon from "@rsuite/icons/AppSelect";
 import React, { useCallback, useEffect, useState } from "react";
 import { Avatar, Button, Container, FlexboxGrid, Form, Modal, Stack, useToaster } from "rsuite";
+import Enterprise from "./data/templates/enterprise-identity-provider.json";
+import Google from "./data/templates/google.json";
 import IdentityProviderList from "./otherComponents/identityProviderList";
 import styles from "../../../../styles/idp.module.css";
 import decodeCreateIdentityProvider from
@@ -26,8 +28,6 @@ import decodeCreateIdentityProvider from
 import decodeListAllIdentityProviders from
     "../../../../util/apiDecode/settings/identityProvider/decodeListAllIdentityProviders";
 import { EMPTY_STRING, ENTERPRISE_ID, FACEBOOK_ID, GOOGLE_ID } from "../../../../util/util/common/common";
-import Enterprise from "./data/templates/enterprise-identity-provider.json";
-import Google from "./data/templates/google.json";
 import { errorTypeDialog, successTypeDialog } from "../../../common/dialog";
 import SettingsTitle from "../../../common/settingsTitle";
 
