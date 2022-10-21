@@ -30,7 +30,6 @@ export default async function callListCurrentApplication(session) {
 
         return data;
     } catch (err) {
-
         return null;
     }
 }
