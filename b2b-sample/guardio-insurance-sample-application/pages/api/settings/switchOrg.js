@@ -19,27 +19,22 @@
 import config from "../../../config.json";
 import { dataNotRecievedError, notPostError } from "../../../util/util/apiUtil/localResErrors";
 
-const SWITCH_API_CALL = "Switch API Call";
+const getBasicAuth = () => Buffer.from(`${config.WSO2IS_CLIENT_ID}:${config.WSO2IS_CLIENT_SECRET}`).toString("base64");
 
-function getBasicAuth() {
-
-    return Buffer.from(`${config.WSO2IS_CLIENT_ID}:${config.WSO2IS_CLIENT_SECRET}`).toString("base64");
-}
-
-function getSwitchHeader() {
+const getSwitchHeader = () => {
 
     const headers = {
+        "Access-Control-Allow-Credentials": true,
+        "Access-Control-Allow-Origin": config.WSO2IS_CLIENT_URL,
         "Authorization": `Basic ${getBasicAuth()}`,
         "accept": "application/json",
-        "content-type": "application/x-www-form-urlencoded",
-        "Access-Control-Allow-Credentials": true,
-        "Access-Control-Allow-Origin": config.WSO2IS_CLIENT_URL
+        "content-type": "application/x-www-form-urlencoded"
     };
 
     return headers;
-}
+};
 
-function getSwitchBody(subOrgId, accessToken) {
+const getSwitchBody = (subOrgId, accessToken) => {
     const body = {
         "grant_type": "organization_switch",
         "scope": config.WSO2IS_SCOPES.join(" "),
@@ -48,19 +43,19 @@ function getSwitchBody(subOrgId, accessToken) {
     };
 
     return body;
-}
+};
 
-function getSwitchResponse(subOrgId, accessToken) {
+const getSwitchResponse = (subOrgId, accessToken) => {
     const request = {
-        method: "POST",
+        body: new URLSearchParams(getSwitchBody(subOrgId, accessToken)).toString(),
         headers: getSwitchHeader(),
-        body: new URLSearchParams(getSwitchBody(subOrgId, accessToken)).toString()
+        method: "POST"
     };
 
     return request;
-}
+};
 
-function getSwitchEndpoint() {
+const getSwitchEndpoint = () => {
     if (config.WSO2IS_TENANT_NAME === "carbon.super") {
         return `${config.WSO2IS_HOST}/oauth2/token`;
     }
@@ -73,8 +68,14 @@ function getSwitchEndpoint() {
         return `${config.WSO2IS_HOST}/o/${config.WSO2IS_TENANT_NAME}/oauth2/token`;
     }
 
-}
+};
 
+/**
+ * 
+ * @param req - request object
+ * @param res - response object
+ * @returns whether the switch call was successful
+ */
 export default async function switchOrg(req, res) {
 
     if (req.method !== "POST") {
