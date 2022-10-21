@@ -43,8 +43,9 @@ function orgSignin(orgId) {
     }
 }
 
-function orgSignout() {
-    signOut({ callbackUrl: "/" });
+async function orgSignout(beforeFunc, afterFunc) {
+    beforeFunc();
+    signOut({ callbackUrl: "/" }).finally(()=>afterFunc());
 }
 
 function emptySession(session) {

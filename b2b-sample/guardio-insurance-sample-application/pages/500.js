@@ -17,51 +17,58 @@
  */
 
 import Image from "next/image";
-import React from "react";
-import { Button, Col, Grid, Row } from "rsuite";
+import React, { useState } from "react";
+import { Button, Col, Grid, Loader, Row } from "rsuite";
 import error500Image from "../public/internal/500.svg";
 import style from "../styles/Error.module.css";
 import { orgSignout } from "../util/util/routerUtil/routerUtil";
+import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../util/util/frontendUtil/frontendUtil";
 
 export default function Custom500() {
-  
-    const goBack = () => orgSignout();
+    
+    const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
+
+    const goBack = async () => await orgSignout(() => setLoadingDisplay(LOADING_DISPLAY_BLOCK),
+        () => setLoadingDisplay(LOADING_DISPLAY_NONE));
 
     return (
-        <div className={ style.errorMainContent }>
+        <div className={style.errorMainContent}>
+            <div style={loadingDisplay}>
+                <Loader size="lg" backdrop content="User is logging out" vertical />
+            </div>
             <Grid>
                 <Row>
-                    <Col sm={ 24 } md={ 6 } lg={ 3 } />
+                    <Col sm={24} md={6} lg={3} />
 
-                    <Col sm={ 12 } md={ 12 } lg={ 18 }>
+                    <Col sm={12} md={12} lg={18}>
 
-                        <div className={ style.errorMainDiv }>
+                        <div className={style.errorMainDiv}>
 
-                            <Image src={ error500Image } width={ 500 } alt="404 image" />
+                            <Image src={error500Image} width={500} alt="404 image" />
 
                             <p
-                                style={ {
+                                style={{
                                     position: "relative",
                                     textAlign: "center",
                                     top: -100
-                                } }><b>It looks like you have been inactive for a long time.</b> <br />
-                        When you click on <i>Go back</i>, we will try to recover the session if it exists. <br />
-                        If you don&apos;t have an active session, you will be redirected to the login page.</p>
+                                }}><b>It looks like you have been inactive for a long time.</b> <br />
+                                When you click on <i>Go back</i>, we will try to recover the session if it exists. <br />
+                                If you don&apos;t have an active session, you will be redirected to the login page.</p>
                             <Button
-                                style={ {
+                                style={{
                                     position: "relative",
                                     textAlign: "center",
                                     top: -100
-                                } }
+                                }}
                                 size="lg"
                                 appearance="ghost"
-                                onClick={ goBack }>Go Back</Button>
+                                onClick={goBack}>Go Back</Button>
 
                         </div>
 
                     </Col>
 
-                    <Col sm={ 24 } md={ 6 } lg={ 3 } />
+                    <Col sm={24} md={6} lg={3} />
 
                 </Row>
             </Grid>
