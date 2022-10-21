@@ -82,7 +82,6 @@ function getOrgName(token) {
     try {
         return config.SAMPLE_ORGS[0].name;
     } catch (error) {
-
         return parseJwt(token).org_name;
     }
 }
