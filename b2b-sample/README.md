@@ -8,5 +8,7 @@ Here is a list of sample applications to try out B2B Scenarios.
 > different internal organizational applications. **Guardio-SaaS-App** is one such applicaiton. Here, Guardio Insurance
 > is using the WSO2 Identity Server B2B Private CIAM Solution, therefore it’s
 > configured as the super organization.
-
-[Documentation for setting this sample application `Guardio`](https://ciamcloud.docs.wso2.com/en/latest/guides/organization-login/try-organization-login/) 
+>
+> Additional comments are in the app README.md file.
+>
+> [Documentation for setting this sample application `Guardio`](https://ciamcloud.docs.wso2.com/en/latest/guides/organization-login/try-organization-login/) 

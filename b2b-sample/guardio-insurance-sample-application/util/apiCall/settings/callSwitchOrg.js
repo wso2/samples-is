@@ -17,14 +17,15 @@
  */
 
 import config from '../../../config.json';
-import { getInternalApiRequestOptionsWithParam } from '../../util/apiUtil/getInteralApiRequestOptions';
+import { geetInternalApiRequestOptionsForSwitchCallWithParam } from '../../util/apiUtil/getInteralApiRequestOptions';
 
 export default async function callSwitchOrg(subOrgId, accessToken) {
 
     try {
+
         const res = await fetch(
             `${config.WSO2IS_CLIENT_URL}/api/settings/switchOrg`,
-            getInternalApiRequestOptionsWithParam(null, subOrgId, accessToken)
+            geetInternalApiRequestOptionsForSwitchCallWithParam(subOrgId, accessToken)
         );
 
         if (res.status != 200) {
@@ -36,7 +37,7 @@ export default async function callSwitchOrg(subOrgId, accessToken) {
 
         return data;
     } catch (err) {
-        
+
         return null;
     }
 }

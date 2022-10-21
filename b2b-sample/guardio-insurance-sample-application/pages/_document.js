@@ -21,11 +21,14 @@ import Document, { Head, Html, Main, NextScript } from 'next/document';
 export default class MyDocument extends Document {
   render() {
     const pageProps = this.props?.__NEXT_DATA__?.props?.pageProps;
-        
+
     return (
       <Html>
         <Head>
           <link rel="shortcut icon" href="/favicon.png" />
+          <meta httpEquiv='cache-control' content='no-cache' />
+          <meta httpEquiv='expires' content='0' />
+          <meta httpEquiv='pragma' content='no-cache' />
         </Head>
         <body className={pageProps.session ? 'dark-mode' : 'light-mode'}>
           <Main />

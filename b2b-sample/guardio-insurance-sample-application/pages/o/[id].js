@@ -16,40 +16,54 @@
  * under the License.
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { getSession } from 'next-auth/react';
 import Settings from '../../components/settingsComponents/settings';
-import { getOrg, getRouterQuery } from '../../util/util/orgUtil/orgUtil';
-import { parseCookies, redirect } from '../../util/util/routerUtil/routerUtil';
+import { orgSignin, redirect } from '../../util/util/routerUtil/routerUtil';
 
 export async function getServerSideProps(context) {
 
-  const routerQuery = context.query.id;
-  const session = await getSession(context);
-  let setOrg = {};
+	const routerQuery = context.query.id;
+	const session = await getSession(context);
 
-  const cookies = parseCookies(context.req);
-  const subOrgId = cookies.orgId;
+	if (session === null || session === undefined) {
 
-  if (session === null || session === undefined || session.expires || session.error
-    || routerQuery !== getRouterQuery(subOrgId)) {
+		return {
+			props: { routerQuery },
+		};
+	} else {
+		if (routerQuery !== session.orgId) {
 
-    return redirect(`/o/moveOrg?o=${routerQuery}`);
-  } else {
-    setOrg = getOrg(subOrgId);
+			return redirect('/404');
+		} else {
 
-    return {
-      props: { session, setOrg },
-    }
-  }
+			return {
+				props: { session },
+			}
+		}
+
+	}
 
 }
 
 export default function Org(props) {
 
-  return (
-    <Settings orgId={props.setOrg.id} routerQuery={props.setOrg.routerQuery} name={props.setOrg.name}
-      session={props.session} colorTheme={props.setOrg.colorTheme} />
-  )
+	useEffect(() => {
+		if (props.routerQuery) {
+			orgSignin(props.routerQuery);
+			return;
+		}
+	}, [props.routerQuery]);
+
+	return (
+		props.session
+			? <Settings 
+			        orgId={props.session.orgId} 
+			        name={props.session.orgName} 
+			        session={props. session}
+				colorTheme={'blue'} 
+			/>
+			: null
+	)
 }

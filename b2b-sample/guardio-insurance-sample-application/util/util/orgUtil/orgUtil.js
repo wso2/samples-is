@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import FrontCookie from 'js-cookie';
 import config from '../../../config.json';
 
 function checkAdmin(scopes) {
@@ -30,6 +31,14 @@ function checkAdmin(scopes) {
     }
 
     return true;
+}
+
+function setOrgId(orgId) {
+    FrontCookie.set("orgId", orgId);
+}
+
+function setOrgName(orgName) {
+    FrontCookie.set("orgName", orgName);
 }
 
 function getRouterQuery(orgid) {
@@ -73,5 +82,5 @@ function getOrgIdFromQuery(query) {
 }
 
 module.exports = {
-    checkAdmin, getRouterQuery, getOrg, getOrgIdfromRouterQuery, getOrgIdFromQuery
+    checkAdmin, getRouterQuery, getOrg, getOrgIdfromRouterQuery, getOrgIdFromQuery, setOrgId, setOrgName
 };

@@ -291,9 +291,9 @@ const FacebookIdentityProvider = ({ onFormValuesChange, formValues }) => {
     return (
         <Form onChange={onFormValuesChange} formValue={formValues}>
             <Form.Group controlId="application_name">
-                <Form.ControlLabel>Application Name</Form.ControlLabel>
+                <Form.ControlLabel>Idp Name</Form.ControlLabel>
                 <Form.Control name="application_name" />
-                <Form.HelpText tooltip>Application Name is Required</Form.HelpText>
+                <Form.HelpText tooltip>Idp Name is Required</Form.HelpText>
             </Form.Group>
             <Form.Group controlId="client_id">
                 <Form.ControlLabel>Application ID</Form.ControlLabel>
@@ -315,9 +315,9 @@ const GoogleIdentityProvider = ({ onFormValuesChange, formValues }) => {
     return (
         <Form onChange={onFormValuesChange} formValue={formValues}>
             <Form.Group controlId="application_name">
-                <Form.ControlLabel>Application Name</Form.ControlLabel>
+                <Form.ControlLabel>Idp Name</Form.ControlLabel>
                 <Form.Control name="application_name" />
-                <Form.HelpText tooltip>Application Name is Required</Form.HelpText>
+                <Form.HelpText tooltip>Idp Name is Required</Form.HelpText>
             </Form.Group>
             <Form.Group controlId="client_id">
                 <Form.ControlLabel>Client ID</Form.ControlLabel>
@@ -339,9 +339,9 @@ const EnterpriseIdentityProvider = ({ onFormValuesChange, formValues }) => {
     return (
         <Form onChange={onFormValuesChange} formValue={formValues}>
             <Form.Group controlId="application_name">
-                <Form.ControlLabel>Application Name</Form.ControlLabel>
+                <Form.ControlLabel>Idp Name</Form.ControlLabel>
                 <Form.Control name="application_name" />
-                <Form.HelpText tooltip>Application Name is Required</Form.HelpText>
+                <Form.HelpText tooltip>Idp Name is Required</Form.HelpText>
             </Form.Group>
             <Form.Group controlId="client_id">
                 <Form.ControlLabel>Client ID</Form.ControlLabel>

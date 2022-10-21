@@ -20,6 +20,7 @@ import cookie from "cookie";
 import FrontCookie from 'js-cookie';
 import { signIn, signOut } from 'next-auth/react';
 import { getRouterQuery } from '../orgUtil/orgUtil';
+import config from '../../../config.json';
 
 function redirect(path) {
 
@@ -36,10 +37,13 @@ function parseCookies(req) {
     return cookie.parse(req ? req.headers.cookie || "" : document.cookie);
 }
 
-function orgSignin(subOrgId) {
-    FrontCookie.set("orgId", subOrgId);
-
-    signIn("wso2is", { callbackUrl: `/o/${getRouterQuery(subOrgId)}` }, { orgId: subOrgId });
+function orgSignin(orgId) {
+    if (orgId) {
+        FrontCookie.set("orgId", orgId);
+        signIn("wso2is", { callbackUrl: `/o/moveOrg` }, { orgId: orgId });
+    } else {
+        signIn("wso2is", { callbackUrl: `/o/moveOrg` });
+    }
 }
 
 function orgSignout() {
@@ -62,6 +66,24 @@ function parseJwt(token) {
 function getLoggedUserId(token) {
 
     return parseJwt(token).sub;
+}
+
+function getOrgId(token) {
+    try {
+
+        return config.SAMPLE_ORGS[0].id;
+    } catch (error) {
+
+        return parseJwt(token).org_id;
+    }
+}
+
+function getOrgName(token) {
+    try {
+        return config.SAMPLE_ORGS[0].name;
+    } catch (error) {
+        return parseJwt(token).org_name;
+    }
 }
 
 function getLoggedUserFromProfile(profile) {
@@ -88,5 +110,6 @@ function getLoggedUserFromProfile(profile) {
 }
 
 module.exports = {
-    redirect, parseCookies, orgSignin, orgSignout, emptySession, getLoggedUserId, getLoggedUserFromProfile
+    redirect, parseCookies, orgSignin, orgSignout, emptySession, getLoggedUserId, getLoggedUserFromProfile, getOrgId,
+    getOrgName
 };

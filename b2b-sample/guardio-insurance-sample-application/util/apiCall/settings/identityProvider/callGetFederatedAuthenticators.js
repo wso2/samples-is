@@ -16,25 +16,22 @@
  * under the License.
  */
 
-import Cookie from 'js-cookie';
 import config from '../../../../config.json';
 import { getInternalApiRequestOptionsWithParam } from '../../../util/apiUtil/getInteralApiRequestOptions';
-
-const subOrgId = Cookie.get("orgId");
 
 export default async function callGetFederatedAuthenticators(session, idpid, id) {
 
     try {
         const res = await fetch(
             `${config.WSO2IS_CLIENT_URL}/api/settings/identityProvider/getFederatedAuthenticators/${id}`,
-            getInternalApiRequestOptionsWithParam(session, subOrgId, idpid)
+            getInternalApiRequestOptionsWithParam(session, idpid)
         );
 
         const data = await res.json();
 
         return data;
     } catch (err) {
-        
+
         return null;
     }
 }
