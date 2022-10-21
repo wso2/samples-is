@@ -18,14 +18,10 @@
 
 import { getSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
-import { Animation, Button, Dropdown, Loader } from "rsuite";
-import config from "../config.json";
-import styles from "../styles/Signin.module.css";
-
+import { Loader } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
 import LogoComponent from "../components/settingsComponents/logoComponent";
-import { stringIsEmpty } from "../util/util/common/common";
-import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../util/util/frontendUtil/frontendUtil";
+import styles from "../styles/Signin.module.css";
 import { orgSignin, redirect } from "../util/util/routerUtil/routerUtil";
 
 export async function getServerSideProps(context) {
@@ -41,7 +37,11 @@ export async function getServerSideProps(context) {
     };
 }
 
-export default function Signin(props) {
+/**
+ * 
+ * @returns - Signin interface (redirecting to the login or main interface)
+ */
+export default function Signin() {
 
     const moveTime = 40;
     const [ redirectSeconds, setRedirectSeconds ] = useState(moveTime);
