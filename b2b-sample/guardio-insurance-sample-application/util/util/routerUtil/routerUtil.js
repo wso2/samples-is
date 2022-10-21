@@ -80,7 +80,6 @@ function getOrgId(token) {
 
 function getOrgName(token) {
     try {
-
         return config.SAMPLE_ORGS[0].name;
     } catch (error) {
 
