@@ -1,25 +1,26 @@
 {
-  "extends": [
-    "next/core-web-vitals",
-    "./.eslintrc.js"
-  ],
-  "rules": {
-    "max-len": [
-      "error",
-      {
-        "code": 120
-      }
+    "root": true,
+    "extends": [
+        "next/core-web-vitals",
+        "./.eslintrc.js"
     ],
-    "no-multiple-empty-lines": [
-      "error",
-      {
-        "max": 1,
-        "maxEOF": 1
-      }
-    ],
-    "eol-last": [
-      "error",
-      "always"
-    ]
-  }
+    "rules": {
+        "max-len": [
+            "error",
+            {
+                "code": 120
+            }
+        ],
+        "no-multiple-empty-lines": [
+            "error",
+            {
+                "max": 1,
+                "maxEOF": 1
+            }
+        ],
+        "eol-last": [
+            "error",
+            "always"
+        ]
+    }
 }
