@@ -28,12 +28,18 @@ import decodeListAllIdentityProviders from
     "../../../util/apiDecode/settings/identityProvider/decodeListAllIdentityProviders";
 import { EMPTY_STRING, ENTERPRISE_ID, FACEBOOK_ID, GOOGLE_ID } from "../../../util/util/common/common";
 import Enterprise from "../../data/templates/enterprise-identity-provider.json";
-import Facebook from "../../data/templates/facebook.json";
 import Google from "../../data/templates/google.json";
 import { errorTypeDialog, successTypeDialog } from "../../util/dialog";
 import SettingsTitle from "../../util/settingsTitle";
 
-export default function IdentityProviders(props) {
+/**
+ * 
+ * @param prop - session
+ * @returns The idp interface section.
+ */
+export default function IdentityProviders(prop) {
+
+    const { session } = prop;
 
     const toaster = useToaster();
 
@@ -52,7 +58,7 @@ export default function IdentityProviders(props) {
 
     const fetchAllIdPs = useCallback(async () => {
 
-        const res = await decodeListAllIdentityProviders(props.session);
+        const res = await decodeListAllIdentityProviders(session);
 
         if (res) {
             if (res.identityProviders) {
@@ -64,7 +70,7 @@ export default function IdentityProviders(props) {
             setIdpList(null);
         }
 
-    }, [ props.session ]);
+    }, [ session ]);
 
     const onAddIdentityProviderClick = () => {
         setOpenAddModal(true);
@@ -92,7 +98,7 @@ export default function IdentityProviders(props) {
 
     const onIdPSave = async (formValues, template) => {
 
-        decodeCreateIdentityProvider(props.session, template, formValues)
+        decodeCreateIdentityProvider(session, template, formValues)
             .then((response) => onIdpCreated(response));
 
     };
@@ -107,7 +113,7 @@ export default function IdentityProviders(props) {
             {
                 idpList
                     ? (<FlexboxGrid
-                        style={ { width: "100%", height: "60vh", marginTop: "24px" } }
+                        style={ { height: "60vh", marginTop: "24px", width: "100%" } }
                         justify={ idpList.length === 0 ? "center" : "start" }
                         align={ idpList.length === 0 ? "middle" : "top" }>
                         { idpList.length === 0
@@ -117,7 +123,7 @@ export default function IdentityProviders(props) {
                             : (<IdentityProviderList
                                 fetchAllIdPs={ fetchAllIdPs }
                                 idpList={ idpList }
-                                session={ props.session }
+                                session={ session }
                             />)
                         }
                     </FlexboxGrid>)
@@ -151,7 +157,16 @@ export default function IdentityProviders(props) {
 
 }
 
-const AddIdentityProviderModal = ({ openModal, onClose, templates, onTemplateSelected }) => {
+/**
+ * 
+ * @param prop - openModal (function to open the modal), onClose (what will happen when modal closes), 
+ *               templates (templates list), onTemplateSelected 
+ *              (what will happen when a particular template is selected)
+ * @returns A modal to select idp's
+ */
+const AddIdentityProviderModal = (prop) => {
+
+    const { openModal, onClose, templates, onTemplateSelected } = prop;
 
     const resolveIconName = (template) => {
         if (GOOGLE_ID === template.templateId) {
@@ -205,12 +220,19 @@ const AddIdentityProviderModal = ({ openModal, onClose, templates, onTemplateSel
 
 };
 
-const EmptyIdentityProviderList = ({ onAddIdentityProviderClick }) => {
+/**
+ * 
+ * @param prop - onAddIdentityProviderClick (function to open add idp modal)
+ * @returns - The componet to show when there is no idp's.
+ */
+const EmptyIdentityProviderList = (prop) => {
+
+    const { onAddIdentityProviderClick } = prop;
 
     return (
         <Stack alignItems="center" direction="column">
             <AppSelectIcon style={ { opacity: .2 } } width="150px" height="150px" />
-            <p style={ { marginTop: "20px", fontSize: 14 } }>
+            <p style={ { fontSize: 14, marginTop: "20px" } }>
                 There are no identity providers available at the moment.
             </p>
             <Button
@@ -225,7 +247,15 @@ const EmptyIdentityProviderList = ({ onAddIdentityProviderClick }) => {
 
 };
 
-const IdPCreationModal = ({ openModal, onSave, onCancel, template }) => {
+/**
+ * 
+ * @param prop - openModal (open the modal), onSave (create the idp), onCancel (when close the modal), 
+ *               template (selected template)
+ * @returns - Idp creation modal
+ */
+const IdPCreationModal = (prop) => {
+
+    const { openModal, onSave, onCancel, template } = prop;
 
     const [ formValues, setFormValues ] = useState({});
 
@@ -244,13 +274,6 @@ const IdPCreationModal = ({ openModal, onSave, onCancel, template }) => {
 
                 return (
                     <GoogleIdentityProvider
-                        formValues={ formValues }
-                        onFormValuesChange={ setFormValues } />
-                );
-            case FACEBOOK_ID:
-
-                return (
-                    <FacebookIdentityProvider
                         formValues={ formValues }
                         onFormValuesChange={ setFormValues } />
                 );
@@ -293,31 +316,14 @@ const IdPCreationModal = ({ openModal, onSave, onCancel, template }) => {
 
 };
 
-const FacebookIdentityProvider = ({ onFormValuesChange, formValues }) => {
+/**
+ * 
+ * @param prop -  onFormValuesChange, formValues
+ * @returns Form to create a Google idp.
+ */
+const GoogleIdentityProvider = (prop) => {
 
-    return (
-        <Form onChange={ onFormValuesChange } formValue={ formValues }>
-            <Form.Group controlId="application_name">
-                <Form.ControlLabel>Idp Name</Form.ControlLabel>
-                <Form.Control name="application_name" />
-                <Form.HelpText tooltip>Idp Name is Required</Form.HelpText>
-            </Form.Group>
-            <Form.Group controlId="client_id">
-                <Form.ControlLabel>Application ID</Form.ControlLabel>
-                <Form.Control name="client_id" type="text" autoComplete="off" />
-                <Form.HelpText tooltip>Application ID is Required</Form.HelpText>
-            </Form.Group>
-            <Form.Group controlId="client_secret">
-                <Form.ControlLabel>Application Secret</Form.ControlLabel>
-                <Form.Control name="client_secret" type="password" autoComplete="off" />
-                <Form.HelpText tooltip>Application Secret is Required</Form.HelpText>
-            </Form.Group>
-        </Form>
-    );
-
-};
-
-const GoogleIdentityProvider = ({ onFormValuesChange, formValues }) => {
+    const { onFormValuesChange, formValues } = prop;
 
     return (
         <Form onChange={ onFormValuesChange } formValue={ formValues }>
@@ -341,7 +347,14 @@ const GoogleIdentityProvider = ({ onFormValuesChange, formValues }) => {
 
 };
 
-const EnterpriseIdentityProvider = ({ onFormValuesChange, formValues }) => {
+/**
+ * 
+ * @param prop -  onFormValuesChange, formValues
+ * @returns Form to create a enterprise idp.
+ */
+const EnterpriseIdentityProvider = (prop) => {
+
+    const { onFormValuesChange, formValues } = prop;
 
     return (
         <Form onChange={ onFormValuesChange } formValue={ formValues }>
