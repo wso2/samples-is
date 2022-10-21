@@ -17,9 +17,7 @@
  */
 
 import cookie from "cookie";
-import FrontCookie from 'js-cookie';
 import { signIn, signOut } from 'next-auth/react';
-import { getRouterQuery } from '../orgUtil/orgUtil';
 import config from '../../../config.json';
 
 function redirect(path) {
@@ -39,7 +37,6 @@ function parseCookies(req) {
 
 function orgSignin(orgId) {
     if (orgId) {
-        FrontCookie.set("orgId", orgId);
         signIn("wso2is", { callbackUrl: `/o/moveOrg` }, { orgId: orgId });
     } else {
         signIn("wso2is", { callbackUrl: `/o/moveOrg` });
@@ -47,7 +44,6 @@ function orgSignin(orgId) {
 }
 
 function orgSignout() {
-    FrontCookie.remove("orgId");
     signOut({ callbackUrl: "/" });
 }
 
