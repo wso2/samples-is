@@ -28,7 +28,14 @@ import { checkIfJSONisEmpty } from "../../../util/util/common/common";
 import { errorTypeDialog, successTypeDialog } from "../../util/dialog";
 import ConfirmAddRemoveLoginFlowModal from "../application/confirmAddRemoveLoginFlowModal";
 
-export default function ButtonGroupIdentityProviderDetails(props) {
+/**
+ * 
+ * @param prop - session, idpDetails, fetchAllIdPs, id (idp id)
+ * @returns Add/Remove button and delete button group in an Idp
+ */
+export default function ButtonGroupIdentityProviderDetails(prop) {
+
+    const { session, idpDetails, fetchAllIdPs, id } = prop;
 
     const toaster = useToaster();
 
@@ -38,18 +45,18 @@ export default function ButtonGroupIdentityProviderDetails(props) {
     const [ openListAppicationModal, setOpenListAppicationModal ] = useState(false);
 
     const fetchData = useCallback(async () => {
-        const res = await decodeListCurrentApplication(props.session);
+        const res = await decodeListCurrentApplication(session);
 
         await setAllApplications(res);
-    }, [ props ]);
+    }, [ session ]);
 
     const fetchApplicatioDetails = useCallback(async () => {
         if (!checkIfJSONisEmpty(allApplications) && allApplications.totalResults !== 0) {
-            const res = await decodeGetApplication(props.session, allApplications.applications[0].id);
+            const res = await decodeGetApplication(session, allApplications.applications[0].id);
 
             await setApplicationDetail(res);
         }
-    }, [ props, allApplications ]);
+    }, [ session, allApplications ]);
 
     useEffect(() => {
         fetchData();
@@ -61,9 +68,9 @@ export default function ButtonGroupIdentityProviderDetails(props) {
 
     useEffect(() => {
         if (!checkIfJSONisEmpty(applicationDetail)) {
-            setIdpIsinAuthSequence(checkIfIdpIsinAuthSequence(applicationDetail, props.idpDetails));
+            setIdpIsinAuthSequence(checkIfIdpIsinAuthSequence(applicationDetail, idpDetails));
         }
-    }, [ props, applicationDetail ]);
+    }, [ idpDetails, applicationDetail ]);
 
     const onIdpDelete = (response) => {
         if (response) {
@@ -74,10 +81,10 @@ export default function ButtonGroupIdentityProviderDetails(props) {
     };
 
     const onIdPDeleteClick = (id) => {
-        decodeDeleteIdentityProvider(props.session, id)
+        decodeDeleteIdentityProvider(session, id)
             .then((response) => onIdpDelete(response))
             .finally(() => {
-                props.fetchAllIdPs().finally();
+                fetchAllIdPs().finally();
             });
     };
 
@@ -101,19 +108,19 @@ export default function ButtonGroupIdentityProviderDetails(props) {
             }
 
             <ConfirmAddRemoveLoginFlowModal
-                session={ props.session }
-                id={ props.id }
+                session={ session }
+                id={ id }
                 openModal={ openListAppicationModal }
                 onModalClose={ onCloseListAllApplicaitonModal }
-                fetchAllIdPs={ props.fetchAllIdPs }
-                idpDetails={ props.idpDetails }
+                fetchAllIdPs={ fetchAllIdPs }
+                idpDetails={ idpDetails }
                 applicationDetail={ applicationDetail }
                 idpIsinAuthSequence={ idpIsinAuthSequence } />
 
             <IconButton
                 icon={ <Trash /> }
                 style={ { marginLeft: "10px" } }
-                onClick={ () => onIdPDeleteClick(props.id) }
+                onClick={ () => onIdPDeleteClick(id) }
                 appearance="subtle" />
         </Stack>
     );
