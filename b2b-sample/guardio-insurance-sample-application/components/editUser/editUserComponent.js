@@ -28,7 +28,14 @@ import { checkIfJSONisEmpty } from "../../util/util/common/common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../util/util/frontendUtil/frontendUtil";
 import { errorTypeDialog, successTypeDialog } from "../util/dialog";
 
-export default function EditUserComponent(props) {
+/**
+ * 
+ * @param prop - session, user (user details), open (whether the modal open or close), onClose (on modal close)
+ * @returns - Modal form to edit the user
+ */
+export default function EditUserComponent(prop) {
+
+    const { session, user, open, onClose } = prop;
 
     const toaster = useToaster();
 
@@ -77,10 +84,10 @@ export default function EditUserComponent(props) {
         return errors;
     };
 
-    const onDataSubmit = (response, form) => {
+    const onDataSubmit = (response) => {
         if (response) {
             successTypeDialog(toaster, "Changes Saved Successfully", "User details edited successfully.");
-            props.onClose();
+            onClose();
         } else {
             errorTypeDialog(toaster, "Error Occured", "Error occured while editing the user. Try again.");
         }
@@ -88,19 +95,19 @@ export default function EditUserComponent(props) {
 
     const onSubmit = async (values, form) => {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
-        decodeEditUser(props.session, props.user.id, values.firstName, values.familyName, values.email,
+        decodeEditUser(session, user.id, values.firstName, values.familyName, values.email,
             values.username)
             .then((response) => onDataSubmit(response, form))
-            .finally((response) => setLoadingDisplay(LOADING_DISPLAY_NONE));
+            .finally(() => setLoadingDisplay(LOADING_DISPLAY_NONE));
     };
 
     return (
-        <Modal backdrop="static" role="alertdialog" open={ props.open } onClose={ props.onClose } size="xs">
+        <Modal backdrop="static" role="alertdialog" open={ open } onClose={ onClose } size="xs">
 
             <Modal.Header>
                 <Modal.Title>
                     <b>Edit User</b>
-                    <p>Edit user { props.user.username }</p>
+                    <p>Edit user { user.username }</p>
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
@@ -109,12 +116,12 @@ export default function EditUserComponent(props) {
                         onSubmit={ onSubmit }
                         validate={ validate }
                         initialValues={ {
-                            firstName: props.user.firstName,
-                            familyName: props.user.familyName,
-                            email: props.user.email,
-                            username: props.user.username
+                            email: user.email,
+                            familyName: user.familyName,
+                            firstName: user.firstName,
+                            username: user.username
                         } }
-                        render={ ({ handleSubmit, form, submitting, pristine, errors, values }) => (
+                        render={ ({ handleSubmit, form, submitting, pristine, errors }) => (
                             <FormSuite
                                 layout="vertical"
                                 className={ styles.addUserForm }
@@ -197,7 +204,7 @@ export default function EditUserComponent(props) {
                                                 size="lg"
                                                 appearance="ghost"
                                                 type="button"
-                                                onClick={ props.onClose }>Cancel</Button>
+                                                onClick={ onClose }>Cancel</Button>
                                         </ButtonToolbar>
                                     </FormSuite.Group>
                                 </div>
