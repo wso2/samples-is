@@ -39,7 +39,7 @@ export async function getServerSideProps(context) {
 
 /**
  * 
- * @returns - Signin interface (redirecting to the login or main interface)
+ * @returns Signin interface (redirecting to the login or main interface)
  */
 export default function Signin() {
 

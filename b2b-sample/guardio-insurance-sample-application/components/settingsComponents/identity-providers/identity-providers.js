@@ -223,7 +223,7 @@ const AddIdentityProviderModal = (prop) => {
 /**
  * 
  * @param prop - onAddIdentityProviderClick (function to open add idp modal)
- * @returns - The componet to show when there is no idp's.
+ * @returns The componet to show when there is no idp's.
  */
 const EmptyIdentityProviderList = (prop) => {
 
@@ -251,7 +251,7 @@ const EmptyIdentityProviderList = (prop) => {
  * 
  * @param prop - openModal (open the modal), onSave (create the idp), onCancel (when close the modal), 
  *               template (selected template)
- * @returns - Idp creation modal
+ * @returns Idp creation modal
  */
 const IdPCreationModal = (prop) => {
 

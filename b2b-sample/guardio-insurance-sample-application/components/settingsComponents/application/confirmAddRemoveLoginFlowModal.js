@@ -125,7 +125,7 @@ export default function ConfirmAddRemoveLoginFlowModal(prop) {
 
 /**
  * 
- * @returns - When then WSO2IS_APP_NAME is not the correct applicaiton, it will show this section
+ * @returns When then WSO2IS_APP_NAME is not the correct applicaiton, it will show this section
  */
 function EmptySelectApplicationBody() {
 

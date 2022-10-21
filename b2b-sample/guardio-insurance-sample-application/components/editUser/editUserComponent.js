@@ -31,7 +31,7 @@ import { errorTypeDialog, successTypeDialog } from "../util/dialog";
 /**
  * 
  * @param prop - session, user (user details), open (whether the modal open or close), onClose (on modal close)
- * @returns - Modal form to edit the user
+ * @returns Modal form to edit the user
  */
 export default function EditUserComponent(prop) {
 

@@ -23,7 +23,7 @@ import logoImage from "../../public/logo.png";
 /**
  * 
  * @param prop - imageSize (small, medium, large or x-large)
- * @returns - Logo component
+ * @returns Logo component
  */
 export default function Logo(prop) {
 
