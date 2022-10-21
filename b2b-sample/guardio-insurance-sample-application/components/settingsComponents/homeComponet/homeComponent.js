@@ -23,7 +23,7 @@ import LatestNewsComponent from "./latestNewsComponent";
 import UserDetails from "./userDetails";
 import styles from "../../../styles/Settings.module.css";
 import decodeMe from "../../../util/apiDecode/dashboard/decodeMe";
-import LogoComponent from "../logoComponent";
+import LogoComponent from "../../logo/logoComponent";
 
 /**
  * 

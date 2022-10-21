@@ -23,7 +23,7 @@ import { Button, Nav, Sidenav } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
 import HomeComponent from "./homeComponet/homeComponent";
 import IdentityProviders from "./identity-providers/identity-providers";
-import LogoComponent from "./logoComponent";
+import LogoComponent from "../logo/logoComponent";
 import ViewUserComponent from "./viewUserComponent";
 import Custom500 from "../../pages/500";
 import styles from "../../styles/Settings.module.css";

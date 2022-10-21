@@ -20,7 +20,7 @@ import { getSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 import { Loader } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
-import LogoComponent from "../components/settingsComponents/logoComponent";
+import LogoComponent from "../components/logo/logoComponent";
 import styles from "../styles/Signin.module.css";
 import { orgSignin, redirect } from "../util/util/routerUtil/routerUtil";
 
