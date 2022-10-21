@@ -19,7 +19,6 @@
 export default function decodeUser(user) {
 
     if ( !user.id || !user.userName || !user.name  || !user.emails ) {
-
         return null;
     }
 
