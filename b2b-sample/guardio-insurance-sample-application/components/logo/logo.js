@@ -20,7 +20,14 @@ import Image from "next/image";
 import React from "react";
 import logoImage from "../../public/logo.png";
 
-export default function Logo(props) {
+/**
+ * 
+ * @param prop - imageSize (small, medium, large or x-large)
+ * @returns - Logo component
+ */
+export default function Logo(prop) {
+
+    const { imageSize } = prop;
     
     function switchImageSize(size) {
         switch (size) {
@@ -38,7 +45,7 @@ export default function Logo(props) {
     }
 
     return (
-        <div style={ switchImageSize(props.imageSize) }>
+        <div style={ switchImageSize(imageSize) }>
             <Image
                 src={ logoImage }
                 alt="404 image" />

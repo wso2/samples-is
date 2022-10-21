@@ -27,9 +27,14 @@ import { checkIfJSONisEmpty } from "../../util/util/common/common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../util/util/frontendUtil/frontendUtil";
 import { errorTypeDialog, successTypeDialog } from "../util/dialog";
 
-export default function AddUserComponent(props) {
+/**
+ * 
+ * @param prop - session, open (whether modal open or close), onClose (on modal close)
+ * @returns - Modal to add a user.
+ */
+export default function AddUserComponent(prop) {
 
-    const ADD_USER_COMPONENT = "ADD USER COMPONENT";
+    const { session, open, onClose } = prop;
 
     const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
 
@@ -100,7 +105,7 @@ export default function AddUserComponent(props) {
         if (response) {
             successTypeDialog(toaster, "Changes Saved Successfully", "User add to the organization successfully.");
             form.restart();
-            props.onClose();
+            onClose();
         } else {
             errorTypeDialog(toaster, "Error Occured", "Error occured while adding the user. Try again.");
         }
@@ -108,14 +113,14 @@ export default function AddUserComponent(props) {
 
     const onSubmit = async (values, form) => {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
-        decodeAddUser(props.session, values.firstName, values.familyName, values.email,
+        decodeAddUser(session, values.firstName, values.familyName, values.email,
             values.username, values.password)
             .then((response) => onDataSubmit(response, form))
-            .finally((response) => setLoadingDisplay(LOADING_DISPLAY_NONE));
+            .finally(() => setLoadingDisplay(LOADING_DISPLAY_NONE));
     };
 
     return (
-        <Modal backdrop="static" role="alertdialog" open={ props.open } onClose={ props.onClose } >
+        <Modal backdrop="static" role="alertdialog" open={ open } onClose={ onClose } >
 
             <Modal.Header>
                 <Modal.Title>
@@ -131,7 +136,7 @@ export default function AddUserComponent(props) {
                         <Form
                             onSubmit={ onSubmit }
                             validate={ validate }
-                            render={ ({ handleSubmit, form, submitting, pristine, errors, values }) => (
+                            render={ ({ handleSubmit, form, submitting, pristine, errors }) => (
                                 <FormSuite
                                     layout="vertical"
                                     className={ styles.addUserForm }
@@ -145,7 +150,7 @@ export default function AddUserComponent(props) {
                                                 <FormSuite.Control
                                                     { ...input }
                                                 />
-                                                { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true }  >
+                                                { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true } >
                                                     { meta.error }
                                                 </FormSuite.ErrorMessage>) }
                                             </FormSuite.Group>
@@ -160,7 +165,7 @@ export default function AddUserComponent(props) {
                                                 <FormSuite.Control
                                                     { ...input }
                                                 />
-                                                { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true }  >
+                                                { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true } >
                                                     { meta.error }
                                                 </FormSuite.ErrorMessage>) }
                                             </FormSuite.Group>
@@ -176,7 +181,7 @@ export default function AddUserComponent(props) {
                                                     { ...input }
                                                     type="email"
                                                 />
-                                                { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true }  >
+                                                { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true } >
                                                     { meta.error }
                                                 </FormSuite.ErrorMessage>) }
                                             </FormSuite.Group>
@@ -210,7 +215,7 @@ export default function AddUserComponent(props) {
                                                     type="password"
                                                     autoComplete="off"
                                                 />
-                                                { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true }  >
+                                                { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true } >
                                                     { meta.error }
                                                 </FormSuite.ErrorMessage>) }
                                             </FormSuite.Group>
@@ -227,7 +232,7 @@ export default function AddUserComponent(props) {
                                                     type="password"
                                                     autoComplete="off"
                                                 />
-                                                { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true }  >
+                                                { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true } >
                                                     { meta.error }
                                                 </FormSuite.ErrorMessage>) }
                                             </FormSuite.Group>
@@ -251,7 +256,7 @@ export default function AddUserComponent(props) {
                                                     size="lg"
                                                     appearance="ghost"
                                                     type="button"
-                                                    onClick={ props.onClose }>Cancel</Button>
+                                                    onClick={ onClose }>Cancel</Button>
                                             </ButtonToolbar>
                                         </FormSuite.Group>
 
