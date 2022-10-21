@@ -39,7 +39,7 @@ export async function getServerSideProps(context) {
             setOrgId(orgId);
 
             return {
-                props: { session, orgId, orgName }
+                props: { orgId, orgName }
             };
         }
     } else {
@@ -48,7 +48,14 @@ export async function getServerSideProps(context) {
     }
 }
 
-export default function MoveOrg(props) {
+/**
+ * 
+ * @param prop - orgId, orgName
+ * @returns Interface to call organization switch function
+ */
+export default function MoveOrg(prop) {
+
+    const { orgId, orgName } = prop;
 
     const router = useRouter();
 
@@ -56,8 +63,8 @@ export default function MoveOrg(props) {
     const [ redirectSeconds, setRedirectSeconds ] = useState(moveTime);
 
     const redirectToOrg = useCallback(() => {
-        router.push(`/o/${props.orgId}`);
-    },[ props.orgId, router ]);
+        router.push(`/o/${orgId}`);
+    },[ orgId, router ]);
 
     useEffect(() => {
         if (redirectSeconds <= 1) {
@@ -69,18 +76,18 @@ export default function MoveOrg(props) {
         setTimeout(() => {
             setRedirectSeconds((redirectSeconds) => redirectSeconds - 1);
         }, moveTime);
-    }, [ redirectSeconds, props.orgId, redirectToOrg ]);
+    }, [ redirectSeconds, orgId, redirectToOrg ]);
 
     return (
         <div
             style={
-                {
+                {      
+                    alignItems: "center",
                     backgroundColor: "black",
-                    height: "100vh",
                     color: "whitesmoke",
                     display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center"
+                    height: "100vh",
+                    justifyContent: "center"
                 }
             }>
             <p
@@ -88,7 +95,7 @@ export default function MoveOrg(props) {
                     {
                         fontSize: "2em"
                     }
-                }>You will be redirected to { props.orgName }</p>
+                }>You will be redirected to { orgName }</p>
         </div>
 
     );
