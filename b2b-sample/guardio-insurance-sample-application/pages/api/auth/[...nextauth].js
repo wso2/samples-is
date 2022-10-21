@@ -24,34 +24,9 @@ import { getLoggedUserFromProfile, getLoggedUserId, getOrgId, getOrgName }
 
 const wso2ISProvider = (req, res) => NextAuth(req, res, {
 
-    providers: [
-        {
-            id: "wso2is",
-            name: "WSO2IS",
-            clientId: config.WSO2IS_CLIENT_ID,
-            clientSecret: config.WSO2IS_CLIENT_SECRET,
-            type: "oauth",
-            secret: process.env.SECRET,
-            wellKnown: config.WSO2IS_HOST + "/t/" + config.WSO2IS_TENANT_NAME
-        + "/oauth2/token/.well-known/openid-configuration",
-            userinfo: config.WSO2IS_HOST + "/t/" + config.WSO2IS_TENANT_NAME + "/oauth2/userinfo",
-            authorization: {
-                params: {
-                    scope: config.WSO2IS_SCOPES.join(" ")
-                }
-            },
-            profile(profile) {
-
-                return {
-                    id: profile.sub
-                };
-            }
-        }
-    ],
-    secret: process.env.SECRET,
     callbacks: {
 
-        async jwt({ token, user, account, profile, isNewUser }) {
+        async jwt({ token, account, profile }) {
             if (account) {
                 token.accessToken = account.access_token;
                 token.idToken = account.id_token;
@@ -61,7 +36,7 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
 
             return token;
         },
-        async session({ session, token, user }) {
+        async session({ session, token }) {
             const orgSession = await decodeSwitchOrg(token);
 
             if (!orgSession) {
@@ -84,7 +59,32 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
             return session;
         }
     },
-    debug: true
+    debug: true,
+    providers: [
+        {   
+            authorization: {
+                params: {
+                    scope: config.WSO2IS_SCOPES.join(" ")
+                }
+            },
+            clientId: config.WSO2IS_CLIENT_ID,
+            clientSecret: config.WSO2IS_CLIENT_SECRET,
+            id: "wso2is",
+            name: "WSO2IS",
+            profile(profile) {
+
+                return {
+                    id: profile.sub
+                };
+            },
+            secret: process.env.SECRET,
+            type: "oauth",
+            userinfo: config.WSO2IS_HOST + "/t/" + config.WSO2IS_TENANT_NAME + "/oauth2/userinfo",
+            wellKnown: config.WSO2IS_HOST + "/t/" + config.WSO2IS_TENANT_NAME
+                       + "/oauth2/token/.well-known/openid-configuration"
+        }
+    ],
+    secret: process.env.SECRET
 });
 
 export default wso2ISProvider;
