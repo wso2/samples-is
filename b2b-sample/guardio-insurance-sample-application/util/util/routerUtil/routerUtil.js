@@ -69,7 +69,6 @@ function getLoggedUserId(token) {
 }
 
 function getOrgId(token) {
-
     try {
 
         return config.SAMPLE_ORGS[0].id;
