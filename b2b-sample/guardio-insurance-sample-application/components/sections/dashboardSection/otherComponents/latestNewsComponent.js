@@ -19,7 +19,7 @@
 import React from "react";
 import { FlexboxGrid, Panel } from "rsuite";
 import NewsComponent from "./newsComponent";
-import newsList from "../../../util/news/news.json";
+import newsList from "../../../../util/news/news.json";
 
 export default function LatestNewsComponent() {
 

@@ -19,8 +19,8 @@
 import React, { useEffect, useState } from "react";
 import { Panel } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
-import LatestNewsComponent from "./latestNewsComponent";
-import UserDetails from "./userDetails";
+import LatestNewsComponent from "./otherComponents/latestNewsComponent";
+import UserDetails from "./otherComponents/userDetails";
 import styles from "../../../styles/Settings.module.css";
 import decodeMe from "../../../util/apiDecode/dashboard/decodeMe";
 import LogoComponent from "../../logo/logoComponent";
@@ -30,7 +30,7 @@ import LogoComponent from "../../logo/logoComponent";
  * @param prop - session, orgName
  * @returns Dashboard interface section
  */
-export default function HomeComponent(prop) {
+export default function DashboardSectionComponent(prop) {
 
     const { session, orgName } = prop;
 

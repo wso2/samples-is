@@ -19,8 +19,8 @@
 import Image from "next/image";
 import React from "react";
 import { Panel } from "rsuite";
-import profileImage from "../../../public/internal/profile.svg";
-import styles from "../../../styles/Settings.module.css";
+import profileImage from "../../../../public/internal/profile.svg";
+import styles from "../../../../styles/Settings.module.css";
 
 /**
  * 

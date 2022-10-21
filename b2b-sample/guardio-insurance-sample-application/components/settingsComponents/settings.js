@@ -21,14 +21,14 @@ import GearCircleIcon from "@rsuite/icons/legacy/GearCircle";
 import React, { useEffect, useState } from "react";
 import { Button, Nav, Sidenav } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
-import HomeComponent from "./homeComponet/homeComponent";
-import IdentityProviders from "./identity-providers/identity-providers";
-import LogoComponent from "../logo/logoComponent";
-import ViewUserComponent from "./viewUserComponent";
 import Custom500 from "../../pages/500";
 import styles from "../../styles/Settings.module.css";
 import { checkCustomization, hideBasedOnScopes } from "../../util/util/frontendUtil/frontendUtil";
 import { orgSignout } from "../../util/util/routerUtil/routerUtil";
+import LogoComponent from "../logo/logoComponent";
+import DashboardSectionComponent from "../sections/dashboardSection/dashboardSectionComponent";
+import IdentityProviders from "./identity-providers/identity-providers";
+import ViewUserComponent from "./viewUserComponent";
 
 /**
  * 
@@ -45,7 +45,7 @@ export default function Settings(prop) {
         switch (activeKey) {
             case "1":
 
-                return <HomeComponent orgName={ name } orgId={ orgId } session={ session } />;
+                return <DashboardSectionComponent orgName={ name } orgId={ orgId } session={ session } />;
             case "2-1":
 
                 return <ViewUserComponent orgName={ name } orgId={ orgId } session={ session } />;
