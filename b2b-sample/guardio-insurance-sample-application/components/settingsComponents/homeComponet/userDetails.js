@@ -18,23 +18,39 @@
 
 import Image from "next/image";
 import React from "react";
+import { Panel } from "rsuite";
 import profileImage from "../../../public/internal/profile.svg";
 import styles from "../../../styles/Settings.module.css";
 
-export default function UserDetails(props) {
+/**
+ * 
+ * @param prop - me (details of the logged in user)
+ * @returns The profile details section
+ */
+export default function UserDetails(prop) {
+
+    const { me } = prop;
     
     return (
-        <div className={ styles.userDetails }>
-            <div className={ styles.userDetailsBody }>
-                <p><b>First Name : </b>{ props.me.firstName }</p>
-                <p><b>Last Name : </b>{ props.me.familyName }</p>
-                <p><b>ID : </b>{ props.me.id }</p>
-                <p><b>Username : </b>{ props.me.username }</p>
-                <p><b>Email : </b>{ props.me.email }</p>
-            </div>
-            <div className={ styles.profileImage }>
-                <Image src={ profileImage } alt="profile image" />
-            </div>
-        </div>
+        me  
+            ? (<Panel header="User Details" bordered>
+                <div id="userDetails" className={ styles.homePanel }>
+                    <div className={ styles.userDetails }>
+                        <div className={ styles.userDetailsBody }>
+                            <p><b>First Name : </b>{ me.firstName }</p>
+                            <p><b>Last Name : </b>{ me.familyName }</p>
+                            <p><b>ID : </b>{ me.id }</p>
+                            <p><b>Username : </b>{ me.username }</p>
+                            <p><b>Email : </b>{ me.email }</p>
+                        </div>
+                        <div className={ styles.profileImage }>
+                            <Image src={ profileImage } alt="profile image" />
+                        </div>
+                    </div>
+                </div>
+            </Panel>)
+            : (<Panel bordered>
+                <div>Add the user attributes in created the application to display user details</div>
+            </Panel>)
     );
 }
