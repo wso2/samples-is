@@ -20,7 +20,6 @@ import config from '../../../../config.json';
 import { getInternalApiRequestOptions } from '../../../util/apiUtil/getInteralApiRequestOptions';
 
 export default async function callListCurrentApplication(session) {
-
     try {
         const res = await fetch(
             `${config.WSO2IS_CLIENT_URL}/api/settings/application/listCurrentApplication`,
@@ -31,7 +30,6 @@ export default async function callListCurrentApplication(session) {
 
         return data;
     } catch (err) {
-
         return null;
     }
 }

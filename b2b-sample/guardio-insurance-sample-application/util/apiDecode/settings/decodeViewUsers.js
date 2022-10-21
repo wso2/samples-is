@@ -27,7 +27,10 @@ export default async function decodeViewUsers(session) {
         const usersReturn = [];
 
         usersData["Resources"].map((user) => {
-            usersReturn.push(decodeUser(user));
+            let userDetails = decodeUser(user);
+            if (userDetails) {
+                usersReturn.push(userDetails);
+            }
         })
 
         return usersReturn;

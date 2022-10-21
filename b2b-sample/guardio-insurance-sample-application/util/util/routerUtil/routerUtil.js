@@ -69,7 +69,6 @@ function getLoggedUserId(token) {
 }
 
 function getOrgId(token) {
-
     try {
 
         return config.SAMPLE_ORGS[0].id;
@@ -80,12 +79,9 @@ function getOrgId(token) {
 }
 
 function getOrgName(token) {
-
     try {
-
         return config.SAMPLE_ORGS[0].name;
     } catch (error) {
-
         return parseJwt(token).org_name;
     }
 }
