@@ -21,14 +21,14 @@ import { Form } from "react-final-form";
 import { Button, ButtonToolbar, Loader, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
 import SettingsFormSelection from "./settingsFormSection/settingsFormSelection";
-import styles from "../../../../styles/Settings.module.css";
+import styles from "../../../../../../styles/Settings.module.css";
 import decodeGetFederatedAuthenticators from
-    "../../../../util/apiDecode/settings/identityProvider/decodeGetFederatedAuthenticators";
+    "../../../../../../util/apiDecode/settings/identityProvider/decodeGetFederatedAuthenticators";
 import decodeUpdateFederatedAuthenticators from
-    "../../../../util/apiDecode/settings/identityProvider/decodeUpdateFederatedAuthenticators";
-import { checkIfJSONisEmpty } from "../../../../util/util/common/common";
-import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../util/util/frontendUtil/frontendUtil";
-import { errorTypeDialog, successTypeDialog } from "../../../util/dialog";
+    "../../../../../../util/apiDecode/settings/identityProvider/decodeUpdateFederatedAuthenticators";
+import { checkIfJSONisEmpty } from "../../../../../../util/util/common/common";
+import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../../util/util/frontendUtil/frontendUtil";
+import { errorTypeDialog, successTypeDialog } from "../../../../../util/dialog";
 
 /**
  * 

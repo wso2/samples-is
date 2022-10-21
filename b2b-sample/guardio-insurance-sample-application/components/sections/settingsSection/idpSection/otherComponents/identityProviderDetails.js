@@ -24,8 +24,8 @@ import General from "./idpDetailsSections/general";
 import Raw from "./idpDetailsSections/raw";
 import Settings from "./idpDetailsSections/settings";
 import decodeGetDetailedIdentityProvider from
-    "../../../util/apiDecode/settings/identityProvider/decodeGetDetailedIdentityProvider";
-import { selectedTemplateBaesedonTemplateId } from "../../../util/util/applicationUtil/applicationUtil";
+    "../../../../../util/apiDecode/settings/identityProvider/decodeGetDetailedIdentityProvider";
+import { selectedTemplateBaesedonTemplateId } from "../../../../../util/util/applicationUtil/applicationUtil";
 
 /**
  * 

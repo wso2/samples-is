@@ -20,13 +20,13 @@ import React, { useState } from "react";
 import { Field, Form } from "react-final-form";
 import { Button, ButtonToolbar, Loader, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
-import styles from "../../../../styles/Settings.module.css";
+import styles from "../../../../../../styles/Settings.module.css";
 import decodePatchGeneralSettingsIdp from
-    "../../../../util/apiDecode/settings/identityProvider/decodePatchGeneralSettingsIdp";
-import { checkIfJSONisEmpty } from "../../../../util/util/common/common";
-import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../util/util/frontendUtil/frontendUtil";
-import { errorTypeDialog, successTypeDialog } from "../../../util/dialog";
-import HelperText from "../../../util/helperText";
+    "../../../../../../util/apiDecode/settings/identityProvider/decodePatchGeneralSettingsIdp";
+import { checkIfJSONisEmpty } from "../../../../../../util/util/common/common";
+import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../../util/util/frontendUtil/frontendUtil";
+import { errorTypeDialog, successTypeDialog } from "../../../../../util/dialog";
+import HelperText from "../../../../../util/helperText";
 
 /**
  * 

@@ -27,8 +27,8 @@ import { checkCustomization, hideBasedOnScopes } from "../../util/util/frontendU
 import { orgSignout } from "../../util/util/routerUtil/routerUtil";
 import LogoComponent from "../logo/logoComponent";
 import DashboardSectionComponent from "../sections/dashboardSection/dashboardSectionComponent";
+import IdpSectionComponent from "../sections/settingsSection/idpSection/idpSectionComponent";
 import ManageUserSectionComponent from "../sections/settingsSection/manageUserSection/manageUserSectionComponent";
-import IdentityProviders from "./identity-providers/identity-providers";
 
 /**
  * 
@@ -51,7 +51,7 @@ export default function Home(prop) {
                 return <ManageUserSectionComponent orgName={ name } orgId={ orgId } session={ session } />;
             case "2-3":
 
-                return <IdentityProviders orgName={ name } orgId={ orgId } session={ session } />;
+                return <IdpSectionComponent orgName={ name } orgId={ orgId } session={ session } />;
         }
     };
 

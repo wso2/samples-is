@@ -19,25 +19,24 @@
 import AppSelectIcon from "@rsuite/icons/AppSelect";
 import React, { useCallback, useEffect, useState } from "react";
 import { Avatar, Button, Container, FlexboxGrid, Form, Modal, Stack, useToaster } from "rsuite";
-
-import IdentityProviderList from "./identityProviderList";
-import styles from "../../../styles/idp.module.css";
+import IdentityProviderList from "./otherComponents/identityProviderList";
+import styles from "../../../../styles/idp.module.css";
 import decodeCreateIdentityProvider from
-    "../../../util/apiDecode/settings/identityProvider/decodeCreateIdentityProvider";
+    "../../../../util/apiDecode/settings/identityProvider/decodeCreateIdentityProvider";
 import decodeListAllIdentityProviders from
-    "../../../util/apiDecode/settings/identityProvider/decodeListAllIdentityProviders";
-import { EMPTY_STRING, ENTERPRISE_ID, FACEBOOK_ID, GOOGLE_ID } from "../../../util/util/common/common";
-import Enterprise from "../../data/templates/enterprise-identity-provider.json";
-import Google from "../../data/templates/google.json";
-import { errorTypeDialog, successTypeDialog } from "../../util/dialog";
-import SettingsTitle from "../../util/settingsTitle";
+    "../../../../util/apiDecode/settings/identityProvider/decodeListAllIdentityProviders";
+import { EMPTY_STRING, ENTERPRISE_ID, FACEBOOK_ID, GOOGLE_ID } from "../../../../util/util/common/common";
+import Enterprise from "../../../data/templates/enterprise-identity-provider.json";
+import Google from "../../../data/templates/google.json";
+import { errorTypeDialog, successTypeDialog } from "../../../util/dialog";
+import SettingsTitle from "../../../util/settingsTitle";
 
 /**
  * 
  * @param prop - session
  * @returns The idp interface section.
  */
-export default function IdentityProviders(prop) {
+export default function IdpSectionComponent(prop) {
 
     const { session } = prop;
 
