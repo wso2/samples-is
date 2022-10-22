@@ -102,6 +102,10 @@ function enterpriseIdpTemplate(model, clientId, clientSecret, formValues, orgId)
         {
             "key": "callbackUrl",
             "value": `${config.WSO2IS_HOST}/o/${orgId}/commonauth`
+        },
+        {
+            "key": "AdditionalQueryParameters",
+            "value": "scope=email openid profile"
         }
     ];
 
