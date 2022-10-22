@@ -98,7 +98,6 @@ export default function ButtonGroupIdentityProviderDetails(prop) {
     };
 
     return (
-
         <Stack justifyContent="flex-end" alignItems="stretch">
             {
                 idpIsinAuthSequence === null
