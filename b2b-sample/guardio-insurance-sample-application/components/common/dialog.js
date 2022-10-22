@@ -22,6 +22,7 @@ import { Notification } from "rsuite";
 /**
  * 
  * @param prop - type (error, info, success ), header - title text, body - body text
+ *
  * @returns A side dialog to show notifications
  */
 function Dialog(prop) {
