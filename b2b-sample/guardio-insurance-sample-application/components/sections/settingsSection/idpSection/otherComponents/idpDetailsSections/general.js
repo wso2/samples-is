@@ -31,6 +31,7 @@ import HelperText from "../../../../../common/helperText";
 /**
  * 
  * @param prop - fetchData (function to fetch data after form is submitted), session, idpDetails
+ * 
  * @returns The general section of an idp
  */
 export default function General(prop) {
