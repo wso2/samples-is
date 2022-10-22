@@ -27,7 +27,8 @@ import decodeCreateIdentityProvider from
     "../../../../util/apiDecode/settings/identityProvider/decodeCreateIdentityProvider";
 import decodeListAllIdentityProviders from
     "../../../../util/apiDecode/settings/identityProvider/decodeListAllIdentityProviders";
-import { checkIfJSONisEmpty, EMPTY_STRING, ENTERPRISE_ID, GOOGLE_ID, sizeOfJson } from "../../../../util/util/common/common";
+import { EMPTY_STRING, ENTERPRISE_ID, GOOGLE_ID, checkIfJSONisEmpty, sizeOfJson } from 
+    "../../../../util/util/common/common";
 import { errorTypeDialog, successTypeDialog } from "../../../common/dialog";
 import SettingsTitle from "../../../common/settingsTitle";
 
@@ -42,9 +43,9 @@ export default function IdpSectionComponent(prop) {
 
     const toaster = useToaster();
 
-    const [idpList, setIdpList] = useState([]);
-    const [openAddModal, setOpenAddModal] = useState(false);
-    const [selectedTemplate, setSelectedTemplate] = useState(undefined);
+    const [ idpList, setIdpList ] = useState([]);
+    const [ openAddModal, setOpenAddModal ] = useState(false);
+    const [ selectedTemplate, setSelectedTemplate ] = useState(undefined);
 
     const templates = [
         Enterprise,
@@ -53,7 +54,7 @@ export default function IdpSectionComponent(prop) {
 
     useEffect(() => {
         fetchAllIdPs();
-    }, [fetchAllIdPs]);
+    }, [ fetchAllIdPs ]);
 
     const fetchAllIdPs = useCallback(async () => {
 
@@ -69,7 +70,7 @@ export default function IdpSectionComponent(prop) {
             setIdpList(null);
         }
 
-    }, [session]);
+    }, [ session ]);
 
     const onAddIdentityProviderClick = () => {
         setOpenAddModal(true);
@@ -97,8 +98,6 @@ export default function IdpSectionComponent(prop) {
 
     const onIdPSave = async (formValues, template) => {
 
-        console.log(checkEmpty(formValues, template));
-
         if (checkEmpty(formValues, template)) {
             errorTypeDialog(toaster, "Fields Cannot be Empty", "Form fields cannot be empty occured.");
         } else {
@@ -115,12 +114,14 @@ export default function IdpSectionComponent(prop) {
         }
 
         let size = sizeOfJson(formValue);
+        let key;
+        let val;
 
         switch (template.templateId) {
             case GOOGLE_ID:
                 if (size == 3) {
-                    for (var key in formValue) {
-                        var val = formValue[key];
+                    for (key in formValue) {
+                        val = formValue[key];
 
                         if (!val) {
                             return true;
@@ -129,12 +130,13 @@ export default function IdpSectionComponent(prop) {
 
                     return false;
                 }
+
                 break;
 
             case ENTERPRISE_ID:
                 if (size == 6) {
-                    for (var key in formValue) {
-                        var val = formValue[key];
+                    for (key in formValue) {
+                        val = formValue[key];
 
                         if (!val) {
                             return true;
@@ -143,11 +145,12 @@ export default function IdpSectionComponent(prop) {
 
                     return false;
                 }
+
                 break;
+                
             default:
-                return true;
-                break;
-            
+
+                return true;  
         }
 
         return true;
@@ -163,17 +166,17 @@ export default function IdpSectionComponent(prop) {
             {
                 idpList
                     ? (<FlexboxGrid
-                        style={{ height: "60vh", marginTop: "24px", width: "100%" }}
-                        justify={idpList.length === 0 ? "center" : "start"}
-                        align={idpList.length === 0 ? "middle" : "top"}>
-                        {idpList.length === 0
+                        style={ { height: "60vh", marginTop: "24px", width: "100%" } }
+                        justify={ idpList.length === 0 ? "center" : "start" }
+                        align={ idpList.length === 0 ? "middle" : "top" }>
+                        { idpList.length === 0
                             ? (<EmptyIdentityProviderList
-                                onAddIdentityProviderClick={onAddIdentityProviderClick}
+                                onAddIdentityProviderClick={ onAddIdentityProviderClick }
                             />)
                             : (<IdentityProviderList
-                                fetchAllIdPs={fetchAllIdPs}
-                                idpList={idpList}
-                                session={session}
+                                fetchAllIdPs={ fetchAllIdPs }
+                                idpList={ idpList }
+                                session={ session }
                             />)
                         }
                     </FlexboxGrid>)
@@ -183,23 +186,23 @@ export default function IdpSectionComponent(prop) {
             {
                 openAddModal && (
                     <AddIdentityProviderModal
-                        templates={templates}
-                        onClose={() => setOpenAddModal(false)}
-                        openModal={openAddModal}
-                        onTemplateSelected={(template) => {
+                        templates={ templates }
+                        onClose={ () => setOpenAddModal(false) }
+                        openModal={ openAddModal }
+                        onTemplateSelected={ (template) => {
                             setOpenAddModal(false);
                             setSelectedTemplate(template);
-                        }}
+                        } }
                     />
                 )
             }
             {
                 selectedTemplate && (
                     <IdPCreationModal
-                        onSave={onIdPSave}
-                        onCancel={onCreationDismiss}
-                        openModal={!!selectedTemplate}
-                        template={selectedTemplate} />
+                        onSave={ onIdPSave }
+                        onCancel={ onCreationDismiss }
+                        openModal={ !!selectedTemplate }
+                        template={ selectedTemplate } />
                 )
             }
         </Container>
@@ -233,31 +236,31 @@ const AddIdentityProviderModal = (prop) => {
 
     return (
         <Modal
-            open={openModal}
-            onClose={onClose}
-            onBackdropClick={onClose}>
+            open={ openModal }
+            onClose={ onClose }
+            onBackdropClick={ onClose }>
             <Modal.Header>
                 <Modal.Title><b>Select Identity Provider</b></Modal.Title>
                 <p>Choose one of the following identity providers.</p>
             </Modal.Header>
             <Modal.Body>
                 <div>
-                    <div className={styles.idp__template__list}>
-                        {templates.map((template) => {
+                    <div className={ styles.idp__template__list }>
+                        { templates.map((template) => {
 
                             return (
                                 <div
-                                    key={template.id}
-                                    className={styles.idp__template__card}
-                                    onClick={() => onTemplateSelected(template)}>
+                                    key={ template.id }
+                                    className={ styles.idp__template__card }
+                                    onClick={ () => onTemplateSelected(template) }>
                                     <div>
-                                        <h5>{template.name}</h5>
-                                        <small>{template.description}</small>
+                                        <h5>{ template.name }</h5>
+                                        <small>{ template.description }</small>
                                     </div>
-                                    <Avatar src={`/icons/${resolveIconName(template)}`} />
+                                    <Avatar src={ `/icons/${resolveIconName(template)}` } />
                                 </div>
                             );
-                        })}
+                        }) }
                     </div>
                 </div>
             </Modal.Body>
@@ -277,15 +280,15 @@ const EmptyIdentityProviderList = (prop) => {
 
     return (
         <Stack alignItems="center" direction="column">
-            <AppSelectIcon style={{ opacity: .2 }} width="150px" height="150px" />
-            <p style={{ fontSize: 14, marginTop: "20px" }}>
+            <AppSelectIcon style={ { opacity: .2 } } width="150px" height="150px" />
+            <p style={ { fontSize: 14, marginTop: "20px" } }>
                 There are no identity providers available at the moment.
             </p>
             <Button
                 appearance="primary"
-                onClick={onAddIdentityProviderClick}
+                onClick={ onAddIdentityProviderClick }
                 size="md"
-                style={{ marginTop: "12px" }}>
+                style={ { marginTop: "12px" } }>
                 Add Identity Provider
             </Button>
         </Stack>
@@ -303,7 +306,7 @@ const IdPCreationModal = (prop) => {
 
     const { openModal, onSave, onCancel, template } = prop;
 
-    const [formValues, setFormValues] = useState({});
+    const [ formValues, setFormValues ] = useState({});
 
     const handleModalClose = () => {
         onCancel();
@@ -320,39 +323,39 @@ const IdPCreationModal = (prop) => {
 
                 return (
                     <GoogleIdentityProvider
-                        formValues={formValues}
-                        onFormValuesChange={setFormValues} />
+                        formValues={ formValues }
+                        onFormValuesChange={ setFormValues } />
                 );
             case ENTERPRISE_ID:
 
                 return (
                     <EnterpriseIdentityProvider
-                        formValues={formValues}
-                        onFormValuesChange={setFormValues} />
+                        formValues={ formValues }
+                        onFormValuesChange={ setFormValues } />
                 );
         }
     };
 
     return (
         <Modal
-            open={openModal}
-            onClose={handleModalClose}
-            onBackdropClick={handleModalClose}>
+            open={ openModal }
+            onClose={ handleModalClose }
+            onBackdropClick={ handleModalClose }>
             <Modal.Header>
-                <Modal.Title><b>{template.name}</b></Modal.Title>
-                <p>{template.description}</p>
+                <Modal.Title><b>{ template.name }</b></Modal.Title>
+                <p>{ template.description }</p>
             </Modal.Header>
             <Modal.Body>
-                {resolveTemplateForm()}
+                { resolveTemplateForm() }
             </Modal.Body>
             <Modal.Footer>
                 <Button
-                    onClick={handleCreate}
+                    onClick={ handleCreate }
                     appearance="primary">
                     Create
                 </Button>
                 <Button
-                    onClick={handleModalClose}
+                    onClick={ handleModalClose }
                     appearance="subtle">
                     Cancel
                 </Button>
@@ -372,7 +375,7 @@ const GoogleIdentityProvider = (prop) => {
     const { onFormValuesChange, formValues } = prop;
 
     return (
-        <Form onChange={onFormValuesChange} formValue={formValues}>
+        <Form onChange={ onFormValuesChange } formValue={ formValues }>
             <Form.Group controlId="application_name">
                 <Form.ControlLabel>Idp Name</Form.ControlLabel>
                 <Form.Control name="application_name" />
@@ -403,7 +406,7 @@ const EnterpriseIdentityProvider = (prop) => {
     const { onFormValuesChange, formValues } = prop;
 
     return (
-        <Form onChange={onFormValuesChange} formValue={formValues}>
+        <Form onChange={ onFormValuesChange } formValue={ formValues }>
             <Form.Group controlId="application_name">
                 <Form.ControlLabel>Idp Name</Form.ControlLabel>
                 <Form.Control name="application_name" />
