@@ -33,6 +33,7 @@ import LogoComponent from "../common/logo/logoComponent";
 /**
  * 
  * @param prop - orgId, name, session, colorTheme
+ *
  * @returns The home section. Mainly side nav bar and the section to show other settings sections.
  */
 export default function Home(prop) {
