@@ -101,7 +101,6 @@ export default function SettingsFormSelection(prop) {
                 );
             })
             : <p>Access the console to edit this identity provider</p>
-
     );
 }
 
