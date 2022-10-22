@@ -60,7 +60,6 @@ export default function SettingsFormSelection(prop) {
     };
 
     return (
-
         propList()
             ? propList().map((property) => {
                 return (
