@@ -27,7 +27,7 @@ import decodeCreateIdentityProvider from
     "../../../../util/apiDecode/settings/identityProvider/decodeCreateIdentityProvider";
 import decodeListAllIdentityProviders from
     "../../../../util/apiDecode/settings/identityProvider/decodeListAllIdentityProviders";
-import { EMPTY_STRING, ENTERPRISE_ID, FACEBOOK_ID, GOOGLE_ID } from "../../../../util/util/common/common";
+import { EMPTY_STRING, ENTERPRISE_ID, GOOGLE_ID } from "../../../../util/util/common/common";
 import { errorTypeDialog, successTypeDialog } from "../../../common/dialog";
 import SettingsTitle from "../../../common/settingsTitle";
 
@@ -171,10 +171,6 @@ const AddIdentityProviderModal = (prop) => {
         if (GOOGLE_ID === template.templateId) {
 
             return "google.svg";
-        }
-        if (FACEBOOK_ID === template.templateId) {
-
-            return "facebook.svg";
         }
         if (ENTERPRISE_ID === template.templateId) {
 
