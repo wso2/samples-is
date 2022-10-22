@@ -24,6 +24,7 @@ import styles from "../../../styles/Settings.module.css";
 /**
  * 
  * @param prop - name (org name), imageSize (small, medium, large, x-large)
+ *
  * @returns 
  */
 export default function LogoComponent(prop) {
