@@ -24,10 +24,14 @@ function getSubOrgId(token) {
     
     try {
 
-        return config.SAMPLE_ORGS[0].id;
+        if (!token.user.user_organization) {
+            return token.user.org_id;
+        }
+
+        return token.user.user_organization;
     } catch (error) {
 
-        return token.user.federated_org;
+        return config.SAMPLE_ORGS[0].id;
     }
 
 }
