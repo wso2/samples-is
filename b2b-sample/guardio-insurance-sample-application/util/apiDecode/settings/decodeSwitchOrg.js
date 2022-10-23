@@ -16,10 +16,9 @@
  * under the License.
  */
 
+import config from "../../../config.json";
 import callSwitchOrg from "../../apiCall/settings/callSwitchOrg";
 import { commonDecode } from "../../util/apiUtil/commonDecode";
-import { parseCookies } from '../../util/routerUtil/routerUtil';
-import config from '../../../config.json';
 
 function getSubOrgId(token) {
     

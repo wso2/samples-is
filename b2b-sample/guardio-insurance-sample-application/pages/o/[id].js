@@ -1,69 +1,75 @@
-/*
- * Copyright (c) 2022 WSO2 LLC. (http://www.wso2.com).
+/**
+ * Copyright (c) 2022, WSO2 LLC. (https://www.wso2.com). All Rights Reserved.
  *
  * WSO2 LLC. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License.
  * You may obtain a copy of the License at
  *
- *http://www.apache.org/licenses/LICENSE-2.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
+ * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
  */
 
-import React, { useEffect } from 'react';
-
-import { getSession } from 'next-auth/react';
-import Settings from '../../components/settingsComponents/settings';
-import { orgSignin, redirect } from '../../util/util/routerUtil/routerUtil';
+import { getSession } from "next-auth/react";
+import React, { useEffect } from "react";
+import Home from "../../components/sections/home";
+import { orgSignin, redirect } from "../../util/util/routerUtil/routerUtil";
 
 export async function getServerSideProps(context) {
 
-	const routerQuery = context.query.id;
-	const session = await getSession(context);
+    const routerQuery = context.query.id;
+    const session = await getSession(context);
 
-	if (session === null || session === undefined) {
+    if (session === null || session === undefined) {
 
-		return {
-			props: { routerQuery },
-		};
-	} else {
-		if (routerQuery !== session.orgId) {
+        return {
+            props: { routerQuery }
+        };
+    } else {
+        if (routerQuery !== session.orgId) {
 
-			return redirect('/404');
-		} else {
+            return redirect("/404");
+        } else {
 
-			return {
-				props: { session },
-			}
-		}
+            return {
+                props: { session }
+            };
+        }
 
-	}
+    }
 
 }
 
-export default function Org(props) {
+/**
+ * 
+ * @param prop - session, routerQuery (orgId)
+ * @returns Organization distinct interace
+ */
+export default function Org(prop) {
 
-	useEffect(() => {
-		if (props.routerQuery) {
-			orgSignin(props.routerQuery);
-			return;
-		}
-	}, [props.routerQuery]);
+    const { session, routerQuery } = prop;
 
-	return (
-		props.session
-			? <Settings 
-			        orgId={props.session.orgId} 
-			        name={props.session.orgName} 
-			        session={props. session}
-				colorTheme={'blue'} 
-			/>
-			: null
-	)
+    useEffect(() => {
+        if (routerQuery) {
+            orgSignin(routerQuery);
+
+            return;
+        }
+    }, [ routerQuery ]);
+
+    return (
+        session
+            ? (<Home
+                orgId={ session.orgId }
+                name={ session.orgName }
+                session={ session }
+                colorTheme={ "blue" } />)
+            : null
+    );
 }

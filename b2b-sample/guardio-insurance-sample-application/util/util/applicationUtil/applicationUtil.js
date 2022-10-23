@@ -17,8 +17,10 @@
  */
 
 const { GOOGLE_ID, ENTERPRISE_ID } = require("../common/common");
-import enterpriseFederatedAuthenticators from '../../../components/data/templates/enterprise-identity-provider.json';
-import googleFederatedAuthenticators from '../../../components/data/templates/google.json';
+import enterpriseFederatedAuthenticators from
+    "../../../components/sections/settingsSection/idpSection/data/templates/enterprise-identity-provider.json";
+import googleFederatedAuthenticators from
+    "../../../components/sections/settingsSection/idpSection/data/templates/google.json";
 
 
 function selectedTemplateBaesedonTemplateId(templateId) {

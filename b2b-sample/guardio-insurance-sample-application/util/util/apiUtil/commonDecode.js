@@ -21,7 +21,7 @@ export async function commonDecode(callFunction, errorReturnValue) {
     try {
         const res = await callFunction();
 
-        if (res.error) {
+        if (res.error || res.traceId) {
 
             return errorReturnValue;
         }
