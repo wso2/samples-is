@@ -104,9 +104,6 @@
                 "scheme": "PROVISION_SILENTLY",
                 "userstore": "DEFAULT",
                 "associateLocalUser": true
-            },
-            "outboundConnectors": {
-                "connectors": []
             }
         },
         "templateId": "google-idp"
