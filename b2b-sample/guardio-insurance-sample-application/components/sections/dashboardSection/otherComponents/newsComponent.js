@@ -28,6 +28,7 @@ import { getCurrentDate } from "../../../../util/util/common/common";
 /**
  * 
  * @param prop - header (header text), body (body text)
+ *
  * @returns Single news component
  */
 export default function NewsComponent(prop) {
