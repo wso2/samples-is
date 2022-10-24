@@ -47,7 +47,7 @@ function setIdpTemplate(model, templateId, formValues, orgId) {
 function googleIdpTemplate(model, clientId, clientSecret, orgId) {
 
     model.image =
-        `${config.WSO2IS_HOST}/console/libs/themes/default/assets/images/identity-providers/google-idp-illustration.svg`;
+        `https://console.asgardeo.io/libs/themes/default/assets/images/identity-providers/google-idp-illustration.svg`;
 
     model.alias = `${config.WSO2IS_HOST}/oauth2/token`;
 
@@ -65,8 +65,8 @@ function googleIdpTemplate(model, clientId, clientSecret, orgId) {
             "value": `${config.WSO2IS_HOST}/o/${orgId}/commonauth`
         },
         {
-            "key": "AdditionalQueryParameters",
-            "value": "scope=email openid profile"
+            "key": "Scopes",
+            "value": "email openid profile"
         }
     ];
 
@@ -80,7 +80,7 @@ function enterpriseIdpTemplate(model, clientId, clientSecret, formValues, orgId)
     let certificate = formValues.certificate.toString();
 
     model.image =
-        `${config.WSO2IS_HOST}/console/libs/themes/default/assets/images/identity-providers/enterprise-idp-illustration.svg`;
+        `https://console.asgardeo.io/libs/themes/default/assets/images/identity-providers/enterprise-idp-illustration.svg`;
 
     model.federatedAuthenticators.authenticators[0].properties = [
         {
@@ -104,8 +104,8 @@ function enterpriseIdpTemplate(model, clientId, clientSecret, formValues, orgId)
             "value": `${config.WSO2IS_HOST}/o/${orgId}/commonauth`
         },
         {
-            "key": "AdditionalQueryParameters",
-            "value": "scope=email openid profile"
+            "key": "Scopes",
+            "value": "email openid profile"
         }
     ];
 

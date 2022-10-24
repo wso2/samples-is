@@ -27,7 +27,7 @@
     <artifactId>samples-is</artifactId>
     <packaging>pom</packaging>
     <description>WSO2 Identity Server Samples</description>
-    <version>4.5.2-SNAPSHOT</version>
+    <version>4.5.3-SNAPSHOT</version>
 
     <scm>
         <url>https://github.com/wso2/samples-is.git</url>
