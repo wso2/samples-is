@@ -19,10 +19,10 @@
 import { commonDecode } from "../../util/apiUtil/commonDecode";
 import callSignOutCall from "../../apiCall/dashboard/callSignOutCall";
 
-export default async function decodeSignOutCall(session, id) {
+export default async function decodeSignOutCall(superOrgId, idToken) {
 
     try {
-        const res = await commonDecode(() => callSignOutCall(session, id), null);
+        const res = await commonDecode(() => callSignOutCall(superOrgId, idToken), null);
 
         return res;
     } catch (err) {

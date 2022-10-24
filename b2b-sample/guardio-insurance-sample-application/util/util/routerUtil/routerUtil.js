@@ -46,9 +46,10 @@ function orgSignin(orgId) {
 
 async function orgSignout(session, orgId, beforeFunc, afterFunc) {
     beforeFunc();
-    decodeSignOutCall(session, orgId)
-    .then(()=>signOut({ callbackUrl: "/" }))
-    .finally(()=>afterFunc());
+    await signOut({ callbackUrl: "/" });
+    // decodeSignOutCall(session, orgId)
+    // .then(()=>signOut({ callbackUrl: "/" }))
+    // .finally(()=>afterFunc());
 }
 
 function emptySession(session) {

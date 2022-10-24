@@ -18,6 +18,7 @@
 
 import NextAuth from "next-auth";
 import config from "../../../config.json";
+import decodeSignOutCall from "../../../util/apiDecode/dashboard/decodeSignOutCall";
 import decodeSwitchOrg from "../../../util/apiDecode/settings/decodeSwitchOrg";
 import { getLoggedUserFromProfile, getLoggedUserId, getOrgId, getOrgName }
     from "../../../util/util/routerUtil/routerUtil";
@@ -27,6 +28,7 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
     callbacks: {
 
         async jwt({ token, account, profile }) {
+
             if (account) {
                 token.accessToken = account.access_token;
                 token.idToken = account.id_token;
@@ -60,6 +62,18 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
         }
     },
     debug: true,
+    events : {
+        signOut : async ({session, token}) => {
+            console.log('aaa');
+            console.log(session);
+            console.log('bbb');
+            console.log(token);
+            console.log('ccc');
+
+            await decodeSignOutCall(token.user.org_name, token.idToken);
+
+        }
+    },
     providers: [
         {   
             authorization: {

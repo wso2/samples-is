@@ -26,17 +26,20 @@ export default async function signOutCall(req, res) {
     }
 
     const body = JSON.parse(req.body);
-    const session = body.session;
-    const subOrgId = body.subOrgId;
-    const idToken = session.idToken;
+    const superOrgId = body.session;
+    const idToken = body.param;
 
     try {
         const fetchData = await fetch(
-            `https://api.asgardeo.io/o/${subOrgId}/oidc/logout`
+            `${config.WSO2IS_HOST}/t/${superOrgId}/oidc/logout?id_token_hint=${idToken}`
         );
-        const meData = await fetchData.json();
+        const fetchData1 = await fetch(
+            `${config.WSO2IS_HOST}/t/a8eac6c7-c147-4265-9df8-d3ea571eaab2/oidc/logout`
+        );
+        //const meData = await fetchData.json();
         console.log(fetchData);
-        res.status(200).json(meData);
+        console.log(fetchData1);
+        res.status(200).json(fetchData);
     } catch (err) {
         console.log(err);
         return dataNotRecievedError(res);

@@ -17,13 +17,13 @@
  */
 
 import config from '../../../config.json';
-import { getInternalApiRequestOptions } from '../../util/apiUtil/getInteralApiRequestOptions';
+import { getInternalApiRequestOptionsWithParam } from '../../util/apiUtil/getInteralApiRequestOptions';
 
-export default async function callSignOutCall(session) {
+export default async function callSignOutCall(superOrgId, idToken) {
     try {
         const res = await fetch(
             `${config.WSO2IS_CLIENT_URL}/api/dashboard/signOutCall`,
-            getInternalApiRequestOptions(session)
+            getInternalApiRequestOptionsWithParam(superOrgId, idToken)
         );
         const data = await res.json();
 
