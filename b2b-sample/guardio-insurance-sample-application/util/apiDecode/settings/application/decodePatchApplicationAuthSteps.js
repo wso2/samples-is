@@ -58,6 +58,7 @@ function addRemoveAuthSequence(template, idpTempleteId, idpName, method) {
 
     if (method) {
         authenticationSequenceModel.steps[0].options = [(getAuthenticatorBody(idpTempleteId, idpName))];
+
         return authenticationSequenceModel;
     } else {
 
