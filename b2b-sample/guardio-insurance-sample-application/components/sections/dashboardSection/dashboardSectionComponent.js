@@ -28,6 +28,7 @@ import LogoComponent from "../../common/logo/logoComponent";
 /**
  * 
  * @param prop - session, orgName
+ *
  * @returns Dashboard interface section
  */
 export default function DashboardSectionComponent(prop) {

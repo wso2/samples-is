@@ -27,7 +27,8 @@ import decodeCreateIdentityProvider from
     "../../../../util/apiDecode/settings/identityProvider/decodeCreateIdentityProvider";
 import decodeListAllIdentityProviders from
     "../../../../util/apiDecode/settings/identityProvider/decodeListAllIdentityProviders";
-import { EMPTY_STRING, ENTERPRISE_ID, FACEBOOK_ID, GOOGLE_ID } from "../../../../util/util/common/common";
+import { EMPTY_STRING, ENTERPRISE_ID, GOOGLE_ID, checkIfJSONisEmpty, sizeOfJson } from 
+    "../../../../util/util/common/common";
 import { errorTypeDialog, successTypeDialog } from "../../../common/dialog";
 import SettingsTitle from "../../../common/settingsTitle";
 
@@ -97,9 +98,62 @@ export default function IdpSectionComponent(prop) {
 
     const onIdPSave = async (formValues, template) => {
 
-        decodeCreateIdentityProvider(session, template, formValues)
-            .then((response) => onIdpCreated(response));
+        if (checkEmpty(formValues, template)) {
+            errorTypeDialog(toaster, "Fields Cannot be Empty", "Form fields cannot be empty occured.");
+        } else {
+            decodeCreateIdentityProvider(session, template, formValues)
+                .then((response) => onIdpCreated(response));
+        }
 
+    };
+
+    const checkEmpty = (formValue, template) => {
+
+        if (checkIfJSONisEmpty(formValue)) {
+            return true;
+        }
+
+        let size = sizeOfJson(formValue);
+        let key;
+        let val;
+
+        switch (template.templateId) {
+            case GOOGLE_ID:
+                if (size == 3) {
+                    for (key in formValue) {
+                        val = formValue[key];
+
+                        if (!val) {
+                            return true;
+                        }
+                    }
+
+                    return false;
+                }
+
+                break;
+
+            case ENTERPRISE_ID:
+                if (size == 6) {
+                    for (key in formValue) {
+                        val = formValue[key];
+
+                        if (!val) {
+                            return true;
+                        }
+                    }
+
+                    return false;
+                }
+
+                break;
+                
+            default:
+
+                return true;  
+        }
+
+        return true;
     };
 
     return (
@@ -171,10 +225,6 @@ const AddIdentityProviderModal = (prop) => {
         if (GOOGLE_ID === template.templateId) {
 
             return "google.svg";
-        }
-        if (FACEBOOK_ID === template.templateId) {
-
-            return "facebook.svg";
         }
         if (ENTERPRISE_ID === template.templateId) {
 

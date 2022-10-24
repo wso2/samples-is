@@ -17,7 +17,7 @@
  */
 
 import config from '../../../config.json';
-import { ENTERPRISE_ID, FACEBOOK_ID, GOOGLE_ID } from '../common/common';
+import { ENTERPRISE_ID, GOOGLE_ID } from '../common/common';
 
 function setIdpTemplate(model, templateId, formValues, orgId) {
 
@@ -28,9 +28,6 @@ function setIdpTemplate(model, templateId, formValues, orgId) {
     model.name = name;
 
     switch (templateId) {
-        case FACEBOOK_ID:
-            model = facebookIdpTemplate(model, clientId, clientSecret, orgId);
-            break;
         case GOOGLE_ID:
             model = googleIdpTemplate(model, clientId, clientSecret, orgId);
             break;
@@ -45,39 +42,6 @@ function setIdpTemplate(model, templateId, formValues, orgId) {
 
     return model;
 
-}
-
-function facebookIdpTemplate(model, clientId, clientSecret, orgId) {
-
-    model.image =
-        `${config.WSO2IS_HOST}/console/libs/themes/default/assets/images/identity-providers/facebook-idp-illustration.svg`;
-
-    model.alias = `${config.WSO2IS_HOST}/oauth2/token`;
-
-    model.federatedAuthenticators.authenticators[0].properties = [
-        {
-            "key": "ClientId",
-            "value": clientId
-        },
-        {
-            "key": "ClientSecret",
-            "value": clientSecret
-        },
-        {
-            "key": "callBackUrl",
-            "value": `${config.WSO2IS_HOST}/o/${orgId}/commonauth`
-        },
-        {
-            "key": "Scope",
-            "value": `email,public_profile`
-        },
-        {
-            "key": "UserInfoFields",
-            "value": `id,name,gender,email,first_name,last_name,age_range,link`
-        }
-    ];
-
-    return model;
 }
 
 function googleIdpTemplate(model, clientId, clientSecret, orgId) {
@@ -138,6 +102,10 @@ function enterpriseIdpTemplate(model, clientId, clientSecret, formValues, orgId)
         {
             "key": "callbackUrl",
             "value": `${config.WSO2IS_HOST}/o/${orgId}/commonauth`
+        },
+        {
+            "key": "AdditionalQueryParameters",
+            "value": "scope=email openid profile"
         }
     ];
 

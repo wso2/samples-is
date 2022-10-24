@@ -41,7 +41,14 @@ function checkIfJSONisEmpty(obj) {
         return true;
     }
 
-    return Object.keys(obj).length === 0;
+    return sizeOfJson(obj) === 0;
+}
+
+/**
+ *  @return the size of JSON object
+ */
+ function sizeOfJson(obj) {
+    return Object.keys(obj).length;
 }
 
 function copyTheTextToClipboard(text) {
@@ -49,15 +56,13 @@ function copyTheTextToClipboard(text) {
 }
 
 const GOOGLE_ID = "google-idp";
-const FACEBOOK_ID = "facebook-idp";
 const ENTERPRISE_ID = "enterprise-idp";
 const EMPTY_STRING = "";
 
 const GOOGLE_AUTHENTICATOR_ID = "GoogleOIDCAuthenticator";
-const FACEBOOK_AUTHENTICATOR_ID = "FacebookAuthenticator";
 const ENTERPRISE_AUTHENTICATOR_ID = "OpenIDConnectAuthenticator";
 
 module.exports = {
-    stringIsEmpty, getCurrentDate, copyTheTextToClipboard, checkIfJSONisEmpty, GOOGLE_ID, FACEBOOK_ID,
-    ENTERPRISE_ID, EMPTY_STRING, GOOGLE_AUTHENTICATOR_ID, FACEBOOK_AUTHENTICATOR_ID, ENTERPRISE_AUTHENTICATOR_ID
+    stringIsEmpty, getCurrentDate, copyTheTextToClipboard, checkIfJSONisEmpty, sizeOfJson, GOOGLE_ID,ENTERPRISE_ID, 
+    EMPTY_STRING, GOOGLE_AUTHENTICATOR_ID, ENTERPRISE_AUTHENTICATOR_ID
 };

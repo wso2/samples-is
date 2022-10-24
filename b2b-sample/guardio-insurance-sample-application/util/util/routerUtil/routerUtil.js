@@ -51,13 +51,13 @@ async function orgSignout(beforeFunc, afterFunc) {
 function emptySession(session) {
     if (session === null || session === undefined) {
 
-        return redirect('/signin');
+        return redirect("/signin");
     }
 }
 
 function parseJwt(token) {
 
-    return JSON.parse(Buffer.from(token.split('.')[1], 'base64'));
+    return JSON.parse(Buffer.from(token.split(".")[1], "base64"));
 }
 
 function getLoggedUserId(token) {
@@ -68,18 +68,20 @@ function getLoggedUserId(token) {
 function getOrgId(token) {
     try {
 
-        return config.SAMPLE_ORGS[0].id;
+        return parseJwt(token).org_id;
     } catch (error) {
 
-        return parseJwt(token).org_id;
+        return config.SAMPLE_ORGS[0].id;
     }
 }
 
 function getOrgName(token) {
     try {
-        return config.SAMPLE_ORGS[0].name;
-    } catch (error) {
+
         return parseJwt(token).org_name;
+    } catch (error) {
+
+        return config.SAMPLE_ORGS[0].name;
     }
 }
 

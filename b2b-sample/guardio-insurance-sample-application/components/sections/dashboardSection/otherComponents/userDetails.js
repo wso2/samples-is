@@ -25,6 +25,7 @@ import styles from "../../../../styles/Settings.module.css";
 /**
  * 
  * @param prop - me (details of the logged in user)
+ *
  * @returns The profile details section
  */
 export default function UserDetails(prop) {

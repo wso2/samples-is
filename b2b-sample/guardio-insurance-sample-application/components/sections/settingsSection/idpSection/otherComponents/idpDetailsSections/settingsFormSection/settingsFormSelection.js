@@ -60,7 +60,6 @@ export default function SettingsFormSelection(prop) {
     };
 
     return (
-
         propList()
             ? propList().map((property) => {
                 return (
@@ -101,7 +100,6 @@ export default function SettingsFormSelection(prop) {
                 );
             })
             : <p>Access the console to edit this identity provider</p>
-
     );
 }
 

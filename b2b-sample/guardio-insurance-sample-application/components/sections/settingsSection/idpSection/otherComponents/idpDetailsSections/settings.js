@@ -33,6 +33,7 @@ import { errorTypeDialog, successTypeDialog } from "../../../../../common/dialog
 /**
  * 
  * @param prop - session, idpDetails
+ *
  * @returns The settings section of an idp
  */
 export default function Settings(prop) {

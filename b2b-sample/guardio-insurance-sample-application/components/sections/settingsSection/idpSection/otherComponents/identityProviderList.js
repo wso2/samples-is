@@ -24,6 +24,7 @@ import styles from "../../../../../styles/idp.module.css";
 /**
  * 
  * @param prop - idpDetails (List of idp's), fetchAllIdPs (function to fetch all idp's), session
+ *
  * @returns List of idp's created in the organization
  */
 export default function IdentityProviderList(prop) {
