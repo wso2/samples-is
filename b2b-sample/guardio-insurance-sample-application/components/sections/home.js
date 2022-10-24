@@ -79,7 +79,9 @@ export default function Home(prop) {
                             scope={session.scope}
                             activeKeySideNav={activeKeySideNav}
                             activeKeySideNavSelect={activeKeySideNavSelect}
-                            setLoadingDisplay={setLoadingDisplay} />
+                            setLoadingDisplay={setLoadingDisplay}
+                            session={session}
+                            orgId={orgId} />
                     </div>
                     <div className={styles.mainPanelDiv}>
                         {mainPanelComponenet(activeKeySideNav, session)}
@@ -92,9 +94,12 @@ export default function Home(prop) {
 
 function SideNavSection(prop) {
 
-    const { name, scope, activeKeySideNav, activeKeySideNavSelect, setLoadingDisplay } = prop;
+    const { name, scope, activeKeySideNav, activeKeySideNavSelect, setLoadingDisplay, session, orgId } = prop;
 
-    const signOutOnClick = async () => await orgSignout(() => setLoadingDisplay(LOADING_DISPLAY_BLOCK),
+    const signOutOnClick = async () => await orgSignout(
+        session,
+        orgId,
+        () => setLoadingDisplay(LOADING_DISPLAY_BLOCK),
         () => setLoadingDisplay(LOADING_DISPLAY_NONE));
 
     return (

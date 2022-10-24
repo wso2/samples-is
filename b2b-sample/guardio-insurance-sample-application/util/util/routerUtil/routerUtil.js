@@ -19,6 +19,7 @@
 import cookie from "cookie";
 import { signIn, signOut } from 'next-auth/react';
 import config from '../../../config.json';
+import decodeSignOutCall from "../../apiDecode/dashboard/decodeSignOutCall";
 
 function redirect(path) {
 
@@ -43,9 +44,11 @@ function orgSignin(orgId) {
     }
 }
 
-async function orgSignout(beforeFunc, afterFunc) {
+async function orgSignout(session, orgId, beforeFunc, afterFunc) {
     beforeFunc();
-    signOut({ callbackUrl: "/" }).finally(()=>afterFunc());
+    decodeSignOutCall(session, orgId)
+    .then(()=>signOut({ callbackUrl: "/" }))
+    .finally(()=>afterFunc());
 }
 
 function emptySession(session) {
