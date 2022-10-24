@@ -93,9 +93,9 @@
                             "readOnly": true
                         },
                         {
-                            "key": "AdditionalQueryParameters",
-                            "displayName": "Additional Query Parameters",
-                            "description": "Additional query parameters. e.g: paramName1=value1",
+                            "key": "Scopes",
+                            "displayName": "Scopes",
+                            "description": "Scopes. e.g: value1 value2",
                             "type": "STRING",
                             "displayOrder": 4,
                             "regex": ".*",
@@ -105,7 +105,7 @@
                             "defaultValue": "",
                             "subProperties": [],
                             "readOnly": true
-                          }
+                        }
                     ]
                 }
             ],
