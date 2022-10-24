@@ -122,9 +122,6 @@
                 "scheme": "PROVISION_SILENTLY",
                 "userstore": "DEFAULT",
                 "associateLocalUser": true
-            },
-            "outboundConnectors": {
-                "connectors": []
             }
         },
         "roles": {
