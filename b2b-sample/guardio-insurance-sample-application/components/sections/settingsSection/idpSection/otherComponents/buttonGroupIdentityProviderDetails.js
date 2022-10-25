@@ -49,7 +49,7 @@ export default function ButtonGroupIdentityProviderDetails(prop) {
         const res = await decodeListCurrentApplication(session);
 
         await setAllApplications(res);
-    }, [ session ]);
+    }, [ session, openListAppicationModal ]);
 
     const fetchApplicatioDetails = useCallback(async () => {
         if (!checkIfJSONisEmpty(allApplications) && allApplications.totalResults !== 0) {
