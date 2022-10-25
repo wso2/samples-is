@@ -27,8 +27,8 @@ import ManageUserSectionComponent from "./settingsSection/manageUserSection/mana
 import Custom500 from "../../pages/500";
 import styles from "../../styles/Settings.module.css";
 import { checkCustomization, hideBasedOnScopes } from "../../util/util/frontendUtil/frontendUtil";
-import { orgSignout } from "../../util/util/routerUtil/routerUtil";
 import LogoComponent from "../common/logo/logoComponent";
+import SignOutModal from "../common/signOutModal";
 
 /**
  * 
@@ -41,6 +41,7 @@ export default function Home(prop) {
     const { name, orgId, session, colorTheme } = prop;
 
     const [ activeKeySideNav, setActiveKeySideNav ] = useState("1");
+    const [ signOutModalOpen, setSignOutModalOpen ] = useState(false);
 
     const mainPanelComponenet = (activeKey) => {
         switch (activeKey) {
@@ -60,20 +61,26 @@ export default function Home(prop) {
         setActiveKeySideNav(eventKey);
     };
 
+    const signOutModalClose = () => {
+        setSignOutModalOpen(false);
+    };
+
     useEffect(() => {
         document.body.className = checkCustomization(colorTheme);
     }, [ colorTheme ]);
 
     return (
         <div>
+            <SignOutModal session={ session } open={ signOutModalOpen } onClose={ signOutModalClose } />
             { session && session.scope
                 ? (<div className={ styles.mainDiv }>
                     <div className={ styles.sideNavDiv }>
-                        <SideNavSection 
-                            name={ name } 
+                        <SideNavSection
+                            name={ name }
                             scope={ session.scope }
-                            activeKeySideNav={ activeKeySideNav } 
-                            activeKeySideNavSelect={ activeKeySideNavSelect } />
+                            activeKeySideNav={ activeKeySideNav }
+                            activeKeySideNavSelect={ activeKeySideNavSelect }
+                            setSignOutModalOpen={ setSignOutModalOpen } />
                     </div>
                     <div className={ styles.mainPanelDiv }>
                         { mainPanelComponenet(activeKeySideNav, session) }
@@ -86,9 +93,9 @@ export default function Home(prop) {
 
 function SideNavSection(prop) {
 
-    const { name, scope, activeKeySideNav, activeKeySideNavSelect } = prop;
+    const { name, scope, activeKeySideNav, activeKeySideNavSelect, setSignOutModalOpen } = prop;
 
-    const signOutOnClick = () => orgSignout();
+    const signOutOnClick = () => setSignOutModalOpen(true);
 
     return (
         <Sidenav className={ styles.sideNav } defaultOpenKeys={ [ "3", "4" ] }>
@@ -99,22 +106,22 @@ function SideNavSection(prop) {
             </Sidenav.Header>
             <Sidenav.Body>
                 <Nav activeKey={ activeKeySideNav }>
-                    <Nav.Item 
-                        eventKey="1" 
+                    <Nav.Item
+                        eventKey="1"
                         icon={ <DashboardIcon /> }
                         onSelect={ (eventKey) => activeKeySideNavSelect(eventKey) }>
                         Dashboard
                     </Nav.Item>
-                    <Nav.Menu 
-                        eventKey="2" 
-                        title="Settings" 
+                    <Nav.Menu
+                        eventKey="2"
+                        title="Settings"
                         icon={ <GearCircleIcon /> }
                         style={ hideBasedOnScopes(scope) }>
-                        <Nav.Item 
+                        <Nav.Item
                             eventKey="2-1"
                             onSelect={ (eventKey) => activeKeySideNavSelect(eventKey) }>
                             Manage Users</Nav.Item>
-                        <Nav.Item 
+                        <Nav.Item
                             eventKey="2-3"
                             onSelect={ (eventKey) => activeKeySideNavSelect(eventKey) }>
                             Identity Providers</Nav.Item>
