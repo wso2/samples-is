@@ -25,13 +25,6 @@ import config from "../../../config.json";
  */
 function decodeUser(user) {
 
-    if ( !user.id || !user.userName || !user.name  || !user.emails ) {
-
-        return null;
-    }
-
-    console.log(getUsername(user.userName));
-
     return {
         "id": user.id ? user.id : "-",
         "username": user.userName ? getUsername(user.userName) : "-",
