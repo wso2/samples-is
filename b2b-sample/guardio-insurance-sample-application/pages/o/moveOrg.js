@@ -19,7 +19,6 @@
 import { getSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { useCallback, useEffect, useState } from "react";
-import { setOrgId } from "../../util/util/orgUtil/orgUtil";
 import { redirect } from "../../util/util/routerUtil/routerUtil";
 
 export async function getServerSideProps(context) {
@@ -35,8 +34,6 @@ export async function getServerSideProps(context) {
 
             const orgId = session.orgId;
             const orgName = session.orgName;
-
-            setOrgId(orgId);
 
             return {
                 props: { orgId, orgName }
