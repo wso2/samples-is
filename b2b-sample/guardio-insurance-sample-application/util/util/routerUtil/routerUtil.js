@@ -1,26 +1,30 @@
-/*
- * Copyright (c) 2022 WSO2 LLC. (https://www.wso2.com).
+/**
+ * Copyright (c) 2022, WSO2 LLC. (https://www.wso2.com). All Rights Reserved.
  *
  * WSO2 LLC. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License.
  * You may obtain a copy of the License at
  *
- *http://www.apache.org/licenses/LICENSE-2.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
+ * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
  */
 
 import cookie from "cookie";
-import { signIn, signOut } from 'next-auth/react';
-import config from '../../../config.json';
-import decodeSignOutCall from "../../apiDecode/dashboard/decodeSignOutCall";
+import { signIn, signOut } from "next-auth/react";
+import config from "../../../config.json";
 
+/**
+ * 
+ * @param path 
+ * @returns redirect locally to a path
+ */
 function redirect(path) {
 
     return {
@@ -31,11 +35,20 @@ function redirect(path) {
     }
 }
 
+/**
+ * 
+ * @param req - request containing the cookie
+ * @returns parse cookie
+ */
 function parseCookies(req) {
 
     return cookie.parse(req ? req.headers.cookie || "" : document.cookie);
 }
 
+/**
+ * 
+ * @param orgId `orgId` - (directs to the organization login), `null` - (enter the organization to login)
+ */
 function orgSignin(orgId) {
     if (orgId) {
         signIn("wso2is", { callbackUrl: `/o/moveOrg` }, { orgId: orgId });
@@ -44,14 +57,30 @@ function orgSignin(orgId) {
     }
 }
 
-async function orgSignout(session, orgId, beforeFunc, afterFunc) {
-    beforeFunc();
-    await signOut({ callbackUrl: "/" });
-    // decodeSignOutCall(session, orgId)
-    // .then(()=>signOut({ callbackUrl: "/" }))
-    // .finally(()=>afterFunc());
+/**
+ * 
+ * @param session 
+ */
+async function orgSignout(session) {
+    if (session) {
+        signOut()
+            .then(
+                () => window.location.assign(
+                    config.WSO2IS_HOST + "/t/" + config.WSO2IS_TENANT_NAME +
+                    "/oidc/logout?id_token_hint=" + session.orginalIdToken + "&post_logout_redirect_uri=" +
+                    config.WSO2IS_CLIENT_URL + "&state=sign_out_success"
+                )
+            );
+    } else {
+        await signOut({ callbackUrl: "/" });
+    }
 }
 
+/**
+ * 
+ * @param session 
+ * @returns when session is `null` redirect  to /signin
+ */
 function emptySession(session) {
     if (session === null || session === undefined) {
 
@@ -59,16 +88,31 @@ function emptySession(session) {
     }
 }
 
+/**
+ * 
+ * @param {*} token 
+ * @returns - parse JWT token and return a JSON
+ */
 function parseJwt(token) {
 
     return JSON.parse(Buffer.from(token.split(".")[1], "base64"));
 }
 
+/**
+ * 
+ * @param {*} token 
+ * @returns logged in user id.
+ */
 function getLoggedUserId(token) {
 
     return parseJwt(token).sub;
 }
 
+/**
+ * 
+ * @param token 
+ * @returns get organization id. If `org_id` is null in token check `config.json` for the org id
+ */
 function getOrgId(token) {
     try {
 
@@ -79,6 +123,11 @@ function getOrgId(token) {
     }
 }
 
+/**
+ * 
+ * @param token 
+ * @returns get organization name. If `org_name` is null in token check `config.json` for the org name
+ */
 function getOrgName(token) {
     try {
 
@@ -89,6 +138,11 @@ function getOrgName(token) {
     }
 }
 
+/**
+ * 
+ * @param {*} profile 
+ * @returns get logged user from profile
+ */
 function getLoggedUserFromProfile(profile) {
     const user = {};
     try {

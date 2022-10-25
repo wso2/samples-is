@@ -18,7 +18,6 @@
 
 import NextAuth from "next-auth";
 import config from "../../../config.json";
-import decodeSignOutCall from "../../../util/apiDecode/dashboard/decodeSignOutCall";
 import decodeSwitchOrg from "../../../util/apiDecode/settings/decodeSwitchOrg";
 import { getLoggedUserFromProfile, getLoggedUserId, getOrgId, getOrgName }
     from "../../../util/util/routerUtil/routerUtil";
@@ -56,26 +55,15 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
                 session.user = getLoggedUserFromProfile(token.user);
                 session.orgId = getOrgId(session.idToken);
                 session.orgName = getOrgName(session.idToken);
+                session.orginalIdToken = token.idToken;
             }
 
             return session;
         }
     },
     debug: true,
-    events : {
-        signOut : async ({session, token}) => {
-            console.log('aaa');
-            console.log(session);
-            console.log('bbb');
-            console.log(token);
-            console.log('ccc');
-
-            await decodeSignOutCall(token.user.org_name, token.idToken);
-
-        }
-    },
     providers: [
-        {   
+        {
             authorization: {
                 params: {
                     scope: config.WSO2IS_SCOPES.join(" ")
@@ -95,7 +83,7 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
             type: "oauth",
             userinfo: config.WSO2IS_HOST + "/t/" + config.WSO2IS_TENANT_NAME + "/oauth2/userinfo",
             wellKnown: config.WSO2IS_HOST + "/t/" + config.WSO2IS_TENANT_NAME
-                       + "/oauth2/token/.well-known/openid-configuration"
+                + "/oauth2/token/.well-known/openid-configuration"
         }
     ],
     secret: process.env.SECRET
