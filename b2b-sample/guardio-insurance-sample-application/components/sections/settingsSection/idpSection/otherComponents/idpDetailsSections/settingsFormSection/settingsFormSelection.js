@@ -23,7 +23,6 @@ import { InputGroup, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
 import { selectedTemplateBaesedonTemplateId } from "../../../../../../../util/util/applicationUtil/applicationUtil";
 import { copyTheTextToClipboard } from "../../../../../../../util/util/common/common";
-import { infoTypeDialog } from "../../../../../../common/dialog";
 import HelperText from "../../../../../../common/helperText";
 
 /**
@@ -55,8 +54,7 @@ export default function SettingsFormSelection(prop) {
     };
 
     const copyValueToClipboard = (text) => {
-        copyTheTextToClipboard(text);
-        infoTypeDialog(toaster, "Text copied to clipboard");
+        copyTheTextToClipboard(text, toaster);
     };
 
     return (

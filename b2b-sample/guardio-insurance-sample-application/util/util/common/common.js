@@ -16,6 +16,8 @@
  * under the License.
  */
 
+import { infoTypeDialog } from "../../../components/common/dialog";
+
 function stringIsEmpty(str) {
 
     return (str === "");
@@ -47,12 +49,13 @@ function checkIfJSONisEmpty(obj) {
 /**
  *  @return the size of JSON object
  */
- function sizeOfJson(obj) {
+function sizeOfJson(obj) {
     return Object.keys(obj).length;
 }
 
-function copyTheTextToClipboard(text) {
+function copyTheTextToClipboard(text, toaster) {
     navigator.clipboard.writeText(text);
+    infoTypeDialog(toaster, "Text copied to clipboard");
 }
 
 const GOOGLE_ID = "google-idp";
@@ -63,6 +66,6 @@ const GOOGLE_AUTHENTICATOR_ID = "GoogleOIDCAuthenticator";
 const ENTERPRISE_AUTHENTICATOR_ID = "OpenIDConnectAuthenticator";
 
 module.exports = {
-    stringIsEmpty, getCurrentDate, copyTheTextToClipboard, checkIfJSONisEmpty, sizeOfJson, GOOGLE_ID,ENTERPRISE_ID, 
+    stringIsEmpty, getCurrentDate, copyTheTextToClipboard, checkIfJSONisEmpty, sizeOfJson, GOOGLE_ID, ENTERPRISE_ID,
     EMPTY_STRING, GOOGLE_AUTHENTICATOR_ID, ENTERPRISE_AUTHENTICATOR_ID
 };
