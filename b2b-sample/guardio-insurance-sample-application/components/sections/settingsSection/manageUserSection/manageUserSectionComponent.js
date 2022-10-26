@@ -23,6 +23,7 @@ import EditUserComponent from "./otherComponents/editUserComponent";
 import styles from "../../../../styles/Settings.module.css";
 import decodeViewUsers from "../../../../util/apiDecode/settings/decodeViewUsers";
 import SettingsTitle from "../../../common/settingsTitle";
+import AddUserButton from "./otherComponents/addUserButton";
 
 /**
  * 
@@ -98,12 +99,9 @@ export default function ManageUserSectionComponent(prop) {
                 <SettingsTitle 
                     title="Manage Users" 
                     subtitle="Manage users in the organisation" />
-                <Button 
-                    appearance="primary" 
-                    size="lg" 
-                    onClick={ onAddUserClick }>
-                    Add User
-                </Button>
+                <AddUserButton 
+                    session = {session}
+                    onClick={ onAddUserClick } />
             </Stack>
 
             {
@@ -121,13 +119,8 @@ export default function ManageUserSectionComponent(prop) {
                             <HeaderCell><h6>Last Name</h6></HeaderCell>
                             <Cell dataKey="familyName" />
                         </Column>
-
-                        <Column width={ 300 } align="center">
-                            <HeaderCell><h6>Id</h6></HeaderCell>
-                            <Cell dataKey="id" />
-                        </Column>
-
-                        <Column width={ 200 } align="center">
+                        
+                        <Column flexGrow={ 2 } align="center">
                             <HeaderCell><h6>User Name</h6></HeaderCell>
                             <Cell dataKey="username" />
                         </Column>
@@ -136,7 +129,9 @@ export default function ManageUserSectionComponent(prop) {
                             <HeaderCell><h6>Email</h6></HeaderCell>
                             <Cell dataKey="email" />
                         </Column>
-                        <Column flexGrow={ 1 } align="center" fixed="right">
+
+                        {/* todo: need to implement this after role management section is completed. */}
+                        {/* <Column flexGrow={ 1 } align="center" fixed="right">
                             <HeaderCell><h6>Edit User</h6></HeaderCell>
 
                             <Cell>
@@ -148,7 +143,7 @@ export default function ManageUserSectionComponent(prop) {
                                     </span>
                                 ) }
                             </Cell>
-                        </Column>
+                        </Column> */}
 
                     </Table>)
                     : null
