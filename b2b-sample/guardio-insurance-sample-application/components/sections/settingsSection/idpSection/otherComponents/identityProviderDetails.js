@@ -109,6 +109,7 @@ function IdentityProviderDetailsHeader(prop) {
                     circle
                     src={ idpDetails.image }
                     alt="IDP image"
+                    style={ { background: "rgba(255,0,0,0)" } }
                 />
                 <Stack direction="column" justifyContent="flex-start" alignItems="stretch">
                     <h4>{ idpDetails.name }</h4>

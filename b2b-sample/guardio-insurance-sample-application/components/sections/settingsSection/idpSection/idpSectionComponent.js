@@ -27,7 +27,7 @@ import decodeCreateIdentityProvider from
     "../../../../util/apiDecode/settings/identityProvider/decodeCreateIdentityProvider";
 import decodeListAllIdentityProviders from
     "../../../../util/apiDecode/settings/identityProvider/decodeListAllIdentityProviders";
-import { EMPTY_STRING, ENTERPRISE_ID, GOOGLE_ID, checkIfJSONisEmpty, sizeOfJson } from 
+import { EMPTY_STRING, ENTERPRISE_ID, GOOGLE_ID, checkIfJSONisEmpty, sizeOfJson } from
     "../../../../util/util/common/common";
 import { errorTypeDialog, successTypeDialog } from "../../../common/dialog";
 import SettingsTitle from "../../../common/settingsTitle";
@@ -147,10 +147,10 @@ export default function IdpSectionComponent(prop) {
                 }
 
                 break;
-                
+
             default:
 
-                return true;  
+                return true;
         }
 
         return true;
@@ -257,7 +257,9 @@ const AddIdentityProviderModal = (prop) => {
                                         <h5>{ template.name }</h5>
                                         <small>{ template.description }</small>
                                     </div>
-                                    <Avatar src={ `/icons/${resolveIconName(template)}` } />
+                                    <Avatar
+                                        style={ { background: "rgba(255,0,0,0)" } }
+                                        src={ `/icons/${resolveIconName(template)}` } />
                                 </div>
                             );
                         }) }
