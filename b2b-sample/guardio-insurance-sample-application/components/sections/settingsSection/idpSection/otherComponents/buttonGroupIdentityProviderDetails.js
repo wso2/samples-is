@@ -43,6 +43,7 @@ export default function ButtonGroupIdentityProviderDetails(prop) {
     const [ allApplications, setAllApplications ] = useState({});
     const [ applicationDetail, setApplicationDetail ] = useState({});
     const [ idpIsinAuthSequence, setIdpIsinAuthSequence ] = useState(null);
+    const [ onlyIdp, setOnlyIdp ] = useState(false);
     const [ openListAppicationModal, setOpenListAppicationModal ] = useState(false);
 
     const fetchData = useCallback(async () => {
@@ -69,7 +70,10 @@ export default function ButtonGroupIdentityProviderDetails(prop) {
 
     useEffect(() => {
         if (!checkIfJSONisEmpty(applicationDetail)) {
-            setIdpIsinAuthSequence(checkIfIdpIsinAuthSequence(applicationDetail, idpDetails));
+            let check = checkIfIdpIsinAuthSequence(applicationDetail, idpDetails);
+
+            setIdpIsinAuthSequence(check[0]);
+            setOnlyIdp(check[1]);
         }
     }, [ idpDetails, applicationDetail ]);
 
@@ -103,7 +107,9 @@ export default function ButtonGroupIdentityProviderDetails(prop) {
                 idpIsinAuthSequence === null
                     ? null
                     : idpIsinAuthSequence
-                        ? <Button onClick={ onAddToLoginFlowClick }>Remove from Login Flow</Button>
+                        ? onlyIdp
+                            ? null
+                            : <Button onClick={ onAddToLoginFlowClick }>Remove from Login Flow</Button>
                         : <Button onClick={ onAddToLoginFlowClick }>Add to the Login Flow</Button>
             }
 
@@ -116,12 +122,17 @@ export default function ButtonGroupIdentityProviderDetails(prop) {
                 idpDetails={ idpDetails }
                 applicationDetail={ applicationDetail }
                 idpIsinAuthSequence={ idpIsinAuthSequence } />
+            
+            {
+                idpIsinAuthSequence
+                    ? null
+                    : (<IconButton
+                        icon={ <Trash /> }
+                        style={ { marginLeft: "10px" } }
+                        onClick={ () => onIdPDeleteClick(id) }
+                        appearance="subtle" />)
+            }
 
-            <IconButton
-                icon={ <Trash /> }
-                style={ { marginLeft: "10px" } }
-                onClick={ () => onIdPDeleteClick(id) }
-                appearance="subtle" />
         </Stack>
     );
 }
