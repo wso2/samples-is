@@ -23,6 +23,7 @@ import FormSuite from "rsuite/Form";
 import stylesSettings from "../../../../../styles/Settings.module.css";
 import styles from "../../../../../styles/util.module.css";
 import decodeEditUser from "../../../../../util/apiDecode/settings/decodeEditUser";
+import decodeListAllRoles from "../../../../../util/apiDecode/settings/role/decodeListAllRoles";
 import decodeUserRole from "../../../../../util/apiDecode/settings/role/decodeUserRole";
 import { checkIfJSONisEmpty } from "../../../../../util/util/common/common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../util/util/frontendUtil/frontendUtil";
@@ -40,14 +41,16 @@ export default function EditUserComponent(prop) {
     const toaster = useToaster();
 
     const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
+    const [allRoles, setAllRoles] = useState(null);
     const [userRoles, setUserRoles] = useState(null);
     const [userRolesForForm, setUserRolesForForm] = useState(null);
+    const [initUserRolesForForm, setInitUserRolesForForm] = useState(null);
 
     const fetchAllRoles = useCallback(async () => {
-        const res = await decodeUserRole(session, user.id);
+        const res = await decodeListAllRoles(session);
 
-        await setUserRoles(res);
-    }, [session, user]);
+        await setAllRoles(res);
+    }, [session]);
 
     const fetchUserRoles = useCallback(async () => {
         const res = await decodeUserRole(session, user.id);
@@ -65,17 +68,19 @@ export default function EditUserComponent(prop) {
     }, [fetchAllRoles]);
 
     useEffect(() => {
-        if (userRoles) {
+        if (allRoles && userRoles) {
             try {
-                setUserRolesForForm(userRoles.map(role => ({
+                setUserRolesForForm(allRoles.map(role => ({
                     label: role.displayName,
-                    value: role.displayName
+                    value: role.meta.location
                 })));
+
+                setInitUserRolesForForm(userRoles.map(role => (role.meta.location)));
             } catch (err) {
 
             }
         }
-    }, [userRoles])
+    }, [allRoles, userRoles])
 
     const firstNameValidate = (firstName, errors) => {
         if (!firstName) {
@@ -111,7 +116,7 @@ export default function EditUserComponent(prop) {
 
     const rolesValidate = (roles, errors) => {
         if (roles) {
-            if (roles.length==0) {
+            if (roles.length == 0) {
                 errors.roles = "This field cannot be empty";
             }
         } else {
@@ -168,7 +173,8 @@ export default function EditUserComponent(prop) {
                             familyName: user.familyName,
                             firstName: user.firstName,
                             username: user.username,
-                            roles: ["admin"]
+                            roles:  initUserRolesForForm ? initUserRolesForForm : []
+                            
                         }}
                         render={({ handleSubmit, form, submitting, pristine, errors }) => (
                             <FormSuite
@@ -237,21 +243,28 @@ export default function EditUserComponent(prop) {
                                     )}
                                 />
 
-                                <Field
-                                    name="roles"
-                                    render={({ input, meta }) => (
-                                        <FormSuite.Group controlId="name-6">
-                                            <FormSuite.ControlLabel>Role Management</FormSuite.ControlLabel>
-                                            <FormSuite.Control
-                                                {...input} 
-                                                accepter={TagPicker} data={userRolesForForm ? userRolesForForm : []}
-                                            />
-                                            {meta.error && meta.touched && (<FormSuite.ErrorMessage show={true} >
-                                                {meta.error}
-                                            </FormSuite.ErrorMessage>)}
-                                        </FormSuite.Group>
-                                    )}
-                                />
+                                {
+                                    userRolesForForm
+                                        ? <Field
+                                            name="roles"
+                                            render={({ input, meta }) => (
+                                                <FormSuite.Group controlId="name-6">
+                                                    <FormSuite.ControlLabel>Role Management</FormSuite.ControlLabel>
+                                                    <FormSuite.Control
+                                                        {...input}
+                                                        accepter={TagPicker}
+                                                        data={userRolesForForm ? userRolesForForm : []}
+                                                    />
+                                                    {meta.error && meta.touched && (<FormSuite.ErrorMessage show={true} >
+                                                        {meta.error}
+                                                    </FormSuite.ErrorMessage>)}
+                                                </FormSuite.Group>
+                                            )}
+                                        />
+                                        : null
+                                }
+
+
 
                                 <div className="buttons">
                                     <FormSuite.Group>
