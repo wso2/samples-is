@@ -34,16 +34,16 @@
  * under the License.
  */
 
-import callUserRole from
-    "../../../apiCall/settings/role/callUserRole";
+import callListAllRoles from
+    "../../../apiCall/settings/role/callListAllRoles";
 import { commonDecode } from "../../../util/apiUtil/commonDecode";
 
-export default async function decodeUserRole(session, id) {
+export default async function decodeListAllRoles(session) {
 
     try {
-        const res = await commonDecode(() => callUserRole(session, id), null);
+        const res = await commonDecode(() => callListAllRoles(session), null);
 
-        return res;
+        return res.Resources;
     } catch (err) {
 
         return null;

@@ -19,7 +19,7 @@
  import config from '../../../../config.json';
  import { getInternalApiRequestOptions } from '../../../util/apiUtil/getInteralApiRequestOptions';
  
- export default async function callGetDetailedIdentityProvider(session, id) {
+ export default async function callUserRole(session, id) {
  
      try {
          const res = await fetch(
@@ -35,4 +35,3 @@
          return null;
      }
  }
- 
