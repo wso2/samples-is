@@ -130,8 +130,7 @@ export default function ManageUserSectionComponent(prop) {
                             <Cell dataKey="email" />
                         </Column>
 
-                        {/* todo: need to implement this after role management section is completed. */}
-                        {/* <Column flexGrow={ 1 } align="center" fixed="right">
+                        <Column flexGrow={ 1 } align="center" fixed="right">
                             <HeaderCell><h6>Edit User</h6></HeaderCell>
 
                             <Cell>
@@ -143,7 +142,7 @@ export default function ManageUserSectionComponent(prop) {
                                     </span>
                                 ) }
                             </Cell>
-                        </Column> */}
+                        </Column>
 
                     </Table>)
                     : null
