@@ -122,6 +122,7 @@ export default function EditUserComponent(prop) {
         } else {
             errors.roles = "This field cannot be empty";
         }
+        
         return errors;
     };
 
@@ -173,8 +174,7 @@ export default function EditUserComponent(prop) {
                             familyName: user.familyName,
                             firstName: user.firstName,
                             username: user.username,
-                            roles:  initUserRolesForForm ? initUserRolesForForm : []
-                            
+                            roles:  initUserRolesForForm ? initUserRolesForForm : []  
                         }}
                         render={({ handleSubmit, form, submitting, pristine, errors }) => (
                             <FormSuite
@@ -254,6 +254,8 @@ export default function EditUserComponent(prop) {
                                                         {...input}
                                                         accepter={TagPicker}
                                                         data={userRolesForForm ? userRolesForForm : []}
+                                                        cleanable={false}
+                                                        block
                                                     />
                                                     {meta.error && meta.touched && (<FormSuite.ErrorMessage show={true} >
                                                         {meta.error}

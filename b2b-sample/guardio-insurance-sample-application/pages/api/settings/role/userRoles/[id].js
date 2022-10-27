@@ -40,7 +40,7 @@ export default async function userRoles(req, res) {
 
         res.status(200).json(data);
     } catch (err) {
-        console.log(err);
+
         return dataNotRecievedError(res);
     }
 }
