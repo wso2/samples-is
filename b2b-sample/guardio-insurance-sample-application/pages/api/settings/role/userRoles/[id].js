@@ -16,34 +16,31 @@
  * under the License.
  */
 
- import config from "../../../../../config.json";
- import { getSentDataRequestOptions } from "../../../../../util/util/apiUtil/getSentDataRequestOptions";
- import { dataNotRecievedError, notPostError } from "../../../../../util/util/apiUtil/localResErrors";
- import { RequestMethod } from "../../../../../util/util/apiUtil/requestMethod";
- 
- export default async function userRoles(req, res) {
-     if (req.method !== "POST") {
-         notPostError(res);
-     }
- 
-     const body = JSON.parse(req.body);
-     const session = body.session;
-     const subOrgId = body.subOrgId;
-     const user = body.param;
- 
-     const id = req.query.id;
- 
-     try {
-         const fetchData = await fetch(
-             `${config.WSO2IS_HOST}/o/${subOrgId}/api/server/v1/organizations/${subOrgId}/users/${id}/roles`,
-             getSentDataRequestOptions(session, RequestMethod.PATCH, user)
-         );
-         const data = await fetchData.json();
- 
-         res.status(200).json(data);    
-     } catch (err) {
-         
-         return dataNotRecievedError(res);
-     }
- }
- 
+import config from "../../../../../config.json";
+import getDataHeader from "../../../../../util/util/apiUtil/getDataHeader";
+import { dataNotRecievedError, notPostError } from "../../../../../util/util/apiUtil/localResErrors";
+
+export default async function userRoles(req, res) {
+    if (req.method !== "POST") {
+        notPostError(res);
+    }
+
+    const body = JSON.parse(req.body);
+    const session = body.session;
+    const subOrgId = body.subOrgId;
+
+    const id = req.query.id;
+
+    try {
+        const fetchData = await fetch(
+            `${config.WSO2IS_HOST}/o/${subOrgId}/api/server/v1/organizations/${subOrgId}/users/${id}/roles`,
+            getDataHeader(session)
+        );
+        const data = await fetchData.json();
+
+        res.status(200).json(data);
+    } catch (err) {
+        console.log(err);
+        return dataNotRecievedError(res);
+    }
+}
