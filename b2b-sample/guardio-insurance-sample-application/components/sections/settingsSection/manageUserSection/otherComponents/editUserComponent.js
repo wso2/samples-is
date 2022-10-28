@@ -18,11 +18,12 @@
 
 import React, { useCallback, useEffect, useState } from "react";
 import { Field, Form } from "react-final-form";
-import { Button, ButtonToolbar, Loader, Modal, TagPicker, useToaster } from "rsuite";
+import { Button, ButtonToolbar, Divider, Loader, Modal, TagPicker, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
 import stylesSettings from "../../../../../styles/Settings.module.css";
 import styles from "../../../../../styles/util.module.css";
 import decodeEditUser from "../../../../../util/apiDecode/settings/decodeEditUser";
+import decodEditRolesToAddOrRemoveUser from "../../../../../util/apiDecode/settings/role/decodEditRolesToAddOrRemoveUser";
 import decodeListAllRoles from "../../../../../util/apiDecode/settings/role/decodeListAllRoles";
 import decodeUserRole from "../../../../../util/apiDecode/settings/role/decodeUserRole";
 import { checkIfJSONisEmpty } from "../../../../../util/util/common/common";
@@ -115,14 +116,10 @@ export default function EditUserComponent(prop) {
     };
 
     const rolesValidate = (roles, errors) => {
-        if (roles) {
-            if (roles.length == 0) {
-                errors.roles = "This field cannot be empty";
-            }
-        } else {
+        if (!roles) {
             errors.roles = "This field cannot be empty";
         }
-        
+
         return errors;
     };
 
@@ -149,9 +146,23 @@ export default function EditUserComponent(prop) {
 
     const onSubmit = async (values, form) => {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
+
+        await 
+
         decodeEditUser(session, user.id, values.firstName, values.familyName, values.email,
             values.username)
-            .then((response) => onDataSubmit(response, form))
+            .then((response) => {
+                if(response) {
+                    console.log(response);
+                    decodEditRolesToAddOrRemoveUser(session, user.id, initUserRolesForForm, values.roles)
+                    .then((res)=>{
+                        console.log(res);
+                        onDataSubmit(res, form);
+                    });
+                } else {
+                    onDataSubmit(response, form)
+                }
+            } )
             .finally(() => setLoadingDisplay(LOADING_DISPLAY_NONE));
     };
 
@@ -245,28 +256,31 @@ export default function EditUserComponent(prop) {
 
                                 {
                                     userRolesForForm
-                                        ? <Field
-                                            name="roles"
-                                            render={({ input, meta }) => (
-                                                <FormSuite.Group controlId="name-6">
-                                                    <FormSuite.ControlLabel>Role Management</FormSuite.ControlLabel>
-                                                    <FormSuite.Control
-                                                        {...input}
-                                                        accepter={TagPicker}
-                                                        data={userRolesForForm ? userRolesForForm : []}
-                                                        cleanable={false}
-                                                        block
-                                                    />
-                                                    {meta.error && meta.touched && (<FormSuite.ErrorMessage show={true} >
-                                                        {meta.error}
-                                                    </FormSuite.ErrorMessage>)}
-                                                </FormSuite.Group>
-                                            )}
-                                        />
+                                        ? <>
+                                            <Divider />
+                                            <Field
+                                                name="roles"
+                                                render={({ input, meta }) => (
+                                                    <FormSuite.Group controlId="name-6">
+                                                        <FormSuite.ControlLabel>Role Management</FormSuite.ControlLabel>
+                                                        <FormSuite.Control
+                                                            {...input}
+                                                            accepter={TagPicker}
+                                                            data={userRolesForForm ? userRolesForForm : []}
+                                                            cleanable={false}
+                                                            placeholder="No roles assigned"
+                                                            block
+                                                        />
+                                                        {meta.error && meta.touched && (<FormSuite.ErrorMessage show={true} >
+                                                            {meta.error}
+                                                        </FormSuite.ErrorMessage>)}
+                                                    </FormSuite.Group>
+                                                )}
+                                            />
+                                            <Divider />
+                                        </>
                                         : null
                                 }
-
-
 
                                 <div className="buttons">
                                     <FormSuite.Group>
