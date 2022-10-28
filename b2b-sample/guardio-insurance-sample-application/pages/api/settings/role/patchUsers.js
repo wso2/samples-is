@@ -35,11 +35,12 @@ export default async function editRole(req, res) {
             roleUri,
             getSentDataRequestOptions(session, RequestMethod.PATCH, patchBody)
         );
+        
         const data = await fetchData.json();
-        console.log(data);
+
         res.status(200).json(data);
     } catch (err) {
-        console.log(err);
+        
         return dataNotRecievedError(res);
     }
 }

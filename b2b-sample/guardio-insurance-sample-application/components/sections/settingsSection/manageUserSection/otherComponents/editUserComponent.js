@@ -23,7 +23,8 @@ import FormSuite from "rsuite/Form";
 import stylesSettings from "../../../../../styles/Settings.module.css";
 import styles from "../../../../../styles/util.module.css";
 import decodeEditUser from "../../../../../util/apiDecode/settings/decodeEditUser";
-import decodEditRolesToAddOrRemoveUser from "../../../../../util/apiDecode/settings/role/decodEditRolesToAddOrRemoveUser";
+import decodEditRolesToAddOrRemoveUser
+    from "../../../../../util/apiDecode/settings/role/decodEditRolesToAddOrRemoveUser";
 import decodeListAllRoles from "../../../../../util/apiDecode/settings/role/decodeListAllRoles";
 import decodeUserRole from "../../../../../util/apiDecode/settings/role/decodeUserRole";
 import { checkIfJSONisEmpty } from "../../../../../util/util/common/common";
@@ -41,32 +42,32 @@ export default function EditUserComponent(prop) {
 
     const toaster = useToaster();
 
-    const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
-    const [allRoles, setAllRoles] = useState(null);
-    const [userRoles, setUserRoles] = useState(null);
-    const [userRolesForForm, setUserRolesForForm] = useState(null);
-    const [initUserRolesForForm, setInitUserRolesForForm] = useState(null);
+    const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
+    const [ allRoles, setAllRoles ] = useState(null);
+    const [ userRoles, setUserRoles ] = useState(null);
+    const [ userRolesForForm, setUserRolesForForm ] = useState(null);
+    const [ initUserRolesForForm, setInitUserRolesForForm ] = useState(null);
 
     const fetchAllRoles = useCallback(async () => {
         const res = await decodeListAllRoles(session);
 
         await setAllRoles(res);
-    }, [session]);
+    }, [ session ]);
 
     const fetchUserRoles = useCallback(async () => {
         const res = await decodeUserRole(session, user.id);
 
         await setUserRoles(res);
-    }, [session, user]);
+    }, [ session, user ]);
 
     useEffect(() => {
         fetchUserRoles();
-    }, [fetchUserRoles]);
+    }, [ fetchUserRoles ]);
 
 
     useEffect(() => {
         fetchAllRoles();
-    }, [fetchAllRoles]);
+    }, [ fetchAllRoles ]);
 
     useEffect(() => {
         if (allRoles && userRoles) {
@@ -78,10 +79,11 @@ export default function EditUserComponent(prop) {
 
                 setInitUserRolesForForm(userRoles.map(role => (role.meta.location)));
             } catch (err) {
-
+                setUserRolesForForm(null);
+                setInitUserRolesForForm([]);
             }
         }
-    }, [allRoles, userRoles])
+    }, [ allRoles, userRoles ]);
 
     const firstNameValidate = (firstName, errors) => {
         if (!firstName) {
@@ -147,138 +149,137 @@ export default function EditUserComponent(prop) {
     const onSubmit = async (values, form) => {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
 
-        await 
+        await
 
         decodeEditUser(session, user.id, values.firstName, values.familyName, values.email,
             values.username)
             .then((response) => {
-                if(response) {
-                    console.log(response);
+                if (response) {
                     decodEditRolesToAddOrRemoveUser(session, user.id, initUserRolesForForm, values.roles)
-                    .then((res)=>{
-                        console.log(res);
-                        onDataSubmit(res, form);
-                    });
+                        .then((res) => {
+                            onDataSubmit(res, form);
+                        });
                 } else {
-                    onDataSubmit(response, form)
+                    onDataSubmit(response, form);
                 }
-            } )
+            })
             .finally(() => setLoadingDisplay(LOADING_DISPLAY_NONE));
     };
 
     return (
-        <Modal backdrop="static" role="alertdialog" open={open} onClose={onClose} size="xs">
+        <Modal backdrop="static" role="alertdialog" open={ open } onClose={ onClose } size="xs">
 
             <Modal.Header>
                 <Modal.Title>
                     <b>Edit User</b>
-                    <p>Edit user {user.username}</p>
+                    <p>Edit user { user.username }</p>
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <div className={stylesSettings.addUserMainDiv}>
+                <div className={ stylesSettings.addUserMainDiv }>
                     <Form
-                        onSubmit={onSubmit}
-                        validate={validate}
-                        initialValues={{
+                        onSubmit={ onSubmit }
+                        validate={ validate }
+                        initialValues={ {
                             email: user.email,
                             familyName: user.familyName,
                             firstName: user.firstName,
-                            username: user.username,
-                            roles:  initUserRolesForForm ? initUserRolesForForm : []  
-                        }}
-                        render={({ handleSubmit, form, submitting, pristine, errors }) => (
+                            roles: initUserRolesForForm ? initUserRolesForForm : [],
+                            username: user.username
+                        } }
+                        render={ ({ handleSubmit, form, submitting, pristine, errors }) => (
                             <FormSuite
                                 layout="vertical"
-                                className={styles.addUserForm}
-                                onSubmit={event => { handleSubmit(event).then(form.restart); }}
+                                className={ styles.addUserForm }
+                                onSubmit={ event => { handleSubmit(event).then(form.restart); } }
                                 fluid>
                                 <Field
                                     name="firstName"
-                                    render={({ input, meta }) => (
+                                    render={ ({ input, meta }) => (
                                         <FormSuite.Group controlId="name-6">
                                             <FormSuite.ControlLabel>First Name</FormSuite.ControlLabel>
                                             <FormSuite.Control
-                                                {...input}
+                                                { ...input }
                                             />
-                                            {meta.error && meta.touched && (<FormSuite.ErrorMessage show={true}  >
-                                                {meta.error}
-                                            </FormSuite.ErrorMessage>)}
+                                            { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true }  >
+                                                { meta.error }
+                                            </FormSuite.ErrorMessage>) }
                                         </FormSuite.Group>
-                                    )}
+                                    ) }
                                 />
 
                                 <Field
                                     name="familyName"
-                                    render={({ input, meta }) => (
+                                    render={ ({ input, meta }) => (
                                         <FormSuite.Group controlId="name-6">
                                             <FormSuite.ControlLabel>Last Name</FormSuite.ControlLabel>
                                             <FormSuite.Control
-                                                {...input}
+                                                { ...input }
                                             />
-                                            {meta.error && meta.touched && (<FormSuite.ErrorMessage show={true}  >
-                                                {meta.error}
-                                            </FormSuite.ErrorMessage>)}
+                                            { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true }  >
+                                                { meta.error }
+                                            </FormSuite.ErrorMessage>) }
                                         </FormSuite.Group>
-                                    )}
+                                    ) }
                                 />
 
                                 <Field
                                     name="email"
-                                    render={({ input, meta }) => (
+                                    render={ ({ input, meta }) => (
                                         <FormSuite.Group controlId="name-6">
                                             <FormSuite.ControlLabel>Email</FormSuite.ControlLabel>
                                             <FormSuite.Control
-                                                {...input}
+                                                { ...input }
                                                 type="email"
                                             />
-                                            {meta.error && meta.touched && (<FormSuite.ErrorMessage show={true}  >
-                                                {meta.error}
-                                            </FormSuite.ErrorMessage>)}
+                                            { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true }  >
+                                                { meta.error }
+                                            </FormSuite.ErrorMessage>) }
                                         </FormSuite.Group>
-                                    )}
+                                    ) }
                                 />
 
                                 <Field
                                     name="username"
-                                    render={({ input, meta }) => (
+                                    render={ ({ input, meta }) => (
                                         <FormSuite.Group controlId="name-6">
                                             <FormSuite.ControlLabel>Username</FormSuite.ControlLabel>
                                             <FormSuite.Control
-                                                {...input}
+                                                { ...input }
                                             />
-                                            {meta.error && meta.touched && (<FormSuite.ErrorMessage show={true} >
-                                                {meta.error}
-                                            </FormSuite.ErrorMessage>)}
+                                            { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true } >
+                                                { meta.error }
+                                            </FormSuite.ErrorMessage>) }
                                         </FormSuite.Group>
-                                    )}
+                                    ) }
                                 />
 
                                 {
                                     userRolesForForm
-                                        ? <>
+                                        ? (<>
                                             <Divider />
                                             <Field
                                                 name="roles"
-                                                render={({ input, meta }) => (
+                                                render={ ({ input, meta }) => (
                                                     <FormSuite.Group controlId="name-6">
                                                         <FormSuite.ControlLabel>Role Management</FormSuite.ControlLabel>
                                                         <FormSuite.Control
-                                                            {...input}
-                                                            accepter={TagPicker}
-                                                            data={userRolesForForm ? userRolesForForm : []}
-                                                            cleanable={false}
+                                                            { ...input }
+                                                            accepter={ TagPicker }
+                                                            data={ userRolesForForm ? userRolesForForm : [] }
+                                                            cleanable={ false }
                                                             placeholder="No roles assigned"
                                                             block
                                                         />
-                                                        {meta.error && meta.touched && (<FormSuite.ErrorMessage show={true} >
-                                                            {meta.error}
-                                                        </FormSuite.ErrorMessage>)}
+                                                        { meta.error && meta.touched &&
+                                                            (<FormSuite.ErrorMessage show={ true } >
+                                                                { meta.error }
+                                                            </FormSuite.ErrorMessage>) }
                                                     </FormSuite.Group>
-                                                )}
+                                                ) }
                                             />
                                             <Divider />
-                                        </>
+                                        </>)
                                         : null
                                 }
 
@@ -286,30 +287,30 @@ export default function EditUserComponent(prop) {
                                     <FormSuite.Group>
                                         <ButtonToolbar>
                                             <Button
-                                                className={styles.addUserButton}
+                                                className={ styles.addUserButton }
                                                 size="lg"
                                                 appearance="primary"
                                                 type="submit"
-                                                disabled={submitting || pristine || !checkIfJSONisEmpty(errors)}>
+                                                disabled={ submitting || pristine || !checkIfJSONisEmpty(errors) }>
                                                 Submit
                                             </Button>
 
                                             <Button
-                                                className={styles.addUserButton}
+                                                className={ styles.addUserButton }
                                                 size="lg"
                                                 appearance="ghost"
                                                 type="button"
-                                                onClick={onClose}>Cancel</Button>
+                                                onClick={ onClose }>Cancel</Button>
                                         </ButtonToolbar>
                                     </FormSuite.Group>
                                 </div>
                             </FormSuite>
-                        )}
+                        ) }
                     />
                 </div>
             </Modal.Body>
 
-            <div style={loadingDisplay}>
+            <div style={ loadingDisplay }>
                 <Loader size="lg" backdrop content="User is adding" vertical />
             </div>
         </Modal>

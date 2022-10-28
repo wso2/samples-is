@@ -34,6 +34,7 @@ export default async function getRole(req, res) {
             getDataHeader(session)
         );
         const data = await fetchData.json();
+
         res.status(200).json(data);
     } catch (err) {
 

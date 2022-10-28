@@ -17,13 +17,13 @@
  */
 
 import React, { useCallback, useEffect, useState } from "react";
-import { Button, Stack, Table } from "rsuite";
+import { Stack, Table } from "rsuite";
+import AddUserButton from "./otherComponents/addUserButton";
 import AddUserComponent from "./otherComponents/addUserComponent";
 import EditUserComponent from "./otherComponents/editUserComponent";
 import styles from "../../../../styles/Settings.module.css";
 import decodeViewUsers from "../../../../util/apiDecode/settings/decodeViewUsers";
 import SettingsTitle from "../../../common/settingsTitle";
-import AddUserButton from "./otherComponents/addUserButton";
 
 /**
  * 
@@ -100,7 +100,7 @@ export default function ManageUserSectionComponent(prop) {
                     title="Manage Users" 
                     subtitle="Manage users in the organisation" />
                 <AddUserButton 
-                    session = {session}
+                    session = { session }
                     onClick={ onAddUserClick } />
             </Stack>
 

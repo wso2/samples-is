@@ -18,6 +18,7 @@
 
 import { getSentDataRequestOptions } from "../../../../util/util/apiUtil/getSentDataRequestOptions";
 import { dataNotRecievedError, notPostError } from "../../../../util/util/apiUtil/localResErrors";
+import { RequestMethod } from "../../../../util/util/apiUtil/requestMethod";
 
 export default async function editRole(req, res) {
     if (req.method !== "POST") {

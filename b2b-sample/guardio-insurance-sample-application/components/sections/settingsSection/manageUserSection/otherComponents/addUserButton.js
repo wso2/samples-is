@@ -21,39 +21,40 @@ import { Button } from "rsuite";
 import decodeGetApplication from "../../../../../util/apiDecode/settings/application/decodeGetApplication";
 import decodeListCurrentApplication
     from "../../../../../util/apiDecode/settings/application/decodeListCurrentApplication";
-import { checkIfJSONisEmpty } from "../../../../../util/util/common/common";
 import { checkIfBasicAvailableinAuthSequence } from "../../../../../util/util/applicationUtil/applicationUtil";
+import { checkIfJSONisEmpty } from "../../../../../util/util/common/common";
 
 export default function AddUserButton(prop) {
 
     const { session, onClick } = prop;
 
-    const [allApplications, setAllApplications] = useState({});
-    const [applicationDetail, setApplicationDetail] = useState({});
-    const [basicAuthAvailable, setBasicAuthAvailable] = useState(false);
+    const [ allApplications, setAllApplications ] = useState({});
+    const [ applicationDetail, setApplicationDetail ] = useState({});
+    const [ basicAuthAvailable, setBasicAuthAvailable ] = useState(false);
 
     const fetchData = useCallback(async () => {
 
         const res = await decodeListCurrentApplication(session);
 
         await setAllApplications(res);
-    }, [session]);
+    }, [ session ]);
 
     const fetchApplicatioDetails = useCallback(async () => {
         if (!checkIfJSONisEmpty(allApplications) && allApplications.totalResults !== 0) {
             const res = await decodeGetApplication(session, allApplications.applications[0].id);
+
             await setApplicationDetail(res);
         }
 
-    }, [session, allApplications]);
+    }, [ session, allApplications ]);
 
     useEffect(() => {
         fetchData();
-    }, [fetchData]);
+    }, [ fetchData ]);
 
     useEffect(() => {
         fetchApplicatioDetails();
-    }, [fetchApplicatioDetails]);
+    }, [ fetchApplicatioDetails ]);
 
     useEffect(() => {
         if (!checkIfJSONisEmpty(applicationDetail)) {
@@ -61,16 +62,16 @@ export default function AddUserButton(prop) {
 
             setBasicAuthAvailable(check);
         }
-    }, [applicationDetail])
+    }, [ applicationDetail ]);
 
     return (
         basicAuthAvailable
-            ? <Button
+            ? (<Button
                 appearance="primary"
                 size="lg"
-                onClick={onClick}>
+                onClick={ onClick }>
                 Add User
-            </Button>
+            </Button>)
             : null
-    )
+    );
 }
