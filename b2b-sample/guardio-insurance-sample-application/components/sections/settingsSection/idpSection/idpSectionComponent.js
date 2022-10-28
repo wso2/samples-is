@@ -259,7 +259,8 @@ const AddIdentityProviderModal = (prop) => {
                                     </div>
                                     <Avatar
                                         style={ { background: "rgba(255,0,0,0)" } }
-                                        src={ `/icons/${resolveIconName(template)}` } />
+                                        src={ `/icons/${resolveIconName(template)}` } 
+                                    />
                                 </div>
                             );
                         }) }
