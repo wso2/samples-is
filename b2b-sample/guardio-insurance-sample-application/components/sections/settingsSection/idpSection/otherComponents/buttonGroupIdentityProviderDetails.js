@@ -21,7 +21,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Button, IconButton, Stack, useToaster } from "rsuite";
 import ConfirmAddRemoveLoginFlowModal from "./confirmAddRemoveLoginFlowModal";
 import decodeGetApplication from "../../../../../util/apiDecode/settings/application/decodeGetApplication";
-import decodeListCurrentApplication from 
+import decodeListCurrentApplication from
     "../../../../../util/apiDecode/settings/application/decodeListCurrentApplication";
 import decodeDeleteIdentityProvider from
     "../../../../../util/apiDecode/settings/identityProvider/decodeDeleteIdentityProvider";
@@ -118,7 +118,7 @@ export default function ButtonGroupIdentityProviderDetails(prop) {
                 idpDetails={ idpDetails }
                 applicationDetail={ applicationDetail }
                 idpIsinAuthSequence={ idpIsinAuthSequence } />
-            
+
             {
                 idpIsinAuthSequence
                     ? null
