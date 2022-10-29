@@ -23,6 +23,7 @@ import { decodeUser } from "../../util/apiUtil/decodeUser";
 /**
  * 
  * @param session 
+
  * @returns all the users as a list. If failed `null`
  */
 export default async function decodeViewUsers(session) {

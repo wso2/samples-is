@@ -45,6 +45,7 @@ function selectedTemplateBaesedonTemplateId(templateId) {
  * 
  * @param template 
  * @param idpDetails 
+
  * @returns `[check,onlyIdp]`
  * `check` - if the idp is in authentication sequence, 
  * `onlyIdp` - is the idp is the only idp in the sequence
