@@ -29,6 +29,7 @@ import { errorTypeDialog, successTypeDialog } from "../../../../common/dialog";
 /**
  * 
  * @param prop - session, open (whether modal open or close), onClose (on modal close)
+ * 
  * @returns Modal to add a user.
  */
 export default function AddUserComponent(prop) {

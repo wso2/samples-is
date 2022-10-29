@@ -48,6 +48,7 @@ export async function getServerSideProps(context) {
 /**
  * 
  * @param prop - orgId, orgName
+ * 
  * @returns Interface to call organization switch function
  */
 export default function MoveOrg(prop) {

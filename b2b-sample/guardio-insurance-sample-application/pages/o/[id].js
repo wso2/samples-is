@@ -49,6 +49,7 @@ export async function getServerSideProps(context) {
 /**
  * 
  * @param prop - session, routerQuery (orgId)
+ * 
  * @returns Organization distinct interace
  */
 export default function Org(prop) {

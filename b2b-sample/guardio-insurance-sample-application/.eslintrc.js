@@ -112,7 +112,8 @@
          "eslint:recommended",
          "plugin:react/recommended",
          "plugin:import/typescript",
-         "plugin:react-hooks/recommended"
+         "plugin:react-hooks/recommended",
+         "plugin:@next/next/recommended"
      ],
      globals: {
          JSX: false,

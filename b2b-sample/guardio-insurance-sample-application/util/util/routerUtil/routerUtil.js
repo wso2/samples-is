@@ -22,7 +22,8 @@ import config from "../../../config.json";
 
 /**
  * 
- * @param path 
+ * @param path
+ * 
  * @returns redirect locally to a path
  */
 function redirect(path) {
@@ -38,6 +39,7 @@ function redirect(path) {
 /**
  * 
  * @param req - request containing the cookie
+ * 
  * @returns parse cookie
  */
 function parseCookies(req) {
@@ -78,7 +80,8 @@ async function orgSignout(session) {
 
 /**
  * 
- * @param session 
+ * @param session
+ * 
  * @returns when session is `null` redirect  to /signin
  */
 function emptySession(session) {
@@ -90,7 +93,8 @@ function emptySession(session) {
 
 /**
  * 
- * @param {*} token 
+ * @param token
+ * 
  * @returns - parse JWT token and return a JSON
  */
 function parseJwt(token) {
@@ -100,7 +104,8 @@ function parseJwt(token) {
 
 /**
  * 
- * @param {*} token 
+ * @param token
+ * 
  * @returns logged in user id.
  */
 function getLoggedUserId(token) {
@@ -110,7 +115,8 @@ function getLoggedUserId(token) {
 
 /**
  * 
- * @param token 
+ * @param token
+ * 
  * @returns get organization id. If `org_id` is null in token check `config.json` for the org id
  */
 function getOrgId(token) {
@@ -125,7 +131,8 @@ function getOrgId(token) {
 
 /**
  * 
- * @param token 
+ * @param token
+ * 
  * @returns get organization name. If `org_name` is null in token check `config.json` for the org name
  */
 function getOrgName(token) {
@@ -140,7 +147,8 @@ function getOrgName(token) {
 
 /**
  * 
- * @param {*} profile 
+ * @param profile
+ * 
  * @returns get logged user from profile
  */
 function getLoggedUserFromProfile(profile) {
