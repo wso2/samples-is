@@ -18,7 +18,7 @@ public class MainActivity extends ReactActivity {
    * Add this according to React Navigation Native instructions
    */
   @Override
-protected void onCreate(Bundle savedInstanceState) {
-  super.onCreate(null);
-}
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(null);
+  }
 }

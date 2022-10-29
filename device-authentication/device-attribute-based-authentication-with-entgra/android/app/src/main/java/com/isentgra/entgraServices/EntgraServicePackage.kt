@@ -17,5 +17,4 @@ class EntgraServicePackage (): ReactPackage {
     override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
         return Collections.emptyList<ViewManager<*, *>>()
     }
-
 }
