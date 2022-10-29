@@ -23,6 +23,7 @@ import { decodeUser } from "../../util/apiUtil/decodeUser";
 /**
  * 
  * @param session 
+
  * @returns logged in users object. If failed `null`
  */
 export default async function decodeMe(session) {
