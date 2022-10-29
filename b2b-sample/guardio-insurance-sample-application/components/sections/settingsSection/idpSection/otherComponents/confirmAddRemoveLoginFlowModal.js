@@ -29,6 +29,7 @@ import { errorTypeDialog, successTypeDialog } from "../../../../common/dialog";
 /**
  * 
  * @param prop - session, applicationDetail, idpDetails, idpIsinAuthSequence, openModal, onModalClose, fetchAllIdPs
+ * 
  * @returns Add/Remove from login flow button
  */
 export default function ConfirmAddRemoveLoginFlowModal(prop) {
@@ -151,6 +152,7 @@ function EmptySelectApplicationBody() {
 /**
  * 
  * @param prop - idpIsinAuthSequence, applicationDetail
+ * 
  * @returns  When then WSO2IS_APP_NAME is the correct applicaiton, it will show this section 
  */
 function ApplicationListAvailable(prop) {
@@ -182,6 +184,7 @@ function ApplicationListAvailable(prop) {
 /**
  * 
  * @param prop - application
+ * 
  * @returns The component to show the applicaiton name and the description
  */
 function ApplicationListItem(prop) {

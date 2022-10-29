@@ -21,7 +21,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Button, IconButton, Stack, useToaster } from "rsuite";
 import ConfirmAddRemoveLoginFlowModal from "./confirmAddRemoveLoginFlowModal";
 import decodeGetApplication from "../../../../../util/apiDecode/settings/application/decodeGetApplication";
-import decodeListCurrentApplication from 
+import decodeListCurrentApplication from
     "../../../../../util/apiDecode/settings/application/decodeListCurrentApplication";
 import decodeDeleteIdentityProvider from
     "../../../../../util/apiDecode/settings/identityProvider/decodeDeleteIdentityProvider";
@@ -32,6 +32,7 @@ import { errorTypeDialog, successTypeDialog } from "../../../../common/dialog";
 /**
  * 
  * @param prop - session, idpDetails, fetchAllIdPs, id (idp id)
+ * 
  * @returns Add/Remove button and delete button group in an Idp
  */
 export default function ButtonGroupIdentityProviderDetails(prop) {
@@ -118,7 +119,7 @@ export default function ButtonGroupIdentityProviderDetails(prop) {
                 idpDetails={ idpDetails }
                 applicationDetail={ applicationDetail }
                 idpIsinAuthSequence={ idpIsinAuthSequence } />
-            
+
             {
                 idpIsinAuthSequence
                     ? null

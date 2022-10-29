@@ -22,7 +22,8 @@ import { Form, Stack } from "rsuite";
 
 /**
  * 
- * @param prop - text 
+ * @param prop - text
+ * 
  * @returns A component for the decription section of an idp property.
  */
 export default function HelperText(prop) {

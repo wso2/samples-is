@@ -24,7 +24,8 @@ import {
 
 /**
  * 
- * @param {*} template 
+ * @param template
+ * 
  * @returns get authentication sequence
  */
 function getAuthenticationSequenceModel(template) {
@@ -36,7 +37,8 @@ function getAuthenticationSequenceModel(template) {
 }
 /**
  * 
- * @param {*} templateId 
+ * @param templateId
+ * 
  * @returns get authenticator id for the given template id
  */
 function getAuthenticatorId(templateId) {
@@ -58,8 +60,9 @@ function getAuthenticatorId(templateId) {
 
 /**
  * 
- * @param {*} idpTempleteId 
- * @param {*} idpName 
+ * @param idpTempleteId 
+ * @param idpName
+ * 
  * @returns get authenticator body
  */
 function getAuthenticatorBody(idpTempleteId, idpName) {
@@ -72,10 +75,11 @@ function getAuthenticatorBody(idpTempleteId, idpName) {
 
 /**
  * 
- * @param {*} template 
- * @param {*} idpTempleteId 
- * @param {*} idpName 
- * @param {*} method 
+ * @param template 
+ * @param idpTempleteId 
+ * @param idpName 
+ * @param method
+ * 
  * @returns add or remove idp from the login sequence
  */
 function addRemoveAuthSequence(template, idpTempleteId, idpName, method) {
@@ -122,10 +126,11 @@ function addRemoveAuthSequence(template, idpTempleteId, idpName, method) {
 
 /**
  * 
- * @param {*} session 
- * @param {*} template 
- * @param {*} idpDetails 
- * @param {*} method 
+ * @param session 
+ * @param template 
+ * @param idpDetails 
+ * @param method
+ * 
  * @returns decode patch applicaiton authentication steps API calls.
  */
 export default async function decodePatchApplicationAuthSteps(session, template, idpDetails, method) {

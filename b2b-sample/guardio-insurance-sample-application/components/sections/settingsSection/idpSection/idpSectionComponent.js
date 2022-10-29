@@ -39,6 +39,7 @@ import SettingsTitle from "../../../common/settingsTitle";
 /**
  * 
  * @param prop - session
+ * 
  * @returns The idp interface section.
  */
 export default function IdpSectionComponent(prop) {
@@ -220,6 +221,7 @@ export default function IdpSectionComponent(prop) {
  * @param prop - openModal (function to open the modal), onClose (what will happen when modal closes), 
  *               templates (templates list), onTemplateSelected 
  *              (what will happen when a particular template is selected)
+ * 
  * @returns A modal to select idp's
  */
 const AddIdentityProviderModal = (prop) => {
@@ -264,7 +266,8 @@ const AddIdentityProviderModal = (prop) => {
                                     </div>
                                     <Avatar
                                         style={ { background: "rgba(255,0,0,0)" } }
-                                        src={ `/icons/${resolveIconName(template)}` } />
+                                        src={ `/icons/${resolveIconName(template)}` } 
+                                    />
                                 </div>
                             );
                         }) }
@@ -279,6 +282,7 @@ const AddIdentityProviderModal = (prop) => {
 /**
  * 
  * @param prop - onAddIdentityProviderClick (function to open add idp modal)
+ * 
  * @returns The componet to show when there is no idp's.
  */
 const EmptyIdentityProviderList = (prop) => {
@@ -307,6 +311,7 @@ const EmptyIdentityProviderList = (prop) => {
  * 
  * @param prop - openModal (open the modal), onSave (create the idp), onCancel (when close the modal), 
  *               template (selected template)
+ * 
  * @returns Idp creation modal
  */
 const IdPCreationModal = (prop) => {
@@ -410,6 +415,7 @@ const IdPCreationModal = (prop) => {
 /**
  * 
  * @param prop -  onFormValuesChange, formValues
+ * 
  * @returns Form to create a Google idp.
  */
 const GoogleIdentityProvider = (prop) => {
@@ -441,6 +447,7 @@ const GoogleIdentityProvider = (prop) => {
 /**
  * 
  * @param prop -  onFormValuesChange, formValues
+ * 
  * @returns Form to create a enterprise idp.
  */
 const EnterpriseIdentityProvider = (prop) => {

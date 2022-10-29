@@ -28,6 +28,7 @@ import HelperText from "../../../../../../common/helperText";
 /**
  * 
  * @param prop - templateId, federatedAuthenticators (federatedAuthenticators as a list)
+ * 
  * @returns Component of the settings section of the idp interface
  */
 export default function SettingsFormSelection(prop) {

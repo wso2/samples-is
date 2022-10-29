@@ -22,6 +22,7 @@ import { Stack } from "rsuite";
 /**
  * 
  * @param prop - title, subtitle
+ * 
  * @returns A component for the title in an interface of the admin settings section
  */
 export default function SettingsTitle(prop) {

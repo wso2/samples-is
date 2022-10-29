@@ -21,6 +21,7 @@ import config from "../../../config.json";
 /**
  * 
  * @param user (user object return from the IS)
+ * 
  * @returns user object that can be view in front end side
  */
 function decodeUser(user) {
@@ -36,7 +37,8 @@ function decodeUser(user) {
 
 /**
  * 
- * @param userName 
+ * @param userName
+ * 
  * @returns set username. If the IS is Asgardeo DEFAULT/ add to the username changed else returns the original username
  */
  function setUsername(userName) {
@@ -50,7 +52,8 @@ function decodeUser(user) {
 
 /**
  * 
- * @param userName 
+ * @param userName
+ * 
  * @returns get username. If the IS is Asgardeo DEFAULT/ is removed from the username else returns the original username
  */
 function getUsername(userName) {

@@ -28,6 +28,7 @@ import SettingsTitle from "../../../common/settingsTitle";
 /**
  * 
  * @param prop - orgName, orgId, session
+ * 
  * @returns A component that will show the users in a table view
  */
 export default function ManageUserSectionComponent(prop) {
