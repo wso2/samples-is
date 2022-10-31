@@ -21,7 +21,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Button, IconButton, Stack, useToaster } from "rsuite";
 import ConfirmAddRemoveLoginFlowModal from "./confirmAddRemoveLoginFlowModal";
 import decodeGetApplication from "../../../../../util/apiDecode/settings/application/decodeGetApplication";
-import decodeListCurrentApplication from 
+import decodeListCurrentApplication from
     "../../../../../util/apiDecode/settings/application/decodeListCurrentApplication";
 import decodeDeleteIdentityProvider from
     "../../../../../util/apiDecode/settings/identityProvider/decodeDeleteIdentityProvider";
@@ -69,7 +69,9 @@ export default function ButtonGroupIdentityProviderDetails(prop) {
 
     useEffect(() => {
         if (!checkIfJSONisEmpty(applicationDetail)) {
-            setIdpIsinAuthSequence(checkIfIdpIsinAuthSequence(applicationDetail, idpDetails));
+            let check = checkIfIdpIsinAuthSequence(applicationDetail, idpDetails);
+
+            setIdpIsinAuthSequence(check[0]);
         }
     }, [ idpDetails, applicationDetail ]);
 
@@ -117,11 +119,16 @@ export default function ButtonGroupIdentityProviderDetails(prop) {
                 applicationDetail={ applicationDetail }
                 idpIsinAuthSequence={ idpIsinAuthSequence } />
 
-            <IconButton
-                icon={ <Trash /> }
-                style={ { marginLeft: "10px" } }
-                onClick={ () => onIdPDeleteClick(id) }
-                appearance="subtle" />
+            {
+                idpIsinAuthSequence
+                    ? null
+                    : (<IconButton
+                        icon={ <Trash /> }
+                        style={ { marginLeft: "10px" } }
+                        onClick={ () => onIdPDeleteClick(id) }
+                        appearance="subtle" />)
+            }
+
         </Stack>
     );
 }

@@ -55,8 +55,6 @@ function decodeUser(user) {
  */
 function getUsername(userName) {
 
-    console.log(userName);
-
     if (config.ASGARDEO) {
 
         return userName.split("/").pop();

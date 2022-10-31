@@ -28,6 +28,7 @@ import { commonDecode } from "../../util/apiUtil/commonDecode";
  * @param {*} familyName 
  * @param {*} email 
  * @param {*} username 
+
  * @returns `res` (if user edited successfully) or `false` (if the process was not completed)
  */
 export default async function decodeEditUser(session, id, firstName, familyName, email, username) {
