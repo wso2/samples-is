@@ -18,13 +18,19 @@
 
 import React, { useState } from "react";
 import { Field, Form } from "react-final-form";
-import { Button, ButtonToolbar, Loader, Modal, useToaster } from "rsuite";
+import { Button, ButtonToolbar, Divider, Loader, Modal, Panel, Radio, RadioGroup, Stack, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
 import styles from "../../../../../styles/Settings.module.css";
 import decodeAddUser from "../../../../../util/apiDecode/settings/decodeAddUser";
 import { checkIfJSONisEmpty } from "../../../../../util/util/common/common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../util/util/frontendUtil/frontendUtil";
 import { errorTypeDialog, successTypeDialog } from "../../../../common/dialog";
+import EmailFillIcon from "@rsuite/icons/EmailFill";
+
+const InviteConst = {
+    INVITE: "pwd-method-invite",
+    PWD: "pwd-method-pwd"
+}
 
 /**
  * 
@@ -36,7 +42,10 @@ export default function AddUserComponent(prop) {
 
     const { session, open, onClose } = prop;
 
-    const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
+    const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
+    const [inviteSelect, serInviteSelect] = useState("pwd-method-invite");
+    const [inviteShow, setInviteShow] = useState(LOADING_DISPLAY_BLOCK);
+    const [passwordShow, setPasswordShow] = useState(LOADING_DISPLAY_NONE);
 
     const toaster = useToaster();
 
@@ -97,9 +106,25 @@ export default function AddUserComponent(prop) {
         errors = usernameValidate(values.username, errors);
         errors = passwordValidate(values.password, errors);
         errors = repasswordValidate(values.repassword, errors);
-        
+
         return errors;
     };
+
+    const inviteSelectOnChange = (value) => {
+        serInviteSelect(value);
+
+        switch (value) {
+            case InviteConst.INVITE:
+                setInviteShow(LOADING_DISPLAY_BLOCK);
+                setPasswordShow(LOADING_DISPLAY_NONE);
+                break;
+
+            case InviteConst.PWD:
+                setInviteShow(LOADING_DISPLAY_NONE);
+                setPasswordShow(LOADING_DISPLAY_BLOCK);
+                break;
+        }
+    }
 
     const onDataSubmit = (response, form) => {
         if (response) {
@@ -120,7 +145,7 @@ export default function AddUserComponent(prop) {
     };
 
     return (
-        <Modal backdrop="static" role="alertdialog" open={ open } onClose={ onClose } >
+        <Modal backdrop="static" role="alertdialog" open={open} onClose={onClose} size="sm">
 
             <Modal.Header>
                 <Modal.Title>
@@ -130,149 +155,180 @@ export default function AddUserComponent(prop) {
             </Modal.Header>
 
             <Modal.Body>
-                <div className={ styles.addUserMainDiv }>
+                <div className={styles.addUserMainDiv}>
 
-                    <div className={ styles.addUserFormDiv }>
-                        <Form
-                            onSubmit={ onSubmit }
-                            validate={ validate }
-                            render={ ({ handleSubmit, form, submitting, pristine, errors }) => (
-                                <FormSuite
-                                    layout="vertical"
-                                    className={ styles.addUserForm }
-                                    onSubmit={ event => { handleSubmit(event).then(form.restart); } }
-                                    fluid>
-                                    <Field
-                                        name="firstName"
-                                        render={ ({ input, meta }) => (
-                                            <FormSuite.Group controlId="firstName">
-                                                <FormSuite.ControlLabel>First Name</FormSuite.ControlLabel>
-                                                <FormSuite.Control
-                                                    { ...input }
-                                                />
-                                                { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true } >
-                                                    { meta.error }
-                                                </FormSuite.ErrorMessage>) }
-                                            </FormSuite.Group>
-                                        ) }
-                                    />
-
-                                    <Field
-                                        name="familyName"
-                                        render={ ({ input, meta }) => (
-                                            <FormSuite.Group controlId="familyName">
-                                                <FormSuite.ControlLabel>Last Name</FormSuite.ControlLabel>
-                                                <FormSuite.Control
-                                                    { ...input }
-                                                />
-                                                { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true } >
-                                                    { meta.error }
-                                                </FormSuite.ErrorMessage>) }
-                                            </FormSuite.Group>
-                                        ) }
-                                    />
-
-                                    <Field
-                                        name="email"
-                                        render={ ({ input, meta }) => (
-                                            <FormSuite.Group controlId="email">
-                                                <FormSuite.ControlLabel>Email</FormSuite.ControlLabel>
-                                                <FormSuite.Control
-                                                    { ...input }
-                                                    type="email"
-                                                />
-                                                { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true } >
-                                                    { meta.error }
-                                                </FormSuite.ErrorMessage>) }
-                                            </FormSuite.Group>
-                                        ) }
-                                    />
-
-                                    <hr />
-
-                                    <Field
-                                        name="username"
-                                        render={ ({ input, meta }) => (
-                                            <FormSuite.Group controlId="username">
-                                                <FormSuite.ControlLabel>Username</FormSuite.ControlLabel>
-                                                <FormSuite.Control
-                                                    { ...input }
-                                                />
-                                                { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true } >
-                                                    { meta.error }
-                                                </FormSuite.ErrorMessage>) }
-                                            </FormSuite.Group>
-                                        ) }
-                                    />
-
-                                    <Field
-                                        name="password"
-                                        render={ ({ input, meta }) => (
-                                            <FormSuite.Group controlId="password">
-                                                <FormSuite.ControlLabel>Password</FormSuite.ControlLabel>
-                                                <FormSuite.Control
-                                                    { ...input }
-                                                    type="password"
-                                                    autoComplete="off"
-                                                />
-                                                { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true } >
-                                                    { meta.error }
-                                                </FormSuite.ErrorMessage>) }
-                                            </FormSuite.Group>
-                                        ) }
-                                    />
-
-                                    <Field
-                                        name="repassword"
-                                        render={ ({ input, meta }) => (
-                                            <FormSuite.Group controlId="repassword">
-                                                <FormSuite.ControlLabel>Re enter password</FormSuite.ControlLabel>
-                                                <FormSuite.Control
-                                                    { ...input }
-                                                    type="password"
-                                                    autoComplete="off"
-                                                />
-                                                { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true } >
-                                                    { meta.error }
-                                                </FormSuite.ErrorMessage>) }
-                                            </FormSuite.Group>
-                                        ) }
-                                    />
-
-                                    <div className="buttons">
-                                        <FormSuite.Group>
-                                            <ButtonToolbar>
-                                                <Button
-                                                    className={ styles.addUserButton }
-                                                    size="lg"
-                                                    appearance="primary"
-                                                    type="submit"
-                                                    disabled={ submitting || pristine || !checkIfJSONisEmpty(errors) }>
-                                                    Submit
-                                                </Button>
-
-                                                <Button
-                                                    className={ styles.addUserButton }
-                                                    size="lg"
-                                                    appearance="ghost"
-                                                    type="button"
-                                                    onClick={ onClose }>Cancel</Button>
-                                            </ButtonToolbar>
+                    <Form
+                        onSubmit={onSubmit}
+                        validate={validate}
+                        render={({ handleSubmit, form, submitting, pristine, errors }) => (
+                            <FormSuite
+                                layout="vertical"
+                                onSubmit={event => { handleSubmit(event).then(form.restart); }}
+                                fluid>
+                                <Field
+                                    name="firstName"
+                                    render={({ input, meta }) => (
+                                        <FormSuite.Group controlId="firstName">
+                                            <FormSuite.ControlLabel>First Name</FormSuite.ControlLabel>
+                                            <FormSuite.Control
+                                                {...input}
+                                            />
+                                            {meta.error && meta.touched && (<FormSuite.ErrorMessage show={true} >
+                                                {meta.error}
+                                            </FormSuite.ErrorMessage>)}
                                         </FormSuite.Group>
+                                    )}
+                                />
+
+                                <Field
+                                    name="familyName"
+                                    render={({ input, meta }) => (
+                                        <FormSuite.Group controlId="familyName">
+                                            <FormSuite.ControlLabel>Last Name</FormSuite.ControlLabel>
+                                            <FormSuite.Control
+                                                {...input}
+                                            />
+                                            {meta.error && meta.touched && (<FormSuite.ErrorMessage show={true} >
+                                                {meta.error}
+                                            </FormSuite.ErrorMessage>)}
+                                        </FormSuite.Group>
+                                    )}
+                                />
+
+                                <Field
+                                    name="email"
+                                    render={({ input, meta }) => (
+                                        <FormSuite.Group controlId="email">
+                                            <FormSuite.ControlLabel>Email</FormSuite.ControlLabel>
+                                            <FormSuite.Control
+                                                {...input}
+                                                type="email"
+                                            />
+                                            {meta.error && meta.touched && (<FormSuite.ErrorMessage show={true} >
+                                                {meta.error}
+                                            </FormSuite.ErrorMessage>)}
+                                        </FormSuite.Group>
+                                    )}
+                                />
+
+                                <Divider />
+
+                                <Field
+                                    name="username"
+                                    render={({ input, meta }) => (
+                                        <FormSuite.Group controlId="username">
+                                            <FormSuite.ControlLabel>Username</FormSuite.ControlLabel>
+                                            <FormSuite.Control
+                                                {...input}
+                                            />
+                                            {meta.error && meta.touched && (<FormSuite.ErrorMessage show={true} >
+                                                {meta.error}
+                                            </FormSuite.ErrorMessage>)}
+                                        </FormSuite.Group>
+                                    )}
+                                />
+
+                                <RadioGroup name="radioList" value={inviteSelect} onChange={inviteSelectOnChange}>
+                                    <p>Select the method to set the user password</p>
+                                    <Radio value={InviteConst.INVITE}>Invite the user to set their own password</Radio>
+
+                                    <div style={inviteShow}>
+                                        <br />
+                                        <EmailInvitePanel />
+                                        <br />
 
                                     </div>
-                                </FormSuite>
-                            ) }
-                        />
-                    </div>
+
+                                    <Radio value={InviteConst.PWD}>Set a password for the user</Radio>
+
+                                    <div style={passwordShow}>
+                                        <br />
+                                        <Field
+                                            name="password"
+                                            render={({ input, meta }) => (
+                                                <FormSuite.Group controlId="password">
+                                                    <FormSuite.ControlLabel>Password</FormSuite.ControlLabel>
+                                                    <FormSuite.Control
+                                                        {...input}
+                                                        type="password"
+                                                        autoComplete="off"
+                                                    />
+                                                    {meta.error && meta.touched && (<FormSuite.ErrorMessage show={true} >
+                                                        {meta.error}
+                                                    </FormSuite.ErrorMessage>)}
+                                                </FormSuite.Group>
+                                            )}
+                                        />
+
+                                        <Field
+                                            name="repassword"
+                                            render={({ input, meta }) => (
+                                                <FormSuite.Group controlId="repassword">
+                                                    <FormSuite.ControlLabel>Re enter password</FormSuite.ControlLabel>
+                                                    <FormSuite.Control
+                                                        {...input}
+                                                        type="password"
+                                                        autoComplete="off"
+                                                    />
+                                                    {meta.error && meta.touched && (<FormSuite.ErrorMessage show={true} >
+                                                        {meta.error}
+                                                    </FormSuite.ErrorMessage>)}
+                                                </FormSuite.Group>
+                                            )}
+                                        />
+
+                                    </div>
+
+                                </RadioGroup>
+                                <br />
+                                <br />
+
+                                <div className="buttons">
+                                    <FormSuite.Group>
+                                        <ButtonToolbar>
+                                            <Button
+                                                className={styles.addUserButton}
+                                                size="lg"
+                                                appearance="primary"
+                                                type="submit"
+                                                disabled={submitting || pristine || !checkIfJSONisEmpty(errors)}>
+                                                Submit
+                                            </Button>
+
+                                            <Button
+                                                className={styles.addUserButton}
+                                                size="lg"
+                                                appearance="ghost"
+                                                type="button"
+                                                onClick={onClose}>Cancel</Button>
+                                        </ButtonToolbar>
+                                    </FormSuite.Group>
+
+                                </div>
+                            </FormSuite>
+                        )}
+                    />
 
                 </div>
             </Modal.Body>
 
-            <div style={ loadingDisplay }>
+            <div style={loadingDisplay}>
                 <Loader size="lg" backdrop content="User is adding" vertical />
             </div>
         </Modal>
 
     );
+}
+
+function EmailInvitePanel() {
+    return (
+        <Panel bordered>
+            <Stack spacing={30}>
+                <EmailFillIcon style={{ fontSize: "3em"}}/>
+                An email with a confirmation link will be sent to the provided
+                email address for the user to set their own password.
+            </Stack>
+
+        </Panel>
+    )
 }
