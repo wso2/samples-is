@@ -22,7 +22,7 @@ import { Field, Form } from "react-final-form";
 import { Button, ButtonToolbar, Divider, Loader, Modal, Panel, Radio, RadioGroup, Stack, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
 import styles from "../../../../../styles/Settings.module.css";
-import { decodeAddUser, InviteConst } from "../../../../../util/apiDecode/settings/decodeAddUser";
+import { InviteConst, decodeAddUser } from "../../../../../util/apiDecode/settings/decodeAddUser";
 import { checkIfJSONisEmpty } from "../../../../../util/util/common/common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../util/util/frontendUtil/frontendUtil";
 import { errorTypeDialog, successTypeDialog } from "../../../../common/dialog";
@@ -37,10 +37,10 @@ export default function AddUserComponent(prop) {
 
     const { session, open, onClose } = prop;
 
-    const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
-    const [inviteSelect, serInviteSelect] = useState(InviteConst.INVITE);
-    const [inviteShow, setInviteShow] = useState(LOADING_DISPLAY_BLOCK);
-    const [passwordShow, setPasswordShow] = useState(LOADING_DISPLAY_NONE);
+    const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
+    const [ inviteSelect, serInviteSelect ] = useState(InviteConst.INVITE);
+    const [ inviteShow, setInviteShow ] = useState(LOADING_DISPLAY_BLOCK);
+    const [ passwordShow, setPasswordShow ] = useState(LOADING_DISPLAY_NONE);
 
     const toaster = useToaster();
 
@@ -116,14 +116,16 @@ export default function AddUserComponent(prop) {
             case InviteConst.INVITE:
                 setInviteShow(LOADING_DISPLAY_BLOCK);
                 setPasswordShow(LOADING_DISPLAY_NONE);
+
                 break;
 
             case InviteConst.PWD:
                 setInviteShow(LOADING_DISPLAY_NONE);
                 setPasswordShow(LOADING_DISPLAY_BLOCK);
+
                 break;
         }
-    }
+    };
 
     const onDataSubmit = (response, form) => {
         if (response) {
@@ -144,7 +146,7 @@ export default function AddUserComponent(prop) {
     };
 
     return (
-        <Modal backdrop="static" role="alertdialog" open={open} onClose={onClose} size="sm">
+        <Modal backdrop="static" role="alertdialog" open={ open } onClose={ onClose } size="sm">
 
             <Modal.Header>
                 <Modal.Title>
@@ -154,128 +156,134 @@ export default function AddUserComponent(prop) {
             </Modal.Header>
 
             <Modal.Body>
-                <div className={styles.addUserMainDiv}>
+                <div className={ styles.addUserMainDiv }>
 
                     <Form
-                        onSubmit={onSubmit}
-                        validate={validate}
-                        render={({ handleSubmit, form, submitting, pristine, errors }) => (
+                        onSubmit={ onSubmit }
+                        validate={ validate }
+                        render={ ({ handleSubmit, form, submitting, pristine, errors }) => (
                             <FormSuite
                                 layout="vertical"
-                                onSubmit={event => { handleSubmit(event).then(form.restart); }}
+                                onSubmit={ event => { handleSubmit(event).then(form.restart); } }
                                 fluid>
                                 <Field
                                     name="firstName"
-                                    render={({ input, meta }) => (
+                                    render={ ({ input, meta }) => (
                                         <FormSuite.Group controlId="firstName">
                                             <FormSuite.ControlLabel>First Name</FormSuite.ControlLabel>
                                             <FormSuite.Control
-                                                {...input}
+                                                { ...input }
                                             />
-                                            {meta.error && meta.touched && (<FormSuite.ErrorMessage show={true} >
-                                                {meta.error}
-                                            </FormSuite.ErrorMessage>)}
+                                            { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true } >
+                                                { meta.error }
+                                            </FormSuite.ErrorMessage>) }
                                         </FormSuite.Group>
-                                    )}
+                                    ) }
                                 />
 
                                 <Field
                                     name="familyName"
-                                    render={({ input, meta }) => (
+                                    render={ ({ input, meta }) => (
                                         <FormSuite.Group controlId="familyName">
                                             <FormSuite.ControlLabel>Last Name</FormSuite.ControlLabel>
                                             <FormSuite.Control
-                                                {...input}
+                                                { ...input }
                                             />
-                                            {meta.error && meta.touched && (<FormSuite.ErrorMessage show={true} >
-                                                {meta.error}
-                                            </FormSuite.ErrorMessage>)}
+                                            { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true } >
+                                                { meta.error }
+                                            </FormSuite.ErrorMessage>) }
                                         </FormSuite.Group>
-                                    )}
+                                    ) }
                                 />
 
                                 <Field
                                     name="email"
-                                    render={({ input, meta }) => (
+                                    render={ ({ input, meta }) => (
                                         <FormSuite.Group controlId="email">
                                             <FormSuite.ControlLabel>Email</FormSuite.ControlLabel>
                                             <FormSuite.Control
-                                                {...input}
+                                                { ...input }
                                                 type="email"
                                             />
-                                            {meta.error && meta.touched && (<FormSuite.ErrorMessage show={true} >
-                                                {meta.error}
-                                            </FormSuite.ErrorMessage>)}
+                                            { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true } >
+                                                { meta.error }
+                                            </FormSuite.ErrorMessage>) }
                                         </FormSuite.Group>
-                                    )}
+                                    ) }
                                 />
 
                                 <Divider />
 
                                 <Field
                                     name="username"
-                                    render={({ input, meta }) => (
+                                    render={ ({ input, meta }) => (
                                         <FormSuite.Group controlId="username">
                                             <FormSuite.ControlLabel>Username</FormSuite.ControlLabel>
                                             <FormSuite.Control
-                                                {...input}
+                                                { ...input }
                                             />
-                                            {meta.error && meta.touched && (<FormSuite.ErrorMessage show={true} >
-                                                {meta.error}
-                                            </FormSuite.ErrorMessage>)}
+                                            { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true } >
+                                                { meta.error }
+                                            </FormSuite.ErrorMessage>) }
                                         </FormSuite.Group>
-                                    )}
+                                    ) }
                                 />
 
-                                <RadioGroup name="radioList" value={inviteSelect}
-                                    defaultValue={InviteConst.INVITE}
-                                    onChange={inviteSelectOnChange}>
+                                <RadioGroup
+                                    name="radioList"
+                                    value={ inviteSelect }
+                                    defaultValue={ InviteConst.INVITE }
+                                    onChange={ inviteSelectOnChange }>
                                     <p>Select the method to set the user password</p>
-                                    <Radio value={InviteConst.INVITE}>Invite the user to set their own password</Radio>
+                                    <Radio value={ InviteConst.INVITE }>
+                                        Invite the user to set their own password
+                                    </Radio>
 
-                                    <div style={inviteShow}>
+                                    <div style={ inviteShow }>
                                         <br />
                                         <EmailInvitePanel />
                                         <br />
 
                                     </div>
 
-                                    <Radio value={InviteConst.PWD}>Set a password for the user</Radio>
+                                    <Radio value={ InviteConst.PWD }>Set a password for the user</Radio>
 
-                                    <div style={passwordShow}>
+                                    <div style={ passwordShow }>
                                         <br />
                                         <Field
                                             name="password"
-                                            render={({ input, meta }) => (
+                                            render={ ({ input, meta }) => (
                                                 <FormSuite.Group controlId="password">
                                                     <FormSuite.ControlLabel>Password</FormSuite.ControlLabel>
                                                     <FormSuite.Control
-                                                        {...input}
+                                                        { ...input }
                                                         type="password"
                                                         autoComplete="off"
                                                     />
-                                                    {meta.error && meta.touched && (<FormSuite.ErrorMessage show={true} >
-                                                        {meta.error}
-                                                    </FormSuite.ErrorMessage>)}
+                                                    { meta.error && meta.touched &&
+                                                        (<FormSuite.ErrorMessage show={ true }>
+                                                            { meta.error }
+                                                        </FormSuite.ErrorMessage>) }
                                                 </FormSuite.Group>
-                                            )}
+                                            ) }
                                         />
 
                                         <Field
                                             name="repassword"
-                                            render={({ input, meta }) => (
+                                            render={ ({ input, meta }) => (
                                                 <FormSuite.Group controlId="repassword">
                                                     <FormSuite.ControlLabel>Re enter password</FormSuite.ControlLabel>
                                                     <FormSuite.Control
-                                                        {...input}
+                                                        { ...input }
                                                         type="password"
                                                         autoComplete="off"
                                                     />
-                                                    {meta.error && meta.touched && (<FormSuite.ErrorMessage show={true} >
-                                                        {meta.error}
-                                                    </FormSuite.ErrorMessage>)}
+                                                    { meta.error && meta.touched &&
+                                                        (<FormSuite.ErrorMessage show={ true }>
+                                                            { meta.error }
+                                                        </FormSuite.ErrorMessage>) }
                                                 </FormSuite.Group>
-                                            )}
+                                            ) }
                                         />
 
                                     </div>
@@ -288,32 +296,32 @@ export default function AddUserComponent(prop) {
                                     <FormSuite.Group>
                                         <ButtonToolbar>
                                             <Button
-                                                className={styles.addUserButton}
+                                                className={ styles.addUserButton }
                                                 size="lg"
                                                 appearance="primary"
                                                 type="submit"
-                                                disabled={submitting || pristine || !checkIfJSONisEmpty(errors)}>
+                                                disabled={ submitting || pristine || !checkIfJSONisEmpty(errors) }>
                                                 Submit
                                             </Button>
 
                                             <Button
-                                                className={styles.addUserButton}
+                                                className={ styles.addUserButton }
                                                 size="lg"
                                                 appearance="ghost"
                                                 type="button"
-                                                onClick={onClose}>Cancel</Button>
+                                                onClick={ onClose }>Cancel</Button>
                                         </ButtonToolbar>
                                     </FormSuite.Group>
 
                                 </div>
                             </FormSuite>
-                        )}
+                        ) }
                     />
 
                 </div>
             </Modal.Body>
 
-            <div style={loadingDisplay}>
+            <div style={ loadingDisplay }>
                 <Loader size="lg" backdrop content="User is adding" vertical />
             </div>
         </Modal>
@@ -324,12 +332,12 @@ export default function AddUserComponent(prop) {
 function EmailInvitePanel() {
     return (
         <Panel bordered>
-            <Stack spacing={30}>
-                <EmailFillIcon style={{ fontSize: "3em" }} />
+            <Stack spacing={ 30 }>
+                <EmailFillIcon style={ { fontSize: "3em" } } />
                 An email with a confirmation link will be sent to the provided
                 email address for the user to set their own password.
             </Stack>
 
         </Panel>
-    )
+    );
 }

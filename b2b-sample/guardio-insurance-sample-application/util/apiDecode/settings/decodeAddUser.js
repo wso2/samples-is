@@ -83,7 +83,8 @@ function getAddUserBody(inviteConst, firstName, familyName, email, username, pas
  * @param familyName 
  * @param email 
  * @param username 
- * @param password 
+ * @param password
+ * 
  * @returns `res` (if user added successfully) or `null` (if user addition was not completed)
  */
 async function decodeAddUser(session, inviteConst, firstName, familyName, email, username, password) {
