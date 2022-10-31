@@ -191,13 +191,12 @@ export default function EditUserComponent(prop) {
                         render={ ({ handleSubmit, form, submitting, pristine, errors }) => (
                             <FormSuite
                                 layout="vertical"
-                                className={ styles.addUserForm }
                                 onSubmit={ event => { handleSubmit(event).then(form.restart); } }
                                 fluid>
                                 <Field
                                     name="firstName"
                                     render={ ({ input, meta }) => (
-                                        <FormSuite.Group controlId="name-6">
+                                        <FormSuite.Group controlId="firstName">
                                             <FormSuite.ControlLabel>First Name</FormSuite.ControlLabel>
                                             <FormSuite.Control
                                                 { ...input }
@@ -212,7 +211,7 @@ export default function EditUserComponent(prop) {
                                 <Field
                                     name="familyName"
                                     render={ ({ input, meta }) => (
-                                        <FormSuite.Group controlId="name-6">
+                                        <FormSuite.Group controlId="familyName">
                                             <FormSuite.ControlLabel>Last Name</FormSuite.ControlLabel>
                                             <FormSuite.Control
                                                 { ...input }
@@ -227,7 +226,7 @@ export default function EditUserComponent(prop) {
                                 <Field
                                     name="email"
                                     render={ ({ input, meta }) => (
-                                        <FormSuite.Group controlId="name-6">
+                                        <FormSuite.Group controlId="email">
                                             <FormSuite.ControlLabel>Email</FormSuite.ControlLabel>
                                             <FormSuite.Control
                                                 { ...input }
@@ -243,7 +242,7 @@ export default function EditUserComponent(prop) {
                                 <Field
                                     name="username"
                                     render={ ({ input, meta }) => (
-                                        <FormSuite.Group controlId="name-6">
+                                        <FormSuite.Group controlId="username">
                                             <FormSuite.ControlLabel>Username</FormSuite.ControlLabel>
                                             <FormSuite.Control
                                                 { ...input }
@@ -262,7 +261,7 @@ export default function EditUserComponent(prop) {
                                             <Field
                                                 name="roles"
                                                 render={ ({ input, meta }) => (
-                                                    <FormSuite.Group controlId="name-6">
+                                                    <FormSuite.Group controlId="role">
                                                         <FormSuite.ControlLabel>Role Management</FormSuite.ControlLabel>
                                                         <FormSuite.Control
                                                             { ...input }

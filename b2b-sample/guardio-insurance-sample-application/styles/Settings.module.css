@@ -125,8 +125,6 @@
     display: flex;
     overflow: hidden;
     flex-direction: column;
-    gap: 32px;
-    margin-left: 10px;
     margin-top: 10px;
     margin-bottom: 10px;
 }
@@ -134,19 +132,6 @@
 .addUserFormDiv{
     padding: 0px;
 }
-
-.addUserForm {
-    width: 600px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.addUserForm hr {
-    margin: 10px;
-    align-self: stretch;
-    border-top: 1px solid #8c8b8b4c;
-  }
 
 .addUserButton{
     width: 25%;
