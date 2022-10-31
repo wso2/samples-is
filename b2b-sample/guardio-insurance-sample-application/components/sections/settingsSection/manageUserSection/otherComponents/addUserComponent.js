@@ -16,21 +16,16 @@
  * under the License.
  */
 
+import EmailFillIcon from "@rsuite/icons/EmailFill";
 import React, { useState } from "react";
 import { Field, Form } from "react-final-form";
 import { Button, ButtonToolbar, Divider, Loader, Modal, Panel, Radio, RadioGroup, Stack, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
 import styles from "../../../../../styles/Settings.module.css";
-import decodeAddUser from "../../../../../util/apiDecode/settings/decodeAddUser";
+import { decodeAddUser, InviteConst } from "../../../../../util/apiDecode/settings/decodeAddUser";
 import { checkIfJSONisEmpty } from "../../../../../util/util/common/common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../util/util/frontendUtil/frontendUtil";
 import { errorTypeDialog, successTypeDialog } from "../../../../common/dialog";
-import EmailFillIcon from "@rsuite/icons/EmailFill";
-
-const InviteConst = {
-    INVITE: "pwd-method-invite",
-    PWD: "pwd-method-pwd"
-}
 
 /**
  * 
@@ -43,7 +38,7 @@ export default function AddUserComponent(prop) {
     const { session, open, onClose } = prop;
 
     const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
-    const [inviteSelect, serInviteSelect] = useState("pwd-method-invite");
+    const [inviteSelect, serInviteSelect] = useState(InviteConst.INVITE);
     const [inviteShow, setInviteShow] = useState(LOADING_DISPLAY_BLOCK);
     const [passwordShow, setPasswordShow] = useState(LOADING_DISPLAY_NONE);
 
@@ -82,16 +77,20 @@ export default function AddUserComponent(prop) {
     };
 
     const passwordValidate = (password, errors) => {
-        if (!password) {
-            errors.password = "This field cannot be empty";
+        if (inviteSelect == InviteConst.PWD) {
+            if (!password) {
+                errors.password = "This field cannot be empty";
+            }
         }
 
         return errors;
     };
 
     const repasswordValidate = (repassword, errors) => {
-        if (!repassword) {
-            errors.repassword = "This field cannot be empty";
+        if (inviteSelect == InviteConst.PWD) {
+            if (!repassword) {
+                errors.repassword = "This field cannot be empty";
+            }
         }
 
         return errors;
@@ -138,7 +137,7 @@ export default function AddUserComponent(prop) {
 
     const onSubmit = async (values, form) => {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
-        decodeAddUser(session, values.firstName, values.familyName, values.email,
+        decodeAddUser(session, inviteSelect, values.firstName, values.familyName, values.email,
             values.username, values.password)
             .then((response) => onDataSubmit(response, form))
             .finally(() => setLoadingDisplay(LOADING_DISPLAY_NONE));
@@ -228,7 +227,9 @@ export default function AddUserComponent(prop) {
                                     )}
                                 />
 
-                                <RadioGroup name="radioList" value={inviteSelect} onChange={inviteSelectOnChange}>
+                                <RadioGroup name="radioList" value={inviteSelect}
+                                    defaultValue={InviteConst.INVITE}
+                                    onChange={inviteSelectOnChange}>
                                     <p>Select the method to set the user password</p>
                                     <Radio value={InviteConst.INVITE}>Invite the user to set their own password</Radio>
 
@@ -324,7 +325,7 @@ function EmailInvitePanel() {
     return (
         <Panel bordered>
             <Stack spacing={30}>
-                <EmailFillIcon style={{ fontSize: "3em"}}/>
+                <EmailFillIcon style={{ fontSize: "3em" }} />
                 An email with a confirmation link will be sent to the provided
                 email address for the user to set their own password.
             </Stack>
