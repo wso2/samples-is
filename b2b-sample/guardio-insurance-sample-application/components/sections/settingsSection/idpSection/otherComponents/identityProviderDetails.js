@@ -30,6 +30,7 @@ import { selectedTemplateBaesedonTemplateId } from "../../../../../util/util/app
 /**
  * 
  * @param prop - session, id (idp id), fetchAllIdPs (function to fetch all Idps)
+ * 
  * @returns 
  */
 export default function IdentityProviderDetails(prop) {

@@ -17,24 +17,29 @@
  */
 
 import AppSelectIcon from "@rsuite/icons/AppSelect";
+import CopyIcon from "@rsuite/icons/Copy";
+import InfoRoundIcon from "@rsuite/icons/InfoRound";
 import React, { useCallback, useEffect, useState } from "react";
-import { Avatar, Button, Container, FlexboxGrid, Form, Modal, Stack, useToaster } from "rsuite";
+import { Avatar, Button, Container, FlexboxGrid, Form, Input, InputGroup, Modal, Panel, Stack, useToaster } 
+    from "rsuite";
 import Enterprise from "./data/templates/enterprise-identity-provider.json";
 import Google from "./data/templates/google.json";
 import IdentityProviderList from "./otherComponents/identityProviderList";
 import styles from "../../../../styles/idp.module.css";
-import decodeCreateIdentityProvider from
-    "../../../../util/apiDecode/settings/identityProvider/decodeCreateIdentityProvider";
-import decodeListAllIdentityProviders from
-    "../../../../util/apiDecode/settings/identityProvider/decodeListAllIdentityProviders";
-import { EMPTY_STRING, ENTERPRISE_ID, GOOGLE_ID, checkIfJSONisEmpty, sizeOfJson } from
-    "../../../../util/util/common/common";
+import decodeCreateIdentityProvider 
+    from "../../../../util/apiDecode/settings/identityProvider/decodeCreateIdentityProvider";
+import decodeListAllIdentityProviders 
+    from "../../../../util/apiDecode/settings/identityProvider/decodeListAllIdentityProviders";
+import { EMPTY_STRING, ENTERPRISE_ID, GOOGLE_ID, checkIfJSONisEmpty, copyTheTextToClipboard, sizeOfJson } 
+    from "../../../../util/util/common/common";
+import { getCallbackUrl } from "../../../../util/util/idpUtil/idpUtil";
 import { errorTypeDialog, successTypeDialog } from "../../../common/dialog";
 import SettingsTitle from "../../../common/settingsTitle";
 
 /**
  * 
  * @param prop - session
+ * 
  * @returns The idp interface section.
  */
 export default function IdpSectionComponent(prop) {
@@ -202,7 +207,8 @@ export default function IdpSectionComponent(prop) {
                         onSave={ onIdPSave }
                         onCancel={ onCreationDismiss }
                         openModal={ !!selectedTemplate }
-                        template={ selectedTemplate } />
+                        template={ selectedTemplate }
+                        orgId={ session.orgId } />
                 )
             }
         </Container>
@@ -215,6 +221,7 @@ export default function IdpSectionComponent(prop) {
  * @param prop - openModal (function to open the modal), onClose (what will happen when modal closes), 
  *               templates (templates list), onTemplateSelected 
  *              (what will happen when a particular template is selected)
+ * 
  * @returns A modal to select idp's
  */
 const AddIdentityProviderModal = (prop) => {
@@ -275,6 +282,7 @@ const AddIdentityProviderModal = (prop) => {
 /**
  * 
  * @param prop - onAddIdentityProviderClick (function to open add idp modal)
+ * 
  * @returns The componet to show when there is no idp's.
  */
 const EmptyIdentityProviderList = (prop) => {
@@ -303,11 +311,14 @@ const EmptyIdentityProviderList = (prop) => {
  * 
  * @param prop - openModal (open the modal), onSave (create the idp), onCancel (when close the modal), 
  *               template (selected template)
+ * 
  * @returns Idp creation modal
  */
 const IdPCreationModal = (prop) => {
 
-    const { openModal, onSave, onCancel, template } = prop;
+    const toaster = useToaster();
+
+    const { openModal, onSave, onCancel, template, orgId } = prop;
 
     const [ formValues, setFormValues ] = useState({});
 
@@ -317,6 +328,10 @@ const IdPCreationModal = (prop) => {
 
     const handleCreate = () => {
         onSave(formValues, template);
+    };
+
+    const copyValueToClipboard = (text) => {
+        copyTheTextToClipboard(text, toaster);
     };
 
     const resolveTemplateForm = () => {
@@ -343,13 +358,42 @@ const IdPCreationModal = (prop) => {
         <Modal
             open={ openModal }
             onClose={ handleModalClose }
-            onBackdropClick={ handleModalClose }>
+            onBackdropClick={ handleModalClose }
+            size="md">
             <Modal.Header>
                 <Modal.Title><b>{ template.name }</b></Modal.Title>
                 <p>{ template.description }</p>
             </Modal.Header>
             <Modal.Body>
-                { resolveTemplateForm() }
+                <FlexboxGrid>
+                    <FlexboxGrid.Item colspan={ 12 }>
+                        { resolveTemplateForm() }
+                    </FlexboxGrid.Item>
+                    <FlexboxGrid.Item colspan={ 12 }>
+                        <Panel
+                            header={
+                                (<Stack alignItems="center" spacing={ 10 }>
+                                    <InfoRoundIcon />
+                                    <b>Prerequisite</b>
+                                </Stack>)
+                            }
+                            bordered>
+                            <p>
+                                Before you begin, create an OAuth application, and obtain a client ID & secret.
+                                Add the following URL as the Authorized Redirect URI.
+                            </p>
+                            <br />
+                            <InputGroup >
+                                <Input readOnly value={ getCallbackUrl(orgId) } size="lg" />
+                                <InputGroup.Button
+                                    onClick={ () => copyValueToClipboard(getCallbackUrl(orgId)) }>
+                                    <CopyIcon />
+                                </InputGroup.Button>
+                            </InputGroup>
+                        </Panel>
+                    </FlexboxGrid.Item>
+                </FlexboxGrid>
+
             </Modal.Body>
             <Modal.Footer>
                 <Button
@@ -371,6 +415,7 @@ const IdPCreationModal = (prop) => {
 /**
  * 
  * @param prop -  onFormValuesChange, formValues
+ * 
  * @returns Form to create a Google idp.
  */
 const GoogleIdentityProvider = (prop) => {
@@ -402,6 +447,7 @@ const GoogleIdentityProvider = (prop) => {
 /**
  * 
  * @param prop -  onFormValuesChange, formValues
+ * 
  * @returns Form to create a enterprise idp.
  */
 const EnterpriseIdentityProvider = (prop) => {

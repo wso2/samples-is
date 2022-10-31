@@ -26,6 +26,7 @@
     "rsuite": "^5.16.1"
   },
   "devDependencies": {
+    "@next/eslint-plugin-next": "^13.0.0",
     "eslint": "8.24.0",
     "eslint-config-next": "12.2.3"
   }

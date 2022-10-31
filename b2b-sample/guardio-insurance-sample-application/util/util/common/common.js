@@ -16,6 +16,8 @@
  * under the License.
  */
 
+import { infoTypeDialog } from "../../../components/common/dialog";
+
 function stringIsEmpty(str) {
 
     return (str === "");
@@ -47,12 +49,13 @@ function checkIfJSONisEmpty(obj) {
 /**
  *  @return the size of JSON object
  */
- function sizeOfJson(obj) {
+function sizeOfJson(obj) {
     return Object.keys(obj).length;
 }
 
-function copyTheTextToClipboard(text) {
+function copyTheTextToClipboard(text, toaster) {
     navigator.clipboard.writeText(text);
+    infoTypeDialog(toaster, "Text copied to clipboard");
 }
 
 const GOOGLE_ID = "google-idp";

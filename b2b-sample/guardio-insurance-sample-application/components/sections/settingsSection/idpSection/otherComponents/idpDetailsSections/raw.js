@@ -22,6 +22,7 @@ import styles from "../../../../../../styles/idp.module.css";
 /**
  * 
  * @param prop - idpDetails
+ * 
  * @returns The raw section of an idp
  */
 export default function Raw(prop) {

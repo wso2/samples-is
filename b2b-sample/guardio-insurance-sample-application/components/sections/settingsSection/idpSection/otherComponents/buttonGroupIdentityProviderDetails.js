@@ -32,6 +32,7 @@ import { errorTypeDialog, successTypeDialog } from "../../../../common/dialog";
 /**
  * 
  * @param prop - session, idpDetails, fetchAllIdPs, id (idp id)
+ * 
  * @returns Add/Remove button and delete button group in an Idp
  */
 export default function ButtonGroupIdentityProviderDetails(prop) {

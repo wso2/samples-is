@@ -72,6 +72,7 @@ const getSwitchEndpoint = () => {
  * 
  * @param req - request object
  * @param res - response object
+ * 
  * @returns whether the switch call was successful
  */
 export default async function switchOrg(req, res) {
