@@ -44,7 +44,7 @@ function selectedTemplateBaesedonTemplateId(templateId) {
 
 /**
  * 
- * @param template 
+ * @param template
  * @param idpDetails 
 
  * @returns `[check,onlyIdp]`
