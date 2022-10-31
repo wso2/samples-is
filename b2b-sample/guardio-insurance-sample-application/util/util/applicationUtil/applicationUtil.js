@@ -44,7 +44,7 @@ function selectedTemplateBaesedonTemplateId(templateId) {
 
 /**
  * 
- * @param template 
+ * @param template
  * @param idpDetails 
 
  * @returns `[check,onlyIdp]`
@@ -73,6 +73,26 @@ function checkIfIdpIsinAuthSequence(template, idpDetails) {
 }
 
 /**
+ * 
+ * @param template - applicaiton details template
+ * @returns `true` if BASIC AUTH is available in auth sequence, else `false`
+ */
+function checkIfBasicAvailableinAuthSequence(template) {
+    let authenticationSequenceModel = template.authenticationSequence;
+    let check = false;
+
+    authenticationSequenceModel.steps.map((step) => {
+        step.options.map((option) => {
+            if (option.authenticator === "BasicAuthenticator") {
+                check = true;
+            }
+        });
+    });
+
+    return check;
+}
+
+/**
  * PatchApplicationAuthMethod mentioned whether we are adding or removing the idp.
  * @REMOVE Will remove the idp from every step
  */
@@ -82,5 +102,6 @@ const PatchApplicationAuthMethod = {
 }
 
 module.exports = {
-    selectedTemplateBaesedonTemplateId, checkIfIdpIsinAuthSequence, PatchApplicationAuthMethod
+    selectedTemplateBaesedonTemplateId, checkIfIdpIsinAuthSequence, checkIfBasicAvailableinAuthSequence,
+    PatchApplicationAuthMethod
 }
