@@ -29,7 +29,7 @@ import decodeListAllRoles from "../../../../../util/apiDecode/settings/role/deco
 import decodeUserRole from "../../../../../util/apiDecode/settings/role/decodeUserRole";
 import { checkIfJSONisEmpty } from "../../../../../util/util/common/common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../util/util/frontendUtil/frontendUtil";
-import { errorTypeDialog, successTypeDialog } from "../../../../common/dialog";
+import { errorTypeDialog, successTypeDialog, warningTypeDialog } from "../../../../common/dialog";
 
 /**
  * 
@@ -49,12 +49,22 @@ export default function EditUserComponent(prop) {
     const [ userRolesForForm, setUserRolesForForm ] = useState(null);
     const [ initUserRolesForForm, setInitUserRolesForForm ] = useState(null);
 
+    /**
+     * fetch all the roles in the identity server available for the logged in organization
+     */
     const fetchAllRoles = useCallback(async () => {
         const res = await decodeListAllRoles(session);
 
         await setAllRoles(res);
     }, [ session ]);
 
+    useEffect(() => {
+        fetchAllRoles();
+    }, [ fetchAllRoles ]);
+
+    /**
+     * fetch the roles of the user
+     */
     const fetchUserRoles = useCallback(async () => {
         const res = await decodeUserRole(session, user.id);
 
@@ -65,11 +75,9 @@ export default function EditUserComponent(prop) {
         fetchUserRoles();
     }, [ fetchUserRoles ]);
 
-
-    useEffect(() => {
-        fetchAllRoles();
-    }, [ fetchAllRoles ]);
-
+    /**
+     * set `userRolesForForm` and `initUserRolesForForm`
+     */
     useEffect(() => {
         if (allRoles && userRoles) {
             try {
@@ -86,6 +94,7 @@ export default function EditUserComponent(prop) {
         }
     }, [ allRoles, userRoles ]);
 
+    // todo: need to remove the validate functions from the front end and move to util folder
     const firstNameValidate = (firstName, errors) => {
         if (!firstName) {
             errors.firstName = "This field cannot be empty";
@@ -147,19 +156,30 @@ export default function EditUserComponent(prop) {
         }
     };
 
+    const onRolesSubmite = (response) => {
+        if (response) {
+            successTypeDialog(toaster, "Changes Saved Successfully", "User details edited successfully.");
+            onClose();
+        } else {
+            warningTypeDialog(toaster, "Roles not Updated", "Error occured while updating the roles. Try again.");
+        }
+    };
+
     const onSubmit = async (values, form) => {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
 
-        await
-
-        decodeEditUser(session, user.id, values.firstName, values.familyName, values.email,
+        await decodeEditUser(session, user.id, values.firstName, values.familyName, values.email,
             values.username)
             .then((response) => {
-                if (response) {
-                    decodEditRolesToAddOrRemoveUser(session, user.id, initUserRolesForForm, values.roles)
-                        .then((res) => {
-                            onDataSubmit(res, form);
-                        });
+                if(initUserRolesForForm) {
+                    if (response) {
+                        decodEditRolesToAddOrRemoveUser(session, user.id, initUserRolesForForm, values.roles)
+                            .then((res) => {
+                                onRolesSubmite(res, form);
+                            });
+                    } else {
+                        onDataSubmit(response, form);
+                    }
                 } else {
                     onDataSubmit(response, form);
                 }
