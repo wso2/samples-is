@@ -28,32 +28,77 @@ import { Notification } from "rsuite";
 function Dialog(prop) {
 
     const { type, header, body } = prop;
-    
+
     return (
-        <Notification type={ type } header={ header } closable>
-            { body }
+        <Notification type={type} header={header} closable>
+            {body}
         </Notification>
     );
 }
 
-function showDialog(toaster,type,header,body) {
-    toaster.push(<Dialog type={ type } header={ header } body={ body } />, {
+/**
+ * 
+ * @param toaster 
+ * @param type - `error`, `info`, `success` or `warning`
+ * @param header - header text
+ * @param body - body text
+ * 
+ * @returns - A notification dialog baed on the `type`
+ */
+function showDialog(toaster, type, header, body) {
+    toaster.push(<Dialog type={type} header={header} body={body} />, {
         placement: "bottomStart"
     });
 
-    setTimeout(() => toaster.remove(),2500);
+    setTimeout(() => toaster.remove(), 2500);
 }
 
+/**
+ * 
+ * @param toaster 
+ * @param header - header text
+ * @param body - body text
+ * 
+ * @returns - A error type notification dialog
+ */
 function errorTypeDialog(toaster, header, body) {
     showDialog(toaster, "error", header, body);
 }
 
+/**
+ * 
+ * @param toaster 
+ * @param header - header text
+ * @param body - body text
+ * 
+ * @returns - A information type notification dialog
+ */
 function infoTypeDialog(toaster, header, body) {
     showDialog(toaster, "info", header, body);
 }
 
+/**
+ * 
+ * @param toaster 
+ * @param header - header text
+ * @param body - body text
+ * 
+ * @returns - A success type notification dialog
+ */
 function successTypeDialog(toaster, header, body) {
     showDialog(toaster, "success", header, body);
 }
 
-module.exports = { errorTypeDialog, infoTypeDialog, successTypeDialog };
+/**
+ * 
+ * @param toaster 
+ * @param header - header text
+ * @param body - body text
+ * 
+ * @returns - A warning type notification dialog
+ */
+function warningTypeDialog(toaster, header, body) {
+    showDialog(toaster, "warning", header, body);
+}
+
+module.exports = { errorTypeDialog, infoTypeDialog, successTypeDialog, warningTypeDialog };

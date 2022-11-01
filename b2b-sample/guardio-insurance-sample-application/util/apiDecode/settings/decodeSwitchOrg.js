@@ -20,7 +20,13 @@ import config from "../../../config.json";
 import callSwitchOrg from "../../apiCall/settings/callSwitchOrg";
 import { commonDecode } from "../../util/apiUtil/commonDecode";
 
-function getSubOrgId(token) {
+/**
+ * 
+ * @param token 
+ * 
+ * @returns - organization id of the logged in organization
+ */
+function getOrgId(token) {
 
     if (token.user.user_organization) {
 
@@ -35,9 +41,16 @@ function getSubOrgId(token) {
 
 }
 
+/**
+ * decode switch API call
+ * 
+ * @param token 
+ * 
+ * @returns - `orgnization session` if the API call is a success else `null`
+ */
 export default async function decodeSwitchOrg(token) {
 
-    const subOrgId = getSubOrgId(token);
+    const subOrgId = getOrgId(token);
     const accessToken = token.accessToken;
 
     try {
