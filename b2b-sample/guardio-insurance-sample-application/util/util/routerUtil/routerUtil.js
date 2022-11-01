@@ -120,13 +120,13 @@ function getLoggedUserId(token) {
  * @returns get organization id. If `org_id` is null in token check `config.json` for the org id
  */
 function getOrgId(token) {
-    try {
+    
+    if (parseJwt(token).org_id) {
 
-        return parseJwt(token).org_id;
-    } catch (error) {
+        return parseJwt(token).org_id
+    } 
 
-        return config.SAMPLE_ORGS[0].id;
-    }
+    return config.SAMPLE_ORGS[0].id;
 }
 
 /**
@@ -136,13 +136,13 @@ function getOrgId(token) {
  * @returns get organization name. If `org_name` is null in token check `config.json` for the org name
  */
 function getOrgName(token) {
-    try {
 
-        return parseJwt(token).org_name;
-    } catch (error) {
+    if (parseJwt(token).org_name) {
 
-        return config.SAMPLE_ORGS[0].name;
-    }
+        return parseJwt(token).org_name
+    } 
+
+    return config.SAMPLE_ORGS[0].name;
 }
 
 /**

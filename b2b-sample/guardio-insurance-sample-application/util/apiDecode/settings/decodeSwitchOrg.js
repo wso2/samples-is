@@ -21,17 +21,16 @@ import callSwitchOrg from "../../apiCall/settings/callSwitchOrg";
 import { commonDecode } from "../../util/apiUtil/commonDecode";
 
 function getSubOrgId(token) {
-    
-    try {
 
-        if (!token.user.user_organization) {
-            return token.user.org_id;
-        }
+    if (token.user.user_organization) {
 
         return token.user.user_organization;
-    } catch (error) {
+    } else if (config.SAMPLE_ORGS[0]) {
 
         return config.SAMPLE_ORGS[0].id;
+    } else {
+
+        return token.user.org_id;
     }
 
 }
