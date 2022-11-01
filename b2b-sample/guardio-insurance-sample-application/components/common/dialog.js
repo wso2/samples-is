@@ -30,15 +30,15 @@ function Dialog(prop) {
     const { type, header, body } = prop;
 
     return (
-        <Notification type={type} header={header} closable>
-            {body}
+        <Notification type={ type } header={ header } closable>
+            { body }
         </Notification>
     );
 }
 
 /**
  * 
- * @param toaster 
+ * @param toaster - `useToaster()` get the toaster
  * @param type - `error`, `info`, `success` or `warning`
  * @param header - header text
  * @param body - body text
@@ -46,7 +46,7 @@ function Dialog(prop) {
  * @returns - A notification dialog baed on the `type`
  */
 function showDialog(toaster, type, header, body) {
-    toaster.push(<Dialog type={type} header={header} body={body} />, {
+    toaster.push(<Dialog type={ type } header={ header } body={ body } />, {
         placement: "bottomStart"
     });
 
@@ -55,7 +55,7 @@ function showDialog(toaster, type, header, body) {
 
 /**
  * 
- * @param toaster 
+ * @param toaster - `useToaster()` get the toaster
  * @param header - header text
  * @param body - body text
  * 
@@ -67,7 +67,7 @@ function errorTypeDialog(toaster, header, body) {
 
 /**
  * 
- * @param toaster 
+ * @param toaster - `useToaster()` get the toaster 
  * @param header - header text
  * @param body - body text
  * 
@@ -79,7 +79,7 @@ function infoTypeDialog(toaster, header, body) {
 
 /**
  * 
- * @param toaster 
+ * @param toaster - `useToaster()` get the toaster 
  * @param header - header text
  * @param body - body text
  * 
@@ -91,7 +91,7 @@ function successTypeDialog(toaster, header, body) {
 
 /**
  * 
- * @param toaster 
+ * @param toaster - `useToaster()` get the toaster 
  * @param header - header text
  * @param body - body text
  * 
