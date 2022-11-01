@@ -20,18 +20,33 @@ import { setUsername } from "../../../util/util/apiUtil/decodeUser";
 import callAddUser from "../../apiCall/settings/callAddUser";
 import { commonDecode } from "../../util/apiUtil/commonDecode";
 
-/**
- * 
- * @param session 
- * @param firstName 
- * @param familyName 
- * @param email 
- * @param username 
- * @param password 
- * @returns `res` (if user added successfully) or `null` (if user addition was not completed)
- */
-export default async function decodeAddUser(session, firstName, familyName, email, username, password) {
-    const addUserEncode = {
+const InviteConst = {
+    INVITE: "pwd-method-invite",
+    PWD: "pwd-method-pwd"
+}
+
+
+function inviteAddUserBody(firstName, familyName, email, username) {
+    return {
+        "emails": [
+            {
+                "value": email,
+                "primary": true
+            }
+        ],
+        "userName": setUsername(username),
+        "name": {
+            "givenName": firstName,
+            "familyName": familyName
+        },
+        "urn:scim:wso2:schema": {
+            "askPassword": "true"
+        }
+    }
+}
+
+function pwdAddUserBody(firstName, familyName, email, username, password) {
+    return {
         "schemas": [],
         "name": {
             "givenName": firstName,
@@ -45,7 +60,35 @@ export default async function decodeAddUser(session, firstName, familyName, emai
                 "primary": true
             }
         ]
+    };
+}
+
+function getAddUserBody(inviteConst, firstName, familyName, email, username, password) {
+    switch (inviteConst) {
+        case InviteConst.INVITE:
+            return inviteAddUserBody(firstName, familyName, email, username);
+
+        case InviteConst.PWD:
+            return pwdAddUserBody(firstName, familyName, email, username, password);
+
+        default:
+            break;
     }
+}
+
+/**
+ * 
+ * @param session 
+ * @param firstName 
+ * @param familyName 
+ * @param email 
+ * @param username 
+ * @param password
+ * 
+ * @returns `res` (if user added successfully) or `null` (if user addition was not completed)
+ */
+async function decodeAddUser(session, inviteConst, firstName, familyName, email, username, password) {
+    const addUserEncode = getAddUserBody(inviteConst, firstName, familyName, email, username, password);
 
     try {
         const res = await commonDecode(() => callAddUser(session, addUserEncode), false);
@@ -56,3 +99,5 @@ export default async function decodeAddUser(session, firstName, familyName, emai
         return false;
     }
 }
+
+module.exports = { InviteConst, decodeAddUser }
