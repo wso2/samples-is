@@ -60,6 +60,7 @@ function orgSignin(orgId) {
 }
 
 /**
+ * signout of the logged in organization
  * 
  * @param session 
  */
@@ -68,7 +69,7 @@ async function orgSignout(session) {
         signOut()
             .then(
                 () => window.location.assign(
-                    config.WSO2IS_HOST + "/t/" + config.WSO2IS_TENANT_NAME +
+                    config.AuthorizationConfig.BaseOrganizationUrl +
                     "/oidc/logout?id_token_hint=" + session.orginalIdToken + "&post_logout_redirect_uri=" +
                     config.WSO2IS_CLIENT_URL + "&state=sign_out_success"
                 )
