@@ -53,7 +53,7 @@ const getSwitchHeader = () => {
 const getSwitchBody = (subOrgId, accessToken) => {
     const body = {
         "grant_type": "organization_switch",
-        "scope": config.WSO2IS_SCOPES.join(" "),
+        "scope": config.ApplicationConfig.APIScopes.join(" "),
         "switching_organization": subOrgId,
         "token": accessToken
     };

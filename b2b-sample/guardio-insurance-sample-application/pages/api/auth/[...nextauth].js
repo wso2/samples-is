@@ -74,7 +74,7 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
         {
             authorization: {
                 params: {
-                    scope: config.WSO2IS_SCOPES.join(" ")
+                    scope: config.ApplicationConfig.APIScopes.join(" ")
                 }
             },
             clientId: config.AuthorizationConfig.ClientId,
