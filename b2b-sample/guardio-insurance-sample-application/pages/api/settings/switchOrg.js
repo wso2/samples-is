@@ -19,8 +19,17 @@
 import config from "../../../config.json";
 import { dataNotRecievedError, notPostError } from "../../../util/util/apiUtil/localResErrors";
 
-const getBasicAuth = () => Buffer.from(`${config.WSO2IS_CLIENT_ID}:${config.WSO2IS_CLIENT_SECRET}`).toString("base64");
+/**
+ * 
+ * @returns get the basic auth for authorize the switch call
+ */
+const getBasicAuth = () => Buffer
+    .from(`${config.AuthorizationConfig.ClientId}:${config.AuthorizationConfig.ClientSecret}`).toString("base64");
 
+/**
+ * 
+ * @returns get the header for the switch call
+ */
 const getSwitchHeader = () => {
 
     const headers = {
@@ -34,6 +43,13 @@ const getSwitchHeader = () => {
     return headers;
 };
 
+/**
+ * 
+ * @param subOrgId 
+ * @param accessToken 
+ * 
+ * @returns get the body for the switch call
+ */
 const getSwitchBody = (subOrgId, accessToken) => {
     const body = {
         "grant_type": "organization_switch",
@@ -45,7 +61,14 @@ const getSwitchBody = (subOrgId, accessToken) => {
     return body;
 };
 
-const getSwitchResponse = (subOrgId, accessToken) => {
+/**
+ * 
+ * @param subOrgId 
+ * @param accessToken 
+ * 
+ * @returns get the request body for the switch call
+ */
+const getSwitchRequest = (subOrgId, accessToken) => {
     const request = {
         body: new URLSearchParams(getSwitchBody(subOrgId, accessToken)).toString(),
         headers: getSwitchHeader(),
@@ -55,17 +78,13 @@ const getSwitchResponse = (subOrgId, accessToken) => {
     return request;
 };
 
+/**
+ * 
+ * @returns get the endpoint for the switch API call
+ */
 const getSwitchEndpoint = () => {
-    if (config.WSO2IS_TENANT_NAME === "carbon.super") {
-        return `${config.WSO2IS_HOST}/oauth2/token`;
-    }
 
-    if(config.APP_IN_ASGARDEO_FIRST_LEVEL) {
-        return `${config.WSO2IS_HOST}/t/${config.WSO2IS_TENANT_NAME}/oauth2/token`;
-    } else {
-        return `${config.WSO2IS_HOST}/o/${config.WSO2IS_TENANT_NAME}/oauth2/token`;
-    }
-
+    return `${config.AuthorizationConfig.BaseOrganizationUrl}/oauth2/token`;
 };
 
 /**
@@ -89,7 +108,7 @@ export default async function switchOrg(req, res) {
 
         const fetchData = await fetch(
             getSwitchEndpoint(),
-            getSwitchResponse(subOrgId, accessToken)
+            getSwitchRequest(subOrgId, accessToken)
         );
 
         const data = await fetchData.json();
