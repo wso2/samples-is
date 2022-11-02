@@ -34,7 +34,7 @@ export default function LogoComponent(prop) {
     return (
         <div className={ styles.logoDiv }>
             <Logo imageSize={ imageSize } />
-            <p className={ styles.nameTag }>{ config.CUSTOMIZATION.tag } </p>
+            <p className={ styles.nameTag }>{ config.ApplicationConfig.Branding.tag } </p>
             {
                 name
                     ? (<>
