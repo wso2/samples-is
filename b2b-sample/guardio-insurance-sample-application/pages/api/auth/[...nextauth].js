@@ -22,6 +22,14 @@ import decodeSwitchOrg from "../../../util/apiDecode/settings/decodeSwitchOrg";
 import { getLoggedUserFromProfile, getLoggedUserId, getOrgId, getOrgName }
     from "../../../util/util/routerUtil/routerUtil";
 
+/**
+ * 
+ * @param req 
+ * @param res 
+ * 
+ * @returns IS provider that will handle the sign in process. Used in `routerUtil` `orgSignin()`
+ * [Use this method to signin]
+ */
 const wso2ISProvider = (req, res) => NextAuth(req, res, {
 
     callbacks: {
@@ -69,8 +77,8 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
                     scope: config.WSO2IS_SCOPES.join(" ")
                 }
             },
-            clientId: config.WSO2IS_CLIENT_ID,
-            clientSecret: config.WSO2IS_CLIENT_SECRET,
+            clientId: config.AuthorizationConfig.ClientId,
+            clientSecret: config.AuthorizationConfig.ClientSecret,
             id: "wso2is",
             name: "WSO2IS",
             profile(profile) {
@@ -81,9 +89,8 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
             },
             secret: process.env.SECRET,
             type: "oauth",
-            userinfo: config.WSO2IS_HOST + "/t/" + config.WSO2IS_TENANT_NAME + "/oauth2/userinfo",
-            wellKnown: config.WSO2IS_HOST + "/t/" + config.WSO2IS_TENANT_NAME
-                + "/oauth2/token/.well-known/openid-configuration"
+            userinfo: `${config.AuthorizationConfig.BaseOrganizationUrl}/oauth2/userinfo`,
+            wellKnown: `${config.AuthorizationConfig.BaseOrganizationUrl}/oauth2/token/.well-known/openid-configuration`
         }
     ],
     secret: process.env.SECRET
