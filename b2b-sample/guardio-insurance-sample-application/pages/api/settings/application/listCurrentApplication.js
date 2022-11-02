@@ -20,6 +20,15 @@ import config from "../../../../config.json";
 import getDataHeader from "../../../../util/util/apiUtil/getDataHeader";
 import { dataNotRecievedError, notPostError } from "../../../../util/util/apiUtil/localResErrors";
 
+/**
+ * API call to get the initial details of the current application. Use the application name to filter out the 
+ * application (`config.ManagementAPIConfig.SharedApplicationName`).
+ * 
+ * @param req 
+ * @param res 
+ * 
+ * @returns initial details of the current application
+ */
 export default async function listCurrentApplication(req, res) {
     if (req.method !== "POST") {
         notPostError(res);
@@ -29,7 +38,7 @@ export default async function listCurrentApplication(req, res) {
     const session = body.session;
     const subOrgId = body.subOrgId;
 
-    const appName = config.WSO2IS_APP_NAME;
+    const appName = config.ManagementAPIConfig.SharedApplicationName;
 
     try {
         const fetchData = await fetch(
