@@ -126,7 +126,8 @@ export default function ConfirmAddRemoveLoginFlowModal(prop) {
 
 /**
  * 
- * @returns When then WSO2IS_APP_NAME is not the correct applicaiton, it will show this section
+ * @returns When then `config.ManagementAPIConfig.SharedApplicationName` is not the correct applicaiton, 
+ * it will show this section
  */
 function EmptySelectApplicationBody() {
 
@@ -153,7 +154,8 @@ function EmptySelectApplicationBody() {
  * 
  * @param prop - idpIsinAuthSequence, applicationDetail
  * 
- * @returns  When then WSO2IS_APP_NAME is the correct applicaiton, it will show this section 
+ * @returns  When then config.ManagementAPIConfig.SharedApplicationName is the correct applicaiton, 
+ * it will show this section 
  */
 function ApplicationListAvailable(prop) {
 
