@@ -19,6 +19,7 @@
 import cookie from "cookie";
 import { signIn, signOut } from "next-auth/react";
 import config from "../../../config.json";
+import { getManagementAPIServerBaseUrl, getTenantDomain } from "../../util/apiUtil/getUrls";
 
 /**
  * 
@@ -69,7 +70,7 @@ async function orgSignout(session) {
         signOut()
             .then(
                 () => window.location.assign(
-                    config.AuthorizationConfig.BaseOrganizationUrl +
+                    getManagementAPIServerBaseUrl() + "/t/" + getTenantDomain() +
                     "/oidc/logout?id_token_hint=" + session.orginalIdToken + "&post_logout_redirect_uri=" +
                     config.WSO2IS_CLIENT_URL + "&state=sign_out_success"
                 )
