@@ -16,11 +16,19 @@
  * under the License.
  */
 
-import config from "../../../../../config.json";
 import { getSentDataRequestOptions } from "../../../../../util/util/apiUtil/getSentDataRequestOptions";
 import { dataNotRecievedError, notPostError } from "../../../../../util/util/apiUtil/localResErrors";
 import { RequestMethod } from "../../../../../util/util/apiUtil/requestMethod";
+import { getOrgUrl } from "../../../../../util/util/orgUtil/orgUtil";
 
+/**
+ * backend API call to update federtated authenticators of an identity provider
+ * 
+ * @param req - request
+ * @param res - response
+ * 
+ * @returns correct data if the call is successful, else an error message
+ */
 export default async function updateFederatedAuthenticators(req, res) {
     if (req.method !== "POST") {
         notPostError(res);
@@ -28,12 +36,12 @@ export default async function updateFederatedAuthenticators(req, res) {
 
     const body = JSON.parse(req.body);
     const session = body.session;
-    const subOrgId = body.subOrgId;
+    const orgId = body.orgId;
     const request = body.param;
 
     const idpId = req.query.id;
 
-    const url = `${config.WSO2IS_HOST}/o/${subOrgId}/api/server/v1/identity-providers/${idpId}` +
+    const url = `${getOrgUrl(orgId)}/api/server/v1/identity-providers/${idpId}` +
         `/federated-authenticators/${request[0]}`;
 
     try {

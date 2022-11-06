@@ -16,8 +16,15 @@
  * under the License.
  */
 
-import config from '../../../config.json';
+import { getManagementAPIServerBaseUrl } from "../apiUtil/getUrls";
 
+/**
+ * check if the user is an administrator of the logged in identity server
+ * 
+ * @param scopes - scopes of the logged in user
+ * 
+ * @returns `true` if the user is an administrator, else `false`
+ */
 function checkAdmin(scopes) {
     const adminScopes = ["email", "internal_login", "internal_user_mgt_create", "internal_user_mgt_delete",
         "internal_user_mgt_list", "internal_user_mgt_update", "internal_user_mgt_view", "openid", "profile"];
@@ -32,16 +39,13 @@ function checkAdmin(scopes) {
     return true;
 }
 
-function getOrg(orgId) {
-    for (var i = 0; i < config.ApplicationConfig.SampleOrganization.length; i++) {
-        if (config.ApplicationConfig.SampleOrganization[i].id === orgId) {
+function getOrgUrl(orgId) {
 
-            return config.ApplicationConfig.SampleOrganization[i];
-        }
-    }
-    return undefined;
+    const managementAPIServerBaseUrl = getManagementAPIServerBaseUrl();
+    
+    return `${managementAPIServerBaseUrl}/o/${orgId}`;
 }
 
 module.exports = {
-    checkAdmin, getOrg
+    checkAdmin, getOrgUrl
 };

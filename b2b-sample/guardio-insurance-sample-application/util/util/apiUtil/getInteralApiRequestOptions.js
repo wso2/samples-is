@@ -21,7 +21,7 @@ import { RequestMethod } from './requestMethod';
 function getInternalApibBody(session) {
     const body = {
         session: session,
-        subOrgId: session ? session.orgId : null
+        orgId: session ? session.orgId : null
     }
 
     return body;

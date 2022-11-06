@@ -16,15 +16,16 @@
  * under the License.
  */
 
-import config from "../../../config.json";
 import { ENTERPRISE_ID, GOOGLE_ID } from "../common/common";
+import { getOrgUrl } from "../orgUtil/orgUtil";
+import { getManagementAPIServerBaseUrl } from "../apiUtil/getUrls";
 
 /**
  * 
  * @returns callBackUrl of the idp
  */
 function getCallbackUrl(orgId) {
-    return `${config.WSO2IS_HOST}/o/${orgId}/commonauth`;
+    return `${getOrgUrl(orgId)}/commonauth`;
 }
 
 /**
@@ -75,7 +76,7 @@ function googleIdpTemplate(model, clientId, clientSecret, orgId) {
     model.image =
         `https://console.asgardeo.io/libs/themes/default/assets/images/identity-providers/google-idp-illustration.svg`;
 
-    model.alias = `${config.WSO2IS_HOST}/oauth2/token`;
+    model.alias = `${getManagementAPIServerBaseUrl()}/oauth2/token`;
 
     model.federatedAuthenticators.authenticators[0].properties = [
         {

@@ -16,10 +16,18 @@
  * under the License.
  */
 
-import config from "../../../config.json";
 import getDataHeader from "../../../util/util/apiUtil/getDataHeader";
 import { dataNotRecievedError, notPostError } from "../../../util/util/apiUtil/localResErrors";
+import { getOrgUrl } from "../../../util/util/orgUtil/orgUtil";
 
+/**
+ * backend API call to get logged user details
+ * 
+ * @param req - request
+ * @param res - response
+ * 
+ * @returns correct data if the call is successful, else an error message
+ */
 export default async function me(req , res) {
     if(req.method !== "POST"){
         notPostError(res);
@@ -27,18 +35,18 @@ export default async function me(req , res) {
 
     const body = JSON.parse(req.body);
     const session = body.session;
-    const subOrgId = body.subOrgId;
+    const orgId = body.orgId;
 
     try {
         const fetchData = await fetch(
-            `${config.WSO2IS_HOST}/o/${subOrgId}/scim2/Users/${session.userId}`,
+            `${getOrgUrl(orgId)}/scim2/Users/${session.userId}`,
             getDataHeader(session)
         );
         const meData = await fetchData.json();
 
         res.status(200).json(meData);
     } catch (err) {
-        
+
         return dataNotRecievedError(res);
     }
 }

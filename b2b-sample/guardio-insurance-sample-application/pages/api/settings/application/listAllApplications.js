@@ -16,10 +16,18 @@
  * under the License.
  */
 
-import config from "../../../../config.json";
 import getDataHeader from "../../../../util/util/apiUtil/getDataHeader";
 import { dataNotRecievedError, notPostError } from "../../../../util/util/apiUtil/localResErrors";
+import { getOrgUrl } from "../../../../util/util/orgUtil/orgUtil";
 
+/**
+ * backend API call to view all applications
+ * 
+ * @param req - request
+ * @param res - response
+ * 
+ * @returns correct data if the call is successful, else an error message
+ */
 export default async function listAllApplications(req, res) {
     if (req.method !== "POST") {
         notPostError(res);
@@ -27,11 +35,11 @@ export default async function listAllApplications(req, res) {
 
     const body = JSON.parse(req.body);
     const session = body.session;
-    const subOrgId = body.subOrgId;
+    const orgId = body.orgId;
 
     try {
         const fetchData = await fetch(
-            `${config.WSO2IS_HOST}/o/${subOrgId}/api/server/v1/applications`,
+            `${getOrgUrl(orgId)}/api/server/v1/applications`,
             getDataHeader(session)
         );
         const data = await fetchData.json();

@@ -31,8 +31,6 @@ function getManagementAPIServerBaseUrl() {
     const matches = baseOrganizationUrl.match(/^(http|https)?\:\/\/([^\/?#]+)/i);
     const domain = matches && matches[0];
 
-    console.log(domain);
-
     return domain;
 }
 
