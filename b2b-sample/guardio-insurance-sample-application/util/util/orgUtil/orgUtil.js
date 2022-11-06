@@ -32,46 +32,16 @@ function checkAdmin(scopes) {
     return true;
 }
 
-function getRouterQuery(orgid) {
-    for (var i = 0; i < config.SAMPLE_ORGS.length; i++) {
-        if (config.SAMPLE_ORGS[i].id === orgid) {
-
-            return config.SAMPLE_ORGS[i].routerQuery;
-        }
-    }
-}
-
 function getOrg(orgId) {
-    for (var i = 0; i < config.SAMPLE_ORGS.length; i++) {
-        if (config.SAMPLE_ORGS[i].id === orgId) {
+    for (var i = 0; i < config.ApplicationConfig.SampleOrganization.length; i++) {
+        if (config.ApplicationConfig.SampleOrganization[i].id === orgId) {
 
-            return config.SAMPLE_ORGS[i];
+            return config.ApplicationConfig.SampleOrganization[i];
         }
     }
     return undefined;
-}
-
-function getOrgIdfromRouterQuery(routerQuery) {
-    for (var i = 0; i < config.SAMPLE_ORGS.length; i++) {
-        if (config.SAMPLE_ORGS[i].routerQuery === routerQuery) {
-
-            return config.SAMPLE_ORGS[i].id;
-        }
-    }
-    return undefined;
-}
-
-function getOrgIdFromQuery(query) {
-    for (var i = 0; i < config.SAMPLE_ORGS.length; i++) {
-        if (config.SAMPLE_ORGS[i].routerQuery === query) {
-            
-            return config.SAMPLE_ORGS[i].id;
-        }
-    }
-
-    return null;
 }
 
 module.exports = {
-    checkAdmin, getRouterQuery, getOrg, getOrgIdfromRouterQuery, getOrgIdFromQuery
+    checkAdmin, getOrg
 };

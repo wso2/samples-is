@@ -31,9 +31,9 @@ function getOrgId(token) {
     if (token.user.user_organization) {
 
         return token.user.user_organization;
-    } else if (config.SAMPLE_ORGS[0]) {
+    } else if (config.ApplicationConfig.SampleOrganization[0]) {
 
-        return config.SAMPLE_ORGS[0].id;
+        return config.ApplicationConfig.SampleOrganization[0].id;
     } else {
 
         return token.user.org_id;
