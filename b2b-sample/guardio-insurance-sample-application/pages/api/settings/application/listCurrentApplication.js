@@ -24,8 +24,8 @@ import { dataNotRecievedError, notPostError } from "../../../../util/util/apiUti
  * API call to get the initial details of the current application. Use the application name to filter out the 
  * application (`config.ManagementAPIConfig.SharedApplicationName`).
  * 
- * @param req 
- * @param res 
+ * @param req - request
+ * @param res - response
  * 
  * @returns initial details of the current application
  */

@@ -31,6 +31,8 @@ function getManagementAPIServerBaseUrl() {
     const matches = baseOrganizationUrl.match(/^(http|https)?\:\/\/([^\/?#]+)/i);
     const domain = matches && matches[0];
 
+    console.log(domain);
+
     return domain;
 }
 
@@ -48,4 +50,9 @@ function getTenantDomain() {
     return path;
 }
 
-module.exports = { getManagementAPIServerBaseUrl, getTenantDomain }
+function getHostedUrl() {
+
+    return config.ApplicationConfig.HostedUrl;
+}
+
+module.exports = { getManagementAPIServerBaseUrl, getTenantDomain, getHostedUrl }

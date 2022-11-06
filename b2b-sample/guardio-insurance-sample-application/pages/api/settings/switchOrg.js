@@ -34,7 +34,7 @@ const getSwitchHeader = () => {
 
     const headers = {
         "Access-Control-Allow-Credentials": true,
-        "Access-Control-Allow-Origin": config.WSO2IS_CLIENT_URL,
+        "Access-Control-Allow-Origin": config.ApplicationConfig.HostedUrl,
         "Authorization": `Basic ${getBasicAuth()}`,
         "accept": "application/json",
         "content-type": "application/x-www-form-urlencoded"
@@ -45,8 +45,8 @@ const getSwitchHeader = () => {
 
 /**
  * 
- * @param subOrgId 
- * @param accessToken 
+ * @param subOrgId - sub organization id
+ * @param accessToken - access token return from the IS
  * 
  * @returns get the body for the switch call
  */
@@ -63,8 +63,8 @@ const getSwitchBody = (subOrgId, accessToken) => {
 
 /**
  * 
- * @param subOrgId 
- * @param accessToken 
+ * @param subOrgId - sub organization id
+ * @param accessToken - access token return from the IS
  * 
  * @returns get the request body for the switch call
  */

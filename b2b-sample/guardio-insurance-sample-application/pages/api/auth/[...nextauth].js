@@ -24,8 +24,8 @@ import { getLoggedUserFromProfile, getLoggedUserId, getOrgId, getOrgName }
 
 /**
  * 
- * @param req 
- * @param res 
+ * @param req - request body
+ * @param res - response body
  * 
  * @returns IS provider that will handle the sign in process. Used in `routerUtil` `orgSignin()`
  * [Use this method to signin]
