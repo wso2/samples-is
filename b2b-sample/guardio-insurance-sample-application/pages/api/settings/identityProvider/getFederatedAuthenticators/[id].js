@@ -16,7 +16,6 @@
  * under the License.
  */
 
-import config from "../../../../../config.json";
 import getDataHeader from "../../../../../util/util/apiUtil/getDataHeader";
 import { dataNotRecievedError, notPostError } from "../../../../../util/util/apiUtil/localResErrors";
 import { getOrgUrl } from "../../../../../util/util/orgUtil/orgUtil";
