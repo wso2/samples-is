@@ -21,5 +21,9 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## Additionally
 * If the federated organization id is returned in the idToken (in user_organization variable) when a user is logging into an organization, remove the `ApplicationConfig.SampleOrganization` section from the <i>config.json</i> file.
 
-#### If you are using the app with [Asgardeo](https://wso2.com/asgardeo/)
+#### If you are using the application with [Asgardeo](https://wso2.com/asgardeo/)
 * When creating or editing a user, make sure to append `DEFAULT/` to the username of the user.
+* In the <i>config.json</i> file, change the variable to `ManagementAPIConfig.ImageBaseUrl` `https://console.asgardeo.io`.
+
+#### If you are using the application with [on-premsie](https://is.docs.wso2.com/en/latest/)
+* In the <i>config.json</i> file, change the variable to `ManagementAPIConfig.ImageBaseUrl` `<Identity server hosted URL>/console`.
