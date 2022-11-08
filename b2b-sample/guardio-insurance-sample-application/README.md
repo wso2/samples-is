@@ -19,7 +19,7 @@ yarn dev
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## Additionally
-* If the federated organization id is returned in the idToken (in user_organization variable) when a user is logging into an organization, remove the `SAMPLE ORGS` section from the <i>config.json</i> file.
+* If the federated organization id is returned in the idToken (in user_organization variable) when a user is logging into an organization, remove the `ApplicationConfig.SampleOrganization` section from the <i>config.json</i> file.
 
 #### If you are using the app with [Asgardeo](https://wso2.com/asgardeo/)
-* Please change the value of the <i>config.json</i>  file's `APP IN ASGARDEO FIRST LEVEL` to `true` if the organisation that contains the application is in the first level.
+* When creating or editing a user, make sure to append `DEFAULT/` to the username of the user.
