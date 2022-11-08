@@ -69,8 +69,7 @@ export default function Org(prop) {
             ? (<Home
                 orgId={ session.orgId }
                 name={ session.orgName }
-                session={ session }
-                colorTheme={ "blue" } />)
+                session={ session }/>)
             : null
     );
 }

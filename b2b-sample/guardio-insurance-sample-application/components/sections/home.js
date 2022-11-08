@@ -18,7 +18,7 @@
 
 import DashboardIcon from "@rsuite/icons/legacy/Dashboard";
 import GearCircleIcon from "@rsuite/icons/legacy/GearCircle";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button, Nav, Sidenav } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
 import DashboardSectionComponent from "./dashboardSection/dashboardSectionComponent";
@@ -26,7 +26,7 @@ import IdpSectionComponent from "./settingsSection/idpSection/idpSectionComponen
 import ManageUserSectionComponent from "./settingsSection/manageUserSection/manageUserSectionComponent";
 import Custom500 from "../../pages/500";
 import styles from "../../styles/Settings.module.css";
-import { checkCustomization, hideBasedOnScopes } from "../../util/util/frontendUtil/frontendUtil";
+import { hideBasedOnScopes } from "../../util/util/frontendUtil/frontendUtil";
 import LogoComponent from "../common/logo/logoComponent";
 import SignOutModal from "../common/signOutModal";
 
@@ -38,7 +38,7 @@ import SignOutModal from "../common/signOutModal";
  */
 export default function Home(prop) {
 
-    const { name, orgId, session, colorTheme } = prop;
+    const { name, orgId, session } = prop;
 
     const [ activeKeySideNav, setActiveKeySideNav ] = useState("1");
     const [ signOutModalOpen, setSignOutModalOpen ] = useState(false);
@@ -64,10 +64,6 @@ export default function Home(prop) {
     const signOutModalClose = () => {
         setSignOutModalOpen(false);
     };
-
-    useEffect(() => {
-        document.body.className = checkCustomization(colorTheme);
-    }, [ colorTheme ]);
 
     return (
         <div>
@@ -98,10 +94,10 @@ function SideNavSection(prop) {
     const signOutOnClick = () => setSignOutModalOpen(true);
 
     return (
-        <Sidenav className={ styles.sideNav } defaultOpenKeys={ [ "3", "4" ] }>
+        <Sidenav appearance="inverse" className={ styles.sideNav } defaultOpenKeys={ [ "3", "4" ] }>
             <Sidenav.Header>
                 <div style={ { marginBottom: "25px", marginTop: "35px" } }>
-                    <LogoComponent imageSize="small" name={ name } />
+                    <LogoComponent imageSize="small" name={ name } white={ true }/>
                 </div>
             </Sidenav.Header>
             <Sidenav.Body>
@@ -129,7 +125,7 @@ function SideNavSection(prop) {
                 </Nav>
             </Sidenav.Body>
             <div className={ styles.nextButtonDiv }>
-                <Button size="lg" appearance="ghost" onClick={ signOutOnClick }>Sign Out</Button>
+                <Button size="lg" appearance="default" onClick={ signOutOnClick }>Sign Out</Button>
             </div>
         </Sidenav>
     );

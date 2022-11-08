@@ -23,17 +23,17 @@ import styles from "../../../styles/Settings.module.css";
 
 /**
  * 
- * @param prop - name (org name), imageSize (small, medium, large, x-large)
+ * @param prop - name (org name), imageSize `small` | `medium` | `large` | `x-large`
  *
  * @returns 
  */
 export default function LogoComponent(prop) {
 
-    let { name, imageSize } = prop;
+    let { name, imageSize, white } = prop;
 
     return (
         <div className={ styles.logoDiv }>
-            <Logo imageSize={ imageSize } />
+            <Logo imageSize={ imageSize } white={ white } />
             <p className={ styles.nameTag }>{ config.ApplicationConfig.Branding.tag } </p>
             {
                 name

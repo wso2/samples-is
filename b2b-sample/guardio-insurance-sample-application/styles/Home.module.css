@@ -23,7 +23,7 @@
 }
 
 .homeImageDiv {
-  width: 50vw;
+  width: 75vw;
   height: 100vh;
   display: flex;
   overflow: auto;
@@ -36,8 +36,8 @@
 
 .signInDiv {
   background-color: #0071f309;
-  width: 50vw;
-  padding: 4rem 4rem;
+  width: 25vw;
+  padding: 2rem 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -65,7 +65,7 @@
 
 .signInDivButton {
   width: 50%;
-  height: 60px;
+  height: 50px;
   font-size: 18px;
 }
 

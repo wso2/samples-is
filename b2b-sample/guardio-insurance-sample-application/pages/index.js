@@ -49,7 +49,7 @@ export default function Home() {
                 </div>
 
                 <div className={ styles.signInDiv }>
-                    <LogoComponent imageSize="x-large" />
+                    <LogoComponent imageSize="medium" />
 
                     <hr />
                     <p className={ styles.buttonTag }>Let&apos;s get your journey started. </p>
