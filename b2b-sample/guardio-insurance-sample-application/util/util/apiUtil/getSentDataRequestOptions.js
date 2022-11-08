@@ -16,27 +16,31 @@
  * under the License.
  */
 
-import config from '../../../config.json';
+import { getHostedUrl } from "../../util/apiUtil/getUrls";
 
-function sentDataHeader(session) {
-    const headers = {
+function getSentDataHeader(session, contentType) {
+    let headers = {
         "accept": "application/json",
         "content-type": "application/json",
-        "authorization": "Bearer " + session.accessToken,
-        
-        "access-control-allow-origin": config.WSO2IS_CLIENT_URL
+        "authorization": "Bearer " + session.accessToken, 
+        "access-control-allow-origin": getHostedUrl()
     }
+
+    if(contentType) {
+        headers["content-type"] = "application/json";
+    }
+
     return headers;
 }
 
 function getSentDataRequestOptions(session, method, body) {
     const request = {
         method: method,
-        headers: sentDataHeader(session),
+        headers: getSentDataHeader(session),
         body: JSON.stringify(body)
     }
     
     return request;
 }
 
-module.exports = { getSentDataRequestOptions }
+module.exports = { getSentDataHeader ,getSentDataRequestOptions }

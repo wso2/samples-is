@@ -31,8 +31,8 @@ function MyApp(prop) {
     return (
         <SessionProvider session={ pageProps ? pageProps.session : null }>
             <Head>
-                <title>{ config.CUSTOMIZATION.name }</title>
-                <meta name="description" content={ config.CUSTOMIZATION.name } />
+                <title>{ config.ApplicationConfig.Branding.name }</title>
+                <meta name="description" content={ config.ApplicationConfig.Branding.name } />
             </Head>
 
             <Component { ...pageProps } />

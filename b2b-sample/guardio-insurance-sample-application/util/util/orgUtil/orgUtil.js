@@ -16,8 +16,15 @@
  * under the License.
  */
 
-import config from '../../../config.json';
+import { getManagementAPIServerBaseUrl } from "../apiUtil/getUrls";
 
+/**
+ * check if the user is an administrator of the logged in identity server
+ * 
+ * @param scopes - scopes of the logged in user
+ * 
+ * @returns `true` if the user is an administrator, else `false`
+ */
 function checkAdmin(scopes) {
     const adminScopes = ["email", "internal_login", "internal_user_mgt_create", "internal_user_mgt_delete",
         "internal_user_mgt_list", "internal_user_mgt_update", "internal_user_mgt_view", "openid", "profile"];
@@ -32,46 +39,13 @@ function checkAdmin(scopes) {
     return true;
 }
 
-function getRouterQuery(orgid) {
-    for (var i = 0; i < config.SAMPLE_ORGS.length; i++) {
-        if (config.SAMPLE_ORGS[i].id === orgid) {
+function getOrgUrl(orgId) {
 
-            return config.SAMPLE_ORGS[i].routerQuery;
-        }
-    }
-}
-
-function getOrg(orgId) {
-    for (var i = 0; i < config.SAMPLE_ORGS.length; i++) {
-        if (config.SAMPLE_ORGS[i].id === orgId) {
-
-            return config.SAMPLE_ORGS[i];
-        }
-    }
-    return undefined;
-}
-
-function getOrgIdfromRouterQuery(routerQuery) {
-    for (var i = 0; i < config.SAMPLE_ORGS.length; i++) {
-        if (config.SAMPLE_ORGS[i].routerQuery === routerQuery) {
-
-            return config.SAMPLE_ORGS[i].id;
-        }
-    }
-    return undefined;
-}
-
-function getOrgIdFromQuery(query) {
-    for (var i = 0; i < config.SAMPLE_ORGS.length; i++) {
-        if (config.SAMPLE_ORGS[i].routerQuery === query) {
-            
-            return config.SAMPLE_ORGS[i].id;
-        }
-    }
-
-    return null;
+    const managementAPIServerBaseUrl = getManagementAPIServerBaseUrl();
+    
+    return `${managementAPIServerBaseUrl}/o/${orgId}`;
 }
 
 module.exports = {
-    checkAdmin, getRouterQuery, getOrg, getOrgIdfromRouterQuery, getOrgIdFromQuery
+    checkAdmin, getOrgUrl
 };

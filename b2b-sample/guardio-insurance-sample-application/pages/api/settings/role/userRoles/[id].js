@@ -16,9 +16,9 @@
  * under the License.
  */
 
-import config from "../../../../../config.json";
 import getDataHeader from "../../../../../util/util/apiUtil/getDataHeader";
 import { dataNotRecievedError, notPostError } from "../../../../../util/util/apiUtil/localResErrors";
+import { getOrgUrl } from "../../../../../util/util/orgUtil/orgUtil";
 
 export default async function userRoles(req, res) {
     if (req.method !== "POST") {
@@ -27,13 +27,13 @@ export default async function userRoles(req, res) {
 
     const body = JSON.parse(req.body);
     const session = body.session;
-    const subOrgId = body.subOrgId;
+    const orgId = body.orgId;
 
     const id = req.query.id;
 
     try {
         const fetchData = await fetch(
-            `${config.WSO2IS_HOST}/o/${subOrgId}/api/server/v1/organizations/${subOrgId}/users/${id}/roles`,
+            `${getOrgUrl(orgId)}/api/server/v1/organizations/${orgId}/users/${id}/roles`,
             getDataHeader(session)
         );
         const data = await fetchData.json();

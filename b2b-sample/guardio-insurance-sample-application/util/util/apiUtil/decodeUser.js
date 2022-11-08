@@ -42,11 +42,7 @@ function decodeUser(user) {
  * @returns set username. If the IS is Asgardeo DEFAULT/ add to the username changed else returns the original username
  */
  function setUsername(userName) {
-    if (config.ASGARDEO) {
-       
-        return  `DEFAULT/${userName}`;
-    }
-
+    
     return userName;
 }
 
@@ -57,11 +53,6 @@ function decodeUser(user) {
  * @returns get username. If the IS is Asgardeo DEFAULT/ is removed from the username else returns the original username
  */
 function getUsername(userName) {
-
-    if (config.ASGARDEO) {
-
-        return userName.split("/").pop();
-    }
 
     return userName;
 }

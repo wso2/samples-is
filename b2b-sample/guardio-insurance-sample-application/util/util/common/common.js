@@ -18,11 +18,20 @@
 
 import { infoTypeDialog } from "../../../components/common/dialog";
 
+/**
+ * 
+ * @param str 
+ * @returns `true` if `str` is empty, else `false`
+ */
 function stringIsEmpty(str) {
 
     return (str === "");
 }
 
+/**
+ * 
+ * @returns current date
+ */
 function getCurrentDate() {
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
@@ -53,6 +62,12 @@ function sizeOfJson(obj) {
     return Object.keys(obj).length;
 }
 
+/**
+ * Copy the pased `text` to the clipboard and shows a notification
+ * 
+ * @param text 
+ * @param toaster 
+ */
 function copyTheTextToClipboard(text, toaster) {
     navigator.clipboard.writeText(text);
     infoTypeDialog(toaster, "Text copied to clipboard");

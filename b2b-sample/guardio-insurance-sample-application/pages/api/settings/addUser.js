@@ -16,11 +16,19 @@
  * under the License.
  */
 
-import config from "../../../config.json";
 import { getSentDataRequestOptions } from "../../../util/util/apiUtil/getSentDataRequestOptions";
 import { dataNotRecievedError, notPostError } from "../../../util/util/apiUtil/localResErrors";
 import { RequestMethod } from "../../../util/util/apiUtil/requestMethod";
+import { getOrgUrl } from "../../../util/util/orgUtil/orgUtil";
 
+/**
+ * backend API call to create a user
+ * 
+ * @param req - request
+ * @param res - response
+ * 
+ * @returns correct data if the call is successful, else an error message
+ */
 export default async function addUser(req, res) {
     if (req.method !== "POST") {
         notPostError(res);
@@ -28,12 +36,12 @@ export default async function addUser(req, res) {
 
     const body = JSON.parse(req.body);
     const session = body.session;
-    const subOrgId = body.subOrgId;
+    const orgId = body.orgId;
     const user = body.param;
 
     try {
         const fetchData = await fetch(
-            `${config.WSO2IS_HOST}/o/${subOrgId}/scim2/Users`,
+            `${getOrgUrl(orgId)}/scim2/Users`,
             getSentDataRequestOptions(session, RequestMethod.POST, user)
         );
         const data = await fetchData.json();

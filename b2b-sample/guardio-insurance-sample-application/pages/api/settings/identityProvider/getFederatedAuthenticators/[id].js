@@ -16,10 +16,18 @@
  * under the License.
  */
 
-import config from "../../../../../config.json";
 import getDataHeader from "../../../../../util/util/apiUtil/getDataHeader";
 import { dataNotRecievedError, notPostError } from "../../../../../util/util/apiUtil/localResErrors";
+import { getOrgUrl } from "../../../../../util/util/orgUtil/orgUtil";
 
+/**
+ * backend API call to get federtated authenticators of an identity provider
+ * 
+ * @param req - request
+ * @param res - response
+ * 
+ * @returns correct data if the call is successful, else an error message
+ */
 export default async function getFederatedAuthenticators(req, res) {
     if (req.method !== "POST") {
         notPostError(res);
@@ -27,13 +35,12 @@ export default async function getFederatedAuthenticators(req, res) {
 
     const body = JSON.parse(req.body);
     const session = body.session;
-    const subOrgId = body.subOrgId;
+    const orgId = body.orgId;
     const idpId = body.param;
 
     const id = req.query.id;
 
-    const url = `${config.WSO2IS_HOST}/o/${subOrgId}/api/server/v1/identity-providers/${idpId}` +
-        `/federated-authenticators/${id}`;
+    const url = `${getOrgUrl(orgId)}/api/server/v1/identity-providers/${idpId}/federated-authenticators/${id}`;
 
     try {
         const fetchData = await fetch(

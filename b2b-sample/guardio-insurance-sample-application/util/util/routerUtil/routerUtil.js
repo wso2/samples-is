@@ -19,6 +19,7 @@
 import cookie from "cookie";
 import { signIn, signOut } from "next-auth/react";
 import config from "../../../config.json";
+import { getManagementAPIServerBaseUrl, getTenantDomain, getHostedUrl } from "../../util/apiUtil/getUrls";
 
 /**
  * 
@@ -60,17 +61,21 @@ function orgSignin(orgId) {
 }
 
 /**
+ * signout of the logged in organization
  * 
  * @param session 
  */
 async function orgSignout(session) {
+    
+    // todo: implementation should change after the backend changes are completed
+
     if (session) {
         signOut()
             .then(
                 () => window.location.assign(
-                    config.WSO2IS_HOST + "/t/" + config.WSO2IS_TENANT_NAME +
+                    getManagementAPIServerBaseUrl() + "/t/" + getTenantDomain() +
                     "/oidc/logout?id_token_hint=" + session.orginalIdToken + "&post_logout_redirect_uri=" +
-                    config.WSO2IS_CLIENT_URL + "&state=sign_out_success"
+                    getHostedUrl() + "&state=sign_out_success"
                 )
             );
     } else {
@@ -126,7 +131,7 @@ function getOrgId(token) {
         return parseJwt(token).org_id
     } 
 
-    return config.SAMPLE_ORGS[0].id;
+    return config.ApplicationConfig.SampleOrganization[0].id;
 }
 
 /**
@@ -142,7 +147,7 @@ function getOrgName(token) {
         return parseJwt(token).org_name
     } 
 
-    return config.SAMPLE_ORGS[0].name;
+    return config.ApplicationConfig.SampleOrganization[0].name;
 }
 
 /**
