@@ -19,6 +19,7 @@
 import { ENTERPRISE_ID, GOOGLE_ID } from "../common/common";
 import { getOrgUrl } from "../orgUtil/orgUtil";
 import { getManagementAPIServerBaseUrl } from "../apiUtil/getUrls";
+import config from "../../../config.json";
 
 /**
  * 
@@ -74,7 +75,8 @@ function setIdpTemplate(model, templateId, formValues, orgId) {
 function googleIdpTemplate(model, clientId, clientSecret, orgId) {
 
     model.image =
-        `https://console.asgardeo.io/libs/themes/default/assets/images/identity-providers/google-idp-illustration.svg`;
+        `${config.ManagementAPIConfig.ImageBaseUrl}/libs/themes/default/assets` +
+        `/images/identity-providers/google-idp-illustration.svg`;
 
     model.alias = `${getManagementAPIServerBaseUrl()}/oauth2/token`;
 
@@ -117,7 +119,8 @@ function enterpriseIdpTemplate(model, clientId, clientSecret, formValues, orgId)
     let certificate = formValues.certificate.toString();
 
     model.image =
-        `https://console.asgardeo.io/libs/themes/default/assets/images/identity-providers/enterprise-idp-illustration.svg`;
+        `${config.ManagementAPIConfig.ImageBaseUrl}/libs/themes/default/assets` +
+        `/images/identity-providers/enterprise-idp-illustration.svg`;
 
     model.federatedAuthenticators.authenticators[0].properties = [
         {
