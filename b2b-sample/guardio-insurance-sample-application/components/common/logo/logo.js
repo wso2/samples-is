@@ -22,31 +22,45 @@ import logoImage from "../../../public/logo.png";
 
 /**
  * 
- * @param prop - imageSize (small, medium, large or x-large)
+ * @param prop - imageSize `small` | `medium` | `large` | `x-large`
  * 
  * @returns Logo component
  */
 export default function Logo(prop) {
 
-    const { imageSize } = prop;
+    const { imageSize, white } = prop;
     
-    function switchImageSize(size) {
+    const getImageStyle = (size, white) => {
+
+        let imageStyle = {};
+
         switch (size) {
             case "small":
-                return { width: "200px" };
+                imageStyle["width"] = "200px" ;
+                break;
             case "medium":
-                return { width: "250px" };
+                imageStyle["width"] = "350px" ;
+                break;
             case "large":
-                return { width: "600px" };
+                imageStyle["width"] = "600px" ;
+                break;
             case "x-large":
-                return { width: "600px" };
+                imageStyle["width"] = "600px" ;
+                break;
             default:
                 break;
         }
+
+
+        if (white) {
+            imageStyle["filter"] = "brightness(0) invert(1)"
+        }
+
+        return imageStyle;
     }
 
     return (
-        <div style={ switchImageSize(imageSize) }>
+        <div style={ getImageStyle(imageSize, white) }>
             <Image
                 src={ logoImage }
                 alt="404 image" />
