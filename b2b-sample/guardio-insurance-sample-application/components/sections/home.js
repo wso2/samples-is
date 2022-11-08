@@ -21,14 +21,14 @@ import GearCircleIcon from "@rsuite/icons/legacy/GearCircle";
 import React, { useState } from "react";
 import { Button, Nav, Sidenav } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
+import DashboardSectionComponent from "./dashboardSection/dashboardSectionComponent";
+import IdpSectionComponent from "./settingsSection/idpSection/idpSectionComponent";
+import ManageUserSectionComponent from "./settingsSection/manageUserSection/manageUserSectionComponent";
 import Custom500 from "../../pages/500";
 import styles from "../../styles/Settings.module.css";
 import { hideBasedOnScopes } from "../../util/util/frontendUtil/frontendUtil";
 import LogoComponent from "../common/logo/logoComponent";
 import SignOutModal from "../common/signOutModal";
-import DashboardSectionComponent from "./dashboardSection/dashboardSectionComponent";
-import IdpSectionComponent from "./settingsSection/idpSection/idpSectionComponent";
-import ManageUserSectionComponent from "./settingsSection/manageUserSection/manageUserSectionComponent";
 
 /**
  * 
@@ -38,7 +38,7 @@ import ManageUserSectionComponent from "./settingsSection/manageUserSection/mana
  */
 export default function Home(prop) {
 
-    const { name, orgId, session, colorTheme } = prop;
+    const { name, orgId, session } = prop;
 
     const [ activeKeySideNav, setActiveKeySideNav ] = useState("1");
     const [ signOutModalOpen, setSignOutModalOpen ] = useState(false);
@@ -97,7 +97,7 @@ function SideNavSection(prop) {
         <Sidenav appearance="inverse" className={ styles.sideNav } defaultOpenKeys={ [ "3", "4" ] }>
             <Sidenav.Header>
                 <div style={ { marginBottom: "25px", marginTop: "35px" } }>
-                    <LogoComponent imageSize="small" name={ name } white={true}/>
+                    <LogoComponent imageSize="small" name={ name } white={ true }/>
                 </div>
             </Sidenav.Header>
             <Sidenav.Body>

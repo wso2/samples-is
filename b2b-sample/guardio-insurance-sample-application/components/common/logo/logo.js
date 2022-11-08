@@ -37,15 +37,19 @@ export default function Logo(prop) {
         switch (size) {
             case "small":
                 imageStyle["width"] = "200px" ;
+
                 break;
             case "medium":
                 imageStyle["width"] = "350px" ;
+
                 break;
             case "large":
                 imageStyle["width"] = "600px" ;
+
                 break;
             case "x-large":
                 imageStyle["width"] = "600px" ;
+
                 break;
             default:
                 break;
@@ -53,11 +57,11 @@ export default function Logo(prop) {
 
 
         if (white) {
-            imageStyle["filter"] = "brightness(0) invert(1)"
+            imageStyle["filter"] = "brightness(0) invert(1)";
         }
 
         return imageStyle;
-    }
+    };
 
     return (
         <div style={ getImageStyle(imageSize, white) }>

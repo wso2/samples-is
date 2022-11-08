@@ -32,14 +32,14 @@ export default function LogoComponent(prop) {
     let { name, imageSize, white } = prop;
 
     return (
-        <div className={styles.logoDiv}>
-            <Logo imageSize={imageSize} white={white} />
-            <p className={styles.nameTag}>{config.ApplicationConfig.Branding.tag} </p>
+        <div className={ styles.logoDiv }>
+            <Logo imageSize={ imageSize } white={ white } />
+            <p className={ styles.nameTag }>{ config.ApplicationConfig.Branding.tag } </p>
             {
                 name
                     ? (<>
                         <hr />
-                        <h5 className={styles.nameTag}>{name}</h5>
+                        <h5 className={ styles.nameTag }>{ name }</h5>
                         <hr />
                     </>)
                     : null
