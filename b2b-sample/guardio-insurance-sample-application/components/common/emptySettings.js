@@ -18,7 +18,7 @@
 
 import AppSelectIcon from "@rsuite/icons/AppSelect";
 import React from "react";
-import { Button, Stack } from "rsuite";
+import { Button, FlexboxGrid, Stack } from "rsuite";
 
 /**
  * 
@@ -31,20 +31,24 @@ export default function EmptySettings(prop) {
     const { bodyString, buttonString, icon, onAddButtonClick } = prop;
     console.log(icon);
     return (
-        <Stack alignItems="center" direction="column">
-            {icon}
-           
-            <p style={{ fontSize: 14, marginTop: "20px" }}>
-                {bodyString}
-            </p>
-            <Button
-                appearance="primary"
-                onClick={onAddButtonClick}
-                size="md"
-                style={{ marginTop: "12px" }}>
-                {buttonString}
-            </Button>
-        </Stack>
+        <FlexboxGrid
+            style={{ height: "60vh", marginTop: "24px", width: "100%" }}
+            justify="center"
+            align="middle">
+            <Stack alignItems="center" direction="column">
+                {icon}
+                <p style={{ fontSize: 14, marginTop: "20px" }}>
+                    {bodyString}
+                </p>
+                <Button
+                    appearance="primary"
+                    onClick={onAddButtonClick}
+                    size="md"
+                    style={{ marginTop: "12px" }}>
+                    {buttonString}
+                </Button>
+            </Stack>
+        </FlexboxGrid>
     );
 
 };
