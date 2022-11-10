@@ -17,32 +17,18 @@
  */
 
 import PeoplesIcon from '@rsuite/icons/Peoples';
-import CopyIcon from "@rsuite/icons/Copy";
-import InfoRoundIcon from "@rsuite/icons/InfoRound";
 import React, { useCallback, useEffect, useState } from "react";
-import { Avatar, Button, Container, FlexboxGrid, Form, Input, InputGroup, Modal, Panel, Stack, useToaster }
-    from "rsuite";
-import Enterprise from "../idpSection/data/templates/enterprise-identity-provider.json";
-import Google from "../idpSection/data/templates/google.json";
-import IdentityProviderList from "../idpSection/otherComponents/identityProviderList";
-import styles from "../../../../../styles/idp.module.css";
-import decodeCreateIdentityProvider
-    from "../../../../../util/apiDecode/settings/identityProvider/decodeCreateIdentityProvider";
-import decodeListAllIdentityProviders
-    from "../../../../../util/apiDecode/settings/identityProvider/decodeListAllIdentityProviders";
-import { EMPTY_STRING, ENTERPRISE_ID, GOOGLE_ID, checkIfJSONisEmpty, copyTheTextToClipboard, sizeOfJson }
-    from "../../../../../util/util/common/common";
-import { getCallbackUrl } from "../../../../../util/util/idpUtil/idpUtil";
-import { errorTypeDialog, successTypeDialog } from "../../../../common/dialog";
-import SettingsTitle from "../../../../common/settingsTitle";
-import EmptySettings from "../../../../common/emptySettings";
+import { Container, useToaster } from "rsuite";
 import decodeListAllRoles from '../../../../../util/apiDecode/settings/role/decodeListAllRoles';
+import EmptySettings from "../../../../common/emptySettings";
+import SettingsTitle from "../../../../common/settingsTitle";
+import RolesList from './otherComponents/rolesList';
 
 /**
  * 
  * @param prop - session
  * 
- * @returns The idp interface section.
+ * @returns The role management interface section.
  */
 export default function RoleManagementSectionComponent(prop) {
 
@@ -61,15 +47,13 @@ export default function RoleManagementSectionComponent(prop) {
     const fetchAllRoles = useCallback(async () => {
 
         const res = await decodeListAllRoles(session);
+
         console.log(res);
+
         if (res) {
-            if (res.identityProviders) {
-                setRolesList(res.identityProviders);
-            } else {
-                setRolesList([]);
-            }
+            setRolesList(res);
         } else {
-            setIdpList(null);
+            setRolesList([]);
         }
 
     }, [session]);
@@ -78,7 +62,6 @@ export default function RoleManagementSectionComponent(prop) {
         setOpenAddModal(true);
     };
 
-
     return (
         <Container>
 
@@ -86,35 +69,19 @@ export default function RoleManagementSectionComponent(prop) {
                 title="Role Management"
                 subtitle="Manage organization roles here." />
 
-            <EmptySettings
-                bodyString="There are no roles created for the organization."
-                buttonString="Create role"
-                icon={<PeoplesIcon style={{ opacity: .2 }} width="150px" height="150px" />}
-                onAddButtonClick={onAddIdentityProviderClick}
-            />
+            {
+                rolesList
+                    ? <RolesList rolesList={rolesList} />
+                    : <EmptySettings
+                        bodyString="There are no roles created for the organization."
+                        buttonString="Create role"
+                        icon={<PeoplesIcon style={{ opacity: .2 }} width="150px" height="150px" />}
+                        onAddButtonClick={onAddIdentityProviderClick}
+                    />
+            }
 
-            {/* {
-                idpList
-                    ? (<FlexboxGrid
-                        style={{ height: "60vh", marginTop: "24px", width: "100%" }}
-                        justify={idpList.length === 0 ? "center" : "start"}
-                        align={idpList.length === 0 ? "middle" : "top"}>
-                        {idpList.length === 0
-                            ? (<EmptySettings
-                                bodyString="There are no roles created for the organization."
-                                buttonString="Create role"
-                                icon={<PeoplesIcon style={{ opacity: .2 }} width="150px" height="150px" />}
-                                onAddButtonClick={onAddIdentityProviderClick}
-                            />)
-                            : (<IdentityProviderList
-                                fetchAllIdPs={fetchAllIdPs}
-                                idpList={idpList}
-                                session={session}
-                            />)
-                        }
-                    </FlexboxGrid>)
-                    : null
-            } */}
+
+
         </Container>
     );
 

@@ -17,57 +17,37 @@
  */
 
 import CodeIcon from "@rsuite/icons/Code";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Nav, Panel, Stack } from "rsuite";
-import decodeGetDetailedIdentityProvider from
-    "../../../../../../util/apiDecode/settings/identityProvider/decodeGetDetailedIdentityProvider";
 import { selectedTemplateBaesedonTemplateId } from "../../../../../../util/util/applicationUtil/applicationUtil";
 import AccordianItemHeader from "../../../../../common/accordianItemHeader";
-import ButtonGroupIdentityProviderDetails from "./buttonGroupIdentityProviderDetails";
-import General from "./idpDetailsSections/general";
-import Raw from "./idpDetailsSections/raw";
-import Settings from "./idpDetailsSections/settings";
 
 /**
  * 
- * @param prop - session, id (idp id), fetchAllIdPs (function to fetch all Idps)
+ * @param prop
  * 
- * @returns idp item details component
+ * @returns role item componet
  */
-export default function IdentityProviderDetails(prop) {
+export default function RoleItem(prop) {
 
-    const { session, id, fetchAllIdPs } = prop;
+    const { session, id, name } = prop;
 
     const [idpDetails, setIdpDetails] = useState({});
     const [activeKeyNav, setActiveKeyNav] = useState("1");
 
-    const fetchData = useCallback(async () => {
-        const res = await decodeGetDetailedIdentityProvider(session, id);
+    // const fetchData = useCallback(async () => {
+    //     const res = await decodeGetDetailedIdentityProvider(session, id);
 
-        setIdpDetails(res);
-    }, [session, id]);
+    //     setIdpDetails(res);
+    // }, [session, id]);
 
-    useEffect(() => {
-        fetchData();
-    }, [fetchData]);
+    // useEffect(() => {
+    //     fetchData();
+    // }, [fetchData]);
 
-    const activeKeyNavSelect = (eventKey) => {
-        setActiveKeyNav(eventKey);
-    };
-
-    const idpDetailsComponent = (activeKey) => {
-        switch (activeKey) {
-            case "1":
-
-                return <General session={session} idpDetails={idpDetails} fetchData={fetchData} />;
-            case "2":
-
-                return <Settings session={session} idpDetails={idpDetails} />;
-            case "3":
-
-                return <Raw idpDetails={idpDetails} />;
-        }
-    };
+    // const activeKeyNavSelect = (eventKey) => {
+    //     setActiveKeyNav(eventKey);
+    // };
 
     return (
 
@@ -75,26 +55,14 @@ export default function IdentityProviderDetails(prop) {
             ? (<Panel
                 header={
                     <AccordianItemHeader
-                        imageUrl={idpDetails.image}
-                        title={idpDetails.name}
-                        description={idpDetails.description} />
+                    title={name}
+                    description = {`Organization role ${name} details`}/>
                 }
                 eventKey={id}
                 id={id}>
                 <div style={{ marginLeft: "25px", marginRight: "25px" }}>
                     <Stack direction="column" alignItems="stretch">
-                        <ButtonGroupIdentityProviderDetails
-                            session={session}
-                            id={id}
-                            fetchAllIdPs={fetchAllIdPs}
-                            idpDetails={idpDetails} />
-                        <IdentityProviderDetailsNav
-                            activeKeyNav={activeKeyNav}
-                            idpDetails={idpDetails}
-                            activeKeyNavSelect={activeKeyNavSelect} />
-                        <div>
-                            {idpDetailsComponent(activeKeyNav)}
-                        </div>
+                        asd
                     </Stack>
                 </div>
             </Panel>)
