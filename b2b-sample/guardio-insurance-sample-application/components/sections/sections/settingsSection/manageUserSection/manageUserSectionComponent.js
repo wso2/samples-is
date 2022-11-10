@@ -35,27 +35,27 @@ export default function ManageUserSectionComponent(prop) {
 
     const { orgName, orgId, session } = prop;
 
-    const [ users, setUsers ] = useState([]);
-    const [ editUserOpen, setEditUserOpen ] = useState(false);
-    const [ addUserOpen, setAddUserOpen ] = useState(false);
+    const [users, setUsers] = useState([]);
+    const [editUserOpen, setEditUserOpen] = useState(false);
+    const [addUserOpen, setAddUserOpen] = useState(false);
 
-    const [ openUser, setOpenUser ] = useState({});
+    const [openUser, setOpenUser] = useState({});
 
     const fetchData = useCallback(async () => {
         const res = await decodeViewUsers(session);
 
         await setUsers(res);
-    }, [ session ]);
+    }, [session]);
 
     useEffect(() => {
         if (!editUserOpen || !addUserOpen) {
             fetchData();
         }
-    }, [ editUserOpen, addUserOpen, fetchData ]);
+    }, [editUserOpen, addUserOpen, fetchData]);
 
     useEffect(() => {
         fetchData();
-    }, [ fetchData ]);
+    }, [fetchData]);
 
     const { Column, HeaderCell, Cell } = Table;
 
@@ -78,70 +78,67 @@ export default function ManageUserSectionComponent(prop) {
     };
 
     return (
-        <div 
-            className={ styles.tableMainPanelDiv }
+        <div
+            className={styles.tableMainPanelDiv}
         >
-            <EditUserComponent 
-                session={ session } 
-                open={ editUserOpen }
-                onClose={ closeEditDialog } 
-                user={ openUser } />
+            <EditUserComponent
+                session={session}
+                open={editUserOpen}
+                onClose={closeEditDialog}
+                user={openUser} />
 
-            <AddUserComponent 
-                orgName={ orgName } 
-                orgId={ orgId } 
-                session={ session }
-                open={ addUserOpen } 
-                onClose={ closeAddUserDialog } />
+            <AddUserComponent
+                orgName={orgName}
+                orgId={orgId}
+                session={session}
+                open={addUserOpen}
+                onClose={closeAddUserDialog} />
 
-            <Stack 
-                direction="row" 
-                justifyContent="space-between">
-                <SettingsTitle 
-                    title="Manage Users" 
-                    subtitle="Manage users in the organisation" />
-                <AddUserButton 
-                    session = { session }
-                    onClick={ onAddUserClick } />
-            </Stack>
+            <SettingsTitle
+                title="Manage Users"
+                subtitle="Manage users in the organisation">
+                <AddUserButton
+                    session={session}
+                    onClick={onAddUserClick} />
+            </SettingsTitle>
 
             {
                 users ?
                     (<Table
-                        height={ 900 }
-                        data={ users }
+                        height={900}
+                        data={users}
                     >
-                        <Column width={ 200 } align="center">
+                        <Column width={200} align="center">
                             <HeaderCell><h6>First Name</h6></HeaderCell>
                             <Cell dataKey="firstName" />
                         </Column>
 
-                        <Column width={ 200 } align="center">
+                        <Column width={200} align="center">
                             <HeaderCell><h6>Last Name</h6></HeaderCell>
                             <Cell dataKey="familyName" />
                         </Column>
-                        
-                        <Column flexGrow={ 2 } align="center">
+
+                        <Column flexGrow={2} align="center">
                             <HeaderCell><h6>User Name</h6></HeaderCell>
                             <Cell dataKey="username" />
                         </Column>
 
-                        <Column flexGrow={ 2 } align="center">
+                        <Column flexGrow={2} align="center">
                             <HeaderCell><h6>Email</h6></HeaderCell>
                             <Cell dataKey="email" />
                         </Column>
 
-                        <Column flexGrow={ 1 } align="center" fixed="right">
+                        <Column flexGrow={1} align="center" fixed="right">
                             <HeaderCell><h6>Edit User</h6></HeaderCell>
 
                             <Cell>
-                                { rowData => (
+                                {rowData => (
                                     <span>
-                                        <a onClick={ () => onEditClick(rowData) } style={ { cursor: "pointer" } }> 
+                                        <a onClick={() => onEditClick(rowData)} style={{ cursor: "pointer" }}>
                                             Edit
                                         </a>
                                     </span>
-                                ) }
+                                )}
                             </Cell>
                         </Column>
 

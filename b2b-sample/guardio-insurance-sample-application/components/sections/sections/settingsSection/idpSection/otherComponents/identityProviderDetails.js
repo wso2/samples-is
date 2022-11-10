@@ -23,9 +23,9 @@ import decodeGetDetailedIdentityProvider from
     "../../../../../../util/apiDecode/settings/identityProvider/decodeGetDetailedIdentityProvider";
 import { selectedTemplateBaesedonTemplateId } from "../../../../../../util/util/applicationUtil/applicationUtil";
 import AccordianItemHeader from "../../../../../common/accordianItemHeader";
+import JsonDisplay from "../../../../../common/jsonDisplay";
 import ButtonGroupIdentityProviderDetails from "./buttonGroupIdentityProviderDetails";
 import General from "./idpDetailsSections/general";
-import Raw from "./idpDetailsSections/raw";
 import Settings from "./idpDetailsSections/settings";
 
 /**
@@ -65,7 +65,7 @@ export default function IdentityProviderDetails(prop) {
                 return <Settings session={session} idpDetails={idpDetails} />;
             case "3":
 
-                return <Raw idpDetails={idpDetails} />;
+                return <JsonDisplay jsonObject={idpDetails} />;
         }
     };
 

@@ -44,6 +44,5 @@ export default function RolesList(prop) {
                 </PanelGroup>
             </div>
         </FlexboxGrid >
-
     );
 }

@@ -17,19 +17,24 @@
  */
 
 import React from "react";
-import styles from "../../../../../../../styles/idp.module.css";
+import { Button } from "rsuite";
 
 /**
  * 
- * @param prop - idpDetails
+ * @param {*} prop 
  * 
- * @returns The raw section of an idp
+ * @returns 
  */
-export default function Raw(prop) {
+export default function CreateRoleButton(prop) {
 
-    const { idpDetails } = prop;
-	
+    const { session } = prop;
+
     return (
-        <pre className={ styles.idp__item__json__pre }> { JSON.stringify(idpDetails, null, 2) }</pre>
+        <Button
+            appearance="primary"
+            size="lg"
+            onClick={()=>{}}>
+            Create Role
+        </Button>
     );
 }

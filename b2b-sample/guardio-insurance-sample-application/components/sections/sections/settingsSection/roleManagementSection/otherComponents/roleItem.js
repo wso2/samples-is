@@ -21,6 +21,7 @@ import React, { useState } from "react";
 import { Nav, Panel, Stack } from "rsuite";
 import { selectedTemplateBaesedonTemplateId } from "../../../../../../util/util/applicationUtil/applicationUtil";
 import AccordianItemHeader from "../../../../../common/accordianItemHeader";
+import JsonDisplay from "../../../../../common/jsonDisplay";
 
 /**
  * 
@@ -62,7 +63,7 @@ export default function RoleItem(prop) {
                 id={id}>
                 <div style={{ marginLeft: "25px", marginRight: "25px" }}>
                     <Stack direction="column" alignItems="stretch">
-                        asd
+                        as
                     </Stack>
                 </div>
             </Panel>)

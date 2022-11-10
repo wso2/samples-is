@@ -22,6 +22,7 @@ import { Container, useToaster } from "rsuite";
 import decodeListAllRoles from '../../../../../util/apiDecode/settings/role/decodeListAllRoles';
 import EmptySettings from "../../../../common/emptySettings";
 import SettingsTitle from "../../../../common/settingsTitle";
+import CreateRoleButton from './otherComponents/createRoleButton';
 import RolesList from './otherComponents/rolesList';
 
 /**
@@ -67,7 +68,9 @@ export default function RoleManagementSectionComponent(prop) {
 
             <SettingsTitle
                 title="Role Management"
-                subtitle="Manage organization roles here." />
+                subtitle="Manage organization roles here.">
+                <CreateRoleButton />
+            </SettingsTitle>
 
             {
                 rolesList
@@ -79,8 +82,6 @@ export default function RoleManagementSectionComponent(prop) {
                         onAddButtonClick={onAddIdentityProviderClick}
                     />
             }
-
-
 
         </Container>
     );
