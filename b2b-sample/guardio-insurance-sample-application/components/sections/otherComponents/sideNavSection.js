@@ -18,76 +18,20 @@
 
 import DashboardIcon from "@rsuite/icons/legacy/Dashboard";
 import GearCircleIcon from "@rsuite/icons/legacy/GearCircle";
-import React, { useState } from "react";
+import React from "react";
 import { Button, Nav, Sidenav } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
-import DashboardSectionComponent from "./sections/dashboardSection/dashboardSectionComponent";
-import IdpSectionComponent from "./sections/settingsSection/idpSection/idpSectionComponent";
-import ManageUserSectionComponent from "./sections/settingsSection/manageUserSection/manageUserSectionComponent";
-import Custom500 from "../../pages/500";
-import styles from "../../styles/Settings.module.css";
-import { hideBasedOnScopes } from "../../util/util/frontendUtil/frontendUtil";
-import LogoComponent from "../common/logo/logoComponent";
-import SignOutModal from "../common/signOutModal";
+import styles from "../../../styles/Settings.module.css";
+import { hideBasedOnScopes } from "../../../util/util/frontendUtil/frontendUtil";
+import LogoComponent from "../../common/logo/logoComponent";
 
 /**
  * 
- * @param prop - orgId, name, session, colorTheme
- *
- * @returns The home section. Mainly side nav bar and the section to show other settings sections.
+ * @param prop {`name`, `scope`, `activeKeySideNav`, `activeKeySideNavSelect`, `setSignOutModalOpen`}
+ * 
+ * @returns side navigation component
  */
-export default function Home(prop) {
-
-    const { name, orgId, session } = prop;
-
-    const [ activeKeySideNav, setActiveKeySideNav ] = useState("1");
-    const [ signOutModalOpen, setSignOutModalOpen ] = useState(false);
-
-    const mainPanelComponenet = (activeKey) => {
-        switch (activeKey) {
-            case "1":
-
-                return <DashboardSectionComponent orgName={ name } orgId={ orgId } session={ session } />;
-            case "2-1":
-
-                return <ManageUserSectionComponent orgName={ name } orgId={ orgId } session={ session } />;
-            case "2-3":
-
-                return <IdpSectionComponent orgName={ name } orgId={ orgId } session={ session } />;
-        }
-    };
-
-    const activeKeySideNavSelect = (eventKey) => {
-        setActiveKeySideNav(eventKey);
-    };
-
-    const signOutModalClose = () => {
-        setSignOutModalOpen(false);
-    };
-
-    return (
-        <div>
-            <SignOutModal session={ session } open={ signOutModalOpen } onClose={ signOutModalClose } />
-            { session && session.scope
-                ? (<div className={ styles.mainDiv }>
-                    <div className={ styles.sideNavDiv }>
-                        <SideNavSection
-                            name={ name }
-                            scope={ session.scope }
-                            activeKeySideNav={ activeKeySideNav }
-                            activeKeySideNavSelect={ activeKeySideNavSelect }
-                            setSignOutModalOpen={ setSignOutModalOpen } />
-                    </div>
-                    <div className={ styles.mainPanelDiv }>
-                        { mainPanelComponenet(activeKeySideNav, session) }
-                    </div>
-                </div>)
-                : <Custom500 /> }
-        </div>
-    );
-}
-
-function SideNavSection(prop) {
+export default function SideNavSection(prop) {
 
     const { name, scope, activeKeySideNav, activeKeySideNavSelect, setSignOutModalOpen } = prop;
 

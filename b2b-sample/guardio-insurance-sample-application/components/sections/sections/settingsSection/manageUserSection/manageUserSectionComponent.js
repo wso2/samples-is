@@ -21,9 +21,9 @@ import { Stack, Table } from "rsuite";
 import AddUserButton from "./otherComponents/addUserButton";
 import AddUserComponent from "./otherComponents/addUserComponent";
 import EditUserComponent from "./otherComponents/editUserComponent";
-import styles from "../../../../styles/Settings.module.css";
-import decodeViewUsers from "../../../../util/apiDecode/settings/decodeViewUsers";
-import SettingsTitle from "../../../common/settingsTitle";
+import styles from "../../../../../styles/Settings.module.css";
+import decodeViewUsers from "../../../../../util/apiDecode/settings/decodeViewUsers";
+import SettingsTitle from "../../../../common/settingsTitle";
 
 /**
  * 

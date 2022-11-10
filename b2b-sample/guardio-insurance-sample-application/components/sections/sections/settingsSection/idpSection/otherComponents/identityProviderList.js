@@ -19,7 +19,7 @@
 import React from "react";
 import { PanelGroup } from "rsuite";
 import IdentityProviderDetails from "./identityProviderDetails";
-import styles from "../../../../../styles/idp.module.css";
+import styles from "../../../../../../styles/idp.module.css";
 
 /**
  * 

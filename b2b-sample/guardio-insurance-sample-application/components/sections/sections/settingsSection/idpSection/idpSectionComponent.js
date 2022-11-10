@@ -25,16 +25,16 @@ import { Avatar, Button, Container, FlexboxGrid, Form, Input, InputGroup, Modal,
 import Enterprise from "./data/templates/enterprise-identity-provider.json";
 import Google from "./data/templates/google.json";
 import IdentityProviderList from "./otherComponents/identityProviderList";
-import styles from "../../../../styles/idp.module.css";
+import styles from "../../../../../styles/idp.module.css";
 import decodeCreateIdentityProvider 
-    from "../../../../util/apiDecode/settings/identityProvider/decodeCreateIdentityProvider";
+    from "../../../../../util/apiDecode/settings/identityProvider/decodeCreateIdentityProvider";
 import decodeListAllIdentityProviders 
-    from "../../../../util/apiDecode/settings/identityProvider/decodeListAllIdentityProviders";
+    from "../../../../../util/apiDecode/settings/identityProvider/decodeListAllIdentityProviders";
 import { EMPTY_STRING, ENTERPRISE_ID, GOOGLE_ID, checkIfJSONisEmpty, copyTheTextToClipboard, sizeOfJson } 
-    from "../../../../util/util/common/common";
-import { getCallbackUrl } from "../../../../util/util/idpUtil/idpUtil";
-import { errorTypeDialog, successTypeDialog } from "../../../common/dialog";
-import SettingsTitle from "../../../common/settingsTitle";
+    from "../../../../../util/util/common/common";
+import { getCallbackUrl } from "../../../../../util/util/idpUtil/idpUtil";
+import { errorTypeDialog, successTypeDialog } from "../../../../common/dialog";
+import SettingsTitle from "../../../../common/settingsTitle";
 
 /**
  * 

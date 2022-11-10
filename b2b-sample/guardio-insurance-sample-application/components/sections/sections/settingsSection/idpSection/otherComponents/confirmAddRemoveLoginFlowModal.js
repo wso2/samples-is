@@ -18,13 +18,13 @@
 
 import React, { useState } from "react";
 import { Avatar, Button, Col, Grid, Loader, Modal, Row, useToaster } from "rsuite";
-import stylesSettings from "../../../../../styles/Settings.module.css";
+import stylesSettings from "../../../../../../styles/Settings.module.css";
 import decodePatchApplicationAuthSteps from
-    "../../../../../util/apiDecode/settings/application/decodePatchApplicationAuthSteps";
-import { PatchApplicationAuthMethod } from "../../../../../util/util/applicationUtil/applicationUtil";
-import { checkIfJSONisEmpty } from "../../../../../util/util/common/common";
-import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../util/util/frontendUtil/frontendUtil";
-import { errorTypeDialog, successTypeDialog } from "../../../../common/dialog";
+    "../../../../../../util/apiDecode/settings/application/decodePatchApplicationAuthSteps";
+import { PatchApplicationAuthMethod } from "../../../../../../util/util/applicationUtil/applicationUtil";
+import { checkIfJSONisEmpty } from "../../../../../../util/util/common/common";
+import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../../util/util/frontendUtil/frontendUtil";
+import { errorTypeDialog, successTypeDialog } from "../../../../../common/dialog";
 
 /**
  * 

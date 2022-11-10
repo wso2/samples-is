@@ -21,9 +21,9 @@ import React from "react";
 import { Field } from "react-final-form";
 import { InputGroup, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
-import { selectedTemplateBaesedonTemplateId } from "../../../../../../../util/util/applicationUtil/applicationUtil";
-import { copyTheTextToClipboard } from "../../../../../../../util/util/common/common";
-import HelperText from "../../../../../../common/helperText";
+import { selectedTemplateBaesedonTemplateId } from "../../../../../../../../util/util/applicationUtil/applicationUtil";
+import { copyTheTextToClipboard } from "../../../../../../../../util/util/common/common";
+import HelperText from "../../../../../../../common/helperText";
 
 /**
  * 

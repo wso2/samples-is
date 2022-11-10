@@ -20,16 +20,16 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Field, Form } from "react-final-form";
 import { Button, ButtonToolbar, Divider, Loader, Modal, TagPicker, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
-import stylesSettings from "../../../../../styles/Settings.module.css";
-import styles from "../../../../../styles/util.module.css";
-import decodeEditUser from "../../../../../util/apiDecode/settings/decodeEditUser";
+import stylesSettings from "../../../../../../styles/Settings.module.css";
+import styles from "../../../../../../styles/util.module.css";
+import decodeEditUser from "../../../../../../util/apiDecode/settings/decodeEditUser";
 import decodEditRolesToAddOrRemoveUser
-    from "../../../../../util/apiDecode/settings/role/decodEditRolesToAddOrRemoveUser";
-import decodeListAllRoles from "../../../../../util/apiDecode/settings/role/decodeListAllRoles";
-import decodeUserRole from "../../../../../util/apiDecode/settings/role/decodeUserRole";
-import { checkIfJSONisEmpty } from "../../../../../util/util/common/common";
-import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../util/util/frontendUtil/frontendUtil";
-import { errorTypeDialog, successTypeDialog, warningTypeDialog } from "../../../../common/dialog";
+    from "../../../../../../util/apiDecode/settings/role/decodEditRolesToAddOrRemoveUser";
+import decodeListAllRoles from "../../../../../../util/apiDecode/settings/role/decodeListAllRoles";
+import decodeUserRole from "../../../../../../util/apiDecode/settings/role/decodeUserRole";
+import { checkIfJSONisEmpty } from "../../../../../../util/util/common/common";
+import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../../util/util/frontendUtil/frontendUtil";
+import { errorTypeDialog, successTypeDialog, warningTypeDialog } from "../../../../../common/dialog";
 
 /**
  * 
@@ -282,7 +282,7 @@ export default function EditUserComponent(prop) {
                                                 name="roles"
                                                 render={ ({ input, meta }) => (
                                                     <FormSuite.Group controlId="role">
-                                                        <FormSuite.ControlLabel>Role Management</FormSuite.ControlLabel>
+                                                        <FormSuite.ControlLabel>Role Assignment</FormSuite.ControlLabel>
                                                         <FormSuite.Control
                                                             { ...input }
                                                             accepter={ TagPicker }

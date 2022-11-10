@@ -17,7 +17,7 @@
  */
 
 import React from "react";
-import styles from "../../../../../../styles/idp.module.css";
+import styles from "../../../../../../../styles/idp.module.css";
 
 /**
  * 

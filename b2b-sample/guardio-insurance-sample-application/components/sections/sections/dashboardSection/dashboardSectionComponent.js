@@ -21,9 +21,9 @@ import { Panel } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
 import LatestNewsComponent from "./otherComponents/latestNewsComponent";
 import UserDetails from "./otherComponents/userDetails";
-import styles from "../../../styles/Settings.module.css";
-import decodeMe from "../../../util/apiDecode/dashboard/decodeMe";
-import LogoComponent from "../../common/logo/logoComponent";
+import styles from "../../../../styles/Settings.module.css";
+import decodeMe from "../../../../util/apiDecode/dashboard/decodeMe";
+import LogoComponent from "../../../common/logo/logoComponent";
 
 /**
  * 

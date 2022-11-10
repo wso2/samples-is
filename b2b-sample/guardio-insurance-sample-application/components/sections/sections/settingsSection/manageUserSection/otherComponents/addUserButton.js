@@ -18,11 +18,11 @@
 
 import React, { useCallback, useEffect, useState } from "react";
 import { Button } from "rsuite";
-import decodeGetApplication from "../../../../../util/apiDecode/settings/application/decodeGetApplication";
+import decodeGetApplication from "../../../../../../util/apiDecode/settings/application/decodeGetApplication";
 import decodeListCurrentApplication
-    from "../../../../../util/apiDecode/settings/application/decodeListCurrentApplication";
-import { checkIfBasicAvailableinAuthSequence } from "../../../../../util/util/applicationUtil/applicationUtil";
-import { checkIfJSONisEmpty } from "../../../../../util/util/common/common";
+    from "../../../../../../util/apiDecode/settings/application/decodeListCurrentApplication";
+import { checkIfBasicAvailableinAuthSequence } from "../../../../../../util/util/applicationUtil/applicationUtil";
+import { checkIfJSONisEmpty } from "../../../../../../util/util/common/common";
 
 export default function AddUserButton(prop) {
 
