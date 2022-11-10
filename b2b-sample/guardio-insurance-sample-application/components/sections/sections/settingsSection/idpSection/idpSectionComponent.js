@@ -35,6 +35,7 @@ import { EMPTY_STRING, ENTERPRISE_ID, GOOGLE_ID, checkIfJSONisEmpty, copyTheText
 import { getCallbackUrl } from "../../../../../util/util/idpUtil/idpUtil";
 import { errorTypeDialog, successTypeDialog } from "../../../../common/dialog";
 import SettingsTitle from "../../../../common/settingsTitle";
+import EmptySettings from "../../../../common/emptySettings";
 
 /**
  * 
@@ -175,8 +176,11 @@ export default function IdpSectionComponent(prop) {
                         justify={ idpList.length === 0 ? "center" : "start" }
                         align={ idpList.length === 0 ? "middle" : "top" }>
                         { idpList.length === 0
-                            ? (<EmptyIdentityProviderList
-                                onAddIdentityProviderClick={ onAddIdentityProviderClick }
+                            ? (<EmptySettings
+                                bodyString = "There are no identity providers available at the moment."
+                                buttonString = "Add Identity Provider"
+                                icon = {<AppSelectIcon style={{ opacity: .2 }} width="150px" height="150px" />}
+                                onAddButtonClick={ onAddIdentityProviderClick }
                             />)
                             : (<IdentityProviderList
                                 fetchAllIdPs={ fetchAllIdPs }
@@ -275,34 +279,6 @@ const AddIdentityProviderModal = (prop) => {
                 </div>
             </Modal.Body>
         </Modal>
-    );
-
-};
-
-/**
- * 
- * @param prop - onAddIdentityProviderClick (function to open add idp modal)
- * 
- * @returns The componet to show when there is no idp's.
- */
-const EmptyIdentityProviderList = (prop) => {
-
-    const { onAddIdentityProviderClick } = prop;
-
-    return (
-        <Stack alignItems="center" direction="column">
-            <AppSelectIcon style={ { opacity: .2 } } width="150px" height="150px" />
-            <p style={ { fontSize: 14, marginTop: "20px" } }>
-                There are no identity providers available at the moment.
-            </p>
-            <Button
-                appearance="primary"
-                onClick={ onAddIdentityProviderClick }
-                size="md"
-                style={ { marginTop: "12px" } }>
-                Add Identity Provider
-            </Button>
-        </Stack>
     );
 
 };

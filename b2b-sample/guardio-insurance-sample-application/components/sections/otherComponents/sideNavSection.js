@@ -24,6 +24,7 @@ import "rsuite/dist/rsuite.min.css";
 import styles from "../../../styles/Settings.module.css";
 import { hideBasedOnScopes } from "../../../util/util/frontendUtil/frontendUtil";
 import LogoComponent from "../../common/logo/logoComponent";
+import sideNavConfig from "../data/sideNav.json";
 
 /**
  * 
@@ -37,43 +38,65 @@ export default function SideNavSection(prop) {
 
     const signOutOnClick = () => setSignOutModalOpen(true);
 
+    const getIcon = (iconString) => {
+        switch (iconString) {
+            case "DashboardIcon":
+
+                return (<DashboardIcon />);
+            case "GearCircleIcon":
+
+                return (<GearCircleIcon />);
+            default:
+                break;
+        }
+    }
+
     return (
-        <Sidenav appearance="inverse" className={ styles.sideNav } defaultOpenKeys={ [ "3", "4" ] }>
+        <Sidenav appearance="inverse" className={styles.sideNav} defaultOpenKeys={["3", "4"]}>
             <Sidenav.Header>
-                <div style={ { marginBottom: "25px", marginTop: "35px" } }>
-                    <LogoComponent imageSize="small" name={ name } white={ true } />
+                <div style={{ marginBottom: "25px", marginTop: "35px" }}>
+                    <LogoComponent imageSize="small" name={name} white={true} />
                 </div>
             </Sidenav.Header>
             <Sidenav.Body>
-                <Nav activeKey={ activeKeySideNav }>
-                    <Nav.Item
-                        eventKey="1"
-                        icon={ <DashboardIcon /> }
-                        onSelect={ (eventKey) => activeKeySideNavSelect(eventKey) }>
-                        Dashboard
-                    </Nav.Item>
-                    <Nav.Menu
-                        eventKey="2"
-                        title="Settings"
-                        icon={ <GearCircleIcon /> }
-                        style={ hideBasedOnScopes(scope) }>
-                        <Nav.Item
-                            eventKey="2-1"
-                            onSelect={ (eventKey) => activeKeySideNavSelect(eventKey) }>
-                            Manage Users</Nav.Item>
-                        <Nav.Item
-                            eventKey="2-2"
-                            onSelect={ (eventKey) => activeKeySideNavSelect(eventKey) }>
-                            Role Management</Nav.Item>
-                        <Nav.Item
-                            eventKey="2-3"
-                            onSelect={ (eventKey) => activeKeySideNavSelect(eventKey) }>
-                            Identity Providers</Nav.Item>
-                    </Nav.Menu>
+                <Nav activeKey={activeKeySideNav}>
+                    {
+                        sideNavConfig.items.map((item) => {
+
+                            if (item.items) {
+                                return (
+                                    <Nav.Menu
+                                        eventKey={item.eventKey}
+                                        title={item.title}
+                                        icon={getIcon(item.icon)}
+                                        style={item.hideBasedOnScope ? hideBasedOnScopes(scope) : {}}>
+                                        {
+                                            item.items.map((item) =>
+                                                <Nav.Item
+                                                    eventKey={item.eventKey}
+                                                    onSelect={(eventKey) => activeKeySideNavSelect(eventKey)}>
+                                                    {item.title}
+                                                </Nav.Item>
+                                            )
+                                        }
+                                    </Nav.Menu>
+                                )
+                            } else {
+                                return (
+                                    <Nav.Item
+                                        eventKey={item.eventKey}
+                                        icon={getIcon(item.icon)}
+                                        onSelect={(eventKey) => activeKeySideNavSelect(eventKey)}>
+                                        {item.title}
+                                    </Nav.Item>
+                                )
+                            }
+                        })
+                    }
                 </Nav>
             </Sidenav.Body>
-            <div className={ styles.nextButtonDiv }>
-                <Button size="lg" appearance="default" onClick={ signOutOnClick }>Sign Out</Button>
+            <div className={styles.nextButtonDiv}>
+                <Button size="lg" appearance="default" onClick={signOutOnClick}>Sign Out</Button>
             </div>
         </Sidenav>
     );

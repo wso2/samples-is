@@ -16,19 +16,16 @@
  * under the License.
  */
 
-import DashboardIcon from "@rsuite/icons/legacy/Dashboard";
-import GearCircleIcon from "@rsuite/icons/legacy/GearCircle";
 import React, { useState } from "react";
-import { Button, Nav, Sidenav } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
+import Custom500 from "../../pages/500";
+import styles from "../../styles/Settings.module.css";
+import SignOutModal from "../common/signOutModal";
+import SideNavSection from "./otherComponents/sideNavSection";
 import DashboardSectionComponent from "./sections/dashboardSection/dashboardSectionComponent";
 import IdpSectionComponent from "./sections/settingsSection/idpSection/idpSectionComponent";
 import ManageUserSectionComponent from "./sections/settingsSection/manageUserSection/manageUserSectionComponent";
-import Custom500 from "../../pages/500";
-import styles from "../../styles/Settings.module.css";
-import { hideBasedOnScopes } from "../../util/util/frontendUtil/frontendUtil";
-import LogoComponent from "../common/logo/logoComponent";
-import SignOutModal from "../common/signOutModal";
+import RoleManagementSectionComponent from "./sections/settingsSection/roleManagementSection/roleManagementSectionComponent";
 
 /**
  * 
@@ -40,20 +37,23 @@ export default function Home(prop) {
 
     const { name, orgId, session } = prop;
 
-    const [ activeKeySideNav, setActiveKeySideNav ] = useState("1");
-    const [ signOutModalOpen, setSignOutModalOpen ] = useState(false);
+    const [activeKeySideNav, setActiveKeySideNav] = useState("1");
+    const [signOutModalOpen, setSignOutModalOpen] = useState(false);
 
     const mainPanelComponenet = (activeKey) => {
         switch (activeKey) {
             case "1":
 
-                return <DashboardSectionComponent orgName={ name } orgId={ orgId } session={ session } />;
+                return <DashboardSectionComponent orgName={name} orgId={orgId} session={session} />;
             case "2-1":
 
-                return <ManageUserSectionComponent orgName={ name } orgId={ orgId } session={ session } />;
+                return <ManageUserSectionComponent orgName={name} orgId={orgId} session={session} />;
+            case "2-2":
+
+                return <RoleManagementSectionComponent orgName={name} orgId={orgId} session={session} />;
             case "2-3":
 
-                return <IdpSectionComponent orgName={ name } orgId={ orgId } session={ session } />;
+                return <IdpSectionComponent orgName={name} orgId={orgId} session={session} />;
         }
     };
 
@@ -67,70 +67,22 @@ export default function Home(prop) {
 
     return (
         <div>
-            <SignOutModal session={ session } open={ signOutModalOpen } onClose={ signOutModalClose } />
-            { session && session.scope
-                ? (<div className={ styles.mainDiv }>
-                    <div className={ styles.sideNavDiv }>
+            <SignOutModal session={session} open={signOutModalOpen} onClose={signOutModalClose} />
+            {session && session.scope
+                ? (<div className={styles.mainDiv}>
+                    <div className={styles.sideNavDiv}>
                         <SideNavSection
-                            name={ name }
-                            scope={ session.scope }
-                            activeKeySideNav={ activeKeySideNav }
-                            activeKeySideNavSelect={ activeKeySideNavSelect }
-                            setSignOutModalOpen={ setSignOutModalOpen } />
+                            name={name}
+                            scope={session.scope}
+                            activeKeySideNav={activeKeySideNav}
+                            activeKeySideNavSelect={activeKeySideNavSelect}
+                            setSignOutModalOpen={setSignOutModalOpen} />
                     </div>
-                    <div className={ styles.mainPanelDiv }>
-                        { mainPanelComponenet(activeKeySideNav, session) }
+                    <div className={styles.mainPanelDiv}>
+                        {mainPanelComponenet(activeKeySideNav, session)}
                     </div>
                 </div>)
-                : <Custom500 /> }
+                : <Custom500 />}
         </div>
-    );
-}
-
-function SideNavSection(prop) {
-
-    const { name, scope, activeKeySideNav, activeKeySideNavSelect, setSignOutModalOpen } = prop;
-
-    const signOutOnClick = () => setSignOutModalOpen(true);
-
-    return (
-        <Sidenav appearance="inverse" className={ styles.sideNav } defaultOpenKeys={ [ "3", "4" ] }>
-            <Sidenav.Header>
-                <div style={ { marginBottom: "25px", marginTop: "35px" } }>
-                    <LogoComponent imageSize="small" name={ name } white={ true } />
-                </div>
-            </Sidenav.Header>
-            <Sidenav.Body>
-                <Nav activeKey={ activeKeySideNav }>
-                    <Nav.Item
-                        eventKey="1"
-                        icon={ <DashboardIcon /> }
-                        onSelect={ (eventKey) => activeKeySideNavSelect(eventKey) }>
-                        Dashboard
-                    </Nav.Item>
-                    <Nav.Menu
-                        eventKey="2"
-                        title="Settings"
-                        icon={ <GearCircleIcon /> }
-                        style={ hideBasedOnScopes(scope) }>
-                        <Nav.Item
-                            eventKey="2-1"
-                            onSelect={ (eventKey) => activeKeySideNavSelect(eventKey) }>
-                            Manage Users</Nav.Item>
-                        <Nav.Item
-                            eventKey="2-2"
-                            onSelect={ (eventKey) => activeKeySideNavSelect(eventKey) }>
-                            Role Management</Nav.Item>
-                        <Nav.Item
-                            eventKey="2-3"
-                            onSelect={ (eventKey) => activeKeySideNavSelect(eventKey) }>
-                            Identity Providers</Nav.Item>
-                    </Nav.Menu>
-                </Nav>
-            </Sidenav.Body>
-            <div className={ styles.nextButtonDiv }>
-                <Button size="lg" appearance="default" onClick={ signOutOnClick }>Sign Out</Button>
-            </div>
-        </Sidenav>
     );
 }
