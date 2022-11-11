@@ -23,6 +23,7 @@ import decodeGetRole from "../../../../../../util/apiDecode/settings/role/decode
 import { selectedTemplateBaesedonTemplateId } from "../../../../../../util/util/applicationUtil/applicationUtil";
 import AccordianItemHeader from "../../../../../common/accordianItemHeader";
 import JsonDisplay from "../../../../../common/jsonDisplay";
+import General from "./roleItemDetailsSection/general";
 
 /**
  * 
@@ -53,9 +54,9 @@ export default function RoleItem(prop) {
 
     const roleItemDetailsComponent = (activeKey) => {
         switch (activeKey) {
-            // case "1":
+            case "1":
 
-            //     return <General session={session} idpDetails={idpDetails} fetchData={fetchData} />;
+                return <General session={session} roleDetails={roleDetails} fetchData={fetchData} />
             // case "2":
 
             //     return <Settings session={session} idpDetails={idpDetails} />;
