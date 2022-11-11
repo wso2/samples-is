@@ -29,7 +29,7 @@ function getRolesThatNeedToRemoveUser(initRoleList, roleList) {
 
 async function getRoleDetailsForAdd(session, userId, initRoleList, roleList) {
     const rolesUriList = getRolesThatNeedToAddUser(initRoleList, roleList);
-    let x = [];
+
     await rolesUriList.forEach(async (uri) => {
         decodePatchRole(session, uri, PatchMethod.ADD, "users", [userId]);
     });
@@ -37,13 +37,21 @@ async function getRoleDetailsForAdd(session, userId, initRoleList, roleList) {
 
 async function getRoleDetailsForRemove(session, userId, initRoleList, roleList) {
     const rolesUriList = getRolesThatNeedToRemoveUser(initRoleList, roleList);
-    let x = [];
+
     await rolesUriList.forEach(async (uri) => {
         decodePatchRole(session, uri, PatchMethod.REMOVE, "users", userId);
     });
 }
 
-
+/**
+ * 
+ * @param session - session
+ * @param userId - id of the user
+ * @param initRoleList - inital list of roles assigned for the user
+ * @param roleList - current list of roles assigned for the user
+ * 
+ * @returns - `true` if the operation is successfull, else `false`
+ */
 export default async function decodEditRolesToAddOrRemoveUser(session, userId, initRoleList, roleList) {
 
     try {

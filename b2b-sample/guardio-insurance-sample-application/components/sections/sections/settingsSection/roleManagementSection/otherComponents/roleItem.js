@@ -20,6 +20,7 @@ import CodeIcon from "@rsuite/icons/Code";
 import React, { useCallback, useEffect, useState } from "react";
 import { Nav, Panel } from "rsuite";
 import General from "./roleItemDetailsSection/general";
+import Users from "./roleItemDetailsSection/users";
 import decodeGetRole from "../../../../../../util/apiDecode/settings/role/decodeGetRole";
 import AccordianItemHeader from "../../../../../common/accordianItemHeader";
 import JsonDisplay from "../../../../../common/jsonDisplay";
@@ -56,9 +57,9 @@ export default function RoleItem(prop) {
             case "1":
 
                 return <General session={ session } roleDetails={ roleDetails } fetchData={ fetchData } />;
-                // case "2":
+            case "3":
 
-            //     return <Settings session={session} idpDetails={idpDetails} />;
+                return <Users session={ session } roleDetails={ roleDetails } fetchData={ fetchData } />;
             case "4":
 
                 return <JsonDisplay jsonObject={ roleDetails } />;
@@ -90,6 +91,12 @@ export default function RoleItem(prop) {
     );
 }
 
+/**
+ * 
+ * @param prop - `activeKeyNav`, `activeKeyNavSelect`
+ * 
+ * @returns navigation bar of role item section
+ */
 function RoleItemNav(prop) {
 
     const { activeKeyNav, activeKeyNavSelect } = prop;
@@ -109,13 +116,13 @@ function RoleItemNav(prop) {
                     eventKey="2"
                     onSelect={(eventKey) => activeKeyNavSelect(eventKey)}>
                     Permissions
-                </Nav.Item>
+                </Nav.Item> */ }
 
                 <Nav.Item
                     eventKey="3"
-                    onSelect={(eventKey) => activeKeyNavSelect(eventKey)}>
+                    onSelect={ (eventKey) => activeKeyNavSelect(eventKey) }>
                     Users
-                </Nav.Item> */ }
+                </Nav.Item>
 
                 <div style={ { flexGrow: "1" } }></div>
 

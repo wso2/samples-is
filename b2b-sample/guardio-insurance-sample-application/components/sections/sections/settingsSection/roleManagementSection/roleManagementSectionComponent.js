@@ -19,7 +19,6 @@
 import PeoplesIcon from "@rsuite/icons/Peoples";
 import React, { useCallback, useEffect, useState } from "react";
 import { Container } from "rsuite";
-import CreateRoleButton from "./otherComponents/createRoleButton";
 import RolesList from "./otherComponents/rolesList";
 import decodeListAllRoles from "../../../../../util/apiDecode/settings/role/decodeListAllRoles";
 import EmptySettings from "../../../../common/emptySettings";
@@ -63,7 +62,7 @@ export default function RoleManagementSectionComponent(prop) {
             <SettingsTitle
                 title="Role Management"
                 subtitle="Manage organization roles here.">
-                {/* <CreateRoleButton /> */}
+                { /* <CreateRoleButton /> */ }
             </SettingsTitle>
 
             {
