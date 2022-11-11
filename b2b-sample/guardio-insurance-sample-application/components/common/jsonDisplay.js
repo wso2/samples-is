@@ -29,6 +29,6 @@ export default function JsonDisplay(prop) {
     const { jsonObject } = prop;
 
     return (
-        <pre className={{maxWidth: "50vw"}}> {JSON.stringify(jsonObject, null, 2)}</pre>
+        <pre style={{maxWidth: "50vw"}}> {JSON.stringify(jsonObject, null, 2)}</pre>
     );
 }

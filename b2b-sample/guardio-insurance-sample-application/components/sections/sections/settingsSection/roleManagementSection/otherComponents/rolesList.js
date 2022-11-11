@@ -29,7 +29,7 @@ import RoleItem from "./roleItem";
  */
 export default function RolesList(prop) {
 
-    const { rolesList } = prop;
+    const { session ,rolesList } = prop;
 
     return (
         <FlexboxGrid
@@ -39,7 +39,7 @@ export default function RolesList(prop) {
             <div className={styles.idp__list}>
                 <PanelGroup accordion bordered>
                     {rolesList.map(( role ) => (
-                        <RoleItem id={role.id} name={role.displayName}/>
+                        <RoleItem session={session} id={role.id} roleUri={role.meta.location}/>
                     ))}
                 </PanelGroup>
             </div>

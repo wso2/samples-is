@@ -102,6 +102,12 @@ export default function IdentityProviderDetails(prop) {
     );
 }
 
+/**
+ * 
+ * @param {*} prop {`idpDetails`, `activeKeyNav`, `activeKeyNavSelect`}
+ * 
+ * @returns navigation component of idp details
+ */
 function IdentityProviderDetailsNav(prop) {
 
     const { idpDetails, activeKeyNav, activeKeyNavSelect } = prop;

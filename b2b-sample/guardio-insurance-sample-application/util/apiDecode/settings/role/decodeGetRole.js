@@ -25,7 +25,7 @@ export default async function decodeGetRole(session, roleUri) {
     try {
         const res = await commonDecode(() => callGetRole(session, roleUri), null);
 
-        return res.Resources;
+        return res;
     } catch (err) {
 
         return null;

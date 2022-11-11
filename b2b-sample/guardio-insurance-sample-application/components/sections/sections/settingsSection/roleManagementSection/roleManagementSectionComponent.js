@@ -49,8 +49,6 @@ export default function RoleManagementSectionComponent(prop) {
 
         const res = await decodeListAllRoles(session);
 
-        console.log(res);
-
         if (res) {
             setRolesList(res);
         } else {
@@ -74,7 +72,7 @@ export default function RoleManagementSectionComponent(prop) {
 
             {
                 rolesList
-                    ? <RolesList rolesList={rolesList} />
+                    ? <RolesList session={session} rolesList={rolesList} />
                     : <EmptySettings
                         bodyString="There are no roles created for the organization."
                         buttonString="Create role"

@@ -17,8 +17,9 @@
  */
 
 import CodeIcon from "@rsuite/icons/Code";
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { Nav, Panel, Stack } from "rsuite";
+import decodeGetRole from "../../../../../../util/apiDecode/settings/role/decodeGetRole";
 import { selectedTemplateBaesedonTemplateId } from "../../../../../../util/util/applicationUtil/applicationUtil";
 import AccordianItemHeader from "../../../../../common/accordianItemHeader";
 import JsonDisplay from "../../../../../common/jsonDisplay";
@@ -31,59 +32,68 @@ import JsonDisplay from "../../../../../common/jsonDisplay";
  */
 export default function RoleItem(prop) {
 
-    const { session, id, name } = prop;
+    const { session, id, roleUri } = prop;
 
-    const [idpDetails, setIdpDetails] = useState({});
+    const [roleDetails, setRoleDetails] = useState({});
     const [activeKeyNav, setActiveKeyNav] = useState("1");
 
-    // const fetchData = useCallback(async () => {
-    //     const res = await decodeGetDetailedIdentityProvider(session, id);
+    const fetchData = useCallback(async () => {
+        const res = await decodeGetRole(session, roleUri);
+        setRoleDetails(res);
+    }, [session, roleUri]);
 
-    //     setIdpDetails(res);
-    // }, [session, id]);
+    useEffect(() => {
+        fetchData();
+        console.log(roleDetails);
+    }, [fetchData]);
 
-    // useEffect(() => {
-    //     fetchData();
-    // }, [fetchData]);
+    const activeKeyNavSelect = (eventKey) => {
+        setActiveKeyNav(eventKey);
+    };
 
-    // const activeKeyNavSelect = (eventKey) => {
-    //     setActiveKeyNav(eventKey);
-    // };
+    const roleItemDetailsComponent = (activeKey) => {
+        switch (activeKey) {
+            // case "1":
+
+            //     return <General session={session} idpDetails={idpDetails} fetchData={fetchData} />;
+            // case "2":
+
+            //     return <Settings session={session} idpDetails={idpDetails} />;
+            case "4":
+
+                return <JsonDisplay jsonObject={roleDetails} />;
+        }
+    };
+
 
     return (
 
-        idpDetails
+        roleDetails
             ? (<Panel
                 header={
                     <AccordianItemHeader
-                    title={name}
-                    description = {`Organization role ${name} details`}/>
+                        title={roleDetails.displayName}
+                        description={`Organization role ${roleDetails.displayName} details`} />
                 }
                 eventKey={id}
                 id={id}>
                 <div style={{ marginLeft: "25px", marginRight: "25px" }}>
-                    <Stack direction="column" alignItems="stretch">
-                        as
-                    </Stack>
+                    <RoleItemNav
+                        activeKeyNav={activeKeyNav}
+                        roleDetails={roleDetails}
+                        activeKeyNavSelect={activeKeyNavSelect} />
+                    <div>
+                        {roleItemDetailsComponent(activeKeyNav)}
+                    </div>
                 </div>
             </Panel>)
             : null
     );
 }
 
-function IdentityProviderDetailsNav(prop) {
+function RoleItemNav(prop) {
 
-    const { idpDetails, activeKeyNav, activeKeyNavSelect } = prop;
-
-    const templateIdCheck = () => {
-        let selectedTemplate = selectedTemplateBaesedonTemplateId(idpDetails.templateId);
-
-        if (selectedTemplate) {
-            return true;
-        } else {
-            return false;
-        }
-    };
+    const { roleDetails, activeKeyNav, activeKeyNavSelect } = prop;
 
     return (
         <Nav appearance="subtle" activeKey={activeKeyNav} style={{ marginBottom: 10, marginTop: 15 }}>
@@ -96,26 +106,27 @@ function IdentityProviderDetailsNav(prop) {
                     eventKey="1"
                     onSelect={(eventKey) => activeKeyNavSelect(eventKey)}>General</Nav.Item>
 
-                {
-                    templateIdCheck()
-                        ? (<Nav.Item
-                            eventKey="2"
-                            onSelect={(eventKey) => activeKeyNavSelect(eventKey)}>
-                            Settings
-                        </Nav.Item>)
-                        : null
-                }
+                <Nav.Item
+                    eventKey="2"
+                    onSelect={(eventKey) => activeKeyNavSelect(eventKey)}>
+                    Permissions
+                </Nav.Item>
+
+                <Nav.Item
+                    eventKey="3"
+                    onSelect={(eventKey) => activeKeyNavSelect(eventKey)}>
+                    Users
+                </Nav.Item>
 
                 <div style={{ flexGrow: "1" }}></div>
 
                 <Nav.Item
-                    eventKey="3"
+                    eventKey="4"
                     onSelect={(eventKey) => activeKeyNavSelect(eventKey)}
                     icon={<CodeIcon />}>
                     Developer Tools
                 </Nav.Item>
             </div>
-
         </Nav>
     );
 }
