@@ -82,6 +82,15 @@ function random_rgba() {
     return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
 }
 
+/**
+ * operations that we can do on PATCH methods
+ */
+const PatchMethod = {
+    ADD: "ADD",
+    REMOVE: "REMOVE",
+    REPLACE: "REPLACE"
+};
+
 const GOOGLE_ID = "google-idp";
 const ENTERPRISE_ID = "enterprise-idp";
 const BASIC_ID = "basic-idp";
@@ -93,6 +102,6 @@ const BASIC_AUTHENTICATOR_ID = "BasicAuthenticator";
 
 module.exports = {
     stringIsEmpty, getCurrentDate, copyTheTextToClipboard, checkIfJSONisEmpty, sizeOfJson,random_rgba, 
-    GOOGLE_ID,ENTERPRISE_ID, BASIC_ID, EMPTY_STRING, GOOGLE_AUTHENTICATOR_ID, ENTERPRISE_AUTHENTICATOR_ID, 
-    BASIC_AUTHENTICATOR_ID
+    PatchMethod, GOOGLE_ID,ENTERPRISE_ID, BASIC_ID, EMPTY_STRING, GOOGLE_AUTHENTICATOR_ID, 
+    ENTERPRISE_AUTHENTICATOR_ID, BASIC_AUTHENTICATOR_ID
 };

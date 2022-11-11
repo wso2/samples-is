@@ -28,7 +28,7 @@ import sideNavConfig from "../data/sideNav.json";
 
 /**
  * 
- * @param prop {`name`, `scope`, `activeKeySideNav`, `activeKeySideNavSelect`, `setSignOutModalOpen`}
+ * @param prop - `name`, `scope`, `activeKeySideNav`, `activeKeySideNavSelect`, `setSignOutModalOpen`
  * 
  * @returns side navigation component
  */
@@ -49,54 +49,55 @@ export default function SideNavSection(prop) {
             default:
                 break;
         }
-    }
+    };
 
     return (
-        <Sidenav appearance="inverse" className={styles.sideNav} defaultOpenKeys={["3", "4"]}>
+        <Sidenav appearance="inverse" className={ styles.sideNav } defaultOpenKeys={ [ "3", "4" ] }>
             <Sidenav.Header>
-                <div style={{ marginBottom: "25px", marginTop: "35px" }}>
-                    <LogoComponent imageSize="small" name={name} white={true} />
+                <div style={ { marginBottom: "25px", marginTop: "35px" } }>
+                    <LogoComponent imageSize="small" name={ name } white={ true } />
                 </div>
             </Sidenav.Header>
             <Sidenav.Body>
-                <Nav activeKey={activeKeySideNav}>
+                <Nav activeKey={ activeKeySideNav }>
                     {
                         sideNavConfig.items.map((item) => {
 
                             if (item.items) {
                                 return (
                                     <Nav.Menu
-                                        eventKey={item.eventKey}
-                                        title={item.title}
-                                        icon={getIcon(item.icon)}
-                                        style={item.hideBasedOnScope ? hideBasedOnScopes(scope) : {}}>
+                                        eventKey={ item.eventKey }
+                                        title={ item.title }
+                                        icon={ getIcon(item.icon) }
+                                        style={ item.hideBasedOnScope ? hideBasedOnScopes(scope) : {} }>
                                         {
                                             item.items.map((item) =>
-                                                <Nav.Item
-                                                    eventKey={item.eventKey}
-                                                    onSelect={(eventKey) => activeKeySideNavSelect(eventKey)}>
-                                                    {item.title}
-                                                </Nav.Item>
+                                                (<Nav.Item
+                                                    key={ item.eventKey }
+                                                    eventKey={ item.eventKey }
+                                                    onSelect={ (eventKey) => activeKeySideNavSelect(eventKey) }>
+                                                    { item.title }
+                                                </Nav.Item>)
                                             )
                                         }
                                     </Nav.Menu>
-                                )
+                                );
                             } else {
                                 return (
                                     <Nav.Item
-                                        eventKey={item.eventKey}
-                                        icon={getIcon(item.icon)}
-                                        onSelect={(eventKey) => activeKeySideNavSelect(eventKey)}>
-                                        {item.title}
+                                        eventKey={ item.eventKey }
+                                        icon={ getIcon(item.icon) }
+                                        onSelect={ (eventKey) => activeKeySideNavSelect(eventKey) }>
+                                        { item.title }
                                     </Nav.Item>
-                                )
+                                );
                             }
                         })
                     }
                 </Nav>
             </Sidenav.Body>
-            <div className={styles.nextButtonDiv}>
-                <Button size="lg" appearance="default" onClick={signOutOnClick}>Sign Out</Button>
+            <div className={ styles.nextButtonDiv }>
+                <Button size="lg" appearance="default" onClick={ signOutOnClick }>Sign Out</Button>
             </div>
         </Sidenav>
     );

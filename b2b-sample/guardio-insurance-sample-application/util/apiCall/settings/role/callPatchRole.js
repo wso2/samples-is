@@ -32,7 +32,7 @@ export default async function callPatchUsers(session, roleUri, patchBody) {
 
     try {
         const res = await fetch(
-            `${getHostedUrl()}/api/settings/role/patchUsers?roleUri=${roleUri}`,
+            `${getHostedUrl()}/api/settings/role/patchRole?roleUri=${roleUri}`,
             getInternalApiRequestOptionsWithParam(session, patchBody)
         );
 

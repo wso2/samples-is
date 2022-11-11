@@ -21,16 +21,15 @@ import { Field, Form } from "react-final-form";
 import { Button, ButtonToolbar, Loader, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
 import styles from "../../../../../../../styles/Settings.module.css";
-import decodePatchGeneralSettingsIdp from
-    "../../../../../../../util/apiDecode/settings/identityProvider/decodePatchGeneralSettingsIdp";
-import { checkIfJSONisEmpty } from "../../../../../../../util/util/common/common";
+import decodePatchRole from "../../../../../../../util/apiDecode/settings/role/decodePatchRole";
+import { PatchMethod, checkIfJSONisEmpty } from "../../../../../../../util/util/common/common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../../../util/util/frontendUtil/frontendUtil";
 import { errorTypeDialog, successTypeDialog } from "../../../../../../common/dialog";
 import HelperText from "../../../../../../common/helperText";
 
 /**
  * 
- * @param prop - { `fetchData` - function , `session`, `roleDetails` - Object}
+ * @param prop - `fetchData` - function , `session`, `roleDetails` - Object
  * 
  * @returns The general section of role details
  */
@@ -38,7 +37,7 @@ export default function General(prop) {
 
     const { fetchData, session, roleDetails } = prop;
 
-    const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
+    const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
 
     const toaster = useToaster();
 
@@ -70,57 +69,58 @@ export default function General(prop) {
     };
 
     const onUpdate = async (values, form) => {
+
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
-        decodePatchGeneralSettingsIdp(session, values.name, values.description, idpDetails.id)
+        decodePatchRole(session, roleDetails.meta.location, PatchMethod.REPLACE, "displayName", [ values.name ])
             .then((response) => onDataSubmit(response, form))
             .finally(() => setLoadingDisplay(LOADING_DISPLAY_NONE));
     };
 
     return (
-        <div className={styles.addUserMainDiv}>
+        <div className={ styles.addUserMainDiv }>
 
             <div>
                 <Form
-                    onSubmit={onUpdate}
-                    validate={validate}
-                    initialValues={{
+                    onSubmit={ onUpdate }
+                    validate={ validate }
+                    initialValues={ {
                         name: roleDetails.displayName
-                    }}
-                    render={({ handleSubmit, form, submitting, pristine, errors }) => (
+                    } }
+                    render={ ({ handleSubmit, form, submitting, pristine, errors }) => (
                         <FormSuite
                             layout="vertical"
-                            className={styles.addUserForm}
-                            onSubmit={event => { handleSubmit(event).then(form.restart); }}
+                            className={ styles.addUserForm }
+                            onSubmit={ event => { handleSubmit(event).then(form.restart); } }
                             fluid>
-                            
+
                             <Field
                                 name="name"
-                                render={({ input, meta }) => (
+                                render={ ({ input, meta }) => (
                                     <FormSuite.Group controlId="name">
                                         <FormSuite.ControlLabel>Name</FormSuite.ControlLabel>
 
                                         <FormSuite.Control
-                                            {...input}
+                                            { ...input }
                                         />
 
                                         <HelperText text="The name of the role." />
 
-                                        {meta.error && meta.touched && (<FormSuite.ErrorMessage show={true}  >
-                                            {meta.error}
-                                        </FormSuite.ErrorMessage>)}
+                                        { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true }  >
+                                            { meta.error }
+                                        </FormSuite.ErrorMessage>) }
                                     </FormSuite.Group>
-                                )}
+                                ) }
                             />
 
                             <div className="buttons">
                                 <FormSuite.Group>
                                     <ButtonToolbar>
                                         <Button
-                                            className={styles.addUserButton}
+                                            className={ styles.addUserButton }
                                             size="lg"
                                             appearance="primary"
                                             type="submit"
-                                            disabled={submitting || pristine || !checkIfJSONisEmpty(errors)}>
+                                            disabled={ submitting || pristine || !checkIfJSONisEmpty(errors) }>
                                             Update
                                         </Button>
                                     </ButtonToolbar>
@@ -128,12 +128,12 @@ export default function General(prop) {
 
                             </div>
                         </FormSuite>
-                    )}
+                    ) }
                 />
 
             </div>
 
-            <div style={loadingDisplay}>
+            <div style={ loadingDisplay }>
                 <Loader size="lg" backdrop content="role is updating" vertical />
             </div>
         </div>

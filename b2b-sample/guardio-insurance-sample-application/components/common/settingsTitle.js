@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import React, { Children } from "react";
+import React from "react";
 import { Stack } from "rsuite";
 
 /**
@@ -34,10 +34,10 @@ export default function SettingsTitle(prop) {
             direction="row"
             justifyContent="space-between">
             <Stack direction="column" alignItems="flex-start">
-                <h2>{title}</h2>
-                <p>{subtitle}</p>
+                <h2>{ title }</h2>
+                <p>{ subtitle }</p>
             </Stack>
-            {children}
+            { children }
         </Stack>
 
     );

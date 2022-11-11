@@ -34,8 +34,8 @@ import { EMPTY_STRING, ENTERPRISE_ID, GOOGLE_ID, checkIfJSONisEmpty, copyTheText
     from "../../../../../util/util/common/common";
 import { getCallbackUrl } from "../../../../../util/util/idpUtil/idpUtil";
 import { errorTypeDialog, successTypeDialog } from "../../../../common/dialog";
-import SettingsTitle from "../../../../common/settingsTitle";
 import EmptySettings from "../../../../common/emptySettings";
+import SettingsTitle from "../../../../common/settingsTitle";
 
 /**
  * 
@@ -49,9 +49,9 @@ export default function IdpSectionComponent(prop) {
 
     const toaster = useToaster();
 
-    const [idpList, setIdpList] = useState([]);
-    const [openAddModal, setOpenAddModal] = useState(false);
-    const [selectedTemplate, setSelectedTemplate] = useState(undefined);
+    const [ idpList, setIdpList ] = useState([]);
+    const [ openAddModal, setOpenAddModal ] = useState(false);
+    const [ selectedTemplate, setSelectedTemplate ] = useState(undefined);
 
     const templates = [
         Enterprise,
@@ -60,7 +60,7 @@ export default function IdpSectionComponent(prop) {
 
     useEffect(() => {
         fetchAllIdPs();
-    }, [fetchAllIdPs]);
+    }, [ fetchAllIdPs ]);
 
     const fetchAllIdPs = useCallback(async () => {
 
@@ -76,7 +76,7 @@ export default function IdpSectionComponent(prop) {
             setIdpList(null);
         }
 
-    }, [session]);
+    }, [ session ]);
 
     const onAddIdentityProviderClick = () => {
         setOpenAddModal(true);
@@ -175,13 +175,13 @@ export default function IdpSectionComponent(prop) {
                         ? (<EmptySettings
                             bodyString="There are no identity providers available at the moment."
                             buttonString="Add Identity Provider"
-                            icon={<AppSelectIcon style={{ opacity: .2 }} width="150px" height="150px" />}
-                            onAddButtonClick={onAddIdentityProviderClick}
+                            icon={ <AppSelectIcon style={ { opacity: .2 } } width="150px" height="150px" /> }
+                            onAddButtonClick={ onAddIdentityProviderClick }
                         />)
                         : (<IdentityProviderList
-                            fetchAllIdPs={fetchAllIdPs}
-                            idpList={idpList}
-                            session={session}
+                            fetchAllIdPs={ fetchAllIdPs }
+                            idpList={ idpList }
+                            session={ session }
                         />)
                     : null
             }
@@ -189,24 +189,24 @@ export default function IdpSectionComponent(prop) {
             {
                 openAddModal && (
                     <AddIdentityProviderModal
-                        templates={templates}
-                        onClose={() => setOpenAddModal(false)}
-                        openModal={openAddModal}
-                        onTemplateSelected={(template) => {
+                        templates={ templates }
+                        onClose={ () => setOpenAddModal(false) }
+                        openModal={ openAddModal }
+                        onTemplateSelected={ (template) => {
                             setOpenAddModal(false);
                             setSelectedTemplate(template);
-                        }}
+                        } }
                     />
                 )
             }
             {
                 selectedTemplate && (
                     <IdPCreationModal
-                        onSave={onIdPSave}
-                        onCancel={onCreationDismiss}
-                        openModal={!!selectedTemplate}
-                        template={selectedTemplate}
-                        orgId={session.orgId} />
+                        onSave={ onIdPSave }
+                        onCancel={ onCreationDismiss }
+                        openModal={ !!selectedTemplate }
+                        template={ selectedTemplate }
+                        orgId={ session.orgId } />
                 )
             }
         </Container>
@@ -241,34 +241,34 @@ const AddIdentityProviderModal = (prop) => {
 
     return (
         <Modal
-            open={openModal}
-            onClose={onClose}
-            onBackdropClick={onClose}>
+            open={ openModal }
+            onClose={ onClose }
+            onBackdropClick={ onClose }>
             <Modal.Header>
                 <Modal.Title><b>Select Identity Provider</b></Modal.Title>
                 <p>Choose one of the following identity providers.</p>
             </Modal.Header>
             <Modal.Body>
                 <div>
-                    <div className={styles.idp__template__list}>
-                        {templates.map((template) => {
+                    <div className={ styles.idp__template__list }>
+                        { templates.map((template) => {
 
                             return (
                                 <div
-                                    key={template.id}
-                                    className={styles.idp__template__card}
-                                    onClick={() => onTemplateSelected(template)}>
+                                    key={ template.id }
+                                    className={ styles.idp__template__card }
+                                    onClick={ () => onTemplateSelected(template) }>
                                     <div>
-                                        <h5>{template.name}</h5>
-                                        <small>{template.description}</small>
+                                        <h5>{ template.name }</h5>
+                                        <small>{ template.description }</small>
                                     </div>
                                     <Avatar
-                                        style={{ background: "rgba(255,0,0,0)" }}
-                                        src={`/icons/${resolveIconName(template)}`}
+                                        style={ { background: "rgba(255,0,0,0)" } }
+                                        src={ `/icons/${resolveIconName(template)}` }
                                     />
                                 </div>
                             );
-                        })}
+                        }) }
                     </div>
                 </div>
             </Modal.Body>
@@ -290,7 +290,7 @@ const IdPCreationModal = (prop) => {
 
     const { openModal, onSave, onCancel, template, orgId } = prop;
 
-    const [formValues, setFormValues] = useState({});
+    const [ formValues, setFormValues ] = useState({});
 
     const handleModalClose = () => {
         onCancel();
@@ -311,38 +311,38 @@ const IdPCreationModal = (prop) => {
 
                 return (
                     <GoogleIdentityProvider
-                        formValues={formValues}
-                        onFormValuesChange={setFormValues} />
+                        formValues={ formValues }
+                        onFormValuesChange={ setFormValues } />
                 );
             case ENTERPRISE_ID:
 
                 return (
                     <EnterpriseIdentityProvider
-                        formValues={formValues}
-                        onFormValuesChange={setFormValues} />
+                        formValues={ formValues }
+                        onFormValuesChange={ setFormValues } />
                 );
         }
     };
 
     return (
         <Modal
-            open={openModal}
-            onClose={handleModalClose}
-            onBackdropClick={handleModalClose}
+            open={ openModal }
+            onClose={ handleModalClose }
+            onBackdropClick={ handleModalClose }
             size="md">
             <Modal.Header>
-                <Modal.Title><b>{template.name}</b></Modal.Title>
-                <p>{template.description}</p>
+                <Modal.Title><b>{ template.name }</b></Modal.Title>
+                <p>{ template.description }</p>
             </Modal.Header>
             <Modal.Body>
                 <FlexboxGrid>
-                    <FlexboxGrid.Item colspan={12}>
-                        {resolveTemplateForm()}
+                    <FlexboxGrid.Item colspan={ 12 }>
+                        { resolveTemplateForm() }
                     </FlexboxGrid.Item>
-                    <FlexboxGrid.Item colspan={12}>
+                    <FlexboxGrid.Item colspan={ 12 }>
                         <Panel
                             header={
-                                (<Stack alignItems="center" spacing={10}>
+                                (<Stack alignItems="center" spacing={ 10 }>
                                     <InfoRoundIcon />
                                     <b>Prerequisite</b>
                                 </Stack>)
@@ -354,9 +354,9 @@ const IdPCreationModal = (prop) => {
                             </p>
                             <br />
                             <InputGroup >
-                                <Input readOnly value={getCallbackUrl(orgId)} size="lg" />
+                                <Input readOnly value={ getCallbackUrl(orgId) } size="lg" />
                                 <InputGroup.Button
-                                    onClick={() => copyValueToClipboard(getCallbackUrl(orgId))}>
+                                    onClick={ () => copyValueToClipboard(getCallbackUrl(orgId)) }>
                                     <CopyIcon />
                                 </InputGroup.Button>
                             </InputGroup>
@@ -367,12 +367,12 @@ const IdPCreationModal = (prop) => {
             </Modal.Body>
             <Modal.Footer>
                 <Button
-                    onClick={handleCreate}
+                    onClick={ handleCreate }
                     appearance="primary">
                     Create
                 </Button>
                 <Button
-                    onClick={handleModalClose}
+                    onClick={ handleModalClose }
                     appearance="subtle">
                     Cancel
                 </Button>
@@ -393,7 +393,7 @@ const GoogleIdentityProvider = (prop) => {
     const { onFormValuesChange, formValues } = prop;
 
     return (
-        <Form onChange={onFormValuesChange} formValue={formValues}>
+        <Form onChange={ onFormValuesChange } formValue={ formValues }>
             <Form.Group controlId="application_name">
                 <Form.ControlLabel>Idp Name</Form.ControlLabel>
                 <Form.Control name="application_name" />
@@ -425,7 +425,7 @@ const EnterpriseIdentityProvider = (prop) => {
     const { onFormValuesChange, formValues } = prop;
 
     return (
-        <Form onChange={onFormValuesChange} formValue={formValues}>
+        <Form onChange={ onFormValuesChange } formValue={ formValues }>
             <Form.Group controlId="application_name">
                 <Form.ControlLabel>Idp Name</Form.ControlLabel>
                 <Form.Control name="application_name" />

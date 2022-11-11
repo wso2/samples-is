@@ -18,29 +18,33 @@
 
 import React from "react";
 import { FlexboxGrid, PanelGroup } from "rsuite";
-import styles from "../../../../../../styles/idp.module.css";
 import RoleItem from "./roleItem";
+import styles from "../../../../../../styles/idp.module.css";
 
 /**
  * 
- * @param prop
+ * @param prop - `session`, `roleList`
  *
  * @returns List of all the roles in an organization
  */
 export default function RolesList(prop) {
 
-    const { session ,rolesList } = prop;
+    const { session, rolesList } = prop;
 
     return (
         <FlexboxGrid
-            style={{ height: "60vh", marginTop: "24px", width: "100%" }}
+            style={ { height: "60vh", marginTop: "24px", width: "100%" } }
             justify="start"
             align="top" >
-            <div className={styles.idp__list}>
+            <div className={ styles.idp__list }>
                 <PanelGroup accordion bordered>
-                    {rolesList.map(( role ) => (
-                        <RoleItem session={session} id={role.id} roleUri={role.meta.location}/>
-                    ))}
+                    { rolesList.map((role) => (
+                        <RoleItem
+                            key={ role.id }
+                            session={ session }
+                            id={ role.id }
+                            roleUri={ role.meta.location } />
+                    )) }
                 </PanelGroup>
             </div>
         </FlexboxGrid >

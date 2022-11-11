@@ -20,7 +20,7 @@ import React from "react";
 
 /**
  * 
- * @param prop - { `jsonObject` }
+ * @param prop - `jsonObject` 
  * 
  * @returns The beautified json object visualizer component
  */
@@ -29,6 +29,6 @@ export default function JsonDisplay(prop) {
     const { jsonObject } = prop;
 
     return (
-        <pre style={{maxWidth: "50vw"}}> {JSON.stringify(jsonObject, null, 2)}</pre>
+        <pre style={ { maxWidth: "50vw" } }> { JSON.stringify(jsonObject, null, 2) }</pre>
     );
 }

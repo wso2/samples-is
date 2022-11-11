@@ -16,14 +16,14 @@
  * under the License.
  */
 
-import PeoplesIcon from '@rsuite/icons/Peoples';
+import PeoplesIcon from "@rsuite/icons/Peoples";
 import React, { useCallback, useEffect, useState } from "react";
-import { Container, useToaster } from "rsuite";
-import decodeListAllRoles from '../../../../../util/apiDecode/settings/role/decodeListAllRoles';
+import { Container } from "rsuite";
+import CreateRoleButton from "./otherComponents/createRoleButton";
+import RolesList from "./otherComponents/rolesList";
+import decodeListAllRoles from "../../../../../util/apiDecode/settings/role/decodeListAllRoles";
 import EmptySettings from "../../../../common/emptySettings";
 import SettingsTitle from "../../../../common/settingsTitle";
-import CreateRoleButton from './otherComponents/createRoleButton';
-import RolesList from './otherComponents/rolesList';
 
 /**
  * 
@@ -35,15 +35,11 @@ export default function RoleManagementSectionComponent(prop) {
 
     const { session } = prop;
 
-    const toaster = useToaster();
-
-    const [rolesList, setRolesList] = useState([]);
-    const [openAddModal, setOpenAddModal] = useState(false);
-    const [selectedTemplate, setSelectedTemplate] = useState(undefined);
+    const [ rolesList, setRolesList ] = useState([]);
 
     useEffect(() => {
         fetchAllRoles();
-    }, [fetchAllRoles]);
+    }, [ fetchAllRoles ]);
 
     const fetchAllRoles = useCallback(async () => {
 
@@ -55,11 +51,11 @@ export default function RoleManagementSectionComponent(prop) {
             setRolesList([]);
         }
 
-    }, [session]);
+    }, [ session ]);
 
-    const onAddIdentityProviderClick = () => {
-        setOpenAddModal(true);
-    };
+    // const onAddIdentityProviderClick = () => {
+    //     setOpenAddModal(true);
+    // };
 
     return (
         <Container>
@@ -67,18 +63,18 @@ export default function RoleManagementSectionComponent(prop) {
             <SettingsTitle
                 title="Role Management"
                 subtitle="Manage organization roles here.">
-                <CreateRoleButton />
+                {/* <CreateRoleButton /> */}
             </SettingsTitle>
 
             {
                 rolesList
-                    ? <RolesList session={session} rolesList={rolesList} />
-                    : <EmptySettings
+                    ? <RolesList session={ session } rolesList={ rolesList } />
+                    : (<EmptySettings
                         bodyString="There are no roles created for the organization."
                         buttonString="Create role"
-                        icon={<PeoplesIcon style={{ opacity: .2 }} width="150px" height="150px" />}
-                        onAddButtonClick={onAddIdentityProviderClick}
-                    />
+                        icon={ <PeoplesIcon style={ { opacity: .2 } } width="150px" height="150px" /> }
+                        onAddButtonClick={ ()=>{} }
+                    />)
             }
 
         </Container>
