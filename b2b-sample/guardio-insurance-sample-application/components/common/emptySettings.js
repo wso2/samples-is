@@ -33,7 +33,8 @@ export default function EmptySettings(prop) {
         <FlexboxGrid
             style={ { height: "60vh", marginTop: "24px", width: "100%" } }
             justify="center"
-            align="middle">
+            align="middle"
+        >
             <Stack alignItems="center" direction="column">
                 { icon }
                 <p style={ { fontSize: 14, marginTop: "20px" } }>
