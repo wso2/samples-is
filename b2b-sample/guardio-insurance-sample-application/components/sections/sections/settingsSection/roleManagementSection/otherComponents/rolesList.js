@@ -18,8 +18,9 @@
 
 import React from "react";
 import { FlexboxGrid, PanelGroup } from "rsuite";
-import RoleItem from "./roleItem";
+import RoleItem from "./roleItem/roleItem";
 import styles from "../../../../../../styles/idp.module.css";
+import CreateRoleComponent from "./createRoleComponent/createRoleComponent";
 
 /**
  * 
@@ -36,6 +37,7 @@ export default function RolesList(prop) {
             style={ { height: "60vh", marginTop: "24px", width: "100%" } }
             justify="start"
             align="top" >
+                <CreateRoleComponent />
             <div className={ styles.idp__list }>
                 <PanelGroup accordion bordered>
                     { rolesList.map((role) => (

@@ -20,12 +20,12 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Field, Form } from "react-final-form";
 import { Button, ButtonToolbar, CheckTree, Loader, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
-import styles from "../../../../../../../styles/Settings.module.css";
-import decodePatchRole from "../../../../../../../util/apiDecode/settings/role/decodePatchRole";
-import { PatchMethod } from "../../../../../../../util/util/common/common";
-import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../../../util/util/frontendUtil/frontendUtil";
-import { errorTypeDialog, successTypeDialog } from "../../../../../../common/dialog";
-import orgRolesData from "../../data/orgRolesData.json";
+import styles from "../../../../../../../../styles/Settings.module.css";
+import decodePatchRole from "../../../../../../../../util/apiDecode/settings/role/decodePatchRole";
+import { PatchMethod } from "../../../../../../../../util/util/common/common";
+import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../../../../util/util/frontendUtil/frontendUtil";
+import { errorTypeDialog, successTypeDialog } from "../../../../../../../common/dialog";
+import orgRolesData from "../../../data/orgRolesData.json";
 
 /**
  * 
