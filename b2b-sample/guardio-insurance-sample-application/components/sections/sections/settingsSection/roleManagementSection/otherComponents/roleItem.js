@@ -56,9 +56,6 @@ export default function RoleItem(prop) {
             case "1":
 
                 return <General session={ session } roleDetails={ roleDetails } fetchData={ fetchData } />;
-                // case "2":
-
-            //     return <Settings session={session} idpDetails={idpDetails} />;
             case "4":
 
                 return <JsonDisplay jsonObject={ roleDetails } />;
