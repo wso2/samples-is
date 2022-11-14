@@ -61,11 +61,11 @@ function getPatchBody(patchMethod, path, value) {
 
 /**
  * 
- * @param {*} session - session
- * @param {*} roleUri - uri of the role
- * @param {*} patchMethod - `PatchMethod` value
- * @param {*} path - path variable (`users` | `permission` | `displayName`)
- * @param {*} value - value that need to be updated. If `patchMethod` is `PatchMethod.ADD` then `value` 
+ * @param session - session
+ * @param roleUri - uri of the role
+ * @param patchMethod - `PatchMethod` value
+ * @param path - path variable (`users` | `permission` | `displayName`)
+ * @param value - value that need to be updated. If `patchMethod` is `PatchMethod.ADD` then `value` 
  * should be an `array`
  * 
  * @returns - API return call 

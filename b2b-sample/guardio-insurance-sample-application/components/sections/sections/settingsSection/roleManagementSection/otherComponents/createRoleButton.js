@@ -30,8 +30,7 @@ export default function CreateRoleButton() {
     return (
         <Button
             appearance="primary"
-            size="lg"
-            onClick={ ()=>{} }>
+            size="lg">
             Create Role
         </Button>
     );
