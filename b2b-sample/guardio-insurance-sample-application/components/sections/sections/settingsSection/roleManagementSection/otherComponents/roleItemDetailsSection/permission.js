@@ -37,18 +37,18 @@ export default function Permission(prop) {
 
     const { fetchData, session, roleDetails } = prop;
 
-    const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
-    const [selectedPermissions, setSelectedPermissions] = useState([]);
+    const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
+    const [ selectedPermissions, setSelectedPermissions ] = useState([]);
 
     const toaster = useToaster();
 
     const setInitialPermissions = useCallback(async () => {
         setSelectedPermissions(roleDetails.permissions);
-    }, [roleDetails]);
+    }, [ roleDetails ]);
 
     useEffect(() => {
         setInitialPermissions();
-    }, [setInitialPermissions]);
+    }, [ setInitialPermissions ]);
 
     const onDataSubmit = (response, form) => {
         if (response) {
@@ -69,49 +69,49 @@ export default function Permission(prop) {
     };
 
     return (
-        <div className={styles.addUserMainDiv}>
+        <div className={ styles.addUserMainDiv }>
 
             <div>
                 {
                     selectedPermissions
                         ? (<Form
-                            onSubmit={onUpdate}
-                            initialValues={{
+                            onSubmit={ onUpdate }
+                            initialValues={ {
                                 permissions: selectedPermissions
-                            }}
-                            render={({ handleSubmit, form, submitting, pristine }) => (
+                            } }
+                            render={ ({ handleSubmit, form, submitting, pristine }) => (
                                 <FormSuite
                                     layout="vertical"
-                                    className={styles.addUserForm}
-                                    onSubmit={event => { handleSubmit(event).then(form.restart); }}
+                                    className={ styles.addUserForm }
+                                    onSubmit={ event => { handleSubmit(event).then(form.restart); } }
                                     fluid>
 
                                     <Field
                                         name="permissions"
-                                        render={({ input }) => (
+                                        render={ ({ input }) => (
                                             <FormSuite.Group controlId="checkbox">
                                                 <FormSuite.Control
-                                                    {...input}
+                                                    { ...input }
                                                     name="checkbox"
-                                                    accepter={CheckTree}
-                                                    data={orgRolesData}
+                                                    accepter={ CheckTree }
+                                                    data={ orgRolesData }
                                                     defaultExpandAll
                                                     cascade
                                                 />
                                                 <FormSuite.HelpText>Assign permission for the role</FormSuite.HelpText>
                                             </FormSuite.Group>
-                                        )}
+                                        ) }
                                     />
 
                                     <div className="buttons">
                                         <FormSuite.Group>
                                             <ButtonToolbar>
                                                 <Button
-                                                    className={styles.addUserButton}
+                                                    className={ styles.addUserButton }
                                                     size="lg"
                                                     appearance="primary"
                                                     type="submit"
-                                                    disabled={submitting || pristine}>
+                                                    disabled={ submitting || pristine }>
                                                     Update
                                                 </Button>
                                             </ButtonToolbar>
@@ -119,14 +119,14 @@ export default function Permission(prop) {
 
                                     </div>
                                 </FormSuite>
-                            )}
+                            ) }
                         />)
                         : null
                 }
 
             </div>
 
-            <div style={loadingDisplay}>
+            <div style={ loadingDisplay }>
                 <Loader size="lg" backdrop content="role is updating" vertical />
             </div>
         </div>
