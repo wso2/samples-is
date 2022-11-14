@@ -19,8 +19,13 @@
 import React, { useState } from "react";
 import { Modal, Panel, Steps } from "rsuite";
 import styles from "../../../../../../../styles/Settings.module.css";
+import General from "./createRoleComponentInner/general";
+import Permission from "./createRoleComponentInner/permission";
+import Users from "./createRoleComponentInner/users";
 
-export default function CreateRoleComponent() {
+export default function CreateRoleComponent(prop) {
+
+    const { session } = prop;
 
     const [step, setStep] = useState(0);
 
@@ -32,20 +37,20 @@ export default function CreateRoleComponent() {
 
     const onPrevious = () => onChange(step - 1);
 
-    const roleItemDetailsComponent = (activeKey) => {
-        switch (activeKey) {
-            case "1":
+    const craeteRoleItemDetailsComponent = (currentStep) => {
+        console.log(currentStep);
+        switch (currentStep) {
+            case 0:
 
-                return <General session={ session } roleDetails={ roleDetails } fetchData={ fetchData } />;
-            case "2":
+                return <General onNext={onNext} />;
 
-                return <Permission session={ session } roleDetails={ roleDetails } fetchData={ fetchData } />;
-            case "3":
+            case 1:
 
-                return <Users session={ session } roleDetails={ roleDetails } fetchData={ fetchData } />;
-            case "4":
+                return <Permission onNext={onNext} onPrevious={onPrevious} />;
 
-                return <JsonDisplay jsonObject={ roleDetails } />;
+            case 2:
+
+                return <Users session={session} onNext={onNext} onPrevious={onPrevious} />;
         }
     };
 
@@ -67,7 +72,7 @@ export default function CreateRoleComponent() {
                 <div className={styles.addUserMainDiv}>
                     <Panel bordered>
 
-                        sdads
+                        {craeteRoleItemDetailsComponent(step)}
 
                     </Panel>
                 </div>

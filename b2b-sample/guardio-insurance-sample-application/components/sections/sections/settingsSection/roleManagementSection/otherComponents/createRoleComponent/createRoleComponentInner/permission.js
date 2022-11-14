@@ -1,0 +1,138 @@
+/**
+ * Copyright (c) 2022, WSO2 LLC. (https://www.wso2.com). All Rights Reserved.
+ *
+ * WSO2 LLC. licenses this file to you under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+import React, { useCallback, useEffect, useState } from "react";
+import { Field, Form } from "react-final-form";
+import { Button, ButtonToolbar, CheckTree, Loader, useToaster } from "rsuite";
+import FormSuite from "rsuite/Form";
+import styles from "../../../../../../../../styles/Settings.module.css";
+import decodePatchRole from "../../../../../../../../util/apiDecode/settings/role/decodePatchRole";
+import { PatchMethod } from "../../../../../../../../util/util/common/common";
+import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../../../../util/util/frontendUtil/frontendUtil";
+import { errorTypeDialog, successTypeDialog } from "../../../../../../../common/dialog";
+import orgRolesData from "../../../data/orgRolesData.json";
+
+/**
+ * 
+ * @param prop - `fetchData` - function , `session`, `roleDetails` - Object
+ * 
+ * @returns The permission section of role details
+ */
+export default function Permission(prop) {
+
+    const { onNext, onPrevious } = prop;
+
+    const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
+    const [selectedPermissions, setSelectedPermissions] = useState([]);
+
+    const toaster = useToaster();
+
+    //  const setInitialPermissions = useCallback(async () => {
+    //      setSelectedPermissions(roleDetails.permissions);
+    //  }, [ roleDetails ]);
+
+
+    const onDataSubmit = (response, form) => {
+        if (response) {
+            successTypeDialog(toaster, "Changes Saved Successfully", "Role updated successfully.");
+            form.restart();
+        } else {
+            errorTypeDialog(toaster, "Error Occured", "Error occured while updating the role. Try again.");
+        }
+    };
+
+    const onUpdate = async (values, form) => {
+
+        //setLoadingDisplay(LOADING_DISPLAY_BLOCK);
+        onNext();
+        //  decodePatchRole(session, roleDetails.meta.location, PatchMethod.REPLACE, "permissions", values.permissions)
+        //      .then((response) => onDataSubmit(response, form))
+        //      .finally(() => setLoadingDisplay(LOADING_DISPLAY_NONE));
+    };
+
+    return (
+        <div className={styles.addUserMainDiv}>
+
+            <div>
+                {
+                    selectedPermissions
+                        ? (<Form
+                            onSubmit={onUpdate}
+                            initialValues={{
+                                permissions: selectedPermissions
+                            }}
+                            render={({ handleSubmit, form, submitting, pristine }) => (
+                                <FormSuite
+                                    layout="vertical"
+                                    className={styles.addUserForm}
+                                    onSubmit={event => { handleSubmit(event).then(form.restart); }}
+                                    fluid>
+
+                                    <Field
+                                        name="permissions"
+                                        render={({ input }) => (
+                                            <FormSuite.Group controlId="checkbox">
+                                                <FormSuite.Control
+                                                    {...input}
+                                                    name="checkbox"
+                                                    accepter={CheckTree}
+                                                    data={orgRolesData}
+                                                    defaultExpandAll
+                                                    cascade
+                                                />
+                                                <FormSuite.HelpText>Assign permission for the role</FormSuite.HelpText>
+                                            </FormSuite.Group>
+                                        )}
+                                    />
+
+                                    <div className="buttons">
+                                        <FormSuite.Group>
+                                            <ButtonToolbar>
+                                                <Button
+                                                    className={styles.addUserButton}
+                                                    size="lg"
+                                                    appearance="ghost"
+                                                    type="submit"
+                                                    onClick={onPrevious}>
+                                                    Back
+                                                </Button>
+                                                <Button
+                                                    className={styles.addUserButton}
+                                                    size="lg"
+                                                    appearance="primary"
+                                                    type="submit">
+                                                    Next
+                                                </Button>
+                                            </ButtonToolbar>
+                                        </FormSuite.Group>
+
+                                    </div>
+                                </FormSuite>
+                            )}
+                        />)
+                        : null
+                }
+
+            </div>
+
+            <div style={loadingDisplay}>
+                <Loader size="lg" backdrop content="role is updating" vertical />
+            </div>
+        </div>
+    );
+}

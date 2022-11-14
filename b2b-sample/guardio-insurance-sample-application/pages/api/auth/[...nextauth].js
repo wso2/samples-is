@@ -42,12 +42,13 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
                 token.scope = account.scope;
                 token.user = profile;
             }
-
+            console.log(token);
             return token;
         },
         async session({ session, token }) {
             const orgSession = await decodeSwitchOrg(token);
-
+            console.log("///");
+            console.log(orgSession);
             if (!orgSession) {
                 session.error = true;
             } else if (orgSession.expiresIn <= 0) {

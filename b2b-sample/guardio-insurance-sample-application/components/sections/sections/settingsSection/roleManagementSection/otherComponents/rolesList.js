@@ -34,19 +34,19 @@ export default function RolesList(prop) {
 
     return (
         <FlexboxGrid
-            style={ { height: "60vh", marginTop: "24px", width: "100%" } }
+            style={{ height: "60vh", marginTop: "24px", width: "100%" }}
             justify="start"
             align="top" >
-                <CreateRoleComponent />
-            <div className={ styles.idp__list }>
+            {/* <CreateRoleComponent session={session}/> */}
+            <div className={styles.idp__list}>
                 <PanelGroup accordion bordered>
-                    { rolesList.map((role) => (
+                    {rolesList.map((role) => (
                         <RoleItem
-                            key={ role.id }
-                            session={ session }
-                            id={ role.id }
-                            roleUri={ role.meta.location } />
-                    )) }
+                            key={role.id}
+                            session={session}
+                            id={role.id}
+                            roleUri={role.meta.location} />
+                    ))}
                 </PanelGroup>
             </div>
         </FlexboxGrid >
