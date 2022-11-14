@@ -16,16 +16,29 @@
  * under the License.
  */
 
-import callGetRole from
-    "../../../apiCall/settings/role/callGetRole";
-import { commonDecode } from "../../../util/apiUtil/commonDecode";
+import { getInternalApiRequestOptionsWithParam } from "../../../util/apiUtil/getInteralApiRequestOptions";
+import { getHostedUrl } from "../../../util/apiUtil/getUrls";
 
-export default async function decodeGetRole(session, roleUri) {
-    
+/**
+ * call PATCH `roleUri`
+ * 
+ * @param session 
+ * @param roleUri - uri of the role
+ * @param patchBody - body of the role that need to be patched
+ * 
+ * @returns patched role, if the call failed `null`
+ */
+export default async function callPatchUsers(session, roleUri, patchBody) {
+
     try {
-        const res = await commonDecode(() => callGetRole(session, roleUri), null);
+        const res = await fetch(
+            `${getHostedUrl()}/api/settings/role/patchRole?roleUri=${roleUri}`,
+            getInternalApiRequestOptionsWithParam(session, patchBody)
+        );
 
-        return res;
+        const data = await res.json();
+
+        return data;
     } catch (err) {
 
         return null;

@@ -16,18 +16,16 @@
  * under the License.
  */
 
-import DashboardIcon from "@rsuite/icons/legacy/Dashboard";
-import GearCircleIcon from "@rsuite/icons/legacy/GearCircle";
 import React, { useState } from "react";
-import { Button, Nav, Sidenav } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
-import DashboardSectionComponent from "./dashboardSection/dashboardSectionComponent";
-import IdpSectionComponent from "./settingsSection/idpSection/idpSectionComponent";
-import ManageUserSectionComponent from "./settingsSection/manageUserSection/manageUserSectionComponent";
+import SideNavSection from "./otherComponents/sideNavSection";
+import DashboardSectionComponent from "./sections/dashboardSection/dashboardSectionComponent";
+import IdpSectionComponent from "./sections/settingsSection/idpSection/idpSectionComponent";
+import ManageUserSectionComponent from "./sections/settingsSection/manageUserSection/manageUserSectionComponent";
+import RoleManagementSectionComponent from
+    "./sections/settingsSection/roleManagementSection/roleManagementSectionComponent";
 import Custom500 from "../../pages/500";
 import styles from "../../styles/Settings.module.css";
-import { hideBasedOnScopes } from "../../util/util/frontendUtil/frontendUtil";
-import LogoComponent from "../common/logo/logoComponent";
 import SignOutModal from "../common/signOutModal";
 
 /**
@@ -51,6 +49,9 @@ export default function Home(prop) {
             case "2-1":
 
                 return <ManageUserSectionComponent orgName={ name } orgId={ orgId } session={ session } />;
+            case "2-2":
+
+                return <RoleManagementSectionComponent orgName={ name } orgId={ orgId } session={ session } />;
             case "2-3":
 
                 return <IdpSectionComponent orgName={ name } orgId={ orgId } session={ session } />;
@@ -84,49 +85,5 @@ export default function Home(prop) {
                 </div>)
                 : <Custom500 /> }
         </div>
-    );
-}
-
-function SideNavSection(prop) {
-
-    const { name, scope, activeKeySideNav, activeKeySideNavSelect, setSignOutModalOpen } = prop;
-
-    const signOutOnClick = () => setSignOutModalOpen(true);
-
-    return (
-        <Sidenav appearance="inverse" className={ styles.sideNav } defaultOpenKeys={ [ "3", "4" ] }>
-            <Sidenav.Header>
-                <div style={ { marginBottom: "25px", marginTop: "35px" } }>
-                    <LogoComponent imageSize="small" name={ name } white={ true }/>
-                </div>
-            </Sidenav.Header>
-            <Sidenav.Body>
-                <Nav activeKey={ activeKeySideNav }>
-                    <Nav.Item
-                        eventKey="1"
-                        icon={ <DashboardIcon /> }
-                        onSelect={ (eventKey) => activeKeySideNavSelect(eventKey) }>
-                        Dashboard
-                    </Nav.Item>
-                    <Nav.Menu
-                        eventKey="2"
-                        title="Settings"
-                        icon={ <GearCircleIcon /> }
-                        style={ hideBasedOnScopes(scope) }>
-                        <Nav.Item
-                            eventKey="2-1"
-                            onSelect={ (eventKey) => activeKeySideNavSelect(eventKey) }>
-                            Manage Users</Nav.Item>
-                        <Nav.Item
-                            eventKey="2-3"
-                            onSelect={ (eventKey) => activeKeySideNavSelect(eventKey) }>
-                            Identity Providers</Nav.Item>
-                    </Nav.Menu>
-                </Nav>
-            </Sidenav.Body>
-            <div className={ styles.nextButtonDiv }>
-                <Button size="lg" appearance="default" onClick={ signOutOnClick }>Sign Out</Button>
-            </div>
-        </Sidenav>
     );
 }

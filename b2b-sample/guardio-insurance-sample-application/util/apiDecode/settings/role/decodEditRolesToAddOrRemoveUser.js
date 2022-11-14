@@ -16,7 +16,8 @@
  * under the License.
  */
 
-import { decodePatchUsers, PatchUsersMethod } from "./decodePatchUsers";
+import { PatchMethod } from "../../../util/common/common";
+import decodePatchRole from "./decodePatchRole";
 
 function getRolesThatNeedToAddUser(initRoleList, roleList) {
     return roleList.filter(roleUri => !initRoleList.includes(roleUri));
@@ -30,7 +31,7 @@ async function getRoleDetailsForAdd(session, userId, initRoleList, roleList) {
     const rolesUriList = getRolesThatNeedToAddUser(initRoleList, roleList);
     let x = [];
     await rolesUriList.forEach(async (uri) => {
-        decodePatchUsers(session, uri, userId, PatchUsersMethod.ADD);
+        decodePatchRole(session, uri, PatchMethod.ADD, "users", [userId]);
     });
 }
 
@@ -38,7 +39,7 @@ async function getRoleDetailsForRemove(session, userId, initRoleList, roleList) 
     const rolesUriList = getRolesThatNeedToRemoveUser(initRoleList, roleList);
     let x = [];
     await rolesUriList.forEach(async (uri) => {
-        decodePatchUsers(session, uri, userId, PatchUsersMethod.REMOVE);
+        decodePatchRole(session, uri, PatchMethod.REMOVE, "users", userId);
     });
 }
 
@@ -49,9 +50,9 @@ export default async function decodEditRolesToAddOrRemoveUser(session, userId, i
         return getRoleDetailsForAdd(session, userId, initRoleList, roleList)
             .then(
                 () => getRoleDetailsForRemove(session, userId, initRoleList, roleList)
-                .then(()=>true)
-                .catch(()=>false)
-            ).catch(()=>false);
+                    .then(() => true)
+                    .catch(() => false)
+            ).catch(() => false);
 
     } catch (err) {
 

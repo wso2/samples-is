@@ -73,6 +73,24 @@ function copyTheTextToClipboard(text, toaster) {
     infoTypeDialog(toaster, "Text copied to clipboard");
 }
 
+/**
+ * 
+ * @returns random generatored rgb colour
+ */
+function random_rgba() {
+    var o = Math.round, r = Math.random, s = 255;
+    return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
+}
+
+/**
+ * operations that we can do on PATCH methods
+ */
+const PatchMethod = {
+    ADD: "ADD",
+    REMOVE: "REMOVE",
+    REPLACE: "REPLACE"
+};
+
 const GOOGLE_ID = "google-idp";
 const ENTERPRISE_ID = "enterprise-idp";
 const BASIC_ID = "basic-idp";
@@ -83,6 +101,7 @@ const ENTERPRISE_AUTHENTICATOR_ID = "OpenIDConnectAuthenticator";
 const BASIC_AUTHENTICATOR_ID = "BasicAuthenticator";
 
 module.exports = {
-    stringIsEmpty, getCurrentDate, copyTheTextToClipboard, checkIfJSONisEmpty, sizeOfJson, GOOGLE_ID,ENTERPRISE_ID, 
-    BASIC_ID, EMPTY_STRING, GOOGLE_AUTHENTICATOR_ID, ENTERPRISE_AUTHENTICATOR_ID, BASIC_AUTHENTICATOR_ID
+    stringIsEmpty, getCurrentDate, copyTheTextToClipboard, checkIfJSONisEmpty, sizeOfJson,random_rgba, 
+    PatchMethod, GOOGLE_ID,ENTERPRISE_ID, BASIC_ID, EMPTY_STRING, GOOGLE_AUTHENTICATOR_ID, 
+    ENTERPRISE_AUTHENTICATOR_ID, BASIC_AUTHENTICATOR_ID
 };

@@ -17,28 +17,21 @@
  */
 
 import React from "react";
-import { Stack } from "rsuite";
+import { Button } from "rsuite";
 
 /**
  * 
- * @param prop - title, subtitle
+ * @param prop - `session`
  * 
- * @returns A component for the title in an interface of the admin settings sections
+ * @returns - create role button
  */
-export default function SettingsTitle(prop) {
-
-    const { title, subtitle, children } = prop;
+export default function CreateRoleButton() {
 
     return (
-        <Stack
-            direction="row"
-            justifyContent="space-between">
-            <Stack direction="column" alignItems="flex-start">
-                <h2>{ title }</h2>
-                <p>{ subtitle }</p>
-            </Stack>
-            { children }
-        </Stack>
-
+        <Button
+            appearance="primary"
+            size="lg">
+            Create Role
+        </Button>
     );
 }
