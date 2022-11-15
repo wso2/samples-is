@@ -25,9 +25,9 @@ import decodeViewUsers from "../../../../../../../../util/apiDecode/settings/dec
 
 /**
  * 
- * @param prop - `fetchData` - function , `session`, `roleDetails` - Object
+ * @param prop - `setAssignedUsers` - function , `assignedUsers`, `session`, `onNext`, `onPrevious`
  * 
- * @returns The users section of role details
+ * @returns The users section of create role modal
  */
 export default function Users(prop) {
 

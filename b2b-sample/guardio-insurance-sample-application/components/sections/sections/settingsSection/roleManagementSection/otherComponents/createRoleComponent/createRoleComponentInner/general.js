@@ -26,9 +26,9 @@ import HelperText from "../../../../../../../common/helperText";
 
 /**
  * 
- * @param prop - `fetchData` - function , `session`, `roleDetails` - Object
+ * @param prop - `displayName` , `setDisplayName`, `onNext`
  * 
- * @returns The general section of role details
+ * @returns The general section of create role modal
  */
 export default function General(prop) {
 

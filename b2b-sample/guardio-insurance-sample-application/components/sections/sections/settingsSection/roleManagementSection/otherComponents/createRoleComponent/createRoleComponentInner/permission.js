@@ -25,9 +25,9 @@ import orgRolesData from "../../../data/orgRolesData.json";
 
 /**
  * 
- * @param prop - `fetchData` - function , `session`, `roleDetails` - Object
+ * @param prop - `permissions`, `setPermissions`, `onNext`, `onPrevious`
  * 
- * @returns The permission section of role details
+ * @returns The permission section of create role modal
  */
 export default function Permission(prop) {
 
