@@ -33,16 +33,13 @@ import { errorTypeDialog, successTypeDialog } from "../../../../../../../common/
  */
 export default function Users(prop) {
 
-    const { session, onNext, onPrevious } = prop;
+    const { assignedUsers, setAssignedUsers, session, onNext, onPrevious } = prop;
 
-    const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
     const [users, setUsers] = useState(null);
-
-    const toaster = useToaster();
 
     const fetchAllUsers = useCallback(async () => {
         const res = await decodeViewUsers(session);
-        res.map(user => console.log(user));
+
         await setUsers(res);
     }, [session]);
 
@@ -50,21 +47,10 @@ export default function Users(prop) {
         fetchAllUsers();
     }, [fetchAllUsers]);
 
-    const onDataSubmit = (response, form) => {
-        if (response) {
-            successTypeDialog(toaster, "Changes Saved Successfully", "Role updated successfully.");
-            form.restart();
-        } else {
-            errorTypeDialog(toaster, "Error Occured", "Error occured while updating the role. Try again.");
-        }
-    };
+    const onUpdate = async (values) => {
 
-    const onUpdate = async (values, form) => {
-        console.log(values);
-        //setLoadingDisplay(LOADING_DISPLAY_BLOCK);
-        //  decodePatchRole(session, roleDetails.meta.location, PatchMethod.REPLACE, "users", values.users)
-        //      .then((response) => onDataSubmit(response, form))
-        //      .finally(() => setLoadingDisplay(LOADING_DISPLAY_NONE));
+        setAssignedUsers(values.users);
+        onNext();
     };
 
     return (
@@ -76,7 +62,7 @@ export default function Users(prop) {
                         ? (<Form
                             onSubmit={onUpdate}
                             initialValues={{
-                                users: users
+                                users: assignedUsers
                             }}
                             render={({ handleSubmit, form, submitting, pristine }) => (
                                 <FormSuite
@@ -132,11 +118,6 @@ export default function Users(prop) {
                         />)
                         : null
                 }
-
-            </div>
-
-            <div style={loadingDisplay}>
-                <Loader size="lg" backdrop content="role is updating" vertical />
             </div>
         </div>
     );

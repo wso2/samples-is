@@ -35,34 +35,14 @@ import orgRolesData from "../../../data/orgRolesData.json";
  */
 export default function Permission(prop) {
 
-    const { onNext, onPrevious } = prop;
+    const { permissions, setPermissions, onNext, onPrevious } = prop;
 
-    const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
     const [selectedPermissions, setSelectedPermissions] = useState([]);
-
-    const toaster = useToaster();
-
-    //  const setInitialPermissions = useCallback(async () => {
-    //      setSelectedPermissions(roleDetails.permissions);
-    //  }, [ roleDetails ]);
-
-
-    const onDataSubmit = (response, form) => {
-        if (response) {
-            successTypeDialog(toaster, "Changes Saved Successfully", "Role updated successfully.");
-            form.restart();
-        } else {
-            errorTypeDialog(toaster, "Error Occured", "Error occured while updating the role. Try again.");
-        }
-    };
 
     const onUpdate = async (values, form) => {
 
-        //setLoadingDisplay(LOADING_DISPLAY_BLOCK);
         onNext();
-        //  decodePatchRole(session, roleDetails.meta.location, PatchMethod.REPLACE, "permissions", values.permissions)
-        //      .then((response) => onDataSubmit(response, form))
-        //      .finally(() => setLoadingDisplay(LOADING_DISPLAY_NONE));
+        setPermissions(values.permissions);
     };
 
     return (
@@ -74,15 +54,14 @@ export default function Permission(prop) {
                         ? (<Form
                             onSubmit={onUpdate}
                             initialValues={{
-                                permissions: selectedPermissions
+                                permissions: permissions
                             }}
-                            render={({ handleSubmit, form, submitting, pristine }) => (
+                            render={({ handleSubmit, form }) => (
                                 <FormSuite
                                     layout="vertical"
                                     className={styles.addUserForm}
                                     onSubmit={event => { handleSubmit(event).then(form.restart); }}
                                     fluid>
-
                                     <Field
                                         name="permissions"
                                         render={({ input }) => (
@@ -92,7 +71,7 @@ export default function Permission(prop) {
                                                     name="checkbox"
                                                     accepter={CheckTree}
                                                     data={orgRolesData}
-                                                    defaultExpandItemValues = { [ "/permission" ] }
+                                                    defaultExpandItemValues={["/permission"]}
                                                     cascade
                                                 />
                                                 <FormSuite.HelpText>Assign permission for the role</FormSuite.HelpText>
@@ -128,10 +107,6 @@ export default function Permission(prop) {
                         : null
                 }
 
-            </div>
-
-            <div style={loadingDisplay}>
-                <Loader size="lg" backdrop content="role is updating" vertical />
             </div>
         </div>
     );

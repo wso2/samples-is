@@ -71,7 +71,7 @@ export default function RoleManagementSectionComponent(prop) {
                 subtitle="Manage organization roles here.">
                 <CreateRoleButton onClick={onClickCreateRole}/>
             </SettingsTitle>
-            <CreateRoleComponent open={openCreateRoleModal} onClose={onCreateRoleModalClose} session={session}/>
+            <CreateRoleComponent open={openCreateRoleModal} setOpenCreateRoleModal={setOpenCreateRoleModal} session={session}/>
             {
                 rolesList
                     ? <RolesList session={ session } rolesList={ rolesList } />
