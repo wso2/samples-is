@@ -79,7 +79,8 @@ export default function Permission(prop) {
                                             size="lg"
                                             appearance="ghost"
                                             type="submit"
-                                            onClick={ onPrevious }>
+                                            onClick={ onPrevious }
+                                        >
                                             Back
                                         </Button>
                                         <Button
