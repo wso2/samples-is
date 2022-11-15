@@ -25,16 +25,22 @@ import Users from "./createRoleComponentInner/users";
 
 export default function CreateRoleComponent(prop) {
 
-    const { open, onClose ,session } = prop;
+    const { open, onClose, session } = prop;
 
     const [step, setStep] = useState(0);
+    const [displayName, setDisplayName] = useState("");
+    const [permissions, setPermissions] = useState([]);
+    const [users, setUsers] = useState([]);
 
+    /**
+     * change the screens to previous and next
+     * 
+     * @param nextStep - next step
+     */
     const onChange = (nextStep) => {
         setStep(nextStep < 0 ? 0 : nextStep > 3 ? 3 : nextStep);
     };
-
     const onNext = () => onChange(step + 1);
-
     const onPrevious = () => onChange(step - 1);
 
     const craeteRoleItemDetailsComponent = (currentStep) => {
@@ -42,7 +48,7 @@ export default function CreateRoleComponent(prop) {
         switch (currentStep) {
             case 0:
 
-                return <General onNext={onNext} />;
+                return <General displayName={displayName} setDisplayName={setDisplayName} onNext={onNext} />;
 
             case 1:
 

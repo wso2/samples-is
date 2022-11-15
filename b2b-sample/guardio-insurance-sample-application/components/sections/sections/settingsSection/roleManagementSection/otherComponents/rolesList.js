@@ -37,7 +37,6 @@ export default function RolesList(prop) {
             style={{ height: "60vh", marginTop: "24px", width: "100%" }}
             justify="start"
             align="top" >
-            <CreateRoleComponent session={session}/>
             <div className={styles.idp__list}>
                 <PanelGroup accordion bordered>
                     {rolesList.map((role) => (
