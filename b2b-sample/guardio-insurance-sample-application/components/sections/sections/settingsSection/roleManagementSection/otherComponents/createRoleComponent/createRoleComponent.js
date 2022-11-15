@@ -17,23 +17,26 @@
  */
 
 import React, { useEffect, useState } from "react";
-import { Loader, Modal, Panel, Steps } from "rsuite";
+import { Loader, Modal, Panel, Steps, useToaster } from "rsuite";
 import styles from "../../../../../../../styles/Settings.module.css";
 import General from "./createRoleComponentInner/general";
 import Permission from "./createRoleComponentInner/permission";
 import Users from "./createRoleComponentInner/users";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../../../util/util/frontendUtil/frontendUtil";
 import { errorTypeDialog, successTypeDialog } from "../../../../../../common/dialog";
+import { decodeCreateRole } from "../../../../../../../util/apiDecode/settings/role/deocdeCreateRole";
 
 export default function CreateRoleComponent(prop) {
 
     const { open, setOpenCreateRoleModal, session } = prop;
 
-    const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
+    const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
     const [step, setStep] = useState(0);
     const [displayName, setDisplayName] = useState("");
     const [permissions, setPermissions] = useState([]);
     const [users, setUsers] = useState([]);
+
+    const toaster = useToaster();
 
     /**
      * change the screens to previous and next
@@ -45,11 +48,11 @@ export default function CreateRoleComponent(prop) {
     };
     const onPrevious = () => onChange(step - 1);
     const onNext = () => {
-        if(step==2) {
+        if (step == 2) {
 
             onSubmit(displayName, permissions, users);
         } else {
-            
+
             onChange(step + 1);
         }
     }
@@ -65,26 +68,11 @@ export default function CreateRoleComponent(prop) {
 
     const onSubmit = async (displayName, permissions, users) => {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
-
-        // await decodeEditUser(session, user.id, values.firstName, values.familyName, values.email,
-        //     values.username)
-        //     .then((response) => {
-        //         if(initUserRolesForForm) {
-        //             if (response) {
-        //                 decodEditRolesToAddOrRemoveUser(session, user.id, initUserRolesForForm, values.roles)
-        //                     .then((res) => {
-        //                         onRolesSubmite(res, form);
-        //                     });
-        //             } else {
-        //                 onDataSubmit(response, form);
-        //             }
-        //         } else {
-        //             onDataSubmit(response, form);
-        //         }
-        //     })
-        //     .finally(() => setLoadingDisplay(LOADING_DISPLAY_NONE));
+        await decodeCreateRole(session, displayName, permissions, users)
+            .then((response) => onDataSubmit(response))
+            .finally(() => setLoadingDisplay(LOADING_DISPLAY_NONE));
     };
-        
+
 
     /**
      *  callback function on create role modal close

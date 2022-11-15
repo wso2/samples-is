@@ -17,7 +17,7 @@
  */
 
 import callCreateRole from "../../../apiCall/settings/role/callCreateRole";
-import { commonDecode } from "../../util/apiUtil/commonDecode";
+import { commonDecode } from "../../../util/apiUtil/commonDecode";
 
 function getUsersList(users) {
 

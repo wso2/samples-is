@@ -31,7 +31,7 @@ import { getHostedUrl } from "../../../util/apiUtil/getUrls";
 export default async function callCreateRole(session, role) {
     try {
         const res = await fetch(
-            `${getHostedUrl()}/api/role/createRole`,
+            `${getHostedUrl()}/api/settings/role/createRole`,
             getInternalApiRequestOptionsWithParam(session, role)
         );
 

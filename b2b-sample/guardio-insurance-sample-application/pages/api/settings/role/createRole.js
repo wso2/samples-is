@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { getSentDataRequestOptions } from "../../../../util/util/apiUtil/getSentDataHeader";
+import { getSentDataRequestOptions } from "../../../../util/util/apiUtil/getSentDataRequestOptions";
 import { dataNotRecievedError, notPostError } from "../../../../util/util/apiUtil/localResErrors";
 import { RequestMethod } from "../../../../util/util/apiUtil/requestMethod";
 import { getOrgUrl } from "../../../../util/util/orgUtil/orgUtil";
@@ -48,7 +48,7 @@ export default async function createRole(req, res) {
 
         res.status(200).json(data);
     } catch (err) {
-
+        console.log(err);
         return dataNotRecievedError(res);
     }
 }
