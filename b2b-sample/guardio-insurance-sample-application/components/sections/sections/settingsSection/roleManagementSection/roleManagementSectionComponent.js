@@ -19,12 +19,12 @@
 import PeoplesIcon from "@rsuite/icons/Peoples";
 import React, { useCallback, useEffect, useState } from "react";
 import { Container } from "rsuite";
+import CreateRoleButton from "./otherComponents/createRoleButton";
+import CreateRoleComponent from "./otherComponents/createRoleComponent/createRoleComponent";
 import RolesList from "./otherComponents/rolesList";
 import decodeListAllRoles from "../../../../../util/apiDecode/settings/role/decodeListAllRoles";
 import EmptySettings from "../../../../common/emptySettings";
 import SettingsTitle from "../../../../common/settingsTitle";
-import CreateRoleComponent from "./otherComponents/createRoleComponent/createRoleComponent";
-import CreateRoleButton from "./otherComponents/createRoleButton";
 
 /**
  * 
@@ -36,12 +36,12 @@ export default function RoleManagementSectionComponent(prop) {
 
     const { session } = prop;
 
-    const [rolesList, setRolesList] = useState([]);
-    const [openCreateRoleModal, setOpenCreateRoleModal] = useState(false);
+    const [ rolesList, setRolesList ] = useState([]);
+    const [ openCreateRoleModal, setOpenCreateRoleModal ] = useState(false);
 
     useEffect(() => {
         fetchAllRoles();
-    }, [fetchAllRoles, openCreateRoleModal]);
+    }, [ fetchAllRoles, openCreateRoleModal ]);
 
     const fetchAllRoles = useCallback(async () => {
 
@@ -53,15 +53,11 @@ export default function RoleManagementSectionComponent(prop) {
             setRolesList([]);
         }
 
-    }, [session]);
+    }, [ session ]);
 
     const onClickCreateRole = () => {
         setOpenCreateRoleModal(true);
     };
-
-    const onCreateRoleModalClose = () => {
-        setOpenCreateRoleModal(false);
-    }
 
     return (
         <Container>
@@ -69,20 +65,20 @@ export default function RoleManagementSectionComponent(prop) {
             <SettingsTitle
                 title="Role Management"
                 subtitle="Manage organization roles here.">
-                <CreateRoleButton onClick={onClickCreateRole} />
+                <CreateRoleButton onClick={ onClickCreateRole } />
             </SettingsTitle>
             <CreateRoleComponent
-                open={openCreateRoleModal}
-                setOpenCreateRoleModal={setOpenCreateRoleModal}
-                session={session} />
+                open={ openCreateRoleModal }
+                setOpenCreateRoleModal={ setOpenCreateRoleModal }
+                session={ session } />
             {
                 rolesList
-                    ? <RolesList session={session} rolesList={rolesList} />
+                    ? <RolesList session={ session } rolesList={ rolesList } />
                     : (<EmptySettings
                         bodyString="There are no roles created for the organization."
                         buttonString="Create role"
-                        icon={<PeoplesIcon style={{ opacity: .2 }} width="150px" height="150px" />}
-                        onAddButtonClick={() => { }}
+                        icon={ <PeoplesIcon style={ { opacity: .2 } } width="150px" height="150px" /> }
+                        onAddButtonClick={ () => { } }
                     />)
             }
 

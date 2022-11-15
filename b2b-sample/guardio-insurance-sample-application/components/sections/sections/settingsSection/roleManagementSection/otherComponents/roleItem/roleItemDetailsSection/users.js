@@ -24,7 +24,8 @@ import styles from "../../../../../../../../styles/Settings.module.css";
 import decodeViewUsers from "../../../../../../../../util/apiDecode/settings/decodeViewUsers";
 import decodePatchRole from "../../../../../../../../util/apiDecode/settings/role/decodePatchRole";
 import { PatchMethod } from "../../../../../../../../util/util/common/common";
-import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../../../../util/util/frontendUtil/frontendUtil";
+import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE }
+    from "../../../../../../../../util/util/frontendUtil/frontendUtil";
 import { errorTypeDialog, successTypeDialog } from "../../../../../../../common/dialog";
 
 /**
@@ -46,7 +47,7 @@ export default function Users(prop) {
     const getInitialAssignedUserIds = (users) => {
         if (users) {
             return users.map(user => user.value);
-        }   
+        }
 
         return [];
     };
@@ -67,7 +68,7 @@ export default function Users(prop) {
 
         await setInitialAssignedUsers(getInitialAssignedUserIds(roleDetails.users));
     }, [ roleDetails ]);
- 
+
     useEffect(() => {
         fetchAllUsers();
     }, [ fetchAllUsers ]);

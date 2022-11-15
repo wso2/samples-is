@@ -57,50 +57,50 @@ export default function General(prop) {
     };
 
     return (
-        <div className={styles.addUserMainDiv}>
+        <div className={ styles.addUserMainDiv }>
 
             <div>
                 <Form
-                    onSubmit={onUpdate}
-                    validate={validate}
-                    initialValues={{
+                    onSubmit={ onUpdate }
+                    validate={ validate }
+                    initialValues={ {
                         name: displayName
-                    }}
-                    render={({ handleSubmit, form, errors }) => (
+                    } }
+                    render={ ({ handleSubmit, form, errors }) => (
                         <FormSuite
                             layout="vertical"
-                            className={styles.addUserForm}
-                            onSubmit={event => { handleSubmit(event).then(form.restart); }}
+                            className={ styles.addUserForm }
+                            onSubmit={ event => { handleSubmit(event).then(form.restart); } }
                             fluid>
 
                             <Field
                                 name="name"
-                                render={({ input, meta }) => (
+                                render={ ({ input, meta }) => (
                                     <FormSuite.Group controlId="name">
                                         <FormSuite.ControlLabel>Name</FormSuite.ControlLabel>
 
                                         <FormSuite.Control
-                                            {...input}
+                                            { ...input }
                                         />
 
                                         <HelperText text="The name of the role." />
 
-                                        {meta.error && meta.touched && (<FormSuite.ErrorMessage show={true}  >
-                                            {meta.error}
-                                        </FormSuite.ErrorMessage>)}
+                                        { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true }  >
+                                            { meta.error }
+                                        </FormSuite.ErrorMessage>) }
                                     </FormSuite.Group>
-                                )}
+                                ) }
                             />
 
                             <div className="buttons">
                                 <FormSuite.Group>
                                     <ButtonToolbar>
                                         <Button
-                                            className={styles.addUserButton}
+                                            className={ styles.addUserButton }
                                             size="md"
                                             appearance="primary"
                                             type="submit"
-                                            disabled={!checkIfJSONisEmpty(errors)}>
+                                            disabled={ !checkIfJSONisEmpty(errors) }>
                                             Next
                                         </Button>
                                     </ButtonToolbar>
@@ -108,7 +108,7 @@ export default function General(prop) {
 
                             </div>
                         </FormSuite>
-                    )}
+                    ) }
                 />
             </div>
         </div>

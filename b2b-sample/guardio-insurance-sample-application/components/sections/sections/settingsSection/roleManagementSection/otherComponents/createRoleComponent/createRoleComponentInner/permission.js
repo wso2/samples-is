@@ -16,15 +16,11 @@
  * under the License.
  */
 
-import React, { useCallback, useEffect, useState } from "react";
+import React from "react";
 import { Field, Form } from "react-final-form";
-import { Button, ButtonToolbar, CheckTree, Loader, useToaster } from "rsuite";
+import { Button, ButtonToolbar, CheckTree } from "rsuite";
 import FormSuite from "rsuite/Form";
 import styles from "../../../../../../../../styles/Settings.module.css";
-import decodePatchRole from "../../../../../../../../util/apiDecode/settings/role/decodePatchRole";
-import { PatchMethod } from "../../../../../../../../util/util/common/common";
-import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../../../../util/util/frontendUtil/frontendUtil";
-import { errorTypeDialog, successTypeDialog } from "../../../../../../../common/dialog";
 import orgRolesData from "../../../data/orgRolesData.json";
 
 /**
@@ -37,75 +33,69 @@ export default function Permission(prop) {
 
     const { permissions, setPermissions, onNext, onPrevious } = prop;
 
-    const [selectedPermissions, setSelectedPermissions] = useState([]);
-
-    const onUpdate = async (values, form) => {
+    const onUpdate = async (values) => {
 
         onNext();
         setPermissions(values.permissions);
     };
 
     return (
-        <div className={styles.addUserMainDiv}>
+        <div className={ styles.addUserMainDiv }>
 
             <div>
-                {
-                    selectedPermissions
-                        ? (<Form
-                            onSubmit={onUpdate}
-                            initialValues={{
-                                permissions: permissions
-                            }}
-                            render={({ handleSubmit, form }) => (
-                                <FormSuite
-                                    layout="vertical"
-                                    className={styles.addUserForm}
-                                    onSubmit={event => { handleSubmit(event).then(form.restart); }}
-                                    fluid>
-                                    <Field
-                                        name="permissions"
-                                        render={({ input }) => (
-                                            <FormSuite.Group controlId="checkbox">
-                                                <FormSuite.Control
-                                                    {...input}
-                                                    name="checkbox"
-                                                    accepter={CheckTree}
-                                                    data={orgRolesData}
-                                                    defaultExpandItemValues={["/permission"]}
-                                                    cascade
-                                                />
-                                                <FormSuite.HelpText>Assign permission for the role</FormSuite.HelpText>
-                                            </FormSuite.Group>
-                                        )}
-                                    />
+                <Form
+                    onSubmit={ onUpdate }
+                    initialValues={ {
+                        permissions: permissions
+                    } }
+                    render={ ({ handleSubmit, form }) => (
+                        <FormSuite
+                            layout="vertical"
+                            className={ styles.addUserForm }
+                            onSubmit={ event => { handleSubmit(event).then(form.restart); } }
+                            fluid>
+                            <Field
+                                name="permissions"
+                                render={ ({ input }) => (
+                                    <FormSuite.Group controlId="checkbox">
+                                        <FormSuite.Control
+                                            { ...input }
+                                            name="checkbox"
+                                            accepter={ CheckTree }
+                                            data={ orgRolesData }
+                                            defaultExpandItemValues={ [ "/permission" ] }
+                                            cascade
+                                        />
+                                        <FormSuite.HelpText>Assign permission for the role</FormSuite.HelpText>
+                                    </FormSuite.Group>
+                                ) }
+                            />
 
-                                    <div className="buttons">
-                                        <FormSuite.Group>
-                                            <ButtonToolbar>
-                                                <Button
-                                                    className={styles.addUserButton}
-                                                    size="lg"
-                                                    appearance="ghost"
-                                                    type="submit"
-                                                    onClick={onPrevious}>
-                                                    Back
-                                                </Button>
-                                                <Button
-                                                    className={styles.addUserButton}
-                                                    size="lg"
-                                                    appearance="primary"
-                                                    type="submit">
-                                                    Next
-                                                </Button>
-                                            </ButtonToolbar>
-                                        </FormSuite.Group>
+                            <div className="buttons">
+                                <FormSuite.Group>
+                                    <ButtonToolbar>
+                                        <Button
+                                            className={ styles.addUserButton }
+                                            size="lg"
+                                            appearance="ghost"
+                                            type="submit"
+                                            onClick={ onPrevious }>
+                                            Back
+                                        </Button>
+                                        <Button
+                                            className={ styles.addUserButton }
+                                            size="lg"
+                                            appearance="primary"
+                                            type="submit">
+                                            Next
+                                        </Button>
+                                    </ButtonToolbar>
+                                </FormSuite.Group>
 
-                                    </div>
-                                </FormSuite>
-                            )}
-                        />)
-                        : null
-                }
+                            </div>
+                        </FormSuite>
+                    ) }
+                />
 
             </div>
         </div>

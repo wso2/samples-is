@@ -16,25 +16,25 @@
  * under the License.
  */
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Loader, Modal, Panel, Steps, useToaster } from "rsuite";
-import styles from "../../../../../../../styles/Settings.module.css";
 import General from "./createRoleComponentInner/general";
 import Permission from "./createRoleComponentInner/permission";
 import Users from "./createRoleComponentInner/users";
+import styles from "../../../../../../../styles/Settings.module.css";
+import { decodeCreateRole } from "../../../../../../../util/apiDecode/settings/role/deocdeCreateRole";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../../../util/util/frontendUtil/frontendUtil";
 import { errorTypeDialog, successTypeDialog } from "../../../../../../common/dialog";
-import { decodeCreateRole } from "../../../../../../../util/apiDecode/settings/role/deocdeCreateRole";
 
 export default function CreateRoleComponent(prop) {
 
     const { open, setOpenCreateRoleModal, session } = prop;
 
-    const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
-    const [step, setStep] = useState(0);
-    const [displayName, setDisplayName] = useState("");
-    const [permissions, setPermissions] = useState([]);
-    const [users, setUsers] = useState([]);
+    const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
+    const [ step, setStep ] = useState(0);
+    const [ displayName, setDisplayName ] = useState("");
+    const [ permissions, setPermissions ] = useState([]);
+    const [ users, setUsers ] = useState([]);
 
     const toaster = useToaster();
 
@@ -55,7 +55,7 @@ export default function CreateRoleComponent(prop) {
 
             onChange(step + 1);
         }
-    }
+    };
 
     const onDataSubmit = (response) => {
         if (response) {
@@ -83,39 +83,39 @@ export default function CreateRoleComponent(prop) {
         setDisplayName("");
         setPermissions([]);
         setUsers([]);
-    }
+    };
 
     const craeteRoleItemDetailsComponent = (currentStep) => {
 
         switch (currentStep) {
             case 0:
 
-                return <General
-                    displayName={displayName}
-                    setDisplayName={setDisplayName}
-                    onNext={onNext} />;
+                return (<General
+                    displayName={ displayName }
+                    setDisplayName={ setDisplayName }
+                    onNext={ onNext } />);
 
             case 1:
 
-                return <Permission
-                    permissions={permissions}
-                    setPermissions={setPermissions}
-                    onNext={onNext}
-                    onPrevious={onPrevious} />;
+                return (<Permission
+                    permissions={ permissions }
+                    setPermissions={ setPermissions }
+                    onNext={ onNext }
+                    onPrevious={ onPrevious } />);
 
             case 2:
 
-                return <Users
-                    assignedUsers={users}
-                    setAssignedUsers={setUsers}
-                    session={session}
-                    onNext={onNext}
-                    onPrevious={onPrevious} />;
+                return (<Users
+                    assignedUsers={ users }
+                    setAssignedUsers={ setUsers }
+                    session={ session }
+                    onNext={ onNext }
+                    onPrevious={ onPrevious } />);
         }
     };
 
     return (
-        <Modal backdrop="static" role="alertdialog" open={open} onClose={onCreateRoleModalClose} size="md">
+        <Modal backdrop="static" role="alertdialog" open={ open } onClose={ onCreateRoleModalClose } size="md">
             <Modal.Header>
                 <Modal.Title>
                     <b>Create Role</b>
@@ -124,23 +124,23 @@ export default function CreateRoleComponent(prop) {
             </Modal.Header>
 
             <Modal.Body>
-                <Steps current={step} small>
+                <Steps current={ step } small>
                     <Steps.Item title="Basic Details" />
                     <Steps.Item title="Permission Selection" />
                     <Steps.Item title="Users Selection" />
                 </Steps>
-                <div className={styles.addUserMainDiv}>
+                <div className={ styles.addUserMainDiv }>
                     <Panel bordered>
 
-                        {craeteRoleItemDetailsComponent(step)}
+                        { craeteRoleItemDetailsComponent(step) }
 
                     </Panel>
                 </div>
             </Modal.Body>
 
-            <div style={loadingDisplay}>
+            <div style={ loadingDisplay }>
                 <Loader size="lg" backdrop content="Role is creating" vertical />
             </div>
         </Modal>
-    )
+    );
 }

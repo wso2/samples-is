@@ -33,7 +33,7 @@ export default function CreateRoleButton(prop) {
         <Button
             appearance="primary"
             size="lg"
-            onClick={onClick}>
+            onClick={ onClick }>
             Create Role
         </Button>
     );

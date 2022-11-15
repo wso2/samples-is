@@ -23,7 +23,8 @@ import FormSuite from "rsuite/Form";
 import styles from "../../../../../../../../styles/Settings.module.css";
 import decodePatchRole from "../../../../../../../../util/apiDecode/settings/role/decodePatchRole";
 import { PatchMethod } from "../../../../../../../../util/util/common/common";
-import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../../../../util/util/frontendUtil/frontendUtil";
+import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE }
+    from "../../../../../../../../util/util/frontendUtil/frontendUtil";
 import { errorTypeDialog, successTypeDialog } from "../../../../../../../common/dialog";
 import orgRolesData from "../../../data/orgRolesData.json";
 
@@ -95,7 +96,7 @@ export default function Permission(prop) {
                                                     name="checkbox"
                                                     accepter={ CheckTree }
                                                     data={ orgRolesData }
-                                                    defaultExpandItemValues = { [ "/permission" ] }
+                                                    defaultExpandItemValues={ [ "/permission" ] }
                                                     cascade
                                                 />
                                                 <FormSuite.HelpText>Assign permission for the role</FormSuite.HelpText>

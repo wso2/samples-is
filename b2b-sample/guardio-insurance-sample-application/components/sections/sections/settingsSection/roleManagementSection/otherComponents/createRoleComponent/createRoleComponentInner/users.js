@@ -18,12 +18,10 @@
 
 import React, { useCallback, useEffect, useState } from "react";
 import { Field, Form } from "react-final-form";
-import { Button, ButtonToolbar, Checkbox, CheckboxGroup, Loader, useToaster } from "rsuite";
+import { Button, ButtonToolbar, Checkbox, CheckboxGroup } from "rsuite";
 import FormSuite from "rsuite/Form";
 import styles from "../../../../../../../../styles/Settings.module.css";
 import decodeViewUsers from "../../../../../../../../util/apiDecode/settings/decodeViewUsers";
-import { LOADING_DISPLAY_NONE } from "../../../../../../../../util/util/frontendUtil/frontendUtil";
-import { errorTypeDialog, successTypeDialog } from "../../../../../../../common/dialog";
 
 /**
  * 
@@ -35,17 +33,17 @@ export default function Users(prop) {
 
     const { assignedUsers, setAssignedUsers, session, onNext, onPrevious } = prop;
 
-    const [users, setUsers] = useState(null);
+    const [ users, setUsers ] = useState(null);
 
     const fetchAllUsers = useCallback(async () => {
         const res = await decodeViewUsers(session);
 
         await setUsers(res);
-    }, [session]);
+    }, [ session ]);
 
     useEffect(() => {
         fetchAllUsers();
-    }, [fetchAllUsers]);
+    }, [ fetchAllUsers ]);
 
     const onUpdate = async (values) => {
 
@@ -54,56 +52,56 @@ export default function Users(prop) {
     };
 
     return (
-        <div className={styles.addUserMainDiv}>
+        <div className={ styles.addUserMainDiv }>
 
             <div>
                 {
                     users
                         ? (<Form
-                            onSubmit={onUpdate}
-                            initialValues={{
+                            onSubmit={ onUpdate }
+                            initialValues={ {
                                 users: assignedUsers
-                            }}
-                            render={({ handleSubmit, form, submitting, pristine }) => (
+                            } }
+                            render={ ({ handleSubmit, form }) => (
                                 <FormSuite
                                     layout="vertical"
-                                    className={styles.addUserForm}
-                                    onSubmit={event => { handleSubmit(event).then(form.restart); }}
+                                    className={ styles.addUserForm }
+                                    onSubmit={ event => { handleSubmit(event).then(form.restart); } }
                                     fluid>
 
                                     <Field
                                         name="users"
-                                        render={({ input }) => (
+                                        render={ ({ input }) => (
                                             <FormSuite.Group controlId="checkbox">
                                                 <FormSuite.Control
-                                                    {...input}
+                                                    { ...input }
                                                     name="checkbox"
-                                                    accepter={CheckboxGroup}
+                                                    accepter={ CheckboxGroup }
                                                 >
-                                                    {users.map(user => (
-                                                        <Checkbox key={user.id} value={user.id}>
-                                                            {user.username}
+                                                    { users.map(user => (
+                                                        <Checkbox key={ user.id } value={ user.id }>
+                                                            { user.username }
                                                         </Checkbox>
-                                                    ))}
+                                                    )) }
                                                 </FormSuite.Control>
                                                 <FormSuite.HelpText>Assign users for the role</FormSuite.HelpText>
                                             </FormSuite.Group>
-                                        )}
+                                        ) }
                                     />
 
                                     <div className="buttons">
                                         <FormSuite.Group>
                                             <ButtonToolbar>
                                                 <Button
-                                                    className={styles.addUserButton}
+                                                    className={ styles.addUserButton }
                                                     size="lg"
                                                     appearance="ghost"
                                                     type="submit"
-                                                    onClick={onPrevious}>
+                                                    onClick={ onPrevious }>
                                                     Back
                                                 </Button>
                                                 <Button
-                                                    className={styles.addUserButton}
+                                                    className={ styles.addUserButton }
                                                     size="lg"
                                                     appearance="primary"
                                                     type="submit">
@@ -114,7 +112,7 @@ export default function Users(prop) {
 
                                     </div>
                                 </FormSuite>
-                            )}
+                            ) }
                         />)
                         : null
                 }
