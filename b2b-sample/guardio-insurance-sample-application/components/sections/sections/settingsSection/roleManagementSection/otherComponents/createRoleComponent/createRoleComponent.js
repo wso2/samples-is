@@ -25,7 +25,7 @@ import Users from "./createRoleComponentInner/users";
 
 export default function CreateRoleComponent(prop) {
 
-    const { session } = prop;
+    const { open, onClose ,session } = prop;
 
     const [step, setStep] = useState(0);
 
@@ -38,7 +38,7 @@ export default function CreateRoleComponent(prop) {
     const onPrevious = () => onChange(step - 1);
 
     const craeteRoleItemDetailsComponent = (currentStep) => {
-        console.log(currentStep);
+
         switch (currentStep) {
             case 0:
 
@@ -55,7 +55,7 @@ export default function CreateRoleComponent(prop) {
     };
 
     return (
-        <Modal backdrop="static" role="alertdialog" open={true} size="md">
+        <Modal backdrop="static" role="alertdialog" open={open} onClose={onClose} size="md">
             <Modal.Header>
                 <Modal.Title>
                     <b>Create Role</b>

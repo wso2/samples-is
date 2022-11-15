@@ -23,6 +23,8 @@ import RolesList from "./otherComponents/rolesList";
 import decodeListAllRoles from "../../../../../util/apiDecode/settings/role/decodeListAllRoles";
 import EmptySettings from "../../../../common/emptySettings";
 import SettingsTitle from "../../../../common/settingsTitle";
+import CreateRoleComponent from "./otherComponents/createRoleComponent/createRoleComponent";
+import CreateRoleButton from "./otherComponents/createRoleButton";
 
 /**
  * 
@@ -35,6 +37,7 @@ export default function RoleManagementSectionComponent(prop) {
     const { session } = prop;
 
     const [ rolesList, setRolesList ] = useState([]);
+    const [ openCreateRoleModal, setOpenCreateRoleModal ] = useState(false);
 
     useEffect(() => {
         fetchAllRoles();
@@ -52,9 +55,13 @@ export default function RoleManagementSectionComponent(prop) {
 
     }, [ session ]);
 
-    // const onAddIdentityProviderClick = () => {
-    //     setOpenAddModal(true);
-    // };
+    const onClickCreateRole = () => {
+        setOpenCreateRoleModal(true);
+    };
+
+    const onCreateRoleModalClose = () => {
+        setOpenCreateRoleModal(false);
+    }
 
     return (
         <Container>
@@ -62,9 +69,9 @@ export default function RoleManagementSectionComponent(prop) {
             <SettingsTitle
                 title="Role Management"
                 subtitle="Manage organization roles here.">
-                { /* <CreateRoleButton /> */ }
+                <CreateRoleButton onClick={onClickCreateRole}/>
             </SettingsTitle>
-
+            <CreateRoleComponent open={openCreateRoleModal} onClose={onCreateRoleModalClose} session={session}/>
             {
                 rolesList
                     ? <RolesList session={ session } rolesList={ rolesList } />

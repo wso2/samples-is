@@ -96,7 +96,7 @@ export default function Users(prop) {
                                                 >
                                                     {users.map(user => (
                                                         <Checkbox key={user.id} value={user.id}>
-                                                            {user.email} ({user.username})
+                                                            {user.username}
                                                         </Checkbox>
                                                     ))}
                                                 </FormSuite.Control>
