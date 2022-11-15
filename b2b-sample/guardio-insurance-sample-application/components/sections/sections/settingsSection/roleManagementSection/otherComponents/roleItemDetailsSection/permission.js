@@ -95,7 +95,7 @@ export default function Permission(prop) {
                                                     name="checkbox"
                                                     accepter={ CheckTree }
                                                     data={ orgRolesData }
-                                                    defaultExpandAll
+                                                    defaultExpandItemValues = { [ "/permission" ] }
                                                     cascade
                                                 />
                                                 <FormSuite.HelpText>Assign permission for the role</FormSuite.HelpText>
