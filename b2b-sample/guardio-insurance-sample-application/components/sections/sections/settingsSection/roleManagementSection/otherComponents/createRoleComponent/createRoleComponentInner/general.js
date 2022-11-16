@@ -16,30 +16,23 @@
  * under the License.
  */
 
-import React, { useState } from "react";
+import React from "react";
 import { Field, Form } from "react-final-form";
-import { Button, ButtonToolbar, Loader, useToaster } from "rsuite";
+import { Button, ButtonToolbar } from "rsuite";
 import FormSuite from "rsuite/Form";
-import styles from "../../../../../../../styles/Settings.module.css";
-import decodePatchRole from "../../../../../../../util/apiDecode/settings/role/decodePatchRole";
-import { PatchMethod, checkIfJSONisEmpty } from "../../../../../../../util/util/common/common";
-import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../../../util/util/frontendUtil/frontendUtil";
-import { errorTypeDialog, successTypeDialog } from "../../../../../../common/dialog";
-import HelperText from "../../../../../../common/helperText";
+import styles from "../../../../../../../../styles/Settings.module.css";
+import { checkIfJSONisEmpty } from "../../../../../../../../util/util/common/common";
+import HelperText from "../../../../../../../common/helperText";
 
 /**
  * 
- * @param prop - `fetchData` - function , `session`, `roleDetails` - Object
+ * @param prop - `displayName` , `setDisplayName`, `onNext`
  * 
- * @returns The general section of role details
+ * @returns The general section of create role modal
  */
 export default function General(prop) {
 
-    const { fetchData, session, roleDetails } = prop;
-
-    const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
-
-    const toaster = useToaster();
+    const { displayName, setDisplayName, onNext } = prop;
 
     const nameValidate = (name, errors) => {
         if (!name) {
@@ -49,7 +42,6 @@ export default function General(prop) {
         return errors;
     };
 
-
     const validate = values => {
         let errors = {};
 
@@ -58,22 +50,10 @@ export default function General(prop) {
         return errors;
     };
 
-    const onDataSubmit = (response, form) => {
-        if (response) {
-            successTypeDialog(toaster, "Changes Saved Successfully", "Role updated successfully.");
-            fetchData();
-            form.restart();
-        } else {
-            errorTypeDialog(toaster, "Error Occured", "Error occured while updating the role. Try again.");
-        }
-    };
+    const onUpdate = async (values) => {
 
-    const onUpdate = async (values, form) => {
-
-        setLoadingDisplay(LOADING_DISPLAY_BLOCK);
-        decodePatchRole(session, roleDetails.meta.location, PatchMethod.REPLACE, "displayName", [ values.name ])
-            .then((response) => onDataSubmit(response, form))
-            .finally(() => setLoadingDisplay(LOADING_DISPLAY_NONE));
+        setDisplayName(values.name);
+        onNext();
     };
 
     return (
@@ -84,9 +64,9 @@ export default function General(prop) {
                     onSubmit={ onUpdate }
                     validate={ validate }
                     initialValues={ {
-                        name: roleDetails.displayName
+                        name: displayName
                     } }
-                    render={ ({ handleSubmit, form, submitting, pristine, errors }) => (
+                    render={ ({ handleSubmit, form, errors }) => (
                         <FormSuite
                             layout="vertical"
                             className={ styles.addUserForm }
@@ -117,11 +97,11 @@ export default function General(prop) {
                                     <ButtonToolbar>
                                         <Button
                                             className={ styles.addUserButton }
-                                            size="lg"
+                                            size="md"
                                             appearance="primary"
                                             type="submit"
-                                            disabled={ submitting || pristine || !checkIfJSONisEmpty(errors) }>
-                                            Update
+                                            disabled={ !checkIfJSONisEmpty(errors) }>
+                                            Next
                                         </Button>
                                     </ButtonToolbar>
                                 </FormSuite.Group>
@@ -130,11 +110,6 @@ export default function General(prop) {
                         </FormSuite>
                     ) }
                 />
-
-            </div>
-
-            <div style={ loadingDisplay }>
-                <Loader size="lg" backdrop content="role is updating" vertical />
             </div>
         </div>
     );

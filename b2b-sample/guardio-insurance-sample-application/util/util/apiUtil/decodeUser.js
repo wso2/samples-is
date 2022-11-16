@@ -39,7 +39,7 @@ function decodeUser(user) {
  * 
  * @param userName
  * 
- * @returns set username. If the IS is Asgardeo DEFAULT/ add to the username changed else returns the original username
+ * @returns set username.
  */
  function setUsername(userName) {
     
@@ -53,6 +53,12 @@ function decodeUser(user) {
  * @returns get username. If the IS is Asgardeo DEFAULT/ is removed from the username else returns the original username
  */
 function getUsername(userName) {
+
+    // to remove DEFAULT/ if that part exists in the username
+    if(userName.includes("/")) {
+
+        return userName.split("/")[1];
+    }
 
     return userName;
 }

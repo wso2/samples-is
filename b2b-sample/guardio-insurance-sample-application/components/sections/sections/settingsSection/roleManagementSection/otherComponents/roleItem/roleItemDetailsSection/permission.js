@@ -18,63 +18,38 @@
 
 import React, { useCallback, useEffect, useState } from "react";
 import { Field, Form } from "react-final-form";
-import { Button, ButtonToolbar, Checkbox, CheckboxGroup, Loader, useToaster } from "rsuite";
+import { Button, ButtonToolbar, CheckTree, Loader, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
-import styles from "../../../../../../../styles/Settings.module.css";
-import decodeViewUsers from "../../../../../../../util/apiDecode/settings/decodeViewUsers";
-import decodePatchRole from "../../../../../../../util/apiDecode/settings/role/decodePatchRole";
-import { PatchMethod } from "../../../../../../../util/util/common/common";
-import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../../../util/util/frontendUtil/frontendUtil";
-import { errorTypeDialog, successTypeDialog } from "../../../../../../common/dialog";
+import styles from "../../../../../../../../styles/Settings.module.css";
+import decodePatchRole from "../../../../../../../../util/apiDecode/settings/role/decodePatchRole";
+import { PatchMethod } from "../../../../../../../../util/util/common/common";
+import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE }
+    from "../../../../../../../../util/util/frontendUtil/frontendUtil";
+import { errorTypeDialog, successTypeDialog } from "../../../../../../../common/dialog";
+import orgRolesData from "../../../data/orgRolesData.json";
 
 /**
  * 
  * @param prop - `fetchData` - function , `session`, `roleDetails` - Object
  * 
- * @returns The users section of role details
+ * @returns The permission section of role details
  */
-export default function Users(prop) {
+export default function Permission(prop) {
 
     const { fetchData, session, roleDetails } = prop;
 
-    /**
-     * 
-     * @param users - users list
-     * 
-     * @returns get initial assigned user id's.
-     */
-    const getInitialAssignedUserIds = (users) => {
-        if (users) {
-            return users.map(user => user.value);
-        }   
-
-        return [];
-    };
-
     const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
-    const [ users, setUsers ] = useState(null);
-    const [ initialAssignedUsers, setInitialAssignedUsers ] = useState([]);
+    const [ selectedPermissions, setSelectedPermissions ] = useState([]);
 
     const toaster = useToaster();
 
-    const fetchAllUsers = useCallback(async () => {
-        const res = await decodeViewUsers(session);
-
-        await setUsers(res);
-    }, [ session ]);
-
-    const setInitialAssignedUserIds = useCallback(async () => {
-
-        await setInitialAssignedUsers(getInitialAssignedUserIds(roleDetails.users));
+    const setInitialPermissions = useCallback(async () => {
+        setSelectedPermissions(roleDetails.permissions);
     }, [ roleDetails ]);
- 
-    useEffect(() => {
-        fetchAllUsers();
-    }, [ fetchAllUsers ]);
 
     useEffect(() => {
-        setInitialAssignedUserIds();
-    }, [ setInitialAssignedUserIds ]);
+        setInitialPermissions();
+    }, [ setInitialPermissions ]);
 
     const onDataSubmit = (response, form) => {
         if (response) {
@@ -89,7 +64,7 @@ export default function Users(prop) {
     const onUpdate = async (values, form) => {
 
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
-        decodePatchRole(session, roleDetails.meta.location, PatchMethod.REPLACE, "users", values.users)
+        decodePatchRole(session, roleDetails.meta.location, PatchMethod.REPLACE, "permissions", values.permissions)
             .then((response) => onDataSubmit(response, form))
             .finally(() => setLoadingDisplay(LOADING_DISPLAY_NONE));
     };
@@ -99,11 +74,11 @@ export default function Users(prop) {
 
             <div>
                 {
-                    users
+                    selectedPermissions
                         ? (<Form
                             onSubmit={ onUpdate }
                             initialValues={ {
-                                users: initialAssignedUsers
+                                permissions: selectedPermissions
                             } }
                             render={ ({ handleSubmit, form, submitting, pristine }) => (
                                 <FormSuite
@@ -113,21 +88,18 @@ export default function Users(prop) {
                                     fluid>
 
                                     <Field
-                                        name="users"
+                                        name="permissions"
                                         render={ ({ input }) => (
                                             <FormSuite.Group controlId="checkbox">
                                                 <FormSuite.Control
                                                     { ...input }
                                                     name="checkbox"
-                                                    accepter={ CheckboxGroup }
-                                                >
-                                                    { users.map(user => (
-                                                        <Checkbox key={ user.id } value={ user.id }>
-                                                            { user.email } ({ user.username })
-                                                        </Checkbox>
-                                                    )) }
-                                                </FormSuite.Control>
-                                                <FormSuite.HelpText>Assign users for the role</FormSuite.HelpText>
+                                                    accepter={ CheckTree }
+                                                    data={ orgRolesData }
+                                                    defaultExpandItemValues={ [ "/permission" ] }
+                                                    cascade
+                                                />
+                                                <FormSuite.HelpText>Assign permission for the role</FormSuite.HelpText>
                                             </FormSuite.Group>
                                         ) }
                                     />

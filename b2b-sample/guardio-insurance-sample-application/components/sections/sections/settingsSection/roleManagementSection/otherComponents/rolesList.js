@@ -18,7 +18,7 @@
 
 import React from "react";
 import { FlexboxGrid, PanelGroup } from "rsuite";
-import RoleItem from "./roleItem";
+import RoleItem from "./roleItem/roleItem";
 import styles from "../../../../../../styles/idp.module.css";
 
 /**

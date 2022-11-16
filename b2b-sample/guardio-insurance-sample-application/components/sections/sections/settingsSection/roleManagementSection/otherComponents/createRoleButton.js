@@ -25,12 +25,15 @@ import { Button } from "rsuite";
  * 
  * @returns - create role button
  */
-export default function CreateRoleButton() {
+export default function CreateRoleButton(prop) {
 
+    const { onClick } = prop;
+ 
     return (
         <Button
             appearance="primary"
-            size="lg">
+            size="lg"
+            onClick={ onClick }>
             Create Role
         </Button>
     );
