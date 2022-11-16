@@ -65,12 +65,18 @@ export default function RoleManagementSectionComponent(prop) {
             <SettingsTitle
                 title="Role Management"
                 subtitle="Manage organization roles here.">
-                <CreateRoleButton onClick={ onClickCreateRole } />
+                {
+                    rolesList
+                        ? <CreateRoleButton onClick={ onClickCreateRole } />
+                        : null
+                }
             </SettingsTitle>
+
             <CreateRoleComponent
                 open={ openCreateRoleModal }
                 setOpenCreateRoleModal={ setOpenCreateRoleModal }
                 session={ session } />
+
             {
                 rolesList
                     ? <RolesList session={ session } rolesList={ rolesList } />
@@ -78,7 +84,7 @@ export default function RoleManagementSectionComponent(prop) {
                         bodyString="There are no roles created for the organization."
                         buttonString="Create role"
                         icon={ <PeoplesIcon style={ { opacity: .2 } } width="150px" height="150px" /> }
-                        onAddButtonClick={ () => { } }
+                        onAddButtonClick={ onClickCreateRole }
                     />)
             }
 
