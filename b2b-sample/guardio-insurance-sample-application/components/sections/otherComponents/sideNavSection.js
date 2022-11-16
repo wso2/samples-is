@@ -69,7 +69,8 @@ export default function SideNavSection(prop) {
                                         eventKey={ item.eventKey }
                                         title={ item.title }
                                         icon={ getIcon(item.icon) }
-                                        style={ item.hideBasedOnScope ? hideBasedOnScopes(scope) : {} }>
+                                        style={ item.hideBasedOnScope ? hideBasedOnScopes(scope) : {} }
+                                        key={ item.eventKey }>
                                         {
                                             item.items.map((item) =>
                                                 (<Nav.Item
@@ -85,6 +86,7 @@ export default function SideNavSection(prop) {
                             } else {
                                 return (
                                     <Nav.Item
+                                        key={ item.eventKey }
                                         eventKey={ item.eventKey }
                                         icon={ getIcon(item.icon) }
                                         onSelect={ (eventKey) => activeKeySideNavSelect(eventKey) }>

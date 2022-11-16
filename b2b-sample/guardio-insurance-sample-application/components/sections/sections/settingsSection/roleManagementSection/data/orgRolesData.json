@@ -1,0 +1,262 @@
+[
+    {
+        "label": "All Permissions",
+        "value": "/permission",
+        "children": [
+            {
+                "label": "Admin",
+                "value": "/permission/admin",
+                "children": [
+                    {
+                        "label": "Manage",
+                        "value": "/permission/admin/manage",
+                        "children": [
+                            {
+                                "label": "Identity",
+                                "value": "/permission/admin/manage/identity",
+                                "children": [
+                                    {
+                                        "label": "Authentication",
+                                        "value": "/permission/admin/manage/identity/authentication",
+                                        "children": [
+                                            {
+                                                "label": "Sessions",
+                                                "value": "/permission/admin/manage/identity/authentication/session",
+                                                "children": [
+                                                    {
+                                                        "label": "Session view",
+                                                        "value": "/permission/admin/manage/identity/authentication/session/view"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "label": "Claim Management",
+                                        "value": "/permission/admin/manage/identity/claimmgt",
+                                        "children": [
+                                            {
+                                                "label": "Claim Metadata",
+                                                "value": "/permission/admin/manage/identity/claimmgt/metadata",
+                                                "children": [
+                                                    {
+                                                        "label": "Claim Metadata view",
+                                                        "value": "/permission/admin/manage/identity/claimmgt/metadata/view"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "label": "CORS Management",
+                                        "value": "/permission/admin/manage/identity/cors",
+                                        "children": [
+                                            {
+                                                "label": "CORS Origins",
+                                                "value": "/permission/admin/manage/identity/cors/origins",
+                                                "children": [
+                                                    {
+                                                        "label": "CORS Origins view",
+                                                        "value": "/permission/admin/manage/identity/cors/origins/view"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "label": "Email Management",
+                                        "value": "/permission/admin/manage/identity/emailmgt",
+                                        "children": [
+                                            {
+                                                "label": "View",
+                                                "value": "/permission/admin/manage/identity/emailmgt/view"
+                                            },
+                                            {
+                                                "label": "Update",
+                                                "value": "/permission/admin/manage/identity/emailmgt/update"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "label": "Governance",
+                                        "value": "/permission/admin/manage/identity/governance",
+                                        "children": [
+                                            {
+                                                "label": "Governance view",
+                                                "value": "/permission/admin/manage/identity/governance/view"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "label": "Group Management",
+                                        "value": "/permission/admin/manage/identity/groupmgt",
+                                        "children": [
+                                            {
+                                                "label": "Group view",
+                                                "value": "/permission/admin/manage/identity/groupmgt/view"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "label": "Role Management",
+                                        "value": "/permission/admin/manage/identity/rolemgt",
+                                        "children": [
+                                            {
+                                                "label": "Roles view",
+                                                "value": "/permission/admin/manage/identity/rolemgt/view"
+                                            },
+                                            {
+                                                "label": "Roles create",
+                                                "value": "/permission/admin/manage/identity/rolemgt/create"
+                                            },
+                                            {
+                                                "label": "Roles update",
+                                                "value": "/permission/admin/manage/identity/rolemgt/update"
+                                            },
+                                            {
+                                                "label": "Roles delete",
+                                                "value": "/permission/admin/manage/identity/rolemgt/delete"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "label": "Organization Management",
+                                        "value": "/permission/admin/manage/identity/organizationmgt",
+                                        "children": [
+                                            {
+                                                "label": "Organizations view",
+                                                "value": "/permission/admin/manage/identity/organizationmgt/view"
+                                            },
+                                            {
+                                                "label": "Organizations create",
+                                                "value": "/permission/admin/manage/identity/organizationmgt/create"
+                                            },
+                                            {
+                                                "label": "Organizations update",
+                                                "value": "/permission/admin/manage/identity/organizationmgt/update"
+                                            },
+                                            {
+                                                "label": "Organizations delete",
+                                                "value": "/permission/admin/manage/identity/organizationmgt/delete"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "label": "User Management",
+                                        "value": "/permission/admin/manage/identity/usermgt",
+                                        "children": [
+                                            {
+                                                "label": "Users view",
+                                                "value": "/permission/admin/manage/identity/usermgt/view"
+                                            },
+                                            {
+                                                "label": "Users list",
+                                                "value": "/permission/admin/manage/identity/usermgt/list"
+                                            },
+                                            {
+                                                "label": "Users create",
+                                                "value": "/permission/admin/manage/identity/usermgt/create"
+                                            },
+                                            {
+                                                "label": "Users update",
+                                                "value": "/permission/admin/manage/identity/usermgt/update"
+                                            },
+                                            {
+                                                "label": "Users delete",
+                                                "value": "/permission/admin/manage/identity/usermgt/delete"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "label": "Identity Providers",
+                                        "value": "/permission/admin/manage/identity/idpmgt",
+                                        "children": [
+                                            {
+                                                "label": "Identity Providers view",
+                                                "value": "/permission/admin/manage/identity/idpmgt/view"
+                                            },
+                                            {
+                                                "label": "Identity Providers list",
+                                                "value": "/permission/admin/manage/identity/idpmgt/list"
+                                            },
+                                            {
+                                                "label": "Identity Providers create",
+                                                "value": "/permission/admin/manage/identity/idpmgt/create"
+                                            },
+                                            {
+                                                "label": "Identity Providers update",
+                                                "value": "/permission/admin/manage/identity/idpmgt/update"
+                                            },
+                                            {
+                                                "label": "Identity Providers delete",
+                                                "value": "/permission/admin/manage/identity/idpmgt/delete"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "label": "Applications",
+                                        "value": "/permission/admin/manage/identity/applicationmgt",
+                                        "children": [
+                                            {
+                                                "label": "Applications view",
+                                                "value": "/permission/admin/manage/identity/applicationmgt/view"
+                                            },
+                                            {
+                                                "label": "Applications list",
+                                                "value": "/permission/admin/manage/identity/applicationmgt/list"
+                                            },
+                                            {
+                                                "label": "Applications create",
+                                                "value": "/permission/admin/manage/identity/applicationmgt/create"
+                                            },
+                                            {
+                                                "label": "Applications update",
+                                                "value": "/permission/admin/manage/identity/applicationmgt/update"
+                                            },
+                                            {
+                                                "label": "Applications delete",
+                                                "value": "/permission/admin/manage/identity/applicationmgt/delete"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "label": "Userstores",
+                                        "value": "/permission/admin/manage/identity/userstore",
+                                        "children": [
+                                            {
+                                                "label": "Userstores Config",
+                                                "value": "/permission/admin/manage/identity/userstore/config",
+                                                "children": [
+                                                    {
+                                                        "label": "Userstore view",
+                                                        "value": "/permission/admin/manage/identity/userstore/config/view"
+                                                    },
+                                                    {
+                                                        "label": "Userstore list",
+                                                        "value": "/permission/admin/manage/identity/userstore/config/list"
+                                                    },
+                                                    {
+                                                        "label": "Userstore create",
+                                                        "value": "/permission/admin/manage/identity/userstore/config/create"
+                                                    },
+                                                    {
+                                                        "label": "Userstore update",
+                                                        "value": "/permission/admin/manage/identity/userstore/config/update"
+                                                    },
+                                                    {
+                                                        "label": "Userstore delete",
+                                                        "value": "/permission/admin/manage/identity/userstore/config/delete"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

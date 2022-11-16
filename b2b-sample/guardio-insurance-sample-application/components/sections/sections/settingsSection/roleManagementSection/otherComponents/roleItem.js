@@ -20,6 +20,7 @@ import CodeIcon from "@rsuite/icons/Code";
 import React, { useCallback, useEffect, useState } from "react";
 import { Nav, Panel } from "rsuite";
 import General from "./roleItemDetailsSection/general";
+import Permission from "./roleItemDetailsSection/permission";
 import Users from "./roleItemDetailsSection/users";
 import decodeGetRole from "../../../../../../util/apiDecode/settings/role/decodeGetRole";
 import AccordianItemHeader from "../../../../../common/accordianItemHeader";
@@ -57,6 +58,9 @@ export default function RoleItem(prop) {
             case "1":
 
                 return <General session={ session } roleDetails={ roleDetails } fetchData={ fetchData } />;
+            case "2":
+
+                return <Permission session={ session } roleDetails={ roleDetails } fetchData={ fetchData } />;
             case "3":
 
                 return <Users session={ session } roleDetails={ roleDetails } fetchData={ fetchData } />;
@@ -112,11 +116,11 @@ function RoleItemNav(prop) {
                     eventKey="1"
                     onSelect={ (eventKey) => activeKeyNavSelect(eventKey) }>General</Nav.Item>
 
-                { /* <Nav.Item
+                <Nav.Item
                     eventKey="2"
-                    onSelect={(eventKey) => activeKeyNavSelect(eventKey)}>
+                    onSelect={ (eventKey) => activeKeyNavSelect(eventKey) }>
                     Permissions
-                </Nav.Item> */ }
+                </Nav.Item>
 
                 <Nav.Item
                     eventKey="3"
