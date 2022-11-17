@@ -1,28 +1,29 @@
 {
-  "version": 1,
+  "version": 2,
   "projects": {
     "business-app": {
-      "root": "packages/business-app",
-      "type": "library"
+      "root": "apps/business-app",
+      "type": "application"
     },
     "shared-assets": {
       "root": "libs/shared/assets",
       "sourceRoot": "libs/shared/assets/src",
       "projectType": "library",
-      "architect": {
+      "tags": [],
+      "targets": {
         "lint": {
-          "builder": "@nrwl/linter:eslint",
+          "executor": "@nrwl/linter:eslint",
           "outputs": [
             "{options.outputFile}"
           ],
           "options": {
             "lintFilePatterns": [
-              "libs/shared/assets/**/*.ts"
+              "libs/shared/assets/**/*.{ts,tsx,js,jsx}"
             ]
           }
         },
         "test": {
-          "builder": "@nrwl/jest:jest",
+          "executor": "@nrwl/jest:jest",
           "outputs": [
             "{workspaceRoot}/coverage/{projectRoot}"
           ],
@@ -31,8 +32,7 @@
             "passWithNoTests": true
           }
         }
-      },
-      "tags": []
+      }
     }
   }
 }
