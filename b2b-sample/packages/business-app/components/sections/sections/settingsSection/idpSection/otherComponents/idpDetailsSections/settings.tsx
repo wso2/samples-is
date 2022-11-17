@@ -21,6 +21,7 @@ import { Form } from "react-final-form";
 import { Button, ButtonToolbar, Loader, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
 import SettingsFormSelection from "./settingsFormSection/settingsFormSelection";
+import { FederatedAuthenticators } from "../../../../../../../models/identityProvider/identityProvider";
 import styles from "../../../../../../../styles/Settings.module.css";
 import decodeGetFederatedAuthenticators from
     "../../../../../../../util/apiDecode/settings/identityProvider/decodeGetFederatedAuthenticators";
@@ -29,7 +30,6 @@ import decodeUpdateFederatedAuthenticators from
 import { checkIfJSONisEmpty } from "../../../../../../../util/util/common/common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../../../util/util/frontendUtil/frontendUtil";
 import { errorTypeDialog, successTypeDialog } from "../../../../../../common/dialog";
-import { FederatedAuthenticators } from "../../../../../../../models/identityProvider/identityProvider";
 
 /**
  * 
@@ -41,8 +41,8 @@ export default function Settings(prop) {
 
     const { session, idpDetails } = prop;
 
-    const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
-    const [federatedAuthenticators, setFederatedAuthenticators] = useState<FederatedAuthenticators>(null);
+    const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
+    const [ federatedAuthenticators, setFederatedAuthenticators ] = useState<FederatedAuthenticators>(null);
 
     const toaster = useToaster();
 
@@ -52,14 +52,14 @@ export default function Settings(prop) {
         );
 
         await setFederatedAuthenticators(res);
-    }, [session, idpDetails]);
+    }, [ session, idpDetails ]);
 
     useEffect(() => {
         fetchData();
-    }, [fetchData]);
+    }, [ fetchData ]);
 
     const validate = () => {
-        let errors = {};
+        const errors = {};
 
         if (federatedAuthenticators.properties) {
             federatedAuthenticators.properties.filter((property) => {
@@ -89,25 +89,25 @@ export default function Settings(prop) {
     };
 
     return (
-        <div className={styles.addUserMainDiv}>
+        <div className={ styles.addUserMainDiv }>
 
             <div>
 
                 <Form
-                    onSubmit={onUpdate}
-                    validate={validate}
+                    onSubmit={ onUpdate }
+                    validate={ validate }
 
-                    render={({ handleSubmit, submitting, pristine, errors }) => (
+                    render={ ({ handleSubmit, submitting, pristine, errors }) => (
                         <FormSuite
                             layout="vertical"
-                            className={styles.addUserForm}
-                            onSubmit={() => handleSubmit()}
+                            className={ styles.addUserForm }
+                            onSubmit={ () => handleSubmit() }
                             fluid>
 
-                            {federatedAuthenticators.properties
+                            { federatedAuthenticators.properties
                                 ? (<SettingsFormSelection
-                                    federatedAuthenticators={federatedAuthenticators.properties}
-                                    templateId={idpDetails.templateId} />)
+                                    federatedAuthenticators={ federatedAuthenticators.properties }
+                                    templateId={ idpDetails.templateId } />)
                                 : null
                             }
 
@@ -115,23 +115,23 @@ export default function Settings(prop) {
                                 <FormSuite.Group>
                                     <ButtonToolbar>
                                         <Button
-                                            className={styles.addUserButton}
+                                            className={ styles.addUserButton }
                                             size="lg"
                                             appearance="primary"
                                             type="submit"
-                                            disabled={submitting || pristine || !checkIfJSONisEmpty(errors)}>
+                                            disabled={ submitting || pristine || !checkIfJSONisEmpty(errors) }>
                                             Update
                                         </Button>
                                     </ButtonToolbar>
                                 </FormSuite.Group>
                             </div>
                         </FormSuite>
-                    )}
+                    ) }
                 />
 
             </div>
 
-            <div style={loadingDisplay}>
+            <div style={ loadingDisplay }>
                 <Loader size="lg" backdrop content="User is adding" vertical />
             </div>
         </div>

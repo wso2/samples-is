@@ -165,7 +165,7 @@ export default function EditUserComponent(prop) {
         }
     };
 
-    const onSubmit = async (values, form) => {
+    const onSubmit = async (values) => {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
 
         await decodeEditUser(session, user.id, values.firstName, values.familyName, values.email,

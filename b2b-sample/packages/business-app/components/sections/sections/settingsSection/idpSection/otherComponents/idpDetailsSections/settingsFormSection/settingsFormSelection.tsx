@@ -38,7 +38,7 @@ export default function SettingsFormSelection(prop) {
     const toaster = useToaster();
 
     const propList = () => {
-        let selectedTemplate = selectedTemplateBaesedonTemplateId(templateId);
+        const selectedTemplate = selectedTemplateBaesedonTemplateId(templateId);
 
         if (selectedTemplate) {
             return selectedTemplate.idp.federatedAuthenticators.authenticators[0].properties;
@@ -49,7 +49,7 @@ export default function SettingsFormSelection(prop) {
 
     const selectedValue = (key) => {
 
-        let keyFederatedAuthenticator = federatedAuthenticators.filter((obj) => obj.key === key)[0];
+        const keyFederatedAuthenticator = federatedAuthenticators.filter((obj) => obj.key === key)[0];
 
         return keyFederatedAuthenticator ? keyFederatedAuthenticator.value : "";
     };
@@ -66,23 +66,26 @@ export default function SettingsFormSelection(prop) {
                     ? propList().map((property) => {
                         return (
                             <Field
-                                key={property.key}
-                                name={property.key}
-                                initialValue={selectedValue(property.key)}
-                                render={({ input, meta }) => (
-                                    <FormSuite.Group controlId={property.key}>
-                                        <FormSuite.ControlLabel>{property.displayName}</FormSuite.ControlLabel>
-                                        <InputGroup inside style={{ width: "100%" }}>
+                                key={ property.key }
+                                name={ property.key }
+                                initialValue={ selectedValue(property.key) }
+                                render={ ({ input, meta }) => (
+                                    <FormSuite.Group controlId={ property.key }>
+                                        <FormSuite.ControlLabel>{ property.displayName }</FormSuite.ControlLabel>
+                                        <InputGroup inside style={ { width: "100%" } }>
 
                                             <FormSuite.Control
-                                                readOnly={property.readOnly ? property.readOnly : false}
-                                                {...input}
+                                                readOnly={ property.readOnly ? property.readOnly : false }
+                                                { ...input }
                                             />
 
                                             {
                                                 property.readOnly
                                                     ? (<InputGroup.Button
-                                                        onClick={() => copyValueToClipboard(selectedValue(property.key))}>
+                                                        onClick={ () =>
+                                                            copyValueToClipboard(selectedValue(property.key))
+                                                        }
+                                                    >
                                                         <CopyIcon />
                                                     </InputGroup.Button>)
                                                     : null
@@ -90,14 +93,14 @@ export default function SettingsFormSelection(prop) {
 
                                         </InputGroup>
                                         <HelperText
-                                            text={property.description} />
+                                            text={ property.description } />
 
-                                        {meta.error && meta.touched && (<FormSuite.ErrorMessage show={true} >
-                                            {meta.error}
-                                        </FormSuite.ErrorMessage>)}
+                                        { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true } >
+                                            { meta.error }
+                                        </FormSuite.ErrorMessage>) }
 
                                     </FormSuite.Group>
-                                )}
+                                ) }
                             />
                         );
                     })

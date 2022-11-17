@@ -58,10 +58,6 @@ export default function IdpSectionComponent(prop) {
         Google
     ];
 
-    useEffect(() => {
-        fetchAllIdPs();
-    }, [ fetchAllIdPs ]);
-
     const fetchAllIdPs = useCallback(async () => {
 
         const res = await decodeListAllIdentityProviders(session);
@@ -77,6 +73,10 @@ export default function IdpSectionComponent(prop) {
         }
 
     }, [ session ]);
+
+    useEffect(() => {
+        fetchAllIdPs();
+    }, [ fetchAllIdPs ]);
 
     const onAddIdentityProviderClick = () => {
         setOpenAddModal(true);
@@ -119,7 +119,7 @@ export default function IdpSectionComponent(prop) {
             return true;
         }
 
-        let size = sizeOfJson(formValue);
+        const size = sizeOfJson(formValue);
         let key;
         let val;
 

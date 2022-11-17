@@ -36,8 +36,8 @@ export default function RoleManagementSectionComponent(prop) {
 
     const { session } = prop;
 
-    const [rolesList, setRolesList] = useState([]);
-    const [openCreateRoleModal, setOpenCreateRoleModal] = useState(false);
+    const [ rolesList, setRolesList ] = useState([]);
+    const [ openCreateRoleModal, setOpenCreateRoleModal ] = useState(false);
 
     const fetchAllRoles = useCallback(async () => {
 
@@ -49,11 +49,11 @@ export default function RoleManagementSectionComponent(prop) {
             setRolesList([]);
         }
 
-    }, [session]);
+    }, [ session ]);
 
     useEffect(() => {
         fetchAllRoles();
-    }, [fetchAllRoles, openCreateRoleModal]);
+    }, [ fetchAllRoles, openCreateRoleModal ]);
 
     const onClickCreateRole = () => {
         setOpenCreateRoleModal(true);
@@ -67,24 +67,24 @@ export default function RoleManagementSectionComponent(prop) {
                 subtitle="Manage organization roles here.">
                 {
                     rolesList
-                        ? <CreateRoleButton onClick={onClickCreateRole} />
+                        ? <CreateRoleButton onClick={ onClickCreateRole } />
                         : null
                 }
             </SettingsTitle>
 
             <CreateRoleComponent
-                open={openCreateRoleModal}
-                setOpenCreateRoleModal={setOpenCreateRoleModal}
-                session={session} />
+                open={ openCreateRoleModal }
+                setOpenCreateRoleModal={ setOpenCreateRoleModal }
+                session={ session } />
 
             {
                 rolesList
-                    ? <RolesList session={session} rolesList={rolesList} />
+                    ? <RolesList session={ session } rolesList={ rolesList } />
                     : (<EmptySettings
                         bodyString="There are no roles created for the organization."
                         buttonString="Create role"
-                        icon={<PeoplesIcon style={{ opacity: .2 }} width="150px" height="150px" />}
-                        onAddButtonClick={onClickCreateRole}
+                        icon={ <PeoplesIcon style={ { opacity: .2 } } width="150px" height="150px" /> }
+                        onAddButtonClick={ onClickCreateRole }
                     />)
             }
 

@@ -22,10 +22,10 @@ import { Nav, Panel } from "rsuite";
 import General from "./roleItemDetailsSection/general";
 import Permission from "./roleItemDetailsSection/permission";
 import Users from "./roleItemDetailsSection/users";
+import { Role } from "../../../../../../../models/role/role";
 import decodeGetRole from "../../../../../../../util/apiDecode/settings/role/decodeGetRole";
 import AccordianItemHeader from "../../../../../../common/accordianItemHeader";
 import JsonDisplay from "../../../../../../common/jsonDisplay";
-import { Role } from "../../../../../../../models/role/role";
 
 /**
  * 

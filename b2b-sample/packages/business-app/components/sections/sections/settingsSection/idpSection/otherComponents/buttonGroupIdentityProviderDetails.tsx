@@ -20,6 +20,7 @@ import Trash from "@rsuite/icons/Trash";
 import React, { useCallback, useEffect, useState } from "react";
 import { Button, IconButton, Stack, useToaster } from "rsuite";
 import ConfirmAddRemoveLoginFlowModal from "./confirmAddRemoveLoginFlowModal";
+import { AllApplications, Application } from "../../../../../../models/application/application";
 import decodeGetApplication from "../../../../../../util/apiDecode/settings/application/decodeGetApplication";
 import decodeListCurrentApplication from
     "../../../../../../util/apiDecode/settings/application/decodeListCurrentApplication";
@@ -28,7 +29,6 @@ import decodeDeleteIdentityProvider from
 import { checkIfIdpIsinAuthSequence } from "../../../../../../util/util/applicationUtil/applicationUtil";
 import { checkIfJSONisEmpty } from "../../../../../../util/util/common/common";
 import { errorTypeDialog, successTypeDialog } from "../../../../../common/dialog";
-import { AllApplications, Application } from "../../../../../../models/application/application";
 
 /**
  * 
@@ -71,7 +71,7 @@ export default function ButtonGroupIdentityProviderDetails(prop) {
 
     useEffect(() => {
         if (!checkIfJSONisEmpty(applicationDetail)) {
-            let check = checkIfIdpIsinAuthSequence(applicationDetail, idpDetails);
+            const check = checkIfIdpIsinAuthSequence(applicationDetail, idpDetails);
 
             setIdpIsinAuthSequence(check[0]);
         }
