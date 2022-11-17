@@ -1,0 +1,9 @@
+{
+    "version" : 1,
+    "projects" : {
+        "bussiness-app" :{
+            "root" : "packages/business-app",
+            "type" : "library"
+        }
+    }
+}

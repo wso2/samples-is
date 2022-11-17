@@ -1,0 +1,16 @@
+{
+  "name": "b2b-sample",
+  "version": "1.0.0",
+  "description": "Here is a list of sample applications to try out B2B Scenarios.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@nrwl/nx-cloud": "latest",
+    "nx": "15.1.1",
+    "@nrwl/cli": "^15.1.1"
+  }
+}
