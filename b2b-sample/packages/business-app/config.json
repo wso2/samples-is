@@ -1,8 +1,8 @@
 {
     "AuthorizationConfig": {
-        "BaseOrganizationUrl": "<PARENT ORGANIZATION URL> ex: https://dev.api.asgardeo.io/t/guardio",
-        "ClientId": "<CLIENT ID>",
-        "ClientSecret": "<CLIENT SECRET>"
+        "BaseOrganizationUrl": "https://dev.api.asgardeo.io/t/guardioi",
+        "ClientId": "3IUFkGr4sjfDRXDm5z9fm34PgMwa",
+        "ClientSecret": "EI3KG6Z1PhnBqohWbt1P7qZA7Dsa"
     },
     "ApplicationConfig": {
         "HostedUrl": "http://localhost:3000",
@@ -41,7 +41,7 @@
         ]
     },
     "ManagementAPIConfig": {
-        "SharedApplicationName": "<SHARED APPLICATION NAME> ex: guardio-app",
-        "ImageBaseUrl" : "<IMAGE BASE URL - FOLLOW README.MD FOR MORE INFORMATION>"
+        "SharedApplicationName": "temp",
+        "ImageBaseUrl" : "https://console.asgardeo.io"
     }
 }

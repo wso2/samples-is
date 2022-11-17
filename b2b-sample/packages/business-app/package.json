@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "NODE_TLS_REJECT_UNAUTHORIZED='0' next",
+    "dev": "NODE_TLS_REJECT_UNAUTHORIZED='0' next -p 3000",
     "build": "next build",
     "start": "NODE_TLS_REJECT_UNAUTHORIZED='0' next start",
     "lint": "next lint"
@@ -27,7 +27,10 @@
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^13.0.0",
+    "@types/node": "^18.11.9",
+    "@types/react": "^18.0.25",
     "eslint": "8.24.0",
-    "eslint-config-next": "12.2.3"
+    "eslint-config-next": "12.2.3",
+    "typescript": "^4.9.3"
   }
 }
