@@ -17,9 +17,9 @@
  */
 
 import Image from "next/image";
-import React  from "react";
+import React from "react";
 import logoImage from "../../../public/logo.png";
-import SharedAssets from "@b2bsample/shared/assets";
+// import { SharedAssets } from "@b2bsample/shared/assets";
 
 /**
  * 
@@ -30,26 +30,26 @@ import SharedAssets from "@b2bsample/shared/assets";
 export default function Logo(prop) {
 
     const { imageSize, white } = prop;
-    
+
     const getImageStyle = (size, white) => {
 
         let imageStyle = {};
 
         switch (size) {
             case "small":
-                imageStyle["width"] = "200px" ;
+                imageStyle["width"] = "200px";
 
                 break;
             case "medium":
-                imageStyle["width"] = "350px" ;
+                imageStyle["width"] = "350px";
 
                 break;
             case "large":
-                imageStyle["width"] = "600px" ;
+                imageStyle["width"] = "600px";
 
                 break;
             case "x-large":
-                imageStyle["width"] = "600px" ;
+                imageStyle["width"] = "600px";
 
                 break;
             default:
@@ -65,10 +65,10 @@ export default function Logo(prop) {
     };
 
     return (
-        <div style={ getImageStyle(imageSize, white) }>
-            <SharedAssets />
+        <div style={getImageStyle(imageSize, white)}>
+            {/* <SharedAssets /> */}
             <Image
-                src={ logoImage }
+                src={logoImage}
                 alt="404 image" />
         </div>
     );

@@ -1,10 +1,11 @@
+import React from 'react';
 import { render } from '@testing-library/react';
 
-import SharedAssets from './shared-assets';
+import Index from '../pages/index';
 
-describe('SharedAssets', () => {
+describe('Index', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(< SharedAssets />);
+    const { baseElement } = render(<Index />);
     expect(baseElement).toBeTruthy();
   });
 });

@@ -1,7 +1,6 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "moduleResolution": "node",
     "jsx": "preserve",
     "allowJs": true,
     "esModuleInterop": true,
@@ -15,15 +14,7 @@
     "types": [
       "jest",
       "node"
-    ],
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "skipLibCheck": true,
-    "module": "esnext"
+    ]
   },
   "include": [
     "**/*.ts",

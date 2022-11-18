@@ -3,23 +3,48 @@
   "projects": {
     "business-app": {
       "root": "apps/business-app",
-      "type": "application"
-    },
-    "shared-assets": {
-      "root": "libs/shared/assets",
-      "sourceRoot": "libs/shared/assets/src",
-      "projectType": "library",
-      "tags": [],
+      "sourceRoot": "apps/business-app",
+      "projectType": "application",
       "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
+        "build": {
+          "executor": "@nrwl/next:build",
           "outputs": [
-            "{options.outputFile}"
+            "{options.outputPath}"
           ],
+          "defaultConfiguration": "production",
           "options": {
-            "lintFilePatterns": [
-              "libs/shared/assets/**/*.{ts,tsx,js,jsx}"
-            ]
+            "root": "apps/business-app",
+            "outputPath": "dist/apps/business-app"
+          },
+          "configurations": {
+            "development": {
+              "outputPath": "apps/business-app"
+            },
+            "production": {}
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/next:server",
+          "defaultConfiguration": "development",
+          "options": {
+            "buildTarget": "business-app:build",
+            "dev": true
+          },
+          "configurations": {
+            "development": {
+              "buildTarget": "business-app:build:development",
+              "dev": true
+            },
+            "production": {
+              "buildTarget": "business-app:build:production",
+              "dev": false
+            }
+          }
+        },
+        "export": {
+          "executor": "@nrwl/next:export",
+          "options": {
+            "buildTarget": "business-app:build:production"
           }
         },
         "test": {
@@ -28,11 +53,23 @@
             "{workspaceRoot}/coverage/{projectRoot}"
           ],
           "options": {
-            "jestConfig": "libs/shared/assets/jest.config.ts",
+            "jestConfig": "apps/business-app/jest.config.ts",
             "passWithNoTests": true
           }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "options": {
+            "lintFilePatterns": [
+              "apps/business-app/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
         }
-      }
+      },
+      "tags": []
     }
   }
 }
