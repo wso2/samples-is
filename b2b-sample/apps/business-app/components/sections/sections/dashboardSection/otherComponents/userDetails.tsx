@@ -19,7 +19,7 @@
 import Image from "next/image";
 import React from "react";
 import { Panel } from "rsuite";
-import profileImage from "../../../../../public/internal/profile.svg";
+import profileImage from "../../../../../../../libs/business-app/ui-assets/src/lib/images/profile.svg";
 import styles from "../../../../../styles/Settings.module.css";
 
 /**
@@ -35,16 +35,16 @@ export default function UserDetails(prop) {
     return (
         me
             ? (<Panel header="User Details" bordered>
-                <div id="userDetails" className={styles.homePanel}>
-                    <div className={styles.userDetails}>
-                        <div className={styles.userDetailsBody}>
-                            <p><b>First Name : </b>{me.firstName}</p>
-                            <p><b>Last Name : </b>{me.familyName}</p>
-                            <p><b>ID : </b>{me.id}</p>
-                            <p><b>Username : </b>{me.username}</p>
-                            <p><b>Email : </b>{me.email}</p>
+                <div id="userDetails" className={ styles.homePanel }>
+                    <div className={ styles.userDetails }>
+                        <div className={ styles.userDetailsBody }>
+                            <p><b>First Name : </b>{ me.firstName }</p>
+                            <p><b>Last Name : </b>{ me.familyName }</p>
+                            <p><b>ID : </b>{ me.id }</p>
+                            <p><b>Username : </b>{ me.username }</p>
+                            <p><b>Email : </b>{ me.email }</p>
                         </div>
-                        <Image src={profileImage} className={styles.profileImage} alt="profile image" />
+                        <Image src={ profileImage } className={ styles.profileImage } alt="profile image" />
                     </div>
                 </div>
             </Panel>)

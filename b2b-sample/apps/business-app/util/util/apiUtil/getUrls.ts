@@ -42,8 +42,8 @@ function getManagementAPIServerBaseUrl() {
 function getTenantDomain() {
 
     const baseOrganizationUrl = config.AuthorizationConfig.BaseOrganizationUrl;
-    var url = baseOrganizationUrl.split('/');
-    var path = url[url.length - 1];
+    const url = baseOrganizationUrl.split("/");
+    const path = url[url.length - 1];
 
     return path;
 }
@@ -53,4 +53,4 @@ function getHostedUrl() {
     return config.ApplicationConfig.HostedUrl;
 }
 
-export{ getManagementAPIServerBaseUrl, getTenantDomain, getHostedUrl }
+export{ getManagementAPIServerBaseUrl, getTenantDomain, getHostedUrl };

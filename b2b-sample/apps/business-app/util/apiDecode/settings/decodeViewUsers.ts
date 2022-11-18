@@ -33,15 +33,16 @@ export default async function decodeViewUsers(session) {
         const usersReturn = [];
 
         usersData["Resources"].map((user) => {
-            let userDetails = decodeUser(user);
+            const userDetails = decodeUser(user);
+
             if (userDetails) {
                 usersReturn.push(userDetails);
             }
-        })
+        });
 
         return usersReturn;
     } catch (err) {
         
-        return null
+        return null;
     }
 }

@@ -17,9 +17,8 @@
  */
 
 import Image from "next/image";
-import React from "react";
-import { Button, Col, Grid, Row } from "rsuite";
-import error500Image from "../public/internal/500.svg";
+import { Button, Stack } from "rsuite";
+import error500Image from "../../../libs/shared/ui-assets/src/lib/images/500.svg";
 import style from "../styles/Error.module.css";
 import { orgSignout } from "../util/util/routerUtil/routerUtil";
 
@@ -28,43 +27,36 @@ export default function Custom500() {
     const goBack = async () => await orgSignout(null);
 
     return (
-        <div className={ style.errorMainContent }>
-            <Grid>
-                <Row>
-                    <Col sm={ 24 } md={ 6 } lg={ 3 } />
 
-                    <Col sm={ 12 } md={ 12 } lg={ 18 }>
+        <Stack
+            className={ style["errorMainContent"] }
+            spacing={ 50 }
+            direction="column"
+            justifyContent="center"
+            alignItems="center">
 
-                        <div className={ style.errorMainDiv }>
+            <Image src={ error500Image } width={ 500 } alt="404 image" />
 
-                            <Image src={ error500Image } width={ 500 } alt="404 image" />
+            <Stack
+                spacing={ 25 }
+                direction="column"
+                justifyContent="center"
+                alignItems="center">
 
-                            <p
-                                style={ {
-                                    position: "relative",
-                                    textAlign: "center",
-                                    top: -100
-                                } }><b>It looks like you have been inactive for a long time.</b> <br />
-                                When you click on <i>Go back</i>, we will try to recover the session if it exists.<br />
-                                If you don&apos;t have an active session, you will be redirected to the login page.</p>
-                            <Button
-                                style={ {
-                                    position: "relative",
-                                    textAlign: "center",
-                                    top: -100
-                                } }
-                                size="lg"
-                                appearance="ghost"
-                                onClick={ goBack }>Go Back</Button>
+                <p className={ style["p"] }><b>It looks like you have been inactive for a long time.</b>
+                    <br />
+                    When you click on <i>Go back</i>, we will try to recover the session if it exists.
+                    <br />
+                    If you don&apos;t have an active session, you will be redirected to the login page.
+                </p>
+                <Button
+                    size="lg"
+                    appearance="ghost"
+                    onClick={ goBack }>
+                    Go Back
+                </Button>
+            </Stack>
 
-                        </div>
-
-                    </Col>
-
-                    <Col sm={ 24 } md={ 6 } lg={ 3 } />
-
-                </Row>
-            </Grid>
-        </div>
+        </Stack>
     );
 }

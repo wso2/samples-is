@@ -21,7 +21,7 @@ import { commonDecode } from "../../../util/apiUtil/commonDecode";
 
 function getUsersList(users) {
 
-    return users.map((user) => { return { "value": user } });
+    return users.map((user) => { return { "value": user }; });
 }
 
 function getRoleBody(displayName, permissions, users) {
@@ -30,7 +30,7 @@ function getRoleBody(displayName, permissions, users) {
         "groups": [],
         "permissions": permissions,
         "users": getUsersList(users)
-    }
+    };
 }
 
 /**

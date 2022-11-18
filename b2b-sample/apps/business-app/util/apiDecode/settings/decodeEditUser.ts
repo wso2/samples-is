@@ -16,9 +16,9 @@
  * under the License.
  */
 
-import { setUsername } from "../../util/apiUtil/decodeUser";
 import callEditUser from "../../apiCall/settings/callEditUser";
 import { commonDecode } from "../../util/apiUtil/commonDecode";
+import { setUsername } from "../../util/apiUtil/decodeUser";
 
 /**
  * 
@@ -54,14 +54,14 @@ export default async function decodeEditUser(session, id, firstName, familyName,
                 }
             }
         ]
-    }
+    };
 
     try {
-        const usersData = await commonDecode(() => callEditUser(session, id, editUserEncode), false)
+        const usersData = await commonDecode(() => callEditUser(session, id, editUserEncode), false);
 
         return usersData;
     } catch (err) {
 
-        return false
+        return false;
     }
 }

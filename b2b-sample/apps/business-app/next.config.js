@@ -16,13 +16,13 @@
  * under the License.
  */
 
-const { withNx } = require('@nrwl/next/plugins/with-nx');
+const { withNx } = require("@nrwl/next/plugins/with-nx");
 const withLess = require("next-with-less");
 
 const lessConfig = withLess({
     lessLoaderOptions: {
         lessOptions: {
-            strictMath: true,
+            strictMath: true
         }
     }
 });
@@ -34,7 +34,7 @@ const nextConfig = withNx({
     nx: {
         // Set this to true if you would like to to use SVGR
         // See: https://github.com/gregberge/svgr
-        svgr: false,
+        svgr: false
 
     },
     ...lessConfig

@@ -30,7 +30,7 @@ function getAddReplaceBody(patchMethod, path, value) {
                 "value": value
             }
         ]
-    }
+    };
 }
 
 function getRemoveBody(patchMethod, path, value) {
@@ -41,7 +41,7 @@ function getRemoveBody(patchMethod, path, value) {
                 "path": `${path}[value eq ${value}]`
             }
         ]
-    }
+    };
 }
 
 function getPatchBody(patchMethod, path, value) {

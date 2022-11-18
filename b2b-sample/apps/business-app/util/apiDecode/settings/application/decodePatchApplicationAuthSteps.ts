@@ -19,7 +19,7 @@
 import callPatchApplicationAuthSteps from "../../../apiCall/settings/application/callPatchApplicationAuthSteps";
 import { commonDecode } from "../../../util/apiUtil/commonDecode";
 import {
-    ENTERPRISE_AUTHENTICATOR_ID, ENTERPRISE_ID, GOOGLE_AUTHENTICATOR_ID, GOOGLE_ID, BASIC_ID, BASIC_AUTHENTICATOR_ID
+    BASIC_AUTHENTICATOR_ID, BASIC_ID, ENTERPRISE_AUTHENTICATOR_ID, ENTERPRISE_ID, GOOGLE_AUTHENTICATOR_ID, GOOGLE_ID
 } from "../../../util/common/common";
 
 /**
@@ -29,7 +29,8 @@ import {
  * @returns get authentication sequence
  */
 function getAuthenticationSequenceModel(template) {
-    let authenticationSequenceModel = template.authenticationSequence;
+    const authenticationSequenceModel = template.authenticationSequence;
+
     delete authenticationSequenceModel.requestPathAuthenticators;
     authenticationSequenceModel.type = "USER_DEFINED";
 
@@ -70,7 +71,7 @@ function getAuthenticatorBody(idpTempleteId, idpName) {
     return {
         "idp": idpName,
         "authenticator": getAuthenticatorId(idpTempleteId)
-    }
+    };
 }
 
 /**
@@ -84,10 +85,10 @@ function getAuthenticatorBody(idpTempleteId, idpName) {
  */
 function addRemoveAuthSequence(template, idpTempleteId, idpName, method) {
 
-    let authenticationSequenceModel = getAuthenticationSequenceModel(template);
+    const authenticationSequenceModel = getAuthenticationSequenceModel(template);
 
     if (method) {
-        authenticationSequenceModel.steps[0].options = [(getAuthenticatorBody(idpTempleteId, idpName))];
+        authenticationSequenceModel.steps[0].options = [ (getAuthenticatorBody(idpTempleteId, idpName)) ];
 
         return authenticationSequenceModel;
     } else {
@@ -95,13 +96,15 @@ function addRemoveAuthSequence(template, idpTempleteId, idpName, method) {
         let basicCheck = false;
 
         for (let j = authenticationSequenceModel.steps.length - 1; j >= 0; j--) {
-            let step = authenticationSequenceModel.steps[j];
+            const step = authenticationSequenceModel.steps[j];
+
             for (let i = 0; i < step.options.length; i++) {
                 if (step.options[i].idp === idpName) {
                     step.options.splice(i, 1);
                     if (step.options.length === 0) {
                         authenticationSequenceModel.steps.splice(j, 1);
                     }
+
                     break;
                 } else if (step.options[i].authenticator === "BasicAuthenticator") {
                     basicCheck = true;
@@ -115,7 +118,7 @@ function addRemoveAuthSequence(template, idpTempleteId, idpName, method) {
             } catch (e) {
                 authenticationSequenceModel.steps.push({
                     "id": 1,
-                    "options": [(getAuthenticatorBody(BASIC_ID, "LOCAL"))]
+                    "options": [ (getAuthenticatorBody(BASIC_ID, "LOCAL")) ]
                 });
             }
         }
@@ -135,13 +138,13 @@ function addRemoveAuthSequence(template, idpTempleteId, idpName, method) {
  */
 export default async function decodePatchApplicationAuthSteps(session, template, idpDetails, method) {
 
-    let applicationId = template.id;
-    let idpName = idpDetails.name;
-    let idpTempleteId = idpDetails.templateId;
+    const applicationId = template.id;
+    const idpName = idpDetails.name;
+    const idpTempleteId = idpDetails.templateId;
 
-    let authenticationSequenceModel = {
+    const authenticationSequenceModel = {
         "authenticationSequence": addRemoveAuthSequence(template, idpTempleteId, idpName, method)
-    }
+    };
 
     try {
         const res = await commonDecode(

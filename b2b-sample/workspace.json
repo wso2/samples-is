@@ -71,6 +71,16 @@
         }
       },
       "tags": []
+    },
+    "business-app-ui-assets": {
+      "root": "libs/business-app/ui-assets",
+      "sourceRoot": "libs/business-app/ui-assets/src",
+      "projectType": "ui-library"
+    },
+    "shared-ui-assets": {
+      "root": "libs/shared/ui-assets",
+      "sourceRoot": "libs/shared/ui-assets/src",
+      "projectType": "ui-library"
     }
   }
 }

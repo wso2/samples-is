@@ -16,14 +16,14 @@
  * under the License.
  */
 
-import { setUsername } from "../../util/apiUtil/decodeUser";
 import callAddUser from "../../apiCall/settings/callAddUser";
 import { commonDecode } from "../../util/apiUtil/commonDecode";
+import { setUsername } from "../../util/apiUtil/decodeUser";
 
 const InviteConst = {
     INVITE: "pwd-method-invite",
     PWD: "pwd-method-pwd"
-}
+};
 
 
 function inviteAddUserBody(firstName, familyName, email, username) {
@@ -42,7 +42,7 @@ function inviteAddUserBody(firstName, familyName, email, username) {
         "urn:scim:wso2:schema": {
             "askPassword": "true"
         }
-    }
+    };
 }
 
 function pwdAddUserBody(firstName, familyName, email, username, password) {
@@ -100,4 +100,4 @@ async function decodeAddUser(session, inviteConst, firstName, familyName, email,
     }
 }
 
-export{ InviteConst, decodeAddUser }
+export{ InviteConst, decodeAddUser };

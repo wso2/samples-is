@@ -1,17 +1,17 @@
-/*
- * Copyright (c) 2022 WSO2 LLC. (https://www.wso2.com).
+/**
+ * Copyright (c) 2022, WSO2 LLC. (https://www.wso2.com). All Rights Reserved.
  *
  * WSO2 LLC. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License.
  * You may obtain a copy of the License at
  *
- *http://www.apache.org/licenses/LICENSE-2.
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
+ * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
  */
@@ -33,12 +33,12 @@ function stringIsEmpty(str) : boolean{
  * @returns current date
  */
 function getCurrentDate() : string {
-    var today: Date = new Date();
-    var dd : string = String(today.getDate()).padStart(2, '0');
-    var mm : string  = String(today.getMonth() + 1).padStart(2, '0');
-    var yyyy : string  = today.getFullYear().toString();
+    const today: Date = new Date();
+    const dd : string = String(today.getDate()).padStart(2, "0");
+    const mm : string  = String(today.getMonth() + 1).padStart(2, "0");
+    const yyyy : string  = today.getFullYear().toString();
 
-    const todayString: string = mm + '/' + dd + '/' + yyyy;
+    const todayString: string = mm + "/" + dd + "/" + yyyy;
 
     return todayString;
 }
@@ -78,8 +78,9 @@ function copyTheTextToClipboard(text, toaster) : void {
  * @returns random generatored rgb colour
  */
 function random_rgba() : string {
-    var o = Math.round, r = Math.random, s = 255;
-    return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + r().toFixed(1) + ')';
+    const o = Math.round, r = Math.random, s = 255;
+
+    return "rgba(" + o(r() * s) + "," + o(r() * s) + "," + o(r() * s) + "," + r().toFixed(1) + ")";
 }
 
 /**

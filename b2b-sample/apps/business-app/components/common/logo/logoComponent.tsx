@@ -29,7 +29,7 @@ import styles from "../../../styles/Settings.module.css";
  */
 export default function LogoComponent(prop) {
 
-    let { name, imageSize, white } = prop;
+    const { name, imageSize, white } = prop;
 
     return (
         <div className={ styles.logoDiv }>

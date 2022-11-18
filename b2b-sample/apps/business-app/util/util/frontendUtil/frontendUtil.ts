@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { checkAdmin } from '../orgUtil/orgUtil';
+import { checkAdmin } from "../orgUtil/orgUtil";
 
 const LOADING_DISPLAY_NONE = {
     display: "none"
@@ -39,7 +39,7 @@ function hideBasedOnScopes(scopes) {
         return LOADING_DISPLAY_BLOCK;
     } else {
 
-        return LOADING_DISPLAY_NONE
+        return LOADING_DISPLAY_NONE;
     }
 }
 

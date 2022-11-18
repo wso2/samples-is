@@ -25,6 +25,7 @@ import { Avatar, Button, Container, FlexboxGrid, Form, Input, InputGroup, Modal,
 import Enterprise from "./data/templates/enterprise-identity-provider.json";
 import Google from "./data/templates/google.json";
 import IdentityProviderList from "./otherComponents/identityProviderList";
+import config from "../../../../../config.json";
 import { AllIdentityProvidersIdentityProvider } from "../../../../../models/identityProvider/identityProvider";
 import styles from "../../../../../styles/idp.module.css";
 import decodeCreateIdentityProvider from
@@ -37,6 +38,7 @@ import { getCallbackUrl } from "../../../../../util/util/idpUtil/idpUtil";
 import { errorTypeDialog, successTypeDialog } from "../../../../common/dialog";
 import EmptySettings from "../../../../common/emptySettings";
 import SettingsTitle from "../../../../common/settingsTitle";
+//import f from "../../../../../../../libs/business-app/ui-assets/src/lib/images/"
 
 /**
  * 
@@ -230,11 +232,13 @@ const AddIdentityProviderModal = (prop) => {
     const resolveIconName = (template) => {
         if (GOOGLE_ID === template.templateId) {
 
-            return "google.svg";
+            return `${config.ManagementAPIConfig.ImageBaseUrl}/libs/themes/default/assets` +
+                "/images/identity-providers/google-idp-illustration.svg";
         }
         if (ENTERPRISE_ID === template.templateId) {
 
-            return "enterprise.svg";
+            return `${config.ManagementAPIConfig.ImageBaseUrl}/libs/themes/default/assets` +
+                "/images/identity-providers/enterprise-idp-illustration.svg";
         }
 
         return EMPTY_STRING;
@@ -265,7 +269,7 @@ const AddIdentityProviderModal = (prop) => {
                                     </div>
                                     <Avatar
                                         style={ { background: "rgba(255,0,0,0)" } }
-                                        src={ `/icons/${resolveIconName(template)}` }
+                                        src={ resolveIconName(template) }
                                     />
                                 </div>
                             );

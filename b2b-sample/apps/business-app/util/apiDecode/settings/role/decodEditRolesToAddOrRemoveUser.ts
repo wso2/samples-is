@@ -16,8 +16,8 @@
  * under the License.
  */
 
-import { PatchMethod } from "../../../util/common/common";
 import decodePatchRole from "./decodePatchRole";
+import { PatchMethod } from "../../../util/common/common";
 
 function getRolesThatNeedToAddUser(initRoleList, roleList) {
     return roleList.filter(roleUri => !initRoleList.includes(roleUri));
@@ -31,7 +31,7 @@ async function getRoleDetailsForAdd(session, userId, initRoleList, roleList) {
     const rolesUriList = getRolesThatNeedToAddUser(initRoleList, roleList);
 
     await rolesUriList.forEach(async (uri) => {
-        decodePatchRole(session, uri, PatchMethod.ADD, "users", [userId]);
+        decodePatchRole(session, uri, PatchMethod.ADD, "users", [ userId ]);
     });
 }
 

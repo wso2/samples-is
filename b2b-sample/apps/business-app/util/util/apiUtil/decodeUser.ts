@@ -11,7 +11,7 @@
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or export. See the License for the
+ * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
  */
@@ -39,7 +39,7 @@ function decodeUser(user) {
  * 
  * @returns set username.
  */
- function setUsername(userName) {
+function setUsername(userName) {
     
     return userName;
 }
@@ -61,4 +61,4 @@ function getUsername(userName) {
     return userName;
 }
 
-export{ decodeUser, setUsername }
+export{ decodeUser, setUsername };

@@ -18,7 +18,7 @@
 
 import Image from "next/image";
 import React from "react";
-import logoImage from "../../../public/logo.png";
+import logoImage from "../../../../../libs/shared/ui-assets/src/lib/images/logo.png";
 
 /**
  * 
@@ -32,7 +32,7 @@ export default function Logo(prop) {
 
     const getImageStyle = (size, white) => {
 
-        let imageStyle = {
+        const imageStyle = {
             "height": "auto"
         };
 
@@ -67,8 +67,8 @@ export default function Logo(prop) {
 
     return (
         <Image
-            src={logoImage}
+            src={ logoImage }
             alt="404 image"
-            style={getImageStyle(imageSize, white)} />
+            style={ getImageStyle(imageSize, white) } />
     );
 }

@@ -29,7 +29,7 @@ export default function getDataHeader(session) {
         "accept": "application/json",
         "authorization": "Bearer " + session.accessToken,
         "access-control-allow-origin": getHostedUrl()
-    }
+    };
 
-    return { headers }
+    return { headers };
 }

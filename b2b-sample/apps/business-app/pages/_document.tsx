@@ -25,7 +25,7 @@ export default class MyDocument extends Document {
         return (
             <Html>
                 <Head>
-                    <link rel="shortcut icon" href="/favicon.png" />
+                    <link rel="shortcut icon" href="./favicon.png" />
                     <meta httpEquiv="cache-control" content="no-cache" />
                     <meta httpEquiv="expires" content="0" />
                     <meta httpEquiv="pragma" content="no-cache" />

@@ -20,6 +20,7 @@ import enterpriseFederatedAuthenticators from
     "../../../components/sections/sections/settingsSection/idpSection/data/templates/enterprise-identity-provider.json";
 import googleFederatedAuthenticators from
     "../../../components/sections/sections/settingsSection/idpSection/data/templates/google.json";
+
 const { GOOGLE_ID, ENTERPRISE_ID } = require("../common/common");
 
 /**
@@ -52,8 +53,8 @@ function selectedTemplateBaesedonTemplateId(templateId) {
  * `onlyIdp` - is the idp is the only idp in the sequence
  */
 function checkIfIdpIsinAuthSequence(template, idpDetails) {
-    let authenticationSequenceModel = template.authenticationSequence;
-    let idpName = idpDetails.name;
+    const authenticationSequenceModel = template.authenticationSequence;
+    const idpName = idpDetails.name;
     let check = false;
     let onlyIdp = false;
 
@@ -69,7 +70,7 @@ function checkIfIdpIsinAuthSequence(template, idpDetails) {
         }
     });
 
-    return [check, onlyIdp];
+    return [ check, onlyIdp ];
 }
 
 /**
@@ -78,7 +79,7 @@ function checkIfIdpIsinAuthSequence(template, idpDetails) {
  * @returns `true` if BASIC AUTH is available in auth sequence, else `false`
  */
 function checkIfBasicAvailableinAuthSequence(template) {
-    let authenticationSequenceModel = template.authenticationSequence;
+    const authenticationSequenceModel = template.authenticationSequence;
     let check = false;
 
     authenticationSequenceModel.steps.map((step) => {
@@ -99,9 +100,9 @@ function checkIfBasicAvailableinAuthSequence(template) {
 const PatchApplicationAuthMethod = {
     ADD: true,
     REMOVE: false
-}
+};
 
 export{
     selectedTemplateBaesedonTemplateId, checkIfIdpIsinAuthSequence, checkIfBasicAvailableinAuthSequence,
     PatchApplicationAuthMethod
-}
+};

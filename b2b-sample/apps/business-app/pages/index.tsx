@@ -21,8 +21,8 @@ import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { Button } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
+import homeImage from "../../../libs/shared/ui-assets/src/lib/images/home.jpeg";
 import LogoComponent from "../components/common/logo/logoComponent";
-import homeImage from "../public/internal/home.jpeg";
 import styles from "../styles/Home.module.css";
 
 /**
@@ -30,8 +30,6 @@ import styles from "../styles/Home.module.css";
  * @returns - First interface of the app
  */
 export default function Home() {
-
-    const homeImageAddress = "./internal/home.jpeg";
 
     const router = useRouter();
     const signinOnClick = () => {
@@ -43,26 +41,26 @@ export default function Home() {
     }, []);
 
     return (
-        <div className={styles.container}>
-            <main className={styles.main}>
+        <div className={ styles.container }>
+            <main className={ styles.main }>
 
-                <Image src={homeImage} className={styles.homeImageDiv} alt="home image" />
+                <Image src={ homeImage } className={ styles.homeImageDiv } alt="home image" />
 
-                <div className={styles.signInDiv}>
+                <div className={ styles.signInDiv }>
                     <LogoComponent imageSize="medium" />
 
                     <hr />
-                    <p className={styles.buttonTag}>Let&apos;s get your journey started. </p>
+                    <p className={ styles.buttonTag }>Let&apos;s get your journey started. </p>
                     <Button
-                        className={styles.signInDivButton}
+                        className={ styles.signInDivButton }
                         size="lg"
                         appearance="primary"
-                        onClick={signinOnClick}>Sign In</Button>
+                        onClick={ signinOnClick }>Sign In</Button>
                 </div>
 
             </main>
 
-            <footer className={styles.footer}>
+            <footer className={ styles.footer }>
                 <a
                     href="https://wso2.com/asgardeo/"
                     target="_blank"

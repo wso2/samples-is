@@ -28,7 +28,7 @@ import { decodeUser } from "../../util/apiUtil/decodeUser";
  */
 export default async function decodeMe(session) {
     try {
-        var meData;
+        let meData;
 
         if (!session.user || session.user.id === undefined || session.user.userName === undefined
             || session.user.name === undefined || session.user.emails === undefined) {
@@ -42,6 +42,6 @@ export default async function decodeMe(session) {
         return meReturn;
     } catch (err) {
 
-        return null
+        return null;
     }
 }

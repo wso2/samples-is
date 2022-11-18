@@ -18,11 +18,11 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@b2bsample/my-new-lib": [
-        "libs/my-new-lib/src/index.ts"
+      "@b2bsample/shared/ui-assets": [
+        "libs/shared/ui-assets/src"
       ],
-      "@b2bsample/shared/assets": [
-        "libs/shared/assets/src/index.ts"
+      "@b2bsample/business-app/ui-assets": [
+        "libs/business-app/ui-assets/src"
       ]
     }
   },

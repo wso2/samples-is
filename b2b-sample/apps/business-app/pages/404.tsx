@@ -19,9 +19,8 @@
 import Image from "next/image";
 
 import { useRouter } from "next/router";
-import React from "react";
-import { Button, Col, Grid, Row } from "rsuite";
-import errorImage from "../public/internal/error.svg";
+import { Button, Stack } from "rsuite";
+import errorImage from "../../../libs/shared/ui-assets/src/lib/images/404.svg";
 import style from "../styles/Error.module.css";
 
 export default function Custom404() {
@@ -30,33 +29,31 @@ export default function Custom404() {
     const goBack = () => router.back();
 
     return (
-        <div className={ style.errorMainContent }>
-            <Grid>
-                <Row>
-                    <Col sm={ 24 } md={ 6 } lg={ 3 } />
+        <Stack
+            className={ style["errorMainContent"] }
+            spacing={ 50 }
+            direction="column"
+            justifyContent="center"
+            alignItems="center">
 
-                    <Col sm={ 12 } md={ 12 } lg={ 18 }>
+            <Image src={ errorImage } width={ 600 } alt="404 image" />
 
-                        <div className={ style.errorMainDiv }>
 
-                            <Image src={ errorImage } width={ 600 } alt="404 image" />
+            <Stack
+                spacing={ 25 }
+                direction="column"
+                justifyContent="center"
+                alignItems="center">
 
-                            <p
-                                style={ {
-                                    textAlign: "center"
-                                } }><b>The page your searching seems to be missing.</b> <br />
-                You can go back, or contact our <a>Customer Service</a> team if you need any help</p>
+                <p className={ style["p"] }><b>The page your searching seems to be missing.</b>
+                    <br />
+                    You can go back, or contact our <a>Customer Service</a> team if you need any help
+                </p>
 
-                            <Button size="lg" appearance="ghost" onClick={ goBack }>Go Back</Button>
+                <Button size="lg" appearance="ghost" onClick={ goBack }>Go Back</Button>
 
-                        </div>
+            </Stack>
 
-                    </Col>
-
-                    <Col sm={ 24 } md={ 6 } lg={ 3 } />
-
-                </Row>
-            </Grid>
-        </div>
+        </Stack>
     );
 }

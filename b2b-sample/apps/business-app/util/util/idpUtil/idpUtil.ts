@@ -16,10 +16,10 @@
  * under the License.
  */
 
+import config from "../../../config.json";
+import { getManagementAPIServerBaseUrl } from "../apiUtil/getUrls";
 import { ENTERPRISE_ID, GOOGLE_ID } from "../common/common";
 import { getOrgUrl } from "../orgUtil/orgUtil";
-import { getManagementAPIServerBaseUrl } from "../apiUtil/getUrls";
-import config from "../../../config.json";
 
 /**
  * 
@@ -40,18 +40,20 @@ function getCallbackUrl(orgId) {
  */
 function setIdpTemplate(model, templateId, formValues, orgId) {
 
-    let name = formValues.application_name.toString();
-    let clientId = formValues.client_id.toString();
-    let clientSecret = formValues.client_secret.toString();
+    const name = formValues.application_name.toString();
+    const clientId = formValues.client_id.toString();
+    const clientSecret = formValues.client_secret.toString();
 
     model.name = name;
 
     switch (templateId) {
         case GOOGLE_ID:
             model = googleIdpTemplate(model, clientId, clientSecret, orgId);
+
             break;
         case ENTERPRISE_ID:
             model = enterpriseIdpTemplate(model, clientId, clientSecret, formValues, orgId);
+
             break;
         default:
             break;
@@ -76,7 +78,7 @@ function googleIdpTemplate(model, clientId, clientSecret, orgId) {
 
     model.image =
         `${config.ManagementAPIConfig.ImageBaseUrl}/libs/themes/default/assets` +
-        `/images/identity-providers/google-idp-illustration.svg`;
+        "/images/identity-providers/google-idp-illustration.svg";
 
     model.alias = `${getManagementAPIServerBaseUrl()}/oauth2/token`;
 
@@ -114,13 +116,13 @@ function googleIdpTemplate(model, clientId, clientSecret, orgId) {
  */
 function enterpriseIdpTemplate(model, clientId, clientSecret, formValues, orgId) {
 
-    let authorizationEndpointUrl = formValues.authorization_endpoint_url.toString();
-    let tokenEndpointUrl = formValues.token_endpoint_url.toString();
-    let certificate = formValues.certificate.toString();
+    const authorizationEndpointUrl = formValues.authorization_endpoint_url.toString();
+    const tokenEndpointUrl = formValues.token_endpoint_url.toString();
+    const certificate = formValues.certificate.toString();
 
     model.image =
         `${config.ManagementAPIConfig.ImageBaseUrl}/libs/themes/default/assets` +
-        `/images/identity-providers/enterprise-idp-illustration.svg`;
+        "/images/identity-providers/enterprise-idp-illustration.svg";
 
     model.federatedAuthenticators.authenticators[0].properties = [
         {

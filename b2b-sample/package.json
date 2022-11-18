@@ -54,6 +54,8 @@
   "dependencies": {
     "@nrwl/workspace": "^15.1.1",
     "core-js": "^3.6.5",
+    "eslint-plugin-header": "^3.1.1",
+    "eslint-plugin-tsdoc": "^0.2.17",
     "less": "^4.1.3",
     "next": "13.0.0",
     "next-auth": "^4.16.4",

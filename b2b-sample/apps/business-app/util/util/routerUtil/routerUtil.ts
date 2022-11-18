@@ -18,9 +18,9 @@
 
 import cookie from "cookie";
 import { signIn, signOut } from "next-auth/react";
-import { User } from "../../../models/user/user";
 import config from "../../../config.json";
-import { getManagementAPIServerBaseUrl, getTenantDomain, getHostedUrl } from "../apiUtil/getUrls";
+import { User } from "../../../models/user/user";
+import { getHostedUrl, getManagementAPIServerBaseUrl, getTenantDomain } from "../apiUtil/getUrls";
 import { checkIfJSONisEmpty } from "../common/common";
 
 /**
@@ -33,9 +33,9 @@ function redirect(path): object {
     return {
         redirect: {
             destination: path,
-            permanent: false,
-        },
-    }
+            permanent: false
+        }
+    };
 }
 
 /**
@@ -55,9 +55,9 @@ function parseCookies(req) {
  */
 function orgSignin(orgId?: string): void {
     if (orgId) {
-        signIn("wso2is", { callbackUrl: `/o/moveOrg` }, { orgId: orgId });
+        signIn("wso2is", { callbackUrl: "/o/moveOrg" }, { orgId: orgId });
     } else {
-        signIn("wso2is", { callbackUrl: `/o/moveOrg` });
+        signIn("wso2is", { callbackUrl: "/o/moveOrg" });
     }
 }
 
@@ -131,7 +131,7 @@ function getOrgId(token): string {
 
     if (parseJwt(token).org_id) {
 
-        return parseJwt(token).org_id
+        return parseJwt(token).org_id;
     }
 
     return config.ApplicationConfig.SampleOrganization[0].id;
@@ -147,7 +147,7 @@ function getOrgName(token): string {
 
     if (parseJwt(token).org_name) {
 
-        return parseJwt(token).org_name
+        return parseJwt(token).org_name;
     }
 
     return config.ApplicationConfig.SampleOrganization[0].name;
@@ -168,19 +168,19 @@ function getLoggedUserFromProfile(profile): User {
                 givenName: profile.given_name ? profile.given_name : "-",
                 familyName: profile.family_name ? profile.family_name : "-"
             },
-            emails: [profile.email],
+            emails: [ profile.email ],
             userName: profile.userName
         };
 
         if (checkIfJSONisEmpty(user.name) || !user.emails[0] || !user.userName) {
 
-            return null
+            return null;
         }
 
         return user;
     } catch (err) {
 
-        return null
+        return null;
     }
 }
 
