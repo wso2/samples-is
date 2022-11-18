@@ -31,6 +31,8 @@ import styles from "../styles/Home.module.css";
  */
 export default function Home() {
 
+    const homeImageAddress = "./internal/home.jpeg";
+
     const router = useRouter();
     const signinOnClick = () => {
         router.push("/signin");
@@ -41,34 +43,32 @@ export default function Home() {
     }, []);
 
     return (
-        <div className={ styles.container }>
-            <main className={ styles.main }>
+        <div className={styles.container}>
+            <main className={styles.main}>
 
-                <div className={ styles.homeImageDiv }>
-                    <Image src={ homeImage } className={ styles.homeImage } alt="home image" />
-                </div>
+                <Image src={homeImage} className={styles.homeImageDiv} alt="home image" />
 
-                <div className={ styles.signInDiv }>
+                <div className={styles.signInDiv}>
                     <LogoComponent imageSize="medium" />
 
                     <hr />
-                    <p className={ styles.buttonTag }>Let&apos;s get your journey started. </p>
+                    <p className={styles.buttonTag}>Let&apos;s get your journey started. </p>
                     <Button
-                        className={ styles.signInDivButton }
+                        className={styles.signInDivButton}
                         size="lg"
                         appearance="primary"
-                        onClick={ signinOnClick }>Sign In</Button>
+                        onClick={signinOnClick}>Sign In</Button>
                 </div>
 
             </main>
 
-            <footer className={ styles.footer }>
+            <footer className={styles.footer}>
                 <a
                     href="https://wso2.com/asgardeo/"
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-          WSO2 Sample Application
+                    WSO2 Sample Application
                 </a>
             </footer>
         </div>

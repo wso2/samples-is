@@ -107,6 +107,7 @@
 
 .profileImage{
     width: 0.5%;  
+    height: auto;
     flex-grow: 1;
 }
 

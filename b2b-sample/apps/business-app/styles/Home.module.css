@@ -25,13 +25,10 @@
 .homeImageDiv {
   width: 75vw;
   height: 100vh;
-  display: flex;
-  overflow: auto;
-  flex-wrap: nowrap;
-}
-
-.homeImage {
   opacity: 0.8;
+  display: flex;
+  overflow: hidden;
+  flex-wrap: nowrap;
 }
 
 .signInDiv {

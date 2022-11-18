@@ -28,7 +28,8 @@
           "defaultConfiguration": "development",
           "options": {
             "buildTarget": "business-app:build",
-            "dev": true
+            "dev": true,
+            "port": 3000
           },
           "configurations": {
             "development": {

@@ -19,7 +19,6 @@
 import Image from "next/image";
 import React from "react";
 import logoImage from "../../../public/logo.png";
-// import { SharedAssets } from "@b2bsample/shared/assets";
 
 /**
  * 
@@ -33,7 +32,9 @@ export default function Logo(prop) {
 
     const getImageStyle = (size, white) => {
 
-        let imageStyle = {};
+        let imageStyle = {
+            "height": "auto"
+        };
 
         switch (size) {
             case "small":
@@ -65,11 +66,9 @@ export default function Logo(prop) {
     };
 
     return (
-        <div style={getImageStyle(imageSize, white)}>
-            {/* <SharedAssets /> */}
-            <Image
-                src={logoImage}
-                alt="404 image" />
-        </div>
+        <Image
+            src={logoImage}
+            alt="404 image"
+            style={getImageStyle(imageSize, white)} />
     );
 }
