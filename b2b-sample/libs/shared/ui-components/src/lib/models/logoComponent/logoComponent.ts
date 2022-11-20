@@ -16,5 +16,20 @@
  * under the License.
  */
 
-// NOTE: This file should not be edited
-// see https://nextjs.org/docs/basic-features/typescript for more information.
+export interface LogoComponentProps {
+    name? : string,
+    imageSize : "small" | "medium" | "large" | "x-large",
+    white? : boolean
+}
+
+export interface LogoProps {
+    imageSize: "small" | "medium" | "large" | "x-large",
+    white?: boolean
+}
+
+export interface LogoImageStyle {
+    height : string,
+    width? : string,
+    filter? : string,
+    [key: string]: any;
+}

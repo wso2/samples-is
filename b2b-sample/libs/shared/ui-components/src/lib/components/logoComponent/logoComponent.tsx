@@ -17,8 +17,39 @@
  */
 
 import Image from "next/image";
-import React from "react";
-import logoImage from "../../../../../libs/shared/ui-assets/src/lib/images/logo.png";
+import config from "../../../../../../../config.json";
+import logoImage from "../../../../../../../libs/shared/ui-assets/src/lib/images/logo.png";
+import { LogoComponentProps, LogoImageStyle, LogoProps } from "../../models/logoComponent/logoComponent";
+import styles from "./logoComponent.module.css";
+
+/**
+ * 
+ * @param prop - name (org name), imageSize `small` | `medium` | `large` | `x-large`
+ *
+ * @returns 
+ */
+export function LogoComponent(prop: LogoComponentProps) {
+
+    const { name, imageSize, white } = prop;
+
+    return (
+        <div className={styles["logoDiv"]}>
+            <Logo imageSize={imageSize} white={white} />
+            <p className={styles["nameTag"]}>{config.ApplicationConfig.Branding.tag} </p>
+            {
+                name
+                    ? (
+                        <>
+                            <hr />
+                            <h5 className={styles["nameTag"]}>{name}</h5>
+                            <hr />
+                        </>
+                    )
+                    : null
+            }
+        </div>
+    );
+}
 
 /**
  * 
@@ -26,13 +57,13 @@ import logoImage from "../../../../../libs/shared/ui-assets/src/lib/images/logo.
  * 
  * @returns Logo component
  */
-export default function Logo(prop) {
+function Logo(prop: LogoProps) {
 
     const { imageSize, white } = prop;
 
-    const getImageStyle = (size, white) => {
+    const getImageStyle = (size: string, white?: boolean) => {
 
-        const imageStyle = {
+        const imageStyle: LogoImageStyle = {
             "height": "auto"
         };
 
@@ -67,8 +98,10 @@ export default function Logo(prop) {
 
     return (
         <Image
-            src={ logoImage }
+            src={logoImage}
             alt="404 image"
-            style={ getImageStyle(imageSize, white) } />
+            style={getImageStyle(imageSize, white)} />
     );
 }
+
+export default LogoComponent;

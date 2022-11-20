@@ -22,7 +22,7 @@ import React, { useEffect } from "react";
 import { Button } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
 import homeImage from "../../../libs/shared/ui-assets/src/lib/images/home.jpeg";
-import LogoComponent from "../components/common/logo/logoComponent";
+import { LogoComponent } from "@b2bsample/shared/ui-components";
 import styles from "../styles/Home.module.css";
 
 /**

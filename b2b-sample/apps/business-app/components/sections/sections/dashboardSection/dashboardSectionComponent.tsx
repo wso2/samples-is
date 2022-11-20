@@ -23,7 +23,7 @@ import LatestNewsComponent from "./otherComponents/latestNewsComponent";
 import UserDetails from "./otherComponents/userDetails";
 import styles from "../../../../styles/Settings.module.css";
 import decodeMe from "../../../../util/apiDecode/dashboard/decodeMe";
-import LogoComponent from "../../../common/logo/logoComponent";
+import { LogoComponent } from "@b2bsample/shared/ui-components";
 
 /**
  * 
@@ -50,9 +50,7 @@ export default function DashboardSectionComponent(prop) {
         <div className={ styles.homeMainPanelDiv }>
             <Panel bordered>
                 <div className={ styles.homePanel }>
-                    <LogoComponent imageSize="medium" />
-                    <hr />
-                    <h4 className={ styles.nameTag }>{ orgName }</h4>
+                    <LogoComponent imageSize="medium" name={ orgName } />
                 </div>
             </Panel>
 

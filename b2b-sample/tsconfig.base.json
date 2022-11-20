@@ -1,33 +1,37 @@
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "rootDir": ".",
-    "sourceMap": true,
-    "declaration": false,
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "importHelpers": true,
-    "target": "es2015",
-    "module": "esnext",
-    "lib": [
-      "es2017",
-      "dom"
-    ],
-    "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
-    "baseUrl": ".",
-    "paths": {
-      "@b2bsample/shared/ui-assets": [
-        "libs/shared/ui-assets/src"
-      ],
-      "@b2bsample/business-app/ui-assets": [
-        "libs/business-app/ui-assets/src"
-      ]
-    }
-  },
-  "exclude": [
-    "node_modules",
-    "tmp"
-  ]
+    "compileOnSave": false,
+    "compilerOptions": {
+        "rootDir": ".",
+        "sourceMap": true,
+        "declaration": false,
+        "moduleResolution": "node",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "importHelpers": true,
+        "target": "es2015",
+        "module": "esnext",
+        "resolveJsonModule": true,
+        "lib": [
+            "es2017",
+            "dom"
+        ],
+        "skipLibCheck": true,
+        "skipDefaultLibCheck": true,
+        "baseUrl": ".",
+        "paths": {
+            "@b2bsample/business-app/ui-assets": [
+                "libs/business-app/ui-assets/src"
+            ],
+            "@b2bsample/shared/ui-assets": [
+                "libs/shared/ui-assets/src"
+            ],
+            "@b2bsample/shared/ui-components": [
+                "libs/shared/ui-components/src/index.ts"
+            ]
+        }
+    },
+    "exclude": [
+        "node_modules",
+        "tmp"
+    ]
 }
