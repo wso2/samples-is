@@ -32,9 +32,9 @@ function getCallbackUrl(orgId) {
 /**
  * 
  * @param model - template of the idp as a JSON
- * @param templateId 
- * @param formValues 
- * @param orgId
+ * @param templateId - identity provider template id
+ * @param formValues - values get from the form inputs
+ * @param orgId - organization id
  * 
  * @returns - idp readay to sent to the IS 
  */
@@ -67,10 +67,10 @@ function setIdpTemplate(model, templateId, formValues, orgId) {
 
 /**
  * 
- * @param model 
- * @param clientId 
- * @param clientSecret 
- * @param orgId
+ * @param model - template of the idp as a JSON
+ * @param clientId - client id text entered by the user for the identity provider
+ * @param clientSecret - client secret text entered by the user for the identity provider
+ * @param orgId - organization id
  * 
  * @returns - create google IDP template
  */
@@ -106,11 +106,11 @@ function googleIdpTemplate(model, clientId, clientSecret, orgId) {
 
 /**
  * 
- * @param model 
- * @param clientId 
- * @param clientSecret 
- * @param formValues 
- * @param orgId
+ * @param model - template of the idp as a JSON
+ * @param clientId - client id text entered by the user for the identity provider
+ * @param clientSecret - client secret text entered by the user for the identity provider    
+ * @param formValues - values get from the form inputs
+ * @param orgId - organization id
  * 
  * @returns create enterprise IDP template
  */
@@ -156,6 +156,6 @@ function enterpriseIdpTemplate(model, clientId, clientSecret, formValues, orgId)
     return model;
 }
 
-export{
+export {
     setIdpTemplate, getCallbackUrl
 };

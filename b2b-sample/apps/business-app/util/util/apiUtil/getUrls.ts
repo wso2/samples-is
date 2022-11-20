@@ -23,11 +23,13 @@ import config from "../../../config.json";
  * 
  * @returns get managemnt API server base URL
  */
+
 function getManagementAPIServerBaseUrl() {
 
     // todo: implementation will change after changes are done to the IS.
 
     const baseOrganizationUrl = config.AuthorizationConfig.BaseOrganizationUrl;
+    // eslint-disable-next-line
     const matches = baseOrganizationUrl.match(/^(http|https)?\:\/\/([^\/?#]+)/i);
     const domain = matches && matches[0];
 
@@ -37,7 +39,7 @@ function getManagementAPIServerBaseUrl() {
 /**
  * Tenant domain extracted from the `config.AuthorizationConfig.BaseOrganizationUrl`
  * 
- *  @return tenatn domain.
+ *  @returns tenatn domain.
  */
 function getTenantDomain() {
 

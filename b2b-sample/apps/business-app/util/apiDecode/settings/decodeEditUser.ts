@@ -22,12 +22,12 @@ import { setUsername } from "../../util/apiUtil/decodeUser";
 
 /**
  * 
- * @param session 
- * @param id 
- * @param firstName 
- * @param familyName 
- * @param email 
- * @param username 
+ * @param session - session object
+ * @param id - id of the user
+ * @param firstName - first name of the user
+ * @param familyName - family name of the user
+ * @param email - email of the user
+ * @param username - user name of the user
 
  * @returns `res` (if user edited successfully) or `false` (if the process was not completed)
  */

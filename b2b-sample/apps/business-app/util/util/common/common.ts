@@ -26,7 +26,7 @@ import { infoTypeDialog } from "../../../components/common/dialog";
  */
 function stringIsEmpty(str) : boolean{
 
-    return (str === "");
+    return str === "";
 }
 
 /**
@@ -45,7 +45,7 @@ function getCurrentDate() : string {
 }
 
 /**
- *  @return true if JSON is empty else false
+ *  @returns true if JSON is empty else false
  */
 function checkIfJSONisEmpty(obj) : boolean {
     if (!obj) {
@@ -57,7 +57,7 @@ function checkIfJSONisEmpty(obj) : boolean {
 }
 
 /**
- *  @return the size of JSON object
+ *  @returns the size of JSON object
  */
 function sizeOfJson(obj) : number {
     return Object.keys(obj).length;
@@ -66,8 +66,8 @@ function sizeOfJson(obj) : number {
 /**
  * Copy the pased `text` to the clipboard and shows a notification
  * 
- * @param text 
- * @param toaster 
+ * @param text - text that need to be copied to the clipboard
+ * @param toaster - toaster object
  */
 function copyTheTextToClipboard(text, toaster) : void {
     navigator.clipboard.writeText(text);

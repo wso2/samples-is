@@ -29,7 +29,7 @@ const InviteConst = {
 function inviteAddUserBody(firstName, familyName, email, username) {
     return {
         "emails": [
-            {   
+            {
                 "primary": true,
                 "value": email
             }
@@ -78,12 +78,12 @@ function getAddUserBody(inviteConst, firstName, familyName, email, username, pas
 
 /**
  * 
- * @param session 
- * @param firstName 
- * @param familyName 
- * @param email 
- * @param username 
- * @param password
+ * @param session - session object
+ * @param firstName - first name of the user
+ * @param familyName - family name of the user
+ * @param email - email of the user
+ * @param username - user name of the user
+ * @param password - password of the user
  * 
  * @returns `res` (if user added successfully) or `null` (if user addition was not completed)
  */
@@ -100,4 +100,4 @@ async function decodeAddUser(session, inviteConst, firstName, familyName, email,
     }
 }
 
-export{ InviteConst, decodeAddUser };
+export { InviteConst, decodeAddUser };

@@ -22,7 +22,7 @@ import { commonDecode } from "../../util/apiUtil/commonDecode";
 
 /**
  * 
- * @param token 
+ * @param token - token object get from the inital login call
  * 
  * @returns - organization id of the logged in organization
  */
@@ -44,7 +44,7 @@ function getOrgId(token) {
 /**
  * decode switch API call
  * 
- * @param token 
+ * @param token - token object get from the inital login call
  * 
  * @returns - `orgnization session` if the API call is a success else `null`
  */
@@ -54,7 +54,7 @@ export default async function decodeSwitchOrg(token) {
     const accessToken = token.accessToken;
 
     try {
-        const orgSession = await commonDecode(()=> callSwitchOrg(subOrgId, accessToken), null);
+        const orgSession = await commonDecode(() => callSwitchOrg(subOrgId, accessToken), null);
 
         return orgSession;
     } catch (err) {

@@ -22,8 +22,8 @@ import { getHostedUrl } from "../../../util/apiUtil/getUrls";
 /**
  * call POST `getManagementAPIServerBaseUrl()/api/server/v1/organizations/${orgId}/roles` create the role
  * 
- * @param session 
- * @param role
+ * @param session - session object
+ * @param role - role object
  * 
  * @returns created role details, if not created returns `null`
  */

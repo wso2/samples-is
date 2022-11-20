@@ -22,7 +22,7 @@ import { decodeUser } from "../../util/apiUtil/decodeUser";
 
 /**
  * 
- * @param session 
+ * @param session - session objecr
 
  * @returns all the users as a list. If failed `null`
  */
