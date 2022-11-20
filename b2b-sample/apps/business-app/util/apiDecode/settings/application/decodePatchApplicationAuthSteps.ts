@@ -24,7 +24,7 @@ import {
 
 /**
  * 
- * @param template
+ * @param template - identity provider object template
  * 
  * @returns get authentication sequence
  */
@@ -38,7 +38,7 @@ function getAuthenticationSequenceModel(template) {
 }
 /**
  * 
- * @param templateId
+ * @param templateId - GOOGLE_ID, ENTERPRISE_ID, BASIC_ID
  * 
  * @returns get authenticator id for the given template id
  */
@@ -61,25 +61,25 @@ function getAuthenticatorId(templateId) {
 
 /**
  * 
- * @param idpTempleteId 
- * @param idpName
+ * @param idpTempleteId - identity provider template id
+ * @param idpName - identity provider name
  * 
  * @returns get authenticator body
  */
 function getAuthenticatorBody(idpTempleteId, idpName) {
 
     return {
-        "idp": idpName,
-        "authenticator": getAuthenticatorId(idpTempleteId)
+        "authenticator": getAuthenticatorId(idpTempleteId),
+        "idp": idpName
     };
 }
 
 /**
  * 
- * @param template 
- * @param idpTempleteId 
- * @param idpName 
- * @param method
+ * @param template - identity provider object template
+ * @param idpTempleteId - identity provider template id
+ * @param idpName - identity provider name
+ * @param method - PatchApplicationAuthMethod
  * 
  * @returns add or remove idp from the login sequence
  */
@@ -129,10 +129,10 @@ function addRemoveAuthSequence(template, idpTempleteId, idpName, method) {
 
 /**
  * 
- * @param session 
- * @param template 
- * @param idpDetails 
- * @param method
+ * @param session - session object
+ * @param template - identity provider object template
+ * @param idpDetails - identity provider details
+ * @param method -  PatchApplicationAuthMethod
  * 
  * @returns decode patch applicaiton authentication steps API calls.
  */

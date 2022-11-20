@@ -24,7 +24,7 @@ import { getHostedUrl } from "../../../util/apiUtil/getUrls";
  * /federated-authenticators/<id>` 
  * to get detail of a federated authenticator of an identity provider
  * 
- * @param session 
+ * @param session - session object
  * @param idpid - identity provider id
  * @param id - federated authenticator id
  * 

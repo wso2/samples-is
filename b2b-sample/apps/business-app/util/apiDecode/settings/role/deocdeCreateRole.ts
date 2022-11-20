@@ -35,10 +35,10 @@ function getRoleBody(displayName, permissions, users) {
 
 /**
  * 
- * @param session 
- * @param displayName 
- * @param permissions 
- * @param users 
+ * @param session - session object
+ * @param displayName - role name
+ * @param permissions - role permissions
+ * @param users - users assigned to the role
  * 
  * @returns `res` (if user added successfully) or `false` (if user addition was not completed)
  */

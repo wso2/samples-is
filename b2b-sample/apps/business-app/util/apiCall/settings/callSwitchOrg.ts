@@ -22,9 +22,8 @@ import { getHostedUrl } from "../../util/apiUtil/getUrls";
 /**
  * call the switch organization API endpoint
  * 
- * @param subOrgId 
- * @param accessToken 
- * @returns 
+ * @param subOrgId - sub organization id
+ * @param accessToken - access token recieved from the login function
  */
 export default async function callSwitchOrg(subOrgId, accessToken) {
 

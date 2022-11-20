@@ -28,7 +28,10 @@ function notPostError(res) {
 
 function dataNotRecievedError(res) {
 
-    return error404(res, { msg: "Error occured when requesting data.", error: true });
+    return error404(res, {
+        error: true,
+        msg: "Error occured when requesting data."
+    });
 }
 
-export{ notPostError, dataNotRecievedError };
+export { notPostError, dataNotRecievedError };

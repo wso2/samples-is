@@ -22,7 +22,7 @@ import { getHostedUrl } from "../../../util/apiUtil/getUrls";
 /**
  * call GET `roleUri`
  * 
- * @param session 
+ * @param session - session object
  * @param roleUri - uri of the role
  * 
  * @returns - role details, if the call failed `null`

@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { LogoComponent } from "@b2bsample/shared/ui-components";
 import React, { useEffect, useState } from "react";
 import { Panel } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
@@ -23,7 +24,6 @@ import LatestNewsComponent from "./otherComponents/latestNewsComponent";
 import UserDetails from "./otherComponents/userDetails";
 import styles from "../../../../styles/Settings.module.css";
 import decodeMe from "../../../../util/apiDecode/dashboard/decodeMe";
-import { LogoComponent } from "@b2bsample/shared/ui-components";
 
 /**
  * 

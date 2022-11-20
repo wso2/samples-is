@@ -24,7 +24,7 @@ import { getHostedUrl } from "../../../util/apiUtil/getUrls";
  * call GET `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/applications?filter=name+eq+<appName>` 
  * to get the initial applicaion details
  * 
- * @param session 
+ * @param session - session object
  * 
  * @returns application initial details, if call failed `null`
  */

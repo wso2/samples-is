@@ -24,7 +24,7 @@ import { getHostedUrl } from "../../../util/apiUtil/getUrls";
  * 
  * call PUT `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/identity-providers/<idpid>/<request[0]>`
  * 
- * @param session 
+ * @param session - session object
  * @param idpId - identity provider id
  * @param body - identity provider body that need to patch
  * 

@@ -23,7 +23,7 @@ import { getHostedUrl } from "../../../util/apiUtil/getUrls";
  * call GET `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/organizations/<subOrgId>/roles` 
  * to list all the roles
  * 
- * @param session 
+ * @param session - session object
  * 
  * @returns - all the roles, if the call failed `null`
  */

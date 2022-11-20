@@ -33,26 +33,26 @@ import { setUsername } from "../../util/apiUtil/decodeUser";
  */
 export default async function decodeEditUser(session, id, firstName, familyName, email, username) {
     const editUserEncode = {
-        "schemas": [
-            "urn:ietf:params:scim:api:messages:2.0:PatchOp"
-        ],
         "Operations": [
             {
                 "op": "replace",
                 "value": {
-                    "name": {
-                        "givenName": firstName,
-                        "familyName": familyName
-                    },
-                    "userName": setUsername(username),
                     "emails": [
-                        {
-                            "value": email,
-                            "primary": true
+                        {   
+                            "primary": true,
+                            "value": email
                         }
-                    ]
+                    ],
+                    "name": {
+                        "familyName": familyName,
+                        "givenName": firstName
+                    },
+                    "userName": setUsername(username)
                 }
             }
+        ],
+        "schemas": [
+            "urn:ietf:params:scim:api:messages:2.0:PatchOp"
         ]
     };
 

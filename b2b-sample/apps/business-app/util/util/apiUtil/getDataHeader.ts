@@ -20,15 +20,15 @@ import { getHostedUrl } from "./getUrls";
 
 /**
  * 
- * @param session 
+ * @param session - session object
  * 
  * @returns header object that can used for IS API calls
  */
 export default function getDataHeader(session) {
     const headers = {
         "accept": "application/json",
-        "authorization": "Bearer " + session.accessToken,
-        "access-control-allow-origin": getHostedUrl()
+        "access-control-allow-origin": getHostedUrl(),
+        "authorization": "Bearer " + session.accessToken
     };
 
     return { headers };

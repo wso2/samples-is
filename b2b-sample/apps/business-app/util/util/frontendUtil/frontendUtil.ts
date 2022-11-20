@@ -28,7 +28,7 @@ const LOADING_DISPLAY_BLOCK = {
 /**
  * hide content based on the user's realated privilages
  * 
- * @param {*} scopes - scopes related for the user
+ * @param scopes - scopes related for the user
  * 
  * @returns `LOADING_DISPLAY_BLOCK` if admin, else `LOADING_DISPLAY_NONE` 
  */

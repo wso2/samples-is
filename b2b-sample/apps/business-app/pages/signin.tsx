@@ -16,11 +16,11 @@
  * under the License.
  */
 
+import { LogoComponent } from "@b2bsample/shared/ui-components";
 import { getSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 import { Loader } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
-import { LogoComponent } from "@b2bsample/shared/ui-components";
 import styles from "../styles/Signin.module.css";
 import { orgSignin, redirect } from "../util/util/routerUtil/routerUtil";
 
@@ -62,7 +62,7 @@ export default function Signin() {
         <div className={ styles.signinOuter }>
             <div className={ styles.signinInner }>
                 <LogoComponent imageSize="medium" />
-                <Loader size="lg" content="Redirecting to the organization login. " vertical/>
+                <Loader size="lg" content="Redirecting to the organization login. " vertical />
             </div>
         </div>
     );

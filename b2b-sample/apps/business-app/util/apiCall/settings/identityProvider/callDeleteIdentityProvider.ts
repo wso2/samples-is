@@ -23,7 +23,7 @@ import { getHostedUrl } from "../../../util/apiUtil/getUrls";
  * call DELETE `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/identity-providers/<id>` 
  * to delete an identity provider
  * 
- * @param session 
+ * @param session - session object
  * @param idpId - identity provider id
  * 
  * @returns delete success, if the call failed `null`

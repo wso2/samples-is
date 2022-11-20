@@ -24,7 +24,7 @@ import { getHostedUrl } from "../../../util/apiUtil/getUrls";
  * call PATCH `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/applications/<id>` 
  *  to get PATCH the auth steps to the applicaion
  * 
- * @param session 
+ * @param session - session object
  * @param applicationId - application id
  * @param model - body of the applicaiton that need to patch
  * 

@@ -17,9 +17,9 @@
  */
 
 const RequestMethod = {
-    POST : "POST",
-    PATCH : "PATCH",
     DELETE: "DELETE",
+    PATCH : "PATCH",
+    POST : "POST",
     PUT: "PUT"
 };
 

@@ -29,37 +29,37 @@ const InviteConst = {
 function inviteAddUserBody(firstName, familyName, email, username) {
     return {
         "emails": [
-            {
-                "value": email,
-                "primary": true
+            {   
+                "primary": true,
+                "value": email
             }
         ],
-        "userName": setUsername(username),
         "name": {
-            "givenName": firstName,
-            "familyName": familyName
+            "familyName": familyName,
+            "givenName": firstName
         },
         "urn:scim:wso2:schema": {
             "askPassword": "true"
-        }
+        },
+        "userName": setUsername(username)
     };
 }
 
 function pwdAddUserBody(firstName, familyName, email, username, password) {
     return {
-        "schemas": [],
-        "name": {
-            "givenName": firstName,
-            "familyName": familyName
-        },
-        "userName": setUsername(username),
-        "password": password,
         "emails": [
             {
-                "value": email,
-                "primary": true
+                "primary": true,
+                "value": email
             }
-        ]
+        ],
+        "name": {
+            "familyName": familyName,
+            "givenName": firstName
+        },
+        "password": password,
+        "schemas": [],
+        "userName": setUsername(username)
     };
 }
 

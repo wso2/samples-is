@@ -25,7 +25,7 @@ import { checkIfJSONisEmpty } from "../common/common";
 
 /**
  * 
- * @param path
+ * @param path - path string that need to be redirected
  * 
  * @returns redirect locally to a path
  */
@@ -51,7 +51,7 @@ function parseCookies(req) {
 
 /**
  * 
- * @param orgId `orgId` - (directs to the organization login), `null` - (enter the organization to login)
+ * @param orgId - `orgId` - (directs to the organization login), `null` - (enter the organization to login)
  */
 function orgSignin(orgId?: string): void {
     if (orgId) {
@@ -64,7 +64,7 @@ function orgSignin(orgId?: string): void {
 /**
  * signout of the logged in organization
  * 
- * @param session 
+ * @param session - session object
  */
 async function orgSignout(session): Promise<void> {
 
@@ -86,7 +86,7 @@ async function orgSignout(session): Promise<void> {
 
 /**
  * 
- * @param session
+ * @param session - session object
  * 
  * @returns when session is `null` redirect  to /signin
  */
@@ -99,7 +99,7 @@ function emptySession(session): object {
 
 /**
  * 
- * @param token
+ * @param token - token object returned from the login function
  * 
  * @returns - parse JWT token and return a JSON
  */
@@ -112,7 +112,7 @@ function parseJwt(token): { [key: string]: any } {
 
 /**
  * 
- * @param token
+ * @param token - token object returned from the login function
  * 
  * @returns logged in user id.
  */
@@ -123,7 +123,7 @@ function getLoggedUserId(token): string {
 
 /**
  * 
- * @param token
+ * @param token - token object returned from the login function
  * 
  * @returns get organization id. If `org_id` is null in token check `config.json` for the org id
  */
@@ -139,7 +139,7 @@ function getOrgId(token): string {
 
 /**
  * 
- * @param token
+ * @param token - token object returned from the login function
  * 
  * @returns get organization name. If `org_name` is null in token check `config.json` for the org name
  */
@@ -163,12 +163,12 @@ function getLoggedUserFromProfile(profile): User {
 
     try {
         const user: User = {
+            emails: [ profile.email ],
             id: profile.sub,
             name: {
-                givenName: profile.given_name ? profile.given_name : "-",
-                familyName: profile.family_name ? profile.family_name : "-"
+                familyName: profile.family_name ? profile.family_name : "-",
+                givenName: profile.given_name ? profile.given_name : "-"
             },
-            emails: [ profile.email ],
             userName: profile.userName
         };
 

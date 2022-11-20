@@ -16,13 +16,13 @@
  * under the License.
  */
 
+import { LogoComponent } from "@b2bsample/shared/ui-components";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React ,{ useEffect } from "react";
 import { Button } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
 import homeImage from "../../../libs/shared/ui-assets/src/lib/images/home.jpeg";
-import { LogoComponent } from "@b2bsample/shared/ui-components";
 import styles from "../styles/Home.module.css";
 
 /**

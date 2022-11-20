@@ -22,7 +22,7 @@ import { getHostedUrl } from "../../../util/apiUtil/getUrls";
 /**
  * call PATCH `roleUri`
  * 
- * @param session 
+ * @param session - session object
  * @param roleUri - uri of the role
  * @param patchBody - body of the role that need to be patched
  * 

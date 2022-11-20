@@ -22,7 +22,7 @@ import { getHostedUrl } from "../../../util/apiUtil/getUrls";
 /**
  * call GET `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/applications/<id>` to get the applicaion details
  * 
- * @param session 
+ * @param session - session object
  * @param id - application id
  * 
  * @returns applicaiton details, if the call failed `null`

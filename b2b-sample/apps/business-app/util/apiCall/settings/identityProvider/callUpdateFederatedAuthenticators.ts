@@ -25,7 +25,7 @@ import { getHostedUrl } from "../../../util/apiUtil/getUrls";
  * 
  * call PATCH `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/identity-providers/<idpid>`
  * 
- * @param session 
+ * @param session - session object
  * @param idpid - identity provider id
  * @param body - identity provider body that need to update
  * 

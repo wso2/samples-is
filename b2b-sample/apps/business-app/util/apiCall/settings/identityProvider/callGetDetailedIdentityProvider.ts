@@ -23,7 +23,7 @@ import { getHostedUrl } from "../../../util/apiUtil/getUrls";
  * call GET `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/identity-providers/<id>` 
  * to get detail of an identity provider
  * 
- * @param session 
+ * @param session - session object
  * @param id - identity provider id
  * 
  * @returns details of the identity provdider, if the call failed `null`

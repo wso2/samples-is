@@ -21,9 +21,9 @@ import { getHostedUrl } from "./getUrls";
 function getSentDataHeader(session) {
     const headers = {
         "accept": "application/json",
-        "content-type": "application/json",
-        "authorization": "Bearer " + session.accessToken, 
-        "access-control-allow-origin": getHostedUrl()
+        "access-control-allow-origin": getHostedUrl(),
+        "authorization": "Bearer " + session.accessToken,
+        "content-type": "application/json"
     };
 
     return headers;
@@ -31,9 +31,9 @@ function getSentDataHeader(session) {
 
 function getSentDataRequestOptions(session, method, body) {
     const request = {
-        method: method,
+        body: JSON.stringify(body),
         headers: getSentDataHeader(session),
-        body: JSON.stringify(body)
+        method: method
     };
     
     return request;

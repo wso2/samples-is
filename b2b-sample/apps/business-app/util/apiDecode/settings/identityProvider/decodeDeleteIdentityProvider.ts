@@ -22,7 +22,7 @@ import { commonDecode } from "../../../util/apiUtil/commonDecode";
 export default async function decodeDeleteIdentityProvider(session, id) {
 
     try {
-        const res = await commonDecode(() => callDeleteIdentityProvider(session, id), null);
+        await commonDecode(() => callDeleteIdentityProvider(session, id), null);
 
         return true;
     } catch (err) {

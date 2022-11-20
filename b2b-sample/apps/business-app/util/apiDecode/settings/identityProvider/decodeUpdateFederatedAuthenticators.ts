@@ -16,7 +16,8 @@
  * under the License.
  */
 
-import callUpdateFederatedAuthenticators from "../../../apiCall/settings/identityProvider/callUpdateFederatedAuthenticators";
+import callUpdateFederatedAuthenticators from
+    "../../../apiCall/settings/identityProvider/callUpdateFederatedAuthenticators";
 import { commonDecode } from "../../../util/apiUtil/commonDecode";
 
 function refactorFederatedAuthenticatorsForUpdate(federatedAuthenticators) {
@@ -32,7 +33,8 @@ function updateProperties(federatedAuthenticators, keyProperty, valueProperty) {
     return federatedAuthenticators;
 }
 
-export default async function decodeUpdateFederatedAuthenticators(session, idpId, federatedAuthenticators, changedValues) {
+export default async function decodeUpdateFederatedAuthenticators
+(session, idpId, federatedAuthenticators, changedValues) {
     const federatedAuthenticatorId = federatedAuthenticators.authenticatorId;
 
     federatedAuthenticators = refactorFederatedAuthenticatorsForUpdate(federatedAuthenticators);

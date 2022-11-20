@@ -20,12 +20,11 @@ import enterpriseFederatedAuthenticators from
     "../../../components/sections/sections/settingsSection/idpSection/data/templates/enterprise-identity-provider.json";
 import googleFederatedAuthenticators from
     "../../../components/sections/sections/settingsSection/idpSection/data/templates/google.json";
-
-const { GOOGLE_ID, ENTERPRISE_ID } = require("../common/common");
+import { ENTERPRISE_ID, GOOGLE_ID } from "../common/common";
 
 /**
  * 
- * @param templateId
+ * @param templateId - application details template id
  * 
  * @returns template related to the template id.
  */
@@ -45,8 +44,8 @@ function selectedTemplateBaesedonTemplateId(templateId) {
 
 /**
  * 
- * @param template
- * @param idpDetails 
+ * @param template - applicaiton details template
+ * @param idpDetails - identity provider details
 
  * @returns `[check,onlyIdp]`
  * `check` - if the idp is in authentication sequence, 
@@ -95,7 +94,7 @@ function checkIfBasicAvailableinAuthSequence(template) {
 
 /**
  * PatchApplicationAuthMethod mentioned whether we are adding or removing the idp.
- * @REMOVE Will remove the idp from every step
+ * `REMOVE` Will remove the idp from every step
  */
 const PatchApplicationAuthMethod = {
     ADD: true,

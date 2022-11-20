@@ -22,7 +22,7 @@ import { getHostedUrl } from "../../util/apiUtil/getUrls";
 /**
  * call `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users/<userId>` get the user details
  * 
- * @param session 
+ * @param session - session object
  * 
  * @returns user details, if not possible returns `null`
  */

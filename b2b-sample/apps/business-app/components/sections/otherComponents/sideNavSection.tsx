@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { LogoComponent } from "@b2bsample/shared/ui-components";
 import DashboardIcon from "@rsuite/icons/legacy/Dashboard";
 import GearCircleIcon from "@rsuite/icons/legacy/GearCircle";
 import React from "react";
@@ -23,7 +24,6 @@ import { Button, Nav, Sidenav } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
 import styles from "../../../styles/Settings.module.css";
 import { hideBasedOnScopes } from "../../../util/util/frontendUtil/frontendUtil";
-import { LogoComponent } from "@b2bsample/shared/ui-components";
 import sideNavConfig from "../data/sideNav.json";
 
 /**

@@ -20,9 +20,9 @@ import { RequestMethod } from "./requestMethod";
 
 function getInternalApibBody(session) {
     const body = {
-        session: session,
         orgId: session ? session.orgId : null,
-        param : null
+        param : null,
+        session: session
     };
 
     return body;
@@ -38,8 +38,8 @@ function getInternalApibBodyWithParam(session, param) {
 
 function getInternalApiRequestOptions(session) {
     const request = {
-        method: RequestMethod.POST,
-        body: JSON.stringify(getInternalApibBody(session))
+        body: JSON.stringify(getInternalApibBody(session)),
+        method: RequestMethod.POST
     };
 
     return request;
@@ -47,8 +47,8 @@ function getInternalApiRequestOptions(session) {
 
 function getInternalApiRequestOptionsWithParam(session, param) {
     const request = {
-        method: RequestMethod.POST,
-        body: JSON.stringify(getInternalApibBodyWithParam(session, param))
+        body: JSON.stringify(getInternalApibBodyWithParam(session, param)),
+        method: RequestMethod.POST
     };
 
     return request;
@@ -56,8 +56,8 @@ function getInternalApiRequestOptionsWithParam(session, param) {
 
 function getInternalApibBodyForSwitchCall(subOrgId, param) {
     const body = {
-        subOrgId: subOrgId,
-        param: param
+        param: param,
+        subOrgId: subOrgId
     };
 
     return body;
@@ -65,8 +65,8 @@ function getInternalApibBodyForSwitchCall(subOrgId, param) {
 
 function geetInternalApiRequestOptionsForSwitchCallWithParam(subOrgId, param) {
     const request = {
-        method: RequestMethod.POST,
-        body: JSON.stringify(getInternalApibBodyForSwitchCall(subOrgId, param))
+        body: JSON.stringify(getInternalApibBodyForSwitchCall(subOrgId, param)),
+        method: RequestMethod.POST
     };
 
     return request;

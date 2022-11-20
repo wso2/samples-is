@@ -23,7 +23,7 @@ import { getHostedUrl } from "../../../util/apiUtil/getUrls";
  * call POST `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/identity-providers` 
  * to create an identity provider
  * 
- * @param session 
+ * @param session - session object
  * @param model - body of the identity provider that will be created
  *  
  * @returns created identity provider, if the call failed `null`

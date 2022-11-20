@@ -22,9 +22,9 @@ import { getHostedUrl } from "../../util/apiUtil/getUrls";
 /**
  * call PATCH `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users/<id>` to edit the user
  * 
- * @param session 
- * @param id 
- * @param user
+ * @param session - session object
+ * @param id - user id
+ * @param user - edited user object
  *  
  * @returns edited user details, if not edited returns `null`
  */

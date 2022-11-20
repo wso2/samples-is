@@ -17,6 +17,7 @@
  */
 
 import Image from "next/image";
+import React from "react";
 import { Button, Stack } from "rsuite";
 import error500Image from "../../../libs/shared/ui-assets/src/lib/images/500.svg";
 import style from "../styles/Error.module.css";

@@ -23,9 +23,8 @@ import { getHostedUrl } from "../../util/apiUtil/getUrls";
 /**
  * call GET `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users` to view all the users
  * 
- * @param session 
+ * @param session - session object
  * 
- * @returns 
  */
 export default async function callViewUsers(session) {
     try {

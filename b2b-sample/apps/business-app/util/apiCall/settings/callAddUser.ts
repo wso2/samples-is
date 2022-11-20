@@ -22,8 +22,8 @@ import { getHostedUrl } from "../../util/apiUtil/getUrls";
 /**
  * call POST `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users` create the user
  * 
- * @param session 
- * @param user
+ * @param session - session object
+ * @param user - user object
  * 
  * @returns created user details, if not created returns `null`
  */

@@ -20,7 +20,8 @@ import { infoTypeDialog } from "../../../components/common/dialog";
 
 /**
  * 
- * @param str 
+ * @param str - string that need to be checked
+ * 
  * @returns `true` if `str` is empty, else `false`
  */
 function stringIsEmpty(str) : boolean{
