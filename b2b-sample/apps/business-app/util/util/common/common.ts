@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { infoTypeDialog } from "../../../components/common/dialog";
+import { infoTypeDialog } from "@b2bsample/shared/ui-components";
 
 /**
  * 

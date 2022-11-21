@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui-components";
 import EmailFillIcon from "@rsuite/icons/EmailFill";
 import React, { useState } from "react";
 import { Field, Form } from "react-final-form";
@@ -25,7 +26,6 @@ import styles from "../../../../../../styles/Settings.module.css";
 import { InviteConst, decodeAddUser } from "../../../../../../util/apiDecode/settings/decodeAddUser";
 import { checkIfJSONisEmpty } from "../../../../../../util/util/common/common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../../util/util/frontendUtil/frontendUtil";
-import { errorTypeDialog, successTypeDialog } from "../../../../../common/dialog";
 
 /**
  * 

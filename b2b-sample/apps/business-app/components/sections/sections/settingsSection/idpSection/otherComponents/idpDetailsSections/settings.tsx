@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui-components";
 import React, { useCallback, useEffect, useState } from "react";
 import { Form } from "react-final-form";
 import { Button, ButtonToolbar, Loader, useToaster } from "rsuite";
@@ -29,7 +30,6 @@ import decodeUpdateFederatedAuthenticators from
     "../../../../../../../util/apiDecode/settings/identityProvider/decodeUpdateFederatedAuthenticators";
 import { checkIfJSONisEmpty } from "../../../../../../../util/util/common/common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../../../util/util/frontendUtil/frontendUtil";
-import { errorTypeDialog, successTypeDialog } from "../../../../../../common/dialog";
 
 /**
  * 

@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { errorTypeDialog, successTypeDialog, warningTypeDialog } from "@b2bsample/shared/ui-components";
 import React, { useCallback, useEffect, useState } from "react";
 import { Field, Form } from "react-final-form";
 import { Button, ButtonToolbar, Divider, Loader, Modal, TagPicker, useToaster } from "rsuite";
@@ -29,7 +30,6 @@ import decodeListAllRoles from "../../../../../../util/apiDecode/settings/role/d
 import decodeUserRole from "../../../../../../util/apiDecode/settings/role/decodeUserRole";
 import { checkIfJSONisEmpty } from "../../../../../../util/util/common/common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../../util/util/frontendUtil/frontendUtil";
-import { errorTypeDialog, successTypeDialog, warningTypeDialog } from "../../../../../common/dialog";
 
 /**
  * 

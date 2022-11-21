@@ -16,5 +16,8 @@
  * under the License.
  */
 
-export * from "./lib/components/logoComponent/logoComponent";
-export * from "./lib/components/dialogComponent/dialogComponent";
+export interface DialogComponentProps {
+    type : "error" | "info" | "success" | "warning",
+    header : string,
+    body? : string
+}

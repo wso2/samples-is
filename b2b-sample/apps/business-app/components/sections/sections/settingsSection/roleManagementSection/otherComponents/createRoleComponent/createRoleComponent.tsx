@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui-components";
 import React, { useState } from "react";
 import { Loader, Modal, Panel, Steps, useToaster } from "rsuite";
 import General from "./createRoleComponentInner/general";
@@ -24,7 +25,6 @@ import Users from "./createRoleComponentInner/users";
 import styles from "../../../../../../../styles/Settings.module.css";
 import { decodeCreateRole } from "../../../../../../../util/apiDecode/settings/role/deocdeCreateRole";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../../../util/util/frontendUtil/frontendUtil";
-import { errorTypeDialog, successTypeDialog } from "../../../../../../common/dialog";
 
 export default function CreateRoleComponent(prop) {
 

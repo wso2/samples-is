@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui-components";
 import React, { useState } from "react";
 import { Avatar, Button, Col, Grid, Loader, Modal, Row, useToaster } from "rsuite";
 import stylesSettings from "../../../../../../styles/Settings.module.css";
@@ -24,7 +25,6 @@ import decodePatchApplicationAuthSteps from
 import { PatchApplicationAuthMethod } from "../../../../../../util/util/applicationUtil/applicationUtil";
 import { checkIfJSONisEmpty } from "../../../../../../util/util/common/common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../../util/util/frontendUtil/frontendUtil";
-import { errorTypeDialog, successTypeDialog } from "../../../../../common/dialog";
 
 /**
  * 

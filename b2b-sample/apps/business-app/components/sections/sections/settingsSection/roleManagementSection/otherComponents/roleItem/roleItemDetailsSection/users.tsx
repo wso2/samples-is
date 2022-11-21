@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui-components";
 import React, { useCallback, useEffect, useState } from "react";
 import { Field, Form } from "react-final-form";
 import { Button, ButtonToolbar, Checkbox, CheckboxGroup, Loader, useToaster } from "rsuite";
@@ -26,7 +27,6 @@ import decodePatchRole from "../../../../../../../../util/apiDecode/settings/rol
 import { PatchMethod } from "../../../../../../../../util/util/common/common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE }
     from "../../../../../../../../util/util/frontendUtil/frontendUtil";
-import { errorTypeDialog, successTypeDialog } from "../../../../../../../common/dialog";
 
 /**
  * 

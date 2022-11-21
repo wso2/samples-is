@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui-components";
 import AppSelectIcon from "@rsuite/icons/AppSelect";
 import CopyIcon from "@rsuite/icons/Copy";
 import InfoRoundIcon from "@rsuite/icons/InfoRound";
@@ -35,7 +36,6 @@ import decodeListAllIdentityProviders from
 import { EMPTY_STRING, ENTERPRISE_ID, GOOGLE_ID, checkIfJSONisEmpty, copyTheTextToClipboard, sizeOfJson } from
     "../../../../../util/util/common/common";
 import { getCallbackUrl } from "../../../../../util/util/idpUtil/idpUtil";
-import { errorTypeDialog, successTypeDialog } from "../../../../common/dialog";
 import EmptySettings from "../../../../common/emptySettings";
 import SettingsTitle from "../../../../common/settingsTitle";
 //import f from "../../../../../../../libs/business-app/ui-assets/src/lib/images/"
