@@ -16,17 +16,10 @@
  * under the License.
  */
 
-import React from "react";
 import { Stack } from "rsuite";
+import { SettingsTitleComponentProps } from "../../models/settingsTitleComponent/settingsTitleComponent";
 
-/**
- * 
- * @param prop - title, subtitle
- * 
- * @returns A component for the title in an interface of the admin settings sections
- */
-export default function SettingsTitle(prop) {
-
+export function SettingsTitleComponent(prop: SettingsTitleComponentProps) {
     const { title, subtitle, children } = prop;
 
     return (
@@ -34,11 +27,13 @@ export default function SettingsTitle(prop) {
             direction="row"
             justifyContent="space-between">
             <Stack direction="column" alignItems="flex-start">
-                <h2>{ title }</h2>
-                <p>{ subtitle }</p>
+                <h2>{title}</h2>
+                <p>{subtitle}</p>
             </Stack>
-            { children }
+            {children}
         </Stack>
 
     );
-}
+};
+
+export default SettingsTitleComponent;

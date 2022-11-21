@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { EmptySettingsComponent } from "@b2bsample/shared/ui-components";
+import { EmptySettingsComponent, SettingsTitleComponent } from "@b2bsample/shared/ui-components";
 import PeoplesIcon from "@rsuite/icons/Peoples";
 import React, { useCallback, useEffect, useState } from "react";
 import { Container } from "rsuite";
@@ -24,7 +24,6 @@ import CreateRoleButton from "./otherComponents/createRoleButton";
 import CreateRoleComponent from "./otherComponents/createRoleComponent/createRoleComponent";
 import RolesList from "./otherComponents/rolesList";
 import decodeListAllRoles from "../../../../../util/apiDecode/settings/role/decodeListAllRoles";
-import SettingsTitle from "../../../../common/settingsTitle";
 
 /**
  * 
@@ -62,7 +61,7 @@ export default function RoleManagementSectionComponent(prop) {
     return (
         <Container>
 
-            <SettingsTitle
+            <SettingsTitleComponent
                 title="Role Management"
                 subtitle="Manage organization roles here.">
                 {
@@ -70,7 +69,7 @@ export default function RoleManagementSectionComponent(prop) {
                         ? <CreateRoleButton onClick={ onClickCreateRole } />
                         : null
                 }
-            </SettingsTitle>
+            </SettingsTitleComponent>
 
             <CreateRoleComponent
                 open={ openCreateRoleModal }

@@ -16,7 +16,8 @@
  * under the License.
  */
 
-import { EmptySettingsComponent, errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui-components";
+import { EmptySettingsComponent, SettingsTitleComponent, errorTypeDialog, successTypeDialog } from
+    "@b2bsample/shared/ui-components";
 import { EMPTY_STRING, ENTERPRISE_ID, GOOGLE_ID, checkIfJSONisEmpty, copyTheTextToClipboard, sizeOfJson } from
     "@b2bsample/shared/util-common";
 import AppSelectIcon from "@rsuite/icons/AppSelect";
@@ -36,7 +37,6 @@ import decodeCreateIdentityProvider from
 import decodeListAllIdentityProviders from
     "../../../../../util/apiDecode/settings/identityProvider/decodeListAllIdentityProviders";
 import { getCallbackUrl } from "../../../../../util/util/idpUtil/idpUtil";
-import SettingsTitle from "../../../../common/settingsTitle";
 
 /**
  * 
@@ -166,7 +166,7 @@ export default function IdpSectionComponent(prop) {
     return (
         <Container>
 
-            <SettingsTitle
+            <SettingsTitleComponent
                 title="Identity Providers"
                 subtitle="Manage identity providers to allow users to log in to your application through them." />
 

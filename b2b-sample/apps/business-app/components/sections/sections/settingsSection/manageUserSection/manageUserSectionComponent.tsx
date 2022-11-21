@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { SettingsTitleComponent } from "@b2bsample/shared/ui-components";
 import React, { useCallback, useEffect, useState } from "react";
 import { Table } from "rsuite";
 import AddUserButton from "./otherComponents/addUserButton";
@@ -23,7 +24,6 @@ import AddUserComponent from "./otherComponents/addUserComponent";
 import EditUserComponent from "./otherComponents/editUserComponent";
 import styles from "../../../../../styles/Settings.module.css";
 import decodeViewUsers from "../../../../../util/apiDecode/settings/decodeViewUsers";
-import SettingsTitle from "../../../../common/settingsTitle";
 
 /**
  * 
@@ -94,13 +94,13 @@ export default function ManageUserSectionComponent(prop) {
                 open={ addUserOpen }
                 onClose={ closeAddUserDialog } />
 
-            <SettingsTitle
+            <SettingsTitleComponent
                 title="Manage Users"
                 subtitle="Manage users in the organisation">
                 <AddUserButton
                     session={ session }
                     onClick={ onAddUserClick } />
-            </SettingsTitle>
+            </SettingsTitleComponent>
 
             {
                 users ?
