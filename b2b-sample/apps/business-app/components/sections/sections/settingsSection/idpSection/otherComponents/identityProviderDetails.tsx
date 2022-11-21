@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { AccordianItemHeader } from "@b2bsample/shared/ui-components";
+import { AccordianItemHeaderComponent } from "@b2bsample/shared/ui-components";
 import CodeIcon from "@rsuite/icons/Code";
 import React, { useCallback, useEffect, useState } from "react";
 import { Nav, Panel, Stack } from "rsuite";
@@ -75,7 +75,7 @@ export default function IdentityProviderDetails(prop) {
         idpDetails
             ? (<Panel
                 header={
-                    (<AccordianItemHeader
+                    (<AccordianItemHeaderComponent
                         imageUrl={ idpDetails.image }
                         title={ idpDetails.name }
                         description={ idpDetails.description } />)

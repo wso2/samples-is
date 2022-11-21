@@ -23,7 +23,7 @@ import CreateRoleButton from "./otherComponents/createRoleButton";
 import CreateRoleComponent from "./otherComponents/createRoleComponent/createRoleComponent";
 import RolesList from "./otherComponents/rolesList";
 import decodeListAllRoles from "../../../../../util/apiDecode/settings/role/decodeListAllRoles";
-import EmptySettings from "../../../../common/emptySettings";
+import { EmptySettingsComponent } from "@b2bsample/shared/ui-components";
 import SettingsTitle from "../../../../common/settingsTitle";
 
 /**
@@ -36,8 +36,8 @@ export default function RoleManagementSectionComponent(prop) {
 
     const { session } = prop;
 
-    const [ rolesList, setRolesList ] = useState([]);
-    const [ openCreateRoleModal, setOpenCreateRoleModal ] = useState(false);
+    const [rolesList, setRolesList] = useState([]);
+    const [openCreateRoleModal, setOpenCreateRoleModal] = useState(false);
 
     const fetchAllRoles = useCallback(async () => {
 
@@ -49,11 +49,11 @@ export default function RoleManagementSectionComponent(prop) {
             setRolesList([]);
         }
 
-    }, [ session ]);
+    }, [session]);
 
     useEffect(() => {
         fetchAllRoles();
-    }, [ fetchAllRoles, openCreateRoleModal ]);
+    }, [fetchAllRoles, openCreateRoleModal]);
 
     const onClickCreateRole = () => {
         setOpenCreateRoleModal(true);
@@ -67,24 +67,24 @@ export default function RoleManagementSectionComponent(prop) {
                 subtitle="Manage organization roles here.">
                 {
                     rolesList
-                        ? <CreateRoleButton onClick={ onClickCreateRole } />
+                        ? <CreateRoleButton onClick={onClickCreateRole} />
                         : null
                 }
             </SettingsTitle>
 
             <CreateRoleComponent
-                open={ openCreateRoleModal }
-                setOpenCreateRoleModal={ setOpenCreateRoleModal }
-                session={ session } />
+                open={openCreateRoleModal}
+                setOpenCreateRoleModal={setOpenCreateRoleModal}
+                session={session} />
 
             {
                 rolesList
-                    ? <RolesList session={ session } rolesList={ rolesList } />
-                    : (<EmptySettings
+                    ? <RolesList session={session} rolesList={rolesList} />
+                    : (<EmptySettingsComponent
                         bodyString="There are no roles created for the organization."
                         buttonString="Create role"
-                        icon={ <PeoplesIcon style={ { opacity: .2 } } width="150px" height="150px" /> }
-                        onAddButtonClick={ onClickCreateRole }
+                        icon={<PeoplesIcon style={{ opacity: .2 }} width="150px" height="150px" />}
+                        onAddButtonClick={onClickCreateRole}
                     />)
             }
 

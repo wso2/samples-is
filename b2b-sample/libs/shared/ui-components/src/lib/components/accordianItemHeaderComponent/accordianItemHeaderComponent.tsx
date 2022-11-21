@@ -18,7 +18,8 @@
 
 import { random_rgba } from "@b2bsample/shared/util-common";
 import { Avatar, Stack } from "rsuite";
-import { AccordianItemHeaderProps } from "../../models/accordianItemHeaderComponent/accordianItemHeaderComponent";
+import { AccordianItemHeaderComponentProps } from
+    "../../models/accordianItemHeaderComponent/accordianItemHeaderComponent";
 
 /**
  * 
@@ -26,7 +27,7 @@ import { AccordianItemHeaderProps } from "../../models/accordianItemHeaderCompon
  * 
  * @returns header componet for items in an accordian
  */
-export function AccordianItemHeader(prop : AccordianItemHeaderProps) {
+export function AccordianItemHeaderComponent(prop: AccordianItemHeaderComponentProps) {
 
     const { title, description, imageUrl } = prop;
 
@@ -52,4 +53,4 @@ export function AccordianItemHeader(prop : AccordianItemHeaderProps) {
     );
 }
 
-export default AccordianItemHeader;
+export default AccordianItemHeaderComponent;

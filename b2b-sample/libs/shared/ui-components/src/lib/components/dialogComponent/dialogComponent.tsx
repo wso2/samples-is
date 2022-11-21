@@ -25,7 +25,7 @@ import { DialogComponentProps } from "../../models/dialogComponent/dialogCompone
  *
  * @returns A side dialog to show notifications
  */
-function Dialog(prop : DialogComponentProps) {
+function DialogComponent(prop : DialogComponentProps) {
 
     const { type, header, body } = prop;
 
@@ -46,7 +46,7 @@ function Dialog(prop : DialogComponentProps) {
  * @returns - A notification dialog baed on the `type`
  */
 async function showDialog(toaster : Toaster, type : "error" | "info" | "success" | "warning", header : string, body? : string) {
-    const toasteKey = toaster.push(<Dialog type={type} header={header} body={body} />, {
+    const toasteKey = toaster.push(<DialogComponent type={type} header={header} body={body} />, {
         placement: "bottomStart"
     });
 

@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { AccordianItemHeader } from "@b2bsample/shared/ui-components";
+import { AccordianItemHeaderComponent } from "@b2bsample/shared/ui-components";
 import CodeIcon from "@rsuite/icons/Code";
 import React, { useCallback, useEffect, useState } from "react";
 import { Nav, Panel } from "rsuite";
@@ -77,7 +77,7 @@ export default function RoleItem(prop) {
         roleDetails
             ? (<Panel
                 header={
-                    (<AccordianItemHeader
+                    (<AccordianItemHeaderComponent
                         title={ roleDetails.displayName }
                         description={ `Organization role ${roleDetails.displayName} details` } />)
                 }
