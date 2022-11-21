@@ -18,13 +18,13 @@
 
 import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
 import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
+import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "@b2bsample/shared/util/util-front-end-util";
 import React, { useState } from "react";
 import { Avatar, Button, Col, Grid, Loader, Modal, Row, useToaster } from "rsuite";
 import stylesSettings from "../../../../../../styles/Settings.module.css";
 import decodePatchApplicationAuthSteps from
     "../../../../../../util/apiDecode/settings/application/decodePatchApplicationAuthSteps";
 import { PatchApplicationAuthMethod } from "../../../../../../util/util/applicationUtil/applicationUtil";
-import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "@b2bsample/business-app/util/util-front-end-util";
 
 /**
  * 

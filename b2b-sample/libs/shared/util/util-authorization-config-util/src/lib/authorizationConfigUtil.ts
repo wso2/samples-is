@@ -140,7 +140,7 @@ function getLoggedUserFromProfile(profile: any): User | null {
 
     try {
         const user: User = {
-            emails: [profile.email],
+            emails: [ profile.email ],
             id: profile.sub,
             name: {
                 familyName: profile.family_name ? profile.family_name : "-",

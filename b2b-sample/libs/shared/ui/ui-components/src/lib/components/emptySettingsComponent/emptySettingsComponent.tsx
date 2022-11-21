@@ -16,8 +16,9 @@
  * under the License.
  */
 
+import React from "react";
 import { Button, FlexboxGrid, Stack } from "rsuite";
-import { EmptySettingsComponent } from "../../models/emptySettingsComponent/emptySettingsComponent";
+import { EmptySettingsComponentProps } from "../../models/emptySettingsComponent/emptySettingsComponent";
 
 /**
  * 
@@ -25,27 +26,27 @@ import { EmptySettingsComponent } from "../../models/emptySettingsComponent/empt
  * 
  * @returns The componet to show when there is no idp's.
  */
-export function EmptySettingsComponent(prop: EmptySettingsComponent) {
+export function EmptySettingsComponent(prop: EmptySettingsComponentProps) {
 
     const { bodyString, buttonString, icon, onAddButtonClick } = prop;
 
     return (
         <FlexboxGrid
-            style={{ height: "60vh", marginTop: "24px", width: "100%" }}
+            style={ { height: "60vh", marginTop: "24px", width: "100%" } }
             justify="center"
             align="middle"
         >
             <Stack alignItems="center" direction="column">
-                {icon}
-                <p style={{ fontSize: 14, marginTop: "20px" }}>
-                    {bodyString}
+                { icon }
+                <p style={ { fontSize: 14, marginTop: "20px" } }>
+                    { bodyString }
                 </p>
                 <Button
                     appearance="primary"
-                    onClick={onAddButtonClick}
+                    onClick={ onAddButtonClick }
                     size="md"
-                    style={{ marginTop: "12px" }}>
-                    {buttonString}
+                    style={ { marginTop: "12px" } }>
+                    { buttonString }
                 </Button>
             </Stack>
         </FlexboxGrid>

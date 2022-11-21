@@ -17,10 +17,11 @@
  */
 
 import Image from "next/image";
+import React from "react";
+import styles from "./logoComponent.module.css";
 import config from "../../../../../../../../config.json";
 import logoImage from "../../../../../../../../libs/shared/ui/ui-assets/src/lib/images/logo.png";
 import { LogoComponentProps, LogoImageStyle, LogoProps } from "../../models/logoComponent/logoComponent";
-import styles from "./logoComponent.module.css";
 
 /**
  * 
@@ -33,15 +34,15 @@ export function LogoComponent(prop: LogoComponentProps) {
     const { name, imageSize, white } = prop;
 
     return (
-        <div className={styles["logoDiv"]}>
-            <Logo imageSize={imageSize} white={white} />
-            <p className={styles["nameTag"]}>{config.ApplicationConfig.Branding.tag} </p>
+        <div className={ styles["logoDiv"] }>
+            <Logo imageSize={ imageSize } white={ white } />
+            <p className={ styles["nameTag"] }>{ config.ApplicationConfig.Branding.tag } </p>
             {
                 name
                     ? (
                         <>
                             <hr />
-                            <h5 className={styles["nameTag"]}>{name}</h5>
+                            <h5 className={ styles["nameTag"] }>{ name }</h5>
                             <hr />
                         </>
                     )
@@ -98,9 +99,9 @@ function Logo(prop: LogoProps) {
 
     return (
         <Image
-            src={logoImage}
+            src={ logoImage }
             alt="404 image"
-            style={getImageStyle(imageSize, white)} />
+            style={ getImageStyle(imageSize, white) } />
     );
 }
 

@@ -16,16 +16,17 @@
  * under the License.
  */
 
-import { JsonDisplayComponentProps } from "../../models/jsonDisplayComponent/jsonDisplayComponent";
+import React from "react";
 import styles from "./jsonDisplayComponent.module.css";
+import { JsonDisplayComponentProps } from "../../models/jsonDisplayComponent/jsonDisplayComponent";
 
 export function JsonDisplayComponent(prop: JsonDisplayComponentProps) {
     const { jsonObject } = prop;
 
     return (
-        <pre className={styles["jsonDisplay"]}> {JSON.stringify(jsonObject, null, 2)}</pre>
+        <pre className={ styles["jsonDisplay"] }> { JSON.stringify(jsonObject, null, 2) }</pre>
     );
-};
+}
 
 
 export default JsonDisplayComponent;

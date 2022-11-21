@@ -16,13 +16,11 @@
  * under the License.
  */
 
-import { MouseEventHandler, ReactNode } from "react"
+import { MouseEventHandler, ReactNode } from "react";
 
- export interface EmptySettingsComponent {
+export interface EmptySettingsComponentProps {
     bodyString : string,
     buttonString : string,
     icon : ReactNode
     onAddButtonClick : MouseEventHandler<HTMLElement>
-
-    // MouseEventHandler<HTMLElement>
 }

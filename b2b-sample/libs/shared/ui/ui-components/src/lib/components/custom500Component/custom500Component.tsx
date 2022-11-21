@@ -16,32 +16,34 @@
  * under the License.
  */
 
-import { orgSignout } from "@b2bsample/shared/util/util-authorization-config-util";
 import Image from "next/image";
+import React from "react";
 import { Button, Stack } from "rsuite";
-import errorImage from "../../../../../ui-assets/src/lib/images/500.svg";
 import styles from "./custom500Component.module.css";
+import errorImage from "../../../../../ui-assets/src/lib/images/500.svg";
+import { Custom500ComponentProps } from "../../models/custom500Component/custom500Component";
 
-export function Custom500Component() {
-    const goBack = async () => await orgSignout(null);
+export function Custom500Component(prop : Custom500ComponentProps) {
+
+    const { goBack } = prop;
 
     return (
         <Stack
-            className={styles["errorMainContent"]}
-            spacing={50}
+            className={ styles["errorMainContent"] }
+            spacing={ 50 }
             direction="column"
             justifyContent="center"
             alignItems="center">
 
-            <Image src={errorImage} width={500} alt="404 image" />
+            <Image src={ errorImage } width={ 500 } alt="404 image" />
 
             <Stack
-                spacing={25}
+                spacing={ 25 }
                 direction="column"
                 justifyContent="center"
                 alignItems="center">
 
-                <p className={styles["p"]}><b>It looks like you have been inactive for a long time.</b>
+                <p className={ styles["p"] }><b>It looks like you have been inactive for a long time.</b>
                     <br />
                     When you click on <i>Go back</i>, we will try to recover the session if it exists.
                     <br />
@@ -50,14 +52,14 @@ export function Custom500Component() {
                 <Button
                     size="lg"
                     appearance="ghost"
-                    onClick={goBack}>
+                    onClick={ goBack }>
                     Go Back
                 </Button>
             </Stack>
             
         </Stack>
     );
-};
+}
 
 
 export default Custom500Component;

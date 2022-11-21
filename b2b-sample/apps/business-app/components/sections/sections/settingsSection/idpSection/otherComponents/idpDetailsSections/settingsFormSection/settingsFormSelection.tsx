@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { HelperTextComponent } from "@b2bsample/shared/ui/ui-components";
+import { HelperTextComponent, infoTypeDialog } from "@b2bsample/shared/ui/ui-components";
 import { copyTheTextToClipboard } from "@b2bsample/shared/util/util-common";
 import CopyIcon from "@rsuite/icons/Copy";
 import React from "react";
@@ -55,7 +55,9 @@ export default function SettingsFormSelection(prop) {
     };
 
     const copyValueToClipboard = (text) => {
-        copyTheTextToClipboard(text, toaster);
+        const callback = () => infoTypeDialog(toaster, "Text copied to clipboard");
+
+        copyTheTextToClipboard(text, callback);
     };
 
     return (

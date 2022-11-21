@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import React from "react";
 import { Stack } from "rsuite";
 import { SettingsTitleComponentProps } from "../../models/settingsTitleComponent/settingsTitleComponent";
 
@@ -27,13 +28,13 @@ export function SettingsTitleComponent(prop: SettingsTitleComponentProps) {
             direction="row"
             justifyContent="space-between">
             <Stack direction="column" alignItems="flex-start">
-                <h2>{title}</h2>
-                <p>{subtitle}</p>
+                <h2>{ title }</h2>
+                <p>{ subtitle }</p>
             </Stack>
-            {children}
+            { children }
         </Stack>
 
     );
-};
+}
 
 export default SettingsTitleComponent;

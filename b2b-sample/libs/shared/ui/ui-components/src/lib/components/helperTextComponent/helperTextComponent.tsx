@@ -17,19 +17,20 @@
  */
 
 import InfoOutlineIcon from "@rsuite/icons/InfoOutline";
+import React from "react";
 import { Form, Stack } from "rsuite";
-import { HelperTextComponentProps } from "../../models/helperTextComponent/helperTextComponent";
 import styles from "./helperTextComponent.module.css";
+import { HelperTextComponentProps } from "../../models/helperTextComponent/helperTextComponent";
 
 export function HelperTextComponent(prop: HelperTextComponentProps) {
     const { text } = prop;
 
     return (
-        <Stack className={styles["stack"]}>
-            <InfoOutlineIcon className={styles["icon"]} />
-            <Form.HelpText>{text}</Form.HelpText>
+        <Stack className={ styles["stack"] }>
+            <InfoOutlineIcon className={ styles["icon"] } />
+            <Form.HelpText>{ text }</Form.HelpText>
         </Stack>
     );
-};
+}
 
 export default HelperTextComponent;

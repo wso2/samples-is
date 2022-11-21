@@ -16,9 +16,6 @@
  * under the License.
  */
 
-import { infoTypeDialog } from "@b2bsample/shared/ui/ui-components";
-import { Toaster } from "rsuite";
-
 /**
  * 
  * @param str - string that need to be checked
@@ -70,9 +67,9 @@ export function sizeOfJson(obj: Object): number {
  * @param text - text that need to be copied to the clipboard
  * @param toaster - toaster object
  */
-export function copyTheTextToClipboard(text: string, toaster: Toaster): void {
+export function copyTheTextToClipboard(text: string, callback : Function): void {
     navigator.clipboard.writeText(text);
-    infoTypeDialog(toaster, "Text copied to clipboard");
+    callback();
 }
 
 /**
@@ -94,17 +91,17 @@ export const PatchMethod = {
     REPLACE: "REPLACE"
 };
 
-export const GOOGLE_ID: string = "google-idp";
-export const ENTERPRISE_ID: string = "enterprise-idp";
-export const BASIC_ID: string = "basic-idp";
-export const EMPTY_STRING: string = "";
+export const GOOGLE_ID = "google-idp";
+export const ENTERPRISE_ID = "enterprise-idp";
+export const BASIC_ID = "basic-idp";
+export const EMPTY_STRING = "";
 
-export const GOOGLE_AUTHENTICATOR_ID: string = "GoogleOIDCAuthenticator";
-export const ENTERPRISE_AUTHENTICATOR_ID: string = "OpenIDConnectAuthenticator";
-export const BASIC_AUTHENTICATOR_ID: string = "BasicAuthenticator";
+export const GOOGLE_AUTHENTICATOR_ID = "GoogleOIDCAuthenticator";
+export const ENTERPRISE_AUTHENTICATOR_ID = "OpenIDConnectAuthenticator";
+export const BASIC_AUTHENTICATOR_ID = "BasicAuthenticator";
 
 export default {
-    stringIsEmpty, getCurrentDate, copyTheTextToClipboard, checkIfJSONisEmpty, sizeOfJson, random_rgba,
-    PatchMethod, GOOGLE_ID, ENTERPRISE_ID, BASIC_ID, EMPTY_STRING, GOOGLE_AUTHENTICATOR_ID,
-    ENTERPRISE_AUTHENTICATOR_ID, BASIC_AUTHENTICATOR_ID
+    BASIC_AUTHENTICATOR_ID, BASIC_ID, EMPTY_STRING, ENTERPRISE_AUTHENTICATOR_ID, ENTERPRISE_ID, 
+    GOOGLE_AUTHENTICATOR_ID, GOOGLE_ID, PatchMethod, checkIfJSONisEmpty, copyTheTextToClipboard, getCurrentDate, 
+    random_rgba, sizeOfJson, stringIsEmpty
 };

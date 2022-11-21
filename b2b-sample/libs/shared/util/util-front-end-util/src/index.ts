@@ -16,33 +16,4 @@
  * under the License.
  */
 
-import { checkAdmin } from "@b2bsample/shared/util/util-application-config-util";
-
-const LOADING_DISPLAY_NONE = {
-    display: "none"
-};
-const LOADING_DISPLAY_BLOCK = {
-    display: "block"
-};
-
-/**
- * hide content based on the user's realated privilages
- * 
- * @param scopes - scopes related for the user
- * 
- * @returns `LOADING_DISPLAY_BLOCK` if admin, else `LOADING_DISPLAY_NONE` 
- */
-function hideBasedOnScopes(scopes) {
-
-    if (checkAdmin(scopes)) {
-
-        return LOADING_DISPLAY_BLOCK;
-    } else {
-
-        return LOADING_DISPLAY_NONE;
-    }
-}
-
-export{
-    hideBasedOnScopes, LOADING_DISPLAY_NONE, LOADING_DISPLAY_BLOCK
-};
+export * from "./lib/frontendUtil";

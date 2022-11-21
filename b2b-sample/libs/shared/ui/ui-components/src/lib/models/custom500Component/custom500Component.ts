@@ -16,12 +16,9 @@
  * under the License.
  */
 
-export * from "./lib/components/logoComponent/logoComponent";
-export * from "./lib/components/dialogComponent/dialogComponent";
-export * from "./lib/components/accordianItemHeaderComponent/accordianItemHeaderComponent";
-export * from "./lib/components/emptySettingsComponent/emptySettingsComponent";
-export * from "./lib/components/jsonDisplayComponent/jsonDisplayComponent";
-export * from "./lib/components/settingsTitleComponent/settingsTitleComponent";
-export * from "./lib/components/helperTextComponent/helperTextComponent";
-export * from "./lib/components/custom404Component/custom404Component";
-export * from "./lib/components/custom500Component/custom500Component";
+import { MouseEventHandler } from "react";
+
+export interface Custom500ComponentProps {
+    goBack : MouseEventHandler<HTMLElement>
+ }
+ 

@@ -16,7 +16,7 @@
  * under the License.
  */
 
- export interface AccordianItemHeaderComponentProps {
+export interface AccordianItemHeaderComponentProps {
     title : string,
     description : string,
     imageUrl? : string

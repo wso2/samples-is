@@ -16,13 +16,25 @@
  * under the License.
  */
 
-export const LOADING_DISPLAY_NONE = {
-    display: "none"
-};
-export const LOADING_DISPLAY_BLOCK = {
-    display: "block"
-};
+import { checkAdmin } from "@b2bsample/shared/util/util-application-config-util";
+import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "@b2bsample/shared/util/util-front-end-util";
 
-export default {
-    LOADING_DISPLAY_NONE, LOADING_DISPLAY_BLOCK
-};
+/**
+ * hide content based on the user's realated privilages
+ * 
+ * @param scopes - scopes related for the user
+ * 
+ * @returns `LOADING_DISPLAY_BLOCK` if admin, else `LOADING_DISPLAY_NONE` 
+ */
+export function hideBasedOnScopes(scopes : string[]) {
+
+    if (checkAdmin(scopes)) {
+
+        return LOADING_DISPLAY_BLOCK;
+    } else {
+
+        return LOADING_DISPLAY_NONE;
+    }
+}
+
+export default { hideBasedOnScopes };

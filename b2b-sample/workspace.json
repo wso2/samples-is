@@ -255,6 +255,35 @@
           }
         }
       }
+    },
+    "shared-util-util-front-end-util": {
+      "root": "libs/shared/util/util-front-end-util",
+      "sourceRoot": "libs/shared/util/util-front-end-util/src",
+      "projectType": "library",
+      "tags": [],
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/util/util-front-end-util/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "{workspaceRoot}/coverage/{projectRoot}"
+          ],
+          "options": {
+            "jestConfig": "libs/shared/util/util-front-end-util/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   }
 }

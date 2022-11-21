@@ -17,6 +17,7 @@
  */
 
 import { random_rgba } from "@b2bsample/shared/util/util-common";
+import React from "react";
 import { Avatar, Stack } from "rsuite";
 import { AccordianItemHeaderComponentProps } from
     "../../models/accordianItemHeaderComponent/accordianItemHeaderComponent";
@@ -33,19 +34,19 @@ export function AccordianItemHeaderComponent(prop: AccordianItemHeaderComponentP
 
     return (
         <Stack>
-            <Stack spacing={20}>
+            <Stack spacing={ 20 }>
                 <Avatar
                     size="md"
                     circle
-                    src={imageUrl}
+                    src={ imageUrl }
                     alt="IDP image"
-                    style={imageUrl ? { background: "rgba(255,0,0,0)" } : { background: `${random_rgba()}` }}
+                    style={ imageUrl ? { background: "rgba(255,0,0,0)" } : { background: `${random_rgba()}` } }
                 >
-                    {title ? title.charAt(0) : ""}
+                    { title ? title.charAt(0) : "" }
                 </Avatar>
                 <Stack direction="column" justifyContent="flex-start" alignItems="stretch">
-                    <h5>{title}</h5>
-                    <p>{description ? description : ""}</p>
+                    <h5>{ title }</h5>
+                    <p>{ description ? description : "" }</p>
                 </Stack>
             </Stack>
 

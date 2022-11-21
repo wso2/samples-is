@@ -33,5 +33,5 @@ export function consoleLogError(title: string, message: string) {
 }
 
 export default {
-    consoleLogInfo, consoleLogDebug, consoleLogError
+    consoleLogDebug, consoleLogError, consoleLogInfo
 };

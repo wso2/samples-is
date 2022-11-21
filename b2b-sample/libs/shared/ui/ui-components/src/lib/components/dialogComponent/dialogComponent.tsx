@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import React from "react";
 import { Notification, Toaster } from "rsuite";
 import { DialogComponentProps } from "../../models/dialogComponent/dialogComponent";
 
@@ -25,13 +26,13 @@ import { DialogComponentProps } from "../../models/dialogComponent/dialogCompone
  *
  * @returns A side dialog to show notifications
  */
-function DialogComponent(prop : DialogComponentProps) {
+function DialogComponent(prop: DialogComponentProps) {
 
     const { type, header, body } = prop;
 
     return (
-        <Notification type={type} header={header} closable>
-            {body}
+        <Notification type={ type } header={ header } closable>
+            { body }
         </Notification>
     );
 }
@@ -45,13 +46,17 @@ function DialogComponent(prop : DialogComponentProps) {
  * 
  * @returns - A notification dialog baed on the `type`
  */
-async function showDialog(toaster : Toaster, type : "error" | "info" | "success" | "warning", header : string, body? : string) {
-    const toasteKey = toaster.push(<DialogComponent type={type} header={header} body={body} />, {
+async function showDialog(toaster: Toaster,
+    type: "error" | "info" | "success" | "warning",
+    header: string,
+    body?: string) {
+    const toasteKey = toaster.push(<DialogComponent type={ type } header={ header } body={ body } />, {
         placement: "bottomStart"
     });
 
-    if(toasteKey){
-        const key : string = toasteKey.toString();
+    if (toasteKey) {
+        const key: string = toasteKey.toString();
+
         setTimeout(() => toaster.remove(key), 2500);
     }
 }
@@ -64,7 +69,7 @@ async function showDialog(toaster : Toaster, type : "error" | "info" | "success"
  * 
  * @returns - A error type notification dialog
  */
-export function errorTypeDialog(toaster : Toaster, header : string, body? : string) {
+export function errorTypeDialog(toaster: Toaster, header: string, body?: string) {
     showDialog(toaster, "error", header, body);
 }
 
@@ -76,7 +81,7 @@ export function errorTypeDialog(toaster : Toaster, header : string, body? : stri
  * 
  * @returns - A information type notification dialog
  */
-export function infoTypeDialog(toaster : Toaster, header : string, body? : string) {
+export function infoTypeDialog(toaster: Toaster, header: string, body?: string) {
     showDialog(toaster, "info", header, body);
 }
 
@@ -88,7 +93,7 @@ export function infoTypeDialog(toaster : Toaster, header : string, body? : strin
  * 
  * @returns - A success type notification dialog
  */
-export function successTypeDialog(toaster : Toaster, header : string, body? : string) {
+export function successTypeDialog(toaster: Toaster, header: string, body?: string) {
     showDialog(toaster, "success", header, body);
 }
 
@@ -100,8 +105,8 @@ export function successTypeDialog(toaster : Toaster, header : string, body? : st
  * 
  * @returns - A warning type notification dialog
  */
-export function warningTypeDialog(toaster : Toaster, header : string, body? : string) {
+export function warningTypeDialog(toaster: Toaster, header: string, body?: string) {
     showDialog(toaster, "warning", header, body);
 }
 
-export default {errorTypeDialog, infoTypeDialog, successTypeDialog, warningTypeDialog};
+export default { errorTypeDialog, infoTypeDialog, successTypeDialog, warningTypeDialog };
