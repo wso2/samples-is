@@ -85,7 +85,7 @@
     "shared-ui-components": {
       "root": "libs/shared/ui-components",
       "sourceRoot": "libs/shared/ui-components/src",
-      "projectType": "library",
+      "projectType": "ui-library",
       "tags": [],
       "targets": {
         "lint": {
@@ -106,6 +106,35 @@
           ],
           "options": {
             "jestConfig": "libs/shared/ui-components/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "shared-util-common": {
+      "root": "libs/shared/util-common",
+      "sourceRoot": "libs/shared/util-common/src",
+      "projectType": "library",
+      "tags": [],
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/util-common/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "{workspaceRoot}/coverage/{projectRoot}"
+          ],
+          "options": {
+            "jestConfig": "libs/shared/util-common/jest.config.ts",
             "passWithNoTests": true
           }
         }

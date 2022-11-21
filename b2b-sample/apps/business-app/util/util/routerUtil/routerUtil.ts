@@ -21,7 +21,7 @@ import { signIn, signOut } from "next-auth/react";
 import config from "../../../config.json";
 import { User } from "../../../models/user/user";
 import { getHostedUrl, getManagementAPIServerBaseUrl, getTenantDomain } from "../apiUtil/getUrls";
-import { checkIfJSONisEmpty } from "../common/common";
+import { checkIfJSONisEmpty } from "@b2bsample/shared/util-common";
 
 /**
  * 

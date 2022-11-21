@@ -23,7 +23,7 @@ import stylesSettings from "../../../../../../styles/Settings.module.css";
 import decodePatchApplicationAuthSteps from
     "../../../../../../util/apiDecode/settings/application/decodePatchApplicationAuthSteps";
 import { PatchApplicationAuthMethod } from "../../../../../../util/util/applicationUtil/applicationUtil";
-import { checkIfJSONisEmpty } from "../../../../../../util/util/common/common";
+import { checkIfJSONisEmpty } from "@b2bsample/shared/util-common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../../util/util/frontendUtil/frontendUtil";
 
 /**

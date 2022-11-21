@@ -28,7 +28,7 @@ import decodeListCurrentApplication from
 import decodeDeleteIdentityProvider from
     "../../../../../../util/apiDecode/settings/identityProvider/decodeDeleteIdentityProvider";
 import { checkIfIdpIsinAuthSequence } from "../../../../../../util/util/applicationUtil/applicationUtil";
-import { checkIfJSONisEmpty } from "../../../../../../util/util/common/common";
+import { checkIfJSONisEmpty } from "@b2bsample/shared/util-common";
 
 /**
  * 

@@ -23,7 +23,7 @@ import image1 from "../../../../../../../libs/business-app/ui-assets/src/lib/ima
 import image2 from "../../../../../../../libs/business-app/ui-assets/src/lib/images/news/news2.jpeg";
 import image3 from "../../../../../../../libs/business-app/ui-assets/src/lib/images/news/news3.jpeg";
 import image4 from "../../../../../../../libs/business-app/ui-assets/src/lib/images/news/news4.jpeg";
-import { getCurrentDate } from "../../../../../util/util/common/common";
+import { getCurrentDate } from "@b2bsample/shared/util-common";
 
 /**
  * 

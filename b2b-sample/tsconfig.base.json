@@ -27,6 +27,9 @@
       ],
       "@b2bsample/shared/ui-components": [
         "libs/shared/ui-components/src/index.ts"
+      ],
+      "@b2bsample/shared/util-common": [
+        "libs/shared/util-common/src/index.ts"
       ]
     }
   },

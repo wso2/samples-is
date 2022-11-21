@@ -28,7 +28,7 @@ import decodEditRolesToAddOrRemoveUser
     from "../../../../../../util/apiDecode/settings/role/decodEditRolesToAddOrRemoveUser";
 import decodeListAllRoles from "../../../../../../util/apiDecode/settings/role/decodeListAllRoles";
 import decodeUserRole from "../../../../../../util/apiDecode/settings/role/decodeUserRole";
-import { checkIfJSONisEmpty } from "../../../../../../util/util/common/common";
+import { checkIfJSONisEmpty } from "@b2bsample/shared/util-common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../../util/util/frontendUtil/frontendUtil";
 
 /**

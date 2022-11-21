@@ -23,7 +23,7 @@ import { Button, ButtonToolbar, Loader, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
 import styles from "../../../../../../../../styles/Settings.module.css";
 import decodePatchRole from "../../../../../../../../util/apiDecode/settings/role/decodePatchRole";
-import { PatchMethod, checkIfJSONisEmpty } from "../../../../../../../../util/util/common/common";
+import { PatchMethod, checkIfJSONisEmpty } from "@b2bsample/shared/util-common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE }
     from "../../../../../../../../util/util/frontendUtil/frontendUtil";
 import HelperText from "../../../../../../../common/helperText";

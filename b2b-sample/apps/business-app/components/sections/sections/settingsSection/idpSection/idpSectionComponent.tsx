@@ -34,7 +34,7 @@ import decodeCreateIdentityProvider from
 import decodeListAllIdentityProviders from
     "../../../../../util/apiDecode/settings/identityProvider/decodeListAllIdentityProviders";
 import { EMPTY_STRING, ENTERPRISE_ID, GOOGLE_ID, checkIfJSONisEmpty, copyTheTextToClipboard, sizeOfJson } from
-    "../../../../../util/util/common/common";
+    "@b2bsample/shared/util-common";
 import { getCallbackUrl } from "../../../../../util/util/idpUtil/idpUtil";
 import EmptySettings from "../../../../common/emptySettings";
 import SettingsTitle from "../../../../common/settingsTitle";

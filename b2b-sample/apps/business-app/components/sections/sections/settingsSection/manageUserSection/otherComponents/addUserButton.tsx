@@ -23,7 +23,7 @@ import decodeGetApplication from "../../../../../../util/apiDecode/settings/appl
 import decodeListCurrentApplication
     from "../../../../../../util/apiDecode/settings/application/decodeListCurrentApplication";
 import { checkIfBasicAvailableinAuthSequence } from "../../../../../../util/util/applicationUtil/applicationUtil";
-import { checkIfJSONisEmpty } from "../../../../../../util/util/common/common";
+import { checkIfJSONisEmpty } from "@b2bsample/shared/util-common";
 
 export default function AddUserButton(prop) {
 
