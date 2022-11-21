@@ -54,6 +54,7 @@ export function Custom500Component() {
                     Go Back
                 </Button>
             </Stack>
+            
         </Stack>
     );
 };

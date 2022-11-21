@@ -29,7 +29,7 @@ import decodEditRolesToAddOrRemoveUser
     from "../../../../../../util/apiDecode/settings/role/decodEditRolesToAddOrRemoveUser";
 import decodeListAllRoles from "../../../../../../util/apiDecode/settings/role/decodeListAllRoles";
 import decodeUserRole from "../../../../../../util/apiDecode/settings/role/decodeUserRole";
-import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../../util/util/frontendUtil/frontendUtil";
+import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "@b2bsample/business-app/util/util-front-end-util";
 
 /**
  * 

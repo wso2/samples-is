@@ -24,7 +24,7 @@ import Permission from "./createRoleComponentInner/permission";
 import Users from "./createRoleComponentInner/users";
 import styles from "../../../../../../../styles/Settings.module.css";
 import { decodeCreateRole } from "../../../../../../../util/apiDecode/settings/role/deocdeCreateRole";
-import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../../../util/util/frontendUtil/frontendUtil";
+import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "@b2bsample/business-app/util/util-front-end-util";
 
 export default function CreateRoleComponent(prop) {
 

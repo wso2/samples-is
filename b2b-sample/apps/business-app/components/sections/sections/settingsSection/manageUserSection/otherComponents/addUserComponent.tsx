@@ -25,7 +25,7 @@ import { Button, ButtonToolbar, Divider, Loader, Modal, Panel, Radio, RadioGroup
 import FormSuite from "rsuite/Form";
 import styles from "../../../../../../styles/Settings.module.css";
 import { InviteConst, decodeAddUser } from "../../../../../../util/apiDecode/settings/decodeAddUser";
-import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../../util/util/frontendUtil/frontendUtil";
+import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "@b2bsample/business-app/util/util-front-end-util";
 
 /**
  * 

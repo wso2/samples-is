@@ -19,7 +19,7 @@
 import { orgSignout } from "@b2bsample/shared/util/util-authorization-config-util";
 import React, { useState } from "react";
 import { Button, ButtonToolbar, Loader, Modal, Stack } from "rsuite";
-import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../util/util/frontendUtil/frontendUtil";
+import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "@b2bsample/business-app/util/util-front-end-util";
 
 export default function SignOutModal(prop) {
 

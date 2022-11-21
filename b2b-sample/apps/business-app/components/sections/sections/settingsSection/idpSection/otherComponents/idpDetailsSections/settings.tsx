@@ -29,7 +29,7 @@ import decodeGetFederatedAuthenticators from
     "../../../../../../../util/apiDecode/settings/identityProvider/decodeGetFederatedAuthenticators";
 import decodeUpdateFederatedAuthenticators from
     "../../../../../../../util/apiDecode/settings/identityProvider/decodeUpdateFederatedAuthenticators";
-import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../../../util/util/frontendUtil/frontendUtil";
+import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "@b2bsample/business-app/util/util-front-end-util";
 
 /**
  * 

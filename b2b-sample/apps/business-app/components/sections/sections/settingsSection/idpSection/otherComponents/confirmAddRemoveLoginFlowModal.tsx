@@ -24,7 +24,7 @@ import stylesSettings from "../../../../../../styles/Settings.module.css";
 import decodePatchApplicationAuthSteps from
     "../../../../../../util/apiDecode/settings/application/decodePatchApplicationAuthSteps";
 import { PatchApplicationAuthMethod } from "../../../../../../util/util/applicationUtil/applicationUtil";
-import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../../util/util/frontendUtil/frontendUtil";
+import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "@b2bsample/business-app/util/util-front-end-util";
 
 /**
  * 

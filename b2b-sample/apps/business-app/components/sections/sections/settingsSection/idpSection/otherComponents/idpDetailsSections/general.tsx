@@ -25,8 +25,7 @@ import FormSuite from "rsuite/Form";
 import styles from "../../../../../../../styles/Settings.module.css";
 import decodePatchGeneralSettingsIdp from 
     "../../../../../../../util/apiDecode/settings/identityProvider/decodePatchGeneralSettingsIdp";
-import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from 
-    "../../../../../../../util/util/frontendUtil/frontendUtil";
+import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "@b2bsample/business-app/util/util-front-end-util";
 
 /**
  * 
