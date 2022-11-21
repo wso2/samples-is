@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { AccordianItemHeaderComponent } from "@b2bsample/shared/ui-components";
+import { AccordianItemHeaderComponent, JsonDisplayComponent } from "@b2bsample/shared/ui-components";
 import CodeIcon from "@rsuite/icons/Code";
 import React, { useCallback, useEffect, useState } from "react";
 import { Nav, Panel, Stack } from "rsuite";
@@ -27,7 +27,6 @@ import { IdentityProvider } from "../../../../../../models/identityProvider/iden
 import decodeGetDetailedIdentityProvider from
     "../../../../../../util/apiDecode/settings/identityProvider/decodeGetDetailedIdentityProvider";
 import { selectedTemplateBaesedonTemplateId } from "../../../../../../util/util/applicationUtil/applicationUtil";
-import JsonDisplay from "../../../../../common/jsonDisplay";
 
 /**
  * 
@@ -66,7 +65,7 @@ export default function IdentityProviderDetails(prop) {
                 return <Settings session={ session } idpDetails={ idpDetails } />;
             case "3":
 
-                return <JsonDisplay jsonObject={ idpDetails } />;
+                return <JsonDisplayComponent jsonObject={ idpDetails } />;
         }
     };
 

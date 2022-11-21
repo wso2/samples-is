@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { AccordianItemHeaderComponent } from "@b2bsample/shared/ui-components";
+import { AccordianItemHeaderComponent, JsonDisplayComponent } from "@b2bsample/shared/ui-components";
 import CodeIcon from "@rsuite/icons/Code";
 import React, { useCallback, useEffect, useState } from "react";
 import { Nav, Panel } from "rsuite";
@@ -25,7 +25,6 @@ import Permission from "./roleItemDetailsSection/permission";
 import Users from "./roleItemDetailsSection/users";
 import { Role } from "../../../../../../../models/role/role";
 import decodeGetRole from "../../../../../../../util/apiDecode/settings/role/decodeGetRole";
-import JsonDisplay from "../../../../../../common/jsonDisplay";
 
 /**
  * 
@@ -67,7 +66,7 @@ export default function RoleItem(prop) {
                 return <Users session={ session } roleDetails={ roleDetails } fetchData={ fetchData } />;
             case "4":
 
-                return <JsonDisplay jsonObject={ roleDetails } />;
+                return <JsonDisplayComponent jsonObject={ roleDetails } />;
         }
     };
 

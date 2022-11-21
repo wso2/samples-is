@@ -16,19 +16,16 @@
  * under the License.
  */
 
-import React from "react";
+import { JsonDisplayComponentProps } from "../../models/jsonDisplayComponent/jsonDisplayComponent";
+import styles from "./jsonDisplayComponent.module.css";
 
-/**
- * 
- * @param prop - `jsonObject` 
- * 
- * @returns The beautified json object visualizer component
- */
-export default function JsonDisplay(prop) {
-
+export function JsonDisplayComponent(prop: JsonDisplayComponentProps) {
     const { jsonObject } = prop;
 
     return (
-        <pre style={ { maxWidth: "50vw" } }> { JSON.stringify(jsonObject, null, 2) }</pre>
+        <pre className={styles["jsonDisplay"]}> {JSON.stringify(jsonObject, null, 2)}</pre>
     );
-}
+};
+
+
+export default JsonDisplayComponent;
