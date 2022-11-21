@@ -16,8 +16,8 @@
  * under the License.
  */
 
-import decodePatchRole from "./decodePatchRole";
 import { PatchMethod } from "@b2bsample/shared/util-common";
+import decodePatchRole from "./decodePatchRole";
 
 function getRolesThatNeedToAddUser(initRoleList, roleList) {
     return roleList.filter(roleUri => !initRoleList.includes(roleUri));

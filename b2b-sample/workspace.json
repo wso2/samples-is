@@ -114,7 +114,7 @@
     "shared-util-common": {
       "root": "libs/shared/util-common",
       "sourceRoot": "libs/shared/util-common/src",
-      "projectType": "library",
+      "projectType": "util-library",
       "tags": [],
       "targets": {
         "lint": {

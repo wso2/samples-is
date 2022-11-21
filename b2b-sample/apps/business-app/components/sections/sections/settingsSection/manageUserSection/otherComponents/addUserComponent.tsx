@@ -17,6 +17,7 @@
  */
 
 import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui-components";
+import { checkIfJSONisEmpty } from "@b2bsample/shared/util-common";
 import EmailFillIcon from "@rsuite/icons/EmailFill";
 import React, { useState } from "react";
 import { Field, Form } from "react-final-form";
@@ -24,7 +25,6 @@ import { Button, ButtonToolbar, Divider, Loader, Modal, Panel, Radio, RadioGroup
 import FormSuite from "rsuite/Form";
 import styles from "../../../../../../styles/Settings.module.css";
 import { InviteConst, decodeAddUser } from "../../../../../../util/apiDecode/settings/decodeAddUser";
-import { checkIfJSONisEmpty } from "@b2bsample/shared/util-common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../../util/util/frontendUtil/frontendUtil";
 
 /**

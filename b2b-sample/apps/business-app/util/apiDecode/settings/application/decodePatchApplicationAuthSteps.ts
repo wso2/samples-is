@@ -16,11 +16,11 @@
  * under the License.
  */
 
-import callPatchApplicationAuthSteps from "../../../apiCall/settings/application/callPatchApplicationAuthSteps";
-import { commonDecode } from "../../../util/apiUtil/commonDecode";
 import {
     BASIC_AUTHENTICATOR_ID, BASIC_ID, ENTERPRISE_AUTHENTICATOR_ID, ENTERPRISE_ID, GOOGLE_AUTHENTICATOR_ID, GOOGLE_ID
 } from "@b2bsample/shared/util-common";
+import callPatchApplicationAuthSteps from "../../../apiCall/settings/application/callPatchApplicationAuthSteps";
+import { commonDecode } from "../../../util/apiUtil/commonDecode";
 
 /**
  * 

@@ -16,12 +16,12 @@
  * under the License.
  */
 
+import { checkIfJSONisEmpty } from "@b2bsample/shared/util-common";
 import React from "react";
 import { Field, Form } from "react-final-form";
 import { Button, ButtonToolbar } from "rsuite";
 import FormSuite from "rsuite/Form";
 import styles from "../../../../../../../../styles/Settings.module.css";
-import { checkIfJSONisEmpty } from "@b2bsample/shared/util-common";
 import HelperText from "../../../../../../../common/helperText";
 
 /**

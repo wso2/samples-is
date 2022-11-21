@@ -16,10 +16,10 @@
  * under the License.
  */
 
+import { PatchMethod } from "@b2bsample/shared/util-common";
 import callPatchRole from
     "../../../apiCall/settings/role/callPatchRole";
 import { commonDecode } from "../../../util/apiUtil/commonDecode";
-import { PatchMethod } from "@b2bsample/shared/util-common";
 
 function getAddReplaceBody(patchMethod, path, value) {
     return {

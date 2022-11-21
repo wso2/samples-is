@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { AccordianItemHeader } from "@b2bsample/shared/ui-components";
 import CodeIcon from "@rsuite/icons/Code";
 import React, { useCallback, useEffect, useState } from "react";
 import { Nav, Panel, Stack } from "rsuite";
@@ -26,7 +27,6 @@ import { IdentityProvider } from "../../../../../../models/identityProvider/iden
 import decodeGetDetailedIdentityProvider from
     "../../../../../../util/apiDecode/settings/identityProvider/decodeGetDetailedIdentityProvider";
 import { selectedTemplateBaesedonTemplateId } from "../../../../../../util/util/applicationUtil/applicationUtil";
-import AccordianItemHeader from "../../../../../common/accordianItemHeader";
 import JsonDisplay from "../../../../../common/jsonDisplay";
 
 /**

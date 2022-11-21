@@ -16,12 +16,12 @@
  * under the License.
  */
 
+import { checkIfJSONisEmpty } from "@b2bsample/shared/util-common";
 import cookie from "cookie";
 import { signIn, signOut } from "next-auth/react";
 import config from "../../../config.json";
 import { User } from "../../../models/user/user";
 import { getHostedUrl, getManagementAPIServerBaseUrl, getTenantDomain } from "../apiUtil/getUrls";
-import { checkIfJSONisEmpty } from "@b2bsample/shared/util-common";
 
 /**
  * 

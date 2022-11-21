@@ -16,6 +16,8 @@
  * under the License.
  */
 
-export * from "./lib/components/logoComponent/logoComponent";
-export * from "./lib/components/dialogComponent/dialogComponent";
-export * from "./lib/components/accordianItemHeaderComponent/accordianItemHeaderComponent";
+ export interface AccordianItemHeaderProps {
+    title : string,
+    description : string,
+    imageUrl? : string
+}

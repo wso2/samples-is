@@ -17,6 +17,7 @@
  */
 
 import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui-components";
+import { checkIfJSONisEmpty } from "@b2bsample/shared/util-common";
 import React, { useState } from "react";
 import { Field, Form } from "react-final-form";
 import { Button, ButtonToolbar, Loader, useToaster } from "rsuite";
@@ -24,7 +25,6 @@ import FormSuite from "rsuite/Form";
 import styles from "../../../../../../../styles/Settings.module.css";
 import decodePatchGeneralSettingsIdp from
     "../../../../../../../util/apiDecode/settings/identityProvider/decodePatchGeneralSettingsIdp";
-import { checkIfJSONisEmpty } from "@b2bsample/shared/util-common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../../../util/util/frontendUtil/frontendUtil";
 import HelperText from "../../../../../../common/helperText";
 
