@@ -16,9 +16,9 @@
  * under the License.
  */
 
+import { getOrgUrl } from "@b2bsample/shared/util/util-application-config-util";
 import getDataHeader from "../../../../../util/util/apiUtil/getDataHeader";
 import { dataNotRecievedError, notPostError } from "../../../../../util/util/apiUtil/localResErrors";
-import { getOrgUrl } from "../../../../../util/util/orgUtil/orgUtil";
 
 /**
  * backend API call to get all the details of an identity provider

@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { getHostedUrl } from "./getUrls";
+import { getHostedUrl } from "@b2bsample/shared/util/util-application-config-util";
 
 function getSentDataHeader(session) {
     const headers = {

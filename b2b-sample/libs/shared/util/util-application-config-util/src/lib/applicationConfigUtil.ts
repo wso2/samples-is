@@ -16,7 +16,41 @@
  * under the License.
  */
 
-import config from "../../../config.json";
+import config from "../../../../../../config.json";
+
+/**
+ * check if the user is an administrator of the logged in identity server
+ * 
+ * @param scopes - scopes of the logged in user
+ * 
+ * @returns `true` if the user is an administrator, else `false`
+ */
+export function checkAdmin(scopes: string[]): boolean {
+    const adminScopes = ["email", "internal_login", "internal_user_mgt_create", "internal_user_mgt_delete",
+        "internal_user_mgt_list", "internal_user_mgt_update", "internal_user_mgt_view", "openid", "profile"];
+
+    for (let i = 0; i < adminScopes.length; i++) {
+        if (!scopes.includes(adminScopes[i])) {
+
+            return false;
+        }
+    }
+
+    return true;
+}
+
+/**
+ * 
+ * @param orgId - organization id
+ * 
+ * @returns organization url
+ */
+export function getOrgUrl(orgId: string): string {
+
+    const managementAPIServerBaseUrl = getManagementAPIServerBaseUrl();
+
+    return `${managementAPIServerBaseUrl}/o/${orgId}`;
+}
 
 /**
  * URL extracted from the `config.AuthorizationConfig.BaseOrganizationUrl`
@@ -24,7 +58,7 @@ import config from "../../../config.json";
  * @returns get managemnt API server base URL
  */
 
-function getManagementAPIServerBaseUrl() {
+export function getManagementAPIServerBaseUrl() {
 
     // todo: implementation will change after changes are done to the IS.
 
@@ -41,7 +75,7 @@ function getManagementAPIServerBaseUrl() {
  * 
  *  @returns tenatn domain.
  */
-function getTenantDomain() {
+export function getTenantDomain() {
 
     const baseOrganizationUrl = config.AuthorizationConfig.BaseOrganizationUrl;
     const url = baseOrganizationUrl.split("/");
@@ -50,9 +84,16 @@ function getTenantDomain() {
     return path;
 }
 
-function getHostedUrl() {
+/**
+ * 
+ * get hosted url
+ * value of `config.ApplicationConfig.HostedUrl`
+ */
+export function getHostedUrl() {
 
     return config.ApplicationConfig.HostedUrl;
 }
 
-export{ getManagementAPIServerBaseUrl, getTenantDomain, getHostedUrl };
+export default {
+    checkAdmin, getOrgUrl, getManagementAPIServerBaseUrl, getTenantDomain, getHostedUrl
+};

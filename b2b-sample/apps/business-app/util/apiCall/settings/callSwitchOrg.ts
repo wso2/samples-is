@@ -16,8 +16,8 @@
  * under the License.
  */
 
+import { getHostedUrl } from "@b2bsample/shared/util/util-application-config-util";
 import { geetInternalApiRequestOptionsForSwitchCallWithParam } from "../../util/apiUtil/getInteralApiRequestOptions";
-import { getHostedUrl } from "../../util/apiUtil/getUrls";
 
 /**
  * call the switch organization API endpoint

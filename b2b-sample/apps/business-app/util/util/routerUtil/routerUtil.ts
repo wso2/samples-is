@@ -16,11 +16,12 @@
  * under the License.
  */
 
+import { getHostedUrl, getManagementAPIServerBaseUrl, getTenantDomain } from
+    "@b2bsample/shared/util/util-application-config-util";
 import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
 import { signIn, signOut } from "next-auth/react";
 import config from "../../../config.json";
 import { User } from "../../../models/user/user";
-import { getHostedUrl, getManagementAPIServerBaseUrl, getTenantDomain } from "../apiUtil/getUrls";
 
 /**
  * 

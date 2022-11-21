@@ -77,12 +77,12 @@
       "sourceRoot": "libs/business-app/ui-assets/src",
       "projectType": "ui-library"
     },
-    "shared-ui-assets": {
+    "shared-ui-ui-assets": {
       "root": "libs/shared/ui/ui-assets",
       "sourceRoot": "libs/shared/ui/ui-assets/src",
       "projectType": "ui-library"
     },
-    "shared-ui-components": {
+    "shared-ui-ui-components": {
       "root": "libs/shared/ui/ui-components",
       "sourceRoot": "libs/shared/ui/ui-components/src",
       "projectType": "ui-library",
@@ -111,7 +111,7 @@
         }
       }
     },
-    "shared-util-common": {
+    "shared-util-util-common": {
       "root": "libs/shared/util/util-common",
       "sourceRoot": "libs/shared/util/util-common/src",
       "projectType": "util-library",
@@ -140,9 +140,9 @@
         }
       }
     },
-    "shared-util-organization-util": {
-      "root": "libs/shared/util/util-organization-util",
-      "sourceRoot": "libs/shared/util/util-organization-util/src",
+    "shared-util-util-application-config-util": {
+      "root": "libs/shared/util/util-application-config-util",
+      "sourceRoot": "libs/shared/util/util-application-config-util/src",
       "projectType": "library",
       "tags": [],
       "targets": {
@@ -153,7 +153,7 @@
           ],
           "options": {
             "lintFilePatterns": [
-              "libs/shared/util/util-organization-util/**/*.{ts,tsx,js,jsx}"
+              "libs/shared/util/util-application-config-util/**/*.{ts,tsx,js,jsx}"
             ]
           }
         },
@@ -163,7 +163,7 @@
             "{workspaceRoot}/coverage/{projectRoot}"
           ],
           "options": {
-            "jestConfig": "libs/shared/util/util-organization-util/jest.config.ts",
+            "jestConfig": "libs/shared/util/util-application-config-util/jest.config.ts",
             "passWithNoTests": true
           }
         }

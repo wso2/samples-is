@@ -16,10 +16,10 @@
  * under the License.
  */
 
+import { getOrgUrl } from "@b2bsample/shared/util/util-application-config-util";
 import { getSentDataRequestOptions } from "../../../../util/util/apiUtil/getSentDataRequestOptions";
 import { dataNotRecievedError, notPostError } from "../../../../util/util/apiUtil/localResErrors";
 import { RequestMethod } from "../../../../util/util/apiUtil/requestMethod";
-import { getOrgUrl } from "../../../../util/util/orgUtil/orgUtil";
 
 /**
  * backend API call to edit a user

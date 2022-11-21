@@ -16,10 +16,10 @@
  * under the License.
  */
 
+import { getOrgUrl } from "@b2bsample/shared/util/util-application-config-util";
 import config from "../../../../config.json";
 import getDataHeader from "../../../../util/util/apiUtil/getDataHeader";
 import { dataNotRecievedError, notPostError } from "../../../../util/util/apiUtil/localResErrors";
-import { getOrgUrl } from "../../../../util/util/orgUtil/orgUtil";
 
 /**
  * API call to get the initial details of the current application. Use the application name to filter out the 

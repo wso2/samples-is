@@ -16,4 +16,4 @@
  * under the License.
  */
 
-export * from './lib/organizationUtil';
+export * from "./lib/applicationConfigUtil";

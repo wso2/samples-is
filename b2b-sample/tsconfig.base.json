@@ -31,8 +31,8 @@
       "@b2bsample/shared/util/util-common": [
         "libs/shared/util/util-common/src/index.ts"
       ],
-      "shared/util/util-organization-util": [
-        "libs/shared/util/util-organization-util/src/index.ts"
+      "@b2bsample/shared/util/util-application-config-util": [
+        "libs/shared/util/util-application-config-util/src/index.ts"
       ]
     }
   },

@@ -16,8 +16,8 @@
  * under the License.
  */
 
+import { getHostedUrl } from "@b2bsample/shared/util/util-application-config-util";
 import { getInternalApiRequestOptionsWithParam } from "../../../util/apiUtil/getInteralApiRequestOptions";
-import { getHostedUrl } from "../../../util/apiUtil/getUrls";
 
 /**
  * call GET `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/identity-providers/<idpid>

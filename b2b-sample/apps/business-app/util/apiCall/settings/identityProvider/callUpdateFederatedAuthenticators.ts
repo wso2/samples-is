@@ -17,8 +17,8 @@
  */
 
 
+import { getHostedUrl } from "@b2bsample/shared/util/util-application-config-util";
 import { getInternalApiRequestOptionsWithParam } from "../../../util/apiUtil/getInteralApiRequestOptions";
-import { getHostedUrl } from "../../../util/apiUtil/getUrls";
 
 /**
  * update federated authenticators of an identity provider

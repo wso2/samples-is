@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { checkAdmin } from "../orgUtil/orgUtil";
+import { checkAdmin } from "@b2bsample/shared/util/util-application-config-util";
 
 const LOADING_DISPLAY_NONE = {
     display: "none"

@@ -17,8 +17,8 @@
  */
 
 
+import { getHostedUrl } from "@b2bsample/shared/util/util-application-config-util";
 import { getInternalApiRequestOptions } from "../../../util/apiUtil/getInteralApiRequestOptions";
-import { getHostedUrl } from "../../../util/apiUtil/getUrls";
 
 /**
  * call GET `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/applications?filter=name+eq+<appName>` 
