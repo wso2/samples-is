@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { getCurrentDate } from "@b2bsample/shared/util-common";
+import { getCurrentDate } from "@b2bsample/shared/util/util-common";
 import Image from "next/image";
 import React from "react";
 import { Panel } from "rsuite";

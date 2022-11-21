@@ -16,8 +16,8 @@
  * under the License.
  */
 
-import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui-components";
-import { checkIfJSONisEmpty } from "@b2bsample/shared/util-common";
+import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
+import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
 import React, { useCallback, useEffect, useState } from "react";
 import { Form } from "react-final-form";
 import { Button, ButtonToolbar, Loader, useToaster } from "rsuite";
@@ -41,8 +41,8 @@ export default function Settings(prop) {
 
     const { session, idpDetails } = prop;
 
-    const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
-    const [ federatedAuthenticators, setFederatedAuthenticators ] = useState<FederatedAuthenticators>(null);
+    const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
+    const [federatedAuthenticators, setFederatedAuthenticators] = useState<FederatedAuthenticators>(null);
 
     const toaster = useToaster();
 
@@ -52,19 +52,21 @@ export default function Settings(prop) {
         );
 
         await setFederatedAuthenticators(res);
-    }, [ session, idpDetails ]);
+    }, [session, idpDetails]);
 
     useEffect(() => {
         fetchData();
-    }, [ fetchData ]);
+    }, [fetchData]);
 
     const validate = () => {
         const errors = {};
 
-        if (federatedAuthenticators.properties) {
+        if (federatedAuthenticators && federatedAuthenticators.properties) {
             federatedAuthenticators.properties.filter((property) => {
-                if (!eval(property.key) && !eval(property.key).value) {
-                    errors[property.key] = "This field cannot be empty";
+                if (document.getElementById(property.key)) {
+                    if(!(document.getElementById(property.key) as HTMLInputElement).value){
+                        errors[property.key] = "This field cannot be empty";
+                    }
                 }
             });
         }
@@ -89,49 +91,52 @@ export default function Settings(prop) {
     };
 
     return (
-        <div className={ styles.addUserMainDiv }>
+        <div className={styles.addUserMainDiv}>
 
             <div>
+                {
+                    federatedAuthenticators
+                        ? <Form
+                            onSubmit={onUpdate}
+                            validate={validate}
 
-                <Form
-                    onSubmit={ onUpdate }
-                    validate={ validate }
+                            render={({ handleSubmit, submitting, pristine, errors }) => (
+                                <FormSuite
+                                    layout="vertical"
+                                    className={styles.addUserForm}
+                                    onSubmit={() => handleSubmit()}
+                                    fluid>
 
-                    render={ ({ handleSubmit, submitting, pristine, errors }) => (
-                        <FormSuite
-                            layout="vertical"
-                            className={ styles.addUserForm }
-                            onSubmit={ () => handleSubmit() }
-                            fluid>
+                                    {federatedAuthenticators.properties
+                                        ? (<SettingsFormSelection
+                                            federatedAuthenticators={federatedAuthenticators.properties}
+                                            templateId={idpDetails.templateId} />)
+                                        : null
+                                    }
 
-                            { federatedAuthenticators.properties
-                                ? (<SettingsFormSelection
-                                    federatedAuthenticators={ federatedAuthenticators.properties }
-                                    templateId={ idpDetails.templateId } />)
-                                : null
-                            }
-
-                            <div className="buttons">
-                                <FormSuite.Group>
-                                    <ButtonToolbar>
-                                        <Button
-                                            className={ styles.addUserButton }
-                                            size="lg"
-                                            appearance="primary"
-                                            type="submit"
-                                            disabled={ submitting || pristine || !checkIfJSONisEmpty(errors) }>
-                                            Update
-                                        </Button>
-                                    </ButtonToolbar>
-                                </FormSuite.Group>
-                            </div>
-                        </FormSuite>
-                    ) }
-                />
+                                    <div className="buttons">
+                                        <FormSuite.Group>
+                                            <ButtonToolbar>
+                                                <Button
+                                                    className={styles.addUserButton}
+                                                    size="lg"
+                                                    appearance="primary"
+                                                    type="submit"
+                                                    disabled={submitting || pristine || !checkIfJSONisEmpty(errors)}>
+                                                    Update
+                                                </Button>
+                                            </ButtonToolbar>
+                                        </FormSuite.Group>
+                                    </div>
+                                </FormSuite>
+                            )}
+                        />
+                        : null
+                }
 
             </div>
 
-            <div style={ loadingDisplay }>
+            <div style={loadingDisplay}>
                 <Loader size="lg" backdrop content="User is adding" vertical />
             </div>
         </div>

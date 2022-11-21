@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui-components";
+import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
 import React, { useState } from "react";
 import { Loader, Modal, Panel, Steps, useToaster } from "rsuite";
 import General from "./createRoleComponentInner/general";

@@ -17,8 +17,8 @@
  */
 
 import Image from "next/image";
-import config from "../../../../../../../config.json";
-import logoImage from "../../../../../../../libs/shared/ui-assets/src/lib/images/logo.png";
+import config from "../../../../../../../../config.json";
+import logoImage from "../../../../../../../../libs/shared/ui/ui-assets/src/lib/images/logo.png";
 import { LogoComponentProps, LogoImageStyle, LogoProps } from "../../models/logoComponent/logoComponent";
 import styles from "./logoComponent.module.css";
 

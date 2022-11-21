@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { PatchMethod } from "@b2bsample/shared/util-common";
+import { PatchMethod } from "@b2bsample/shared/util/util-common";
 import callPatchRole from
     "../../../apiCall/settings/role/callPatchRole";
 import { commonDecode } from "../../../util/apiUtil/commonDecode";

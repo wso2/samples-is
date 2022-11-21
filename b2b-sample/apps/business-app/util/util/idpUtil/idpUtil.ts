@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { ENTERPRISE_ID, GOOGLE_ID } from "@b2bsample/shared/util-common";
+import { ENTERPRISE_ID, GOOGLE_ID } from "@b2bsample/shared/util/util-common";
 import config from "../../../config.json";
 import { getManagementAPIServerBaseUrl } from "../apiUtil/getUrls";
 import { getOrgUrl } from "../orgUtil/orgUtil";

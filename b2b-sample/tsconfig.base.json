@@ -22,14 +22,17 @@
       "@b2bsample/business-app/ui-assets": [
         "libs/business-app/ui-assets/src"
       ],
-      "@b2bsample/shared/ui-assets": [
-        "libs/shared/ui-assets/src"
+      "@b2bsample/shared/ui/ui-assets": [
+        "libs/shared/ui/ui-assets/src"
       ],
-      "@b2bsample/shared/ui-components": [
-        "libs/shared/ui-components/src/index.ts"
+      "@b2bsample/shared/ui/ui-components": [
+        "libs/shared/ui/ui-components/src/index.ts"
       ],
-      "@b2bsample/shared/util-common": [
-        "libs/shared/util-common/src/index.ts"
+      "@b2bsample/shared/util/util-common": [
+        "libs/shared/util/util-common/src/index.ts"
+      ],
+      "shared/util/util-organization-util": [
+        "libs/shared/util/util-organization-util/src/index.ts"
       ]
     }
   },

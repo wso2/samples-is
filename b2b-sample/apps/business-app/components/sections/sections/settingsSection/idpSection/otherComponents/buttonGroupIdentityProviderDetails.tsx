@@ -16,8 +16,8 @@
  * under the License.
  */
 
-import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui-components";
-import { checkIfJSONisEmpty } from "@b2bsample/shared/util-common";
+import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
+import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
 import Trash from "@rsuite/icons/Trash";
 import React, { useCallback, useEffect, useState } from "react";
 import { Button, IconButton, Stack, useToaster } from "rsuite";

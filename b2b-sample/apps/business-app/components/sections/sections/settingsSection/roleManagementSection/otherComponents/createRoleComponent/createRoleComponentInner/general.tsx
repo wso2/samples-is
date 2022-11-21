@@ -16,8 +16,8 @@
  * under the License.
  */
 
-import { HelperTextComponent } from "@b2bsample/shared/ui-components";
-import { checkIfJSONisEmpty } from "@b2bsample/shared/util-common";
+import { HelperTextComponent } from "@b2bsample/shared/ui/ui-components";
+import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
 import React from "react";
 import { Field, Form } from "react-final-form";
 import { Button, ButtonToolbar } from "rsuite";

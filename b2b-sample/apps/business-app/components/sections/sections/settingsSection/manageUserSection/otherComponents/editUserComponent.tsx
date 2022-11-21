@@ -16,8 +16,8 @@
  * under the License.
  */
 
-import { errorTypeDialog, successTypeDialog, warningTypeDialog } from "@b2bsample/shared/ui-components";
-import { checkIfJSONisEmpty } from "@b2bsample/shared/util-common";
+import { errorTypeDialog, successTypeDialog, warningTypeDialog } from "@b2bsample/shared/ui/ui-components";
+import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
 import React, { useCallback, useEffect, useState } from "react";
 import { Field, Form } from "react-final-form";
 import { Button, ButtonToolbar, Divider, Loader, Modal, TagPicker, useToaster } from "rsuite";

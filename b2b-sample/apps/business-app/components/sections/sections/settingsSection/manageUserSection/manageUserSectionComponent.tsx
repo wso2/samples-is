@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { SettingsTitleComponent } from "@b2bsample/shared/ui-components";
+import { SettingsTitleComponent } from "@b2bsample/shared/ui/ui-components";
 import React, { useCallback, useEffect, useState } from "react";
 import { Table } from "rsuite";
 import AddUserButton from "./otherComponents/addUserButton";

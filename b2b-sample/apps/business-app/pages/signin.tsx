@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { LogoComponent } from "@b2bsample/shared/ui-components";
+import { LogoComponent } from "@b2bsample/shared/ui/ui-components";
 import { getSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 import { Loader } from "rsuite";

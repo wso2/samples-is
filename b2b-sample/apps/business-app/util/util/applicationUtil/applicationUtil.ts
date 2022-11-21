@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { ENTERPRISE_ID, GOOGLE_ID } from "@b2bsample/shared/util-common";
+import { ENTERPRISE_ID, GOOGLE_ID } from "@b2bsample/shared/util/util-common";
 import enterpriseFederatedAuthenticators from
     "../../../components/sections/sections/settingsSection/idpSection/data/templates/enterprise-identity-provider.json";
 import googleFederatedAuthenticators from

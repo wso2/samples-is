@@ -17,9 +17,9 @@
  */
 
 import { EmptySettingsComponent, SettingsTitleComponent, errorTypeDialog, successTypeDialog } from
-    "@b2bsample/shared/ui-components";
+    "@b2bsample/shared/ui/ui-components";
 import { EMPTY_STRING, ENTERPRISE_ID, GOOGLE_ID, checkIfJSONisEmpty, copyTheTextToClipboard, sizeOfJson } from
-    "@b2bsample/shared/util-common";
+    "@b2bsample/shared/util/util-common";
 import AppSelectIcon from "@rsuite/icons/AppSelect";
 import CopyIcon from "@rsuite/icons/Copy";
 import InfoRoundIcon from "@rsuite/icons/InfoRound";

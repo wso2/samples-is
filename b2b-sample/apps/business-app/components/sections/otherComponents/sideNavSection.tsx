@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { LogoComponent } from "@b2bsample/shared/ui-components";
+import { LogoComponent } from "@b2bsample/shared/ui/ui-components";
 import DashboardIcon from "@rsuite/icons/legacy/Dashboard";
 import GearCircleIcon from "@rsuite/icons/legacy/GearCircle";
 import React from "react";

@@ -16,8 +16,8 @@
  * under the License.
  */
 
-import { HelperTextComponent } from "@b2bsample/shared/ui-components";
-import { copyTheTextToClipboard } from "@b2bsample/shared/util-common";
+import { HelperTextComponent } from "@b2bsample/shared/ui/ui-components";
+import { copyTheTextToClipboard } from "@b2bsample/shared/util/util-common";
 import CopyIcon from "@rsuite/icons/Copy";
 import React from "react";
 import { Field } from "react-final-form";
@@ -66,6 +66,7 @@ export default function SettingsFormSelection(prop) {
                     ? propList().map((property) => {
                         return (
                             <Field
+                                id = { property.key }
                                 key={ property.key }
                                 name={ property.key }
                                 initialValue={ selectedValue(property.key) }

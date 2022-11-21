@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { infoTypeDialog } from "@b2bsample/shared/ui-components";
+import { infoTypeDialog } from "@b2bsample/shared/ui/ui-components";
 import { Toaster } from "rsuite";
 
 /**

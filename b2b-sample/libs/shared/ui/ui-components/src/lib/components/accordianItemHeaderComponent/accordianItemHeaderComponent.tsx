@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { random_rgba } from "@b2bsample/shared/util-common";
+import { random_rgba } from "@b2bsample/shared/util/util-common";
 import { Avatar, Stack } from "rsuite";
 import { AccordianItemHeaderComponentProps } from
     "../../models/accordianItemHeaderComponent/accordianItemHeaderComponent";

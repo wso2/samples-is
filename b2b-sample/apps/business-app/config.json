@@ -1,8 +1,8 @@
 {
     "AuthorizationConfig": {
-        "BaseOrganizationUrl": "https://localhost:9443/t/carbon.super",
-        "ClientId": "ALArdvAwI2H5GRK3f0wFZ9E38qAa",
-        "ClientSecret": "5T1hhXvg_HqB1sL5qTTecDofVH0a"
+        "BaseOrganizationUrl": "https://dev.api.asgardeo.io/t/guardioi",
+        "ClientId": "3IUFkGr4sjfDRXDm5z9fm34PgMwa",
+        "ClientSecret": "EI3KG6Z1PhnBqohWbt1P7qZA7Dsa"
     },
     "ApplicationConfig": {
         "HostedUrl": "http://localhost:3000",
@@ -35,13 +35,13 @@
         },
         "SampleOrganization" : [
             {
-                "id": "d95da28f-65cc-4c37-b045-e8164b030de3",
-                "name": "temp"
+                "id": "<SUB ORGANIZATION ID>",
+                "name": "<SUB ORGANIZATION NAME>"
             }
         ]
     },
     "ManagementAPIConfig": {
-        "SharedApplicationName": "test",
+        "SharedApplicationName": "temp",
         "ImageBaseUrl" : "https://console.asgardeo.io"
     }
 }

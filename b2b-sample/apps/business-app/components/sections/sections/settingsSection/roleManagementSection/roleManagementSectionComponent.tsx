@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { EmptySettingsComponent, SettingsTitleComponent } from "@b2bsample/shared/ui-components";
+import { EmptySettingsComponent, SettingsTitleComponent } from "@b2bsample/shared/ui/ui-components";
 import PeoplesIcon from "@rsuite/icons/Peoples";
 import React, { useCallback, useEffect, useState } from "react";
 import { Container } from "rsuite";

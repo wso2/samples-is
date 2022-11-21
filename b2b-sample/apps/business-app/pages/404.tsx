@@ -20,7 +20,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
 import { Button, Stack } from "rsuite";
-import errorImage from "../../../libs/shared/ui-assets/src/lib/images/404.svg";
+import errorImage from "../../../libs/shared/ui/ui-assets/src/lib/images/404.svg";
 import style from "../styles/Error.module.css";
 
 export default function Custom404() {

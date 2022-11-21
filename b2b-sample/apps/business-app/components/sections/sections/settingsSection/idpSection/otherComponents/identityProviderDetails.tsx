@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { AccordianItemHeaderComponent, JsonDisplayComponent } from "@b2bsample/shared/ui-components";
+import { AccordianItemHeaderComponent, JsonDisplayComponent } from "@b2bsample/shared/ui/ui-components";
 import CodeIcon from "@rsuite/icons/Code";
 import React, { useCallback, useEffect, useState } from "react";
 import { Nav, Panel, Stack } from "rsuite";

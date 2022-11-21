@@ -16,8 +16,8 @@
  * under the License.
  */
 
-import { HelperTextComponent, errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui-components";
-import { PatchMethod, checkIfJSONisEmpty } from "@b2bsample/shared/util-common";
+import { HelperTextComponent, errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
+import { PatchMethod, checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
 import React,{ useState } from "react";
 import { Field, Form } from "react-final-form";
 import { Button, ButtonToolbar, Loader, useToaster } from "rsuite";

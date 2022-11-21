@@ -16,8 +16,8 @@
  * under the License.
  */
 
-import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui-components";
-import { checkIfJSONisEmpty } from "@b2bsample/shared/util-common";
+import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
+import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
 import EmailFillIcon from "@rsuite/icons/EmailFill";
 import React, { useState } from "react";
 import { Field, Form } from "react-final-form";

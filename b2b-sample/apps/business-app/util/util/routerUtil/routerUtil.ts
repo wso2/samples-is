@@ -16,8 +16,7 @@
  * under the License.
  */
 
-import { checkIfJSONisEmpty } from "@b2bsample/shared/util-common";
-import cookie from "cookie";
+import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
 import { signIn, signOut } from "next-auth/react";
 import config from "../../../config.json";
 import { User } from "../../../models/user/user";
@@ -36,17 +35,6 @@ function redirect(path): object {
             permanent: false
         }
     };
-}
-
-/**
- * 
- * @param req - request containing the cookie
- * 
- * @returns parse cookie
- */
-function parseCookies(req) {
-
-    return cookie.parse(req ? req.headers.cookie || "" : document.cookie);
 }
 
 /**
@@ -185,6 +173,5 @@ function getLoggedUserFromProfile(profile): User {
 }
 
 export {
-    redirect, parseCookies, orgSignin, orgSignout, emptySession, getLoggedUserId, getLoggedUserFromProfile, getOrgId,
-    getOrgName
+    redirect, orgSignin, orgSignout, emptySession, getLoggedUserId, getLoggedUserFromProfile, getOrgId, getOrgName
 };

@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { checkIfJSONisEmpty } from "@b2bsample/shared/util-common";
+import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
 import React, { useCallback, useEffect, useState } from "react";
 import { Button } from "rsuite";
 import { AllApplications, Application } from "../../../../../../models/application/application";

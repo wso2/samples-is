@@ -16,8 +16,8 @@
  * under the License.
  */
 
-import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui-components";
-import { PatchMethod } from "@b2bsample/shared/util-common";
+import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
+import { PatchMethod } from "@b2bsample/shared/util/util-common";
 import React, { useCallback, useEffect, useState } from "react";
 import { Field, Form } from "react-final-form";
 import { Button, ButtonToolbar, Checkbox, CheckboxGroup, Loader, useToaster } from "rsuite";
