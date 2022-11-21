@@ -16,17 +16,16 @@
  * under the License.
  */
 
-import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui-components";
+import { HelperTextComponent, errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui-components";
 import { PatchMethod, checkIfJSONisEmpty } from "@b2bsample/shared/util-common";
-import React, { useState } from "react";
+import React,{ useState } from "react";
 import { Field, Form } from "react-final-form";
 import { Button, ButtonToolbar, Loader, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
 import styles from "../../../../../../../../styles/Settings.module.css";
 import decodePatchRole from "../../../../../../../../util/apiDecode/settings/role/decodePatchRole";
-import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE }
-    from "../../../../../../../../util/util/frontendUtil/frontendUtil";
-import HelperText from "../../../../../../../common/helperText";
+import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from
+    "../../../../../../../../util/util/frontendUtil/frontendUtil";
 
 /**
  * 
@@ -104,7 +103,7 @@ export default function General(prop) {
                                             { ...input }
                                         />
 
-                                        <HelperText text="The name of the role." />
+                                        <HelperTextComponent text="The name of the role." />
 
                                         { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true }  >
                                             { meta.error }

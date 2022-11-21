@@ -16,17 +16,17 @@
  * under the License.
  */
 
-import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui-components";
+import { HelperTextComponent, errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui-components";
 import { checkIfJSONisEmpty } from "@b2bsample/shared/util-common";
-import React, { useState } from "react";
+import React,{ useState } from "react";
 import { Field, Form } from "react-final-form";
 import { Button, ButtonToolbar, Loader, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
 import styles from "../../../../../../../styles/Settings.module.css";
-import decodePatchGeneralSettingsIdp from
+import decodePatchGeneralSettingsIdp from 
     "../../../../../../../util/apiDecode/settings/identityProvider/decodePatchGeneralSettingsIdp";
-import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../../../../../../util/util/frontendUtil/frontendUtil";
-import HelperText from "../../../../../../common/helperText";
+import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from 
+    "../../../../../../../util/util/frontendUtil/frontendUtil";
 
 /**
  * 
@@ -63,7 +63,7 @@ export default function General(prop) {
 
         errors = nameValidate(values.name, errors);
         errors = descriptionValidate(values.description, errors);
-        
+
         return errors;
     };
 
@@ -97,10 +97,10 @@ export default function General(prop) {
                         name: idpDetails.name
                     } }
                     render={ ({ handleSubmit, form, submitting, pristine, errors }) => (
-                        <FormSuite 
-                            layout="vertical" 
+                        <FormSuite
+                            layout="vertical"
                             className={ styles.addUserForm }
-                            onSubmit={ () => { handleSubmit().then(form.restart); } } 
+                            onSubmit={ () => { handleSubmit().then(form.restart); } }
                             fluid>
                             <Field
                                 name="name"
@@ -112,7 +112,7 @@ export default function General(prop) {
                                             { ...input }
                                         />
 
-                                        <HelperText text="A text description of the identity provider." />
+                                        <HelperTextComponent text="A text description of the identity provider." />
 
                                         { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true }  >
                                             { meta.error }
@@ -130,7 +130,7 @@ export default function General(prop) {
                                             { ...input }
                                         />
 
-                                        <HelperText text="A text description of the identity provider." />
+                                        <HelperTextComponent text="A text description of the identity provider." />
 
                                         { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true }  >
                                             { meta.error }
@@ -143,9 +143,9 @@ export default function General(prop) {
                             <div className="buttons">
                                 <FormSuite.Group>
                                     <ButtonToolbar>
-                                        <Button 
-                                            className={ styles.addUserButton } 
-                                            size="lg" 
+                                        <Button
+                                            className={ styles.addUserButton }
+                                            size="lg"
                                             appearance="primary"
                                             type="submit"
                                             disabled={ submitting || pristine || !checkIfJSONisEmpty(errors) }>

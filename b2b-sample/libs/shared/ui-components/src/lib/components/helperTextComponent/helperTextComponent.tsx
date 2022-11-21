@@ -16,10 +16,20 @@
  * under the License.
  */
 
-export * from "./lib/components/logoComponent/logoComponent";
-export * from "./lib/components/dialogComponent/dialogComponent";
-export * from "./lib/components/accordianItemHeaderComponent/accordianItemHeaderComponent";
-export * from "./lib/components/emptySettingsComponent/emptySettingsComponent";
-export * from "./lib/components/jsonDisplayComponent/jsonDisplayComponent";
-export * from "./lib/components/settingsTitleComponent/settingsTitleComponent";
-export * from "./lib/components/helperTextComponent/helperTextComponent";
+import InfoOutlineIcon from "@rsuite/icons/InfoOutline";
+import { Form, Stack } from "rsuite";
+import { HelperTextComponentProps } from "../../models/helperTextComponent/helperTextComponent";
+import styles from "./helperTextComponent.module.css";
+
+export function HelperTextComponent(prop: HelperTextComponentProps) {
+    const { text } = prop;
+
+    return (
+        <Stack className={styles["stack"]}>
+            <InfoOutlineIcon className={styles["icon"]} />
+            <Form.HelpText>{text}</Form.HelpText>
+        </Stack>
+    );
+};
+
+export default HelperTextComponent;

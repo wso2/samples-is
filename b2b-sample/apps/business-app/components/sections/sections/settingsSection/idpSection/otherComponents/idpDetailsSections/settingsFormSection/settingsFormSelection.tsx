@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { HelperTextComponent } from "@b2bsample/shared/ui-components";
 import { copyTheTextToClipboard } from "@b2bsample/shared/util-common";
 import CopyIcon from "@rsuite/icons/Copy";
 import React from "react";
@@ -23,7 +24,6 @@ import { Field } from "react-final-form";
 import { InputGroup, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
 import { selectedTemplateBaesedonTemplateId } from "../../../../../../../../util/util/applicationUtil/applicationUtil";
-import HelperText from "../../../../../../../common/helperText";
 
 /**
  * 
@@ -92,7 +92,7 @@ export default function SettingsFormSelection(prop) {
                                             }
 
                                         </InputGroup>
-                                        <HelperText
+                                        <HelperTextComponent
                                             text={ property.description } />
 
                                         { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true } >

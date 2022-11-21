@@ -1,4 +1,4 @@
-/**
+ /**
  * Copyright (c) 2022, WSO2 LLC. (https://www.wso2.com). All Rights Reserved.
  *
  * WSO2 LLC. licenses this file to you under the Apache License,
@@ -16,24 +16,6 @@
  * under the License.
  */
 
-import InfoOutlineIcon from "@rsuite/icons/InfoOutline";
-import React from "react";
-import { Form, Stack } from "rsuite";
-
-/**
- * 
- * @param prop - text
- * 
- * @returns A component for the decription section of an idp property.
- */
-export default function HelperText(prop) {
-
-    const { text } = prop;
-
-    return (
-        <Stack style={ { marginTop: "5px" } }>
-            <InfoOutlineIcon style={ { marginLeft: "2px", marginRight: "10px" } } />
-            <Form.HelpText>{ text }</Form.HelpText>
-        </Stack>
-    );
+export interface HelperTextComponentProps {
+    text : string
 }
