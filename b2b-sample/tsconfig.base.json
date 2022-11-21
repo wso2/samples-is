@@ -1,43 +1,49 @@
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "rootDir": ".",
-    "sourceMap": true,
-    "declaration": false,
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "importHelpers": true,
-    "target": "es2015",
-    "module": "esnext",
-    "resolveJsonModule": true,
-    "lib": [
-      "es2017",
-      "dom"
-    ],
-    "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
-    "baseUrl": ".",
-    "paths": {
-      "@b2bsample/business-app/ui-assets": [
-        "libs/business-app/ui-assets/src"
-      ],
-      "@b2bsample/shared/ui/ui-assets": [
-        "libs/shared/ui/ui-assets/src"
-      ],
-      "@b2bsample/shared/ui/ui-components": [
-        "libs/shared/ui/ui-components/src/index.ts"
-      ],
-      "@b2bsample/shared/util/util-common": [
-        "libs/shared/util/util-common/src/index.ts"
-      ],
-      "@b2bsample/shared/util/util-application-config-util": [
-        "libs/shared/util/util-application-config-util/src/index.ts"
-      ]
-    }
-  },
-  "exclude": [
-    "node_modules",
-    "tmp"
-  ]
+    "compileOnSave": false,
+    "compilerOptions": {
+        "rootDir": ".",
+        "sourceMap": true,
+        "declaration": false,
+        "moduleResolution": "node",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "importHelpers": true,
+        "target": "es2015",
+        "module": "esnext",
+        "resolveJsonModule": true,
+        "lib": [
+            "es2017",
+            "dom"
+        ],
+        "skipLibCheck": true,
+        "skipDefaultLibCheck": true,
+        "baseUrl": ".",
+        "paths": {
+            "@b2bsample/business-app/ui-assets": [
+                "libs/business-app/ui-assets/src"
+            ],
+            "@b2bsample/shared/ui/ui-assets": [
+                "libs/shared/ui/ui-assets/src"
+            ],
+            "@b2bsample/shared/ui/ui-components": [
+                "libs/shared/ui/ui-components/src/index.ts"
+            ],
+            "@b2bsample/shared/util/util-application-config-util": [
+                "libs/shared/util/util-application-config-util/src/index.ts"
+            ],
+            "@b2bsample/shared/util/util-common": [
+                "libs/shared/util/util-common/src/index.ts"
+            ],
+            "@b2bsample/shared/data-access/data-access-common-models-util": [
+                "libs/shared/data-access/data-access-common-models-util/src/index.ts"
+            ],
+            "@b2bsample/shared/util/util-authorization-config-util": [
+                "libs/shared/util/util-authorization-config-util/src/index.ts"
+            ]
+        }
+    },
+    "exclude": [
+        "node_modules",
+        "tmp"
+    ]
 }

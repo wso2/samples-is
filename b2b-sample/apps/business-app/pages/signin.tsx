@@ -17,12 +17,12 @@
  */
 
 import { LogoComponent } from "@b2bsample/shared/ui/ui-components";
+import { orgSignin, redirect } from "@b2bsample/shared/util/util-authorization-config-util";
 import { getSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 import { Loader } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
 import styles from "../styles/Signin.module.css";
-import { orgSignin, redirect } from "../util/util/routerUtil/routerUtil";
 
 export async function getServerSideProps(context) {
     const session = await getSession(context);

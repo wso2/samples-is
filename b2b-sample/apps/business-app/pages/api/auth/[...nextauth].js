@@ -16,18 +16,18 @@
  * under the License.
  */
 
+import { getLoggedUserFromProfile, getLoggedUserId, getOrgId, getOrgName }
+    from "@b2bsample/shared/util/util-authorization-config-util";
 import NextAuth from "next-auth";
 import config from "../../../config.json";
 import decodeSwitchOrg from "../../../util/apiDecode/settings/decodeSwitchOrg";
-import { getLoggedUserFromProfile, getLoggedUserId, getOrgId, getOrgName }
-    from "../../../util/util/routerUtil/routerUtil";
 
 /**
  * 
  * @param req - request body
  * @param res - response body
  * 
- * @returns IS provider that will handle the sign in process. Used in `routerUtil` `orgSignin()`
+ * @returns IS provider that will handle the sign in process. Used in `orgSignin()`
  * [Use this method to signin]
  */
 const wso2ISProvider = (req, res) => NextAuth(req, res, {

@@ -16,12 +16,12 @@
  * under the License.
  */
 
+import { orgSignout } from "@b2bsample/shared/util/util-authorization-config-util";
 import Image from "next/image";
 import React from "react";
 import { Button, Stack } from "rsuite";
 import error500Image from "../../../libs/shared/ui/ui-assets/src/lib/images/500.svg";
 import style from "../styles/Error.module.css";
-import { orgSignout } from "../util/util/routerUtil/routerUtil";
 
 export default function Custom500() {
 

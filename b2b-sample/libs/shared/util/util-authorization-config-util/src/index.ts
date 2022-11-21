@@ -15,14 +15,5 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-interface Name {
-    givenName: string,
-    familyName: string
-}
 
-export interface User {
-    id: string,
-    name: Name;
-    emails : [string]
-    userName : string
-}
+export * from "./lib/authorizationConfigUtil";

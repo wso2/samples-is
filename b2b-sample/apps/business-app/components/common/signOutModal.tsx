@@ -16,10 +16,10 @@
  * under the License.
  */
 
+import { orgSignout } from "@b2bsample/shared/util/util-authorization-config-util";
 import React, { useState } from "react";
 import { Button, ButtonToolbar, Loader, Modal, Stack } from "rsuite";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "../../util/util/frontendUtil/frontendUtil";
-import { orgSignout } from "../../util/util/routerUtil/routerUtil";
 
 export default function SignOutModal(prop) {
 

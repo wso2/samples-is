@@ -16,20 +16,21 @@
  * under the License.
  */
 
+import { User } from "@b2bsample/shared/data-access/data-access-common-models-util";
 import { getHostedUrl, getManagementAPIServerBaseUrl, getTenantDomain } from
     "@b2bsample/shared/util/util-application-config-util";
 import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
+import { JWT } from "next-auth/jwt";
 import { signIn, signOut } from "next-auth/react";
-import config from "../../../config.json";
-import { User } from "../../../models/user/user";
+import config from "../../../../../../config.json";
 
 /**
- * 
- * @param path - path string that need to be redirected
- * 
- * @returns redirect locally to a path
- */
-function redirect(path): object {
+* 
+* @param path - path string that need to be redirected
+* 
+* @returns redirect locally to a path
+*/
+function redirect(path: string): object {
     return {
         redirect: {
             destination: path,
@@ -39,9 +40,9 @@ function redirect(path): object {
 }
 
 /**
- * 
- * @param orgId - `orgId` - (directs to the organization login), `null` - (enter the organization to login)
- */
+* 
+* @param orgId - `orgId` - (directs to the organization login), `null` - (enter the organization to login)
+*/
 function orgSignin(orgId?: string): void {
     if (orgId) {
         signIn("wso2is", { callbackUrl: "/o/moveOrg" }, { orgId: orgId });
@@ -51,11 +52,11 @@ function orgSignin(orgId?: string): void {
 }
 
 /**
- * signout of the logged in organization
- * 
- * @param session - session object
- */
-async function orgSignout(session): Promise<void> {
+* signout of the logged in organization
+* 
+* @param session - session object
+*/
+async function orgSignout(session: any): Promise<void> {
 
     // todo: implementation should change after the backend changes are completed
 
@@ -74,85 +75,72 @@ async function orgSignout(session): Promise<void> {
 }
 
 /**
- * 
- * @param session - session object
- * 
- * @returns when session is `null` redirect  to /signin
- */
-function emptySession(session): object {
-    if (session === null || session === undefined) {
+* 
+* @param token - token object returned from the login function
+* 
+* @returns - parse JWT token and return a JSON
+*/
+function parseJwt(token: JWT) {
 
-        return redirect("/signin");
-    }
-}
-
-/**
- * 
- * @param token - token object returned from the login function
- * 
- * @returns - parse JWT token and return a JSON
- */
-function parseJwt(token): { [key: string]: any } {
-
-    const buffestString: Buffer = Buffer.from(token.split(".")[1], "base64");
+    const buffestString: Buffer = Buffer.from(token.toString().split(".")[1], "base64");
 
     return JSON.parse(buffestString.toString());
 }
 
 /**
- * 
- * @param token - token object returned from the login function
- * 
- * @returns logged in user id.
- */
-function getLoggedUserId(token): string {
+* 
+* @param token - token object returned from the login function
+* 
+* @returns logged in user id.
+*/
+function getLoggedUserId(token: JWT): string {
 
-    return parseJwt(token).sub;
+    return parseJwt(token)["sub"];
 }
 
 /**
- * 
- * @param token - token object returned from the login function
- * 
- * @returns get organization id. If `org_id` is null in token check `config.json` for the org id
- */
-function getOrgId(token): string {
+* 
+* @param token - token object returned from the login function
+* 
+* @returns get organization id. If `org_id` is null in token check `config.json` for the org id
+*/
+function getOrgId(token: JWT): string {
 
-    if (parseJwt(token).org_id) {
+    if (parseJwt(token)["org_id"]) {
 
-        return parseJwt(token).org_id;
+        return parseJwt(token)["org_id"];
     }
 
     return config.ApplicationConfig.SampleOrganization[0].id;
 }
 
 /**
- * 
- * @param token - token object returned from the login function
- * 
- * @returns get organization name. If `org_name` is null in token check `config.json` for the org name
- */
-function getOrgName(token): string {
+* 
+* @param token - token object returned from the login function
+* 
+* @returns get organization name. If `org_name` is null in token check `config.json` for the org name
+*/
+function getOrgName(token: JWT): string {
 
-    if (parseJwt(token).org_name) {
+    if (parseJwt(token)["org_name"]) {
 
-        return parseJwt(token).org_name;
+        return parseJwt(token)["org_name"];
     }
 
     return config.ApplicationConfig.SampleOrganization[0].name;
 }
 
 /**
- * 
- * @param profile - profile
- * 
- * @returns `User` get logged user from profile
- */
-function getLoggedUserFromProfile(profile): User {
+* 
+* @param profile - profile
+* 
+* @returns `User` get logged user from profile
+*/
+function getLoggedUserFromProfile(profile: any): User | null {
 
     try {
         const user: User = {
-            emails: [ profile.email ],
+            emails: [profile.email],
             id: profile.sub,
             name: {
                 familyName: profile.family_name ? profile.family_name : "-",
@@ -174,5 +162,5 @@ function getLoggedUserFromProfile(profile): User {
 }
 
 export {
-    redirect, orgSignin, orgSignout, emptySession, getLoggedUserId, getLoggedUserFromProfile, getOrgId, getOrgName
+    redirect, orgSignin, orgSignout, getLoggedUserId, getLoggedUserFromProfile, getOrgId, getOrgName
 };
