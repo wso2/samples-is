@@ -24,7 +24,7 @@ import FormSuite from "rsuite/Form";
 import styles from "../../../../../../../../styles/Settings.module.css";
 import decodeViewUsers from "../../../../../../../../util/apiDecode/settings/decodeViewUsers";
 import decodePatchRole from "../../../../../../../../util/apiDecode/settings/role/decodePatchRole";
-import { PatchMethod } from "../../../../../../../../util/util/common/common";
+import { PatchMethod } from "@b2bsample/shared/util-common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE }
     from "../../../../../../../../util/util/frontendUtil/frontendUtil";
 

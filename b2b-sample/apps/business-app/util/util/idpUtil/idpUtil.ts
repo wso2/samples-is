@@ -18,7 +18,7 @@
 
 import config from "../../../config.json";
 import { getManagementAPIServerBaseUrl } from "../apiUtil/getUrls";
-import { ENTERPRISE_ID, GOOGLE_ID } from "../common/common";
+import { ENTERPRISE_ID, GOOGLE_ID } from "@b2bsample/shared/util-common";
 import { getOrgUrl } from "../orgUtil/orgUtil";
 
 /**

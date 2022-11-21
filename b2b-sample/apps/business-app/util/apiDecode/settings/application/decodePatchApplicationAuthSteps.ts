@@ -20,7 +20,7 @@ import callPatchApplicationAuthSteps from "../../../apiCall/settings/application
 import { commonDecode } from "../../../util/apiUtil/commonDecode";
 import {
     BASIC_AUTHENTICATOR_ID, BASIC_ID, ENTERPRISE_AUTHENTICATOR_ID, ENTERPRISE_ID, GOOGLE_AUTHENTICATOR_ID, GOOGLE_ID
-} from "../../../util/common/common";
+} from "@b2bsample/shared/util-common";
 
 /**
  * 

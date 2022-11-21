@@ -18,7 +18,7 @@
 
 import React from "react";
 import { Avatar, Stack } from "rsuite";
-import { random_rgba } from "../../util/util/common/common";
+import { random_rgba } from "@b2bsample/shared/util-common";
 
 /**
  * 

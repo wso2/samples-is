@@ -20,7 +20,7 @@ import enterpriseFederatedAuthenticators from
     "../../../components/sections/sections/settingsSection/idpSection/data/templates/enterprise-identity-provider.json";
 import googleFederatedAuthenticators from
     "../../../components/sections/sections/settingsSection/idpSection/data/templates/google.json";
-import { ENTERPRISE_ID, GOOGLE_ID } from "../common/common";
+import { ENTERPRISE_ID, GOOGLE_ID } from "@b2bsample/shared/util-common";
 
 /**
  * 
