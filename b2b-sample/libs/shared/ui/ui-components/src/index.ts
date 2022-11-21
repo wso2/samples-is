@@ -23,3 +23,5 @@ export * from "./lib/components/emptySettingsComponent/emptySettingsComponent";
 export * from "./lib/components/jsonDisplayComponent/jsonDisplayComponent";
 export * from "./lib/components/settingsTitleComponent/settingsTitleComponent";
 export * from "./lib/components/helperTextComponent/helperTextComponent";
+export * from "./lib/components/custom404Component/custom404Component";
+export * from "./lib/components/custom500Component/custom500Component";

@@ -16,44 +16,10 @@
  * under the License.
  */
 
-import Image from "next/image";
-import { useRouter } from "next/router";
+import { Custom404Component } from "@b2bsample/shared/ui/ui-components";
 import React from "react";
-import { Button, Stack } from "rsuite";
-import errorImage from "../../../libs/shared/ui/ui-assets/src/lib/images/404.svg";
-import style from "../styles/Error.module.css";
 
 export default function Custom404() {
 
-    const router = useRouter();
-    const goBack = () => router.back();
-
-    return (
-        <Stack
-            className={ style["errorMainContent"] }
-            spacing={ 50 }
-            direction="column"
-            justifyContent="center"
-            alignItems="center">
-
-            <Image src={ errorImage } width={ 600 } alt="404 image" />
-
-
-            <Stack
-                spacing={ 25 }
-                direction="column"
-                justifyContent="center"
-                alignItems="center">
-
-                <p className={ style["p"] }><b>The page your searching seems to be missing.</b>
-                    <br />
-                    You can go back, or contact our <a>Customer Service</a> team if you need any help
-                </p>
-
-                <Button size="lg" appearance="ghost" onClick={ goBack }>Go Back</Button>
-
-            </Stack>
-
-        </Stack>
-    );
+    return (<Custom404Component />);
 }

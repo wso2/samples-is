@@ -16,11 +16,13 @@
  * under the License.
  */
 
-import { Custom500Component } from "@b2bsample/shared/ui/ui-components";
-import React from "react";
+ .errorMainContent {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-
-export default function Custom500() {
-
-    return (<Custom500Component />);
+.p {
+    text-align: center;
 }
