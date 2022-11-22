@@ -16,6 +16,8 @@
  * under the License.
  */
 
+import { SignOutComponent } from "@b2bsample/shared/ui/ui-components";
+import { orgSignout } from "@b2bsample/shared/util/util-authorization-config-util";
 import React, { useState } from "react";
 import "rsuite/dist/rsuite.min.css";
 import SideNavSection from "./otherComponents/sideNavSection";
@@ -26,7 +28,6 @@ import RoleManagementSectionComponent from
     "./sections/settingsSection/roleManagementSection/roleManagementSectionComponent";
 import Custom500 from "../../pages/500";
 import styles from "../../styles/Settings.module.css";
-import SignOutModal from "../common/signOutModal";
 
 /**
  * 
@@ -58,6 +59,10 @@ export default function Home(prop) {
         }
     };
 
+    const signOutCallback = () => {
+        orgSignout(session);
+    };
+
     const activeKeySideNavSelect = (eventKey) => {
         setActiveKeySideNav(eventKey);
     };
@@ -68,7 +73,11 @@ export default function Home(prop) {
 
     return (
         <div>
-            <SignOutModal session={ session } open={ signOutModalOpen } onClose={ signOutModalClose } />
+            <SignOutComponent
+                open={ signOutModalOpen }
+                onClose={ signOutModalClose }
+                signOutCallback={ signOutCallback } />
+
             { session && session.scope
                 ? (<div className={ styles.mainDiv }>
                     <div className={ styles.sideNavDiv }>

@@ -16,14 +16,13 @@
  * under the License.
  */
 
-import { orgSignout } from "@b2bsample/shared/util/util-authorization-config-util";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "@b2bsample/shared/util/util-front-end-util";
 import React, { useState } from "react";
 import { Button, ButtonToolbar, Loader, Modal, Stack } from "rsuite";
+import { SignOutComponentProps } from "../../models/signoutComponent/signoutComponent";
 
-export default function SignOutModal(prop) {
-
-    const { session, open, onClose } = prop;
+export function SignOutComponent(prop: SignOutComponentProps) {
+    const { open, onClose, signOutCallback } = prop;
 
     const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
 
@@ -31,7 +30,7 @@ export default function SignOutModal(prop) {
 
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
 
-        orgSignout(session);
+        signOutCallback();
     };
 
     return (
@@ -59,7 +58,8 @@ export default function SignOutModal(prop) {
                                 size="lg"
                                 appearance="ghost"
                                 type="button"
-                            >Cancel</Button>
+                            >Cancel
+                            </Button>
                         </ButtonToolbar>
                     </Stack>
                 </Stack>
@@ -71,3 +71,5 @@ export default function SignOutModal(prop) {
         </Modal>
     );
 }
+
+export default SignOutComponent;
