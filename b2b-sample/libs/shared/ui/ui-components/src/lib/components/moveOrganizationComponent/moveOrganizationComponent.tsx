@@ -17,28 +17,24 @@
  */
 
 import React from "react";
-import { Loader } from "rsuite";
-import styles from "./signinRedirectComponent.module.css";
-import { SigninRedirectComponentProps } from "../../models/signinRedirectComponent/signinRedirectComponent";
-import LogoComponent from "../logoComponent/logoComponent";
+import styles from "./moveOrganizationComponent.module.css";
 
-/**
- * Sign in redirect component
- * 
- * @param prop - loaderContent
- */
-export function SigninRedirectComponent(prop: SigninRedirectComponentProps) {
+/* eslint-disable-next-line */
+export interface MoveOrganizationComponentProps {
+    orgName: string
+}
 
-    const { loaderContent } = prop;
+export function MoveOrganizationComponent(prop: MoveOrganizationComponentProps) {
+
+    const { orgName } = prop;
 
     return (
-        <div className={ styles["signinOuter"] }>
-            <div className={ styles["signinInner"] }>
-                <LogoComponent imageSize="medium" />
-                <Loader size="lg" content={ loaderContent } vertical />
-            </div>
+        <div className={ styles["moveOrgDiv"] }>
+            <p className={ styles["pFont"] }>
+                You will be redirected to { orgName }
+            </p>
         </div>
     );
 }
 
-export default SigninRedirectComponent;
+export default MoveOrganizationComponent;

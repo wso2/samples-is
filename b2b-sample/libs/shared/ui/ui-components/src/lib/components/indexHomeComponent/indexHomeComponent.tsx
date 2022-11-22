@@ -16,17 +16,18 @@
  * under the License.
  */
 
-import Image from 'next/image';
-import { Button } from 'rsuite';
-import { IndexHomeComponentProps } from '../../models/indexHomeComponent/indexHomeComponent';
-import FooterComponent from '../footerComponent/footerComponent';
-import LogoComponent from '../logoComponent/logoComponent';
-import styles from './indexHomeComponent.module.css';
+import Image from "next/image";
+import React from "react";
+import { Button } from "rsuite";
+import styles from "./indexHomeComponent.module.css";
+import { IndexHomeComponentProps } from "../../models/indexHomeComponent/indexHomeComponent";
+import FooterComponent from "../footerComponent/footerComponent";
+import LogoComponent from "../logoComponent/logoComponent";
 
 /**
  * First page component
  * 
- * @param prop image, tagText, signinOnClick
+ * @param prop - image, tagText, signinOnClick
  */
 export function IndexHomeComponent(prop: IndexHomeComponentProps) {
 
@@ -35,20 +36,20 @@ export function IndexHomeComponent(prop: IndexHomeComponentProps) {
     return (
         <div>
 
-            <main className={styles["main"]}>
-                <Image src={image} className={styles["homeImageDiv"]} alt="home image" />
+            <main className={ styles["main"] }>
+                <Image src={ image } className={ styles["homeImageDiv"] } alt="home image" />
 
-                <div className={styles["signInDiv"]}>
+                <div className={ styles["signInDiv"] }>
                     <LogoComponent imageSize="medium" />
 
                     <hr />
 
-                    <p className={styles["buttonTag"]}>{tagText}</p>
+                    <p className={ styles["buttonTag"] }>{ tagText }</p>
                     <Button
-                        className={styles["signInDivButton"]}
+                        className={ styles["signInDivButton"] }
                         size="lg"
                         appearance="primary"
-                        onClick={signinOnClick}>
+                        onClick={ signinOnClick }>
                         Sign In
                     </Button>
 
@@ -59,6 +60,6 @@ export function IndexHomeComponent(prop: IndexHomeComponentProps) {
             <FooterComponent />
         </div>
     );
-};
+}
 
 export default IndexHomeComponent;

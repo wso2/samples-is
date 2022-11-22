@@ -35,9 +35,9 @@ export default function Home() {
 
     return (
         <IndexHomeComponent
-            image={homeImage}
+            image={ homeImage }
             tagText="Let&apos;s get your journey started."
-            signinOnClick={signinOnClick}
+            signinOnClick={ signinOnClick }
         />
        
     );

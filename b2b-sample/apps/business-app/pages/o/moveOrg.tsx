@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { MoveOrganizationComponent } from "@b2bsample/shared/ui/ui-components";
 import { redirect } from "@b2bsample/shared/util/util-authorization-config-util";
 import { getSession } from "next-auth/react";
 import { useRouter } from "next/router";
@@ -62,7 +63,7 @@ export default function MoveOrg(prop) {
 
     const redirectToOrg = useCallback(() => {
         router.push(`/o/${orgId}`);
-    },[ orgId, router ]);
+    }, [ orgId, router ]);
 
     useEffect(() => {
         if (redirectSeconds <= 1) {
@@ -77,24 +78,6 @@ export default function MoveOrg(prop) {
     }, [ redirectSeconds, orgId, redirectToOrg ]);
 
     return (
-        <div
-            style={
-                {      
-                    alignItems: "center",
-                    backgroundColor: "black",
-                    color: "whitesmoke",
-                    display: "flex",
-                    height: "100vh",
-                    justifyContent: "center"
-                }
-            }>
-            <p
-                style={
-                    {
-                        fontSize: "2em"
-                    }
-                }>You will be redirected to { orgName }</p>
-        </div>
-
+        <MoveOrganizationComponent orgName={ orgName } />
     );
 }

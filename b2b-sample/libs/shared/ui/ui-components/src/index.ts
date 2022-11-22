@@ -30,3 +30,4 @@ export * from "./lib/components/homeComponent/homeComponent";
 export * from "./lib/components/footerComponent/footerComponent";
 export * from "./lib/components/indexHomeComponent/indexHomeComponent";
 export * from "./lib/components/signinRedirectComponent/signinRedirectComponent";
+export * from "./lib/components/moveOrganizationComponent/moveOrganizationComponent";
