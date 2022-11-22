@@ -23,44 +23,6 @@
     overflow-x: hidden;
 }
 
-.sideNavDiv {
-    width: 20%;
-}
-
-.sideNav {
-    height: 100%;
-    width: 18%;
-    position:fixed;
-}
-
-.nextButtonDiv{
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    height: 100%;
-    padding-bottom: 2rem;
-}
-
-.logoDiv {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    height: auto;
-    flex-direction: column;
-}
-
-.logoDiv hr {
-    margin: 12px;
-    align-self: stretch;
-}
-
-.mainPanelDiv {
-    height: 100vh;
-    width: 100%;
-    padding: 4rem;
-}
-
 .homeMainPanelDiv {
     display: flex;
     flex-direction: column;

@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { SidenavComponent, SignOutComponent } from "@b2bsample/shared/ui/ui-components";
+import { MainPanelComponent, SidenavComponent, SignOutComponent } from "@b2bsample/shared/ui/ui-components";
 import { orgSignout } from "@b2bsample/shared/util/util-authorization-config-util";
 import React, { useState } from "react";
 import "rsuite/dist/rsuite.min.css";
@@ -86,10 +86,11 @@ export default function Home(prop) {
                         activeKeySideNav={activeKeySideNav}
                         activeKeySideNavSelect={activeKeySideNavSelect}
                         setSignOutModalOpen={setSignOutModalOpen} />
-                        
-                    <div className={styles.mainPanelDiv}>
+
+                    <MainPanelComponent>
                         {mainPanelComponenet(activeKeySideNav)}
-                    </div>
+                    </MainPanelComponent>
+
                 </div>)
                 : <Custom500 />}
         </div>

@@ -27,3 +27,4 @@ export * from "./lib/components/custom404Component/custom404Component";
 export * from "./lib/components/custom500Component/custom500Component";
 export * from "./lib/components/signoutComponent/signoutComponent";
 export * from "./lib/components/sidenavComponent/sidenavComponent";
+export * from "./lib/components/mainPanelComponent/mainPanelComponent";
