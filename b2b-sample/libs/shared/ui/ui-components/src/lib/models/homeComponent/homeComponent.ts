@@ -16,8 +16,11 @@
  * under the License.
  */
 
-.mainPanelDiv {
-    height: 100vh;
-    width: 100%;
-    padding: 3rem 5rem;
+export interface HomeComponentProps {
+    name : string,
+    scope : string[]
+    activeKeySideNav : string,
+    activeKeySideNavSelect : Function
+    setSignOutModalOpen : Function,
+    children : JSX.Element
 }

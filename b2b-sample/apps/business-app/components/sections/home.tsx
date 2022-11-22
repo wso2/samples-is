@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { MainPanelComponent, SidenavComponent, SignOutComponent } from "@b2bsample/shared/ui/ui-components";
+import { HomeComponent, SignOutComponent } from "@b2bsample/shared/ui/ui-components";
 import { orgSignout } from "@b2bsample/shared/util/util-authorization-config-util";
 import React, { useState } from "react";
 import "rsuite/dist/rsuite.min.css";
@@ -38,23 +38,23 @@ export default function Home(prop) {
 
     const { name, orgId, session } = prop;
 
-    const [activeKeySideNav, setActiveKeySideNav] = useState("1");
-    const [signOutModalOpen, setSignOutModalOpen] = useState(false);
+    const [ activeKeySideNav, setActiveKeySideNav ] = useState("1");
+    const [ signOutModalOpen, setSignOutModalOpen ] = useState(false);
 
     const mainPanelComponenet = (activeKey) => {
         switch (activeKey) {
             case "1":
 
-                return <DashboardSectionComponent orgName={name} orgId={orgId} session={session} />;
+                return <DashboardSectionComponent orgName={ name } orgId={ orgId } session={ session } />;
             case "2-1":
 
-                return <ManageUserSectionComponent orgName={name} orgId={orgId} session={session} />;
+                return <ManageUserSectionComponent orgName={ name } orgId={ orgId } session={ session } />;
             case "2-2":
 
-                return <RoleManagementSectionComponent orgName={name} orgId={orgId} session={session} />;
+                return <RoleManagementSectionComponent orgName={ name } orgId={ orgId } session={ session } />;
             case "2-3":
 
-                return <IdpSectionComponent orgName={name} orgId={orgId} session={session} />;
+                return <IdpSectionComponent orgName={ name } orgId={ orgId } session={ session } />;
         }
     };
 
@@ -73,26 +73,25 @@ export default function Home(prop) {
     return (
         <div>
             <SignOutComponent
-                open={signOutModalOpen}
-                onClose={signOutModalClose}
-                signOutCallback={signOutCallback} />
+                open={ signOutModalOpen }
+                onClose={ signOutModalClose }
+                signOutCallback={ signOutCallback } />
 
-            {session && session.scope
-                ? (<div className={styles.mainDiv}>
+            { session && session.scope
+                ? (
 
-                    <SidenavComponent
-                        name={name}
-                        scope={session.scope}
-                        activeKeySideNav={activeKeySideNav}
-                        activeKeySideNavSelect={activeKeySideNavSelect}
-                        setSignOutModalOpen={setSignOutModalOpen} />
+                    <HomeComponent
+                        name={ name }
+                        scope={ session.scope }
+                        activeKeySideNav={ activeKeySideNav }
+                        activeKeySideNavSelect={ activeKeySideNavSelect }
+                        setSignOutModalOpen={ setSignOutModalOpen }>
 
-                    <MainPanelComponent>
-                        {mainPanelComponenet(activeKeySideNav)}
-                    </MainPanelComponent>
+                        { mainPanelComponenet(activeKeySideNav) }
 
-                </div>)
-                : <Custom500 />}
+                    </HomeComponent>
+                )
+                : <Custom500 /> }
         </div>
     );
 }

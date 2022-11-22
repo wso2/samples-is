@@ -16,13 +16,6 @@
  * under the License.
  */
 
-.mainDiv {
-    display: flex;
-    flex-direction: row;
-    width: 100vw;
-    overflow-x: hidden;
-}
-
 .homeMainPanelDiv {
     display: flex;
     flex-direction: column;

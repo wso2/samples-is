@@ -16,18 +16,19 @@
  * under the License.
  */
 
-import { MainPanelComponentProps } from "../../models/mainPanelComponent/mainPanelComponent";
+import React from "react";
 import styles from "./mainPanelComponent.module.css";
+import { MainPanelComponentProps } from "../../models/mainPanelComponent/mainPanelComponent";
 
 export function MainPanelComponent(prop: MainPanelComponentProps) {
 
     const { children } = prop;
 
     return (
-        <div className={styles["mainPanelDiv"]}>
-            {children}
+        <div className={ styles["mainPanelDiv"] }>
+            { children }
         </div>
     );
-};
+}
 
 export default MainPanelComponent;
