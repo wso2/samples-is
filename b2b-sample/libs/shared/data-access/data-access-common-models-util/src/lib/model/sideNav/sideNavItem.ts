@@ -16,6 +16,13 @@
  * under the License.
  */
 
-export * from "./lib/model/user/user";
-export * from "./lib/model/sideNav/sideNavList";
-export * from "./lib/model/sideNav/sideNavItem";
+export interface SideNavItem {
+    title: string,
+    eventKey: string,
+    icon?: string,
+    type: string,
+    hideBasedOnScope?: boolean,
+    items?: SideNavItem[]
+}
+
+export default SideNavItem;

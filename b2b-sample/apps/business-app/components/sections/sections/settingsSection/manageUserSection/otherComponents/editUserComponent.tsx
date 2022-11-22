@@ -24,7 +24,6 @@ import { Field, Form } from "react-final-form";
 import { Button, ButtonToolbar, Divider, Loader, Modal, TagPicker, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
 import stylesSettings from "../../../../../../styles/Settings.module.css";
-import styles from "../../../../../../styles/util.module.css";
 import decodeEditUser from "../../../../../../util/apiDecode/settings/decodeEditUser";
 import decodEditRolesToAddOrRemoveUser
     from "../../../../../../util/apiDecode/settings/role/decodEditRolesToAddOrRemoveUser";
@@ -307,7 +306,7 @@ export default function EditUserComponent(prop) {
                                     <FormSuite.Group>
                                         <ButtonToolbar>
                                             <Button
-                                                className={ styles.addUserButton }
+                                                className={ stylesSettings.addUserButton }
                                                 size="lg"
                                                 appearance="primary"
                                                 type="submit"
@@ -316,7 +315,7 @@ export default function EditUserComponent(prop) {
                                             </Button>
 
                                             <Button
-                                                className={ styles.addUserButton }
+                                                className={ stylesSettings.addUserButton }
                                                 size="lg"
                                                 appearance="ghost"
                                                 type="button"

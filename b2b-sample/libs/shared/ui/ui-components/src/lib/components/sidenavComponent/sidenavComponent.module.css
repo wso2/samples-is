@@ -16,6 +16,25 @@
  * under the License.
  */
 
-export * from "./lib/model/user/user";
-export * from "./lib/model/sideNav/sideNavList";
-export * from "./lib/model/sideNav/sideNavItem";
+.sideNavDiv {
+    width: 20%;
+}
+
+.sideNav {
+    height: 100%;
+    width: 18%;
+    position: fixed;
+}
+
+.logoComponentDiv {
+    margin-bottom: 25px;
+    margin-top: 35px;
+}
+
+.nextButtonDiv {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    height: 100%;
+    padding-bottom: 2rem;
+}
