@@ -16,56 +16,6 @@
  * under the License.
  */
 
-.main {
-    min-height: 100vh;
-    flex: 1;
-    display: flex;
-}
-
-.homeImageDiv {
-    width: 75vw;
-    height: 100vh;
-    opacity: 0.8;
-    display: flex;
-    overflow: hidden;
-    flex-wrap: nowrap;
-}
-
-.signInDiv {
-    background-color: #0071f309;
-    width: 25vw;
-    padding: 2rem 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    flex-wrap: wrap;
-    flex: 1;
-}
-
-.nameTag {
-    position: relative;
-    top: 10px;
-    font-size: 16px;
-}
-
-.signInDiv hr {
-    margin: 40px;
-    align-self: stretch;
-}
-
-.buttonTag {
-    position: relative;
-    margin-bottom: 16px;
-    font-size: 14px;
-}
-
-.signInDivButton {
-    width: 50%;
-    height: 50px;
-    font-size: 18px;
-}
-
 .title a {
     text-decoration: none;
 }

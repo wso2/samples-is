@@ -28,3 +28,4 @@ export * from "./lib/components/custom500Component/custom500Component";
 export * from "./lib/components/signoutComponent/signoutComponent";
 export * from "./lib/components/homeComponent/homeComponent";
 export * from "./lib/components/footerComponent/footerComponent";
+export * from "./lib/components/indexHomeComponent/indexHomeComponent";

@@ -16,29 +16,46 @@
  * under the License.
  */
 
-import { IndexHomeComponent } from "@b2bsample/shared/ui/ui-components";
-import { useRouter } from "next/router";
-import React from "react";
-import "rsuite/dist/rsuite.min.css";
-import homeImage from "../../../libs/shared/ui/ui-assets/src/lib/images/home.jpeg";
+.main {
+    min-height: 100vh;
+    flex: 1;
+    display: flex;
+}
 
-/**
- * 
- * @returns - First interface of the app
- */
-export default function Home() {
+.homeImageDiv {
+    width: 75vw;
+    height: 100vh;
+    opacity: 0.8;
+    display: flex;
+    overflow: hidden;
+    flex-wrap: nowrap;
+}
 
-    const router = useRouter();
-    const signinOnClick = () => {
-        router.push("/signin");
-    };
+.signInDiv {
+    background-color: #0071f309;
+    width: 25vw;
+    padding: 2rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    flex: 1;
+}
 
-    return (
-        <IndexHomeComponent
-            image={homeImage}
-            tagText="Let&apos;s get your journey started."
-            signinOnClick={signinOnClick}
-        />
-       
-    );
+.signInDiv hr {
+    margin: 40px;
+    align-self: stretch;
+}
+
+.signInDivButton {
+    width: 50%;
+    height: 50px;
+    font-size: 18px;
+}
+
+.buttonTag {
+    position: relative;
+    margin-bottom: 16px;
+    font-size: 14px;
 }

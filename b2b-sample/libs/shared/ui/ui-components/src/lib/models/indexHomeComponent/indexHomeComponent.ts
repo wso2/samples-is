@@ -16,29 +16,11 @@
  * under the License.
  */
 
-import { IndexHomeComponent } from "@b2bsample/shared/ui/ui-components";
-import { useRouter } from "next/router";
-import React from "react";
-import "rsuite/dist/rsuite.min.css";
-import homeImage from "../../../libs/shared/ui/ui-assets/src/lib/images/home.jpeg";
+import { StaticImageData } from "next/image"
+import { MouseEventHandler } from "react"
 
-/**
- * 
- * @returns - First interface of the app
- */
-export default function Home() {
-
-    const router = useRouter();
-    const signinOnClick = () => {
-        router.push("/signin");
-    };
-
-    return (
-        <IndexHomeComponent
-            image={homeImage}
-            tagText="Let&apos;s get your journey started."
-            signinOnClick={signinOnClick}
-        />
-       
-    );
+export interface IndexHomeComponentProps {
+    image : StaticImageData
+    tagText : string
+    signinOnClick : MouseEventHandler<HTMLElement>
 }
