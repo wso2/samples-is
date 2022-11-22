@@ -16,13 +16,11 @@
  * under the License.
  */
 
-import { LogoComponent } from "@b2bsample/shared/ui/ui-components";
+import { SigninRedirectComponent } from "@b2bsample/shared/ui/ui-components";
 import { orgSignin, redirect } from "@b2bsample/shared/util/util-authorization-config-util";
 import { getSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
-import { Loader } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
-import styles from "../styles/Signin.module.css";
 
 export async function getServerSideProps(context) {
     const session = await getSession(context);
@@ -59,11 +57,6 @@ export default function Signin() {
     }, [ redirectSeconds ]);
 
     return (
-        <div className={ styles.signinOuter }>
-            <div className={ styles.signinInner }>
-                <LogoComponent imageSize="medium" />
-                <Loader size="lg" content="Redirecting to the organization login. " vertical />
-            </div>
-        </div>
+        <SigninRedirectComponent loaderContent="Redirecting to the organization login." />
     );
 }
