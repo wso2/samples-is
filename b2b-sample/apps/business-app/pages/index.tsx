@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { LogoComponent } from "@b2bsample/shared/ui/ui-components";
+import { FooterComponent, LogoComponent } from "@b2bsample/shared/ui/ui-components";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React ,{ useEffect } from "react";
@@ -42,6 +42,7 @@ export default function Home() {
 
     return (
         <div className={ styles.container }>
+            
             <main className={ styles.main }>
 
                 <Image src={ homeImage } className={ styles.homeImageDiv } alt="home image" />
@@ -60,15 +61,7 @@ export default function Home() {
 
             </main>
 
-            <footer className={ styles.footer }>
-                <a
-                    href="https://wso2.com/asgardeo/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    WSO2 Sample Application
-                </a>
-            </footer>
+            <FooterComponent />
         </div>
     );
 }
