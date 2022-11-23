@@ -16,9 +16,10 @@
  * under the License.
  */
 
+import { apiRequestOptions, dataNotRecievedError, notPostError } from
+    "@b2bsample/shared/data-access/data-access-common-api-util";
 import { getOrgUrl } from "@b2bsample/shared/util/util-application-config-util";
-import getDataHeader from "../../../../../util/util/apiUtil/getDataHeader";
-import { dataNotRecievedError, notPostError } from "../../../../../util/util/apiUtil/localResErrors";
+import { NextApiRequest, NextApiResponse } from "next";
 
 /**
  * backend API call to get details of an application
@@ -28,7 +29,7 @@ import { dataNotRecievedError, notPostError } from "../../../../../util/util/api
  * 
  * @returns correct data if the call is successful, else an error message
  */
-export default async function getApplication(req, res) {
+export default async function getApplication(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== "POST") {
         notPostError(res);
     }
@@ -42,13 +43,13 @@ export default async function getApplication(req, res) {
     try {
         const fetchData = await fetch(
             `${getOrgUrl(orgId)}/api/server/v1/applications/${id}`,
-            getDataHeader(session)
+            apiRequestOptions(session)
         );
         const data = await fetchData.json();
 
         res.status(200).json(data);
     } catch (err) {
-        
+
         return dataNotRecievedError(res);
     }
 }

@@ -16,13 +16,12 @@
  * under the License.
  */
 
-import { contollerDecodeListCurrentApplication } from
+import { contollerDecodeGetApplication, contollerDecodeListCurrentApplication } from
     "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
 import React, { useCallback, useEffect, useState } from "react";
 import { Button } from "rsuite";
 import { AllApplications, Application } from "../../../../../../models/application/application";
-import decodeGetApplication from "../../../../../../util/apiDecode/settings/application/decodeGetApplication";
 import { checkIfBasicAvailableinAuthSequence } from "../../../../../../util/util/applicationUtil/applicationUtil";
 
 export default function AddUserButton(prop) {
@@ -42,7 +41,7 @@ export default function AddUserButton(prop) {
 
     const fetchApplicatioDetails = useCallback(async () => {
         if (!checkIfJSONisEmpty(allApplications) && allApplications.totalResults !== 0) {
-            const res = await decodeGetApplication(session, allApplications.applications[0].id);
+            const res = await contollerDecodeGetApplication(session, allApplications.applications[0].id);
 
             await setApplicationDetail(res);
         }
