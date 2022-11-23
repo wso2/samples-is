@@ -16,6 +16,6 @@
  * under the License.
  */
 
-export * from "./lib/controller/users/controllerViewUser/controllerDecodeViewUsers";
-export * from "./lib/controller/users/controllerAddUser/controllerDecodeAddUser";
-export * from "./lib/controller/users/controllerEditUser/controllerDecodeEditUser";
+export * from "./lib/controller/user/controllerViewUser/controllerDecodeViewUsers";
+export * from "./lib/controller/user/controllerAddUser/controllerDecodeAddUser";
+export * from "./lib/controller/user/controllerEditUser/controllerDecodeEditUser";
