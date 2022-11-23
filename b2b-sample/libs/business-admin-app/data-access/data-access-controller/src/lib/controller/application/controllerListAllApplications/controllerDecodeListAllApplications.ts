@@ -16,29 +16,21 @@
  * under the License.
  */
 
-import { getHostedUrl } from "@b2bsample/shared/util/util-application-config-util";
-import { getInternalApiRequestOptions } from "../../../util/apiUtil/getInteralApiRequestOptions";
+import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { controllerCallListAllApplications } from "./controllerCallListAllApplications";
 
 /**
- * call GET `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/applications` to all the applicaions
  * 
  * @param session - session object
- * 
- * @returns all applicaitons, if the call failed `null`
+ 
+ * @returns logged in users object. If failed `null`
  */
-export default async function callListAllApplications(session) {
+export async function controllerDecodeListAllApplications(session: any) {
 
-    try {
-        const res = await fetch(
-            `${getHostedUrl()}/api/settings/application/listAllApplications`,
-            getInternalApiRequestOptions(session)
-        );
+    const res = await commonControllerDecode(() => controllerCallListAllApplications(session), null);
 
-        const data = await res.json();
+    return res;
 
-        return data;
-    } catch (err) {
-
-        return null;
-    }
 }
+
+export default controllerDecodeListAllApplications;

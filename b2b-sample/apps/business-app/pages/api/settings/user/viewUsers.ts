@@ -16,10 +16,10 @@
  * under the License.
  */
 
+import { apiRequestOptions, dataNotRecievedError, notPostError } from
+    "@b2bsample/shared/data-access/data-access-common-api-util";
 import { getOrgUrl } from "@b2bsample/shared/util/util-application-config-util";
 import { NextApiRequest, NextApiResponse } from "next";
-import getDataHeader from "../../../../util/util/apiUtil/getDataHeader";
-import { dataNotRecievedError, notPostError } from "../../../../util/util/apiUtil/localResErrors";
 
 /**
  * backend API call to view users
@@ -29,8 +29,8 @@ import { dataNotRecievedError, notPostError } from "../../../../util/util/apiUti
  * 
  * @returns correct data if the call is successful, else an error message
  */
-export default async function viewUsers(req : NextApiRequest, res : NextApiResponse) {
-    if(req.method !== "POST"){
+export default async function viewUsers(req: NextApiRequest, res: NextApiResponse) {
+    if (req.method !== "POST") {
         notPostError(res);
     }
 
@@ -41,13 +41,13 @@ export default async function viewUsers(req : NextApiRequest, res : NextApiRespo
     try {
         const fetchData = await fetch(
             `${getOrgUrl(orgId)}/scim2/Users`,
-            getDataHeader(session)
+            apiRequestOptions(session)
         );
         const users = await fetchData.json();
 
         res.status(200).json(users);
     } catch (err) {
-        
+
         return dataNotRecievedError(res);
     }
 }

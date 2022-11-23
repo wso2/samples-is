@@ -16,36 +16,42 @@
  * under the License.
  */
 
+import { apiRequestOptionsWithBody, dataNotRecievedError, notPostError } from
+    "@b2bsample/shared/data-access/data-access-common-api-util";
 import { getOrgUrl } from "@b2bsample/shared/util/util-application-config-util";
-import getDataHeader from "../../../../util/util/apiUtil/getDataHeader";
-import { dataNotRecievedError, notPostError } from "../../../../util/util/apiUtil/localResErrors";
+import { NextApiRequest, NextApiResponse } from "next";
+import { RequestMethod } from "../../../../../util/util/apiUtil/requestMethod";
 
 /**
- * backend API call to view all applications
+ * backend API call to edit a user
  * 
  * @param req - request
  * @param res - response
  * 
  * @returns correct data if the call is successful, else an error message
  */
-export default async function listAllApplications(req, res) {
+export default async function editUser(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== "POST") {
         notPostError(res);
     }
 
     const body = JSON.parse(req.body);
     const session = body.session;
+    const user = body.param;
     const orgId = body.orgId;
+
+    const id = req.query.id;
 
     try {
         const fetchData = await fetch(
-            `${getOrgUrl(orgId)}/api/server/v1/applications`,
-            getDataHeader(session)
+            `${getOrgUrl(orgId)}/scim2/Users/${id}`,
+            apiRequestOptionsWithBody(session, RequestMethod.PATCH, user)
         );
         const data = await fetchData.json();
 
         res.status(200).json(data);
     } catch (err) {
+
         return dataNotRecievedError(res);
     }
 }

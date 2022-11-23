@@ -16,10 +16,11 @@
  * under the License.
  */
 
+import { apiRequestOptions, dataNotRecievedError, notPostError } from
+    "@b2bsample/shared/data-access/data-access-common-api-util";
 import { getOrgUrl } from "@b2bsample/shared/util/util-application-config-util";
+import { NextApiRequest, NextApiResponse } from "next";
 import config from "../../../../../../config.json";
-import getDataHeader from "../../../../util/util/apiUtil/getDataHeader";
-import { dataNotRecievedError, notPostError } from "../../../../util/util/apiUtil/localResErrors";
 
 /**
  * API call to get the initial details of the current application. Use the application name to filter out the 
@@ -30,7 +31,7 @@ import { dataNotRecievedError, notPostError } from "../../../../util/util/apiUti
  * 
  * @returns initial details of the current application
  */
-export default async function listCurrentApplication(req, res) {
+export default async function listCurrentApplication(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== "POST") {
         notPostError(res);
     }
@@ -44,7 +45,7 @@ export default async function listCurrentApplication(req, res) {
     try {
         const fetchData = await fetch(
             `${getOrgUrl(orgId)}/api/server/v1/applications?filter=name+eq+${appName}`,
-            getDataHeader(session)
+            apiRequestOptions(session)
         );
         const data = await fetchData.json();
 

@@ -16,8 +16,18 @@
  * under the License.
  */
 
-export * from "./lib/controller/user/controllerViewUser/controllerDecodeViewUsers";
-export * from "./lib/controller/user/controllerAddUser/controllerDecodeAddUser";
-export * from "./lib/controller/user/controllerEditUser/controllerDecodeEditUser";
-export * from "./lib/controller/application/controllerListAllApplications/controllerDecodeListAllApplications";
-export * from "./lib/controller/application/contollerListCurrentApplication/contollerDecodeListCurrentApplication";
+import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
+
+/**
+ * call `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users/<userId>` get the user details
+ * 
+ * @param session - session object
+ * 
+ * @returns all applications details, if not possible returns `null`
+ */
+export async function contollerCallListCurrentApplication(session: any) {
+
+    const data = await commonControllerCall("/api/settings/application/listCurrentApplication", session);
+
+    return data;
+}

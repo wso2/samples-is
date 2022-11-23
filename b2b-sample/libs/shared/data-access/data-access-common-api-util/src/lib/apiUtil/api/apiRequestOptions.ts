@@ -17,7 +17,6 @@
  */
 
 import { getHostedUrl } from "@b2bsample/shared/util/util-application-config-util";
-import RequestMethod from "./requestMethod";
 
 /**
  * 
@@ -37,14 +36,14 @@ export function apiRequestOptions(session: any) {
 
 function apiRequestOptionsWithDataHeader(session: any) {
     const headers = {
-        ...apiRequestOptions(session),
+        ...apiRequestOptions(session).headers,
         "content-type": "application/json"
     };
 
     return headers;
 }
 
-export function apiRequestOptionsWithBody(session: any, method : typeof RequestMethod, body : any) {
+export function apiRequestOptionsWithBody(session: any, method : string, body : any) {
     const request = {
         body: JSON.stringify(body),
         headers: apiRequestOptionsWithDataHeader(session),

@@ -16,6 +16,8 @@
  * under the License.
  */
 
+import { contollerDecodeListCurrentApplication } from
+    "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
 import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
 import Trash from "@rsuite/icons/Trash";
@@ -24,8 +26,6 @@ import { Button, IconButton, Stack, useToaster } from "rsuite";
 import ConfirmAddRemoveLoginFlowModal from "./confirmAddRemoveLoginFlowModal";
 import { AllApplications, Application } from "../../../../../../models/application/application";
 import decodeGetApplication from "../../../../../../util/apiDecode/settings/application/decodeGetApplication";
-import decodeListCurrentApplication from
-    "../../../../../../util/apiDecode/settings/application/decodeListCurrentApplication";
 import decodeDeleteIdentityProvider from
     "../../../../../../util/apiDecode/settings/identityProvider/decodeDeleteIdentityProvider";
 import { checkIfIdpIsinAuthSequence } from "../../../../../../util/util/applicationUtil/applicationUtil";
@@ -42,16 +42,16 @@ export default function ButtonGroupIdentityProviderDetails(prop) {
 
     const toaster = useToaster();
 
-    const [ allApplications, setAllApplications ] = useState<AllApplications>(null);
-    const [ applicationDetail, setApplicationDetail ] = useState<Application>(null);
-    const [ idpIsinAuthSequence, setIdpIsinAuthSequence ] = useState(null);
-    const [ openListAppicationModal, setOpenListAppicationModal ] = useState(false);
+    const [allApplications, setAllApplications] = useState<AllApplications>(null);
+    const [applicationDetail, setApplicationDetail] = useState<Application>(null);
+    const [idpIsinAuthSequence, setIdpIsinAuthSequence] = useState(null);
+    const [openListAppicationModal, setOpenListAppicationModal] = useState(false);
 
     const fetchData = useCallback(async () => {
-        const res = await decodeListCurrentApplication(session);
+        const res = await contollerDecodeListCurrentApplication(session);
 
         await setAllApplications(res);
-    }, [ session, openListAppicationModal ]);
+    }, [session, openListAppicationModal]);
 
     const fetchApplicatioDetails = useCallback(async () => {
         if (!checkIfJSONisEmpty(allApplications) && allApplications.totalResults !== 0) {
@@ -59,15 +59,15 @@ export default function ButtonGroupIdentityProviderDetails(prop) {
 
             await setApplicationDetail(res);
         }
-    }, [ session, allApplications ]);
+    }, [session, allApplications]);
 
     useEffect(() => {
         fetchData();
-    }, [ fetchData ]);
+    }, [fetchData]);
 
     useEffect(() => {
         fetchApplicatioDetails();
-    }, [ fetchApplicatioDetails ]);
+    }, [fetchApplicatioDetails]);
 
     useEffect(() => {
         if (!checkIfJSONisEmpty(applicationDetail)) {
@@ -75,7 +75,7 @@ export default function ButtonGroupIdentityProviderDetails(prop) {
 
             setIdpIsinAuthSequence(check[0]);
         }
-    }, [ idpDetails, applicationDetail ]);
+    }, [idpDetails, applicationDetail]);
 
     const onIdpDelete = (response) => {
         if (response) {
@@ -107,27 +107,27 @@ export default function ButtonGroupIdentityProviderDetails(prop) {
                 idpIsinAuthSequence === null
                     ? null
                     : idpIsinAuthSequence
-                        ? <Button onClick={ onAddToLoginFlowClick }>Remove from Login Flow</Button>
-                        : <Button onClick={ onAddToLoginFlowClick }>Add to the Login Flow</Button>
+                        ? <Button onClick={onAddToLoginFlowClick}>Remove from Login Flow</Button>
+                        : <Button onClick={onAddToLoginFlowClick}>Add to the Login Flow</Button>
             }
 
             <ConfirmAddRemoveLoginFlowModal
-                session={ session }
-                id={ id }
-                openModal={ openListAppicationModal }
-                onModalClose={ onCloseListAllApplicaitonModal }
-                fetchAllIdPs={ fetchAllIdPs }
-                idpDetails={ idpDetails }
-                applicationDetail={ applicationDetail }
-                idpIsinAuthSequence={ idpIsinAuthSequence } />
+                session={session}
+                id={id}
+                openModal={openListAppicationModal}
+                onModalClose={onCloseListAllApplicaitonModal}
+                fetchAllIdPs={fetchAllIdPs}
+                idpDetails={idpDetails}
+                applicationDetail={applicationDetail}
+                idpIsinAuthSequence={idpIsinAuthSequence} />
 
             {
                 idpIsinAuthSequence
                     ? null
                     : (<IconButton
-                        icon={ <Trash /> }
-                        style={ { marginLeft: "10px" } }
-                        onClick={ () => onIdPDeleteClick(id) }
+                        icon={<Trash />}
+                        style={{ marginLeft: "10px" }}
+                        onClick={() => onIdPDeleteClick(id)}
                         appearance="subtle" />)
             }
 

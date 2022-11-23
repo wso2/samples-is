@@ -16,18 +16,21 @@
  * under the License.
  */
 
-import { AllApplications } from "../../../../models/application/application";
-import callListCurrentApplication from "../../../apiCall/settings/application/callListCurrentApplication";
-import { commonDecode } from "../../../util/apiUtil/commonDecode";
+import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { contollerCallListCurrentApplication } from "./contollerCallListCurrentApplication";
 
-export default async function decodeListCurrentApplication(session) : Promise<AllApplications> {
+/**
+ * 
+ * @param session - session object
+ 
+ * @returns logged in users object. If failed `null`
+ */
+export async function contollerDecodeListCurrentApplication(session: any) {
 
-    try {
-        const res = await commonDecode(() => callListCurrentApplication(session), null);
+    const res = await commonControllerDecode(() => contollerCallListCurrentApplication(session), null);
 
-        return res;
-    } catch (err) {
+    return res;
 
-        return null;
-    }
 }
+
+export default contollerDecodeListCurrentApplication;

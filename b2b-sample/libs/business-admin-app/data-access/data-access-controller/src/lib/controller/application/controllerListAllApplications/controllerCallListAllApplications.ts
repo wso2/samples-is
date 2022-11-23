@@ -16,17 +16,18 @@
  * under the License.
  */
 
-import callListAllApplications from "../../../apiCall/settings/application/callListAllApplications";
-import { commonDecode } from "../../../util/apiUtil/commonDecode";
+import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
 
-export default async function decodeListAllApplications(session) {
+/**
+ * call `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users/<userId>` get the user details
+ * 
+ * @param session - session object
+ * 
+ * @returns all applications details, if not possible returns `null`
+ */
+export async function controllerCallListAllApplications(session: any) {
 
-    try {
-        const res = await commonDecode(() => callListAllApplications(session), null);
+    const data = await commonControllerCall("/api/settings/application/listAllApplications", session);
 
-        return res;
-    } catch (err) {
-
-        return null;
-    }
+    return data;
 }
