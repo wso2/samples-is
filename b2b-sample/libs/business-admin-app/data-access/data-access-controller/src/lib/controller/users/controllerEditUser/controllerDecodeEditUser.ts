@@ -16,29 +16,26 @@
  * under the License.
  */
 
-import callEditUser from "../../apiCall/settings/callEditUser";
-import { commonDecode } from "../../util/apiUtil/commonDecode";
-import { setUsername } from "../../util/apiUtil/decodeUser";
+import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { SendEditUser, setUsername } from "@b2bsample/shared/data-access/data-access-common-models-util";
+import { controllerCallEditUser } from "./controllerCallEditUser";
 
 /**
  * 
  * @param session - session object
- * @param id - id of the user
- * @param firstName - first name of the user
- * @param familyName - family name of the user
- * @param email - email of the user
- * @param username - user name of the user
-
- * @returns `res` (if user edited successfully) or `false` (if the process was not completed)
+ 
+ * @returns logged in users object. If failed `null`
  */
-export default async function decodeEditUser(session, id, firstName, familyName, email, username) {
-    const editUserEncode = {
+export async function controllerDecodeEditUser(
+    session: any, id: string, firstName: string, familyName: string, email: string, username: string) {
+
+    const editUserEncode: SendEditUser = {
         "Operations": [
             {
                 "op": "replace",
                 "value": {
                     "emails": [
-                        {   
+                        {
                             "primary": true,
                             "value": email
                         }
@@ -56,12 +53,12 @@ export default async function decodeEditUser(session, id, firstName, familyName,
         ]
     };
 
-    try {
-        const usersData = await commonDecode(() => callEditUser(session, id, editUserEncode), false);
 
-        return usersData;
-    } catch (err) {
+    const usersData = await commonControllerDecode(() => controllerCallEditUser(session, id, editUserEncode), false);
 
-        return false;
-    }
+    return usersData;
+
+
 }
+
+export default controllerDecodeEditUser;

@@ -16,24 +16,21 @@
  * under the License.
  */
 
+import { Email } from "./sendUser";
 import { Name } from "./user";
 
-export interface Email {
-    primary: boolean,
-    value: string
+interface Operation {
+    op: string,
+    value : {
+        emails : [Email],
+        name : Name,
+        userName : string,
+    }
 }
 
-interface UrnSchema {
-    askPassword : string
+export interface SendEditUser {
+    Operations: [Operation],
+    schemas: [string]
 }
 
-export interface SendUser {
-    emails: [Email],
-    name : Name,
-    "urn:scim:wso2:schema"? : UrnSchema,
-    userName : string,
-    schemas? : [],
-    password? : string
-}
-
-export default SendUser;
+export default SendEditUser;

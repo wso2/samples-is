@@ -16,24 +16,20 @@
  * under the License.
  */
 
-import { Name } from "./user";
+import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { SendEditUser } from "@b2bsample/shared/data-access/data-access-common-models-util";
 
-export interface Email {
-    primary: boolean,
-    value: string
+/**
+ * call `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users/<userId>` get the user details
+ * 
+ * @param session - session object
+ * 
+ * @returns user details, if not possible returns `null`
+ */
+export async function controllerCallEditUser(session: any, id:string, user: SendEditUser) {
+
+    const data = await commonControllerCall(`/api/settings/user/editUser/${id}`, session, user);
+
+    return data;
+
 }
-
-interface UrnSchema {
-    askPassword : string
-}
-
-export interface SendUser {
-    emails: [Email],
-    name : Name,
-    "urn:scim:wso2:schema"? : UrnSchema,
-    userName : string,
-    schemas? : [],
-    password? : string
-}
-
-export default SendUser;

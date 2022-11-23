@@ -15,7 +15,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-interface Name {
+export interface Name {
     givenName: string,
     familyName: string
 }

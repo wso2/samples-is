@@ -19,6 +19,7 @@
 export * from "./lib/model/user/user";
 export * from "./lib/model/user/internalUser";
 export * from "./lib/model/user/sendUser";
+export * from "./lib/model/user/sendEditUser";
 export * from "./lib/model/user/userUtils";
 export * from "./lib/model/sideNav/sideNavList";
 export * from "./lib/model/sideNav/sideNavItem";

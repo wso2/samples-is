@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { controllerDecodeEditUser } from "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { errorTypeDialog, successTypeDialog, warningTypeDialog } from "@b2bsample/shared/ui/ui-components";
 import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "@b2bsample/shared/util/util-front-end-util";
@@ -24,7 +25,6 @@ import { Field, Form } from "react-final-form";
 import { Button, ButtonToolbar, Divider, Loader, Modal, TagPicker, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
 import stylesSettings from "../../../../../../styles/Settings.module.css";
-import decodeEditUser from "../../../../../../util/apiDecode/settings/decodeEditUser";
 import decodEditRolesToAddOrRemoveUser
     from "../../../../../../util/apiDecode/settings/role/decodEditRolesToAddOrRemoveUser";
 import decodeListAllRoles from "../../../../../../util/apiDecode/settings/role/decodeListAllRoles";
@@ -167,7 +167,7 @@ export default function EditUserComponent(prop) {
     const onSubmit = async (values) => {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
 
-        await decodeEditUser(session, user.id, values.firstName, values.familyName, values.email,
+        await controllerDecodeEditUser(session, user.id, values.firstName, values.familyName, values.email,
             values.username)
             .then((response) => {
                 if(initUserRolesForForm) {

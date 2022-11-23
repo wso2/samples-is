@@ -17,7 +17,7 @@
  */
 
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
-import { decodeUser, InternalUser, User } from "@b2bsample/shared/data-access/data-access-common-models-util";
+import { InternalUser, User, decodeUser } from "@b2bsample/shared/data-access/data-access-common-models-util";
 import { controllerCallViewUsers } from "./controllerCallViewUsers";
 
 /**

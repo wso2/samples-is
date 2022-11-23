@@ -106,4 +106,4 @@ export async function controllerDecodeAddUser(
 
 }
 
-export default { InviteConst, controllerDecodeAddUser }
+export default { InviteConst, controllerDecodeAddUser };

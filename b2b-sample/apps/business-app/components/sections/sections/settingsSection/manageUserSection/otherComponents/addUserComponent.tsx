@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { controllerDecodeAddUser, InviteConst } from "@b2bsample/business-admin-app/data-access/data-access-controller";
+import { InviteConst, controllerDecodeAddUser } from "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
 import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "@b2bsample/shared/util/util-front-end-util";
