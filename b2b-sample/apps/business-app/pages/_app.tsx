@@ -20,7 +20,7 @@ import { SessionProvider } from "next-auth/react";
 import Head from "next/head";
 import React from "react";
 import "rsuite/dist/rsuite.min.css";
-import config from "../config.json";
+import config from "../../../config.json";
 import "../styles/custom-theme.less";
 import "../styles/globals.css";
 
@@ -31,8 +31,8 @@ function MyApp(prop) {
     return (
         <SessionProvider session={ pageProps ? pageProps.session : null }>
             <Head>
-                <title>{ config.ApplicationConfig.Branding.name }</title>
-                <meta name="description" content={ config.ApplicationConfig.Branding.name } />
+                <title>{ config.BusinessAppConfig.ApplicationConfig.Branding.name }</title>
+                <meta name="description" content={ config.BusinessAppConfig.ApplicationConfig.Branding.name } />
             </Head>
 
             <Component { ...pageProps } />

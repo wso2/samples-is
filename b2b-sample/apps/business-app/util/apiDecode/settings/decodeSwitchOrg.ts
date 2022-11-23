@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import config from "../../../config.json";
+import config from "../../../../../config.json";
 import callSwitchOrg from "../../apiCall/settings/callSwitchOrg";
 import { commonDecode } from "../../util/apiUtil/commonDecode";
 
@@ -31,9 +31,9 @@ function getOrgId(token) {
     if (token.user.user_organization) {
 
         return token.user.user_organization;
-    } else if (config.ApplicationConfig.SampleOrganization[0]) {
+    } else if (config.CommonConfig.ApplicationConfig.SampleOrganization[0]) {
 
-        return config.ApplicationConfig.SampleOrganization[0].id;
+        return config.CommonConfig.ApplicationConfig.SampleOrganization[0].id;
     } else {
 
         return token.user.org_id;

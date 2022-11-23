@@ -18,7 +18,7 @@
 
 import { getManagementAPIServerBaseUrl, getOrgUrl } from "@b2bsample/shared/util/util-application-config-util";
 import { ENTERPRISE_ID, GOOGLE_ID } from "@b2bsample/shared/util/util-common";
-import config from "../../../config.json";
+import config from "../../../../../config.json";
 
 /**
  * 
@@ -76,7 +76,7 @@ function setIdpTemplate(model, templateId, formValues, orgId) {
 function googleIdpTemplate(model, clientId, clientSecret, orgId) {
 
     model.image =
-        `${config.ManagementAPIConfig.ImageBaseUrl}/libs/themes/default/assets` +
+        `${config.CommonConfig.ManagementAPIConfig.ImageBaseUrl}/libs/themes/default/assets` +
         "/images/identity-providers/google-idp-illustration.svg";
 
     model.alias = `${getManagementAPIServerBaseUrl()}/oauth2/token`;
@@ -120,7 +120,7 @@ function enterpriseIdpTemplate(model, clientId, clientSecret, formValues, orgId)
     const certificate = formValues.certificate.toString();
 
     model.image =
-        `${config.ManagementAPIConfig.ImageBaseUrl}/libs/themes/default/assets` +
+        `${config.CommonConfig.ManagementAPIConfig.ImageBaseUrl}/libs/themes/default/assets` +
         "/images/identity-providers/enterprise-idp-illustration.svg";
 
     model.federatedAuthenticators.authenticators[0].properties = [

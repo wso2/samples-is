@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import config from "../../../config.json";
+import config from "../../../../../config.json";
 import { dataNotRecievedError, notPostError } from "../../../util/util/apiUtil/localResErrors";
 
 /**
@@ -24,7 +24,7 @@ import { dataNotRecievedError, notPostError } from "../../../util/util/apiUtil/l
  * @returns get the basic auth for authorize the switch call
  */
 const getBasicAuth = () => Buffer
-    .from(`${config.AuthorizationConfig.ClientId}:${config.AuthorizationConfig.ClientSecret}`).toString("base64");
+    .from(`${config.BusinessAppConfig.AuthorizationConfig.ClientId}:${config.BusinessAppConfig.AuthorizationConfig.ClientSecret}`).toString("base64");
 
 /**
  * 
@@ -34,7 +34,7 @@ const getSwitchHeader = () => {
 
     const headers = {
         "Access-Control-Allow-Credentials": true,
-        "Access-Control-Allow-Origin": config.ApplicationConfig.HostedUrl,
+        "Access-Control-Allow-Origin": config.BusinessAppConfig.ApplicationConfig.HostedUrl,
         "Authorization": `Basic ${getBasicAuth()}`,
         "accept": "application/json",
         "content-type": "application/x-www-form-urlencoded"
@@ -53,7 +53,7 @@ const getSwitchHeader = () => {
 const getSwitchBody = (subOrgId, accessToken) => {
     const body = {
         "grant_type": "organization_switch",
-        "scope": config.ApplicationConfig.APIScopes.join(" "),
+        "scope": config.BusinessAppConfig.ApplicationConfig.APIScopes.join(" "),
         "switching_organization": subOrgId,
         "token": accessToken
     };
@@ -84,7 +84,7 @@ const getSwitchRequest = (subOrgId, accessToken) => {
  */
 const getSwitchEndpoint = () => {
 
-    return `${config.AuthorizationConfig.BaseOrganizationUrl}/oauth2/token`;
+    return `${config.CommonConfig.AuthorizationConfig.BaseOrganizationUrl}/oauth2/token`;
 };
 
 /**
@@ -115,7 +115,7 @@ export default async function switchOrg(req, res) {
 
         res.status(200).json(data);
     } catch (err) {
-
+        
         return dataNotRecievedError(res);
     }
 }

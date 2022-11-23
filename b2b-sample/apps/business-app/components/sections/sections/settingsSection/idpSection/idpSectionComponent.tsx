@@ -29,7 +29,7 @@ import { Avatar, Button, Container, FlexboxGrid, Form, Input, InputGroup, Modal,
 import Enterprise from "./data/templates/enterprise-identity-provider.json";
 import Google from "./data/templates/google.json";
 import IdentityProviderList from "./otherComponents/identityProviderList";
-import config from "../../../../../config.json";
+import config from "../../../../../../../config.json";
 import { AllIdentityProvidersIdentityProvider } from "../../../../../models/identityProvider/identityProvider";
 import styles from "../../../../../styles/idp.module.css";
 import decodeCreateIdentityProvider from
@@ -230,12 +230,12 @@ const AddIdentityProviderModal = (prop) => {
     const resolveIconName = (template) => {
         if (GOOGLE_ID === template.templateId) {
 
-            return `${config.ManagementAPIConfig.ImageBaseUrl}/libs/themes/default/assets` +
+            return `${config.CommonConfig.ManagementAPIConfig.ImageBaseUrl}/libs/themes/default/assets` +
                 "/images/identity-providers/google-idp-illustration.svg";
         }
         if (ENTERPRISE_ID === template.templateId) {
 
-            return `${config.ManagementAPIConfig.ImageBaseUrl}/libs/themes/default/assets` +
+            return `${config.CommonConfig.ManagementAPIConfig.ImageBaseUrl}/libs/themes/default/assets` +
                 "/images/identity-providers/enterprise-idp-illustration.svg";
         }
 

@@ -62,7 +62,7 @@ export function getManagementAPIServerBaseUrl() {
 
     // todo: implementation will change after changes are done to the IS.
 
-    const baseOrganizationUrl = config.AuthorizationConfig.BaseOrganizationUrl;
+    const baseOrganizationUrl = config.CommonConfig.AuthorizationConfig.BaseOrganizationUrl;
     // eslint-disable-next-line
     const matches = baseOrganizationUrl.match(/^(http|https)?\:\/\/([^\/?#]+)/i);
     const domain = matches && matches[0];
@@ -77,7 +77,7 @@ export function getManagementAPIServerBaseUrl() {
  */
 export function getTenantDomain() {
 
-    const baseOrganizationUrl = config.AuthorizationConfig.BaseOrganizationUrl;
+    const baseOrganizationUrl = config.CommonConfig.AuthorizationConfig.BaseOrganizationUrl;
     const url = baseOrganizationUrl.split("/");
     const path = url[url.length - 1];
 
@@ -91,7 +91,7 @@ export function getTenantDomain() {
  */
 export function getHostedUrl() {
 
-    return config.ApplicationConfig.HostedUrl;
+    return config.BusinessAppConfig.ApplicationConfig.HostedUrl;
 }
 
 export default {

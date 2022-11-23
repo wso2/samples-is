@@ -111,7 +111,7 @@ function getOrgId(token: JWT): string {
         return parseJwt(token)["org_id"];
     }
 
-    return config.ApplicationConfig.SampleOrganization[0].id;
+    return config.CommonConfig.ApplicationConfig.SampleOrganization[0].id;
 }
 
 /**
@@ -127,7 +127,7 @@ function getOrgName(token: JWT): string {
         return parseJwt(token)["org_name"];
     }
 
-    return config.ApplicationConfig.SampleOrganization[0].name;
+    return config.CommonConfig.ApplicationConfig.SampleOrganization[0].name;
 }
 
 /**

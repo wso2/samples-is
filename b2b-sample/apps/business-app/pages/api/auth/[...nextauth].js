@@ -19,7 +19,7 @@
 import { getLoggedUserFromProfile, getLoggedUserId, getOrgId, getOrgName }
     from "@b2bsample/shared/util/util-authorization-config-util";
 import NextAuth from "next-auth";
-import config from "../../../config.json";
+import config from "../../../../../config.json";
 import decodeSwitchOrg from "../../../util/apiDecode/settings/decodeSwitchOrg";
 
 /**
@@ -74,11 +74,11 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
         {
             authorization: {
                 params: {
-                    scope: config.ApplicationConfig.APIScopes.join(" ")
+                    scope: config.BusinessAppConfig.ApplicationConfig.APIScopes.join(" ")
                 }
             },
-            clientId: config.AuthorizationConfig.ClientId,
-            clientSecret: config.AuthorizationConfig.ClientSecret,
+            clientId: config.BusinessAppConfig.AuthorizationConfig.ClientId,
+            clientSecret: config.BusinessAppConfig.AuthorizationConfig.ClientSecret,
             id: "wso2is",
             name: "WSO2IS",
             profile(profile) {
@@ -89,8 +89,8 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
             },
             secret: process.env.SECRET,
             type: "oauth",
-            userinfo: `${config.AuthorizationConfig.BaseOrganizationUrl}/oauth2/userinfo`,
-            wellKnown: `${config.AuthorizationConfig.BaseOrganizationUrl}/oauth2/token/.well-known/openid-configuration`
+            userinfo: `${config.CommonConfig.AuthorizationConfig.BaseOrganizationUrl}/oauth2/userinfo`,
+            wellKnown: `${config.CommonConfig.AuthorizationConfig.BaseOrganizationUrl}/oauth2/token/.well-known/openid-configuration`
         }
     ],
     secret: process.env.SECRET

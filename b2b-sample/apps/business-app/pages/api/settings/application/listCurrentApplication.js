@@ -17,7 +17,7 @@
  */
 
 import { getOrgUrl } from "@b2bsample/shared/util/util-application-config-util";
-import config from "../../../../config.json";
+import config from "../../../../../../config.json";
 import getDataHeader from "../../../../util/util/apiUtil/getDataHeader";
 import { dataNotRecievedError, notPostError } from "../../../../util/util/apiUtil/localResErrors";
 
@@ -39,7 +39,7 @@ export default async function listCurrentApplication(req, res) {
     const session = body.session;
     const orgId = body.orgId;
 
-    const appName = config.ManagementAPIConfig.SharedApplicationName;
+    const appName = config.BusinessAppConfig.ManagementAPIConfig.SharedApplicationName;
 
     try {
         const fetchData = await fetch(
