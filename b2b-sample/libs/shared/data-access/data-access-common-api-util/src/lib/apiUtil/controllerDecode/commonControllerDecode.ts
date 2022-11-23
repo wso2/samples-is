@@ -16,30 +16,21 @@
  * under the License.
  */
 
-import { getHostedUrl } from "@b2bsample/shared/util/util-application-config-util";
-import { getInternalApiRequestOptionsWithParam } from "../../util/apiUtil/getInteralApiRequestOptions";
+export async function commonControllerDecode(callFunction: Function, errorReturnValue: boolean | null) {
 
-/**
- * call POST `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users` create the user
- * 
- * @param session - session object
- * @param user - user object
- * 
- * @returns created user details, if not created returns `null`
- */
-
-export default async function callAddUser(session, user) {
     try {
-        const res = await fetch(
-            "/api/settings/addUser",
-            getInternalApiRequestOptionsWithParam(session, user)
-        );
+        const res = await callFunction();
 
-        const data = await res.json();
+        if (res.error || res.traceId) {
 
-        return data;
+            return errorReturnValue;
+        }
+
+        return res;
     } catch (err) {
 
-        return null;
+        return errorReturnValue;
     }
 }
+
+export default commonControllerDecode;

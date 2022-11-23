@@ -16,24 +16,36 @@
  * under the License.
  */
 
-import { getHostedUrl } from "@b2bsample/shared/util/util-application-config-util";
-import { getInternalApiRequestOptionsWithParam } from "../../util/apiUtil/getInteralApiRequestOptions";
+import { getControllerCallApiRequestOptions, getControllerCallApiRequestOptionsForSwitchCallWithParam }
+    from "./controllerCallApiRequestOptions";
 
 /**
  * call POST `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users` create the user
  * 
  * @param session - session object
- * @param user - user object
+ * @param param - data object that need to be sent to server
  * 
  * @returns created user details, if not created returns `null`
  */
 
-export default async function callAddUser(session, user) {
+export default async function callAddUser(
+    api: string, switchCall = false, session: any, param?: any) {
     try {
-        const res = await fetch(
-            "/api/settings/addUser",
-            getInternalApiRequestOptionsWithParam(session, user)
-        );
+
+        let header;
+
+        if (switchCall) {
+            if (param) {
+                header = getControllerCallApiRequestOptionsForSwitchCallWithParam(session, param);
+            } else {
+                throw Error;
+            }
+        } else {
+
+            header = getControllerCallApiRequestOptions(session, param);
+        }
+
+        const res = await fetch(api, header);
 
         const data = await res.json();
 

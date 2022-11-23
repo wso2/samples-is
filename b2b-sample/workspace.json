@@ -135,6 +135,35 @@
         }
       }
     },
+    "shared-data-access-data-access-common-api-util": {
+      "root": "libs/shared/data-access/data-access-common-api-util",
+      "sourceRoot": "libs/shared/data-access/data-access-common-api-util/src",
+      "projectType": "library",
+      "tags": [],
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/data-access/data-access-common-api-util/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "{workspaceRoot}/coverage/{projectRoot}"
+          ],
+          "options": {
+            "jestConfig": "libs/shared/data-access/data-access-common-api-util/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "shared-data-access-data-access-common-models-util": {
       "root": "libs/shared/data-access/data-access-common-models-util",
       "sourceRoot": "libs/shared/data-access/data-access-common-models-util/src",
