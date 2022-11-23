@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { LogoComponent } from "@b2bsample/business-app/ui/ui-components";
 import { FooterComponent, HomeComponent, SignOutComponent } from "@b2bsample/shared/ui/ui-components";
 import { orgSignout } from "@b2bsample/shared/util/util-authorization-config-util";
 import React, { useState } from "react";
@@ -26,7 +27,6 @@ import ManageUserSectionComponent from "./sections/settingsSection/manageUserSec
 import RoleManagementSectionComponent from
     "./sections/settingsSection/roleManagementSection/roleManagementSectionComponent";
 import Custom500 from "../../pages/500";
-import { LogoComponent } from "@b2bsample/business-app/ui/ui-components";
 
 
 /**

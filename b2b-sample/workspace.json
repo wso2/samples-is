@@ -72,6 +72,35 @@
       },
       "tags": []
     },
+    "business-app-data-access-data-access-controller": {
+      "root": "libs/business-app/data-access/data-access-controller",
+      "sourceRoot": "libs/business-app/data-access/data-access-controller/src",
+      "projectType": "library",
+      "tags": [],
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "options": {
+            "lintFilePatterns": [
+              "libs/business-app/data-access/data-access-controller/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "{workspaceRoot}/coverage/{projectRoot}"
+          ],
+          "options": {
+            "jestConfig": "libs/business-app/data-access/data-access-controller/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "business-app-ui-assets": {
       "root": "libs/business-app/ui-assets",
       "sourceRoot": "libs/business-app/ui-assets/src",

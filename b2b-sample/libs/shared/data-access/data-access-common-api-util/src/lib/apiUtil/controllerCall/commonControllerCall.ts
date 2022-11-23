@@ -28,8 +28,8 @@ import { getControllerCallApiRequestOptions, getControllerCallApiRequestOptionsF
  * @returns created user details, if not created returns `null`
  */
 
-export default async function callAddUser(
-    api: string, switchCall = false, session: any, param?: any) {
+export async function commonControllerCall(
+    api: string, session: any, param?: any, switchCall = false) {
     try {
 
         let header;
@@ -55,3 +55,5 @@ export default async function callAddUser(
         return null;
     }
 }
+
+export default commonControllerCall;

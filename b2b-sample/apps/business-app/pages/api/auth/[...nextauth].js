@@ -90,6 +90,7 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
             secret: process.env.SECRET,
             type: "oauth",
             userinfo: `${config.CommonConfig.AuthorizationConfig.BaseOrganizationUrl}/oauth2/userinfo`,
+            // eslint-disable-next-line
             wellKnown: `${config.CommonConfig.AuthorizationConfig.BaseOrganizationUrl}/oauth2/token/.well-known/openid-configuration`
         }
     ],

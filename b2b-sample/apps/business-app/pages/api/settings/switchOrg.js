@@ -24,6 +24,7 @@ import { dataNotRecievedError, notPostError } from "../../../util/util/apiUtil/l
  * @returns get the basic auth for authorize the switch call
  */
 const getBasicAuth = () => Buffer
+    // eslint-disable-next-line
     .from(`${config.BusinessAppConfig.AuthorizationConfig.ClientId}:${config.BusinessAppConfig.AuthorizationConfig.ClientSecret}`).toString("base64");
 
 /**

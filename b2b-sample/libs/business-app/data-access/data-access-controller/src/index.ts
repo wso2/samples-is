@@ -16,29 +16,4 @@
  * under the License.
  */
 
-import { getInternalApiRequestOptionsWithParam } from "../../util/apiUtil/getInteralApiRequestOptions";
-
-/**
- * call POST `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users` create the user
- * 
- * @param session - session object
- * @param user - user object
- * 
- * @returns created user details, if not created returns `null`
- */
-
-export default async function callAddUser(session, user) {
-    try {
-        const res = await fetch(
-            "/api/settings/addUser",
-            getInternalApiRequestOptionsWithParam(session, user)
-        );
-
-        const data = await res.json();
-
-        return data;
-    } catch (err) {
-
-        return null;
-    }
-}
+export * from "./lib/controller/controllerMe/controllerDecodeMe";

@@ -16,32 +16,34 @@
  * under the License.
  */
 
-import callMe from "../../apiCall/dashboard/callMe";
-import { commonDecode } from "../../util/apiUtil/commonDecode";
-import { decodeUser } from "../../util/apiUtil/decodeUser";
+import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { decodeUser } from "@b2bsample/shared/data-access/data-access-common-models-util";
+import { controllerCallMe } from "./controllerCallMe";
 
 /**
  * 
  * @param session - session object
-
+ 
  * @returns logged in users object. If failed `null`
  */
-export default async function decodeMe(session) {
-    try {
-        let meData;
+export async function controllerDecodeMe(session: any) {
+    let meData;
 
-        if (!session.user || session.user.id === undefined || session.user.userName === undefined
-            || session.user.name === undefined || session.user.emails === undefined) {
-            meData = await commonDecode(() => callMe(session), null);
-        } else {
-            meData = session.user;
-        }
+    if (!session.user || session.user.id === undefined || session.user.userName === undefined
+        || session.user.name === undefined || session.user.emails === undefined) {
+        meData = await commonControllerDecode(() => controllerCallMe(session), null);
+    } else {
+        meData = session.user;
+    }
 
+    if(meData){
         const meReturn = decodeUser(meData);
 
         return meReturn;
-    } catch (err) {
+    } 
 
-        return null;
-    }
+    return meData;
+
 }
+
+export default controllerDecodeMe;

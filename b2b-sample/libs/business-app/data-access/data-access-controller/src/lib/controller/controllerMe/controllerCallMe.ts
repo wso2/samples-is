@@ -16,8 +16,7 @@
  * under the License.
  */
 
-import { getHostedUrl } from "@b2bsample/shared/util/util-application-config-util";
-import { getInternalApiRequestOptions } from "../../util/apiUtil/getInteralApiRequestOptions";
+import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
 
 /**
  * call `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users/<userId>` get the user details
@@ -26,18 +25,10 @@ import { getInternalApiRequestOptions } from "../../util/apiUtil/getInteralApiRe
  * 
  * @returns user details, if not possible returns `null`
  */
-export default async function callMe(session) {
-    try {
-        const res = await fetch(
-            `${getHostedUrl()}/api/dashboard/me`,
-            getInternalApiRequestOptions(session)
-        );
-        const data = await res.json();
+export async function controllerCallMe(session: any) {
 
-        return data;
-        
-    } catch (err) {
-        
-        return null;
-    }
+    const data = await commonControllerCall("/api/dashboard/me", session);
+
+    return data;
+
 }

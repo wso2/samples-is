@@ -16,9 +16,10 @@
  * under the License.
  */
 
+import { apiRequestOptions, dataNotRecievedError, notPostError } from
+    "@b2bsample/shared/data-access/data-access-common-api-util";
 import { getOrgUrl } from "@b2bsample/shared/util/util-application-config-util";
-import getDataHeader from "../../../util/util/apiUtil/getDataHeader";
-import { dataNotRecievedError, notPostError } from "../../../util/util/apiUtil/localResErrors";
+import { NextApiRequest, NextApiResponse } from "next";
 
 /**
  * backend API call to get logged user details
@@ -28,8 +29,9 @@ import { dataNotRecievedError, notPostError } from "../../../util/util/apiUtil/l
  * 
  * @returns correct data if the call is successful, else an error message
  */
-export default async function me(req , res) {
-    if(req.method !== "POST"){
+export default async function me(req: NextApiRequest, res: NextApiResponse) {
+
+    if (req.method !== "POST") {
         notPostError(res);
     }
 
@@ -40,8 +42,9 @@ export default async function me(req , res) {
     try {
         const fetchData = await fetch(
             `${getOrgUrl(orgId)}/scim2/Users/${session.userId}`,
-            getDataHeader(session)
+            apiRequestOptions(session)
         );
+
         const meData = await fetchData.json();
 
         res.status(200).json(meData);

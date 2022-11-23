@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { controllerDecodeMe } from "@b2bsample/business-app/data-access/data-access-controller";
 import { LogoComponent } from "@b2bsample/business-app/ui/ui-components";
 import React, { useEffect, useState } from "react";
 import { Panel } from "rsuite";
@@ -23,7 +24,6 @@ import "rsuite/dist/rsuite.min.css";
 import LatestNewsComponent from "./otherComponents/latestNewsComponent";
 import UserDetails from "./otherComponents/userDetails";
 import styles from "../../../../styles/Settings.module.css";
-import decodeMe from "../../../../util/apiDecode/dashboard/decodeMe";
 
 /**
  * 
@@ -39,7 +39,7 @@ export default function DashboardSectionComponent(prop) {
 
     useEffect(() => {
         async function fetchData() {
-            const res = await decodeMe(session);
+            const res = await controllerDecodeMe(session);
 
             setMe(res);
         }
