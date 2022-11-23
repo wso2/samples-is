@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { controllerDecodeViewUsers } from "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
 import { PatchMethod } from "@b2bsample/shared/util/util-common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "@b2bsample/shared/util/util-front-end-util";
@@ -24,7 +25,6 @@ import { Field, Form } from "react-final-form";
 import { Button, ButtonToolbar, Checkbox, CheckboxGroup, Loader, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
 import styles from "../../../../../../../../styles/Settings.module.css";
-import decodeViewUsers from "../../../../../../../../util/apiDecode/settings/decodeViewUsers";
 import decodePatchRole from "../../../../../../../../util/apiDecode/settings/role/decodePatchRole";
 
 /**
@@ -58,7 +58,7 @@ export default function Users(prop) {
     const toaster = useToaster();
 
     const fetchAllUsers = useCallback(async () => {
-        const res = await decodeViewUsers(session);
+        const res = await controllerDecodeViewUsers(session);
 
         await setUsers(res);
     }, [ session ]);

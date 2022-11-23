@@ -17,8 +17,8 @@
  */
 
 import { getOrgUrl } from "@b2bsample/shared/util/util-application-config-util";
-import getDataHeader from "../../../util/util/apiUtil/getDataHeader";
-import { dataNotRecievedError, notPostError } from "../../../util/util/apiUtil/localResErrors";
+import getDataHeader from "../../../../util/util/apiUtil/getDataHeader";
+import { dataNotRecievedError, notPostError } from "../../../../util/util/apiUtil/localResErrors";
 
 /**
  * backend API call to view users

@@ -22,9 +22,10 @@ interface Name {
 
 export interface User {
     id: string,
-    name: Name;
-    emails : [string]
-    userName : string
+    name: Name,
+    emails : [string],
+    userName : string,
+    [key: string]: any
 }
 
 export default User;

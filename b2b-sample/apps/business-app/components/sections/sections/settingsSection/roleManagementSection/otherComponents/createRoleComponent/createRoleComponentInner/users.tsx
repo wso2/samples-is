@@ -16,12 +16,12 @@
  * under the License.
  */
 
+import { controllerDecodeViewUsers } from "@b2bsample/business-admin-app/data-access/data-access-controller";
 import React, { useCallback, useEffect, useState } from "react";
 import { Field, Form } from "react-final-form";
 import { Button, ButtonToolbar, Checkbox, CheckboxGroup } from "rsuite";
 import FormSuite from "rsuite/Form";
 import styles from "../../../../../../../../styles/Settings.module.css";
-import decodeViewUsers from "../../../../../../../../util/apiDecode/settings/decodeViewUsers";
 
 /**
  * 
@@ -36,7 +36,7 @@ export default function Users(prop) {
     const [ users, setUsers ] = useState(null);
 
     const fetchAllUsers = useCallback(async () => {
-        const res = await decodeViewUsers(session);
+        const res = await controllerDecodeViewUsers(session);
 
         await setUsers(res);
     }, [ session ]);

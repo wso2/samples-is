@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import InternalUser from "./internalUser";
 import User from "./user";
 
 /**
@@ -24,7 +25,7 @@ import User from "./user";
  * 
  * @returns user object that can be view in front end side
  */
-export function decodeUser(user: User) {
+export function decodeUser(user: User) : InternalUser {
 
     return {
         "email": user.emails ? user.emails[0] : "-",

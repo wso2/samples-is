@@ -16,27 +16,19 @@
  * under the License.
  */
 
-
-import { getHostedUrl } from "@b2bsample/shared/util/util-application-config-util";
-import { getInternalApiRequestOptions } from "../../util/apiUtil/getInteralApiRequestOptions";
+import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
 
 /**
- * call GET `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users` to view all the users
+ * call `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users/<userId>` get the user details
  * 
  * @param session - session object
  * 
+ * @returns user details, if not possible returns `null`
  */
-export default async function callViewUsers(session) {
-    try {
-        const res = await fetch(
-            `${getHostedUrl()}/api/settings/viewUsers`,
-            getInternalApiRequestOptions(session)
-        );
-        const data = await res.json();
+export async function controllerCallViewUsers(session: any) {
 
-        return data;
-    } catch (err) {
+    const data = await commonControllerCall("/api/settings/user/viewUsers", session);
 
-        return null;
-    }
+    return data;
+
 }

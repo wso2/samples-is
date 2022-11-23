@@ -16,8 +16,12 @@
  * under the License.
  */
 
-export * from "./lib/model/user/user";
-export * from "./lib/model/user/internalUser";
-export * from "./lib/model/user/userUtils";
-export * from "./lib/model/sideNav/sideNavList";
-export * from "./lib/model/sideNav/sideNavItem";
+export interface InternalUser {
+    email: string,
+    familyName: string,
+    firstName: string,
+    id: string,
+    username: string
+}
+
+export default InternalUser;

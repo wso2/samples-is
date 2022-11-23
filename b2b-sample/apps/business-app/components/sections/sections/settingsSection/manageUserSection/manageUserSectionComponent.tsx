@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { controllerDecodeViewUsers } from "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { SettingsTitleComponent } from "@b2bsample/shared/ui/ui-components";
 import React, { useCallback, useEffect, useState } from "react";
 import { Table } from "rsuite";
@@ -23,7 +24,6 @@ import AddUserButton from "./otherComponents/addUserButton";
 import AddUserComponent from "./otherComponents/addUserComponent";
 import EditUserComponent from "./otherComponents/editUserComponent";
 import styles from "../../../../../styles/Settings.module.css";
-import decodeViewUsers from "../../../../../util/apiDecode/settings/decodeViewUsers";
 
 /**
  * 
@@ -42,7 +42,7 @@ export default function ManageUserSectionComponent(prop) {
     const [ openUser, setOpenUser ] = useState({});
 
     const fetchData = useCallback(async () => {
-        const res = await decodeViewUsers(session);
+        const res = await controllerDecodeViewUsers(session);
 
         await setUsers(res);
     }, [ session ]);

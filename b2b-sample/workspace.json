@@ -1,6 +1,35 @@
 {
   "version": 2,
   "projects": {
+    "business-admin-app-data-access-data-access-controller": {
+      "root": "libs/business-admin-app/data-access/data-access-controller",
+      "sourceRoot": "libs/business-admin-app/data-access/data-access-controller/src",
+      "projectType": "library",
+      "tags": [],
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "options": {
+            "lintFilePatterns": [
+              "libs/business-admin-app/data-access/data-access-controller/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "{workspaceRoot}/coverage/{projectRoot}"
+          ],
+          "options": {
+            "jestConfig": "libs/business-admin-app/data-access/data-access-controller/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "business-app": {
       "root": "apps/business-app",
       "sourceRoot": "apps/business-app",

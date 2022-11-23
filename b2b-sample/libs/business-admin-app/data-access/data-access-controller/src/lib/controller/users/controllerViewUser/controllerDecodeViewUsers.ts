@@ -16,23 +16,24 @@
  * under the License.
  */
 
-import callViewUsers from "../../apiCall/settings/callViewUsers";
-import { commonDecode } from "../../util/apiUtil/commonDecode";
-import { decodeUser } from "../../util/apiUtil/decodeUser";
+import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { decodeUser, InternalUser, User } from "@b2bsample/shared/data-access/data-access-common-models-util";
+import { controllerCallViewUsers } from "./controllerCallViewUsers";
 
 /**
  * 
- * @param session - session objecr
-
- * @returns all the users as a list. If failed `null`
+ * @param session - session object
+ 
+ * @returns logged in users object. If failed `null`
  */
-export default async function decodeViewUsers(session) {
-    try {
-        const usersData = await commonDecode(()=>callViewUsers(session), null);
+export async function controllerDecodeViewUsers(session: any) {
 
-        const usersReturn = [];
+    const usersData = await commonControllerDecode(() => controllerCallViewUsers(session), null);
 
-        usersData["Resources"].map((user) => {
+    if (usersData) {
+        const usersReturn : InternalUser[] = [];
+
+        usersData["Resources"].map((user : User) => {
             const userDetails = decodeUser(user);
 
             if (userDetails) {
@@ -41,8 +42,10 @@ export default async function decodeViewUsers(session) {
         });
 
         return usersReturn;
-    } catch (err) {
-        
-        return null;
     }
+
+    return usersData;
+
 }
+
+export default controllerDecodeViewUsers;
