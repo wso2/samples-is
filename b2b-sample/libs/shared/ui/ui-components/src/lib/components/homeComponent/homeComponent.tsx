@@ -24,17 +24,18 @@ import SidenavComponent from "../sidenavComponent/sidenavComponent";
 
 export function HomeComponent(prop: HomeComponentProps) {
 
-    const { name, scope, activeKeySideNav, activeKeySideNavSelect, setSignOutModalOpen, children } = prop;
+    const { scope, activeKeySideNav, activeKeySideNavSelect, setSignOutModalOpen, children, logoComponent }
+        = prop;
 
     return (
         <div className={ styles["mainDiv"] }>
 
             <SidenavComponent
-                name={ name }
                 scope={ scope }
                 activeKeySideNav={ activeKeySideNav }
                 activeKeySideNavSelect={ activeKeySideNavSelect }
-                setSignOutModalOpen={ setSignOutModalOpen } />
+                setSignOutModalOpen={ setSignOutModalOpen }
+                logoComponent={ logoComponent } />
 
             <MainPanelComponent>
                 { children }

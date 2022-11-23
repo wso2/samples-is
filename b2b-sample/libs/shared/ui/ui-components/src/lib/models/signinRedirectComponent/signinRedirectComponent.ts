@@ -17,5 +17,6 @@
  */
 
 export interface SigninRedirectComponentProps {
+    logoComponent : JSX.Element,
     loaderContent: string
 }

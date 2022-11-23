@@ -22,7 +22,6 @@ import { Button } from "rsuite";
 import styles from "./indexHomeComponent.module.css";
 import { IndexHomeComponentProps } from "../../models/indexHomeComponent/indexHomeComponent";
 import FooterComponent from "../footerComponent/footerComponent";
-import LogoComponent from "../logoComponent/logoComponent";
 
 /**
  * First page component
@@ -31,7 +30,7 @@ import LogoComponent from "../logoComponent/logoComponent";
  */
 export function IndexHomeComponent(prop: IndexHomeComponentProps) {
 
-    const { image, tagText, signinOnClick } = prop;
+    const { logoComponent, image, tagText, signinOnClick } = prop;
 
     return (
         <div>
@@ -40,7 +39,7 @@ export function IndexHomeComponent(prop: IndexHomeComponentProps) {
                 <Image src={ image } className={ styles["homeImageDiv"] } alt="home image" />
 
                 <div className={ styles["signInDiv"] }>
-                    <LogoComponent imageSize="medium" />
+                    { logoComponent }
 
                     <hr />
 

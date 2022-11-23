@@ -18,10 +18,9 @@
 
 import Image from "next/image";
 import React from "react";
-import styles from "./logoComponent.module.css";
-import config from "../../../../../../../../config.json";
-import logoImage from "../../../../../../../../libs/shared/ui/ui-assets/src/lib/images/logo.png";
-import { LogoComponentProps, LogoImageStyle, LogoProps } from "../../models/logoComponent/logoComponent";
+import styles from "./sharedLogoComponent.module.css";
+import { SharedLogoComponentProps, SharedLogoImageStyle, SharedLogoProps } from
+    "../../models/sharedLogoComponent/sharedLogoComponent";
 
 /**
  * 
@@ -29,14 +28,14 @@ import { LogoComponentProps, LogoImageStyle, LogoProps } from "../../models/logo
  *
  * @returns 
  */
-export function LogoComponent(prop: LogoComponentProps) {
+export function SharedLogoComponent(prop: SharedLogoComponentProps) {
 
-    const { name, imageSize, white } = prop;
+    const { image, tagLine, name, imageSize, white } = prop;
 
     return (
         <div className={ styles["logoDiv"] }>
-            <Logo imageSize={ imageSize } white={ white } />
-            <p className={ styles["nameTag"] }>{ config.BusinessAppConfig.ApplicationConfig.Branding.tag } </p>
+            <Logo image={ image } imageSize={ imageSize } white={ white } />
+            <p className={ styles["nameTag"] }>{ tagLine } </p>
             {
                 name
                     ? (
@@ -58,13 +57,13 @@ export function LogoComponent(prop: LogoComponentProps) {
  * 
  * @returns Logo component
  */
-function Logo(prop: LogoProps) {
+function Logo(prop: SharedLogoProps) {
 
-    const { imageSize, white } = prop;
+    const { image, imageSize, white } = prop;
 
     const getImageStyle = (size: string, white?: boolean) => {
 
-        const imageStyle: LogoImageStyle = {
+        const imageStyle: SharedLogoImageStyle = {
             "height": "auto"
         };
 
@@ -99,10 +98,10 @@ function Logo(prop: LogoProps) {
 
     return (
         <Image
-            src={ logoImage }
+            src={ image }
             alt="404 image"
             style={ getImageStyle(imageSize, white) } />
     );
 }
 
-export default LogoComponent;
+export default SharedLogoComponent;

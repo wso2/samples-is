@@ -26,6 +26,8 @@ import ManageUserSectionComponent from "./sections/settingsSection/manageUserSec
 import RoleManagementSectionComponent from
     "./sections/settingsSection/roleManagementSection/roleManagementSectionComponent";
 import Custom500 from "../../pages/500";
+import { LogoComponent } from "@b2bsample/business-app/ui/ui-components";
+
 
 /**
  * 
@@ -80,11 +82,11 @@ export default function Home(prop) {
                 ? (
 
                     <HomeComponent
-                        name={ name }
                         scope={ session.scope }
                         activeKeySideNav={ activeKeySideNav }
                         activeKeySideNavSelect={ activeKeySideNavSelect }
-                        setSignOutModalOpen={ setSignOutModalOpen }>
+                        setSignOutModalOpen={ setSignOutModalOpen }
+                        logoComponent={ <LogoComponent imageSize="small" name={ name } white={ true } /> }>
 
                         { mainPanelComponenet(activeKeySideNav) }
 

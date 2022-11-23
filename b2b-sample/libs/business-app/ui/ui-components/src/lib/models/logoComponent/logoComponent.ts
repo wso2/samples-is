@@ -16,20 +16,10 @@
  * under the License.
  */
 
-export interface LogoComponentProps {
-    name? : string,
-    imageSize : "small" | "medium" | "large" | "x-large",
-    white? : boolean
-}
+import { StaticImageData } from "next/image";
 
-export interface LogoProps {
+export interface LogoComponentProps {
+    name?: string,
     imageSize: "small" | "medium" | "large" | "x-large",
     white?: boolean
-}
-
-export interface LogoImageStyle {
-    height : string,
-    width? : string,
-    filter? : string,
-    [key: string]: any;
 }

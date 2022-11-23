@@ -26,10 +26,9 @@ import "rsuite/dist/rsuite.min.css";
 import styles from "./sidenavComponent.module.css";
 import sideNavConfig from "../../../../../../../business-app/ui-assets/src/lib/data/sideNav.json";
 import { SidenavComponentProps } from "../../models/sidenavComponent/sidenavComponent";
-import LogoComponent from "../logoComponent/logoComponent";
 
 export function SidenavComponent(prop: SidenavComponentProps) {
-    const { name, scope, activeKeySideNav, activeKeySideNavSelect, setSignOutModalOpen } = prop;
+    const { scope, activeKeySideNav, activeKeySideNavSelect, setSignOutModalOpen, logoComponent } = prop;
 
     const signOutOnClick = () => setSignOutModalOpen(true);
 
@@ -54,7 +53,7 @@ export function SidenavComponent(prop: SidenavComponentProps) {
             <Sidenav appearance="inverse" className={ styles["sideNav"] } defaultOpenKeys={ [ "3", "4" ] }>
                 <Sidenav.Header>
                     <div className={ styles["logoComponentDiv"] }>
-                        <LogoComponent imageSize="small" name={ name } white={ true } />
+                        { logoComponent }
                     </div>
                 </Sidenav.Header>
                 <Sidenav.Body>

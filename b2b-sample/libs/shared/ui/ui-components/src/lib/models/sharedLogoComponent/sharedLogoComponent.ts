@@ -16,11 +16,25 @@
  * under the License.
  */
 
-export interface HomeComponentProps {
-    scope : string[]
-    activeKeySideNav : string,
-    activeKeySideNavSelect : Function
-    setSignOutModalOpen : Function,
-    children : JSX.Element,
-    logoComponent : JSX.Element
+import { StaticImageData } from "next/image";
+
+export interface SharedLogoComponentProps {
+    image : StaticImageData,
+    tagLine : string,
+    name? : string,
+    imageSize : "small" | "medium" | "large" | "x-large",
+    white? : boolean
+}
+
+export interface SharedLogoProps {
+    image : StaticImageData,
+    imageSize: "small" | "medium" | "large" | "x-large",
+    white?: boolean
+}
+
+export interface SharedLogoImageStyle {
+    height : string,
+    width? : string,
+    filter? : string,
+    [key: string]: any;
 }

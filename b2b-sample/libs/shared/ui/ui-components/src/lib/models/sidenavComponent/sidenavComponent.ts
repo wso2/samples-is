@@ -17,9 +17,9 @@
  */
 
 export interface SidenavComponentProps {
-    name : string,
     scope : string[]
     activeKeySideNav : string,
     activeKeySideNavSelect : Function
-    setSignOutModalOpen : Function
+    setSignOutModalOpen : Function,
+    logoComponent : JSX.Element
 }

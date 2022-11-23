@@ -16,11 +16,4 @@
  * under the License.
  */
 
-export interface HomeComponentProps {
-    scope : string[]
-    activeKeySideNav : string,
-    activeKeySideNavSelect : Function
-    setSignOutModalOpen : Function,
-    children : JSX.Element,
-    logoComponent : JSX.Element
-}
+export * from "./lib/components/logoComponent/logoComponent";

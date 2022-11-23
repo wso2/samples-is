@@ -20,7 +20,6 @@ import React from "react";
 import { Loader } from "rsuite";
 import styles from "./signinRedirectComponent.module.css";
 import { SigninRedirectComponentProps } from "../../models/signinRedirectComponent/signinRedirectComponent";
-import LogoComponent from "../logoComponent/logoComponent";
 
 /**
  * Sign in redirect component
@@ -29,12 +28,12 @@ import LogoComponent from "../logoComponent/logoComponent";
  */
 export function SigninRedirectComponent(prop: SigninRedirectComponentProps) {
 
-    const { loaderContent } = prop;
+    const { logoComponent, loaderContent } = prop;
 
     return (
         <div className={ styles["signinOuter"] }>
             <div className={ styles["signinInner"] }>
-                <LogoComponent imageSize="medium" />
+                { logoComponent }
                 <Loader size="lg" content={ loaderContent } vertical />
             </div>
         </div>

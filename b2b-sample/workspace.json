@@ -77,6 +77,35 @@
       "sourceRoot": "libs/business-app/ui-assets/src",
       "projectType": "ui-library"
     },
+    "business-app-ui-ui-components": {
+      "root": "libs/business-app/ui/ui-components",
+      "sourceRoot": "libs/business-app/ui/ui-components/src",
+      "projectType": "library",
+      "tags": [],
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "options": {
+            "lintFilePatterns": [
+              "libs/business-app/ui/ui-components/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "{workspaceRoot}/coverage/{projectRoot}"
+          ],
+          "options": {
+            "jestConfig": "libs/business-app/ui/ui-components/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "business-app-util-util-front-end-util": {
       "root": "libs/business-app/util/util-front-end-util",
       "sourceRoot": "libs/business-app/util/util-front-end-util/src",

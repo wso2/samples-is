@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { LogoComponent } from "@b2bsample/business-app/ui/ui-components";
 import { IndexHomeComponent } from "@b2bsample/shared/ui/ui-components";
 import { useRouter } from "next/router";
 import React from "react";
@@ -38,6 +39,7 @@ export default function Home() {
             image={ homeImage }
             tagText="Let&apos;s get your journey started."
             signinOnClick={ signinOnClick }
+            logoComponent = { <LogoComponent imageSize="medium"/> }
         />
        
     );

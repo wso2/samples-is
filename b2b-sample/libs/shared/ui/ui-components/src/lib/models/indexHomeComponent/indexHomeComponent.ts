@@ -20,6 +20,7 @@ import { StaticImageData } from "next/image";
 import { MouseEventHandler } from "react";
 
 export interface IndexHomeComponentProps {
+    logoComponent : JSX.Element,
     image : StaticImageData
     tagText : string
     signinOnClick : MouseEventHandler<HTMLElement>

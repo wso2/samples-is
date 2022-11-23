@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { LogoComponent } from "@b2bsample/business-app/ui/ui-components";
 import { SigninRedirectComponent } from "@b2bsample/shared/ui/ui-components";
 import { orgSignin, redirect } from "@b2bsample/shared/util/util-authorization-config-util";
 import { getSession } from "next-auth/react";
@@ -57,6 +58,9 @@ export default function Signin() {
     }, [ redirectSeconds ]);
 
     return (
-        <SigninRedirectComponent loaderContent="Redirecting to the organization login." />
+        <SigninRedirectComponent
+            logoComponent={ <LogoComponent imageSize="medium" /> }
+            loaderContent="Redirecting to the organization login."
+        />
     );
 }

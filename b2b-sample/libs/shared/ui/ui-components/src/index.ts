@@ -16,7 +16,7 @@
  * under the License.
  */
 
-export * from "./lib/components/logoComponent/logoComponent";
+export * from "./lib/components/sharedLogoComponent;/sharedLogoComponent";
 export * from "./lib/components/dialogComponent/dialogComponent";
 export * from "./lib/components/accordianItemHeaderComponent/accordianItemHeaderComponent";
 export * from "./lib/components/emptySettingsComponent/emptySettingsComponent";
