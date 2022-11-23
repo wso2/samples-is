@@ -22,3 +22,4 @@ export * from "./lib/controller/user/controllerEditUser/controllerDecodeEditUser
 export * from "./lib/controller/application/controllerListAllApplications/controllerDecodeListAllApplications";
 export * from "./lib/controller/application/contollerListCurrentApplication/contollerDecodeListCurrentApplication";
 export * from "./lib/controller/application/contollerGetApplication/contollerDecodeGetApplication";
+export * from "./lib/controller/role/contollerGetRole/contollerDecodeGetRole";

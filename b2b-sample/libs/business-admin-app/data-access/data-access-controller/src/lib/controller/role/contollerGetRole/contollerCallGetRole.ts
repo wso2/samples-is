@@ -16,19 +16,18 @@
  * under the License.
  */
 
-import { Role } from "../../../../models/role/role";
-import callGetRole from
-    "../../../apiCall/settings/role/callGetRole";
-import { commonDecode } from "../../../util/apiUtil/commonDecode";
+import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
 
-export default async function decodeGetRole(session, roleUri): Promise<Role> {
+/**
+ * call `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users/<userId>` get the user details
+ * 
+ * @param session - session object
+ * 
+ * @returns all applications details, if not possible returns `null`
+ */
+export async function contollerCallGetRole(session: any, roleUri: string) {
 
-    try {
-        const res = await commonDecode(() => callGetRole(session, roleUri), null);
+    const data = await commonControllerCall(`/api/settings/role/getRole?roleUri=${roleUri}`, session);
 
-        return res;
-    } catch (err) {
-
-        return null;
-    }
+    return data;
 }

@@ -16,30 +16,21 @@
  * under the License.
  */
 
-import { getHostedUrl } from "@b2bsample/shared/util/util-application-config-util";
-import { getInternalApiRequestOptions } from "../../../util/apiUtil/getInteralApiRequestOptions";
+import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { contollerCallGetRole } from "./contollerCallGetRole";
 
 /**
- * call GET `roleUri`
  * 
  * @param session - session object
- * @param roleUri - uri of the role
- * 
- * @returns - role details, if the call failed `null`
+ 
+ * @returns logged in users object. If failed `null`
  */
-export default async function callGetRole(session, roleUri) {
+export async function contollerDecodeGetRole(session: any, roleUri: string) {
 
-    try {
-        const res = await fetch(
-            `${getHostedUrl()}/api/settings/role/getRole?roleUri=${roleUri}`,
-            getInternalApiRequestOptions(session)
-        );
+    const res = await commonControllerDecode(() => contollerCallGetRole(session, roleUri), null);
 
-        const data = await res.json();
+    return res;
 
-        return data;
-    } catch (err) {
-
-        return null;
-    }
 }
+
+export default contollerDecodeGetRole;

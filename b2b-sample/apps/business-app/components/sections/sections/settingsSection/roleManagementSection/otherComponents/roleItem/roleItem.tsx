@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { contollerDecodeGetRole } from "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { AccordianItemHeaderComponent, JsonDisplayComponent } from "@b2bsample/shared/ui/ui-components";
 import CodeIcon from "@rsuite/icons/Code";
 import React, { useCallback, useEffect, useState } from "react";
@@ -24,7 +25,6 @@ import General from "./roleItemDetailsSection/general";
 import Permission from "./roleItemDetailsSection/permission";
 import Users from "./roleItemDetailsSection/users";
 import { Role } from "../../../../../../../models/role/role";
-import decodeGetRole from "../../../../../../../util/apiDecode/settings/role/decodeGetRole";
 
 /**
  * 
@@ -40,7 +40,7 @@ export default function RoleItem(prop) {
     const [ activeKeyNav, setActiveKeyNav ] = useState("1");
 
     const fetchData = useCallback(async () => {
-        const res = await decodeGetRole(session, roleUri);
+        const res = await contollerDecodeGetRole(session, roleUri);
 
         setRoleDetails(res);
     }, [ session, roleUri ]);
