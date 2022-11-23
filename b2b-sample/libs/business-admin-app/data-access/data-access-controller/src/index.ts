@@ -17,3 +17,4 @@
  */
 
 export * from "./lib/controller/users/controllerViewUser/controllerDecodeViewUsers";
+export * from "./lib/controller/users/controllerAddUser/controllerDecodeAddUser";

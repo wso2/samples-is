@@ -16,29 +16,20 @@
  * under the License.
  */
 
-import { getInternalApiRequestOptionsWithParam } from "../../util/apiUtil/getInteralApiRequestOptions";
+import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { SendUser } from "@b2bsample/shared/data-access/data-access-common-models-util";
 
 /**
- * call POST `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users` create the user
+ * call `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users/<userId>` get the user details
  * 
  * @param session - session object
- * @param user - user object
  * 
- * @returns created user details, if not created returns `null`
+ * @returns user details, if not possible returns `null`
  */
+export async function controllerCallAddUser(session: any, user: SendUser) {
 
-export default async function callAddUser(session, user) {
-    try {
-        const res = await fetch(
-            "/api/settings/addUser",
-            getInternalApiRequestOptionsWithParam(session, user)
-        );
+    const data = await commonControllerCall("/api/settings/user/addUser", session, user);
 
-        const data = await res.json();
+    return data;
 
-        return data;
-    } catch (err) {
-
-        return null;
-    }
 }

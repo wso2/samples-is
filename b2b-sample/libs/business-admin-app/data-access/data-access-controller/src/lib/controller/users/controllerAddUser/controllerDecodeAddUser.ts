@@ -16,17 +16,16 @@
  * under the License.
  */
 
-import callAddUser from "../../apiCall/settings/callAddUser";
-import { commonDecode } from "../../util/apiUtil/commonDecode";
-import { setUsername } from "../../util/apiUtil/decodeUser";
+import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { SendUser, setUsername } from "@b2bsample/shared/data-access/data-access-common-models-util";
+import { controllerCallAddUser } from "./controllerCallAddUser";
 
-const InviteConst = {
+export const InviteConst = {
     INVITE: "pwd-method-invite",
     PWD: "pwd-method-pwd"
 };
 
-
-function inviteAddUserBody(firstName, familyName, email, username) {
+function inviteAddUserBody(firstName: string, familyName: string, email: string, username: string): SendUser {
     return {
         "emails": [
             {
@@ -45,7 +44,7 @@ function inviteAddUserBody(firstName, familyName, email, username) {
     };
 }
 
-function pwdAddUserBody(firstName, familyName, email, username, password) {
+function pwdAddUserBody(firstName: string, familyName: string, email: string, username: string, password: string): SendUser {
     return {
         "emails": [
             {
@@ -63,7 +62,13 @@ function pwdAddUserBody(firstName, familyName, email, username, password) {
     };
 }
 
-function getAddUserBody(inviteConst, firstName, familyName, email, username, password) {
+function getAddUserBody(
+    inviteConst: string,
+    firstName: string,
+    familyName: string,
+    email: string,
+    username: string,
+    password: string): SendUser | undefined {
     switch (inviteConst) {
         case InviteConst.INVITE:
             return inviteAddUserBody(firstName, familyName, email, username);
@@ -72,32 +77,33 @@ function getAddUserBody(inviteConst, firstName, familyName, email, username, pas
             return pwdAddUserBody(firstName, familyName, email, username, password);
 
         default:
-            break;
+
+            return;
     }
 }
 
 /**
  * 
  * @param session - session object
- * @param firstName - first name of the user
- * @param familyName - family name of the user
- * @param email - email of the user
- * @param username - user name of the user
- * @param password - password of the user
- * 
- * @returns `res` (if user added successfully) or `null` (if user addition was not completed)
+ 
+ * @returns logged in users object. If failed `null`
  */
-async function decodeAddUser(session, inviteConst, firstName, familyName, email, username, password) {
-    const addUserEncode = getAddUserBody(inviteConst, firstName, familyName, email, username, password);
+export async function controllerDecodeAddUser(
+    session: any,
+    inviteConst: string,
+    firstName: string,
+    familyName: string,
+    email: string,
+    username: string,
+    password: string) {
 
-    try {
-        const res = await commonDecode(() => callAddUser(session, addUserEncode), false);
+    const addUserEncode: SendUser =
+        (getAddUserBody(inviteConst, firstName, familyName, email, username, password) as SendUser);
 
-        return res;
-    } catch (err) {
+    const res = await commonControllerDecode(() => controllerCallAddUser(session, addUserEncode), false);
 
-        return false;
-    }
+    return res;
+
 }
 
-export { InviteConst, decodeAddUser };
+export default { InviteConst, controllerDecodeAddUser }

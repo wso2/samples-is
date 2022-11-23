@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { controllerDecodeAddUser, InviteConst } from "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
 import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "@b2bsample/shared/util/util-front-end-util";
@@ -25,7 +26,6 @@ import { Field, Form } from "react-final-form";
 import { Button, ButtonToolbar, Divider, Loader, Modal, Panel, Radio, RadioGroup, Stack, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
 import styles from "../../../../../../styles/Settings.module.css";
-import { InviteConst, decodeAddUser } from "../../../../../../util/apiDecode/settings/decodeAddUser";
 
 /**
  * 
@@ -139,7 +139,7 @@ export default function AddUserComponent(prop) {
 
     const onSubmit = async (values, form) => {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
-        decodeAddUser(session, inviteSelect, values.firstName, values.familyName, values.email,
+        controllerDecodeAddUser(session, inviteSelect, values.firstName, values.familyName, values.email,
             values.username, values.password)
             .then((response) => onDataSubmit(response, form))
             .finally(() => setLoadingDisplay(LOADING_DISPLAY_NONE));

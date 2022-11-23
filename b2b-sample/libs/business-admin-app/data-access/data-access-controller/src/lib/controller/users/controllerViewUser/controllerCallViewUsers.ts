@@ -30,5 +30,4 @@ export async function controllerCallViewUsers(session: any) {
     const data = await commonControllerCall("/api/settings/user/viewUsers", session);
 
     return data;
-
 }

@@ -16,9 +16,27 @@
  * under the License.
  */
 
-export * from "./lib/model/user/user";
-export * from "./lib/model/user/internalUser";
-export * from "./lib/model/user/sendUser";
-export * from "./lib/model/user/userUtils";
-export * from "./lib/model/sideNav/sideNavList";
-export * from "./lib/model/sideNav/sideNavItem";
+interface Email {
+    primary: boolean,
+    value: string
+}
+
+interface Name {
+    familyName: string,
+    givenName: string
+}
+
+interface UrnSchema {
+    askPassword : string
+}
+
+export interface SendUser {
+    emails: [Email],
+    name : Name,
+    "urn:scim:wso2:schema"? : UrnSchema,
+    userName : string,
+    schemas? : [],
+    password? : string
+}
+
+export default SendUser;

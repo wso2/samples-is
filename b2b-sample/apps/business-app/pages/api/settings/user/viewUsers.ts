@@ -17,6 +17,7 @@
  */
 
 import { getOrgUrl } from "@b2bsample/shared/util/util-application-config-util";
+import { NextApiRequest, NextApiResponse } from "next";
 import getDataHeader from "../../../../util/util/apiUtil/getDataHeader";
 import { dataNotRecievedError, notPostError } from "../../../../util/util/apiUtil/localResErrors";
 
@@ -28,7 +29,7 @@ import { dataNotRecievedError, notPostError } from "../../../../util/util/apiUti
  * 
  * @returns correct data if the call is successful, else an error message
  */
-export default async function viewUsers(req , res) {
+export default async function viewUsers(req : NextApiRequest, res : NextApiResponse) {
     if(req.method !== "POST"){
         notPostError(res);
     }
