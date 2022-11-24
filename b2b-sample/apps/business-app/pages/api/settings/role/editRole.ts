@@ -16,11 +16,11 @@
  * under the License.
  */
 
-import { getSentDataRequestOptions } from "../../../../util/util/apiUtil/getSentDataRequestOptions";
-import { dataNotRecievedError, notPostError } from "../../../../util/util/apiUtil/localResErrors";
-import { RequestMethod } from "../../../../util/util/apiUtil/requestMethod";
+import { apiRequestOptionsWithBody, dataNotRecievedError, notPostError, RequestMethod } from
+    "@b2bsample/shared/data-access/data-access-common-api-util";
+import { NextApiRequest, NextApiResponse } from "next";
 
-export default async function editRole(req, res) {
+export default async function editRole(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== "POST") {
         notPostError(res);
     }
@@ -28,12 +28,12 @@ export default async function editRole(req, res) {
     const body = JSON.parse(req.body);
     const session = body.session;
     const role = body.param;
-    const roleUri = req.query.roleUri;
+    const roleUri = new URL(req.query.roleUri.toString());
 
     try {
         const fetchData = await fetch(
             roleUri,
-            getSentDataRequestOptions(session, RequestMethod.PUT, role)
+            apiRequestOptionsWithBody(session, RequestMethod.PUT, role)
         );
         const data = await fetchData.json();
 

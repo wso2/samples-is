@@ -16,11 +16,11 @@
  * under the License.
  */
 
-import { getSentDataRequestOptions } from "../../../../util/util/apiUtil/getSentDataRequestOptions";
-import { dataNotRecievedError, notPostError } from "../../../../util/util/apiUtil/localResErrors";
-import { RequestMethod } from "../../../../util/util/apiUtil/requestMethod";
+import { apiRequestOptionsWithBody, dataNotRecievedError, notPostError, RequestMethod } from
+    "@b2bsample/shared/data-access/data-access-common-api-util";
+import { NextApiRequest, NextApiResponse } from "next";
 
-export default async function patchRole(req, res) {
+export default async function patchRole(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== "POST") {
         notPostError(res);
     }
@@ -28,19 +28,19 @@ export default async function patchRole(req, res) {
     const body = JSON.parse(req.body);
     const session = body.session;
     const patchBody = body.param;
-    const roleUri = req.query.roleUri;
+    const roleUri = new URL(req.query.roleUri.toString());
 
     try {
         const fetchData = await fetch(
             roleUri,
-            getSentDataRequestOptions(session, RequestMethod.PATCH, patchBody)
+            apiRequestOptionsWithBody(session, RequestMethod.PATCH, patchBody)
         );
-        
+
         const data = await fetchData.json();
 
         res.status(200).json(data);
     } catch (err) {
-        
+
         return dataNotRecievedError(res);
     }
 }
