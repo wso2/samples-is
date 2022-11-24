@@ -16,18 +16,18 @@
  * under the License.
  */
 
-import { AllIdentityProviders } from "../../../../models/identityProvider/identityProvider";
-import callListAllIdentityProviders from "../../../apiCall/settings/identityProvider/callListAllIdentityProviders";
-import { commonDecode } from "../../../util/apiUtil/commonDecode";
+import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
 
-export default async function decodeListAllIdentityProviders(session) : Promise<AllIdentityProviders>{
+/**
+ * call `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users/<userId>` get the user details
+ * 
+ * @param session - session object
+ * 
+ * @returns all applications details, if not possible returns `null`
+ */
+export async function controllerCallListAllIdentityProviders(session: any) {
 
-    try {
-        const res = await commonDecode(() => callListAllIdentityProviders(session), null);
+    const data = await commonControllerCall("/api/settings/identityProvider/listAllIdentityProviders", session);
 
-        return res;
-    } catch (err) {
-
-        return null;
-    }
+    return data;
 }

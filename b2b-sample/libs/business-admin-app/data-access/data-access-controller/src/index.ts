@@ -23,10 +23,12 @@ export * from "./lib/controller/application/controllerListAllApplications/contro
 export * from "./lib/controller/application/controllerListCurrentApplication/controllerDecodeListCurrentApplication";
 export * from "./lib/controller/application/controllerGetApplication/controllerDecodeGetApplication";
 export * from
-"./lib/controller/application/controllerPatchApplicationAuthSteps/controllerDecodePatchApplicationAuthSteps";
+    "./lib/controller/application/controllerPatchApplicationAuthSteps/controllerDecodePatchApplicationAuthSteps";
 export * from "./lib/controller/role/controllerGetRole/controllerDecodeGetRole";
 export * from "./lib/controller/role/controllerListAllRoles/controllerDecodeListAllRoles";
 export * from "./lib/controller/role/controllerUserRole/controllerDecodeUserRole";
 export * from "./lib/controller/role/controllerCreateRole/controllerDecodeCreateRole";
 export * from "./lib/controller/role/controllerPatchRole/controllerDecodePatchRole";
 export * from "./lib/controller/role/controllerEditRolesToAddOrRemoveUser/controllerDecodeEditRolesToAddOrRemoveUser";
+export * from
+    "./lib/controller/identityProvider/controllerListAllIdentityProviders/controllerDecodeListAllIdentityProviders";
