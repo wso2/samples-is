@@ -16,22 +16,4 @@
  * under the License.
  */
 
-function error404(res, msg) {
-
-    return res.status(404).json(msg);
-}
-
-function notPostError(res) {
-
-    return error404(res, "Cannot request data directyly.");
-}
-
-function dataNotRecievedError(res) {
-
-    return error404(res, {
-        error: true,
-        msg: "Error occured when requesting data."
-    });
-}
-
-export { notPostError, dataNotRecievedError };
+export * from "./lib/controller/controllerSwitchOrg/controllerDecodeSwitchOrg";

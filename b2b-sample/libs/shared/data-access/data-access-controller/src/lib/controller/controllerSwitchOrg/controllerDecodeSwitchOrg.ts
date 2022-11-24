@@ -16,17 +16,11 @@
  * under the License.
  */
 
-import config from "../../../../../config.json";
-import callSwitchOrg from "../../apiCall/settings/callSwitchOrg";
-import { commonDecode } from "../../util/apiUtil/commonDecode";
+import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { controllerCallSwitchOrg } from "./controllerCallSwitchOrg";
+import config from "../../../../../../../../config.json";
 
-/**
- * 
- * @param token - token object get from the inital login call
- * 
- * @returns - organization id of the logged in organization
- */
-function getOrgId(token) {
+function getOrgId(token : any) {
 
     if (token.user.user_organization) {
 
@@ -42,23 +36,20 @@ function getOrgId(token) {
 }
 
 /**
- * decode switch API call
  * 
  * @param token - token object get from the inital login call
  * 
- * @returns - `orgnization session` if the API call is a success else `null`
+ * @returns - organization id of the logged in organization
  */
-export default async function decodeSwitchOrg(token) {
+export async function controllerDecodeSwitchOrg(token: any) {
 
     const subOrgId = getOrgId(token);
     const accessToken = token.accessToken;
 
-    try {
-        const orgSession = await commonDecode(() => callSwitchOrg(subOrgId, accessToken), null);
+    const res = await commonControllerDecode(() => controllerCallSwitchOrg(subOrgId, accessToken), null);
 
-        return orgSession;
-    } catch (err) {
+    return res;
 
-        return null;
-    }
 }
+
+export default controllerDecodeSwitchOrg;

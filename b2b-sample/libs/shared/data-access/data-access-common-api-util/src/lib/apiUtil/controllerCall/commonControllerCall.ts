@@ -28,15 +28,15 @@ import { getControllerCallApiRequestOptions, getControllerCallApiRequestOptionsF
  * @returns created user details, if not created returns `null`
  */
 
-export async function commonControllerCall(
-    api: string, session: any, param?: any, switchCall = false) {
+export async function commonControllerCall(api: string, session: any, param?: any, switchCall = false) {
     try {
 
         let header;
 
         if (switchCall) {
             if (param) {
-                header = getControllerCallApiRequestOptionsForSwitchCallWithParam(session, param);
+
+                header = getControllerCallApiRequestOptionsForSwitchCallWithParam(param.subOrgId, param.accessToken);
             } else {
                 throw Error;
             }
@@ -46,11 +46,11 @@ export async function commonControllerCall(
         }
 
         const res = await fetch(api, header);
-
         const data = await res.json();
 
         return data;
     } catch (err) {
+        console.log(err);
 
         return null;
     }

@@ -48,7 +48,7 @@ export async function controllerDecodeUpdateFederatedAuthenticators(
         federatedAuthenticators = updateProperties(federatedAuthenticators, key, changedValues[key]);
     });
 
-    const body = [federatedAuthenticatorId, federatedAuthenticators];
+    const body = [ federatedAuthenticatorId, federatedAuthenticators ];
 
     const res = await commonControllerDecode(() => controllerCallUpdateFederatedAuthenticators(session, idpId, body),
         null);

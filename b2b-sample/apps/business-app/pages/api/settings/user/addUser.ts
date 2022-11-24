@@ -16,10 +16,9 @@
  * under the License.
  */
 
-import { apiRequestOptionsWithBody, dataNotRecievedError, notPostError } from
+import { apiRequestOptionsWithBody, dataNotRecievedError, notPostError, RequestMethod } from
     "@b2bsample/shared/data-access/data-access-common-api-util";
 import { getOrgUrl } from "@b2bsample/shared/util/util-application-config-util";
-import { RequestMethod } from "../../../../util/util/apiUtil/requestMethod";
 
 /**
  * backend API call to create a user

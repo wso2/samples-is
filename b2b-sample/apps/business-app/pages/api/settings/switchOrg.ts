@@ -16,8 +16,9 @@
  * under the License.
  */
 
+import { dataNotRecievedError, notPostError } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { getHostedUrl } from "@b2bsample/shared/util/util-application-config-util";
 import config from "../../../../../config.json";
-import { dataNotRecievedError, notPostError } from "../../../util/util/apiUtil/localResErrors";
 
 /**
  * 
@@ -35,7 +36,7 @@ const getSwitchHeader = () => {
 
     const headers = {
         "Access-Control-Allow-Credentials": true,
-        "Access-Control-Allow-Origin": config.BusinessAppConfig.ApplicationConfig.HostedUrl,
+        "Access-Control-Allow-Origin": getHostedUrl(),
         "Authorization": `Basic ${getBasicAuth()}`,
         "accept": "application/json",
         "content-type": "application/x-www-form-urlencoded"
@@ -69,7 +70,7 @@ const getSwitchBody = (subOrgId, accessToken) => {
  * 
  * @returns get the request body for the switch call
  */
-const getSwitchRequest = (subOrgId, accessToken) => {
+const getSwitchRequest = (subOrgId, accessToken): any => {
     const request = {
         body: new URLSearchParams(getSwitchBody(subOrgId, accessToken)).toString(),
         headers: getSwitchHeader(),
@@ -83,10 +84,7 @@ const getSwitchRequest = (subOrgId, accessToken) => {
  * 
  * @returns get the endpoint for the switch API call
  */
-const getSwitchEndpoint = () => {
-
-    return `${config.CommonConfig.AuthorizationConfig.BaseOrganizationUrl}/oauth2/token`;
-};
+const getSwitchEndpoint = (): string => `${config.CommonConfig.AuthorizationConfig.BaseOrganizationUrl}/oauth2/token`;
 
 /**
  * 
@@ -116,7 +114,7 @@ export default async function switchOrg(req, res) {
 
         res.status(200).json(data);
     } catch (err) {
-        
+
         return dataNotRecievedError(res);
     }
 }

@@ -27,7 +27,7 @@ import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-
  */
 export async function controllerCallCreateIdentityProvider(session: any,  model: any) {
 
-    const data = await commonControllerCall(`/api/settings/identityProvider/createIdentityProvider`, session, model);
+    const data = await commonControllerCall("/api/settings/identityProvider/createIdentityProvider", session, model);
 
     return data;
 }

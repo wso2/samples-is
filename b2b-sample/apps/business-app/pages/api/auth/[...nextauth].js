@@ -16,11 +16,11 @@
  * under the License.
  */
 
-import { getLoggedUserFromProfile, getLoggedUserId, getOrgId, getOrgName }
-    from "@b2bsample/shared/util/util-authorization-config-util";
+import { controllerDecodeSwitchOrg } from "@b2bsample/shared/data-access/data-access-controller";
+import { getLoggedUserFromProfile, getLoggedUserId, getOrgId, getOrgName } from
+    "@b2bsample/shared/util/util-authorization-config-util";
 import NextAuth from "next-auth";
 import config from "../../../../../config.json";
-import decodeSwitchOrg from "../../../util/apiDecode/settings/decodeSwitchOrg";
 
 /**
  * 
@@ -46,7 +46,7 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
             return token;
         },
         async session({ session, token }) {
-            const orgSession = await decodeSwitchOrg(token);
+            const orgSession = await controllerDecodeSwitchOrg(token);
 
             if (!orgSession) {
                 session.error = true;
@@ -65,7 +65,7 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
                 session.orgName = getOrgName(session.idToken);
                 session.orginalIdToken = token.idToken;
             }
-            
+
             return session;
         }
     },

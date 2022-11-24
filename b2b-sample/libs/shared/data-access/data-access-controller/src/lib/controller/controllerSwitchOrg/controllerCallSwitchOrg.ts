@@ -16,20 +16,25 @@
  * under the License.
  */
 
+import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import { getHostedUrl } from "@b2bsample/shared/util/util-application-config-util";
 
 /**
+ * call `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users/<userId>` get the user details
  * 
  * @param session - session object
  * 
- * @returns header object that can used for IS API calls
+ * @returns all applications details, if not possible returns `null`
  */
-export default function getDataHeader(session) {
-    const headers = {
-        "accept": "application/json",
-        "access-control-allow-origin": getHostedUrl(),
-        "authorization": "Bearer " + session.accessToken
-    };
+export async function controllerCallSwitchOrg(subOrgId: any, accessToken: string) {
+    const data = await commonControllerCall(`${getHostedUrl()}/api/settings/switchOrg`,
+        null,
+        {
+            accessToken: accessToken,
+            subOrgId: subOrgId
+        },
+        true
+    );
 
-    return { headers };
+    return data;
 }

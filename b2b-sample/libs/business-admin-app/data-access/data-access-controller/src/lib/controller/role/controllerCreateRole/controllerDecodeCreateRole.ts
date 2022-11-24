@@ -21,7 +21,6 @@ import { controllerCallCreateRole } from "./controllerCallCreateRole";
 
 
 function getUsersList(users: string[]) {
-    console.log(users);
 
     return users.map((user) => { return { "value": user }; });
 }
