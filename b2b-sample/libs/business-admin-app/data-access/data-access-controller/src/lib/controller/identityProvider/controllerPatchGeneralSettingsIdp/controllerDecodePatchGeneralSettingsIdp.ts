@@ -16,10 +16,17 @@
  * under the License.
  */
 
-import callPatchGeneralSettingsIdp from "../../../apiCall/settings/identityProvider/callPatchGeneralSettingsIdp";
-import { commonDecode } from "../../../util/apiUtil/commonDecode";
+import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { controllerCallPatchGeneralSettingsIdp } from "./controllerCallPatchGeneralSettingsIdp";
 
-export default async function decodePatchGeneralSettingsIdp(session, name, description, idpId) {
+/**
+ * 
+ * @param session - session object
+ 
+ * @returns logged in users object. If failed `null`
+ */
+export async function controllerDecodePatchGeneralSettingsIdp(
+    session: any, name: string, description: string, idpId: string) {
 
     const body = [
         { "operation": "REPLACE", "path": "/description", "value": description },
@@ -27,12 +34,9 @@ export default async function decodePatchGeneralSettingsIdp(session, name, descr
         { "operation": "REPLACE", "path": "/name", "value": name }
     ];
 
-    try {
-        const res = await commonDecode(() => callPatchGeneralSettingsIdp(session, idpId, body), null);
+    const res = await commonControllerDecode(() => controllerCallPatchGeneralSettingsIdp(session, idpId, body), null);
 
-        return res;
-    } catch (err) {
-
-        return null;
-    }
+    return res;
 }
+
+export default controllerDecodePatchGeneralSettingsIdp;

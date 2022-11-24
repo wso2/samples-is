@@ -16,16 +16,16 @@
  * under the License.
  */
 
+import { controllerDecodePatchGeneralSettingsIdp } from
+    "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { HelperTextComponent, errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
 import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "@b2bsample/shared/util/util-front-end-util";
-import React,{ useState } from "react";
+import React, { useState } from "react";
 import { Field, Form } from "react-final-form";
 import { Button, ButtonToolbar, Loader, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
 import styles from "../../../../../../../styles/Settings.module.css";
-import decodePatchGeneralSettingsIdp from 
-    "../../../../../../../util/apiDecode/settings/identityProvider/decodePatchGeneralSettingsIdp";
 
 /**
  * 
@@ -37,7 +37,7 @@ export default function General(prop) {
 
     const { fetchData, session, idpDetails } = prop;
 
-    const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
+    const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
 
     const toaster = useToaster();
 
@@ -78,76 +78,76 @@ export default function General(prop) {
 
     const onUpdate = async (values, form) => {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
-        decodePatchGeneralSettingsIdp(session, values.name, values.description, idpDetails.id)
+        controllerDecodePatchGeneralSettingsIdp(session, values.name, values.description, idpDetails.id)
             .then((response) => onDataSubmit(response, form))
             .finally(() => setLoadingDisplay(LOADING_DISPLAY_NONE));
     };
 
     return (
-        <div className={ styles.addUserMainDiv }>
+        <div className={styles.addUserMainDiv}>
 
             <div>
 
                 <Form
-                    onSubmit={ onUpdate }
-                    validate={ validate }
-                    initialValues={ {
+                    onSubmit={onUpdate}
+                    validate={validate}
+                    initialValues={{
                         description: idpDetails.description,
                         name: idpDetails.name
-                    } }
-                    render={ ({ handleSubmit, form, submitting, pristine, errors }) => (
+                    }}
+                    render={({ handleSubmit, form, submitting, pristine, errors }) => (
                         <FormSuite
                             layout="vertical"
-                            className={ styles.addUserForm }
-                            onSubmit={ () => { handleSubmit().then(form.restart); } }
+                            className={styles.addUserForm}
+                            onSubmit={() => { handleSubmit().then(form.restart); }}
                             fluid>
                             <Field
                                 name="name"
-                                render={ ({ input, meta }) => (
+                                render={({ input, meta }) => (
                                     <FormSuite.Group controlId="name">
                                         <FormSuite.ControlLabel>Name</FormSuite.ControlLabel>
 
                                         <FormSuite.Control
-                                            { ...input }
+                                            {...input}
                                         />
 
                                         <HelperTextComponent text="A text description of the identity provider." />
 
-                                        { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true }  >
-                                            { meta.error }
-                                        </FormSuite.ErrorMessage>) }
+                                        {meta.error && meta.touched && (<FormSuite.ErrorMessage show={true}  >
+                                            {meta.error}
+                                        </FormSuite.ErrorMessage>)}
                                     </FormSuite.Group>
-                                ) }
+                                )}
                             />
 
                             <Field
                                 name="description"
-                                render={ ({ input, meta }) => (
+                                render={({ input, meta }) => (
                                     <FormSuite.Group controlId="description">
                                         <FormSuite.ControlLabel>Description</FormSuite.ControlLabel>
                                         <FormSuite.Control
-                                            { ...input }
+                                            {...input}
                                         />
 
                                         <HelperTextComponent text="A text description of the identity provider." />
 
-                                        { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true }  >
-                                            { meta.error }
-                                        </FormSuite.ErrorMessage>) }
+                                        {meta.error && meta.touched && (<FormSuite.ErrorMessage show={true}  >
+                                            {meta.error}
+                                        </FormSuite.ErrorMessage>)}
 
                                     </FormSuite.Group>
-                                ) }
+                                )}
                             />
 
                             <div className="buttons">
                                 <FormSuite.Group>
                                     <ButtonToolbar>
                                         <Button
-                                            className={ styles.addUserButton }
+                                            className={styles.addUserButton}
                                             size="lg"
                                             appearance="primary"
                                             type="submit"
-                                            disabled={ submitting || pristine || !checkIfJSONisEmpty(errors) }>
+                                            disabled={submitting || pristine || !checkIfJSONisEmpty(errors)}>
                                             Update
                                         </Button>
                                     </ButtonToolbar>
@@ -155,12 +155,12 @@ export default function General(prop) {
 
                             </div>
                         </FormSuite>
-                    ) }
+                    )}
                 />
 
             </div>
 
-            <div style={ loadingDisplay }>
+            <div style={loadingDisplay}>
                 <Loader size="lg" backdrop content="User is adding" vertical />
             </div>
         </div>
