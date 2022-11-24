@@ -16,18 +16,21 @@
  * under the License.
  */
 
-import { FederatedAuthenticators } from "../../../../models/identityProvider/identityProvider";
-import callGetFederatedAuthenticators from "../../../apiCall/settings/identityProvider/callGetFederatedAuthenticators";
-import { commonDecode } from "../../../util/apiUtil/commonDecode";
+import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { controllerCallGetFederatedAuthenticators } from "./controllerCallGetFederatedAuthenticators";
 
-export default async function decodeGetFederatedAuthenticators(session, idpId, id): Promise<FederatedAuthenticators> {
+/**
+ * 
+ * @param session - session object
+ 
+ * @returns logged in users object. If failed `null`
+ */
+export async function controllerDecodeGetFederatedAuthenticators(session: any, id: string, idpId: string) {
 
-    try {
-        const res = await commonDecode(() => callGetFederatedAuthenticators(session, idpId, id), null);
+    const res = await commonControllerDecode(() => controllerCallGetFederatedAuthenticators(session, id, idpId), null);
 
-        return res;
-    } catch (err) {
+    return res;
 
-        return null;
-    }
 }
+
+export default controllerDecodeGetFederatedAuthenticators;

@@ -36,3 +36,5 @@ export * from
     "./lib/controller/identityProvider/controllerListAllIdentityProviders/controllerDecodeListAllIdentityProviders";
 export * from
     "./lib/controller/identityProvider/controllerGetDetailedIdentityProvider/controllerDecodeGetDetailedIdentityProvider";
+    export * from
+    "./lib/controller/identityProvider/controllerGetFederatedAuthenticators/controllerDecodeGetFederatedAuthenticators";

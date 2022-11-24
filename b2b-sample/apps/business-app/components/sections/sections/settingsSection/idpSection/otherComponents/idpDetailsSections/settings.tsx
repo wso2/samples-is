@@ -16,6 +16,8 @@
  * under the License.
  */
 
+import { controllerDecodeGetFederatedAuthenticators } from
+    "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
 import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "@b2bsample/shared/util/util-front-end-util";
@@ -23,13 +25,11 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Form } from "react-final-form";
 import { Button, ButtonToolbar, Loader, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
-import SettingsFormSelection from "./settingsFormSection/settingsFormSelection";
 import { FederatedAuthenticators } from "../../../../../../../models/identityProvider/identityProvider";
 import styles from "../../../../../../../styles/Settings.module.css";
-import decodeGetFederatedAuthenticators from
-    "../../../../../../../util/apiDecode/settings/identityProvider/decodeGetFederatedAuthenticators";
 import decodeUpdateFederatedAuthenticators from
     "../../../../../../../util/apiDecode/settings/identityProvider/decodeUpdateFederatedAuthenticators";
+import SettingsFormSelection from "./settingsFormSection/settingsFormSelection";
 
 /**
  * 
@@ -41,22 +41,22 @@ export default function Settings(prop) {
 
     const { session, idpDetails } = prop;
 
-    const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
-    const [ federatedAuthenticators, setFederatedAuthenticators ] = useState<FederatedAuthenticators>(null);
+    const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
+    const [federatedAuthenticators, setFederatedAuthenticators] = useState<FederatedAuthenticators>(null);
 
     const toaster = useToaster();
 
     const fetchData = useCallback(async () => {
-        const res = await decodeGetFederatedAuthenticators(
+        const res = await controllerDecodeGetFederatedAuthenticators(
             session, idpDetails.id, idpDetails.federatedAuthenticators.defaultAuthenticatorId
         );
 
         await setFederatedAuthenticators(res);
-    }, [ session, idpDetails ]);
+    }, [session, idpDetails]);
 
     useEffect(() => {
         fetchData();
-    }, [ fetchData ]);
+    }, [fetchData]);
 
     const validate = () => {
         const errors = {};
@@ -64,7 +64,7 @@ export default function Settings(prop) {
         if (federatedAuthenticators && federatedAuthenticators.properties) {
             federatedAuthenticators.properties.filter((property) => {
                 if (document.getElementById(property.key)) {
-                    if(!(document.getElementById(property.key) as HTMLInputElement).value){
+                    if (!(document.getElementById(property.key) as HTMLInputElement).value) {
                         errors[property.key] = "This field cannot be empty";
                     }
                 }
@@ -91,26 +91,26 @@ export default function Settings(prop) {
     };
 
     return (
-        <div className={ styles.addUserMainDiv }>
+        <div className={styles.addUserMainDiv}>
 
             <div>
                 {
                     federatedAuthenticators
                         ? (<Form
-                            onSubmit={ onUpdate }
-                            validate={ validate }
+                            onSubmit={onUpdate}
+                            validate={validate}
 
-                            render={ ({ handleSubmit, submitting, pristine, errors }) => (
+                            render={({ handleSubmit, submitting, pristine, errors }) => (
                                 <FormSuite
                                     layout="vertical"
-                                    className={ styles.addUserForm }
-                                    onSubmit={ () => handleSubmit() }
+                                    className={styles.addUserForm}
+                                    onSubmit={() => handleSubmit()}
                                     fluid>
 
-                                    { federatedAuthenticators.properties
+                                    {federatedAuthenticators.properties
                                         ? (<SettingsFormSelection
-                                            federatedAuthenticators={ federatedAuthenticators.properties }
-                                            templateId={ idpDetails.templateId } />)
+                                            federatedAuthenticators={federatedAuthenticators.properties}
+                                            templateId={idpDetails.templateId} />)
                                         : null
                                     }
 
@@ -118,25 +118,25 @@ export default function Settings(prop) {
                                         <FormSuite.Group>
                                             <ButtonToolbar>
                                                 <Button
-                                                    className={ styles.addUserButton }
+                                                    className={styles.addUserButton}
                                                     size="lg"
                                                     appearance="primary"
                                                     type="submit"
-                                                    disabled={ submitting || pristine || !checkIfJSONisEmpty(errors) }>
+                                                    disabled={submitting || pristine || !checkIfJSONisEmpty(errors)}>
                                                     Update
                                                 </Button>
                                             </ButtonToolbar>
                                         </FormSuite.Group>
                                     </div>
                                 </FormSuite>
-                            ) }
+                            )}
                         />)
                         : null
                 }
 
             </div>
 
-            <div style={ loadingDisplay }>
+            <div style={loadingDisplay}>
                 <Loader size="lg" backdrop content="User is adding" vertical />
             </div>
         </div>
