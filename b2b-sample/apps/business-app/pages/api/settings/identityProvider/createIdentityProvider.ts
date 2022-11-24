@@ -16,19 +16,21 @@
  * under the License.
  */
 
+import { RequestMethod, apiRequestOptionsWithBody, dataNotRecievedError, notPostError } from
+    "@b2bsample/shared/data-access/data-access-common-api-util";
 import { getOrgUrl } from "@b2bsample/shared/util/util-application-config-util";
-import getDataHeader from "../../../../util/util/apiUtil/getDataHeader";
-import { dataNotRecievedError, notPostError } from "../../../../util/util/apiUtil/localResErrors";
+import { NextApiRequest, NextApiResponse } from "next";
+
 
 /**
- * backend API call to list all identity providers
+ * backend API call to create a new identity provider
  * 
  * @param req - request
  * @param res - response
  * 
  * @returns correct data if the call is successful, else an error message
  */
-export default async function listAllIdentityProviders(req, res) {
+export default async function createIdentityProvider(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== "POST") {
         notPostError(res);
     }
@@ -36,17 +38,18 @@ export default async function listAllIdentityProviders(req, res) {
     const body = JSON.parse(req.body);
     const session = body.session;
     const orgId = body.orgId;
-    
+    const model = body.param;
+
     try {
         const fetchData = await fetch(
             `${getOrgUrl(orgId)}/api/server/v1/identity-providers`,
-            getDataHeader(session)
+            apiRequestOptionsWithBody(session, RequestMethod.POST, model)
         );
         const data = await fetchData.json();
 
         res.status(200).json(data);
     } catch (err) {
-        
+
         return dataNotRecievedError(res);
     }
 }

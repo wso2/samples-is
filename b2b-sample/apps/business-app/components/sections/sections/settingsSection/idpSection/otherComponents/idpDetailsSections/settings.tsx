@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { controllerDecodeGetFederatedAuthenticators } from
+import { controllerDecodeGetFederatedAuthenticators, controllerDecodeUpdateFederatedAuthenticators } from
     "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
 import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
@@ -28,8 +28,6 @@ import FormSuite from "rsuite/Form";
 import SettingsFormSelection from "./settingsFormSection/settingsFormSelection";
 import { FederatedAuthenticators } from "../../../../../../../models/identityProvider/identityProvider";
 import styles from "../../../../../../../styles/Settings.module.css";
-import decodeUpdateFederatedAuthenticators from
-    "../../../../../../../util/apiDecode/settings/identityProvider/decodeUpdateFederatedAuthenticators";
 
 /**
  * 
@@ -85,7 +83,7 @@ export default function Settings(prop) {
 
     const onUpdate = async (values) => {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
-        decodeUpdateFederatedAuthenticators(session, idpDetails.id, federatedAuthenticators, values)
+        controllerDecodeUpdateFederatedAuthenticators(session, idpDetails.id, federatedAuthenticators, values)
             .then((response) => onDataSubmit(response))
             .finally(() => setLoadingDisplay(LOADING_DISPLAY_NONE));
     };

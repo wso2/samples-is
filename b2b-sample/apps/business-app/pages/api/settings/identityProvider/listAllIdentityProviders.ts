@@ -16,20 +16,20 @@
  * under the License.
  */
 
+import { dataNotRecievedError, notPostError } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import { getOrgUrl } from "@b2bsample/shared/util/util-application-config-util";
-import { getSentDataRequestOptions } from "../../../../../util/util/apiUtil/getSentDataRequestOptions";
-import { dataNotRecievedError, notPostError } from "../../../../../util/util/apiUtil/localResErrors";
-import { RequestMethod } from "../../../../../util/util/apiUtil/requestMethod";
+import { NextApiRequest, NextApiResponse } from "next";
+import getDataHeader from "../../../../util/util/apiUtil/getDataHeader";
 
 /**
- * backend API call to patch general settings of an identity provider
+ * backend API call to list all identity providers
  * 
  * @param req - request
  * @param res - response
  * 
  * @returns correct data if the call is successful, else an error message
  */
-export default async function patchGeneralSettingsIdp(req, res) {
+export default async function listAllIdentityProviders(req : NextApiRequest, res : NextApiResponse) {
     if (req.method !== "POST") {
         notPostError(res);
     }
@@ -37,14 +37,11 @@ export default async function patchGeneralSettingsIdp(req, res) {
     const body = JSON.parse(req.body);
     const session = body.session;
     const orgId = body.orgId;
-    const request = body.param;
-
-    const idpId = req.query.id;
-
+    
     try {
         const fetchData = await fetch(
-            `${getOrgUrl(orgId)}/api/server/v1/identity-providers/${idpId}`,
-            getSentDataRequestOptions(session, RequestMethod.PATCH, request)
+            `${getOrgUrl(orgId)}/api/server/v1/identity-providers`,
+            getDataHeader(session)
         );
         const data = await fetchData.json();
 

@@ -45,7 +45,7 @@ export default function IdentityProviderDetails(prop) {
     const fetchData = useCallback(async () => {
         const res = await controllerDecodeGetDetailedIdentityProvider(session, id);
 
-        setIdpDetails(res);
+        setIdpDetails(res); 
     }, [ session, id ]);
 
     useEffect(() => {

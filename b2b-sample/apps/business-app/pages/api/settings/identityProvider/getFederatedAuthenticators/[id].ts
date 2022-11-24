@@ -16,19 +16,20 @@
  * under the License.
  */
 
+import { apiRequestOptions, dataNotRecievedError, notPostError } from
+    "@b2bsample/shared/data-access/data-access-common-api-util";
 import { getOrgUrl } from "@b2bsample/shared/util/util-application-config-util";
-import getDataHeader from "../../../../../util/util/apiUtil/getDataHeader";
-import { dataNotRecievedError, notPostError } from "../../../../../util/util/apiUtil/localResErrors";
+import { NextApiRequest, NextApiResponse } from "next";
 
 /**
- * backend API call to get all the details of an identity provider
+ * backend API call to get federtated authenticators of an identity provider
  * 
  * @param req - request
  * @param res - response
  * 
  * @returns correct data if the call is successful, else an error message
  */
-export default async function getDetailedIdentityProvider(req, res) {
+export default async function getFederatedAuthenticators(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== "POST") {
         notPostError(res);
     }
@@ -36,19 +37,22 @@ export default async function getDetailedIdentityProvider(req, res) {
     const body = JSON.parse(req.body);
     const session = body.session;
     const orgId = body.orgId;
+    const idpId = body.param;
 
     const id = req.query.id;
 
+    const url = `${getOrgUrl(orgId)}/api/server/v1/identity-providers/${idpId}/federated-authenticators/${id}`;
+
     try {
         const fetchData = await fetch(
-            `${getOrgUrl(orgId)}/api/server/v1/identity-providers/${id}`,
-            getDataHeader(session)
+            url,
+            apiRequestOptions(session)
         );
         const data = await fetchData.json();
 
         res.status(200).json(data);
     } catch (err) {
-        
+
         return dataNotRecievedError(res);
     }
 }

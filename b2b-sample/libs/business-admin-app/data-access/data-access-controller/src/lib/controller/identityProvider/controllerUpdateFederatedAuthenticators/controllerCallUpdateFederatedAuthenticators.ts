@@ -25,10 +25,10 @@ import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-
  * 
  * @returns all applications details, if not possible returns `null`
  */
-export async function controllerCallGetFederatedAuthenticators(session: any, idpId: string, id: string) {
+export async function controllerCallUpdateFederatedAuthenticators(session: any, idpId: string, body: any) {
 
-    const data = await commonControllerCall(`/api/settings/identityProvider/getFederatedAuthenticators/${id}`,
-        session, idpId);
+    const data = await commonControllerCall(`/api/settings/identityProvider/updateFederatedAuthenticators/${idpId}`,
+        session, body);
 
     return data;
 }

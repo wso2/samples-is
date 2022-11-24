@@ -26,7 +26,7 @@ import { controllerCallGetDetailedIdentityProvider } from "./controllerCallGetDe
  * @returns logged in users object. If failed `null`
  */
 export async function controllerDecodeGetDetailedIdentityProvider(session: any, id: string) {
-
+    
     const res = await commonControllerDecode(() => controllerCallGetDetailedIdentityProvider(session, id), null);
 
     return res;

@@ -16,10 +16,9 @@
  * under the License.
  */
 
+import { RequestMethod, apiRequestOptionsWithBody, dataNotRecievedError, notPostError } from
+    "@b2bsample/shared/data-access/data-access-common-api-util";
 import { getOrgUrl } from "@b2bsample/shared/util/util-application-config-util";
-import { getSentDataRequestOptions } from "../../../../../util/util/apiUtil/getSentDataRequestOptions";
-import { dataNotRecievedError, notPostError } from "../../../../../util/util/apiUtil/localResErrors";
-import { RequestMethod } from "../../../../../util/util/apiUtil/requestMethod";
 
 /**
  * backend API call to delete an identity provider
@@ -43,13 +42,13 @@ export default async function deleteIdentityProvider(req, res) {
     try {
         const fetchData = await fetch(
             `${getOrgUrl(orgId)}/api/server/v1/identity-providers/${id}`,
-            getSentDataRequestOptions(session, RequestMethod.DELETE, null)
+            apiRequestOptionsWithBody(session, RequestMethod.DELETE, null)
         );
         const data = await fetchData.json();
 
         res.status(200).json(data);
     } catch (err) {
-        
+
         return dataNotRecievedError(res);
     }
 }
