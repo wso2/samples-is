@@ -42,3 +42,5 @@ export * from
 "./lib/controller/identityProvider/controllerPatchGeneralSettingsIdp/controllerDecodePatchGeneralSettingsIdp";
 export * from
 "./lib/controller/identityProvider/controllerDeleteIdentityProvider/controllerDecodeDeleteIdentityProvider";
+export * from
+"./lib/controller/identityProvider/controllerCreateIdentityProvider/controllerDecodeCreateIdentityProvider";

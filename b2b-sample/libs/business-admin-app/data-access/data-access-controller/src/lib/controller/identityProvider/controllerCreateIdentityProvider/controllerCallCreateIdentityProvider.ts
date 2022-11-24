@@ -16,22 +16,18 @@
  * under the License.
  */
 
-import callCreateIdentityProvider from "../../../apiCall/settings/identityProvider/callCreateIdentityProvider";
-import { commonDecode } from "../../../util/apiUtil/commonDecode";
-import { setIdpTemplate } from "../../../util/idpUtil/idpUtil";
+import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
 
-export default async function decodeCreateIdentityProvider(session, template, formValues) {
+/**
+ * call `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users/<userId>` get the user details
+ * 
+ * @param session - session object
+ * 
+ * @returns all applications details, if not possible returns `null`
+ */
+export async function controllerCallCreateIdentityProvider(session: any,  model: any) {
 
-    let model = JSON.parse(JSON.stringify(template.idp));
+    const data = await commonControllerCall(`/api/settings/identityProvider/createIdentityProvider`, session, model);
 
-    model = setIdpTemplate( model, template.templateId, formValues, session.orgId);
-
-    try {
-        const res = await commonDecode(() => callCreateIdentityProvider(session, model), null);
-
-        return res;
-    } catch (err) {
-
-        return null;
-    }
+    return data;
 }

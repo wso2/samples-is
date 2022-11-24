@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { controllerDecodeListAllIdentityProviders } from
+import { controllerDecodeCreateIdentityProvider, controllerDecodeListAllIdentityProviders } from
     "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { EmptySettingsComponent, SettingsTitleComponent, errorTypeDialog, infoTypeDialog, successTypeDialog } from
     "@b2bsample/shared/ui/ui-components";
@@ -34,8 +34,6 @@ import IdentityProviderList from "./otherComponents/identityProviderList";
 import config from "../../../../../../../config.json";
 import { AllIdentityProvidersIdentityProvider } from "../../../../../models/identityProvider/identityProvider";
 import styles from "../../../../../styles/idp.module.css";
-import decodeCreateIdentityProvider from
-    "../../../../../util/apiDecode/settings/identityProvider/decodeCreateIdentityProvider";
 import { getCallbackUrl } from "../../../../../util/util/idpUtil/idpUtil";
 
 /**
@@ -108,7 +106,7 @@ export default function IdpSectionComponent(prop) {
         if (checkEmpty(formValues, template)) {
             errorTypeDialog(toaster, "Fields Cannot be Empty", "Form fields cannot be empty occured.");
         } else {
-            decodeCreateIdentityProvider(session, template, formValues)
+            controllerDecodeCreateIdentityProvider(session, template, formValues)
                 .then((response) => onIdpCreated(response));
         }
 
