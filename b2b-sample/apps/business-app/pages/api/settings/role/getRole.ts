@@ -16,37 +16,25 @@
  * under the License.
  */
 
-import { getOrgUrl } from "@b2bsample/shared/util/util-application-config-util";
-import { getSentDataRequestOptions } from "../../../../../util/util/apiUtil/getSentDataRequestOptions";
-import { dataNotRecievedError, notPostError } from "../../../../../util/util/apiUtil/localResErrors";
-import { RequestMethod } from "../../../../../util/util/apiUtil/requestMethod";
+import { apiRequestOptions, dataNotRecievedError, notPostError } from
+    "@b2bsample/shared/data-access/data-access-common-api-util";
+import { NextApiRequest, NextApiResponse } from "next";
 
-/**
- * backend API call to patch authentication steps of an application
- * 
- * @param req - request
- * @param res - response
- * 
- * @returns correct data if the call is successful, else an error message
- */
-export default async function patchApplicationAuthSteps(req, res) {
+export default async function getRole(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== "POST") {
         notPostError(res);
     }
 
     const body = JSON.parse(req.body);
     const session = body.session;
-    const model = body.param;
-    const orgId = body.orgId;
-
-    const id = req.query.id;
+    const roleUri: URL = new URL(req.query.roleUri.toString());
 
     try {
         const fetchData = await fetch(
-            `${getOrgUrl(orgId)}/api/server/v1/applications/${id}`,
-            getSentDataRequestOptions(session, RequestMethod.PATCH, model)
+            roleUri,
+            apiRequestOptions(session)
         );
-        const data = await fetchData;
+        const data = await fetchData.json();
 
         res.status(200).json(data);
     } catch (err) {

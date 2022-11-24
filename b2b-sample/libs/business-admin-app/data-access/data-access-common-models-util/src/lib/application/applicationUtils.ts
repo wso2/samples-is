@@ -17,10 +17,8 @@
  */
 
 import { ENTERPRISE_ID, GOOGLE_ID } from "@b2bsample/shared/util/util-common";
-import enterpriseFederatedAuthenticators from
-    "../../../components/sections/sections/settingsSection/idpSection/data/templates/enterprise-identity-provider.json";
-import googleFederatedAuthenticators from
-    "../../../components/sections/sections/settingsSection/idpSection/data/templates/google.json";
+import enterpriseFederatedAuthenticators from "./data/templates/enterprise-identity-provider.json";
+import googleFederatedAuthenticators from "./data/templates/google.json";
 
 /**
  * 
@@ -28,7 +26,7 @@ import googleFederatedAuthenticators from
  * 
  * @returns template related to the template id.
  */
-function selectedTemplateBaesedonTemplateId(templateId) {
+export function selectedTemplateBaesedonTemplateId(templateId: string) {
     switch (templateId) {
         case GOOGLE_ID:
 
@@ -46,12 +44,12 @@ function selectedTemplateBaesedonTemplateId(templateId) {
  * 
  * @param template - applicaiton details template
  * @param idpDetails - identity provider details
-
+ 
  * @returns `[check,onlyIdp]`
  * `check` - if the idp is in authentication sequence, 
  * `onlyIdp` - is the idp is the only idp in the sequence
  */
-function checkIfIdpIsinAuthSequence(template, idpDetails) {
+export function checkIfIdpIsinAuthSequence(template, idpDetails) {
     const authenticationSequenceModel = template.authenticationSequence;
     const idpName = idpDetails.name;
     let check = false;
@@ -77,7 +75,7 @@ function checkIfIdpIsinAuthSequence(template, idpDetails) {
  * @param template - applicaiton details template
  * @returns `true` if BASIC AUTH is available in auth sequence, else `false`
  */
-function checkIfBasicAvailableinAuthSequence(template) {
+export function checkIfBasicAvailableinAuthSequence(template) {
     const authenticationSequenceModel = template.authenticationSequence;
     let check = false;
 
@@ -96,12 +94,12 @@ function checkIfBasicAvailableinAuthSequence(template) {
  * PatchApplicationAuthMethod mentioned whether we are adding or removing the idp.
  * `REMOVE` Will remove the idp from every step
  */
-const PatchApplicationAuthMethod = {
+export const PatchApplicationAuthMethod = {
     ADD: true,
     REMOVE: false
 };
 
-export{
+export default {
     selectedTemplateBaesedonTemplateId, checkIfIdpIsinAuthSequence, checkIfBasicAvailableinAuthSequence,
     PatchApplicationAuthMethod
 };

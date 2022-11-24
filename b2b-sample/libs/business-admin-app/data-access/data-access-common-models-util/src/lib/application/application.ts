@@ -16,28 +16,11 @@
  * under the License.
  */
 
-import getDataHeader from "../../../../util/util/apiUtil/getDataHeader";
-import { dataNotRecievedError, notPostError } from "../../../../util/util/apiUtil/localResErrors";
-
-export default async function getRole(req, res) {
-    if (req.method !== "POST") {
-        notPostError(res);
-    }
-
-    const body = JSON.parse(req.body);
-    const session = body.session;
-    const roleUri = req.query.roleUri;
-
-    try {
-        const fetchData = await fetch(
-            roleUri,
-            getDataHeader(session)
-        );
-        const data = await fetchData.json();
-
-        res.status(200).json(data);
-    } catch (err) {
-
-        return dataNotRecievedError(res);
-    }
+export interface Application {
+    id: string,
+    name: string,
+    description: string,
+    [key: string]: any;
 }
+
+export default Application;

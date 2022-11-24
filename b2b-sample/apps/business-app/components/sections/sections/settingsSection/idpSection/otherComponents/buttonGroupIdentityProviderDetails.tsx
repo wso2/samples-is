@@ -27,7 +27,7 @@ import ConfirmAddRemoveLoginFlowModal from "./confirmAddRemoveLoginFlowModal";
 import { AllApplications, Application } from "../../../../../../models/application/application";
 import decodeDeleteIdentityProvider from
     "../../../../../../util/apiDecode/settings/identityProvider/decodeDeleteIdentityProvider";
-import { checkIfIdpIsinAuthSequence } from "../../../../../../util/util/applicationUtil/applicationUtil";
+import { checkIfIdpIsinAuthSequence } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 
 /**
  * 

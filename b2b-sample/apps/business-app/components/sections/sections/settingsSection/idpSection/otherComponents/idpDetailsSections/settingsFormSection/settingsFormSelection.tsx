@@ -16,6 +16,8 @@
  * under the License.
  */
 
+import { selectedTemplateBaesedonTemplateId } from
+    "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { HelperTextComponent, infoTypeDialog } from "@b2bsample/shared/ui/ui-components";
 import { copyTheTextToClipboard } from "@b2bsample/shared/util/util-common";
 import CopyIcon from "@rsuite/icons/Copy";
@@ -23,7 +25,6 @@ import React from "react";
 import { Field } from "react-final-form";
 import { InputGroup, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
-import { selectedTemplateBaesedonTemplateId } from "../../../../../../../../util/util/applicationUtil/applicationUtil";
 
 /**
  * 
@@ -68,24 +69,24 @@ export default function SettingsFormSelection(prop) {
                     ? propList().map((property) => {
                         return (
                             <Field
-                                id = { property.key }
-                                key={ property.key }
-                                name={ property.key }
-                                initialValue={ selectedValue(property.key) }
-                                render={ ({ input, meta }) => (
-                                    <FormSuite.Group controlId={ property.key }>
-                                        <FormSuite.ControlLabel>{ property.displayName }</FormSuite.ControlLabel>
-                                        <InputGroup inside style={ { width: "100%" } }>
+                                id={property.key}
+                                key={property.key}
+                                name={property.key}
+                                initialValue={selectedValue(property.key)}
+                                render={({ input, meta }) => (
+                                    <FormSuite.Group controlId={property.key}>
+                                        <FormSuite.ControlLabel>{property.displayName}</FormSuite.ControlLabel>
+                                        <InputGroup inside style={{ width: "100%" }}>
 
                                             <FormSuite.Control
-                                                readOnly={ property.readOnly ? property.readOnly : false }
-                                                { ...input }
+                                                readOnly={property.readOnly ? property.readOnly : false}
+                                                {...input}
                                             />
 
                                             {
                                                 property.readOnly
                                                     ? (<InputGroup.Button
-                                                        onClick={ () =>
+                                                        onClick={() =>
                                                             copyValueToClipboard(selectedValue(property.key))
                                                         }
                                                     >
@@ -96,14 +97,14 @@ export default function SettingsFormSelection(prop) {
 
                                         </InputGroup>
                                         <HelperTextComponent
-                                            text={ property.description } />
+                                            text={property.description} />
 
-                                        { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true } >
-                                            { meta.error }
-                                        </FormSuite.ErrorMessage>) }
+                                        {meta.error && meta.touched && (<FormSuite.ErrorMessage show={true} >
+                                            {meta.error}
+                                        </FormSuite.ErrorMessage>)}
 
                                     </FormSuite.Group>
-                                ) }
+                                )}
                             />
                         );
                     })

@@ -16,15 +16,15 @@
  * under the License.
  */
 
+import { PatchApplicationAuthMethod } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
+import { controllerDecodePatchApplicationAuthSteps } from
+    "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
 import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "@b2bsample/shared/util/util-front-end-util";
 import React, { useState } from "react";
 import { Avatar, Button, Col, Grid, Loader, Modal, Row, useToaster } from "rsuite";
 import stylesSettings from "../../../../../../styles/Settings.module.css";
-import decodePatchApplicationAuthSteps from
-    "../../../../../../util/apiDecode/settings/application/decodePatchApplicationAuthSteps";
-import { PatchApplicationAuthMethod } from "../../../../../../util/util/applicationUtil/applicationUtil";
 
 /**
  * 
@@ -43,7 +43,7 @@ export default function ConfirmAddRemoveLoginFlowModal(prop) {
     const onSubmit = async (patchApplicationAuthMethod) => {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
 
-        decodePatchApplicationAuthSteps(session, applicationDetail, idpDetails,
+        controllerDecodePatchApplicationAuthSteps(session, applicationDetail, idpDetails,
             patchApplicationAuthMethod)
             .then((response) => idpIsinAuthSequence
                 ? onIdpRemovefromLoginFlow(response)

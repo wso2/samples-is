@@ -19,6 +19,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@b2bsample/business-admin-app/data-access/data-access-controller": [
+        "libs/business-admin-app/data-access/data-access-controller/src/index.ts"
+      ],
       "@b2bsample/business-app/data-access/data-access-controller": [
         "libs/business-app/data-access/data-access-controller/src/index.ts"
       ],
@@ -55,8 +58,8 @@
       "@b2bsample/shared/util/util-front-end-util": [
         "libs/shared/util/util-front-end-util/src/index.ts"
       ],
-      "@b2bsample/business-admin-app/data-access/data-access-controller": [
-        "libs/business-admin-app/data-access/data-access-controller/src/index.ts"
+      "@b2bsample/business-admin-app/data-access/data-access-common-models-util": [
+        "libs/business-admin-app/data-access/data-access-common-models-util/src/index.ts"
       ]
     }
   },
