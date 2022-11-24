@@ -17,8 +17,10 @@
  */
 
 import { checkIfIdpIsinAuthSequence } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
-import { controllerDecodeGetApplication, controllerDecodeListCurrentApplication } from
-    "@b2bsample/business-admin-app/data-access/data-access-controller";
+import {
+    controllerDecodeDeleteIdentityProvider, controllerDecodeGetApplication,
+    controllerDecodeListCurrentApplication
+} from "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
 import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
 import Trash from "@rsuite/icons/Trash";
@@ -26,8 +28,6 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Button, IconButton, Stack, useToaster } from "rsuite";
 import ConfirmAddRemoveLoginFlowModal from "./confirmAddRemoveLoginFlowModal";
 import { AllApplications, Application } from "../../../../../../models/application/application";
-import decodeDeleteIdentityProvider from
-    "../../../../../../util/apiDecode/settings/identityProvider/decodeDeleteIdentityProvider";
 
 /**
  * 
@@ -85,7 +85,7 @@ export default function ButtonGroupIdentityProviderDetails(prop) {
     };
 
     const onIdPDeleteClick = (id) => {
-        decodeDeleteIdentityProvider(session, id)
+        controllerDecodeDeleteIdentityProvider(session, id)
             .then((response) => onIdpDelete(response))
             .finally(() => {
                 fetchAllIdPs().finally();

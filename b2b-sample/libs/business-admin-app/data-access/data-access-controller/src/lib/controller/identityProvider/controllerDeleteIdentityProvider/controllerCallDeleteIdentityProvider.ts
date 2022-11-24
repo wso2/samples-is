@@ -16,17 +16,18 @@
  * under the License.
  */
 
-import callDeleteIdentityProvider from "../../../apiCall/settings/identityProvider/callDeleteIdentityProvider";
-import { commonDecode } from "../../../util/apiUtil/commonDecode";
+import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
 
-export default async function decodeDeleteIdentityProvider(session, id) {
+/**
+ * call `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users/<userId>` get the user details
+ * 
+ * @param session - session object
+ * 
+ * @returns all applications details, if not possible returns `null`
+ */
+export async function controllerCallDeleteIdentityProvider(session: any, id: string) {
 
-    try {
-        await commonDecode(() => callDeleteIdentityProvider(session, id), null);
+    const data = await commonControllerCall(`/api/settings/identityProvider/deleteIdentityProvider/${id}`, session);
 
-        return true;
-    } catch (err) {
-
-        return null;
-    }
+    return data;
 }

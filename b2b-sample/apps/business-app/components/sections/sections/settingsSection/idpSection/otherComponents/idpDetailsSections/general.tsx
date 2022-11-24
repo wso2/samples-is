@@ -37,7 +37,7 @@ export default function General(prop) {
 
     const { fetchData, session, idpDetails } = prop;
 
-    const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
+    const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
 
     const toaster = useToaster();
 
@@ -84,70 +84,70 @@ export default function General(prop) {
     };
 
     return (
-        <div className={styles.addUserMainDiv}>
+        <div className={ styles.addUserMainDiv }>
 
             <div>
 
                 <Form
-                    onSubmit={onUpdate}
-                    validate={validate}
-                    initialValues={{
+                    onSubmit={ onUpdate }
+                    validate={ validate }
+                    initialValues={ {
                         description: idpDetails.description,
                         name: idpDetails.name
-                    }}
-                    render={({ handleSubmit, form, submitting, pristine, errors }) => (
+                    } }
+                    render={ ({ handleSubmit, form, submitting, pristine, errors }) => (
                         <FormSuite
                             layout="vertical"
-                            className={styles.addUserForm}
-                            onSubmit={() => { handleSubmit().then(form.restart); }}
+                            className={ styles.addUserForm }
+                            onSubmit={ () => { handleSubmit().then(form.restart); } }
                             fluid>
                             <Field
                                 name="name"
-                                render={({ input, meta }) => (
+                                render={ ({ input, meta }) => (
                                     <FormSuite.Group controlId="name">
                                         <FormSuite.ControlLabel>Name</FormSuite.ControlLabel>
 
                                         <FormSuite.Control
-                                            {...input}
+                                            { ...input }
                                         />
 
                                         <HelperTextComponent text="A text description of the identity provider." />
 
-                                        {meta.error && meta.touched && (<FormSuite.ErrorMessage show={true}  >
-                                            {meta.error}
-                                        </FormSuite.ErrorMessage>)}
+                                        { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true }  >
+                                            { meta.error }
+                                        </FormSuite.ErrorMessage>) }
                                     </FormSuite.Group>
-                                )}
+                                ) }
                             />
 
                             <Field
                                 name="description"
-                                render={({ input, meta }) => (
+                                render={ ({ input, meta }) => (
                                     <FormSuite.Group controlId="description">
                                         <FormSuite.ControlLabel>Description</FormSuite.ControlLabel>
                                         <FormSuite.Control
-                                            {...input}
+                                            { ...input }
                                         />
 
                                         <HelperTextComponent text="A text description of the identity provider." />
 
-                                        {meta.error && meta.touched && (<FormSuite.ErrorMessage show={true}  >
-                                            {meta.error}
-                                        </FormSuite.ErrorMessage>)}
+                                        { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true }  >
+                                            { meta.error }
+                                        </FormSuite.ErrorMessage>) }
 
                                     </FormSuite.Group>
-                                )}
+                                ) }
                             />
 
                             <div className="buttons">
                                 <FormSuite.Group>
                                     <ButtonToolbar>
                                         <Button
-                                            className={styles.addUserButton}
+                                            className={ styles.addUserButton }
                                             size="lg"
                                             appearance="primary"
                                             type="submit"
-                                            disabled={submitting || pristine || !checkIfJSONisEmpty(errors)}>
+                                            disabled={ submitting || pristine || !checkIfJSONisEmpty(errors) }>
                                             Update
                                         </Button>
                                     </ButtonToolbar>
@@ -155,12 +155,12 @@ export default function General(prop) {
 
                             </div>
                         </FormSuite>
-                    )}
+                    ) }
                 />
 
             </div>
 
-            <div style={loadingDisplay}>
+            <div style={ loadingDisplay }>
                 <Loader size="lg" backdrop content="User is adding" vertical />
             </div>
         </div>

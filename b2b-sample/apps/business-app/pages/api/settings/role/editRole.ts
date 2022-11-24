@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { apiRequestOptionsWithBody, dataNotRecievedError, notPostError, RequestMethod } from
+import { RequestMethod, apiRequestOptionsWithBody, dataNotRecievedError, notPostError } from
     "@b2bsample/shared/data-access/data-access-common-api-util";
 import { NextApiRequest, NextApiResponse } from "next";
 

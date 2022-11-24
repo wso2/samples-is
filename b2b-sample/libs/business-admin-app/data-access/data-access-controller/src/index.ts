@@ -25,7 +25,7 @@ export * from "./lib/controller/application/controllerListAllApplications/contro
 export * from "./lib/controller/application/controllerListCurrentApplication/controllerDecodeListCurrentApplication";
 export * from "./lib/controller/application/controllerGetApplication/controllerDecodeGetApplication";
 export * from
-    "./lib/controller/application/controllerPatchApplicationAuthSteps/controllerDecodePatchApplicationAuthSteps";
+"./lib/controller/application/controllerPatchApplicationAuthSteps/controllerDecodePatchApplicationAuthSteps";
 export * from "./lib/controller/role/controllerGetRole/controllerDecodeGetRole";
 export * from "./lib/controller/role/controllerListAllRoles/controllerDecodeListAllRoles";
 export * from "./lib/controller/role/controllerUserRole/controllerDecodeUserRole";
@@ -33,10 +33,12 @@ export * from "./lib/controller/role/controllerCreateRole/controllerDecodeCreate
 export * from "./lib/controller/role/controllerPatchRole/controllerDecodePatchRole";
 export * from "./lib/controller/role/controllerEditRolesToAddOrRemoveUser/controllerDecodeEditRolesToAddOrRemoveUser";
 export * from
-    "./lib/controller/identityProvider/controllerListAllIdentityProviders/controllerDecodeListAllIdentityProviders";
+"./lib/controller/identityProvider/controllerListAllIdentityProviders/controllerDecodeListAllIdentityProviders";
 export * from
-    "./lib/controller/identityProvider/controllerGetDetailedIdentityProvider/controllerDecodeGetDetailedIdentityProvider";
+"./lib/controller/identityProvider/controllerGetDetailedIdentityProvider/controllerDecodeGetDetailedIdentityProvider";
 export * from
-    "./lib/controller/identityProvider/controllerGetFederatedAuthenticators/controllerDecodeGetFederatedAuthenticators";
+"./lib/controller/identityProvider/controllerGetFederatedAuthenticators/controllerDecodeGetFederatedAuthenticators";
 export * from
-    "./lib/controller/identityProvider/controllerPatchGeneralSettingsIdp/controllerDecodePatchGeneralSettingsIdp";
+"./lib/controller/identityProvider/controllerPatchGeneralSettingsIdp/controllerDecodePatchGeneralSettingsIdp";
+export * from
+"./lib/controller/identityProvider/controllerDeleteIdentityProvider/controllerDecodeDeleteIdentityProvider";
