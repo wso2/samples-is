@@ -16,6 +16,8 @@
  * under the License.
  */
 
+/* eslint-disable max-len */
+
 export * from "./lib/controller/user/controllerViewUser/controllerDecodeViewUsers";
 export * from "./lib/controller/user/controllerAddUser/controllerDecodeAddUser";
 export * from "./lib/controller/user/controllerEditUser/controllerDecodeEditUser";
@@ -32,3 +34,5 @@ export * from "./lib/controller/role/controllerPatchRole/controllerDecodePatchRo
 export * from "./lib/controller/role/controllerEditRolesToAddOrRemoveUser/controllerDecodeEditRolesToAddOrRemoveUser";
 export * from
     "./lib/controller/identityProvider/controllerListAllIdentityProviders/controllerDecodeListAllIdentityProviders";
+export * from
+    "./lib/controller/identityProvider/controllerGetDetailedIdentityProvider/controllerDecodeGetDetailedIdentityProvider";
