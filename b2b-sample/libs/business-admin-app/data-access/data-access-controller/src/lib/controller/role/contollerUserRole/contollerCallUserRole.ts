@@ -16,30 +16,18 @@
  * under the License.
  */
 
-import { getHostedUrl } from "@b2bsample/shared/util/util-application-config-util";
-import { getInternalApiRequestOptions } from "../../../util/apiUtil/getInteralApiRequestOptions";
+import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
 
 /**
- * call GET `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/organizations/<subOrgId>/roles` 
- * to list all the roles
+ * call `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users/<userId>` get the user details
  * 
  * @param session - session object
  * 
- * @returns - all the roles, if the call failed `null`
+ * @returns all applications details, if not possible returns `null`
  */
-export default async function callListAllRoles(session) {
+export async function contollerCallUserRole(session: any, id : string) {
 
-    try {
-        const res = await fetch(
-            `${getHostedUrl()}/api/settings/role/listAllRoles`,
-            getInternalApiRequestOptions(session)
-        );
+    const data = await commonControllerCall(`/api/settings/role/userRoles/${id}`, session);
 
-        const data = await res.json();
-
-        return data;
-    } catch (err) {
-
-        return null;
-    }
+    return data;
 }

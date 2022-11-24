@@ -16,7 +16,8 @@
  * under the License.
  */
 
-import { controllerDecodeEditUser } from "@b2bsample/business-admin-app/data-access/data-access-controller";
+import { contollerDecodeListAllRoles, controllerDecodeEditUser, contollerDecodeUserRole } from
+    "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { errorTypeDialog, successTypeDialog, warningTypeDialog } from "@b2bsample/shared/ui/ui-components";
 import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "@b2bsample/shared/util/util-front-end-util";
@@ -27,8 +28,6 @@ import FormSuite from "rsuite/Form";
 import stylesSettings from "../../../../../../styles/Settings.module.css";
 import decodEditRolesToAddOrRemoveUser
     from "../../../../../../util/apiDecode/settings/role/decodEditRolesToAddOrRemoveUser";
-import decodeListAllRoles from "../../../../../../util/apiDecode/settings/role/decodeListAllRoles";
-import decodeUserRole from "../../../../../../util/apiDecode/settings/role/decodeUserRole";
 
 /**
  * 
@@ -52,7 +51,7 @@ export default function EditUserComponent(prop) {
      * fetch all the roles in the identity server available for the logged in organization
      */
     const fetchAllRoles = useCallback(async () => {
-        const res = await decodeListAllRoles(session);
+        const res = await contollerDecodeListAllRoles(session);
 
         await setAllRoles(res);
     }, [ session ]);
@@ -65,7 +64,7 @@ export default function EditUserComponent(prop) {
      * fetch the roles of the user
      */
     const fetchUserRoles = useCallback(async () => {
-        const res = await decodeUserRole(session, user.id);
+        const res = await contollerDecodeUserRole(session, user.id);
 
         await setUserRoles(res);
     }, [ session, user ]);
@@ -170,7 +169,7 @@ export default function EditUserComponent(prop) {
         await controllerDecodeEditUser(session, user.id, values.firstName, values.familyName, values.email,
             values.username)
             .then((response) => {
-                if(initUserRolesForForm) {
+                if (initUserRolesForForm) {
                     if (response) {
                         decodEditRolesToAddOrRemoveUser(session, user.id, initUserRolesForForm, values.roles)
                             .then((res) => {

@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { checkIfIdpIsinAuthSequence } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { contollerDecodeGetApplication, contollerDecodeListCurrentApplication } from
     "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
@@ -27,7 +28,6 @@ import ConfirmAddRemoveLoginFlowModal from "./confirmAddRemoveLoginFlowModal";
 import { AllApplications, Application } from "../../../../../../models/application/application";
 import decodeDeleteIdentityProvider from
     "../../../../../../util/apiDecode/settings/identityProvider/decodeDeleteIdentityProvider";
-import { checkIfIdpIsinAuthSequence } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 
 /**
  * 

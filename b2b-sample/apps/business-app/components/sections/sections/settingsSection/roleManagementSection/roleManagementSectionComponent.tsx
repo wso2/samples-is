@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { contollerDecodeListAllRoles } from "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { EmptySettingsComponent, SettingsTitleComponent } from "@b2bsample/shared/ui/ui-components";
 import PeoplesIcon from "@rsuite/icons/Peoples";
 import React, { useCallback, useEffect, useState } from "react";
@@ -23,7 +24,6 @@ import { Container } from "rsuite";
 import CreateRoleButton from "./otherComponents/createRoleButton";
 import CreateRoleComponent from "./otherComponents/createRoleComponent/createRoleComponent";
 import RolesList from "./otherComponents/rolesList";
-import decodeListAllRoles from "../../../../../util/apiDecode/settings/role/decodeListAllRoles";
 
 /**
  * 
@@ -40,7 +40,7 @@ export default function RoleManagementSectionComponent(prop) {
 
     const fetchAllRoles = useCallback(async () => {
 
-        const res = await decodeListAllRoles(session);
+        const res = await contollerDecodeListAllRoles(session);
 
         if (res) {
             setRolesList(res);

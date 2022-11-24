@@ -16,19 +16,12 @@
  * under the License.
  */
 
+import { apiRequestOptions, dataNotRecievedError, notPostError } from
+    "@b2bsample/shared/data-access/data-access-common-api-util";
 import { getOrgUrl } from "@b2bsample/shared/util/util-application-config-util";
-import getDataHeader from "../../../../util/util/apiUtil/getDataHeader";
-import { dataNotRecievedError, notPostError } from "../../../../util/util/apiUtil/localResErrors";
+import { NextApiRequest, NextApiResponse } from "next";
 
-/**
- * backend API call to list all roles.
- * 
- * @param req - request
- * @param res - response
- * 
- * @returns correct data if the call is successful, else an error message
- */
-export default async function listAllRoles(req, res) {
+export default async function userRoles(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== "POST") {
         notPostError(res);
     }
@@ -37,10 +30,12 @@ export default async function listAllRoles(req, res) {
     const session = body.session;
     const orgId = body.orgId;
 
+    const id = req.query.id;
+
     try {
         const fetchData = await fetch(
-            `${getOrgUrl(orgId)}/api/server/v1/organizations/${orgId}/roles`,
-            getDataHeader(session)
+            `${getOrgUrl(orgId)}/api/server/v1/organizations/${orgId}/users/${id}/roles`,
+            apiRequestOptions(session)
         );
         const data = await fetchData.json();
 

@@ -30,16 +30,16 @@ export default function AddUserButton(prop) {
 
     const { session, onClick } = prop;
 
-    const [allApplications, setAllApplications] = useState<AllApplications>(null);
-    const [applicationDetail, setApplicationDetail] = useState<Application>(null);
-    const [basicAuthAvailable, setBasicAuthAvailable] = useState(false);
+    const [ allApplications, setAllApplications ] = useState<AllApplications>(null);
+    const [ applicationDetail, setApplicationDetail ] = useState<Application>(null);
+    const [ basicAuthAvailable, setBasicAuthAvailable ] = useState(false);
 
     const fetchData = useCallback(async () => {
 
         const res = await contollerDecodeListCurrentApplication(session);
 
         await setAllApplications(res);
-    }, [session]);
+    }, [ session ]);
 
     const fetchApplicatioDetails = useCallback(async () => {
         if (!checkIfJSONisEmpty(allApplications) && allApplications.totalResults !== 0) {
@@ -48,15 +48,15 @@ export default function AddUserButton(prop) {
             await setApplicationDetail(res);
         }
 
-    }, [session, allApplications]);
+    }, [ session, allApplications ]);
 
     useEffect(() => {
         fetchData();
-    }, [fetchData]);
+    }, [ fetchData ]);
 
     useEffect(() => {
         fetchApplicatioDetails();
-    }, [fetchApplicatioDetails]);
+    }, [ fetchApplicatioDetails ]);
 
     useEffect(() => {
         if (!checkIfJSONisEmpty(applicationDetail)) {
@@ -64,14 +64,14 @@ export default function AddUserButton(prop) {
 
             setBasicAuthAvailable(check);
         }
-    }, [applicationDetail]);
+    }, [ applicationDetail ]);
 
     return (
         basicAuthAvailable
             ? (<Button
                 appearance="primary"
                 size="lg"
-                onClick={onClick}>
+                onClick={ onClick }>
                 Add User
             </Button>)
             : null

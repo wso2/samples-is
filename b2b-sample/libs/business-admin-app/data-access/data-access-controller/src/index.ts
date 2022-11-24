@@ -25,3 +25,5 @@ export * from "./lib/controller/application/contollerGetApplication/contollerDec
 export * from
 "./lib/controller/application/controllerPatchApplicationAuthSteps/controllerDecodePatchApplicationAuthSteps";
 export * from "./lib/controller/role/contollerGetRole/contollerDecodeGetRole";
+export * from "./lib/controller/role/contollerListAllRoles/contollerDecodeListAllRoles";
+export * from "./lib/controller/role/contollerUserRole/contollerDecodeUserRole";

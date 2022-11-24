@@ -16,18 +16,25 @@
  * under the License.
  */
 
-import callUserRole from
-    "../../../apiCall/settings/role/callUserRole";
-import { commonDecode } from "../../../util/apiUtil/commonDecode";
+import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { contollerCallUserRole } from "./contollerCallUserRole";
 
-export default async function decodeUserRole(session, id) {
+/**
+ * 
+ * @param session - session object
+ 
+ * @returns logged in users object. If failed `null`
+ */
+export async function contollerDecodeUserRole(session: any, id: string) {
 
-    try {
-        const res = await commonDecode(() => callUserRole(session, id), null);
+    const res = await commonControllerDecode(() => contollerCallUserRole(session, id), null);
 
-        return res;
-    } catch (err) {
-
-        return null;
+    if(res) {
+        return res.Resources;
     }
+
+    return res;
+
 }
+
+export default contollerDecodeUserRole;
