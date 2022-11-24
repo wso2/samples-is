@@ -27,3 +27,4 @@ export * from
 export * from "./lib/controller/role/contollerGetRole/contollerDecodeGetRole";
 export * from "./lib/controller/role/contollerListAllRoles/contollerDecodeListAllRoles";
 export * from "./lib/controller/role/contollerUserRole/contollerDecodeUserRole";
+export * from "./lib/controller/role/contollerCreateRole/contollerDecodeCreateRole";

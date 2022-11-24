@@ -16,15 +16,16 @@
  * under the License.
  */
 
-import callCreateRole from "../../../apiCall/settings/role/callCreateRole";
-import { commonDecode } from "../../../util/apiUtil/commonDecode";
+import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { contollerCallCreateRole } from "./contollerCallCreateRole";
 
-function getUsersList(users) {
 
+function getUsersList(users: string[]) {
+    console.log(users);
     return users.map((user) => { return { "value": user }; });
 }
 
-function getRoleBody(displayName, permissions, users) {
+function getRoleBody(displayName: string, permissions: string[], users: string[]) {
     return {
         "displayName": displayName,
         "groups": [],
@@ -42,15 +43,12 @@ function getRoleBody(displayName, permissions, users) {
  * 
  * @returns `res` (if user added successfully) or `false` (if user addition was not completed)
  */
-export async function decodeCreateRole(session, displayName, permissions, users) {
+export async function contollerDecodeCreateRole(session: any, displayName: string, permissions: string[], users: string[]) {
     const role = getRoleBody(displayName, permissions, users);
 
-    try {
-        const res = await commonDecode(() => callCreateRole(session, role), false);
+    const res = await commonControllerDecode(() => contollerCallCreateRole(session, role), null);
 
-        return res;
-    } catch (err) {
-
-        return false;
-    }
+    return res;
 }
+
+export default contollerDecodeCreateRole;

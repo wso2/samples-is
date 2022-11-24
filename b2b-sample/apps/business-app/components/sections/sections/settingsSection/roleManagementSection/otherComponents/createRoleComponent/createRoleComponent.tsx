@@ -16,15 +16,15 @@
  * under the License.
  */
 
+import { contollerDecodeCreateRole } from "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "@b2bsample/shared/util/util-front-end-util";
 import React, { useState } from "react";
 import { Loader, Modal, Panel, Steps, useToaster } from "rsuite";
+import styles from "../../../../../../../styles/Settings.module.css";
 import General from "./createRoleComponentInner/general";
 import Permission from "./createRoleComponentInner/permission";
 import Users from "./createRoleComponentInner/users";
-import styles from "../../../../../../../styles/Settings.module.css";
-import { decodeCreateRole } from "../../../../../../../util/apiDecode/settings/role/deocdeCreateRole";
 
 export default function CreateRoleComponent(prop) {
 
@@ -68,7 +68,7 @@ export default function CreateRoleComponent(prop) {
 
     const onSubmit = async (displayName, permissions, users) => {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
-        await decodeCreateRole(session, displayName, permissions, users)
+        await contollerDecodeCreateRole(session, displayName, permissions, users)
             .then((response) => onDataSubmit(response))
             .finally(() => setLoadingDisplay(LOADING_DISPLAY_NONE));
     };

@@ -16,10 +16,11 @@
  * under the License.
  */
 
+import { apiRequestOptionsWithBody, dataNotRecievedError, notPostError, RequestMethod } from
+    "@b2bsample/shared/data-access/data-access-common-api-util";
 import { getOrgUrl } from "@b2bsample/shared/util/util-application-config-util";
-import { getSentDataRequestOptions } from "../../../../util/util/apiUtil/getSentDataRequestOptions";
-import { dataNotRecievedError, notPostError } from "../../../../util/util/apiUtil/localResErrors";
-import { RequestMethod } from "../../../../util/util/apiUtil/requestMethod";
+import { NextApiRequest, NextApiResponse } from "next";
+
 
 /**
  * backend API call to list all roles.
@@ -29,7 +30,7 @@ import { RequestMethod } from "../../../../util/util/apiUtil/requestMethod";
  * 
  * @returns correct data if the call is successful, else an error message
  */
-export default async function createRole(req, res) {
+export default async function createRole(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== "POST") {
         notPostError(res);
     }
@@ -42,7 +43,7 @@ export default async function createRole(req, res) {
     try {
         const fetchData = await fetch(
             `${getOrgUrl(orgId)}/api/server/v1/organizations/${orgId}/roles`,
-            getSentDataRequestOptions(session, RequestMethod.POST, role)
+            apiRequestOptionsWithBody(session, RequestMethod.POST, role)
         );
         const data = await fetchData.json();
 
