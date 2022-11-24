@@ -17,7 +17,7 @@
  */
 
 import { checkIfIdpIsinAuthSequence } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
-import { contollerDecodeGetApplication, contollerDecodeListCurrentApplication } from
+import { controllerDecodeGetApplication, controllerDecodeListCurrentApplication } from
     "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
 import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
@@ -47,14 +47,14 @@ export default function ButtonGroupIdentityProviderDetails(prop) {
     const [ openListAppicationModal, setOpenListAppicationModal ] = useState(false);
 
     const fetchData = useCallback(async () => {
-        const res = await contollerDecodeListCurrentApplication(session);
+        const res = await controllerDecodeListCurrentApplication(session);
 
         await setAllApplications(res);
     }, [ session, openListAppicationModal ]);
 
     const fetchApplicatioDetails = useCallback(async () => {
         if (!checkIfJSONisEmpty(allApplications) && allApplications.totalResults !== 0) {
-            const res = await contollerDecodeGetApplication(session, allApplications.applications[0].id);
+            const res = await controllerDecodeGetApplication(session, allApplications.applications[0].id);
 
             await setApplicationDetail(res);
         }

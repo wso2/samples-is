@@ -17,11 +17,12 @@
  */
 
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
-import { contollerCallCreateRole } from "./contollerCallCreateRole";
+import { controllerCallCreateRole } from "./controllerCallCreateRole";
 
 
 function getUsersList(users: string[]) {
     console.log(users);
+
     return users.map((user) => { return { "value": user }; });
 }
 
@@ -43,12 +44,12 @@ function getRoleBody(displayName: string, permissions: string[], users: string[]
  * 
  * @returns `res` (if user added successfully) or `false` (if user addition was not completed)
  */
-export async function contollerDecodeCreateRole(session: any, displayName: string, permissions: string[], users: string[]) {
+export async function controllerDecodeCreateRole(session: any, displayName: string, permissions: string[], users: string[]) {
     const role = getRoleBody(displayName, permissions, users);
 
-    const res = await commonControllerDecode(() => contollerCallCreateRole(session, role), null);
+    const res = await commonControllerDecode(() => controllerCallCreateRole(session, role), null);
 
     return res;
 }
 
-export default contollerDecodeCreateRole;
+export default controllerDecodeCreateRole;

@@ -25,9 +25,9 @@ import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-
  * 
  * @returns all applications details, if not possible returns `null`
  */
-export async function contollerCallListAllRoles(session: any) {
+export async function controllerCallCreateRole(session: any, role: any) {
 
-    const data = await commonControllerCall("/api/settings/role/listAllRoles", session);
+    const data = await commonControllerCall("/api/settings/role/createRole", session, role);
 
     return data;
 }

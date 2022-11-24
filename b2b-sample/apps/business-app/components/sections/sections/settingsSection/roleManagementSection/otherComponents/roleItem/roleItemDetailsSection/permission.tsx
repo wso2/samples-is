@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { contollerDecodePatchRole } from "@b2bsample/business-admin-app/data-access/data-access-controller";
+import { controllerDecodePatchRole } from "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
 import { PatchMethod } from "@b2bsample/shared/util/util-common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "@b2bsample/shared/util/util-front-end-util";
@@ -63,7 +63,8 @@ export default function Permission(prop) {
     const onUpdate = async (values, form) => {
 
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
-        contollerDecodePatchRole(session, roleDetails.meta.location, PatchMethod.REPLACE, "permissions", values.permissions)
+        controllerDecodePatchRole(
+            session, roleDetails.meta.location, PatchMethod.REPLACE, "permissions", values.permissions)
             .then((response) => onDataSubmit(response, form))
             .finally(() => setLoadingDisplay(LOADING_DISPLAY_NONE));
     };

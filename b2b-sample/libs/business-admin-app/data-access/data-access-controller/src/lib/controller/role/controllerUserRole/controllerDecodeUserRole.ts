@@ -16,18 +16,21 @@
  * under the License.
  */
 
-import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { controllerCallUserRole } from "./controllerCallUserRole";
 
 /**
- * call `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users/<userId>` get the user details
  * 
  * @param session - session object
- * 
- * @returns all applications details, if not possible returns `null`
+ 
+ * @returns logged in users object. If failed `null`
  */
-export async function contollerCallUserRole(session: any, id : string) {
+export async function controllerDecodeUserRole(session: any, id: string) {
 
-    const data = await commonControllerCall(`/api/settings/role/userRoles/${id}`, session);
+    const res = await commonControllerDecode(() => controllerCallUserRole(session, id), null);
+    
+    return res;
 
-    return data;
 }
+
+export default controllerDecodeUserRole;

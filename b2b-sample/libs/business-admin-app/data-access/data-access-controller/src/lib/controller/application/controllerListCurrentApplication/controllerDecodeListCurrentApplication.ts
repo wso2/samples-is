@@ -17,7 +17,7 @@
  */
 
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
-import { contollerCallGetRole } from "./contollerCallGetRole";
+import { controllerCallListCurrentApplication } from "./controllerCallListCurrentApplication";
 
 /**
  * 
@@ -25,12 +25,12 @@ import { contollerCallGetRole } from "./contollerCallGetRole";
  
  * @returns logged in users object. If failed `null`
  */
-export async function contollerDecodeGetRole(session: any, roleUri: string) {
+export async function controllerDecodeListCurrentApplication(session: any) {
 
-    const res = await commonControllerDecode(() => contollerCallGetRole(session, roleUri), null);
+    const res = await commonControllerDecode(() => controllerCallListCurrentApplication(session), null);
 
     return res;
 
 }
 
-export default contollerDecodeGetRole;
+export default controllerDecodeListCurrentApplication;

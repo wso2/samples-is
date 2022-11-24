@@ -16,7 +16,10 @@
  * under the License.
  */
 
-import { contollerDecodeListAllRoles, controllerDecodeEditUser, contollerDecodeUserRole } from
+import {
+    controllerDecodeEditRolesToAddOrRemoveUser, controllerDecodeEditUser, controllerDecodeListAllRoles,
+    controllerDecodeUserRole
+} from
     "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { errorTypeDialog, successTypeDialog, warningTypeDialog } from "@b2bsample/shared/ui/ui-components";
 import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
@@ -26,8 +29,6 @@ import { Field, Form } from "react-final-form";
 import { Button, ButtonToolbar, Divider, Loader, Modal, TagPicker, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
 import stylesSettings from "../../../../../../styles/Settings.module.css";
-import decodEditRolesToAddOrRemoveUser
-    from "../../../../../../util/apiDecode/settings/role/decodEditRolesToAddOrRemoveUser";
 
 /**
  * 
@@ -51,7 +52,7 @@ export default function EditUserComponent(prop) {
      * fetch all the roles in the identity server available for the logged in organization
      */
     const fetchAllRoles = useCallback(async () => {
-        const res = await contollerDecodeListAllRoles(session);
+        const res = await controllerDecodeListAllRoles(session);
 
         await setAllRoles(res);
     }, [ session ]);
@@ -64,9 +65,10 @@ export default function EditUserComponent(prop) {
      * fetch the roles of the user
      */
     const fetchUserRoles = useCallback(async () => {
-        const res = await contollerDecodeUserRole(session, user.id);
+        const res = await controllerDecodeUserRole(session, user.id);
 
         await setUserRoles(res);
+
     }, [ session, user ]);
 
     useEffect(() => {
@@ -171,7 +173,8 @@ export default function EditUserComponent(prop) {
             .then((response) => {
                 if (initUserRolesForForm) {
                     if (response) {
-                        decodEditRolesToAddOrRemoveUser(session, user.id, initUserRolesForForm, values.roles)
+                        controllerDecodeEditRolesToAddOrRemoveUser(
+                            session, user.id, initUserRolesForForm, values.roles)
                             .then((res) => {
                                 onRolesSubmite(res);
                             });

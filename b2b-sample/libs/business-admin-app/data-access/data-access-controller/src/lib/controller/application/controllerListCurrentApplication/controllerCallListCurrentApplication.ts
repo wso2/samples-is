@@ -25,9 +25,9 @@ import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-
  * 
  * @returns all applications details, if not possible returns `null`
  */
-export async function contollerCallGetApplication(session: any, id: string) {
+export async function controllerCallListCurrentApplication(session: any) {
 
-    const data = await commonControllerCall(`/api/settings/application/getApplication/${id}`, session, id);
+    const data = await commonControllerCall("/api/settings/application/listCurrentApplication", session);
 
     return data;
 }

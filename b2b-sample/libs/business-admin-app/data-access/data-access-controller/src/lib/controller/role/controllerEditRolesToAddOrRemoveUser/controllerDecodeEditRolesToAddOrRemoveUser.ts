@@ -16,30 +16,30 @@
  * under the License.
  */
 
-import { contollerDecodePatchRole } from "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { PatchMethod } from "@b2bsample/shared/util/util-common";
+import { controllerDecodePatchRole } from "../controllerPatchRole/controllerDecodePatchRole";
 
-function getRolesThatNeedToAddUser(initRoleList, roleList) {
+function getRolesThatNeedToAddUser(initRoleList : string[], roleList : string[]) {
     return roleList.filter(roleUri => !initRoleList.includes(roleUri));
 }
 
-function getRolesThatNeedToRemoveUser(initRoleList, roleList) {
+function getRolesThatNeedToRemoveUser(initRoleList : string[], roleList : string[]) {
     return initRoleList.filter(roleUri => !roleList.includes(roleUri));
 }
 
-async function getRoleDetailsForAdd(session, userId, initRoleList, roleList) {
+async function getRoleDetailsForAdd(session : any, userId : string, initRoleList : string[], roleList : string[]) {
     const rolesUriList = getRolesThatNeedToAddUser(initRoleList, roleList);
 
     await rolesUriList.forEach(async (uri) => {
-        contollerDecodePatchRole(session, uri, PatchMethod.ADD, "users", [ userId ]);
+        controllerDecodePatchRole(session, uri, PatchMethod.ADD, "users", [ userId ]);
     });
 }
 
-async function getRoleDetailsForRemove(session, userId, initRoleList, roleList) {
+async function getRoleDetailsForRemove(session : any, userId : string, initRoleList : string[], roleList : string[]) {
     const rolesUriList = getRolesThatNeedToRemoveUser(initRoleList, roleList);
 
     await rolesUriList.forEach(async (uri) => {
-        contollerDecodePatchRole(session, uri, PatchMethod.REMOVE, "users", userId);
+        controllerDecodePatchRole(session, uri, PatchMethod.REMOVE, "users", userId);
     });
 }
 
@@ -52,7 +52,8 @@ async function getRoleDetailsForRemove(session, userId, initRoleList, roleList) 
  * 
  * @returns - `true` if the operation is successfull, else `false`
  */
-export default async function decodEditRolesToAddOrRemoveUser(session, userId, initRoleList, roleList) {
+export async function controllerDecodeEditRolesToAddOrRemoveUser(
+    session: any, userId: string, initRoleList : string[], roleList : string[]) {
 
     try {
         return getRoleDetailsForAdd(session, userId, initRoleList, roleList)
@@ -66,4 +67,7 @@ export default async function decodEditRolesToAddOrRemoveUser(session, userId, i
 
         return false;
     }
+
 }
+
+export default controllerDecodeEditRolesToAddOrRemoveUser;

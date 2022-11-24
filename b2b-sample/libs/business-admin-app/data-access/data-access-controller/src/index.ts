@@ -20,12 +20,13 @@ export * from "./lib/controller/user/controllerViewUser/controllerDecodeViewUser
 export * from "./lib/controller/user/controllerAddUser/controllerDecodeAddUser";
 export * from "./lib/controller/user/controllerEditUser/controllerDecodeEditUser";
 export * from "./lib/controller/application/controllerListAllApplications/controllerDecodeListAllApplications";
-export * from "./lib/controller/application/contollerListCurrentApplication/contollerDecodeListCurrentApplication";
-export * from "./lib/controller/application/contollerGetApplication/contollerDecodeGetApplication";
+export * from "./lib/controller/application/controllerListCurrentApplication/controllerDecodeListCurrentApplication";
+export * from "./lib/controller/application/controllerGetApplication/controllerDecodeGetApplication";
 export * from
 "./lib/controller/application/controllerPatchApplicationAuthSteps/controllerDecodePatchApplicationAuthSteps";
-export * from "./lib/controller/role/contollerGetRole/contollerDecodeGetRole";
-export * from "./lib/controller/role/contollerListAllRoles/contollerDecodeListAllRoles";
-export * from "./lib/controller/role/contollerUserRole/contollerDecodeUserRole";
-export * from "./lib/controller/role/contollerCreateRole/contollerDecodeCreateRole";
-export * from "./lib/controller/role/contollerPatchRole/contollerDecodePatchRole";
+export * from "./lib/controller/role/controllerGetRole/controllerDecodeGetRole";
+export * from "./lib/controller/role/controllerListAllRoles/controllerDecodeListAllRoles";
+export * from "./lib/controller/role/controllerUserRole/controllerDecodeUserRole";
+export * from "./lib/controller/role/controllerCreateRole/controllerDecodeCreateRole";
+export * from "./lib/controller/role/controllerPatchRole/controllerDecodePatchRole";
+export * from "./lib/controller/role/controllerEditRolesToAddOrRemoveUser/controllerDecodeEditRolesToAddOrRemoveUser";

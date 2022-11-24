@@ -25,9 +25,9 @@ import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-
  * 
  * @returns all applications details, if not possible returns `null`
  */
-export async function contollerCallListCurrentApplication(session: any) {
+export async function controllerCallGetRole(session: any, roleUri: string) {
 
-    const data = await commonControllerCall("/api/settings/application/listCurrentApplication", session);
+    const data = await commonControllerCall(`/api/settings/role/getRole?roleUri=${roleUri}`, session);
 
     return data;
 }

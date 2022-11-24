@@ -27,7 +27,7 @@ import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-
  * 
  * @returns patched role, if the call failed `null`
  */
-export async function contollerCallPatchRole(session: any, roleUri : string, patchBody : any) {
+export async function controllerCallPatchRole(session: any, roleUri : string, patchBody : any) {
 
     const data = await commonControllerCall(`/api/settings/role/patchRole?roleUri=${roleUri}`, session, patchBody);
 

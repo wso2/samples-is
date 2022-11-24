@@ -18,9 +18,9 @@
 
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import { PatchMethod } from "@b2bsample/shared/util/util-common";
-import { contollerCallPatchRole } from "./contollerCallPatchRole";
+import { controllerCallPatchRole } from "./controllerCallPatchRole";
 
-function getAddReplaceBody(patchMethod: string, path: string, value: string[]) {
+function getAddReplaceBody(patchMethod: string, path: string, value: string[] | string) {
     return {
         "operations": [
             {
@@ -32,7 +32,7 @@ function getAddReplaceBody(patchMethod: string, path: string, value: string[]) {
     };
 }
 
-function getRemoveBody(patchMethod: string, path: string, value: string[]) {
+function getRemoveBody(patchMethod: string, path: string, value: string[] | string) {
     return {
         "operations": [
             {
@@ -43,7 +43,7 @@ function getRemoveBody(patchMethod: string, path: string, value: string[]) {
     };
 }
 
-function getPatchBody(patchMethod: string, path: string, value: string[]) {
+function getPatchBody(patchMethod: string, path: string, value: string[] | string) {
     switch (patchMethod) {
         case PatchMethod.ADD:
 
@@ -71,13 +71,13 @@ function getPatchBody(patchMethod: string, path: string, value: string[]) {
  * 
  * @returns `res` (if user added successfully) or `false` (if user addition was not completed)
  */
-export async function contollerDecodePatchRole(
-    session: any, roleUri: string, patchMethod: string, path: string, value: string[]) {
+export async function controllerDecodePatchRole(
+    session: any, roleUri: string, patchMethod: string, path: string, value: string[] | string) {
     const patchBody = getPatchBody(patchMethod, path, value);
 
-    const res = await commonControllerDecode(() => contollerCallPatchRole(session, roleUri, patchBody), null);
+    const res = await commonControllerDecode(() => controllerCallPatchRole(session, roleUri, patchBody), null);
 
     return res;
 }
 
-export default contollerDecodePatchRole;
+export default controllerDecodePatchRole;
