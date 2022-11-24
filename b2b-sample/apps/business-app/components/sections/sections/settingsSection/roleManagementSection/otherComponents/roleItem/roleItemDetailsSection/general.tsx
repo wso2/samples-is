@@ -16,15 +16,15 @@
  * under the License.
  */
 
-import { HelperTextComponent, errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
-import { PatchMethod, checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
+import { contollerDecodePatchRole } from "@b2bsample/business-admin-app/data-access/data-access-controller";
+import { errorTypeDialog, HelperTextComponent, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
+import { checkIfJSONisEmpty, PatchMethod } from "@b2bsample/shared/util/util-common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "@b2bsample/shared/util/util-front-end-util";
-import React,{ useState } from "react";
+import React, { useState } from "react";
 import { Field, Form } from "react-final-form";
 import { Button, ButtonToolbar, Loader, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
 import styles from "../../../../../../../../styles/Settings.module.css";
-import decodePatchRole from "../../../../../../../../util/apiDecode/settings/role/decodePatchRole";
 
 /**
  * 
@@ -70,7 +70,7 @@ export default function General(prop) {
     const onUpdate = async (values, form) => {
 
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
-        decodePatchRole(session, roleDetails.meta.location, PatchMethod.REPLACE, "displayName", [ values.name ])
+        contollerDecodePatchRole(session, roleDetails.meta.location, PatchMethod.REPLACE, "displayName", [ values.name ])
             .then((response) => onDataSubmit(response, form))
             .finally(() => setLoadingDisplay(LOADING_DISPLAY_NONE));
     };

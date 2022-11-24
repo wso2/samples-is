@@ -16,7 +16,8 @@
  * under the License.
  */
 
-import { controllerDecodeViewUsers } from "@b2bsample/business-admin-app/data-access/data-access-controller";
+import { contollerDecodePatchRole, controllerDecodeViewUsers } from
+    "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
 import { PatchMethod } from "@b2bsample/shared/util/util-common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "@b2bsample/shared/util/util-front-end-util";
@@ -25,7 +26,6 @@ import { Field, Form } from "react-final-form";
 import { Button, ButtonToolbar, Checkbox, CheckboxGroup, Loader, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
 import styles from "../../../../../../../../styles/Settings.module.css";
-import decodePatchRole from "../../../../../../../../util/apiDecode/settings/role/decodePatchRole";
 
 /**
  * 
@@ -51,9 +51,9 @@ export default function Users(prop) {
         return [];
     };
 
-    const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
-    const [ users, setUsers ] = useState(null);
-    const [ initialAssignedUsers, setInitialAssignedUsers ] = useState([]);
+    const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
+    const [users, setUsers] = useState(null);
+    const [initialAssignedUsers, setInitialAssignedUsers] = useState([]);
 
     const toaster = useToaster();
 
@@ -61,20 +61,20 @@ export default function Users(prop) {
         const res = await controllerDecodeViewUsers(session);
 
         await setUsers(res);
-    }, [ session ]);
+    }, [session]);
 
     const setInitialAssignedUserIds = useCallback(async () => {
 
         await setInitialAssignedUsers(getInitialAssignedUserIds(roleDetails.users));
-    }, [ roleDetails ]);
+    }, [roleDetails]);
 
     useEffect(() => {
         fetchAllUsers();
-    }, [ fetchAllUsers ]);
+    }, [fetchAllUsers]);
 
     useEffect(() => {
         setInitialAssignedUserIds();
-    }, [ setInitialAssignedUserIds ]);
+    }, [setInitialAssignedUserIds]);
 
     const onDataSubmit = (response, form) => {
         if (response) {
@@ -89,58 +89,58 @@ export default function Users(prop) {
     const onUpdate = async (values, form) => {
 
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
-        decodePatchRole(session, roleDetails.meta.location, PatchMethod.REPLACE, "users", values.users)
+        contollerDecodePatchRole(session, roleDetails.meta.location, PatchMethod.REPLACE, "users", values.users)
             .then((response) => onDataSubmit(response, form))
             .finally(() => setLoadingDisplay(LOADING_DISPLAY_NONE));
     };
 
     return (
-        <div className={ styles.addUserMainDiv }>
+        <div className={styles.addUserMainDiv}>
 
             <div>
                 {
                     users
                         ? (<Form
-                            onSubmit={ onUpdate }
-                            initialValues={ {
+                            onSubmit={onUpdate}
+                            initialValues={{
                                 users: initialAssignedUsers
-                            } }
-                            render={ ({ handleSubmit, form, submitting, pristine }) => (
+                            }}
+                            render={({ handleSubmit, form, submitting, pristine }) => (
                                 <FormSuite
                                     layout="vertical"
-                                    className={ styles.addUserForm }
-                                    onSubmit={ () => { handleSubmit().then(form.restart); } }
+                                    className={styles.addUserForm}
+                                    onSubmit={() => { handleSubmit().then(form.restart); }}
                                     fluid>
 
                                     <Field
                                         name="users"
-                                        render={ ({ input }) => (
+                                        render={({ input }) => (
                                             <FormSuite.Group controlId="checkbox">
                                                 <FormSuite.Control
-                                                    { ...input }
+                                                    {...input}
                                                     name="checkbox"
-                                                    accepter={ CheckboxGroup }
+                                                    accepter={CheckboxGroup}
                                                 >
-                                                    { users.map(user => (
-                                                        <Checkbox key={ user.id } value={ user.id }>
-                                                            { user.username }
+                                                    {users.map(user => (
+                                                        <Checkbox key={user.id} value={user.id}>
+                                                            {user.username}
                                                         </Checkbox>
-                                                    )) }
+                                                    ))}
                                                 </FormSuite.Control>
                                                 <FormSuite.HelpText>Assign users for the role</FormSuite.HelpText>
                                             </FormSuite.Group>
-                                        ) }
+                                        )}
                                     />
 
                                     <div className="buttons">
                                         <FormSuite.Group>
                                             <ButtonToolbar>
                                                 <Button
-                                                    className={ styles.addUserButton }
+                                                    className={styles.addUserButton}
                                                     size="lg"
                                                     appearance="primary"
                                                     type="submit"
-                                                    disabled={ submitting || pristine }>
+                                                    disabled={submitting || pristine}>
                                                     Update
                                                 </Button>
                                             </ButtonToolbar>
@@ -148,14 +148,14 @@ export default function Users(prop) {
 
                                     </div>
                                 </FormSuite>
-                            ) }
+                            )}
                         />)
                         : null
                 }
 
             </div>
 
-            <div style={ loadingDisplay }>
+            <div style={loadingDisplay}>
                 <Loader size="lg" backdrop content="role is updating" vertical />
             </div>
         </div>

@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { contollerDecodePatchRole } from "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
 import { PatchMethod } from "@b2bsample/shared/util/util-common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "@b2bsample/shared/util/util-front-end-util";
@@ -24,7 +25,6 @@ import { Field, Form } from "react-final-form";
 import { Button, ButtonToolbar, CheckTree, Loader, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
 import styles from "../../../../../../../../styles/Settings.module.css";
-import decodePatchRole from "../../../../../../../../util/apiDecode/settings/role/decodePatchRole";
 import orgRolesData from "../../../data/orgRolesData.json";
 
 /**
@@ -63,7 +63,7 @@ export default function Permission(prop) {
     const onUpdate = async (values, form) => {
 
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
-        decodePatchRole(session, roleDetails.meta.location, PatchMethod.REPLACE, "permissions", values.permissions)
+        contollerDecodePatchRole(session, roleDetails.meta.location, PatchMethod.REPLACE, "permissions", values.permissions)
             .then((response) => onDataSubmit(response, form))
             .finally(() => setLoadingDisplay(LOADING_DISPLAY_NONE));
     };

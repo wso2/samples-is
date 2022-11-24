@@ -16,8 +16,7 @@
  * under the License.
  */
 
-import { getHostedUrl } from "@b2bsample/shared/util/util-application-config-util";
-import { getInternalApiRequestOptionsWithParam } from "../../../util/apiUtil/getInteralApiRequestOptions";
+import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
 
 /**
  * call PATCH `roleUri`
@@ -28,19 +27,9 @@ import { getInternalApiRequestOptionsWithParam } from "../../../util/apiUtil/get
  * 
  * @returns patched role, if the call failed `null`
  */
-export default async function callPatchUsers(session, roleUri, patchBody) {
+export async function contollerCallPatchRole(session: any, roleUri : string, patchBody : any) {
 
-    try {
-        const res = await fetch(
-            `${getHostedUrl()}/api/settings/role/patchRole?roleUri=${roleUri}`,
-            getInternalApiRequestOptionsWithParam(session, patchBody)
-        );
+    const data = await commonControllerCall(`/api/settings/role/patchRole?roleUri=${roleUri}`, session, patchBody);
 
-        const data = await res.json();
-
-        return data;
-    } catch (err) {
-
-        return null;
-    }
+    return data;
 }

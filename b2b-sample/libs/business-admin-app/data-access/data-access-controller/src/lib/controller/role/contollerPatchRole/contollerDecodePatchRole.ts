@@ -16,12 +16,11 @@
  * under the License.
  */
 
+import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import { PatchMethod } from "@b2bsample/shared/util/util-common";
-import callPatchRole from
-    "../../../apiCall/settings/role/callPatchRole";
-import { commonDecode } from "../../../util/apiUtil/commonDecode";
+import { contollerCallPatchRole } from "./contollerCallPatchRole";
 
-function getAddReplaceBody(patchMethod, path, value) {
+function getAddReplaceBody(patchMethod: string, path: string, value: string[]) {
     return {
         "operations": [
             {
@@ -33,7 +32,7 @@ function getAddReplaceBody(patchMethod, path, value) {
     };
 }
 
-function getRemoveBody(patchMethod, path, value) {
+function getRemoveBody(patchMethod: string, path: string, value: string[]) {
     return {
         "operations": [
             {
@@ -44,7 +43,7 @@ function getRemoveBody(patchMethod, path, value) {
     };
 }
 
-function getPatchBody(patchMethod, path, value) {
+function getPatchBody(patchMethod: string, path: string, value: string[]) {
     switch (patchMethod) {
         case PatchMethod.ADD:
 
@@ -56,29 +55,29 @@ function getPatchBody(patchMethod, path, value) {
         case PatchMethod.REMOVE:
 
             return getRemoveBody(patchMethod, path, value);
+        default:
+
+            return;
     }
 }
+
 
 /**
  * 
- * @param session - session
- * @param roleUri - uri of the role
- * @param patchMethod - `PatchMethod` value
- * @param path - path variable (`users` | `permission` | `displayName`)
- * @param value - value that need to be updated. If `patchMethod` is `PatchMethod.ADD` then `value` 
- * should be an `array`
+ * @param session - session object
+ * @param displayName - role name
+ * @param permissions - role permissions
+ * @param users - users assigned to the role
  * 
- * @returns - API return call 
+ * @returns `res` (if user added successfully) or `false` (if user addition was not completed)
  */
-export default async function decodePatchRole(session, roleUri, patchMethod, path, value) {
+export async function contollerDecodePatchRole(
+    session: any, roleUri: string, patchMethod: string, path: string, value: string[]) {
+    const patchBody = getPatchBody(patchMethod, path, value);
 
-    try {
-        const res = await commonDecode(() => callPatchRole(session, roleUri,
-            getPatchBody(patchMethod, path, value)), null);
+    const res = await commonControllerDecode(() => contollerCallPatchRole(session, roleUri, patchBody), null);
 
-        return res;
-    } catch (err) {
-
-        return null;
-    }
+    return res;
 }
+
+export default contollerDecodePatchRole;

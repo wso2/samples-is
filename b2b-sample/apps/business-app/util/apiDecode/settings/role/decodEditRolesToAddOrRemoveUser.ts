@@ -16,8 +16,8 @@
  * under the License.
  */
 
+import { contollerDecodePatchRole } from "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { PatchMethod } from "@b2bsample/shared/util/util-common";
-import decodePatchRole from "./decodePatchRole";
 
 function getRolesThatNeedToAddUser(initRoleList, roleList) {
     return roleList.filter(roleUri => !initRoleList.includes(roleUri));
@@ -31,7 +31,7 @@ async function getRoleDetailsForAdd(session, userId, initRoleList, roleList) {
     const rolesUriList = getRolesThatNeedToAddUser(initRoleList, roleList);
 
     await rolesUriList.forEach(async (uri) => {
-        decodePatchRole(session, uri, PatchMethod.ADD, "users", [ userId ]);
+        contollerDecodePatchRole(session, uri, PatchMethod.ADD, "users", [ userId ]);
     });
 }
 
@@ -39,7 +39,7 @@ async function getRoleDetailsForRemove(session, userId, initRoleList, roleList) 
     const rolesUriList = getRolesThatNeedToRemoveUser(initRoleList, roleList);
 
     await rolesUriList.forEach(async (uri) => {
-        decodePatchRole(session, uri, PatchMethod.REMOVE, "users", userId);
+        contollerDecodePatchRole(session, uri, PatchMethod.REMOVE, "users", userId);
     });
 }
 
