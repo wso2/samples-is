@@ -17,8 +17,7 @@
  */
 
 import { User } from "@b2bsample/shared/data-access/data-access-common-models-util";
-import { getHostedUrl, getManagementAPIServerBaseUrl, getTenantDomain } from
-    "@b2bsample/shared/util/util-application-config-util";
+import { getManagementAPIServerBaseUrl, getTenantDomain } from "@b2bsample/shared/util/util-application-config-util";
 import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
 import { JWT } from "next-auth/jwt";
 import { signIn, signOut } from "next-auth/react";
@@ -56,7 +55,7 @@ function orgSignin(orgId?: string): void {
 * 
 * @param session - session object
 */
-async function orgSignout(session: any): Promise<void> {
+async function orgSignout(session: any, hostedUrl: string): Promise<void> {
 
     // todo: implementation should change after the backend changes are completed
 
@@ -66,7 +65,7 @@ async function orgSignout(session: any): Promise<void> {
                 () => window.location.assign(
                     getManagementAPIServerBaseUrl() + "/t/" + getTenantDomain() +
                     "/oidc/logout?id_token_hint=" + session.orginalIdToken + "&post_logout_redirect_uri=" +
-                    getHostedUrl() + "&state=sign_out_success"
+                    hostedUrl + "&state=sign_out_success"
                 )
             );
     } else {

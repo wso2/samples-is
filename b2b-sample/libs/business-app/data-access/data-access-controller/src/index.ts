@@ -17,3 +17,4 @@
  */
 
 export * from "./lib/controller/controllerMe/controllerDecodeMe";
+export * from "./lib/controller/controllerSwitchOrg/controllerDecodeSwitchOrg";

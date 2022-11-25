@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { controllerDecodeSwitchOrg } from "@b2bsample/shared/data-access/data-access-controller";
+import { controllerDecodeSwitchOrg } from "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { getLoggedUserFromProfile, getLoggedUserId, getOrgId, getOrgName } from
     "@b2bsample/shared/util/util-authorization-config-util";
 import NextAuth from "next-auth";
@@ -74,11 +74,11 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
         {
             authorization: {
                 params: {
-                    scope: config.BusinessAppConfig.ApplicationConfig.APIScopes.join(" ")
+                    scope: config.BusinessAdminAppConfig.ApplicationConfig.APIScopes.join(" ")
                 }
             },
-            clientId: config.BusinessAppConfig.AuthorizationConfig.ClientId,
-            clientSecret: config.BusinessAppConfig.AuthorizationConfig.ClientSecret,
+            clientId: config.BusinessAdminAppConfig.AuthorizationConfig.ClientId,
+            clientSecret: config.BusinessAdminAppConfig.AuthorizationConfig.ClientSecret,
             id: "wso2is",
             name: "WSO2IS",
             profile(profile) {

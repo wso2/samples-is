@@ -84,16 +84,6 @@ export function getTenantDomain() {
     return path;
 }
 
-/**
- * 
- * get hosted url
- * value of `config.ApplicationConfig.HostedUrl`
- */
-export function getHostedUrl() {
-
-    return config.BusinessAppConfig.ApplicationConfig.HostedUrl;
-}
-
 export default {
-    checkAdmin, getOrgUrl, getManagementAPIServerBaseUrl, getTenantDomain, getHostedUrl
+    checkAdmin, getOrgUrl, getManagementAPIServerBaseUrl, getTenantDomain
 };

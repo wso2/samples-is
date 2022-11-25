@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { controllerDecodeSwitchOrg } from "@b2bsample/shared/data-access/data-access-controller";
+import { controllerDecodeSwitchOrg } from "@b2bsample/business-app/data-access/data-access-controller";
 import { getLoggedUserFromProfile, getLoggedUserId, getOrgId, getOrgName } from
     "@b2bsample/shared/util/util-authorization-config-util";
 import NextAuth from "next-auth";

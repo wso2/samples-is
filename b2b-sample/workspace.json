@@ -72,6 +72,35 @@
       },
       "tags": []
     },
+    "business-admin-app-data-access-data-access-common-api-util": {
+      "root": "libs/business-admin-app/data-access/data-access-common-api-util",
+      "sourceRoot": "libs/business-admin-app/data-access/data-access-common-api-util/src",
+      "projectType": "library",
+      "tags": [],
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "options": {
+            "lintFilePatterns": [
+              "libs/business-admin-app/data-access/data-access-common-api-util/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "{workspaceRoot}/coverage/{projectRoot}"
+          ],
+          "options": {
+            "jestConfig": "libs/business-admin-app/data-access/data-access-common-api-util/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "business-admin-app-data-access-data-access-common-models-util": {
       "root": "libs/business-admin-app/data-access/data-access-common-models-util",
       "sourceRoot": "libs/business-admin-app/data-access/data-access-common-models-util/src",
@@ -188,6 +217,64 @@
         }
       }
     },
+    "business-admin-app-util-util-application-config-util": {
+      "root": "libs/business-admin-app/util/util-application-config-util",
+      "sourceRoot": "libs/business-admin-app/util/util-application-config-util/src",
+      "projectType": "library",
+      "tags": [],
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "options": {
+            "lintFilePatterns": [
+              "libs/business-admin-app/util/util-application-config-util/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "{workspaceRoot}/coverage/{projectRoot}"
+          ],
+          "options": {
+            "jestConfig": "libs/business-admin-app/util/util-application-config-util/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "business-admin-app-util-util-authorization-config-util": {
+      "root": "libs/business-admin-app/util/util-authorization-config-util",
+      "sourceRoot": "libs/business-admin-app/util/util-authorization-config-util/src",
+      "projectType": "library",
+      "tags": [],
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "options": {
+            "lintFilePatterns": [
+              "libs/business-admin-app/util/util-authorization-config-util/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "{workspaceRoot}/coverage/{projectRoot}"
+          ],
+          "options": {
+            "jestConfig": "libs/business-admin-app/util/util-authorization-config-util/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "business-app": {
       "root": "apps/business-app",
       "sourceRoot": "apps/business-app",
@@ -259,6 +346,35 @@
       },
       "tags": []
     },
+    "business-app-data-access-data-access-common-api-util": {
+      "root": "libs/business-app/data-access/data-access-common-api-util",
+      "sourceRoot": "libs/business-app/data-access/data-access-common-api-util/src",
+      "projectType": "library",
+      "tags": [],
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "options": {
+            "lintFilePatterns": [
+              "libs/business-app/data-access/data-access-common-api-util/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "{workspaceRoot}/coverage/{projectRoot}"
+          ],
+          "options": {
+            "jestConfig": "libs/business-app/data-access/data-access-common-api-util/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "business-app-data-access-data-access-controller": {
       "root": "libs/business-app/data-access/data-access-controller",
       "sourceRoot": "libs/business-app/data-access/data-access-controller/src",
@@ -317,6 +433,64 @@
           ],
           "options": {
             "jestConfig": "libs/business-app/ui/ui-components/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "business-app-util-util-application-config-util": {
+      "root": "libs/business-app/util/util-application-config-util",
+      "sourceRoot": "libs/business-app/util/util-application-config-util/src",
+      "projectType": "library",
+      "tags": [],
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "options": {
+            "lintFilePatterns": [
+              "libs/business-app/util/util-application-config-util/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "{workspaceRoot}/coverage/{projectRoot}"
+          ],
+          "options": {
+            "jestConfig": "libs/business-app/util/util-application-config-util/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "business-app-util-util-authorization-config-util": {
+      "root": "libs/business-app/util/util-authorization-config-util",
+      "sourceRoot": "libs/business-app/util/util-authorization-config-util/src",
+      "projectType": "library",
+      "tags": [],
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": [
+            "{options.outputFile}"
+          ],
+          "options": {
+            "lintFilePatterns": [
+              "libs/business-app/util/util-authorization-config-util/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "{workspaceRoot}/coverage/{projectRoot}"
+          ],
+          "options": {
+            "jestConfig": "libs/business-app/util/util-authorization-config-util/jest.config.ts",
             "passWithNoTests": true
           }
         }
@@ -404,35 +578,6 @@
           ],
           "options": {
             "jestConfig": "libs/shared/data-access/data-access-common-models-util/jest.config.ts",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "shared-data-access-data-access-controller": {
-      "root": "libs/shared/data-access/data-access-controller",
-      "sourceRoot": "libs/shared/data-access/data-access-controller/src",
-      "projectType": "library",
-      "tags": [],
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "outputs": [
-            "{options.outputFile}"
-          ],
-          "options": {
-            "lintFilePatterns": [
-              "libs/shared/data-access/data-access-controller/**/*.{ts,tsx,js,jsx}"
-            ]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "{workspaceRoot}/coverage/{projectRoot}"
-          ],
-          "options": {
-            "jestConfig": "libs/shared/data-access/data-access-controller/jest.config.ts",
             "passWithNoTests": true
           }
         }

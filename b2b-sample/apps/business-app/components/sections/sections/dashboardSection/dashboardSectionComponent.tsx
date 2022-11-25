@@ -40,7 +40,7 @@ export default function DashboardSectionComponent(prop) {
     useEffect(() => {
         async function fetchData() {
             const res = await controllerDecodeMe(session);
-
+            console.log(res);
             setMe(res);
         }
         fetchData();

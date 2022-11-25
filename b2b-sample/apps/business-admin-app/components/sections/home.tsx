@@ -18,7 +18,7 @@
 
 import { LogoComponent } from "@b2bsample/business-admin-app/ui/ui-components";
 import { FooterComponent, HomeComponent, SignOutComponent } from "@b2bsample/shared/ui/ui-components";
-import { orgSignout } from "@b2bsample/shared/util/util-authorization-config-util";
+import { signout } from "@b2bsample/business-admin-app/util/util-authorization-config-util";
 import React, { useState } from "react";
 import "rsuite/dist/rsuite.min.css";
 import IdpSectionComponent from "./sections/settingsSection/idpSection/idpSectionComponent";
@@ -57,7 +57,7 @@ export default function Home(prop) {
     };
 
     const signOutCallback = () => {
-        orgSignout(session);
+        signout(session);
     };
 
     const activeKeySideNavSelect = (eventKey) => {

@@ -17,12 +17,12 @@
  */
 
 import { Custom500Component } from "@b2bsample/shared/ui/ui-components";
-import { orgSignout } from "@b2bsample/shared/util/util-authorization-config-util";
+import { signout } from "@b2bsample/business-app/util/util-authorization-config-util";
 import React from "react";
 
 export default function Custom500() {
 
-    const goBack = async () => await orgSignout(null);
+    const goBack = async () => await signout(null);
 
     return (<Custom500Component goBack={ goBack } />);
 }

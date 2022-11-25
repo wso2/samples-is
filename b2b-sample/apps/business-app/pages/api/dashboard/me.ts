@@ -16,8 +16,8 @@
  * under the License.
  */
 
-import { apiRequestOptions, dataNotRecievedError, notPostError } from
-    "@b2bsample/shared/data-access/data-access-common-api-util";
+import { requestOptions } from "@b2bsample/business-app/data-access/data-access-common-api-util";
+import { dataNotRecievedError, notPostError } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import { getOrgUrl } from "@b2bsample/shared/util/util-application-config-util";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -42,14 +42,14 @@ export default async function me(req: NextApiRequest, res: NextApiResponse) {
     try {
         const fetchData = await fetch(
             `${getOrgUrl(orgId)}/scim2/Users/${session.userId}`,
-            apiRequestOptions(session)
+            requestOptions(session)
         );
 
         const meData = await fetchData.json();
 
         res.status(200).json(meData);
     } catch (err) {
-
+        console.log(err);
         return dataNotRecievedError(res);
     }
 }

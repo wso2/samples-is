@@ -16,37 +16,35 @@
  * under the License.
  */
 
-import { getHostedUrl } from "@b2bsample/shared/util/util-application-config-util";
-
 /**
  * 
  * @param session - session object
  * 
  * @returns header object that can used for IS API calls
  */
-export function apiRequestOptions(session: any) {
+export function apiRequestOptions(session: any, hostedUrl : string ) {
     const headers = {
         "accept": "application/json",
-        "access-control-allow-origin": getHostedUrl(),
+        "access-control-allow-origin": hostedUrl,
         "authorization": "Bearer " + session.accessToken
     };
 
     return { headers };
 }
 
-function apiRequestOptionsWithDataHeader(session: any) {
+function apiRequestOptionsWithDataHeader(session: any, hostedUrl : string) {
     const headers = {
-        ...apiRequestOptions(session).headers,
+        ...apiRequestOptions(session, hostedUrl).headers,
         "content-type": "application/json"
     };
 
     return headers;
 }
 
-export function apiRequestOptionsWithBody(session: any, method : string, body : any) {
+export function apiRequestOptionsWithBody(session: any, method : string, body : any, hostedUrl : string) {
     const request = {
         body: JSON.stringify(body),
-        headers: apiRequestOptionsWithDataHeader(session),
+        headers: apiRequestOptionsWithDataHeader(session, hostedUrl),
         method: method
     };
 
