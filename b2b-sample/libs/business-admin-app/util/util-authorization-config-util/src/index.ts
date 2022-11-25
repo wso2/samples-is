@@ -16,4 +16,4 @@
  * under the License.
  */
 
-export * from "./lib/apiUtil/api/apiRequestOptions";
+export * from "./lib/authorizationConfigUtil";

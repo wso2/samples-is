@@ -16,8 +16,8 @@
  * under the License.
  */
 
-import { apiRequestOptions, dataNotRecievedError, notPostError } from
-    "@b2bsample/shared/data-access/data-access-common-api-util";
+import { requestOptions } from "@b2bsample/business-app/data-access/data-access-common-api-util";
+import { dataNotRecievedError, notPostError } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import { getOrgUrl } from "@b2bsample/shared/util/util-application-config-util";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -35,7 +35,7 @@ export default async function userRoles(req: NextApiRequest, res: NextApiRespons
     try {
         const fetchData = await fetch(
             `${getOrgUrl(orgId)}/api/server/v1/organizations/${orgId}/users/${id}/roles`,
-            apiRequestOptions(session)
+            requestOptions(session)
         );
         const data = await fetchData.json();
 

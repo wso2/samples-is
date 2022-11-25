@@ -16,11 +16,11 @@
  * under the License.
  */
 
-import { apiRequestOptionsWithBody, dataNotRecievedError, notPostError } from
+import { requestOptionsWithBody } from "@b2bsample/business-app/data-access/data-access-common-api-util";
+import { dataNotRecievedError, notPostError, RequestMethod } from
     "@b2bsample/shared/data-access/data-access-common-api-util";
 import { getOrgUrl } from "@b2bsample/shared/util/util-application-config-util";
 import { NextApiRequest, NextApiResponse } from "next";
-import { RequestMethod } from "../../../../../util/util/apiUtil/requestMethod";
 
 /**
  * backend API call to edit a user
@@ -45,7 +45,7 @@ export default async function editUser(req: NextApiRequest, res: NextApiResponse
     try {
         const fetchData = await fetch(
             `${getOrgUrl(orgId)}/scim2/Users/${id}`,
-            apiRequestOptionsWithBody(session, RequestMethod.PATCH, user)
+            requestOptionsWithBody(session, RequestMethod.PATCH, user)
         );
         const data = await fetchData.json();
 

@@ -16,7 +16,8 @@
  * under the License.
  */
 
-import { RequestMethod, apiRequestOptionsWithBody, dataNotRecievedError, notPostError } from
+import { requestOptionsWithBody } from "@b2bsample/business-app/data-access/data-access-common-api-util";
+import { dataNotRecievedError, notPostError, RequestMethod } from
     "@b2bsample/shared/data-access/data-access-common-api-util";
 import { getOrgUrl } from "@b2bsample/shared/util/util-application-config-util";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -44,7 +45,7 @@ export default async function patchGeneralSettingsIdp(req: NextApiRequest, res: 
     try {
         const fetchData = await fetch(
             `${getOrgUrl(orgId)}/api/server/v1/identity-providers/${idpId}`,
-            apiRequestOptionsWithBody(session, RequestMethod.PATCH, request)
+            requestOptionsWithBody(session, RequestMethod.PATCH, request)
         );
         const data = await fetchData.json();
 

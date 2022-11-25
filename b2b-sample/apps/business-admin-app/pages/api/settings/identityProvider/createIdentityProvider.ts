@@ -16,7 +16,8 @@
  * under the License.
  */
 
-import { RequestMethod, apiRequestOptionsWithBody, dataNotRecievedError, notPostError } from
+import { requestOptionsWithBody } from "@b2bsample/business-app/data-access/data-access-common-api-util";
+import { dataNotRecievedError, notPostError, RequestMethod } from
     "@b2bsample/shared/data-access/data-access-common-api-util";
 import { getOrgUrl } from "@b2bsample/shared/util/util-application-config-util";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -43,7 +44,7 @@ export default async function createIdentityProvider(req: NextApiRequest, res: N
     try {
         const fetchData = await fetch(
             `${getOrgUrl(orgId)}/api/server/v1/identity-providers`,
-            apiRequestOptionsWithBody(session, RequestMethod.POST, model)
+            requestOptionsWithBody(session, RequestMethod.POST, model)
         );
         const data = await fetchData.json();
 

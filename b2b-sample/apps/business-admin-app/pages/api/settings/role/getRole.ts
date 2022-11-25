@@ -16,8 +16,8 @@
  * under the License.
  */
 
-import { apiRequestOptions, dataNotRecievedError, notPostError } from
-    "@b2bsample/shared/data-access/data-access-common-api-util";
+import { requestOptions } from "@b2bsample/business-app/data-access/data-access-common-api-util";
+import { dataNotRecievedError, notPostError } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function getRole(req: NextApiRequest, res: NextApiResponse) {
@@ -32,7 +32,7 @@ export default async function getRole(req: NextApiRequest, res: NextApiResponse)
     try {
         const fetchData = await fetch(
             roleUri,
-            apiRequestOptions(session)
+            requestOptions(session)
         );
         const data = await fetchData.json();
 

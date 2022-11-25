@@ -16,4 +16,17 @@
  * under the License.
  */
 
-export * from "./lib/apiUtil/api/apiRequestOptions";
+import { getHostedUrl } from "@b2bsample/business-app/util/util-application-config-util";
+import { orgSignout } from "@b2bsample/shared/util/util-authorization-config-util";
+
+/**
+* signout of the logged in organization
+* 
+* @param session - session object
+*/
+async function signout(session: any): Promise<void> {
+
+   await orgSignout(session, getHostedUrl())
+}
+
+export { signout };

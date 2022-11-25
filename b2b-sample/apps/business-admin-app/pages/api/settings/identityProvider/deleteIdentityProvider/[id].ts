@@ -16,7 +16,8 @@
  * under the License.
  */
 
-import { RequestMethod, apiRequestOptionsWithBody, dataNotRecievedError, notPostError } from
+import { requestOptionsWithBody } from "@b2bsample/business-app/data-access/data-access-common-api-util";
+import { dataNotRecievedError, notPostError, RequestMethod } from
     "@b2bsample/shared/data-access/data-access-common-api-util";
 import { getOrgUrl } from "@b2bsample/shared/util/util-application-config-util";
 
@@ -42,7 +43,7 @@ export default async function deleteIdentityProvider(req, res) {
     try {
         const fetchData = await fetch(
             `${getOrgUrl(orgId)}/api/server/v1/identity-providers/${id}`,
-            apiRequestOptionsWithBody(session, RequestMethod.DELETE, null)
+            requestOptionsWithBody(session, RequestMethod.DELETE, null)
         );
         const data = await fetchData.json();
 

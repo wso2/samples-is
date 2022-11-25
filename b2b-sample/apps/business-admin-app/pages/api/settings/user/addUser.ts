@@ -16,7 +16,8 @@
  * under the License.
  */
 
-import { apiRequestOptionsWithBody, dataNotRecievedError, notPostError, RequestMethod } from
+import { requestOptionsWithBody } from "@b2bsample/business-app/data-access/data-access-common-api-util";
+import { dataNotRecievedError, notPostError, RequestMethod } from
     "@b2bsample/shared/data-access/data-access-common-api-util";
 import { getOrgUrl } from "@b2bsample/shared/util/util-application-config-util";
 
@@ -41,7 +42,7 @@ export default async function addUser(req, res) {
     try {
         const fetchData = await fetch(
             `${getOrgUrl(orgId)}/scim2/Users`,
-            apiRequestOptionsWithBody(session, RequestMethod.POST, user)
+            requestOptionsWithBody(session, RequestMethod.POST, user)
         );
         const data = await fetchData.json();
 

@@ -16,7 +16,8 @@
  * under the License.
  */
 
-import { RequestMethod, apiRequestOptionsWithBody, dataNotRecievedError, notPostError } from
+import { requestOptionsWithBody } from "@b2bsample/business-app/data-access/data-access-common-api-util";
+import { dataNotRecievedError, notPostError, RequestMethod } from
     "@b2bsample/shared/data-access/data-access-common-api-util";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -33,7 +34,7 @@ export default async function editRole(req: NextApiRequest, res: NextApiResponse
     try {
         const fetchData = await fetch(
             roleUri,
-            apiRequestOptionsWithBody(session, RequestMethod.PUT, role)
+            requestOptionsWithBody(session, RequestMethod.PUT, role)
         );
         const data = await fetchData.json();
 
