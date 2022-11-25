@@ -27,52 +27,14 @@ import { Button } from "rsuite";
 
 export default function AddUserButton(prop) {
 
-    const { session, onClick } = prop;
-
-    const [ allApplications, setAllApplications ] = useState<AllApplications>(null);
-    const [ applicationDetail, setApplicationDetail ] = useState<Application>(null);
-    const [ basicAuthAvailable, setBasicAuthAvailable ] = useState(false);
-
-    const fetchData = useCallback(async () => {
-
-        const res = await controllerDecodeListCurrentApplication(session);
-
-        await setAllApplications(res);
-    }, [ session ]);
-
-    const fetchApplicatioDetails = useCallback(async () => {
-        if (!checkIfJSONisEmpty(allApplications) && allApplications.totalResults !== 0) {
-            const res = await controllerDecodeGetApplication(session, allApplications.applications[0].id);
-
-            await setApplicationDetail(res);
-        }
-
-    }, [ session, allApplications ]);
-
-    useEffect(() => {
-        fetchData();
-    }, [ fetchData ]);
-
-    useEffect(() => {
-        fetchApplicatioDetails();
-    }, [ fetchApplicatioDetails ]);
-
-    useEffect(() => {
-        if (!checkIfJSONisEmpty(applicationDetail)) {
-            const check = checkIfBasicAvailableinAuthSequence(applicationDetail);
-
-            setBasicAuthAvailable(check);
-        }
-    }, [ applicationDetail ]);
+    const { onClick } = prop;
 
     return (
-        basicAuthAvailable
-            ? (<Button
-                appearance="primary"
-                size="lg"
-                onClick={ onClick }>
-                Add User
-            </Button>)
-            : null
+        <Button
+            appearance="primary"
+            size="lg"
+            onClick={onClick}>
+            Add User
+        </Button>
     );
 }

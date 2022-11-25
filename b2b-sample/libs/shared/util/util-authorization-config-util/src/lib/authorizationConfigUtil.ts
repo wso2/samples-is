@@ -136,7 +136,7 @@ function getOrgName(token: JWT): string {
 * @returns `User` get logged user from profile
 */
 function getLoggedUserFromProfile(profile: any): User | null {
-
+    console.log(profile);
     try {
         const user: User = {
             emails: [ profile.email ],

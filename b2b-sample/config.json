@@ -60,7 +60,7 @@
             "ClientSecret": "ajJMUHQgf8pQNCKUUFm4ClAKiwQa"
         },
         "ApplicationConfig": {
-            "HostedUrl": "http://localhost:3000",
+            "HostedUrl": "http://localhost:3001",
             "APIScopes": [
                 "openid",
                 "email",

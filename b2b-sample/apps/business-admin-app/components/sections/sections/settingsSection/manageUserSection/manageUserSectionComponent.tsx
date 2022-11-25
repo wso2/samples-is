@@ -97,9 +97,7 @@ export default function ManageUserSectionComponent(prop) {
             <SettingsTitleComponent
                 title="Manage Users"
                 subtitle="Manage users in the organisation">
-                <AddUserButton
-                    session={ session }
-                    onClick={ onAddUserClick } />
+                <AddUserButton onClick={ onAddUserClick } />
             </SettingsTitleComponent>
 
             {

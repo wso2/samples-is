@@ -35,7 +35,8 @@ export async function controllerDecodeMe(session: any) {
     } else {
         meData = session.user;
     }
-
+    console.log(meData);
+    console.log(session);
     if(meData){
         const meReturn = decodeUser(meData);
 
