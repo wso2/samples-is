@@ -19,7 +19,7 @@
 import { SharedLogoComponent } from "@b2bsample/shared/ui/ui-components";
 import React from "react";
 import config from "../../../../../../../../config.json";
-import logoImage from "../../../../../../../../libs/shared/ui/ui-assets/src/lib/images/logo.png";
+import logoImage from "../../../../../../ui-assets/src/lib/images/logo.png";
 import { LogoComponentProps } from "../../models/logoComponent/logoComponent";
 
 /**
@@ -30,13 +30,11 @@ import { LogoComponentProps } from "../../models/logoComponent/logoComponent";
  */
 export function LogoComponent(prop: LogoComponentProps) {
 
-    const { name, imageSize, white } = prop;
+    const { imageSize, white } = prop;
 
     return (
         <SharedLogoComponent
             image={ logoImage }
-            tagLine={ config.BusinessAppConfig.ApplicationConfig.Branding.tag }
-            name={ name }
             imageSize={ imageSize }
             white={ white }
         />

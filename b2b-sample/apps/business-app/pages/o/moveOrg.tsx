@@ -34,10 +34,9 @@ export async function getServerSideProps(context) {
         } else {
 
             const orgId = session.orgId;
-            const orgName = session.orgName;
 
             return {
-                props: { orgId, orgName }
+                props: { orgId }
             };
         }
     } else {
@@ -54,7 +53,7 @@ export async function getServerSideProps(context) {
  */
 export default function MoveOrg(prop) {
 
-    const { orgId, orgName } = prop;
+    const { orgId } = prop;
 
     const router = useRouter();
 
@@ -78,6 +77,6 @@ export default function MoveOrg(prop) {
     }, [ redirectSeconds, orgId, redirectToOrg ]);
 
     return (
-        <MoveOrganizationComponent orgName={ orgName } />
+        <MoveOrganizationComponent orgName={ "Business Application" } />
     );
 }

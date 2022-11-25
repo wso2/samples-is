@@ -25,7 +25,7 @@ export async function getServerSideProps(context) {
 
     const routerQuery = context.query.id;
     const session = await getSession(context);
-
+    console.log(session);
     if (session === null || session === undefined) {
 
         return {
@@ -68,7 +68,6 @@ export default function Org(prop) {
         session
             ? (<Home
                 orgId={ session.orgId }
-                name={ session.orgName }
                 session={ session }/>)
             : null
     );

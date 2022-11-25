@@ -34,7 +34,7 @@ import sideNavData from "../../../../libs/business-app/ui-assets/src/lib/data/si
  */
 export default function Home(prop) {
 
-    const { name, orgId, session } = prop;
+    const { orgId, session } = prop;
 
     const [ activeKeySideNav, setActiveKeySideNav ] = useState("1");
     const [ signOutModalOpen, setSignOutModalOpen ] = useState(false);
@@ -43,7 +43,7 @@ export default function Home(prop) {
         switch (activeKey) {
             case "1":
 
-                return <DashboardSectionComponent orgName={ name } orgId={ orgId } session={ session } />;
+                return <DashboardSectionComponent orgId={ orgId } session={ session } />;
         }
     };
 
@@ -66,7 +66,7 @@ export default function Home(prop) {
                 onClose={ signOutModalClose }
                 signOutCallback={ signOutCallback } />
 
-            { session && session.scope
+            { session
                 ? (
 
                     <HomeComponent
@@ -75,7 +75,7 @@ export default function Home(prop) {
                         activeKeySideNav={ activeKeySideNav }
                         activeKeySideNavSelect={ activeKeySideNavSelect }
                         setSignOutModalOpen={ setSignOutModalOpen }
-                        logoComponent={ <LogoComponent imageSize="small" name={ name } white={ true } /> }>
+                        logoComponent={ <LogoComponent imageSize="small" white={ true } /> }>
 
                         { mainPanelComponenet(activeKeySideNav) }
 

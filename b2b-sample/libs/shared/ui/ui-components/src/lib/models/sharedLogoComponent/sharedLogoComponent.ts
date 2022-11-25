@@ -20,7 +20,7 @@ import { StaticImageData } from "next/image";
 
 export interface SharedLogoComponentProps {
     image : StaticImageData,
-    tagLine : string,
+    tagLine? : string,
     name? : string,
     imageSize : "small" | "medium" | "large" | "x-large",
     white? : boolean

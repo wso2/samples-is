@@ -33,7 +33,7 @@ import styles from "../../../../styles/Settings.module.css";
  */
 export default function DashboardSectionComponent(prop) {
 
-    const { session, orgName } = prop;
+    const { session } = prop;
 
     const [ me, setMe ] = useState(null);
 
@@ -50,7 +50,7 @@ export default function DashboardSectionComponent(prop) {
         <div className={ styles.homeMainPanelDiv }>
             <Panel bordered>
                 <div className={ styles.homePanel }>
-                    <LogoComponent imageSize="medium" name={ orgName } />
+                    <LogoComponent imageSize="medium" />
                 </div>
             </Panel>
 

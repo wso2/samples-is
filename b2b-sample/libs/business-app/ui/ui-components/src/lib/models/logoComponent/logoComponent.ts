@@ -19,7 +19,6 @@
 import { StaticImageData } from "next/image";
 
 export interface LogoComponentProps {
-    name?: string,
     imageSize: "small" | "medium" | "large" | "x-large",
     white?: boolean
 }
