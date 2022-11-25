@@ -26,8 +26,8 @@ import { Form } from "react-final-form";
 import { Button, ButtonToolbar, Loader, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
 import SettingsFormSelection from "./settingsFormSection/settingsFormSelection";
-import { FederatedAuthenticators } from "../../../../../../../models/identityProvider/identityProvider";
 import styles from "../../../../../../../styles/Settings.module.css";
+import { FederatedAuthenticators } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 
 /**
  * 

@@ -17,8 +17,8 @@
  */
 
 import { ENTERPRISE_ID, GOOGLE_ID } from "@b2bsample/shared/util/util-common";
-import enterpriseFederatedAuthenticators from "./data/templates/enterprise-identity-provider.json";
-import googleFederatedAuthenticators from "./data/templates/google.json";
+import enterpriseFederatedAuthenticators from "../identityProvider/data/templates/enterprise-identity-provider.json";
+import googleFederatedAuthenticators from "../identityProvider/data/templates/google.json";
 
 /**
  * 
@@ -26,6 +26,7 @@ import googleFederatedAuthenticators from "./data/templates/google.json";
  * 
  * @returns template related to the template id.
  */
+
 export function selectedTemplateBaesedonTemplateId(templateId: string) {
     switch (templateId) {
         case GOOGLE_ID:

@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { selectedTemplateBaesedonTemplateId } from
+import { IdentityProvider, selectedTemplateBaesedonTemplateId } from
     "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { controllerDecodeGetDetailedIdentityProvider } from
     "@b2bsample/business-admin-app/data-access/data-access-controller";
@@ -27,7 +27,6 @@ import { Nav, Panel, Stack } from "rsuite";
 import ButtonGroupIdentityProviderDetails from "./buttonGroupIdentityProviderDetails";
 import General from "./idpDetailsSections/general";
 import Settings from "./idpDetailsSections/settings";
-import { IdentityProvider } from "../../../../../../models/identityProvider/identityProvider";
 
 /**
  * 

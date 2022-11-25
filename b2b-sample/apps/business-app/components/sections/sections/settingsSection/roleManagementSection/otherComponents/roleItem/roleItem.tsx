@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { Role } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { controllerDecodeGetRole } from "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { AccordianItemHeaderComponent, JsonDisplayComponent } from "@b2bsample/shared/ui/ui-components";
 import CodeIcon from "@rsuite/icons/Code";
@@ -24,7 +25,6 @@ import { Nav, Panel } from "rsuite";
 import General from "./roleItemDetailsSection/general";
 import Permission from "./roleItemDetailsSection/permission";
 import Users from "./roleItemDetailsSection/users";
-import { Role } from "../../../../../../../models/role/role";
 
 /**
  * 

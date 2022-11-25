@@ -19,4 +19,6 @@
 export * from "./lib/application/application";
 export * from "./lib/application/allApplications";
 export * from "./lib/application/applicationUtils";
+export * from "./lib/identityProvider/identityProvider";
 export * from "./lib/identityProvider/identityProviderUtils";
+export * from "./lib/role/role";
