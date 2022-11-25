@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { requestOptions } from "@b2bsample/business-app/data-access/data-access-common-api-util";
+import { requestOptions } from "@b2bsample/business-admin-app/data-access/data-access-common-api-util";
 import { dataNotRecievedError, notPostError } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import { getOrgUrl } from "@b2bsample/shared/util/util-application-config-util";
 import { NextApiRequest, NextApiResponse } from "next";
