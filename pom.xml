@@ -861,7 +861,7 @@
         <osgi.service.component.imp.pkg.version.range>[1.2.0, 2.0.0)</osgi.service.component.imp.pkg.version.range>
         <commons.logging.version.range>[1.2.0,2.0.0)</commons.logging.version.range>
         <commons-lang.wso2.version>2.6.0.wso2v1</commons-lang.wso2.version>
-        <carbon.identity.framework.version.range>[5.14.67, 6.0.0]</carbon.identity.framework.version.range>
+        <carbon.identity.framework.version.range>[6.0.0, 7.0.0]</carbon.identity.framework.version.range>
     </properties>
 
 </project>
