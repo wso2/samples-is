@@ -15,15 +15,11 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+declare module "*.svg" {
+  const content: any;
 
-import { SideNavList } from "@b2bsample/shared/data-access/data-access-common-models-util"
-
-export interface HomeComponentProps {
-    scope : string[],
-    sideNavData : SideNavList,
-    activeKeySideNav : string,
-    activeKeySideNavSelect : Function
-    setSignOutModalOpen : Function,
-    children : JSX.Element,
-    logoComponent : JSX.Element
+  export const ReactComponent: any;
+  export default content;
 }
+
+

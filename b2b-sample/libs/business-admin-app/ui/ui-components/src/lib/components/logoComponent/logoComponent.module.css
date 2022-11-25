@@ -16,14 +16,21 @@
  * under the License.
  */
 
-import { SideNavList } from "@b2bsample/shared/data-access/data-access-common-models-util"
+.nameTag {
+    position: relative;
+    font-size: 16px;
+}
 
-export interface HomeComponentProps {
-    scope : string[],
-    sideNavData : SideNavList,
-    activeKeySideNav : string,
-    activeKeySideNavSelect : Function
-    setSignOutModalOpen : Function,
-    children : JSX.Element,
-    logoComponent : JSX.Element
+.logoDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: auto;
+    flex-direction: column;
+}
+
+.logoDiv hr {
+    margin: 12px;
+    align-self: stretch;
 }

@@ -16,14 +16,13 @@
  * under the License.
  */
 
-import { SideNavList } from "@b2bsample/shared/data-access/data-access-common-models-util"
+import { Custom500Component } from "@b2bsample/shared/ui/ui-components";
+import { orgSignout } from "@b2bsample/shared/util/util-authorization-config-util";
+import React from "react";
 
-export interface HomeComponentProps {
-    scope : string[],
-    sideNavData : SideNavList,
-    activeKeySideNav : string,
-    activeKeySideNavSelect : Function
-    setSignOutModalOpen : Function,
-    children : JSX.Element,
-    logoComponent : JSX.Element
+export default function Custom500() {
+
+    const goBack = async () => await orgSignout(null);
+
+    return (<Custom500Component goBack={ goBack } />);
 }

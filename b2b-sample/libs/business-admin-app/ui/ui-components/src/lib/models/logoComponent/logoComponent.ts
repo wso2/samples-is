@@ -16,14 +16,10 @@
  * under the License.
  */
 
-import { SideNavList } from "@b2bsample/shared/data-access/data-access-common-models-util"
+import { StaticImageData } from "next/image";
 
-export interface HomeComponentProps {
-    scope : string[],
-    sideNavData : SideNavList,
-    activeKeySideNav : string,
-    activeKeySideNavSelect : Function
-    setSignOutModalOpen : Function,
-    children : JSX.Element,
-    logoComponent : JSX.Element
+export interface LogoComponentProps {
+    name?: string,
+    imageSize: "small" | "medium" | "large" | "x-large",
+    white?: boolean
 }

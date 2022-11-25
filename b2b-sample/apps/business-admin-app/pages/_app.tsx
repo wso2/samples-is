@@ -16,31 +16,28 @@
  * under the License.
  */
 
-import { LogoComponent } from "@b2bsample/business-app/ui/ui-components";
-import { IndexHomeComponent } from "@b2bsample/shared/ui/ui-components";
-import { useRouter } from "next/router";
+import { SessionProvider } from "next-auth/react";
+import Head from "next/head";
 import React from "react";
 import "rsuite/dist/rsuite.min.css";
-import homeImage from "../../../libs/business-app/ui-assets/src/lib/images/home.jpeg";
+import config from "../../../config.json";
+import "../styles/custom-theme.less";
+import "../styles/globals.css";
 
-/**
- * 
- * @returns - First interface of the app
- */
-export default function Home() {
+function MyApp(prop) {
 
-    const router = useRouter();
-    const signinOnClick = () => {
-        router.push("/signin");
-    };
+    const { Component, pageProps } = prop;
 
     return (
-        <IndexHomeComponent
-            image={ homeImage }
-            tagText="Let&apos;s get your journey started."
-            signinOnClick={ signinOnClick }
-            logoComponent = { <LogoComponent imageSize="medium"/> }
-        />
-       
+        <SessionProvider session={ pageProps ? pageProps.session : null }>
+            <Head>
+                <title>{ config.BusinessAdminAppConfig.ApplicationConfig.Branding.name }</title>
+                <meta name="description" content={ config.BusinessAdminAppConfig.ApplicationConfig.Branding.name } />
+            </Head>
+
+            <Component { ...pageProps } />
+        </SessionProvider>
     );
 }
+
+export default MyApp;

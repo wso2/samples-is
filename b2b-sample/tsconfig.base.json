@@ -43,6 +43,9 @@
       "@b2bsample/shared/data-access/data-access-common-models-util": [
         "libs/shared/data-access/data-access-common-models-util/src/index.ts"
       ],
+      "@b2bsample/shared/data-access/data-access-controller": [
+        "libs/shared/data-access/data-access-controller/src/index.ts"
+      ],
       "@b2bsample/shared/ui/ui-assets": [
         "libs/shared/ui/ui-assets/src"
       ],
@@ -61,8 +64,11 @@
       "@b2bsample/shared/util/util-front-end-util": [
         "libs/shared/util/util-front-end-util/src/index.ts"
       ],
-      "@b2bsample/shared/data-access/data-access-controller": [
-        "libs/shared/data-access/data-access-controller/src/index.ts"
+      "@b2bsample/business-admin-app/ui/ui-assets": [
+        "libs/business-admin-app/ui/ui-assets/src/index.ts"
+      ],
+      "@b2bsample/business-admin-app/ui/ui-components": [
+        "libs/business-admin-app/ui/ui-components/src/index.ts"
       ]
     }
   },

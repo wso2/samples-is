@@ -16,14 +16,4 @@
  * under the License.
  */
 
-import { SideNavList } from "@b2bsample/shared/data-access/data-access-common-models-util"
-
-export interface HomeComponentProps {
-    scope : string[],
-    sideNavData : SideNavList,
-    activeKeySideNav : string,
-    activeKeySideNavSelect : Function
-    setSignOutModalOpen : Function,
-    children : JSX.Element,
-    logoComponent : JSX.Element
-}
+export * from "./lib/components/logoComponent/logoComponent";

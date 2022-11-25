@@ -24,7 +24,7 @@ import SidenavComponent from "../sidenavComponent/sidenavComponent";
 
 export function HomeComponent(prop: HomeComponentProps) {
 
-    const { scope, activeKeySideNav, activeKeySideNavSelect, setSignOutModalOpen, children, logoComponent }
+    const { scope, sideNavData, activeKeySideNav, activeKeySideNavSelect, setSignOutModalOpen, children, logoComponent }
         = prop;
 
     return (
@@ -32,6 +32,7 @@ export function HomeComponent(prop: HomeComponentProps) {
 
             <SidenavComponent
                 scope={ scope }
+                sideNavData={sideNavData}
                 activeKeySideNav={ activeKeySideNav }
                 activeKeySideNavSelect={ activeKeySideNavSelect }
                 setSignOutModalOpen={ setSignOutModalOpen }

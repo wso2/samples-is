@@ -28,7 +28,7 @@ import sideNavConfig from "../../../../../../../business-app/ui-assets/src/lib/d
 import { SidenavComponentProps } from "../../models/sidenavComponent/sidenavComponent";
 
 export function SidenavComponent(prop: SidenavComponentProps) {
-    const { scope, activeKeySideNav, activeKeySideNavSelect, setSignOutModalOpen, logoComponent } = prop;
+    const { scope, sideNavData, activeKeySideNav, activeKeySideNavSelect, setSignOutModalOpen, logoComponent } = prop;
 
     const signOutOnClick = () => setSignOutModalOpen(true);
 
@@ -46,11 +46,11 @@ export function SidenavComponent(prop: SidenavComponentProps) {
         }
     };
 
-    const sideNavConfigList : SideNavList = sideNavConfig;
+    const sideNavConfigList : SideNavList = sideNavData;
 
     return (
         <div className={ styles["sideNavDiv"] }>
-            <Sidenav appearance="inverse" className={ styles["sideNav"] } defaultOpenKeys={ [ "3", "4" ] }>
+            <Sidenav appearance="inverse" className={ styles["sideNav"] } defaultOpenKeys={ [ "1","2","3", "4" ] }>
                 <Sidenav.Header>
                     <div className={ styles["logoComponentDiv"] }>
                         { logoComponent }

@@ -85,8 +85,8 @@
                 "internal_group_mgt_update"
             ],
             "Branding": {
-                "name": "Guardio Insurance",
-                "tag": "Anytime . Anywhere"
+                "name": "Guardio Insurance - Administrator Application",
+                "tag": "Administrator Application"
             }
         },
         "ManagementAPIConfig": {

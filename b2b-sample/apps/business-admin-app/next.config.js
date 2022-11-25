@@ -16,14 +16,23 @@
  * under the License.
  */
 
-import { SideNavList } from "@b2bsample/shared/data-access/data-access-common-models-util"
+const { withNx } = require("@nrwl/next/plugins/with-nx");
+const withLess = require("next-with-less");
 
-export interface HomeComponentProps {
-    scope : string[],
-    sideNavData : SideNavList,
-    activeKeySideNav : string,
-    activeKeySideNavSelect : Function
-    setSignOutModalOpen : Function,
-    children : JSX.Element,
-    logoComponent : JSX.Element
-}
+const lessConfig = withLess({
+    lessLoaderOptions: {
+        lessOptions: {
+            strictMath: true
+        }
+    }
+});
+
+const nextConfig = withNx({
+    nx: {
+        svgr: false
+
+    },
+    ...lessConfig
+});
+
+module.exports = nextConfig;

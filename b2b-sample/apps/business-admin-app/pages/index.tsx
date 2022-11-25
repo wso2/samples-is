@@ -16,12 +16,12 @@
  * under the License.
  */
 
-import { LogoComponent } from "@b2bsample/business-app/ui/ui-components";
+import { LogoComponent } from "@b2bsample/business-admin-app/ui/ui-components";
 import { IndexHomeComponent } from "@b2bsample/shared/ui/ui-components";
 import { useRouter } from "next/router";
 import React from "react";
 import "rsuite/dist/rsuite.min.css";
-import homeImage from "../../../libs/business-app/ui-assets/src/lib/images/home.jpeg";
+import homeImage from "../../../libs/business-admin-app/ui/ui-assets/src/lib/images/businessAdminHome.jpeg";
 
 /**
  * 
@@ -37,7 +37,7 @@ export default function Home() {
     return (
         <IndexHomeComponent
             image={ homeImage }
-            tagText="Let&apos;s get your journey started."
+            tagText="Sign in to continue"
             signinOnClick={ signinOnClick }
             logoComponent = { <LogoComponent imageSize="medium"/> }
         />

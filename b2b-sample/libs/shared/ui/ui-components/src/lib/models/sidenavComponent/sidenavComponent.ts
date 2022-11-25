@@ -16,8 +16,11 @@
  * under the License.
  */
 
+import { SideNavList } from "@b2bsample/shared/data-access/data-access-common-models-util"
+
 export interface SidenavComponentProps {
-    scope : string[]
+    scope : string[],
+    sideNavData : SideNavList,
     activeKeySideNav : string,
     activeKeySideNavSelect : Function
     setSignOutModalOpen : Function,

@@ -16,14 +16,10 @@
  * under the License.
  */
 
-import { SideNavList } from "@b2bsample/shared/data-access/data-access-common-models-util"
+import { Custom404Component } from "@b2bsample/shared/ui/ui-components";
+import React from "react";
 
-export interface HomeComponentProps {
-    scope : string[],
-    sideNavData : SideNavList,
-    activeKeySideNav : string,
-    activeKeySideNavSelect : Function
-    setSignOutModalOpen : Function,
-    children : JSX.Element,
-    logoComponent : JSX.Element
+export default function Custom404() {
+
+    return (<Custom404Component />);
 }

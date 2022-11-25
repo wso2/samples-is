@@ -16,14 +16,25 @@
  * under the License.
  */
 
-import { SideNavList } from "@b2bsample/shared/data-access/data-access-common-models-util"
+import Document, { Head, Html, Main, NextScript } from "next/document";
+import React from "react";
 
-export interface HomeComponentProps {
-    scope : string[],
-    sideNavData : SideNavList,
-    activeKeySideNav : string,
-    activeKeySideNavSelect : Function
-    setSignOutModalOpen : Function,
-    children : JSX.Element,
-    logoComponent : JSX.Element
+export default class MyDocument extends Document {
+    render() {
+
+        return (
+            <Html>
+                <Head>
+                    <link rel="shortcut icon" href="./favicon.png" />
+                    <meta httpEquiv="cache-control" content="no-cache" />
+                    <meta httpEquiv="expires" content="0" />
+                    <meta httpEquiv="pragma" content="no-cache" />
+                </Head>
+                <body>
+                    <Main />
+                    <NextScript />
+                </body>
+            </Html>
+        );
+    }
 }
