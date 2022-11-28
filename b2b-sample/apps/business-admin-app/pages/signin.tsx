@@ -23,19 +23,6 @@ import { getSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 import "rsuite/dist/rsuite.min.css";
 
-export async function getServerSideProps(context) {
-    const session = await getSession(context);
-
-    if (session) {
-
-        return redirect("/o/moveOrg");
-    }
-
-    return {
-        props: {}
-    };
-}
-
 /**
  * 
  * @returns Signin interface (redirecting to the login or main interface)

@@ -73,7 +73,7 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
             clientSecret: config.BusinessAppConfig.AuthorizationConfig.ClientSecret,
             callbackUrl: "/o/moveOrg",
             httpOptions: {
-                timeout: 180000
+                timeout: 1800000
             },
             id: "wso2is",
             name: "WSO2IS",
