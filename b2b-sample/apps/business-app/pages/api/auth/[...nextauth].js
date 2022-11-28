@@ -16,9 +16,7 @@
  * under the License.
  */
 
-import { controllerDecodeSwitchOrg } from "@b2bsample/business-app/data-access/data-access-controller";
-import { getLoggedUserFromProfile, getLoggedUserId, getOrgId, getOrgName } from
-    "@b2bsample/shared/util/util-authorization-config-util";
+import { getLoggedUserFromProfile } from "@b2bsample/shared/util/util-authorization-config-util";
 import NextAuth from "next-auth";
 import config from "../../../../../config.json";
 
@@ -53,6 +51,7 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
                 session.expires = true;
             }
             else {
+                session.error = false;
                 session.expires = false;
                 session.user = getLoggedUserFromProfile(token.user);
                 session.orgId = token.user.user_organization;
