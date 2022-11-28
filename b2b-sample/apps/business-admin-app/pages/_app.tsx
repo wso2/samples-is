@@ -29,13 +29,17 @@ function MyApp(prop) {
     const { Component, pageProps } = prop;
 
     return (
-        <SessionProvider session={ pageProps ? pageProps.session : null }>
+        <SessionProvider session={pageProps ? pageProps.session : null}>
             <Head>
-                <title>{ config.BusinessAdminAppConfig.ApplicationConfig.Branding.name }</title>
-                <meta name="description" content={ config.BusinessAdminAppConfig.ApplicationConfig.Branding.name } />
+                <link rel="shortcut icon" href="./favicon.png" />
+                <meta httpEquiv="cache-control" content="no-cache" />
+                <meta httpEquiv="expires" content="0" />
+                <meta httpEquiv="pragma" content="no-cache" />
+                <title>{config.BusinessAdminAppConfig.ApplicationConfig.Branding.name}</title>
+                <meta name="description" content={config.BusinessAdminAppConfig.ApplicationConfig.Branding.name} />
             </Head>
 
-            <Component { ...pageProps } />
+            <Component {...pageProps} />
         </SessionProvider>
     );
 }

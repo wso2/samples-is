@@ -54,7 +54,7 @@ export default function DashboardSectionComponent(prop) {
                 </div>
             </Panel>
 
-            {/* <UserDetails me={ me } session={ session } /> */}
+            <UserDetails me={ me } session={ session } />
 
             <LatestNewsComponent />
         </div>
