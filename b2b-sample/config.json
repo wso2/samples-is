@@ -90,7 +90,7 @@
             }
         },
         "ManagementAPIConfig": {
-            "SharedApplicationName": "temp"
+            "SharedApplicationName": "temp-admin"
         }
     }
 }
