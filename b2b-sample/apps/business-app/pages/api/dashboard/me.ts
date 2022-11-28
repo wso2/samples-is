@@ -49,7 +49,7 @@ export default async function me(req: NextApiRequest, res: NextApiResponse) {
 
         res.status(200).json(meData);
     } catch (err) {
-        console.log(err);
+
         return dataNotRecievedError(res);
     }
 }

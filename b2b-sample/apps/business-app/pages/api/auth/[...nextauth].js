@@ -44,7 +44,7 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
             return token;
         },
         async session({ session, token }) {
-            
+
             if (!session) {
                 session.error = true;
             } else if (session.expiresIn <= 0) {
@@ -71,6 +71,10 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
             },
             clientId: config.BusinessAppConfig.AuthorizationConfig.ClientId,
             clientSecret: config.BusinessAppConfig.AuthorizationConfig.ClientSecret,
+            callbackUrl: "/o/moveOrg",
+            httpOptions: {
+                timeout: 180000
+            },
             id: "wso2is",
             name: "WSO2IS",
             profile(profile) {

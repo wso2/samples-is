@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { getHostedUrl } from "@b2bsample/business-app/util/util-application-config-util";
+import { getHostedUrl } from "@b2bsample/business-admin-app/util/util-application-config-util";
 import { orgSignout } from "@b2bsample/shared/util/util-authorization-config-util";
 
 /**

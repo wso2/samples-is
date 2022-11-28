@@ -58,7 +58,7 @@ export default function Org(prop) {
 
     useEffect(() => {
         if (routerQuery) {
-            orgSignin(routerQuery);
+            orgSignin(true,routerQuery);
 
             return;
         }

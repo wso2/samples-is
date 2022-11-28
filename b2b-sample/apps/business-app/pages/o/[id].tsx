@@ -25,7 +25,7 @@ export async function getServerSideProps(context) {
 
     const routerQuery = context.query.id;
     const session = await getSession(context);
-    console.log(session);
+
     if (session === null || session === undefined) {
 
         return {
@@ -58,7 +58,7 @@ export default function Org(prop) {
 
     useEffect(() => {
         if (routerQuery) {
-            orgSignin(routerQuery);
+            orgSignin(false,routerQuery);
 
             return;
         }

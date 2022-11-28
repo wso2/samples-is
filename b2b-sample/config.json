@@ -88,9 +88,6 @@
                 "name": "Guardio Insurance - Administrator Application",
                 "tag": "Administrator Application"
             }
-        },
-        "ManagementAPIConfig": {
-            "SharedApplicationName": "temp-admin"
         }
     }
 }

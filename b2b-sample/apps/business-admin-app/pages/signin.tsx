@@ -47,7 +47,7 @@ export default function Signin() {
 
     useEffect(() => {
         if (redirectSeconds <= 1) {
-            orgSignin();
+            orgSignin(true);
 
             return;
         }

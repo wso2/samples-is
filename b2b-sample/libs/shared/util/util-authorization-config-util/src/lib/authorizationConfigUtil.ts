@@ -42,11 +42,20 @@ function redirect(path: string): object {
 * 
 * @param orgId - `orgId` - (directs to the organization login), `null` - (enter the organization to login)
 */
-function orgSignin(orgId?: string): void {
-    if (orgId) {
-        signIn("wso2is", { callbackUrl: "/o/moveOrg" }, { orgId: orgId });
+function orgSignin(adminApp: boolean, orgId?: string): void {
+
+    if(adminApp) {
+        if (orgId) {
+            signIn("wso2isAdmin", { callbackUrl: "/o/moveOrg" }, { orgId: orgId });
+        } else {
+            signIn("wso2isAdmin", { callbackUrl: "/o/moveOrg" });
+        }
     } else {
-        signIn("wso2is", { callbackUrl: "/o/moveOrg" });
+        if (orgId) {
+            signIn("wso2is", { callbackUrl: "/o/moveOrg" }, { orgId: orgId });
+        } else {
+            signIn("wso2is", { callbackUrl: "/o/moveOrg" });
+        }
     }
 }
 

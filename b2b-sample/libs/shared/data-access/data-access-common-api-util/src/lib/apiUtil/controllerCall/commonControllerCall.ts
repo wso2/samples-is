@@ -50,7 +50,6 @@ export async function commonControllerCall(api: string, session: any, param?: an
 
         return data;
     } catch (err) {
-        console.log(err);
 
         return null;
     }
