@@ -30,7 +30,7 @@ export async function getServerSideProps(context) {
 
         if (session.expires || session.error) {
 
-            return redirect("/500");
+            return redirect("/sigin");
         } else {
 
             const orgId = session.orgId;
@@ -77,6 +77,6 @@ export default function MoveOrg(prop) {
     }, [ redirectSeconds, orgId, redirectToOrg ]);
 
     return (
-        <MoveOrganizationComponent orgName={ "Business Application" } />
+        <MoveOrganizationComponent orgName={ "Easy Meeting" } />
     );
 }

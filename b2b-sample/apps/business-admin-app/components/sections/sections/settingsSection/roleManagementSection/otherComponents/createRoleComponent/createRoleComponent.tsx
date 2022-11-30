@@ -119,7 +119,7 @@ export default function CreateRoleComponent(prop) {
             <Modal.Header>
                 <Modal.Title>
                     <b>Create Role</b>
-                    <p>Create a new role in the system.</p>
+                    <p>Create a new role in the organization</p>
                 </Modal.Title>
             </Modal.Header>
 

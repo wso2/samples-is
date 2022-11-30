@@ -51,7 +51,7 @@
             }
         },
         "ManagementAPIConfig": {
-            "SharedApplicationName": "temp"
+            "SharedApplicationName": "EasyMeeting"
         }
     },
     "BusinessAdminAppConfig": {

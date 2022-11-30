@@ -33,7 +33,6 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
     callbacks: {
 
         async jwt({ token, account, profile }) {
-
             if (account) {
                 token.accessToken = account.access_token;
                 token.idToken = account.id_token;
@@ -72,6 +71,7 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
             clientId: config.BusinessAppConfig.AuthorizationConfig.ClientId,
             clientSecret: config.BusinessAppConfig.AuthorizationConfig.ClientSecret,
             callbackUrl: "/o/moveOrg",
+            checks: ["state"],
             httpOptions: {
                 timeout: 1800000
             },
@@ -90,6 +90,9 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
             wellKnown: `${config.CommonConfig.AuthorizationConfig.BaseOrganizationUrl}/oauth2/token/.well-known/openid-configuration`
         }
     ],
+    session: {
+        jwt: true
+    },
     secret: process.env.SECRET
 });
 

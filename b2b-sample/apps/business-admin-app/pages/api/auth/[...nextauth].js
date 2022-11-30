@@ -79,6 +79,7 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
             },
             clientId: config.BusinessAdminAppConfig.AuthorizationConfig.ClientId,
             clientSecret: config.BusinessAdminAppConfig.AuthorizationConfig.ClientSecret,
+            checks: ["state"],
             httpOptions: {
                 timeout: 1800000
             },
@@ -97,6 +98,9 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
             wellKnown: `${config.CommonConfig.AuthorizationConfig.BaseOrganizationUrl}/oauth2/token/.well-known/openid-configuration`
         }
     ],
+    session: {
+        jwt: true
+    },
     secret: process.env.SECRET
 });
 
