@@ -17,7 +17,7 @@
  */
 
 import { requestOptionsWithBody } from "@b2bsample/business-admin-app/data-access/data-access-common-api-util";
-import { dataNotRecievedError, notPostError, RequestMethod } from
+import { RequestMethod, dataNotRecievedError, notPostError } from
     "@b2bsample/shared/data-access/data-access-common-api-util";
 import { NextApiRequest, NextApiResponse } from "next";
 

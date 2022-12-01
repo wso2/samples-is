@@ -21,6 +21,7 @@ import { selectedTemplateBaesedonTemplateId } from
 import { HelperTextComponent, infoTypeDialog } from "@b2bsample/shared/ui/ui-components";
 import { copyTheTextToClipboard } from "@b2bsample/shared/util/util-common";
 import CopyIcon from "@rsuite/icons/Copy";
+import { CopyTextToClipboardCallback } from "libs/shared/util/util-common/src/model/copyTextToClipboardCallback";
 import React from "react";
 import { Field } from "react-final-form";
 import { InputGroup, useToaster } from "rsuite";
@@ -56,7 +57,7 @@ export default function SettingsFormSelection(prop) {
     };
 
     const copyValueToClipboard = (text) => {
-        const callback = () => infoTypeDialog(toaster, "Text copied to clipboard");
+        const callback : CopyTextToClipboardCallback = () => infoTypeDialog(toaster, "Text copied to clipboard");
 
         copyTheTextToClipboard(text, callback);
     };

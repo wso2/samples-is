@@ -16,6 +16,8 @@
  * under the License.
  */
 
+import { CopyTextToClipboardCallback } from "../model/copyTextToClipboardCallback";
+
 /**
  * 
  * @param str - string that need to be checked
@@ -45,7 +47,7 @@ export function getCurrentDate(): string {
 /**
  *  @returns true if JSON is empty else false
  */
-export function checkIfJSONisEmpty(obj: Object): boolean {
+export function checkIfJSONisEmpty(obj: Record<string, unknown>): boolean {
     if (!obj) {
 
         return true;
@@ -57,7 +59,7 @@ export function checkIfJSONisEmpty(obj: Object): boolean {
 /**
  *  @returns the size of JSON object
  */
-export function sizeOfJson(obj: Object): number {
+export function sizeOfJson(obj: Record<string, unknown>): number {
     return Object.keys(obj).length;
 }
 
@@ -67,7 +69,7 @@ export function sizeOfJson(obj: Object): number {
  * @param text - text that need to be copied to the clipboard
  * @param toaster - toaster object
  */
-export function copyTheTextToClipboard(text: string, callback : Function): void {
+export function copyTheTextToClipboard(text: string, callback: CopyTextToClipboardCallback): void {
     navigator.clipboard.writeText(text);
     callback();
 }
@@ -101,7 +103,7 @@ export const ENTERPRISE_AUTHENTICATOR_ID = "OpenIDConnectAuthenticator";
 export const BASIC_AUTHENTICATOR_ID = "BasicAuthenticator";
 
 export default {
-    BASIC_AUTHENTICATOR_ID, BASIC_ID, EMPTY_STRING, ENTERPRISE_AUTHENTICATOR_ID, ENTERPRISE_ID, 
-    GOOGLE_AUTHENTICATOR_ID, GOOGLE_ID, PatchMethod, checkIfJSONisEmpty, copyTheTextToClipboard, getCurrentDate, 
+    BASIC_AUTHENTICATOR_ID, BASIC_ID, EMPTY_STRING, ENTERPRISE_AUTHENTICATOR_ID, ENTERPRISE_ID,
+    GOOGLE_AUTHENTICATOR_ID, GOOGLE_ID, PatchMethod, checkIfJSONisEmpty, copyTheTextToClipboard, getCurrentDate,
     random_rgba, sizeOfJson, stringIsEmpty
 };

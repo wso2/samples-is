@@ -68,10 +68,10 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
                     scope: config.BusinessAppConfig.ApplicationConfig.APIScopes.join(" ")
                 }
             },
+            callbackUrl: "/o/moveOrg",
+            checks: [ "state" ],
             clientId: config.BusinessAppConfig.AuthorizationConfig.ClientId,
             clientSecret: config.BusinessAppConfig.AuthorizationConfig.ClientSecret,
-            callbackUrl: "/o/moveOrg",
-            checks: ["state"],
             httpOptions: {
                 timeout: 1800000
             },
@@ -92,8 +92,7 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
     ],
     session: {
         jwt: true
-    },
-    secret: process.env.SECRET
+    }
 });
 
 export default wso2ISProvider;

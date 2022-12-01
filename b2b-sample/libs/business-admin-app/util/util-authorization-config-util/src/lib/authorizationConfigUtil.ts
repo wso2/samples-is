@@ -26,7 +26,7 @@ import { orgSignout } from "@b2bsample/shared/util/util-authorization-config-uti
 */
 async function signout(session: any): Promise<void> {
 
-   await orgSignout(session, getHostedUrl())
+    await orgSignout(session, getHostedUrl());
 }
 
 export { signout };

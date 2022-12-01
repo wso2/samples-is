@@ -16,8 +16,8 @@
  * under the License.
  */
 
-import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import { getHostedUrl } from "@b2bsample/business-admin-app/util/util-application-config-util";
+import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
 
 /**
  * call `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users/<userId>` get the user details

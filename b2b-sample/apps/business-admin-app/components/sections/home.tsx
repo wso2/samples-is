@@ -17,16 +17,16 @@
  */
 
 import { LogoComponent } from "@b2bsample/business-admin-app/ui/ui-components";
-import { FooterComponent, HomeComponent, SignOutComponent } from "@b2bsample/shared/ui/ui-components";
 import { signout } from "@b2bsample/business-admin-app/util/util-authorization-config-util";
+import { FooterComponent, HomeComponent, SignOutComponent } from "@b2bsample/shared/ui/ui-components";
 import React, { useState } from "react";
 import "rsuite/dist/rsuite.min.css";
 import IdpSectionComponent from "./sections/settingsSection/idpSection/idpSectionComponent";
 import ManageUserSectionComponent from "./sections/settingsSection/manageUserSection/manageUserSectionComponent";
 import RoleManagementSectionComponent from
     "./sections/settingsSection/roleManagementSection/roleManagementSectionComponent";
-import Custom500 from "../../pages/500";
 import sideNavData from "../../../../libs/business-admin-app/ui/ui-assets/src/lib/data/sideNav.json";
+import Custom500 from "../../pages/500";
 
 
 /**
@@ -39,20 +39,20 @@ export default function Home(prop) {
 
     const { name, orgId, session } = prop;
 
-    const [activeKeySideNav, setActiveKeySideNav] = useState("2-1");
-    const [signOutModalOpen, setSignOutModalOpen] = useState(false);
+    const [ activeKeySideNav, setActiveKeySideNav ] = useState("2-1");
+    const [ signOutModalOpen, setSignOutModalOpen ] = useState(false);
 
     const mainPanelComponenet = (activeKey) => {
         switch (activeKey) {
             case "2-1":
 
-                return <ManageUserSectionComponent orgName={name} orgId={orgId} session={session} />;
+                return <ManageUserSectionComponent orgName={ name } orgId={ orgId } session={ session } />;
             case "2-2":
 
-                return <RoleManagementSectionComponent orgName={name} orgId={orgId} session={session} />;
+                return <RoleManagementSectionComponent orgName={ name } orgId={ orgId } session={ session } />;
             case "2-3":
 
-                return <IdpSectionComponent orgName={name} orgId={orgId} session={session} />;
+                return <IdpSectionComponent orgName={ name } orgId={ orgId } session={ session } />;
         }
     };
 
@@ -71,26 +71,26 @@ export default function Home(prop) {
     return (
         <div>
             <SignOutComponent
-                open={signOutModalOpen}
-                onClose={signOutModalClose}
-                signOutCallback={signOutCallback} />
+                open={ signOutModalOpen }
+                onClose={ signOutModalClose }
+                signOutCallback={ signOutCallback } />
 
-            {session && session.scope
+            { session && session.scope
                 ? (
 
                     <HomeComponent
-                        scope={session.scope}
-                        sideNavData={sideNavData}
-                        activeKeySideNav={activeKeySideNav}
-                        activeKeySideNavSelect={activeKeySideNavSelect}
-                        setSignOutModalOpen={setSignOutModalOpen}
-                        logoComponent={<LogoComponent imageSize="small" name={name} white={true} />}>
+                        scope={ session.scope }
+                        sideNavData={ sideNavData }
+                        activeKeySideNav={ activeKeySideNav }
+                        activeKeySideNavSelect={ activeKeySideNavSelect }
+                        setSignOutModalOpen={ setSignOutModalOpen }
+                        logoComponent={ <LogoComponent imageSize="small" name={ name } white={ true } /> }>
 
-                        {mainPanelComponenet(activeKeySideNav)}
+                        { mainPanelComponenet(activeKeySideNav) }
 
                     </HomeComponent>
                 )
-                : <Custom500 />}
+                : <Custom500 /> }
 
             <FooterComponent />
         </div>

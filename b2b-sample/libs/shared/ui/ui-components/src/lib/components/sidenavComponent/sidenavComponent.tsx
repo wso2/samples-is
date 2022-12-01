@@ -24,7 +24,6 @@ import React from "react";
 import { Button, Nav, Sidenav } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
 import styles from "./sidenavComponent.module.css";
-import sideNavConfig from "../../../../../../../business-app/ui-assets/src/lib/data/sideNav.json";
 import { SidenavComponentProps } from "../../models/sidenavComponent/sidenavComponent";
 
 export function SidenavComponent(prop: SidenavComponentProps) {

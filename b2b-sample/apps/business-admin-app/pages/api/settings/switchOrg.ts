@@ -16,8 +16,8 @@
  * under the License.
  */
 
-import { dataNotRecievedError, notPostError } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import { getHostedUrl } from "@b2bsample/business-admin-app/util/util-application-config-util";
+import { dataNotRecievedError, notPostError } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import config from "../../../../../config.json";
 
 /**

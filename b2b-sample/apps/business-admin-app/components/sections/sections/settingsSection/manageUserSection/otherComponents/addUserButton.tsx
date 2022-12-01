@@ -33,7 +33,7 @@ export default function AddUserButton(prop) {
         <Button
             appearance="primary"
             size="lg"
-            onClick={onClick}>
+            onClick={ onClick }>
             Add User
         </Button>
     );

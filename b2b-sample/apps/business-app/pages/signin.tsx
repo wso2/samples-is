@@ -18,8 +18,7 @@
 
 import { LogoComponent } from "@b2bsample/business-app/ui/ui-components";
 import { SigninRedirectComponent } from "@b2bsample/shared/ui/ui-components";
-import { orgSignin, redirect } from "@b2bsample/shared/util/util-authorization-config-util";
-import { getSession } from "next-auth/react";
+import { orgSignin } from "@b2bsample/shared/util/util-authorization-config-util";
 import React, { useEffect, useState } from "react";
 import "rsuite/dist/rsuite.min.css";
 

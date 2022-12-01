@@ -32,7 +32,7 @@ export function HomeComponent(prop: HomeComponentProps) {
 
             <SidenavComponent
                 scope={ scope }
-                sideNavData={sideNavData}
+                sideNavData={ sideNavData }
                 activeKeySideNav={ activeKeySideNav }
                 activeKeySideNavSelect={ activeKeySideNavSelect }
                 setSignOutModalOpen={ setSignOutModalOpen }

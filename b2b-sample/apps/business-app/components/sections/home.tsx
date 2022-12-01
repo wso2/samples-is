@@ -17,13 +17,13 @@
  */
 
 import { LogoComponent } from "@b2bsample/business-app/ui/ui-components";
-import { FooterComponent, HomeComponent, SignOutComponent } from "@b2bsample/shared/ui/ui-components";
 import { signout } from "@b2bsample/business-app/util/util-authorization-config-util";
+import { FooterComponent, HomeComponent, SignOutComponent } from "@b2bsample/shared/ui/ui-components";
 import React, { useState } from "react";
 import "rsuite/dist/rsuite.min.css";
 import DashboardSectionComponent from "./sections/dashboardSection/dashboardSectionComponent";
-import Custom500 from "../../pages/500";
 import sideNavData from "../../../../libs/business-app/ui-assets/src/lib/data/sideNav.json";
+import Custom500 from "../../pages/500";
 
 
 /**
@@ -71,7 +71,7 @@ export default function Home(prop) {
 
                     <HomeComponent
                         scope={ session.scope }
-                        sideNavData = {sideNavData}
+                        sideNavData = { sideNavData }
                         activeKeySideNav={ activeKeySideNav }
                         activeKeySideNavSelect={ activeKeySideNavSelect }
                         setSignOutModalOpen={ setSignOutModalOpen }

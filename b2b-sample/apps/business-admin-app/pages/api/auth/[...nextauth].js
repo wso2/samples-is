@@ -79,7 +79,7 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
             },
             clientId: config.BusinessAdminAppConfig.AuthorizationConfig.ClientId,
             clientSecret: config.BusinessAdminAppConfig.AuthorizationConfig.ClientSecret,
-            checks: ["state"],
+            checks: [ "state" ],
             httpOptions: {
                 timeout: 1800000
             },
