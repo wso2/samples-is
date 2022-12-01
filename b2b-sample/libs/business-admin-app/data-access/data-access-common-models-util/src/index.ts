@@ -22,3 +22,4 @@ export * from "./lib/application/applicationUtils";
 export * from "./lib/identityProvider/identityProvider";
 export * from "./lib/identityProvider/identityProviderUtils";
 export * from "./lib/role/role";
+export * from "./lib/orgSession/orgSession";

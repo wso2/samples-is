@@ -17,7 +17,7 @@
  */
 
 export async function commonControllerDecode(callFunction: () => Promise<Record<string, unknown> | null>
-    , errorReturnValue: boolean | null) {
+    , errorReturnValue: boolean | null) : Promise<Record<string, unknown> | boolean | null>{
 
     try {
         const res = await callFunction();

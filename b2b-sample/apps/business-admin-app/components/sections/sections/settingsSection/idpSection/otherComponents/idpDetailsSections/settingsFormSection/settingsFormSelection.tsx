@@ -19,9 +19,8 @@
 import { selectedTemplateBaesedonTemplateId } from
     "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { HelperTextComponent, infoTypeDialog } from "@b2bsample/shared/ui/ui-components";
-import { copyTheTextToClipboard } from "@b2bsample/shared/util/util-common";
+import { CopyTextToClipboardCallback, copyTheTextToClipboard } from "@b2bsample/shared/util/util-common";
 import CopyIcon from "@rsuite/icons/Copy";
-import { CopyTextToClipboardCallback } from "libs/shared/util/util-common/src/model/copyTextToClipboardCallback";
 import React from "react";
 import { Field } from "react-final-form";
 import { InputGroup, useToaster } from "rsuite";

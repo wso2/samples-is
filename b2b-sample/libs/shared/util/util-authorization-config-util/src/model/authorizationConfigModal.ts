@@ -16,17 +16,9 @@
  * under the License.
  */
 
-export type Name = {
-    givenName: string,
-    familyName: string
+export default interface RedirectReturnType {
+    redirect: {
+        destination: string,
+        permanent: boolean
+    }
 }
-
-export interface User {
-    id: string,
-    name: Name,
-    emails : [string],
-    userName : string,
-    [key: string]: any
-}
-
-export default User;

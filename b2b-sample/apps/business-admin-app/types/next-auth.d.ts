@@ -16,17 +16,31 @@
  * under the License.
  */
 
-export type Name = {
-    givenName: string,
-    familyName: string
+import { User } from "@b2bsample/shared/data-access/data-access-common-models-util";
+import NextAuth, { Profile } from "next-auth";
+import { JWT } from "next-auth/jwt";
+
+declare module "next-auth" {
+    interface Session {
+        error : boolean,
+        expires : boolean,
+        accessToken? : string,
+        idToken? : JWT,
+        scope? : string,
+        refreshToken? : string,
+        userId? : string,
+        user? : User | null,
+        orgId? : string,
+        orgName? : string,
+        orginalIdToken? : string,
+    }
 }
 
-export interface User {
-    id: string,
-    name: Name,
-    emails : [string],
-    userName : string,
-    [key: string]: any
+declare module "next-auth/jwt" {
+  interface JWT {
+    idToken?: string,
+    accessToken?: string,
+    scope?: string,
+    user?: Profile
+  }
 }
-
-export default User;

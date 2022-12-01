@@ -47,14 +47,15 @@ export default function ButtonGroupIdentityProviderDetails(prop) {
     const [ openListAppicationModal, setOpenListAppicationModal ] = useState(false);
 
     const fetchData = useCallback(async () => {
-        const res = await controllerDecodeListCurrentApplication(session);
-
+        const res : AllApplications = ( await controllerDecodeListCurrentApplication(session) as AllApplications );
+        
         await setAllApplications(res);
     }, [ session, openListAppicationModal ]);
 
     const fetchApplicatioDetails = useCallback(async () => {
         if (!checkIfJSONisEmpty(allApplications) && allApplications.totalResults !== 0) {
-            const res = await controllerDecodeGetApplication(session, allApplications.applications[0].id);
+            const res : Application = ( 
+                await controllerDecodeGetApplication(session, allApplications.applications[0].id) as Application );
 
             await setApplicationDetail(res);
         }

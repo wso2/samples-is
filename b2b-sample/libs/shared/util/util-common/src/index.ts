@@ -18,3 +18,4 @@
 
 export * from "./lib/common";
 export * from "./lib/consoleLogTypes";
+export * from "./model/copyTextToClipboardCallback";

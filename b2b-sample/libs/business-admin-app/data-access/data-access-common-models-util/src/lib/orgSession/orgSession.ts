@@ -14,19 +14,17 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
- */
+*/
 
-export type Name = {
-    givenName: string,
-    familyName: string
+import { JWT } from "next-auth/jwt"
+
+export interface OrgSession {
+    access_token?:string
+    scope?: string,
+    id_token?: JWT,
+    refresh_token?: string,
+    token_type?: string,
+    expires_in: number
 }
 
-export interface User {
-    id: string,
-    name: Name,
-    emails : [string],
-    userName : string,
-    [key: string]: any
-}
-
-export default User;
+export default OrgSession;

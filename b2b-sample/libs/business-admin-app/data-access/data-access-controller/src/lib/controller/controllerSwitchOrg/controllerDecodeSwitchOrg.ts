@@ -19,8 +19,10 @@
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import { controllerCallSwitchOrg } from "./controllerCallSwitchOrg";
 import config from "../../../../../../../../config.json";
+import { JWT } from "next-auth/jwt";
+import { OrgSession } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 
-function getOrgId(token : any) {
+function getOrgId(token: any): string {
 
     if (token.user.user_organization) {
 
@@ -41,12 +43,13 @@ function getOrgId(token : any) {
  * 
  * @returns - organization id of the logged in organization
  */
-export async function controllerDecodeSwitchOrg(token: any) {
+export async function controllerDecodeSwitchOrg(token: JWT): Promise<OrgSession | null> {
 
-    const subOrgId = getOrgId(token);
-    const accessToken = token.accessToken;
+    const subOrgId: string = getOrgId(token);
+    const accessToken: string = (token["accessToken"] as string);
 
-    const res = await commonControllerDecode(() => controllerCallSwitchOrg(subOrgId, accessToken), null);
+    const res =
+        (await commonControllerDecode(() => controllerCallSwitchOrg(subOrgId, accessToken), null) as OrgSession | null);
 
     return res;
 

@@ -22,6 +22,7 @@ import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
 import { JWT } from "next-auth/jwt";
 import { signIn, signOut } from "next-auth/react";
 import config from "../../../../../../config.json";
+import RedirectReturnType from "../model/authorizationConfigModal";
 
 /**
 * 
@@ -29,7 +30,7 @@ import config from "../../../../../../config.json";
 * 
 * @returns redirect locally to a path
 */
-function redirect(path: string): object {
+function redirect(path: string): RedirectReturnType {
     return {
         redirect: {
             destination: path,

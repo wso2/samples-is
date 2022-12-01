@@ -19,6 +19,7 @@
 import { controllerDecodeSwitchOrg } from "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { getLoggedUserFromProfile, getLoggedUserId, getOrgId, getOrgName } from
     "@b2bsample/shared/util/util-authorization-config-util";
+import { NextApiRequest, NextApiResponse } from "next";
 import NextAuth from "next-auth";
 import config from "../../../../../config.json";
 
@@ -30,7 +31,7 @@ import config from "../../../../../config.json";
  * @returns IS provider that will handle the sign in process. Used in `orgSignin()`
  * [Use this method to signin]
  */
-const wso2ISProvider = (req, res) => NextAuth(req, res, {
+const wso2ISProvider = (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res, {
 
     callbacks: {
 
@@ -50,7 +51,7 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
 
             if (!orgSession) {
                 session.error = true;
-            } else if (orgSession.expiresIn <= 0) {
+            } else if (orgSession.expires_in <= 0) {
                 session.expires = true;
             }
             else {
@@ -67,6 +68,12 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
             }
 
             return session;
+        },
+        async redirect({ url, baseUrl }) {
+
+            if (url.startsWith("/")) return `${baseUrl}${url}`
+            else if (new URL(url).origin === baseUrl) return url
+            return `${baseUrl}${url}`
         }
     },
     debug: true,
@@ -79,7 +86,7 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
             },
             clientId: config.BusinessAdminAppConfig.AuthorizationConfig.ClientId,
             clientSecret: config.BusinessAdminAppConfig.AuthorizationConfig.ClientSecret,
-            checks: [ "state" ],
+            checks: ["state"],
             httpOptions: {
                 timeout: 1800000
             },
@@ -91,16 +98,12 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
                     id: profile.sub
                 };
             },
-            secret: process.env.SECRET,
             type: "oauth",
             userinfo: `${config.CommonConfig.AuthorizationConfig.BaseOrganizationUrl}/oauth2/userinfo`,
             // eslint-disable-next-line
             wellKnown: `${config.CommonConfig.AuthorizationConfig.BaseOrganizationUrl}/oauth2/token/.well-known/openid-configuration`
         }
     ],
-    session: {
-        jwt: true
-    },
     secret: process.env.SECRET
 });
 

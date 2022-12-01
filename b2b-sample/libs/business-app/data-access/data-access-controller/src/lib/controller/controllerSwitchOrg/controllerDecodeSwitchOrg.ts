@@ -19,8 +19,9 @@
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import { controllerCallSwitchOrg } from "./controllerCallSwitchOrg";
 import config from "../../../../../../../../config.json";
+import { JWT } from "next-auth/jwt";
 
-function getOrgId(token : any) {
+function getOrgId(token : any) : string {
 
     if (token.user.user_organization) {
 
@@ -41,10 +42,10 @@ function getOrgId(token : any) {
  * 
  * @returns - organization id of the logged in organization
  */
-export async function controllerDecodeSwitchOrg(token: any) {
+export async function controllerDecodeSwitchOrg(token: JWT) {
 
-    const subOrgId = getOrgId(token);
-    const accessToken = token.accessToken;
+    const subOrgId : string = getOrgId(token);
+    const accessToken : string = ( token["accessToken"] as string );
 
     const res = await commonControllerDecode(() => controllerCallSwitchOrg(subOrgId, accessToken), null);
 

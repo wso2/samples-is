@@ -22,12 +22,11 @@ import { controllerDecodeCreateIdentityProvider, controllerDecodeListAllIdentity
     "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { EmptySettingsComponent, SettingsTitleComponent, errorTypeDialog, infoTypeDialog, successTypeDialog } from
     "@b2bsample/shared/ui/ui-components";
-import { EMPTY_STRING, ENTERPRISE_ID, GOOGLE_ID, checkIfJSONisEmpty, copyTheTextToClipboard, sizeOfJson } from
+import { EMPTY_STRING, ENTERPRISE_ID, GOOGLE_ID, checkIfJSONisEmpty, copyTheTextToClipboard, sizeOfJson, CopyTextToClipboardCallback } from
     "@b2bsample/shared/util/util-common";
 import AppSelectIcon from "@rsuite/icons/AppSelect";
 import CopyIcon from "@rsuite/icons/Copy";
 import InfoRoundIcon from "@rsuite/icons/InfoRound";
-import { CopyTextToClipboardCallback } from "libs/shared/util/util-common/src/model/copyTextToClipboardCallback";
 import React, { useCallback, useEffect, useState } from "react";
 import { Avatar, Button, Container, FlexboxGrid, Form, Input, InputGroup, Modal, Panel, Stack, useToaster } from
     "rsuite";
@@ -65,8 +64,8 @@ export default function IdpSectionComponent(prop) {
         const res = await controllerDecodeListAllIdentityProviders(session);
 
         if (res) {
-            if (res.identityProviders) {
-                setIdpList(res.identityProviders);
+            if (res["identityProviders"]) {
+                setIdpList(res["identityProviders"]);
             } else {
                 setIdpList([]);
             }

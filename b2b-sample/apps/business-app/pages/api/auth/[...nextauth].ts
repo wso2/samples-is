@@ -17,6 +17,7 @@
  */
 
 import { getLoggedUserFromProfile } from "@b2bsample/shared/util/util-authorization-config-util";
+import { NextApiRequest, NextApiResponse } from "next";
 import NextAuth from "next-auth";
 import config from "../../../../../config.json";
 
@@ -28,7 +29,7 @@ import config from "../../../../../config.json";
  * @returns IS provider that will handle the sign in process. Used in `orgSignin()`
  * [Use this method to signin]
  */
-const wso2ISProvider = (req, res) => NextAuth(req, res, {
+const wso2ISProvider = (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res, {
 
     callbacks: {
 
@@ -46,8 +47,6 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
 
             if (!session) {
                 session.error = true;
-            } else if (session.expiresIn <= 0) {
-                session.expires = true;
             }
             else {
                 session.error = false;
@@ -58,6 +57,12 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
             }
 
             return session;
+        },
+        async redirect({ url, baseUrl }) {
+
+            if (url.startsWith("/")) return `${baseUrl}${url}`
+            else if (new URL(url).origin === baseUrl) return url
+            return `${baseUrl}${url}`
         }
     },
     debug: true,
@@ -68,8 +73,7 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
                     scope: config.BusinessAppConfig.ApplicationConfig.APIScopes.join(" ")
                 }
             },
-            callbackUrl: "/o/moveOrg",
-            checks: [ "state" ],
+            checks: ["state"],
             clientId: config.BusinessAppConfig.AuthorizationConfig.ClientId,
             clientSecret: config.BusinessAppConfig.AuthorizationConfig.ClientSecret,
             httpOptions: {
@@ -83,16 +87,12 @@ const wso2ISProvider = (req, res) => NextAuth(req, res, {
                     id: profile.sub
                 };
             },
-            secret: process.env.SECRET,
             type: "oauth",
             userinfo: `${config.CommonConfig.AuthorizationConfig.BaseOrganizationUrl}/oauth2/userinfo`,
             // eslint-disable-next-line
             wellKnown: `${config.CommonConfig.AuthorizationConfig.BaseOrganizationUrl}/oauth2/token/.well-known/openid-configuration`
         }
-    ],
-    session: {
-        jwt: true
-    }
+    ]
 });
 
 export default wso2ISProvider;

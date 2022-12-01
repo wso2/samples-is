@@ -30,7 +30,6 @@ const lessConfig = withLess({
 const nextConfig = withNx({
     nx: {
         svgr: false
-
     },
     ...lessConfig
 });
