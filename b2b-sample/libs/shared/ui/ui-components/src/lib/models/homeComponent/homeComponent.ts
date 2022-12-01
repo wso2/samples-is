@@ -22,8 +22,8 @@ export interface HomeComponentProps {
     scope : string[],
     sideNavData : SideNavList,
     activeKeySideNav : string,
-    activeKeySideNavSelect : Function
-    setSignOutModalOpen : Function,
+    activeKeySideNavSelect : (event:string | undefined)=>void,
+    setSignOutModalOpen : React.Dispatch<React.SetStateAction<boolean>>,
     children : JSX.Element,
     logoComponent : JSX.Element
 }

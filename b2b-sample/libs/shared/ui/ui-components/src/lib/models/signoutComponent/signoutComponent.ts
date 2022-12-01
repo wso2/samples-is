@@ -21,5 +21,5 @@ import { SyntheticEvent } from "react";
 export interface SignOutComponentProps {
     open : boolean,
     onClose : (event: SyntheticEvent<Element, Event>) => void,
-    signOutCallback : Function
+    signOutCallback : () => void
 }

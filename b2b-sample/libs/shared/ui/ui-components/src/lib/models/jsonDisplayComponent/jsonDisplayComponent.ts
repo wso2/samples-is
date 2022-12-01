@@ -17,5 +17,5 @@
  */
 
 export interface JsonDisplayComponentProps {
-    jsonObject: Object
+    jsonObject: Record<string, unknown>
 }

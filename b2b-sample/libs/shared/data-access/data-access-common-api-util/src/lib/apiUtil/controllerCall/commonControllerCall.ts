@@ -28,7 +28,8 @@ import { getControllerCallApiRequestOptions, getControllerCallApiRequestOptionsF
  * @returns created user details, if not created returns `null`
  */
 
-export async function commonControllerCall(api: string, session: any, param?: any, switchCall = false) {
+export async function commonControllerCall(api: string, session: any, param?: any, switchCall = false)
+    : Promise<Record<string, unknown> | null> {
     try {
 
         let header;

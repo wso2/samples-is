@@ -25,7 +25,7 @@ import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-
  * 
  * @returns all applications details, if not possible returns `null`
  */
-export async function controllerCallGetApplication(session: any, id: string) {
+export async function controllerCallGetApplication(session: any, id: string) : Promise<Record<string, unknown> | null> {
 
     const data = await commonControllerCall(`/api/settings/application/getApplication/${id}`, session, id);
 

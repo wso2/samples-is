@@ -16,12 +16,17 @@
  * under the License.
  */
 
-export async function commonControllerDecode(callFunction: Function, errorReturnValue: boolean | null) {
+export async function commonControllerDecode(callFunction: () => Promise<Record<string, unknown> | null>
+    , errorReturnValue: boolean | null) {
 
     try {
         const res = await callFunction();
 
-        if (res.error || res.traceId) {
+        if (!res) {
+
+            return errorReturnValue;
+        }
+        if (res["error"] || res["traceId"]) {
 
             return errorReturnValue;
         }

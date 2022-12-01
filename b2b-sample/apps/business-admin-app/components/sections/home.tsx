@@ -35,14 +35,14 @@ import Custom500 from "../../pages/500";
  *
  * @returns The home section. Mainly side nav bar and the section to show other settings sections.
  */
-export default function Home(prop) {
+export default function Home(prop) : JSX.Element {
 
     const { name, orgId, session } = prop;
 
     const [ activeKeySideNav, setActiveKeySideNav ] = useState("2-1");
     const [ signOutModalOpen, setSignOutModalOpen ] = useState(false);
 
-    const mainPanelComponenet = (activeKey) => {
+    const mainPanelComponenet = (activeKey) : JSX.Element => {
         switch (activeKey) {
             case "2-1":
 
@@ -56,15 +56,15 @@ export default function Home(prop) {
         }
     };
 
-    const signOutCallback = () => {
+    const signOutCallback = () : void => {
         signout(session);
     };
 
-    const activeKeySideNavSelect = (eventKey) => {
+    const activeKeySideNavSelect = (eventKey : string | undefined) : void => {
         setActiveKeySideNav(eventKey);
     };
 
-    const signOutModalClose = () => {
+    const signOutModalClose = () : void => {
         setSignOutModalOpen(false);
     };
 

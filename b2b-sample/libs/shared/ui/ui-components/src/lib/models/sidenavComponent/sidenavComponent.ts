@@ -22,7 +22,7 @@ export interface SidenavComponentProps {
     scope : string[],
     sideNavData : SideNavList,
     activeKeySideNav : string,
-    activeKeySideNavSelect : Function
-    setSignOutModalOpen : Function,
+    activeKeySideNavSelect : (event:string | undefined)=>void,
+    setSignOutModalOpen : React.Dispatch<React.SetStateAction<boolean>>,
     logoComponent : JSX.Element
 }
