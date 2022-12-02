@@ -20,13 +20,13 @@ import { getHostedUrl } from "@b2bsample/business-app/util/util-application-conf
 import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
 
 /**
- * call `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users/<userId>` get the user details
+ * call the switch organization API endpoint
  * 
- * @param session - session object
+ * @param subOrgId - sub organization id
+ * @param accessToken - access token
  * 
- * @returns all applications details, if not possible returns `null`
  */
-export async function controllerCallSwitchOrg(subOrgId: any, accessToken: string) {
+export async function controllerCallSwitchOrg(subOrgId: string, accessToken: string) {
     const data = await commonControllerCall(`${getHostedUrl()}/api/settings/switchOrg`,
         null,
         {

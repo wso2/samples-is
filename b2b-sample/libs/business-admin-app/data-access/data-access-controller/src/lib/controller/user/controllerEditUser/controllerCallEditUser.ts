@@ -18,15 +18,18 @@
 
 import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import { SendEditUser } from "@b2bsample/shared/data-access/data-access-common-models-util";
+import { Session } from "next-auth";
 
 /**
- * call `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users/<userId>` get the user details
+ * call PATCH `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users/<id>` to edit the user
  * 
  * @param session - session object
- * 
- * @returns user details, if not possible returns `null`
+ * @param id - id of the user
+ * @param user - `SendEditUser`
+ *  
+ * @returns edited user details, if not edited returns `null`
  */
-export async function controllerCallEditUser(session: any, id:string, user: SendEditUser) {
+export async function controllerCallEditUser(session: Session, id:string, user: SendEditUser) {
 
     const data = await commonControllerCall(`/api/settings/user/editUser/${id}`, session, user);
 

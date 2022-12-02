@@ -17,15 +17,18 @@
  */
 
 import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { Session } from "next-auth";
 
 /**
- * call `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users/<userId>` get the user details
+ * call DELETE `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/identity-providers/<id>` 
+ * to delete an identity provider
  * 
  * @param session - session object
+ * @param idpId - identity provider id
  * 
- * @returns all applications details, if not possible returns `null`
+ * @returns delete success, if the call failed `null`
  */
-export async function controllerCallDeleteIdentityProvider(session: any, id: string) {
+export async function controllerCallDeleteIdentityProvider(session: Session, id: string) {
 
     const data = await commonControllerCall(`/api/settings/identityProvider/deleteIdentityProvider/${id}`, session);
 

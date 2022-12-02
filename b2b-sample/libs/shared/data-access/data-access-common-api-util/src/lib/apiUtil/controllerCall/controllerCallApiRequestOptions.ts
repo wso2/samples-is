@@ -16,9 +16,10 @@
  * under the License.
  */
 
+import { Session } from "next-auth";
 import RequestMethod from "../api/requestMethod";
 
-function getControllerCallApiBody(session: any, param?: any) {
+function getControllerCallApiBody(session: Session | null, param?: any) {
     const body = {
         orgId: session ? session.orgId : null,
         param: param ? param : null,
@@ -28,7 +29,7 @@ function getControllerCallApiBody(session: any, param?: any) {
     return body;
 }
 
-function getControllerCallApiRequestOptions(session: any, param?: any) {
+function getControllerCallApiRequestOptions(session: Session | null, param?: any) {
     const request = {
         body: JSON.stringify(getControllerCallApiBody(session, param)),
         method: RequestMethod.POST

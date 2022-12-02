@@ -17,15 +17,20 @@
  */
 
 import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { Session } from "next-auth";
 
 /**
- * call `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users/<userId>` get the user details
+ * update federated authenticators of an identity provider
+ * 
+ * call PATCH `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/identity-providers/<idpid>`
  * 
  * @param session - session object
+ * @param idpid - identity provider id
+ * @param body - identity provider body that need to update
  * 
- * @returns all applications details, if not possible returns `null`
+ * @returns update federated authenticators
  */
-export async function controllerCallUpdateFederatedAuthenticators(session: any, idpId: string, body: any) {
+export async function controllerCallUpdateFederatedAuthenticators(session: Session, idpId: string, body: any) {
 
     const data = await commonControllerCall(`/api/settings/identityProvider/updateFederatedAuthenticators/${idpId}`,
         session, body);

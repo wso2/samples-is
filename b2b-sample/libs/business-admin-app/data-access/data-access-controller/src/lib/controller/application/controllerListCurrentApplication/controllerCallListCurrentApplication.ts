@@ -17,15 +17,17 @@
  */
 
 import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { Session } from "next-auth";
 
 /**
- * call `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users/<userId>` get the user details
+ * call GET `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/applications?filter=name+eq+<appName>` 
+ * to get the initial applicaion details
  * 
- * @param session - session object
+ * @param session 
  * 
- * @returns all applications details, if not possible returns `null`
+ * @returns application initial details, if call failed `null`
  */
-export async function controllerCallListCurrentApplication(session: any) {
+export async function controllerCallListCurrentApplication(session: Session) {
 
     const data = await commonControllerCall("/api/settings/application/listCurrentApplication", session);
 

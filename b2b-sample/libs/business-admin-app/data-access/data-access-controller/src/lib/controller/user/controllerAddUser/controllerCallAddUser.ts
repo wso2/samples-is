@@ -18,15 +18,17 @@
 
 import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import { SendUser } from "@b2bsample/shared/data-access/data-access-common-models-util";
+import { Session } from "next-auth";
 
 /**
- * call `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users/<userId>` get the user details
+ * call POST `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users` create the user
  * 
  * @param session - session object
+ * @param user - `SendUser`
  * 
- * @returns user details, if not possible returns `null`
+ * @returns created user details, if not created returns `null`
  */
-export async function controllerCallAddUser(session: any, user: SendUser) {
+export async function controllerCallAddUser(session: Session, user: SendUser) {
 
     const data = await commonControllerCall("/api/settings/user/addUser", session, user);
 

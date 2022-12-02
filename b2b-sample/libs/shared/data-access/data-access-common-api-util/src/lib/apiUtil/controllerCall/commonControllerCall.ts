@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { Session } from "next-auth";
 import { getControllerCallApiRequestOptions, getControllerCallApiRequestOptionsForSwitchCallWithParam }
     from "./controllerCallApiRequestOptions";
 
@@ -28,7 +29,7 @@ import { getControllerCallApiRequestOptions, getControllerCallApiRequestOptionsF
  * @returns created user details, if not created returns `null`
  */
 
-export async function commonControllerCall(api: string, session: any, param?: any, switchCall = false)
+export async function commonControllerCall(api: string, session: Session | null, param?: any, switchCall = false)
     : Promise<Record<string, unknown> | null> {
     try {
 

@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { Session } from "inspector";
 import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
 
 /**
@@ -25,7 +26,7 @@ import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-
  * 
  * @returns all applications details, if not possible returns `null`
  */
-export async function controllerCallPatchApplicationAuthSteps(session: any, applicationId: string, model: any) {
+export async function controllerCallPatchApplicationAuthSteps(session: Session, applicationId: string, model: any) {
 
     const data = await commonControllerCall(`/api/settings/application/patchApplicationAuthSteps/${applicationId}`
         , session, model);

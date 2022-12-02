@@ -16,21 +16,22 @@
  * under the License.
  */
 
-import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
-import { Session } from "next-auth";
+import { User } from "@b2bsample/shared/data-access/data-access-common-models-util";
+import "next-auth";
+import { JWT } from "next-auth/jwt";
 
-/**
- * call GET `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/applications/<id>` to get the applicaion details
- * 
- * @param session 
- * @param id - application id
- * 
- * @returns applicaiton details, if the call failed `null`
- */
-export async function controllerCallGetApplication(session: Session, id: string)
-    : Promise<Record<string, unknown> | null> {
-
-    const data = await commonControllerCall(`/api/settings/application/getApplication/${id}`, session, id);
-
-    return data;
+declare module "next-auth" {
+    interface Session {
+        error: boolean,
+        expires: boolean,
+        accessToken?: string,
+        idToken?: JWT,
+        scope?: string,
+        refreshToken?: string,
+        userId?: string,
+        user?: User | null,
+        orgId?: string,
+        orgName?: string,
+        orginalIdToken?: string,
+    }
 }

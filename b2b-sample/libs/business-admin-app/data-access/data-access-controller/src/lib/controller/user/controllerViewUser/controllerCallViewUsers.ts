@@ -17,15 +17,16 @@
  */
 
 import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { Session } from "next-auth";
 
 /**
- * call `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users/<userId>` get the user details
+ * call GET `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users` to view all the users
  * 
  * @param session - session object
  * 
- * @returns user details, if not possible returns `null`
+ * @returns - list all users
  */
-export async function controllerCallViewUsers(session: any) {
+export async function controllerCallViewUsers(session: Session) {
 
     const data = await commonControllerCall("/api/settings/user/viewUsers", session);
 

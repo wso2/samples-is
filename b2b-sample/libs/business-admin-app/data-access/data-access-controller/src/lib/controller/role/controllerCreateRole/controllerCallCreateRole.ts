@@ -17,15 +17,17 @@
  */
 
 import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { Session } from "next-auth";
 
 /**
- * call `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users/<userId>` get the user details
+ * call POST `getManagementAPIServerBaseUrl()/api/server/v1/organizations/${orgId}/roles` create the role
  * 
  * @param session - session object
+ * @param role - role object
  * 
- * @returns all applications details, if not possible returns `null`
+ * @returns created role details, if not created returns `null`
  */
-export async function controllerCallCreateRole(session: any, role: any) {
+export async function controllerCallCreateRole(session: Session, role: any) {
 
     const data = await commonControllerCall("/api/settings/role/createRole", session, role);
 

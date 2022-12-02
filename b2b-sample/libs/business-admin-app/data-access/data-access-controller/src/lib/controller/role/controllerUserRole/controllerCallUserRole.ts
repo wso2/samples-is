@@ -17,15 +17,18 @@
  */
 
 import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { Session } from "next-auth";
 
 /**
- * call `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users/<userId>` get the user details
+ * call GET `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/organizations/<subOrgId>/users/<id>/roles` 
+ * to list all the roles of a user
  * 
  * @param session - session object
+ * @param id - user id
  * 
- * @returns all applications details, if not possible returns `null`
+ * @returns roles of a user, if the call failed `null`
  */
-export async function controllerCallUserRole(session: any, id : string) {
+export async function controllerCallUserRole(session: Session, id : string) {
 
     const data = await commonControllerCall(`/api/settings/role/userRoles/${id}`, session);
 

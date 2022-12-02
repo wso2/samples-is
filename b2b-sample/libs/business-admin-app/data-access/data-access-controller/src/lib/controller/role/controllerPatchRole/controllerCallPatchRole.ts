@@ -17,17 +17,18 @@
  */
 
 import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { Session } from "next-auth";
 
 /**
  * call PATCH `roleUri`
  * 
- * @param session - session object
+ * @param session 
  * @param roleUri - uri of the role
  * @param patchBody - body of the role that need to be patched
  * 
  * @returns patched role, if the call failed `null`
  */
-export async function controllerCallPatchRole(session: any, roleUri : string, patchBody : any) {
+export async function controllerCallPatchRole(session: Session, roleUri : string, patchBody : any) {
 
     const data = await commonControllerCall(`/api/settings/role/patchRole?roleUri=${roleUri}`, session, patchBody);
 

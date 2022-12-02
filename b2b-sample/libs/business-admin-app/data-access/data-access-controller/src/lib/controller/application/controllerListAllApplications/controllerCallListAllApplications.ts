@@ -16,16 +16,17 @@
  * under the License.
  */
 
+import { Session } from "inspector";
 import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
 
 /**
- * call `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users/<userId>` get the user details
+ * call GET `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/applications` to all the applicaions
  * 
  * @param session - session object
  * 
- * @returns all applications details, if not possible returns `null`
+ * @returns all applicaitons, if the call failed `null`
  */
-export async function controllerCallListAllApplications(session: any) {
+export async function controllerCallListAllApplications(session: Session) {
 
     const data = await commonControllerCall("/api/settings/application/listAllApplications", session);
 

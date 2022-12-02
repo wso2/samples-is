@@ -17,6 +17,7 @@
  */
 
 import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { Session } from "next-auth";
 
 /**
  * call `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users/<userId>` get the user details
@@ -25,7 +26,7 @@ import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-
  * 
  * @returns user details, if not possible returns `null`
  */
-export async function controllerCallMe(session: any) {
+export async function controllerCallMe(session: Session) {
 
     const data = await commonControllerCall("/api/dashboard/me", session);
 

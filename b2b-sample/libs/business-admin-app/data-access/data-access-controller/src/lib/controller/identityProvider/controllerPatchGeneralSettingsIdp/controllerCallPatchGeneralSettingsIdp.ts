@@ -17,15 +17,20 @@
  */
 
 import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { Session } from "next-auth";
 
 /**
- * call `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users/<userId>` get the user details
+ * patch general settings of an identity provider
+ * 
+ * call PUT `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/identity-providers/<idpid>/<request[0]>`
  * 
  * @param session - session object
+ * @param idpId - identity provider id
+ * @param body - identity provider body that need to patch
  * 
- * @returns all applications details, if not possible returns `null`
+ * @returns details of the idp, if the call failed `null`
  */
-export async function controllerCallPatchGeneralSettingsIdp(session: any, idpId : string, body : any) {
+export async function controllerCallPatchGeneralSettingsIdp(session: Session, idpId : string, body : any) {
 
     const data = await commonControllerCall(`/api/settings/identityProvider/patchGeneralSettingsIdp/${idpId}`, 
         session, body);

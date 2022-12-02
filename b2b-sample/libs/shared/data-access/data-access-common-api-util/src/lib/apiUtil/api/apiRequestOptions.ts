@@ -16,13 +16,15 @@
  * under the License.
  */
 
+import { Session } from "next-auth";
+
 /**
  * 
  * @param session - session object
  * 
  * @returns header object that can used for IS API calls
  */
-export function apiRequestOptions(session: any, hostedUrl : string ) {
+export function apiRequestOptions(session: Session, hostedUrl : string ) {
     const headers = {
         "accept": "application/json",
         "access-control-allow-origin": hostedUrl,
@@ -32,7 +34,7 @@ export function apiRequestOptions(session: any, hostedUrl : string ) {
     return { headers };
 }
 
-function apiRequestOptionsWithDataHeader(session: any, hostedUrl : string) {
+function apiRequestOptionsWithDataHeader(session: Session, hostedUrl : string) {
     const headers = {
         ...apiRequestOptions(session, hostedUrl).headers,
         "content-type": "application/json"
@@ -41,7 +43,7 @@ function apiRequestOptionsWithDataHeader(session: any, hostedUrl : string) {
     return headers;
 }
 
-export function apiRequestOptionsWithBody(session: any, method : string, body : any, hostedUrl : string) {
+export function apiRequestOptionsWithBody(session: Session, method : string, body : any, hostedUrl : string) {
     const request = {
         body: JSON.stringify(body),
         headers: apiRequestOptionsWithDataHeader(session, hostedUrl),
