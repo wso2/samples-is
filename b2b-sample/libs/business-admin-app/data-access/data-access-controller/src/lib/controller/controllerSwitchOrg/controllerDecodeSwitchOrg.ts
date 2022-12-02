@@ -16,11 +16,11 @@
  * under the License.
  */
 
+import { OrgSession } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { JWT } from "next-auth/jwt";
 import { controllerCallSwitchOrg } from "./controllerCallSwitchOrg";
 import config from "../../../../../../../../config.json";
-import { JWT } from "next-auth/jwt";
-import { OrgSession } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 
 function getOrgId(token: any): string {
 

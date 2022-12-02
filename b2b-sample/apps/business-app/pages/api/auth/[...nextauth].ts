@@ -43,6 +43,13 @@ const wso2ISProvider = (req: NextApiRequest, res: NextApiResponse) => NextAuth(r
 
             return token;
         },
+        async redirect({ url, baseUrl }) {
+
+            if (url.startsWith("/")) return `${baseUrl}${url}`;
+            else if (new URL(url).origin === baseUrl) return url;
+
+            return `${baseUrl}${url}`;
+        },
         async session({ session, token }) {
 
             if (!session) {
@@ -57,12 +64,6 @@ const wso2ISProvider = (req: NextApiRequest, res: NextApiResponse) => NextAuth(r
             }
 
             return session;
-        },
-        async redirect({ url, baseUrl }) {
-
-            if (url.startsWith("/")) return `${baseUrl}${url}`
-            else if (new URL(url).origin === baseUrl) return url
-            return `${baseUrl}${url}`
         }
     },
     debug: true,
@@ -73,7 +74,7 @@ const wso2ISProvider = (req: NextApiRequest, res: NextApiResponse) => NextAuth(r
                     scope: config.BusinessAppConfig.ApplicationConfig.APIScopes.join(" ")
                 }
             },
-            checks: ["state"],
+            checks: [ "state" ],
             clientId: config.BusinessAppConfig.AuthorizationConfig.ClientId,
             clientSecret: config.BusinessAppConfig.AuthorizationConfig.ClientSecret,
             httpOptions: {

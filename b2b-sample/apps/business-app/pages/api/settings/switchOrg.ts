@@ -18,13 +18,15 @@
 
 import { getHostedUrl } from "@b2bsample/business-app/util/util-application-config-util";
 import { dataNotRecievedError, notPostError } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { NextApiRequest, NextApiResponse } from "next";
+import { JWT } from "next-auth/jwt";
 import config from "../../../../../config.json";
 
 /**
  * 
  * @returns get the basic auth for authorize the switch call
  */
-const getBasicAuth = () => Buffer
+const getBasicAuth = ():string => Buffer
     // eslint-disable-next-line
     .from(`${config.BusinessAppConfig.AuthorizationConfig.ClientId}:${config.BusinessAppConfig.AuthorizationConfig.ClientSecret}`).toString("base64");
 
@@ -32,13 +34,13 @@ const getBasicAuth = () => Buffer
  * 
  * @returns get the header for the switch call
  */
-const getSwitchHeader = () => {
+const getSwitchHeader = (): HeadersInit => {
 
     const headers = {
-        "Access-Control-Allow-Credentials": true,
+        "Access-Control-Allow-Credentials": true.toString(),
         "Access-Control-Allow-Origin": getHostedUrl(),
-        "Authorization": `Basic ${getBasicAuth()}`,
-        "accept": "application/json",
+        Authorization: `Basic ${getBasicAuth()}`,
+        accept: "application/json",
         "content-type": "application/x-www-form-urlencoded"
     };
 
@@ -52,7 +54,7 @@ const getSwitchHeader = () => {
  * 
  * @returns get the body for the switch call
  */
-const getSwitchBody = (subOrgId, accessToken) => {
+const getSwitchBody = (subOrgId, accessToken): Record<string, string> => {
     const body = {
         "grant_type": "organization_switch",
         "scope": config.BusinessAppConfig.ApplicationConfig.APIScopes.join(" "),
@@ -70,7 +72,7 @@ const getSwitchBody = (subOrgId, accessToken) => {
  * 
  * @returns get the request body for the switch call
  */
-const getSwitchRequest = (subOrgId, accessToken): any => {
+const getSwitchRequest = (subOrgId : string, accessToken : JWT): RequestInit => {
     const request = {
         body: new URLSearchParams(getSwitchBody(subOrgId, accessToken)).toString(),
         headers: getSwitchHeader(),
@@ -93,7 +95,7 @@ const getSwitchEndpoint = (): string => `${config.CommonConfig.AuthorizationConf
  * 
  * @returns whether the switch call was successful
  */
-export default async function switchOrg(req, res) {
+export default async function switchOrg(req : NextApiRequest, res : NextApiResponse) {
 
     if (req.method !== "POST") {
         notPostError(res);

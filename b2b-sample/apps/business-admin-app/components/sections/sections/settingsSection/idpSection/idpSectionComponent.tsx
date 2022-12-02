@@ -22,7 +22,10 @@ import { controllerDecodeCreateIdentityProvider, controllerDecodeListAllIdentity
     "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { EmptySettingsComponent, SettingsTitleComponent, errorTypeDialog, infoTypeDialog, successTypeDialog } from
     "@b2bsample/shared/ui/ui-components";
-import { EMPTY_STRING, ENTERPRISE_ID, GOOGLE_ID, checkIfJSONisEmpty, copyTheTextToClipboard, sizeOfJson, CopyTextToClipboardCallback } from
+import {
+    CopyTextToClipboardCallback, EMPTY_STRING, ENTERPRISE_ID, GOOGLE_ID,
+    checkIfJSONisEmpty, copyTheTextToClipboard, sizeOfJson
+} from
     "@b2bsample/shared/util/util-common";
 import AppSelectIcon from "@rsuite/icons/AppSelect";
 import CopyIcon from "@rsuite/icons/Copy";
@@ -33,8 +36,10 @@ import { Avatar, Button, Container, FlexboxGrid, Form, Input, InputGroup, Modal,
 import IdentityProviderList from "./otherComponents/identityProviderList";
 import config from "../../../../../../../config.json";
 import Enterprise from
+// eslint-disable-next-line
     "../../../../../../../libs/business-admin-app/data-access/data-access-common-models-util/src/lib/identityProvider/data/templates/enterprise-identity-provider.json";
 import Google from
+// eslint-disable-next-line    
     "../../../../../../../libs/business-admin-app/data-access/data-access-common-models-util/src/lib/identityProvider/data/templates/google.json";
 import styles from "../../../../../styles/idp.module.css";
 
@@ -304,7 +309,7 @@ const IdPCreationModal = (prop) => {
     };
 
     const copyValueToClipboard = (text) => {
-        const callback : CopyTextToClipboardCallback = () => infoTypeDialog(toaster, "Text copied to clipboard");
+        const callback: CopyTextToClipboardCallback = () => infoTypeDialog(toaster, "Text copied to clipboard");
 
         copyTheTextToClipboard(text, callback);
     };

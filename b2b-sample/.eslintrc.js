@@ -302,6 +302,7 @@ module.exports = {
         ],
         "react/no-children-prop": 0,
         "react/prop-types": 1,
+        "react/react-in-jsx-scope": "off",
         semi: 1,
         "sort-imports": [
             "warn",

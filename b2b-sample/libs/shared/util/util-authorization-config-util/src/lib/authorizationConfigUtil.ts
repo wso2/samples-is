@@ -19,6 +19,7 @@
 import { User } from "@b2bsample/shared/data-access/data-access-common-models-util";
 import { getManagementAPIServerBaseUrl, getTenantDomain } from "@b2bsample/shared/util/util-application-config-util";
 import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
+import { Profile, Session } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import { signIn, signOut } from "next-auth/react";
 import config from "../../../../../../config.json";
@@ -41,11 +42,12 @@ function redirect(path: string): RedirectReturnType {
 
 /**
 * 
+* @param adminApp - `true` : business admin app, `false` : business app
 * @param orgId - `orgId` - (directs to the organization login), `null` - (enter the organization to login)
 */
 function orgSignin(adminApp: boolean, orgId?: string): void {
 
-    if(adminApp) {
+    if (adminApp) {
         if (orgId) {
             signIn("wso2isAdmin", { callbackUrl: "/o/moveOrg" }, { orgId: orgId });
         } else {
@@ -65,7 +67,7 @@ function orgSignin(adminApp: boolean, orgId?: string): void {
 * 
 * @param session - session object
 */
-async function orgSignout(session: any, hostedUrl: string): Promise<void> {
+async function orgSignout(session: Session, hostedUrl: string): Promise<void> {
 
     // todo: implementation should change after the backend changes are completed
 
@@ -145,7 +147,7 @@ function getOrgName(token: JWT): string {
 * 
 * @returns `User` get logged user from profile
 */
-function getLoggedUserFromProfile(profile: any): User | null {
+function getLoggedUserFromProfile(profile: Profile): User | null {
 
     try {
         const user: User = {

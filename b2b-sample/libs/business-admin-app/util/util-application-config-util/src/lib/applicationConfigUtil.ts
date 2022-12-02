@@ -23,7 +23,7 @@ import config from "../../../../../../config.json";
  * get hosted url
  * value of `config.ApplicationConfig.HostedUrl`
  */
-export function getHostedUrl() {
+export function getHostedUrl() : string {
 
     return config.BusinessAdminAppConfig.ApplicationConfig.HostedUrl;
 }

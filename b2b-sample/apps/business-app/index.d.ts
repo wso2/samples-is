@@ -16,6 +16,7 @@
  * under the License.
  */
 
+/* eslint-disable */
 declare module "*.svg" {
   const content: any;
 

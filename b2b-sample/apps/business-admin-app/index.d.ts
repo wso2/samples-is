@@ -15,6 +15,8 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
+/* eslint-disable */
 declare module "*.svg" {
   const content: any;
 

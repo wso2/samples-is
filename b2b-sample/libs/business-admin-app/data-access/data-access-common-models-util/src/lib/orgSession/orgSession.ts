@@ -14,9 +14,9 @@
  * KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations
  * under the License.
-*/
+ */
 
-import { JWT } from "next-auth/jwt"
+import { JWT } from "next-auth/jwt";
 
 export interface OrgSession {
     access_token?:string

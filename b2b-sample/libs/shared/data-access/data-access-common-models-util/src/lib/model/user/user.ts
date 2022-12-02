@@ -22,10 +22,10 @@ export type Name = {
 }
 
 export interface User {
-    id: string,
+    id: string | undefined,
     name: Name,
-    emails : [string],
-    userName : string,
+    emails: [string | undefined],
+    userName: string | undefined,
     [key: string]: any
 }
 

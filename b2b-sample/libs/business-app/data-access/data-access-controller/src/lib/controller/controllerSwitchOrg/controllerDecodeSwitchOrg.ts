@@ -17,9 +17,9 @@
  */
 
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { JWT } from "next-auth/jwt";
 import { controllerCallSwitchOrg } from "./controllerCallSwitchOrg";
 import config from "../../../../../../../../config.json";
-import { JWT } from "next-auth/jwt";
 
 function getOrgId(token : any) : string {
 
