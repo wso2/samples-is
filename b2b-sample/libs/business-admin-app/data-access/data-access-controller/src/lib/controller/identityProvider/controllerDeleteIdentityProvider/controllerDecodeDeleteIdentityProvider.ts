@@ -17,15 +17,17 @@
  */
 
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { Session } from "next-auth";
 import { controllerCallDeleteIdentityProvider } from "./controllerCallDeleteIdentityProvider";
 
 /**
  * 
  * @param session - session object
- 
- * @returns logged in users object. If failed `null`
+ * @param id - identity provider id
+ * 
+ * @returns - whether the identity provider is deleted or not
  */
-export async function controllerDecodeDeleteIdentityProvider(session: any, id: string) {
+export async function controllerDecodeDeleteIdentityProvider(session: Session, id: string) {
 
     const res = await commonControllerDecode(() => controllerCallDeleteIdentityProvider(session, id), null);
 

@@ -17,15 +17,16 @@
  */
 
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { Session } from "next-auth";
 import { controllerCallListAllApplications } from "./controllerCallListAllApplications";
 
 /**
  * 
  * @param session - session object
- 
- * @returns logged in users object. If failed `null`
+ *
+ * @returns get all the applications
  */
-export async function controllerDecodeListAllApplications(session: any) {
+export async function controllerDecodeListAllApplications(session: Session) {
 
     const res = await commonControllerDecode(() => controllerCallListAllApplications(session), null);
 

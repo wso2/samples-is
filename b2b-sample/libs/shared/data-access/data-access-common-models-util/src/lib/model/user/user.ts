@@ -21,12 +21,12 @@ export type Name = {
     familyName: string
 }
 
-export interface User {
+export interface User extends Record<string, unknown> {
     id: string | undefined,
     name: Name,
     emails: [string | undefined],
     userName: string | undefined,
-    [key: string]: any
+    [key: string]: unknown
 }
 
 export default User;

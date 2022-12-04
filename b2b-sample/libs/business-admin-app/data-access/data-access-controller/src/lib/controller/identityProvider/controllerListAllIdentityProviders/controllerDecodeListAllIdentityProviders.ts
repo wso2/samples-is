@@ -17,15 +17,16 @@
  */
 
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { Session } from "next-auth";
 import { controllerCallListAllIdentityProviders } from "./controllerCallListAllIdentityProviders";
 
 /**
  * 
  * @param session - session object
- 
- * @returns logged in users object. If failed `null`
+ * 
+ * @returns - details of all the identity providers
  */
-export async function controllerDecodeListAllIdentityProviders(session: any) {
+export async function controllerDecodeListAllIdentityProviders(session: Session) {
 
     const res = await commonControllerDecode(() => controllerCallListAllIdentityProviders(session), null);
 

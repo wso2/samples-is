@@ -18,6 +18,7 @@
 
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import { SendUser, setUsername } from "@b2bsample/shared/data-access/data-access-common-models-util";
+import { Session } from "next-auth";
 import { controllerCallAddUser } from "./controllerCallAddUser";
 
 export const InviteConst = {
@@ -44,7 +45,8 @@ function inviteAddUserBody(firstName: string, familyName: string, email: string,
     };
 }
 
-function pwdAddUserBody(firstName: string, familyName: string, email: string, username: string, password: string): SendUser {
+function pwdAddUserBody(firstName: string, familyName: string, email: string, username: string, password: string)
+    : SendUser {
     return {
         "emails": [
             {
@@ -85,11 +87,17 @@ function getAddUserBody(
 /**
  * 
  * @param session - session object
- 
- * @returns logged in users object. If failed `null`
+ * @param inviteConst - `InviteConst.INVITE` or `InviteConst.PWD`
+ * @param firstName - first name
+ * @param familyName - last name
+ * @param email - email
+ * @param username - username
+ * @param password - password
+ * 
+ * @returns - details of the created user
  */
 export async function controllerDecodeAddUser(
-    session: any,
+    session: Session,
     inviteConst: string,
     firstName: string,
     familyName: string,

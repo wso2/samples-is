@@ -17,6 +17,7 @@
  */
 
 import { PatchMethod } from "@b2bsample/shared/util/util-common";
+import { Session } from "next-auth";
 import { controllerDecodePatchRole } from "../controllerPatchRole/controllerDecodePatchRole";
 
 function getRolesThatNeedToAddUser(initRoleList : string[], roleList : string[]) {
@@ -27,7 +28,7 @@ function getRolesThatNeedToRemoveUser(initRoleList : string[], roleList : string
     return initRoleList.filter(roleUri => !roleList.includes(roleUri));
 }
 
-async function getRoleDetailsForAdd(session : any, userId : string, initRoleList : string[], roleList : string[]) {
+async function getRoleDetailsForAdd(session : Session, userId : string, initRoleList : string[], roleList : string[]) {
     const rolesUriList = getRolesThatNeedToAddUser(initRoleList, roleList);
 
     await rolesUriList.forEach(async (uri) => {
@@ -35,7 +36,8 @@ async function getRoleDetailsForAdd(session : any, userId : string, initRoleList
     });
 }
 
-async function getRoleDetailsForRemove(session : any, userId : string, initRoleList : string[], roleList : string[]) {
+async function getRoleDetailsForRemove(session : Session, userId : string, initRoleList : string[]
+    , roleList : string[]) {
     const rolesUriList = getRolesThatNeedToRemoveUser(initRoleList, roleList);
 
     await rolesUriList.forEach(async (uri) => {
@@ -53,7 +55,7 @@ async function getRoleDetailsForRemove(session : any, userId : string, initRoleL
  * @returns - `true` if the operation is successfull, else `false`
  */
 export async function controllerDecodeEditRolesToAddOrRemoveUser(
-    session: any, userId: string, initRoleList : string[], roleList : string[]) {
+    session: Session, userId: string, initRoleList : string[], roleList : string[]) {
 
     try {
         return getRoleDetailsForAdd(session, userId, initRoleList, roleList)

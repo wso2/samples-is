@@ -18,16 +18,22 @@
 
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import { SendEditUser, setUsername } from "@b2bsample/shared/data-access/data-access-common-models-util";
+import { Session } from "next-auth";
 import { controllerCallEditUser } from "./controllerCallEditUser";
 
 /**
  * 
  * @param session - session object
- 
- * @returns logged in users object. If failed `null`
+ * @param id - id of the user
+ * @param firstName - edited first name
+ * @param familyName - edited last name
+ * @param email - edited email
+ * @param username - edited username
+ * 
+ * @returns - whether the edit of the user is successful or not
  */
 export async function controllerDecodeEditUser(
-    session: any, id: string, firstName: string, familyName: string, email: string, username: string) {
+    session: Session, id: string, firstName: string, familyName: string, email: string, username: string) {
 
     const editUserEncode: SendEditUser = {
         "Operations": [

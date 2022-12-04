@@ -53,6 +53,7 @@ declare module "next-auth" {
         given_name?: string,
         username?: string,
         user_organization?: string,
-        org_name?: string
+        org_name?: string,
+        org_id: string
     }
 }

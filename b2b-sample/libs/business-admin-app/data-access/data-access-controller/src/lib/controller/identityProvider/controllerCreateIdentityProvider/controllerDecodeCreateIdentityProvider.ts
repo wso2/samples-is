@@ -18,19 +18,23 @@
 
 import { setIdpTemplate } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { Session } from "next-auth";
 import { controllerCallCreateIdentityProvider } from "./controllerCallCreateIdentityProvider";
 
 /**
  * 
  * @param session - session object
- 
- * @returns logged in users object. If failed `null`
+ * @param template - template
+ * @param formValues - values of the form that user filled
+ * 
+ * @returns - whether the identity provider is created or not
  */
-export async function controllerDecodeCreateIdentityProvider(session: any,  template : any, formValues : any) {
+export async function controllerDecodeCreateIdentityProvider(session: Session, template: any,
+    formValues: Record<string, string>) {
 
     let model = JSON.parse(JSON.stringify(template.idp));
 
-    model = setIdpTemplate( model, template.templateId, formValues, session.orgId);
+    model = setIdpTemplate(model, template.templateId, formValues, (session.orgId as string));
 
     const res = await commonControllerDecode(() => controllerCallCreateIdentityProvider(session, model), null);
 

@@ -37,11 +37,11 @@ export function getCallbackUrl(orgId: string) {
  * 
  * @returns - idp readay to sent to the IS 
  */
-export function setIdpTemplate(model, templateId, formValues, orgId: string) {
+export function setIdpTemplate(model, templateId: string, formValues: Record<string, string>, orgId: string) {
 
-    const name = formValues.application_name.toString();
-    const clientId = formValues.client_id.toString();
-    const clientSecret = formValues.client_secret.toString();
+    const name = formValues["application_name"].toString();
+    const clientId = formValues["client_id"].toString();
+    const clientSecret = formValues["client_secret"].toString();
 
     model.name = name;
 
@@ -113,11 +113,12 @@ function googleIdpTemplate(model, clientId: string, clientSecret: string, orgId:
  * 
  * @returns create enterprise IDP template
  */
-function enterpriseIdpTemplate(model, clientId: string, clientSecret: string, formValues, orgId: string) {
+function enterpriseIdpTemplate(model, clientId: string, clientSecret: string, formValues: Record<string, string>
+    , orgId: string) {
 
-    const authorizationEndpointUrl = formValues.authorization_endpoint_url.toString();
-    const tokenEndpointUrl = formValues.token_endpoint_url.toString();
-    const certificate = formValues.certificate.toString();
+    const authorizationEndpointUrl = formValues["authorization_endpoint_url"].toString();
+    const tokenEndpointUrl = formValues["token_endpoint_url"].toString();
+    const certificate = formValues["certificate"].toString();
 
     model.image =
         `${config.CommonConfig.ManagementAPIConfig.ImageBaseUrl}/libs/themes/default/assets` +

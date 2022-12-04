@@ -17,7 +17,7 @@
  */
 
 export interface InternalUser {
-    email: string,
+    email: string | undefined,
     familyName: string,
     firstName: string,
     id: string,

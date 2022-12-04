@@ -17,7 +17,7 @@
  */
 interface FederatedAuthenticatorForIdentityProvider {
     defaultAuthenticatorId : string,
-    [key: string]: any,
+    [key: string]: unknown,
 }
 
 export interface IdentityProvider {
@@ -26,19 +26,19 @@ export interface IdentityProvider {
     image : string,
     description : string,
     federatedAuthenticators: [FederatedAuthenticatorForIdentityProvider],
-    [key: string]: any,
+    [key: string]: unknown,
 }
 
 export interface AllIdentityProvidersIdentityProvider {
     id: string,
-    [key: string]: any
+    [key: string]: unknown
 }
 
 export interface AllIdentityProviders {
     count: number
     identityProviders: [AllIdentityProvidersIdentityProvider]
     totalResults: number,
-    [key: string]: any
+    [key: string]: unknown
 }
 
 export interface FederatedAuthenticatorsProperty {
@@ -46,10 +46,10 @@ export interface FederatedAuthenticatorsProperty {
     value: string
 }
 
-export interface FederatedAuthenticators {
-    authenticatorId: string,
+export interface FederatedAuthenticators extends Record<string, unknown> {
+    authenticatorId?: string,
     name: string,
     properties: [FederatedAuthenticatorsProperty],
-    [key: string]: any,
+    [key: string]: unknown,
 
 }

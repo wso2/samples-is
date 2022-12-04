@@ -16,8 +16,8 @@
  * under the License.
  */
 
-import { Session } from "inspector";
 import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { Session } from "next-auth";
 
 /**
  * call `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users/<userId>` get the user details

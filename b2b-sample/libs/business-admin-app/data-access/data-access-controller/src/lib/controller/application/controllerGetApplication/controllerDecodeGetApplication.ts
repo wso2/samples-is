@@ -17,6 +17,7 @@
  */
 
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { Session } from "next-auth";
 import { controllerCallGetApplication } from "./controllerCallGetApplication";
 
 /**
@@ -26,7 +27,7 @@ import { controllerCallGetApplication } from "./controllerCallGetApplication";
  *
  * @returns get application given the id. If failed `null`
  */
-export async function controllerDecodeGetApplication(session: any, id: string) {
+export async function controllerDecodeGetApplication(session: Session, id: string) {
 
     const res = await commonControllerDecode(() => controllerCallGetApplication(session, id), null);
 

@@ -298,7 +298,7 @@ const IdPCreationModal = (prop) => {
 
     const { openModal, onSave, onCancel, template, orgId } = prop;
 
-    const [ formValues, setFormValues ] = useState({});
+    const [ formValues, setFormValues ] = useState<Record<string, string>>({});
 
     const handleModalClose = () => {
         onCancel();

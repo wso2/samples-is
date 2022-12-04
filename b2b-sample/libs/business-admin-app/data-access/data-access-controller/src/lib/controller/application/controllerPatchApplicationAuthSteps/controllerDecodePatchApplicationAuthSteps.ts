@@ -20,6 +20,7 @@ import { commonControllerDecode } from "@b2bsample/shared/data-access/data-acces
 import {
     BASIC_AUTHENTICATOR_ID, BASIC_ID, ENTERPRISE_AUTHENTICATOR_ID, ENTERPRISE_ID, GOOGLE_AUTHENTICATOR_ID, GOOGLE_ID
 } from "@b2bsample/shared/util/util-common";
+import { Session } from "next-auth";
 import { controllerCallPatchApplicationAuthSteps } from "./controllerCallPatchApplicationAuthSteps";
 
 /**
@@ -137,7 +138,7 @@ function addRemoveAuthSequence(template: any, idpTempleteId: string, idpName: st
  * @returns decode patch applicaiton authentication steps API calls.
  */
 export async function controllerDecodePatchApplicationAuthSteps(
-    session: any, template: any, idpDetails: any, method: boolean) {
+    session: Session, template: any, idpDetails: any, method: boolean) {
 
     const applicationId = template.id;
     const idpName = idpDetails.name;

@@ -17,17 +17,22 @@
  */
 
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { Session } from "next-auth";
 import { controllerCallGetFederatedAuthenticators } from "./controllerCallGetFederatedAuthenticators";
 
 /**
  * 
  * @param session - session object
- 
- * @returns logged in users object. If failed `null`
+ * @param id - federated authenticator id
+ * @param idpId - identity provider id
+ * 
+ * @returns - get the federated authenticators
  */
-export async function controllerDecodeGetFederatedAuthenticators(session: any, id: string, idpId: string) {
+export async function controllerDecodeGetFederatedAuthenticators(session: Session, id: string, idpId: string)
+    : Promise<null | Record<string, unknown>> {
 
-    const res = await commonControllerDecode(() => controllerCallGetFederatedAuthenticators(session, id, idpId), null);
+    const res = (await commonControllerDecode(
+        () => controllerCallGetFederatedAuthenticators(session, id, idpId), null) as null | Record<string, unknown>);
 
     return res;
 

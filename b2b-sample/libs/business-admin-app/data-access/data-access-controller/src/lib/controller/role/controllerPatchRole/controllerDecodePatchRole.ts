@@ -18,6 +18,7 @@
 
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import { PatchMethod } from "@b2bsample/shared/util/util-common";
+import { Session } from "next-auth";
 import { controllerCallPatchRole } from "./controllerCallPatchRole";
 
 function getAddReplaceBody(patchMethod: string, path: string, value: string[] | string) {
@@ -65,14 +66,15 @@ function getPatchBody(patchMethod: string, path: string, value: string[] | strin
 /**
  * 
  * @param session - session object
- * @param displayName - role name
- * @param permissions - role permissions
- * @param users - users assigned to the role
+ * @param roleUri - uri of the role
+ * @param patchMethod - `PatchMethod.ADD`, `PatchMethod.REPLACE` or `PatchMethod.REMOVE`
+ * @param path - path
+ * @param value - edited value
  * 
- * @returns `res` (if user added successfully) or `false` (if user addition was not completed)
+ * @returns - whehter the patch was successful or not
  */
 export async function controllerDecodePatchRole(
-    session: any, roleUri: string, patchMethod: string, path: string, value: string[] | string) {
+    session: Session, roleUri: string, patchMethod: string, path: string, value: string[] | string) {
     const patchBody = getPatchBody(patchMethod, path, value);
 
     const res = await commonControllerDecode(() => controllerCallPatchRole(session, roleUri, patchBody), null);

@@ -17,15 +17,17 @@
  */
 
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { Session } from "next-auth";
 import { controllerCallGetRole } from "./controllerCallGetRole";
 
 /**
  * 
- * @param session - session object
- 
- * @returns logged in users object. If failed `null`
+ * @param session - session objet
+ * @param roleUri - uri of the role
+ * 
+ * @returns - details of the role
  */
-export async function controllerDecodeGetRole(session: any, roleUri: string) {
+export async function controllerDecodeGetRole(session: Session, roleUri: string) {
 
     const res = await commonControllerDecode(() => controllerCallGetRole(session, roleUri), null);
 

@@ -17,20 +17,22 @@
  */
 
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { Session } from "next-auth";
 import { controllerCallListAllRoles } from "./controllerCallListAllRoles";
 
 /**
  * 
  * @param session - session object
- 
- * @returns logged in users object. If failed `null`
+ * 
+ * @returns - list all the roles
  */
-export async function controllerDecodeListAllRoles(session: any) {
+export async function controllerDecodeListAllRoles(session: Session) {
 
-    const res = await commonControllerDecode(() => controllerCallListAllRoles(session), null);
+    const res = (
+        await commonControllerDecode(() => controllerCallListAllRoles(session), null) as Record<string, unknown>);
 
-    if(res) {
-        return res.Resources;
+    if (res) {
+        return res["Resources"];
     }
 
     return res;

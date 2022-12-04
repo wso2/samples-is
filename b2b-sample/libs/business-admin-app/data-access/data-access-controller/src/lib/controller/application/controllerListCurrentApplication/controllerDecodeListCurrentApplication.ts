@@ -17,15 +17,17 @@
  */
 
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { Session } from "next-auth";
 import { controllerCallListCurrentApplication } from "./controllerCallListCurrentApplication";
 
 /**
  * 
  * @param session - session object
- 
- * @returns logged in users object. If failed `null`
+ *
+ * @returns get the deatils of the current logged in application of the business app, 
+ * filtered using the `BusinessAppConfig.ManagementAPIConfig.SharedApplicationName` in the config.json 
  */
-export async function controllerDecodeListCurrentApplication(session: any) {
+export async function controllerDecodeListCurrentApplication(session: Session) {
 
     const res = await commonControllerDecode(() => controllerCallListCurrentApplication(session), null);
 

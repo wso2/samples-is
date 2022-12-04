@@ -17,32 +17,33 @@
  */
 
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
-import { decodeUser } from "@b2bsample/shared/data-access/data-access-common-models-util";
+import { InternalUser, User, decodeUser } from "@b2bsample/shared/data-access/data-access-common-models-util";
+import { Session } from "next-auth";
 import { controllerCallMe } from "./controllerCallMe";
 
 /**
  * 
  * @param session - session object
- 
+ * 
  * @returns logged in users object. If failed `null`
  */
-export async function controllerDecodeMe(session: any) {
-    let meData;
+export async function controllerDecodeMe(session: Session) : Promise<InternalUser | null> {
+    let meData : User;
 
     if (!session.user || session.user.id === undefined || session.user.userName === undefined
         || session.user.name === undefined || session.user.emails === undefined) {
-        meData = await commonControllerDecode(() => controllerCallMe(session), null);
+        meData = ( await commonControllerDecode(() => controllerCallMe(session), null) as User);
     } else {
         meData = session.user;
     }
 
     if(meData){
-        const meReturn = decodeUser(meData);
+        const meReturn : InternalUser = decodeUser(meData);
 
         return meReturn;
     } 
 
-    return meData;
+    return null;
 
 }
 

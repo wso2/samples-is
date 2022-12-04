@@ -19,6 +19,7 @@
 import { getHostedUrl } from "@b2bsample/business-admin-app/util/util-application-config-util";
 import { apiRequestOptions, apiRequestOptionsWithBody } from
     "@b2bsample/shared/data-access/data-access-common-api-util";
+import { Session } from "next-auth";
 
 /**
  * 
@@ -26,11 +27,11 @@ import { apiRequestOptions, apiRequestOptionsWithBody } from
  * 
  * @returns header object that can used for IS API calls
  */
-export function requestOptions(session: any) {
+export function requestOptions(session: Session) {
     return apiRequestOptions(session, getHostedUrl());
 }
 
-export function requestOptionsWithBody(session: any, method: string, body: any) {
+export function requestOptionsWithBody(session: Session, method: string, body: any) {
     return apiRequestOptionsWithBody(session, method, body, getHostedUrl());
 }
 

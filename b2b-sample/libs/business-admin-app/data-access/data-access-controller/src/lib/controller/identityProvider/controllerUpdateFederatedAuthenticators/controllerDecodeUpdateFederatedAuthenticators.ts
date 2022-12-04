@@ -16,12 +16,14 @@
  * under the License.
  */
 
+import { FederatedAuthenticators } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { Session } from "next-auth";
 import { controllerCallUpdateFederatedAuthenticators } from "./controllerCallUpdateFederatedAuthenticators";
 
-function refactorFederatedAuthenticatorsForUpdate(federatedAuthenticators: any) {
+function refactorFederatedAuthenticatorsForUpdate(federatedAuthenticators: FederatedAuthenticators) {
     delete federatedAuthenticators.authenticatorId;
-    delete federatedAuthenticators.tags;
+    delete federatedAuthenticators["tags"];
 
     return federatedAuthenticators;
 }
@@ -39,7 +41,7 @@ function updateProperties(federatedAuthenticators: any, keyProperty: any, valueP
  * @returns logged in users object. If failed `null`
  */
 export async function controllerDecodeUpdateFederatedAuthenticators(
-    session: any, idpId: string, federatedAuthenticators: any, changedValues: any) {
+    session: Session, idpId: string, federatedAuthenticators: FederatedAuthenticators, changedValues: any) {
 
     const federatedAuthenticatorId = federatedAuthenticators.authenticatorId;
 

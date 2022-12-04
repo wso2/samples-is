@@ -40,14 +40,14 @@ export default function Settings(prop) {
     const { session, idpDetails } = prop;
 
     const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
-    const [ federatedAuthenticators, setFederatedAuthenticators ] = useState<FederatedAuthenticators>(null);
+    const [ federatedAuthenticators, setFederatedAuthenticators ] = useState<FederatedAuthenticators | null>(null);
 
     const toaster = useToaster();
 
     const fetchData = useCallback(async () => {
-        const res = await controllerDecodeGetFederatedAuthenticators(
+        const res = (await controllerDecodeGetFederatedAuthenticators(
             session, idpDetails.id, idpDetails.federatedAuthenticators.defaultAuthenticatorId
-        );
+        ) as FederatedAuthenticators);
 
         await setFederatedAuthenticators(res);
     }, [ session, idpDetails ]);

@@ -16,7 +16,6 @@
  * under the License.
  */
 
-import { User } from "@b2bsample/shared/data-access/data-access-common-models-util";
 import { Profile } from "next-auth";
 import "next-auth/jwt";
 
@@ -25,8 +24,13 @@ declare module "next-auth" {
         error: boolean,
         expires: boolean,
         accessToken?: string,
+        idToken?: JWT,
+        scope?: string,
+        refreshToken?: string,
+        userId?: string,
         user?: User | null,
         orgId?: string,
+        orgName?: string,
         orginalIdToken?: string,
     }
 }

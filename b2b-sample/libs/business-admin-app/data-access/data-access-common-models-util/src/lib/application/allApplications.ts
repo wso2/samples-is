@@ -20,12 +20,12 @@ interface AllApplicaitonsApplication {
     id: string,
     name: string,
     description: string,
-    [key: string]: any;
+    [key: string]: unknown;
 }
 
 export interface AllApplications {
     totalResults: number,
-    [key: string]: any,
+    [key: string]: unknown,
     applications: [AllApplicaitonsApplication]
 }
 

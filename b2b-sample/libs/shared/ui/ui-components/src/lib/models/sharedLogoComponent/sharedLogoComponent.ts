@@ -36,5 +36,5 @@ export interface SharedLogoImageStyle {
     height : string,
     width? : string,
     filter? : string,
-    [key: string]: any;
+    [key: string]: unknown;
 }

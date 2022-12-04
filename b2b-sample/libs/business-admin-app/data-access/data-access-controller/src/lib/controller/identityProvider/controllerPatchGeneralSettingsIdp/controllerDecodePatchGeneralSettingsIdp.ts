@@ -17,16 +17,20 @@
  */
 
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { Session } from "next-auth";
 import { controllerCallPatchGeneralSettingsIdp } from "./controllerCallPatchGeneralSettingsIdp";
 
 /**
  * 
  * @param session - session object
- 
- * @returns logged in users object. If failed `null`
+ * @param name - name of the identity provider
+ * @param description - description of the identity provider
+ * @param idpId - identity provider id
+ * 
+ * @returns - patch the general settings in the identity provider
  */
 export async function controllerDecodePatchGeneralSettingsIdp(
-    session: any, name: string, description: string, idpId: string) {
+    session: Session, name: string, description: string, idpId: string) {
 
     const body = [
         { "operation": "REPLACE", "path": "/description", "value": description },
