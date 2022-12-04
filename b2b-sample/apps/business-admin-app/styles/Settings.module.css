@@ -50,7 +50,7 @@
     justify-self: center;
     flex-direction: row;
     gap: 24px;
-    display: '';
+    display: "";
 }
 
 .userDetailsBody {
