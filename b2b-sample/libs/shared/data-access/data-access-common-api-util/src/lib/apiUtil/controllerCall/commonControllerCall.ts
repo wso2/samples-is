@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { ControllerCallParam, ControllerCallReturn }
+import { ControllerCallParam, ControllerCallReturn, OrgSession, OrgSessionControllerCallParam }
     from "@b2bsample/shared/data-access/data-access-common-models-util";
 import { Session } from "next-auth";
 import { getControllerCallApiRequestOptions, getControllerCallApiRequestOptionsForSwitchCallWithParam }
@@ -39,8 +39,10 @@ export async function commonControllerCall(api: string, session: Session | null,
 
         if (switchCall) {
             if (param) {
-
-                header = getControllerCallApiRequestOptionsForSwitchCallWithParam(param.subOrgId, param.accessToken);
+                const orgSessionControllerCallParam: OrgSessionControllerCallParam
+                    = param as OrgSessionControllerCallParam;
+                header = getControllerCallApiRequestOptionsForSwitchCallWithParam(
+                    orgSessionControllerCallParam.subOrgId, orgSessionControllerCallParam.accessToken);
             } else {
                 throw Error;
             }

@@ -16,12 +16,11 @@
  * under the License.
  */
 
-export * from "./lib/application/application";
-export * from "./lib/application/allApplications";
-export * from "./lib/application/applicationUtils";
-export * from "./lib/identityProvider/identityProvider";
-export * from "./lib/identityProvider/identityProviderUtils";
-export * from "./lib/role/role";
-export * from "./lib/role/roleUsers";
-export * from "./lib/role/roleGroups";
-export * from "./lib/role/roleList";
+import { ControllerCallParam } from "@b2bsample/shared/data-access/data-access-common-models-util";
+
+export interface OrgSessionControllerCallParam extends ControllerCallParam {
+    accessToken: string,
+    subOrgId: string
+}
+
+export default OrgSessionControllerCallParam;

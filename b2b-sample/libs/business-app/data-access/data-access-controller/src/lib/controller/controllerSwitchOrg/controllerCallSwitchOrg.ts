@@ -18,6 +18,7 @@
 
 import { getHostedUrl } from "@b2bsample/business-app/util/util-application-config-util";
 import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { OrgSession } from "@b2bsample/shared/data-access/data-access-common-models-util";
 
 /**
  * call the switch organization API endpoint
@@ -26,15 +27,15 @@ import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-
  * @param accessToken - access token
  * 
  */
-export async function controllerCallSwitchOrg(subOrgId: string, accessToken: string) {
-    const data = await commonControllerCall(`${getHostedUrl()}/api/settings/switchOrg`,
+export async function controllerCallSwitchOrg(subOrgId: string, accessToken: string): Promise<OrgSession | null> {
+    const data = (await commonControllerCall(`${getHostedUrl()}/api/settings/switchOrg`,
         null,
         {
             accessToken: accessToken,
             subOrgId: subOrgId
         },
         true
-    );
+    ) as OrgSession | null);
 
     return data;
 }

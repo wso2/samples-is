@@ -16,11 +16,11 @@
  * under the License.
  */
 
-import { OrgSession } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { OrgSession } from "@b2bsample/shared/data-access/data-access-common-models-util";
 import { JWT } from "next-auth/jwt";
-import { controllerCallSwitchOrg } from "./controllerCallSwitchOrg";
 import config from "../../../../../../../../config.json";
+import { controllerCallSwitchOrg } from "./controllerCallSwitchOrg";
 
 function getOrgId(token: JWT): string {
 
@@ -51,7 +51,7 @@ function getOrgId(token: JWT): string {
 export async function controllerDecodeSwitchOrg(token: JWT): Promise<OrgSession | null> {
 
     const subOrgId: string = getOrgId(token);
-    const accessToken: string = (token["accessToken"] as string);
+    const accessToken: string = (token.accessToken as string);
 
     const res =
         (await commonControllerDecode(() => controllerCallSwitchOrg(subOrgId, accessToken), null) as OrgSession | null);
