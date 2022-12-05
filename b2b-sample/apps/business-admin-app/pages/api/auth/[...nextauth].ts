@@ -46,12 +46,9 @@ const wso2ISProvider = (req: NextApiRequest, res: NextApiResponse) => NextAuth(r
 
             return token;
         },
-        async redirect({ url, baseUrl }) {
+        async redirect({ baseUrl }) {
 
-            if (url.startsWith("/")) return `${baseUrl}${url}`;
-            else if (new URL(url).origin === baseUrl) return url;
-
-            return `${baseUrl}${url}`;
+            return `${baseUrl}/o/moveOrg`;
         },
         async session({ session, token }) {
             const orgSession = await controllerDecodeSwitchOrg(token);
@@ -86,12 +83,8 @@ const wso2ISProvider = (req: NextApiRequest, res: NextApiResponse) => NextAuth(r
                     scope: config.BusinessAdminAppConfig.ApplicationConfig.APIScopes.join(" ")
                 }
             },
-            checks: [ "state" ],
             clientId: config.BusinessAdminAppConfig.AuthorizationConfig.ClientId,
             clientSecret: config.BusinessAdminAppConfig.AuthorizationConfig.ClientSecret,
-            httpOptions: {
-                timeout: 1800000
-            },
             id: "wso2isAdmin",
             name: "WSO2ISAdmin",
             profile(profile) {

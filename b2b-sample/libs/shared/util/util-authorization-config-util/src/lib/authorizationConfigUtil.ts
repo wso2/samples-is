@@ -49,15 +49,15 @@ function orgSignin(adminApp: boolean, orgId?: string): void {
 
     if (adminApp) {
         if (orgId) {
-            signIn("wso2isAdmin", { callbackUrl: "/o/moveOrg" }, { orgId: orgId });
+            signIn("wso2isAdmin", { orgId: orgId });
         } else {
-            signIn("wso2isAdmin", { callbackUrl: "/o/moveOrg" });
+            signIn("wso2isAdmin");
         }
     } else {
         if (orgId) {
-            signIn("wso2is", { callbackUrl: "/o/moveOrg" }, { orgId: orgId });
+            signIn("wso2is", { orgId: orgId });
         } else {
-            signIn("wso2is", { callbackUrl: "/o/moveOrg" });
+            signIn("wso2is");
         }
     }
 }
