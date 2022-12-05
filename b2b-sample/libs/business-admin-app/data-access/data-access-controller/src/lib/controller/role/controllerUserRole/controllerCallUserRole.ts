@@ -32,6 +32,6 @@ import { Session } from "next-auth";
 export async function controllerCallUserRole(session: Session, id: string): Promise<Role[] | null> {
 
     const data = (await commonControllerCall(`/api/settings/role/userRoles/${id}`, session) as Role[] | null);
-    console.log(data);
+
     return data;
 }

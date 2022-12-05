@@ -16,15 +16,14 @@
  * under the License.
  */
 
-import { ControllerCallParam, ControllerCallReturn, ControllerDecodeReturn }
-    from "@b2bsample/shared/data-access/data-access-common-models-util";
-import Role from "./role";
+import { ControllerCallReturn, ControllerDecodeReturn } from
+    "@b2bsample/shared/data-access/data-access-common-models-util";
+import Application from "./application";
 
-export interface RoleList extends ControllerCallParam, ControllerCallReturn
-    , Record<string, unknown> {
-    Resources: Role[],
-    itemsPerPage: number,
-    totalResults: number
+export interface ApplicationList extends ControllerCallReturn, ControllerDecodeReturn {
+    totalResults: number,
+    applications: Application[],
+    [key: string]: unknown,
 }
 
-export default RoleList;
+export default ApplicationList;

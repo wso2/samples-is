@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { ApplicationList } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import { Session } from "next-auth";
 
@@ -27,9 +28,10 @@ import { Session } from "next-auth";
  * 
  * @returns application initial details, if call failed `null`
  */
-export async function controllerCallListCurrentApplication(session: Session) {
+export async function controllerCallListCurrentApplication(session: Session): Promise<ApplicationList | null> {
 
-    const data = await commonControllerCall("/api/settings/application/listCurrentApplication", session);
+    const data = (await commonControllerCall("/api/settings/application/listCurrentApplication", session) as
+        ApplicationList | null);
 
     return data;
 }

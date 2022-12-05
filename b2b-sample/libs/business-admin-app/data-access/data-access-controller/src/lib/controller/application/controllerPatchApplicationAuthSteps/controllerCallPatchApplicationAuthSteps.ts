@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { AuthenticationSequenceModel } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import { Session } from "next-auth";
 
@@ -26,7 +27,8 @@ import { Session } from "next-auth";
  * 
  * @returns all applications details, if not possible returns `null`
  */
-export async function controllerCallPatchApplicationAuthSteps(session: Session, applicationId: string, model: any) {
+export async function controllerCallPatchApplicationAuthSteps(session: Session, applicationId: string,
+    model: AuthenticationSequenceModel) {
 
     const data = await commonControllerCall(`/api/settings/application/patchApplicationAuthSteps/${applicationId}`
         , session, model);

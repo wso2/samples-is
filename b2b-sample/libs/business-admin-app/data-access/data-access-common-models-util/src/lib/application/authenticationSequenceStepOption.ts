@@ -16,18 +16,9 @@
  * under the License.
  */
 
-interface AllApplicaitonsApplication {
-    id: string,
-    name: string,
-    description: string,
-    [key: string]: unknown;
+export interface AuthenticationSequenceStepOption {
+    idp: string,
+    authenticator: string
 }
 
-export interface AllApplications {
-    totalResults: number,
-    [key: string]: unknown,
-    applications: [AllApplicaitonsApplication]
-}
-
-
-export default AllApplications;
+export default AuthenticationSequenceStepOption;

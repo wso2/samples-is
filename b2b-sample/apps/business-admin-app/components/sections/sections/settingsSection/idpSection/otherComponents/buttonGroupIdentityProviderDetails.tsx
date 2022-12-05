@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { AllApplications, Application, checkIfIdpIsinAuthSequence } from
+import { ApplicationList, Application, checkIfIdpIsinAuthSequence } from
     "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import {
     controllerDecodeDeleteIdentityProvider, controllerDecodeGetApplication,
@@ -41,13 +41,13 @@ export default function ButtonGroupIdentityProviderDetails(prop) {
 
     const toaster = useToaster();
 
-    const [ allApplications, setAllApplications ] = useState<AllApplications>(null);
+    const [ allApplications, setAllApplications ] = useState<ApplicationList>(null);
     const [ applicationDetail, setApplicationDetail ] = useState<Application>(null);
-    const [ idpIsinAuthSequence, setIdpIsinAuthSequence ] = useState(null);
-    const [ openListAppicationModal, setOpenListAppicationModal ] = useState(false);
+    const [ idpIsinAuthSequence, setIdpIsinAuthSequence ] = useState<boolean>(null);
+    const [ openListAppicationModal, setOpenListAppicationModal ] = useState<boolean>(false);
 
     const fetchData = useCallback(async () => {
-        const res : AllApplications = ( await controllerDecodeListCurrentApplication(session) as AllApplications );
+        const res : ApplicationList = ( await controllerDecodeListCurrentApplication(session) as ApplicationList );
         
         await setAllApplications(res);
     }, [ session, openListAppicationModal ]);

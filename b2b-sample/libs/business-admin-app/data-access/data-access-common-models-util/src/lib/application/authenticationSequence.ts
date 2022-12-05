@@ -16,15 +16,19 @@
  * under the License.
  */
 
-import { ControllerCallParam, ControllerCallReturn, ControllerDecodeReturn }
-    from "@b2bsample/shared/data-access/data-access-common-models-util";
-import Role from "./role";
+import AuthenticationSequenceStepOption from "./authenticationSequenceStepOption";
 
-export interface RoleList extends ControllerCallParam, ControllerCallReturn
-    , Record<string, unknown> {
-    Resources: Role[],
-    itemsPerPage: number,
-    totalResults: number
+interface AuthenticationSequenceStep {
+    id: number,
+    options: AuthenticationSequenceStepOption[]
 }
 
-export default RoleList;
+export interface AuthenticationSequence {
+    attributeStepId: number,
+    requestPathAuthenticators?: string[],
+    steps: AuthenticationSequenceStep[],
+    subjectStepId: number,
+    type: string
+}
+
+export default AuthenticationSequence;

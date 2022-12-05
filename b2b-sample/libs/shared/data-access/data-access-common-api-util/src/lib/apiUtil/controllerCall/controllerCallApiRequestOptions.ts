@@ -16,10 +16,11 @@
  * under the License.
  */
 
+import { ControllerCallParam } from "@b2bsample/shared/data-access/data-access-common-models-util";
 import { Session } from "next-auth";
 import RequestMethod from "../api/requestMethod";
 
-function getControllerCallApiBody(session: Session | null, param?: any) {
+function getControllerCallApiBody(session: Session | null, param?: ControllerCallParam) {
     const body = {
         orgId: session ? session.orgId : null,
         param: param ? param : null,
@@ -29,7 +30,7 @@ function getControllerCallApiBody(session: Session | null, param?: any) {
     return body;
 }
 
-function getControllerCallApiRequestOptions(session: Session | null, param?: any): RequestInit {
+function getControllerCallApiRequestOptions(session: Session | null, param?: ControllerCallParam): RequestInit {
     const request = {
         body: JSON.stringify(getControllerCallApiBody(session, param)),
         method: RequestMethod.POST

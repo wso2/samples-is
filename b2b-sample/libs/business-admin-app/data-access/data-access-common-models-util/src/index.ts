@@ -17,8 +17,11 @@
  */
 
 export * from "./lib/application/application";
-export * from "./lib/application/allApplications";
+export * from "./lib/application/applicationList";
 export * from "./lib/application/applicationUtils";
+export * from "./lib/application/authenticationSequence";
+export * from "./lib/application/authenticaitonSequenceModel";
+export * from "./lib/application/authenticationSequenceStepOption";
 export * from "./lib/identityProvider/identityProvider";
 export * from "./lib/identityProvider/identityProviderUtils";
 export * from "./lib/role/role";

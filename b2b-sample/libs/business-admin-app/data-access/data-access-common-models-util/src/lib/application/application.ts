@@ -16,10 +16,15 @@
  * under the License.
  */
 
-export interface Application {
+import { ControllerCallReturn, ControllerDecodeReturn }
+    from "@b2bsample/shared/data-access/data-access-common-models-util";
+import AuthenticationSequence from "./authenticationSequence";
+    
+export interface Application extends ControllerCallReturn, ControllerDecodeReturn {
     id: string,
     name: string,
     description: string,
+    authenticationSequence: AuthenticationSequence,
     [key: string]: unknown;
 }
 

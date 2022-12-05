@@ -16,6 +16,8 @@
  * under the License.
  */
 
+import { Application, AuthenticationSequence, AuthenticationSequenceModel, AuthenticationSequenceStepOption }
+    from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import {
     BASIC_AUTHENTICATOR_ID, BASIC_ID, ENTERPRISE_AUTHENTICATOR_ID, ENTERPRISE_ID, GOOGLE_AUTHENTICATOR_ID, GOOGLE_ID
@@ -29,7 +31,7 @@ import { controllerCallPatchApplicationAuthSteps } from "./controllerCallPatchAp
  * 
  * @returns get authentication sequence
  */
-function getAuthenticationSequenceModel(template: any) {
+function getAuthenticationSequenceModel(template: Application): AuthenticationSequence {
     const authenticationSequenceModel = template.authenticationSequence;
 
     delete authenticationSequenceModel.requestPathAuthenticators;
@@ -43,7 +45,7 @@ function getAuthenticationSequenceModel(template: any) {
  * 
  * @returns get authenticator id for the given template id
  */
-function getAuthenticatorId(templateId: string) {
+function getAuthenticatorId(templateId: string): string | null {
     switch (templateId) {
         case GOOGLE_ID:
 
@@ -67,10 +69,10 @@ function getAuthenticatorId(templateId: string) {
  * 
  * @returns get authenticator body
  */
-function getAuthenticatorBody(idpTempleteId: string, idpName: string) {
+function getAuthenticatorBody(idpTempleteId: string, idpName: string): AuthenticationSequenceStepOption {
 
     return {
-        "authenticator": getAuthenticatorId(idpTempleteId),
+        "authenticator": (getAuthenticatorId(idpTempleteId) as string),
         "idp": idpName
     };
 }
@@ -84,12 +86,13 @@ function getAuthenticatorBody(idpTempleteId: string, idpName: string) {
  * 
  * @returns add or remove idp from the login sequence
  */
-function addRemoveAuthSequence(template: any, idpTempleteId: string, idpName: string, method: boolean) {
+function addRemoveAuthSequence(template: Application, idpTempleteId: string, idpName: string, method: boolean)
+    : AuthenticationSequence {
 
     const authenticationSequenceModel = getAuthenticationSequenceModel(template);
 
     if (method) {
-        authenticationSequenceModel.steps[0].options = [ (getAuthenticatorBody(idpTempleteId, idpName)) ];
+        authenticationSequenceModel.steps[0].options = [(getAuthenticatorBody(idpTempleteId, idpName))];
 
         return authenticationSequenceModel;
     } else {
@@ -119,7 +122,7 @@ function addRemoveAuthSequence(template: any, idpTempleteId: string, idpName: st
             } catch (e) {
                 authenticationSequenceModel.steps.push({
                     "id": 1,
-                    "options": [ (getAuthenticatorBody(BASIC_ID, "LOCAL")) ]
+                    "options": [(getAuthenticatorBody(BASIC_ID, "LOCAL"))]
                 });
             }
         }
@@ -138,19 +141,23 @@ function addRemoveAuthSequence(template: any, idpTempleteId: string, idpName: st
  * @returns decode patch applicaiton authentication steps API calls.
  */
 export async function controllerDecodePatchApplicationAuthSteps(
-    session: Session, template: any, idpDetails: any, method: boolean) {
+    session: Session, template: Application, idpDetails: any, method: boolean): Promise<boolean | null> {
 
     const applicationId = template.id;
     const idpName = idpDetails.name;
     const idpTempleteId = idpDetails.templateId;
 
-    const authenticationSequenceModel = {
+    const authenticationSequenceModel: AuthenticationSequenceModel = {
         "authenticationSequence": addRemoveAuthSequence(template, idpTempleteId, idpName, method)
     };
 
     const res = await commonControllerDecode(
         () => controllerCallPatchApplicationAuthSteps(session, applicationId, authenticationSequenceModel), null);
-
+    
+    if(res){
+        return true;
+    }
+    
     return res;
 
 }

@@ -20,7 +20,7 @@ import ControllerCallReturn from "../controllerReturn/controllerCallReturn";
 import ControllerDecodeReturn from "../controllerReturn/controllerDecodeReturn";
 import User from "./user";
 
-export interface UserList extends ControllerCallReturn, ControllerDecodeReturn {
+export interface UserList extends ControllerCallReturn {
     Resources?: User[] 
     itemsPerPage: number,
     schemas: string[],

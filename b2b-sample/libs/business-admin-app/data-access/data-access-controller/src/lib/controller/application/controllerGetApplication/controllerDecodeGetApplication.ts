@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { Application } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import { Session } from "next-auth";
 import { controllerCallGetApplication } from "./controllerCallGetApplication";
@@ -27,9 +28,10 @@ import { controllerCallGetApplication } from "./controllerCallGetApplication";
  *
  * @returns get application given the id. If failed `null`
  */
-export async function controllerDecodeGetApplication(session: Session, id: string) {
+export async function controllerDecodeGetApplication(session: Session, id: string): Promise<Application | null> {
 
-    const res = await commonControllerDecode(() => controllerCallGetApplication(session, id), null);
+    const res = (
+        await commonControllerDecode(() => controllerCallGetApplication(session, id), null) as Application | null);
 
     return res;
 
