@@ -16,7 +16,9 @@
  * under the License.
  */
 
+import { Role } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { PatchBody } from "@b2bsample/shared/data-access/data-access-common-models-util";
 import { Session } from "next-auth";
 
 /**
@@ -28,9 +30,11 @@ import { Session } from "next-auth";
  * 
  * @returns patched role, if the call failed `null`
  */
-export async function controllerCallPatchRole(session: Session, roleUri : string, patchBody : any) {
+export async function controllerCallPatchRole(session: Session, roleUri: string, patchBody: PatchBody)
+    : Promise<Role | null> {
 
-    const data = await commonControllerCall(`/api/settings/role/patchRole?roleUri=${roleUri}`, session, patchBody);
-
+    const data = (await commonControllerCall(`/api/settings/role/patchRole?roleUri=${roleUri}`, session, patchBody) as
+        Role | null);
+        
     return data;
 }

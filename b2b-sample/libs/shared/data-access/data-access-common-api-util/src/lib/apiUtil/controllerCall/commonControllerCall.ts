@@ -32,7 +32,7 @@ import { getControllerCallApiRequestOptions, getControllerCallApiRequestOptionsF
  */
 
 export async function commonControllerCall(api: string, session: Session | null, param?: ControllerCallParam
-    , switchCall = false): Promise<ControllerCallReturn | null> {
+    , switchCall = false): Promise<ControllerCallReturn | ControllerCallReturn[] | null> {
     try {
 
         let header;

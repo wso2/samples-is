@@ -20,28 +20,29 @@ import { PatchMethod } from "@b2bsample/shared/util/util-common";
 import { Session } from "next-auth";
 import { controllerDecodePatchRole } from "../controllerPatchRole/controllerDecodePatchRole";
 
-function getRolesThatNeedToAddUser(initRoleList : string[], roleList : string[]) {
+function getRolesThatNeedToAddUser(initRoleList: string[], roleList: string[]): string[] {
     return roleList.filter(roleUri => !initRoleList.includes(roleUri));
 }
 
-function getRolesThatNeedToRemoveUser(initRoleList : string[], roleList : string[]) {
+function getRolesThatNeedToRemoveUser(initRoleList: string[], roleList: string[]): string[] {
     return initRoleList.filter(roleUri => !roleList.includes(roleUri));
 }
 
-async function getRoleDetailsForAdd(session : Session, userId : string, initRoleList : string[], roleList : string[]) {
+async function getRoleDetailsForAdd(session: Session, userId: string, initRoleList: string[], roleList: string[])
+    : Promise<void> {
     const rolesUriList = getRolesThatNeedToAddUser(initRoleList, roleList);
 
     await rolesUriList.forEach(async (uri) => {
-        controllerDecodePatchRole(session, uri, PatchMethod.ADD, "users", [ userId ]);
+        await controllerDecodePatchRole(session, uri, PatchMethod.ADD, "users", [userId]);
     });
 }
 
-async function getRoleDetailsForRemove(session : Session, userId : string, initRoleList : string[]
-    , roleList : string[]) {
+async function getRoleDetailsForRemove(session: Session, userId: string, initRoleList: string[]
+    , roleList: string[]): Promise<void> {
     const rolesUriList = getRolesThatNeedToRemoveUser(initRoleList, roleList);
 
     await rolesUriList.forEach(async (uri) => {
-        controllerDecodePatchRole(session, uri, PatchMethod.REMOVE, "users", userId);
+        await controllerDecodePatchRole(session, uri, PatchMethod.REMOVE, "users", userId);
     });
 }
 
@@ -55,7 +56,7 @@ async function getRoleDetailsForRemove(session : Session, userId : string, initR
  * @returns - `true` if the operation is successfull, else `false`
  */
 export async function controllerDecodeEditRolesToAddOrRemoveUser(
-    session: Session, userId: string, initRoleList : string[], roleList : string[]) {
+    session: Session, userId: string, initRoleList: string[], roleList: string[]): Promise<boolean> {
 
     try {
         return getRoleDetailsForAdd(session, userId, initRoleList, roleList)

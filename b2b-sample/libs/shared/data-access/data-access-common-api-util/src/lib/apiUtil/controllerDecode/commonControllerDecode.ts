@@ -18,17 +18,19 @@
 
 import { ControllerCallReturn, ControllerDecodeReturn } from "@b2bsample/shared/data-access/data-access-common-models-util";
 
-export async function commonControllerDecode(callFunction: () => Promise<ControllerCallReturn | null>
-    , errorReturnValue: boolean | null): Promise<ControllerDecodeReturn | boolean | null> {
+export async function commonControllerDecode(
+    callFunction: () => Promise<ControllerCallReturn | ControllerCallReturn[] | null>,
+    errorReturnValue: boolean | null): Promise<ControllerDecodeReturn | ControllerDecodeReturn[] | boolean | null> {
 
     try {
-        const res: ControllerCallReturn | null = await callFunction();
+        const res: ControllerCallReturn | ControllerCallReturn[] | null = await callFunction();
 
         if (!res) {
 
             return errorReturnValue;
         }
-        if (res.error || res.traceId) {
+
+        if ((res instanceof ControllerCallReturn) && (res.error || res.traceId)) {
 
             return errorReturnValue;
         }

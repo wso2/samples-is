@@ -38,12 +38,14 @@ export default function Permission(prop) {
     const { fetchData, session, roleDetails } = prop;
 
     const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
-    const [ selectedPermissions, setSelectedPermissions ] = useState([]);
+    const [ selectedPermissions, setSelectedPermissions ] = useState<string[]>([]);
 
     const toaster = useToaster();
 
     const setInitialPermissions = useCallback(async () => {
-        setSelectedPermissions(roleDetails.permissions);
+        if(roleDetails.permissions) {
+            setSelectedPermissions(roleDetails.permissions);
+        }
     }, [ roleDetails ]);
 
     useEffect(() => {

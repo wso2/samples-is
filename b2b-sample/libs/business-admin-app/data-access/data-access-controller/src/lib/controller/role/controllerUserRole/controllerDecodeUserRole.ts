@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { Role } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import { Session } from "next-auth";
 import { controllerCallUserRole } from "./controllerCallUserRole";
@@ -27,10 +28,10 @@ import { controllerCallUserRole } from "./controllerCallUserRole";
  * 
  * @returns - details of the roles of the user
  */
-export async function controllerDecodeUserRole(session: Session, id: string) {
+export async function controllerDecodeUserRole(session: Session, id: string): Promise<Role[] | null> {
 
-    const res = await commonControllerDecode(() => controllerCallUserRole(session, id), null);
-    
+    const res = (await commonControllerDecode(() => controllerCallUserRole(session, id), null) as Role[] | null);
+
     return res;
 
 }

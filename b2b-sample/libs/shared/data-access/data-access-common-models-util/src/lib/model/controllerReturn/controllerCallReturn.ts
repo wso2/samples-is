@@ -16,9 +16,9 @@
  * under the License.
  */
 
-export interface ControllerCallReturn {
-    error?: string,
+export class ControllerCallReturn {
+    error?: string
     traceId?: string
- }
+}
 
 export default ControllerCallReturn;

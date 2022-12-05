@@ -45,7 +45,7 @@ export default function EditUserComponent(prop) {
 
     const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
     const [ allRoles, setAllRoles ] = useState<Role[]>(null);
-    const [ userRoles, setUserRoles ] = useState(null);
+    const [ userRoles, setUserRoles ] = useState<Role[]>(null);
     const [ userRolesForForm, setUserRolesForForm ] = useState(null);
     const [ initUserRolesForForm, setInitUserRolesForForm ] = useState(null);
 
@@ -157,7 +157,7 @@ export default function EditUserComponent(prop) {
         }
     };
 
-    const onRolesSubmite = (response) => {
+    const onRolesSubmit = (response) => {
         if (response) {
             successTypeDialog(toaster, "Changes Saved Successfully", "User details edited successfully.");
             onClose();
@@ -177,7 +177,7 @@ export default function EditUserComponent(prop) {
                         controllerDecodeEditRolesToAddOrRemoveUser(
                             session, user.id, initUserRolesForForm, values.roles)
                             .then((res) => {
-                                onRolesSubmite(res);
+                                onRolesSubmit(res);
                             });
                     } else {
                         onDataSubmit(response);

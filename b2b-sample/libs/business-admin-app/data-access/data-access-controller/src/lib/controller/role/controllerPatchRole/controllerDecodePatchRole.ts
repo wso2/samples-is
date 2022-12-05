@@ -16,12 +16,14 @@
  * under the License.
  */
 
+import { Role } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { PatchBody } from "@b2bsample/shared/data-access/data-access-common-models-util";
 import { PatchMethod } from "@b2bsample/shared/util/util-common";
 import { Session } from "next-auth";
 import { controllerCallPatchRole } from "./controllerCallPatchRole";
 
-function getAddReplaceBody(patchMethod: string, path: string, value: string[] | string) {
+function getAddReplaceBody(patchMethod: string, path: string, value: string[] | string): PatchBody {
     return {
         "operations": [
             {
@@ -33,7 +35,7 @@ function getAddReplaceBody(patchMethod: string, path: string, value: string[] | 
     };
 }
 
-function getRemoveBody(patchMethod: string, path: string, value: string[] | string) {
+function getRemoveBody(patchMethod: string, path: string, value: string[] | string): PatchBody {
     return {
         "operations": [
             {
@@ -74,10 +76,13 @@ function getPatchBody(patchMethod: string, path: string, value: string[] | strin
  * @returns - whehter the patch was successful or not
  */
 export async function controllerDecodePatchRole(
-    session: Session, roleUri: string, patchMethod: string, path: string, value: string[] | string) {
-    const patchBody = getPatchBody(patchMethod, path, value);
+    session: Session, roleUri: string, patchMethod: string, path: string, value: string[] | string)
+    : Promise<Role | null> {
 
-    const res = await commonControllerDecode(() => controllerCallPatchRole(session, roleUri, patchBody), null);
+    const patchBody: PatchBody = (getPatchBody(patchMethod, path, value) as PatchBody);
+
+    const res = (
+        await commonControllerDecode(() => controllerCallPatchRole(session, roleUri, patchBody), null) as Role | null);
 
     return res;
 }

@@ -16,14 +16,14 @@
  * under the License.
  */
 
-export * from "./lib/model/user/user";
-export * from "./lib/model/user/internalUser";
-export * from "./lib/model/user/sendUser";
-export * from "./lib/model/user/sendEditUser";
-export * from "./lib/model/user/userUtils";
-export * from "./lib/model/sideNav/sideNavList";
-export * from "./lib/model/sideNav/sideNavItem";
-export * from "./lib/model/controllerParam/controllerCallParam";
-export * from "./lib/model/controllerReturn/controllerCallReturn";
-export * from "./lib/model/controllerReturn/controllerDecodeReturn";
-export * from "./lib/model/patchBody/patchBody";
+interface PatchOperation {
+    op: string,
+    path: string,
+    value?: string | string[]
+}
+
+export interface PatchBody {
+    operations: PatchOperation[]
+}
+
+export default PatchBody;
