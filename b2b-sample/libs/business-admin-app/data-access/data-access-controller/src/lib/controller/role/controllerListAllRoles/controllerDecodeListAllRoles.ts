@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { Role, RoleList } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import { Session } from "next-auth";
 import { controllerCallListAllRoles } from "./controllerCallListAllRoles";
@@ -26,13 +27,13 @@ import { controllerCallListAllRoles } from "./controllerCallListAllRoles";
  * 
  * @returns - list all the roles
  */
-export async function controllerDecodeListAllRoles(session: Session) {
+export async function controllerDecodeListAllRoles(session: Session): Promise<Role[] | null> {
 
     const res = (
-        await commonControllerDecode(() => controllerCallListAllRoles(session), null) as Record<string, unknown>);
+        await commonControllerDecode(() => controllerCallListAllRoles(session), null) as RoleList | null);
 
     if (res) {
-        return res["Resources"];
+        return res.Resources;
     }
 
     return res;

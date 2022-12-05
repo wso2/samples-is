@@ -16,6 +16,8 @@
  * under the License.
  */
 
+import { ControllerCallParam, ControllerCallReturn }
+    from "@b2bsample/shared/data-access/data-access-common-models-util";
 import { Session } from "next-auth";
 import { getControllerCallApiRequestOptions, getControllerCallApiRequestOptionsForSwitchCallWithParam }
     from "./controllerCallApiRequestOptions";
@@ -29,8 +31,8 @@ import { getControllerCallApiRequestOptions, getControllerCallApiRequestOptionsF
  * @returns created user details, if not created returns `null`
  */
 
-export async function commonControllerCall(api: string, session: Session | null, param?: any, switchCall = false)
-    : Promise<Record<string, unknown> | null> {
+export async function commonControllerCall(api: string, session: Session | null, param?: ControllerCallParam
+    , switchCall = false): Promise<ControllerCallReturn | null> {
     try {
 
         let header;

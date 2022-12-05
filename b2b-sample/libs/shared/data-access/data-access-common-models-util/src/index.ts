@@ -23,3 +23,6 @@ export * from "./lib/model/user/sendEditUser";
 export * from "./lib/model/user/userUtils";
 export * from "./lib/model/sideNav/sideNavList";
 export * from "./lib/model/sideNav/sideNavItem";
+export * from "./lib/model/controllerParam/controllerCallParam";
+export * from "./lib/model/controllerReturn/controllerCallReturn";
+export * from "./lib/model/controllerReturn/controllerDecodeReturn";

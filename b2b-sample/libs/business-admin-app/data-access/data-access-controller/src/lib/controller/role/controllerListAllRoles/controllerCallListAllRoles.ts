@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { Role, RoleList } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import { Session } from "next-auth";
 
@@ -28,9 +29,9 @@ import { Session } from "next-auth";
  * 
  * @returns - all the roles, if the call failed `null`
  */
-export async function controllerCallListAllRoles(session: Session) {
+export async function controllerCallListAllRoles(session: Session) : Promise<RoleList | null> {
 
-    const data = await commonControllerCall("/api/settings/role/listAllRoles", session);
+    const data = (await commonControllerCall("/api/settings/role/listAllRoles", session) as RoleList | null);
 
     return data;
 }

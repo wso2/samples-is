@@ -16,17 +16,18 @@
  * under the License.
  */
 
+import { Role, RoleUsers } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import { Session } from "next-auth";
 import { controllerCallCreateRole } from "./controllerCallCreateRole";
 
 
-function getUsersList(users: string[]) {
+function getUsersList(users: string[]): RoleUsers[] {
 
     return users.map((user) => { return { "value": user }; });
 }
 
-function getRoleBody(displayName: string, permissions: string[], users: string[]) {
+function getRoleBody(displayName: string, permissions: string[], users: string[]): Role {
     return {
         "displayName": displayName,
         "groups": [],
@@ -45,10 +46,11 @@ function getRoleBody(displayName: string, permissions: string[], users: string[]
  * @returns `res` (if user added successfully) or `false` (if user addition was not completed)
  */
 export async function controllerDecodeCreateRole(session: Session, displayName: string, permissions: string[]
-    , users: string[]) {
-    const role = getRoleBody(displayName, permissions, users);
+    , users: string[]): Promise<Role | null> {
 
-    const res = await commonControllerDecode(() => controllerCallCreateRole(session, role), null);
+    const role: Role = getRoleBody(displayName, permissions, users);
+
+    const res = (await commonControllerDecode(() => controllerCallCreateRole(session, role), null) as Role | null);
 
     return res;
 }

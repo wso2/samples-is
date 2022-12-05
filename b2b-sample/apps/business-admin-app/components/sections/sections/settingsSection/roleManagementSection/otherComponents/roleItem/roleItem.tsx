@@ -37,7 +37,7 @@ export default function RoleItem(prop) {
     const { session, id, roleUri } = prop;
 
     const [ roleDetails, setRoleDetails ] = useState<Role>(null);
-    const [ activeKeyNav, setActiveKeyNav ] = useState("1");
+    const [ activeKeyNav, setActiveKeyNav ] = useState<string>("1");
 
     const fetchData = useCallback(async () => {
         const res = await controllerDecodeGetRole(session, roleUri);

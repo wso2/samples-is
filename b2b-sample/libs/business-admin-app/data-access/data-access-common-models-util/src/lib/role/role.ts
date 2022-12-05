@@ -15,27 +15,26 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
+import { ControllerCallParam, ControllerCallReturn, ControllerDecodeReturn }
+    from "@b2bsample/shared/data-access/data-access-common-models-util";
+import RoleGroups from "./roleGroups";
+import RoleUsers from "./roleUsers";
+
 interface Meta {
     location: string,
     resourceType?: string
 }
 
-interface Users {
-    $ref: string,
-    value: string
-}
-
-interface Groups {
-    $ref: string,
-    value: string
-}
-
-export interface Role {
+export interface Role extends ControllerCallParam, ControllerCallReturn, ControllerDecodeReturn
+    , Record<string, unknown> {
     displayName: string,
-    meta: Meta,
-    schemas?: [string],
-    id: string,
-    users?: [Users],
-    groups?: [Groups],
-    permissions?: [string]
+    meta?: Meta,
+    schemas?: string[],
+    id?: string,
+    users?: RoleUsers[],
+    groups?: RoleGroups[],
+    permissions?: string[]
 }
+
+export default Role;

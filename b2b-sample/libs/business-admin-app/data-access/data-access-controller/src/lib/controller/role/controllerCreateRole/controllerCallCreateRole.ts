@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { Role } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import { Session } from "next-auth";
 
@@ -27,9 +28,9 @@ import { Session } from "next-auth";
  * 
  * @returns created role details, if not created returns `null`
  */
-export async function controllerCallCreateRole(session: Session, role: any) {
+export async function controllerCallCreateRole(session: Session, role: Role) : Promise<Role | null> {
 
-    const data = await commonControllerCall("/api/settings/role/createRole", session, role);
+    const data = ( await commonControllerCall("/api/settings/role/createRole", session, role) as Role | null );
 
     return data;
 }

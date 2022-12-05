@@ -22,4 +22,7 @@ export * from "./lib/application/applicationUtils";
 export * from "./lib/identityProvider/identityProvider";
 export * from "./lib/identityProvider/identityProviderUtils";
 export * from "./lib/role/role";
+export * from "./lib/role/roleUsers";
+export * from "./lib/role/roleGroups";
+export * from "./lib/role/roleList";
 export * from "./lib/orgSession/orgSession";

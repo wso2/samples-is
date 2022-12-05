@@ -29,7 +29,7 @@ function getControllerCallApiBody(session: Session | null, param?: any) {
     return body;
 }
 
-function getControllerCallApiRequestOptions(session: Session | null, param?: any) {
+function getControllerCallApiRequestOptions(session: Session | null, param?: any): RequestInit {
     const request = {
         body: JSON.stringify(getControllerCallApiBody(session, param)),
         method: RequestMethod.POST
@@ -47,7 +47,7 @@ function getControllerCallApiRequestBodyForSwitchCall(subOrgId: string, param: s
     return body;
 }
 
-function getControllerCallApiRequestOptionsForSwitchCallWithParam(subOrgId: string, param: string) {
+function getControllerCallApiRequestOptionsForSwitchCallWithParam(subOrgId: string, param: string): RequestInit {
     const request = {
         body: JSON.stringify(getControllerCallApiRequestBodyForSwitchCall(subOrgId, param)),
         method: RequestMethod.POST

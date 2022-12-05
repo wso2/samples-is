@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { Role } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import {
     controllerDecodeEditRolesToAddOrRemoveUser, controllerDecodeEditUser, controllerDecodeListAllRoles,
     controllerDecodeUserRole
@@ -43,7 +44,7 @@ export default function EditUserComponent(prop) {
     const toaster = useToaster();
 
     const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
-    const [ allRoles, setAllRoles ] = useState(null);
+    const [ allRoles, setAllRoles ] = useState<Role[]>(null);
     const [ userRoles, setUserRoles ] = useState(null);
     const [ userRolesForForm, setUserRolesForForm ] = useState(null);
     const [ initUserRolesForForm, setInitUserRolesForForm ] = useState(null);

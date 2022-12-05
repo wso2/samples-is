@@ -16,17 +16,19 @@
  * under the License.
  */
 
-export async function commonControllerDecode(callFunction: () => Promise<Record<string, unknown> | null>
-    , errorReturnValue: boolean | null) : Promise<Record<string, unknown> | boolean | null>{
+import { ControllerCallReturn, ControllerDecodeReturn } from "@b2bsample/shared/data-access/data-access-common-models-util";
+
+export async function commonControllerDecode(callFunction: () => Promise<ControllerCallReturn | null>
+    , errorReturnValue: boolean | null): Promise<ControllerDecodeReturn | boolean | null> {
 
     try {
-        const res = await callFunction();
+        const res: ControllerCallReturn | null = await callFunction();
 
         if (!res) {
 
             return errorReturnValue;
         }
-        if (res["error"] || res["traceId"]) {
+        if (res.error || res.traceId) {
 
             return errorReturnValue;
         }

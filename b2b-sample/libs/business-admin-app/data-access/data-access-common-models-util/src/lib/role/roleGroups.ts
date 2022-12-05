@@ -16,21 +16,9 @@
  * under the License.
  */
 
-import { Role } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
-import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
-import { Session } from "next-auth";
-
-/**
- * call GET `roleUri`
- * 
- * @param session - session object
- * @param roleUri - uri of the role
- * 
- * @returns - role details, if the call failed `null`
- */
-export async function controllerCallGetRole(session: Session, roleUri: string): Promise<Role | null> {
-
-    const data = (await commonControllerCall(`/api/settings/role/getRole?roleUri=${roleUri}`, session) as Role | null);
-
-    return data;
+export interface RoleGroups {
+    $ref?: string,
+    value: string
 }
+
+export default RoleGroups;

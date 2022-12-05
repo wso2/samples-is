@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { Role } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { controllerDecodeListAllRoles } from "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { EmptySettingsComponent, SettingsTitleComponent } from "@b2bsample/shared/ui/ui-components";
 import PeoplesIcon from "@rsuite/icons/Peoples";
@@ -35,7 +36,7 @@ export default function RoleManagementSectionComponent(prop) {
 
     const { session } = prop;
 
-    const [ rolesList, setRolesList ] = useState([]);
+    const [ rolesList, setRolesList ] = useState<Role[]>([]);
     const [ openCreateRoleModal, setOpenCreateRoleModal ] = useState(false);
 
     const fetchAllRoles = useCallback(async () => {
