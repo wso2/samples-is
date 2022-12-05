@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { Role, RoleList } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
+import { RoleList } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import { Session } from "next-auth";
 

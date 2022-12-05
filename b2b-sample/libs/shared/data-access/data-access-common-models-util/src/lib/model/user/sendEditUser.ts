@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import ControllerCallParam from "../controllerParam/controllerCallParam";
 import { Email } from "./sendUser";
 import { Name } from "./user";
 
@@ -28,7 +29,7 @@ interface Operation {
     }
 }
 
-export interface SendEditUser {
+export interface SendEditUser extends ControllerCallParam {
     Operations: [Operation],
     schemas: [string]
 }

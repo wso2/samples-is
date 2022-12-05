@@ -16,7 +16,10 @@
  * under the License.
  */
 
-export interface InternalUser {
+import ControllerCallReturn from "../controllerReturn/controllerCallReturn";
+import ControllerDecodeReturn from "../controllerReturn/controllerDecodeReturn";
+
+export interface InternalUser extends ControllerCallReturn, ControllerDecodeReturn {
     email: string | undefined,
     familyName: string,
     firstName: string,

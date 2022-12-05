@@ -16,21 +16,16 @@
  * under the License.
  */
 
-import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
-import { InternalUser } from "@b2bsample/shared/data-access/data-access-common-models-util";
-import { Session } from "next-auth";
+import ControllerCallReturn from "../controllerReturn/controllerCallReturn";
+import ControllerDecodeReturn from "../controllerReturn/controllerDecodeReturn";
+import User from "./user";
 
-/**
- * call `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users/<userId>` get the user details
- * 
- * @param session - session object
- * 
- * @returns user details, if not possible returns `null`
- */
-export async function controllerCallMe(session: Session): Promise<InternalUser | null> {
-
-    const data = ( await commonControllerCall("/api/dashboard/me", session) as InternalUser | null);
-
-    return data;
-
+export interface UserList extends ControllerCallReturn, ControllerDecodeReturn {
+    Resources?: User[] 
+    itemsPerPage: number,
+    schemas: string[],
+    startIndex:number, 
+    totalResults: number
 }
+
+export default UserList;

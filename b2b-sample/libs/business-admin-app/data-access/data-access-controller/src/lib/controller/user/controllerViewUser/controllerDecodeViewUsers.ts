@@ -17,7 +17,7 @@
  */
 
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
-import { InternalUser, User, decodeUser } from "@b2bsample/shared/data-access/data-access-common-models-util";
+import { decodeUser, InternalUser, User, UserList } from "@b2bsample/shared/data-access/data-access-common-models-util";
 import { Session } from "next-auth";
 import { controllerCallViewUsers } from "./controllerCallViewUsers";
 
@@ -27,23 +27,26 @@ import { controllerCallViewUsers } from "./controllerCallViewUsers";
  
  * @returns details of all users
  */
-export async function controllerDecodeViewUsers(session: Session) {
+export async function controllerDecodeViewUsers(session: Session): Promise<InternalUser[] | null> {
 
     const usersData = (
-        await commonControllerDecode(() => controllerCallViewUsers(session), null) as Record<string, unknown>);
+        await commonControllerDecode(() => controllerCallViewUsers(session), null) as UserList | null);
 
     if (usersData) {
         const usersReturn: InternalUser[] = [];
-
-        (usersData["Resources"] as User[]).map((user: User) => {
-            const userDetails = decodeUser(user);
-
-            if (userDetails) {
-                usersReturn.push(userDetails);
-            }
-        });
+        
+        if(usersData.Resources){
+            usersData.Resources.map((user: User) => {
+                const userDetails = decodeUser(user);
+    
+                if (userDetails) {
+                    usersReturn.push(userDetails);
+                }
+            });
+        }
 
         return usersReturn;
+    
     }
 
     return usersData;

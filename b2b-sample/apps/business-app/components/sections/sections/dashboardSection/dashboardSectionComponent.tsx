@@ -18,12 +18,13 @@
 
 import { controllerDecodeMe } from "@b2bsample/business-app/data-access/data-access-controller";
 import { LogoComponent } from "@b2bsample/business-app/ui/ui-components";
-import React, { useEffect, useState } from "react";
+import { InternalUser } from "@b2bsample/shared/data-access/data-access-common-models-util";
+import { useEffect, useState } from "react";
 import { Panel } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
+import styles from "../../../../styles/Settings.module.css";
 import LatestNewsComponent from "./otherComponents/latestNewsComponent";
 import UserDetails from "./otherComponents/userDetails";
-import styles from "../../../../styles/Settings.module.css";
 
 /**
  * 
@@ -35,7 +36,7 @@ export default function DashboardSectionComponent(prop) {
 
     const { session } = prop;
 
-    const [ me, setMe ] = useState(null);
+    const [ me, setMe ] = useState<InternalUser>(null);
 
     useEffect(() => {
         async function fetchData() {

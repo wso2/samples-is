@@ -17,7 +17,7 @@
  */
 
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
-import { SendUser, setUsername } from "@b2bsample/shared/data-access/data-access-common-models-util";
+import { SendUser, setUsername, User } from "@b2bsample/shared/data-access/data-access-common-models-util";
 import { Session } from "next-auth";
 import { controllerCallAddUser } from "./controllerCallAddUser";
 
@@ -103,12 +103,13 @@ export async function controllerDecodeAddUser(
     familyName: string,
     email: string,
     username: string,
-    password: string) {
+    password: string): Promise<User | boolean> {
 
     const addUserEncode: SendUser =
         (getAddUserBody(inviteConst, firstName, familyName, email, username, password) as SendUser);
 
-    const res = await commonControllerDecode(() => controllerCallAddUser(session, addUserEncode), false);
+    const res = (
+        await commonControllerDecode(() => controllerCallAddUser(session, addUserEncode), false) as User | boolean);
 
     return res;
 

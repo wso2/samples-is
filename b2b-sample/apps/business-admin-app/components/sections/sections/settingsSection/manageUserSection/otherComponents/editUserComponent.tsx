@@ -47,7 +47,7 @@ export default function EditUserComponent(prop) {
     const [ allRoles, setAllRoles ] = useState<Role[]>(null);
     const [ userRoles, setUserRoles ] = useState<Role[]>(null);
     const [ userRolesForForm, setUserRolesForForm ] = useState(null);
-    const [ initUserRolesForForm, setInitUserRolesForForm ] = useState(null);
+    const [ initUserRolesForForm, setInitUserRolesForForm ] = useState<string[]>(null);
 
     /**
      * fetch all the roles in the identity server available for the logged in organization

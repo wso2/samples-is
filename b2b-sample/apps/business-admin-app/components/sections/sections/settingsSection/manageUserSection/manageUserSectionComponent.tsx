@@ -24,6 +24,7 @@ import AddUserButton from "./otherComponents/addUserButton";
 import AddUserComponent from "./otherComponents/addUserComponent";
 import EditUserComponent from "./otherComponents/editUserComponent";
 import styles from "../../../../../styles/Settings.module.css";
+import { InternalUser } from "@b2bsample/shared/data-access/data-access-common-models-util";
 
 /**
  * 
@@ -35,9 +36,9 @@ export default function ManageUserSectionComponent(prop) {
 
     const { orgName, orgId, session } = prop;
 
-    const [ users, setUsers ] = useState([]);
-    const [ editUserOpen, setEditUserOpen ] = useState(false);
-    const [ addUserOpen, setAddUserOpen ] = useState(false);
+    const [ users, setUsers ] = useState<InternalUser[]>([]);
+    const [ editUserOpen, setEditUserOpen ] = useState<boolean>(false);
+    const [ addUserOpen, setAddUserOpen ] = useState<boolean>(false);
 
     const [ openUser, setOpenUser ] = useState({});
 

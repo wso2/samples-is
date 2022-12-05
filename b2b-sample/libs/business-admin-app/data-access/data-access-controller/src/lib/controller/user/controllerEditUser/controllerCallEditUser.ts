@@ -17,7 +17,7 @@
  */
 
 import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
-import { SendEditUser } from "@b2bsample/shared/data-access/data-access-common-models-util";
+import { SendEditUser, User } from "@b2bsample/shared/data-access/data-access-common-models-util";
 import { Session } from "next-auth";
 
 /**
@@ -29,10 +29,9 @@ import { Session } from "next-auth";
  *  
  * @returns edited user details, if not edited returns `null`
  */
-export async function controllerCallEditUser(session: Session, id:string, user: SendEditUser) {
+export async function controllerCallEditUser(session: Session, id:string, user: SendEditUser): Promise<User | null>{
 
-    const data = await commonControllerCall(`/api/settings/user/editUser/${id}`, session, user);
+    const data = ( await commonControllerCall(`/api/settings/user/editUser/${id}`, session, user) as User | null);
 
     return data;
-
 }

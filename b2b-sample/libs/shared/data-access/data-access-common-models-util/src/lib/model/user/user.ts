@@ -16,15 +16,18 @@
  * under the License.
  */
 
+import ControllerCallReturn from "../controllerReturn/controllerCallReturn";
+import ControllerDecodeReturn from "../controllerReturn/controllerDecodeReturn";
+
 export type Name = {
     givenName: string,
     familyName: string
 }
 
-export interface User extends Record<string, unknown> {
+export interface User extends ControllerCallReturn, ControllerDecodeReturn {
     id: string | undefined,
     name: Name,
-    emails: [string | undefined],
+    emails: string[] | undefined,
     userName: string | undefined,
     [key: string]: unknown
 }

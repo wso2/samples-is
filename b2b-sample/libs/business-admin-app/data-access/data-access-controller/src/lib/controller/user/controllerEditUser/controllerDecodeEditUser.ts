@@ -17,7 +17,7 @@
  */
 
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
-import { SendEditUser, setUsername } from "@b2bsample/shared/data-access/data-access-common-models-util";
+import { SendEditUser, setUsername, User } from "@b2bsample/shared/data-access/data-access-common-models-util";
 import { Session } from "next-auth";
 import { controllerCallEditUser } from "./controllerCallEditUser";
 
@@ -33,7 +33,8 @@ import { controllerCallEditUser } from "./controllerCallEditUser";
  * @returns - whether the edit of the user is successful or not
  */
 export async function controllerDecodeEditUser(
-    session: Session, id: string, firstName: string, familyName: string, email: string, username: string) {
+    session: Session, id: string, firstName: string, familyName: string, email: string, username: string)
+    : Promise<User | null> {
 
     const editUserEncode: SendEditUser = {
         "Operations": [
@@ -59,11 +60,10 @@ export async function controllerDecodeEditUser(
         ]
     };
 
-
-    const usersData = await commonControllerDecode(() => controllerCallEditUser(session, id, editUserEncode), false);
+    const usersData = (
+        await commonControllerDecode(() => controllerCallEditUser(session, id, editUserEncode), false) as User | null);
 
     return usersData;
-
 
 }
 

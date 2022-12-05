@@ -17,7 +17,7 @@
  */
 
 import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
-import { SendUser } from "@b2bsample/shared/data-access/data-access-common-models-util";
+import { SendUser, User } from "@b2bsample/shared/data-access/data-access-common-models-util";
 import { Session } from "next-auth";
 
 /**
@@ -28,9 +28,9 @@ import { Session } from "next-auth";
  * 
  * @returns created user details, if not created returns `null`
  */
-export async function controllerCallAddUser(session: Session, user: SendUser) {
+export async function controllerCallAddUser(session: Session, user: SendUser): Promise<User | null> {
 
-    const data = await commonControllerCall("/api/settings/user/addUser", session, user);
+    const data = (await commonControllerCall("/api/settings/user/addUser", session, user) as User | null);
 
     return data;
 

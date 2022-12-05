@@ -17,6 +17,7 @@
  */
 
 import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { UserList } from "@b2bsample/shared/data-access/data-access-common-models-util";
 import { Session } from "next-auth";
 
 /**
@@ -26,9 +27,9 @@ import { Session } from "next-auth";
  * 
  * @returns - list all users
  */
-export async function controllerCallViewUsers(session: Session) {
+export async function controllerCallViewUsers(session: Session): Promise<UserList | null> {
 
-    const data = await commonControllerCall("/api/settings/user/viewUsers", session);
+    const data = (await commonControllerCall("/api/settings/user/viewUsers", session) as UserList | null);
 
     return data;
 }

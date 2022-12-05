@@ -17,6 +17,7 @@
  */
 
 import { controllerDecodeViewUsers } from "@b2bsample/business-admin-app/data-access/data-access-controller";
+import { InternalUser } from "@b2bsample/shared/data-access/data-access-common-models-util";
 import React, { useCallback, useEffect, useState } from "react";
 import { Field, Form } from "react-final-form";
 import { Button, ButtonToolbar, Checkbox, CheckboxGroup } from "rsuite";
@@ -33,7 +34,7 @@ export default function Users(prop) {
 
     const { assignedUsers, setAssignedUsers, session, onNext, onPrevious } = prop;
 
-    const [ users, setUsers ] = useState(null);
+    const [ users, setUsers ] = useState<InternalUser[]>(null);
 
     const fetchAllUsers = useCallback(async () => {
         const res = await controllerDecodeViewUsers(session);
