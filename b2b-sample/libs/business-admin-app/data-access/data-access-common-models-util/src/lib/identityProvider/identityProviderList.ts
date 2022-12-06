@@ -16,6 +16,7 @@
  * under the License.
  */
 import { ControllerCallReturn, ControllerDecodeReturn } from "@b2bsample/shared/data-access/data-access-common-models-util";
+import IdentityProvider from "./identityProvider";
 
 /**
  * Copyright (c) 2022, WSO2 LLC. (https://www.wso2.com). All Rights Reserved.
@@ -34,19 +35,29 @@ import { ControllerCallReturn, ControllerDecodeReturn } from "@b2bsample/shared/
  * specific language governing permissions and limitations
  * under the License.
  */
-interface FederatedAuthenticatorForIdentityProvider {
-    defaultAuthenticatorId : string,
-    [key: string]: unknown,
+
+export interface IdentityProviderList extends ControllerCallReturn {
+    count: number
+    identityProviders: IdentityProvider[]
+    totalResults: number,
+    [key: string]: unknown
 }
 
-export interface IdentityProvider extends ControllerCallReturn, ControllerDecodeReturn{
-    id: string,
-    name: string,
-    image : string,
-    description : string,
-    federatedAuthenticators?: FederatedAuthenticatorForIdentityProvider[],
-    templateId: string,
-    [key: string]: unknown,
-}
+export default IdentityProviderList;
+// export interface AllIdentityProvidersIdentityProvider {
+//     id: string,
+//     [key: string]: unknown
+// }
 
-export default IdentityProvider;
+// export interface FederatedAuthenticatorsProperty {
+//     key: string,
+//     value: string
+// }
+
+// export interface FederatedAuthenticators extends Record<string, unknown> {
+//     authenticatorId?: string,
+//     name: string,
+//     properties: [FederatedAuthenticatorsProperty],
+//     [key: string]: unknown,
+
+// }

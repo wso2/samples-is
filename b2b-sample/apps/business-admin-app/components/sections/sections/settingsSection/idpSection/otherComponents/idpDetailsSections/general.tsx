@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { IdentityProvider } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { controllerDecodePatchGeneralSettingsIdp } from
     "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { HelperTextComponent, errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
@@ -66,7 +67,7 @@ export default function General(prop) {
         return errors;
     };
 
-    const onDataSubmit = (response, form) => {
+    const onDataSubmit = (response: IdentityProvider, form) => {
         if (response) {
             successTypeDialog(toaster, "Changes Saved Successfully", "Idp updated successfully.");
             fetchData();

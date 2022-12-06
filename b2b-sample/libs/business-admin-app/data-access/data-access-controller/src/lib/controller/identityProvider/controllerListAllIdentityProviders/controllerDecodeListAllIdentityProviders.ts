@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { IdentityProvider, IdentityProviderList } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import { Session } from "next-auth";
 import { controllerCallListAllIdentityProviders } from "./controllerCallListAllIdentityProviders";
@@ -26,12 +27,20 @@ import { controllerCallListAllIdentityProviders } from "./controllerCallListAllI
  * 
  * @returns - details of all the identity providers
  */
-export async function controllerDecodeListAllIdentityProviders(session: Session) {
+export async function controllerDecodeListAllIdentityProviders(session: Session): Promise<IdentityProvider[] | null> {
 
-    const res = await commonControllerDecode(() => controllerCallListAllIdentityProviders(session), null);
+    const res = (await commonControllerDecode(() => controllerCallListAllIdentityProviders(session),
+        null) as IdentityProviderList | null);
+
+    if (res) {
+        if(res.identityProviders) {
+            return res.identityProviders;
+        } else {
+            return [];
+        }
+    }
 
     return res;
-
 }
 
 export default controllerDecodeListAllIdentityProviders;

@@ -33,7 +33,7 @@ async function getRoleDetailsForAdd(session: Session, userId: string, initRoleLi
     const rolesUriList = getRolesThatNeedToAddUser(initRoleList, roleList);
 
     await rolesUriList.forEach(async (uri) => {
-        await controllerDecodePatchRole(session, uri, PatchMethod.ADD, "users", [userId]);
+        await controllerDecodePatchRole(session, uri, PatchMethod.ADD, "users", [ userId ]);
     });
 }
 

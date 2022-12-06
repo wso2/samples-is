@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { IdentityProviderFederatedAuthenticator } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import { Session } from "next-auth";
 import { controllerCallGetFederatedAuthenticators } from "./controllerCallGetFederatedAuthenticators";
@@ -29,10 +30,10 @@ import { controllerCallGetFederatedAuthenticators } from "./controllerCallGetFed
  * @returns - get the federated authenticators
  */
 export async function controllerDecodeGetFederatedAuthenticators(session: Session, id: string, idpId: string)
-    : Promise<null | Record<string, unknown>> {
+    : Promise<IdentityProviderFederatedAuthenticator | null> {
 
-    const res = (await commonControllerDecode(
-        () => controllerCallGetFederatedAuthenticators(session, id, idpId), null) as null | Record<string, unknown>);
+    const res = (await commonControllerDecode(() => controllerCallGetFederatedAuthenticators(session, id, idpId),
+        null) as IdentityProviderFederatedAuthenticator | null);
 
     return res;
 

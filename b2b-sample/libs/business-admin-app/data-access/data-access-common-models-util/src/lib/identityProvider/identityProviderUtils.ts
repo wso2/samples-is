@@ -18,6 +18,7 @@
 
 import { getManagementAPIServerBaseUrl, getOrgUrl } from "@b2bsample/shared/util/util-application-config-util";
 import { ENTERPRISE_ID, GOOGLE_ID } from "@b2bsample/shared/util/util-common";
+import IdentityProviderTemplateModel from "./identityProviderTemplateModel";
 import config from "../../../../../../../config.json";
 
 /**
@@ -37,7 +38,8 @@ export function getCallbackUrl(orgId: string) {
  * 
  * @returns - idp readay to sent to the IS 
  */
-export function setIdpTemplate(model, templateId: string, formValues: Record<string, string>, orgId: string) {
+export function setIdpTemplate(model: IdentityProviderTemplateModel, templateId: string,
+    formValues: Record<string, string>, orgId: string): IdentityProviderTemplateModel {
 
     const name = formValues["application_name"].toString();
     const clientId = formValues["client_id"].toString();
@@ -73,7 +75,8 @@ export function setIdpTemplate(model, templateId: string, formValues: Record<str
  * 
  * @returns - create google IDP template
  */
-function googleIdpTemplate(model, clientId: string, clientSecret: string, orgId: string) {
+function googleIdpTemplate(model: IdentityProviderTemplateModel, clientId: string, clientSecret: string,
+    orgId: string): IdentityProviderTemplateModel {
 
     model.image =
         `${config.CommonConfig.ManagementAPIConfig.ImageBaseUrl}/libs/themes/default/assets` +
@@ -113,8 +116,8 @@ function googleIdpTemplate(model, clientId: string, clientSecret: string, orgId:
  * 
  * @returns create enterprise IDP template
  */
-function enterpriseIdpTemplate(model, clientId: string, clientSecret: string, formValues: Record<string, string>
-    , orgId: string) {
+function enterpriseIdpTemplate(model: IdentityProviderTemplateModel, clientId: string, clientSecret: string,
+    formValues: Record<string, string>, orgId: string): IdentityProviderTemplateModel {
 
     const authorizationEndpointUrl = formValues["authorization_endpoint_url"].toString();
     const tokenEndpointUrl = formValues["token_endpoint_url"].toString();

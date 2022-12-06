@@ -16,7 +16,8 @@
  * under the License.
  */
 
-import { setIdpTemplate } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
+import { IdentityProvider, IdentityProviderTemplate, IdentityProviderTemplateModel, setIdpTemplate } from
+    "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import { Session } from "next-auth";
 import { controllerCallCreateIdentityProvider } from "./controllerCallCreateIdentityProvider";
@@ -29,14 +30,15 @@ import { controllerCallCreateIdentityProvider } from "./controllerCallCreateIden
  * 
  * @returns - whether the identity provider is created or not
  */
-export async function controllerDecodeCreateIdentityProvider(session: Session, template: any,
-    formValues: Record<string, string>) {
+export async function controllerDecodeCreateIdentityProvider(session: Session, template: IdentityProviderTemplate,
+    formValues: Record<string, string>): Promise<IdentityProvider | null> {
 
-    let model = JSON.parse(JSON.stringify(template.idp));
+    let model: IdentityProviderTemplateModel = JSON.parse(JSON.stringify(template.idp));
 
     model = setIdpTemplate(model, template.templateId, formValues, (session.orgId as string));
 
-    const res = await commonControllerDecode(() => controllerCallCreateIdentityProvider(session, model), null);
+    const res = (await commonControllerDecode(() => controllerCallCreateIdentityProvider(session, model),
+        null) as IdentityProvider | null);
 
     return res;
 

@@ -41,6 +41,7 @@ export async function commonControllerCall(api: string, session: Session | null,
             if (param) {
                 const orgSessionControllerCallParam: OrgSessionControllerCallParam
                     = param as OrgSessionControllerCallParam;
+
                 header = getControllerCallApiRequestOptionsForSwitchCallWithParam(
                     orgSessionControllerCallParam.subOrgId, orgSessionControllerCallParam.accessToken);
             } else {

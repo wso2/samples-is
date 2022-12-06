@@ -16,11 +16,19 @@
  * under the License.
  */
 
-import { ControllerCallParam } from "../controllerParam/controllerCallParam";
+import { ControllerCallReturn, ControllerDecodeReturn } from
+    "@b2bsample/shared/data-access/data-access-common-models-util";
 
-export interface OrgSessionControllerCallParam extends ControllerCallParam {
-    accessToken: string,
-    subOrgId: string
+interface IdentityProviderFederatedAuthenticatorProperty {
+    key: string,
+    value: string
 }
 
-export default OrgSessionControllerCallParam;
+export interface IdentityProviderFederatedAuthenticator extends ControllerCallReturn, ControllerDecodeReturn {
+    authenticatorId?: string,
+    tags?: string[],
+    properties: IdentityProviderFederatedAuthenticatorProperty[],
+    [key: string]: unknown
+}
+
+export default IdentityProviderFederatedAuthenticator;

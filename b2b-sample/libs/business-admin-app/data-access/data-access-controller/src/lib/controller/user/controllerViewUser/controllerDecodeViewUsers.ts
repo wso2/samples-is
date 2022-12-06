@@ -17,7 +17,7 @@
  */
 
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
-import { decodeUser, InternalUser, User, UserList } from "@b2bsample/shared/data-access/data-access-common-models-util";
+import { InternalUser, User, UserList, decodeUser } from "@b2bsample/shared/data-access/data-access-common-models-util";
 import { Session } from "next-auth";
 import { controllerCallViewUsers } from "./controllerCallViewUsers";
 

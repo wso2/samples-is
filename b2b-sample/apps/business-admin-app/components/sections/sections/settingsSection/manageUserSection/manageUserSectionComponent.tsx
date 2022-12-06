@@ -17,6 +17,7 @@
  */
 
 import { controllerDecodeViewUsers } from "@b2bsample/business-admin-app/data-access/data-access-controller";
+import { InternalUser } from "@b2bsample/shared/data-access/data-access-common-models-util";
 import { SettingsTitleComponent } from "@b2bsample/shared/ui/ui-components";
 import React, { useCallback, useEffect, useState } from "react";
 import { Table } from "rsuite";
@@ -24,7 +25,6 @@ import AddUserButton from "./otherComponents/addUserButton";
 import AddUserComponent from "./otherComponents/addUserComponent";
 import EditUserComponent from "./otherComponents/editUserComponent";
 import styles from "../../../../../styles/Settings.module.css";
-import { InternalUser } from "@b2bsample/shared/data-access/data-access-common-models-util";
 
 /**
  * 

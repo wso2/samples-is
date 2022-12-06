@@ -45,11 +45,10 @@ export default async function deleteIdentityProvider(req, res) {
             `${getOrgUrl(orgId)}/api/server/v1/identity-providers/${id}`,
             requestOptionsWithBody(session, RequestMethod.DELETE, null)
         );
-        const data = await fetchData.json();
 
-        res.status(200).json(data);
+        res.status(200).json(fetchData);
     } catch (err) {
-
+        
         return dataNotRecievedError(res);
     }
 }

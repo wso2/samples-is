@@ -16,7 +16,9 @@
  * under the License.
  */
 
+import { IdentityProvider } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { PatchOperation } from "@b2bsample/shared/data-access/data-access-common-models-util";
 import { Session } from "next-auth";
 import { controllerCallPatchGeneralSettingsIdp } from "./controllerCallPatchGeneralSettingsIdp";
 
@@ -29,16 +31,17 @@ import { controllerCallPatchGeneralSettingsIdp } from "./controllerCallPatchGene
  * 
  * @returns - patch the general settings in the identity provider
  */
-export async function controllerDecodePatchGeneralSettingsIdp(
-    session: Session, name: string, description: string, idpId: string) {
+export async function controllerDecodePatchGeneralSettingsIdp(session: Session, name: string, description: string,
+    idpId: string): Promise<IdentityProvider | null> {
 
-    const body = [
+    const body: PatchOperation[] = [
         { "operation": "REPLACE", "path": "/description", "value": description },
         { "operation": "REPLACE", "path": "/isPrimary", "value": false },
         { "operation": "REPLACE", "path": "/name", "value": name }
     ];
 
-    const res = await commonControllerDecode(() => controllerCallPatchGeneralSettingsIdp(session, idpId, body), null);
+    const res = (await commonControllerDecode(() => controllerCallPatchGeneralSettingsIdp(session, idpId, body),
+        null) as IdentityProvider | null);
 
     return res;
 }

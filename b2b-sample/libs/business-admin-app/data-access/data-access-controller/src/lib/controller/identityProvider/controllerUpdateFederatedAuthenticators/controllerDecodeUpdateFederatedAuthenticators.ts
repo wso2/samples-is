@@ -16,20 +16,22 @@
  * under the License.
  */
 
-import { FederatedAuthenticators } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
+import { IdentityProviderFederatedAuthenticator } from
+    "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import { Session } from "next-auth";
 import { controllerCallUpdateFederatedAuthenticators } from "./controllerCallUpdateFederatedAuthenticators";
 
-function refactorFederatedAuthenticatorsForUpdate(federatedAuthenticators: FederatedAuthenticators) {
+function refactorFederatedAuthenticatorsForUpdate(federatedAuthenticators: IdentityProviderFederatedAuthenticator) {
     delete federatedAuthenticators.authenticatorId;
-    delete federatedAuthenticators["tags"];
+    delete federatedAuthenticators.tags;
 
     return federatedAuthenticators;
 }
 
-function updateProperties(federatedAuthenticators: any, keyProperty: any, valueProperty: any) {
-    federatedAuthenticators.properties.filter((obj: any) => obj.key === keyProperty)[0].value = valueProperty;
+function updateProperties(federatedAuthenticators: IdentityProviderFederatedAuthenticator, keyProperty: string,
+    valueProperty: string) {
+    federatedAuthenticators.properties.filter((property) => property.key === keyProperty)[0].value = valueProperty;
 
     return federatedAuthenticators;
 }
@@ -41,7 +43,8 @@ function updateProperties(federatedAuthenticators: any, keyProperty: any, valueP
  * @returns logged in users object. If failed `null`
  */
 export async function controllerDecodeUpdateFederatedAuthenticators(
-    session: Session, idpId: string, federatedAuthenticators: FederatedAuthenticators, changedValues: any) {
+    session: Session, idpId: string, federatedAuthenticators: IdentityProviderFederatedAuthenticator,
+    changedValues: Record<string, string>): Promise<IdentityProviderFederatedAuthenticator | null> {
 
     const federatedAuthenticatorId = federatedAuthenticators.authenticatorId;
 
@@ -52,8 +55,8 @@ export async function controllerDecodeUpdateFederatedAuthenticators(
 
     const body = [ federatedAuthenticatorId, federatedAuthenticators ];
 
-    const res = await commonControllerDecode(() => controllerCallUpdateFederatedAuthenticators(session, idpId, body),
-        null);
+    const res = (await commonControllerDecode(() => controllerCallUpdateFederatedAuthenticators(session, idpId, body),
+        null) as IdentityProviderFederatedAuthenticator | null);
 
     return res;
 

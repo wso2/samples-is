@@ -16,11 +16,7 @@
  * under the License.
  */
 
-interface PatchOperation {
-    op: string,
-    path: string,
-    value?: string | string[]
-}
+import PatchOperation from "./patchOperation";
 
 export interface PatchBody {
     operations: PatchOperation[]

@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { AllIdentityProvidersIdentityProvider, getCallbackUrl } from
+import { IdentityProvider, IdentityProviderTemplate, getCallbackUrl } from
     "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { controllerDecodeCreateIdentityProvider, controllerDecodeListAllIdentityProviders } from
     "@b2bsample/business-admin-app/data-access/data-access-controller";
@@ -36,10 +36,10 @@ import { Avatar, Button, Container, FlexboxGrid, Form, Input, InputGroup, Modal,
 import IdentityProviderList from "./otherComponents/identityProviderList";
 import config from "../../../../../../../config.json";
 import Enterprise from
-// eslint-disable-next-line
+    // eslint-disable-next-line
     "../../../../../../../libs/business-admin-app/data-access/data-access-common-models-util/src/lib/identityProvider/data/templates/enterprise-identity-provider.json";
 import Google from
-// eslint-disable-next-line    
+    // eslint-disable-next-line    
     "../../../../../../../libs/business-admin-app/data-access/data-access-common-models-util/src/lib/identityProvider/data/templates/google.json";
 import styles from "../../../../../styles/idp.module.css";
 
@@ -55,9 +55,9 @@ export default function IdpSectionComponent(prop) {
 
     const toaster = useToaster();
 
-    const [ idpList, setIdpList ] = useState<AllIdentityProvidersIdentityProvider[]>([]);
-    const [ openAddModal, setOpenAddModal ] = useState(false);
-    const [ selectedTemplate, setSelectedTemplate ] = useState(undefined);
+    const [ idpList, setIdpList ] = useState<IdentityProvider[]>([]);
+    const [ openAddModal, setOpenAddModal ] = useState<boolean>(false);
+    const [ selectedTemplate, setSelectedTemplate ] = useState<IdentityProviderTemplate>(undefined);
 
     const templates = [
         Enterprise,
@@ -69,13 +69,9 @@ export default function IdpSectionComponent(prop) {
         const res = await controllerDecodeListAllIdentityProviders(session);
 
         if (res) {
-            if (res["identityProviders"]) {
-                setIdpList(res["identityProviders"]);
-            } else {
-                setIdpList([]);
-            }
+            setIdpList(res);
         } else {
-            setIdpList(null);
+            setIdpList([]);
         }
 
     }, [ session ]);
@@ -92,7 +88,7 @@ export default function IdpSectionComponent(prop) {
         setSelectedTemplate(undefined);
     };
 
-    const onIdpCreated = (response) => {
+    const onIdpCreated = (response: IdentityProvider) => {
         if (response) {
             successTypeDialog(toaster, "Success", "Identity Provider Created Successfully");
 

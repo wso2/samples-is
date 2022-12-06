@@ -16,11 +16,12 @@
  * under the License.
  */
 
-import { ControllerCallParam } from "../controllerParam/controllerCallParam";
+import IdentityProviderTemplateModel from "./identityProviderTemplateModel";
 
-export interface OrgSessionControllerCallParam extends ControllerCallParam {
-    accessToken: string,
-    subOrgId: string
+export interface IdentityProviderTemplate {
+	idp: IdentityProviderTemplateModel,
+	templateId: string,
+    [key: string] : unknown
 }
 
-export default OrgSessionControllerCallParam;
+export default IdentityProviderTemplate;

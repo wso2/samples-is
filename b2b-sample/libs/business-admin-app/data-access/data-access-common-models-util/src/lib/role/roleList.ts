@@ -16,8 +16,8 @@
  * under the License.
  */
 
-import { ControllerCallParam, ControllerCallReturn, ControllerDecodeReturn }
-    from "@b2bsample/shared/data-access/data-access-common-models-util";
+import { ControllerCallParam, ControllerCallReturn } from
+    "@b2bsample/shared/data-access/data-access-common-models-util";
 import Role from "./role";
 
 export interface RoleList extends ControllerCallParam, ControllerCallReturn

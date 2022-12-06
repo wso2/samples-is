@@ -16,7 +16,9 @@
  * under the License.
  */
 
+import { IdentityProvider } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { PatchOperation } from "@b2bsample/shared/data-access/data-access-common-models-util";
 import { Session } from "next-auth";
 
 /**
@@ -30,10 +32,11 @@ import { Session } from "next-auth";
  * 
  * @returns details of the idp, if the call failed `null`
  */
-export async function controllerCallPatchGeneralSettingsIdp(session: Session, idpId : string, body : any) {
+export async function controllerCallPatchGeneralSettingsIdp(session: Session, idpId: string,
+    body: PatchOperation[]): Promise<IdentityProvider | null> {
 
-    const data = await commonControllerCall(`/api/settings/identityProvider/patchGeneralSettingsIdp/${idpId}`, 
-        session, body);
+    const data = (await commonControllerCall(`/api/settings/identityProvider/patchGeneralSettingsIdp/${idpId}`,
+        session, body) as IdentityProvider | null);
 
     return data;
 }

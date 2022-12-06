@@ -17,8 +17,8 @@
  */
 
 export class ControllerCallReturn {
-    error?: string
-    traceId?: string
+    error?: string;
+    traceId?: string;
 }
 
 export default ControllerCallReturn;

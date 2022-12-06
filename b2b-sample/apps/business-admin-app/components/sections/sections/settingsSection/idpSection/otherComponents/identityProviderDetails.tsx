@@ -39,7 +39,7 @@ export default function IdentityProviderDetails(prop) {
     const { session, id, fetchAllIdPs } = prop;
 
     const [ idpDetails, setIdpDetails ] = useState<IdentityProvider>(null);
-    const [ activeKeyNav, setActiveKeyNav ] = useState("1");
+    const [ activeKeyNav, setActiveKeyNav ] = useState<string>("1");
 
     const fetchData = useCallback(async () => {
         const res = await controllerDecodeGetDetailedIdentityProvider(session, id);

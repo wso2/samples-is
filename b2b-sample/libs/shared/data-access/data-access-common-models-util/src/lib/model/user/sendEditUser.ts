@@ -16,9 +16,9 @@
  * under the License.
  */
 
-import ControllerCallParam from "../controllerParam/controllerCallParam";
 import { Email } from "./sendUser";
 import { Name } from "./user";
+import ControllerCallParam from "../controllerParam/controllerCallParam";
 
 interface Operation {
     op: string,

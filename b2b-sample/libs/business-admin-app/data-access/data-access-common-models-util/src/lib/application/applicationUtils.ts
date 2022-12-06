@@ -19,6 +19,7 @@
 import { ENTERPRISE_ID, GOOGLE_ID } from "@b2bsample/shared/util/util-common";
 import enterpriseFederatedAuthenticators from "../identityProvider/data/templates/enterprise-identity-provider.json";
 import googleFederatedAuthenticators from "../identityProvider/data/templates/google.json";
+import IdentityProviderTemplateModel from "../identityProvider/identityProviderTemplateModel";
 
 /**
  * 
@@ -27,7 +28,7 @@ import googleFederatedAuthenticators from "../identityProvider/data/templates/go
  * @returns template related to the template id.
  */
 
-export function selectedTemplateBaesedonTemplateId(templateId: string) {
+export function selectedTemplateBaesedonTemplateId(templateId: string): IdentityProviderTemplateModel | null {
     switch (templateId) {
         case GOOGLE_ID:
 
@@ -50,7 +51,7 @@ export function selectedTemplateBaesedonTemplateId(templateId: string) {
  * `check` - if the idp is in authentication sequence, 
  * `onlyIdp` - is the idp is the only idp in the sequence
  */
-export function checkIfIdpIsinAuthSequence(template, idpDetails) {
+export function checkIfIdpIsinAuthSequence(template, idpDetails): boolean[] {
     const authenticationSequenceModel = template.authenticationSequence;
     const idpName = idpDetails.name;
     let check = false;
@@ -76,7 +77,7 @@ export function checkIfIdpIsinAuthSequence(template, idpDetails) {
  * @param template - applicaiton details template
  * @returns `true` if BASIC AUTH is available in auth sequence, else `false`
  */
-export function checkIfBasicAvailableinAuthSequence(template) {
+export function checkIfBasicAvailableinAuthSequence(template): boolean {
     const authenticationSequenceModel = template.authenticationSequence;
     let check = false;
 

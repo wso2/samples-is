@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { Application, AuthenticationSequence, AuthenticationSequenceModel, AuthenticationSequenceStepOption }
+import { Application, AuthenticationSequence, AuthenticationSequenceModel, AuthenticationSequenceStepOption, IdentityProvider }
     from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import {
@@ -92,7 +92,7 @@ function addRemoveAuthSequence(template: Application, idpTempleteId: string, idp
     const authenticationSequenceModel = getAuthenticationSequenceModel(template);
 
     if (method) {
-        authenticationSequenceModel.steps[0].options = [(getAuthenticatorBody(idpTempleteId, idpName))];
+        authenticationSequenceModel.steps[0].options = [ (getAuthenticatorBody(idpTempleteId, idpName)) ];
 
         return authenticationSequenceModel;
     } else {
@@ -122,7 +122,7 @@ function addRemoveAuthSequence(template: Application, idpTempleteId: string, idp
             } catch (e) {
                 authenticationSequenceModel.steps.push({
                     "id": 1,
-                    "options": [(getAuthenticatorBody(BASIC_ID, "LOCAL"))]
+                    "options": [ (getAuthenticatorBody(BASIC_ID, "LOCAL")) ]
                 });
             }
         }
@@ -141,7 +141,7 @@ function addRemoveAuthSequence(template: Application, idpTempleteId: string, idp
  * @returns decode patch applicaiton authentication steps API calls.
  */
 export async function controllerDecodePatchApplicationAuthSteps(
-    session: Session, template: Application, idpDetails: any, method: boolean): Promise<boolean | null> {
+    session: Session, template: Application, idpDetails: IdentityProvider, method: boolean): Promise<boolean | null> {
 
     const applicationId = template.id;
     const idpName = idpDetails.name;
@@ -159,7 +159,6 @@ export async function controllerDecodePatchApplicationAuthSteps(
     }
     
     return res;
-
 }
 
 export default controllerDecodePatchApplicationAuthSteps;

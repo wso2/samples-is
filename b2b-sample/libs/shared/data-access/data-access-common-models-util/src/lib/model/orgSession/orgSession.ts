@@ -16,9 +16,9 @@
  * under the License.
  */
 
-import { ControllerCallReturn, ControllerDecodeReturn }
-    from "@b2bsample/shared/data-access/data-access-common-models-util";
 import { JWT } from "next-auth/jwt";
+import { ControllerCallReturn } from "../controllerReturn/controllerCallReturn";
+import { ControllerDecodeReturn } from "../controllerReturn/controllerDecodeReturn";
 
 export interface OrgSession extends ControllerCallReturn, ControllerDecodeReturn {
     access_token?: string

@@ -16,7 +16,8 @@
  * under the License.
  */
 
-import { FederatedAuthenticators } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
+import { IdentityProviderFederatedAuthenticator } from
+    "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { controllerDecodeGetFederatedAuthenticators, controllerDecodeUpdateFederatedAuthenticators } from
     "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
@@ -40,14 +41,14 @@ export default function Settings(prop) {
     const { session, idpDetails } = prop;
 
     const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
-    const [ federatedAuthenticators, setFederatedAuthenticators ] = useState<FederatedAuthenticators | null>(null);
+    const [ federatedAuthenticators, setFederatedAuthenticators ]
+        = useState<IdentityProviderFederatedAuthenticator>(null);
 
     const toaster = useToaster();
 
     const fetchData = useCallback(async () => {
-        const res = (await controllerDecodeGetFederatedAuthenticators(
-            session, idpDetails.id, idpDetails.federatedAuthenticators.defaultAuthenticatorId
-        ) as FederatedAuthenticators);
+        const res = await controllerDecodeGetFederatedAuthenticators(
+            session, idpDetails.id, idpDetails.federatedAuthenticators.defaultAuthenticatorId);
 
         await setFederatedAuthenticators(res);
     }, [ session, idpDetails ]);
@@ -72,7 +73,7 @@ export default function Settings(prop) {
         return errors;
     };
 
-    const onDataSubmit = (response) => {
+    const onDataSubmit = (response: IdentityProviderFederatedAuthenticator) => {
         if (response) {
             successTypeDialog(toaster, "Changes Saved Successfully", "Idp updated successfully.");
             fetchData();
@@ -81,7 +82,7 @@ export default function Settings(prop) {
         }
     };
 
-    const onUpdate = async (values) => {
+    const onUpdate = async (values: Record<string, string>) => {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
         controllerDecodeUpdateFederatedAuthenticators(session, idpDetails.id, federatedAuthenticators, values)
             .then((response) => onDataSubmit(response))

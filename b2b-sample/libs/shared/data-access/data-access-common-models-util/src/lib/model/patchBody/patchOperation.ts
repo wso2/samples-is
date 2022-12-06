@@ -16,11 +16,11 @@
  * under the License.
  */
 
-import { ControllerCallParam } from "../controllerParam/controllerCallParam";
-
-export interface OrgSessionControllerCallParam extends ControllerCallParam {
-    accessToken: string,
-    subOrgId: string
+export interface PatchOperation {
+    operation?: string,
+    op?: string,
+    path: string,
+    value?: string | string[] | boolean
 }
 
-export default OrgSessionControllerCallParam;
+export default PatchOperation;

@@ -28,5 +28,6 @@ export * from "./lib/model/controllerParam/controllerCallParam";
 export * from "./lib/model/controllerReturn/controllerCallReturn";
 export * from "./lib/model/controllerReturn/controllerDecodeReturn";
 export * from "./lib/model/patchBody/patchBody";
+export * from "./lib/model/patchBody/patchOperation";
 export * from "./lib/model/orgSession/orgSession";
 export * from "./lib/model/orgSession/orgSessionControllerParam";

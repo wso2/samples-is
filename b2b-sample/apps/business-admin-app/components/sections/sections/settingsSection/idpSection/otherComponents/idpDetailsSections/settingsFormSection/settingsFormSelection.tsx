@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { selectedTemplateBaesedonTemplateId } from
+import { IdentityProviderTemplate, selectedTemplateBaesedonTemplateId } from
     "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { HelperTextComponent, infoTypeDialog } from "@b2bsample/shared/ui/ui-components";
 import { CopyTextToClipboardCallback, copyTheTextToClipboard } from "@b2bsample/shared/util/util-common";
@@ -39,7 +39,7 @@ export default function SettingsFormSelection(prop) {
     const toaster = useToaster();
 
     const propList = () => {
-        const selectedTemplate = selectedTemplateBaesedonTemplateId(templateId);
+        const selectedTemplate: IdentityProviderTemplate = selectedTemplateBaesedonTemplateId(templateId);
 
         if (selectedTemplate) {
             return selectedTemplate.idp.federatedAuthenticators.authenticators[0].properties;
@@ -63,7 +63,6 @@ export default function SettingsFormSelection(prop) {
 
     return (
         <>
-
             {
                 propList()
                     ? propList().map((property) => {

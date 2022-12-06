@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { ApplicationList, Application, checkIfIdpIsinAuthSequence } from
+import { Application, ApplicationList, checkIfIdpIsinAuthSequence } from
     "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import {
     controllerDecodeDeleteIdentityProvider, controllerDecodeGetApplication,
@@ -77,7 +77,7 @@ export default function ButtonGroupIdentityProviderDetails(prop) {
         }
     }, [ idpDetails, applicationDetail ]);
 
-    const onIdpDelete = (response) => {
+    const onIdpDelete = (response: boolean) => {
         if (response) {
             successTypeDialog(toaster, "Success", "Identity Provider Deleted Successfully");
         } else {

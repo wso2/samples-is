@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { IdentityProvider } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import { Session } from "next-auth";
 
@@ -28,10 +29,11 @@ import { Session } from "next-auth";
  * 
  * @returns details of the identity provdider, if the call failed `null`
  */
-export async function controllerCallGetDetailedIdentityProvider(session: Session, id: string) {
+export async function controllerCallGetDetailedIdentityProvider(session: Session, id: string)
+    : Promise<IdentityProvider | null> {
 
-    const data = await commonControllerCall(`/api/settings/identityProvider/getDetailedIdentityProvider/${id}`
-        , session);
+    const data = (await commonControllerCall(`/api/settings/identityProvider/getDetailedIdentityProvider/${id}`
+        , session) as IdentityProvider | null);
 
     return data;
 }
