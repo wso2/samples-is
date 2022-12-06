@@ -25,7 +25,7 @@ import config from "../../../../../../../config.json";
  * 
  * @returns callBackUrl of the idp
  */
-export function getCallbackUrl(orgId: string) {
+export function getCallbackUrl(orgId: string): string {
     return `${getOrgUrl(orgId)}/commonauth`;
 }
 
