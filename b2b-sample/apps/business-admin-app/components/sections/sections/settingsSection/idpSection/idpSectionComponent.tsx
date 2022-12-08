@@ -16,32 +16,22 @@
  * under the License.
  */
 
-import { IdentityProvider, IdentityProviderTemplate, getCallbackUrl } from
+import { IdentityProvider, IdentityProviderTemplate } from
     "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
-import { controllerDecodeCreateIdentityProvider, controllerDecodeListAllIdentityProviders } from
+import { controllerDecodeListAllIdentityProviders } from
     "@b2bsample/business-admin-app/data-access/data-access-controller";
-import { EmptySettingsComponent, SettingsTitleComponent, errorTypeDialog, infoTypeDialog, successTypeDialog } from
+import { EmptySettingsComponent, errorTypeDialog, SettingsTitleComponent, successTypeDialog } from
     "@b2bsample/shared/ui/ui-components";
-import {
-    CopyTextToClipboardCallback, EMPTY_STRING, ENTERPRISE_ID, GOOGLE_ID,
-    checkIfJSONisEmpty, copyTheTextToClipboard, sizeOfJson
-} from
-    "@b2bsample/shared/util/util-common";
 import AppSelectIcon from "@rsuite/icons/AppSelect";
-import CopyIcon from "@rsuite/icons/Copy";
-import InfoRoundIcon from "@rsuite/icons/InfoRound";
-import React, { useCallback, useEffect, useState } from "react";
-import { Avatar, Button, Container, FlexboxGrid, Form, Input, InputGroup, Modal, Panel, Stack, useToaster } from
-    "rsuite";
-import IdentityProviderList from "./otherComponents/identityProviderList";
-import config from "../../../../../../../config.json";
+import { useCallback, useEffect, useState } from "react";
+import { Container, useToaster } from "rsuite";
 import Enterprise from
     // eslint-disable-next-line
     "../../../../../../../libs/business-admin-app/data-access/data-access-common-models-util/src/lib/identityProvider/data/templates/enterprise-identity-provider.json";
 import Google from
     // eslint-disable-next-line    
     "../../../../../../../libs/business-admin-app/data-access/data-access-common-models-util/src/lib/identityProvider/data/templates/google.json";
-import styles from "../../../../../styles/idp.module.css";
+import IdentityProviderList from "./otherComponents/identityProviderList";
 import IdpCreate from "./otherComponents/idpCreateModal/idpCreate";
 import SelectIdentityProvider from "./otherComponents/selectIdentityProvider";
 
@@ -164,192 +154,3 @@ export default function IdpSectionComponent(prop) {
     );
 
 }
-
-/**
- * 
- * @param prop - openModal (open the modal), onSave (create the idp), onCancel (when close the modal), 
- *               template (selected template)
- * 
- * @returns Idp creation modal
- */
-const IdPCreationModal = (prop) => {
-
-    const toaster = useToaster();
-
-    const { openModal, onSave, onCancel, template, orgId } = prop;
-
-    const [formValues, setFormValues] = useState<Record<string, string>>({});
-
-    const handleModalClose = () => {
-        onCancel();
-    };
-
-    const handleCreate = () => {
-        onSave(formValues, template);
-    };
-
-    const copyValueToClipboard = (text) => {
-        const callback: CopyTextToClipboardCallback = () => infoTypeDialog(toaster, "Text copied to clipboard");
-
-        copyTheTextToClipboard(text, callback);
-    };
-
-    const resolveTemplateForm = () => {
-        switch (template.templateId) {
-
-            case GOOGLE_ID:
-
-                return (
-                    <GoogleIdentityProvider
-                        formValues={formValues}
-                        onFormValuesChange={setFormValues} />
-                );
-            case ENTERPRISE_ID:
-
-                return (
-                    <EnterpriseIdentityProvider
-                        formValues={formValues}
-                        onFormValuesChange={setFormValues} />
-                );
-        }
-    };
-
-    return (
-        <Modal
-            open={openModal}
-            onClose={handleModalClose}
-            onBackdropClick={handleModalClose}
-            size="md">
-            <Modal.Header>
-                <Modal.Title><b>{template.name}</b></Modal.Title>
-                <p>{template.description}</p>
-            </Modal.Header>
-            <Modal.Body>
-                <FlexboxGrid>
-                    <FlexboxGrid.Item colspan={12}>
-                        {resolveTemplateForm()}
-                    </FlexboxGrid.Item>
-                    <FlexboxGrid.Item colspan={12}>
-                        <Panel
-                            header={
-                                (<Stack alignItems="center" spacing={10}>
-                                    <InfoRoundIcon />
-                                    <b>Prerequisite</b>
-                                </Stack>)
-                            }
-                            bordered>
-                            <p>
-                                Before you begin, create an OAuth application, and obtain a client ID & secret.
-                                Add the following URL as the Authorized Redirect URI.
-                            </p>
-                            <br />
-                            <InputGroup >
-                                <Input readOnly value={getCallbackUrl(orgId)} size="lg" />
-                                <InputGroup.Button
-                                    onClick={() => copyValueToClipboard(getCallbackUrl(orgId))}>
-                                    <CopyIcon />
-                                </InputGroup.Button>
-                            </InputGroup>
-                        </Panel>
-                    </FlexboxGrid.Item>
-                </FlexboxGrid>
-
-            </Modal.Body>
-            <Modal.Footer>
-                <Button
-                    onClick={handleCreate}
-                    appearance="primary">
-                    Create
-                </Button>
-                <Button
-                    onClick={handleModalClose}
-                    appearance="subtle">
-                    Cancel
-                </Button>
-            </Modal.Footer>
-        </Modal>
-    );
-
-};
-
-/**
- * 
- * @param prop -  onFormValuesChange, formValues
- * 
- * @returns Form to create a Google idp.
- */
-const GoogleIdentityProvider = (prop) => {
-
-    const { onFormValuesChange, formValues } = prop;
-
-    return (
-        <Form onChange={onFormValuesChange} formValue={formValues}>
-            <Form.Group controlId="application_name">
-                <Form.ControlLabel>Idp Name</Form.ControlLabel>
-                <Form.Control name="application_name" />
-                <Form.HelpText tooltip>Idp Name is Required</Form.HelpText>
-            </Form.Group>
-            <Form.Group controlId="client_id">
-                <Form.ControlLabel>Client ID</Form.ControlLabel>
-                <Form.Control name="client_id" type="text" autoComplete="off" />
-                <Form.HelpText tooltip>Client ID is Required</Form.HelpText>
-            </Form.Group>
-            <Form.Group controlId="client_secret">
-                <Form.ControlLabel>Client Secret</Form.ControlLabel>
-                <Form.Control name="client_secret" type="password" autoComplete="off" />
-                <Form.HelpText tooltip>Client Secret is Required</Form.HelpText>
-            </Form.Group>
-        </Form>
-    );
-
-};
-
-/**
- * 
- * @param prop -  onFormValuesChange, formValues
- * 
- * @returns Form to create a enterprise idp.
- */
-const EnterpriseIdentityProvider = (prop) => {
-
-    const { onFormValuesChange, formValues } = prop;
-
-    return (
-        <Form onChange={onFormValuesChange} formValue={formValues}>
-            <Form.Group controlId="application_name">
-                <Form.ControlLabel>Idp Name</Form.ControlLabel>
-                <Form.Control name="application_name" />
-                <Form.HelpText tooltip>Idp Name is Required</Form.HelpText>
-            </Form.Group>
-            <Form.Group controlId="client_id">
-                <Form.ControlLabel>Client ID</Form.ControlLabel>
-                <Form.Control name="client_id" type="text" autoComplete="off" />
-                <Form.HelpText tooltip>Client ID is Required</Form.HelpText>
-            </Form.Group>
-            <Form.Group controlId="client_secret">
-                <Form.ControlLabel>Client Secret</Form.ControlLabel>
-                <Form.Control name="client_secret" type="password" autoComplete="off" />
-                <Form.HelpText tooltip>Client Secret is Required</Form.HelpText>
-            </Form.Group>
-            <Form.Group controlId="authorization_endpoint_url">
-                <Form.ControlLabel>Authorization Endpoint URL</Form.ControlLabel>
-                <Form.Control name="authorization_endpoint_url" type="url" />
-                <Form.HelpText tooltip>Authorization Endpoint URL is Required</Form.HelpText>
-            </Form.Group>
-            <Form.Group controlId="token_endpoint_url">
-                <Form.ControlLabel>Token Endpoint URL</Form.ControlLabel>
-                <Form.Control name="token_endpoint_url" type="url" />
-                <Form.HelpText tooltip>Token Endpoint URL is Required</Form.HelpText>
-            </Form.Group>
-            <Form.Group controlId="certificate">
-                <Form.ControlLabel>JWKS endpoint</Form.ControlLabel>
-                <Form.Control name="certificate" type="url" />
-                <Form.HelpText tooltip>
-                    WSO2 Identity Server will use this certificate to
-                    verify the signed responses from your external IdP.
-                </Form.HelpText>
-            </Form.Group>
-        </Form>
-    );
-
-};

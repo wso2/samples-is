@@ -16,11 +16,9 @@
  * under the License.
  */
 
-export enum RequestMethod {
-    DELETE = "DELETE",
-    PATCH = "PATCH",
-    POST = "POST",
-    PUT = "PUT"
-};
+export enum IdentityProviderConfigureType {
+    MANUAL = "manual",
+    AUTO = "auto"
+}
 
-export default RequestMethod;
+export default IdentityProviderConfigureType;

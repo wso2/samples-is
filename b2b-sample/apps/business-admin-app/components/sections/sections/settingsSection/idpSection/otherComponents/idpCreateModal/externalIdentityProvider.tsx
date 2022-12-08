@@ -24,14 +24,15 @@ import { FormButtonToolbar, FormField } from "@b2bsample/shared/ui/ui-basic-comp
 import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
 import { fieldValidate, LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from
     "@b2bsample/shared/util/util-front-end-util";
+import IdentityProviderConfigureType from "libs/business-admin-app/data-access/data-access-common-models-util/src/lib/identityProvider/identityProviderConfigureType";
 import { Session } from "next-auth";
 import { useState } from "react";
 import { Form } from "react-final-form";
-import { Loader } from "rsuite";
+import { Loader, Radio, RadioGroup } from "rsuite";
 import FormSuite from "rsuite/Form";
 import styles from "../../../../../../../styles/Settings.module.css";
 
-interface GoogleIdentityProviderProps {
+interface ExternalIdentityProviderProps {
     session: Session
     template: IdentityProviderTemplate
     onIdpCreate: (response: IdentityProvider) => void,
@@ -39,16 +40,18 @@ interface GoogleIdentityProviderProps {
 }
 
 /**
- * 
- * @param prop - `GoogleIdentityProviderProps`
- * 
- * @returns Form to create google idp
- */
-export default function GoogleIdentityProvider(prop: GoogleIdentityProviderProps) {
+* 
+* @param prop - `ExternalIdentityProviderProps`
+* 
+* @returns Form to create external idp
+*/
+export default function ExternalIdentityProvider(prop: ExternalIdentityProviderProps) {
 
     const { session, template, onIdpCreate, onCancel } = prop;
 
     const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
+    const [configureType, setConfigureType]
+        = useState<IdentityProviderConfigureType>(IdentityProviderConfigureType.AUTO);
 
     const validate = (values: Record<string, string>): Record<string, string> => {
         let errors: Record<string, string> = {};
@@ -59,6 +62,10 @@ export default function GoogleIdentityProvider(prop: GoogleIdentityProviderProps
 
         return errors;
     };
+
+    const onConfigureTypeChange = (value: IdentityProviderConfigureType): void => {
+        setConfigureType(value);
+    }
 
     const onUpdate = async (values: Record<string, string>): Promise<void> => {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
@@ -107,6 +114,64 @@ export default function GoogleIdentityProvider(prop: GoogleIdentityProviderProps
                         >
                             <FormSuite.Control name="input" />
                         </FormField>
+
+                        <RadioGroup name="radioList" value={configureType} onChange={onConfigureTypeChange}>
+                            <Radio value={IdentityProviderConfigureType.AUTO}>
+                                Use the <mark>discovery endpoint</mark>  to  create the identity provider
+                            </Radio>
+                            <Radio value={IdentityProviderConfigureType.MANUAL}>
+                                Manually configure the identity provider
+                            </Radio>
+                        </RadioGroup>
+
+                        {
+                            configureType === IdentityProviderConfigureType.AUTO
+                                ? <>
+                                    <FormField
+                                        name="discovery_url"
+                                        label="Discovery URL"
+                                        helperText="Discovery URL of the identity provider."
+                                        needErrorMessage={true}
+                                    >
+                                        <FormSuite.Control name="input" />
+                                    </FormField>
+
+                                </>
+                                : null
+                        }
+
+                        {
+                            configureType === IdentityProviderConfigureType.MANUAL
+                                ? <>
+                                    <FormField
+                                        name="authorization_endpoint_url"
+                                        label="Authorization Endpoint URL"
+                                        helperText="Authorization Endpoint URL of the identity provider."
+                                        needErrorMessage={true}
+                                    >
+                                        <FormSuite.Control name="input" />
+                                    </FormField>
+
+                                    <FormField
+                                        name="token_endpoint_url"
+                                        label="Token Endpoint URL"
+                                        helperText="Token Endpoint URL of the identity provider."
+                                        needErrorMessage={true}
+                                    >
+                                        <FormSuite.Control name="input" />
+                                    </FormField>
+
+                                    <FormField
+                                        name="certificate"
+                                        label="JWKS endpoint URL"
+                                        helperText="JWKS endpoint URL of the identity provider."
+                                        needErrorMessage={true}
+                                    >
+                                        <FormSuite.Control name="input" />
+                                    </FormField>
+                                </>
+                                : null
+                        }
 
                         <FormButtonToolbar
                             submitButtonText="Create"

@@ -28,6 +28,7 @@ export * from "./lib/identityProvider/identityProviderTemplate";
 export * from "./lib/identityProvider/identityProviderTemplateModel";
 export * from "./lib/identityProvider/identityProviderFederatedAuthenticator";
 export * from "./lib/identityProvider/identityProviderUtils";
+export * from "./lib/identityProvider/identityProviderConfigureType";
 export * from "./lib/role/role";
 export * from "./lib/role/roleUsers";
 export * from "./lib/role/roleGroups";

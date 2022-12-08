@@ -25,6 +25,7 @@ import CopyIcon from "@rsuite/icons/Copy";
 import InfoRoundIcon from "@rsuite/icons/InfoRound";
 import { Session } from "next-auth";
 import { FlexboxGrid, Input, InputGroup, Modal, Panel, Stack, useToaster } from "rsuite";
+import ExternalIdentityProvider from "./externalIdentityProvider";
 import GoogleIdentityProvider from "./googleIdentityProvider";
 
 interface PrerequisiteProps {
@@ -49,11 +50,11 @@ export default function IdpCreate(prop: IdpCreateProps) {
 
     const { session, openModal, onIdpCreate, onCancel, template, orgId } = prop;
 
-    const handleModalClose = () => {
+    const handleModalClose = (): void => {
         onCancel();
     };
 
-    const resolveTemplateForm = () => {
+    const resolveTemplateForm = (): JSX.Element => {
         switch (template.templateId) {
 
             case GOOGLE_ID:
@@ -63,18 +64,14 @@ export default function IdpCreate(prop: IdpCreateProps) {
                     onIdpCreate={onIdpCreate}
                     onCancel={onCancel} />
 
-            // return (
-            //     <GoogleIdentityProvider
-            //         formValues={formValues}
-            //         onFormValuesChange={setFormValues} />
-            // );
             case ENTERPRISE_ID:
 
-            // return (
-            //     <EnterpriseIdentityProvider
-            //         formValues={formValues}
-            //         onFormValuesChange={setFormValues} />
-            // );
+                return <ExternalIdentityProvider
+                    session={session}
+                    template={template}
+                    onIdpCreate={onIdpCreate}
+                    onCancel={onCancel} />
+
         }
     };
 
@@ -83,7 +80,7 @@ export default function IdpCreate(prop: IdpCreateProps) {
             open={openModal}
             onClose={handleModalClose}
             onBackdropClick={handleModalClose}
-            size="md">
+            size="lg">
             <Modal.Header>
                 <Modal.Title><b>{template.name}</b></Modal.Title>
                 <p>{template.description}</p>
