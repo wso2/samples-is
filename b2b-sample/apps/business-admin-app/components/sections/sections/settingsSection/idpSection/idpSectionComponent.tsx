@@ -212,7 +212,7 @@ export default function IdpSectionComponent(prop) {
             {
                 selectedTemplate && (
                     <IdpCreate
-                        onSave={onIdPSave}
+                        onIdpCreate={onIdpCreated}
                         onCancel={onCreationDismiss}
                         openModal={selectedTemplate}
                         template={selectedTemplate}

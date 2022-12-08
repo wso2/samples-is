@@ -16,5 +16,10 @@
  * under the License.
  */
 
-export * from "./lib/formUtil/formUtil";
-export * from "./lib/frontendUtil";
+export interface FormButtonToolbarProps {
+    submitButtonText? : string,
+    cancelButtonText? : string,
+    needCancel: boolean,
+    onCancel?: ()=>void,
+    submitButtonDisabled: boolean,
+}

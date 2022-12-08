@@ -16,5 +16,20 @@
  * under the License.
  */
 
-export * from "./lib/formUtil/formUtil";
-export * from "./lib/frontendUtil";
+/**
+ * 
+ * @param templateId - application details template id
+ * 
+ * @returns template related to the template id.
+ */
+export function fieldValidate(key: string, field: string, errors: Record<string, string>): Record<string, string> {
+
+    if (!field) {
+        errors[key] = "This field cannot be empty";
+        console.log(errors);
+    }
+
+    return errors;
+}
+
+export default { fieldValidate };

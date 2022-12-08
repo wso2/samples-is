@@ -16,12 +16,11 @@
  * under the License.
  */
 
- .stack {
-    margin-top: 5px;
- }
+.stack {
+    margin-top: 1px;
+}
 
- .icon {
-    margin-left: 2px;
-    margin-right: 10px
- }
- 
+.icon {
+    margin-left: 1px;
+    margin-right: 5px
+}

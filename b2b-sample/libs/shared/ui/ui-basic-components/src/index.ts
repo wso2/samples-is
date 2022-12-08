@@ -16,5 +16,5 @@
  * under the License.
  */
 
-export * from "./lib/formUtil/formUtil";
-export * from "./lib/frontendUtil";
+export * from "./lib/components/formField/formField";
+export * from "./lib/components/formButtonToolbar/formButtonToolbar";

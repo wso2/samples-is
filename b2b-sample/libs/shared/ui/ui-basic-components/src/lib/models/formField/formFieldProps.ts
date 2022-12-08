@@ -16,5 +16,10 @@
  * under the License.
  */
 
-export * from "./lib/formUtil/formUtil";
-export * from "./lib/frontendUtil";
+export interface FormFieldProps {
+    name: string,
+    label: string,
+    children: JSX.Element,
+    helperText?: string,
+    needErrorMessage?: boolean
+}

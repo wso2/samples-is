@@ -17,12 +17,14 @@
  */
 
 import { infoTypeDialog } from "@b2bsample/shared/ui/ui-components";
-import { CopyTextToClipboardCallback, copyTheTextToClipboard, ENTERPRISE_ID, GOOGLE_ID } from "@b2bsample/shared/util/util-common";
+import { CopyTextToClipboardCallback, copyTheTextToClipboard, ENTERPRISE_ID, GOOGLE_ID } from
+    "@b2bsample/shared/util/util-common";
 import { useState } from "react";
 import { Button, FlexboxGrid, Input, InputGroup, Modal, Panel, Placeholder, Stack, useToaster } from "rsuite";
 import CopyIcon from "@rsuite/icons/Copy";
 import InfoRoundIcon from "@rsuite/icons/InfoRound";
 import { getCallbackUrl } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
+import GoogleIdentityProvider from "./googleIdentityProvider";
 
 interface PrerequisiteProps {
     orgId: string
@@ -35,7 +37,7 @@ interface IdpCreateProps {
 
 export default function IdpCreate(prop) {
 
-    const { openModal, onSave, onCancel, template, orgId } = prop;
+    const { session, openModal, onIdpCreate, onCancel, template, orgId } = prop;
 
     const [formValues, setFormValues] = useState<Record<string, string>>({});
 
@@ -43,27 +45,28 @@ export default function IdpCreate(prop) {
         onCancel();
     };
 
-    const handleCreate = () => {
-        onSave(formValues, template);
-    };
-
     const resolveTemplateForm = () => {
         switch (template.templateId) {
 
             case GOOGLE_ID:
+                return <GoogleIdentityProvider
+                    session={session}
+                    template={template}
+                    onIdpCreate={onIdpCreate}
+                    onCancel={onCancel} />
 
-                // return (
-                //     <GoogleIdentityProvider
-                //         formValues={formValues}
-                //         onFormValuesChange={setFormValues} />
-                // );
+            // return (
+            //     <GoogleIdentityProvider
+            //         formValues={formValues}
+            //         onFormValuesChange={setFormValues} />
+            // );
             case ENTERPRISE_ID:
 
-                // return (
-                //     <EnterpriseIdentityProvider
-                //         formValues={formValues}
-                //         onFormValuesChange={setFormValues} />
-                // );
+            // return (
+            //     <EnterpriseIdentityProvider
+            //         formValues={formValues}
+            //         onFormValuesChange={setFormValues} />
+            // );
         }
     };
 
@@ -78,28 +81,16 @@ export default function IdpCreate(prop) {
                 <p>{template.description}</p>
             </Modal.Header>
             <Modal.Body>
-                <FlexboxGrid>
+                <FlexboxGrid justify="space-between">
                     <FlexboxGrid.Item colspan={12}>
-                        <Placeholder />
+                        {resolveTemplateForm()}
                     </FlexboxGrid.Item>
-                    <FlexboxGrid.Item colspan={12}>
-                        <Prerequisite orgId={orgId}/>
+                    <FlexboxGrid.Item colspan={11}>
+                        <Prerequisite orgId={orgId} />
                     </FlexboxGrid.Item>
                 </FlexboxGrid>
 
             </Modal.Body>
-            <Modal.Footer>
-                <Button
-                    onClick={handleCreate}
-                    appearance="primary">
-                    Create
-                </Button>
-                <Button
-                    onClick={handleModalClose}
-                    appearance="subtle">
-                    Cancel
-                </Button>
-            </Modal.Footer>
         </Modal>
     );
 }
