@@ -55,7 +55,7 @@ export default function GoogleIdentityProvider(prop: GoogleIdentityProviderProps
 
         console.log(values);
 
-        errors = fieldValidate("name", values.name, errors);
+        errors = fieldValidate("application_name", values.application_name, errors);
         errors = fieldValidate("client_id", values.client_id, errors);
         errors = fieldValidate("client_secret", values.client_secret, errors);
 
@@ -84,7 +84,7 @@ export default function GoogleIdentityProvider(prop: GoogleIdentityProviderProps
                         fluid>
 
                         <FormField
-                            name="name"
+                            name="application_name"
                             label="Name"
                             helperText="Name of the identity provider."
                             needErrorMessage={true}
@@ -121,7 +121,7 @@ export default function GoogleIdentityProvider(prop: GoogleIdentityProviderProps
             />
 
             <div style={loadingDisplay}>
-                <Loader size="lg" backdrop content="User is adding" vertical />
+                <Loader size="lg" backdrop content="Identity provider is creating" vertical />
             </div>
         </div>
     );

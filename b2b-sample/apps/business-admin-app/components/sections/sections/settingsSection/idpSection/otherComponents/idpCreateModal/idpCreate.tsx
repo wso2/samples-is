@@ -16,14 +16,15 @@
  * under the License.
  */
 
+import { getCallbackUrl, IdentityProvider, IdentityProviderTemplate } from
+    "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { infoTypeDialog } from "@b2bsample/shared/ui/ui-components";
-import { CopyTextToClipboardCallback, copyTheTextToClipboard, ENTERPRISE_ID, GOOGLE_ID } from
-    "@b2bsample/shared/util/util-common";
-import { useState } from "react";
-import { Button, FlexboxGrid, Input, InputGroup, Modal, Panel, Placeholder, Stack, useToaster } from "rsuite";
+import { CopyTextToClipboardCallback, copyTheTextToClipboard, ENTERPRISE_ID, GOOGLE_ID }
+    from "@b2bsample/shared/util/util-common";
 import CopyIcon from "@rsuite/icons/Copy";
 import InfoRoundIcon from "@rsuite/icons/InfoRound";
-import { getCallbackUrl } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
+import { Session } from "next-auth";
+import { FlexboxGrid, Input, InputGroup, Modal, Panel, Stack, useToaster } from "rsuite";
 import GoogleIdentityProvider from "./googleIdentityProvider";
 
 interface PrerequisiteProps {
@@ -31,15 +32,22 @@ interface PrerequisiteProps {
 }
 
 interface IdpCreateProps {
+    session: Session,
+    onIdpCreate: (response: IdentityProvider) => void,
+    onCancel: () => void,
+    template: IdentityProviderTemplate,
     orgId: string,
     openModal: boolean,
 }
 
-export default function IdpCreate(prop) {
+/**
+ * 
+ * @param prop - `IdpCreateProps`
+ * @returns Idp creation modal
+ */
+export default function IdpCreate(prop: IdpCreateProps) {
 
     const { session, openModal, onIdpCreate, onCancel, template, orgId } = prop;
-
-    const [formValues, setFormValues] = useState<Record<string, string>>({});
 
     const handleModalClose = () => {
         onCancel();

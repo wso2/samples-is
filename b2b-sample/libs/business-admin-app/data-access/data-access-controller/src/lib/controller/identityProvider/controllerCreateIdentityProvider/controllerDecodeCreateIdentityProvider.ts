@@ -35,7 +35,7 @@ export async function controllerDecodeCreateIdentityProvider(session: Session, t
 
     let model: IdentityProviderTemplateModel = JSON.parse(JSON.stringify(template.idp));
 
-    model = setIdpTemplate(model, template.templateId, formValues, (session.orgId as string));
+    model = setIdpTemplate(model, (template.templateId as string), formValues, (session.orgId as string));
 
     const res = (await commonControllerDecode(() => controllerCallCreateIdentityProvider(session, model),
         null) as IdentityProvider | null);

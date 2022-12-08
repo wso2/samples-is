@@ -115,66 +115,6 @@ export default function IdpSectionComponent(prop) {
         }
     };
 
-    const onIdPSave = async (formValues, template): Promise<void> => {
-
-        if (checkEmpty(formValues, template)) {
-            errorTypeDialog(toaster, "Fields Cannot be Empty", "Form fields cannot be empty occured.");
-        } else {
-            controllerDecodeCreateIdentityProvider(session, template, formValues)
-                .then((response) => onIdpCreated(response));
-        }
-
-    };
-
-    const checkEmpty = (formValue, template): boolean => {
-
-        if (checkIfJSONisEmpty(formValue)) {
-            return true;
-        }
-
-        const size = sizeOfJson(formValue);
-        let key;
-        let val;
-
-        switch (template.templateId) {
-            case GOOGLE_ID:
-                if (size == 3) {
-                    for (key in formValue) {
-                        val = formValue[key];
-
-                        if (!val) {
-                            return true;
-                        }
-                    }
-
-                    return false;
-                }
-
-                break;
-
-            case ENTERPRISE_ID:
-                if (size == 6) {
-                    for (key in formValue) {
-                        val = formValue[key];
-
-                        if (!val) {
-                            return true;
-                        }
-                    }
-
-                    return false;
-                }
-
-                break;
-
-            default:
-
-                return true;
-        }
-
-        return true;
-    };
-
     return (
         <Container>
 
@@ -212,9 +152,10 @@ export default function IdpSectionComponent(prop) {
             {
                 selectedTemplate && (
                     <IdpCreate
+                        session={session}
                         onIdpCreate={onIdpCreated}
                         onCancel={onCreationDismiss}
-                        openModal={selectedTemplate}
+                        openModal={!!selectedTemplate}
                         template={selectedTemplate}
                         orgId={session.orgId} />
                 )
