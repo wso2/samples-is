@@ -23,6 +23,7 @@ export * from "./lib/application/authenticationSequence";
 export * from "./lib/application/authenticaitonSequenceModel";
 export * from "./lib/application/authenticationSequenceStepOption";
 export * from "./lib/identityProvider/identityProvider";
+export * from "./lib/identityProvider/identityProviderDiscoveryUrl";
 export * from "./lib/identityProvider/identityProviderList";
 export * from "./lib/identityProvider/identityProviderTemplate";
 export * from "./lib/identityProvider/identityProviderTemplateModel";

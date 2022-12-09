@@ -119,10 +119,10 @@ function googleIdpTemplate(model: IdentityProviderTemplateModel, clientId: strin
 function enterpriseIdpTemplate(model: IdentityProviderTemplateModel, clientId: string, clientSecret: string,
     formValues: Record<string, string>, orgId: string): IdentityProviderTemplateModel {
 
-    const authorizationEndpointUrl = formValues["authorization_endpoint_url"].toString();
-    const tokenEndpointUrl = formValues["token_endpoint_url"].toString();
-    const logoutUrl = formValues["logout_url"].toString();
-    const certificate = formValues["certificate"].toString();
+    const authorizationEndpointUrl = formValues["authorization_endpoint"].toString();
+    const tokenEndpointUrl = formValues["token_endpoint"].toString();
+    const logoutUrl = formValues["end_session_endpoint"].toString();
+    const jwksUri = formValues["jwks_uri"].toString();
 
     model.image =
         `${config.CommonConfig.ManagementAPIConfig.ImageBaseUrl}/libs/themes/default/assets` +
@@ -159,7 +159,7 @@ function enterpriseIdpTemplate(model: IdentityProviderTemplateModel, clientId: s
         }
     ];
 
-    model.certificate.jwksUri = certificate;
+    model.certificate.jwksUri = jwksUri;
 
     return model;
 }

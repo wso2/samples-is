@@ -46,5 +46,6 @@ export * from
 "./lib/controller/identityProvider/controllerCreateIdentityProvider/controllerDecodeCreateIdentityProvider";
 export * from
 "./lib/controller/identityProvider/controllerUpdateFederatedAuthenticators/controllerDecodeUpdateFederatedAuthenticators";
+export * from "./lib/controller/identityProvider/controllerGetDiscoveryUrl/controllerDecodeGetDiscoveryUrl";
 export * from
 "./lib/controller/controllerSwitchOrg/controllerDecodeSwitchOrg";

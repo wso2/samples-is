@@ -15,21 +15,14 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-import { ControllerCallReturn, ControllerDecodeReturn } from "@b2bsample/shared/data-access/data-access-common-models-util";
+import { ControllerCallReturn, ControllerDecodeReturn } from
+    "@b2bsample/shared/data-access/data-access-common-models-util";
 
-interface FederatedAuthenticatorForIdentityProvider {
-    defaultAuthenticatorId : string,
-    [key: string]: unknown,
+export interface IdentityProviderDiscoveryUrl extends ControllerCallReturn, ControllerDecodeReturn {
+    authorization_endpoint: string,
+    token_endpoint: string,
+    end_session_endpoint: string,
+    jwks_uri: string
 }
 
-export interface IdentityProvider extends ControllerCallReturn, ControllerDecodeReturn{
-    id: string,
-    name: string,
-    image : string,
-    description : string,
-    federatedAuthenticators?: FederatedAuthenticatorForIdentityProvider[],
-    templateId: string,
-    [key: string]: unknown,
-}
-
-export default IdentityProvider;
+export default IdentityProviderDiscoveryUrl;

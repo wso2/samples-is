@@ -18,7 +18,7 @@
 
 import { IdentityProvider, IdentityProviderTemplate } from
     "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
-import { controllerDecodeCreateIdentityProvider } from
+import { controllerDecodeCreateIdentityProvider, controllerDecodeGetDiscoveryUrl } from
     "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { FormButtonToolbar, FormField } from "@b2bsample/shared/ui/ui-basic-components";
 import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
@@ -70,9 +70,10 @@ export default function ExternalIdentityProvider(prop: ExternalIdentityProviderP
 
     const onUpdate = async (values: Record<string, string>): Promise<void> => {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
-        controllerDecodeCreateIdentityProvider(session, template, values)
-            .then((response) => onIdpCreate(response))
-            .finally(() => setLoadingDisplay(LOADING_DISPLAY_NONE));
+        controllerDecodeGetDiscoveryUrl(session, "https://api.asgardeo.io/t/guardioinsurance/oauth2/token/.well-known/openid-configuration");
+        // controllerDecodeCreateIdentityProvider(session, template, values)
+        //     .then((response) => onIdpCreate(response))
+        //     .finally(() => setLoadingDisplay(LOADING_DISPLAY_NONE));
     };
 
     return (
@@ -146,7 +147,7 @@ export default function ExternalIdentityProvider(prop: ExternalIdentityProviderP
                             configureType === IdentityProviderConfigureType.MANUAL
                                 ? <>
                                     <FormField
-                                        name="authorization_endpoint_url"
+                                        name="authorization_endpoint"
                                         label="Authorization Endpoint URL"
                                         helperText="Authorization Endpoint URL of the identity provider."
                                         needErrorMessage={true}
@@ -155,7 +156,7 @@ export default function ExternalIdentityProvider(prop: ExternalIdentityProviderP
                                     </FormField>
 
                                     <FormField
-                                        name="token_endpoint_url"
+                                        name="token_endpoint"
                                         label="Token Endpoint URL"
                                         helperText="Token Endpoint URL of the identity provider."
                                         needErrorMessage={true}
@@ -164,7 +165,7 @@ export default function ExternalIdentityProvider(prop: ExternalIdentityProviderP
                                     </FormField>
 
                                     <FormField
-                                        name="logout_url"
+                                        name="end_session_endpoint"
                                         label="Logout URL (optional)"
                                         helperText="The URL of the identity provider to which Asgardeo will send session invalidation requests."
                                         needErrorMessage={true}
@@ -173,7 +174,7 @@ export default function ExternalIdentityProvider(prop: ExternalIdentityProviderP
                                     </FormField>
 
                                     <FormField
-                                        name="certificate"
+                                        name="jwks_uri"
                                         label="JWKS endpoint URL (optional)"
                                         helperText="JWKS endpoint URL of the identity provider."
                                         needErrorMessage={true}
