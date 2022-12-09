@@ -18,7 +18,7 @@
 
 import { IdentityProvider, IdentityProviderTemplate } from
     "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
-import { controllerDecodeCreateIdentityProvider, controllerDecodeGetDiscoveryUrl } from
+import { controllerDecodeCreateIdentityProvider } from
     "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { FormButtonToolbar, FormField } from "@b2bsample/shared/ui/ui-basic-components";
 import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
@@ -61,6 +61,17 @@ export default function ExternalIdentityProvider(prop: ExternalIdentityProviderP
         errors = fieldValidate("client_id", values.client_id, errors);
         errors = fieldValidate("client_secret", values.client_secret, errors);
 
+        switch (configureType) {
+            case IdentityProviderConfigureType.AUTO:
+                errors = fieldValidate("discovery_url", values.discovery_url, errors);
+                break;
+
+            case IdentityProviderConfigureType.MANUAL:
+                errors = fieldValidate("authorization_endpoint", values.authorization_endpoint, errors);
+                errors = fieldValidate("token_endpoint", values.token_endpoint, errors);
+                break;
+        }
+
         return errors;
     };
 
@@ -70,10 +81,9 @@ export default function ExternalIdentityProvider(prop: ExternalIdentityProviderP
 
     const onUpdate = async (values: Record<string, string>): Promise<void> => {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
-        controllerDecodeGetDiscoveryUrl(session, "https://api.asgardeo.io/t/guardioinsurance/oauth2/token/.well-known/openid-configuration");
-        // controllerDecodeCreateIdentityProvider(session, template, values)
-        //     .then((response) => onIdpCreate(response))
-        //     .finally(() => setLoadingDisplay(LOADING_DISPLAY_NONE));
+        controllerDecodeCreateIdentityProvider(session, template, values, configureType)
+            .then((response) => onIdpCreate(response))
+            .finally(() => setLoadingDisplay(LOADING_DISPLAY_NONE));
     };
 
     return (
@@ -136,7 +146,7 @@ export default function ExternalIdentityProvider(prop: ExternalIdentityProviderP
                                         helperText="Discovery URL of the identity provider."
                                         needErrorMessage={true}
                                     >
-                                        <FormSuite.Control name="input" />
+                                        <FormSuite.Control name="input" type="url"/>
                                     </FormField>
 
                                 </>
@@ -152,7 +162,7 @@ export default function ExternalIdentityProvider(prop: ExternalIdentityProviderP
                                         helperText="Authorization Endpoint URL of the identity provider."
                                         needErrorMessage={true}
                                     >
-                                        <FormSuite.Control name="input" />
+                                        <FormSuite.Control name="input" type="url"/>
                                     </FormField>
 
                                     <FormField
@@ -161,7 +171,7 @@ export default function ExternalIdentityProvider(prop: ExternalIdentityProviderP
                                         helperText="Token Endpoint URL of the identity provider."
                                         needErrorMessage={true}
                                     >
-                                        <FormSuite.Control name="input" />
+                                        <FormSuite.Control name="input" type="url"/>
                                     </FormField>
 
                                     <FormField
@@ -170,7 +180,7 @@ export default function ExternalIdentityProvider(prop: ExternalIdentityProviderP
                                         helperText="The URL of the identity provider to which Asgardeo will send session invalidation requests."
                                         needErrorMessage={true}
                                     >
-                                        <FormSuite.Control name="input" />
+                                        <FormSuite.Control name="input" type="url"/>
                                     </FormField>
 
                                     <FormField
@@ -179,7 +189,7 @@ export default function ExternalIdentityProvider(prop: ExternalIdentityProviderP
                                         helperText="JWKS endpoint URL of the identity provider."
                                         needErrorMessage={true}
                                     >
-                                        <FormSuite.Control name="input" />
+                                        <FormSuite.Control name="input" type="url"/>
                                     </FormField>
                                 </>
                                 : null

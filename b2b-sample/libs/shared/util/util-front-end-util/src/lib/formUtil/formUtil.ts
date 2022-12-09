@@ -26,7 +26,6 @@ export function fieldValidate(key: string, field: string, errors: Record<string,
 
     if (!field) {
         errors[key] = "This field cannot be empty";
-        console.log(errors);
     }
 
     return errors;

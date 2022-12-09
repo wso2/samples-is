@@ -13,7 +13,7 @@ export function FormField(props: FormFieldProps) {
             name={name}
             render={({ input, meta }) => (
                 <FormSuite.Group controlId={name}>
-                    <FormSuite.ControlLabel>{label}</FormSuite.ControlLabel>
+                    <FormSuite.ControlLabel><b>{label}</b></FormSuite.ControlLabel>
 
                     {React.cloneElement(children, { ...input })}
 
