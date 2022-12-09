@@ -24,7 +24,8 @@ import { FormButtonToolbar, FormField } from "@b2bsample/shared/ui/ui-basic-comp
 import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
 import { fieldValidate, LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from
     "@b2bsample/shared/util/util-front-end-util";
-import IdentityProviderConfigureType from "libs/business-admin-app/data-access/data-access-common-models-util/src/lib/identityProvider/identityProviderConfigureType";
+import IdentityProviderConfigureType from
+    "libs/business-admin-app/data-access/data-access-common-models-util/src/lib/identityProvider/identityProviderConfigureType";
 import { Session } from "next-auth";
 import { useState } from "react";
 import { Form } from "react-final-form";
@@ -123,6 +124,7 @@ export default function ExternalIdentityProvider(prop: ExternalIdentityProviderP
                                 Manually configure the identity provider
                             </Radio>
                         </RadioGroup>
+                        <br />
 
                         {
                             configureType === IdentityProviderConfigureType.AUTO
@@ -162,8 +164,17 @@ export default function ExternalIdentityProvider(prop: ExternalIdentityProviderP
                                     </FormField>
 
                                     <FormField
+                                        name="logout_url"
+                                        label="Logout URL (optional)"
+                                        helperText="The URL of the identity provider to which Asgardeo will send session invalidation requests."
+                                        needErrorMessage={true}
+                                    >
+                                        <FormSuite.Control name="input" />
+                                    </FormField>
+
+                                    <FormField
                                         name="certificate"
-                                        label="JWKS endpoint URL"
+                                        label="JWKS endpoint URL (optional)"
                                         helperText="JWKS endpoint URL of the identity provider."
                                         needErrorMessage={true}
                                     >

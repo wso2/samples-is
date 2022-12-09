@@ -121,6 +121,7 @@ function enterpriseIdpTemplate(model: IdentityProviderTemplateModel, clientId: s
 
     const authorizationEndpointUrl = formValues["authorization_endpoint_url"].toString();
     const tokenEndpointUrl = formValues["token_endpoint_url"].toString();
+    const logoutUrl = formValues["logout_url"].toString();
     const certificate = formValues["certificate"].toString();
 
     model.image =
@@ -143,6 +144,10 @@ function enterpriseIdpTemplate(model: IdentityProviderTemplateModel, clientId: s
         {
             "key": "OAuth2TokenEPUrl",
             "value": tokenEndpointUrl
+        },
+        {
+            "key": "OIDCLogoutEPUrl",
+            "value": logoutUrl
         },
         {
             "key": "callbackUrl",

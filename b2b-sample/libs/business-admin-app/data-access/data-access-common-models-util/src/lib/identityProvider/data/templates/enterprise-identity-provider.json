@@ -79,6 +79,19 @@
                             "subProperties": []
                         },
                         {
+                            "key": "OIDCLogoutEPUrl",
+                            "displayName": "Logout URL",
+                            "description": "The URL of the identity provider to which Asgardeo will send session invalidation requests.",
+                            "type": "STRING",
+                            "displayOrder": 4,
+                            "regex": ".*",
+                            "isMandatory": false,
+                            "isConfidential": false,
+                            "options": [],
+                            "defaultValue": "",
+                            "subProperties": []
+                        },
+                        {
                             "key": "callbackUrl",
                             "displayName": "Callback Url",
                             "description": "The WSO2 Identity Server URL to which the user needs to be redirected after completing the authentication at the identity provider. The identity provider needs to send the authorization code to this URL upon successful authentication.",

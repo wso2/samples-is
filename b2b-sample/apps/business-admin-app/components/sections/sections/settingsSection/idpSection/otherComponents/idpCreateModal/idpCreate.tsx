@@ -87,10 +87,10 @@ export default function IdpCreate(prop: IdpCreateProps) {
             </Modal.Header>
             <Modal.Body>
                 <FlexboxGrid justify="space-between">
-                    <FlexboxGrid.Item colspan={12}>
+                    <FlexboxGrid.Item colspan={14}>
                         {resolveTemplateForm()}
                     </FlexboxGrid.Item>
-                    <FlexboxGrid.Item colspan={11}>
+                    <FlexboxGrid.Item colspan={9}>
                         <Prerequisite orgId={orgId} />
                     </FlexboxGrid.Item>
                 </FlexboxGrid>
