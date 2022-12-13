@@ -22,7 +22,7 @@
  * 
  * @returns template related to the template id.
  */
-export function fieldValidate(key: string, field: string, errors: Record<string, string>): Record<string, string> {
+export function fieldValidate(key: string, field: unknown, errors: Record<string, string>): Record<string, string> {
 
     if (!field) {
         errors[key] = "This field cannot be empty";

@@ -52,7 +52,7 @@ export default function Home(prop) : JSX.Element {
                 return <RoleManagementSectionComponent orgName={ name } orgId={ orgId } session={ session } />;
             case "2-3":
 
-                return <IdpSectionComponent orgName={ name } orgId={ orgId } session={ session } />;
+                return <IdpSectionComponent session={ session } />;
         }
     };
 

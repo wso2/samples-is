@@ -21,9 +21,9 @@ import { SendUser, User, setUsername } from "@b2bsample/shared/data-access/data-
 import { Session } from "next-auth";
 import { controllerCallAddUser } from "./controllerCallAddUser";
 
-export const InviteConst = {
-    INVITE: "pwd-method-invite",
-    PWD: "pwd-method-pwd"
+export enum InviteConst {
+    INVITE = "pwd-method-invite",
+    PWD = "pwd-method-pwd"
 };
 
 function inviteAddUserBody(firstName: string, familyName: string, email: string, username: string): SendUser {
@@ -65,7 +65,7 @@ function pwdAddUserBody(firstName: string, familyName: string, email: string, us
 }
 
 function getAddUserBody(
-    inviteConst: string,
+    inviteConst: InviteConst,
     firstName: string,
     familyName: string,
     email: string,
@@ -98,7 +98,7 @@ function getAddUserBody(
  */
 export async function controllerDecodeAddUser(
     session: Session,
-    inviteConst: string,
+    inviteConst: InviteConst,
     firstName: string,
     familyName: string,
     email: string,
