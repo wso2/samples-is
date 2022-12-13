@@ -18,9 +18,9 @@
 
 import { getManagementAPIServerBaseUrl, getOrgUrl } from "@b2bsample/shared/util/util-application-config-util";
 import { ENTERPRISE_ID, GOOGLE_ID } from "@b2bsample/shared/util/util-common";
+import IdentityProviderDiscoveryUrl from "./identityProviderDiscoveryUrl";
 import IdentityProviderTemplateModel from "./identityProviderTemplateModel";
 import config from "../../../../../../../config.json";
-import IdentityProviderDiscoveryUrl from "./identityProviderDiscoveryUrl";
 
 /**
  * 

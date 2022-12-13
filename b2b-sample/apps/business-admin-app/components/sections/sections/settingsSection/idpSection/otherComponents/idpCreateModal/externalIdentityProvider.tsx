@@ -16,16 +16,14 @@
  * under the License.
  */
 
-import { IdentityProvider, IdentityProviderTemplate } from
+import { IdentityProvider, IdentityProviderConfigureType, IdentityProviderTemplate } from
     "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { controllerDecodeCreateIdentityProvider } from
     "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { FormButtonToolbar, FormField } from "@b2bsample/shared/ui/ui-basic-components";
 import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
-import { fieldValidate, LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from
+import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE, fieldValidate } from
     "@b2bsample/shared/util/util-front-end-util";
-import IdentityProviderConfigureType from
-    "libs/business-admin-app/data-access/data-access-common-models-util/src/lib/identityProvider/identityProviderConfigureType";
 import { Session } from "next-auth";
 import { useState } from "react";
 import { Form } from "react-final-form";
@@ -50,8 +48,8 @@ export default function ExternalIdentityProvider(prop: ExternalIdentityProviderP
 
     const { session, template, onIdpCreate, onCancel } = prop;
 
-    const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
-    const [configureType, setConfigureType]
+    const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
+    const [ configureType, setConfigureType ]
         = useState<IdentityProviderConfigureType>(IdentityProviderConfigureType.AUTO);
 
     const validate = (values: Record<string, string>): Record<string, string> => {
@@ -64,11 +62,13 @@ export default function ExternalIdentityProvider(prop: ExternalIdentityProviderP
         switch (configureType) {
             case IdentityProviderConfigureType.AUTO:
                 errors = fieldValidate("discovery_url", values.discovery_url, errors);
+
                 break;
 
             case IdentityProviderConfigureType.MANUAL:
                 errors = fieldValidate("authorization_endpoint", values.authorization_endpoint, errors);
                 errors = fieldValidate("token_endpoint", values.token_endpoint, errors);
+
                 break;
         }
 
@@ -77,7 +77,7 @@ export default function ExternalIdentityProvider(prop: ExternalIdentityProviderP
 
     const onConfigureTypeChange = (value: IdentityProviderConfigureType): void => {
         setConfigureType(value);
-    }
+    };
 
     const onUpdate = async (values: Record<string, string>): Promise<void> => {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
@@ -90,21 +90,21 @@ export default function ExternalIdentityProvider(prop: ExternalIdentityProviderP
         <div>
 
             <Form
-                onSubmit={onUpdate}
-                validate={validate}
+                onSubmit={ onUpdate }
+                validate={ validate }
 
-                render={({ handleSubmit, form, submitting, pristine, errors }) => (
+                render={ ({ handleSubmit, form, submitting, pristine, errors }) => (
                     <FormSuite
                         layout="vertical"
-                        className={styles.addUserForm}
-                        onSubmit={() => { handleSubmit().then(form.restart); }}
+                        className={ styles.addUserForm }
+                        onSubmit={ () => { handleSubmit().then(form.restart); } }
                         fluid>
 
                         <FormField
                             name="application_name"
                             label="Name"
                             helperText="Name of the identity provider."
-                            needErrorMessage={true}
+                            needErrorMessage={ true }
                         >
                             <FormSuite.Control name="input" />
                         </FormField>
@@ -113,7 +113,7 @@ export default function ExternalIdentityProvider(prop: ExternalIdentityProviderP
                             name="client_id"
                             label="Client Id"
                             helperText="Client id of the identity provider."
-                            needErrorMessage={true}
+                            needErrorMessage={ true }
                         >
                             <FormSuite.Control name="input" />
                         </FormField>
@@ -122,16 +122,16 @@ export default function ExternalIdentityProvider(prop: ExternalIdentityProviderP
                             name="client_secret"
                             label="Client Secret"
                             helperText="Client secret of the identity provider."
-                            needErrorMessage={true}
+                            needErrorMessage={ true }
                         >
                             <FormSuite.Control name="input" />
                         </FormField>
 
-                        <RadioGroup name="radioList" value={configureType} onChange={onConfigureTypeChange}>
-                            <Radio value={IdentityProviderConfigureType.AUTO}>
-                                Use the <mark>discovery endpoint</mark>  to  create the identity provider
+                        <RadioGroup name="radioList" value={ configureType } onChange={ onConfigureTypeChange }>
+                            <Radio value={ IdentityProviderConfigureType.AUTO }>
+                                Use the discovery url to configure the identity provider
                             </Radio>
-                            <Radio value={IdentityProviderConfigureType.MANUAL}>
+                            <Radio value={ IdentityProviderConfigureType.MANUAL }>
                                 Manually configure the identity provider
                             </Radio>
                         </RadioGroup>
@@ -139,73 +139,74 @@ export default function ExternalIdentityProvider(prop: ExternalIdentityProviderP
 
                         {
                             configureType === IdentityProviderConfigureType.AUTO
-                                ? <>
+                                ? (<>
                                     <FormField
                                         name="discovery_url"
                                         label="Discovery URL"
                                         helperText="Discovery URL of the identity provider."
-                                        needErrorMessage={true}
+                                        needErrorMessage={ true }
                                     >
-                                        <FormSuite.Control name="input" type="url"/>
+                                        <FormSuite.Control name="input" type="url" />
                                     </FormField>
 
-                                </>
+                                </>)
                                 : null
                         }
 
                         {
                             configureType === IdentityProviderConfigureType.MANUAL
-                                ? <>
+                                ? (<>
                                     <FormField
                                         name="authorization_endpoint"
                                         label="Authorization Endpoint URL"
                                         helperText="Authorization Endpoint URL of the identity provider."
-                                        needErrorMessage={true}
+                                        needErrorMessage={ true }
                                     >
-                                        <FormSuite.Control name="input" type="url"/>
+                                        <FormSuite.Control name="input" type="url" />
                                     </FormField>
 
                                     <FormField
                                         name="token_endpoint"
                                         label="Token Endpoint URL"
                                         helperText="Token Endpoint URL of the identity provider."
-                                        needErrorMessage={true}
+                                        needErrorMessage={ true }
                                     >
-                                        <FormSuite.Control name="input" type="url"/>
+                                        <FormSuite.Control name="input" type="url" />
                                     </FormField>
 
                                     <FormField
                                         name="end_session_endpoint"
                                         label="Logout URL (optional)"
+                                        // eslint-disable-next-line
                                         helperText="The URL of the identity provider to which Asgardeo will send session invalidation requests."
-                                        needErrorMessage={true}
+                                        needErrorMessage={ true }
                                     >
-                                        <FormSuite.Control name="input" type="url"/>
+                                        <FormSuite.Control name="input" type="url" />
                                     </FormField>
 
                                     <FormField
                                         name="jwks_uri"
                                         label="JWKS endpoint URL (optional)"
                                         helperText="JWKS endpoint URL of the identity provider."
-                                        needErrorMessage={true}
+                                        needErrorMessage={ true }
                                     >
-                                        <FormSuite.Control name="input" type="url"/>
+                                        <FormSuite.Control name="input" type="url" />
                                     </FormField>
-                                </>
+                                </>)
                                 : null
                         }
 
                         <FormButtonToolbar
                             submitButtonText="Create"
-                            submitButtonDisabled={submitting || pristine || !checkIfJSONisEmpty(errors)}
-                            onCancel={onCancel}
+                            submitButtonDisabled={ submitting || pristine || !checkIfJSONisEmpty(errors) }
+                            onCancel={ onCancel }
                         />
 
                     </FormSuite>
-                )}
+                ) }
             />
 
-            <div style={loadingDisplay}>
+            <div style={ loadingDisplay }>
                 <Loader size="lg" backdrop content="Identity provider is creating" vertical />
             </div>
         </div>

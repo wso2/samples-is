@@ -83,9 +83,9 @@ const wso2ISProvider = (req: NextApiRequest, res: NextApiResponse) => NextAuth(r
                     scope: config.BusinessAdminAppConfig.ApplicationConfig.APIScopes.join(" ")
                 }
             },
+            checks: [ "state" ],
             clientId: config.BusinessAdminAppConfig.AuthorizationConfig.ClientId,
             clientSecret: config.BusinessAdminAppConfig.AuthorizationConfig.ClientSecret,
-            checks: ["state"],
             id: "wso2isAdmin",
             name: "WSO2ISAdmin",
             profile(profile) {

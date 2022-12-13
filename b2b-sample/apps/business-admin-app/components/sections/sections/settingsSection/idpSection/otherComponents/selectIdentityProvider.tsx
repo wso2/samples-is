@@ -17,6 +17,7 @@
  */
 
 import { IdentityProviderTemplate } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
+import { ModelHeaderComponent } from "@b2bsample/shared/ui/ui-basic-components";
 import { EMPTY_STRING, ENTERPRISE_ID, GOOGLE_ID } from "@b2bsample/shared/util/util-common";
 import { Avatar, Modal } from "rsuite";
 import config from "../../../../../../../../config.json";
@@ -57,34 +58,35 @@ export default function SelectIdentityProvider(prop: SelectIdentityProviderProps
 
     return (
         <Modal
-            open={openModal}
-            onClose={onClose}
-            onBackdropClick={onClose}>
+            open={ openModal }
+            onClose={ onClose }
+            onBackdropClick={ onClose }>
             <Modal.Header>
-                <Modal.Title><b>Select Identity Provider</b></Modal.Title>
-                <p>Choose one of the following identity providers.</p>
+                <ModelHeaderComponent
+                    title="Select Identity Provider"
+                    subTitle="Choose one of the following identity providers" />
             </Modal.Header>
             <Modal.Body>
                 <div>
-                    <div className={styles.idp__template__list}>
-                        {templates.map((template) => {
+                    <div className={ styles.idp__template__list }>
+                        { templates.map((template) => {
 
                             return (
                                 <div
-                                    key={template.id}
-                                    className={styles.idp__template__card}
-                                    onClick={() => onTemplateSelected(template)}>
+                                    key={ template.id }
+                                    className={ styles.idp__template__card }
+                                    onClick={ () => onTemplateSelected(template) }>
                                     <div>
-                                        <h5>{template.name}</h5>
-                                        <small>{template.description}</small>
+                                        <h5>{ template.name }</h5>
+                                        <small>{ template.description }</small>
                                     </div>
                                     <Avatar
-                                        style={{ background: "rgba(255,0,0,0)" }}
-                                        src={resolveIconName(template)}
+                                        style={ { background: "rgba(255,0,0,0)" } }
+                                        src={ resolveIconName(template) }
                                     />
                                 </div>
                             );
-                        })}
+                        }) }
                     </div>
                 </div>
             </Modal.Body>

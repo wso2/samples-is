@@ -16,13 +16,13 @@
  * under the License.
  */
 
-import { IdentityProviderFederatedAuthenticator } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
+import { IdentityProviderFederatedAuthenticator } from
+    "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import { Session } from "next-auth";
 
 /**
- * call GET `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/identity-providers/<idpid>
- * /federated-authenticators/<id>` 
+ * call GET `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/identity-providers/<idpid>/federated-authenticators/<id>` 
  * to get detail of a federated authenticator of an identity provider
  * 
  * @param session - session object

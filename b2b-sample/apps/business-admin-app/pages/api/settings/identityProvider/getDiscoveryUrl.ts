@@ -16,10 +16,7 @@
  * under the License.
  */
 
-import { requestOptionsWithBody } from "@b2bsample/business-admin-app/data-access/data-access-common-api-util";
-import { RequestMethod, dataNotRecievedError, notPostError } from
-    "@b2bsample/shared/data-access/data-access-common-api-util";
-import { getOrgUrl } from "@b2bsample/shared/util/util-application-config-util";
+import { dataNotRecievedError, notPostError } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import { NextApiRequest, NextApiResponse } from "next";
 
 
@@ -44,6 +41,7 @@ export default async function getDiscoveryUrl(req: NextApiRequest, res: NextApiR
             discoveryUrl
         );
         const data = await fetchData.json();
+
         res.status(200).json(data);
     } catch (err) {
 

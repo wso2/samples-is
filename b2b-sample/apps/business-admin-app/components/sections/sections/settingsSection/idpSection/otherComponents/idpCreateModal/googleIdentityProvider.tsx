@@ -22,7 +22,7 @@ import { controllerDecodeCreateIdentityProvider } from
     "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { FormButtonToolbar, FormField } from "@b2bsample/shared/ui/ui-basic-components";
 import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
-import { fieldValidate, LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from
+import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE, fieldValidate } from
     "@b2bsample/shared/util/util-front-end-util";
 import { Session } from "next-auth";
 import { useState } from "react";
@@ -48,7 +48,7 @@ export default function GoogleIdentityProvider(prop: GoogleIdentityProviderProps
 
     const { session, template, onIdpCreate, onCancel } = prop;
 
-    const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
+    const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
 
     const validate = (values: Record<string, string>): Record<string, string> => {
         let errors: Record<string, string> = {};
@@ -71,21 +71,21 @@ export default function GoogleIdentityProvider(prop: GoogleIdentityProviderProps
         <div>
 
             <Form
-                onSubmit={onUpdate}
-                validate={validate}
+                onSubmit={ onUpdate }
+                validate={ validate }
 
-                render={({ handleSubmit, form, submitting, pristine, errors }) => (
+                render={ ({ handleSubmit, form, submitting, pristine, errors }) => (
                     <FormSuite
                         layout="vertical"
-                        className={styles.addUserForm}
-                        onSubmit={() => { handleSubmit().then(form.restart); }}
+                        className={ styles.addUserForm }
+                        onSubmit={ () => { handleSubmit().then(form.restart); } }
                         fluid>
 
                         <FormField
                             name="application_name"
                             label="Name"
                             helperText="Name of the identity provider."
-                            needErrorMessage={true}
+                            needErrorMessage={ true }
                         >
                             <FormSuite.Control name="input" />
                         </FormField>
@@ -94,7 +94,7 @@ export default function GoogleIdentityProvider(prop: GoogleIdentityProviderProps
                             name="client_id"
                             label="Client Id"
                             helperText="Client id of the identity provider."
-                            needErrorMessage={true}
+                            needErrorMessage={ true }
                         >
                             <FormSuite.Control name="input" />
                         </FormField>
@@ -103,22 +103,22 @@ export default function GoogleIdentityProvider(prop: GoogleIdentityProviderProps
                             name="client_secret"
                             label="Client Secret"
                             helperText="Client secret of the identity provider."
-                            needErrorMessage={true}
+                            needErrorMessage={ true }
                         >
                             <FormSuite.Control name="input" />
                         </FormField>
 
                         <FormButtonToolbar
                             submitButtonText="Create"
-                            submitButtonDisabled={submitting || pristine || !checkIfJSONisEmpty(errors)}
-                            onCancel={onCancel}
+                            submitButtonDisabled={ submitting || pristine || !checkIfJSONisEmpty(errors) }
+                            onCancel={ onCancel }
                         />
 
                     </FormSuite>
-                )}
+                ) }
             />
 
-            <div style={loadingDisplay}>
+            <div style={ loadingDisplay }>
                 <Loader size="lg" backdrop content="Identity provider is creating" vertical />
             </div>
         </div>

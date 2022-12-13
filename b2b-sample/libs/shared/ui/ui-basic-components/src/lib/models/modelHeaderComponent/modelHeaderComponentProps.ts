@@ -16,20 +16,7 @@
  * under the License.
  */
 
-import InfoOutlineIcon from "@rsuite/icons/InfoOutline";
-import { Form, Stack } from "rsuite";
-import styles from "./helperTextComponent.module.css";
-import { HelperTextComponentProps } from "../../models/helperTextComponent/helperTextComponent";
-
-export function HelperTextComponent(prop: HelperTextComponentProps) {
-    const { text } = prop;
-
-    return (
-        <Stack className={ styles["stack"] }>
-            <InfoOutlineIcon className={ styles["icon"] } />
-            <Form.HelpText>{ text }</Form.HelpText>
-        </Stack>
-    );
+export interface ModelHeaderComponentProps {
+    title : string,
+    subTitle? : string
 }
-
-export default HelperTextComponent;

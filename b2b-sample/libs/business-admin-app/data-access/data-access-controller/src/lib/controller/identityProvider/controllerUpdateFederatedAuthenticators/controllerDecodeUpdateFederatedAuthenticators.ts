@@ -51,6 +51,8 @@ export async function controllerDecodeUpdateFederatedAuthenticators(
     federatedAuthenticators = refactorFederatedAuthenticatorsForUpdate(federatedAuthenticators);
     Object.keys(changedValues).filter((key) => {
         federatedAuthenticators = updateProperties(federatedAuthenticators, key, changedValues[key]);
+
+        return null;
     });
 
     const body = [ federatedAuthenticatorId, federatedAuthenticators ];

@@ -16,10 +16,11 @@
  * under the License.
  */
 
-import { getCallbackUrl, IdentityProvider, IdentityProviderTemplate } from
+import { IdentityProvider, IdentityProviderTemplate, getCallbackUrl } from
     "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
+import { ModelHeaderComponent } from "@b2bsample/shared/ui/ui-basic-components";
 import { infoTypeDialog } from "@b2bsample/shared/ui/ui-components";
-import { CopyTextToClipboardCallback, copyTheTextToClipboard, ENTERPRISE_ID, GOOGLE_ID }
+import { CopyTextToClipboardCallback, ENTERPRISE_ID, GOOGLE_ID, copyTheTextToClipboard }
     from "@b2bsample/shared/util/util-common";
 import CopyIcon from "@rsuite/icons/Copy";
 import InfoRoundIcon from "@rsuite/icons/InfoRound";
@@ -58,43 +59,41 @@ export default function IdpCreate(prop: IdpCreateProps) {
         switch (template.templateId) {
 
             case GOOGLE_ID:
-                return <GoogleIdentityProvider
-                    session={session}
-                    template={template}
-                    onIdpCreate={onIdpCreate}
-                    onCancel={onCancel} />
+                return (<GoogleIdentityProvider
+                    session={ session }
+                    template={ template }
+                    onIdpCreate={ onIdpCreate }
+                    onCancel={ onCancel } />);
 
             case ENTERPRISE_ID:
 
-                return <ExternalIdentityProvider
-                    session={session}
-                    template={template}
-                    onIdpCreate={onIdpCreate}
-                    onCancel={onCancel} />
+                return (<ExternalIdentityProvider
+                    session={ session }
+                    template={ template }
+                    onIdpCreate={ onIdpCreate }
+                    onCancel={ onCancel } />);
 
         }
     };
 
     return (
         <Modal
-            open={openModal}
-            onClose={handleModalClose}
-            onBackdropClick={handleModalClose}
+            open={ openModal }
+            onClose={ handleModalClose }
+            onBackdropClick={ handleModalClose }
             size="lg">
             <Modal.Header>
-                <Modal.Title><b>{template.name}</b></Modal.Title>
-                <p>{template.description}</p>
+                <ModelHeaderComponent title={ template.name } subTitle = { template.description } />
             </Modal.Header>
             <Modal.Body>
                 <FlexboxGrid justify="space-between">
-                    <FlexboxGrid.Item colspan={14}>
-                        {resolveTemplateForm()}
+                    <FlexboxGrid.Item colspan={ 14 }>
+                        { resolveTemplateForm() }
                     </FlexboxGrid.Item>
-                    <FlexboxGrid.Item colspan={9}>
-                        <Prerequisite orgId={orgId} />
+                    <FlexboxGrid.Item colspan={ 9 }>
+                        <Prerequisite orgId={ orgId } />
                     </FlexboxGrid.Item>
                 </FlexboxGrid>
-
             </Modal.Body>
         </Modal>
     );
@@ -115,7 +114,7 @@ function Prerequisite(prop: PrerequisiteProps) {
     return (
         <Panel
             header={
-                (<Stack alignItems="center" spacing={10}>
+                (<Stack alignItems="center" spacing={ 10 }>
                     <InfoRoundIcon />
                     <b>Prerequisite</b>
                 </Stack>)
@@ -127,12 +126,12 @@ function Prerequisite(prop: PrerequisiteProps) {
             </p>
             <br />
             <InputGroup >
-                <Input readOnly value={getCallbackUrl(orgId)} size="lg" />
+                <Input readOnly value={ getCallbackUrl(orgId) } size="lg" />
                 <InputGroup.Button
-                    onClick={() => copyValueToClipboard(getCallbackUrl(orgId))}>
+                    onClick={ () => copyValueToClipboard(getCallbackUrl(orgId)) }>
                     <CopyIcon />
                 </InputGroup.Button>
             </InputGroup>
         </Panel>
-    )
+    );
 }

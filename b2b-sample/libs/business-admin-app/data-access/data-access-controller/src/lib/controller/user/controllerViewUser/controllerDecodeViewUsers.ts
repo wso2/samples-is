@@ -42,6 +42,8 @@ export async function controllerDecodeViewUsers(session: Session): Promise<Inter
                 if (userDetails) {
                     usersReturn.push(userDetails);
                 }
+
+                return null;
             });
         }
 

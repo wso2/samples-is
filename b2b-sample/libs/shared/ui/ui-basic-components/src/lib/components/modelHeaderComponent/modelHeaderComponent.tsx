@@ -16,20 +16,30 @@
  * under the License.
  */
 
-import InfoOutlineIcon from "@rsuite/icons/InfoOutline";
-import { Form, Stack } from "rsuite";
-import styles from "./helperTextComponent.module.css";
-import { HelperTextComponentProps } from "../../models/helperTextComponent/helperTextComponent";
+import { Modal } from "rsuite";
+import { ModelHeaderComponentProps } from "../../models/modelHeaderComponent/modelHeaderComponentProps";
 
-export function HelperTextComponent(prop: HelperTextComponentProps) {
-    const { text } = prop;
+/**
+ * Always use this as a child of `<Model.Header>`
+ * 
+ * @param props `ModelHeaderComponentProps`
+ * 
+ * @returns header component for the `Model`
+ */
+export function ModelHeaderComponent(props: ModelHeaderComponentProps) {
+
+    const { title, subTitle } = props;
 
     return (
-        <Stack className={ styles["stack"] }>
-            <InfoOutlineIcon className={ styles["icon"] } />
-            <Form.HelpText>{ text }</Form.HelpText>
-        </Stack>
+        <>
+            <Modal.Title><h4>{ title }</h4></Modal.Title>
+            { subTitle
+                ? <p>{ subTitle }</p>
+                : null
+            }
+        </>
+
     );
 }
 
-export default HelperTextComponent;
+export default ModelHeaderComponent;

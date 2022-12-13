@@ -32,7 +32,7 @@ import { Session } from "next-auth";
 export async function controllerCallGetDiscoveryUrl(session: Session, discoveryUrl: string)
     : Promise<IdentityProviderDiscoveryUrl | null> {
 
-    const data = (await commonControllerCall(`/api/settings/identityProvider/getDiscoveryUrl`
+    const data = (await commonControllerCall("/api/settings/identityProvider/getDiscoveryUrl"
         , session, discoveryUrl) as IdentityProviderDiscoveryUrl | null);
 
     return data;

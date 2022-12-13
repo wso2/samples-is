@@ -24,7 +24,7 @@ import { Session } from "next-auth";
 /**
  * call PATCH `roleUri`
  * 
- * @param session 
+ * @param session - Session object
  * @param roleUri - uri of the role
  * @param patchBody - body of the role that need to be patched
  * 

@@ -21,6 +21,6 @@ export enum RequestMethod {
     PATCH = "PATCH",
     POST = "POST",
     PUT = "PUT"
-};
+}
 
 export default RequestMethod;

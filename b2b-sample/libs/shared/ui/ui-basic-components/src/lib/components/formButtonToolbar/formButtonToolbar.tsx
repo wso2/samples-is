@@ -18,8 +18,8 @@
 
 import { Button, ButtonToolbar } from "rsuite";
 import FormSuite from "rsuite/Form";
-import { FormButtonToolbarProps } from "../../models/formButtonToolbar/formButtonToolbarProps";
 import styles from "./formButtonToolbar.module.css";
+import { FormButtonToolbarProps } from "../../models/formButtonToolbar/formButtonToolbarProps";
 
 /**
  * 
@@ -36,24 +36,24 @@ export function FormButtonToolbar(props: FormButtonToolbarProps) {
 
             <ButtonToolbar>
                 <Button
-                    className={styles["addUserButton"]}
+                    className={ styles["addUserButton"] }
                     size="lg"
                     appearance="primary"
                     type="submit"
-                    disabled={submitButtonDisabled}>
-                    {submitButtonText}
+                    disabled={ submitButtonDisabled }>
+                    { submitButtonText }
                 </Button>
 
                 {
                     needCancel
-                        ? <Button
-                            className={styles["addUserButton"]}
+                        ? (<Button
+                            className={ styles["addUserButton"] }
                             size="lg"
                             appearance="ghost"
                             type="button"
-                            onClick={onCancel}>
-                            {cancelButtonText}
-                        </Button>
+                            onClick={ onCancel }>
+                            { cancelButtonText }
+                        </Button>)
                         : null
                 }
 
@@ -61,7 +61,7 @@ export function FormButtonToolbar(props: FormButtonToolbarProps) {
         </FormSuite.Group>
 
     );
-};
+}
 
 FormButtonToolbar.defaultProps = {
     submitButtonText: "Submit",

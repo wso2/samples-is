@@ -24,7 +24,7 @@ import { Session } from "next-auth";
  * call GET `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/identity-providers` 
  * to get list all the identity providers
  * 
- * @param session 
+ * @param session - Session object
  * 
  * @returns details of the identity provdider, if the call failed `null`
  */

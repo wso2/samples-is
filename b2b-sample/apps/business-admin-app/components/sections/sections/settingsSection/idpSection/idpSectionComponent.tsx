@@ -20,20 +20,25 @@ import { IdentityProvider, IdentityProviderTemplate } from
     "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { controllerDecodeListAllIdentityProviders } from
     "@b2bsample/business-admin-app/data-access/data-access-controller";
-import { EmptySettingsComponent, errorTypeDialog, SettingsTitleComponent, successTypeDialog } from
+import { EmptySettingsComponent, SettingsTitleComponent, errorTypeDialog, successTypeDialog } from
     "@b2bsample/shared/ui/ui-components";
 import AppSelectIcon from "@rsuite/icons/AppSelect";
+import { Session } from "next-auth";
 import { useCallback, useEffect, useState } from "react";
 import { Container, useToaster } from "rsuite";
+import IdentityProviderList from "./otherComponents/identityProviderList";
+import IdpCreate from "./otherComponents/idpCreateModal/idpCreate";
+import SelectIdentityProvider from "./otherComponents/selectIdentityProvider";
 import Enterprise from
     // eslint-disable-next-line
     "../../../../../../../libs/business-admin-app/data-access/data-access-common-models-util/src/lib/identityProvider/data/templates/enterprise-identity-provider.json";
 import Google from
     // eslint-disable-next-line    
     "../../../../../../../libs/business-admin-app/data-access/data-access-common-models-util/src/lib/identityProvider/data/templates/google.json";
-import IdentityProviderList from "./otherComponents/identityProviderList";
-import IdpCreate from "./otherComponents/idpCreateModal/idpCreate";
-import SelectIdentityProvider from "./otherComponents/selectIdentityProvider";
+
+interface IdpSectionComponentProps {
+    session: Session
+}
 
 /**
  * 
@@ -41,15 +46,15 @@ import SelectIdentityProvider from "./otherComponents/selectIdentityProvider";
  * 
  * @returns The idp interface section.
  */
-export default function IdpSectionComponent(prop) {
+export default function IdpSectionComponent(props: IdpSectionComponentProps) {
 
-    const { session } = prop;
+    const { session } = props;
 
     const toaster = useToaster();
 
-    const [idpList, setIdpList] = useState<IdentityProvider[]>([]);
-    const [openSelectModal, setOpenSelectModal] = useState<boolean>(false);
-    const [selectedTemplate, setSelectedTemplate] = useState<IdentityProviderTemplate>(undefined);
+    const [ idpList, setIdpList ] = useState<IdentityProvider[]>([]);
+    const [ openSelectModal, setOpenSelectModal ] = useState<boolean>(false);
+    const [ selectedTemplate, setSelectedTemplate ] = useState<IdentityProviderTemplate>(undefined);
 
     const templates: IdentityProviderTemplate[] = [
         Enterprise,
@@ -66,11 +71,11 @@ export default function IdpSectionComponent(prop) {
             setIdpList([]);
         }
 
-    }, [session]);
+    }, [ session ]);
 
     useEffect(() => {
         fetchAllIdPs();
-    }, [fetchAllIdPs]);
+    }, [ fetchAllIdPs ]);
 
     const onAddIdentityProviderClick = (): void => {
         setOpenSelectModal(true);
@@ -79,11 +84,11 @@ export default function IdpSectionComponent(prop) {
     const onTemplateSelect = (template: IdentityProviderTemplate): void => {
         setOpenSelectModal(false);
         setSelectedTemplate(template);
-    }
+    };
 
     const onSelectIdpModalClose = (): void => {
         setOpenSelectModal(false);
-    }
+    };
 
     const onCreationDismiss = (): void => {
         setSelectedTemplate(undefined);
@@ -118,13 +123,13 @@ export default function IdpSectionComponent(prop) {
                         ? (<EmptySettingsComponent
                             bodyString="There are no identity providers available at the moment."
                             buttonString="Add Identity Provider"
-                            icon={<AppSelectIcon style={{ opacity: .2 }} width="150px" height="150px" />}
-                            onAddButtonClick={onAddIdentityProviderClick}
+                            icon={ <AppSelectIcon style={ { opacity: .2 } } width="150px" height="150px" /> }
+                            onAddButtonClick={ onAddIdentityProviderClick }
                         />)
                         : (<IdentityProviderList
-                            fetchAllIdPs={fetchAllIdPs}
-                            idpList={idpList}
-                            session={session}
+                            fetchAllIdPs={ fetchAllIdPs }
+                            idpList={ idpList }
+                            session={ session }
                         />)
                     : null
             }
@@ -132,22 +137,22 @@ export default function IdpSectionComponent(prop) {
             {
                 openSelectModal && (
                     <SelectIdentityProvider
-                        templates={templates}
-                        onClose={onSelectIdpModalClose}
-                        openModal={openSelectModal}
-                        onTemplateSelected={onTemplateSelect}
+                        templates={ templates }
+                        onClose={ onSelectIdpModalClose }
+                        openModal={ openSelectModal }
+                        onTemplateSelected={ onTemplateSelect }
                     />
                 )
             }
             {
                 selectedTemplate && (
                     <IdpCreate
-                        session={session}
-                        onIdpCreate={onIdpCreated}
-                        onCancel={onCreationDismiss}
-                        openModal={!!selectedTemplate}
-                        template={selectedTemplate}
-                        orgId={session.orgId} />
+                        session={ session }
+                        onIdpCreate={ onIdpCreated }
+                        onCancel={ onCreationDismiss }
+                        openModal={ !!selectedTemplate }
+                        template={ selectedTemplate }
+                        orgId={ session.orgId } />
                 )
             }
         </Container>

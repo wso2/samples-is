@@ -17,7 +17,7 @@
  */
 
 import { getHostedUrl } from "@b2bsample/business-admin-app/util/util-application-config-util";
-import { apiRequestOptions, apiRequestOptionsWithBody, RequestMethod } from
+import { RequestMethod, apiRequestOptions, apiRequestOptionsWithBody } from
     "@b2bsample/shared/data-access/data-access-common-api-util";
 import { Session } from "next-auth";
 
