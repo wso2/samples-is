@@ -25,7 +25,7 @@ import User from "./user";
  * 
  * @returns user object that can be view in front end side
  */
-export function decodeUser(user: User) : InternalUser {
+export function decodeUser(user: User): InternalUser {
 
     return {
         "email": user.emails ? user.emails[0] : "-",
@@ -35,6 +35,21 @@ export function decodeUser(user: User) : InternalUser {
         "username": user.userName ? getUsername(user.userName) : "-"
     };
 }
+
+/**
+ * 
+ * @param email - email
+ * 
+ * @returns set email.
+ */
+export function setEmail(email: string) {
+    const regex = /^DEFAULT\//g;
+
+    email = email.replace(regex, "");
+
+    return email;
+}
+
 
 /**
  * 
@@ -55,13 +70,7 @@ export function setUsername(userName: string) {
  */
 export function getUsername(userName: string) {
 
-    // to remove DEFAULT/ if that part exists in the username
-    if (userName.includes("/")) {
-
-        return userName.split("/")[1];
-    }
-
     return userName;
 }
 
-export default { decodeUser, setUsername };
+export default { decodeUser, setUsername, setEmail };

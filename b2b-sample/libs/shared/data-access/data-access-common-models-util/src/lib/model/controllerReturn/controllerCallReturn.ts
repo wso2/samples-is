@@ -19,6 +19,7 @@
 export class ControllerCallReturn {
     error?: string;
     traceId?: string;
+    msg?: string;
 }
 
 export default ControllerCallReturn;

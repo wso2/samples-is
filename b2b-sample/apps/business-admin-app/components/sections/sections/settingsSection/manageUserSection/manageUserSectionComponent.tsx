@@ -19,17 +19,15 @@
 import { controllerDecodeViewUsers } from "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { InternalUser } from "@b2bsample/shared/data-access/data-access-common-models-util";
 import { SettingsTitleComponent } from "@b2bsample/shared/ui/ui-components";
+import { Session } from "next-auth";
 import React, { useCallback, useEffect, useState } from "react";
 import { Table } from "rsuite";
 import AddUserButton from "./otherComponents/addUserButton";
 import AddUserComponent from "./otherComponents/addUserComponent";
 import EditUserComponent from "./otherComponents/editUserComponent";
 import styles from "../../../../../styles/Settings.module.css";
-import { Session } from "next-auth";
 
 interface ManageUserSectionComponentProps {
-    orgName: string,
-    orgId: string,
     session: Session
 }
 
@@ -41,28 +39,28 @@ interface ManageUserSectionComponentProps {
  */
 export default function ManageUserSectionComponent(props: ManageUserSectionComponentProps) {
 
-    const { orgName, orgId, session } = props;
+    const { session } = props;
 
-    const [users, setUsers] = useState<InternalUser[]>([]);
-    const [editUserOpen, setEditUserOpen] = useState<boolean>(false);
-    const [addUserOpen, setAddUserOpen] = useState<boolean>(false);
-    const [openUser, setOpenUser] = useState<InternalUser>(null);
+    const [ users, setUsers ] = useState<InternalUser[]>([]);
+    const [ editUserOpen, setEditUserOpen ] = useState<boolean>(false);
+    const [ addUserOpen, setAddUserOpen ] = useState<boolean>(false);
+    const [ openUser, setOpenUser ] = useState<InternalUser>(null);
 
     const fetchData = useCallback(async () => {
         const res = await controllerDecodeViewUsers(session);
 
         await setUsers(res);
-    }, [session]);
+    }, [ session ]);
 
     useEffect(() => {
         if (!editUserOpen || !addUserOpen) {
             fetchData();
         }
-    }, [editUserOpen, addUserOpen, fetchData]);
+    }, [ editUserOpen, addUserOpen, fetchData ]);
 
     useEffect(() => {
         fetchData();
-    }, [fetchData]);
+    }, [ fetchData ]);
 
     const { Column, HeaderCell, Cell } = Table;
 
@@ -86,68 +84,69 @@ export default function ManageUserSectionComponent(props: ManageUserSectionCompo
 
     return (
         <div
-            className={styles.tableMainPanelDiv}
+            className={ styles.tableMainPanelDiv }
         >
             {
                 openUser
-                    ? <EditUserComponent
-                        session={session}
-                        open={editUserOpen}
-                        onClose={closeEditDialog}
-                        user={openUser} />
+                    ? (<EditUserComponent
+                        session={ session }
+                        open={ editUserOpen }
+                        onClose={ closeEditDialog }
+                        user={ openUser } />)
                     : null
             }
 
 
             <AddUserComponent
-                session={session}
-                open={addUserOpen}
-                onClose={closeAddUserDialog} />
+                session={ session }
+                open={ addUserOpen }
+                onClose={ closeAddUserDialog } />
 
             <SettingsTitleComponent
                 title="Manage Users"
                 subtitle="Manage users in the organization">
-                <AddUserButton onClick={onAddUserClick} />
+                <AddUserButton onClick={ onAddUserClick } />
             </SettingsTitleComponent>
 
             {
                 users ?
                     (<Table
-                        height={900}
-                        data={users}
+                        height={ 900 }
+                        data={ users }
                     >
-                        <Column width={200} align="center">
+                        <Column width={ 200 } align="center">
                             <HeaderCell><h6>First Name</h6></HeaderCell>
                             <Cell dataKey="firstName" />
                         </Column>
 
-                        <Column width={200} align="center">
+                        <Column width={ 200 } align="center">
                             <HeaderCell><h6>Last Name</h6></HeaderCell>
                             <Cell dataKey="familyName" />
                         </Column>
 
-                        <Column flexGrow={2} align="center">
+                        <Column flexGrow={ 2 } align="center">
                             <HeaderCell><h6>User Name</h6></HeaderCell>
                             <Cell dataKey="username" />
                         </Column>
 
-                        <Column flexGrow={2} align="center">
+                        <Column flexGrow={ 2 } align="center">
                             <HeaderCell><h6>Email</h6></HeaderCell>
                             <Cell dataKey="email" />
                         </Column>
 
-                        <Column flexGrow={1} align="center" fixed="right">
+                        <Column flexGrow={ 1 } align="center" fixed="right">
                             <HeaderCell><h6>Edit User</h6></HeaderCell>
 
                             <Cell>
-                                {rowData => (
+                                { rowData => (
                                     <span>
-                                        <a onClick={() => onEditClick(rowData as InternalUser)}
-                                            style={{ cursor: "pointer" }}>
+                                        <a
+                                            onClick={ () => onEditClick(rowData as InternalUser) }
+                                            style={ { cursor: "pointer" } }>
                                             Edit
                                         </a>
                                     </span>
-                                )}
+                                ) }
                             </Cell>
                         </Column>
 

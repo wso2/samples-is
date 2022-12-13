@@ -16,7 +16,8 @@
  * under the License.
  */
 
-import { ControllerCallReturn, ControllerDecodeReturn } from "@b2bsample/shared/data-access/data-access-common-models-util";
+import { ControllerCallReturn, ControllerDecodeReturn } from
+    "@b2bsample/shared/data-access/data-access-common-models-util";
 
 export async function commonControllerDecode(
     callFunction: () => Promise<ControllerCallReturn | ControllerCallReturn[] | null>,
@@ -30,7 +31,7 @@ export async function commonControllerDecode(
             return errorReturnValue;
         }
 
-        if ((res instanceof ControllerCallReturn) && (res.error || res.traceId)) {
+        if ("error" in res) {
 
             return errorReturnValue;
         }

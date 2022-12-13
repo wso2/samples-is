@@ -46,7 +46,7 @@ export default function Home(prop) : JSX.Element {
         switch (activeKey) {
             case "2-1":
 
-                return <ManageUserSectionComponent orgName={ name } orgId={ orgId } session={ session } />;
+                return <ManageUserSectionComponent session={ session } />;
             case "2-2":
 
                 return <RoleManagementSectionComponent orgName={ name } orgId={ orgId } session={ session } />;
