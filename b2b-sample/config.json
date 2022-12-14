@@ -1,7 +1,7 @@
 {
     "CommonConfig": {
         "AuthorizationConfig": {
-            "BaseOrganizationUrl": "https://dev.api.asgardeo.io/t/guardioi"
+            "BaseOrganizationUrl": "<PARENT ORGANIZATION URL> ex: https://dev.api.asgardeo.io/t/guardio"
         },
         "ApplicationConfig": {
             "SampleOrganization": [
@@ -12,13 +12,13 @@
             ]
         },
         "ManagementAPIConfig": {
-            "ImageBaseUrl": "https://console.asgardeo.io"
+            "ImageBaseUrl" : "<IMAGE BASE URL - FOLLOW README.MD FOR MORE INFORMATION>"
         }
     },
     "BusinessAppConfig": {
         "AuthorizationConfig": {
-            "ClientId": "3IUFkGr4sjfDRXDm5z9fm34PgMwa",
-            "ClientSecret": "EI3KG6Z1PhnBqohWbt1P7qZA7Dsa"
+            "ClientId": "<CLIENT ID OF THE BUSINESS APP>",
+            "ClientSecret": "<CLIENT SECRET OF THE BUSINESS APP>"
         },
         "ApplicationConfig": {
             "HostedUrl": "http://localhost:3000",
@@ -46,18 +46,18 @@
                 "internal_group_mgt_update"
             ],
             "Branding": {
-                "name": "Easy Meeting",
+                "name": "Guardio Insurance",
                 "tag": "Anytime . Anywhere"
             }
         },
         "ManagementAPIConfig": {
-            "SharedApplicationName": "EasyMeeting"
+            "SharedApplicationName": "<SHARED APPLICATION NAME FOR BUSINESS APP> ex: guardio-app"
         }
     },
     "BusinessAdminAppConfig": {
         "AuthorizationConfig": {
-            "ClientId": "3i3NnXzEreOgeIT9pXdz5cZ52EIa",
-            "ClientSecret": "ajJMUHQgf8pQNCKUUFm4ClAKiwQa"
+            "ClientId": "<CLIENT ID OF THE BUSINESS ADMIN APP>",
+            "ClientSecret": "<CLIENT SECRET OF THE BUSINESS ADMIN APP>"
         },
         "ApplicationConfig": {
             "HostedUrl": "http://localhost:3001",
@@ -85,7 +85,7 @@
                 "internal_group_mgt_update"
             ],
             "Branding": {
-                "name": "Easy Meeting - Administrator Application",
+                "name": "Guardio Insurance - Administrator Application",
                 "tag": "Administrator Application"
             }
         }
