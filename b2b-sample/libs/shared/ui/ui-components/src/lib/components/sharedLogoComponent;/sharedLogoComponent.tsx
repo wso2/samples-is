@@ -90,7 +90,7 @@ function Logo(prop: SharedLogoProps) {
 
 
         if (white) {
-            imageStyle["filter"] = "grayscale(100%) drop-shadow(0px 0px 2px white)";
+            imageStyle["filter"] = "grayscale(100%) drop-shadow(0px 0px 0px white)";
         }
 
         return imageStyle;
