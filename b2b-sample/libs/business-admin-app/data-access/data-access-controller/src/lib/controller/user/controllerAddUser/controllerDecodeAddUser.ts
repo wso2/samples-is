@@ -51,7 +51,7 @@ function pwdAddUserBody(firstName: string, familyName: string, email: string, pa
         "emails": [
             {
                 "primary": true,
-                "value": setEmail(email)
+                "value": email
             }
         ],
         "name": {

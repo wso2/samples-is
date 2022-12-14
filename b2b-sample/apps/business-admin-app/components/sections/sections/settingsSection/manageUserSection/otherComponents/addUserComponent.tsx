@@ -143,7 +143,7 @@ export default function AddUserComponent(props: AddUserComponentProps) {
 
                                 <FormField
                                     name="email"
-                                    label="Username (Email)"
+                                    label="Email (Username)"
                                     helperText="Email of the user."
                                     needErrorMessage={ true }
                                 >

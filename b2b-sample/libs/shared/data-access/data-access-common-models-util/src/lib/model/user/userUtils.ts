@@ -18,6 +18,7 @@
 
 import InternalUser from "./internalUser";
 import User from "./user";
+import config from "../../../../../../../../config.json";
 
 /**
  * 
@@ -58,8 +59,11 @@ export function setEmail(email: string) {
  * @returns set username.
  */
 export function setUsername(userName: string) {
-
-    return userName;
+    if(config.BusinessAppConfig.ManagementAPIConfig.UserStore.trim()===""){
+        return userName;
+    } else {
+        return `${config.BusinessAppConfig.ManagementAPIConfig.UserStore}/${userName}`;
+    }
 }
 
 /**
