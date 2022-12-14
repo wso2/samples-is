@@ -19,13 +19,14 @@
 import { IdentityProvider } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { controllerDecodePatchGeneralSettingsIdp } from
     "@b2bsample/business-admin-app/data-access/data-access-controller";
-import { HelperTextComponent, errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
+import { FormButtonToolbar, FormField } from "@b2bsample/shared/ui/ui-basic-components";
+import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
 import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
-import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "@b2bsample/shared/util/util-front-end-util";
+import { fieldValidate, LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "@b2bsample/shared/util/util-front-end-util";
 import { Session } from "next-auth";
-import React, { useState } from "react";
-import { Field, Form } from "react-final-form";
-import { Button, ButtonToolbar, Loader, useToaster } from "rsuite";
+import { useState } from "react";
+import { Form } from "react-final-form";
+import { Loader, Toaster, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
 import styles from "../../../../../../../styles/Settings.module.css";
 
@@ -47,34 +48,18 @@ export default function General(props: GeneralProps) {
 
     const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
 
-    const toaster = useToaster();
+    const toaster: Toaster = useToaster();
 
-    const nameValidate = (name, errors) => {
-        if (!name) {
-            errors.name = "This field cannot be empty";
-        }
+    const validate = (values: Record<string, unknown>): Record<string, string> => {
+        let errors: Record<string, string> = {};
 
-        return errors;
-    };
-
-    const descriptionValidate = (description, errors) => {
-        if (!description) {
-            errors.description = "This field cannot be empty";
-        }
+        errors = fieldValidate("name", values.name, errors);
+        errors = fieldValidate("description", values.description, errors);
 
         return errors;
     };
 
-    const validate = values => {
-        let errors = {};
-
-        errors = nameValidate(values.name, errors);
-        errors = descriptionValidate(values.description, errors);
-
-        return errors;
-    };
-
-    const onDataSubmit = (response: IdentityProvider, form) => {
+    const onDataSubmit = (response: IdentityProvider, form): void => {
         if (response) {
             successTypeDialog(toaster, "Changes Saved Successfully", "Idp updated successfully.");
             fetchData();
@@ -84,7 +69,7 @@ export default function General(props: GeneralProps) {
         }
     };
 
-    const onUpdate = async (values, form) => {
+    const onUpdate = async (values: Record<string, string>, form): Promise<void> => {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
         controllerDecodePatchGeneralSettingsIdp(session, values.name, values.description, idpDetails.id)
             .then((response) => onDataSubmit(response, form))
@@ -109,59 +94,31 @@ export default function General(props: GeneralProps) {
                             className={styles.addUserForm}
                             onSubmit={() => { handleSubmit().then(form.restart); }}
                             fluid>
-                            <Field
+
+                            <FormField
                                 name="name"
-                                render={({ input, meta }) => (
-                                    <FormSuite.Group controlId="name">
-                                        <FormSuite.ControlLabel>Name</FormSuite.ControlLabel>
+                                label="Name"
+                                helperText="Name of the identity provider."
+                                needErrorMessage={true}
+                            >
+                                <FormSuite.Control name="input" />
+                            </FormField>
 
-                                        <FormSuite.Control
-                                            {...input}
-                                        />
-
-                                        <HelperTextComponent text="A text description of the identity provider." />
-
-                                        {meta.error && meta.touched && (<FormSuite.ErrorMessage show={true}  >
-                                            {meta.error}
-                                        </FormSuite.ErrorMessage>)}
-                                    </FormSuite.Group>
-                                )}
-                            />
-
-                            <Field
+                            <FormField
                                 name="description"
-                                render={({ input, meta }) => (
-                                    <FormSuite.Group controlId="description">
-                                        <FormSuite.ControlLabel>Description</FormSuite.ControlLabel>
-                                        <FormSuite.Control
-                                            {...input}
-                                        />
+                                label="Description"
+                                helperText="A text description of the identity provider."
+                                needErrorMessage={true}
+                            >
+                                <FormSuite.Control name="input" />
+                            </FormField>
 
-                                        <HelperTextComponent text="A text description of the identity provider." />
-
-                                        {meta.error && meta.touched && (<FormSuite.ErrorMessage show={true}  >
-                                            {meta.error}
-                                        </FormSuite.ErrorMessage>)}
-
-                                    </FormSuite.Group>
-                                )}
+                            <FormButtonToolbar
+                                submitButtonText="Update"
+                                submitButtonDisabled={submitting || pristine || !checkIfJSONisEmpty(errors)}
+                                needCancel={false}
                             />
 
-                            <div className="buttons">
-                                <FormSuite.Group>
-                                    <ButtonToolbar>
-                                        <Button
-                                            className={styles.addUserButton}
-                                            size="lg"
-                                            appearance="primary"
-                                            type="submit"
-                                            disabled={submitting || pristine || !checkIfJSONisEmpty(errors)}>
-                                            Update
-                                        </Button>
-                                    </ButtonToolbar>
-                                </FormSuite.Group>
-
-                            </div>
                         </FormSuite>
                     )}
                 />

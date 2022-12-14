@@ -20,16 +20,17 @@ import { IdentityProvider, IdentityProviderFederatedAuthenticator } from
     "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { controllerDecodeGetFederatedAuthenticators, controllerDecodeUpdateFederatedAuthenticators } from
     "@b2bsample/business-admin-app/data-access/data-access-controller";
+import { FormButtonToolbar } from "@b2bsample/shared/ui/ui-basic-components";
 import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
 import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "@b2bsample/shared/util/util-front-end-util";
-import React, { useCallback, useEffect, useState } from "react";
-import { Form } from "react-final-form";
-import { Button, ButtonToolbar, Loader, Toaster, useToaster } from "rsuite";
-import FormSuite from "rsuite/Form";
-import SettingsFormSelection from "./settingsFormSection/settingsFormSelection";
-import styles from "../../../../../../../styles/Settings.module.css";
 import { Session } from "next-auth";
+import { useCallback, useEffect, useState } from "react";
+import { Form } from "react-final-form";
+import { Loader, Toaster, useToaster } from "rsuite";
+import FormSuite from "rsuite/Form";
+import styles from "../../../../../../../styles/Settings.module.css";
+import SettingsFormSelection from "./settingsFormSection/settingsFormSelection";
 
 interface SettingsProps {
     session: Session,
@@ -46,8 +47,8 @@ export default function Settings(props: SettingsProps) {
 
     const { session, idpDetails } = props;
 
-    const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
-    const [ federatedAuthenticators, setFederatedAuthenticators ]
+    const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
+    const [federatedAuthenticators, setFederatedAuthenticators]
         = useState<IdentityProviderFederatedAuthenticator>(null);
 
     const toaster: Toaster = useToaster();
@@ -58,11 +59,11 @@ export default function Settings(props: SettingsProps) {
             session, idpDetails.id, idpDetails.federatedAuthenticators.defaultAuthenticatorId);
 
         await setFederatedAuthenticators(res);
-    }, [ session, idpDetails ]);
+    }, [session, idpDetails]);
 
     useEffect(() => {
         fetchData();
-    }, [ fetchData ]);
+    }, [fetchData]);
 
     const validate = () => {
         const errors = {};
@@ -97,52 +98,44 @@ export default function Settings(props: SettingsProps) {
     };
 
     return (
-        <div className={ styles.addUserMainDiv }>
+        <div className={styles.addUserMainDiv}>
 
             <div>
                 {
                     federatedAuthenticators
                         ? (<Form
-                            onSubmit={ onUpdate }
-                            validate={ validate }
+                            onSubmit={onUpdate}
+                            validate={validate}
 
-                            render={ ({ handleSubmit, submitting, pristine, errors }) => (
+                            render={({ handleSubmit, submitting, pristine, errors }) => (
                                 <FormSuite
                                     layout="vertical"
-                                    className={ styles.addUserForm }
-                                    onSubmit={ () => handleSubmit() }
+                                    className={styles.addUserForm}
+                                    onSubmit={() => handleSubmit()}
                                     fluid>
 
-                                    { federatedAuthenticators.properties
+                                    {federatedAuthenticators.properties
                                         ? (<SettingsFormSelection
-                                            federatedAuthenticators={ federatedAuthenticators.properties }
-                                            templateId={ idpDetails.templateId } />)
+                                            federatedAuthenticators={federatedAuthenticators.properties}
+                                            templateId={idpDetails.templateId} />)
                                         : null
                                     }
 
-                                    <div className="buttons">
-                                        <FormSuite.Group>
-                                            <ButtonToolbar>
-                                                <Button
-                                                    className={ styles.addUserButton }
-                                                    size="lg"
-                                                    appearance="primary"
-                                                    type="submit"
-                                                    disabled={ submitting || pristine || !checkIfJSONisEmpty(errors) }>
-                                                    Update
-                                                </Button>
-                                            </ButtonToolbar>
-                                        </FormSuite.Group>
-                                    </div>
+                                    <FormButtonToolbar
+                                        submitButtonText="Update"
+                                        submitButtonDisabled={submitting || pristine || !checkIfJSONisEmpty(errors)}
+                                        needCancel={false}
+                                    />
+
                                 </FormSuite>
-                            ) }
+                            )}
                         />)
                         : null
                 }
 
             </div>
 
-            <div style={ loadingDisplay }>
+            <div style={loadingDisplay}>
                 <Loader size="lg" backdrop content="User is adding" vertical />
             </div>
         </div>

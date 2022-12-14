@@ -81,7 +81,7 @@ export default function SettingsFormSelection(props: SettingsFormSelectionProps)
                                 initialValue={selectedValue(property.key)}
                                 render={({ input, meta }) => (
                                     <FormSuite.Group controlId={property.key}>
-                                        <FormSuite.ControlLabel>{property.displayName}</FormSuite.ControlLabel>
+                                        <FormSuite.ControlLabel><b>{property.displayName}</b></FormSuite.ControlLabel>
                                         <InputGroup inside style={{ width: "100%" }}>
 
                                             <FormSuite.Control
