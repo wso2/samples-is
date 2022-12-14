@@ -17,10 +17,31 @@
  */
 
 import { getManagementAPIServerBaseUrl, getOrgUrl } from "@b2bsample/shared/util/util-application-config-util";
-import { ENTERPRISE_ID, GOOGLE_ID } from "@b2bsample/shared/util/util-common";
+import { EMPTY_STRING, ENTERPRISE_ID, GOOGLE_ID } from "@b2bsample/shared/util/util-common";
 import IdentityProviderDiscoveryUrl from "./identityProviderDiscoveryUrl";
+import IdentityProviderTemplate from "./identityProviderTemplate";
 import IdentityProviderTemplateModel from "./identityProviderTemplateModel";
-import config from "../../../../../../../config.json";
+import enterpriseImage from "../../../../../ui/ui-assets/src/lib/images/enterprise.svg";
+import googleImage from "../../../../../ui/ui-assets/src/lib/images/google.svg";
+
+/**
+ * 
+ * @param template - `IdentityProviderTemplate`
+ * @returns - local image for the relevant identity provider
+ */
+export function getImageForTheIdentityProvider(template: IdentityProviderTemplate): string {
+    if (GOOGLE_ID === template.templateId) {
+
+        return googleImage;
+    }
+    if (ENTERPRISE_ID === template.templateId) {
+
+        return enterpriseImage;
+
+    }
+
+    return EMPTY_STRING;
+};
 
 /**
  * 
@@ -81,9 +102,7 @@ export function setIdpTemplate(model: IdentityProviderTemplateModel, templateId:
 function googleIdpTemplate(model: IdentityProviderTemplateModel, clientId: string, clientSecret: string,
     orgId: string): IdentityProviderTemplateModel {
 
-    model.image =
-        `${config.CommonConfig.ManagementAPIConfig.ImageBaseUrl}/libs/themes/default/assets` +
-        "/images/identity-providers/google-idp-illustration.svg";
+    model.image = "/libs/themes/default/assets/images/identity-providers/google-idp-illustration.svg";
 
     model.alias = `${getManagementAPIServerBaseUrl()}/oauth2/token`;
 
@@ -138,19 +157,17 @@ function enterpriseIdpTemplate(model: IdentityProviderTemplateModel, clientId: s
         authorizationEndpointUrl = formValues["authorization_endpoint"].toString();
         tokenEndpointUrl = formValues["token_endpoint"].toString();
 
-        if(formValues["end_session_endpoint"]) {
+        if (formValues["end_session_endpoint"]) {
             logoutUrl = formValues["end_session_endpoint"].toString();
         }
 
-        if(formValues["jwks_uri"]) {
+        if (formValues["jwks_uri"]) {
             jwksUri = formValues["jwks_uri"].toString();
         }
-       
+
     }
 
-    model.image =
-        `${config.CommonConfig.ManagementAPIConfig.ImageBaseUrl}/libs/themes/default/assets` +
-        "/images/identity-providers/enterprise-idp-illustration.svg";
+    model.image = "/libs/themes/default/assets/images/identity-providers/enterprise-idp-illustration.svg";
 
     model.federatedAuthenticators.authenticators[0].properties = [
         {
@@ -188,4 +205,4 @@ function enterpriseIdpTemplate(model: IdentityProviderTemplateModel, clientId: s
     return model;
 }
 
-export default { setIdpTemplate, getCallbackUrl };
+export default { setIdpTemplate, getCallbackUrl, getImageForTheIdentityProvider };

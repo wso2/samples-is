@@ -20,6 +20,14 @@ import React from "react";
 import { FlexboxGrid, PanelGroup } from "rsuite";
 import IdentityProviderDetails from "./identityProviderDetails";
 import styles from "../../../../../../styles/idp.module.css";
+import { Session } from "next-auth";
+import { IdentityProvider } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
+
+interface IdentityProviderListProps {
+    idpList : IdentityProvider[],
+    fetchAllIdPs : ()=>Promise<void>,
+    session : Session
+}
 
 /**
  * 
@@ -27,24 +35,24 @@ import styles from "../../../../../../styles/idp.module.css";
  *
  * @returns List of idp's created in the organization
  */
-export default function IdentityProviderList(prop) {
+export default function IdentityProviderList(props: IdentityProviderListProps) {
 
-    const { idpList, fetchAllIdPs, session } = prop;
+    const { idpList, fetchAllIdPs, session } = props;
 
     return (
         <FlexboxGrid
-            style={ { height: "60vh", marginTop: "24px", width: "100%" } }
+            style={{ height: "60vh", marginTop: "24px", width: "100%" }}
             justify="start"
             align="top" >
-            <div className={ styles.idp__list }>
-                <PanelGroup accordion defaultActiveKey={ idpList[0].id } bordered>
-                    { idpList.map(({ id }) => (
+            <div className={styles.idp__list}>
+                <PanelGroup accordion defaultActiveKey={idpList[0].id} bordered>
+                    {idpList.map(({ id }) => (
                         <IdentityProviderDetails
-                            key={ id }
-                            session={ session }
-                            id={ id }
-                            fetchAllIdPs={ fetchAllIdPs } />
-                    )) }
+                            key={id}
+                            session={session}
+                            id={id}
+                            fetchAllIdPs={fetchAllIdPs} />
+                    ))}
                 </PanelGroup>
             </div>
         </FlexboxGrid >

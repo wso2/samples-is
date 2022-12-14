@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { Application, ApplicationList, checkIfIdpIsinAuthSequence } from
+import { Application, ApplicationList, checkIfIdpIsinAuthSequence, IdentityProvider } from
     "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import {
     controllerDecodeDeleteIdentityProvider, controllerDecodeGetApplication,
@@ -25,9 +25,17 @@ import {
 import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
 import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
 import Trash from "@rsuite/icons/Trash";
+import { Session } from "next-auth";
 import React, { useCallback, useEffect, useState } from "react";
 import { Button, IconButton, Stack, useToaster } from "rsuite";
 import ConfirmAddRemoveLoginFlowModal from "./confirmAddRemoveLoginFlowModal";
+
+interface ButtonGroupIdentityProviderDetailsProps {
+    session : Session
+    idpDetails : IdentityProvider,
+    fetchAllIdPs : () => Promise<void>,
+    id : string
+}
 
 /**
  * 
@@ -35,9 +43,9 @@ import ConfirmAddRemoveLoginFlowModal from "./confirmAddRemoveLoginFlowModal";
  * 
  * @returns Add/Remove button and delete button group in an Idp
  */
-export default function ButtonGroupIdentityProviderDetails(prop) {
+export default function ButtonGroupIdentityProviderDetails(props : ButtonGroupIdentityProviderDetailsProps) {
 
-    const { session, idpDetails, fetchAllIdPs, id } = prop;
+    const { session, idpDetails, fetchAllIdPs, id } = props;
 
     const toaster = useToaster();
 
@@ -77,7 +85,7 @@ export default function ButtonGroupIdentityProviderDetails(prop) {
         }
     }, [ idpDetails, applicationDetail ]);
 
-    const onIdpDelete = (response: boolean) => {
+    const onIdpDelete = (response: boolean): void => {
         if (response) {
             successTypeDialog(toaster, "Success", "Identity Provider Deleted Successfully");
         } else {
@@ -85,7 +93,7 @@ export default function ButtonGroupIdentityProviderDetails(prop) {
         }
     };
 
-    const onIdPDeleteClick = (id) => {
+    const onIdPDeleteClick = (id: string): void => {
         controllerDecodeDeleteIdentityProvider(session, id)
             .then((response) => onIdpDelete(response))
             .finally(() => {
@@ -93,11 +101,11 @@ export default function ButtonGroupIdentityProviderDetails(prop) {
             });
     };
 
-    const onAddToLoginFlowClick = () => {
+    const onAddToLoginFlowClick = (): void => {
         setOpenListAppicationModal(true);
     };
 
-    const onCloseListAllApplicaitonModal = () => {
+    const onCloseListAllApplicaitonModal = (): void => {
         setOpenListAppicationModal(false);
     };
 
@@ -113,7 +121,6 @@ export default function ButtonGroupIdentityProviderDetails(prop) {
 
             <ConfirmAddRemoveLoginFlowModal
                 session={ session }
-                id={ id }
                 openModal={ openListAppicationModal }
                 onModalClose={ onCloseListAllApplicaitonModal }
                 fetchAllIdPs={ fetchAllIdPs }

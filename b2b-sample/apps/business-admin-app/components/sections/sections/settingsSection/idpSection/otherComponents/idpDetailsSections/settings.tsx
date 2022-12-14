@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { IdentityProviderFederatedAuthenticator } from
+import { IdentityProvider, IdentityProviderFederatedAuthenticator } from
     "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { controllerDecodeGetFederatedAuthenticators, controllerDecodeUpdateFederatedAuthenticators } from
     "@b2bsample/business-admin-app/data-access/data-access-controller";
@@ -25,10 +25,16 @@ import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "@b2bsample/shared/util/util-front-end-util";
 import React, { useCallback, useEffect, useState } from "react";
 import { Form } from "react-final-form";
-import { Button, ButtonToolbar, Loader, useToaster } from "rsuite";
+import { Button, ButtonToolbar, Loader, Toaster, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
 import SettingsFormSelection from "./settingsFormSection/settingsFormSelection";
 import styles from "../../../../../../../styles/Settings.module.css";
+import { Session } from "next-auth";
+
+interface SettingsProps {
+    session: Session,
+    idpDetails: IdentityProvider
+}
 
 /**
  * 
@@ -36,17 +42,18 @@ import styles from "../../../../../../../styles/Settings.module.css";
  *
  * @returns The settings section of an idp
  */
-export default function Settings(prop) {
+export default function Settings(props: SettingsProps) {
 
-    const { session, idpDetails } = prop;
+    const { session, idpDetails } = props;
 
     const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
     const [ federatedAuthenticators, setFederatedAuthenticators ]
         = useState<IdentityProviderFederatedAuthenticator>(null);
 
-    const toaster = useToaster();
+    const toaster: Toaster = useToaster();
 
     const fetchData = useCallback(async () => {
+        console.log(idpDetails);
         const res = await controllerDecodeGetFederatedAuthenticators(
             session, idpDetails.id, idpDetails.federatedAuthenticators.defaultAuthenticatorId);
 
@@ -73,7 +80,7 @@ export default function Settings(prop) {
         return errors;
     };
 
-    const onDataSubmit = (response: IdentityProviderFederatedAuthenticator) => {
+    const onDataSubmit = (response: IdentityProviderFederatedAuthenticator): void => {
         if (response) {
             successTypeDialog(toaster, "Changes Saved Successfully", "Idp updated successfully.");
             fetchData();
@@ -82,7 +89,7 @@ export default function Settings(prop) {
         }
     };
 
-    const onUpdate = async (values: Record<string, string>) => {
+    const onUpdate = async (values: Record<string, string>): Promise<void> => {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
         controllerDecodeUpdateFederatedAuthenticators(session, idpDetails.id, federatedAuthenticators, values)
             .then((response) => onDataSubmit(response))

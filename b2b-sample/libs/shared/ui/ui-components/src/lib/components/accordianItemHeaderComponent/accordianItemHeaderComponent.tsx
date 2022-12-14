@@ -17,6 +17,7 @@
  */
 
 import { random_rgba } from "@b2bsample/shared/util/util-common";
+import Image from "next/image";
 import React from "react";
 import { Avatar, Stack } from "rsuite";
 import { AccordianItemHeaderComponentProps } from
@@ -34,19 +35,27 @@ export function AccordianItemHeaderComponent(prop: AccordianItemHeaderComponentP
 
     return (
         <Stack>
-            <Stack spacing={ 20 }>
+            <Stack spacing={20}>
                 <Avatar
                     size="md"
                     circle
-                    src={ imageUrl }
                     alt="IDP image"
-                    style={ imageUrl ? { background: "rgba(255,0,0,0)" } : { background: `${random_rgba()}` } }
+                    style={imageUrl ? { background: "rgba(255,0,0,0)" } : { background: `${random_rgba()}` }}
                 >
-                    { title ? title.charAt(0) : "" }
+                    <>
+                        {imageUrl ?
+                            <Image
+                                src={imageUrl}
+                                alt="idp image"
+                                width={40}
+                                height={40} />
+                            : null}
+                        {title ? title.charAt(0) : null}
+                    </>
                 </Avatar>
                 <Stack direction="column" justifyContent="flex-start" alignItems="stretch">
-                    <h5>{ title }</h5>
-                    <p>{ description ? description : "" }</p>
+                    <h5>{title}</h5>
+                    <p>{description ? description : ""}</p>
                 </Stack>
             </Stack>
 

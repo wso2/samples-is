@@ -16,15 +16,35 @@
  * under the License.
  */
 
-import { PatchApplicationAuthMethod } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
+import { Application, IdentityProvider, PatchApplicationAuthMethod } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { controllerDecodePatchApplicationAuthSteps } from
     "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
 import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "@b2bsample/shared/util/util-front-end-util";
+import { Session } from "next-auth";
 import React, { useState } from "react";
-import { Avatar, Button, Col, Grid, Loader, Modal, Row, useToaster } from "rsuite";
+import { Avatar, Button, Col, Grid, Loader, Modal, Row, Toaster, useToaster } from "rsuite";
 import stylesSettings from "../../../../../../styles/Settings.module.css";
+
+interface ApplicationListItemProps {
+    applicationDetail: Application
+}
+
+interface ApplicationListAvailableProps {
+    applicationDetail: Application,
+    idpIsinAuthSequence: boolean
+}
+
+interface ConfirmAddRemoveLoginFlowModalProps {
+    session: Session,
+    applicationDetail: Application,
+    idpDetails: IdentityProvider,
+    idpIsinAuthSequence: boolean,
+    openModal: boolean,
+    onModalClose: () => void,
+    fetchAllIdPs: () => Promise<void>
+}
 
 /**
  * 
@@ -32,15 +52,40 @@ import stylesSettings from "../../../../../../styles/Settings.module.css";
  * 
  * @returns Add/Remove from login flow button
  */
-export default function ConfirmAddRemoveLoginFlowModal(prop) {
+export default function ConfirmAddRemoveLoginFlowModal(props: ConfirmAddRemoveLoginFlowModalProps) {
 
-    const { session, applicationDetail, idpDetails, idpIsinAuthSequence, openModal, onModalClose, fetchAllIdPs } = prop;
+    const { session, applicationDetail, idpDetails, idpIsinAuthSequence, openModal, onModalClose, fetchAllIdPs }
+        = props;
 
-    const toaster = useToaster();
+    const toaster: Toaster = useToaster();
 
-    const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
+    const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
 
-    const onSubmit = async (patchApplicationAuthMethod) => {
+    const onSuccess = (): void => {
+        onModalClose();
+        fetchAllIdPs().finally();
+    };
+
+    const onIdpAddToLoginFlow = (response: boolean): void => {
+        if (response) {
+            onSuccess();
+            successTypeDialog(toaster, "Success", "Identity Provider Add to the Login Flow Successfully.");
+        } else {
+            errorTypeDialog(toaster, "Error Occured", "Error occured while adding the the identity provider.");
+        }
+    };
+
+    const onIdpRemovefromLoginFlow = (response: boolean): void => {
+        if (response) {
+            onSuccess();
+            successTypeDialog(toaster, "Success", "Identity Provider Remove from the Login Flow Successfully.");
+        } else {
+            errorTypeDialog(toaster, "Error Occured", "Error occured while removing the identity provider. Try again.");
+        }
+    };
+
+
+    const onSubmit = async (patchApplicationAuthMethod): Promise<void> => {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
 
         controllerDecodePatchApplicationAuthSteps(session, applicationDetail, idpDetails,
@@ -51,41 +96,18 @@ export default function ConfirmAddRemoveLoginFlowModal(prop) {
             .finally(() => setLoadingDisplay(LOADING_DISPLAY_NONE));
     };
 
-    const onRemove = async () => {
+    const onRemove = async (): Promise<void> => {
         await onSubmit(PatchApplicationAuthMethod.REMOVE);
     };
 
-    const onAdd = async () => {
+    const onAdd = async (): Promise<void> => {
         await onSubmit(PatchApplicationAuthMethod.ADD);
-    };
-
-    const onSuccess = () => {
-        onModalClose();
-        fetchAllIdPs().finally();
-    };
-
-    const onIdpAddToLoginFlow = (response) => {
-        if (response) {
-            onSuccess();
-            successTypeDialog(toaster, "Success", "Identity Provider Add to the Login Flow Successfully.");
-        } else {
-            errorTypeDialog(toaster, "Error Occured", "Error occured while adding the the identity provider.");
-        }
-    };
-
-    const onIdpRemovefromLoginFlow = (response) => {
-        if (response) {
-            onSuccess();
-            successTypeDialog(toaster, "Success", "IIdentity Provider Remove from the Login Flow Successfully.");
-        } else {
-            errorTypeDialog(toaster, "Error Occured", "Error occured while removing the identity provider. Try again.");
-        }
     };
 
     return (
         <Modal
-            open={ openModal }
-            onClose={ onModalClose }>
+            open={openModal}
+            onClose={onModalClose}>
             <Modal.Header>
                 <Modal.Title><b>
                     {
@@ -100,23 +122,23 @@ export default function ConfirmAddRemoveLoginFlowModal(prop) {
                     checkIfJSONisEmpty(applicationDetail)
                         ? <EmptySelectApplicationBody />
                         : (<ApplicationListAvailable
-                            applicationDetail={ applicationDetail }
-                            idpIsinAuthSequence={ idpIsinAuthSequence } />)
+                            applicationDetail={applicationDetail}
+                            idpIsinAuthSequence={idpIsinAuthSequence} />)
                 }
             </Modal.Body>
             <Modal.Footer>
                 <Button
-                    onClick={ idpIsinAuthSequence ? onRemove : onAdd }
-                    className={ stylesSettings.addUserButton }
+                    onClick={idpIsinAuthSequence ? onRemove : onAdd}
+                    className={stylesSettings.addUserButton}
                     appearance="primary">
                     Confirm
                 </Button>
-                <Button onClick={ onModalClose } className={ stylesSettings.addUserButton } appearance="ghost">
+                <Button onClick={onModalClose} className={stylesSettings.addUserButton} appearance="ghost">
                     Cancel
                 </Button>
             </Modal.Footer>
 
-            <div style={ loadingDisplay }>
+            <div style={loadingDisplay}>
                 <Loader size="lg" backdrop content="Idp is adding to the login flow" vertical />
             </div>
 
@@ -134,7 +156,7 @@ function EmptySelectApplicationBody() {
     return (
         <div >
             <p>No Application Available</p>
-            <div style={ { marginLeft: "5px" } }>
+            <div style={{ marginLeft: "5px" }}>
                 <div>Create an application from the WSO2 IS or Asgardeo Console app to add authentication.</div>
                 <p>For more details check out the following links</p>
                 <ul>
@@ -157,9 +179,9 @@ function EmptySelectApplicationBody() {
  * @returns  When then config.ManagementAPIConfig.SharedApplicationName is the correct applicaiton, 
  * it will show this section 
  */
-function ApplicationListAvailable(prop) {
+function ApplicationListAvailable(props: ApplicationListAvailableProps) {
 
-    const { idpIsinAuthSequence, applicationDetail } = prop;
+    const { idpIsinAuthSequence, applicationDetail } = props;
 
     return (
         <div>
@@ -173,7 +195,7 @@ function ApplicationListAvailable(prop) {
             {
                 idpIsinAuthSequence
                     ? null
-                    : <ApplicationListItem application={ applicationDetail } />
+                    : <ApplicationListItem applicationDetail={applicationDetail} />
             }
 
             <p>Please confirm your action to procced</p>
@@ -189,21 +211,21 @@ function ApplicationListAvailable(prop) {
  * 
  * @returns The component to show the applicaiton name and the description
  */
-function ApplicationListItem(prop) {
+function ApplicationListItem(props: ApplicationListItemProps) {
 
-    const { application } = prop;
+    const { applicationDetail } = props;
 
     return (
-        <div style={ { marginBottom: 15, marginTop: 15 } }>
+        <div style={{ marginBottom: 15, marginTop: 15 }}>
             <Grid fluid>
                 <Row>
                     <Col>
-                        <Avatar>{ application.name[0] }</Avatar>
+                        <Avatar>{applicationDetail.name[0]}</Avatar>
                     </Col>
 
                     <Col>
-                        <div>{ application.name }</div>
-                        <p>{ application.description }</p>
+                        <div>{applicationDetail.name}</div>
+                        <p>{applicationDetail.description}</p>
                     </Col>
                 </Row>
             </Grid>
