@@ -75,24 +75,24 @@ export default function SettingsFormSelection(props: SettingsFormSelectionProps)
                     ? propList().map((property) => {
                         return (
                             <Field
-                                id={property.key}
-                                key={property.key}
-                                name={property.key}
-                                initialValue={selectedValue(property.key)}
-                                render={({ input, meta }) => (
-                                    <FormSuite.Group controlId={property.key}>
-                                        <FormSuite.ControlLabel><b>{property.displayName}</b></FormSuite.ControlLabel>
-                                        <InputGroup inside style={{ width: "100%" }}>
+                                id={ property.key }
+                                key={ property.key }
+                                name={ property.key }
+                                initialValue={ selectedValue(property.key) }
+                                render={ ({ input, meta }) => (
+                                    <FormSuite.Group controlId={ property.key }>
+                                        <FormSuite.ControlLabel><b>{ property.displayName }</b></FormSuite.ControlLabel>
+                                        <InputGroup inside style={ { width: "100%" } }>
 
                                             <FormSuite.Control
-                                                readOnly={property.readOnly ? property.readOnly : false}
-                                                {...input}
+                                                readOnly={ property.readOnly ? property.readOnly : false }
+                                                { ...input }
                                             />
 
                                             {
                                                 property.readOnly
                                                     ? (<InputGroup.Button
-                                                        onClick={() =>
+                                                        onClick={ () =>
                                                             copyValueToClipboard(selectedValue(property.key))
                                                         }
                                                     >
@@ -103,14 +103,14 @@ export default function SettingsFormSelection(props: SettingsFormSelectionProps)
 
                                         </InputGroup>
                                         <HelperTextComponent
-                                            text={property.description} />
+                                            text={ property.description } />
 
-                                        {meta.error && meta.touched && (<FormSuite.ErrorMessage show={true} >
-                                            {meta.error}
-                                        </FormSuite.ErrorMessage>)}
+                                        { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true } >
+                                            { meta.error }
+                                        </FormSuite.ErrorMessage>) }
 
                                     </FormSuite.Group>
-                                )}
+                                ) }
                             />
                         );
                     })

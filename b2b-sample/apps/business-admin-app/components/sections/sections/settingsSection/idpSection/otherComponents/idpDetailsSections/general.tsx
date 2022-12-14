@@ -22,7 +22,7 @@ import { controllerDecodePatchGeneralSettingsIdp } from
 import { FormButtonToolbar, FormField } from "@b2bsample/shared/ui/ui-basic-components";
 import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
 import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
-import { fieldValidate, LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "@b2bsample/shared/util/util-front-end-util";
+import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE, fieldValidate } from "@b2bsample/shared/util/util-front-end-util";
 import { Session } from "next-auth";
 import { useState } from "react";
 import { Form } from "react-final-form";
@@ -46,7 +46,7 @@ export default function General(props: GeneralProps) {
 
     const { fetchData, session, idpDetails } = props;
 
-    const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
+    const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
 
     const toaster: Toaster = useToaster();
 
@@ -77,29 +77,29 @@ export default function General(props: GeneralProps) {
     };
 
     return (
-        <div className={styles.addUserMainDiv}>
+        <div className={ styles.addUserMainDiv }>
 
             <div>
 
                 <Form
-                    onSubmit={onUpdate}
-                    validate={validate}
-                    initialValues={{
+                    onSubmit={ onUpdate }
+                    validate={ validate }
+                    initialValues={ {
                         description: idpDetails.description,
                         name: idpDetails.name
-                    }}
-                    render={({ handleSubmit, form, submitting, pristine, errors }) => (
+                    } }
+                    render={ ({ handleSubmit, form, submitting, pristine, errors }) => (
                         <FormSuite
                             layout="vertical"
-                            className={styles.addUserForm}
-                            onSubmit={() => { handleSubmit().then(form.restart); }}
+                            className={ styles.addUserForm }
+                            onSubmit={ () => { handleSubmit().then(form.restart); } }
                             fluid>
 
                             <FormField
                                 name="name"
                                 label="Name"
                                 helperText="Name of the identity provider."
-                                needErrorMessage={true}
+                                needErrorMessage={ true }
                             >
                                 <FormSuite.Control name="input" />
                             </FormField>
@@ -108,24 +108,24 @@ export default function General(props: GeneralProps) {
                                 name="description"
                                 label="Description"
                                 helperText="A text description of the identity provider."
-                                needErrorMessage={true}
+                                needErrorMessage={ true }
                             >
                                 <FormSuite.Control name="input" />
                             </FormField>
 
                             <FormButtonToolbar
                                 submitButtonText="Update"
-                                submitButtonDisabled={submitting || pristine || !checkIfJSONisEmpty(errors)}
-                                needCancel={false}
+                                submitButtonDisabled={ submitting || pristine || !checkIfJSONisEmpty(errors) }
+                                needCancel={ false }
                             />
 
                         </FormSuite>
-                    )}
+                    ) }
                 />
 
             </div>
 
-            <div style={loadingDisplay}>
+            <div style={ loadingDisplay }>
                 <Loader size="lg" backdrop content="User is adding" vertical />
             </div>
         </div>

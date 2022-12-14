@@ -19,29 +19,28 @@
 import { getManagementAPIServerBaseUrl, getOrgUrl } from "@b2bsample/shared/util/util-application-config-util";
 import { EMPTY_STRING, ENTERPRISE_ID, GOOGLE_ID } from "@b2bsample/shared/util/util-common";
 import IdentityProviderDiscoveryUrl from "./identityProviderDiscoveryUrl";
-import IdentityProviderTemplate from "./identityProviderTemplate";
 import IdentityProviderTemplateModel from "./identityProviderTemplateModel";
 import enterpriseImage from "../../../../../ui/ui-assets/src/lib/images/enterprise.svg";
 import googleImage from "../../../../../ui/ui-assets/src/lib/images/google.svg";
 
 /**
  * 
- * @param template - `IdentityProviderTemplate`
+ * @param templateId - template id of the identity provider
  * @returns - local image for the relevant identity provider
  */
-export function getImageForTheIdentityProvider(template: IdentityProviderTemplate): string {
-    if (GOOGLE_ID === template.templateId) {
+export function getImageForTheIdentityProvider(templateId: string): string {
+    if (GOOGLE_ID === templateId) {
 
         return googleImage;
     }
-    if (ENTERPRISE_ID === template.templateId) {
+    if (ENTERPRISE_ID === templateId) {
 
         return enterpriseImage;
 
     }
 
     return EMPTY_STRING;
-};
+}
 
 /**
  * 

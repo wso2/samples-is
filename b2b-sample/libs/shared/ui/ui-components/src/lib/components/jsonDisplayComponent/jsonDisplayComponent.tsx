@@ -16,8 +16,8 @@
  * under the License.
  */
 
-import { JsonDisplayComponentProps } from "../../models/jsonDisplayComponent/jsonDisplayComponent";
 import styles from "./jsonDisplayComponent.module.css";
+import { JsonDisplayComponentProps } from "../../models/jsonDisplayComponent/jsonDisplayComponent";
 
 export function JsonDisplayComponent(prop: JsonDisplayComponentProps) {
     const { jsonObject } = prop;

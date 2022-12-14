@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { Application, ApplicationList, checkIfIdpIsinAuthSequence, IdentityProvider } from
+import { Application, ApplicationList, IdentityProvider, checkIfIdpIsinAuthSequence } from
     "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import {
     controllerDecodeDeleteIdentityProvider, controllerDecodeGetApplication,

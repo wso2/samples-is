@@ -16,7 +16,8 @@
  * under the License.
  */
 
-import { Application, IdentityProvider, PatchApplicationAuthMethod } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
+import { Application, IdentityProvider, PatchApplicationAuthMethod } from
+    "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { controllerDecodePatchApplicationAuthSteps } from
     "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
@@ -59,7 +60,7 @@ export default function ConfirmAddRemoveLoginFlowModal(props: ConfirmAddRemoveLo
 
     const toaster: Toaster = useToaster();
 
-    const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
+    const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
 
     const onSuccess = (): void => {
         onModalClose();
@@ -106,8 +107,8 @@ export default function ConfirmAddRemoveLoginFlowModal(props: ConfirmAddRemoveLo
 
     return (
         <Modal
-            open={openModal}
-            onClose={onModalClose}>
+            open={ openModal }
+            onClose={ onModalClose }>
             <Modal.Header>
                 <Modal.Title><b>
                     {
@@ -122,23 +123,23 @@ export default function ConfirmAddRemoveLoginFlowModal(props: ConfirmAddRemoveLo
                     checkIfJSONisEmpty(applicationDetail)
                         ? <EmptySelectApplicationBody />
                         : (<ApplicationListAvailable
-                            applicationDetail={applicationDetail}
-                            idpIsinAuthSequence={idpIsinAuthSequence} />)
+                            applicationDetail={ applicationDetail }
+                            idpIsinAuthSequence={ idpIsinAuthSequence } />)
                 }
             </Modal.Body>
             <Modal.Footer>
                 <Button
-                    onClick={idpIsinAuthSequence ? onRemove : onAdd}
-                    className={stylesSettings.addUserButton}
+                    onClick={ idpIsinAuthSequence ? onRemove : onAdd }
+                    className={ stylesSettings.addUserButton }
                     appearance="primary">
                     Confirm
                 </Button>
-                <Button onClick={onModalClose} className={stylesSettings.addUserButton} appearance="ghost">
+                <Button onClick={ onModalClose } className={ stylesSettings.addUserButton } appearance="ghost">
                     Cancel
                 </Button>
             </Modal.Footer>
 
-            <div style={loadingDisplay}>
+            <div style={ loadingDisplay }>
                 <Loader size="lg" backdrop content="Idp is adding to the login flow" vertical />
             </div>
 
@@ -156,7 +157,7 @@ function EmptySelectApplicationBody() {
     return (
         <div >
             <p>No Application Available</p>
-            <div style={{ marginLeft: "5px" }}>
+            <div style={ { marginLeft: "5px" } }>
                 <div>Create an application from the WSO2 IS or Asgardeo Console app to add authentication.</div>
                 <p>For more details check out the following links</p>
                 <ul>
@@ -195,7 +196,7 @@ function ApplicationListAvailable(props: ApplicationListAvailableProps) {
             {
                 idpIsinAuthSequence
                     ? null
-                    : <ApplicationListItem applicationDetail={applicationDetail} />
+                    : <ApplicationListItem applicationDetail={ applicationDetail } />
             }
 
             <p>Please confirm your action to procced</p>
@@ -216,16 +217,16 @@ function ApplicationListItem(props: ApplicationListItemProps) {
     const { applicationDetail } = props;
 
     return (
-        <div style={{ marginBottom: 15, marginTop: 15 }}>
+        <div style={ { marginBottom: 15, marginTop: 15 } }>
             <Grid fluid>
                 <Row>
                     <Col>
-                        <Avatar>{applicationDetail.name[0]}</Avatar>
+                        <Avatar>{ applicationDetail.name[0] }</Avatar>
                     </Col>
 
                     <Col>
-                        <div>{applicationDetail.name}</div>
-                        <p>{applicationDetail.description}</p>
+                        <div>{ applicationDetail.name }</div>
+                        <p>{ applicationDetail.description }</p>
                     </Col>
                 </Row>
             </Grid>
