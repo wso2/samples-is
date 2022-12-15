@@ -47,7 +47,7 @@ const wso2ISProvider = (req: NextApiRequest, res: NextApiResponse) => NextAuth(r
             return token;
         },
         async redirect({ baseUrl }) {
-
+            
             return `${baseUrl}/o/moveOrg`;
         },
         async session({ session, token }) {
