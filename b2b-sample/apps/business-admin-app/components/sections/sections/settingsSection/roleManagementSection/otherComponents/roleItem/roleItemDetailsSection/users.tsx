@@ -97,7 +97,6 @@ export default function Users(props: UsersProps) {
     };
 
     const onUpdate = async (values: Record<string, string | string[]>, form) => {
-
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
         controllerDecodePatchRole(session, roleDetails.meta.location, PatchMethod.REPLACE, "users", values.users)
             .then((response) => onDataSubmit(response, form))
