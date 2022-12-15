@@ -27,7 +27,13 @@ import RoleManagementSectionComponent from
     "./sections/settingsSection/roleManagementSection/roleManagementSectionComponent";
 import sideNavData from "../../../../libs/business-admin-app/ui/ui-assets/src/lib/data/sideNav.json";
 import Custom500 from "../../pages/500";
+import { Session } from "next-auth";
 
+interface HomeProps {
+    name : string,
+    orgId : string,
+    session: Session
+}
 
 /**
  * 
@@ -35,9 +41,9 @@ import Custom500 from "../../pages/500";
  *
  * @returns The home section. Mainly side nav bar and the section to show other settings sections.
  */
-export default function Home(prop) : JSX.Element {
+export default function Home(props: HomeProps) : JSX.Element {
 
-    const { name, orgId, session } = prop;
+    const { name, orgId, session } = props;
 
     const [ activeKeySideNav, setActiveKeySideNav ] = useState("2-1");
     const [ signOutModalOpen, setSignOutModalOpen ] = useState(false);

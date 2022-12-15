@@ -16,6 +16,8 @@
  * under the License.
  */
 
+import { SideNavItem, SideNavList } from "@b2bsample/shared/data-access/data-access-common-models-util";
+
 export const LOADING_DISPLAY_NONE = {
     display: "none"
 };
@@ -23,6 +25,57 @@ export const LOADING_DISPLAY_BLOCK = {
     display: "block"
 };
 
+/**
+ * 
+ * @param scopes - scopes of the user
+ * @param itemScopes - scopes that required for this section
+ * 
+ * @returns `true` if user has the necessary scopes, else `false`
+ */
+function hideBasesdOnScopesSideNavItems(scopes: string[],itemScopes: string[]): boolean {
+    return scopes.every(scope=>itemScopes?.includes(scope));
+}
+
+/**
+ * hide content based on the user's realated privilages
+ * 
+ * @param scopes - scopes related for the user
+ * 
+ * @returns `LOADING_DISPLAY_BLOCK` if admin, else `LOADING_DISPLAY_NONE` 
+ */
+export function hideBasedOnScopes(scopes: string, sideNavType: string, sideNavItems?: SideNavItem[],
+    itemScopes?: string[]): Record<string, string> {
+
+    const scopesList: string[] = scopes.split(/\s+/);
+
+    switch (sideNavType) {
+        case "item":
+            if(hideBasesdOnScopesSideNavItems(scopesList, itemScopes as string[])){
+
+                return LOADING_DISPLAY_BLOCK;
+            } else {
+
+                return LOADING_DISPLAY_NONE;
+            }
+        
+        case "menu": {
+            let check: Record<string, string> = LOADING_DISPLAY_NONE;
+            sideNavItems?.every(sideNavItem => {
+                if(hideBasesdOnScopesSideNavItems(scopesList, sideNavItem.scopes as string[])) {
+                    check = LOADING_DISPLAY_BLOCK;
+                    return;
+                } 
+               
+            });
+            return check;
+
+        }
+    
+        default:
+            return LOADING_DISPLAY_NONE;
+    }
+}
+
 export default {
-    LOADING_DISPLAY_NONE, LOADING_DISPLAY_BLOCK
+    LOADING_DISPLAY_NONE, LOADING_DISPLAY_BLOCK, hideBasedOnScopes
 };

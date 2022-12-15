@@ -1,7 +1,7 @@
 {
     "CommonConfig": {
         "AuthorizationConfig": {
-            "BaseOrganizationUrl": "<PARENT ORGANIZATION URL> ex: https://dev.api.asgardeo.io/t/guardio"
+            "BaseOrganizationUrl": "https://dev.api.asgardeo.io/t/guardioi"
         },
         "ApplicationConfig": {
             "SampleOrganization": [
@@ -14,8 +14,8 @@
     },
     "BusinessAppConfig": {
         "AuthorizationConfig": {
-            "ClientId": "<CLIENT ID OF THE BUSINESS APP>",
-            "ClientSecret": "<CLIENT SECRET OF THE BUSINESS APP>"
+            "ClientId": "3IUFkGr4sjfDRXDm5z9fm34PgMwa",
+            "ClientSecret": "EI3KG6Z1PhnBqohWbt1P7qZA7Dsa"
         },
         "ApplicationConfig": {
             "HostedUrl": "http://localhost:3000",
@@ -43,18 +43,19 @@
                 "internal_group_mgt_update"
             ],
             "Branding": {
-                "name": "Guardio Insurance",
+                "name": "Easy Meeting",
                 "tag": "Anytime . Anywhere"
             }
         },
         "ManagementAPIConfig": {
-            "SharedApplicationName": "<SHARED APPLICATION NAME FOR BUSINESS APP> ex: guardio-app"
+            "SharedApplicationName": "EasyMeeting",
+            "UserStore" : "DEFAULT"
         }
     },
     "BusinessAdminAppConfig": {
         "AuthorizationConfig": {
-            "ClientId": "<CLIENT ID OF THE BUSINESS ADMIN APP>",
-            "ClientSecret": "<CLIENT SECRET OF THE BUSINESS ADMIN APP>"
+            "ClientId": "3i3NnXzEreOgeIT9pXdz5cZ52EIa",
+            "ClientSecret": "ajJMUHQgf8pQNCKUUFm4ClAKiwQa"
         },
         "ApplicationConfig": {
             "HostedUrl": "http://localhost:3001",
@@ -82,7 +83,7 @@
                 "internal_group_mgt_update"
             ],
             "Branding": {
-                "name": "Guardio Insurance - Administrator Application",
+                "name": "Easy Meeting - Administrator Application",
                 "tag": "Administrator Application"
             }
         }

@@ -46,15 +46,20 @@ export async function getServerSideProps(context) {
     }
 }
 
+interface MoveOrgProps {
+    orgId : string,
+    orgName : string
+}
+
 /**
  * 
  * @param prop - orgId, orgName
  * 
  * @returns Interface to call organization switch function
  */
-export default function MoveOrg(prop) {
+export default function MoveOrg(props: MoveOrgProps) {
 
-    const { orgId, orgName } = prop;
+    const { orgId, orgName } = props;
 
     const router = useRouter();
 
