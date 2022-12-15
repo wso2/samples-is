@@ -125,12 +125,7 @@ export default function ManageUserSectionComponent(props: ManageUserSectionCompo
                         </Column>
 
                         <Column flexGrow={ 2 } align="center">
-                            <HeaderCell><h6>User Name</h6></HeaderCell>
-                            <Cell dataKey="username" />
-                        </Column>
-
-                        <Column flexGrow={ 2 } align="center">
-                            <HeaderCell><h6>Email</h6></HeaderCell>
+                            <HeaderCell><h6>Email (Username)</h6></HeaderCell>
                             <Cell dataKey="email" />
                         </Column>
 

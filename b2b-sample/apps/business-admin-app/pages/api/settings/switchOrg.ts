@@ -26,7 +26,7 @@ import config from "../../../../../config.json";
  */
 const getBasicAuth = (): string => Buffer
     // eslint-disable-next-line
-    .from(`${config.BusinessAppConfig.AuthorizationConfig.ClientId}:${config.BusinessAppConfig.AuthorizationConfig.ClientSecret}`).toString("base64");
+    .from(`${config.BusinessAdminAppConfig.AuthorizationConfig.ClientId}:${config.BusinessAdminAppConfig.AuthorizationConfig.ClientSecret}`).toString("base64");
 
 /**
  * 
@@ -55,7 +55,7 @@ const getSwitchHeader = (): HeadersInit => {
 const getSwitchBody = (subOrgId: string, accessToken: string): Record<string, string> => {
     const body = {
         "grant_type": "organization_switch",
-        "scope": config.BusinessAppConfig.ApplicationConfig.APIScopes.join(" "),
+        "scope": config.BusinessAdminAppConfig.ApplicationConfig.APIScopes.join(" "),
         "switching_organization": subOrgId,
         "token": accessToken
     };
