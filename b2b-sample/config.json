@@ -10,9 +10,6 @@
                     "name": "<SUB ORGANIZATION NAME>"
                 }
             ]
-        },
-        "ManagementAPIConfig": {
-            "ImageBaseUrl" : "<IMAGE BASE URL - FOLLOW README.MD FOR MORE INFORMATION>"
         }
     },
     "BusinessAppConfig": {
