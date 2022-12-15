@@ -20,6 +20,13 @@ import React from "react";
 import { FlexboxGrid, PanelGroup } from "rsuite";
 import RoleItem from "./roleItem/roleItem";
 import styles from "../../../../../../styles/idp.module.css";
+import { Session } from "next-auth";
+import { Role } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
+
+interface RolesListProps {
+    session : Session
+    rolesList : Role[]
+}
 
 /**
  * 
@@ -27,9 +34,9 @@ import styles from "../../../../../../styles/idp.module.css";
  *
  * @returns List of all the roles in an organization
  */
-export default function RolesList(prop) {
+export default function RolesList(props: RolesListProps) {
 
-    const { session, rolesList } = prop;
+    const { session, rolesList } = props;
 
     return (
         <FlexboxGrid

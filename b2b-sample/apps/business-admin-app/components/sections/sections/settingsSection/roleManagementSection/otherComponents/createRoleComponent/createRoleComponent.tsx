@@ -25,16 +25,24 @@ import General from "./createRoleComponentInner/general";
 import Permission from "./createRoleComponentInner/permission";
 import Users from "./createRoleComponentInner/users";
 import styles from "../../../../../../../styles/Settings.module.css";
+import { Session } from "next-auth";
+import { Role } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
+
+interface CreateRoleComponentProps {
+    open: boolean,
+    setOpenCreateRoleModal: React.Dispatch<React.SetStateAction<boolean>>,
+    session: Session
+}
 
 export default function CreateRoleComponent(prop) {
 
     const { open, setOpenCreateRoleModal, session } = prop;
 
-    const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
-    const [ step, setStep ] = useState(0);
-    const [ displayName, setDisplayName ] = useState("");
-    const [ permissions, setPermissions ] = useState([]);
-    const [ users, setUsers ] = useState([]);
+    const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
+    const [step, setStep] = useState<number>(0);
+    const [displayName, setDisplayName] = useState<string>("");
+    const [permissions, setPermissions] = useState<string[]>([]);
+    const [users, setUsers] = useState<string[]>([]);
 
     const toaster = useToaster();
 
@@ -43,11 +51,13 @@ export default function CreateRoleComponent(prop) {
      * 
      * @param nextStep - next step
      */
-    const onChange = (nextStep) => {
+    const onChange = (nextStep: number): void => {
         setStep(nextStep < 0 ? 0 : nextStep > 3 ? 3 : nextStep);
     };
-    const onPrevious = () => onChange(step - 1);
-    const onNext = () => {
+
+    const onPrevious = (): void => onChange(step - 1);
+
+    const onNext = (): void => {
         if (step == 2) {
 
             onSubmit(displayName, permissions, users);
@@ -57,7 +67,7 @@ export default function CreateRoleComponent(prop) {
         }
     };
 
-    const onDataSubmit = (response) => {
+    const onDataSubmit = (response: Role): void => {
         if (response) {
             successTypeDialog(toaster, "Changes Saved Successfully", "Role created successfully.");
             onCreateRoleModalClose();
@@ -66,7 +76,7 @@ export default function CreateRoleComponent(prop) {
         }
     };
 
-    const onSubmit = async (displayName, permissions, users) => {
+    const onSubmit = async (displayName, permissions, users): Promise<void> => {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
         await controllerDecodeCreateRole(session, displayName, permissions, users)
             .then((response) => onDataSubmit(response))
@@ -77,7 +87,7 @@ export default function CreateRoleComponent(prop) {
     /**
      *  callback function on create role modal close
      */
-    const onCreateRoleModalClose = () => {
+    const onCreateRoleModalClose = (): void => {
         setOpenCreateRoleModal(false);
         setStep(0);
         setDisplayName("");
@@ -85,37 +95,37 @@ export default function CreateRoleComponent(prop) {
         setUsers([]);
     };
 
-    const craeteRoleItemDetailsComponent = (currentStep) => {
+    const craeteRoleItemDetailsComponent = (currentStep: number): JSX.Element => {
 
         switch (currentStep) {
             case 0:
 
                 return (<General
-                    displayName={ displayName }
-                    setDisplayName={ setDisplayName }
-                    onNext={ onNext } />);
+                    displayName={displayName}
+                    setDisplayName={setDisplayName}
+                    onNext={onNext} />);
 
             case 1:
 
                 return (<Permission
-                    permissions={ permissions }
-                    setPermissions={ setPermissions }
-                    onNext={ onNext }
-                    onPrevious={ onPrevious } />);
+                    permissions={permissions}
+                    setPermissions={setPermissions}
+                    onNext={onNext}
+                    onPrevious={onPrevious} />);
 
             case 2:
 
                 return (<Users
-                    assignedUsers={ users }
-                    setAssignedUsers={ setUsers }
-                    session={ session }
-                    onNext={ onNext }
-                    onPrevious={ onPrevious } />);
+                    assignedUsers={users}
+                    setAssignedUsers={setUsers}
+                    session={session}
+                    onNext={onNext}
+                    onPrevious={onPrevious} />);
         }
     };
 
     return (
-        <Modal backdrop="static" role="alertdialog" open={ open } onClose={ onCreateRoleModalClose } size="md">
+        <Modal backdrop="static" role="alertdialog" open={open} onClose={onCreateRoleModalClose} size="md">
             <Modal.Header>
                 <Modal.Title>
                     <b>Create Role</b>
@@ -124,21 +134,21 @@ export default function CreateRoleComponent(prop) {
             </Modal.Header>
 
             <Modal.Body>
-                <Steps current={ step } small>
+                <Steps current={step} small>
                     <Steps.Item title="Basic Details" />
                     <Steps.Item title="Permission Selection" />
                     <Steps.Item title="Users Selection" />
                 </Steps>
-                <div className={ styles.addUserMainDiv }>
+                <div className={styles.addUserMainDiv}>
                     <Panel bordered>
 
-                        { craeteRoleItemDetailsComponent(step) }
+                        {craeteRoleItemDetailsComponent(step)}
 
                     </Panel>
                 </div>
             </Modal.Body>
 
-            <div style={ loadingDisplay }>
+            <div style={loadingDisplay}>
                 <Loader size="lg" backdrop content="Role is creating" vertical />
             </div>
         </Modal>

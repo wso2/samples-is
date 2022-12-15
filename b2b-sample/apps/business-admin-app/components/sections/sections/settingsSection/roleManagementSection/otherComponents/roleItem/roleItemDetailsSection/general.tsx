@@ -16,15 +16,23 @@
  * under the License.
  */
 
+import { Role } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { controllerDecodePatchRole } from "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { HelperTextComponent, errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
 import { PatchMethod, checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "@b2bsample/shared/util/util-front-end-util";
+import { Session } from "next-auth";
 import React, { useState } from "react";
 import { Field, Form } from "react-final-form";
 import { Button, ButtonToolbar, Loader, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
 import styles from "../../../../../../../../styles/Settings.module.css";
+
+interface GeneralProps {
+    fetchData : () => Promise<void>,
+    session : Session,
+    roleDetails : Role
+}
 
 /**
  * 
@@ -32,9 +40,9 @@ import styles from "../../../../../../../../styles/Settings.module.css";
  * 
  * @returns The general section of role details
  */
-export default function General(prop) {
+export default function General(props: GeneralProps) {
 
-    const { fetchData, session, roleDetails } = prop;
+    const { fetchData, session, roleDetails } = props;
 
     const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
 

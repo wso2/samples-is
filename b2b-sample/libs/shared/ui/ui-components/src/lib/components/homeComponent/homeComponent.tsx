@@ -16,11 +16,10 @@
  * under the License.
  */
 
-import React from "react";
-import styles from "./homeComponent.module.css";
 import { HomeComponentProps } from "../../models/homeComponent/homeComponent";
 import MainPanelComponent from "../mainPanelComponent/mainPanelComponent";
 import SidenavComponent from "../sidenavComponent/sidenavComponent";
+import styles from "./homeComponent.module.css";
 
 export function HomeComponent(prop: HomeComponentProps) {
 

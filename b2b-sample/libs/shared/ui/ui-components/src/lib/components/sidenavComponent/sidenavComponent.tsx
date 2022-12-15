@@ -65,7 +65,9 @@ export function SidenavComponent(prop: SidenavComponentProps) {
                                             eventKey={item.eventKey}
                                             title={item.title}
                                             icon={getIcon(item.icon)}
-                                            style={item.hideBasedOnScope ? hideBasedOnScopes(scope, item.type, item.items) : {}}
+                                            style={item.hideBasedOnScope
+                                                ? hideBasedOnScopes(scope, item.type, item.items)
+                                                : {}}
                                             key={item.eventKey}>
                                             {
                                                 item.items.map((item) =>
@@ -105,6 +107,5 @@ export function SidenavComponent(prop: SidenavComponentProps) {
         </div>
     );
 }
-
 
 export default SidenavComponent;

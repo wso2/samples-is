@@ -16,10 +16,12 @@
  * under the License.
  */
 
+import { Role } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { controllerDecodePatchRole } from "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
 import { PatchMethod } from "@b2bsample/shared/util/util-common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "@b2bsample/shared/util/util-front-end-util";
+import { Session } from "next-auth";
 import React, { useCallback, useEffect, useState } from "react";
 import { Field, Form } from "react-final-form";
 import { Button, ButtonToolbar, CheckTree, Loader, useToaster } from "rsuite";
@@ -27,30 +29,36 @@ import FormSuite from "rsuite/Form";
 import styles from "../../../../../../../../styles/Settings.module.css";
 import orgRolesData from "../../../data/orgRolesData.json";
 
+interface PermissionProps {
+    fetchData: () => Promise<void>,
+    session: Session,
+    roleDetails: Role
+}
+
 /**
  * 
  * @param prop - `fetchData` - function , `session`, `roleDetails` - Object
  * 
  * @returns The permission section of role details
  */
-export default function Permission(prop) {
+export default function Permission(props: PermissionProps) {
 
-    const { fetchData, session, roleDetails } = prop;
+    const { fetchData, session, roleDetails } = props;
 
-    const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
-    const [ selectedPermissions, setSelectedPermissions ] = useState<string[]>([]);
+    const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
+    const [selectedPermissions, setSelectedPermissions] = useState<string[]>([]);
 
     const toaster = useToaster();
 
     const setInitialPermissions = useCallback(async () => {
-        if(roleDetails.permissions) {
+        if (roleDetails.permissions) {
             setSelectedPermissions(roleDetails.permissions);
         }
-    }, [ roleDetails ]);
+    }, [roleDetails]);
 
     useEffect(() => {
         setInitialPermissions();
-    }, [ setInitialPermissions ]);
+    }, [setInitialPermissions]);
 
     const onDataSubmit = (response, form) => {
         if (response) {
@@ -72,49 +80,49 @@ export default function Permission(prop) {
     };
 
     return (
-        <div className={ styles.addUserMainDiv }>
+        <div className={styles.addUserMainDiv}>
 
             <div>
                 {
                     selectedPermissions
                         ? (<Form
-                            onSubmit={ onUpdate }
-                            initialValues={ {
+                            onSubmit={onUpdate}
+                            initialValues={{
                                 permissions: selectedPermissions
-                            } }
-                            render={ ({ handleSubmit, form, submitting, pristine }) => (
+                            }}
+                            render={({ handleSubmit, form, submitting, pristine }) => (
                                 <FormSuite
                                     layout="vertical"
-                                    className={ styles.addUserForm }
-                                    onSubmit={ () => { handleSubmit().then(form.restart); } }
+                                    className={styles.addUserForm}
+                                    onSubmit={() => { handleSubmit().then(form.restart); }}
                                     fluid>
 
                                     <Field
                                         name="permissions"
-                                        render={ ({ input }) => (
+                                        render={({ input }) => (
                                             <FormSuite.Group controlId="checkbox">
                                                 <FormSuite.Control
-                                                    { ...input }
+                                                    {...input}
                                                     name="checkbox"
-                                                    accepter={ CheckTree }
-                                                    data={ orgRolesData }
-                                                    defaultExpandItemValues={ [ "/permission" ] }
+                                                    accepter={CheckTree}
+                                                    data={orgRolesData}
+                                                    defaultExpandItemValues={["/permission"]}
                                                     cascade
                                                 />
                                                 <FormSuite.HelpText>Assign permission for the role</FormSuite.HelpText>
                                             </FormSuite.Group>
-                                        ) }
+                                        )}
                                     />
 
                                     <div className="buttons">
                                         <FormSuite.Group>
                                             <ButtonToolbar>
                                                 <Button
-                                                    className={ styles.addUserButton }
+                                                    className={styles.addUserButton}
                                                     size="lg"
                                                     appearance="primary"
                                                     type="submit"
-                                                    disabled={ submitting || pristine }>
+                                                    disabled={submitting || pristine}>
                                                     Update
                                                 </Button>
                                             </ButtonToolbar>
@@ -122,14 +130,14 @@ export default function Permission(prop) {
 
                                     </div>
                                 </FormSuite>
-                            ) }
+                            )}
                         />)
                         : null
                 }
 
             </div>
 
-            <div style={ loadingDisplay }>
+            <div style={loadingDisplay}>
                 <Loader size="lg" backdrop content="role is updating" vertical />
             </div>
         </div>
