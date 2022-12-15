@@ -33,7 +33,7 @@ import { controllerCallEditUser } from "./controllerCallEditUser";
  * @returns - whether the edit of the user is successful or not
  */
 export async function controllerDecodeEditUser(
-    session: Session, id: string, firstName: string, familyName: string, email: string, username: string)
+    session: Session, id: string, firstName: string, familyName: string, email: string)
     : Promise<User | null> {
 
     const editUserEncode: SendEditUser = {
@@ -51,7 +51,7 @@ export async function controllerDecodeEditUser(
                         "familyName": familyName,
                         "givenName": firstName
                     },
-                    "userName": setUsername(username)
+                    "userName": setUsername(email)
                 }
             }
         ],

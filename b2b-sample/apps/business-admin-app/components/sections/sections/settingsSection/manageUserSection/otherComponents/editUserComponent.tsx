@@ -138,7 +138,7 @@ export default function EditUserComponent(prop: EditUserComponentProps) {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
 
         await controllerDecodeEditUser(session, user.id, values.firstName as string, values.familyName as string,
-            values.email as string, values.username as string)
+            values.email as string)
             .then((response) => {
                 if (initUserRolesForForm) {
                     if (response) {
@@ -203,21 +203,11 @@ export default function EditUserComponent(prop: EditUserComponentProps) {
 
                                 <FormField
                                     name="email"
-                                    label="Email"
+                                    label="Email (Username)"
                                     helperText="Email of the user."
                                     needErrorMessage={ true }
                                 >
                                     <FormSuite.Control name="input" type="email" />
-                                </FormField>
-
-
-                                <FormField
-                                    name="username"
-                                    label="Username"
-                                    helperText="Username of the user."
-                                    needErrorMessage={ true }
-                                >
-                                    <FormSuite.Control name="input" />
                                 </FormField>
 
                                 {
