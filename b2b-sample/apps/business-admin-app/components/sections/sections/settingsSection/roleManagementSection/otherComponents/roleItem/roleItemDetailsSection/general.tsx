@@ -18,20 +18,21 @@
 
 import { Role } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { controllerDecodePatchRole } from "@b2bsample/business-admin-app/data-access/data-access-controller";
+import { FormButtonToolbar, FormField } from "@b2bsample/shared/ui/ui-basic-components";
 import { HelperTextComponent, errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
 import { PatchMethod, checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
-import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "@b2bsample/shared/util/util-front-end-util";
+import { fieldValidate, LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "@b2bsample/shared/util/util-front-end-util";
 import { Session } from "next-auth";
 import React, { useState } from "react";
 import { Field, Form } from "react-final-form";
-import { Button, ButtonToolbar, Loader, useToaster } from "rsuite";
+import { Button, ButtonToolbar, Loader, Toaster, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
 import styles from "../../../../../../../../styles/Settings.module.css";
 
 interface GeneralProps {
-    fetchData : () => Promise<void>,
-    session : Session,
-    roleDetails : Role
+    fetchData: () => Promise<void>,
+    session: Session,
+    roleDetails: Role
 }
 
 /**
@@ -44,28 +45,19 @@ export default function General(props: GeneralProps) {
 
     const { fetchData, session, roleDetails } = props;
 
-    const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
+    const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
 
-    const toaster = useToaster();
+    const toaster: Toaster = useToaster();
 
-    const nameValidate = (name, errors) => {
-        if (!name) {
-            errors.name = "This field cannot be empty";
-        }
+    const validate = (values: Record<string, unknown>): Record<string, string> => {
+        let errors: Record<string, string> = {};
 
-        return errors;
-    };
-
-
-    const validate = values => {
-        let errors = {};
-
-        errors = nameValidate(values.name, errors);
+        errors = fieldValidate("name", values.name, errors);
 
         return errors;
     };
 
-    const onDataSubmit = (response, form) => {
+    const onDataSubmit = (response: Role, form) => {
         if (response) {
             successTypeDialog(toaster, "Changes Saved Successfully", "Role updated successfully.");
             fetchData();
@@ -75,73 +67,54 @@ export default function General(props: GeneralProps) {
         }
     };
 
-    const onUpdate = async (values, form) => {
+    const onUpdate = async (values: Record<string, string>, form) => {
 
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
         controllerDecodePatchRole(
-            session, roleDetails.meta.location, PatchMethod.REPLACE, "displayName", [ values.name ])
+            session, roleDetails.meta.location, PatchMethod.REPLACE, "displayName", [values.name])
             .then((response) => onDataSubmit(response, form))
             .finally(() => setLoadingDisplay(LOADING_DISPLAY_NONE));
     };
 
     return (
-        <div className={ styles.addUserMainDiv }>
+        <div className={styles.addUserMainDiv}>
 
             <div>
                 <Form
-                    onSubmit={ onUpdate }
-                    validate={ validate }
-                    initialValues={ {
+                    onSubmit={onUpdate}
+                    validate={validate}
+                    initialValues={{
                         name: roleDetails.displayName
-                    } }
-                    render={ ({ handleSubmit, form, submitting, pristine, errors }) => (
+                    }}
+                    render={({ handleSubmit, form, submitting, pristine, errors }) => (
                         <FormSuite
                             layout="vertical"
-                            className={ styles.addUserForm }
-                            onSubmit={ () => { handleSubmit().then(form.restart); } }
+                            className={styles.addUserForm}
+                            onSubmit={() => { handleSubmit().then(form.restart); }}
                             fluid>
 
-                            <Field
+                            <FormField
                                 name="name"
-                                render={ ({ input, meta }) => (
-                                    <FormSuite.Group controlId="name">
-                                        <FormSuite.ControlLabel>Name</FormSuite.ControlLabel>
+                                label="Name"
+                                helperText="The name of the role."
+                                needErrorMessage={true}
+                            >
+                                <FormSuite.Control name="input" />
+                            </FormField>
 
-                                        <FormSuite.Control
-                                            { ...input }
-                                        />
-
-                                        <HelperTextComponent text="The name of the role." />
-
-                                        { meta.error && meta.touched && (<FormSuite.ErrorMessage show={ true }  >
-                                            { meta.error }
-                                        </FormSuite.ErrorMessage>) }
-                                    </FormSuite.Group>
-                                ) }
+                            <FormButtonToolbar
+                                submitButtonText="Update"
+                                submitButtonDisabled={submitting || pristine || !checkIfJSONisEmpty(errors)}
+                                needCancel={false}
                             />
-
-                            <div className="buttons">
-                                <FormSuite.Group>
-                                    <ButtonToolbar>
-                                        <Button
-                                            className={ styles.addUserButton }
-                                            size="lg"
-                                            appearance="primary"
-                                            type="submit"
-                                            disabled={ submitting || pristine || !checkIfJSONisEmpty(errors) }>
-                                            Update
-                                        </Button>
-                                    </ButtonToolbar>
-                                </FormSuite.Group>
-
-                            </div>
+                            
                         </FormSuite>
-                    ) }
+                    )}
                 />
 
             </div>
 
-            <div style={ loadingDisplay }>
+            <div style={loadingDisplay}>
                 <Loader size="lg" backdrop content="role is updating" vertical />
             </div>
         </div>
