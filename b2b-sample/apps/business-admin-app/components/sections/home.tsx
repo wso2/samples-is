@@ -55,7 +55,7 @@ export default function Home(props: HomeProps) : JSX.Element {
                 return <ManageUserSectionComponent session={ session } />;
             case "2-2":
 
-                return <RoleManagementSectionComponent orgName={ name } orgId={ orgId } session={ session } />;
+                return <RoleManagementSectionComponent session={ session } />;
             case "2-3":
 
                 return <IdpSectionComponent session={ session } />;

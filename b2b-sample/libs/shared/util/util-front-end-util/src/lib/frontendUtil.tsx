@@ -16,7 +16,11 @@
  * under the License.
  */
 
-import { SideNavItem, SideNavList } from "@b2bsample/shared/data-access/data-access-common-models-util";
+import { SideNavItem } from "@b2bsample/shared/data-access/data-access-common-models-util";
+import DashboardIcon from "@rsuite/icons/legacy/Dashboard";
+import GearCircleIcon from "@rsuite/icons/legacy/GearCircle";
+import SettingHorizontalIcon from '@rsuite/icons/SettingHorizontal';
+import React from "react";
 
 export const LOADING_DISPLAY_NONE = {
     display: "none"
@@ -77,6 +81,23 @@ export function hideBasedOnScopes(scopes: string, sideNavType: string, sideNavIt
     }
 }
 
+export function getIconFromString(iconString: string | undefined): JSX.Element | undefined  {
+    switch (iconString) {
+        case "DashboardIcon":
+
+            return (<DashboardIcon />);
+        case "GearCircleIcon":
+
+            return (<GearCircleIcon />);
+        case "SettingHorizontalIcon":
+
+            return (<SettingHorizontalIcon />);
+        default:
+
+            return;
+    }
+};
+
 export default {
-    LOADING_DISPLAY_NONE, LOADING_DISPLAY_BLOCK, hideBasedOnScopes
+    LOADING_DISPLAY_NONE, LOADING_DISPLAY_BLOCK, hideBasedOnScopes, getIconFromString
 };

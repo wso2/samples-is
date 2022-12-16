@@ -1,6 +1,12 @@
 {
     "items": [
         {
+            "title": "Get Started",
+            "eventKey": "1",
+            "icon": "SettingHorizontalIcon",
+            "type": "menu"
+        },
+        {
             "title": "Settings",
             "eventKey": "2",
             "icon": "GearCircleIcon",

@@ -17,9 +17,7 @@
  */
 
 import { SideNavItem, SideNavList } from "@b2bsample/shared/data-access/data-access-common-models-util";
-import { hideBasedOnScopes } from "@b2bsample/shared/util/util-front-end-util";
-import DashboardIcon from "@rsuite/icons/legacy/Dashboard";
-import GearCircleIcon from "@rsuite/icons/legacy/GearCircle";
+import { getIconFromString, hideBasedOnScopes } from "@b2bsample/shared/util/util-front-end-util";
 import { Button, Nav, Sidenav } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
 import { SidenavComponentProps } from "../../models/sidenavComponent/sidenavComponent";
@@ -29,20 +27,6 @@ export function SidenavComponent(prop: SidenavComponentProps) {
     const { scope, sideNavData, activeKeySideNav, activeKeySideNavSelect, setSignOutModalOpen, logoComponent } = prop;
 
     const signOutOnClick = () => setSignOutModalOpen(true);
-
-    const getIcon = (iconString: string | undefined) => {
-        switch (iconString) {
-            case "DashboardIcon":
-
-                return (<DashboardIcon />);
-            case "GearCircleIcon":
-
-                return (<GearCircleIcon />);
-            default:
-
-                return;
-        }
-    };
 
     const sideNavConfigList: SideNavList = sideNavData;
 
@@ -64,7 +48,7 @@ export function SidenavComponent(prop: SidenavComponentProps) {
                                         <Nav.Menu
                                             eventKey={item.eventKey}
                                             title={item.title}
-                                            icon={getIcon(item.icon)}
+                                            icon={getIconFromString(item.icon)}
                                             style={item.hideBasedOnScope
                                                 ? hideBasedOnScopes(scope, item.type, item.items)
                                                 : {}}
@@ -90,7 +74,7 @@ export function SidenavComponent(prop: SidenavComponentProps) {
                                         <Nav.Item
                                             key={item.eventKey}
                                             eventKey={item.eventKey}
-                                            icon={getIcon(item.icon)}
+                                            icon={getIconFromString(item.icon)}
                                             onSelect={(eventKey) => activeKeySideNavSelect(eventKey)}>
                                             {item.title}
                                         </Nav.Item>
