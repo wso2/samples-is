@@ -130,7 +130,8 @@ export default function EditUserComponent(prop: EditUserComponentProps) {
             successTypeDialog(toaster, "Changes Saved Successfully", "User details edited successfully.");
             onClose();
         } else {
-            warningTypeDialog(toaster, "Roles not Updated", "Error occured while updating the roles. Try again.");
+            warningTypeDialog(toaster, "Roles not Properly Updated",
+                "Error occured while updating the roles. Try again.");
         }
     };
 
@@ -239,7 +240,7 @@ export default function EditUserComponent(prop: EditUserComponentProps) {
                                     submitButtonDisabled={ submitting || pristine || !checkIfJSONisEmpty(errors) }
                                     onCancel={ onClose }
                                 />
-                                
+
                             </FormSuite>
                         ) }
                     />

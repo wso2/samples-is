@@ -87,11 +87,11 @@ export function random_rgba(): string {
 /**
  * operations that we can do on PATCH methods
  */
-export const PatchMethod = {
-    ADD: "ADD",
-    REMOVE: "REMOVE",
-    REPLACE: "REPLACE"
-};
+export enum PatchMethod {
+    ADD = "ADD",
+    REMOVE = "REMOVE",
+    REPLACE = "REPLACE"
+}
 
 export const GOOGLE_ID = "google-idp";
 export const ENTERPRISE_ID = "enterprise-idp";

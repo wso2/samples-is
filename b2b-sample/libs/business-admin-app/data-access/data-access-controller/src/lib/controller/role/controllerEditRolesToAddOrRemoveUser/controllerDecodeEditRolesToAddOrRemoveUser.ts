@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { Role } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { PatchMethod } from "@b2bsample/shared/util/util-common";
 import { Session } from "next-auth";
 import { controllerDecodePatchRole } from "../controllerPatchRole/controllerDecodePatchRole";
@@ -28,22 +29,36 @@ function getRolesThatNeedToRemoveUser(initRoleList: string[], roleList: string[]
     return initRoleList.filter(roleUri => !roleList.includes(roleUri));
 }
 
-async function getRoleDetailsForAdd(session: Session, userId: string, initRoleList: string[], roleList: string[])
-    : Promise<void> {
-    const rolesUriList = getRolesThatNeedToAddUser(initRoleList, roleList);
+async function patchRoleDetails(session: Session, userId: string, rolesUriList: string[], patchMethod: PatchMethod)
+    : Promise<boolean> {
 
-    await rolesUriList.forEach(async (uri) => {
-        await controllerDecodePatchRole(session, uri, PatchMethod.ADD, "users", [ userId ]);
-    });
+    for (const uri in rolesUriList) {
+        const role: Role | null = await controllerDecodePatchRole(session, uri, patchMethod, "users", [ userId ]);
+
+        if (!role) {
+            console.log(false);
+
+            return false;
+        }
+    }
+
+    return true;
+}
+
+async function getRoleDetailsForAdd(session: Session, userId: string, initRoleList: string[], roleList: string[])
+    : Promise<boolean> {
+
+    const rolesUriList: string[] = getRolesThatNeedToAddUser(initRoleList, roleList);
+
+    return await patchRoleDetails(session, userId, rolesUriList, PatchMethod.ADD);
 }
 
 async function getRoleDetailsForRemove(session: Session, userId: string, initRoleList: string[]
-    , roleList: string[]): Promise<void> {
-    const rolesUriList = getRolesThatNeedToRemoveUser(initRoleList, roleList);
+    , roleList: string[]): Promise<boolean> {
 
-    await rolesUriList.forEach(async (uri) => {
-        await controllerDecodePatchRole(session, uri, PatchMethod.REMOVE, "users", userId);
-    });
+    const rolesUriList: string[] = getRolesThatNeedToRemoveUser(initRoleList, roleList);
+
+    return await patchRoleDetails(session, userId, rolesUriList, PatchMethod.REMOVE);
 }
 
 /**
@@ -55,15 +70,28 @@ async function getRoleDetailsForRemove(session: Session, userId: string, initRol
  * 
  * @returns - `true` if the operation is successfull, else `false`
  */
+// todo: need to fix controllerDecodeEditRolesToAddOrRemoveUser
 export async function controllerDecodeEditRolesToAddOrRemoveUser(
     session: Session, userId: string, initRoleList: string[], roleList: string[]): Promise<boolean> {
 
     try {
         return getRoleDetailsForAdd(session, userId, initRoleList, roleList)
             .then(
-                () => getRoleDetailsForRemove(session, userId, initRoleList, roleList)
-                    .then(() => true)
-                    .catch(() => false)
+                (res: boolean) => {
+                    if (res) {
+                        getRoleDetailsForRemove(session, userId, initRoleList, roleList)
+                            .then((res: boolean) => {
+                                if (res) {
+
+                                    return true;
+                                }
+
+                                return false;
+                            }).catch(() => false);
+                    }
+
+                    return false;
+                }
             ).catch(() => false);
 
     } catch (err) {
