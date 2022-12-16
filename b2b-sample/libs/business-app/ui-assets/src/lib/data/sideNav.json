@@ -1,0 +1,10 @@
+{
+    "items" : [
+        {
+            "title" : "Dashboard",
+            "eventKey" : "1",
+            "icon" : "DashboardIcon",
+            "type": "item"
+        }
+    ]
+}
