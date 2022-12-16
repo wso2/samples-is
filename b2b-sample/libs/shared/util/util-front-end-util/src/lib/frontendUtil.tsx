@@ -19,7 +19,7 @@
 import { SideNavItem } from "@b2bsample/shared/data-access/data-access-common-models-util";
 import DashboardIcon from "@rsuite/icons/legacy/Dashboard";
 import GearCircleIcon from "@rsuite/icons/legacy/GearCircle";
-import SettingHorizontalIcon from '@rsuite/icons/SettingHorizontal';
+import SettingHorizontalIcon from "@rsuite/icons/SettingHorizontal";
 
 export const LOADING_DISPLAY_NONE = {
     display: "none"
@@ -64,13 +64,16 @@ export function hideBasedOnScopes(scopes: string, sideNavType: string, sideNavIt
         
         case "menu": {
             let check: Record<string, string> = LOADING_DISPLAY_NONE;
+
             sideNavItems?.every(sideNavItem => {
                 if(hideBasesdOnScopesSideNavItems(scopesList, sideNavItem.scopes as string[])) {
                     check = LOADING_DISPLAY_BLOCK;
+
                     return;
                 } 
                
             });
+
             return check;
 
         }
@@ -95,7 +98,7 @@ export function getIconFromString(iconString: string | undefined): JSX.Element |
 
             return;
     }
-};
+}
 
 export default {
     LOADING_DISPLAY_NONE, LOADING_DISPLAY_BLOCK, hideBasedOnScopes, getIconFromString

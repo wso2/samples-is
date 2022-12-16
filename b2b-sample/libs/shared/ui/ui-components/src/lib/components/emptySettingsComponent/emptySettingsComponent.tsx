@@ -32,24 +32,24 @@ export function EmptySettingsComponent(prop: EmptySettingsComponentProps) {
 
     return (
         <FlexboxGrid
-            style={{ height: "60vh", marginTop: "24px", width: "100%" }}
+            style={ { height: "60vh", marginTop: "24px", width: "100%" } }
             justify="center"
             align="middle"
         >
             <Stack alignItems="center" direction="column">
-                {icon}
-                <p style={{ fontSize: 14, marginTop: "20px" }}>
-                    {bodyString}
+                { icon }
+                <p style={ { fontSize: 14, marginTop: "20px" } }>
+                    { bodyString }
                 </p>
                 {
                     onAddButtonClick
-                        ? <Button
+                        ? (<Button
                             appearance="primary"
-                            onClick={onAddButtonClick}
+                            onClick={ onAddButtonClick }
                             size="md"
-                            style={{ marginTop: "12px" }}>
-                            {buttonString}
-                        </Button>
+                            style={ { marginTop: "12px" } }>
+                            { buttonString }
+                        </Button>)
                         : null
                 }
 
