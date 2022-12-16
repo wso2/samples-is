@@ -20,7 +20,6 @@ import { SideNavItem } from "@b2bsample/shared/data-access/data-access-common-mo
 import DashboardIcon from "@rsuite/icons/legacy/Dashboard";
 import GearCircleIcon from "@rsuite/icons/legacy/GearCircle";
 import SettingHorizontalIcon from '@rsuite/icons/SettingHorizontal';
-import React from "react";
 
 export const LOADING_DISPLAY_NONE = {
     display: "none"
