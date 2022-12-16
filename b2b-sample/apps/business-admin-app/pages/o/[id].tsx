@@ -27,7 +27,7 @@ export async function getServerSideProps(context) {
     const routerQuery = context.query.id;
     const session = await getSession(context);
 
-    if (session === null || session === undefined) {
+    if (session === null || session === undefined|| session.error) {
 
         return {
             props: { routerQuery }
