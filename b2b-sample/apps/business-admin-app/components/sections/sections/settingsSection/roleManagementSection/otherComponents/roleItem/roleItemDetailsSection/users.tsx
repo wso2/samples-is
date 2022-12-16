@@ -61,9 +61,9 @@ export default function Users(props: UsersProps) {
         return [];
     };
 
-    const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
-    const [users, setUsers] = useState<InternalUser[]>(null);
-    const [initialAssignedUsers, setInitialAssignedUsers] = useState<string[]>([]);
+    const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
+    const [ users, setUsers ] = useState<InternalUser[]>(null);
+    const [ initialAssignedUsers, setInitialAssignedUsers ] = useState<string[]>([]);
 
     const toaster = useToaster();
 
@@ -71,20 +71,20 @@ export default function Users(props: UsersProps) {
         const res = await controllerDecodeViewUsers(session);
 
         await setUsers(res);
-    }, [session]);
+    }, [ session ]);
 
     const setInitialAssignedUserIds = useCallback(async () => {
 
         await setInitialAssignedUsers(getInitialAssignedUserIds(roleDetails.users));
-    }, [roleDetails]);
+    }, [ roleDetails ]);
 
     useEffect(() => {
         fetchAllUsers();
-    }, [fetchAllUsers]);
+    }, [ fetchAllUsers ]);
 
     useEffect(() => {
         setInitialAssignedUserIds();
-    }, [setInitialAssignedUserIds]);
+    }, [ setInitialAssignedUserIds ]);
 
     const onDataSubmit = (response: Role, form) => {
         if (response) {
@@ -104,55 +104,55 @@ export default function Users(props: UsersProps) {
     };
 
     return (
-        <div className={styles.addUserMainDiv}>
+        <div className={ styles.addUserMainDiv }>
 
             <div>
                 {
                     users
                         ? (<Form
-                            onSubmit={onUpdate}
-                            initialValues={{
+                            onSubmit={ onUpdate }
+                            initialValues={ {
                                 users: initialAssignedUsers
-                            }}
-                            render={({ handleSubmit, form, submitting, pristine }) => (
+                            } }
+                            render={ ({ handleSubmit, form, submitting, pristine }) => (
                                 <FormSuite
                                     layout="vertical"
-                                    className={styles.addUserForm}
-                                    onSubmit={() => { handleSubmit().then(form.restart); }}
+                                    className={ styles.addUserForm }
+                                    onSubmit={ () => { handleSubmit().then(form.restart); } }
                                     fluid>
 
                                     <FormField
                                         name="users"
                                         label=""
                                         helperText="Assign users for the role"
-                                        needErrorMessage={false}
+                                        needErrorMessage={ false }
                                     >
                                         <FormSuite.Control
                                             name="checkbox"
-                                            accepter={CheckboxGroup}
+                                            accepter={ CheckboxGroup }
                                         >
-                                            {users.map(user => (
-                                                <Checkbox key={user.id} value={user.id}>
-                                                    {user.username}
+                                            { users.map(user => (
+                                                <Checkbox key={ user.id } value={ user.id }>
+                                                    { user.username }
                                                 </Checkbox>
-                                            ))}
+                                            )) }
                                         </FormSuite.Control>
                                     </FormField>
 
                                     <FormButtonToolbar
                                         submitButtonText="Update"
-                                        submitButtonDisabled={submitting || pristine}
-                                        needCancel={false}
+                                        submitButtonDisabled={ submitting || pristine }
+                                        needCancel={ false }
                                     />
                                 </FormSuite>
-                            )}
+                            ) }
                         />)
                         : null
                 }
 
             </div>
 
-            <div style={loadingDisplay}>
+            <div style={ loadingDisplay }>
                 <Loader size="lg" backdrop content="role is updating" vertical />
             </div>
         </div>

@@ -23,9 +23,9 @@ import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-comp
 import { PatchMethod } from "@b2bsample/shared/util/util-common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "@b2bsample/shared/util/util-front-end-util";
 import { Session } from "next-auth";
-import React, { useCallback, useEffect, useState } from "react";
-import { Field, Form } from "react-final-form";
-import { Button, ButtonToolbar, CheckTree, Loader, Toaster, useToaster } from "rsuite";
+import { useCallback, useEffect, useState } from "react";
+import { Form } from "react-final-form";
+import { CheckTree, Loader, Toaster, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
 import styles from "../../../../../../../../styles/Settings.module.css";
 import orgRolesData from "../../../data/orgRolesData.json";
@@ -46,8 +46,8 @@ export default function Permission(props: PermissionProps) {
 
     const { fetchData, session, roleDetails } = props;
 
-    const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
-    const [selectedPermissions, setSelectedPermissions] = useState<string[]>([]);
+    const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
+    const [ selectedPermissions, setSelectedPermissions ] = useState<string[]>([]);
 
     const toaster: Toaster = useToaster();
 
@@ -55,11 +55,11 @@ export default function Permission(props: PermissionProps) {
         if (roleDetails.permissions) {
             setSelectedPermissions(roleDetails.permissions);
         }
-    }, [roleDetails]);
+    }, [ roleDetails ]);
 
     useEffect(() => {
         setInitialPermissions();
-    }, [setInitialPermissions]);
+    }, [ setInitialPermissions ]);
 
     const onDataSubmit = (response: Role, form) => {
         if (response) {
@@ -81,53 +81,53 @@ export default function Permission(props: PermissionProps) {
     };
 
     return (
-        <div className={styles.addUserMainDiv}>
+        <div className={ styles.addUserMainDiv }>
 
             <div>
                 {
                     selectedPermissions
                         ? (<Form
-                            onSubmit={onUpdate}
-                            initialValues={{
+                            onSubmit={ onUpdate }
+                            initialValues={ {
                                 permissions: selectedPermissions
-                            }}
-                            render={({ handleSubmit, form, submitting, pristine }) => (
+                            } }
+                            render={ ({ handleSubmit, form, submitting, pristine }) => (
                                 <FormSuite
                                     layout="vertical"
-                                    className={styles.addUserForm}
-                                    onSubmit={() => { handleSubmit().then(form.restart); }}
+                                    className={ styles.addUserForm }
+                                    onSubmit={ () => { handleSubmit().then(form.restart); } }
                                     fluid>
 
                                     <FormField
                                         name="permissions"
                                         label=""
                                         helperText="Assign permission for the role"
-                                        needErrorMessage={false}
+                                        needErrorMessage={ false }
                                     >
                                         <FormSuite.Control
                                             name="checkbox"
-                                            accepter={CheckTree}
-                                            data={orgRolesData}
-                                            defaultExpandItemValues={["/permission"]}
+                                            accepter={ CheckTree }
+                                            data={ orgRolesData }
+                                            defaultExpandItemValues={ [ "/permission" ] }
                                             cascade
                                         />
                                     </FormField>
 
                                     <FormButtonToolbar
                                         submitButtonText="Update"
-                                        submitButtonDisabled={submitting || pristine}
-                                        needCancel={false}
+                                        submitButtonDisabled={ submitting || pristine }
+                                        needCancel={ false }
                                     />
 
                                 </FormSuite>
-                            )}
+                            ) }
                         />)
                         : null
                 }
 
             </div>
 
-            <div style={loadingDisplay}>
+            <div style={ loadingDisplay }>
                 <Loader size="lg" backdrop content="role is updating" vertical />
             </div>
         </div>

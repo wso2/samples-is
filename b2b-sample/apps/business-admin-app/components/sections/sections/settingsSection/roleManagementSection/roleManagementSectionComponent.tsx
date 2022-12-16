@@ -21,10 +21,8 @@ import { controllerDecodeListAllRoles } from "@b2bsample/business-admin-app/data
 import { EmptySettingsComponent, SettingsTitleComponent } from "@b2bsample/shared/ui/ui-components";
 import PeoplesIcon from "@rsuite/icons/Peoples";
 import { Session } from "next-auth";
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Container } from "rsuite";
-import CreateRoleButton from "./otherComponents/createRoleButton";
-import CreateRoleComponent from "./otherComponents/createRoleComponent/createRoleComponent";
 import RolesList from "./otherComponents/rolesList";
 
 interface RoleManagementSectionComponentProps {

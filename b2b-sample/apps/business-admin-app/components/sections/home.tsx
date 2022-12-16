@@ -19,19 +19,19 @@
 import { LogoComponent } from "@b2bsample/business-admin-app/ui/ui-components";
 import { signout } from "@b2bsample/business-admin-app/util/util-authorization-config-util";
 import { FooterComponent, HomeComponent, SignOutComponent } from "@b2bsample/shared/ui/ui-components";
+import { Session } from "next-auth";
 import React, { useState } from "react";
 import "rsuite/dist/rsuite.min.css";
+import GetStartedSectionComponent from "./sections/getStartedSection/getStartedSectionComponent";
 import IdpSectionComponent from "./sections/settingsSection/idpSection/idpSectionComponent";
 import ManageUserSectionComponent from "./sections/settingsSection/manageUserSection/manageUserSectionComponent";
 import RoleManagementSectionComponent from
     "./sections/settingsSection/roleManagementSection/roleManagementSectionComponent";
 import sideNavData from "../../../../libs/business-admin-app/ui/ui-assets/src/lib/data/sideNav.json";
 import Custom500 from "../../pages/500";
-import { Session } from "next-auth";
 
 interface HomeProps {
     name : string,
-    orgId : string,
     session: Session
 }
 
@@ -43,13 +43,16 @@ interface HomeProps {
  */
 export default function Home(props: HomeProps) : JSX.Element {
 
-    const { name, orgId, session } = props;
+    const { name, session } = props;
 
     const [ activeKeySideNav, setActiveKeySideNav ] = useState("2-1");
     const [ signOutModalOpen, setSignOutModalOpen ] = useState(false);
 
     const mainPanelComponenet = (activeKey) : JSX.Element => {
         switch (activeKey) {
+            case "1":
+
+                return <GetStartedSectionComponent />;
             case "2-1":
 
                 return <ManageUserSectionComponent session={ session } />;

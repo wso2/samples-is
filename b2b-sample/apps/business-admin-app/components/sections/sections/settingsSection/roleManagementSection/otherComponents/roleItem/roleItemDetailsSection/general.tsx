@@ -19,13 +19,13 @@
 import { Role } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { controllerDecodePatchRole } from "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { FormButtonToolbar, FormField } from "@b2bsample/shared/ui/ui-basic-components";
-import { HelperTextComponent, errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
+import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
 import { PatchMethod, checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
-import { fieldValidate, LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "@b2bsample/shared/util/util-front-end-util";
+import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE, fieldValidate } from "@b2bsample/shared/util/util-front-end-util";
 import { Session } from "next-auth";
-import React, { useState } from "react";
-import { Field, Form } from "react-final-form";
-import { Button, ButtonToolbar, Loader, Toaster, useToaster } from "rsuite";
+import { useState } from "react";
+import { Form } from "react-final-form";
+import { Loader, Toaster, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
 import styles from "../../../../../../../../styles/Settings.module.css";
 
@@ -45,7 +45,7 @@ export default function General(props: GeneralProps) {
 
     const { fetchData, session, roleDetails } = props;
 
-    const [loadingDisplay, setLoadingDisplay] = useState(LOADING_DISPLAY_NONE);
+    const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
 
     const toaster: Toaster = useToaster();
 
@@ -71,50 +71,50 @@ export default function General(props: GeneralProps) {
 
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
         controllerDecodePatchRole(
-            session, roleDetails.meta.location, PatchMethod.REPLACE, "displayName", [values.name])
+            session, roleDetails.meta.location, PatchMethod.REPLACE, "displayName", [ values.name ])
             .then((response) => onDataSubmit(response, form))
             .finally(() => setLoadingDisplay(LOADING_DISPLAY_NONE));
     };
 
     return (
-        <div className={styles.addUserMainDiv}>
+        <div className={ styles.addUserMainDiv }>
 
             <div>
                 <Form
-                    onSubmit={onUpdate}
-                    validate={validate}
-                    initialValues={{
+                    onSubmit={ onUpdate }
+                    validate={ validate }
+                    initialValues={ {
                         name: roleDetails.displayName
-                    }}
-                    render={({ handleSubmit, form, submitting, pristine, errors }) => (
+                    } }
+                    render={ ({ handleSubmit, form, submitting, pristine, errors }) => (
                         <FormSuite
                             layout="vertical"
-                            className={styles.addUserForm}
-                            onSubmit={() => { handleSubmit().then(form.restart); }}
+                            className={ styles.addUserForm }
+                            onSubmit={ () => { handleSubmit().then(form.restart); } }
                             fluid>
 
                             <FormField
                                 name="name"
                                 label="Name"
                                 helperText="The name of the role."
-                                needErrorMessage={true}
+                                needErrorMessage={ true }
                             >
                                 <FormSuite.Control name="input" />
                             </FormField>
 
                             <FormButtonToolbar
                                 submitButtonText="Update"
-                                submitButtonDisabled={submitting || pristine || !checkIfJSONisEmpty(errors)}
-                                needCancel={false}
+                                submitButtonDisabled={ submitting || pristine || !checkIfJSONisEmpty(errors) }
+                                needCancel={ false }
                             />
                             
                         </FormSuite>
-                    )}
+                    ) }
                 />
 
             </div>
 
-            <div style={loadingDisplay}>
+            <div style={ loadingDisplay }>
                 <Loader size="lg" backdrop content="role is updating" vertical />
             </div>
         </div>

@@ -48,18 +48,18 @@ export default function RoleItem(props: RoleItemProps) {
 
     const { session, id, roleUri } = props;
 
-    const [roleDetails, setRoleDetails] = useState<Role>(null);
-    const [activeKeyNav, setActiveKeyNav] = useState<string>("1");
+    const [ roleDetails, setRoleDetails ] = useState<Role>(null);
+    const [ activeKeyNav, setActiveKeyNav ] = useState<string>("1");
 
     const fetchData = useCallback(async () => {
         const res = await controllerDecodeGetRole(session, roleUri);
 
         setRoleDetails(res);
-    }, [session, roleUri]);
+    }, [ session, roleUri ]);
 
     useEffect(() => {
         fetchData();
-    }, [fetchData]);
+    }, [ fetchData ]);
 
     const activeKeyNavSelect = (eventKey: string): void => {
         setActiveKeyNav(eventKey);
@@ -69,16 +69,16 @@ export default function RoleItem(props: RoleItemProps) {
         switch (activeKey) {
             case "1":
 
-                return <General session={session} roleDetails={roleDetails} fetchData={fetchData} />;
+                return <General session={ session } roleDetails={ roleDetails } fetchData={ fetchData } />;
             case "2":
 
-                return <Permission session={session} roleDetails={roleDetails} fetchData={fetchData} />;
+                return <Permission session={ session } roleDetails={ roleDetails } fetchData={ fetchData } />;
             case "3":
 
-                return <Users session={session} roleDetails={roleDetails} fetchData={fetchData} />;
+                return <Users session={ session } roleDetails={ roleDetails } fetchData={ fetchData } />;
             case "4":
 
-                return <JsonDisplayComponent jsonObject={roleDetails} />;
+                return <JsonDisplayComponent jsonObject={ roleDetails } />;
         }
     };
 
@@ -89,17 +89,17 @@ export default function RoleItem(props: RoleItemProps) {
             ? (<Panel
                 header={
                     (<AccordianItemHeaderComponent
-                        title={roleDetails.displayName}
-                        description={`Organization role ${roleDetails.displayName} details`} />)
+                        title={ roleDetails.displayName }
+                        description={ `Organization role ${roleDetails.displayName} details` } />)
                 }
-                eventKey={id}
-                id={id}>
-                <div style={{ marginLeft: "25px", marginRight: "25px" }}>
+                eventKey={ id }
+                id={ id }>
+                <div style={ { marginLeft: "25px", marginRight: "25px" } }>
                     <RoleItemNav
-                        activeKeyNav={activeKeyNav}
-                        activeKeyNavSelect={activeKeyNavSelect} />
+                        activeKeyNav={ activeKeyNav }
+                        activeKeyNavSelect={ activeKeyNavSelect } />
                     <div>
-                        {roleItemDetailsComponent(activeKeyNav)}
+                        { roleItemDetailsComponent(activeKeyNav) }
                     </div>
                 </div>
             </Panel>)
@@ -118,36 +118,36 @@ function RoleItemNav(props: RoleItemNavProps) {
     const { activeKeyNav, activeKeyNavSelect } = props;
 
     return (
-        <Nav appearance="subtle" activeKey={activeKeyNav} style={{ marginBottom: 10, marginTop: 15 }}>
+        <Nav appearance="subtle" activeKey={ activeKeyNav } style={ { marginBottom: 10, marginTop: 15 } }>
             <div
-                style={{
+                style={ {
                     alignItems: "stretch",
                     display: "flex"
-                }}>
+                } }>
                 <Nav.Item
                     eventKey="1"
-                    onSelect={(eventKey) => activeKeyNavSelect(eventKey)}>
+                    onSelect={ (eventKey) => activeKeyNavSelect(eventKey) }>
                     General
                 </Nav.Item>
 
                 <Nav.Item
                     eventKey="2"
-                    onSelect={(eventKey) => activeKeyNavSelect(eventKey)}>
+                    onSelect={ (eventKey) => activeKeyNavSelect(eventKey) }>
                     Permissions
                 </Nav.Item>
 
                 <Nav.Item
                     eventKey="3"
-                    onSelect={(eventKey) => activeKeyNavSelect(eventKey)}>
+                    onSelect={ (eventKey) => activeKeyNavSelect(eventKey) }>
                     Users
                 </Nav.Item>
 
-                <div style={{ flexGrow: "1" }}></div>
+                <div style={ { flexGrow: "1" } }></div>
 
                 <Nav.Item
                     eventKey="4"
-                    onSelect={(eventKey) => activeKeyNavSelect(eventKey)}
-                    icon={<CodeIcon />}>
+                    onSelect={ (eventKey) => activeKeyNavSelect(eventKey) }
+                    icon={ <CodeIcon /> }>
                     Developer Tools
                 </Nav.Item>
             </div>

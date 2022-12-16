@@ -16,56 +16,6 @@
  * under the License.
  */
 
-.homeMainPanelDiv {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.homePanel {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 2rem;
-}
-
-.homePanel hr {
-    margin: 12px;
-    align-self: stretch;
-}
-
-#userDetails {
-    height: 100%;
-}
-
-.userNullText {
-    text-align: center;
-}
-
-.userDetails {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-self: center;
-    flex-direction: row;
-    gap: 24px;
-    display: "";
-}
-
-.userDetailsBody {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    flex-grow: 4;
-}
-
-.profileImage{
-    width: 0.5%;  
-    height: auto;
-    flex-grow: 1;
-}
-
 .tableMainPanelDiv {
     display: flex;
     flex-direction: column;
@@ -85,10 +35,27 @@
     margin-bottom: 10px;
 }
 
-.addUserFormDiv{
-    padding: 0px;
-}
-
 .addUserButton{
     width: 25%;
+}
+
+/* getStartedSectionComponent */
+
+/* getStartedSectionComponent-GetStartedText-Div */
+.getStartedSectionComponentGetStartedTextDiv {
+    height: 80vh
+}
+
+/* getStartedSectionComponent-GetStartedText-Panel */
+.getStartedSectionComponentGetStartedTextPanel{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+/* getStartedSectionComponent-GetStartedText-P */
+.getStartedSectionComponentGetStartedTextP {
+    text-align: center ;
 }

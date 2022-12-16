@@ -16,8 +16,6 @@
  * under the License.
  */
 
-import { Session } from "next-auth";
-import React from "react";
 import { Button } from "rsuite";
 
 interface CreateRoleButtonProps {
@@ -38,7 +36,7 @@ export default function CreateRoleButton(props: CreateRoleButtonProps) {
         <Button
             appearance="primary"
             size="lg"
-            onClick={onClick}>
+            onClick={ onClick }>
             Create Role
         </Button>
     );

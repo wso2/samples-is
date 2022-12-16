@@ -73,7 +73,6 @@ export default function Org(props : OrgProps) {
     return (
         session
             ? (<Home
-                orgId={ session.orgId }
                 name={ session.orgName }
                 session={ session }/>)
             : null
