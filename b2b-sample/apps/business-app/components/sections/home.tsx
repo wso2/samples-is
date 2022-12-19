@@ -19,11 +19,11 @@
 import { LogoComponent } from "@b2bsample/business-app/ui/ui-components";
 import { signout } from "@b2bsample/business-app/util/util-authorization-config-util";
 import { FooterComponent, HomeComponent, SignOutComponent } from "@b2bsample/shared/ui/ui-components";
-import React, { useState } from "react";
+import { useState } from "react";
 import "rsuite/dist/rsuite.min.css";
-import DashboardSectionComponent from "./sections/dashboardSection/dashboardSectionComponent";
 import sideNavData from "../../../../libs/business-app/ui-assets/src/lib/data/sideNav.json";
 import Custom500 from "../../pages/500";
+import DashboardSectionComponent from "./sections/dashboardSection/dashboardSectionComponent";
 
 
 /**

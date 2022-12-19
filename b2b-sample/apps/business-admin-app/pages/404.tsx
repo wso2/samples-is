@@ -17,7 +17,6 @@
  */
 
 import { Custom404Component } from "@b2bsample/shared/ui/ui-components";
-import React from "react";
 
 export default function Custom404() {
 

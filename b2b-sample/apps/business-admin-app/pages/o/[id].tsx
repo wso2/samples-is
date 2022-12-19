@@ -19,7 +19,7 @@
 import { orgSignin, redirect } from "@b2bsample/shared/util/util-authorization-config-util";
 import { Session } from "next-auth";
 import { getSession } from "next-auth/react";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import Home from "../../components/sections/home";
 
 export async function getServerSideProps(context) {
