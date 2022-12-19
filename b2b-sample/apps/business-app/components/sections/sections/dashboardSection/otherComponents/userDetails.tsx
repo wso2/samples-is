@@ -16,11 +16,15 @@
  * under the License.
  */
 
+import { InternalUser } from "@b2bsample/shared/data-access/data-access-common-models-util";
 import Image from "next/image";
-import React from "react";
 import { Panel } from "rsuite";
 import profileImage from "../../../../../../../libs/business-app/ui-assets/src/lib/images/profile.svg";
 import styles from "../../../../../styles/Settings.module.css";
+
+interface UserDetailsInterface {
+    me : InternalUser
+}
 
 /**
  * 
@@ -28,9 +32,9 @@ import styles from "../../../../../styles/Settings.module.css";
  *
  * @returns The profile details section
  */
-export default function UserDetails(prop) {
+export default function UserDetails(props: UserDetailsInterface) {
 
-    const { me } = prop;
+    const { me } = props;
 
     return (
         me

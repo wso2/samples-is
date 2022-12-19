@@ -18,12 +18,16 @@
 
 import { getCurrentDate } from "@b2bsample/shared/util/util-common";
 import Image from "next/image";
-import React from "react";
 import { Panel } from "rsuite";
 import image1 from "../../../../../../../libs/business-app/ui-assets/src/lib/images/news/news1.jpeg";
 import image2 from "../../../../../../../libs/business-app/ui-assets/src/lib/images/news/news2.jpeg";
 import image3 from "../../../../../../../libs/business-app/ui-assets/src/lib/images/news/news3.jpeg";
 import image4 from "../../../../../../../libs/business-app/ui-assets/src/lib/images/news/news4.jpeg";
+
+interface NewsComponentInterface {
+    header: string,
+    body: string
+}
 
 /**
  * 
@@ -31,9 +35,9 @@ import image4 from "../../../../../../../libs/business-app/ui-assets/src/lib/ima
  *
  * @returns Single news component
  */
-export default function NewsComponent(prop) {
+export default function NewsComponent(props: NewsComponentInterface) {
 
-    const { header, body } = prop;
+    const { header, body } = props;
 
     return (
         <div>

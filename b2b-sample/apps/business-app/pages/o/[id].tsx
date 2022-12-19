@@ -72,9 +72,7 @@ export default function Org(props: OrgProps) {
 
     return (
         session
-            ? (<Home
-                orgId={ session.orgId }
-                session={ session }/>)
+            ? (<Home session={ session }/>)
             : null
     );
 }

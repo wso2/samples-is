@@ -54,7 +54,7 @@ const getSwitchHeader = (): HeadersInit => {
  * 
  * @returns get the body for the switch call
  */
-const getSwitchBody = (subOrgId, accessToken): Record<string, string> => {
+const getSwitchBody = (subOrgId: string, accessToken: string): Record<string, string> => {
     const body = {
         "grant_type": "organization_switch",
         "scope": config.BusinessAppConfig.ApplicationConfig.APIScopes.join(" "),
@@ -72,7 +72,7 @@ const getSwitchBody = (subOrgId, accessToken): Record<string, string> => {
  * 
  * @returns get the request body for the switch call
  */
-const getSwitchRequest = (subOrgId : string, accessToken : JWT): RequestInit => {
+const getSwitchRequest = (subOrgId : string, accessToken : string): RequestInit => {
     const request = {
         body: new URLSearchParams(getSwitchBody(subOrgId, accessToken)).toString(),
         headers: getSwitchHeader(),

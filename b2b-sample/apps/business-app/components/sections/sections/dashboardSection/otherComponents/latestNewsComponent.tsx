@@ -16,10 +16,9 @@
  * under the License.
  */
 
-import React from "react";
 import { FlexboxGrid, Panel } from "rsuite";
-import NewsComponent from "./newsComponent";
 import newsList from "../../../../../../../libs/business-app/ui-assets/src/lib/data/news.json";
+import NewsComponent from "./newsComponent";
 
 export default function LatestNewsComponent() {
 
@@ -34,7 +33,7 @@ export default function LatestNewsComponent() {
                         return (
                             <FlexboxGrid.Item key={ news.id*-1 } colspan={ 6 }>
                                 <Panel>
-                                    <NewsComponent imgSrc={ news.image } header={ news.header } body={ news.body }/>
+                                    <NewsComponent header={ news.header } body={ news.body }/>
                                 </Panel>
                             </FlexboxGrid.Item>
                         );
@@ -46,7 +45,7 @@ export default function LatestNewsComponent() {
                         return (
                             <FlexboxGrid.Item key={ news.id*1 } colspan={ 6 }>
                                 <Panel>
-                                    <NewsComponent imgSrc={ news.image } header={ news.header } body={ news.body }/>
+                                    <NewsComponent header={ news.header } body={ news.body }/>
                                 </Panel>
                             </FlexboxGrid.Item>
                         );

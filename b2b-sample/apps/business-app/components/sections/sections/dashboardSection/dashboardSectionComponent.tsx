@@ -19,22 +19,27 @@
 import { controllerDecodeMe } from "@b2bsample/business-app/data-access/data-access-controller";
 import { LogoComponent } from "@b2bsample/business-app/ui/ui-components";
 import { InternalUser } from "@b2bsample/shared/data-access/data-access-common-models-util";
+import { Session } from "next-auth";
 import { useEffect, useState } from "react";
 import { Panel } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
+import styles from "../../../../styles/Settings.module.css";
 import LatestNewsComponent from "./otherComponents/latestNewsComponent";
 import UserDetails from "./otherComponents/userDetails";
-import styles from "../../../../styles/Settings.module.css";
+
+interface DashboardSectionComponentInterface {
+    session: Session
+}
 
 /**
  * 
- * @param prop - session, orgName
+ * @param prop - session
  *
  * @returns Dashboard interface section
  */
-export default function DashboardSectionComponent(prop) {
+export default function DashboardSectionComponent(props: DashboardSectionComponentInterface) {
 
-    const { session } = prop;
+    const { session } = props;
 
     const [ me, setMe ] = useState<InternalUser>(null);
 
@@ -55,7 +60,7 @@ export default function DashboardSectionComponent(prop) {
                 </div>
             </Panel>
 
-            <UserDetails me={ me } session={ session } />
+            <UserDetails me={ me } />
 
             <LatestNewsComponent />
         </div>
