@@ -17,10 +17,11 @@
  */
 
 import { SideNavItem } from "@b2bsample/shared/data-access/data-access-common-models-util";
+import AdminIcon from "@rsuite/icons/Admin";
 import DashboardIcon from "@rsuite/icons/legacy/Dashboard";
 import GearCircleIcon from "@rsuite/icons/legacy/GearCircle";
+import PageIcon from "@rsuite/icons/Page";
 import SettingHorizontalIcon from "@rsuite/icons/SettingHorizontal";
-import AdminIcon from '@rsuite/icons/Admin';
 
 export const LOADING_DISPLAY_NONE = {
     display: "none"
@@ -98,6 +99,10 @@ export function getIconFromString(iconString: string | undefined): JSX.Element |
         case "AdminIcon":
 
             return (<AdminIcon />);
+        case "PageIcon":
+
+            return (<PageIcon />);
+
         default:
 
             return;

@@ -28,7 +28,7 @@ import "rsuite/dist/rsuite.min.css";
  */
 export default function Signin() {
 
-    const moveTime: number = 40;
+    const moveTime = 40;
     const [ redirectSeconds, setRedirectSeconds ] = useState<number>(moveTime);
 
     useEffect(() => {

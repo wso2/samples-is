@@ -30,31 +30,31 @@ export function CustomHtmlHeading(props: CustomHtmlHeadingProps) {
 
     const style: Record<string, string> =  {
         "fontWeight" : fontWeight
-    }
+    };
 
     switch (headingType) {
         case "h1":
-            return <h1 style={style}>{content}</h1>
+            return <h1 style={ style }>{ content }</h1>;
             
 
         case "h2":
-            return <h2 style={style}>{content}</h2>
+            return <h2 style={ style }>{ content }</h2>;
             
 
         case "h3":
-            return <h3 style={style}>{content}</h3>
+            return <h3 style={ style }>{ content }</h3>;
             
 
         case "h4":
-            return <h4 style={style}>{content}</h4>
+            return <h4 style={ style }>{ content }</h4>;
             
 
         case "h5":
-            return <h5 style={style}>{content}</h5>
+            return <h5 style={ style }>{ content }</h5>;
             
 
         case "h6":
-            return <h6 style={style}>{content}</h6>
+            return <h6 style={ style }>{ content }</h6>;
             
         default:
             return;

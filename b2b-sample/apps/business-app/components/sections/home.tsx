@@ -22,7 +22,7 @@ import { FooterComponent, HomeComponent, SignOutComponent } from "@b2bsample/sha
 import { Session } from "next-auth";
 import { useState } from "react";
 import "rsuite/dist/rsuite.min.css";
-import DashboardSectionComponent from "./sections/dashboardSection/dashboardSectionComponent";
+import BlogSectionComponent from "./sections/blogSection/blogSectionComponent";
 import ProfileSectionComponent from "./sections/profileSection/profileSectionComponent";
 import sideNavData from "../../../../libs/business-app/ui-assets/src/lib/data/sideNav.json";
 import Custom500 from "../../pages/500";
@@ -51,7 +51,7 @@ export default function Home(props: HomeInterface) {
                 return <ProfileSectionComponent session={ session } />;
             case "2":
 
-                return <DashboardSectionComponent session={ session } />;
+                return <BlogSectionComponent />;
         }
     };
 

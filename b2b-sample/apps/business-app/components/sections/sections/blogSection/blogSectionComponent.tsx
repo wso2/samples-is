@@ -16,25 +16,26 @@
  * under the License.
  */
 
-import { Name } from "./user";
-import ControllerCallParam from "../controllerParam/controllerCallParam";
+import { SettingsTitleComponent } from "@b2bsample/shared/ui/ui-components";
+import { Container } from "rsuite";
+import "rsuite/dist/rsuite.min.css";
+import LatestNewsComponent from "./otherComponents/latestNewsComponent";
 
-export interface Email {
-    primary: boolean,
-    value: string
+/**
+ * 
+ * @param prop - session
+ *
+ * @returns Dashboard interface section
+ */
+export default function BlogSectionComponent() {
+
+    return (
+        <Container>
+            <SettingsTitleComponent
+                title="Blogs"
+                subtitle="Browse our blogs and subscribe to what you like" />
+            <br />
+            <LatestNewsComponent />
+        </Container>
+    );
 }
-
-interface UrnSchema {
-    askPassword : string
-}
-
-export interface SendUser extends ControllerCallParam{
-    emails: [Email],
-    name : Name,
-    "urn:scim:wso2:schema"? : UrnSchema,
-    userName : string,
-    schemas? : [],
-    password? : string
-}
-
-export default SendUser;
