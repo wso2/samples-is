@@ -80,14 +80,7 @@ export async function controllerDecodeEditRolesToAddOrRemoveUser(
                 (res: boolean) => {
                     if (res) {
                         getRoleDetailsForRemove(session, userId, initRoleList, roleList)
-                            .then((res: boolean) => {
-                                if (res) {
-
-                                    return true;
-                                }
-
-                                return false;
-                            }).catch(() => false);
+                            .then((res: boolean) => res).catch(() => false);
                     }
 
                     return false;
