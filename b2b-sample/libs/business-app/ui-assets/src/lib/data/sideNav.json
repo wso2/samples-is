@@ -7,15 +7,22 @@
             "type": "item"
         },
         {
-            "title": "Phone",
+            "title": "Meetings",
             "eventKey": "2",
+            "icon": "PeopleBranchIcon",
+            "type": "item"
+        },
+        {
+            "title": "Phone",
+            "eventKey": "3",
             "icon": "PhoneIcon",
             "type": "item",
             "new": true
         },
+       
         {
             "title": "Blogs",
-            "eventKey": "3",
+            "eventKey": "4",
             "icon": "PageIcon",
             "type": "item"
         }

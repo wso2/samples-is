@@ -21,6 +21,7 @@ import AdminIcon from "@rsuite/icons/Admin";
 import DashboardIcon from "@rsuite/icons/legacy/Dashboard";
 import GearCircleIcon from "@rsuite/icons/legacy/GearCircle";
 import PageIcon from "@rsuite/icons/Page";
+import PeopleBranchIcon from "@rsuite/icons/PeopleBranch";
 import PhoneIcon from "@rsuite/icons/Phone";
 import SettingHorizontalIcon from "@rsuite/icons/SettingHorizontal";
 
@@ -106,6 +107,9 @@ export function getIconFromString(iconString: string | undefined): JSX.Element |
         case "PhoneIcon":
 
             return (<PhoneIcon />);
+        case "PeopleBranchIcon":
+
+            return (<PeopleBranchIcon />);
 
         default:
 

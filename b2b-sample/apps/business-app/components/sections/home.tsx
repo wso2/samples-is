@@ -23,6 +23,7 @@ import { Session } from "next-auth";
 import { useState } from "react";
 import "rsuite/dist/rsuite.min.css";
 import BlogSectionComponent from "./sections/blogSection/blogSectionComponent";
+import MeetingsSectionComponent from "./sections/meetingsSection/meetingsSectionComponent";
 import PhoneSectionComponent from "./sections/phoneSection/phoneSectionComponent";
 import ProfileSectionComponent from "./sections/profileSection/profileSectionComponent";
 import sideNavData from "../../../../libs/business-app/ui-assets/src/lib/data/sideNav.json";
@@ -52,8 +53,11 @@ export default function Home(props: HomeInterface) {
                 return <ProfileSectionComponent session={ session } />;
             case "2":
 
-                return <PhoneSectionComponent />;
+                return <MeetingsSectionComponent />;
             case "3":
+
+                return <PhoneSectionComponent />;
+            case "4":
 
                 return <BlogSectionComponent />;
         }

@@ -16,7 +16,6 @@
  * under the License.
  */
 
-import React from "react";
 import { Button, FlexboxGrid, Stack } from "rsuite";
 import { EmptySettingsComponentProps } from "../../models/emptySettingsComponent/emptySettingsComponent";
 
