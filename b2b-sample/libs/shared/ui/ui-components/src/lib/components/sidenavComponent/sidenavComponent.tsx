@@ -31,44 +31,45 @@ export function SidenavComponent(prop: SidenavComponentProps) {
     const sideNavConfigList: SideNavList = sideNavData;
 
     return (
-        <div className={styles["sideNavDiv"]}>
-            <Sidenav appearance="inverse" className={styles["sideNav"]} defaultOpenKeys={["1", "2", "3", "4"]}>
+        <div className={ styles["sideNavDiv"] }>
+            <Sidenav appearance="inverse" className={ styles["sideNav"] } defaultOpenKeys={ [ "1", "2", "3", "4" ] }>
                 <Sidenav.Header>
-                    <div className={styles["logoComponentDiv"]}>
-                        {logoComponent}
+                    <div className={ styles["logoComponentDiv"] }>
+                        { logoComponent }
                     </div>
                 </Sidenav.Header>
                 <Sidenav.Body>
-                    <Nav activeKey={activeKeySideNav}>
+                    <Nav activeKey={ activeKeySideNav }>
                         {
                             sideNavConfigList.items.map((item: SideNavItem) => {
 
                                 if (item.items) {
                                     return (
                                         <Nav.Menu
-                                            eventKey={item.eventKey}
-                                            title={item.title}
-                                            icon={getIconFromString(item.icon)}
-                                            style={item.hideBasedOnScope
+                                            eventKey={ item.eventKey }
+                                            title={ item.title }
+                                            icon={ getIconFromString(item.icon) }
+                                            style={ item.hideBasedOnScope
                                                 ? hideBasedOnScopes(scope, item.type, item.items)
-                                                : {}}
-                                            key={item.eventKey}>
+                                                : {} }
+                                            key={ item.eventKey }>
                                             {
                                                 item.items.map((item) =>
-                                                (<Nav.Item
-                                                    key={item.eventKey}
-                                                    eventKey={item.eventKey}
-                                                    onSelect={(eventKey) =>
-                                                        activeKeySideNavSelect(eventKey)}
-                                                    style={item.hideBasedOnScope
-                                                        ? hideBasedOnScopes(scope, item.type, item.items, item.scopes)
-                                                        : {}}>
-                                                    <>
-                                                        {item.title}
-                                                        "new"
-                                                    </>
-
-                                                </Nav.Item>)
+                                                    (<Nav.Item
+                                                        key={ item.eventKey }
+                                                        eventKey={ item.eventKey }
+                                                        onSelect={ (eventKey) =>
+                                                            activeKeySideNavSelect(eventKey) }
+                                                        style={ item.hideBasedOnScope
+                                                            ? hideBasedOnScopes(scope, item.type, item.items, item.scopes)
+                                                            : {} }>
+                                                        <Stack spacing={ 10 }>
+                                                            { item.title }
+                                                            { item.new
+                                                                ? <Tag><b>NEW</b></Tag>
+                                                                : null }
+                                                        </Stack>
+                                                    </Nav.Item>)
                                                 )
                                             }
                                         </Nav.Menu>
@@ -76,17 +77,16 @@ export function SidenavComponent(prop: SidenavComponentProps) {
                                 } else {
                                     return (
                                         <Nav.Item
-                                            key={item.eventKey}
-                                            eventKey={item.eventKey}
-                                            icon={getIconFromString(item.icon)}
-                                            onSelect={(eventKey) => activeKeySideNavSelect(eventKey)}>
-                                            <Stack spacing={10}>
-                                                {item.title}
-                                                {item.new
+                                            key={ item.eventKey }
+                                            eventKey={ item.eventKey }
+                                            icon={ getIconFromString(item.icon) }
+                                            onSelect={ (eventKey) => activeKeySideNavSelect(eventKey) }>
+                                            <Stack spacing={ 10 }>
+                                                { item.title }
+                                                { item.new
                                                     ? <Tag><b>NEW</b></Tag>
-                                                    : null}
+                                                    : null }
                                             </Stack>
-
                                         </Nav.Item>
                                     );
                                 }
@@ -94,8 +94,8 @@ export function SidenavComponent(prop: SidenavComponentProps) {
                         }
                     </Nav>
                 </Sidenav.Body>
-                <div className={styles["nextButtonDiv"]}>
-                    <Button size="lg" appearance="default" onClick={signOutOnClick}>Sign Out</Button>
+                <div className={ styles["nextButtonDiv"] }>
+                    <Button size="lg" appearance="default" onClick={ signOutOnClick }>Sign Out</Button>
                 </div>
             </Sidenav>
         </div>
