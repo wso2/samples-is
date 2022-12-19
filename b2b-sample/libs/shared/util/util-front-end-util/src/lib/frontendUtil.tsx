@@ -21,6 +21,7 @@ import AdminIcon from "@rsuite/icons/Admin";
 import DashboardIcon from "@rsuite/icons/legacy/Dashboard";
 import GearCircleIcon from "@rsuite/icons/legacy/GearCircle";
 import PageIcon from "@rsuite/icons/Page";
+import PhoneIcon from '@rsuite/icons/Phone';
 import SettingHorizontalIcon from "@rsuite/icons/SettingHorizontal";
 
 export const LOADING_DISPLAY_NONE = {
@@ -102,6 +103,9 @@ export function getIconFromString(iconString: string | undefined): JSX.Element |
         case "PageIcon":
 
             return (<PageIcon />);
+        case "PhoneIcon":
+
+            return (<PhoneIcon />);
 
         default:
 

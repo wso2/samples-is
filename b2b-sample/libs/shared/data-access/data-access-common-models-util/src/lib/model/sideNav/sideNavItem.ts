@@ -23,7 +23,8 @@ export interface SideNavItem {
     type: string,
     hideBasedOnScope?: boolean,
     items?: SideNavItem[],
-    scopes? : string[]
+    scopes? : string[],
+    new? : boolean
 }
 
 export default SideNavItem;

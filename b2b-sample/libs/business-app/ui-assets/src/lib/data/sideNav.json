@@ -11,6 +11,13 @@
             "eventKey" : "2",
             "icon" : "PageIcon",
             "type": "item"
+        },
+        {
+            "title" : "Phone",
+            "eventKey" : "3",
+            "icon" : "PhoneIcon",
+            "type": "item",
+            "new": true
         }
     ]
 }
