@@ -17,8 +17,8 @@
  */
 
 import { FlexboxGrid, Panel } from "rsuite";
-import newsList from "../../../../../../../libs/business-app/ui-assets/src/lib/data/news.json";
 import NewsComponent from "./newsComponent";
+import newsList from "../../../../../../../libs/business-app/ui-assets/src/lib/data/news.json";
 
 export default function LatestNewsComponent() {
 

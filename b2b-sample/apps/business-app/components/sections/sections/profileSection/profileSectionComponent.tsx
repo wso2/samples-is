@@ -23,11 +23,10 @@ import { Session } from "next-auth";
 import { useEffect, useState } from "react";
 import { Panel } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
-import LatestNewsComponent from "./otherComponents/latestNewsComponent";
 import UserDetails from "./otherComponents/userDetails";
 import styles from "../../../../styles/Settings.module.css";
 
-interface DashboardSectionComponentInterface {
+interface ProfileSectionComponentInterface {
     session: Session
 }
 
@@ -37,7 +36,7 @@ interface DashboardSectionComponentInterface {
  *
  * @returns Dashboard interface section
  */
-export default function DashboardSectionComponent(props: DashboardSectionComponentInterface) {
+export default function ProfileSectionComponent(props: ProfileSectionComponentInterface) {
 
     const { session } = props;
 
@@ -60,9 +59,9 @@ export default function DashboardSectionComponent(props: DashboardSectionCompone
                 </div>
             </Panel>
 
-            <UserDetails me={ me } />
+            <br />
 
-            <LatestNewsComponent />
+            <UserDetails me={ me } />
         </div>
     );
 }

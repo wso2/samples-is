@@ -20,6 +20,7 @@ import { SideNavItem } from "@b2bsample/shared/data-access/data-access-common-mo
 import DashboardIcon from "@rsuite/icons/legacy/Dashboard";
 import GearCircleIcon from "@rsuite/icons/legacy/GearCircle";
 import SettingHorizontalIcon from "@rsuite/icons/SettingHorizontal";
+import AdminIcon from '@rsuite/icons/Admin';
 
 export const LOADING_DISPLAY_NONE = {
     display: "none"
@@ -35,9 +36,9 @@ export const LOADING_DISPLAY_BLOCK = {
  * 
  * @returns `true` if user has the necessary scopes, else `false`
  */
-function hideBasesdOnScopesSideNavItems(scopes: string[],itemScopes: string[]): boolean {
-    
-    return itemScopes.every(scope=>scopes.includes(scope));
+function hideBasesdOnScopesSideNavItems(scopes: string[], itemScopes: string[]): boolean {
+
+    return itemScopes.every(scope => scopes.includes(scope));
 }
 
 /**
@@ -54,36 +55,36 @@ export function hideBasedOnScopes(scopes: string, sideNavType: string, sideNavIt
 
     switch (sideNavType) {
         case "item":
-            if(hideBasesdOnScopesSideNavItems(scopesList, itemScopes as string[])){
+            if (hideBasesdOnScopesSideNavItems(scopesList, itemScopes as string[])) {
 
                 return LOADING_DISPLAY_BLOCK;
             } else {
 
                 return LOADING_DISPLAY_NONE;
             }
-        
+
         case "menu": {
             let check: Record<string, string> = LOADING_DISPLAY_NONE;
 
             sideNavItems?.every(sideNavItem => {
-                if(hideBasesdOnScopesSideNavItems(scopesList, sideNavItem.scopes as string[])) {
+                if (hideBasesdOnScopesSideNavItems(scopesList, sideNavItem.scopes as string[])) {
                     check = LOADING_DISPLAY_BLOCK;
 
                     return;
-                } 
-               
+                }
+
             });
 
             return check;
 
         }
-    
+
         default:
             return LOADING_DISPLAY_NONE;
     }
 }
 
-export function getIconFromString(iconString: string | undefined): JSX.Element | undefined  {
+export function getIconFromString(iconString: string | undefined): JSX.Element | undefined {
     switch (iconString) {
         case "DashboardIcon":
 
@@ -94,6 +95,9 @@ export function getIconFromString(iconString: string | undefined): JSX.Element |
         case "SettingHorizontalIcon":
 
             return (<SettingHorizontalIcon />);
+        case "AdminIcon":
+
+            return (<AdminIcon />);
         default:
 
             return;

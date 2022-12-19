@@ -19,7 +19,6 @@
 import { getHostedUrl } from "@b2bsample/business-app/util/util-application-config-util";
 import { dataNotRecievedError, notPostError } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import { NextApiRequest, NextApiResponse } from "next";
-import { JWT } from "next-auth/jwt";
 import config from "../../../../../config.json";
 
 /**

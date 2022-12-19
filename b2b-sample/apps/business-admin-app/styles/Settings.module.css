@@ -19,7 +19,7 @@
 .tableMainPanelDiv {
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    gap: 40px;
     height: 100%;
 }
 

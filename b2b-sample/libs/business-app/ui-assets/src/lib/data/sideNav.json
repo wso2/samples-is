@@ -1,9 +1,9 @@
 {
     "items" : [
         {
-            "title" : "Dashboard",
+            "title" : "Profile",
             "eventKey" : "1",
-            "icon" : "DashboardIcon",
+            "icon" : "AdminIcon",
             "type": "item"
         }
     ]
