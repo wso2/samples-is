@@ -24,7 +24,7 @@ import { useEffect, useState } from "react";
 import { Panel } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
 import UserDetails from "./otherComponents/userDetails";
-import styles from "../../../../styles/Settings.module.css";
+import styles from "../../../../../styles/Settings.module.css";
 
 interface ProfileSectionComponentInterface {
     session: Session

@@ -62,7 +62,7 @@ export default function MoveOrg(props: MoveOrgInterface) {
 
     const router: NextRouter = useRouter();
 
-    const moveTime = 40;
+    const moveTime: number = 40;
     const [ redirectSeconds, setRedirectSeconds ] = useState<number>(moveTime);
 
     const redirectToOrg = useCallback(() => {

@@ -17,12 +17,12 @@
  */
 
 import { getCurrentDate } from "@b2bsample/shared/util/util-common";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { Stack } from "rsuite";
-import image1 from "../../../../../../../libs/business-app/ui-assets/src/lib/images/news/news1.jpeg";
-import image2 from "../../../../../../../libs/business-app/ui-assets/src/lib/images/news/news2.jpeg";
-import image3 from "../../../../../../../libs/business-app/ui-assets/src/lib/images/news/news3.jpeg";
-import image4 from "../../../../../../../libs/business-app/ui-assets/src/lib/images/news/news4.jpeg";
+import image1 from "../../../../../../../../libs/business-app/ui-assets/src/lib/images/news/news1.jpeg";
+import image2 from "../../../../../../../../libs/business-app/ui-assets/src/lib/images/news/news2.jpeg";
+import image3 from "../../../../../../../../libs/business-app/ui-assets/src/lib/images/news/news3.jpeg";
+import image4 from "../../../../../../../../libs/business-app/ui-assets/src/lib/images/news/news4.jpeg";
 
 interface NewsComponentInterface {
     header: string,
@@ -53,8 +53,8 @@ export default function NewsComponent(props: NewsComponentInterface) {
     );
 }
 
-function selectImage(): string {
-    const imageList: string[] = [ image1, image2, image3, image4 ];
+function selectImage(): StaticImageData {
+    const imageList: StaticImageData[] = [ image1, image2, image3, image4 ];
 
     return imageList[imageList.length * Math.random() | 0];
 }

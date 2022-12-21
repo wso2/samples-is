@@ -20,8 +20,8 @@ import { InternalUser } from "@b2bsample/shared/data-access/data-access-common-m
 import { CustomHtmlHeading } from "@b2bsample/shared/ui/ui-basic-components";
 import Image from "next/image";
 import { FlexboxGrid, Message, Panel, Stack } from "rsuite";
-import profileImage from "../../../../../../../libs/business-app/ui-assets/src/lib/images/profile.svg";
-import styles from "../../../../../styles/Settings.module.css";
+import profileImage from "../../../../../../../../libs/business-app/ui-assets/src/lib/images/profile.svg";
+import styles from "../../../../../../styles/Settings.module.css";
 
 interface UserDetailsInterface {
     me: InternalUser

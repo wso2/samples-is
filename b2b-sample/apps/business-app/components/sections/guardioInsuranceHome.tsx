@@ -22,13 +22,14 @@ import { FooterComponent, HomeComponent, SignOutComponent } from "@b2bsample/sha
 import { Session } from "next-auth";
 import { useState } from "react";
 import "rsuite/dist/rsuite.min.css";
-import BlogSectionComponent from "./sections/blogSection/blogSectionComponent";
-import MeetingsSectionComponent from "./sections/meetingsSection/meetingsSectionComponent";
-import PhoneSectionComponent from "./sections/phoneSection/phoneSectionComponent";
-import ProfileSectionComponent from "./sections/profileSection/profileSectionComponent";
-import sideNavEasyMeetingsData from "../../../../libs/business-app/ui-assets/src/lib/data/sideNav-EasyMeetings.json";
+
+import BlogSectionGuardioInsuranceComponent from "./sections/EasyMeetings/blogSection/blogSectionComponent";
+import MeetingsSectionGuardioInsuranceComponent from "./sections/EasyMeetings/meetingsSection/meetingsSectionComponent";
+import PhoneSectionGuardioInsuranceComponent from "./sections/EasyMeetings/phoneSection/phoneSectionComponent";
+import ProfileSectionGuardioInsuranceComponent from "./sections/EasyMeetings/profileSection/profileSectionComponent";
 import sideNavGuardioInsuranceData
     from "../../../../libs/business-app/ui-assets/src/lib/data/sideNav-GuardioInsurance.json";
+
 import Custom500 from "../../pages/500";
 
 interface HomeInterface {
@@ -41,7 +42,7 @@ interface HomeInterface {
  *
  * @returns The home section. Mainly side nav bar and the section to show other settings sections.
  */
-export default function Home(props: HomeInterface) {
+export default function GuardioInsuranceHome(props: HomeInterface) {
 
     const { session } = props;
 
@@ -52,16 +53,16 @@ export default function Home(props: HomeInterface) {
         switch (activeKey) {
             case "1":
 
-                return <ProfileSectionComponent session={session} />;
+                return <ProfileSectionGuardioInsuranceComponent session={session} />;
             case "2":
 
-                return <MeetingsSectionComponent />;
+                return <MeetingsSectionGuardioInsuranceComponent />;
             case "3":
 
-                return <PhoneSectionComponent />;
+                return <PhoneSectionGuardioInsuranceComponent />;
             case "4":
 
-                return <BlogSectionComponent />;
+                return <BlogSectionGuardioInsuranceComponent />;
         }
     };
 

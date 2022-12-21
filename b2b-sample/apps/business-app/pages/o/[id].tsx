@@ -20,7 +20,9 @@ import { orgSignin, redirect } from "@b2bsample/shared/util/util-authorization-c
 import { Session } from "next-auth";
 import { getSession } from "next-auth/react";
 import { useEffect } from "react";
-import Home from "../../components/sections/home";
+import EasyMeetingsHome from "apps/business-app/components/sections/easyMeetingsHome";
+import GuardioInsuranceHome from "../../components/sections/guardioInsuranceHome";
+import storyConfig from "../../storyConfigBusinessApp.json";
 
 export async function getServerSideProps(context) {
 
@@ -70,9 +72,21 @@ export default function Org(props: OrgProps) {
         }
     }, [ routerQuery ]);
 
+    const getHome = (): JSX.Element => {
+        switch (storyConfig.story) {
+            case "guardio":
+               
+                return  <GuardioInsuranceHome session={ session }/>
+            
+            case "easyMeet":
+
+                return <EasyMeetingsHome session={ session }/>
+        }
+    }
+
     return (
         session
-            ? (<Home session={ session }/>)
+            ? (getHome())
             : null
     );
 }

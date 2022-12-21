@@ -18,7 +18,7 @@
 
 import { Stack } from "rsuite";
 import NewsComponent from "./newsComponent";
-import newsList from "../../../../../../../libs/business-app/ui-assets/src/lib/data/news.json";
+import newsList from "../../../../../../../../libs/business-app/ui-assets/src/lib/data/news.json";
 
 export default function LatestNewsComponent() {
 

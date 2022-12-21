@@ -22,8 +22,8 @@ import PeopleBranchIcon from "@rsuite/icons/PeopleBranch";
 import Image from "next/image";
 import { Button, Container, Stack } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
-import googleImage from "../../../../../../libs/business-app/ui-assets/src/lib/images/google.svg";
-import microsoftImage from "../../../../../../libs/business-app/ui-assets/src/lib/images/microsoft.svg";
+import googleImage from "../../../../../../../libs/business-app/ui-assets/src/lib/images/google.svg";
+import microsoftImage from "../../../../../../../libs/business-app/ui-assets/src/lib/images/microsoft.svg";
 
 /**
  * 
