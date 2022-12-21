@@ -1,0 +1,30 @@
+{
+    "items": [
+        {
+            "title": "Profile",
+            "eventKey": "1",
+            "icon": "AdminIcon",
+            "type": "item"
+        },
+        {
+            "title": "Report",
+            "eventKey": "2",
+            "icon": "SpeakerIcon",
+            "type": "item"
+        },
+        {
+            "title": "Claim",
+            "eventKey": "3",
+            "icon": "ShieldIcon",
+            "type": "item",
+            "new": true
+        },
+       
+        {
+            "title": "Blogs",
+            "eventKey": "4",
+            "icon": "PageIcon",
+            "type": "item"
+        }
+    ]
+}

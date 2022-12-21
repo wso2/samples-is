@@ -74,6 +74,7 @@ const wso2ISProvider = (req: NextApiRequest, res: NextApiResponse) => NextAuth(r
             clientId: config.BusinessAppConfig.AuthorizationConfig.ClientId,
             clientSecret: config.BusinessAppConfig.AuthorizationConfig.ClientSecret,
             id: "wso2is",
+            checks: ["pkce", "state"],
             name: "WSO2IS",
             profile(profile) {
 
