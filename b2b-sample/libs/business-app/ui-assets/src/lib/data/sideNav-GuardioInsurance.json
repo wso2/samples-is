@@ -7,17 +7,18 @@
             "type": "item"
         },
         {
-            "title": "Report",
+            "title": "Reports",
             "eventKey": "2",
-            "icon": "SpeakerIcon",
-            "type": "item"
-        },
-        {
-            "title": "Claim",
-            "eventKey": "3",
-            "icon": "ShieldIcon",
+            "icon": "PageIcon",
             "type": "item",
             "new": true
+        },
+        {
+            "title": "Claims",
+            "eventKey": "3",
+            "icon": "ShieldIcon",
+            "type": "item"
+            
         },
        
         {

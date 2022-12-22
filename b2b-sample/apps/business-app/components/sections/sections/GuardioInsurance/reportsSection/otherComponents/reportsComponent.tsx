@@ -19,9 +19,9 @@
 import { CustomHtmlHeading } from "@b2bsample/shared/ui/ui-basic-components";
 import Image from "next/image";
 import { Button, FlexboxGrid, Panel, Stack } from "rsuite";
-import phoneImage from "../../../../../../../libs/business-app/ui-assets/src/lib/images/phone.svg";
+import reportsImage from "../../../../../../../../libs/business-app/ui-assets/src/lib/images/reports.svg";
 
-export default function PhoneComponent() {
+export default function ReportsComponent() {
 
     return (
         <Panel bordered>
@@ -30,7 +30,7 @@ export default function PhoneComponent() {
                     <Stack direction="column" alignItems="flex-start" spacing={ 30 }>
                         <Stack direction="column" alignItems="flex-start" spacing={ 10 }>
                             <CustomHtmlHeading
-                                content="Looks like you don’t have Easy Meeting Phone enabled"
+                                content="Looks like you don’t have Reports feature enabled"
                                 headingType="h4"
                                 fontWeight="normal" />
 
@@ -46,17 +46,17 @@ export default function PhoneComponent() {
                                 headingType="h6" />
 
                             <ul>
-                                <li>Intelligent Call Routing and Management</li>
-                                <li>Support to Modern Desktop and Mobile Applications</li>
+                                <li>24x7 service</li>
+                                <li>Capability to view your previous claim reports</li>
                                 <li>Auto Attendant and IVR</li>
-                                <li>Support for Interoperability With Standards-Based Endpoints</li>
+                                <li>Special discounts for our other <a href=""><u>features</u></a></li>
                             </ul>
                             
                         </Stack>
                     </Stack>
                 </FlexboxGrid.Item>
                 <FlexboxGrid.Item colspan={ 8 }>
-                    <Image src={ phoneImage } alt="phone image" width={ 300 } />
+                    <Image src={ reportsImage } alt="reports image" width={ 300 } />
                 </FlexboxGrid.Item>
             </FlexboxGrid>
 

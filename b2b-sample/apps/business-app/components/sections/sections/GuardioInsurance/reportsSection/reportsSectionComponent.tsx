@@ -19,11 +19,14 @@
 import { CustomHtmlHeading } from "@b2bsample/shared/ui/ui-basic-components";
 import { EmptySettingsComponent, SettingsTitleComponent } from "@b2bsample/shared/ui/ui-components";
 import PeopleBranchIcon from "@rsuite/icons/PeopleBranch";
+import DetailIcon from '@rsuite/icons/Detail';
 import Image from "next/image";
 import { Button, Container, Stack } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
 import googleImage from "../../../../../../../libs/business-app/ui-assets/src/lib/images/google.svg";
 import microsoftImage from "../../../../../../../libs/business-app/ui-assets/src/lib/images/microsoft.svg";
+import PhoneComponent from "./otherComponents/reportsComponent";
+import ReportsComponent from "./otherComponents/reportsComponent";
 
 /**
  * 
@@ -31,18 +34,20 @@ import microsoftImage from "../../../../../../../libs/business-app/ui-assets/src
  *
  * @returns Dashboard interface section
  */
-export default function MeetingsSectionComponent() {
+export default function ReportsSectionComponent() {
 
     return (
         <Container>
             <SettingsTitleComponent
-                title="Meetings"
-                subtitle="Create and schedule your meetings" />
+                title="Reports"
+                subtitle="View reports of your previous activities" />
             <br />
-            <EmptySettingsComponent
+
+            <ReportsComponent />
+            {/* <EmptySettingsComponent
                 bodyString="Schedule new and manage existing meetings all in one place"
                 buttonString="Create meeting"
-                icon={ <PeopleBranchIcon style={ { opacity: 0.2 } } width="150px" height="150px" /> }
+                icon={ <DetailIcon style={ { opacity: 0.2 } } width="150px" height="150px" /> }
                 onAddButtonClick={ () => true }
             />
             <br />
@@ -69,7 +74,7 @@ export default function MeetingsSectionComponent() {
                         </Stack>
                     </Button>
                 </Stack>
-            </Stack>
+            </Stack> */}
 
         </Container>
     );

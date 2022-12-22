@@ -24,7 +24,8 @@ import { useState } from "react";
 import "rsuite/dist/rsuite.min.css";
 
 import BlogSectionGuardioInsuranceComponent from "./sections/EasyMeetings/blogSection/blogSectionComponent";
-import MeetingsSectionGuardioInsuranceComponent from "./sections/EasyMeetings/meetingsSection/meetingsSectionComponent";
+import ReportsSectionComponent
+    from "./sections/GuardioInsurance/reportsSection/reportsSectionComponent";
 import PhoneSectionGuardioInsuranceComponent from "./sections/EasyMeetings/phoneSection/phoneSectionComponent";
 import ProfileSectionGuardioInsuranceComponent from "./sections/EasyMeetings/profileSection/profileSectionComponent";
 import sideNavGuardioInsuranceData
@@ -56,7 +57,7 @@ export default function GuardioInsuranceHome(props: HomeInterface) {
                 return <ProfileSectionGuardioInsuranceComponent session={session} />;
             case "2":
 
-                return <MeetingsSectionGuardioInsuranceComponent />;
+                return <ReportsSectionComponent />;
             case "3":
 
                 return <PhoneSectionGuardioInsuranceComponent />;
