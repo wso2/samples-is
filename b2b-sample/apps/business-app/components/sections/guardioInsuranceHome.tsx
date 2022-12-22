@@ -23,11 +23,11 @@ import { Session } from "next-auth";
 import { useState } from "react";
 import "rsuite/dist/rsuite.min.css";
 
-import BlogSectionGuardioInsuranceComponent from "./sections/EasyMeetings/blogSection/blogSectionComponent";
+import BlogSectionComponent from "./sections/EasyMeetings/blogSection/blogSectionComponent";
 import ReportsSectionComponent
     from "./sections/GuardioInsurance/reportsSection/reportsSectionComponent";
-import PhoneSectionGuardioInsuranceComponent from "./sections/EasyMeetings/phoneSection/phoneSectionComponent";
-import ProfileSectionGuardioInsuranceComponent from "./sections/EasyMeetings/profileSection/profileSectionComponent";
+import ClaimsSectionComponent from "./sections/GuardioInsurance/claimsSection/claimsSectionComponent";
+import ProfileSectionComponent from "./sections/GuardioInsurance/profileSection/profileSectionComponent";
 import sideNavGuardioInsuranceData
     from "../../../../libs/business-app/ui-assets/src/lib/data/sideNav-GuardioInsurance.json";
 
@@ -54,16 +54,16 @@ export default function GuardioInsuranceHome(props: HomeInterface) {
         switch (activeKey) {
             case "1":
 
-                return <ProfileSectionGuardioInsuranceComponent session={session} />;
+                return <ProfileSectionComponent session={session} />;
             case "2":
 
                 return <ReportsSectionComponent />;
             case "3":
 
-                return <PhoneSectionGuardioInsuranceComponent />;
+                return <ClaimsSectionComponent />;
             case "4":
 
-                return <BlogSectionGuardioInsuranceComponent />;
+                return <BlogSectionComponent />;
         }
     };
 

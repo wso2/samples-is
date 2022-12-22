@@ -23,11 +23,11 @@ import { Session } from "next-auth";
 import { useState } from "react";
 import "rsuite/dist/rsuite.min.css";
 
-import BlogSectionEasyMeetingsComponent from "./sections/EasyMeetings/blogSection/blogSectionComponent";
-import MeetingsSectionEasyMeetingsComponent from "./sections/EasyMeetings/meetingsSection/meetingsSectionComponent";
-import PhoneSectionEasyMeetingsComponent from "./sections/EasyMeetings/phoneSection/phoneSectionComponent";
-import ProfileSectionEasyMeetingsComponent from "./sections/EasyMeetings/profileSection/profileSectionComponent";
-import sideNavEasyMeetingsData from "../../../../libs/business-app/ui-assets/src/lib/data/sideNav-EasyMeetings.json";
+import BlogSectionComponent from "./sections/EasyMeetings/blogSection/blogSectionComponent";
+import MeetingsSectionComponent from "./sections/EasyMeetings/meetingsSection/meetingsSectionComponent";
+import PhoneSectionComponent from "./sections/EasyMeetings/phoneSection/phoneSectionComponent";
+import ProfileSectionComponent from "./sections/EasyMeetings/profileSection/profileSectionComponent";
+import sideNavData from "../../../../libs/business-app/ui-assets/src/lib/data/sideNav-EasyMeetings.json";
 
 import Custom500 from "../../pages/500";
 
@@ -52,16 +52,16 @@ export default function EasyMeetingsHome(props: HomeInterface) {
         switch (activeKey) {
             case "1":
 
-                return <ProfileSectionEasyMeetingsComponent session={session} />;
+                return <ProfileSectionComponent session={session} />;
             case "2":
 
-                return <MeetingsSectionEasyMeetingsComponent />;
+                return <MeetingsSectionComponent />;
             case "3":
 
-                return <PhoneSectionEasyMeetingsComponent />;
+                return <PhoneSectionComponent />;
             case "4":
 
-                return <BlogSectionEasyMeetingsComponent />;
+                return <BlogSectionComponent />;
         }
     };
 
@@ -89,7 +89,7 @@ export default function EasyMeetingsHome(props: HomeInterface) {
 
                     <HomeComponent
                         scope={session.scope}
-                        sideNavData={sideNavEasyMeetingsData}
+                        sideNavData={sideNavData}
                         activeKeySideNav={activeKeySideNav}
                         activeKeySideNavSelect={activeKeySideNavSelect}
                         setSignOutModalOpen={setSignOutModalOpen}

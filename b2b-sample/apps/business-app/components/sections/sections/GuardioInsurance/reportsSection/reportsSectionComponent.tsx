@@ -16,16 +16,9 @@
  * under the License.
  */
 
-import { CustomHtmlHeading } from "@b2bsample/shared/ui/ui-basic-components";
-import { EmptySettingsComponent, SettingsTitleComponent } from "@b2bsample/shared/ui/ui-components";
-import PeopleBranchIcon from "@rsuite/icons/PeopleBranch";
-import DetailIcon from '@rsuite/icons/Detail';
-import Image from "next/image";
-import { Button, Container, Stack } from "rsuite";
+import { SettingsTitleComponent } from "@b2bsample/shared/ui/ui-components";
+import { Container } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
-import googleImage from "../../../../../../../libs/business-app/ui-assets/src/lib/images/google.svg";
-import microsoftImage from "../../../../../../../libs/business-app/ui-assets/src/lib/images/microsoft.svg";
-import PhoneComponent from "./otherComponents/reportsComponent";
 import ReportsComponent from "./otherComponents/reportsComponent";
 
 /**
@@ -44,37 +37,6 @@ export default function ReportsSectionComponent() {
             <br />
 
             <ReportsComponent />
-            {/* <EmptySettingsComponent
-                bodyString="Schedule new and manage existing meetings all in one place"
-                buttonString="Create meeting"
-                icon={ <DetailIcon style={ { opacity: 0.2 } } width="150px" height="150px" /> }
-                onAddButtonClick={ () => true }
-            />
-            <br />
-            <Stack direction="column" alignItems="flex-start" spacing={ 20 }>
-                <h5>Schedule your meetings directly from your calendar.</h5>
-                <Stack spacing={ 30 }>
-                    <Button appearance="ghost">
-                        <Stack spacing={ 20 }>
-                            <Image src={ googleImage } alt="google logo image" width={ 50 } />
-                            <CustomHtmlHeading
-                                content="Google Calander"
-                                headingType="h5"
-                                fontWeight="normal" />
-                        </Stack>
-                    </Button>
-
-                    <Button appearance="ghost">
-                        <Stack spacing={ 20 }>
-                            <Image src={ microsoftImage } alt="microsoft logo image" width={ 50 } />
-                            <CustomHtmlHeading
-                                content="Microsoft Outlook Calander"
-                                headingType="h5"
-                                fontWeight="normal" />
-                        </Stack>
-                    </Button>
-                </Stack>
-            </Stack> */}
 
         </Container>
     );
