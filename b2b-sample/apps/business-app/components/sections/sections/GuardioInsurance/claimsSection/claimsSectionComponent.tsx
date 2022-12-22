@@ -18,10 +18,9 @@
 
 import { CustomHtmlHeading } from "@b2bsample/shared/ui/ui-basic-components";
 import { EmptySettingsComponent, SettingsTitleComponent } from "@b2bsample/shared/ui/ui-components";
-import Image from "next/image";
+import ShieldIcon from "@rsuite/icons/Shield";
 import { Button, Container, Stack } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
-import ShieldIcon from '@rsuite/icons/Shield';
 
 /**
  * 
@@ -41,15 +40,15 @@ export default function PhoneSectionComponent() {
             <EmptySettingsComponent
                 bodyString="No claims have been made"
                 buttonString="Make a claim"
-                icon={<ShieldIcon style={{ opacity: 0.2 }} width="150px" height="150px" />}
-                onAddButtonClick={() => true}
+                icon={ <ShieldIcon style={ { opacity: 0.2 } } width="150px" height="150px" /> }
+                onAddButtonClick={ () => true }
             />
             <br />
-            <Stack direction="column" alignItems="flex-start" spacing={20}>
+            <Stack direction="column" alignItems="flex-start" spacing={ 20 }>
                 <h5>If you are in am emergency, please contact relevant autorities</h5>
-                <Stack spacing={30}>
+                <Stack spacing={ 30 }>
                     <Button appearance="ghost">
-                        <Stack spacing={5}>
+                        <Stack spacing={ 5 }>
                             <CustomHtmlHeading
                                 content="119"
                                 headingType="h5" />
@@ -61,7 +60,7 @@ export default function PhoneSectionComponent() {
                     </Button>
 
                     <Button appearance="ghost">
-                        <Stack spacing={5}>
+                        <Stack spacing={ 5 }>
                             <CustomHtmlHeading
                                 content="118"
                                 headingType="h5" />
@@ -73,7 +72,7 @@ export default function PhoneSectionComponent() {
                     </Button>
 
                     <Button appearance="ghost">
-                        <Stack spacing={5}>
+                        <Stack spacing={ 5 }>
                             <CustomHtmlHeading
                                 content="1919"
                                 headingType="h5" />
@@ -85,7 +84,7 @@ export default function PhoneSectionComponent() {
                     </Button>
 
                     <Button appearance="ghost">
-                        <Stack spacing={5}>
+                        <Stack spacing={ 5 }>
                             <CustomHtmlHeading
                                 content="110"
                                 headingType="h5" />
@@ -98,9 +97,9 @@ export default function PhoneSectionComponent() {
 
                 </Stack>
 
-                <Stack spacing={30}>
+                <Stack spacing={ 30 }>
                     <Button appearance="ghost">
-                        <Stack spacing={5}>
+                        <Stack spacing={ 5 }>
                             <CustomHtmlHeading
                                 content="011-2691111"
                                 headingType="h5" />
@@ -112,7 +111,7 @@ export default function PhoneSectionComponent() {
                     </Button>
 
                     <Button appearance="ghost">
-                        <Stack spacing={5}>
+                        <Stack spacing={ 5 }>
                             <CustomHtmlHeading
                                 content="011-2422222"
                                 headingType="h5" />

@@ -24,8 +24,8 @@ import PageIcon from "@rsuite/icons/Page";
 import PeopleBranchIcon from "@rsuite/icons/PeopleBranch";
 import PhoneIcon from "@rsuite/icons/Phone";
 import SettingHorizontalIcon from "@rsuite/icons/SettingHorizontal";
-import ShieldIcon from '@rsuite/icons/Shield';
-import SpeakerIcon from '@rsuite/icons/Speaker';
+import ShieldIcon from "@rsuite/icons/Shield";
+import SpeakerIcon from "@rsuite/icons/Speaker";
 
 export const LOADING_DISPLAY_NONE = {
     display: "none"

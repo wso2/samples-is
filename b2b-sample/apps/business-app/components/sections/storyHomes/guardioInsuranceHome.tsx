@@ -23,15 +23,15 @@ import { Session } from "next-auth";
 import { useState } from "react";
 import "rsuite/dist/rsuite.min.css";
 
-import BlogSectionComponent from "./sections/EasyMeetings/blogSection/blogSectionComponent";
-import ReportsSectionComponent
-    from "./sections/GuardioInsurance/reportsSection/reportsSectionComponent";
-import ClaimsSectionComponent from "./sections/GuardioInsurance/claimsSection/claimsSectionComponent";
-import ProfileSectionComponent from "./sections/GuardioInsurance/profileSection/profileSectionComponent";
 import sideNavGuardioInsuranceData
-    from "../../../../libs/business-app/ui-assets/src/lib/data/sideNav-GuardioInsurance.json";
+    from "../../../../../libs/business-app/ui-assets/src/lib/data/sideNav-GuardioInsurance.json";
+import Custom500 from "../../../pages/500";
+import BlogSectionComponent from "../sections/GuardioInsurance/blogSection/blogSectionComponent";
+import ClaimsSectionComponent from "../sections/GuardioInsurance/claimsSection/claimsSectionComponent";
+import ProfileSectionComponent from "../sections/GuardioInsurance/profileSection/profileSectionComponent";
+import ReportsSectionComponent
+    from "../sections/GuardioInsurance/reportsSection/reportsSectionComponent";
 
-import Custom500 from "../../pages/500";
 
 interface HomeInterface {
     session: Session
@@ -47,14 +47,14 @@ export default function GuardioInsuranceHome(props: HomeInterface) {
 
     const { session } = props;
 
-    const [activeKeySideNav, setActiveKeySideNav] = useState<string>("1");
-    const [signOutModalOpen, setSignOutModalOpen] = useState<boolean>(false);
+    const [ activeKeySideNav, setActiveKeySideNav ] = useState<string>("1");
+    const [ signOutModalOpen, setSignOutModalOpen ] = useState<boolean>(false);
 
     const mainPanelComponenet = (activeKey: string): JSX.Element => {
         switch (activeKey) {
             case "1":
 
-                return <ProfileSectionComponent session={session} />;
+                return <ProfileSectionComponent session={ session } />;
             case "2":
 
                 return <ReportsSectionComponent />;
@@ -82,26 +82,26 @@ export default function GuardioInsuranceHome(props: HomeInterface) {
     return (
         <div>
             <SignOutComponent
-                open={signOutModalOpen}
-                onClose={signOutModalClose}
-                signOutCallback={signOutCallback} />
+                open={ signOutModalOpen }
+                onClose={ signOutModalClose }
+                signOutCallback={ signOutCallback } />
 
-            {session
+            { session
                 ? (
 
                     <HomeComponent
-                        scope={session.scope}
-                        sideNavData={sideNavGuardioInsuranceData}
-                        activeKeySideNav={activeKeySideNav}
-                        activeKeySideNavSelect={activeKeySideNavSelect}
-                        setSignOutModalOpen={setSignOutModalOpen}
-                        logoComponent={<LogoComponent imageSize="small" white={true} />}>
+                        scope={ session.scope }
+                        sideNavData={ sideNavGuardioInsuranceData }
+                        activeKeySideNav={ activeKeySideNav }
+                        activeKeySideNavSelect={ activeKeySideNavSelect }
+                        setSignOutModalOpen={ setSignOutModalOpen }
+                        logoComponent={ <LogoComponent imageSize="small" white={ true } /> }>
 
-                        {mainPanelComponenet(activeKeySideNav)}
+                        { mainPanelComponenet(activeKeySideNav) }
 
                     </HomeComponent>
                 )
-                : <Custom500 />}
+                : <Custom500 /> }
 
             <FooterComponent />
         </div>
