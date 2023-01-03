@@ -47,7 +47,7 @@ interface IdentityProviderTemplateModelCertificate {
 
 export interface IdentityProviderTemplateModel extends ControllerCallParam {
     name: string,
-    image: string,
+    image?: string,
     alias?: string,
     certificate?: IdentityProviderTemplateModelCertificate,
     federatedAuthenticators?: IdentityProviderTemplateModelFederatedAuthenticator,

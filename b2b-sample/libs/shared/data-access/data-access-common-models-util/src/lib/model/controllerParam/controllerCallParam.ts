@@ -16,6 +16,9 @@
  * under the License.
  */
 
-export interface ControllerCallParam {}
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface ControllerCallParam {
+    key? : string
+}
 
 export default ControllerCallParam;

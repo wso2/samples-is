@@ -16,7 +16,8 @@
  * under the License.
  */
 
-import { IdentityProviderFederatedAuthenticator } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
+import { IdentityProviderFederatedAuthenticator } from
+    "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import { Session } from "next-auth";
 import { controllerCallGetFederatedAuthenticators } from "./controllerCallGetFederatedAuthenticators";

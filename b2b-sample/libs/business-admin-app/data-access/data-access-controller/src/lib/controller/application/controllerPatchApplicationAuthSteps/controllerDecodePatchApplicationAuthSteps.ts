@@ -16,8 +16,10 @@
  * under the License.
  */
 
-import { Application, AuthenticationSequence, AuthenticationSequenceModel, AuthenticationSequenceStepOption, IdentityProvider }
-    from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
+import {
+    Application, AuthenticationSequence, AuthenticationSequenceModel, AuthenticationSequenceStepOption,
+    IdentityProvider
+} from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import {
     BASIC_AUTHENTICATOR_ID, BASIC_ID, ENTERPRISE_AUTHENTICATOR_ID, ENTERPRISE_ID, GOOGLE_AUTHENTICATOR_ID, GOOGLE_ID
@@ -153,11 +155,11 @@ export async function controllerDecodePatchApplicationAuthSteps(
 
     const res = await commonControllerDecode(
         () => controllerCallPatchApplicationAuthSteps(session, applicationId, authenticationSequenceModel), null);
-    
-    if(res){
+
+    if (res) {
         return true;
     }
-    
+
     return res;
 }
 

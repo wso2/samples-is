@@ -17,6 +17,7 @@
  */
 
 import { Session } from "next-auth";
+import RequestMethod from "./requestMethod";
 
 /**
  * 
@@ -43,7 +44,7 @@ function apiRequestOptionsWithDataHeader(session: Session, hostedUrl: string): H
     return headers;
 }
 
-export function apiRequestOptionsWithBody(session: Session, method: string, body: BodyInit, hostedUrl: string)
+export function apiRequestOptionsWithBody(session: Session, method: RequestMethod, body: BodyInit, hostedUrl: string)
     : RequestInit {
     const request = {
         body: JSON.stringify(body),

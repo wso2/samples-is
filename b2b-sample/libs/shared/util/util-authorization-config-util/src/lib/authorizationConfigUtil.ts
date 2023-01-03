@@ -150,6 +150,12 @@ function getOrgName(token: JWT): string {
 function getLoggedUserFromProfile(profile: Profile): User | null {
 
     try {
+
+        if (!profile.family_name || !profile.given_name || !profile.email || !profile.username) {
+
+            return null;
+        }
+
         const user: User = {
             emails: [ profile.email ],
             id: profile.sub,
@@ -159,11 +165,6 @@ function getLoggedUserFromProfile(profile: Profile): User | null {
             },
             userName: profile.username
         };
-
-        if (checkIfJSONisEmpty(user.name) || !user.emails[0] || !user.userName) {
-
-            return null;
-        }
 
         return user;
     } catch (err) {

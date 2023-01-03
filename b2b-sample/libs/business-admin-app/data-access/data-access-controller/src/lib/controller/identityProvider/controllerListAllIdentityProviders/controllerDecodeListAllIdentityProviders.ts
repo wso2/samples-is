@@ -16,7 +16,8 @@
  * under the License.
  */
 
-import { IdentityProvider, IdentityProviderList } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
+import { IdentityProvider, IdentityProviderList } from
+    "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import { Session } from "next-auth";
 import { controllerCallListAllIdentityProviders } from "./controllerCallListAllIdentityProviders";
@@ -33,7 +34,7 @@ export async function controllerDecodeListAllIdentityProviders(session: Session)
         null) as IdentityProviderList | null);
 
     if (res) {
-        if(res.identityProviders) {
+        if (res.identityProviders) {
             return res.identityProviders;
         } else {
             return [];

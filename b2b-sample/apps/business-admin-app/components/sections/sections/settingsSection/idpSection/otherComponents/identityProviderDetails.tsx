@@ -112,7 +112,7 @@ function IdentityProviderDetailsNav(prop) {
 
     const { idpDetails, activeKeyNav, activeKeyNavSelect } = prop;
 
-    const templateIdCheck = () => {
+    const templateIdCheck = (): boolean => {
         const selectedTemplate = selectedTemplateBaesedonTemplateId(idpDetails.templateId);
 
         if (selectedTemplate) {

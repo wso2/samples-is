@@ -19,8 +19,11 @@
 import IdentityProviderTemplateModel from "./identityProviderTemplateModel";
 
 export interface IdentityProviderTemplate {
-	idp: IdentityProviderTemplateModel,
-	templateId: string,
+    id?: string,
+	idp?: IdentityProviderTemplateModel,
+	templateId?: string,
+    name: string,
+    description? : string,
     [key: string] : unknown
 }
 

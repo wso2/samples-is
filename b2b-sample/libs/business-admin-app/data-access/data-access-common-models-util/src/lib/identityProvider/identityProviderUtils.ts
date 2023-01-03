@@ -18,6 +18,7 @@
 
 import { getManagementAPIServerBaseUrl, getOrgUrl } from "@b2bsample/shared/util/util-application-config-util";
 import { ENTERPRISE_ID, GOOGLE_ID } from "@b2bsample/shared/util/util-common";
+import IdentityProviderDiscoveryUrl from "./identityProviderDiscoveryUrl";
 import IdentityProviderTemplateModel from "./identityProviderTemplateModel";
 import config from "../../../../../../../config.json";
 
@@ -25,7 +26,7 @@ import config from "../../../../../../../config.json";
  * 
  * @returns callBackUrl of the idp
  */
-export function getCallbackUrl(orgId: string) {
+export function getCallbackUrl(orgId: string): string {
     return `${getOrgUrl(orgId)}/commonauth`;
 }
 
@@ -39,11 +40,12 @@ export function getCallbackUrl(orgId: string) {
  * @returns - idp readay to sent to the IS 
  */
 export function setIdpTemplate(model: IdentityProviderTemplateModel, templateId: string,
-    formValues: Record<string, string>, orgId: string): IdentityProviderTemplateModel {
+    formValues: Record<string, string>, orgId: string,
+    identityProviderDiscoveryUrl?: IdentityProviderDiscoveryUrl): IdentityProviderTemplateModel {
 
-    const name = formValues["application_name"].toString();
-    const clientId = formValues["client_id"].toString();
-    const clientSecret = formValues["client_secret"].toString();
+    const name: string = formValues["application_name"].toString();
+    const clientId: string = formValues["client_id"].toString();
+    const clientSecret: string = formValues["client_secret"].toString();
 
     model.name = name;
 
@@ -53,7 +55,8 @@ export function setIdpTemplate(model: IdentityProviderTemplateModel, templateId:
 
             break;
         case ENTERPRISE_ID:
-            model = enterpriseIdpTemplate(model, clientId, clientSecret, formValues, orgId);
+            model = enterpriseIdpTemplate(model, clientId, clientSecret, formValues, orgId,
+                identityProviderDiscoveryUrl);
 
             break;
         default:
@@ -117,11 +120,31 @@ function googleIdpTemplate(model: IdentityProviderTemplateModel, clientId: strin
  * @returns create enterprise IDP template
  */
 function enterpriseIdpTemplate(model: IdentityProviderTemplateModel, clientId: string, clientSecret: string,
-    formValues: Record<string, string>, orgId: string): IdentityProviderTemplateModel {
+    formValues: Record<string, string>, orgId: string, identityProviderDiscoveryUrl?: IdentityProviderDiscoveryUrl)
+    : IdentityProviderTemplateModel {
 
-    const authorizationEndpointUrl = formValues["authorization_endpoint_url"].toString();
-    const tokenEndpointUrl = formValues["token_endpoint_url"].toString();
-    const certificate = formValues["certificate"].toString();
+    let authorizationEndpointUrl: string;
+    let tokenEndpointUrl: string;
+    let logoutUrl: string;
+    let jwksUri: string;
+
+    if (identityProviderDiscoveryUrl) {
+        authorizationEndpointUrl = identityProviderDiscoveryUrl.authorization_endpoint;
+        tokenEndpointUrl = identityProviderDiscoveryUrl.token_endpoint;
+        logoutUrl = identityProviderDiscoveryUrl.end_session_endpoint;
+        jwksUri = identityProviderDiscoveryUrl.jwks_uri;
+    } else {
+        authorizationEndpointUrl = formValues["authorization_endpoint"].toString();
+        tokenEndpointUrl = formValues["token_endpoint"].toString();
+
+        if(formValues["end_session_endpoint"]) {
+            logoutUrl = formValues["end_session_endpoint"].toString();
+        }
+
+        if(formValues["jwks_uri"]) {
+            jwksUri = formValues["jwks_uri"].toString();
+        }
+    }
 
     model.image =
         `${config.CommonConfig.ManagementAPIConfig.ImageBaseUrl}/libs/themes/default/assets` +
@@ -145,6 +168,10 @@ function enterpriseIdpTemplate(model: IdentityProviderTemplateModel, clientId: s
             "value": tokenEndpointUrl
         },
         {
+            "key": "OIDCLogoutEPUrl",
+            "value": logoutUrl
+        },
+        {
             "key": "callbackUrl",
             "value": getCallbackUrl(orgId)
         },
@@ -154,9 +181,9 @@ function enterpriseIdpTemplate(model: IdentityProviderTemplateModel, clientId: s
         }
     ];
 
-    model.certificate.jwksUri = certificate;
+    model.certificate.jwksUri = jwksUri;
 
     return model;
 }
 
-export default { setIdpTemplate, getCallbackUrl };
+export default { getCallbackUrl, setIdpTemplate };

@@ -25,7 +25,7 @@ import { Session } from "next-auth";
  * call POST `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/identity-providers` 
  * to create an identity provider
  * 
- * @param session 
+ * @param session - Session object
  * @param model - body of the identity provider that will be created
  *  
  * @returns created identity provider, if the call failed `null`

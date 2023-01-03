@@ -23,7 +23,7 @@ import { Session } from "next-auth";
 /**
  * call GET `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/applications/<id>` to get the applicaion details
  * 
- * @param session 
+ * @param session - Session object
  * @param id - application id
  * 
  * @returns applicaiton details, if the call failed `null`

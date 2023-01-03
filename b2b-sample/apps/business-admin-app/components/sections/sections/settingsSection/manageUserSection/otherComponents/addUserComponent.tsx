@@ -77,7 +77,7 @@ export default function AddUserComponent(prop) {
     };
 
     const passwordValidate = (password, errors) => {
-        if (inviteSelect == InviteConst.PWD) {
+        if (inviteSelect === InviteConst.PWD) {
             if (!password) {
                 errors.password = "This field cannot be empty";
             }
@@ -87,7 +87,7 @@ export default function AddUserComponent(prop) {
     };
 
     const repasswordValidate = (repassword, errors) => {
-        if (inviteSelect == InviteConst.PWD) {
+        if (inviteSelect === InviteConst.PWD) {
             if (!repassword) {
                 errors.repassword = "This field cannot be empty";
             }

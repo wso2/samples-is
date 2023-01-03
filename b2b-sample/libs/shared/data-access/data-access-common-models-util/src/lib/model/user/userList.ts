@@ -18,7 +18,6 @@
 
 import User from "./user";
 import ControllerCallReturn from "../controllerReturn/controllerCallReturn";
-import ControllerDecodeReturn from "../controllerReturn/controllerDecodeReturn";
 
 export interface UserList extends ControllerCallReturn {
     Resources?: User[] 

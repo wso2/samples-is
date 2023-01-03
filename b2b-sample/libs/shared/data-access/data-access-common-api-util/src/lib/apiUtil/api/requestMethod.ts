@@ -16,11 +16,11 @@
  * under the License.
  */
 
-export const RequestMethod = {
-    DELETE: "DELETE",
-    PATCH: "PATCH",
-    POST: "POST",
-    PUT: "PUT"
-};
+export enum RequestMethod {
+    DELETE = "DELETE",
+    PATCH = "PATCH",
+    POST = "POST",
+    PUT = "PUT"
+}
 
 export default RequestMethod;

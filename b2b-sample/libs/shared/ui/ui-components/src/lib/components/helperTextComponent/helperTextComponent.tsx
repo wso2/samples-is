@@ -17,7 +17,6 @@
  */
 
 import InfoOutlineIcon from "@rsuite/icons/InfoOutline";
-import React from "react";
 import { Form, Stack } from "rsuite";
 import styles from "./helperTextComponent.module.css";
 import { HelperTextComponentProps } from "../../models/helperTextComponent/helperTextComponent";

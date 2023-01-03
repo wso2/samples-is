@@ -17,7 +17,7 @@
  */
 
 import { getHostedUrl } from "@b2bsample/business-admin-app/util/util-application-config-util";
-import { apiRequestOptions, apiRequestOptionsWithBody } from
+import { RequestMethod, apiRequestOptions, apiRequestOptionsWithBody } from
     "@b2bsample/shared/data-access/data-access-common-api-util";
 import { Session } from "next-auth";
 
@@ -31,7 +31,7 @@ export function requestOptions(session: Session): RequestInit {
     return apiRequestOptions(session, getHostedUrl());
 }
 
-export function requestOptionsWithBody(session: Session, method: string, body: BodyInit): RequestInit {
+export function requestOptionsWithBody(session: Session, method: RequestMethod, body: BodyInit): RequestInit {
     return apiRequestOptionsWithBody(session, method, body, getHostedUrl());
 }
 
