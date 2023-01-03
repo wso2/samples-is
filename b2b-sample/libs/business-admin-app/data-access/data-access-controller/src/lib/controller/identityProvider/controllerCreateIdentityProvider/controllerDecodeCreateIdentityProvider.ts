@@ -63,7 +63,7 @@ export async function controllerDecodeCreateIdentityProvider(session: Session, t
                         , identityProviderDiscoveryUrl);
                 }
 
-                return null;
+                break;
             }
 
             case IdentityProviderConfigureType.MANUAL: {
