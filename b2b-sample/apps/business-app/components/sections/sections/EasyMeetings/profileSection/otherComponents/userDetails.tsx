@@ -49,7 +49,7 @@ export default function UserDetails(props: UserDetailsInterface) {
 
                         <FlexboxGrid.Item colspan={ 18 }>
 
-                            <CustomHtmlHeading content={ `${me.firstName} ${me.firstName}` } headingType="h2" />
+                            <CustomHtmlHeading content={ `${me.firstName} ${me.familyName}` } headingType="h2" />
                             <CustomHtmlHeading
                                 content={ `${me.email}` }
                                 headingType="h4"

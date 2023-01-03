@@ -11,6 +11,7 @@
             "eventKey": "2",
             "icon": "GearCircleIcon",
             "type": "menu",
+            "hideBasedOnScope": true,
             "scopes": [
                 "internal_user_mgt_list",
                 "internal_user_mgt_create",
