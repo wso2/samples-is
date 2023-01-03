@@ -36,7 +36,6 @@ async function patchRoleDetails(session: Session, userId: string, rolesUriList: 
         const role: Role | null = await controllerDecodePatchRole(session, uri, patchMethod, "users", [ userId ]);
 
         if (!role) {
-            console.log(false);
 
             return false;
         }

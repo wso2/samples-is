@@ -44,7 +44,6 @@ const wso2ISProvider = (req: NextApiRequest, res: NextApiResponse) => NextAuth(r
             return token;
         },
         async redirect({ baseUrl }) {
-
             return `${baseUrl}/o/moveOrg`;
         },
         async session({ session, token }) {
@@ -71,7 +70,6 @@ const wso2ISProvider = (req: NextApiRequest, res: NextApiResponse) => NextAuth(r
                     scope: config.BusinessAppConfig.ApplicationConfig.APIScopes.join(" ")
                 }
             },
-            checks: "both",
             clientId: config.BusinessAppConfig.AuthorizationConfig.ClientId,
             clientSecret: config.BusinessAppConfig.AuthorizationConfig.ClientSecret,
             id: "wso2is",
