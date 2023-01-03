@@ -16,12 +16,15 @@
  * under the License.
  */
 
-import { IdentityProvider, IdentityProviderTemplate } from
-    "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
-import { controllerDecodeListAllIdentityProviders } from
-    "@b2bsample/business-admin-app/data-access/data-access-controller";
-import { EmptySettingsComponent, SettingsTitleComponent, errorTypeDialog, successTypeDialog } from
-    "@b2bsample/shared/ui/ui-components";
+import {
+    EnterpriseIdentityProvider, GoogleIdentityProvider, IdentityProvider, IdentityProviderTemplate
+} from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
+import {
+    controllerDecodeListAllIdentityProviders
+} from "@b2bsample/business-admin-app/data-access/data-access-controller";
+import {
+    EmptySettingsComponent, SettingsTitleComponent, errorTypeDialog, successTypeDialog
+} from "@b2bsample/shared/ui/ui-components";
 import AppSelectIcon from "@rsuite/icons/AppSelect";
 import { Session } from "next-auth";
 import { useCallback, useEffect, useState } from "react";
@@ -29,12 +32,6 @@ import { Container, useToaster } from "rsuite";
 import IdentityProviderList from "./otherComponents/identityProviderList";
 import IdpCreate from "./otherComponents/idpCreateModal/idpCreate";
 import SelectIdentityProvider from "./otherComponents/selectIdentityProvider";
-import Enterprise from
-    // eslint-disable-next-line
-    "../../../../../../../libs/business-admin-app/data-access/data-access-common-models-util/src/lib/identityProvider/data/templates/enterprise-identity-provider.json";
-import Google from
-    // eslint-disable-next-line    
-    "../../../../../../../libs/business-admin-app/data-access/data-access-common-models-util/src/lib/identityProvider/data/templates/google.json";
 
 interface IdpSectionComponentProps {
     session: Session
@@ -57,8 +54,8 @@ export default function IdpSectionComponent(props: IdpSectionComponentProps) {
     const [ selectedTemplate, setSelectedTemplate ] = useState<IdentityProviderTemplate>(undefined);
 
     const templates: IdentityProviderTemplate[] = [
-        Enterprise,
-        Google
+        EnterpriseIdentityProvider,
+        GoogleIdentityProvider
     ];
 
     const fetchAllIdPs = useCallback(async () => {

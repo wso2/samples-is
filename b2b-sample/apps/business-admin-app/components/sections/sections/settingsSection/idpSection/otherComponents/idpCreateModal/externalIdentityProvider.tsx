@@ -88,18 +88,15 @@ export default function ExternalIdentityProvider(prop: ExternalIdentityProviderP
 
     return (
         <div>
-
             <Form
                 onSubmit={ onUpdate }
                 validate={ validate }
-
                 render={ ({ handleSubmit, form, submitting, pristine, errors }) => (
                     <FormSuite
                         layout="vertical"
                         className={ styles.addUserForm }
                         onSubmit={ () => { handleSubmit().then(form.restart); } }
                         fluid>
-
                         <FormField
                             name="application_name"
                             label="Name"
@@ -108,7 +105,6 @@ export default function ExternalIdentityProvider(prop: ExternalIdentityProviderP
                         >
                             <FormSuite.Control name="input" />
                         </FormField>
-
                         <FormField
                             name="client_id"
                             label="Client Id"
@@ -117,7 +113,6 @@ export default function ExternalIdentityProvider(prop: ExternalIdentityProviderP
                         >
                             <FormSuite.Control name="input" />
                         </FormField>
-
                         <FormField
                             name="client_secret"
                             label="Client Secret"
@@ -126,7 +121,6 @@ export default function ExternalIdentityProvider(prop: ExternalIdentityProviderP
                         >
                             <FormSuite.Control name="input" />
                         </FormField>
-
                         <RadioGroup name="radioList" value={ configureType } onChange={ onConfigureTypeChange }>
                             <Radio value={ IdentityProviderConfigureType.AUTO }>
                                 Use the discovery url to configure the identity provider
@@ -136,7 +130,6 @@ export default function ExternalIdentityProvider(prop: ExternalIdentityProviderP
                             </Radio>
                         </RadioGroup>
                         <br />
-
                         {
                             configureType === IdentityProviderConfigureType.AUTO
                                 ? (<>
@@ -148,7 +141,6 @@ export default function ExternalIdentityProvider(prop: ExternalIdentityProviderP
                                     >
                                         <FormSuite.Control name="input" type="url" />
                                     </FormField>
-
                                 </>)
                                 : null
                         }
@@ -164,7 +156,6 @@ export default function ExternalIdentityProvider(prop: ExternalIdentityProviderP
                                     >
                                         <FormSuite.Control name="input" type="url" />
                                     </FormField>
-
                                     <FormField
                                         name="token_endpoint"
                                         label="Token Endpoint URL"
@@ -173,7 +164,6 @@ export default function ExternalIdentityProvider(prop: ExternalIdentityProviderP
                                     >
                                         <FormSuite.Control name="input" type="url" />
                                     </FormField>
-
                                     <FormField
                                         name="end_session_endpoint"
                                         label="Logout URL (optional)"
@@ -183,7 +173,6 @@ export default function ExternalIdentityProvider(prop: ExternalIdentityProviderP
                                     >
                                         <FormSuite.Control name="input" type="url" />
                                     </FormField>
-
                                     <FormField
                                         name="jwks_uri"
                                         label="JWKS endpoint URL (optional)"
@@ -195,17 +184,14 @@ export default function ExternalIdentityProvider(prop: ExternalIdentityProviderP
                                 </>)
                                 : null
                         }
-
                         <FormButtonToolbar
                             submitButtonText="Create"
                             submitButtonDisabled={ submitting || pristine || !checkIfJSONisEmpty(errors) }
                             onCancel={ onCancel }
                         />
-
                     </FormSuite>
                 ) }
             />
-
             <div style={ loadingDisplay }>
                 <Loader size="lg" backdrop content="Identity provider is creating" vertical />
             </div>

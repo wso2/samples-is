@@ -35,7 +35,6 @@ export async function controllerDecodeGetDiscoveryUrl(session: Session, discover
         null) as IdentityProviderDiscoveryUrl | null);
 
     return res;
-
 }
 
 export default controllerDecodeGetDiscoveryUrl;
