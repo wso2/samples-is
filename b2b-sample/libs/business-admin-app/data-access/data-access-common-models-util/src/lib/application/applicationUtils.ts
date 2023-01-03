@@ -17,6 +17,7 @@
  */
 
 import { ENTERPRISE_ID, GOOGLE_ID } from "@b2bsample/shared/util/util-common";
+import Application from "./application";
 import enterpriseFederatedAuthenticators from "../identityProvider/data/templates/enterprise-identity-provider.json";
 import googleFederatedAuthenticators from "../identityProvider/data/templates/google.json";
 import IdentityProviderTemplateModel from "../identityProvider/identityProviderTemplateModel";
@@ -51,20 +52,20 @@ export function selectedTemplateBaesedonTemplateId(templateId: string): Identity
  * `check` - if the idp is in authentication sequence, 
  * `onlyIdp` - is the idp is the only idp in the sequence
  */
-export function checkIfIdpIsinAuthSequence(template, idpDetails): boolean[] {
+export function checkIfIdpIsinAuthSequence(template: Application, idpDetails): boolean[] {
     const authenticationSequenceModel = template.authenticationSequence;
     const idpName = idpDetails.name;
     let check = false;
     let onlyIdp = false;
 
-    authenticationSequenceModel.steps.map((step) => {
-        step.options.map((option) => {
+    authenticationSequenceModel.steps.forEach((step) => {
+        step.options.forEach((option) => {
             if (option.idp === idpName) {
                 check = true;
             }
         });
 
-        if (step.options.length == 1) {
+        if (step.options.length === 1) {
             onlyIdp = true;
         }
     });
@@ -81,8 +82,8 @@ export function checkIfBasicAvailableinAuthSequence(template): boolean {
     const authenticationSequenceModel = template.authenticationSequence;
     let check = false;
 
-    authenticationSequenceModel.steps.map((step) => {
-        step.options.map((option) => {
+    authenticationSequenceModel.steps.forEach((step) => {
+        step.options.forEach((option) => {
             if (option.authenticator === "BasicAuthenticator") {
                 check = true;
             }
@@ -102,6 +103,7 @@ export const PatchApplicationAuthMethod = {
 };
 
 export default {
-    selectedTemplateBaesedonTemplateId, checkIfIdpIsinAuthSequence, checkIfBasicAvailableinAuthSequence,
-    PatchApplicationAuthMethod
+    PatchApplicationAuthMethod, checkIfBasicAvailableinAuthSequence, checkIfIdpIsinAuthSequence,
+    selectedTemplateBaesedonTemplateId
+
 };
