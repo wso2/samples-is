@@ -133,7 +133,6 @@ function enterpriseIdpTemplate(model: IdentityProviderTemplateModel, clientId: s
         tokenEndpointUrl = identityProviderDiscoveryUrl.token_endpoint;
         logoutUrl = identityProviderDiscoveryUrl.end_session_endpoint;
         jwksUri = identityProviderDiscoveryUrl.jwks_uri;
-
     } else {
         authorizationEndpointUrl = formValues["authorization_endpoint"].toString();
         tokenEndpointUrl = formValues["token_endpoint"].toString();
@@ -145,7 +144,6 @@ function enterpriseIdpTemplate(model: IdentityProviderTemplateModel, clientId: s
         if(formValues["jwks_uri"]) {
             jwksUri = formValues["jwks_uri"].toString();
         }
-       
     }
 
     model.image =
@@ -188,4 +186,4 @@ function enterpriseIdpTemplate(model: IdentityProviderTemplateModel, clientId: s
     return model;
 }
 
-export default { setIdpTemplate, getCallbackUrl };
+export default { getCallbackUrl, setIdpTemplate };
