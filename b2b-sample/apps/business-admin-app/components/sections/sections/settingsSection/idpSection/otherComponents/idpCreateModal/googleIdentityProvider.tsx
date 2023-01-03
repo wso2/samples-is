@@ -16,10 +16,12 @@
  * under the License.
  */
 
-import { IdentityProvider, IdentityProviderTemplate } from
-    "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
-import { controllerDecodeCreateIdentityProvider } from
-    "@b2bsample/business-admin-app/data-access/data-access-controller";
+import {
+    IdentityProvider, IdentityProviderTemplate
+} from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
+import {
+    controllerDecodeCreateIdentityProvider
+} from "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { FormButtonToolbar, FormField } from "@b2bsample/shared/ui/ui-basic-components";
 import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE, fieldValidate } from
@@ -47,7 +49,6 @@ interface GoogleIdentityProviderProps {
 export default function GoogleIdentityProvider(prop: GoogleIdentityProviderProps) {
 
     const { session, template, onIdpCreate, onCancel } = prop;
-
     const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
 
     const validate = (values: Record<string, string>): Record<string, string> => {
@@ -69,18 +70,15 @@ export default function GoogleIdentityProvider(prop: GoogleIdentityProviderProps
 
     return (
         <div>
-
             <Form
                 onSubmit={ onUpdate }
                 validate={ validate }
-
                 render={ ({ handleSubmit, form, submitting, pristine, errors }) => (
                     <FormSuite
                         layout="vertical"
                         className={ styles.addUserForm }
                         onSubmit={ () => { handleSubmit().then(form.restart); } }
                         fluid>
-
                         <FormField
                             name="application_name"
                             label="Name"
@@ -89,7 +87,6 @@ export default function GoogleIdentityProvider(prop: GoogleIdentityProviderProps
                         >
                             <FormSuite.Control name="input" />
                         </FormField>
-
                         <FormField
                             name="client_id"
                             label="Client Id"
@@ -98,7 +95,6 @@ export default function GoogleIdentityProvider(prop: GoogleIdentityProviderProps
                         >
                             <FormSuite.Control name="input" />
                         </FormField>
-
                         <FormField
                             name="client_secret"
                             label="Client Secret"
@@ -107,17 +103,14 @@ export default function GoogleIdentityProvider(prop: GoogleIdentityProviderProps
                         >
                             <FormSuite.Control name="input" />
                         </FormField>
-
                         <FormButtonToolbar
                             submitButtonText="Create"
                             submitButtonDisabled={ submitting || pristine || !checkIfJSONisEmpty(errors) }
                             onCancel={ onCancel }
                         />
-
                     </FormSuite>
                 ) }
             />
-
             <div style={ loadingDisplay }>
                 <Loader size="lg" backdrop content="Identity provider is creating" vertical />
             </div>
