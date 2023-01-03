@@ -15,7 +15,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-import { ControllerCallReturn, ControllerDecodeReturn } from "@b2bsample/shared/data-access/data-access-common-models-util";
+import { ControllerCallReturn } from "@b2bsample/shared/data-access/data-access-common-models-util";
 import IdentityProvider from "./identityProvider";
 
 /**
@@ -44,20 +44,3 @@ export interface IdentityProviderList extends ControllerCallReturn {
 }
 
 export default IdentityProviderList;
-// export interface AllIdentityProvidersIdentityProvider {
-//     id: string,
-//     [key: string]: unknown
-// }
-
-// export interface FederatedAuthenticatorsProperty {
-//     key: string,
-//     value: string
-// }
-
-// export interface FederatedAuthenticators extends Record<string, unknown> {
-//     authenticatorId?: string,
-//     name: string,
-//     properties: [FederatedAuthenticatorsProperty],
-//     [key: string]: unknown,
-
-// }

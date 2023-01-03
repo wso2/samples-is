@@ -186,4 +186,4 @@ function enterpriseIdpTemplate(model: IdentityProviderTemplateModel, clientId: s
     return model;
 }
 
-export default { setIdpTemplate, getCallbackUrl };
+export default { getCallbackUrl, setIdpTemplate };
