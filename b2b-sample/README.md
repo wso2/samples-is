@@ -140,7 +140,7 @@ setup the config json file as mentioned above.
 * In the <i>config.json</i> file, change the variable to `CommonConfig.ManagementAPIConfig.ImageBaseUrl`
   `https://console.asgardeo.io`.
 
-#### If you are using the application with [on-premsie](https://is.docs.wso2.com/en/latest/)
+#### If you are using the application with [on-premise](https://is.docs.wso2.com/en/latest/)
 * In the <i>config.json</i> file, change the variable to `CommonConfig.ManagementAPIConfig.ImageBaseUrl`
   `<Identity server hosted URL>/console`.
 
