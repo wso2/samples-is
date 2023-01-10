@@ -24,7 +24,6 @@ import enterpriseImage from "../../../../../ui/ui-assets/src/lib/images/enterpri
 import googleImage from "../../../../../ui/ui-assets/src/lib/images/google.svg";
 
 /**
- * 
  * @param templateId - template id of the identity provider
  * @returns - local image for the relevant identity provider
  */
