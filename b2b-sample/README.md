@@ -129,8 +129,7 @@ setup the config json file as mentioned above.
 ### Step 5: Additional settings
 
 * If the federated organization id is returned in the idToken (in user_organization variable) when a user is logging
-* into an organization, remove the `CommonConfig.ApplicationConfig.SampleOrganization` section from t
-* he <i>config.json</i> file.
+* into an organization, remove the `CommonConfig.ApplicationConfig.SampleOrganization` section from the <i>config.json</i> file.
 
 ### Step 5: Run the Guardio-Admin-App
 
