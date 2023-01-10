@@ -51,7 +51,6 @@ export function setEmail(email: string) {
     return email;
 }
 
-
 /**
  * 
  * @param userName - user name
