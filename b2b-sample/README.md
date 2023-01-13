@@ -155,6 +155,8 @@ setup the config json file as mentioned above.
  npm install
  nx serve business-admin-app
 ```
+> **_NOTE:_** If `nx serve business-admin-app` produced an error, try with `npx nx serve business-admin-app`
+
 * Open [http://localhost:3001](http://localhost:3001) with your browser to see the result.
 * Login from the created user `Alex` to the application.
     * Type `Best Car Mart` when pop up to type the organization.
@@ -186,6 +188,8 @@ setup the config json file as mentioned above.
  # From `<SAMPE_IS_HOME>/b2b-sample`
  nx serve business-app
 ```
+> **_NOTE:_** If `nx serve business-app` produced an error, try with `npx nx serve business-app`
+
 * Open a **private browser** and type [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 * Login from the created user `John` to the application.
     * Type `Best Car Mart` when pop up to type the organization.
