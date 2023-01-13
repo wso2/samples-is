@@ -179,7 +179,7 @@ setup the config json file as mentioned above.
 
 ### Step 8: Run the Guardio-Business-App
 
-* First, run the development server for the **Guardio-Business-App**, 
+* First, run the development server for the **Guardio-Business-App**.
 
 * Open a separate terminal and run
 ```bash
