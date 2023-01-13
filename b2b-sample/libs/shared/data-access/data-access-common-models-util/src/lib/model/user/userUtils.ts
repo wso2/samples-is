@@ -18,6 +18,7 @@
 
 import InternalUser from "./internalUser";
 import User from "./user";
+import config from "../../../../../../../../config.json";
 
 /**
  * 
@@ -25,7 +26,7 @@ import User from "./user";
  * 
  * @returns user object that can be view in front end side
  */
-export function decodeUser(user: User) : InternalUser {
+export function decodeUser(user: User): InternalUser {
 
     return {
         "email": user.emails ? user.emails[0] : "-",
@@ -38,13 +39,30 @@ export function decodeUser(user: User) : InternalUser {
 
 /**
  * 
+ * @param email - email
+ * 
+ * @returns set email.
+ */
+export function setEmail(email: string) {
+    const regex = /^DEFAULT\//g;
+
+    email = email.replace(regex, "");
+
+    return email;
+}
+
+/**
+ * 
  * @param userName - user name
  * 
  * @returns set username.
  */
 export function setUsername(userName: string) {
-
-    return userName;
+    if(config.BusinessAppConfig.ManagementAPIConfig.UserStore.trim()===""){
+        return userName;
+    } else {
+        return `${config.BusinessAppConfig.ManagementAPIConfig.UserStore}/${userName}`;
+    }
 }
 
 /**
@@ -55,13 +73,7 @@ export function setUsername(userName: string) {
  */
 export function getUsername(userName: string) {
 
-    // to remove DEFAULT/ if that part exists in the username
-    if (userName.includes("/")) {
-
-        return userName.split("/")[1];
-    }
-
     return userName;
 }
 
-export default { decodeUser, setUsername };
+export default { decodeUser, setUsername, setEmail };

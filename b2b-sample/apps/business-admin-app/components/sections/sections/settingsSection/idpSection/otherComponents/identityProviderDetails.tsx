@@ -16,17 +16,24 @@
  * under the License.
  */
 
-import { IdentityProvider, selectedTemplateBaesedonTemplateId } from
+import { IdentityProvider, getImageForTheIdentityProvider, selectedTemplateBaesedonTemplateId } from
     "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { controllerDecodeGetDetailedIdentityProvider } from
     "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { AccordianItemHeaderComponent, JsonDisplayComponent } from "@b2bsample/shared/ui/ui-components";
 import CodeIcon from "@rsuite/icons/Code";
+import { Session } from "next-auth";
 import React, { useCallback, useEffect, useState } from "react";
 import { Nav, Panel, Stack } from "rsuite";
 import ButtonGroupIdentityProviderDetails from "./buttonGroupIdentityProviderDetails";
 import General from "./idpDetailsSections/general";
 import Settings from "./idpDetailsSections/settings";
+
+interface IdentityProviderDetailsProps {
+    session: Session
+    id: string
+    fetchAllIdPs: () => Promise<void>
+}
 
 /**
  * 
@@ -34,28 +41,28 @@ import Settings from "./idpDetailsSections/settings";
  * 
  * @returns idp item details component
  */
-export default function IdentityProviderDetails(prop) {
+export default function IdentityProviderDetails(props: IdentityProviderDetailsProps) {
 
-    const { session, id, fetchAllIdPs } = prop;
+    const { session, id, fetchAllIdPs } = props;
 
     const [ idpDetails, setIdpDetails ] = useState<IdentityProvider>(null);
     const [ activeKeyNav, setActiveKeyNav ] = useState<string>("1");
 
     const fetchData = useCallback(async () => {
-        const res = await controllerDecodeGetDetailedIdentityProvider(session, id);
+        const res: IdentityProvider = await controllerDecodeGetDetailedIdentityProvider(session, id);
 
-        setIdpDetails(res); 
+        setIdpDetails(res);
     }, [ session, id ]);
 
     useEffect(() => {
         fetchData();
     }, [ fetchData ]);
 
-    const activeKeyNavSelect = (eventKey) => {
+    const activeKeyNavSelect = (eventKey): void => {
         setActiveKeyNav(eventKey);
     };
 
-    const idpDetailsComponent = (activeKey) => {
+    const idpDetailsComponent = (activeKey): JSX.Element => {
         switch (activeKey) {
             case "1":
 
@@ -75,7 +82,7 @@ export default function IdentityProviderDetails(prop) {
             ? (<Panel
                 header={
                     (<AccordianItemHeaderComponent
-                        imageUrl={ idpDetails.image }
+                        imageSrc={ getImageForTheIdentityProvider(idpDetails.templateId) }
                         title={ idpDetails.name }
                         description={ idpDetails.description } />)
                 }

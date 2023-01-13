@@ -19,7 +19,7 @@
 import { ControllerCallReturn, ControllerDecodeReturn } from
     "@b2bsample/shared/data-access/data-access-common-models-util";
 
-interface IdentityProviderFederatedAuthenticatorProperty {
+export interface IdentityProviderFederatedAuthenticatorProperty {
     key: string,
     value: string
 }

@@ -16,11 +16,11 @@
  * under the License.
  */
 
-import { IdentityProviderTemplate } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
+import { IdentityProviderTemplate, getImageForTheIdentityProvider } from
+    "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { ModelHeaderComponent } from "@b2bsample/shared/ui/ui-basic-components";
-import { EMPTY_STRING, ENTERPRISE_ID, GOOGLE_ID } from "@b2bsample/shared/util/util-common";
+import Image from "next/image";
 import { Avatar, Modal } from "rsuite";
-import config from "../../../../../../../../config.json";
 import styles from "../../../../../../styles/idp.module.css";
 
 interface SelectIdentityProviderProps {
@@ -40,21 +40,6 @@ interface SelectIdentityProviderProps {
  */
 export default function SelectIdentityProvider(prop: SelectIdentityProviderProps) {
     const { openModal, onClose, templates, onTemplateSelected } = prop;
-
-    const resolveIconName = (template): string => {
-        if (GOOGLE_ID === template.templateId) {
-
-            return `${config.CommonConfig.ManagementAPIConfig.ImageBaseUrl}/libs/themes/default/assets` +
-                "/images/identity-providers/google-idp-illustration.svg";
-        }
-        if (ENTERPRISE_ID === template.templateId) {
-
-            return `${config.CommonConfig.ManagementAPIConfig.ImageBaseUrl}/libs/themes/default/assets` +
-                "/images/identity-providers/enterprise-idp-illustration.svg";
-        }
-
-        return EMPTY_STRING;
-    };
 
     return (
         <Modal
@@ -80,10 +65,15 @@ export default function SelectIdentityProvider(prop: SelectIdentityProviderProps
                                         <h5>{ template.name }</h5>
                                         <small>{ template.description }</small>
                                     </div>
+
                                     <Avatar
-                                        style={ { background: "rgba(255,0,0,0)" } }
-                                        src={ resolveIconName(template) }
-                                    />
+                                        style={ { background: "rgba(255,0,0,0)" } }>
+                                        <Image
+                                            src={ getImageForTheIdentityProvider(template.templateId) }
+                                            alt="idp image"
+                                            width={ 40 } />
+                                    </Avatar>
+
                                 </div>
                             );
                         }) }

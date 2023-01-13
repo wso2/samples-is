@@ -16,15 +16,22 @@
  * under the License.
  */
 
-import { IdentityProviderTemplate, selectedTemplateBaesedonTemplateId } from
-    "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
+import {
+    IdentityProviderFederatedAuthenticatorProperty, IdentityProviderTemplate,
+    IdentityProviderTemplateModelAuthenticatorProperty, selectedTemplateBaesedonTemplateId
+} from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { HelperTextComponent, infoTypeDialog } from "@b2bsample/shared/ui/ui-components";
 import { CopyTextToClipboardCallback, copyTheTextToClipboard } from "@b2bsample/shared/util/util-common";
 import CopyIcon from "@rsuite/icons/Copy";
 import React from "react";
 import { Field } from "react-final-form";
-import { InputGroup, useToaster } from "rsuite";
+import { InputGroup, Toaster, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
+
+interface SettingsFormSelectionProps {
+    templateId: string
+    federatedAuthenticators: IdentityProviderFederatedAuthenticatorProperty[]
+}
 
 /**
  * 
@@ -32,13 +39,13 @@ import FormSuite from "rsuite/Form";
  * 
  * @returns Component of the settings section of the idp interface
  */
-export default function SettingsFormSelection(prop) {
+export default function SettingsFormSelection(props: SettingsFormSelectionProps) {
 
-    const { templateId, federatedAuthenticators } = prop;
+    const { templateId, federatedAuthenticators } = props;
 
-    const toaster = useToaster();
+    const toaster: Toaster = useToaster();
 
-    const propList = () => {
+    const propList = (): IdentityProviderTemplateModelAuthenticatorProperty[] => {
         const selectedTemplate: IdentityProviderTemplate = selectedTemplateBaesedonTemplateId(templateId);
 
         if (selectedTemplate) {
@@ -48,15 +55,15 @@ export default function SettingsFormSelection(prop) {
         }
     };
 
-    const selectedValue = (key) => {
+    const selectedValue = (key: string): string => {
 
         const keyFederatedAuthenticator = federatedAuthenticators.filter((obj) => obj.key === key)[0];
 
         return keyFederatedAuthenticator ? keyFederatedAuthenticator.value : "";
     };
 
-    const copyValueToClipboard = (text) => {
-        const callback : CopyTextToClipboardCallback = () => infoTypeDialog(toaster, "Text copied to clipboard");
+    const copyValueToClipboard = (text: string): void => {
+        const callback: CopyTextToClipboardCallback = () => infoTypeDialog(toaster, "Text copied to clipboard");
 
         copyTheTextToClipboard(text, callback);
     };
@@ -74,7 +81,7 @@ export default function SettingsFormSelection(prop) {
                                 initialValue={ selectedValue(property.key) }
                                 render={ ({ input, meta }) => (
                                     <FormSuite.Group controlId={ property.key }>
-                                        <FormSuite.ControlLabel>{ property.displayName }</FormSuite.ControlLabel>
+                                        <FormSuite.ControlLabel><b>{ property.displayName }</b></FormSuite.ControlLabel>
                                         <InputGroup inside style={ { width: "100%" } }>
 
                                             <FormSuite.Control

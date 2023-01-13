@@ -81,9 +81,6 @@ To create a user for Best Auto Mart with permissions to create an IdP for the **
           "name": "<SUB ORGANIZATION NAME>"
         }
       ]
-    },
-    "ManagementAPIConfig": {
-      "ImageBaseUrl" : "<IMAGE BASE URL - FOLLOW README.MD FOR MORE INFORMATION>"
     }
   },
   "BusinessAppConfig": {
@@ -134,17 +131,7 @@ setup the config json file as mentioned above.
 ### Step 5: Additional settings
 
 * If the federated organization id is returned in the idToken (in user_organization variable) when a user is logging
-* into an organization, remove the `CommonConfig.ApplicationConfig.SampleOrganization` section from t
-* he <i>config.json</i> file.
-
-#### If you are using the application with [Asgardeo](https://wso2.com/asgardeo/)
-* When creating or editing a user, make sure to append `DEFAULT/` to the username of the user.
-* In the <i>config.json</i> file, change the variable to `CommonConfig.ManagementAPIConfig.ImageBaseUrl`
-  `https://console.asgardeo.io`.
-
-#### If you are using the application with [on-premise](https://is.docs.wso2.com/en/latest/)
-* In the <i>config.json</i> file, change the variable to `CommonConfig.ManagementAPIConfig.ImageBaseUrl`
-  `<Identity server hosted URL>/console`.
+* into an organization, remove the `CommonConfig.ApplicationConfig.SampleOrganization` section from the <i>config.json</i> file.
 
 ### Step 5: Run the Guardio-Admin-App
 

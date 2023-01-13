@@ -18,7 +18,7 @@
 
 import { ControllerCallParam } from "@b2bsample/shared/data-access/data-access-common-models-util";
 
-interface IdentityProviderTemplateModelAuthenticatorProperty {
+export interface IdentityProviderTemplateModelAuthenticatorProperty {
     key?: string,
     value?: string,
     displayName?: string,

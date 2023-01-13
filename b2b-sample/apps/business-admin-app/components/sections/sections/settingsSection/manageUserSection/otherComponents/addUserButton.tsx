@@ -18,9 +18,13 @@
 
 import { Button } from "rsuite";
 
-export default function AddUserButton(prop) {
+interface AddUserButtonProps {
+    onClick : ()=>void
+}
 
-    const { onClick } = prop;
+export default function AddUserButton(props : AddUserButtonProps) {
+
+    const { onClick } = props;
 
     return (
         <Button

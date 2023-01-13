@@ -17,16 +17,16 @@
  */
 
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
-import { SendUser, User, setUsername } from "@b2bsample/shared/data-access/data-access-common-models-util";
+import { SendUser, User, setEmail, setUsername } from "@b2bsample/shared/data-access/data-access-common-models-util";
 import { Session } from "next-auth";
 import { controllerCallAddUser } from "./controllerCallAddUser";
 
-export const InviteConst = {
-    INVITE: "pwd-method-invite",
-    PWD: "pwd-method-pwd"
-};
+export enum InviteConst {
+    INVITE = "pwd-method-invite",
+    PWD = "pwd-method-pwd"
+}
 
-function inviteAddUserBody(firstName: string, familyName: string, email: string, username: string): SendUser {
+function inviteAddUserBody(firstName: string, familyName: string, email: string): SendUser {
     return {
         "emails": [
             {
@@ -41,11 +41,11 @@ function inviteAddUserBody(firstName: string, familyName: string, email: string,
         "urn:scim:wso2:schema": {
             "askPassword": "true"
         },
-        "userName": setUsername(username)
+        "userName": setUsername(email)
     };
 }
 
-function pwdAddUserBody(firstName: string, familyName: string, email: string, username: string, password: string)
+function pwdAddUserBody(firstName: string, familyName: string, email: string, password: string)
     : SendUser {
     return {
         "emails": [
@@ -60,23 +60,22 @@ function pwdAddUserBody(firstName: string, familyName: string, email: string, us
         },
         "password": password,
         "schemas": [],
-        "userName": setUsername(username)
+        "userName": setUsername(email)
     };
 }
 
 function getAddUserBody(
-    inviteConst: string,
+    inviteConst: InviteConst,
     firstName: string,
     familyName: string,
     email: string,
-    username: string,
     password: string): SendUser | undefined {
     switch (inviteConst) {
         case InviteConst.INVITE:
-            return inviteAddUserBody(firstName, familyName, email, username);
+            return inviteAddUserBody(firstName, familyName, email);
 
         case InviteConst.PWD:
-            return pwdAddUserBody(firstName, familyName, email, username, password);
+            return pwdAddUserBody(firstName, familyName, email, password);
 
         default:
 
@@ -91,22 +90,20 @@ function getAddUserBody(
  * @param firstName - first name
  * @param familyName - last name
  * @param email - email
- * @param username - username
  * @param password - password
  * 
  * @returns - details of the created user
  */
 export async function controllerDecodeAddUser(
     session: Session,
-    inviteConst: string,
+    inviteConst: InviteConst,
     firstName: string,
     familyName: string,
     email: string,
-    username: string,
     password: string): Promise<User | boolean> {
 
     const addUserEncode: SendUser =
-        (getAddUserBody(inviteConst, firstName, familyName, email, username, password) as SendUser);
+        (getAddUserBody(inviteConst, firstName, familyName, email, password) as SendUser);
 
     const res = (
         await commonControllerDecode(() => controllerCallAddUser(session, addUserEncode), false) as User | boolean);

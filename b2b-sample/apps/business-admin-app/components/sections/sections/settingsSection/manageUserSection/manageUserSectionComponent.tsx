@@ -19,6 +19,7 @@
 import { controllerDecodeViewUsers } from "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { InternalUser } from "@b2bsample/shared/data-access/data-access-common-models-util";
 import { SettingsTitleComponent } from "@b2bsample/shared/ui/ui-components";
+import { Session } from "next-auth";
 import React, { useCallback, useEffect, useState } from "react";
 import { Table } from "rsuite";
 import AddUserButton from "./otherComponents/addUserButton";
@@ -26,21 +27,24 @@ import AddUserComponent from "./otherComponents/addUserComponent";
 import EditUserComponent from "./otherComponents/editUserComponent";
 import styles from "../../../../../styles/Settings.module.css";
 
+interface ManageUserSectionComponentProps {
+    session: Session
+}
+
 /**
  * 
  * @param prop - orgName, orgId, session
  * 
  * @returns A component that will show the users in a table view
  */
-export default function ManageUserSectionComponent(prop) {
+export default function ManageUserSectionComponent(props: ManageUserSectionComponentProps) {
 
-    const { orgName, orgId, session } = prop;
+    const { session } = props;
 
     const [ users, setUsers ] = useState<InternalUser[]>([]);
     const [ editUserOpen, setEditUserOpen ] = useState<boolean>(false);
     const [ addUserOpen, setAddUserOpen ] = useState<boolean>(false);
-
-    const [ openUser, setOpenUser ] = useState({});
+    const [ openUser, setOpenUser ] = useState<InternalUser>(null);
 
     const fetchData = useCallback(async () => {
         const res = await controllerDecodeViewUsers(session);
@@ -60,21 +64,21 @@ export default function ManageUserSectionComponent(prop) {
 
     const { Column, HeaderCell, Cell } = Table;
 
-    const closeEditDialog = () => {
-        setOpenUser({});
+    const closeEditDialog = (): void => {
+        setOpenUser(null);
         setEditUserOpen(false);
     };
 
-    const onEditClick = (user) => {
+    const onEditClick = (user: InternalUser): void => {
         setOpenUser(user);
         setEditUserOpen(true);
     };
 
-    const closeAddUserDialog = () => {
+    const closeAddUserDialog = (): void => {
         setAddUserOpen(false);
     };
 
-    const onAddUserClick = () => {
+    const onAddUserClick = (): void => {
         setAddUserOpen(true);
     };
 
@@ -82,15 +86,18 @@ export default function ManageUserSectionComponent(prop) {
         <div
             className={ styles.tableMainPanelDiv }
         >
-            <EditUserComponent
-                session={ session }
-                open={ editUserOpen }
-                onClose={ closeEditDialog }
-                user={ openUser } />
+            {
+                openUser
+                    ? (<EditUserComponent
+                        session={ session }
+                        open={ editUserOpen }
+                        onClose={ closeEditDialog }
+                        user={ openUser } />)
+                    : null
+            }
+
 
             <AddUserComponent
-                orgName={ orgName }
-                orgId={ orgId }
                 session={ session }
                 open={ addUserOpen }
                 onClose={ closeAddUserDialog } />
@@ -118,12 +125,7 @@ export default function ManageUserSectionComponent(prop) {
                         </Column>
 
                         <Column flexGrow={ 2 } align="center">
-                            <HeaderCell><h6>User Name</h6></HeaderCell>
-                            <Cell dataKey="username" />
-                        </Column>
-
-                        <Column flexGrow={ 2 } align="center">
-                            <HeaderCell><h6>Email</h6></HeaderCell>
+                            <HeaderCell><h6>Email (Username)</h6></HeaderCell>
                             <Cell dataKey="email" />
                         </Column>
 
@@ -133,7 +135,9 @@ export default function ManageUserSectionComponent(prop) {
                             <Cell>
                                 { rowData => (
                                     <span>
-                                        <a onClick={ () => onEditClick(rowData) } style={ { cursor: "pointer" } }>
+                                        <a
+                                            onClick={ () => onEditClick(rowData as InternalUser) }
+                                            style={ { cursor: "pointer" } }>
                                             Edit
                                         </a>
                                     </span>
