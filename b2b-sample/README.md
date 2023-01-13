@@ -1,6 +1,8 @@
 # WSO2 B2B Organization Samples
 
-Here is a list of sample applications to try out B2B Scenarios.
+## ⚠️ Read this first
+
+1. The root of the sample-is repository  will be referred to `<SAMPLE_IS_HOME>` throughout this document.
 
 ## 1. Story
 
@@ -149,6 +151,7 @@ setup the config json file as mentioned above.
 * First, run the development server for the **Guardio-Admin-App**
 
 ```bash
+ # From `<SAMPE_IS_HOME>/b2b-sample`
  npm install
  nx serve business-admin-app
 ```
@@ -180,6 +183,7 @@ setup the config json file as mentioned above.
 
 * Open a separate terminal and run
 ```bash
+ # From `<SAMPE_IS_HOME>/b2b-sample`
  nx serve business-app
 ```
 * Open a **private browser** and type [http://localhost:3000](http://localhost:3000) with your browser to see the result.
