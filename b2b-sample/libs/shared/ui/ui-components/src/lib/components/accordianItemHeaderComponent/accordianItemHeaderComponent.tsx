@@ -41,13 +41,17 @@ export function AccordianItemHeaderComponent(prop: AccordianItemHeaderComponentP
                     style={ imageSrc ? { background: "rgba(255,0,0,0)" } : { background: `${random_rgba()}` } }
                 >
                     <>
-                        { imageSrc ?
-                            (<Image
+                        { imageSrc 
+                            ?(<Image
                                 src={ imageSrc }
                                 alt="idp image"
                                 width={ 50 } />)
-                            : null }
-                        { title ? title.charAt(0) : null }
+                            : null 
+                        }
+                        { title 
+                            ? title.charAt(0) 
+                            : null 
+                        }
                     </>
                 </Avatar>
                 <Stack direction="column" justifyContent="flex-start" alignItems="stretch">

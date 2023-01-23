@@ -85,7 +85,6 @@ export default function ConfirmAddRemoveLoginFlowModal(props: ConfirmAddRemoveLo
         }
     };
 
-
     const onSubmit = async (patchApplicationAuthMethod): Promise<void> => {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
 

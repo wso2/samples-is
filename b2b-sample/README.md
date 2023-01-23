@@ -1,6 +1,8 @@
 # WSO2 B2B Organization Samples
 
-Here is a list of sample applications to try out B2B Scenarios.
+## ⚠️ Read this first
+
+1. The root of the sample-is repository  will be referred to `<SAMPLE_IS_HOME>` throughout this document.
 
 ## 1. Story
 
@@ -129,17 +131,19 @@ setup the config json file as mentioned above.
 ### Step 5: Additional settings
 
 * If the federated organization id is returned in the idToken (in user_organization variable) when a user is logging
-* into an organization, remove the `CommonConfig.ApplicationConfig.SampleOrganization` section from t
-* he <i>config.json</i> file.
+* into an organization, remove the `CommonConfig.ApplicationConfig.SampleOrganization` section from the <i>config.json</i> file.
 
 ### Step 5: Run the Guardio-Admin-App
 
 * First, run the development server for the **Guardio-Admin-App**
 
 ```bash
+ # From `<SAMPE_IS_HOME>/b2b-sample`
  npm install
  nx serve business-admin-app
 ```
+> **_NOTE:_** If `nx serve business-admin-app` produced an error, try with `npx nx serve business-admin-app`
+
 * Open [http://localhost:3001](http://localhost:3001) with your browser to see the result.
 * Login from the created user `Alex` to the application.
     * Type `Best Car Mart` when pop up to type the organization.
@@ -168,8 +172,11 @@ setup the config json file as mentioned above.
 
 * Open a separate terminal and run
 ```bash
+ # From `<SAMPE_IS_HOME>/b2b-sample`
  nx serve business-app
 ```
+> **_NOTE:_** If `nx serve business-app` produced an error, try with `npx nx serve business-app`
+
 * Open a **private browser** and type [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 * Login from the created user `John` to the application.
     * Type `Best Car Mart` when pop up to type the organization.
