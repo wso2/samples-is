@@ -29,18 +29,12 @@ export default function GetStartedSectionComponent() {
 
     return (
         <FlexboxGrid align="middle" justify="space-between" style={ { height: "100%" } }>
-
             <FlexboxGrid.Item colspan={ 14 }>
-
                 <GetStartedText />
-
             </FlexboxGrid.Item>
-
             <FlexboxGrid.Item colspan={ 9 }>
-
                 <Image src={ getStartedImage } alt="profile image" width={ 500 } />
             </FlexboxGrid.Item>
-
         </FlexboxGrid>
     );
 
