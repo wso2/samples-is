@@ -336,6 +336,11 @@
                 <artifactId>httpcore</artifactId>
                 <version>${httpcore.wso2.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcprov-jdk15on</artifactId>
+                <version>${bouncycastle.version}</version>
+            </dependency>
 
             <!--=============================================================================-->
 
@@ -827,6 +832,7 @@
         <wsdl4j.version>1.6.2.wso2v2</wsdl4j.version>
         <neethi.wso2.version>2.0.4.wso2v5</neethi.wso2.version>
         <httpcore.wso2.version>4.3.3.wso2v1</httpcore.wso2.version>
+        <bouncycastle.version>1.62</bouncycastle.version>
 
         <!--=============================================================================-->
 
