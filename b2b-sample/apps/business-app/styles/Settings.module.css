@@ -19,7 +19,8 @@
 .homeMainPanelDiv {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 20px;
+    width: 100%;
 }
 
 .homePanel {
@@ -61,7 +62,7 @@
 }
 
 .profileImage{
-    width: 0.5%;  
+    width: 100%;  
     height: auto;
     flex-grow: 1;
 }

@@ -18,13 +18,14 @@
 
 import { MoveOrganizationComponent } from "@b2bsample/shared/ui/ui-components";
 import { redirect } from "@b2bsample/shared/util/util-authorization-config-util";
+import { Session } from "next-auth";
 import { getSession } from "next-auth/react";
-import { useRouter } from "next/router";
-import React, { useCallback, useEffect, useState } from "react";
+import { NextRouter, useRouter } from "next/router";
+import { useCallback, useEffect, useState } from "react";
 
 export async function getServerSideProps(context) {
 
-    const session = await getSession(context);
+    const session: Session = await getSession(context);
 
     if (session) {
 
@@ -45,20 +46,24 @@ export async function getServerSideProps(context) {
     }
 }
 
+interface MoveOrgInterface {
+    orgId: string
+}
+
 /**
  * 
- * @param prop - orgId, orgName
+ * @param prop - orgId
  * 
- * @returns Interface to call organization switch function
+ * @returns Interface to show which organization the user has logged into.
  */
-export default function MoveOrg(prop) {
+export default function MoveOrg(props: MoveOrgInterface) {
 
-    const { orgId } = prop;
+    const { orgId } = props;
 
-    const router = useRouter();
+    const router: NextRouter = useRouter();
 
     const moveTime = 40;
-    const [ redirectSeconds, setRedirectSeconds ] = useState(moveTime);
+    const [ redirectSeconds, setRedirectSeconds ] = useState<number>(moveTime);
 
     const redirectToOrg = useCallback(() => {
         router.push(`/o/${orgId}`);

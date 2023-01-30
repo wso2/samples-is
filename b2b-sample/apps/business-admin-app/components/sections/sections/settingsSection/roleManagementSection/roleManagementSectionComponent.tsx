@@ -20,11 +20,14 @@ import { Role } from "@b2bsample/business-admin-app/data-access/data-access-comm
 import { controllerDecodeListAllRoles } from "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { EmptySettingsComponent, SettingsTitleComponent } from "@b2bsample/shared/ui/ui-components";
 import PeoplesIcon from "@rsuite/icons/Peoples";
-import React, { useCallback, useEffect, useState } from "react";
+import { Session } from "next-auth";
+import { useCallback, useEffect, useState } from "react";
 import { Container } from "rsuite";
-import CreateRoleButton from "./otherComponents/createRoleButton";
-import CreateRoleComponent from "./otherComponents/createRoleComponent/createRoleComponent";
 import RolesList from "./otherComponents/rolesList";
+
+interface RoleManagementSectionComponentProps {
+    session : Session
+}
 
 /**
  * 
@@ -32,12 +35,11 @@ import RolesList from "./otherComponents/rolesList";
  * 
  * @returns The role management interface section.
  */
-export default function RoleManagementSectionComponent(prop) {
+export default function RoleManagementSectionComponent(props: RoleManagementSectionComponentProps) {
 
-    const { session } = prop;
+    const { session } = props;
 
     const [ rolesList, setRolesList ] = useState<Role[]>([]);
-    const [ openCreateRoleModal, setOpenCreateRoleModal ] = useState(false);
 
     const fetchAllRoles = useCallback(async () => {
 
@@ -53,29 +55,14 @@ export default function RoleManagementSectionComponent(prop) {
 
     useEffect(() => {
         fetchAllRoles();
-    }, [ fetchAllRoles, openCreateRoleModal ]);
-
-    const onClickCreateRole = () => {
-        setOpenCreateRoleModal(true);
-    };
+    }, [ fetchAllRoles ]);
 
     return (
         <Container>
 
             <SettingsTitleComponent
                 title="Role Management"
-                subtitle="Manage organization roles here.">
-                {
-                    rolesList
-                        ? <CreateRoleButton onClick={ onClickCreateRole } />
-                        : null
-                }
-            </SettingsTitleComponent>
-
-            <CreateRoleComponent
-                open={ openCreateRoleModal }
-                setOpenCreateRoleModal={ setOpenCreateRoleModal }
-                session={ session } />
+                subtitle="Manage organization roles here." />
 
             {
                 rolesList
@@ -84,7 +71,6 @@ export default function RoleManagementSectionComponent(prop) {
                         bodyString="There are no roles created for the organization."
                         buttonString="Create role"
                         icon={ <PeoplesIcon style={ { opacity: .2 } } width="150px" height="150px" /> }
-                        onAddButtonClick={ onClickCreateRole }
                     />)
             }
 

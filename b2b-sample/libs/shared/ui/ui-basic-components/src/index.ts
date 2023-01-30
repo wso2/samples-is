@@ -16,6 +16,7 @@
  * under the License.
  */
 
+export * from "./lib/components/customHtmlHeading/customHtmlHeading";
 export * from "./lib/components/formField/formField";
 export * from "./lib/components/formButtonToolbar/formButtonToolbar";
 export * from "./lib/components/modelHeaderComponent/modelHeaderComponent";

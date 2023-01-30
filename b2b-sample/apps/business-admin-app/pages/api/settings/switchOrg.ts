@@ -18,6 +18,7 @@
 
 import { getHostedUrl } from "@b2bsample/business-admin-app/util/util-application-config-util";
 import { dataNotRecievedError, notPostError } from "@b2bsample/shared/data-access/data-access-common-api-util";
+import { NextApiRequest, NextApiResponse } from "next";
 import config from "../../../../../config.json";
 
 /**
@@ -70,7 +71,7 @@ const getSwitchBody = (subOrgId: string, accessToken: string): Record<string, st
  * 
  * @returns get the request body for the switch call
  */
-const getSwitchRequest = (subOrgId, accessToken): RequestInit => {
+const getSwitchRequest = (subOrgId: string, accessToken: string): RequestInit => {
     const request = {
         body: new URLSearchParams(getSwitchBody(subOrgId, accessToken)).toString(),
         headers: getSwitchHeader(),
@@ -93,7 +94,7 @@ const getSwitchEndpoint = (): string => `${config.CommonConfig.AuthorizationConf
  * 
  * @returns whether the switch call was successful
  */
-export default async function switchOrg(req, res) {
+export default async function switchOrg(req: NextApiRequest, res: NextApiResponse) {
 
     if (req.method !== "POST") {
         notPostError(res);

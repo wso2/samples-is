@@ -20,11 +20,23 @@ import { Role } from "@b2bsample/business-admin-app/data-access/data-access-comm
 import { controllerDecodeGetRole } from "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { AccordianItemHeaderComponent, JsonDisplayComponent } from "@b2bsample/shared/ui/ui-components";
 import CodeIcon from "@rsuite/icons/Code";
-import React, { useCallback, useEffect, useState } from "react";
+import { Session } from "next-auth";
+import { useCallback, useEffect, useState } from "react";
 import { Nav, Panel } from "rsuite";
 import General from "./roleItemDetailsSection/general";
 import Permission from "./roleItemDetailsSection/permission";
 import Users from "./roleItemDetailsSection/users";
+
+interface RoleItemNavProps {
+    activeKeyNav: string,
+    activeKeyNavSelect: (eventKey: string) => void
+}
+
+interface RoleItemProps {
+    session: Session,
+    id: string,
+    roleUri: string
+}
 
 /**
  * 
@@ -32,9 +44,9 @@ import Users from "./roleItemDetailsSection/users";
  * 
  * @returns role item componet
  */
-export default function RoleItem(prop) {
+export default function RoleItem(props: RoleItemProps) {
 
-    const { session, id, roleUri } = prop;
+    const { session, id, roleUri } = props;
 
     const [ roleDetails, setRoleDetails ] = useState<Role>(null);
     const [ activeKeyNav, setActiveKeyNav ] = useState<string>("1");
@@ -49,11 +61,11 @@ export default function RoleItem(prop) {
         fetchData();
     }, [ fetchData ]);
 
-    const activeKeyNavSelect = (eventKey) => {
+    const activeKeyNavSelect = (eventKey: string): void => {
         setActiveKeyNav(eventKey);
     };
 
-    const roleItemDetailsComponent = (activeKey) => {
+    const roleItemDetailsComponent = (activeKey): JSX.Element => {
         switch (activeKey) {
             case "1":
 
@@ -101,9 +113,9 @@ export default function RoleItem(prop) {
  * 
  * @returns navigation bar of role item section
  */
-function RoleItemNav(prop) {
+function RoleItemNav(props: RoleItemNavProps) {
 
-    const { activeKeyNav, activeKeyNavSelect } = prop;
+    const { activeKeyNav, activeKeyNavSelect } = props;
 
     return (
         <Nav appearance="subtle" activeKey={ activeKeyNav } style={ { marginBottom: 10, marginTop: 15 } }>
@@ -114,7 +126,9 @@ function RoleItemNav(prop) {
                 } }>
                 <Nav.Item
                     eventKey="1"
-                    onSelect={ (eventKey) => activeKeyNavSelect(eventKey) }>General</Nav.Item>
+                    onSelect={ (eventKey) => activeKeyNavSelect(eventKey) }>
+                    General
+                </Nav.Item>
 
                 <Nav.Item
                     eventKey="2"

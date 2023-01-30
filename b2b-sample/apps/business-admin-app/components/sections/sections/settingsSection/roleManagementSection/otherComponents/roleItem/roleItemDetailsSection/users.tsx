@@ -16,17 +16,26 @@
  * under the License.
  */
 
+import { Role, RoleUsers } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { controllerDecodePatchRole, controllerDecodeViewUsers } from
     "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { InternalUser } from "@b2bsample/shared/data-access/data-access-common-models-util";
+import { FormButtonToolbar, FormField } from "@b2bsample/shared/ui/ui-basic-components";
 import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
 import { PatchMethod } from "@b2bsample/shared/util/util-common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "@b2bsample/shared/util/util-front-end-util";
+import { Session } from "next-auth";
 import { useCallback, useEffect, useState } from "react";
-import { Field, Form } from "react-final-form";
-import { Button, ButtonToolbar, Checkbox, CheckboxGroup, Loader, useToaster } from "rsuite";
+import { Form } from "react-final-form";
+import { Checkbox, CheckboxGroup, Loader, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
 import styles from "../../../../../../../../styles/Settings.module.css";
+
+interface UsersProps {
+    fetchData: () => Promise<void>,
+    session: Session,
+    roleDetails: Role
+}
 
 /**
  * 
@@ -34,9 +43,9 @@ import styles from "../../../../../../../../styles/Settings.module.css";
  * 
  * @returns The users section of role details
  */
-export default function Users(prop) {
+export default function Users(props: UsersProps) {
 
-    const { fetchData, session, roleDetails } = prop;
+    const { fetchData, session, roleDetails } = props;
 
     /**
      * 
@@ -44,7 +53,7 @@ export default function Users(prop) {
      * 
      * @returns get initial assigned user id's.
      */
-    const getInitialAssignedUserIds = (users): string[] => {
+    const getInitialAssignedUserIds = (users: RoleUsers[]): string[] => {
         if (users) {
             return users.map(user => user.value);
         }
@@ -77,7 +86,7 @@ export default function Users(prop) {
         setInitialAssignedUserIds();
     }, [ setInitialAssignedUserIds ]);
 
-    const onDataSubmit = (response, form) => {
+    const onDataSubmit = (response: Role, form) => {
         if (response) {
             successTypeDialog(toaster, "Changes Saved Successfully", "Role updated successfully.");
             fetchData();
@@ -87,8 +96,7 @@ export default function Users(prop) {
         }
     };
 
-    const onUpdate = async (values, form) => {
-
+    const onUpdate = async (values: Record<string, string | string[]>, form) => {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
         controllerDecodePatchRole(session, roleDetails.meta.location, PatchMethod.REPLACE, "users", values.users)
             .then((response) => onDataSubmit(response, form))
@@ -113,41 +121,29 @@ export default function Users(prop) {
                                     onSubmit={ () => { handleSubmit().then(form.restart); } }
                                     fluid>
 
-                                    <Field
+                                    <FormField
                                         name="users"
-                                        render={ ({ input }) => (
-                                            <FormSuite.Group controlId="checkbox">
-                                                <FormSuite.Control
-                                                    { ...input }
-                                                    name="checkbox"
-                                                    accepter={ CheckboxGroup }
-                                                >
-                                                    { users.map(user => (
-                                                        <Checkbox key={ user.id } value={ user.id }>
-                                                            { user.username }
-                                                        </Checkbox>
-                                                    )) }
-                                                </FormSuite.Control>
-                                                <FormSuite.HelpText>Assign users for the role</FormSuite.HelpText>
-                                            </FormSuite.Group>
-                                        ) }
+                                        label=""
+                                        helperText="Assign users for the role"
+                                        needErrorMessage={ false }
+                                    >
+                                        <FormSuite.Control
+                                            name="checkbox"
+                                            accepter={ CheckboxGroup }
+                                        >
+                                            { users.map(user => (
+                                                <Checkbox key={ user.id } value={ user.id }>
+                                                    { user.username }
+                                                </Checkbox>
+                                            )) }
+                                        </FormSuite.Control>
+                                    </FormField>
+
+                                    <FormButtonToolbar
+                                        submitButtonText="Update"
+                                        submitButtonDisabled={ submitting || pristine }
+                                        needCancel={ false }
                                     />
-
-                                    <div className="buttons">
-                                        <FormSuite.Group>
-                                            <ButtonToolbar>
-                                                <Button
-                                                    className={ styles.addUserButton }
-                                                    size="lg"
-                                                    appearance="primary"
-                                                    type="submit"
-                                                    disabled={ submitting || pristine }>
-                                                    Update
-                                                </Button>
-                                            </ButtonToolbar>
-                                        </FormSuite.Group>
-
-                                    </div>
                                 </FormSuite>
                             ) }
                         />)

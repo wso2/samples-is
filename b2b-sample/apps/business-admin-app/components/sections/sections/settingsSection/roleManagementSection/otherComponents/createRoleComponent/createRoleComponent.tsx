@@ -16,9 +16,11 @@
  * under the License.
  */
 
+import { Role } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { controllerDecodeCreateRole } from "@b2bsample/business-admin-app/data-access/data-access-controller";
 import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "@b2bsample/shared/util/util-front-end-util";
+import { Session } from "next-auth";
 import React, { useState } from "react";
 import { Loader, Modal, Panel, Steps, useToaster } from "rsuite";
 import General from "./createRoleComponentInner/general";
@@ -26,15 +28,21 @@ import Permission from "./createRoleComponentInner/permission";
 import Users from "./createRoleComponentInner/users";
 import styles from "../../../../../../../styles/Settings.module.css";
 
-export default function CreateRoleComponent(prop) {
+interface CreateRoleComponentProps {
+    open: boolean,
+    setOpenCreateRoleModal: React.Dispatch<React.SetStateAction<boolean>>,
+    session: Session
+}
 
-    const { open, setOpenCreateRoleModal, session } = prop;
+export default function CreateRoleComponent(props: CreateRoleComponentProps) {
+
+    const { open, setOpenCreateRoleModal, session } = props;
 
     const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
-    const [ step, setStep ] = useState(0);
-    const [ displayName, setDisplayName ] = useState("");
-    const [ permissions, setPermissions ] = useState([]);
-    const [ users, setUsers ] = useState([]);
+    const [ step, setStep ] = useState<number>(0);
+    const [ displayName, setDisplayName ] = useState<string>("");
+    const [ permissions, setPermissions ] = useState<string[]>([]);
+    const [ users, setUsers ] = useState<string[]>([]);
 
     const toaster = useToaster();
 
@@ -43,11 +51,13 @@ export default function CreateRoleComponent(prop) {
      * 
      * @param nextStep - next step
      */
-    const onChange = (nextStep) => {
+    const onChange = (nextStep: number): void => {
         setStep(nextStep < 0 ? 0 : nextStep > 3 ? 3 : nextStep);
     };
-    const onPrevious = () => onChange(step - 1);
-    const onNext = () => {
+
+    const onPrevious = (): void => onChange(step - 1);
+
+    const onNext = (): void => {
         if (step == 2) {
 
             onSubmit(displayName, permissions, users);
@@ -57,7 +67,7 @@ export default function CreateRoleComponent(prop) {
         }
     };
 
-    const onDataSubmit = (response) => {
+    const onDataSubmit = (response: Role): void => {
         if (response) {
             successTypeDialog(toaster, "Changes Saved Successfully", "Role created successfully.");
             onCreateRoleModalClose();
@@ -66,7 +76,7 @@ export default function CreateRoleComponent(prop) {
         }
     };
 
-    const onSubmit = async (displayName, permissions, users) => {
+    const onSubmit = async (displayName, permissions, users): Promise<void> => {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
         await controllerDecodeCreateRole(session, displayName, permissions, users)
             .then((response) => onDataSubmit(response))
@@ -77,7 +87,7 @@ export default function CreateRoleComponent(prop) {
     /**
      *  callback function on create role modal close
      */
-    const onCreateRoleModalClose = () => {
+    const onCreateRoleModalClose = (): void => {
         setOpenCreateRoleModal(false);
         setStep(0);
         setDisplayName("");
@@ -85,7 +95,7 @@ export default function CreateRoleComponent(prop) {
         setUsers([]);
     };
 
-    const craeteRoleItemDetailsComponent = (currentStep) => {
+    const craeteRoleItemDetailsComponent = (currentStep: number): JSX.Element => {
 
         switch (currentStep) {
             case 0:

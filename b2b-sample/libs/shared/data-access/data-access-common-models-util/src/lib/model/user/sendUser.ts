@@ -17,6 +17,7 @@
  */
 
 import { Name } from "./user";
+import ControllerCallParam from "../controllerParam/controllerCallParam";
 
 export interface Email {
     primary: boolean,
@@ -27,7 +28,7 @@ interface UrnSchema {
     askPassword : string
 }
 
-export interface SendUser {
+export interface SendUser extends ControllerCallParam{
     emails: [Email],
     name : Name,
     "urn:scim:wso2:schema"? : UrnSchema,

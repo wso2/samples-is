@@ -23,7 +23,7 @@ import { PatchMethod } from "@b2bsample/shared/util/util-common";
 import { Session } from "next-auth";
 import { controllerCallPatchRole } from "./controllerCallPatchRole";
 
-function getAddReplaceBody(patchMethod: string, path: string, value: string[] | string): PatchBody {
+function getAddReplaceBody(patchMethod: PatchMethod, path: string, value: string[] | string): PatchBody {
     return {
         "operations": [
             {
@@ -35,7 +35,7 @@ function getAddReplaceBody(patchMethod: string, path: string, value: string[] | 
     };
 }
 
-function getRemoveBody(patchMethod: string, path: string, value: string[] | string): PatchBody {
+function getRemoveBody(patchMethod: PatchMethod, path: string, value: string[] | string): PatchBody {
     return {
         "operations": [
             {
@@ -46,7 +46,7 @@ function getRemoveBody(patchMethod: string, path: string, value: string[] | stri
     };
 }
 
-function getPatchBody(patchMethod: string, path: string, value: string[] | string) {
+function getPatchBody(patchMethod: PatchMethod, path: string, value: string[] | string) {
     switch (patchMethod) {
         case PatchMethod.ADD:
 
@@ -76,7 +76,7 @@ function getPatchBody(patchMethod: string, path: string, value: string[] | strin
  * @returns - whehter the patch was successful or not
  */
 export async function controllerDecodePatchRole(
-    session: Session, roleUri: string, patchMethod: string, path: string, value: string[] | string)
+    session: Session, roleUri: string, patchMethod: PatchMethod, path: string, value: string[] | string)
     : Promise<Role | null> {
 
     const patchBody: PatchBody = (getPatchBody(patchMethod, path, value) as PatchBody);

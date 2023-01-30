@@ -48,7 +48,8 @@
             }
         },
         "ManagementAPIConfig": {
-            "SharedApplicationName": "<SHARED APPLICATION NAME FOR BUSINESS APP> ex: guardio-app"
+            "SharedApplicationName": "<SHARED APPLICATION NAME FOR BUSINESS APP> ex: guardio-app",
+            "UserStore" : "DEFAULT"
         }
     },
     "BusinessAdminAppConfig": {

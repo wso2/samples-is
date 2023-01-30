@@ -22,5 +22,5 @@ export interface EmptySettingsComponentProps {
     bodyString : string,
     buttonString : string,
     icon : ReactNode
-    onAddButtonClick : MouseEventHandler<HTMLElement>
+    onAddButtonClick? : MouseEventHandler<HTMLElement>
 }

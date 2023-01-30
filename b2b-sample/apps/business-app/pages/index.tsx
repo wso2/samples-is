@@ -18,8 +18,7 @@
 
 import { LogoComponent } from "@b2bsample/business-app/ui/ui-components";
 import { IndexHomeComponent } from "@b2bsample/shared/ui/ui-components";
-import { useRouter } from "next/router";
-import React from "react";
+import { NextRouter, useRouter } from "next/router";
 import "rsuite/dist/rsuite.min.css";
 import homeImage from "../../../libs/business-app/ui-assets/src/lib/images/home.jpeg";
 
@@ -29,8 +28,9 @@ import homeImage from "../../../libs/business-app/ui-assets/src/lib/images/home.
  */
 export default function Home() {
 
-    const router = useRouter();
-    const signinOnClick = () => {
+    const router: NextRouter = useRouter();
+    
+    const signinOnClick = (): void => {
         router.push("/signin");
     };
 

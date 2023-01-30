@@ -22,7 +22,9 @@ export interface SideNavItem {
     icon?: string,
     type: string,
     hideBasedOnScope?: boolean,
-    items?: SideNavItem[]
+    items?: SideNavItem[],
+    scopes? : string[],
+    new? : boolean
 }
 
 export default SideNavItem;

@@ -16,8 +16,11 @@
  * under the License.
  */
 
-import React from "react";
 import { Button } from "rsuite";
+
+interface CreateRoleButtonProps {
+    onClick: () => void
+}
 
 /**
  * 
@@ -25,10 +28,10 @@ import { Button } from "rsuite";
  * 
  * @returns - create role button
  */
-export default function CreateRoleButton(prop) {
+export default function CreateRoleButton(props: CreateRoleButtonProps) {
 
-    const { onClick } = prop;
- 
+    const { onClick } = props;
+
     return (
         <Button
             appearance="primary"
