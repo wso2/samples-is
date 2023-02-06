@@ -110,7 +110,8 @@ To create a user for Best Auto Mart with permissions to create an IdP for the **
       }
     },
     "ManagementAPIConfig": {
-      "SharedApplicationName": "Guardio-Business-App"
+      "SharedApplicationName": "Guardio-Business-App",
+      "UserStore" : "DEFAULT"
     }
   },
   "BusinessAdminAppConfig": {
