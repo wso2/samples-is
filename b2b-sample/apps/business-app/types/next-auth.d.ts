@@ -26,6 +26,7 @@ declare module "next-auth" {
         expires: boolean,
         accessToken?: string,
         user?: User | null,
+        scope?: string,
         orgId?: string,
         orginalIdToken?: string,
     }

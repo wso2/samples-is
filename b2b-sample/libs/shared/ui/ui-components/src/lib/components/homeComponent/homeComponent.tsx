@@ -16,7 +16,6 @@
  * under the License.
  */
 
-import React from "react";
 import styles from "./homeComponent.module.css";
 import { HomeComponentProps } from "../../models/homeComponent/homeComponent";
 import MainPanelComponent from "../mainPanelComponent/mainPanelComponent";

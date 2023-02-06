@@ -17,7 +17,6 @@
  */
 
 import Image from "next/image";
-import React from "react";
 import styles from "./sharedLogoComponent.module.css";
 import { SharedLogoComponentProps, SharedLogoImageStyle, SharedLogoProps } from
     "../../models/sharedLogoComponent/sharedLogoComponent";

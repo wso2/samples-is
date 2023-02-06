@@ -19,8 +19,10 @@
 import { LogoComponent } from "@b2bsample/business-admin-app/ui/ui-components";
 import { signout } from "@b2bsample/business-admin-app/util/util-authorization-config-util";
 import { FooterComponent, HomeComponent, SignOutComponent } from "@b2bsample/shared/ui/ui-components";
+import { Session } from "next-auth";
 import React, { useState } from "react";
 import "rsuite/dist/rsuite.min.css";
+import GetStartedSectionComponent from "./sections/getStartedSection/getStartedSectionComponent";
 import IdpSectionComponent from "./sections/settingsSection/idpSection/idpSectionComponent";
 import ManageUserSectionComponent from "./sections/settingsSection/manageUserSection/manageUserSectionComponent";
 import RoleManagementSectionComponent from
@@ -28,6 +30,10 @@ import RoleManagementSectionComponent from
 import sideNavData from "../../../../libs/business-admin-app/ui/ui-assets/src/lib/data/sideNav.json";
 import Custom500 from "../../pages/500";
 
+interface HomeProps {
+    name : string,
+    session: Session
+}
 
 /**
  * 
@@ -35,21 +41,24 @@ import Custom500 from "../../pages/500";
  *
  * @returns The home section. Mainly side nav bar and the section to show other settings sections.
  */
-export default function Home(prop) : JSX.Element {
+export default function Home(props: HomeProps) : JSX.Element {
 
-    const { name, orgId, session } = prop;
+    const { name, session } = props;
 
-    const [ activeKeySideNav, setActiveKeySideNav ] = useState("2-1");
+    const [ activeKeySideNav, setActiveKeySideNav ] = useState("1");
     const [ signOutModalOpen, setSignOutModalOpen ] = useState(false);
 
     const mainPanelComponenet = (activeKey) : JSX.Element => {
         switch (activeKey) {
+            case "1":
+
+                return <GetStartedSectionComponent />;
             case "2-1":
 
                 return <ManageUserSectionComponent session={ session } />;
             case "2-2":
 
-                return <RoleManagementSectionComponent orgName={ name } orgId={ orgId } session={ session } />;
+                return <RoleManagementSectionComponent session={ session } />;
             case "2-3":
 
                 return <IdpSectionComponent session={ session } />;

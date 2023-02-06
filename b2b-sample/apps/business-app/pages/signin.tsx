@@ -19,7 +19,7 @@
 import { LogoComponent } from "@b2bsample/business-app/ui/ui-components";
 import { SigninRedirectComponent } from "@b2bsample/shared/ui/ui-components";
 import { orgSignin } from "@b2bsample/shared/util/util-authorization-config-util";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "rsuite/dist/rsuite.min.css";
 
 /**
@@ -29,7 +29,7 @@ import "rsuite/dist/rsuite.min.css";
 export default function Signin() {
 
     const moveTime = 40;
-    const [ redirectSeconds, setRedirectSeconds ] = useState(moveTime);
+    const [ redirectSeconds, setRedirectSeconds ] = useState<number>(moveTime);
 
     useEffect(() => {
         if (redirectSeconds <= 1) {

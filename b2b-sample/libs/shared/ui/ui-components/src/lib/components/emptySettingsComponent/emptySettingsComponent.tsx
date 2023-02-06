@@ -16,7 +16,6 @@
  * under the License.
  */
 
-import React from "react";
 import { Button, FlexboxGrid, Stack } from "rsuite";
 import { EmptySettingsComponentProps } from "../../models/emptySettingsComponent/emptySettingsComponent";
 
@@ -41,13 +40,18 @@ export function EmptySettingsComponent(prop: EmptySettingsComponentProps) {
                 <p style={ { fontSize: 14, marginTop: "20px" } }>
                     { bodyString }
                 </p>
-                <Button
-                    appearance="primary"
-                    onClick={ onAddButtonClick }
-                    size="md"
-                    style={ { marginTop: "12px" } }>
-                    { buttonString }
-                </Button>
+                {
+                    onAddButtonClick
+                        ? (<Button
+                            appearance="primary"
+                            onClick={ onAddButtonClick }
+                            size="md"
+                            style={ { marginTop: "12px" } }>
+                            { buttonString }
+                        </Button>)
+                        : null
+                }
+
             </Stack>
         </FlexboxGrid>
     );

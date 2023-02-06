@@ -17,14 +17,17 @@
  */
 
 import { orgSignin, redirect } from "@b2bsample/shared/util/util-authorization-config-util";
+import { Session } from "next-auth";
 import { getSession } from "next-auth/react";
-import React, { useEffect } from "react";
-import Home from "../../components/sections/home";
+import { useEffect } from "react";
+import EasyMeetingsHome from "../../components/sections/storyHomes/easyMeetingsHome";
+import GuardioInsuranceHome from "../../components/sections/storyHomes/guardioInsuranceHome";
+import storyConfig from "../../storyConfigBusinessApp.json";
 
 export async function getServerSideProps(context) {
 
-    const routerQuery = context.query.id;
-    const session = await getSession(context);
+    const routerQuery: string = context.query.id;
+    const session: Session = await getSession(context);
 
     if (session === null || session === undefined) {
 
@@ -46,15 +49,20 @@ export async function getServerSideProps(context) {
 
 }
 
+interface OrgProps {
+    session: Session,
+    routerQuery: string
+}
+
 /**
  * 
  * @param prop - session, routerQuery (orgId)
  * 
  * @returns Organization distinct interace
  */
-export default function Org(prop) {
+export default function Org(props: OrgProps) {
 
-    const { session, routerQuery } = prop;
+    const { session, routerQuery } = props;
 
     useEffect(() => {
         if (routerQuery) {
@@ -64,11 +72,21 @@ export default function Org(prop) {
         }
     }, [ routerQuery ]);
 
+    const getHome = (): JSX.Element => {
+        switch (storyConfig.story) {
+            case "guardio":
+               
+                return  <GuardioInsuranceHome session={ session }/>;
+            
+            case "easyMeet":
+
+                return <EasyMeetingsHome session={ session }/>;
+        }
+    };
+
     return (
         session
-            ? (<Home
-                orgId={ session.orgId }
-                session={ session }/>)
+            ? (getHome())
             : null
     );
 }

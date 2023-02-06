@@ -17,8 +17,6 @@
  */
 
 import { SharedLogoComponent } from "@b2bsample/shared/ui/ui-components";
-import React from "react";
-import config from "../../../../../../../../config.json";
 import logoImage from "../../../../../../ui-assets/src/lib/images/logo.png";
 import { LogoComponentProps } from "../../models/logoComponent/logoComponent";
 

@@ -31,8 +31,8 @@ export async function commonControllerDecode(
             return errorReturnValue;
         }
 
-        if ("error" in res) {
-
+        if ("error" in res || "traceId" in res) {
+            
             return errorReturnValue;
         }
 

@@ -16,16 +16,25 @@
  * under the License.
  */
 
+import { Role } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { controllerDecodePatchRole } from "@b2bsample/business-admin-app/data-access/data-access-controller";
+import { FormButtonToolbar, FormField } from "@b2bsample/shared/ui/ui-basic-components";
 import { errorTypeDialog, successTypeDialog } from "@b2bsample/shared/ui/ui-components";
 import { PatchMethod } from "@b2bsample/shared/util/util-common";
 import { LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE } from "@b2bsample/shared/util/util-front-end-util";
-import React, { useCallback, useEffect, useState } from "react";
-import { Field, Form } from "react-final-form";
-import { Button, ButtonToolbar, CheckTree, Loader, useToaster } from "rsuite";
+import { Session } from "next-auth";
+import { useCallback, useEffect, useState } from "react";
+import { Form } from "react-final-form";
+import { CheckTree, Loader, Toaster, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
 import styles from "../../../../../../../../styles/Settings.module.css";
 import orgRolesData from "../../../data/orgRolesData.json";
+
+interface PermissionProps {
+    fetchData: () => Promise<void>,
+    session: Session,
+    roleDetails: Role
+}
 
 /**
  * 
@@ -33,17 +42,17 @@ import orgRolesData from "../../../data/orgRolesData.json";
  * 
  * @returns The permission section of role details
  */
-export default function Permission(prop) {
+export default function Permission(props: PermissionProps) {
 
-    const { fetchData, session, roleDetails } = prop;
+    const { fetchData, session, roleDetails } = props;
 
     const [ loadingDisplay, setLoadingDisplay ] = useState(LOADING_DISPLAY_NONE);
     const [ selectedPermissions, setSelectedPermissions ] = useState<string[]>([]);
 
-    const toaster = useToaster();
+    const toaster: Toaster = useToaster();
 
     const setInitialPermissions = useCallback(async () => {
-        if(roleDetails.permissions) {
+        if (roleDetails.permissions) {
             setSelectedPermissions(roleDetails.permissions);
         }
     }, [ roleDetails ]);
@@ -52,7 +61,7 @@ export default function Permission(prop) {
         setInitialPermissions();
     }, [ setInitialPermissions ]);
 
-    const onDataSubmit = (response, form) => {
+    const onDataSubmit = (response: Role, form) => {
         if (response) {
             successTypeDialog(toaster, "Changes Saved Successfully", "Role updated successfully.");
             fetchData();
@@ -62,7 +71,7 @@ export default function Permission(prop) {
         }
     };
 
-    const onUpdate = async (values, form) => {
+    const onUpdate = async (values: Record<string, string[]>, form) => {
 
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
         controllerDecodePatchRole(
@@ -89,38 +98,27 @@ export default function Permission(prop) {
                                     onSubmit={ () => { handleSubmit().then(form.restart); } }
                                     fluid>
 
-                                    <Field
+                                    <FormField
                                         name="permissions"
-                                        render={ ({ input }) => (
-                                            <FormSuite.Group controlId="checkbox">
-                                                <FormSuite.Control
-                                                    { ...input }
-                                                    name="checkbox"
-                                                    accepter={ CheckTree }
-                                                    data={ orgRolesData }
-                                                    defaultExpandItemValues={ [ "/permission" ] }
-                                                    cascade
-                                                />
-                                                <FormSuite.HelpText>Assign permission for the role</FormSuite.HelpText>
-                                            </FormSuite.Group>
-                                        ) }
+                                        label=""
+                                        helperText="Assign permission for the role"
+                                        needErrorMessage={ false }
+                                    >
+                                        <FormSuite.Control
+                                            name="checkbox"
+                                            accepter={ CheckTree }
+                                            data={ orgRolesData }
+                                            defaultExpandItemValues={ [ "/permission" ] }
+                                            cascade
+                                        />
+                                    </FormField>
+
+                                    <FormButtonToolbar
+                                        submitButtonText="Update"
+                                        submitButtonDisabled={ submitting || pristine }
+                                        needCancel={ false }
                                     />
 
-                                    <div className="buttons">
-                                        <FormSuite.Group>
-                                            <ButtonToolbar>
-                                                <Button
-                                                    className={ styles.addUserButton }
-                                                    size="lg"
-                                                    appearance="primary"
-                                                    type="submit"
-                                                    disabled={ submitting || pristine }>
-                                                    Update
-                                                </Button>
-                                            </ButtonToolbar>
-                                        </FormSuite.Group>
-
-                                    </div>
                                 </FormSuite>
                             ) }
                         />)
