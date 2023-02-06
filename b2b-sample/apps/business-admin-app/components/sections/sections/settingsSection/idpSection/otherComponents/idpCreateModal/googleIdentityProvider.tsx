@@ -17,7 +17,7 @@
  */
 
 import {
-    IdentityProvider, IdentityProviderTemplate
+    IdentityProvider, IdentityProviderConfigureType, IdentityProviderTemplate
 } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import {
     controllerDecodeCreateIdentityProvider
@@ -63,7 +63,7 @@ export default function GoogleIdentityProvider(prop: GoogleIdentityProviderProps
 
     const onUpdate = async (values: Record<string, string>): Promise<void> => {
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
-        controllerDecodeCreateIdentityProvider(session, template, values)
+        controllerDecodeCreateIdentityProvider(session, template, values, IdentityProviderConfigureType.MANUAL)
             .then((response) => onIdpCreate(response))
             .finally(() => setLoadingDisplay(LOADING_DISPLAY_NONE));
     };

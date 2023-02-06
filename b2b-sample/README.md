@@ -45,12 +45,13 @@ Create a sub-organization named **Best Car Mart**.
 ### Step 2: Create applications
 Now we need **two** applications to communicate with the **Guardio-Business-App** and the ****Guardio-Admin-App****.
 
-Create two applications named **Guardio-Business-App** and **Guardio-Admin-App**.
+Create two applications named **Guardio-Business-App** and **Guardio-Admin-App** [This should be a management application].
 
 #### Step 2.1: In the Guardio-Business-App
+
 >| Property                    |                                    Value/s                                     |
 >|--------------------------|:------------------------------------------------------------------------------:|
->| Allowed Grant types      |            `Organization Switch`, `Code` and `Client Credientials`             |
+>| Allowed Grant types      |            `Code` and `Client Credientials`             |
 >| Authorized redirect URLs |  `http://localhost:3000/api/auth/callback/wso2is` and `http://localhost:3000`  |
 >| Allowed origin           |            `http://localhost:3000 `             |
 
@@ -109,7 +110,8 @@ To create a user for Best Auto Mart with permissions to create an IdP for the **
       }
     },
     "ManagementAPIConfig": {
-      "SharedApplicationName": "Guardio-Business-App"
+      "SharedApplicationName": "Guardio-Business-App",
+      "UserStore" : "DEFAULT"
     }
   },
   "BusinessAdminAppConfig": {
