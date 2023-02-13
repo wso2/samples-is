@@ -664,6 +664,20 @@
                 <artifactId>gson</artifactId>
                 <version>${com.google.code.gson.version}</version>
             </dependency>
+            <!--=============================================================================-->
+
+            <!--dependencies of backend-service-->
+            <dependency>
+                <groupId>javax.annotation</groupId>
+                <artifactId>javax.annotation-api</artifactId>
+                <version>${javax.annotation.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.xml.bind</groupId>
+                <artifactId>jaxb-api</artifactId>
+                <version>${javax.xml.bind.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -887,6 +901,12 @@
         <nimbusds.osgi.version.range>[2.26.0,8.0.0)</nimbusds.osgi.version.range>
         <json-smart.version.range>[1.3.0,3.0.0)</json-smart.version.range>
         <oauth2.outbound.version.range>[1.0.5, 2.0.0)</oauth2.outbound.version.range>
+
+        <!--=============================================================================-->
+
+        <!--repo versions of backend-service-->
+        <javax.annotation.version>1.2</javax.annotation.version>
+        <javax.xml.bind.version>2.3.1</javax.xml.bind.version>
     </properties>
 
 </project>
