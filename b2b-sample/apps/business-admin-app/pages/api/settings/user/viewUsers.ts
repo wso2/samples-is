@@ -40,7 +40,7 @@ export default async function viewUsers(req: NextApiRequest, res: NextApiRespons
 
     try {
         const fetchData = await fetch(
-            `${getOrgUrl(orgId)}/scim2/Users`,
+            `${getOrgUrl(orgId)}/scim2/Users?count=100`,
             requestOptions(session)
         );
         const users = await fetchData.json();

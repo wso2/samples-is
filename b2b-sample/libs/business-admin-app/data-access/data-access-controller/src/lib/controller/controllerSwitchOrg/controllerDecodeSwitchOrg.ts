@@ -28,12 +28,12 @@ function getOrgId(token: JWT): string {
         if (token.user.user_organization) {
 
             return token.user.user_organization;
+        } else if (token.user.org_id) {
+
+            return token.user.org_id;
         } else if (config.CommonConfig.ApplicationConfig.SampleOrganization[0]) {
     
             return config.CommonConfig.ApplicationConfig.SampleOrganization[0].id;
-        } else {
-    
-            return token.user.org_id;
         }
     } else {
         

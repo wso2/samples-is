@@ -47,6 +47,8 @@ Now we need **two** applications to communicate with the **Guardio-Business-App*
 
 Create two applications named **Guardio-Business-App** and **Guardio-Admin-App** [This should be a management application].
 
+Share both applications with all the organizations by clicking the share button.
+
 #### Step 2.1: In the Guardio-Business-App
 
 >| Property                    |                                    Value/s                                     |
@@ -65,6 +67,9 @@ Select `Email`, `First Name`, `Last Name`, and `Username` from the list of attri
 >| Authorized redirect URLs | `http://localhost:3001/api/auth/callback/wso2isAdmin` and `http://localhost:3001` |
 >| Allowed origin           |                           `http://localhost:3001`                            |
 
+Also, On the User Attributes tab, click on + Add User Attributes.
+Select `Email`, `First Name`, `Last Name`, and `Username` from the list of attributes.
+
 ### Step 3: Create a user and assign roles
 You need to create new users on the sub-organizations with the required permissions.
 
@@ -80,15 +85,7 @@ To create a user for Best Auto Mart with permissions to create an IdP for the **
 {
   "CommonConfig": {
     "AuthorizationConfig": {
-      "BaseOrganizationUrl": "<PARENT ORGANIZATION URL> ex: https://dev.api.asgardeo.io/t/guardio"
-    },
-    "ApplicationConfig": {
-      "SampleOrganization": [
-        {
-          "id": "<SUB ORGANIZATION ID>",
-          "name": "<SUB ORGANIZATION NAME>"
-        }
-      ]
+      "BaseOrganizationUrl": "<PARENT ORGANIZATION URL> ex: https://api.asgardeo.io/t/guardio"
     }
   },
   "BusinessAppConfig": {
@@ -108,10 +105,6 @@ To create a user for Best Auto Mart with permissions to create an IdP for the **
         "name": "Guardio Insurance",
         "tag": "Anytime . Anywhere"
       }
-    },
-    "ManagementAPIConfig": {
-      "SharedApplicationName": "Guardio-Business-App",
-      "UserStore" : "DEFAULT"
     }
   },
   "BusinessAdminAppConfig": {
@@ -131,16 +124,23 @@ To create a user for Best Auto Mart with permissions to create an IdP for the **
         "name": "Guardio Insurance - Administrator Application",
         "tag": "Administrator Application"
       }
+    },
+    "ManagementAPIConfig": {
+      "SharedApplicationName": "Guardio-Business-App",
+      "UserStore" : "DEFAULT"
     }
   }
 }
 ```
 setup the config json file as mentioned above.
 
-### Step 5: Additional settings
+**_NOTE:_**  With the latest B2B organization management features provided by WSO2 Identity Server, the following operations are allowed in sub organization for the organization creator.
 
-* If the federated organization id is returned in the idToken (in user_organization variable) when a user is logging
-* into an organization, remove the `CommonConfig.ApplicationConfig.SampleOrganization` section from the <i>config.json</i> file.
+1 - onboarding enterprise IDP.
+2 - Update authentication options of the shared applications.
+3 - Delete the business users.
+
+Then Guardio-Admin-App can be used to manage the sub organization instead of 
 
 ### Step 5: Run the Guardio-Admin-App
 
@@ -159,21 +159,11 @@ setup the config json file as mentioned above.
 
 ### Step 6: Setup the identity provider for the Guardio-Business-App
 
-* For this we will create an external identity provider in Asgardeo. After creating an identity provider in Asgardeo.
-
-* Also, On the User Attributes tab, click on + Add User Attributes.
-    * Select `Email`, `First Name`, `Last Name`, and `Username` from the list of attributes.
-
+* For this we will create an external identity provider in sub organization.
 * Go to the identity providers section in the **Guardio-Admin-App** and fill in the form to create an identity provider for the
   **Guardio-Business-App**.
 
 * After creating the Idp add it to the login flow by clicking on `Add to Login Flow`.
-
-### Step 7: Create a corporate user
-* You need to create a new corporate user to access the **Guardio-Business-App**.
-
-* To create a corporate user for Best Auto Mart organization go to the Asgardeo console where you set up the corporate IDP
-  and create a user named `John`.
 
 ### Step 8: Run the Guardio-Business-App
 
@@ -187,7 +177,7 @@ setup the config json file as mentioned above.
 > **_NOTE:_** If `nx serve business-app` produced an error, try with `npx nx serve business-app`
 
 * Open a **private browser** and type [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-* Login from the created user `John` to the application.
+* Login via the configured enterprise IDP to the application.
     * Type `Best Car Mart` when pop up to type the organization.
 
 ---

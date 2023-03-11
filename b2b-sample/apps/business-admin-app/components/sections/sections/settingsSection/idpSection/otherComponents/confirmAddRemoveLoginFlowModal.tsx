@@ -148,8 +148,8 @@ export default function ConfirmAddRemoveLoginFlowModal(props: ConfirmAddRemoveLo
 
 /**
  * 
- * @returns When then `config.ManagementAPIConfig.SharedApplicationName` is not the correct applicaiton, 
- * it will show this section
+ * @returns When then `config.BusinessAdminAppConfig.ManagementAPIConfig.SharedApplicationName` 
+ * is not the correct applicaiton, it will show this section
  */
 function EmptySelectApplicationBody() {
 
@@ -176,8 +176,8 @@ function EmptySelectApplicationBody() {
  * 
  * @param prop - idpIsinAuthSequence, applicationDetail
  * 
- * @returns  When then config.ManagementAPIConfig.SharedApplicationName is the correct applicaiton, 
- * it will show this section 
+ * @returns  When then config.BusinessAdminAppConfig.ManagementAPIConfig.SharedApplicationName 
+ * is the correct applicaiton, it will show this section 
  */
 function ApplicationListAvailable(props: ApplicationListAvailableProps) {
 

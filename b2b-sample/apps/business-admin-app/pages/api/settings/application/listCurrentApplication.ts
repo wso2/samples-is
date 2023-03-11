@@ -24,7 +24,7 @@ import config from "../../../../../../config.json";
 
 /**
  * API call to get the initial details of the current application. Use the application name to filter out the 
- * application (`config.ManagementAPIConfig.SharedApplicationName`).
+ * application (`config.BusinessAdminAppConfig.ManagementAPIConfig.SharedApplicationName`).
  * 
  * @param req - request
  * @param res - response
@@ -40,7 +40,7 @@ export default async function listCurrentApplication(req: NextApiRequest, res: N
     const session = body.session;
     const orgId = body.orgId;
 
-    const appName = config.BusinessAppConfig.ManagementAPIConfig.SharedApplicationName;
+    const appName = config.BusinessAdminAppConfig.ManagementAPIConfig.SharedApplicationName;
 
     try {
         const fetchData = await fetch(

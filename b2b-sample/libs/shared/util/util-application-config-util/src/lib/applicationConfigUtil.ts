@@ -77,7 +77,12 @@ export function getManagementAPIServerBaseUrl() {
  */
 export function getTenantDomain() {
 
+    const pattern = /t/;
     const baseOrganizationUrl = config.CommonConfig.AuthorizationConfig.BaseOrganizationUrl;
+
+    if (!pattern.test(baseOrganizationUrl)) {
+        return "carbon.super";
+    }
     const url = baseOrganizationUrl.split("/");
     const path = url[url.length - 1];
 

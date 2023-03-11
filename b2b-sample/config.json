@@ -2,14 +2,6 @@
     "CommonConfig": {
         "AuthorizationConfig": {
             "BaseOrganizationUrl": "<PARENT ORGANIZATION URL> ex: https://api.asgardeo.io/t/guardio"
-        },
-        "ApplicationConfig": {
-            "SampleOrganization": [
-                {
-                    "id": "<SUB ORGANIZATION ID>",
-                    "name": "<SUB ORGANIZATION NAME>"
-                }
-            ]
         }
     },
     "BusinessAppConfig": {
@@ -29,10 +21,6 @@
                 "name": "Guardio Insurance",
                 "tag": "Anytime . Anywhere"
             }
-        },
-        "ManagementAPIConfig": {
-            "SharedApplicationName": "<SHARED APPLICATION NAME FOR BUSINESS APP> ex: guardio-app",
-            "UserStore" : "DEFAULT"
         }
     },
     "BusinessAdminAppConfig": {
@@ -69,6 +57,10 @@
                 "name": "Guardio Insurance - Administrator Application",
                 "tag": "Administrator Application"
             }
+        },
+        "ManagementAPIConfig": {
+            "SharedApplicationName": "<SHARED APPLICATION NAME FOR BUSINESS APP> ex: guardio-app",
+            "UserStore" : "DEFAULT"
         }
     }
 }
