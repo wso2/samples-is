@@ -20,7 +20,6 @@ import { commonControllerDecode } from "@b2bsample/shared/data-access/data-acces
 import { OrgSession } from "@b2bsample/shared/data-access/data-access-common-models-util";
 import { JWT } from "next-auth/jwt";
 import { controllerCallSwitchOrg } from "./controllerCallSwitchOrg";
-import config from "../../../../../../../../config.json";
 
 function getOrgId(token: JWT): string {
 
@@ -28,18 +27,13 @@ function getOrgId(token: JWT): string {
         if (token.user.user_organization) {
 
             return token.user.user_organization;
-        } else if (config.CommonConfig.ApplicationConfig.SampleOrganization[0]) {
-
-            return config.CommonConfig.ApplicationConfig.SampleOrganization[0].id;
         } else {
 
             return token.user.org_id;
         }
-    } else {
-
-        return config.CommonConfig.ApplicationConfig.SampleOrganization[0].id;
     }
 
+    return "";
 }
 
 /**

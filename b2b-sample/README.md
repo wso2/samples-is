@@ -140,7 +140,7 @@ setup the config json file as mentioned above.
 2 - Update authentication options of the shared applications.
 3 - Delete the business users.
 
-Then Guardio-Admin-App can be used to manage the sub organization instead of 
+Then Guardio-Admin-App can be used to manage the sub organization instead of console application.
 
 ### Step 5: Run the Guardio-Admin-App
 
