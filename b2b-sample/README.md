@@ -53,7 +53,7 @@ Share both applications with all the organizations by clicking the share button.
 
 >| Property                    |                                    Value/s                                     |
 >|--------------------------|:------------------------------------------------------------------------------:|
->| Allowed Grant types      |            `Code` and `Client Credientials`             |
+>| Allowed Grant types      |            `Code`             |
 >| Authorized redirect URLs |  `http://localhost:3000/api/auth/callback/wso2is` and `http://localhost:3000`  |
 >| Allowed origin           |            `http://localhost:3000 `             |
 
@@ -63,7 +63,7 @@ Select `Email`, `First Name`, `Last Name`, and `Username` from the list of attri
 #### Step 2.2: In the Guardio-Admin-App
 >| Property                    |                                   Value/s                                    |
 >|--------------------------|:----------------------------------------------------------------------------:|
->| Allowed Grant types      |           `Organization Switch`, `Code` and `Client Credientials`            |
+>| Allowed Grant types      |           `Organization Switch` and `Code`           |
 >| Authorized redirect URLs | `http://localhost:3001/api/auth/callback/wso2isAdmin` and `http://localhost:3001` |
 >| Allowed origin           |                           `http://localhost:3001`                            |
 
