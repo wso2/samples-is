@@ -91,6 +91,7 @@ cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.oauth_*.jar $
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.extension.identity.authenticator.backupcode.connector_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.application.authentication.framework_*.jar $WEB_APP_LIB
 cp $IS_HOME/lib/runtimes/cxf3/org.wso2.carbon.identity.application.authentication.endpoint.util-*.jar $WEB_APP_LIB
+cp $IS_HOME/lib/runtimes/cxf3/org.wso2.carbon.identity.mgt.endpoint.util-*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/jettison_*.jar $WEB_APP_LIB
 cp $IS_HOME/lib/runtimes/cxf3/javax.ws.rs-api-*.jar $WEB_APP_LIB
 cp $IS_HOME/lib/runtimes/cxf3/cxf-core-*.jar $WEB_APP_LIB
