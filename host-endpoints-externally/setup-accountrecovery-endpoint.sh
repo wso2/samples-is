@@ -43,7 +43,6 @@ cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.user.registra
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.base_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.base_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.ui_*.jar $WEB_APP_LIB
-cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.application.authentication.endpoint.util_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.core_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.utils_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.user.core_*.jar $WEB_APP_LIB
@@ -85,6 +84,7 @@ cp $IS_HOME/repository/components/plugins/org.wso2.carbon.registry.core_*.jar $W
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.registry.api_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.governance_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.handler.event.account.lock_*.jar $WEB_APP_LIB
+cp $IS_HOME/repository/components/plugins/jstl_*.jar $WEB_APP_LIB
 cp $IS_HOME/lib/commons-logging-*.jar $WEB_APP_LIB
 cp $IS_HOME/lib/runtimes/cxf3/javax.ws.rs-api-*.jar $WEB_APP_LIB
 cp $IS_HOME/lib/runtimes/cxf3/cxf-core-*.jar $WEB_APP_LIB
@@ -104,6 +104,7 @@ cp $IS_HOME/lib/runtimes/cxf3/org.wso2.carbon.identity.mgt.endpoint.util-*.jar $
 cp $IS_HOME/lib/runtimes/cxf3/jersey-client-*.jar $WEB_APP_LIB
 cp $IS_HOME/lib/runtimes/cxf3/jersey-core-*.jar $WEB_APP_LIB
 cp $IS_HOME/lib/runtimes/cxf3/jersey-multipart-*.jar $WEB_APP_LIB
+cp $IS_HOME/lib/runtimes/cxf3/org.wso2.carbon.identity.application.authentication.endpoint.util-*.jar $WEB_APP_LIB
 
 echo "===================================================================================="
 echo

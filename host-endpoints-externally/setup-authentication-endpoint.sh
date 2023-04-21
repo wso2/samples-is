@@ -108,12 +108,14 @@ cp $IS_HOME/lib/geronimo-jta_*.jar $WEB_APP_LIB
 cp $IS_HOME/lib/stax2-api-*.jar $WEB_APP_LIB
 cp $IS_HOME/lib/woodstox-core-asl-*.jar $WEB_APP_LIB
 cp $IS_HOME/lib/log4j-*.jar $WEB_APP_LIB
+cp $IS_HOME/lib/jaxb-impl-*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.ops4j.pax.logging.pax-logging-api_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.captcha_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/commons-text_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.governance_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/commons-lang3_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.orbit.javax.xml.bind.jaxb-api_*.jar $WEB_APP_LIB
+cp $IS_HOME/repository/components/plugins/org.wso2.orbit.sun.xml.bind.jaxb_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.extension.identity.authenticator.totp.connector_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/dropins/org.wso2.carbon.extension.identity.authenticator.smsotp.connector-*.jar $WEB_APP_LIB
 rm $WEB_APP_LIB/javax.cache.wso2_*.jar
@@ -140,6 +142,11 @@ echo "..."
 echo "   <context-param>"
 echo "      <param-name>EnableSelfSignUpEndpoint</param-name>"
 echo "      <param-value>true</param-value>"
+echo "   </context-param>"
+echo "..."
+echo "   <context-param>"
+echo "      <param-name>AuthenticationRESTEndpointURL</param-name>"
+echo "      <param-value>https://localhost:9443/api/identity/auth/v1.1/</param-value>"
 echo "   </context-param>"
 echo "..."
 echo "===================================================================================="
