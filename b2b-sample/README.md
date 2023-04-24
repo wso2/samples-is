@@ -45,13 +45,14 @@ Create a sub-organization named **Best Car Mart**.
 ### Step 2: Create applications
 Now we need **two** applications to communicate with the **Guardio-Business-App** and the ****Guardio-Admin-App****.
 
-Create two applications named **Guardio-Business-App** and **Guardio-Admin-App** [This should be a management application].
+- Create two applications named **Guardio-Business-App** and **Guardio-Admin-App** [This should be a management application].
+- Click **Share Application** button, select the suborganizations with which you want to share the application, and proceed. Select **Share with all sub-organizations**, if you want to share your application with all existing suborganizations and every sub-organization that will be created later.
 
 #### Step 2.1: In the Guardio-Business-App
 
 >| Property                    |                                    Value/s                                     |
 >|--------------------------|:------------------------------------------------------------------------------:|
->| Allowed Grant types      |            `Code` and `Client Credientials`             |
+>| Allowed Grant types      |            `Code`             |
 >| Authorized redirect URLs |  `http://localhost:3000/api/auth/callback/wso2is` and `http://localhost:3000`  |
 >| Allowed origin           |            `http://localhost:3000 `             |
 
@@ -61,7 +62,7 @@ Select `Email`, `First Name`, `Last Name`, and `Username` from the list of attri
 #### Step 2.2: In the Guardio-Admin-App
 >| Property                    |                                   Value/s                                    |
 >|--------------------------|:----------------------------------------------------------------------------:|
->| Allowed Grant types      |           `Organization Switch`, `Code` and `Client Credientials`            |
+>| Allowed Grant types      |                           `Organization Switch`, `Code`            |
 >| Authorized redirect URLs | `http://localhost:3001/api/auth/callback/wso2isAdmin` and `http://localhost:3001` |
 >| Allowed origin           |                           `http://localhost:3001`                            |
 
