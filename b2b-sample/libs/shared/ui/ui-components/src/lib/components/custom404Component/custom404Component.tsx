@@ -43,9 +43,9 @@ export function Custom404Component() {
                 justifyContent="center"
                 alignItems="center">
 
-                <p className={ styles["p"] }><b>The page your searching seems to be missing.</b>
+                <p className={ styles["p"] }><b>The page you are searching seems to be missing.</b>
                     <br />
-                    You can go back, or contact our <u>Customer Service</u> team if you need any help
+                    You can go back, or contact our <u>Customer Service</u> team if you need any help.
                 </p>
 
                 <Button size="lg" appearance="ghost" onClick={ goBack }>Go Back</Button>

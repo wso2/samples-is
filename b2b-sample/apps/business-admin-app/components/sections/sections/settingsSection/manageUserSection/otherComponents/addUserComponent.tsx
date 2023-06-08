@@ -86,7 +86,7 @@ export default function AddUserComponent(props: AddUserComponentProps) {
 
     const onDataSubmit = (response: boolean | User, form): void => {
         if (response) {
-            successTypeDialog(toaster, "Changes Saved Successfully", "User add to the organization successfully.");
+            successTypeDialog(toaster, "Changes Saved Successfully", "User is added to the organization successfully.");
             form.restart();
             onClose();
         } else {
