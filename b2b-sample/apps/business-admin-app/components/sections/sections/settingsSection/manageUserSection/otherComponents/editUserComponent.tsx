@@ -59,7 +59,7 @@ export default function EditUserComponent(prop: EditUserComponentProps) {
     const [ initUserRolesForForm, setInitUserRolesForForm ] = useState<string[]>(null);
 
     /**
-     * fetch all the roles in the identity server available for the logged in organization
+     * Fetch all the roles in the identity server available for the logged in organization.
      */
     const fetchAllRoles = useCallback(async () => {
         const res = await controllerDecodeListAllRoles(session);
@@ -72,7 +72,7 @@ export default function EditUserComponent(prop: EditUserComponentProps) {
     }, [ fetchAllRoles ]);
 
     /**
-     * fetch the roles of the user
+     * Fetch the roles of the user.
      */
     const fetchUserRoles = useCallback(async () => {
         const res = await controllerDecodeUserRole(session, user.id);
@@ -86,7 +86,7 @@ export default function EditUserComponent(prop: EditUserComponentProps) {
     }, [ fetchUserRoles ]);
 
     /**
-     * set `userRolesForForm` and `initUserRolesForForm`
+     * Set `userRolesForForm` and `initUserRolesForForm`.
      */
     useEffect(() => {
         if (allRoles && userRoles) {

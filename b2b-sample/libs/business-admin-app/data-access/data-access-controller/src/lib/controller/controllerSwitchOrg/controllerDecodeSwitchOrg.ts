@@ -22,6 +22,13 @@ import { JWT } from "next-auth/jwt";
 import { controllerCallSwitchOrg } from "./controllerCallSwitchOrg";
 import config from "../../../../../../../../config.json";
 
+/**
+ * Get the organization id of the logged in organization
+ * 
+ * @param token - token object get from the inital login call
+ * 
+ * @returns - organization id of the logged in organization
+ */
 function getOrgId(token: JWT): string {
 
     if (token.user) {
@@ -39,6 +46,7 @@ function getOrgId(token: JWT): string {
 }
 
 /**
+ * Decode the token and call the `controllerCallSwitchOrg` to switch the organization
  * 
  * @param token - token object get from the inital login call
  * 
