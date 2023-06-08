@@ -73,7 +73,7 @@ export function getManagementAPIServerBaseUrl() {
 /**
  * Tenant domain extracted from the `config.AuthorizationConfig.BaseOrganizationUrl`
  * 
- *  @returns tenatn domain.
+ * @returns tenatn domain.
  */
 export function getTenantDomain() {
 

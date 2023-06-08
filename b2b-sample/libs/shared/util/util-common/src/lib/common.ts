@@ -45,7 +45,7 @@ export function getCurrentDate(): string {
 }
 
 /**
- *  @returns true if JSON is empty else false
+ * @returns true if JSON is empty else false
  */
 export function checkIfJSONisEmpty(obj: Record<string, unknown>): boolean {
     if (!obj) {
@@ -56,7 +56,7 @@ export function checkIfJSONisEmpty(obj: Record<string, unknown>): boolean {
 }
 
 /**
- *  @returns the size of JSON object
+ * @returns the size of JSON object
  */
 export function sizeOfJson(obj: Record<string, unknown>): number {
     return Object.keys(obj).length;
