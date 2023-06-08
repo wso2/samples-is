@@ -17,7 +17,11 @@
  */
 
 import {
-    Application, AuthenticationSequence, AuthenticationSequenceModel, AuthenticationSequenceStepOption,
+    Application,
+    AuthenticationSequence,
+    AuthenticationSequenceModel,
+    AuthenticationSequenceStep,
+    AuthenticationSequenceStepOption,
     IdentityProvider
 } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
@@ -97,22 +101,21 @@ function addRemoveAuthSequence(template: Application, idpTempleteId: string, idp
 
         let basicCheck = false;
 
-        for (let j = authenticationSequenceModel.steps.length - 1; j >= 0; j--) {
-            const step = authenticationSequenceModel.steps[j];
-
-            for (let i = 0; i < step.options.length; i++) {
-                if (step.options[i].idp === idpName) {
-                    step.options.splice(i, 1);
-                    if (step.options.length === 0) {
-                        authenticationSequenceModel.steps.splice(j, 1);
-                    }
-
-                    break;
-                } else if (step.options[i].authenticator === "BasicAuthenticator") {
+        authenticationSequenceModel.steps.forEach((step: AuthenticationSequenceStep) => {
+            step.options = step.options.filter((option: AuthenticationSequenceStepOption) => {
+                if (option.idp === idpName) {
+                    return false;
+                } else if (option.authenticator === "BasicAuthenticator") {
                     basicCheck = true;
                 }
+
+                return true;
+            });
+          
+            if (step.options.length === 0) {
+                authenticationSequenceModel.steps.splice(authenticationSequenceModel.steps.indexOf(step), 1);
             }
-        }
+        });
 
         if (!basicCheck) {
             try {

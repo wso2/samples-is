@@ -18,7 +18,7 @@
 
 import AuthenticationSequenceStepOption from "./authenticationSequenceStepOption";
 
-interface AuthenticationSequenceStep {
+export interface AuthenticationSequenceStep {
     id: number,
     options: AuthenticationSequenceStepOption[]
 }

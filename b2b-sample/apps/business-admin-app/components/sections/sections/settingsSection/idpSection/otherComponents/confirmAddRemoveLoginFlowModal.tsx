@@ -70,16 +70,16 @@ export default function ConfirmAddRemoveLoginFlowModal(props: ConfirmAddRemoveLo
     const onIdpAddToLoginFlow = (response: boolean): void => {
         if (response) {
             onSuccess();
-            successTypeDialog(toaster, "Success", "Identity Provider Add to the Login Flow Successfully.");
+            successTypeDialog(toaster, "Success", "Identity Provider is added to the login flow successfully.");
         } else {
-            errorTypeDialog(toaster, "Error Occured", "Error occured while adding the the identity provider.");
+            errorTypeDialog(toaster, "Error Occured", "Error occured while adding the identity provider.");
         }
     };
 
     const onIdpRemovefromLoginFlow = (response: boolean): void => {
         if (response) {
             onSuccess();
-            successTypeDialog(toaster, "Success", "Identity Provider Remove from the Login Flow Successfully.");
+            successTypeDialog(toaster, "Success", "Identity Provider is removed from the login flow successfully.");
         } else {
             errorTypeDialog(toaster, "Error Occured", "Error occured while removing the identity provider. Try again.");
         }
