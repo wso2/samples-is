@@ -99,14 +99,12 @@ export default function CreateRoleComponent(props: CreateRoleComponentProps) {
 
         switch (currentStep) {
             case 0:
-
                 return (<General
                     displayName={ displayName }
                     setDisplayName={ setDisplayName }
                     onNext={ onNext } />);
 
             case 1:
-
                 return (<Permission
                     permissions={ permissions }
                     setPermissions={ setPermissions }
@@ -114,7 +112,6 @@ export default function CreateRoleComponent(props: CreateRoleComponentProps) {
                     onPrevious={ onPrevious } />);
 
             case 2:
-
                 return (<Users
                     assignedUsers={ users }
                     setAssignedUsers={ setUsers }

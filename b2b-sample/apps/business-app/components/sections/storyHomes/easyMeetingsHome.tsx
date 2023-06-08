@@ -51,16 +51,12 @@ export default function EasyMeetingsHome(props: HomeInterface) {
     const mainPanelComponenet = (activeKey: string): JSX.Element => {
         switch (activeKey) {
             case "1":
-
                 return <ProfileSectionComponent session={ session } />;
             case "2":
-
                 return <MeetingsSectionComponent />;
             case "3":
-
                 return <PhoneSectionComponent />;
             case "4":
-
                 return <BlogSectionComponent />;
         }
     };

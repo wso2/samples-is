@@ -61,7 +61,7 @@ export default function General(props: GeneralProps) {
 
     const onDataSubmit = (response: IdentityProvider, form): void => {
         if (response) {
-            successTypeDialog(toaster, "Changes Saved Successfully", "Idp updated successfully.");
+            successTypeDialog(toaster, "Changes are saved successfully", "Idp is updated successfully.");
             fetchData();
             form.restart();
         } else {

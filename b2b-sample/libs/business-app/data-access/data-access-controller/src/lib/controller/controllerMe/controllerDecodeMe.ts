@@ -37,7 +37,7 @@ export async function controllerDecodeMe(session: Session) : Promise<InternalUse
         meData = session.user;
     }
 
-    if(meData){
+    if (meData){
         const meReturn : InternalUser = decodeUser(meData);
 
         return meReturn;

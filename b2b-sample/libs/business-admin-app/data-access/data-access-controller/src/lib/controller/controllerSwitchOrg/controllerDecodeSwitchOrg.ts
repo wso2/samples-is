@@ -24,19 +24,15 @@ import config from "../../../../../../../../config.json";
 
 function getOrgId(token: JWT): string {
 
-    if(token.user) {
+    if (token.user) {
         if (token.user.user_organization) {
-
             return token.user.user_organization;
         } else if (config.CommonConfig.ApplicationConfig.SampleOrganization[0]) {
-    
             return config.CommonConfig.ApplicationConfig.SampleOrganization[0].id;
         } else {
-    
             return token.user.org_id;
         }
     } else {
-        
         return config.CommonConfig.ApplicationConfig.SampleOrganization[0].id;
     }
 

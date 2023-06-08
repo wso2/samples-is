@@ -52,16 +52,12 @@ export default function GuardioInsuranceHome(props: HomeInterface) {
     const mainPanelComponenet = (activeKey: string): JSX.Element => {
         switch (activeKey) {
             case "1":
-
                 return <ProfileSectionComponent session={ session } />;
             case "2":
-
                 return <ReportsSectionComponent />;
             case "3":
-
                 return <ClaimsSectionComponent />;
             case "4":
-
                 return <BlogSectionComponent />;
         }
     };

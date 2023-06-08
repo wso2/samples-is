@@ -51,16 +51,12 @@ export default function Home(props: HomeProps) : JSX.Element {
     const mainPanelComponenet = (activeKey) : JSX.Element => {
         switch (activeKey) {
             case "1":
-
                 return <GetStartedSectionComponent />;
             case "2-1":
-
                 return <ManageUserSectionComponent session={ session } />;
             case "2-2":
-
                 return <RoleManagementSectionComponent session={ session } />;
             case "2-3":
-
                 return <IdpSectionComponent session={ session } />;
         }
     };

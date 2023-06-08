@@ -32,13 +32,10 @@ import IdentityProviderTemplateModel from "../identityProvider/identityProviderT
 export function selectedTemplateBaesedonTemplateId(templateId: string): IdentityProviderTemplateModel | null {
     switch (templateId) {
         case GOOGLE_ID:
-
             return googleFederatedAuthenticators;
         case ENTERPRISE_ID:
-
             return enterpriseFederatedAuthenticators;
         default:
-
             return null;
     }
 }

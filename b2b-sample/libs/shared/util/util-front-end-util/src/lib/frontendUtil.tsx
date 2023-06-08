@@ -60,10 +60,8 @@ export function hideBasedOnScopes(scopes: string, sideNavType: string, sideNavIt
     switch (sideNavType) {
         case "item":
             if (hideBasesdOnScopesSideNavItems(scopesList, itemScopes as string[])) {
-
                 return LOADING_DISPLAY_BLOCK;
             } else {
-
                 return LOADING_DISPLAY_NONE;
             }
 
@@ -74,6 +72,7 @@ export function hideBasedOnScopes(scopes: string, sideNavType: string, sideNavIt
                 for (let i = 0; i < sideNavItems.length; i++) {
                     if (hideBasesdOnScopesSideNavItems(scopesList, sideNavItems[i].scopes as string[])) {
                         check = LOADING_DISPLAY_BLOCK;
+
                         break;
                     }
                 }
@@ -92,39 +91,37 @@ export function hideBasedOnScopes(scopes: string, sideNavType: string, sideNavIt
 export function getIconFromString(iconString: string | undefined): JSX.Element | undefined {
     switch (iconString) {
         case "DashboardIcon":
-
             return (<DashboardIcon />);
+
         case "GearCircleIcon":
-
             return (<GearCircleIcon />);
+
         case "SettingHorizontalIcon":
-
             return (<SettingHorizontalIcon />);
+
         case "AdminIcon":
-
             return (<AdminIcon />);
+
         case "PageIcon":
-
             return (<PageIcon />);
+
         case "PhoneIcon":
-
             return (<PhoneIcon />);
+
         case "PeopleBranchIcon":
-
             return (<PeopleBranchIcon />);
+
         case "SpeakerIcon":
-
             return (<SpeakerIcon />);
-        case "ShieldIcon":
 
+        case "ShieldIcon":
             return (<ShieldIcon />);
 
         default:
-
             return;
     }
 }
 
 export default {
-    LOADING_DISPLAY_NONE, LOADING_DISPLAY_BLOCK, hideBasedOnScopes, getIconFromString
+    LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE, getIconFromString, hideBasedOnScopes
 };

@@ -134,7 +134,6 @@ function getOrgId(token: JWT): string {
 function getOrgName(token: JWT): string {
 
     if (parseJwt(token)["org_name"]) {
-
         return parseJwt(token)["org_name"];
     }
 
@@ -152,7 +151,6 @@ function getLoggedUserFromProfile(profile: Profile): User | null {
     try {
 
         if (!profile.family_name || !profile.given_name || !profile.email || !profile.username) {
-
             return null;
         }
 

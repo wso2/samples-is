@@ -50,16 +50,12 @@ function getAuthenticationSequenceModel(template: Application): AuthenticationSe
 function getAuthenticatorId(templateId: string): string | null {
     switch (templateId) {
         case GOOGLE_ID:
-
             return GOOGLE_AUTHENTICATOR_ID;
         case ENTERPRISE_ID:
-
             return ENTERPRISE_AUTHENTICATOR_ID;
         case BASIC_ID:
-
             return BASIC_AUTHENTICATOR_ID;
         default:
-
             return null;
     }
 }

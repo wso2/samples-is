@@ -49,7 +49,6 @@ export function getCurrentDate(): string {
  */
 export function checkIfJSONisEmpty(obj: Record<string, unknown>): boolean {
     if (!obj) {
-
         return true;
     }
 

@@ -65,13 +65,10 @@ export default function IdentityProviderDetails(props: IdentityProviderDetailsPr
     const idpDetailsComponent = (activeKey): JSX.Element => {
         switch (activeKey) {
             case "1":
-
                 return <General session={ session } idpDetails={ idpDetails } fetchData={ fetchData } />;
             case "2":
-
                 return <Settings session={ session } idpDetails={ idpDetails } />;
             case "3":
-
                 return <JsonDisplayComponent jsonObject={ idpDetails } />;
         }
     };

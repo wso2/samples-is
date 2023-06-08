@@ -49,11 +49,9 @@ function getRemoveBody(patchMethod: PatchMethod, path: string, value: string[] |
 function getPatchBody(patchMethod: PatchMethod, path: string, value: string[] | string) {
     switch (patchMethod) {
         case PatchMethod.ADD:
-
             return getAddReplaceBody(patchMethod, path, value);
 
         case PatchMethod.REPLACE:
-
             return getAddReplaceBody(patchMethod, path, value);
         case PatchMethod.REMOVE:
 

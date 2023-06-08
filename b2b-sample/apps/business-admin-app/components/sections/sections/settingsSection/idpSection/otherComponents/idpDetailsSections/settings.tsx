@@ -82,7 +82,7 @@ export default function Settings(props: SettingsProps) {
 
     const onDataSubmit = (response: IdentityProviderFederatedAuthenticator): void => {
         if (response) {
-            successTypeDialog(toaster, "Changes Saved Successfully", "Idp updated successfully.");
+            successTypeDialog(toaster, "Changes are saved successfully", "Idp is updated successfully.");
             fetchData();
         } else {
             errorTypeDialog(toaster, "Error Occured", "Error occured while updating the Idp. Try again.");

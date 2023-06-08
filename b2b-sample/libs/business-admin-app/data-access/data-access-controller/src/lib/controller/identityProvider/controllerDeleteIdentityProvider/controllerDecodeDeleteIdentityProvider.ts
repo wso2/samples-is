@@ -31,7 +31,7 @@ export async function controllerDecodeDeleteIdentityProvider(session: Session, i
 
     const res = await commonControllerDecode(() => controllerCallDeleteIdentityProvider(session, id), null);
 
-    if(res){
+    if (res){
         return true;
     }
     

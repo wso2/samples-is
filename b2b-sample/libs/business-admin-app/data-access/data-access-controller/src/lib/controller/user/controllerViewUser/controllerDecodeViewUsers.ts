@@ -35,7 +35,7 @@ export async function controllerDecodeViewUsers(session: Session): Promise<Inter
     if (usersData) {
         const usersReturn: InternalUser[] = [];
         
-        if(usersData.Resources){
+        if (usersData.Resources){
             usersData.Resources.map((user: User) => {
                 const userDetails = decodeUser(user);
     

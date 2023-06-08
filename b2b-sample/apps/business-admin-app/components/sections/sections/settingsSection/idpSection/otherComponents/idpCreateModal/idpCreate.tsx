@@ -57,7 +57,6 @@ export default function IdpCreate(prop: IdpCreateProps) {
 
     const resolveTemplateForm = (): JSX.Element => {
         switch (template.templateId) {
-
             case GOOGLE_ID:
                 return (<GoogleIdentityProvider
                     session={ session }
