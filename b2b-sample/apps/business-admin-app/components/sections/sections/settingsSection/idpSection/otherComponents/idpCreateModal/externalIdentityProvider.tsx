@@ -55,7 +55,7 @@ export default function ExternalIdentityProvider(prop: ExternalIdentityProviderP
     const validate = (values: Record<string, string>): Record<string, string> => {
         let errors: Record<string, string> = {};
 
-        errors = fieldValidate("application_name", values.application_name, errors);
+        errors = fieldValidate("idp_name", values.idp_name, errors);
         errors = fieldValidate("client_id", values.client_id, errors);
         errors = fieldValidate("client_secret", values.client_secret, errors);
 
@@ -98,7 +98,7 @@ export default function ExternalIdentityProvider(prop: ExternalIdentityProviderP
                         onSubmit={ () => { handleSubmit().then(form.restart); } }
                         fluid>
                         <FormField
-                            name="application_name"
+                            name="idp_name"
                             label="Name"
                             helperText="Name of the identity provider."
                             needErrorMessage={ true }

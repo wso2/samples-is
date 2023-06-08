@@ -63,7 +63,7 @@ export function setIdpTemplate(model: IdentityProviderTemplateModel, templateId:
     formValues: Record<string, string>, orgId: string,
     identityProviderDiscoveryUrl?: IdentityProviderDiscoveryUrl): IdentityProviderTemplateModel {
 
-    const name: string = formValues["application_name"].toString();
+    const name: string = formValues["idp_name"].toString();
     const clientId: string = formValues["client_id"].toString();
     const clientSecret: string = formValues["client_secret"].toString();
 
