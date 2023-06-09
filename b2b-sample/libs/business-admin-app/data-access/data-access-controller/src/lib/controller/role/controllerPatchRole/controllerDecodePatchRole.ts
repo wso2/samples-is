@@ -64,6 +64,7 @@ function getPatchBody(patchMethod: PatchMethod, path: string, value: string[] | 
 
 
 /**
+ * Decodes the response from the API call to patch a role.
  * 
  * @param session - session object
  * @param roleUri - uri of the role
