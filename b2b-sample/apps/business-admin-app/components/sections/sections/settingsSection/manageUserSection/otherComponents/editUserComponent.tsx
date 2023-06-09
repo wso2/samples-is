@@ -130,7 +130,7 @@ export default function EditUserComponent(prop: EditUserComponentProps) {
             successTypeDialog(toaster, "Changes Saved Successfully", "User details edited successfully.");
             onClose();
         } else {
-            warningTypeDialog(toaster, "Roles not Properly Updated",
+            warningTypeDialog(toaster, "Roles are not properly updated",
                 "Error occured while updating the roles. Try again.");
         }
     };

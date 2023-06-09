@@ -48,7 +48,6 @@ export default function NewsComponent(props: NewsComponentInterface) {
                 <h4>{ header }</h4>
                 <p>{ body }</p>
             </Stack>
-
         </Stack>
     );
 }

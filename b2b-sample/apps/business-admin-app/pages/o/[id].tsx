@@ -27,12 +27,13 @@ export async function getServerSideProps(context) {
     const routerQuery = context.query.id;
     const session = await getSession(context);
 
-    if (session === null || session === undefined|| session.error) {
+    if (session === null || session === undefined || session.error) {
 
         return {
             props: { routerQuery }
         };
     } else {
+
         if (routerQuery !== session.orgId) {
 
             return redirect("/404");
@@ -42,9 +43,7 @@ export async function getServerSideProps(context) {
                 props: { session }
             };
         }
-
     }
-
 }
 
 interface OrgProps {

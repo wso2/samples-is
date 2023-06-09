@@ -83,7 +83,6 @@ export function hideBasedOnScopes(scopes: string, sideNavType: string, sideNavIt
             }
 
             return check;
-
         }
 
         default:

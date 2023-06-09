@@ -49,6 +49,7 @@ export default function EasyMeetingsHome(props: HomeInterface) {
     const [ signOutModalOpen, setSignOutModalOpen ] = useState<boolean>(false);
 
     const mainPanelComponenet = (activeKey: string): JSX.Element => {
+
         switch (activeKey) {
             case "1":
                 return <ProfileSectionComponent session={ session } />;
@@ -62,14 +63,17 @@ export default function EasyMeetingsHome(props: HomeInterface) {
     };
 
     const signOutCallback = (): void => {
+
         signout(session);
     };
 
     const activeKeySideNavSelect = (eventKey: string): void => {
+
         setActiveKeySideNav(eventKey);
     };
 
     const signOutModalClose = (): void => {
+
         setSignOutModalOpen(false);
     };
 
