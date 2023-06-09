@@ -27,12 +27,13 @@ import { controllerCallCreateIdentityProvider } from "./controllerCallCreateIden
 import controllerDecodeGetDiscoveryUrl from "../controllerGetDiscoveryUrl/controllerDecodeGetDiscoveryUrl";
 
 /**
- * get the identity provider details from the discovery url
+ * Get the identity provider details from the discovery url.
  * 
  * @param discoveryUrl - discovery url
  */
 async function getIdentityProviderFromDiscoveryUrl(session: Session, discoveryUrl: string)
     : Promise<IdentityProviderDiscoveryUrl | null> {
+
     const identityProviderDiscoveryUrl = await controllerDecodeGetDiscoveryUrl(session, discoveryUrl);
 
     return identityProviderDiscoveryUrl;

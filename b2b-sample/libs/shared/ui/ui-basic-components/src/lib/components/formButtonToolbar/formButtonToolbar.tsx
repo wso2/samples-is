@@ -33,7 +33,6 @@ export function FormButtonToolbar(props: FormButtonToolbarProps) {
 
     return (
         <FormSuite.Group>
-
             <ButtonToolbar>
                 <Button
                     className={ styles["addUserButton"] }
@@ -68,6 +67,5 @@ FormButtonToolbar.defaultProps = {
     needCancel: true,
     submitButtonText: "Submit"
 };
-
 
 export default FormButtonToolbar;
