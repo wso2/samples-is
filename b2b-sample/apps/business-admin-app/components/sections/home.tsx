@@ -49,6 +49,7 @@ export default function Home(props: HomeProps) : JSX.Element {
     const [ signOutModalOpen, setSignOutModalOpen ] = useState(false);
 
     const mainPanelComponenet = (activeKey) : JSX.Element => {
+
         switch (activeKey) {
             case "1":
                 return <GetStartedSectionComponent />;
@@ -62,14 +63,17 @@ export default function Home(props: HomeProps) : JSX.Element {
     };
 
     const signOutCallback = () : void => {
+
         signout(session);
     };
 
     const activeKeySideNavSelect = (eventKey : string | undefined) : void => {
+
         setActiveKeySideNav(eventKey);
     };
 
     const signOutModalClose = () : void => {
+
         setSignOutModalOpen(false);
     };
 
@@ -82,7 +86,6 @@ export default function Home(props: HomeProps) : JSX.Element {
 
             { session && session.scope
                 ? (
-
                     <HomeComponent
                         scope={ session.scope }
                         sideNavData={ sideNavData }
