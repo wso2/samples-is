@@ -22,10 +22,12 @@ import { Session } from "next-auth";
 import { controllerDecodePatchRole } from "../controllerPatchRole/controllerDecodePatchRole";
 
 function getRolesThatNeedToAddUser(initRoleList: string[], roleList: string[]): string[] {
+
     return roleList.filter(roleUri => !initRoleList.includes(roleUri));
 }
 
 function getRolesThatNeedToRemoveUser(initRoleList: string[], roleList: string[]): string[] {
+
     return initRoleList.filter(roleUri => !roleList.includes(roleUri));
 }
 
@@ -74,6 +76,7 @@ export async function controllerDecodeEditRolesToAddOrRemoveUser(
     session: Session, userId: string, initRoleList: string[], roleList: string[]): Promise<boolean> {
 
     try {
+
         return getRoleDetailsForAdd(session, userId, initRoleList, roleList)
             .then(
                 (res: boolean) => {
@@ -90,7 +93,6 @@ export async function controllerDecodeEditRolesToAddOrRemoveUser(
 
         return false;
     }
-
 }
 
 export default controllerDecodeEditRolesToAddOrRemoveUser;

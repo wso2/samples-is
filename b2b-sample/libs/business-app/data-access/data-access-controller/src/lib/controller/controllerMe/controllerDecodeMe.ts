@@ -44,7 +44,6 @@ export async function controllerDecodeMe(session: Session) : Promise<InternalUse
     } 
 
     return null;
-
 }
 
 export default controllerDecodeMe;

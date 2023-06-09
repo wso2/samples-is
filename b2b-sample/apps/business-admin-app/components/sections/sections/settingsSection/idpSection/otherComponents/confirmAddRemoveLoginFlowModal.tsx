@@ -209,7 +209,7 @@ function ApplicationListAvailable(props: ApplicationListAvailableProps) {
  * 
  * @param prop - application
  * 
- * @returns The component to show the applicaiton name and the description
+ * @returns The component to show the applicaiton name and the description.
  */
 function ApplicationListItem(props: ApplicationListItemProps) {
 

@@ -28,10 +28,12 @@ import { Session } from "next-auth";
  * @returns header object that can used for IS API calls.
  */
 export function requestOptions(session: Session): RequestInit {
+
     return apiRequestOptions(session, getHostedUrl());
 }
 
 export function requestOptionsWithBody(session: Session, method: string, body: BodyInit): RequestInit {
+
     return apiRequestOptionsWithBody(session, method, body, getHostedUrl());
 }
 

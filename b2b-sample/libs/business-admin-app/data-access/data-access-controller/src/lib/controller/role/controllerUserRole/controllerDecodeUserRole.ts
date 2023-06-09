@@ -33,7 +33,6 @@ export async function controllerDecodeUserRole(session: Session, id: string): Pr
     const res = (await commonControllerDecode(() => controllerCallUserRole(session, id), null) as Role[] | null);
 
     return res;
-
 }
 
 export default controllerDecodeUserRole;

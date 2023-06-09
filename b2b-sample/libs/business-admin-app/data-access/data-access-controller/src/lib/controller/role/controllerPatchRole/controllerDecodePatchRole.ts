@@ -24,6 +24,7 @@ import { Session } from "next-auth";
 import { controllerCallPatchRole } from "./controllerCallPatchRole";
 
 function getAddReplaceBody(patchMethod: PatchMethod, path: string, value: string[] | string): PatchBody {
+
     return {
         "operations": [
             {
@@ -36,6 +37,7 @@ function getAddReplaceBody(patchMethod: PatchMethod, path: string, value: string
 }
 
 function getRemoveBody(patchMethod: PatchMethod, path: string, value: string[] | string): PatchBody {
+
     return {
         "operations": [
             {

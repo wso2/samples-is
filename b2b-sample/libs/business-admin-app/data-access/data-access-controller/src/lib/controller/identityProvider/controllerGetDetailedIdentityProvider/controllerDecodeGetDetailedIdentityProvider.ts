@@ -35,7 +35,6 @@ export async function controllerDecodeGetDetailedIdentityProvider(session: Sessi
         null) as IdentityProvider | null);
 
     return res;
-
 }
 
 export default controllerDecodeGetDetailedIdentityProvider;

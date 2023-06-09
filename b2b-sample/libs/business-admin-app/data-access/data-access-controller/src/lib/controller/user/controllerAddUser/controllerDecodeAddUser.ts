@@ -108,7 +108,6 @@ export async function controllerDecodeAddUser(
         await commonControllerDecode(() => controllerCallAddUser(session, addUserEncode), false) as User | boolean);
 
     return res;
-
 }
 
 export default { InviteConst, controllerDecodeAddUser };

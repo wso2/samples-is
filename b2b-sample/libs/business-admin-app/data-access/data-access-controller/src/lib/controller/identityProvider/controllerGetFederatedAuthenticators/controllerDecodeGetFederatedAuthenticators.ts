@@ -37,7 +37,6 @@ export async function controllerDecodeGetFederatedAuthenticators(session: Sessio
         null) as IdentityProviderFederatedAuthenticator | null);
 
     return res;
-
 }
 
 export default controllerDecodeGetFederatedAuthenticators;

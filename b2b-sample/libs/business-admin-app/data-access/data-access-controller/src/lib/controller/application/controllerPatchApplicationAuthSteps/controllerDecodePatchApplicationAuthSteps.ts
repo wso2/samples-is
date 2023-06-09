@@ -104,6 +104,7 @@ function addRemoveAuthSequence(template: Application, idpTempleteId: string, idp
         authenticationSequenceModel.steps.forEach((step: AuthenticationSequenceStep) => {
             step.options = step.options.filter((option: AuthenticationSequenceStepOption) => {
                 if (option.idp === idpName) {
+
                     return false;
                 } else if (option.authenticator === "BasicAuthenticator") {
                     basicCheck = true;
@@ -156,6 +157,7 @@ export async function controllerDecodePatchApplicationAuthSteps(
         () => controllerCallPatchApplicationAuthSteps(session, applicationId, authenticationSequenceModel), null);
 
     if (res) {
+
         return true;
     }
 

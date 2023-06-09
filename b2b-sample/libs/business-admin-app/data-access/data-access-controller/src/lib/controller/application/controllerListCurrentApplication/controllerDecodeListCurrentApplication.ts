@@ -34,7 +34,6 @@ export async function controllerDecodeListCurrentApplication(session: Session): 
         ApplicationList | null);
 
     return res;
-
 }
 
 export default controllerDecodeListCurrentApplication;

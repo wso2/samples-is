@@ -47,6 +47,7 @@ export function getImageForTheIdentityProvider(templateId: string): string {
  * @returns callBackUrl of the idp.
  */
 export function getCallbackUrl(orgId: string): string {
+
     return `${getOrgUrl(orgId)}/commonauth`;
 }
 
@@ -86,7 +87,6 @@ export function setIdpTemplate(model: IdentityProviderTemplateModel, templateId:
     model.federatedAuthenticators.authenticators[0].isEnabled = true;
 
     return model;
-
 }
 
 /**

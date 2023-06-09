@@ -33,5 +33,4 @@ export async function controllerCallAddUser(session: Session, user: SendUser): P
     const data = (await commonControllerCall("/api/settings/user/addUser", session, user) as User | null);
 
     return data;
-
 }

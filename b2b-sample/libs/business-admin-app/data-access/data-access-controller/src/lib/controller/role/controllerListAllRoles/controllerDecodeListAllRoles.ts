@@ -37,7 +37,6 @@ export async function controllerDecodeListAllRoles(session: Session): Promise<Ro
     }
 
     return res;
-
 }
 
 export default controllerDecodeListAllRoles;

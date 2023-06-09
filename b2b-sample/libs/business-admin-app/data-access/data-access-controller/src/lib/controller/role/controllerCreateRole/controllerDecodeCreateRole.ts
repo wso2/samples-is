@@ -28,6 +28,7 @@ function getUsersList(users: string[]): RoleUsers[] {
 }
 
 function getRoleBody(displayName: string, permissions: string[], users: string[]): Role {
+
     return {
         "displayName": displayName,
         "groups": [],

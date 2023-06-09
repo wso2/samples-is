@@ -32,5 +32,4 @@ export async function controllerCallMe(session: Session): Promise<InternalUser |
     const data = ( await commonControllerCall("/api/dashboard/me", session) as InternalUser | null);
 
     return data;
-
 }

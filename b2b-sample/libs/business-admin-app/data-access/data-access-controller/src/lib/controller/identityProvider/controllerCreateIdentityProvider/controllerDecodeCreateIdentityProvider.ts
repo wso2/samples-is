@@ -79,7 +79,6 @@ export async function controllerDecodeCreateIdentityProvider(session: Session, t
         null) as IdentityProvider | null);
 
     return res;
-
 }
 
 export default controllerDecodeCreateIdentityProvider;

@@ -42,6 +42,7 @@ export const LOADING_DISPLAY_BLOCK = {
  * @returns `true` if user has the necessary scopes, else `false`.
  */
 function hideBasesdOnScopesSideNavItems(scopes: string[], itemScopes: string[]): boolean {
+
     return itemScopes.every(scope => scopes.includes(scope));
 }
 
@@ -60,8 +61,10 @@ export function hideBasedOnScopes(scopes: string, sideNavType: string, sideNavIt
     switch (sideNavType) {
         case "item":
             if (hideBasesdOnScopesSideNavItems(scopesList, itemScopes as string[])) {
+
                 return LOADING_DISPLAY_BLOCK;
             } else {
+
                 return LOADING_DISPLAY_NONE;
             }
 

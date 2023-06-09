@@ -39,7 +39,6 @@ function getOrgId(token: JWT): string {
 
         return config.CommonConfig.ApplicationConfig.SampleOrganization[0].id;
     }
-
 }
 
 /**
@@ -57,7 +56,6 @@ export async function controllerDecodeSwitchOrg(token: JWT): Promise<OrgSession 
         await commonControllerDecode(() => controllerCallSwitchOrg(subOrgId, accessToken), null) as OrgSession | null);
 
     return res;
-
 }
 
 export default controllerDecodeSwitchOrg;

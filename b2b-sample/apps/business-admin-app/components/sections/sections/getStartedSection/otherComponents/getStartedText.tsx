@@ -25,6 +25,7 @@ import getStartedWelcomeImage from
 import styles from "../../../../../styles/Settings.module.css";
 
 export default function GetStartedText() {
+
     return (
         <div className={ styles.getStartedSectionComponentGetStartedTextDiv }>
             <Panel bordered className={ styles.getStartedSectionComponentGetStartedTextPanel }>

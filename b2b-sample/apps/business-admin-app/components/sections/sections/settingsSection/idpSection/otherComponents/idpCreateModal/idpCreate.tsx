@@ -66,7 +66,6 @@ export default function IdpCreate(prop: IdpCreateProps) {
                     onCancel={ onCancel } />);
 
             case ENTERPRISE_ID:
-
                 return (<ExternalIdentityProvider
                     session={ session }
                     template={ template }

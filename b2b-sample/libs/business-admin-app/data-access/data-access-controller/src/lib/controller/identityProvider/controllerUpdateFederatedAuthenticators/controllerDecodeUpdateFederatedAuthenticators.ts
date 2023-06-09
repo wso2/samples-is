@@ -61,7 +61,6 @@ export async function controllerDecodeUpdateFederatedAuthenticators(
         null) as IdentityProviderFederatedAuthenticator | null);
 
     return res;
-
 }
 
 export default controllerDecodeUpdateFederatedAuthenticators;

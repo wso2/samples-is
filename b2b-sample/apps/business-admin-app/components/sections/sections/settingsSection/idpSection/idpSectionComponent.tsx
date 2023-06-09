@@ -92,6 +92,7 @@ export default function IdpSectionComponent(props: IdpSectionComponentProps) {
     };
 
     const onIdpCreated = (response: IdentityProvider): void => {
+
         if (response) {
             successTypeDialog(toaster, "Success", "Identity Provider is created successfully");
 

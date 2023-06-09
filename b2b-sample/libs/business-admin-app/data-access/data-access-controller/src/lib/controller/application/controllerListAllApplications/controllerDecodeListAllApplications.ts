@@ -33,7 +33,6 @@ export async function controllerDecodeListAllApplications(session: Session): Pro
         ApplicationList | null);
 
     return res;
-
 }
 
 export default controllerDecodeListAllApplications;

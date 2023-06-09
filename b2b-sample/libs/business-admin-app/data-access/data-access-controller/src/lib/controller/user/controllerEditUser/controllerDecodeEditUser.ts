@@ -64,7 +64,6 @@ export async function controllerDecodeEditUser(
         await commonControllerDecode(() => controllerCallEditUser(session, id, editUserEncode), false) as User | null);
 
     return usersData;
-
 }
 
 export default controllerDecodeEditUser;

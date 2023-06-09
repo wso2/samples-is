@@ -214,6 +214,7 @@ export default function AddUserComponent(props: AddUserComponentProps) {
 }
 
 function EmailInvitePanel() {
+
     return (
         <Panel bordered>
             <Stack spacing={ 30 }>

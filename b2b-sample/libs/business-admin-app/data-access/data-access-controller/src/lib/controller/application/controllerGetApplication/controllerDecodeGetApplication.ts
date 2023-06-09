@@ -34,7 +34,6 @@ export async function controllerDecodeGetApplication(session: Session, id: strin
         await commonControllerDecode(() => controllerCallGetApplication(session, id), null) as Application | null);
 
     return res;
-
 }
 
 export default controllerDecodeGetApplication;

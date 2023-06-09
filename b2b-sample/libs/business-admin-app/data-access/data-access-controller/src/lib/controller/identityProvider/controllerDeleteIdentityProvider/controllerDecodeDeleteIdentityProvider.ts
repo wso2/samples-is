@@ -36,7 +36,6 @@ export async function controllerDecodeDeleteIdentityProvider(session: Session, i
     }
     
     return res;
-
 }
 
 export default controllerDecodeDeleteIdentityProvider;

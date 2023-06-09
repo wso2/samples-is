@@ -86,6 +86,7 @@ export default function ButtonGroupIdentityProviderDetails(props : ButtonGroupId
     }, [ idpDetails, applicationDetail ]);
 
     const onIdpDelete = (response: boolean): void => {
+
         if (response) {
             successTypeDialog(toaster, "Success", "Identity provider is deleted successfully");
         } else {
