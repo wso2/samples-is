@@ -85,7 +85,6 @@ function Logo(prop: SharedLogoProps) {
                 break;
         }
 
-
         if (white) {
             imageStyle["filter"] = "grayscale(100%) drop-shadow(0px 0px 0px white)";
         }
