@@ -25,7 +25,7 @@ import ReportsComponent from "./otherComponents/reportsComponent";
  * 
  * @param prop - session
  *
- * @returns Dashboard interface section
+ * @returns Dashboard interface section.
  */
 export default function ReportsSectionComponent() {
 

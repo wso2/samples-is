@@ -25,7 +25,7 @@ import { controllerCallViewUsers } from "./controllerCallViewUsers";
  * 
  * @param session - session object
  
- * @returns details of all users
+ * @returns details of all users.
  */
 export async function controllerDecodeViewUsers(session: Session): Promise<InternalUser[] | null> {
 

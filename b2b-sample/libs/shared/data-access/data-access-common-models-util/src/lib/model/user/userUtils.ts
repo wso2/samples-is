@@ -24,7 +24,7 @@ import config from "../../../../../../../../config.json";
  * 
  * @param user - (user object return from the IS)
  * 
- * @returns user object that can be view in front end side
+ * @returns user object that can be view in front end side.
  */
 export function decodeUser(user: User): InternalUser {
 
@@ -69,7 +69,8 @@ export function setUsername(userName: string) {
  * 
  * @param userName - user name
  * 
- * @returns get username. If the IS is Asgardeo DEFAULT/ is removed from the username else returns the original username
+ * @returns get username. If the IS is Asgardeo DEFAULT/ is removed from the username else 
+ * returns the original username.
  */
 export function getUsername(userName: string) {
 

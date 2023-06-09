@@ -39,18 +39,18 @@ export const LOADING_DISPLAY_BLOCK = {
  * @param scopes - scopes of the user
  * @param itemScopes - scopes that required for this section
  * 
- * @returns `true` if user has the necessary scopes, else `false`
+ * @returns `true` if user has the necessary scopes, else `false`.
  */
 function hideBasesdOnScopesSideNavItems(scopes: string[], itemScopes: string[]): boolean {
     return itemScopes.every(scope => scopes.includes(scope));
 }
 
 /**
- * hide content based on the user's realated privilages
+ * Hide content based on the user's realated privilages,
  * 
  * @param scopes - scopes related for the user
  * 
- * @returns `LOADING_DISPLAY_BLOCK` if admin, else `LOADING_DISPLAY_NONE` 
+ * @returns `LOADING_DISPLAY_BLOCK` if admin, else `LOADING_DISPLAY_NONE`.
  */
 export function hideBasedOnScopes(scopes: string, sideNavType: string, sideNavItems?: SideNavItem[],
     itemScopes?: string[]): Record<string, string> {

@@ -23,11 +23,11 @@ import { controllerCallSwitchOrg } from "./controllerCallSwitchOrg";
 import config from "../../../../../../../../config.json";
 
 /**
- * Get the organization id of the logged in organization
+ * Get the organization id of the logged in organization.
  * 
  * @param token - token object get from the inital login call
  * 
- * @returns - organization id of the logged in organization
+ * @returns - organization id of the logged in organization.
  */
 function getOrgId(token: JWT): string {
 
@@ -46,11 +46,11 @@ function getOrgId(token: JWT): string {
 }
 
 /**
- * Decode the token and call the `controllerCallSwitchOrg` to switch the organization
+ * Decode the token and call the `controllerCallSwitchOrg` to switch the organization.
  * 
  * @param token - token object get from the inital login call
  * 
- * @returns - organization id of the logged in organization
+ * @returns - organization id of the logged in organization.
  */
 export async function controllerDecodeSwitchOrg(token: JWT): Promise<OrgSession | null> {
 

@@ -22,12 +22,12 @@ import { getOrgUrl } from "@b2bsample/shared/util/util-application-config-util";
 import { NextApiRequest, NextApiResponse } from "next";
 
 /**
- * backend API call to get details of an application
+ * Backend API call to get details of an application.
  * 
  * @param req - request
  * @param res - response
  * 
- * @returns correct data if the call is successful, else an error message
+ * @returns correct data if the call is successful, else an error message.
  */
 export default async function getApplication(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== "POST") {

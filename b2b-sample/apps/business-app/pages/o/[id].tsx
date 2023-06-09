@@ -58,7 +58,7 @@ interface OrgProps {
  * 
  * @param prop - session, routerQuery (orgId)
  * 
- * @returns Organization distinct interace
+ * @returns Organization distinct interace.
  */
 export default function Org(props: OrgProps) {
 

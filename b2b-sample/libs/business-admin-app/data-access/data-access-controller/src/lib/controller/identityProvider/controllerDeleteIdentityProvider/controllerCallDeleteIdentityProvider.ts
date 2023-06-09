@@ -20,13 +20,13 @@ import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-
 import { Session } from "next-auth";
 
 /**
- * call DELETE `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/identity-providers/<id>` 
- * to delete an identity provider
+ * Call DELETE `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/identity-providers/<id>` 
+ * to delete an identity provider.
  * 
  * @param session - session object
  * @param idpId - identity provider id
  * 
- * @returns delete success, if the call failed `null`
+ * @returns delete success, if the call failed `null`.
  */
 export async function controllerCallDeleteIdentityProvider(session: Session, id: string) {
 

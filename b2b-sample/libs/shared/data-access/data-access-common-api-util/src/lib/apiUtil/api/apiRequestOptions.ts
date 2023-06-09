@@ -23,7 +23,7 @@ import RequestMethod from "./requestMethod";
  * 
  * @param session - session object
  * 
- * @returns header object that can used for IS API calls
+ * @returns header object that can used for IS API calls.
  */
 export function apiRequestOptions(session: Session, hostedUrl: string): RequestInit {
     const headers = {

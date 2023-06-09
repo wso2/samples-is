@@ -22,7 +22,7 @@ import { CopyTextToClipboardCallback } from "../model/copyTextToClipboardCallbac
  * 
  * @param str - string that need to be checked
  * 
- * @returns `true` if `str` is empty, else `false`
+ * @returns `true` if `str` is empty, else `false`.
  */
 export function stringIsEmpty(str: string): boolean {
 
@@ -31,7 +31,7 @@ export function stringIsEmpty(str: string): boolean {
 
 /**
  * 
- * @returns current date
+ * @returns current date.
  */
 export function getCurrentDate(): string {
     const today: Date = new Date();
@@ -45,7 +45,7 @@ export function getCurrentDate(): string {
 }
 
 /**
- * @returns true if JSON is empty else false
+ * @returns true if JSON is empty else false.
  */
 export function checkIfJSONisEmpty(obj: Record<string, unknown>): boolean {
     if (!obj) {
@@ -56,14 +56,14 @@ export function checkIfJSONisEmpty(obj: Record<string, unknown>): boolean {
 }
 
 /**
- * @returns the size of JSON object
+ * @returns the size of JSON object.
  */
 export function sizeOfJson(obj: Record<string, unknown>): number {
     return Object.keys(obj).length;
 }
 
 /**
- * Copy the pased `text` to the clipboard and shows a notification
+ * Copy the pased `text` to the clipboard and shows a notification.
  * 
  * @param text - text that need to be copied to the clipboard
  * @param toaster - toaster object
@@ -75,7 +75,7 @@ export function copyTheTextToClipboard(text: string, callback: CopyTextToClipboa
 
 /**
  * 
- * @returns random generatored rgb colour
+ * @returns random generatored rgb colour.
  */
 export function random_rgba(): string {
     const o = Math.round, r = Math.random, s = 255;
@@ -84,7 +84,7 @@ export function random_rgba(): string {
 }
 
 /**
- * operations that we can do on PATCH methods
+ * Operations that we can do on PATCH methods,
  */
 export enum PatchMethod {
     ADD = "ADD",

@@ -24,8 +24,6 @@ import { SharedLogoComponentProps, SharedLogoImageStyle, SharedLogoProps } from
 /**
  * 
  * @param prop - name (org name), imageSize `small` | `medium` | `large` | `x-large`
- *
- * @returns 
  */
 export function SharedLogoComponent(prop: SharedLogoComponentProps) {
 

@@ -25,12 +25,12 @@ import {
 } from "./controllerCallApiRequestOptions";
 
 /**
- * call POST `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users` create the user
+ * Call POST `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users` create the user.
  * 
  * @param session - session object
  * @param param - data object that need to be sent to server
  * 
- * @returns created user details, if not created returns `null`
+ * @returns created user details, if not created returns `null`.
  */
 export async function commonControllerCall(api: string, session: Session | null, param?: ControllerCallParam
     , switchCall = false): Promise<ControllerCallReturn | ControllerCallReturn[] | null> {

@@ -21,11 +21,11 @@ import { InternalUser } from "@b2bsample/shared/data-access/data-access-common-m
 import { Session } from "next-auth";
 
 /**
- * call `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users/<userId>` get the user details
+ * Call `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users/<userId>` get the user details
  * 
  * @param session - session object
  * 
- * @returns user details, if not possible returns `null`
+ * @returns user details, if not possible returns `null`.
  */
 export async function controllerCallMe(session: Session): Promise<InternalUser | null> {
 

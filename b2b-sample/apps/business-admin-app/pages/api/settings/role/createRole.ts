@@ -24,12 +24,12 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 
 /**
- * backend API call to list all roles.
+ * Backend API call to list all roles.
  * 
  * @param req - request
  * @param res - response
  * 
- * @returns correct data if the call is successful, else an error message
+ * @returns correct data if the call is successful, else an error message.
  */
 export default async function createRole(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== "POST") {

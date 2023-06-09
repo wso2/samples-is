@@ -26,7 +26,7 @@ import { controllerCallGetDiscoveryUrl } from "./controllerCallGetDiscoveryUrl";
  * @param session - session object
  * @param id - identity provider id
  * 
- * @returns - details of the identity provider
+ * @returns - details of the identity provider.
  */
 export async function controllerDecodeGetDiscoveryUrl(session: Session, discoveryUrl: string)
     : Promise<IdentityProviderDiscoveryUrl | null> {

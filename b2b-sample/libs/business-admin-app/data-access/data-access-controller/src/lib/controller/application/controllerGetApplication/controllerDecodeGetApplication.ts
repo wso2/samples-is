@@ -26,7 +26,7 @@ import { controllerCallGetApplication } from "./controllerCallGetApplication";
  * @param session - session object
  * @param id - application id
  *
- * @returns get application given the id. If failed `null`
+ * @returns get application given the id. If failed `null`.
  */
 export async function controllerDecodeGetApplication(session: Session, id: string): Promise<Application | null> {
 

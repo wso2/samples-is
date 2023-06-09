@@ -25,7 +25,7 @@ import PhoneComponent from "./otherComponents/phoneComponent";
  * 
  * @param prop - session
  *
- * @returns Dashboard interface section
+ * @returns Dashboard interface section.
  */
 export default function PhoneSectionComponent() {
 

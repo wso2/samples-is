@@ -21,12 +21,12 @@ import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-
 import { Session } from "next-auth";
 
 /**
- * call GET `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/identity-providers` 
- * to get list all the identity providers
+ * Call GET `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/identity-providers` 
+ * to get list all the identity providers.
  * 
  * @param session - Session object
  * 
- * @returns details of the identity provdider, if the call failed `null`
+ * @returns details of the identity provdider, if the call failed `null`.
  */
 export async function controllerCallListAllIdentityProviders(session: Session): Promise<IdentityProviderList | null> {
 

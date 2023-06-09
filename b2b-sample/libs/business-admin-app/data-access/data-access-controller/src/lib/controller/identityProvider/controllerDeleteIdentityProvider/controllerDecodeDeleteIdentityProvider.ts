@@ -25,7 +25,7 @@ import { controllerCallDeleteIdentityProvider } from "./controllerCallDeleteIden
  * @param session - session object
  * @param id - identity provider id
  * 
- * @returns - whether the identity provider is deleted or not
+ * @returns - whether the identity provider is deleted or not.
  */
 export async function controllerDecodeDeleteIdentityProvider(session: Session, id: string): Promise<boolean | null> {
 

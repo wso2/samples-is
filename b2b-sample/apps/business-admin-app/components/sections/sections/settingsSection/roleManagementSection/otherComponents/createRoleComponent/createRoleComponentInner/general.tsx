@@ -28,7 +28,7 @@ import styles from "../../../../../../../../styles/Settings.module.css";
  * 
  * @param prop - `displayName` , `setDisplayName`, `onNext`
  * 
- * @returns The general section of create role modal
+ * @returns The general section of create role modal.
  */
 export default function General(prop) {
 

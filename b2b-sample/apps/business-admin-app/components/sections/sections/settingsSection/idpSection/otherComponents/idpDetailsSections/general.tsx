@@ -40,7 +40,7 @@ interface GeneralProps {
  * 
  * @param prop - fetchData (function to fetch data after form is submitted), session, idpDetails
  * 
- * @returns The general section of an idp
+ * @returns The general section of an idp.
  */
 export default function General(props: GeneralProps) {
 

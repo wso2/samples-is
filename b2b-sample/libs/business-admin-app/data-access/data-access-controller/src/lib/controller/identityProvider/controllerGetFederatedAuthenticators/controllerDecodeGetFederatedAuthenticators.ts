@@ -28,7 +28,7 @@ import { controllerCallGetFederatedAuthenticators } from "./controllerCallGetFed
  * @param id - federated authenticator id
  * @param idpId - identity provider id
  * 
- * @returns - get the federated authenticators
+ * @returns - get the federated authenticators.
  */
 export async function controllerDecodeGetFederatedAuthenticators(session: Session, id: string, idpId: string)
     : Promise<IdentityProviderFederatedAuthenticator | null> {

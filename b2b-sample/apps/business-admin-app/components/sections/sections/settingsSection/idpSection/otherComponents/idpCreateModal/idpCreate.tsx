@@ -46,7 +46,7 @@ interface IdpCreateProps {
  * 
  * @param prop - `IdpCreateProps`
  * 
- * @returns Idp creation modal
+ * @returns Idp creation modal.
  */
 export default function IdpCreate(prop: IdpCreateProps) {
 

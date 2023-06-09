@@ -67,7 +67,7 @@ async function getRoleDetailsForRemove(session: Session, userId: string, initRol
  * @param initRoleList - inital list of roles assigned for the user
  * @param roleList - current list of roles assigned for the user
  * 
- * @returns - `true` if the operation is successfull, else `false`
+ * @returns - `true` if the operation is successfull, else `false`.
  */
 // todo: need to fix controllerDecodeEditRolesToAddOrRemoveUser
 export async function controllerDecodeEditRolesToAddOrRemoveUser(

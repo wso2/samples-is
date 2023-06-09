@@ -25,7 +25,7 @@ import LatestNewsComponent from "./otherComponents/latestNewsComponent";
  * 
  * @param prop - session
  *
- * @returns Dashboard interface section
+ * @returns Dashboard interface section.
  */
 export default function BlogSectionComponent() {
 

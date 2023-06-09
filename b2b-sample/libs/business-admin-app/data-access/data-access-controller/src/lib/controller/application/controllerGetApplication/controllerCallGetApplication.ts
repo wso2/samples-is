@@ -26,7 +26,7 @@ import { Session } from "next-auth";
  * @param session - Session object
  * @param id - application id
  * 
- * @returns applicaiton details, if the call failed `null`
+ * @returns applicaiton details, if the call failed `null`.
  */
 export async function controllerCallGetApplication(session: Session, id: string)
     : Promise<Application | null> {

@@ -40,7 +40,7 @@ function updateProperties(federatedAuthenticators: IdentityProviderFederatedAuth
  * 
  * @param session - session object
  
- * @returns logged in users object. If failed `null`
+ * @returns logged in users object. If failed `null`.
  */
 export async function controllerDecodeUpdateFederatedAuthenticators(
     session: Session, idpId: string, federatedAuthenticators: IdentityProviderFederatedAuthenticator,

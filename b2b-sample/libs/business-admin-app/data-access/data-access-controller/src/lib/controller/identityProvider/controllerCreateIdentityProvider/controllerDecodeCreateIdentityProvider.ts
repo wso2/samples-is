@@ -44,7 +44,7 @@ async function getIdentityProviderFromDiscoveryUrl(session: Session, discoveryUr
  * @param template - template
  * @param formValues - values of the form that user filled
  * 
- * @returns - whether the identity provider is created or not
+ * @returns - whether the identity provider is created or not.
  */
 export async function controllerDecodeCreateIdentityProvider(session: Session, template: IdentityProviderTemplate,
     formValues: Record<string, string>, configureType?: IdentityProviderConfigureType)

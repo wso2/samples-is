@@ -26,7 +26,7 @@ import { LogoComponentProps } from "../../models/logoComponent/logoComponent";
  * 
  * @param prop - name (org name), imageSize `small` | `medium` | `large` | `x-large`, white
  *
- * @returns Business app logo image
+ * @returns Business app logo image.
  */
 export function LogoComponent(prop: LogoComponentProps) {
 

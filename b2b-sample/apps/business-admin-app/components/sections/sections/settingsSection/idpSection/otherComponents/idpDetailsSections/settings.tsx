@@ -41,7 +41,7 @@ interface SettingsProps {
  * 
  * @param prop - session, idpDetails
  *
- * @returns The settings section of an idp
+ * @returns The settings section of an idp.
  */
 export default function Settings(props: SettingsProps) {
 

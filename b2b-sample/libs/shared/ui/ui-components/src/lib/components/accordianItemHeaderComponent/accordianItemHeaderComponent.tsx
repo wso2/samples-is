@@ -26,7 +26,7 @@ import { AccordianItemHeaderComponentProps } from
  * 
  * @param prop - `title`, `description`, `imageUrl`
  * 
- * @returns header componet for items in an accordian
+ * @returns header componet for items in an accordian.
  */
 export function AccordianItemHeaderComponent(prop: AccordianItemHeaderComponentProps) {
 

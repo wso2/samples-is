@@ -22,13 +22,13 @@ import { PatchBody } from "@b2bsample/shared/data-access/data-access-common-mode
 import { Session } from "next-auth";
 
 /**
- * call PATCH `roleUri`
+ * Call PATCH `roleUri`.
  * 
  * @param session - Session object
  * @param roleUri - uri of the role
  * @param patchBody - body of the role that need to be patched
  * 
- * @returns patched role, if the call failed `null`
+ * @returns patched role, if the call failed `null`.
  */
 export async function controllerCallPatchRole(session: Session, roleUri: string, patchBody: PatchBody)
     : Promise<Role | null> {

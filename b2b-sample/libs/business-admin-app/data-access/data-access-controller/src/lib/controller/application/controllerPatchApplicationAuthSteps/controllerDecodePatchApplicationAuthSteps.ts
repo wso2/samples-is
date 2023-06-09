@@ -35,7 +35,7 @@ import { controllerCallPatchApplicationAuthSteps } from "./controllerCallPatchAp
  * 
  * @param template - identity provider object template
  * 
- * @returns get authentication sequence
+ * @returns get authentication sequence.
  */
 function getAuthenticationSequenceModel(template: Application): AuthenticationSequence {
     const authenticationSequenceModel = template.authenticationSequence;
@@ -49,7 +49,7 @@ function getAuthenticationSequenceModel(template: Application): AuthenticationSe
  * 
  * @param templateId - GOOGLE_ID, ENTERPRISE_ID, BASIC_ID
  * 
- * @returns get authenticator id for the given template id
+ * @returns get authenticator id for the given template id.
  */
 function getAuthenticatorId(templateId: string): string | null {
     switch (templateId) {
@@ -69,7 +69,7 @@ function getAuthenticatorId(templateId: string): string | null {
  * @param idpTempleteId - identity provider template id
  * @param idpName - identity provider name
  * 
- * @returns get authenticator body
+ * @returns get authenticator body.
  */
 function getAuthenticatorBody(idpTempleteId: string, idpName: string): AuthenticationSequenceStepOption {
 
@@ -86,7 +86,7 @@ function getAuthenticatorBody(idpTempleteId: string, idpName: string): Authentic
  * @param idpName - identity provider name
  * @param method - PatchApplicationAuthMethod
  * 
- * @returns add or remove idp from the login sequence
+ * @returns add or remove idp from the login sequence.
  */
 function addRemoveAuthSequence(template: Application, idpTempleteId: string, idpName: string, method: boolean)
     : AuthenticationSequence {

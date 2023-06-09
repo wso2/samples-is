@@ -20,11 +20,11 @@ import { Modal } from "rsuite";
 import { ModelHeaderComponentProps } from "../../models/modelHeaderComponent/modelHeaderComponentProps";
 
 /**
- * Always use this as a child of `<Model.Header>`
+ * Always use this as a child of `<Model.Header>`.
  * 
- * @param props `ModelHeaderComponentProps`
+ * @param props - `ModelHeaderComponentProps`
  * 
- * @returns header component for the `Model`
+ * @returns header component for the `Model`.
  */
 export function ModelHeaderComponent(props: ModelHeaderComponentProps) {
 

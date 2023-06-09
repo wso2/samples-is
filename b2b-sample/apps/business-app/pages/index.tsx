@@ -24,7 +24,7 @@ import homeImage from "../../../libs/business-app/ui-assets/src/lib/images/home.
 
 /**
  * 
- * @returns - First interface of the app
+ * @returns - First interface of the app.
  */
 export default function Home() {
 

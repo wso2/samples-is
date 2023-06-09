@@ -46,7 +46,7 @@ function getOrgId(token: JWT): string {
  * 
  * @param token - token object get from the inital login call
  * 
- * @returns - organization id of the logged in organization
+ * @returns - organization id of the logged in organization.
  */
 export async function controllerDecodeSwitchOrg(token: JWT): Promise<OrgSession | null> {
 

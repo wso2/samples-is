@@ -26,7 +26,7 @@ import { controllerCallUserRole } from "./controllerCallUserRole";
  * @param session - session object
  * @param id - id of the user
  * 
- * @returns - details of the roles of the user
+ * @returns - details of the roles of the user.
  */
 export async function controllerDecodeUserRole(session: Session, id: string): Promise<Role[] | null> {
 

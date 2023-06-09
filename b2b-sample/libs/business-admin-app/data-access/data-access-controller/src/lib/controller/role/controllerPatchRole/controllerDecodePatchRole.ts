@@ -71,7 +71,7 @@ function getPatchBody(patchMethod: PatchMethod, path: string, value: string[] | 
  * @param path - path
  * @param value - edited value
  * 
- * @returns - whehter the patch was successful or not
+ * @returns - whehter the patch was successful or not.
  */
 export async function controllerDecodePatchRole(
     session: Session, roleUri: string, patchMethod: PatchMethod, path: string, value: string[] | string)

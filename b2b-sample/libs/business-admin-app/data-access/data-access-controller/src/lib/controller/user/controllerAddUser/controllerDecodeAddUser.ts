@@ -91,7 +91,7 @@ function getAddUserBody(
  * @param email - email
  * @param password - password
  * 
- * @returns - details of the created user
+ * @returns - details of the created user.
  */
 export async function controllerDecodeAddUser(
     session: Session,

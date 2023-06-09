@@ -40,7 +40,7 @@ interface PermissionProps {
  * 
  * @param prop - `fetchData` - function , `session`, `roleDetails` - Object
  * 
- * @returns The permission section of role details
+ * @returns The permission section of role details.
  */
 export default function Permission(props: PermissionProps) {
 

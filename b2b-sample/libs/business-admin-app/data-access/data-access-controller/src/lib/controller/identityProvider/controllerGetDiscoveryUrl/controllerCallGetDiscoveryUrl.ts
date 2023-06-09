@@ -21,13 +21,13 @@ import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-
 import { Session } from "next-auth";
 
 /**
- * call GET `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/identity-providers/<id>` 
+ * Call GET `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/identity-providers/<id>` 
  * to get detail of an identity provider
  * 
  * @param session - session
  * @param id - identity provider id
  * 
- * @returns details of the identity provdider, if the call failed `null`
+ * @returns details of the identity provdider, if the call failed `null`.
  */
 export async function controllerCallGetDiscoveryUrl(session: Session, discoveryUrl: string)
     : Promise<IdentityProviderDiscoveryUrl | null> {

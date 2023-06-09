@@ -22,13 +22,13 @@ import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-
 import { Session } from "next-auth";
 
 /**
- * call POST `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/identity-providers` 
- * to create an identity provider
+ * Call POST `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/identity-providers` 
+ * to create an identity provider.
  * 
  * @param session - Session object
  * @param model - body of the identity provider that will be created
  *  
- * @returns created identity provider, if the call failed `null`
+ * @returns created identity provider, if the call failed `null`.
  */
 export async function controllerCallCreateIdentityProvider(session: Session,
     model: IdentityProviderTemplateModel): Promise<IdentityProvider | null> {

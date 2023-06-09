@@ -20,9 +20,9 @@ import { CustomHtmlHeadingProps } from "../../models/customHtmlHeading/customHtm
 
 /**
  * 
- * @param props `CustomHtmlHeadingProps`
+ * @param props - `CustomHtmlHeadingProps`
  * 
- * @returns Custom Html Heading
+ * @returns Custom Html Heading.
  */
 export function CustomHtmlHeading(props: CustomHtmlHeadingProps) {
 

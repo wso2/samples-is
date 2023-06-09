@@ -51,7 +51,7 @@ interface ConfirmAddRemoveLoginFlowModalProps {
  * 
  * @param prop - session, applicationDetail, idpDetails, idpIsinAuthSequence, openModal, onModalClose, fetchAllIdPs
  * 
- * @returns Add/Remove from login flow button
+ * @returns Add/Remove from login flow button.
  */
 export default function ConfirmAddRemoveLoginFlowModal(props: ConfirmAddRemoveLoginFlowModalProps) {
 
@@ -149,7 +149,7 @@ export default function ConfirmAddRemoveLoginFlowModal(props: ConfirmAddRemoveLo
 /**
  * 
  * @returns When then `config.ManagementAPIConfig.SharedApplicationName` is not the correct applicaiton, 
- * it will show this section
+ * it will show this section.
  */
 function EmptySelectApplicationBody() {
 
@@ -177,7 +177,7 @@ function EmptySelectApplicationBody() {
  * @param prop - idpIsinAuthSequence, applicationDetail
  * 
  * @returns  When then config.ManagementAPIConfig.SharedApplicationName is the correct applicaiton, 
- * it will show this section 
+ * it will show this section.
  */
 function ApplicationListAvailable(props: ApplicationListAvailableProps) {
 

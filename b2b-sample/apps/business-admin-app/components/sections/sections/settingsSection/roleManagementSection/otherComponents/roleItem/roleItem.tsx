@@ -42,7 +42,7 @@ interface RoleItemProps {
  * 
  * @param prop - `session`, `id`, `roleUri`
  * 
- * @returns role item componet
+ * @returns role item componet.
  */
 export default function RoleItem(props: RoleItemProps) {
 
@@ -107,7 +107,7 @@ export default function RoleItem(props: RoleItemProps) {
  * 
  * @param prop - `activeKeyNav`, `activeKeyNavSelect`
  * 
- * @returns navigation bar of role item section
+ * @returns navigation bar of role item section.
  */
 function RoleItemNav(props: RoleItemNavProps) {
 

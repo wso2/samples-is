@@ -42,7 +42,7 @@ interface ExternalIdentityProviderProps {
 * 
 * @param prop - `ExternalIdentityProviderProps`
 * 
-* @returns Form to create external idp
+* @returns Form to create external idp.
 */
 export default function ExternalIdentityProvider(prop: ExternalIdentityProviderProps) {
 

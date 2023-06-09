@@ -25,7 +25,7 @@ import { controllerCallListAllRoles } from "./controllerCallListAllRoles";
  * 
  * @param session - session object
  * 
- * @returns - list all the roles
+ * @returns - list all the roles.
  */
 export async function controllerDecodeListAllRoles(session: Session): Promise<Role[] | null> {
 

@@ -22,15 +22,15 @@ import { PatchOperation } from "@b2bsample/shared/data-access/data-access-common
 import { Session } from "next-auth";
 
 /**
- * patch general settings of an identity provider
+ * Patch general settings of an identity provider.
  * 
- * call PUT `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/identity-providers/<idpid>/<request[0]>`
+ * Call PUT `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/identity-providers/<idpid>/<request[0]>`.
  * 
  * @param session - session object
  * @param idpId - identity provider id
  * @param body - identity provider body that need to patch
  * 
- * @returns details of the idp, if the call failed `null`
+ * @returns details of the idp, if the call failed `null`.
  */
 export async function controllerCallPatchGeneralSettingsIdp(session: Session, idpId: string,
     body: PatchOperation[]): Promise<IdentityProvider | null> {

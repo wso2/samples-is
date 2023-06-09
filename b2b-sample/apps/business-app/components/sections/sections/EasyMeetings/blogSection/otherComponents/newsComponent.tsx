@@ -33,7 +33,7 @@ interface NewsComponentInterface {
  * 
  * @param prop - header (header text), body (body text)
  *
- * @returns Single news component
+ * @returns Single news component.
  */
 export default function NewsComponent(props: NewsComponentInterface) {
 

@@ -23,12 +23,12 @@ import { getOrgUrl } from "@b2bsample/shared/util/util-application-config-util";
 import { NextApiRequest, NextApiResponse } from "next";
 
 /**
- * backend API call to patch general settings of an identity provider
+ * Backend API call to patch general settings of an identity provider.
  * 
  * @param req - request
  * @param res - response
  * 
- * @returns correct data if the call is successful, else an error message
+ * @returns correct data if the call is successful, else an error message.
  */
 export default async function patchGeneralSettingsIdp(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== "POST") {

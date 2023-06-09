@@ -44,7 +44,7 @@ interface GoogleIdentityProviderProps {
  * 
  * @param prop - `GoogleIdentityProviderProps`
  * 
- * @returns Form to create google idp
+ * @returns Form to create google idp.
  */
 export default function GoogleIdentityProvider(prop: GoogleIdentityProviderProps) {
 
