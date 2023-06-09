@@ -52,12 +52,14 @@ export default function CreateRoleComponent(props: CreateRoleComponentProps) {
      * @param nextStep - next step
      */
     const onChange = (nextStep: number): void => {
+
         setStep(nextStep < 0 ? 0 : nextStep > 3 ? 3 : nextStep);
     };
 
     const onPrevious = (): void => onChange(step - 1);
 
     const onNext = (): void => {
+
         if (step == 2) {
 
             onSubmit(displayName, permissions, users);
@@ -68,6 +70,7 @@ export default function CreateRoleComponent(props: CreateRoleComponentProps) {
     };
 
     const onDataSubmit = (response: Role): void => {
+
         if (response) {
             successTypeDialog(toaster, "Changes Saved Successfully", "Role created successfully.");
             onCreateRoleModalClose();
@@ -77,6 +80,7 @@ export default function CreateRoleComponent(props: CreateRoleComponentProps) {
     };
 
     const onSubmit = async (displayName, permissions, users): Promise<void> => {
+
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
         await controllerDecodeCreateRole(session, displayName, permissions, users)
             .then((response) => onDataSubmit(response))
@@ -88,6 +92,7 @@ export default function CreateRoleComponent(props: CreateRoleComponentProps) {
      *  callback function on create role modal close
      */
     const onCreateRoleModalClose = (): void => {
+
         setOpenCreateRoleModal(false);
         setStep(0);
         setDisplayName("");
