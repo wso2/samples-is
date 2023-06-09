@@ -24,6 +24,7 @@ import enterpriseImage from "../../../../../ui/ui-assets/src/lib/images/enterpri
 import googleImage from "../../../../../ui/ui-assets/src/lib/images/google.svg";
 
 /**
+ * 
  * @param templateId - template id of the identity provider
 
  * @returns - local image for the relevant identity provider.
@@ -36,7 +37,6 @@ export function getImageForTheIdentityProvider(templateId: string): string {
     if (ENTERPRISE_ID === templateId) {
 
         return enterpriseImage;
-
     }
 
     return EMPTY_STRING;
@@ -202,4 +202,4 @@ function enterpriseIdpTemplate(model: IdentityProviderTemplateModel, clientId: s
     return model;
 }
 
-export default { setIdpTemplate, getCallbackUrl, getImageForTheIdentityProvider };
+export default { getCallbackUrl, getImageForTheIdentityProvider, setIdpTemplate };

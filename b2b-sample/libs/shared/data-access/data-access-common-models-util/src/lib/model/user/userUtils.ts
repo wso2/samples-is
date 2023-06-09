@@ -58,7 +58,7 @@ export function setEmail(email: string) {
  * @returns set username.
  */
 export function setUsername(userName: string) {
-    if (config.BusinessAppConfig.ManagementAPIConfig.UserStore.trim()===""){
+    if (config.BusinessAppConfig.ManagementAPIConfig.UserStore.trim() === "") {
 
         return userName;
     } else {
