@@ -22,15 +22,15 @@ import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-
 import { Session } from "next-auth";
 
 /**
- * update federated authenticators of an identity provider
+ * Update federated authenticators of an identity provider.
  * 
- * call PATCH `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/identity-providers/<idpid>`
+ * Call PATCH `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/identity-providers/<idpid>`.
  * 
  * @param session - session object
  * @param idpid - identity provider id
  * @param body - identity provider body that need to update
  * 
- * @returns update federated authenticators
+ * @returns update federated authenticators.
  */
 export async function controllerCallUpdateFederatedAuthenticators(session: Session, idpId: string,
     body: (string | IdentityProviderFederatedAuthenticator | undefined)[])

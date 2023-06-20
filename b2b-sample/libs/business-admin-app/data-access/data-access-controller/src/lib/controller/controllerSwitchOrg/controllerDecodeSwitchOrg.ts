@@ -22,31 +22,39 @@ import { JWT } from "next-auth/jwt";
 import { controllerCallSwitchOrg } from "./controllerCallSwitchOrg";
 import config from "../../../../../../../../config.json";
 
+/**
+ * Get the organization id of the logged in organization.
+ * 
+ * @param token - token object get from the inital login call
+ * 
+ * @returns - organization id of the logged in organization.
+ */
 function getOrgId(token: JWT): string {
 
-    if(token.user) {
+    if (token.user) {
         if (token.user.user_organization) {
 
             return token.user.user_organization;
         } else if (config.CommonConfig.ApplicationConfig.SampleOrganization[0]) {
-    
+
             return config.CommonConfig.ApplicationConfig.SampleOrganization[0].id;
         } else {
-    
+
             return token.user.org_id;
         }
     } else {
-        
+
         return config.CommonConfig.ApplicationConfig.SampleOrganization[0].id;
     }
 
 }
 
 /**
+ * Decode the token and call the `controllerCallSwitchOrg` to switch the organization.
  * 
  * @param token - token object get from the inital login call
  * 
- * @returns - organization id of the logged in organization
+ * @returns - organization id of the logged in organization.
  */
 export async function controllerDecodeSwitchOrg(token: JWT): Promise<OrgSession | null> {
 
@@ -57,7 +65,6 @@ export async function controllerDecodeSwitchOrg(token: JWT): Promise<OrgSession 
         (await commonControllerDecode(() => controllerCallSwitchOrg(subOrgId, accessToken), null) as OrgSession | null);
 
     return res;
-
 }
 
 export default controllerDecodeSwitchOrg;

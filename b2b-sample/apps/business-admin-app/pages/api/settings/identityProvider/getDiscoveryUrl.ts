@@ -19,16 +19,16 @@
 import { dataNotRecievedError, notPostError } from "@b2bsample/shared/data-access/data-access-common-api-util";
 import { NextApiRequest, NextApiResponse } from "next";
 
-
 /**
- * backend API call to create a new identity provider
+ * Backend API call to create a new identity provider.
  * 
  * @param req - request
  * @param res - response
  * 
- * @returns correct data if the call is successful, else an error message
+ * @returns correct data if the call is successful, else an error message.
  */
 export default async function getDiscoveryUrl(req: NextApiRequest, res: NextApiResponse) {
+
     if (req.method !== "POST") {
         notPostError(res);
     }

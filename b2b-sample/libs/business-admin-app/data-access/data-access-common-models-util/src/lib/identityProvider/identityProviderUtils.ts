@@ -24,9 +24,10 @@ import enterpriseImage from "../../../../../ui/ui-assets/src/lib/images/enterpri
 import googleImage from "../../../../../ui/ui-assets/src/lib/images/google.svg";
 
 /**
+ * 
  * @param templateId - template id of the identity provider
 
- * @returns - local image for the relevant identity provider
+ * @returns - local image for the relevant identity provider.
  */
 export function getImageForTheIdentityProvider(templateId: string): string {
     if (GOOGLE_ID === templateId) {
@@ -36,7 +37,6 @@ export function getImageForTheIdentityProvider(templateId: string): string {
     if (ENTERPRISE_ID === templateId) {
 
         return enterpriseImage;
-
     }
 
     return EMPTY_STRING;
@@ -44,9 +44,10 @@ export function getImageForTheIdentityProvider(templateId: string): string {
 
 /**
  * 
- * @returns callBackUrl of the idp
+ * @returns callBackUrl of the idp.
  */
 export function getCallbackUrl(orgId: string): string {
+
     return `${getOrgUrl(orgId)}/commonauth`;
 }
 
@@ -57,13 +58,13 @@ export function getCallbackUrl(orgId: string): string {
  * @param formValues - values get from the form inputs
  * @param orgId - organization id
  * 
- * @returns - idp readay to sent to the IS 
+ * @returns - idp readay to sent to the IS.
  */
 export function setIdpTemplate(model: IdentityProviderTemplateModel, templateId: string,
     formValues: Record<string, string>, orgId: string,
     identityProviderDiscoveryUrl?: IdentityProviderDiscoveryUrl): IdentityProviderTemplateModel {
 
-    const name: string = formValues["application_name"].toString();
+    const name: string = formValues["idp_name"].toString();
     const clientId: string = formValues["client_id"].toString();
     const clientSecret: string = formValues["client_secret"].toString();
 
@@ -86,7 +87,6 @@ export function setIdpTemplate(model: IdentityProviderTemplateModel, templateId:
     model.federatedAuthenticators.authenticators[0].isEnabled = true;
 
     return model;
-
 }
 
 /**
@@ -96,7 +96,7 @@ export function setIdpTemplate(model: IdentityProviderTemplateModel, templateId:
  * @param clientSecret - client secret text entered by the user for the identity provider
  * @param orgId - organization id
  * 
- * @returns - create google IDP template
+ * @returns - create google IDP template.
  */
 function googleIdpTemplate(model: IdentityProviderTemplateModel, clientId: string, clientSecret: string,
     orgId: string): IdentityProviderTemplateModel {
@@ -135,7 +135,7 @@ function googleIdpTemplate(model: IdentityProviderTemplateModel, clientId: strin
  * @param formValues - values get from the form inputs
  * @param orgId - organization id
  * 
- * @returns create enterprise IDP template
+ * @returns create enterprise IDP template.
  */
 function enterpriseIdpTemplate(model: IdentityProviderTemplateModel, clientId: string, clientSecret: string,
     formValues: Record<string, string>, orgId: string, identityProviderDiscoveryUrl?: IdentityProviderDiscoveryUrl)
@@ -202,4 +202,4 @@ function enterpriseIdpTemplate(model: IdentityProviderTemplateModel, clientId: s
     return model;
 }
 
-export default { setIdpTemplate, getCallbackUrl, getImageForTheIdentityProvider };
+export default { getCallbackUrl, getImageForTheIdentityProvider, setIdpTemplate };

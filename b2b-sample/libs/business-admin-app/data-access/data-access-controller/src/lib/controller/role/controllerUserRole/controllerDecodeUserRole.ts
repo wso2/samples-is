@@ -26,14 +26,13 @@ import { controllerCallUserRole } from "./controllerCallUserRole";
  * @param session - session object
  * @param id - id of the user
  * 
- * @returns - details of the roles of the user
+ * @returns - details of the roles of the user.
  */
 export async function controllerDecodeUserRole(session: Session, id: string): Promise<Role[] | null> {
 
     const res = (await commonControllerDecode(() => controllerCallUserRole(session, id), null) as Role[] | null);
 
     return res;
-
 }
 
 export default controllerDecodeUserRole;

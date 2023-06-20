@@ -23,7 +23,7 @@ import config from "../../../../../config.json";
 
 /**
  * 
- * @returns get the basic auth for authorize the switch call
+ * @returns get the basic auth for authorize the switch call.
  */
 const getBasicAuth = ():string => Buffer
     // eslint-disable-next-line
@@ -31,7 +31,7 @@ const getBasicAuth = ():string => Buffer
 
 /**
  * 
- * @returns get the header for the switch call
+ * @returns get the header for the switch call.
  */
 const getSwitchHeader = (): HeadersInit => {
 
@@ -51,7 +51,7 @@ const getSwitchHeader = (): HeadersInit => {
  * @param subOrgId - sub organization id
  * @param accessToken - access token return from the IS
  * 
- * @returns get the body for the switch call
+ * @returns get the body for the switch call.
  */
 const getSwitchBody = (subOrgId: string, accessToken: string): Record<string, string> => {
     const body = {
@@ -69,7 +69,7 @@ const getSwitchBody = (subOrgId: string, accessToken: string): Record<string, st
  * @param subOrgId - sub organization id
  * @param accessToken - access token return from the IS
  * 
- * @returns get the request body for the switch call
+ * @returns get the request body for the switch call.
  */
 const getSwitchRequest = (subOrgId : string, accessToken : string): RequestInit => {
     const request = {
@@ -83,7 +83,7 @@ const getSwitchRequest = (subOrgId : string, accessToken : string): RequestInit 
 
 /**
  * 
- * @returns get the endpoint for the switch API call
+ * @returns get the endpoint for the switch API call.
  */
 const getSwitchEndpoint = (): string => `${config.CommonConfig.AuthorizationConfig.BaseOrganizationUrl}/oauth2/token`;
 
@@ -92,7 +92,7 @@ const getSwitchEndpoint = (): string => `${config.CommonConfig.AuthorizationConf
  * @param req - request object
  * @param res - response object
  * 
- * @returns whether the switch call was successful
+ * @returns whether the switch call was successful.
  */
 export default async function switchOrg(req : NextApiRequest, res : NextApiResponse) {
 

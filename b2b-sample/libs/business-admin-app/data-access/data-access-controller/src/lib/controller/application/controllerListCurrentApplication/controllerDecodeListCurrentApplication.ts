@@ -26,7 +26,7 @@ import { controllerCallListCurrentApplication } from "./controllerCallListCurren
  * @param session - session object
  *
  * @returns get the deatils of the current logged in application of the business app, 
- * filtered using the `BusinessAppConfig.ManagementAPIConfig.SharedApplicationName` in the config.json 
+ * filtered using the `BusinessAppConfig.ManagementAPIConfig.SharedApplicationName` in the config.json.
  */
 export async function controllerDecodeListCurrentApplication(session: Session): Promise<ApplicationList | null> {
 
@@ -34,7 +34,6 @@ export async function controllerDecodeListCurrentApplication(session: Session): 
         ApplicationList | null);
 
     return res;
-
 }
 
 export default controllerDecodeListCurrentApplication;

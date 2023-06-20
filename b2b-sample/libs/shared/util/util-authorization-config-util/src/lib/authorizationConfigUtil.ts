@@ -18,7 +18,6 @@
 
 import { User } from "@b2bsample/shared/data-access/data-access-common-models-util";
 import { getManagementAPIServerBaseUrl, getTenantDomain } from "@b2bsample/shared/util/util-application-config-util";
-import { checkIfJSONisEmpty } from "@b2bsample/shared/util/util-common";
 import { Profile, Session } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import { signIn, signOut } from "next-auth/react";
@@ -29,9 +28,10 @@ import RedirectReturnType from "../model/authorizationConfigModal";
 * 
 * @param path - path string that need to be redirected
 * 
-* @returns redirect locally to a path
+* @returns redirect locally to a path.
 */
 function redirect(path: string): RedirectReturnType {
+
     return {
         redirect: {
             destination: path,
@@ -63,9 +63,9 @@ function orgSignin(adminApp: boolean, orgId?: string): void {
 }
 
 /**
-* signout of the logged in organization
+* Signout of the logged in organization.
 * 
-* @param session - session object
+* @param session - session object.
 */
 async function orgSignout(session: Session, hostedUrl: string): Promise<void> {
 
@@ -89,7 +89,7 @@ async function orgSignout(session: Session, hostedUrl: string): Promise<void> {
 * 
 * @param token - token object returned from the login function
 * 
-* @returns - parse JWT token and return a JSON
+* @returns - parse JWT token and return a JSON.
 */
 function parseJwt(token: JWT) {
 
@@ -113,7 +113,7 @@ function getLoggedUserId(token: JWT): string {
 * 
 * @param token - token object returned from the login function
 * 
-* @returns get organization id. If `org_id` is null in token check `config.json` for the org id
+* @returns get organization id. If `org_id` is null in token check `config.json` for the org id.
 */
 function getOrgId(token: JWT): string {
 
@@ -129,7 +129,7 @@ function getOrgId(token: JWT): string {
 * 
 * @param token - token object returned from the login function
 * 
-* @returns get organization name. If `org_name` is null in token check `config.json` for the org name
+* @returns get organization name. If `org_name` is null in token check `config.json` for the org name.
 */
 function getOrgName(token: JWT): string {
 
@@ -145,7 +145,7 @@ function getOrgName(token: JWT): string {
 * 
 * @param profile - profile
 * 
-* @returns `User` get logged user from profile
+* @returns `User` get logged user from profile.
 */
 function getLoggedUserFromProfile(profile: Profile): User | null {
 

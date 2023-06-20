@@ -34,7 +34,7 @@ interface ProfileSectionComponentInterface {
  * 
  * @param prop - session
  *
- * @returns Dashboard interface section
+ * @returns Dashboard interface section.
  */
 export default function ProfileSectionComponent(props: ProfileSectionComponentInterface) {
 

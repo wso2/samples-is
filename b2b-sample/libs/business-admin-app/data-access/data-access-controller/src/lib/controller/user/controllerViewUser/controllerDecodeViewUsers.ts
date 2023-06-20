@@ -25,7 +25,7 @@ import { controllerCallViewUsers } from "./controllerCallViewUsers";
  * 
  * @param session - session object
  
- * @returns details of all users
+ * @returns details of all users.
  */
 export async function controllerDecodeViewUsers(session: Session): Promise<InternalUser[] | null> {
 
@@ -35,7 +35,7 @@ export async function controllerDecodeViewUsers(session: Session): Promise<Inter
     if (usersData) {
         const usersReturn: InternalUser[] = [];
         
-        if(usersData.Resources){
+        if (usersData.Resources){
             usersData.Resources.map((user: User) => {
                 const userDetails = decodeUser(user);
     
@@ -52,7 +52,6 @@ export async function controllerDecodeViewUsers(session: Session): Promise<Inter
     }
 
     return usersData;
-
 }
 
 export default controllerDecodeViewUsers;

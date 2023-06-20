@@ -26,7 +26,7 @@ import "rsuite/dist/rsuite.min.css";
  * 
  * @param prop - session
  *
- * @returns Dashboard interface section
+ * @returns Dashboard interface section.
  */
 export default function PhoneSectionComponent() {
 

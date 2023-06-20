@@ -31,7 +31,6 @@ import ProfileSectionComponent from "../sections/GuardioInsurance/profileSection
 import ReportsSectionComponent
     from "../sections/GuardioInsurance/reportsSection/reportsSectionComponent";
 
-
 interface HomeInterface {
     session: Session
 }
@@ -50,31 +49,31 @@ export default function GuardioInsuranceHome(props: HomeInterface) {
     const [ signOutModalOpen, setSignOutModalOpen ] = useState<boolean>(false);
 
     const mainPanelComponenet = (activeKey: string): JSX.Element => {
+
         switch (activeKey) {
             case "1":
-
                 return <ProfileSectionComponent session={ session } />;
             case "2":
-
                 return <ReportsSectionComponent />;
             case "3":
-
                 return <ClaimsSectionComponent />;
             case "4":
-
                 return <BlogSectionComponent />;
         }
     };
 
     const signOutCallback = (): void => {
+
         signout(session);
     };
 
     const activeKeySideNavSelect = (eventKey: string): void => {
+
         setActiveKeySideNav(eventKey);
     };
 
     const signOutModalClose = (): void => {
+
         setSignOutModalOpen(false);
     };
 

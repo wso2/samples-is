@@ -41,7 +41,7 @@ interface UsersProps {
  * 
  * @param prop - `fetchData` - function , `session`, `roleDetails` - Object
  * 
- * @returns The users section of role details
+ * @returns The users section of role details.
  */
 export default function Users(props: UsersProps) {
 

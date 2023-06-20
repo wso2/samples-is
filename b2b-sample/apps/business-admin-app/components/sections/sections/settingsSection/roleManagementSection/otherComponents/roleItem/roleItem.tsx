@@ -42,7 +42,7 @@ interface RoleItemProps {
  * 
  * @param prop - `session`, `id`, `roleUri`
  * 
- * @returns role item componet
+ * @returns role item componet.
  */
 export default function RoleItem(props: RoleItemProps) {
 
@@ -68,16 +68,12 @@ export default function RoleItem(props: RoleItemProps) {
     const roleItemDetailsComponent = (activeKey): JSX.Element => {
         switch (activeKey) {
             case "1":
-
                 return <General session={ session } roleDetails={ roleDetails } fetchData={ fetchData } />;
             case "2":
-
                 return <Permission session={ session } roleDetails={ roleDetails } fetchData={ fetchData } />;
             case "3":
-
                 return <Users session={ session } roleDetails={ roleDetails } fetchData={ fetchData } />;
             case "4":
-
                 return <JsonDisplayComponent jsonObject={ roleDetails } />;
         }
     };
@@ -111,7 +107,7 @@ export default function RoleItem(props: RoleItemProps) {
  * 
  * @param prop - `activeKeyNav`, `activeKeyNavSelect`
  * 
- * @returns navigation bar of role item section
+ * @returns navigation bar of role item section.
  */
 function RoleItemNav(props: RoleItemNavProps) {
 

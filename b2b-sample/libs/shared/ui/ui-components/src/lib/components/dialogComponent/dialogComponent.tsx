@@ -24,7 +24,7 @@ import { DialogComponentProps } from "../../models/dialogComponent/dialogCompone
  * 
  * @param prop - type (error, info, success ), header - title text, body - body text
  *
- * @returns A side dialog to show notifications
+ * @returns A side dialog to show notifications.
  */
 function DialogComponent(prop: DialogComponentProps) {
 
@@ -44,7 +44,7 @@ function DialogComponent(prop: DialogComponentProps) {
  * @param header - header text
  * @param body - body text
  * 
- * @returns - A notification dialog baed on the `type`
+ * @returns - A notification dialog baed on the `type`.
  */
 async function showDialog(toaster: Toaster,
     type: "error" | "info" | "success" | "warning",
@@ -67,7 +67,7 @@ async function showDialog(toaster: Toaster,
  * @param header - header text
  * @param body - body text
  * 
- * @returns - A error type notification dialog
+ * @returns - A error type notification dialog.
  */
 export function errorTypeDialog(toaster: Toaster, header: string, body?: string) {
     showDialog(toaster, "error", header, body);
@@ -79,7 +79,7 @@ export function errorTypeDialog(toaster: Toaster, header: string, body?: string)
  * @param header - header text
  * @param body - body text
  * 
- * @returns - A information type notification dialog
+ * @returns - A information type notification dialog.
  */
 export function infoTypeDialog(toaster: Toaster, header: string, body?: string) {
     showDialog(toaster, "info", header, body);
@@ -91,7 +91,7 @@ export function infoTypeDialog(toaster: Toaster, header: string, body?: string) 
  * @param header - header text
  * @param body - body text
  * 
- * @returns - A success type notification dialog
+ * @returns - A success type notification dialog.
  */
 export function successTypeDialog(toaster: Toaster, header: string, body?: string) {
     showDialog(toaster, "success", header, body);
@@ -103,7 +103,7 @@ export function successTypeDialog(toaster: Toaster, header: string, body?: strin
  * @param header - header text
  * @param body - body text
  * 
- * @returns - A warning type notification dialog
+ * @returns - A warning type notification dialog.
  */
 export function warningTypeDialog(toaster: Toaster, header: string, body?: string) {
     showDialog(toaster, "warning", header, body);

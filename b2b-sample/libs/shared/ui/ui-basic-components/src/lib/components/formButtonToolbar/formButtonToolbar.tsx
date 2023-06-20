@@ -23,9 +23,9 @@ import { FormButtonToolbarProps } from "../../models/formButtonToolbar/formButto
 
 /**
  * 
- * @param props `FormButtonToolbarProps`
+ * @param props - `FormButtonToolbarProps`
  * 
- * @returns Button toolbar for the forms
+ * @returns Button toolbar for the forms.
  */
 export function FormButtonToolbar(props: FormButtonToolbarProps) {
 
@@ -33,7 +33,6 @@ export function FormButtonToolbar(props: FormButtonToolbarProps) {
 
     return (
         <FormSuite.Group>
-
             <ButtonToolbar>
                 <Button
                     className={ styles["addUserButton"] }
@@ -64,10 +63,9 @@ export function FormButtonToolbar(props: FormButtonToolbarProps) {
 }
 
 FormButtonToolbar.defaultProps = {
-    submitButtonText: "Submit",
     cancelButtonText: "Cancel",
-    needCancel: true
+    needCancel: true,
+    submitButtonText: "Submit"
 };
-
 
 export default FormButtonToolbar;

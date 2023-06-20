@@ -17,7 +17,11 @@
  */
 
 import {
-    Application, AuthenticationSequence, AuthenticationSequenceModel, AuthenticationSequenceStepOption,
+    Application,
+    AuthenticationSequence,
+    AuthenticationSequenceModel,
+    AuthenticationSequenceStep,
+    AuthenticationSequenceStepOption,
     IdentityProvider
 } from "@b2bsample/business-admin-app/data-access/data-access-common-models-util";
 import { commonControllerDecode } from "@b2bsample/shared/data-access/data-access-common-api-util";
@@ -31,7 +35,7 @@ import { controllerCallPatchApplicationAuthSteps } from "./controllerCallPatchAp
  * 
  * @param template - identity provider object template
  * 
- * @returns get authentication sequence
+ * @returns get authentication sequence.
  */
 function getAuthenticationSequenceModel(template: Application): AuthenticationSequence {
     const authenticationSequenceModel = template.authenticationSequence;
@@ -45,21 +49,17 @@ function getAuthenticationSequenceModel(template: Application): AuthenticationSe
  * 
  * @param templateId - GOOGLE_ID, ENTERPRISE_ID, BASIC_ID
  * 
- * @returns get authenticator id for the given template id
+ * @returns get authenticator id for the given template id.
  */
 function getAuthenticatorId(templateId: string): string | null {
     switch (templateId) {
         case GOOGLE_ID:
-
             return GOOGLE_AUTHENTICATOR_ID;
         case ENTERPRISE_ID:
-
             return ENTERPRISE_AUTHENTICATOR_ID;
         case BASIC_ID:
-
             return BASIC_AUTHENTICATOR_ID;
         default:
-
             return null;
     }
 }
@@ -69,7 +69,7 @@ function getAuthenticatorId(templateId: string): string | null {
  * @param idpTempleteId - identity provider template id
  * @param idpName - identity provider name
  * 
- * @returns get authenticator body
+ * @returns get authenticator body.
  */
 function getAuthenticatorBody(idpTempleteId: string, idpName: string): AuthenticationSequenceStepOption {
 
@@ -86,7 +86,7 @@ function getAuthenticatorBody(idpTempleteId: string, idpName: string): Authentic
  * @param idpName - identity provider name
  * @param method - PatchApplicationAuthMethod
  * 
- * @returns add or remove idp from the login sequence
+ * @returns add or remove idp from the login sequence.
  */
 function addRemoveAuthSequence(template: Application, idpTempleteId: string, idpName: string, method: boolean)
     : AuthenticationSequence {
@@ -101,22 +101,22 @@ function addRemoveAuthSequence(template: Application, idpTempleteId: string, idp
 
         let basicCheck = false;
 
-        for (let j = authenticationSequenceModel.steps.length - 1; j >= 0; j--) {
-            const step = authenticationSequenceModel.steps[j];
+        authenticationSequenceModel.steps.forEach((step: AuthenticationSequenceStep) => {
+            step.options = step.options.filter((option: AuthenticationSequenceStepOption) => {
+                if (option.idp === idpName) {
 
-            for (let i = 0; i < step.options.length; i++) {
-                if (step.options[i].idp === idpName) {
-                    step.options.splice(i, 1);
-                    if (step.options.length === 0) {
-                        authenticationSequenceModel.steps.splice(j, 1);
-                    }
-
-                    break;
-                } else if (step.options[i].authenticator === "BasicAuthenticator") {
+                    return false;
+                } else if (option.authenticator === "BasicAuthenticator") {
                     basicCheck = true;
                 }
+
+                return true;
+            });
+          
+            if (step.options.length === 0) {
+                authenticationSequenceModel.steps.splice(authenticationSequenceModel.steps.indexOf(step), 1);
             }
-        }
+        });
 
         if (!basicCheck) {
             try {
@@ -157,6 +157,7 @@ export async function controllerDecodePatchApplicationAuthSteps(
         () => controllerCallPatchApplicationAuthSteps(session, applicationId, authenticationSequenceModel), null);
 
     if (res) {
+
         return true;
     }
 

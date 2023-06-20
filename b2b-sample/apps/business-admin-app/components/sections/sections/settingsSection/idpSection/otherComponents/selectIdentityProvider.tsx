@@ -36,7 +36,7 @@ interface SelectIdentityProviderProps {
  *               templates (templates list), onTemplateSelected 
  *              (what will happen when a particular template is selected)
  * 
- * @returns A modal to select idp's
+ * @returns A modal to select idp's.
  */
 export default function SelectIdentityProvider(prop: SelectIdentityProviderProps) {
     const { openModal, onClose, templates, onTemplateSelected } = prop;

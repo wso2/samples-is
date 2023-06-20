@@ -26,7 +26,7 @@ import { controllerCallListAllIdentityProviders } from "./controllerCallListAllI
  * 
  * @param session - session object
  * 
- * @returns - details of all the identity providers
+ * @returns - details of all the identity providers.
  */
 export async function controllerDecodeListAllIdentityProviders(session: Session): Promise<IdentityProvider[] | null> {
 

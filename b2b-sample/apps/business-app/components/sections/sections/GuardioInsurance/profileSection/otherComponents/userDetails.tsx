@@ -31,7 +31,7 @@ interface UserDetailsInterface {
  * 
  * @param prop - me (details of the logged in user)
  *
- * @returns The profile details section
+ * @returns The profile details section.
  */
 export default function UserDetails(props: UserDetailsInterface) {
 
@@ -108,7 +108,7 @@ export default function UserDetails(props: UserDetailsInterface) {
 
                 </div>)
             : (<Panel bordered>
-                <div>Add the user attributes in created the application to display user details</div>
+                <div>Add the user attributes in the created the application to display user details</div>
             </Panel>)
     );
 }

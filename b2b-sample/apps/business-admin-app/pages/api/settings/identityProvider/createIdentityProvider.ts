@@ -24,12 +24,12 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 
 /**
- * backend API call to create a new identity provider
+ * Backend API call to create a new identity provider.
  * 
  * @param req - request
  * @param res - response
  * 
- * @returns correct data if the call is successful, else an error message
+ * @returns correct data if the call is successful, else an error message.
  */
 export default async function createIdentityProvider(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== "POST") {

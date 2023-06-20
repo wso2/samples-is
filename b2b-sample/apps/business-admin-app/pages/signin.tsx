@@ -24,7 +24,7 @@ import "rsuite/dist/rsuite.min.css";
 
 /**
  * 
- * @returns Signin interface (redirecting to the login or main interface)
+ * @returns Signin interface (redirecting to the login or main interface).
  */
 export default function Signin() {
 

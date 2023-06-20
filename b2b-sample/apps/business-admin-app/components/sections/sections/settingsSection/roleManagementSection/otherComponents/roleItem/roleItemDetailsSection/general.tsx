@@ -39,7 +39,7 @@ interface GeneralProps {
  * 
  * @param prop - `fetchData` - function , `session`, `roleDetails` - Object
  * 
- * @returns The general section of role details
+ * @returns The general section of role details.
  */
 export default function General(props: GeneralProps) {
 

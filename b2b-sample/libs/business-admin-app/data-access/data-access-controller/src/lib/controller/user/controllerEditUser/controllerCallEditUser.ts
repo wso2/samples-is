@@ -21,13 +21,13 @@ import { SendEditUser, User } from "@b2bsample/shared/data-access/data-access-co
 import { Session } from "next-auth";
 
 /**
- * call PATCH `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users/<id>` to edit the user
+ * Call PATCH `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users/<id>` to edit the user.
  * 
  * @param session - session object
  * @param id - id of the user
  * @param user - `SendEditUser`
  *  
- * @returns edited user details, if not edited returns `null`
+ * @returns edited user details, if not edited returns `null`.
  */
 export async function controllerCallEditUser(session: Session, id:string, user: SendEditUser): Promise<User | null>{
 

@@ -58,7 +58,7 @@ interface OrgProps {
  * 
  * @param prop - session, routerQuery (orgId)
  * 
- * @returns Organization distinct interace
+ * @returns Organization distinct interace.
  */
 export default function Org(props: OrgProps) {
 
@@ -74,12 +74,10 @@ export default function Org(props: OrgProps) {
 
     const getHome = (): JSX.Element => {
         switch (storyConfig.story) {
-            case "guardio":
-               
+            case "guardio":          
                 return  <GuardioInsuranceHome session={ session }/>;
             
             case "easyMeet":
-
                 return <EasyMeetingsHome session={ session }/>;
         }
     };

@@ -29,7 +29,7 @@ import config from "../../../../../../config.json";
  * @param req - request
  * @param res - response
  * 
- * @returns initial details of the current application
+ * @returns initial details of the current application.
  */
 export default async function listCurrentApplication(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== "POST") {

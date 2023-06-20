@@ -40,7 +40,7 @@ interface PermissionProps {
  * 
  * @param prop - `fetchData` - function , `session`, `roleDetails` - Object
  * 
- * @returns The permission section of role details
+ * @returns The permission section of role details.
  */
 export default function Permission(props: PermissionProps) {
 
@@ -62,6 +62,7 @@ export default function Permission(props: PermissionProps) {
     }, [ setInitialPermissions ]);
 
     const onDataSubmit = (response: Role, form) => {
+
         if (response) {
             successTypeDialog(toaster, "Changes Saved Successfully", "Role updated successfully.");
             fetchData();
@@ -82,7 +83,6 @@ export default function Permission(props: PermissionProps) {
 
     return (
         <div className={ styles.addUserMainDiv }>
-
             <div>
                 {
                     selectedPermissions
@@ -126,7 +126,6 @@ export default function Permission(props: PermissionProps) {
                 }
 
             </div>
-
             <div style={ loadingDisplay }>
                 <Loader size="lg" backdrop content="role is updating" vertical />
             </div>

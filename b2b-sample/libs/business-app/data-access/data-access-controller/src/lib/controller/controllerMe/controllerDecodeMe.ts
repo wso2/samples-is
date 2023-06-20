@@ -25,7 +25,7 @@ import { controllerCallMe } from "./controllerCallMe";
  * 
  * @param session - session object
  * 
- * @returns logged in users object. If failed `null`
+ * @returns logged in users object. If failed `null`.
  */
 export async function controllerDecodeMe(session: Session) : Promise<InternalUser | null> {
     let meData : User;
@@ -37,14 +37,13 @@ export async function controllerDecodeMe(session: Session) : Promise<InternalUse
         meData = session.user;
     }
 
-    if(meData){
+    if (meData){
         const meReturn : InternalUser = decodeUser(meData);
 
         return meReturn;
     } 
 
     return null;
-
 }
 
 export default controllerDecodeMe;

@@ -21,17 +21,16 @@ import { SendUser, User } from "@b2bsample/shared/data-access/data-access-common
 import { Session } from "next-auth";
 
 /**
- * call POST `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users` create the user
+ * Call POST `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users` create the user.
  * 
  * @param session - session object
  * @param user - `SendUser`
  * 
- * @returns created user details, if not created returns `null`
+ * @returns created user details, if not created returns `null`.
  */
 export async function controllerCallAddUser(session: Session, user: SendUser): Promise<User | null> {
 
     const data = (await commonControllerCall("/api/settings/user/addUser", session, user) as User | null);
 
     return data;
-
 }

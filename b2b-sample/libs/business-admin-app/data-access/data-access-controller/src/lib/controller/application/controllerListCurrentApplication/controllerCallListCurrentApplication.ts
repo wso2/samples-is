@@ -21,12 +21,12 @@ import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-
 import { Session } from "next-auth";
 
 /**
- * call GET `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/applications?filter=name+eq+<appName>` 
- * to get the initial applicaion details
+ * Call GET `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/applications?filter=name+eq+<appName>` 
+ * to get the initial applicaion details.
  * 
  * @param session - Session object
  * 
- * @returns application initial details, if call failed `null`
+ * @returns application initial details, if call failed `null`.
  */
 export async function controllerCallListCurrentApplication(session: Session): Promise<ApplicationList | null> {
 

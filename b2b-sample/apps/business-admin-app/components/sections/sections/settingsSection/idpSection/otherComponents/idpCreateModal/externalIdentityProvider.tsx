@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2022, WSO2 LLC. (https://www.wso2.com). All Rights Reserved.
+ * Copyright (c) 2023, WSO2 LLC. (https://www.wso2.com). All Rights Reserved.
  *
  * WSO2 LLC. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
@@ -42,7 +42,7 @@ interface ExternalIdentityProviderProps {
 * 
 * @param prop - `ExternalIdentityProviderProps`
 * 
-* @returns Form to create external idp
+* @returns Form to create external idp.
 */
 export default function ExternalIdentityProvider(prop: ExternalIdentityProviderProps) {
 
@@ -55,7 +55,7 @@ export default function ExternalIdentityProvider(prop: ExternalIdentityProviderP
     const validate = (values: Record<string, string>): Record<string, string> => {
         let errors: Record<string, string> = {};
 
-        errors = fieldValidate("application_name", values.application_name, errors);
+        errors = fieldValidate("idp_name", values.idp_name, errors);
         errors = fieldValidate("client_id", values.client_id, errors);
         errors = fieldValidate("client_secret", values.client_secret, errors);
 
@@ -98,7 +98,7 @@ export default function ExternalIdentityProvider(prop: ExternalIdentityProviderP
                         onSubmit={ () => { handleSubmit().then(form.restart); } }
                         fluid>
                         <FormField
-                            name="application_name"
+                            name="idp_name"
                             label="Name"
                             helperText="Name of the identity provider."
                             needErrorMessage={ true }

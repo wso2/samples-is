@@ -28,6 +28,7 @@ function getUsersList(users: string[]): RoleUsers[] {
 }
 
 function getRoleBody(displayName: string, permissions: string[], users: string[]): Role {
+
     return {
         "displayName": displayName,
         "groups": [],
@@ -43,7 +44,7 @@ function getRoleBody(displayName: string, permissions: string[], users: string[]
  * @param permissions - role permissions
  * @param users - users assigned to the role
  * 
- * @returns `res` (if user added successfully) or `false` (if user addition was not completed)
+ * @returns `res` (if user added successfully) or `false` (if user addition was not completed).
  */
 export async function controllerDecodeCreateRole(session: Session, displayName: string, permissions: string[]
     , users: string[]): Promise<Role | null> {

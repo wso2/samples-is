@@ -2,7 +2,7 @@
 
 ## ⚠️ Read this first
 
-1. The root of the sample-is repository  will be referred to `<SAMPLE_IS_HOME>` throughout this document.
+1. The root of the sample-is repository  will be referred to as `<SAMPLE_IS_HOME>` throughout this document.
 2. Required versions
  ```
  Node version >= v16.16.0
@@ -152,7 +152,7 @@ setup the config json file as mentioned above.
  npm install
  nx serve business-admin-app
 ```
-> **_NOTE:_** If `nx serve business-admin-app` produced an error, try with `npx nx serve business-admin-app`
+> **_NOTE:_** If `nx serve business-admin-app` produces an error, try using `npx nx serve business-admin-app`.
 
 * Open [http://localhost:3001](http://localhost:3001) with your browser to see the result.
 * Login from the created user `Alex` to the application.
@@ -185,7 +185,7 @@ setup the config json file as mentioned above.
  # From `<SAMPE_IS_HOME>/b2b-sample`
  nx serve business-app
 ```
-> **_NOTE:_** If `nx serve business-app` produced an error, try with `npx nx serve business-app`
+> **_NOTE:_** If `nx serve business-admin-app` produces an error, try using `npx nx serve business-admin-app`.
 
 * Open a **private browser** and type [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 * Login from the created user `John` to the application.

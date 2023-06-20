@@ -40,7 +40,7 @@ interface GeneralProps {
  * 
  * @param prop - fetchData (function to fetch data after form is submitted), session, idpDetails
  * 
- * @returns The general section of an idp
+ * @returns The general section of an idp.
  */
 export default function General(props: GeneralProps) {
 
@@ -61,7 +61,7 @@ export default function General(props: GeneralProps) {
 
     const onDataSubmit = (response: IdentityProvider, form): void => {
         if (response) {
-            successTypeDialog(toaster, "Changes Saved Successfully", "Idp updated successfully.");
+            successTypeDialog(toaster, "Changes are saved successfully", "Idp is updated successfully.");
             fetchData();
             form.restart();
         } else {

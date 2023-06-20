@@ -27,12 +27,13 @@ import { controllerCallCreateIdentityProvider } from "./controllerCallCreateIden
 import controllerDecodeGetDiscoveryUrl from "../controllerGetDiscoveryUrl/controllerDecodeGetDiscoveryUrl";
 
 /**
- * get the identity provider details from the discovery url
+ * Get the identity provider details from the discovery url.
  * 
  * @param discoveryUrl - discovery url
  */
 async function getIdentityProviderFromDiscoveryUrl(session: Session, discoveryUrl: string)
     : Promise<IdentityProviderDiscoveryUrl | null> {
+
     const identityProviderDiscoveryUrl = await controllerDecodeGetDiscoveryUrl(session, discoveryUrl);
 
     return identityProviderDiscoveryUrl;
@@ -44,7 +45,7 @@ async function getIdentityProviderFromDiscoveryUrl(session: Session, discoveryUr
  * @param template - template
  * @param formValues - values of the form that user filled
  * 
- * @returns - whether the identity provider is created or not
+ * @returns - whether the identity provider is created or not.
  */
 export async function controllerDecodeCreateIdentityProvider(session: Session, template: IdentityProviderTemplate,
     formValues: Record<string, string>, configureType?: IdentityProviderConfigureType)
@@ -79,7 +80,6 @@ export async function controllerDecodeCreateIdentityProvider(session: Session, t
         null) as IdentityProvider | null);
 
     return res;
-
 }
 
 export default controllerDecodeCreateIdentityProvider;

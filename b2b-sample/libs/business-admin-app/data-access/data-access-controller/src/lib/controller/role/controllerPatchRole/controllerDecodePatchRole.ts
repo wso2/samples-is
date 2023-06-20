@@ -24,6 +24,7 @@ import { Session } from "next-auth";
 import { controllerCallPatchRole } from "./controllerCallPatchRole";
 
 function getAddReplaceBody(patchMethod: PatchMethod, path: string, value: string[] | string): PatchBody {
+
     return {
         "operations": [
             {
@@ -36,6 +37,7 @@ function getAddReplaceBody(patchMethod: PatchMethod, path: string, value: string
 }
 
 function getRemoveBody(patchMethod: PatchMethod, path: string, value: string[] | string): PatchBody {
+
     return {
         "operations": [
             {
@@ -49,11 +51,9 @@ function getRemoveBody(patchMethod: PatchMethod, path: string, value: string[] |
 function getPatchBody(patchMethod: PatchMethod, path: string, value: string[] | string) {
     switch (patchMethod) {
         case PatchMethod.ADD:
-
             return getAddReplaceBody(patchMethod, path, value);
 
         case PatchMethod.REPLACE:
-
             return getAddReplaceBody(patchMethod, path, value);
         case PatchMethod.REMOVE:
 
@@ -66,6 +66,7 @@ function getPatchBody(patchMethod: PatchMethod, path: string, value: string[] | 
 
 
 /**
+ * Decodes the response from the API call to patch a role.
  * 
  * @param session - session object
  * @param roleUri - uri of the role
@@ -73,7 +74,7 @@ function getPatchBody(patchMethod: PatchMethod, path: string, value: string[] | 
  * @param path - path
  * @param value - edited value
  * 
- * @returns - whehter the patch was successful or not
+ * @returns - whehter the patch was successful or not.
  */
 export async function controllerDecodePatchRole(
     session: Session, roleUri: string, patchMethod: PatchMethod, path: string, value: string[] | string)

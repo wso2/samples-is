@@ -26,7 +26,7 @@ interface CreateRoleButtonProps {
  * 
  * @param prop - `session`
  * 
- * @returns - create role button
+ * @returns - create role button.
  */
 export default function CreateRoleButton(props: CreateRoleButtonProps) {
 

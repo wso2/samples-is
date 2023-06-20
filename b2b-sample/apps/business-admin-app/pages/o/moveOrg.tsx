@@ -55,7 +55,7 @@ interface MoveOrgProps {
  * 
  * @param prop - orgId, orgName
  * 
- * @returns Interface to call organization switch function
+ * @returns Interface to call organization switch function.
  */
 export default function MoveOrg(props: MoveOrgProps) {
 

@@ -30,7 +30,7 @@ function error404(res: NextApiResponse, msg: Error404Interface | string) {
 
 export function notPostError(res: NextApiResponse) {
 
-    return error404(res, "Cannot request data directyly.");
+    return error404(res, "Cannot request data directly.");
 }
 
 export function dataNotRecievedError(res: NextApiResponse) {

@@ -35,7 +35,7 @@ interface ManageUserSectionComponentProps {
  * 
  * @param prop - orgName, orgId, session
  * 
- * @returns A component that will show the users in a table view
+ * @returns A component that will show the users in a table view.
  */
 export default function ManageUserSectionComponent(props: ManageUserSectionComponentProps) {
 

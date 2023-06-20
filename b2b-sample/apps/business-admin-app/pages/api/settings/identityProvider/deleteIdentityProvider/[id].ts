@@ -22,12 +22,12 @@ import { RequestMethod, dataNotRecievedError, notPostError } from
 import { getOrgUrl } from "@b2bsample/shared/util/util-application-config-util";
 
 /**
- * backend API call to delete an identity provider
+ * Backend API call to delete an identity provider.
  * 
  * @param req - request
  * @param res - response
  * 
- * @returns correct data if the call is successful, else an error message
+ * @returns correct data if the call is successful, else an error message.
  */
 export default async function deleteIdentityProvider(req, res) {
     if (req.method !== "POST") {

@@ -32,7 +32,7 @@ interface RolesListProps {
  * 
  * @param prop - `session`, `roleList`
  *
- * @returns List of all the roles in an organization
+ * @returns List of all the roles in an organization.
  */
 export default function RolesList(props: RolesListProps) {
 

@@ -20,6 +20,7 @@ import React from "react";
 import styles from "./footerComponent.module.css";
 
 export function FooterComponent() {
+
     return (
         <footer className={ styles["footer"] }>
             <a

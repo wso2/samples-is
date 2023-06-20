@@ -21,13 +21,12 @@ import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-
 import { Session } from "next-auth";
 
 /**
-/**
- * call GET `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/organizations/<subOrgId>/roles` 
- * to list all the roles
+ * Call GET `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/organizations/<subOrgId>/roles` 
+ * to list all the roles.
  * 
  * @param session - session object
  * 
- * @returns - all the roles, if the call failed `null`
+ * @returns - all the roles, if the call failed `null`.
  */
 export async function controllerCallListAllRoles(session: Session) : Promise<RoleList | null> {
 

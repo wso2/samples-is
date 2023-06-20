@@ -21,12 +21,12 @@ import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-
 import { Session } from "next-auth";
 
 /**
- * call GET `roleUri`
+ * Call GET `roleUri`.
  * 
  * @param session - session object
  * @param roleUri - uri of the role
  * 
- * @returns - role details, if the call failed `null`
+ * @returns - role details, if the call failed `null`.
  */
 export async function controllerCallGetRole(session: Session, roleUri: string): Promise<Role | null> {
 

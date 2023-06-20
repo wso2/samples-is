@@ -21,11 +21,11 @@ import { UserList } from "@b2bsample/shared/data-access/data-access-common-model
 import { Session } from "next-auth";
 
 /**
- * call GET `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users` to view all the users
+ * Call GET `getManagementAPIServerBaseUrl()/o/<subOrgId>/scim2/Users` to view all the users.
  * 
  * @param session - session object
  * 
- * @returns - list all users
+ * @returns - list all users.
  */
 export async function controllerCallViewUsers(session: Session): Promise<UserList | null> {
 

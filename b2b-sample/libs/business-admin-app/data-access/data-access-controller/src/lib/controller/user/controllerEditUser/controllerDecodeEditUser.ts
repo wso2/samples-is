@@ -30,7 +30,7 @@ import { controllerCallEditUser } from "./controllerCallEditUser";
  * @param email - edited email
  * @param username - edited username
  * 
- * @returns - whether the edit of the user is successful or not
+ * @returns - whether the edit of the user is successful or not.
  */
 export async function controllerDecodeEditUser(
     session: Session, id: string, firstName: string, familyName: string, email: string)
@@ -64,7 +64,6 @@ export async function controllerDecodeEditUser(
         await commonControllerDecode(() => controllerCallEditUser(session, id, editUserEncode), false) as User | null);
 
     return usersData;
-
 }
 
 export default controllerDecodeEditUser;

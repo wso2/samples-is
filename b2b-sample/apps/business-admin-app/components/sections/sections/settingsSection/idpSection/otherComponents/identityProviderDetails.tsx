@@ -39,7 +39,7 @@ interface IdentityProviderDetailsProps {
  * 
  * @param prop - session, id (idp id), fetchAllIdPs (function to fetch all Idps)
  * 
- * @returns idp item details component
+ * @returns idp item details component.
  */
 export default function IdentityProviderDetails(props: IdentityProviderDetailsProps) {
 
@@ -65,13 +65,10 @@ export default function IdentityProviderDetails(props: IdentityProviderDetailsPr
     const idpDetailsComponent = (activeKey): JSX.Element => {
         switch (activeKey) {
             case "1":
-
                 return <General session={ session } idpDetails={ idpDetails } fetchData={ fetchData } />;
             case "2":
-
                 return <Settings session={ session } idpDetails={ idpDetails } />;
             case "3":
-
                 return <JsonDisplayComponent jsonObject={ idpDetails } />;
         }
     };
@@ -113,7 +110,7 @@ export default function IdentityProviderDetails(props: IdentityProviderDetailsPr
  * 
  * @param prop - `idpDetails`, `activeKeyNav`, `activeKeyNavSelect`
  * 
- * @returns navigation component of idp details
+ * @returns navigation component of idp details.
  */
 function IdentityProviderDetailsNav(prop) {
 

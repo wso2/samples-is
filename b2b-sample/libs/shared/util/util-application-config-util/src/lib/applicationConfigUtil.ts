@@ -19,11 +19,11 @@
 import config from "../../../../../../config.json";
 
 /**
- * check if the user is an administrator of the logged in identity server
+ * Check if the user is an administrator of the logged in identity server.
  * 
  * @param scopes - scopes of the logged in user
  * 
- * @returns `true` if the user is an administrator, else `false`
+ * @returns `true` if the user is an administrator, else `false`.
  */
 export function checkAdmin(scopes: string[]): boolean {
     const adminScopes = [ "email", "internal_login", "internal_user_mgt_create", "internal_user_mgt_delete",
@@ -43,7 +43,7 @@ export function checkAdmin(scopes: string[]): boolean {
  * 
  * @param orgId - organization id
  * 
- * @returns organization url
+ * @returns organization url.
  */
 export function getOrgUrl(orgId: string): string {
 
@@ -53,15 +53,14 @@ export function getOrgUrl(orgId: string): string {
 }
 
 /**
- * URL extracted from the `config.AuthorizationConfig.BaseOrganizationUrl`
+ * URL extracted from the `config.AuthorizationConfig.BaseOrganizationUrl`.
  * 
- * @returns get managemnt API server base URL
+ * @returns get managemnt API server base URL.
  */
 
 export function getManagementAPIServerBaseUrl() {
 
     // todo: implementation will change after changes are done to the IS.
-
     const baseOrganizationUrl = config.CommonConfig.AuthorizationConfig.BaseOrganizationUrl;
     // eslint-disable-next-line
     const matches = baseOrganizationUrl.match(/^(http|https)?\:\/\/([^\/?#]+)/i);
@@ -71,9 +70,9 @@ export function getManagementAPIServerBaseUrl() {
 }
 
 /**
- * Tenant domain extracted from the `config.AuthorizationConfig.BaseOrganizationUrl`
+ * Tenant domain extracted from the `config.AuthorizationConfig.BaseOrganizationUrl`.
  * 
- *  @returns tenatn domain.
+ * @returns tenatn domain.
  */
 export function getTenantDomain() {
 
@@ -85,5 +84,5 @@ export function getTenantDomain() {
 }
 
 export default {
-    checkAdmin, getOrgUrl, getManagementAPIServerBaseUrl, getTenantDomain
+    checkAdmin, getManagementAPIServerBaseUrl, getOrgUrl, getTenantDomain
 };

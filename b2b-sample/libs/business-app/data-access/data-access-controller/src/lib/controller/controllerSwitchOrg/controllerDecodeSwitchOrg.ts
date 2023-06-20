@@ -39,14 +39,13 @@ function getOrgId(token: JWT): string {
 
         return config.CommonConfig.ApplicationConfig.SampleOrganization[0].id;
     }
-
 }
 
 /**
  * 
  * @param token - token object get from the inital login call
  * 
- * @returns - organization id of the logged in organization
+ * @returns - organization id of the logged in organization.
  */
 export async function controllerDecodeSwitchOrg(token: JWT): Promise<OrgSession | null> {
 
@@ -57,7 +56,6 @@ export async function controllerDecodeSwitchOrg(token: JWT): Promise<OrgSession 
         await commonControllerDecode(() => controllerCallSwitchOrg(subOrgId, accessToken), null) as OrgSession | null);
 
     return res;
-
 }
 
 export default controllerDecodeSwitchOrg;

@@ -25,7 +25,7 @@ import { controllerCallListAllApplications } from "./controllerCallListAllApplic
  * 
  * @param session - session object
  *
- * @returns get all the applications
+ * @returns get all the applications.
  */
 export async function controllerDecodeListAllApplications(session: Session): Promise<ApplicationList | null> {
 
@@ -33,7 +33,6 @@ export async function controllerDecodeListAllApplications(session: Session): Pro
         ApplicationList | null);
 
     return res;
-
 }
 
 export default controllerDecodeListAllApplications;

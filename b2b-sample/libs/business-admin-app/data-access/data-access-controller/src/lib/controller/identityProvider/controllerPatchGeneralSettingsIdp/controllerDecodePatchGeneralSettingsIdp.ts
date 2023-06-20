@@ -29,7 +29,7 @@ import { controllerCallPatchGeneralSettingsIdp } from "./controllerCallPatchGene
  * @param description - description of the identity provider
  * @param idpId - identity provider id
  * 
- * @returns - patch the general settings in the identity provider
+ * @returns - patch the general settings in the identity provider.
  */
 export async function controllerDecodePatchGeneralSettingsIdp(session: Session, name: string, description: string,
     idpId: string): Promise<IdentityProvider | null> {

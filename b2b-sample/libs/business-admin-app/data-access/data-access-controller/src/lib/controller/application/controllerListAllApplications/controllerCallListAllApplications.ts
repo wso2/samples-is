@@ -25,7 +25,7 @@ import { Session } from "next-auth";
  * 
  * @param session - session object
  * 
- * @returns all applicaitons, if the call failed `null`
+ * @returns all applicaitons, if the call failed `null`.
  */
 export async function controllerCallListAllApplications(session: Session): Promise<ApplicationList | null> {
 

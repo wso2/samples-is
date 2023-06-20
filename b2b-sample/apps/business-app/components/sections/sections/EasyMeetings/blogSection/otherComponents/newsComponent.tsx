@@ -33,7 +33,7 @@ interface NewsComponentInterface {
  * 
  * @param prop - header (header text), body (body text)
  *
- * @returns Single news component
+ * @returns Single news component.
  */
 export default function NewsComponent(props: NewsComponentInterface) {
 
@@ -48,7 +48,6 @@ export default function NewsComponent(props: NewsComponentInterface) {
                 <h4>{ header }</h4>
                 <p>{ body }</p>
             </Stack>
-
         </Stack>
     );
 }

@@ -25,25 +25,21 @@ import getStartedWelcomeImage from
 import styles from "../../../../../styles/Settings.module.css";
 
 export default function GetStartedText() {
+
     return (
         <div className={ styles.getStartedSectionComponentGetStartedTextDiv }>
             <Panel bordered className={ styles.getStartedSectionComponentGetStartedTextPanel }>
-
                 <Stack direction="column" spacing={ 50 } justifyContent="center">
-
                     <Image src={ getStartedWelcomeImage } alt="profile image" width={ 150 } />
-
                     <Stack direction="column" spacing={ 10 } justifyContent="center">
                         <p><strong>Welcome to</strong></p>
                         <LogoComponent imageSize="medium" />
                     </Stack>
-
                     <p className={ styles.getStartedSectionComponentGetStartedTextP }>
                         Guardio Insurance administrator application is the application that provides capabilities to
                         manage users, create roles, assign roles and setup an identity provider for 
                         the Guardio Insurance business application.
                     </p>
-
                     <Stack direction="column" spacing={ 20 } justifyContent="center">
                         <h4>Select one of the settings to get started</h4>
                         <Button appearance="ghost" size="lg">
@@ -54,9 +50,7 @@ export default function GetStartedText() {
                         </Button>
                     </Stack>
                 </Stack>
-
             </Panel>
-
         </div>
     );
 }

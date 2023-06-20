@@ -22,10 +22,12 @@ import { Session } from "next-auth";
 import { controllerDecodePatchRole } from "../controllerPatchRole/controllerDecodePatchRole";
 
 function getRolesThatNeedToAddUser(initRoleList: string[], roleList: string[]): string[] {
+
     return roleList.filter(roleUri => !initRoleList.includes(roleUri));
 }
 
 function getRolesThatNeedToRemoveUser(initRoleList: string[], roleList: string[]): string[] {
+
     return initRoleList.filter(roleUri => !roleList.includes(roleUri));
 }
 
@@ -67,13 +69,14 @@ async function getRoleDetailsForRemove(session: Session, userId: string, initRol
  * @param initRoleList - inital list of roles assigned for the user
  * @param roleList - current list of roles assigned for the user
  * 
- * @returns - `true` if the operation is successfull, else `false`
+ * @returns - `true` if the operation is successfull, else `false`.
  */
 // todo: need to fix controllerDecodeEditRolesToAddOrRemoveUser
 export async function controllerDecodeEditRolesToAddOrRemoveUser(
     session: Session, userId: string, initRoleList: string[], roleList: string[]): Promise<boolean> {
 
     try {
+
         return getRoleDetailsForAdd(session, userId, initRoleList, roleList)
             .then(
                 (res: boolean) => {
@@ -90,7 +93,6 @@ export async function controllerDecodeEditRolesToAddOrRemoveUser(
 
         return false;
     }
-
 }
 
 export default controllerDecodeEditRolesToAddOrRemoveUser;

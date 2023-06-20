@@ -29,7 +29,7 @@ import config from "../../../../../config.json";
  * @param res - response body
  * 
  * @returns IS provider that will handle the sign in process. Used in `orgSignin()`
- * [Use this method to signin]
+ * [Use this method to signin].
  */
 const wso2ISProvider = (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res, {
 

@@ -25,7 +25,7 @@ import { Session } from "next-auth";
  * 
  * @param session - session object
  * 
- * @returns all applications details, if not possible returns `null`
+ * @returns all applications details, if not possible returns `null`.
  */
 export async function controllerCallPatchApplicationAuthSteps(session: Session, applicationId: string,
     model: AuthenticationSequenceModel) {

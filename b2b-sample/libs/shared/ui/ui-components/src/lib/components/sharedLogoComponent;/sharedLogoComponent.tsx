@@ -24,8 +24,6 @@ import { SharedLogoComponentProps, SharedLogoImageStyle, SharedLogoProps } from
 /**
  * 
  * @param prop - name (org name), imageSize `small` | `medium` | `large` | `x-large`
- *
- * @returns 
  */
 export function SharedLogoComponent(prop: SharedLogoComponentProps) {
 
@@ -86,7 +84,6 @@ function Logo(prop: SharedLogoProps) {
             default:
                 break;
         }
-
 
         if (white) {
             imageStyle["filter"] = "grayscale(100%) drop-shadow(0px 0px 0px white)";

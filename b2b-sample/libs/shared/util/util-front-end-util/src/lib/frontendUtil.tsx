@@ -39,18 +39,19 @@ export const LOADING_DISPLAY_BLOCK = {
  * @param scopes - scopes of the user
  * @param itemScopes - scopes that required for this section
  * 
- * @returns `true` if user has the necessary scopes, else `false`
+ * @returns `true` if user has the necessary scopes, else `false`.
  */
 function hideBasesdOnScopesSideNavItems(scopes: string[], itemScopes: string[]): boolean {
+
     return itemScopes.every(scope => scopes.includes(scope));
 }
 
 /**
- * hide content based on the user's realated privilages
+ * Hide content based on the user's realated privilages,
  * 
  * @param scopes - scopes related for the user
  * 
- * @returns `LOADING_DISPLAY_BLOCK` if admin, else `LOADING_DISPLAY_NONE` 
+ * @returns `LOADING_DISPLAY_BLOCK` if admin, else `LOADING_DISPLAY_NONE`.
  */
 export function hideBasedOnScopes(scopes: string, sideNavType: string, sideNavItems?: SideNavItem[],
     itemScopes?: string[]): Record<string, string> {
@@ -74,6 +75,7 @@ export function hideBasedOnScopes(scopes: string, sideNavType: string, sideNavIt
                 for (let i = 0; i < sideNavItems.length; i++) {
                     if (hideBasesdOnScopesSideNavItems(scopesList, sideNavItems[i].scopes as string[])) {
                         check = LOADING_DISPLAY_BLOCK;
+
                         break;
                     }
                 }
@@ -81,7 +83,6 @@ export function hideBasedOnScopes(scopes: string, sideNavType: string, sideNavIt
             }
 
             return check;
-
         }
 
         default:
@@ -92,39 +93,37 @@ export function hideBasedOnScopes(scopes: string, sideNavType: string, sideNavIt
 export function getIconFromString(iconString: string | undefined): JSX.Element | undefined {
     switch (iconString) {
         case "DashboardIcon":
-
             return (<DashboardIcon />);
+
         case "GearCircleIcon":
-
             return (<GearCircleIcon />);
+
         case "SettingHorizontalIcon":
-
             return (<SettingHorizontalIcon />);
+
         case "AdminIcon":
-
             return (<AdminIcon />);
+
         case "PageIcon":
-
             return (<PageIcon />);
+
         case "PhoneIcon":
-
             return (<PhoneIcon />);
+
         case "PeopleBranchIcon":
-
             return (<PeopleBranchIcon />);
+
         case "SpeakerIcon":
-
             return (<SpeakerIcon />);
-        case "ShieldIcon":
 
+        case "ShieldIcon":
             return (<ShieldIcon />);
 
         default:
-
             return;
     }
 }
 
 export default {
-    LOADING_DISPLAY_NONE, LOADING_DISPLAY_BLOCK, hideBasedOnScopes, getIconFromString
+    LOADING_DISPLAY_BLOCK, LOADING_DISPLAY_NONE, getIconFromString, hideBasedOnScopes
 };

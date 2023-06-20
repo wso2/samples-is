@@ -41,7 +41,7 @@ interface ButtonGroupIdentityProviderDetailsProps {
  * 
  * @param prop - session, idpDetails, fetchAllIdPs, id (idp id)
  * 
- * @returns Add/Remove button and delete button group in an Idp
+ * @returns Add/Remove button and delete button group in an Idp.
  */
 export default function ButtonGroupIdentityProviderDetails(props : ButtonGroupIdentityProviderDetailsProps) {
 
@@ -86,8 +86,9 @@ export default function ButtonGroupIdentityProviderDetails(props : ButtonGroupId
     }, [ idpDetails, applicationDetail ]);
 
     const onIdpDelete = (response: boolean): void => {
+
         if (response) {
-            successTypeDialog(toaster, "Success", "Identity Provider Deleted Successfully");
+            successTypeDialog(toaster, "Success", "Identity provider is deleted successfully");
         } else {
             errorTypeDialog(toaster, "Error Occured", "Error occured while deleting the identity provider. Try again.");
         }

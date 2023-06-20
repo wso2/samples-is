@@ -18,7 +18,7 @@
 
 import { SideNavItem, SideNavList } from "@b2bsample/shared/data-access/data-access-common-models-util";
 import { getIconFromString, hideBasedOnScopes } from "@b2bsample/shared/util/util-front-end-util";
-import { Button, FlexboxGrid, Nav, Sidenav, Stack, Tag } from "rsuite";
+import { Button, Nav, Sidenav, Stack, Tag } from "rsuite";
 import "rsuite/dist/rsuite.min.css";
 import styles from "./sidenavComponent.module.css";
 import { SidenavComponentProps } from "../../models/sidenavComponent/sidenavComponent";
@@ -44,6 +44,7 @@ export function SidenavComponent(prop: SidenavComponentProps) {
                             sideNavConfigList.items.map((item: SideNavItem) => {
 
                                 if (item.items) {
+
                                     return (
                                         <Nav.Menu
                                             eventKey={ item.eventKey }
@@ -61,7 +62,8 @@ export function SidenavComponent(prop: SidenavComponentProps) {
                                                         onSelect={ (eventKey) =>
                                                             activeKeySideNavSelect(eventKey) }
                                                         style={ item.hideBasedOnScope
-                                                            ? hideBasedOnScopes(scope, item.type, item.items, item.scopes)
+                                                            ? hideBasedOnScopes(
+                                                                scope, item.type, item.items, item.scopes)
                                                             : {} }>
                                                         <Stack spacing={ 10 }>
                                                             { item.title }
@@ -75,6 +77,7 @@ export function SidenavComponent(prop: SidenavComponentProps) {
                                         </Nav.Menu>
                                     );
                                 } else {
+
                                     return (
                                         <Nav.Item
                                             key={ item.eventKey }

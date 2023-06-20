@@ -86,7 +86,7 @@ export default function AddUserComponent(props: AddUserComponentProps) {
 
     const onDataSubmit = (response: boolean | User, form): void => {
         if (response) {
-            successTypeDialog(toaster, "Changes Saved Successfully", "User add to the organization successfully.");
+            successTypeDialog(toaster, "Changes Saved Successfully", "User is added to the organization successfully.");
             form.restart();
             onClose();
         } else {
@@ -111,7 +111,6 @@ export default function AddUserComponent(props: AddUserComponentProps) {
 
             <Modal.Body>
                 <div className={ styles.addUserMainDiv }>
-
                     <Form
                         onSubmit={ onSubmit }
                         validate={ validate }
@@ -204,7 +203,6 @@ export default function AddUserComponent(props: AddUserComponentProps) {
                             </FormSuite>
                         ) }
                     />
-
                 </div>
             </Modal.Body>
 
@@ -212,11 +210,11 @@ export default function AddUserComponent(props: AddUserComponentProps) {
                 <Loader size="lg" backdrop content="User is adding" vertical />
             </div>
         </Modal>
-
     );
 }
 
 function EmailInvitePanel() {
+
     return (
         <Panel bordered>
             <Stack spacing={ 30 }>
@@ -224,7 +222,6 @@ function EmailInvitePanel() {
                 An email with a confirmation link will be sent to the provided
                 email address for the user to set their own password.
             </Stack>
-
         </Panel>
     );
 }

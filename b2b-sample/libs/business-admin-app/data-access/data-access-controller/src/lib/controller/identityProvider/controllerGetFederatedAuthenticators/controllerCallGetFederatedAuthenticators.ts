@@ -22,14 +22,15 @@ import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-
 import { Session } from "next-auth";
 
 /**
- * call GET `getManagementAPIServerBaseUrl()/o/<subOrgId>/api/server/v1/identity-providers/<idpid>/federated-authenticators/<id>` 
- * to get detail of a federated authenticator of an identity provider
+ * Call GET `getManagementAPIServerBaseUrl()/o/` + 
+ * `<subOrgId>/api/server/v1/identity-providers/<idpid>/federated-authenticators/<id>`
+ * to get detail of a federated authenticator of an identity provider.
  * 
  * @param session - session object
  * @param idpid - identity provider id
  * @param id - federated authenticator id
  * 
- * @returns details of the federated authenticator, if the call failed `null`
+ * @returns details of the federated authenticator, if the call failed `null`.
  */
 export async function controllerCallGetFederatedAuthenticators(session: Session, idpId: string, id: string)
     : Promise<IdentityProviderFederatedAuthenticator | null> {

@@ -29,7 +29,7 @@ import microsoftImage from "../../../../../../../libs/business-app/ui-assets/src
  * 
  * @param prop - session
  *
- * @returns Dashboard interface section
+ * @returns Dashboard interface section.
  */
 export default function MeetingsSectionComponent() {
 

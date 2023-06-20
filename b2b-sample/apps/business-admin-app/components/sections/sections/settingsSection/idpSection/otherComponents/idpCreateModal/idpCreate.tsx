@@ -45,7 +45,8 @@ interface IdpCreateProps {
 /**
  * 
  * @param prop - `IdpCreateProps`
- * @returns Idp creation modal
+ * 
+ * @returns Idp creation modal.
  */
 export default function IdpCreate(prop: IdpCreateProps) {
 
@@ -57,7 +58,6 @@ export default function IdpCreate(prop: IdpCreateProps) {
 
     const resolveTemplateForm = (): JSX.Element => {
         switch (template.templateId) {
-
             case GOOGLE_ID:
                 return (<GoogleIdentityProvider
                     session={ session }
@@ -66,7 +66,6 @@ export default function IdpCreate(prop: IdpCreateProps) {
                     onCancel={ onCancel } />);
 
             case ENTERPRISE_ID:
-
                 return (<ExternalIdentityProvider
                     session={ session }
                     template={ template }

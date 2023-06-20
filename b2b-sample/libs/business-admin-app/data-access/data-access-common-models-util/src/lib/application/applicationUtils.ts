@@ -32,13 +32,10 @@ import IdentityProviderTemplateModel from "../identityProvider/identityProviderT
 export function selectedTemplateBaesedonTemplateId(templateId: string): IdentityProviderTemplateModel | null {
     switch (templateId) {
         case GOOGLE_ID:
-
             return googleFederatedAuthenticators;
         case ENTERPRISE_ID:
-
             return enterpriseFederatedAuthenticators;
         default:
-
             return null;
     }
 }
@@ -50,7 +47,7 @@ export function selectedTemplateBaesedonTemplateId(templateId: string): Identity
  
  * @returns `[check,onlyIdp]`
  * `check` - if the idp is in authentication sequence, 
- * `onlyIdp` - is the idp is the only idp in the sequence
+ * `onlyIdp` - is the idp is the only idp in the sequence.
  */
 export function checkIfIdpIsinAuthSequence(template: Application, idpDetails): boolean[] {
     const authenticationSequenceModel = template.authenticationSequence;
@@ -76,7 +73,7 @@ export function checkIfIdpIsinAuthSequence(template: Application, idpDetails): b
 /**
  * 
  * @param template - applicaiton details template
- * @returns `true` if BASIC AUTH is available in auth sequence, else `false`
+ * @returns `true` if BASIC AUTH is available in auth sequence, else `false`.
  */
 export function checkIfBasicAvailableinAuthSequence(template): boolean {
     const authenticationSequenceModel = template.authenticationSequence;

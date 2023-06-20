@@ -21,12 +21,12 @@ import { commonControllerCall } from "@b2bsample/shared/data-access/data-access-
 import { Session } from "next-auth";
 
 /**
- * call POST `getManagementAPIServerBaseUrl()/api/server/v1/organizations/${orgId}/roles` create the role
+ * Call POST `getManagementAPIServerBaseUrl()/api/server/v1/organizations/${orgId}/roles` create the role.
  * 
  * @param session - session object
  * @param role - role object
  * 
- * @returns created role details, if not created returns `null`
+ * @returns created role details, if not created returns `null`.
  */
 export async function controllerCallCreateRole(session: Session, role: Role) : Promise<Role | null> {
 

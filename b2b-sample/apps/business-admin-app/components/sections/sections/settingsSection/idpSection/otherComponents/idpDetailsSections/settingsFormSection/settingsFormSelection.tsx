@@ -37,7 +37,7 @@ interface SettingsFormSelectionProps {
  * 
  * @param prop - templateId, federatedAuthenticators (federatedAuthenticators as a list)
  * 
- * @returns Component of the settings section of the idp interface
+ * @returns Component of the settings section of the idp interface.
  */
 export default function SettingsFormSelection(props: SettingsFormSelectionProps) {
 

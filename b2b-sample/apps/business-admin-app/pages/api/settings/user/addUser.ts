@@ -22,12 +22,12 @@ import { RequestMethod, dataNotRecievedError, notPostError } from
 import { getOrgUrl } from "@b2bsample/shared/util/util-application-config-util";
 
 /**
- * backend API call to create a user
+ * Backend API call to create a user.
  * 
  * @param req - request
  * @param res - response
  * 
- * @returns correct data if the call is successful, else an error message
+ * @returns correct data if the call is successful, else an error message.
  */
 export default async function addUser(req, res) {
     if (req.method !== "POST") {

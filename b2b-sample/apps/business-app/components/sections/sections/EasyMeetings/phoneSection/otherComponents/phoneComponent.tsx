@@ -38,20 +38,16 @@ export default function PhoneComponent() {
                                 Upgrade to unlock this feature
                             </Button>
                         </Stack>
-
-
                         <Stack direction="column" alignItems="flex-start" spacing={ 10 }>
                             <CustomHtmlHeading
                                 content="What you will get..."
                                 headingType="h6" />
-
                             <ul>
                                 <li>Intelligent Call Routing and Management</li>
                                 <li>Support to Modern Desktop and Mobile Applications</li>
                                 <li>Auto Attendant and IVR</li>
                                 <li>Support for Interoperability With Standards-Based Endpoints</li>
                             </ul>
-                            
                         </Stack>
                     </Stack>
                 </FlexboxGrid.Item>
@@ -59,7 +55,6 @@ export default function PhoneComponent() {
                     <Image src={ phoneImage } alt="phone image" width={ 300 } />
                 </FlexboxGrid.Item>
             </FlexboxGrid>
-
         </Panel>
     );
 }

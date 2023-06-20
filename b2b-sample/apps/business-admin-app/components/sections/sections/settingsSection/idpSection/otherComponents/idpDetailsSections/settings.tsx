@@ -41,7 +41,7 @@ interface SettingsProps {
  * 
  * @param prop - session, idpDetails
  *
- * @returns The settings section of an idp
+ * @returns The settings section of an idp.
  */
 export default function Settings(props: SettingsProps) {
 
@@ -54,6 +54,7 @@ export default function Settings(props: SettingsProps) {
     const toaster: Toaster = useToaster();
 
     const fetchData = useCallback(async () => {
+
         const res = await controllerDecodeGetFederatedAuthenticators(
             session, idpDetails.id, idpDetails.federatedAuthenticators.defaultAuthenticatorId);
 
@@ -65,6 +66,7 @@ export default function Settings(props: SettingsProps) {
     }, [ fetchData ]);
 
     const validate = () => {
+
         const errors = {};
 
         if (federatedAuthenticators && federatedAuthenticators.properties) {
@@ -81,8 +83,9 @@ export default function Settings(props: SettingsProps) {
     };
 
     const onDataSubmit = (response: IdentityProviderFederatedAuthenticator): void => {
+
         if (response) {
-            successTypeDialog(toaster, "Changes Saved Successfully", "Idp updated successfully.");
+            successTypeDialog(toaster, "Changes are saved successfully", "Idp is updated successfully.");
             fetchData();
         } else {
             errorTypeDialog(toaster, "Error Occured", "Error occured while updating the Idp. Try again.");
@@ -90,6 +93,7 @@ export default function Settings(props: SettingsProps) {
     };
 
     const onUpdate = async (values: Record<string, string>): Promise<void> => {
+
         setLoadingDisplay(LOADING_DISPLAY_BLOCK);
         controllerDecodeUpdateFederatedAuthenticators(session, idpDetails.id, federatedAuthenticators, values)
             .then((response) => onDataSubmit(response))
@@ -98,7 +102,6 @@ export default function Settings(props: SettingsProps) {
 
     return (
         <div className={ styles.addUserMainDiv }>
-
             <div>
                 {
                     federatedAuthenticators
@@ -133,7 +136,6 @@ export default function Settings(props: SettingsProps) {
                 }
 
             </div>
-
             <div style={ loadingDisplay }>
                 <Loader size="lg" backdrop content="User is adding" vertical />
             </div>

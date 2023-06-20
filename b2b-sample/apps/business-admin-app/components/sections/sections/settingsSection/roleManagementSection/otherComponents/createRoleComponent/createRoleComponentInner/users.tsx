@@ -28,7 +28,7 @@ import styles from "../../../../../../../../styles/Settings.module.css";
  * 
  * @param prop - `setAssignedUsers` - function , `assignedUsers`, `session`, `onNext`, `onPrevious`
  * 
- * @returns The users section of create role modal
+ * @returns The users section of create role modal.
  */
 export default function Users(prop) {
 

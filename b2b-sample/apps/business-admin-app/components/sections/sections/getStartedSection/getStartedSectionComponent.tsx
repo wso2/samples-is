@@ -37,5 +37,4 @@ export default function GetStartedSectionComponent() {
             </FlexboxGrid.Item>
         </FlexboxGrid>
     );
-
 }
