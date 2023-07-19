@@ -17,6 +17,7 @@
  */
 package org.wso2.sample.identity.jks;
 
+import java.net.URLDecoder;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import java.io.IOException;
@@ -58,8 +59,9 @@ public class JKSLoader implements ServletContextListener {
         final URL resource = this.getClass().getClassLoader().getResource(jksProperties.getProperty("keystorename"));
 
         if (resource != null) {
-            LOGGER.log(Level.INFO, "Setting trust store path to : " + resource.getPath());
-            System.setProperty("javax.net.ssl.trustStore", resource.getPath());
+            final String trustStorePath = new URLDecoder().decode(resource.getPath());
+            LOGGER.log(Level.INFO, "Setting trust store path to : " + trustStorePath);
+            System.setProperty("javax.net.ssl.trustStore", trustStorePath);
             System.setProperty("javax.net.ssl.trustStorePassword", jksProperties.getProperty("keystorepassword"));
         } else {
             LOGGER.log(Level.INFO, "Unable to find JKS defined by properties. Trust store properties will not be set.");
