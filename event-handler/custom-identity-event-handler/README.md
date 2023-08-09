@@ -10,6 +10,6 @@ Steps
 
 [[event_handler]]
 name= "customUserRegistration"
-subscriptions =["PRE_ADD_USER, POST_ADD_USER"]
+subscriptions =["PRE_ADD_USER"]
 
 ```
