@@ -13,6 +13,7 @@
  # KIND, either express or implied.  See the License for the
  # specific language governing permissions and limitations
  # under the License.
+
 echo
 echo "Welcome to the H2 DB Migration Tool!"
 echo
@@ -54,11 +55,18 @@ read dest_dir
 
 db_files=("$src_dir"/*.mv.db "$src_dir"/*.h2.db)
 for filepath in "${db_files[@]}"; do
-    if [[ "$filepath" == *"*.mv.db" || "$filepath" == *"*.h2.db" ]]; then
+    if [[ "$filepath" == "$src_dir/*.mv.db" || "$filepath" == "$src_dir/*.h2.db" ]]; then
+        # Skip files that don't actually match any existing files (from the wildcards in db_files)
         continue
     fi
-    dbname=$(basename "$filepath")
-    dbname="${dbname%.*}"
+
+    if [[ "$filepath" == *".mv.db" ]]; then
+        dbname=$(basename "$filepath" .mv.db)
+    elif [[ "$filepath" == *".h2.db" ]]; then
+        dbname=$(basename "$filepath" .h2.db)
+    else
+        continue
+    fi
 
     # Export data from old db file to backup.zip
     echo "Exporting database..."
