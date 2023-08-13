@@ -25,18 +25,24 @@ read old_h2_version_choice
 case $old_h2_version_choice in
     1)
         old_h2_version="h2-2.1.210.jar"
+        wget -c https://repo1.maven.org/maven2/com/h2database/h2/2.1.210/h2-2.1.210.jar || exit 1
         ;;
     2)
         old_h2_version="h2-1.4.199.jar"
+        wget -c https://repo1.maven.org/maven2/com/h2database/h2/1.4.199/h2-1.4.199.jar || exit 1
         ;;
     3)
         old_h2_version="h2-1.3.175.jar"
+        wget -c https://repo1.maven.org/maven2/com/h2database/h2/1.3.175/h2-1.3.175.jar || exit 1
         ;;
     *)
         echo "Invalid choice. Exiting."
         exit 1
         ;;
 esac
+
+# Always download the latest h2 version we're migrating to
+wget -c https://repo1.maven.org/maven2/com/h2database/h2/2.2.220/h2-2.2.220.jar || exit 1
 
 echo "Provide a directory path for the old db files and a directory path to store the new files."
 echo
@@ -45,12 +51,6 @@ read src_dir
 echo
 echo "Enter the path to store the newly created files: eg. <file-path>/new-databases "
 read dest_dir
-
-# Downloading necessary jars
-wget -c https://repo1.maven.org/maven2/com/h2database/h2/2.2.220/h2-2.2.220.jar || exit 1
-wget -c https://repo1.maven.org/maven2/com/h2database/h2/2.1.210/h2-2.1.210.jar || exit 1
-wget -c https://repo1.maven.org/maven2/com/h2database/h2/1.4.199/h2-1.4.199.jar || exit 1
-wget -c https://repo1.maven.org/maven2/com/h2database/h2/1.3.175/h2-1.3.175.jar || exit 1
 
 db_files=("$src_dir"/*.mv.db "$src_dir"/*.h2.db)
 for filepath in "${db_files[@]}"; do
