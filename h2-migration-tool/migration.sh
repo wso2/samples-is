@@ -42,6 +42,27 @@ case $old_h2_version_choice in
         ;;
 esac
 
+echo
+echo "Please select the h2 version you are migrating to:"
+echo "h2-2.2.220 - (1)"
+echo "h2-2.1.210 - (2)"
+read new_h2_version_choice
+
+case $new_h2_version_choice in
+    1)
+        new_h2_version="h2-2.2.220.jar"
+        wget -c https://repo1.maven.org/maven2/com/h2database/h2/2.2.220/h2-2.2.220.jar || exit 1
+        ;;
+    2)
+        new_h2_version="h2-2.1.210.jar"
+        wget -c https://repo1.maven.org/maven2/com/h2database/h2/2.1.210/h2-2.1.210.jar || exit 1
+        ;;
+    *)
+        echo "Invalid choice. Exiting."
+        exit 1
+        ;;
+esac
+
 # Always download the latest h2 version we're migrating to
 wget -c https://repo1.maven.org/maven2/com/h2database/h2/2.2.220/h2-2.2.220.jar || exit 1
 
@@ -75,16 +96,14 @@ for filepath in "${db_files[@]}"; do
 
     # Import data from the backup.zip to the new db file
     echo "Importing data..."
-    java -cp h2-2.2.220.jar org.h2.tools.RunScript -url "jdbc:h2:$dest_dir/$dbname" -user wso2carbon -password wso2carbon -script ./backup.zip -options compression zip FROM_1X || exit 1
+        java -cp $new_h2_version org.h2.tools.RunScript -url "jdbc:h2:$dest_dir/$dbname" -user wso2carbon -password wso2carbon -script ./backup.zip -options compression zip FROM_1X || exit 1
     rm -f backup.zip
 
     echo "$dbname migrated successfully"
 done
 
-rm -f h2-2.2.220.jar
-rm -f h2-2.1.210.jar
-rm -f h2-1.4.199.jar
-rm -f h2-1.3.175.jar
+rm -f $new_h2_version
+rm -f $old_h2_version
 
 echo
 echo "Database files are created at $dest_dir."
