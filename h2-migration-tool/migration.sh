@@ -63,9 +63,6 @@ case $new_h2_version_choice in
         ;;
 esac
 
-# Always download the latest h2 version we're migrating to
-wget -c https://repo1.maven.org/maven2/com/h2database/h2/2.2.220/h2-2.2.220.jar || exit 1
-
 echo "Provide a directory path for the old db files and a directory path to store the new files."
 echo
 echo "Enter the path to the previous database files: eg. <file-path>/old-databases, <OLD_IS_HOME>/repository/database "
