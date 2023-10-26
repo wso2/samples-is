@@ -2,14 +2,6 @@
     "CommonConfig": {
         "AuthorizationConfig": {
             "BaseOrganizationUrl": "<PARENT ORGANIZATION URL> ex: https://api.asgardeo.io/t/guardio"
-        },
-        "ApplicationConfig": {
-            "SampleOrganization": [
-                {
-                    "id": "<SUB ORGANIZATION ID>",
-                    "name": "<SUB ORGANIZATION NAME>"
-                }
-            ]
         }
     },
     "BusinessAppConfig": {

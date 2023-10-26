@@ -60,11 +60,11 @@ Also, On the User Attributes tab, click on + Add User Attributes.
 Select `Email`, `First Name`, `Last Name`, and `Username` from the list of attributes.
 
 #### Step 2.2: In the Guardio-Admin-App
->| Property                    |                                   Value/s                                    |
+>| Property                    |                                   Value/s                                   |
 >|--------------------------|:----------------------------------------------------------------------------:|
->| Allowed Grant types      |                           `Organization Switch`, `Code`            |
+>| Allowed Grant types      |                            `Code`            |
 >| Authorized redirect URLs | `http://localhost:3001/api/auth/callback/wso2isAdmin` and `http://localhost:3001` |
->| Allowed origin           |                           `http://localhost:3001`                            |
+>| Allowed origin           |                           `http://localhost:3001`                           |
 
 ### Step 3: Create a user and assign roles
 You need to create new users on the sub-organizations with the required permissions.
