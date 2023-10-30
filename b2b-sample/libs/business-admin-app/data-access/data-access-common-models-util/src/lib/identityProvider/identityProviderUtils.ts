@@ -48,7 +48,7 @@ export function getImageForTheIdentityProvider(templateId: string): string {
  */
 export function getCallbackUrl(orgId: string): string {
 
-    return `${getOrgUrl(orgId)}/commonauth`;
+    return `${getManagementAPIServerBaseUrl()}/o/${orgId}/commonauth`;
 }
 
 /**

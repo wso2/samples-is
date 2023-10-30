@@ -47,8 +47,6 @@ export function checkAdmin(scopes: string[]): boolean {
  */
 export function getOrgUrl(orgId: string): string {
 
-    const managementAPIServerBaseUrl = getManagementAPIServerBaseUrl();
-
     return `${config.CommonConfig.AuthorizationConfig.BaseOrganizationUrl}/o`;
 }
 
