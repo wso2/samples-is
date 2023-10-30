@@ -49,7 +49,7 @@ export function getOrgUrl(orgId: string): string {
 
     const managementAPIServerBaseUrl = getManagementAPIServerBaseUrl();
 
-    return `${managementAPIServerBaseUrl}/o/${orgId}`;
+    return `${config.CommonConfig.AuthorizationConfig.BaseOrganizationUrl}/o`;
 }
 
 /**
