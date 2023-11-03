@@ -29,8 +29,8 @@
     },
     "BusinessAdminAppConfig": {
         "AuthorizationConfig": {
-            "ClientId": "kklQ7LcGDHPSLabRfEzaNkoykmQa",
-            "ClientSecret": "_elOlfc_XVfaQHSe0zblO_f37KjFStCtozjH_ZP9SHoa"
+            "ClientId": "<CLIENT ID OF THE BUSINESS ADMIN APP>",
+            "ClientSecret": "<CLIENT SECRET OF THE BUSINESS ADMIN APP>"
         },
         "ApplicationConfig": {
             "HostedUrl": "http://localhost:3001",
