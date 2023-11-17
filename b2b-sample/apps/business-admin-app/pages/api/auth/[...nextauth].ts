@@ -51,23 +51,18 @@ const wso2ISProvider = (req: NextApiRequest, res: NextApiResponse) => NextAuth(r
             return `${baseUrl}/o/moveOrg`;
         },
         async session({ session, token }) {
-            const orgSession = await controllerDecodeSwitchOrg(token);
 
-            if (!orgSession) {
+            if (!session) {
                 session.error = true;
-            } else if (orgSession.expires_in <= 0) {
-                session.expires = true;
-            }
-            else {
-                session.accessToken = orgSession.access_token;
-                session.idToken = orgSession.id_token;
-                session.scope = orgSession.scope;
-                session.refreshToken = orgSession.refresh_token;
+            } else {
+                session.error = false;
                 session.expires = false;
-                session.userId = getLoggedUserId(session.idToken);
+                session.accessToken = token.accessToken;
+                session.scope = token.scope;
+                //session.userId = getLoggedUserId(session.idToken);
                 session.user = getLoggedUserFromProfile(token.user);
-                session.orgId = getOrgId(session.idToken);
-                session.orgName = getOrgName(session.idToken);
+                session.orgId = token.user.org_id;
+                session.orgName = token.user.org_name;
                 session.orginalIdToken = token.idToken;
             }
 
