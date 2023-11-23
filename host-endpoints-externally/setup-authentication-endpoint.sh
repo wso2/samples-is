@@ -63,12 +63,17 @@ cp $IS_HOME/repository/components/plugins/org.wso2.carbon.base_*.jar $WEB_APP_LI
 cp $IS_HOME/repository/components/plugins/org.eclipse.osgi_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.eclipse.osgi.services_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.base_*.jar $WEB_APP_LIB
+cp $IS_HOME/repository/components/plugins/org.wso2.carbon.claim.mgt_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.core_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.crypto.api_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.database.utils_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.application.common_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.base_*.jar $WEB_APP_LIB
+cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.claim.metadata.mgt_*.jar $WEB_APP_LIB
+cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.event_*.jar $WEB_APP_LIB
+cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.user.profile_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.template.mgt_*.jar $WEB_APP_LIB
+cp $IS_HOME/repository/components/plugins/org.wso2.carbon.idp.mgt_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.queuing_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.registry.api_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.registry.core_*.jar $WEB_APP_LIB
@@ -127,6 +132,10 @@ echo "following changes to point to Identity Server URLs"
 echo
 echo "===================================================================================="
 echo "..."
+echo "   <context-param>"
+echo "      <param-name>IsHostedExternally</param-name>"
+echo "      <param-value>true</param-value>"
+echo "   </context-param>"
 echo "   <context-param>"
 echo "      <param-name>IdentityServerEndpointContextURL</param-name>"
 echo "      <param-value>https://localhost:9443</param-value>"
