@@ -1,7 +1,7 @@
 {
     "CommonConfig": {
         "AuthorizationConfig": {
-            "BaseOrganizationUrl": "https://localhost:9443/t/carbon.super"
+            "BaseOrganizationUrl": "<ROOT ORGANIZATION URL>"
         }
     },
     "BusinessAppConfig": {
@@ -23,14 +23,14 @@
             }
         },
         "ManagementAPIConfig": {
-            "SharedApplicationName": "<SHARED APPLICATION NAME FOR BUSINESS APP> ex: guardio-app",
-            "UserStore" : "PRIMARY"
+            "SharedApplicationName": "<SHARED APPLICATION NAME FOR BUSINESS APP> eg: Guardio-Business-App",
+            "UserStore" : "<USERSTORE USED TO PROVISION USERS IN ORGANIZATION>"
         }
     },
     "BusinessAdminAppConfig": {
         "AuthorizationConfig": {
-            "ClientId": "<CLIENT ID OF THE BUSINESS ADMIN APP>",
-            "ClientSecret": "<CLIENT SECRET OF THE BUSINESS ADMIN APP>"
+            "ClientId": "<CLIENT ID OF THE ADMIN APP>",
+            "ClientSecret": "<CLIENT SECRET OF THE ADMIN APP>"
         },
         "ApplicationConfig": {
             "HostedUrl": "http://localhost:3001",
@@ -52,9 +52,8 @@
                 "internal_org_application_mgt_update",
                 "internal_org_organization_view",
                 "internal_org_role_mgt_view",
-                "internal_org_role_mgt_create",
                 "internal_org_role_mgt_update",
-                "internal_org_role_mgt_delete",
+                "internal_org_group_mgt_view",
                 "internal_org_group_mgt_update"
             ],
             "Branding": {
