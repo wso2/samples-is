@@ -82,6 +82,6 @@ export default function MoveOrg(props: MoveOrgInterface) {
     }, [ redirectSeconds, orgId, redirectToOrg ]);
 
     return (
-        <MoveOrganizationComponent orgName={ "" } />
+        <MoveOrganizationComponent orgName={ "organization" } />
     );
 }
