@@ -282,7 +282,7 @@ To onboard the "Guardio Administrator" of `Best Car Mart` organization:
 
 setup the config json file as mentioned above.
 
-### Step 8: Run the Guardio-Admin-App
+### Step 7: Run the Guardio-Admin-App
 
 - First, run the development server for the **Guardio-Admin-App**
 
@@ -300,7 +300,7 @@ setup the config json file as mentioned above.
 - You will get the login page of `Best Car Mart` organization.
 - Provide the credentials of `Alex` and login.
 
-### Step 9: Setup the identity provider for the Guardio-Business-App
+### Step 8: Setup the identity provider for the Guardio-Business-App
 
 ```agsl
 Prerequisite
@@ -319,13 +319,13 @@ Prerequisite
 
 - After creating the IdP add it to the login flow of **Guardio-Business-App** by clicking on `Add to Login Flow`.
 
-### Step 10: Create a corporate user
+### Step 9: Create a corporate user
 
 - You need to create a new corporate user to access the **Guardio-Business-App**.
 - Log in to the external IdP you configured in step 10.
 - Create a user named `John`.
 
-### Step 11: Run the Guardio-Business-App
+### Step 10: Run the Guardio-Business-App
 
 - First, run the development server for the **Guardio-Business-App**.
 
