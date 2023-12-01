@@ -36,7 +36,7 @@ IdP for authentication. This will be setup through the **Guardio-Admin-App**.
 
 **Guardio-Admin-App** is the application that provides administrative capabilities to administrators of **Guardio** customer/partner organizations.
 The provided administrative capabilities are managing users, assigning roles,
-configuring an identity provider for the organization, and customize the login flow of **Guardio-Business-App** business application for your organization.
+configuring an identity provider for the organization, and customize the login flow of **Guardio-Business-App** business application for their respective organization.
 
 ## 2. Setting up
 
