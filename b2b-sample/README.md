@@ -116,7 +116,7 @@ Role's permission selection:
 Note
    
    When you create an application audience role, it will be associated with the selected application. Also that application can use only application audienced roles.
-   Instead, you can change the allowed audience for role association from the application configuration and use roles created in organization audience.
+   Instead, you can change the allowed audience to organization audience for role association from the application configuration and use roles created in organization audience.
    Learn more about role management and associating roles to an application through the official documentation
 ```
 
