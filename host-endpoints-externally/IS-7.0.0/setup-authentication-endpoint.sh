@@ -68,9 +68,11 @@ cp $IS_HOME/repository/components/plugins/org.wso2.carbon.core_*.jar $WEB_APP_LI
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.crypto.api_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.database.utils_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.application.common_*.jar $WEB_APP_LIB
+cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.authenticator.emailotp_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.base_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.claim.metadata.mgt_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.event_*.jar $WEB_APP_LIB
+cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.organization.management.service_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.user.profile_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.template.mgt_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.idp.mgt_*.jar $WEB_APP_LIB
@@ -139,6 +141,10 @@ echo "   </context-param>"
 echo "   <context-param>"
 echo "      <param-name>IdentityServerEndpointContextURL</param-name>"
 echo "      <param-value>https://localhost:9443</param-value>"
+echo "   </context-param>"
+echo "   <context-param>"
+echo "      <param-name>IdentityManagementEndpointLoginURL</param-name>"
+echo "      <param-value>https://localhost:9443/accountrecoveryendpoint/login.do</param-value>"
 echo "   </context-param>"
 echo "   <context-param>"
 echo "      <param-name>IdentityManagementEndpointContextURL</param-name>"
