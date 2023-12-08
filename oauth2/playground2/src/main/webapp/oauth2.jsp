@@ -690,7 +690,7 @@
                             %>
                             <td>
                                 <button type="button" class="button"
-                                        onclick="document.location.href='<%=(String)session.getAttribute(OAuth2Constants.OIDC_LOGOUT_ENDPOINT)%>';">
+                                        onclick="document.location.href='<%=(String)session.getAttribute(OAuth2Constants.OIDC_LOGOUT_ENDPOINT)%>?post_logout_redirect_uri=<%=ApplicationConfig.getPostLogoutRedirectUri()%>&client_id=<%=(String)session.getAttribute(OAuth2Constants.CONSUMER_KEY)%>';">
                                     Logout
                                 </button>
                             </td>
@@ -759,7 +759,7 @@
                             %>
                             <td>
                                 <button type="button" class="button"
-                                        onclick="document.location.href='<%=(String)session.getAttribute(OAuth2Constants.OIDC_LOGOUT_ENDPOINT)%>';">
+                                        onclick="document.location.href='<%=(String)session.getAttribute(OAuth2Constants.OIDC_LOGOUT_ENDPOINT)%>?post_logout_redirect_uri=<%=ApplicationConfig.getPostLogoutRedirectUri()%>&client_id=<%=(String)session.getAttribute(OAuth2Constants.CONSUMER_KEY)%>';">
                                     Logout
                                 </button>
                             </td>
@@ -820,7 +820,7 @@
                             %>
                             <td>
                                 <button type="button" class="button"
-                                        onclick="document.location.href='<%=(String)session.getAttribute(OAuth2Constants.OIDC_LOGOUT_ENDPOINT)%>';">
+                                        onclick="document.location.href='<%=(String)session.getAttribute(OAuth2Constants.OIDC_LOGOUT_ENDPOINT)%>?post_logout_redirect_uri=<%=ApplicationConfig.getPostLogoutRedirectUri()%>&client_id=<%=(String)session.getAttribute(OAuth2Constants.CONSUMER_KEY)%>';">
                                     Logout
                                 </button>
                             </td>
@@ -890,7 +890,7 @@
                     <tr>
                         <td>
                             <button type="button" class="button"
-                                    onclick="document.location.href='<%=(String)session.getAttribute(OAuth2Constants.OIDC_LOGOUT_ENDPOINT)%>';">
+                                    onclick="document.location.href='<%=(String)session.getAttribute(OAuth2Constants.OIDC_LOGOUT_ENDPOINT)%>?post_logout_redirect_uri=<%=ApplicationConfig.getPostLogoutRedirectUri()%>&client_id=<%=(String)session.getAttribute(OAuth2Constants.CONSUMER_KEY)%>';">
                                 Logout
                             </button>
                         </td>
@@ -920,7 +920,7 @@
                     <tr>
                         <td>
                             <button type="button" class="button"
-                                    onclick="document.location.href='<%=(String)session.getAttribute(OAuth2Constants.OIDC_LOGOUT_ENDPOINT)%>';">
+                                    onclick="document.location.href='<%=(String)session.getAttribute(OAuth2Constants.OIDC_LOGOUT_ENDPOINT)%>?post_logout_redirect_uri=<%=ApplicationConfig.getPostLogoutRedirectUri()%>&client_id=<%=(String)session.getAttribute(OAuth2Constants.CONSUMER_KEY)%>';">
                                 Logout
                             </button>
                         </td>

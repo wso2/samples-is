@@ -1,6 +1,7 @@
 <%@page import="org.apache.commons.lang.StringUtils" %>
 <%@page import="org.json.simple.JSONObject" %>
 <%@page import="org.json.simple.parser.JSONParser" %>
+<%@page import="org.wso2.sample.identity.oauth2.ApplicationConfig" %>
 <%@page import="org.wso2.sample.identity.oauth2.OAuth2Constants" %>
 <%@page import="java.util.Iterator" %>
 <%@page import="java.util.Map" %>
@@ -95,7 +96,7 @@
             %>
             <td colspan="2">
                 <button type="button" class="button"
-                        onclick="document.location.href='<%=(String)session.getAttribute(OAuth2Constants.OIDC_LOGOUT_ENDPOINT)%>';">
+                        onclick="document.location.href='<%=(String)session.getAttribute(OAuth2Constants.OIDC_LOGOUT_ENDPOINT)%>?post_logout_redirect_uri=<%=ApplicationConfig.getPostLogoutRedirectUri()%>&client_id=<%=(String)session.getAttribute(OAuth2Constants.CONSUMER_KEY)%>';">
                     Logout
                 </button>
             </td>
