@@ -93,10 +93,17 @@
         <tr>
             <%
                 if (isOIDCLogoutEnabled) {
+                    String idToken = (String)session.getAttribute(OAuth2Constants.ID_TOKEN);
+                    String logout_url = (String)session.getAttribute(OAuth2Constants.OIDC_LOGOUT_ENDPOINT) + "?post_logout_redirect_uri=" + ApplicationConfig.getPostLogoutRedirectUri();
+                    if (StringUtils.isNotBlank(idToken)) {
+                        logout_url+= "&id_token_hint=" + idToken;
+                    } else {
+                        logout_url+= "&client_id=" + (String)session.getAttribute(OAuth2Constants.CONSUMER_KEY);
+                    }
             %>
             <td colspan="2">
                 <button type="button" class="button"
-                        onclick="document.location.href='<%=(String)session.getAttribute(OAuth2Constants.OIDC_LOGOUT_ENDPOINT)%>?post_logout_redirect_uri=<%=ApplicationConfig.getPostLogoutRedirectUri()%>&client_id=<%=(String)session.getAttribute(OAuth2Constants.CONSUMER_KEY)%>';">
+                        onclick="document.location.href='<%=logout_url%>';">
                     Logout
                 </button>
             </td>

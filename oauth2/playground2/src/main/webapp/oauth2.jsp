@@ -687,10 +687,16 @@
                             <td><input type="submit" name="authorize" value="Get Access Token"></td>
                             <%
                                 if (isOIDCLogoutEnabled) {
+                                    String logout_url = (String)session.getAttribute(OAuth2Constants.OIDC_LOGOUT_ENDPOINT) + "?post_logout_redirect_uri=" + ApplicationConfig.getPostLogoutRedirectUri();
+                                    if (StringUtils.isNotBlank(idToken)) {
+                                        logout_url+= "&id_token_hint=" + idToken;
+                                    } else {
+                                        logout_url+= "&client_id=" + (String)session.getAttribute(OAuth2Constants.CONSUMER_KEY);
+                                    }
                             %>
                             <td>
                                 <button type="button" class="button"
-                                        onclick="document.location.href='<%=(String)session.getAttribute(OAuth2Constants.OIDC_LOGOUT_ENDPOINT)%>?post_logout_redirect_uri=<%=ApplicationConfig.getPostLogoutRedirectUri()%>&client_id=<%=(String)session.getAttribute(OAuth2Constants.CONSUMER_KEY)%>';">
+                                        onclick="document.location.href='<%=logout_url%>';">
                                     Logout
                                 </button>
                             </td>
@@ -756,10 +762,16 @@
                             </td>
                             <%
                                 if (isOIDCLogoutEnabled) {
+                                    String logout_url = (String)session.getAttribute(OAuth2Constants.OIDC_LOGOUT_ENDPOINT) + "?post_logout_redirect_uri=" + ApplicationConfig.getPostLogoutRedirectUri();
+                                    if (StringUtils.isNotBlank(idToken)) {
+                                        logout_url+= "&id_token_hint=" + idToken;
+                                    } else {
+                                        logout_url+= "&client_id=" + (String)session.getAttribute(OAuth2Constants.CONSUMER_KEY);
+                                    }
                             %>
                             <td>
                                 <button type="button" class="button"
-                                        onclick="document.location.href='<%=(String)session.getAttribute(OAuth2Constants.OIDC_LOGOUT_ENDPOINT)%>?post_logout_redirect_uri=<%=ApplicationConfig.getPostLogoutRedirectUri()%>&client_id=<%=(String)session.getAttribute(OAuth2Constants.CONSUMER_KEY)%>';">
+                                        onclick="document.location.href='<%=logout_url%>';">
                                     Logout
                                 </button>
                             </td>
@@ -817,10 +829,16 @@
                             </td>
                             <%
                                 if (isOIDCLogoutEnabled) {
+                                    String logout_url = (String)session.getAttribute(OAuth2Constants.OIDC_LOGOUT_ENDPOINT) + "?post_logout_redirect_uri=" + ApplicationConfig.getPostLogoutRedirectUri();
+                                    if (StringUtils.isNotBlank(idToken)) {
+                                        logout_url+= "&id_token_hint=" + idToken;
+                                    } else {
+                                        logout_url+= "&client_id=" + (String)session.getAttribute(OAuth2Constants.CONSUMER_KEY);
+                                    }
                             %>
                             <td>
                                 <button type="button" class="button"
-                                        onclick="document.location.href='<%=(String)session.getAttribute(OAuth2Constants.OIDC_LOGOUT_ENDPOINT)%>?post_logout_redirect_uri=<%=ApplicationConfig.getPostLogoutRedirectUri()%>&client_id=<%=(String)session.getAttribute(OAuth2Constants.CONSUMER_KEY)%>';">
+                                        onclick="document.location.href='<%=logout_url%>';">
                                     Logout
                                 </button>
                             </td>
@@ -882,6 +900,12 @@
                     <tr>
                         <script type="text/javascript">
                             var idtoken = getIDtoken();
+                            var logout_url = "<%=(String)session.getAttribute(OAuth2Constants.OIDC_LOGOUT_ENDPOINT)%>?post_logout_redirect_uri=<%=ApplicationConfig.getPostLogoutRedirectUri()%>";
+                            if (idtoken != 'null' && idtoken != '') {
+                                logout_url = logout_url + '&id_token_hint=' + idtoken;
+                            } else {
+                                logout_url = logout_url + '&client_id=<%=(String)session.getAttribute(OAuth2Constants.CONSUMER_KEY)%>';
+                            }
                             renderImplicitFlowIdTokenHTML(idtoken);
                             var decodedIdToken = JSON.parse(getDecodedIDToken(idtoken));
                             makeList(decodedIdToken);
@@ -890,7 +914,7 @@
                     <tr>
                         <td>
                             <button type="button" class="button"
-                                    onclick="document.location.href='<%=(String)session.getAttribute(OAuth2Constants.OIDC_LOGOUT_ENDPOINT)%>?post_logout_redirect_uri=<%=ApplicationConfig.getPostLogoutRedirectUri()%>&client_id=<%=(String)session.getAttribute(OAuth2Constants.CONSUMER_KEY)%>';">
+                                    onclick="document.location.href=logout_url;">
                                 Logout
                             </button>
                         </td>
@@ -911,6 +935,12 @@
                     <tr>
                         <script type="text/javascript">
                             var idtoken = getIDtoken();
+                            var logout_url = "<%=(String)session.getAttribute(OAuth2Constants.OIDC_LOGOUT_ENDPOINT)%>?post_logout_redirect_uri=<%=ApplicationConfig.getPostLogoutRedirectUri()%>";
+                            if (idtoken != 'null' && idtoken != '') {
+                                logout_url = logout_url + '&id_token_hint=' + idtoken;
+                            } else {
+                                logout_url = logout_url + '&client_id=<%=(String)session.getAttribute(OAuth2Constants.CONSUMER_KEY)%>';
+                            }
                             renderImplicitFlowIdTokenTokenHTML(idtoken);
                             var decodedIdToken = JSON.parse(getDecodedIDToken(idtoken));
                             makeList(decodedIdToken);
@@ -920,7 +950,7 @@
                     <tr>
                         <td>
                             <button type="button" class="button"
-                                    onclick="document.location.href='<%=(String)session.getAttribute(OAuth2Constants.OIDC_LOGOUT_ENDPOINT)%>?post_logout_redirect_uri=<%=ApplicationConfig.getPostLogoutRedirectUri()%>&client_id=<%=(String)session.getAttribute(OAuth2Constants.CONSUMER_KEY)%>';">
+                                    onclick="document.location.href=logout_url;">
                                 Logout
                             </button>
                         </td>
