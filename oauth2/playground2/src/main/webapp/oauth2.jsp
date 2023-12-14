@@ -720,7 +720,7 @@
 
                 if (idToken != null) {
                     // Check token for JWS or JWE by number of periods (.)
-                    if (StringUtils.countMatches(idToken, "e") > 4) {
+                    if (StringUtils.countMatches(idToken, ".") == 4) {
                         // It's a JWE.
             %>
 
