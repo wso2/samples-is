@@ -141,11 +141,11 @@ public class ApplicationConfig {
 
     public static String getPostLogoutRedirectUri() {
 
-        String value = getProperties().getProperty(POST_LOGOUT_REDIRECT_URI);
-        if (StringUtils.isBlank(value)) {
-            value = StringUtils.EMPTY;
+        String postLogoutRedirectUri = getProperties().getProperty(POST_LOGOUT_REDIRECT_URI);
+        if (StringUtils.isBlank(postLogoutRedirectUri)) {
+            postLogoutRedirectUri = StringUtils.EMPTY;
         }
-        return value;
+        return postLogoutRedirectUri;
     }
 
     private static String buildURL(String context) {
