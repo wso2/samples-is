@@ -267,6 +267,21 @@
                 <artifactId>commons-net</artifactId>
                 <version>${commons-net.version}</version>
             </dependency>
+            <dependency>
+                <groupId>javax.xml.soap</groupId>
+                <artifactId>javax.xml.soap-api</artifactId>
+                <version>${javax.xml.soap.api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.xml.messaging.saaj</groupId>
+                <artifactId>saaj-impl</artifactId>
+                <version>${saaj.impl.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jvnet.staxex</groupId>
+                <artifactId>stax-ex</artifactId>
+                <version>${stax.ex.version}</version>
+            </dependency>
 
             <!--=============================================================================-->
 
@@ -800,6 +815,9 @@
         <joda.wso2.version>2.9.4.wso2v1</joda.wso2.version>
         <axiom.impl.version>1.2.12</axiom.impl.version>
         <commons-collections.version>3.2.2</commons-collections.version>
+        <javax.xml.soap.api.version>1.4.0</javax.xml.soap.api.version>
+        <saaj.impl.version>1.5.1</saaj.impl.version>
+        <stax.ex.version>1.8.3</stax.ex.version>
 
         <!--=============================================================================-->
 
