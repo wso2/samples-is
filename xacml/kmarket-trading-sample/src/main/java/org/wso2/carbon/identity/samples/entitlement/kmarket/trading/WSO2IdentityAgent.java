@@ -104,7 +104,7 @@ public class WSO2IdentityAgent {
             try{
                 trustStore =  (new File(".")).getCanonicalPath() + File.separator +
                                                  "src" + File.separator + "main" + File.separator +
-                                                 "resources" + File.separator + "wso2carbon.jks";
+                                                 "resources" + File.separator + "wso2carbon.p12";
             } catch (IOException e) {
                 e.printStackTrace(); 
             }

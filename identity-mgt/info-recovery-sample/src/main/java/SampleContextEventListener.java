@@ -42,7 +42,7 @@ public class SampleContextEventListener implements ServletContextListener {
             LOGGER.log(Level.SEVERE, e.getMessage(), e);
         }
         SSOAgentConfigs.setKeyStoreStream(servletContextEvent.getServletContext().getClassLoader()
-                .getResourceAsStream("wso2carbon.jks"));
+                .getResourceAsStream("wso2carbon.p12"));
     }
 
     public void contextDestroyed(ServletContextEvent servletContextEvent) {

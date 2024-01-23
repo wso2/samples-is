@@ -53,7 +53,7 @@ public class SPSignKeyDataHolder implements X509Credential {
     public SPSignKeyDataHolder() throws IdentityException {
 
         ClassLoader loader = SPSignKeyDataHolder.class.getClassLoader();
-        String keyStorePath = new File(loader.getResource("wso2carbon.jks").getPath()).getAbsolutePath();
+        String keyStorePath = new File(loader.getResource("wso2carbon.p12").getPath()).getAbsolutePath();
         System.out.println("Key store path : " + keyStorePath);
         String keyAlias = "wso2carbon";
         String password = "wso2carbon";

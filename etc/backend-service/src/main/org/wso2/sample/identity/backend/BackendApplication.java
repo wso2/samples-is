@@ -37,7 +37,7 @@ public class BackendApplication {
     private static final Logger logger = LoggerFactory.getLogger(BookingService.class);
     private static final Properties properties = new Properties();
 
-    // Perform property loading and JKS setup
+    // Perform property loading and PKCS12 setup
     static {
         final InputStream resourceAsStream =
                 BackendApplication.class.getClassLoader().getResourceAsStream("service.properties");
@@ -72,7 +72,7 @@ public class BackendApplication {
             return;
         }
 
-        // Find and store JKS required for SSL communication on a temporary location
+        // Find and store PKCS12 required for SSL communication on a temporary location
         final InputStream keyStoreAsStream = BackendApplication.class.getClassLoader().getResourceAsStream(jksProperties.getProperty("keystorename"));
 
         try {

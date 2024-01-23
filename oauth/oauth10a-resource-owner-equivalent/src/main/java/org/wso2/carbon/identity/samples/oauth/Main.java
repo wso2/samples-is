@@ -81,7 +81,7 @@ public class Main {
              * trust store. Following code sets what trust-store to look for and its JKs password.
              * Note : The trust store should have server's certificate.
              */
-            System.setProperty("javax.net.ssl.trustStore",   new File("src/main/resources/wso2carbon.jks").getAbsolutePath());
+            System.setProperty("javax.net.ssl.trustStore",   new File("src/main/resources/wso2carbon.p12").getAbsolutePath());
             System.setProperty("javax.net.ssl.trustStorePassword", "wso2carbon");
 
             client = new OAuthServiceClient(IDENTITY_SERVER , configContext, ADMIN_USER_NAME, ADMIN_PASSWORD);
