@@ -23,7 +23,7 @@ Specify the credentials to access Identity Server with admin privileges for "acc
 
 Specify the captcha validation enable or disable in the webApp using captchaDisable propery.
 
-Specify the trustStore absolute resource path for "trustStorePath". eg. path to wso2carbon.jks of the Identity Server
+Specify the trustStore absolute resource path for "trustStorePath". eg. path to wso2carbon.p12 of the Identity Server
 
 
 2. If you are deploying the sample in tomcat enable the SSL configuration in {tomcat_home}/conf/server.xml
@@ -32,7 +32,7 @@ Specify the trustStore absolute resource path for "trustStorePath". eg. path to 
     <Connector port="8443" protocol="HTTP/1.1" SSLEnabled="true"
                maxThreads="150" scheme="https" secure="true"
                clientAuth="false" sslProtocol="TLS"
-               keystoreFile="<IS_HOME>/repository/resources/security/wso2carbon.jks" keystorePass="wso2carbon" />
+               keystoreFile="<IS_HOME>/repository/resources/security/wso2carbon.p12" keystorePass="wso2carbon" />
 
 3. Configure the email confirmation links.
 
