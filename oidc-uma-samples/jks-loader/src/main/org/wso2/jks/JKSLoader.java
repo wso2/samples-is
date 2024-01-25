@@ -28,7 +28,7 @@ import java.util.logging.Logger;
 
 /**
  * A listener to get invoked at application deployment.
- * This will allow us to set the carbon JKS for HTTPS communication.
+ * This will allow us to set the carbon PKCS12 for HTTPS communication.
  */
 public class JKSLoader implements ServletContextListener {
 
@@ -54,7 +54,7 @@ public class JKSLoader implements ServletContextListener {
             return;
         }
 
-        // Find and set JKS required for IS server communication
+        // Find and set PKCS12 required for IS server communication
         final URL resource = this.getClass().getClassLoader().getResource(jksProperties.getProperty("keystorename"));
 
         if (resource != null) {
@@ -62,7 +62,7 @@ public class JKSLoader implements ServletContextListener {
             System.setProperty("javax.net.ssl.trustStore", resource.getPath());
             System.setProperty("javax.net.ssl.trustStorePassword", jksProperties.getProperty("keystorepassword"));
         } else {
-            LOGGER.log(Level.INFO, "Unable to find JKS defined by properties. Trust store properties will not be set.");
+            LOGGER.log(Level.INFO, "Unable to find PKCS12 defined by properties. Trust store properties will not be set.");
         }
     }
 

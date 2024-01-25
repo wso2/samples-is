@@ -57,7 +57,7 @@
     </context-param>
     <context-param>
         <param-name>certificate-file</param-name>
-        <param-value>wso2carbon.jks</param-value>
+        <param-value>wso2carbon.p12</param-value>
     </context-param>
 
     <listener>

@@ -38,7 +38,7 @@ public class TestUtils {
 
     private static final String END_POINT = "https://localhost:9443/services/SAMLQueryService";
     private static final String SOAP_ACTION = "http://wso2.org/identity/saml/query";
-    private static final String TRUST_STORE = "wso2carbon.jks";
+    private static final String TRUST_STORE = "wso2carbon.p12";
     private static final String TRUST_STORE_PASSWORD = "wso2carbon";
 
     public static void setSystemProperties() {

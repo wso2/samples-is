@@ -354,7 +354,7 @@ public class Client {
 
 		Properties cryptoProperties = new Properties();
 		cryptoProperties.put(
-				"org.apache.ws.security.crypto.merlin.keystore.type", "JKS");
+				"org.apache.ws.security.crypto.merlin.keystore.type", "PKCS12");
 		cryptoProperties.put("org.apache.ws.security.crypto.merlin.file",
 				keystorePath);
 		cryptoProperties.put(

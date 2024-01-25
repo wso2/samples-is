@@ -19,7 +19,7 @@
     <parent>
         <groupId>org.wso2.samples.is</groupId>
         <artifactId>uma.sample</artifactId>
-        <version>4.3.10-SNAPSHOT</version>
+        <version>4.3.12-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -72,7 +72,7 @@
                             <directory>${project.parent.basedir}/common-resources/</directory>
                             <targetPath>WEB-INF/classes</targetPath>
                             <includes>
-                                <include>wso2carbon.jks</include>
+                                <include>wso2carbon.p12</include>
                             </includes>
                         </resource>
                     </webResources>
