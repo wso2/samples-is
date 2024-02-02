@@ -130,7 +130,8 @@ SAMPLES_HOME
 │   ├── oidc-sso-sample
 │   │   ├── oidc-jks-loader
 │   │   ├── pickup-dispatch
-│   │   └── pickup-manager
+│   │   ├── pickup-manager
+│   │   └── oidc-keystore-loader
 │   └── saml2-sso-sample
 │       ├── saml2-web-app-pickup-dispatch
 │       └── saml2-web-app-pickup-manager
