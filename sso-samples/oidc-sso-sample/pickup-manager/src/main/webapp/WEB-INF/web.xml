@@ -41,7 +41,7 @@
     </servlet-mapping>
 
     <listener>
-        <listener-class>org.wso2.sample.identity.jks.JKSLoader</listener-class>
+        <listener-class>org.wso2.sample.identity.KeystoreLoader</listener-class>
     </listener>
     <listener>
         <listener-class>org.wso2.sample.identity.oauth2.SampleContextEventListener</listener-class>
