@@ -44,14 +44,14 @@ esac
 
 echo
 echo "Please select the h2 version you are migrating to:"
-echo "h2-2.2.220 - (1)"
+echo "h2-2.2.224 - (1)"
 echo "h2-2.1.210 - (2)"
 read new_h2_version_choice
 
 case $new_h2_version_choice in
     1)
-        new_h2_version="h2-2.2.220.jar"
-        wget -c https://repo1.maven.org/maven2/com/h2database/h2/2.2.220/h2-2.2.220.jar || exit 1
+        new_h2_version="h2-2.2.224.jar"
+        wget -c https://repo1.maven.org/maven2/com/h2database/h2/2.2.224/h2-2.2.224.jar || exit 1
         ;;
     2)
         new_h2_version="h2-2.1.210.jar"
