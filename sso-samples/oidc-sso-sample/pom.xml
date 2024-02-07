@@ -32,6 +32,7 @@
         <module>oidc-jks-loader</module>
         <module>pickup-dispatch</module>
         <module>pickup-manager</module>
+        <module>oidc-keystore-loader</module>
     </modules>
 
     <build>
