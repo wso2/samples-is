@@ -176,7 +176,7 @@
                             <directory>${project.parent.parent.basedir}/etc/resources/</directory>
                             <targetPath>WEB-INF/classes</targetPath>
                             <includes>
-                                <include>wso2carbon.jks</include>
+                                <include>wso2carbon.p12</include>
                             </includes>
                         </resource>
                     </webResources>
