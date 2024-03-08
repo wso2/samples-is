@@ -1,0 +1,16 @@
+{
+    "email_configurations": {
+        "sender_email": "<SENDER_EMAIL>",
+        "sender_password": "<SENDER_PASSWORD>",
+        "smtp_server": "<SMTP_SERVER>",
+        "smtp_port": 587
+    },
+
+    "is_server_config": {
+        "client_id": "<CLIENT_ID>",
+        "client_secret": "<CLIENT_SECRET>",
+        "organization": "<ORG_NAME>", 
+        "hostname": "<HOSTNAME>",
+        "alert_before_in_days": 3
+    }
+}
