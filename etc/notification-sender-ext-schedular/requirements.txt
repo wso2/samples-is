@@ -3,6 +3,5 @@
 # Manually managing azure-functions-worker may cause unexpected issues
 
 azure-functions
-
 secure-smtplib
 emails
