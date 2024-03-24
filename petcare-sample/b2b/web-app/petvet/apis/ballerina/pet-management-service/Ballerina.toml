@@ -1,0 +1,14 @@
+[package]
+org = "WSO2"
+name = "pet_management_service"
+version = "1.0.0"
+export = ["pet_management_service"]
+distribution = "2201.5.0"
+
+[build-options]
+observabilityIncluded = true
+
+[[dependency]]
+org = "pubudu538"
+name = "choreo.user.info"
+version = "0.1.1"

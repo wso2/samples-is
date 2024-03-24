@@ -1,0 +1,70 @@
+{
+    "items": [
+        {
+            "title": "Get Started",
+            "eventKey": "1",
+            "icon": "SettingHorizontalIcon",
+            "type": "menu"
+        },
+        {
+            "title": "Settings",
+            "eventKey": "2",
+            "icon": "GearCircleIcon",
+            "type": "menu",
+            "hideBasedOnScope": true,
+            "scopes": [
+                "internal_org_user_mgt_list",
+                "internal_org_user_mgt_create",
+                "internal_org_user_mgt_update",
+                "internal_org_role_mgt_view",
+                "internal_org_role_mgt_create",
+                "internal_org_role_mgt_update",
+                "internal_org_idp_view",
+                "internal_org_idp_create",
+                "internal_org_idp_update",
+                "internal_org_idp_delete",
+                "internal_org_application_mgt_view",
+                "internal_org_application_mgt_update"
+            ],
+            "items": [
+                {
+                    "title": "Manage Users",
+                    "eventKey": "2-1",
+                    "type": "item",
+                    "hideBasedOnScope": true,
+                    "scopes": [
+                        "internal_org_user_mgt_list",
+                        "internal_org_user_mgt_create",
+                        "internal_org_user_mgt_update"
+                    ]
+                },
+                {
+                    "title": "Role Management",
+                    "eventKey": "2-2",
+                    "type": "item",
+                    "hideBasedOnScope": true,
+                    "scopes": [
+                        "internal_org_user_mgt_list",
+                        "internal_org_role_mgt_view",
+                        "internal_org_role_mgt_create",
+                        "internal_org_role_mgt_update"
+                    ]
+                },
+                {
+                    "title": "Identity Providers",
+                    "eventKey": "2-3",
+                    "type": "item",
+                    "hideBasedOnScope": true,
+                    "scopes": [
+                        "internal_org_idp_view",
+                        "internal_org_idp_create",
+                        "internal_org_idp_update",
+                        "internal_org_idp_delete",
+                        "internal_org_application_mgt_view",
+                        "internal_org_application_mgt_update"
+                    ]
+                }
+            ]
+        }
+    ]
+}
