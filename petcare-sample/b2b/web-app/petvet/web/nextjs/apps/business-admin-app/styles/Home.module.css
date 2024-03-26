@@ -1,0 +1,273 @@
+/*
+ * Copyright (c) 2022 WSO2 LLC. (http://www.wso2.com).
+ *
+ * WSO2 LLC. licenses this file to you under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *http://www.apache.org/licenses/LICENSE-2.
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+.title a {
+    text-decoration: none;
+}
+
+.title a:hover,
+.title a:focus,
+.title a:active {
+    text-decoration: underline;
+}
+
+.title {
+    margin: 0;
+    line-height: 1.15;
+    font-size: 4rem;
+}
+
+.title,
+.description {
+    text-align: center;
+}
+
+.description {
+    margin: 4rem 0;
+    line-height: 1.5;
+    font-size: 1.5rem;
+}
+
+.code {
+    background: #fafafa;
+    border-radius: 5px;
+    padding: 0.75rem;
+    font-size: 1.1rem;
+    font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
+        Bitstream Vera Sans Mono, Courier New, monospace;
+}
+
+.grid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 800px;
+}
+
+.card {
+    margin: 1rem;
+    padding: 1.5rem;
+    text-align: left;
+    color: inherit;
+    text-decoration: none;
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    transition: color 0.15s ease, border-color 0.15s ease;
+    max-width: 300px;
+}
+
+.card h2 {
+    margin: 0 0 1rem 0;
+    font-size: 1.5rem;
+}
+
+.card p {
+    margin: 0;
+    font-size: 1.25rem;
+    line-height: 1.5;
+}
+
+.logo {
+    height: 1em;
+    margin-left: 0.5rem;
+}
+
+@media (max-width: 600px) {
+    .grid {
+        width: 100%;
+        flex-direction: column;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+
+    .card {
+        border-color: #222;
+    }
+
+    .code {
+        background: #111;
+    }
+
+    .logo img {
+        filter: invert(1);
+    }
+}
+
+.chartDivForDoc {
+    width: 70vw;
+    height: 60vh;
+    margin-top: 5vh;
+    background-color: rgb(255, 255, 255);
+    border-radius: 1vh;
+}
+
+.orgProfileDiv {
+    width: 70vw;
+    height: 45vh;
+    margin-top: 5vh;
+    background-color: rgb(255, 255, 255);
+    border-radius: 1vh;
+    overflow: auto;
+}
+
+.bookingSummaryHeader {
+    font-size: 3vh;
+    font-weight: bold;
+    padding-top: 3vh;
+    padding-left: 3vh;
+}
+
+.chartForBookingSummary {
+    width: 50vh;
+    height: 50vh;
+    margin-left: 40vw;
+}
+
+.totalBookingCountHeader {
+    font-weight: bold;
+    font-size: 6vh;
+    margin-top: -40vh;
+    margin-left: 10vh;
+}
+
+.totalBookingHeader {
+    font-weight: bold;
+    font-size: 3vh;
+    margin-left: 10vh;
+}
+
+.dailyChartDivForDoc {
+    width: 70vw;
+    height: 80vh;
+    margin-top: 5vh;
+    background-color: rgb(255, 255, 255);
+    border-radius: 1vh;
+}
+
+.dailyBookingSummaryHeader {
+    font-size: 3vh;
+    font-weight: bold;
+    padding-top: 3vh;
+    padding-left: 3vh;
+}
+
+.dailiBookingsChart {
+    margin-left: 5vw;
+    margin-top: 10vh;
+    width: 100vh;
+    height: 50vh;
+}
+
+.welcomeDiv {
+    margin-top: -8vh;
+    margin-left: 9vh;
+    font-weight: bold;
+    font-size: 3vh;
+}
+
+.welcomeMainDiv {
+    background-color: #ffffff;
+    height: 13vh;
+    min-width: 28vw;
+    width: 70vw;
+    border-radius: 1vh;
+    padding: 2vh;
+}
+
+.tagLine {
+    margin-top: 0vh;
+    margin-left: 9vh;
+    font-size: 2vh;
+}
+
+.upcomingBookingsDivForUser {
+    width: 70vw;
+    min-height: 15vh;
+    margin-top: 5vh;
+    background-color: rgb(255, 255, 255);
+    border-radius: 1vh;
+}
+
+.dashboardBookingDiv {
+    background-color: rgb(236, 238, 238);
+    padding: 3vh;
+}
+
+.noUpcomingBookingsDiv {
+    margin-left: 1.5vw;
+    margin-top: 1vh;
+}
+
+.orgInfoGrid {
+    width: 30vw;
+    margin-left: 2vw;
+    margin-top: -5vh;
+}
+
+.orgInfoFont {
+    font-size: 2vh;
+    color: rgb(105, 105, 105);
+    font-weight: bold;
+    /* margin-bottom: 2.5vh; */
+}
+
+.orgInfoInputStyle {
+    width: 25vw;
+    font-size: 2vh;
+    margin-bottom: 1.5vh;
+    /* padding: 0.1vh;
+    margin-bottom: 1vh; */
+}
+
+.editOrgDetailBtn {
+    position: sticky;
+    margin-left: 65vw;
+    width: 2.5vw;
+    height: 2.5vw;
+    background-color: #d8d8d8;
+    border-radius: 1vh;
+
+}
+
+.buttonContainer {
+    position: sticky;
+    top: 0;
+    right: 0;
+    margin-left: 61vw;
+    display: flex;
+    align-items: center;
+    padding-left: 1vw;
+  }
+
+.saveEditOrgDetailBtn {
+    width: 2.5vw;
+    height: 2.5vw;
+    background-color: #d8d8d8;
+    border-radius: 1vh;
+    margin-right: 0.5vw;
+}
+
+.closeEditOrgDetailBtn {
+    width: 2.5vw;
+    height: 2.5vw;
+    background-color: #d8d8d8;
+    border-radius: 1vh;
+    margin-right: 0.5vw;
+}

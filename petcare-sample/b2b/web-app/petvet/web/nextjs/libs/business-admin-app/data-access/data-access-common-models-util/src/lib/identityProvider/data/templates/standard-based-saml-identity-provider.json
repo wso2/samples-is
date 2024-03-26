@@ -1,0 +1,154 @@
+{
+    "description": "Configure a new enterprise identity provider with SAML 2.0",
+    "id": "enterprise-saml-idp",
+    "idp": {
+        "image": "",
+        "isPrimary": false,
+        "roles": {
+            "mappings": [],
+            "outboundProvisioningRoles": []
+        },
+        "certificate": {
+            "certificates": [
+                ""
+            ]
+        },
+        "claims": {
+            "userIdClaim": {
+                "uri": ""
+            },
+            "provisioningClaims": [],
+            "roleClaim": {
+                "uri": ""
+            }
+        },
+        "name": "SAML 2.0 Authentication Provider",
+        "description": "Authenticate users with Enterprise SAML connections.",
+        "federatedAuthenticators": {
+            "defaultAuthenticatorId": "U0FNTFNTT0F1dGhlbnRpY2F0b3I",
+            "authenticators": [
+                {
+                    "isEnabled": true,
+                    "authenticatorId": "U0FNTFNTT0F1dGhlbnRpY2F0b3I",
+                    "properties": [
+                        {
+                            "regex": ".*",
+                            "isConfidential": false,
+                            "displayName": "HTTP Binding",
+                            "defaultValue": "redirect",
+                            "displayOrder": 32,
+                            "options": [
+                                "redirect",
+                                "post",
+                                "as_request"
+                            ],
+                            "description": "Choose the HTTP Binding or decide from incoming request",
+                            "subProperties": [],
+                            "type": "STRING",
+                            "key": "RequestMethod",
+                            "isMandatory": false
+                        },
+                        {
+                            "regex": ".*",
+                            "isConfidential": false,
+                            "displayName": "SSO URL",
+                            "defaultValue": "",
+                            "displayOrder": 6,
+                            "options": [],
+                            "description": "Enter identity provider's SAML2 Web SSO URL value",
+                            "subProperties": [],
+                            "type": "STRING",
+                            "key": "SSOUrl",
+                            "isMandatory": true
+                        },
+                        {
+                            "regex": ".*",
+                            "isConfidential": false,
+                            "displayName": "Identity Provider Entity ID",
+                            "defaultValue": "",
+                            "displayOrder": 5,
+                            "options": [],
+                            "description": "Enter identity provider's entity identifier value. This should be a valid URI/URL.",
+                            "subProperties": [],
+                            "type": "STRING",
+                            "key": "IdPEntityId",
+                            "isMandatory": true
+                        },
+                        {
+                            "regex": ".*",
+                            "isConfidential": false,
+                            "displayName": "Service Provider Entity ID",
+                            "defaultValue": "",
+                            "displayOrder": 1,
+                            "options": [],
+                            "description": "Enter the service provider's entity identifier value",
+                            "subProperties": [],
+                            "type": "STRING",
+                            "key": "SPEntityId",
+                            "isMandatory": true
+                        },
+                        {
+                            "regex": ".*",
+                            "isConfidential": false,
+                            "displayName": "SAML Metadata File",
+                            "defaultValue": "",
+                            "displayOrder": 4,
+                            "options": [],
+                            "description": "Base-64 encoded metadata file content for SAML configuration",
+                            "subProperties": [],
+                            "type": "STRING",
+                            "key": "meta_data_saml",
+                            "isMandatory": false
+                        },
+                        {
+                            "regex": ".*",
+                            "isConfidential": false,
+                            "displayName": "NameID format",
+                            "defaultValue": "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified",
+                            "displayOrder": 2,
+                            "options": [],
+                            "description": "NameID format to be used in the SAML request",
+                            "subProperties": [],
+                            "type": "STRING",
+                            "key": "NameIDType",
+                            "isMandatory": true
+                        },
+                        {
+                            "regex": ".*",
+                            "isConfidential": false,
+                            "displayName": "Select Mode",
+                            "defaultValue": "Manual Configuration",
+                            "displayOrder": 3,
+                            "options": [
+                                "Manual Configuration",
+                                "Metadata File Configuration"
+                            ],
+                            "description": "Select the input method for SAML configuration",
+                            "subProperties": [],
+                            "type": "STRING",
+                            "key": "selectMode",
+                            "isMandatory": false
+                        }
+                    ]
+                }
+            ]
+        },
+        "homeRealmIdentifier": "",
+        "isFederationHub": false,
+        "templateId": "enterprise-saml-idp",
+        "provisioning": {
+            "jit": {
+                "isEnabled": true,
+                "scheme": "PROVISION_SILENTLY",
+                "userstore": "PRIMARY",
+                "associateLocalUser": true
+            }
+        }
+    },
+    "image": "enterprise",
+    "name": "SAML 2.0",
+    "services": [],
+    "disabled": false,
+    "templateId": "enterprise-saml-idp",
+    "type": "ENTERPRISE"
+}
