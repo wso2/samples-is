@@ -67,6 +67,9 @@ Select `Email`, `First Name`, `Last Name`, and `Username` from the list of attri
 >| Authorized redirect URLs | `http://localhost:3001/api/auth/callback/wso2isAdmin` and `http://localhost:3001` |
 >| Allowed origin           |                           `http://localhost:3001`                           |
 
+Also, On the User Attributes tab, click on + Add User Attributes.
+Select `Email`, `First Name`, `Last Name`, and `Username` from the list of attributes.
+
 - Navigate to the **Shared Access** tab of both created application.
 - Select **Share with all organizations**, if you want to share your application with all existing organizations and every organization that will be created future.
 - If you want to share the application with only a set of organizations when the organizations are onboarded, chose **Share with only selected organizations** option and select the required organizations.
