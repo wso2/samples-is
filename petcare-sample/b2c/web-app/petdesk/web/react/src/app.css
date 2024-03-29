@@ -1,0 +1,667 @@
+/**
+ * Copyright (c) 2021, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ *
+ * WSO2 Inc. licenses this file to you under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+
+body {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    color: #2A2A2A;
+    background-color: #e6e3e3;
+    /* background-image: url("https://user-images.githubusercontent.com/35829027/230572364-20406db8-6f8e-4f52-9b50-d776765bd1fd.png"); */
+    font-family: BlinkMacSystemFont, Segoe WPC, Segoe UI, HelveticaNeue-Light, Ubuntu, Droid Sans, sans-serif, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}
+
+h1, h2, h3, h4, h5 {
+    font-weight: 300;
+}
+
+h1 b, h2 b, h3 b, h4 b, h5 b {
+    font-weight: 400;
+}
+
+b {
+    font-weight: 500;
+}
+
+a {
+    color: #f47421;
+}
+
+a:hover {
+    text-decoration: none;
+    ;
+}
+
+.mb-0 {
+    margin-bottom: 0 !important;
+}
+
+.mt-4 {
+    margin-top: 40px !important;
+}
+
+.my-4 {
+    margin: 40px auto 40px auto;
+}
+
+.home-image {
+    vertical-align: middle;
+    margin-bottom: 50px;
+}
+
+.home-image .logo {
+    width: 150px;
+    vertical-align: middle;
+}
+
+.home-image .logo-plus {
+    display: inline-block;
+    font-size: 50px;
+    margin: 0 15px 0 30px;
+    vertical-align: middle;
+}
+
+img.footer-image {
+    width: 50px;
+    margin: 30px auto;
+    opacity: .8;
+}
+
+img.logo-image {
+    width: 200px;
+    margin-top: 100px;
+}
+
+code {
+    background: #272822;
+    padding: 4px;
+    font-size: 90%;
+    color: #fd971f;
+}
+
+.code {
+    background: #272822;
+    display: block;
+    word-break: break-all;
+    padding: 20px;
+    text-align: left;
+    border-radius: 4px;
+}
+
+.code .id-token-0 {
+    color: #cc6633;
+}
+
+.code .id-token-1 {
+    color: #f9f8f5;
+}
+
+.code .id-token-2 {
+    color: #fd971f;
+}
+
+.row {
+    width: 100%;
+    display: flex;
+    text-align: left;
+}
+
+.row>.column {
+    flex: 40%;
+    margin-right: 15px;
+}
+
+.row>.column:last-child {
+    flex: 60%;
+    margin-right: 0;
+}
+
+@media screen and (max-width: 600px) {
+    .column {
+        width: 100%;
+        margin-right: 0;
+    }
+}
+
+.container {
+    border: 1px solid #e2e2e2;
+    /* width: 470px;
+    height: 580px; */
+    margin: 0 auto;
+    margin-top: 0px;
+    border-radius: 0px;
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    min-width: 97%;
+    min-height: 97%;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.json {
+    text-align: left;
+    display: block;
+    overflow: auto;
+    word-break: break-all;
+}
+
+.json .pretty-json-container.object-container {
+    padding: 20px;
+}
+
+.header-title {
+    background-color: #4AD6DB;
+    color: #ffffff;
+    /* padding: 20px; */
+    /* border-radius: 10px 10px 0 0; */
+    min-width: 100%;
+    max-width: 100%;
+}
+
+.content {
+    padding: 0px;
+    background-color: #f7f6f8;
+    min-width: 100vw;
+    min-height:100vh;
+    height: 100vh;
+    position: absolute;
+    overflow: hidden;
+    background-color: #4AD6DB;
+    /* background-image: url("https://user-images.githubusercontent.com/35829027/230468155-2e1ac5d7-b35c-4392-b9fe-40cfb7fea7d8.png");
+    background-repeat: no-repeat;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    background-size: contain; */
+}
+
+.content .spa-app-description {
+    line-height: 1.7;
+}
+
+.btn.primary, .btn.primary:active, .btn.primary:focus {
+    background-color: #4AD6DB;
+    border-radius: 3px;
+    border: none;
+    color: #ffffff;
+    display: inline-block;
+    font-size: 1.14285714rem;
+    text-align: center;
+    text-decoration: none;
+    width: 150px;
+    cursor: pointer;
+    -webkit-text-size-adjust: none;
+    padding: .78571429em 1.5em .78571429em;
+    margin-top: 30px;
+    outline: none;
+}
+
+.btn.secondary {
+    background-color: white;
+    border-radius: 3px;
+    border: none;
+    color: #4AD6DB;
+    display: inline-block;
+    font-size: 1.14285714rem;
+    text-align: center;
+    text-decoration: none;
+    width: 150px;
+    cursor: pointer;
+    -webkit-text-size-adjust: none;
+    padding: .78571429em 1.5em .78571429em;
+    margin-top: 30px;
+    outline: none;
+}
+
+.sub-title {
+    margin-top: 0;
+}
+
+.inline-code-block {
+    border-radius: 6px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    padding: 3px 5px;
+    border: 1px solid #cdcdcd;
+    background-color: white;
+    font-family: Monaco, Consolas, "Andale  Mono", "DejaVu Sans Mono", monospace;
+}
+
+.inline-code-block a {
+    text-decoration: none !important;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.ui.attached.negative.message,
+.ui.negative.message {
+    background-color: #fff6f6;
+    color: #9f3a38;
+    box-shadow: 0 0 0 1px #e0b4b4 inset, 0 0 0 0 transparent;
+    padding: 1em 1.5em;
+}
+
+.asg-json-viewer {
+    background-color: #272822 !important;
+    padding: 20px;
+}
+
+.header {
+    padding: 1vw;
+    background: #4AD6DB;
+    font-size: 1vw;
+    height: 8vh;
+    max-width: 100vW;
+  }
+
+.username {
+    position: absolute;
+    right: 200px;
+    color: white;
+    top:3%;
+}  
+
+.horizontal-right {
+    margin: 0;
+    position: absolute;
+    right: 30px;
+    top:3%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+
+.add-pet-right {
+    position: absolute;
+    top: 65vh;
+    left: 70vw;
+    text-align: left;
+}
+
+.table-view {
+    position:absolute;
+    transform: translate(-50%, 8vh);
+    left: 50%;
+    color: white;
+    top:80%;
+    width: 63vw;
+}
+
+.rowStyle {
+    background-color: #f5f5f1;
+    padding: 100px;
+}
+
+.home-page-title-style {
+    font-weight: bold;
+    font-size: 30px;
+    color: black;
+    text-align: center;
+}
+
+.app-title-style {
+    width:400px;
+    text-align: left;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    position: absolute;
+    left: 4vw;
+}
+
+.pet-logo-image {
+    width: 170px;
+}
+
+.grid-item {
+    min-width:30vw;
+    min-height: 35vw;
+    align-items: center;
+    height: fit-content;
+    width: fit-content;
+}
+
+.user-menu-div {
+    width: 350px;
+    right: 20px;
+    position:absolute;
+    height: 100px;
+    top: 10px;
+}
+
+.menu-btn {
+    background-color: #4AD6DB;
+    width: 10vw;
+    height: 5vh;
+    border: none;
+}
+
+.arrow-down {
+    border: solid white;
+    border-width: 0 0.5vh 0.5vh 0;
+    display: inline-block;
+    padding: 0.8vh;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    right: 0px;
+    position: absolute;
+}
+
+.usename-label {
+    padding: 0px;
+    font-weight: bold;
+    color: white;
+    font-size: 3vh;
+    position: absolute;
+    right: 1vw;
+    width: 20vw;
+    text-align: center;  
+}
+
+.list-style {
+    width: 15vw;
+    position: absolute;
+}
+
+.menu-style {
+    position: absolute;
+    top: 50px;
+    right:100px;
+}
+
+.settings-div {
+    width: 45vw;
+    height: 55vh;
+    background-color: white;
+    /* margin-top: 7%; */
+    /* top: 10%;
+    left: 30%;
+    right:30%; */
+    outline: 2px solid #bcbebf;
+    border-radius: 10px;
+    position: absolute;
+    align-items: left;
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.notification-div {
+    border: solid #bcbebf;
+    border-radius: 10px;
+    width: 37vw;
+    height: 27vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+.settings-panel {
+    width: 100%;
+    align-items: center;
+}
+
+.settings-title-style {
+    font-weight: bolder;
+    font-size:5vh;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.settings-grid {
+    position: absolute;
+    width: 30vw;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -30%);
+}
+
+.settings-save-btn {
+    background-color: #4AD6DB;  
+    color: white;
+    border: none;
+    width: 7vw;
+    height: 5vh;
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 18vh);
+    font-size: 2vh;
+}
+
+.test {
+    background-color: #561414;
+    min-width: 100%;
+    min-height: 100%;
+    overflow: hidden;
+    overflow-block: hidden;
+}
+
+.get-started-btn {
+    background-color: #faa11b;
+    border-radius: 30vh;
+    border: none;
+    color: #ffffff;
+    display: inline-block;
+    font-size: 3.9vh;
+    font-weight: bolder;
+    text-align: center;
+    text-decoration: none;
+    min-width: 18vw;
+    height: 10vh;
+    max-height: 10vh;
+    cursor: pointer;
+    -webkit-text-size-adjust: none;
+    padding: .78571429em 1.5em .78571429em;
+    outline: none;
+    position: absolute;
+    bottom: 20vh;
+    left: 5vw;
+}
+
+.home-wording {
+    font-weight: bold;
+    font-size: 8vh;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.wording-div {
+    position: absolute;
+    top: 15%;
+    left: 22%;
+    text-align: left;
+}
+
+.home-wording-sec {
+    font-weight: bold;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: left;
+    color: rgb(131, 133, 131);
+}
+
+.add-pet-btn {
+    background-color: #4AD6DB;
+    border-radius: 100%;
+    border: none;
+    color: #ffffff;
+    display: inline-block;
+    font-size: 3vw;
+    font-weight: bolder;
+    text-align: center;
+    cursor: pointer;
+    -webkit-text-size-adjust: none;
+    /* padding: .78571429em 1.5em .78571429em; */
+    padding: 1vw;
+    position: relative;
+    width: 5vw;
+    height: 5vw;
+    margin-left: 3vw;
+}
+
+
+.my-pets {
+    position: absolute;
+    top: 65vh;
+    /* left: 22vw; */
+    text-align: left;
+    max-width: 30vw;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+
+.notification-label {
+    font-weight: bold;
+    font-size: 3vh;
+    color: rgb(114, 112, 112);
+    text-align: left;
+    position: absolute;
+    left: 2vw;
+    top: 3vh;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.enable-label {
+    position: absolute;
+    /* top: 1vh;
+    left: 9vw; */
+    font-size: 2.7vh;
+}
+
+.email-label {
+    position: absolute;
+    /* top: 8.4vh;
+    left: 5vw; */
+    font-size: 2.7vh;
+}
+
+.alerts-div {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+}
+
+.cover-div {
+    position: absolute;
+    top: 11vh;
+    left: 0px;
+    /* background-image: url("https://user-images.githubusercontent.com/35829027/230943187-0924ad69-dfa4-4bdb-9cb6-1e8246d12633.png"); */
+    padding: 0px;
+    background: linear-gradient(to right, #FFDE59, #F4B24E);
+    min-width: 100%;
+    min-height:40vh;
+    height: 40vh;
+    overflow-x: hidden;
+    /* -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; */
+}
+
+.logo-div {
+    position: absolute;
+    top: 10vh;
+    left: 4vw;
+    width: 20vw;
+    height: 10vh;
+}
+
+.get-started-wording {
+    color: white;
+    font-weight: bold;
+    font-size: 4vw;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.get-started-wording-div {
+    position: absolute;
+    width: 30vw;
+    height: 20vh;
+    top:30vh;
+    left: 6vw;
+    text-align: left;
+}
+
+.dog-img {
+    position: absolute;
+    top: 30vh;
+    right: 20vw;  
+}
+
+.cat-img {
+    position: absolute;
+    top: 11vh;
+    right: 5vw;  
+}
+
+.rabbit-img {
+    position: absolute;
+    top: 60vh;
+    right: 5vw;  
+}
+
+.quarter-circle {
+    width: 70vh;
+    height: 70vh;
+    border-radius: 300vh 0 0 0;
+    background: linear-gradient(to right, #F4B24E, #FFDE59);
+    position: absolute;
+    bottom: 0vh;
+    right: 0vw;
+}
+
+.switch-style {
+    width: 40vw;
+    height: 2vh;
+}
+
+.cover-img {
+    position: absolute;
+    top: 15vh;
+    right: 5vw;
+    width:20vw;
+    height: 19vw;
+}
+
+.cover-wording {
+    position: absolute;
+    top: 20vh;
+    left: 10vw;
+}
+
+.wording-style {
+    font-size: 6vh;
+    color: #4AD6DB;
+    font-weight: bolder;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: italic;
+}
+
+.list-text {
+    font-size: 30%;
+    color: #de3f67;
+    font-weight: bolder;
+    font-family: Arial, Helvetica, sans-serif;
+}
