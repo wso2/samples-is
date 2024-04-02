@@ -110,7 +110,7 @@ function dbAddPet(Pet pet) returns Pet|error {
         Vaccination[]? vacs = pet.vaccinations;
         sql:ExecutionResult[]|sql:Error batchResult = [];
 
-        if vacs != null {
+        if vacs != null && vacs.length() > 0 {
 
             foreach Vaccination vac in vacs {
                 if vac.enableAlerts == null {
@@ -157,7 +157,7 @@ function dbUpdatePet(Pet pet) returns Pet|error {
         Vaccination[]? vacs = pet.vaccinations;
         sql:ExecutionResult[]|sql:Error batchResult = [];
 
-        if vacs != null {
+        if vacs != null && vacs.length() > 0 {
 
             foreach Vaccination vac in vacs {
                 if vac.enableAlerts == null {

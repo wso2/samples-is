@@ -4,6 +4,11 @@ import ballerina/mime;
 
 # A service representing a network-accessible API
 # bound to port `9090`.
+@http:ServiceConfig {
+    cors: {
+        allowOrigins: ["*"]
+    }
+}
 service / on new http:Listener(9090) {
 
     # Get all pets
@@ -197,6 +202,17 @@ function getOwner(http:Headers headers) returns string|error {
 
     var jwtHeader = headers.getHeader("x-jwt-assertion");
     if jwtHeader is http:HeaderNotFoundError {
+        var authHeader = headers.getHeader("Authorization");
+        if authHeader is http:HeaderNotFoundError {
+            return authHeader;
+        } else {
+            if (authHeader.startsWith("Bearer ")) {
+                jwtHeader = authHeader.substring(7);
+            }
+        }
+    }
+
+    if (jwtHeader is http:HeaderNotFoundError) {
         return jwtHeader;
     }
 
@@ -208,6 +224,17 @@ function getOwnerWithEmail(http:Headers headers) returns [string, string]|error 
 
     var jwtHeader = headers.getHeader("x-jwt-assertion");
     if jwtHeader is http:HeaderNotFoundError {
+        var authHeader = headers.getHeader("Authorization");
+        if authHeader is http:HeaderNotFoundError {
+            return authHeader;
+        } else {
+            if (authHeader.startsWith("Bearer ")) {
+                jwtHeader = authHeader.substring(7);
+            }
+        }
+    }
+
+    if (jwtHeader is http:HeaderNotFoundError) {
         return jwtHeader;
     }
 

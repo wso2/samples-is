@@ -5,7 +5,7 @@ import ballerina/sql;
 import ballerina/log;
 import ballerinax/mysql;
 
-configurable string dbHost = "localhost";
+configurable string dbHost = "";
 configurable string dbUsername = "admin";
 configurable string dbPassword = "admin";
 configurable string dbDatabase = "PET_DB";
@@ -19,7 +19,7 @@ map<Thumbnail> thumbnailMap = {};
 
 function init() returns error? {
 
-    if dbHost != "localhost" && dbHost != "" {
+    if dbHost != "" {
         useDB = true;
     }
 
