@@ -1,0 +1,681 @@
+/**
+ * Copyright (c) 2021, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ *
+ * WSO2 Inc. licenses this file to you under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+ .center-outline-blue {
+    width: 33vw;
+    height: 65vh;
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    outline: 1px solid #6d7273;
+    border-radius: 20px;
+    position: absolute;
+    align-items: left;
+    left: 50%;
+    transform: translate(-50%, 10vh);
+}
+
+.input-style {
+    width: 13vw;
+    height: 2vh;
+    font-size: 2vh;
+    padding: 1vh;
+}
+
+.input-style-2 {
+    width: 22vw;
+    height: 2vh;
+    font-size: 2.7vh;
+    padding: 1vh;
+}
+
+.align-left {
+    display: inline-block;
+    text-align: left;
+    margin-left: 5vw;
+    padding: 1.5vh;
+    font-size: 3vh;
+    }
+
+.image-div {
+    display: inline-block;
+    text-align: left;
+    margin-left: 10px;
+    padding: 0px;
+    font-size: 18px;
+    right:200%;
+    transform: translate(-2%, 0);
+    position: static;
+}    
+
+.overview-title-style {
+    top:0vh;
+    font-weight: bold;
+    /* margin-top:10vw; */
+    left: 29vw;
+    font-size: 6vh;
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 40vw;
+    position: absolute;
+    text-align: left;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.label-style {
+    margin-bottom: 2vh;
+    font-weight: bold;
+    font-size: medium;
+}
+
+.overview-div {
+    width: 80vw;
+    height: 80vh;
+    background-color: white;
+    /* margin-left: 150px;
+        margin-right: auto; */
+    /* margin-top: 7%; */
+    /* top: 13vh;
+        left: 13vw; */
+    outline: 2px solid #bcbebf;
+    border-radius: 2vw;
+    /* border-style: outset; */
+    /* align-items: left; */
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.typography-style {
+    width:15vw;
+    height:fit-content;
+    right: 120vw;
+    text-align: left;
+    padding-left: 1vw;
+}
+
+.div-grid {
+    width: 25vw;
+    height: 18vh;
+    /* margin-left: 29vw;
+    margin-right: auto;
+    margin-top:15vh; */
+    position: absolute;
+    border: solid;
+    border-color: #dce0e0;
+    border-radius: 1vw;
+    top: 17vh;
+    left: 29vw;
+}
+
+.div-grid-sec {
+    width: 28vw;
+    height: 20vh;
+    position: absolute;
+    top: 16vh;
+    left: 28vw;
+    border: solid;
+    border-color: #dce0e0;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.div-grid-style {
+    width: 500px;
+    margin-left: 500px;
+    margin-right: auto;
+    margin-top:10px;
+}
+
+.div-grid-header-style {
+    width: 400px;
+    margin-left: 400px;
+    margin-right: auto;
+    margin-top:10px;
+}
+
+.vcc-div-grid-style {
+    width: 50vw;
+    top:14vh;
+    left: 2vw;
+    position: absolute;
+}
+
+.update-grid-div {
+    width: 300px;
+    margin-left: 30px;
+    margin-right: auto;
+    margin-top:40px;
+
+}
+
+.pet-image-style {
+    width: 19vw;
+    height: 39vh;
+    object-fit: contain;
+    left:4vw;
+    top:17vh;
+    position: absolute;
+}
+
+.image-update-div {
+    width: 20vw;
+    height: 7vh;
+    object-fit: contain;
+    left:4vw;
+    top:380px;
+    position: absolute;
+}
+
+.update-image-div {
+    width: 15vw;
+    height: 5vh;
+    object-fit: contain;
+    left:4vw;
+    top:58vh;
+    position: absolute;
+    text-align: left;
+}
+
+.bold {
+    font-weight: bold;
+    position: absolute;
+    left: 1vw;
+    color: #6d7273;
+    font-size: 1.5vw;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.vcc-div-style {
+    position: absolute;
+    left: 29vw;
+    top: 38vh;
+    border: solid;
+    border-color: #dce0e0;
+    border-radius: 1vw;
+    width: 47vw;
+    min-height:38vh;
+    overflow: hidden;
+}
+
+.vcc-div-style-sec {
+    position: relative;
+    left: 28vw;
+    margin-top:0px;
+    top:40vh;
+    width:47vw;
+    border: solid;
+    border-color: #dce0e0;
+    border-radius: 10px;
+    min-height:37vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.update-button {
+    background-color: #0e8a33;
+    border: none;
+    color: white;
+    padding: 1.7vh 1.7vh;
+    text-align: center;
+    font-size: 2vh;
+    margin: 0vh 2vh;
+    opacity: 1;
+    transition: 0.3s;
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 6vw;
+  }  
+
+.save-button {
+    background-color: #4AD6DB;
+    border: none;
+    color: white;
+    padding: 9px 17px;
+    text-align: center;
+    font-size: 16px;
+    margin: 4px 2px;
+    opacity: 1;
+    transition: 0.3s;
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }  
+  
+.save-btn-div {
+    width: 30vw;
+    height: 10vh;
+    object-fit: contain;
+    left:50%;
+    position: absolute;
+    transform: translate(-50%, 56vh);
+}  
+
+.delete-btn-div {
+    width: 6vw;
+    height: 7vh;
+    object-fit: contain;
+    right:2.5vw;
+    top:17vh;
+    position: absolute;
+}  
+
+.update-btn-div {
+    width: 8vw;
+    height: 7vh;
+    object-fit: contain;
+    right:8vw;
+    top:17vh;
+    position: absolute;
+}
+
+.cancel-btn-div {
+    width: 7vw;
+    height: 7vh;
+    object-fit: contain;
+    right:2vw;
+    top:16vh;
+    position: absolute;
+}
+
+.save-btn-div-sec {
+    width: 7vw;
+    height: 7vh;
+    object-fit: contain;
+    right:9vw;
+    top:16vh;
+    position: absolute;
+}
+
+.delete-button {
+    background-color: #f4251e;
+    border: none;
+    color: white;
+    padding: 1.7vh 1.7vh;
+    text-align: center;
+    font-size: 2vh;
+    margin: 0px 2px;
+    opacity: 0.6;
+    transition: 0.3s;
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 6vw;
+  }
+  
+  .delete-button:hover {opacity: 1}
+
+.cancel-button {
+    background-color: #918d8d;
+    border: none;
+    color: white;
+    padding: 1.7vh 1.7vh;
+    text-align: center;
+    font-size: 2vh;
+    margin: 0vh 2vh;
+    opacity: 1;
+    transition: 0.3s;
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 6vw;
+}  
+
+.update-input-style {
+    width: 13vw;
+    font-size: 2.2vh;
+    padding: 1.5vh;
+    font-family: Arial, Helvetica, sans-serif;
+} 
+
+.vcc-update-input-style {
+    width: 150px;
+    font-size: 13px;
+    padding: 9.2px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.vcc-update-input-style-sec {
+    width: 11vw;
+    font-size: 2vh;
+    padding: 1vh;
+}
+
+.vaccine-input-style {
+    width: 150px;
+    font-size: 13px;
+    padding: 10px;
+}
+
+.update-img-div {
+    text-align: left;
+}
+
+.update-form-save-btn {
+    background-color: #4AD6DB;
+    border-radius: 3px;
+    border: none;
+    color: #ffffff;
+    display: inline-block;
+    font-size: 17px;
+    text-align: center;
+    text-decoration: none;
+    width: 100px;
+    cursor: pointer;
+    -webkit-text-size-adjust: none;
+    padding: .78571429em 1.5em .78571429em;
+    margin-top: 10px;
+    outline: none;
+}
+
+.vcc-label-style {
+    color: #6d7273;
+    font-size: small;
+}
+
+.card-style {
+    background-color: #d3d5d6;
+    width:95%;
+    height: 95%;  
+}
+
+.card-pet-image-style {
+    width:20vw;
+    top: 10vw;
+    margin: 0 auto;
+    border-radius: 10%;
+}
+
+.card-typo-style {
+    width: 100%;
+    font-weight: bolder;
+    word-wrap: break-word;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2vw;
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.file-upload-name {
+    position: fixed;
+    top: 65vh;
+    left: 15vw;
+    width: 2vw;
+    background-color: #f09090;
+}
+
+.breed-style {
+    width: 100%;
+    font-weight: bolder;
+    word-wrap: break-word;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #6d7273;
+    font-size: 1.5vw;
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.vcc-info-grid {
+    width: 550px;
+    position: relative;
+    left: 320px;
+    margin-top:4px;
+}
+
+.vcc-label-style {
+    padding: 5px 5px;
+    display: block;
+    width: 145px;
+}
+
+.form-group-style {
+    position: relative;
+    left: 400px;
+    margin-top:0px;
+    width:150px;
+}
+
+.form-control-label-style {
+    font-size: x-small;
+}
+
+.date-label-style {
+    font-size: 1.3vh;
+    padding: 1vh 2vw;
+    max-width: 13vw;
+    color: #6d7273;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.date-div-style {
+    position: absolute;
+    left: 7vw;
+    top:9vh;
+    width: 25vw;
+    height:2vh;
+}
+
+.date-div-style-2 {
+    position: absolute;
+    left: 20vw;
+    top:9vh;
+    width: 25vw;
+    height:2vh;
+}
+
+.vacc-grid-header-style {
+    font-size: 10px;
+    font-weight: bold;
+    padding: 3px 20px;
+    color: #6d7273;
+}
+
+.update-image-label {
+    font-size: 2.5vh;
+    font-weight: bold;
+    color: #6d7273;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.plus-button-style {
+    height: 5vh;
+    width: 5vh;
+    background-color: #4AD6DB; 
+    border: none;
+    border-radius: 1vh;
+    color: white;
+    font-weight: bolder;
+    font-size: 2vh;
+}
+
+.remove-btn {
+    border: none;
+    border-radius: 3px;
+    background-color: #f09090;
+    color: white;
+    font-weight: bolder;
+}
+
+.checkbox-div {
+    height:25px;
+}
+
+.vcc-info-div {
+    background-color: #4AD6DB;
+    width: 500px;
+}
+
+.enable-alerts {
+    width:100px;
+    position: absolute;
+    left: 290px;
+    margin-top:18px;
+    width:200px;
+}
+
+.no-vacc-details {
+    position: absolute;
+    left: 1vw;
+    top: 13vh;
+}
+
+.no-detail-label {
+    font-size: 2.3vh;
+    color: #6d7273;
+}
+
+.vaccine-info-box{
+    width: 50vw;
+    position: absolute;
+    left: 1vw;
+    top: 20vh;
+}
+
+.vaccine-info-box-sec{
+    width: 50vw;
+    position: absolute;
+    left:1vw;
+    top:10vh;
+}
+
+.save-btn-style {
+    background-color: #4AD6DB;
+    border: none;
+    width: 7vw;
+    height: 5vh;
+    border-radius: 5px;
+    font-size: 2vh;
+    
+}
+
+.upload-btn-style {
+    background-color: #4AD6DB;
+    border: none;
+    color: white;
+    padding: 1vh 1vh;
+    text-align: center;
+    font-size: 1vw;
+    margin: 1vh 1vh;
+    opacity: 1;
+    transition: 0.3s;
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 8vw;
+    object-fit: contain;
+}
+
+.upload-btn-style-sec {
+    text-decoration: none;
+    border: none;
+    padding: 1vh 2vh;
+    margin-right: 1vw;
+    font-size: 2vh;
+    background-color: #4AD6DB;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+    cursor: pointer;
+    outline: none;
+    transition: 0.2s all;
+}
+/* Adding transformation when the button is active */
+  
+.upload-btn-style-sec:active {
+    transform: scale(0.98);
+    /* Scaling button to 0.98 to its original size */
+    box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+    /* Lowering the shadow */
+}
+
+.upload-btn-div {
+    position: fixed;
+    top: 65vh;
+    left: 4vw;
+}
+
+.upload-btn-div-sec {
+    position: fixed;
+    top: 70vh;
+    left: 4vw;
+}
+
+.file-name-label {
+    max-width: 10vw;
+    display: inline-block;
+    font-size: 2vh;
+    font-family: Arial, Helvetica, sans-serif;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.grid-style {
+    background-color: aqua;
+}
+
+.overview-card {
+    width: 300px;
+    height: 100px;
+    position: absolute;
+    top: 90px;
+    left: 350px;
+    border-radius: 90px;
+}
+
+.add-pet-div {
+    position: absolute;
+    font-weight: bold;
+    font-size: 4vh;
+    left:50%;
+    transform: translate(-50%, 2vh);
+}
+
+.child-div {
+    position: absolute;
+    top: 15vh;
+    width: 20vw;
+}
+
+.overview-font {
+    font-size: 3vh;
+}
+
+.update-view-font {
+    font-size: 2.5vh;
+    font-family: Arial, Helvetica, sans-serif;
+}
