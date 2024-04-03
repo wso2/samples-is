@@ -14,13 +14,15 @@
     
     
 > [!NOTE]
-> By default, the services store the data in memory. They can be connected to MySQL databases. Create a `Config.toml` file in the root folder of the service component and add the relevant DB configurations to the `Config.toml` files
-> dbHost = "<DB_HOST>" 
-> dbUsername = "<DB_USERNAME>" 
-> dbPassword = "<DB_USER_PASSWORD>" 
-> dbDatabase = "<DB_NAME>" 
-> dbPort = "<DB_PORT>"
-> Create a MySQL database tables using the schemas located in `<PROJECT_HOME>/petcare-sample/b2c/web-app/petdesk/dbscripts directory`.
+> By default, the service stores the data in memory. It can be connected to a MySQL database. Create a `Config.toml` file in the root folder of the service component and add the relevant DB configurations to the `Config.toml` files. Create MySQL database tables using the schemas located in `<PROJECT_HOME>/petcare-sample/b2c/web-app/petdesk/dbscripts directory`.
+
+```
+dbHost = "<DB_HOST>" 
+dbUsername = "<DB_USERNAME>" 
+dbPassword = "<DB_USER_PASSWORD>" 
+dbDatabase = "<DB_NAME>" 
+dbPort = "<DB_PORT>"
+```
 
 ## Create an Application in WSO2 Identity Server
 1. Create a Single-Page Application named `Pet Desk App` in root organization.
