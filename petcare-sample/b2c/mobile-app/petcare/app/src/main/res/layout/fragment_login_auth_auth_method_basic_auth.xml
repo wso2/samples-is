@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/basicAuthlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activities.login.fragments.auth.auth_method.BasicAuth">
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/asgardeo_secondary"
+        android:drawableTint="@color/asgardeo_colour_variant"
+        android:ems="10"
+        android:foregroundTint="@color/asgardeo_colour_variant"
+        android:hint="@string/activity_login_auth_auth_method_basic_auth.username"
+        android:inputType="textPersonName"
+        android:textColor="@color/black"
+        android:textColorHint="@color/font_accent_black"
+        android:textColorLink="@color/asgardeo_colour"
+        android:textCursorDrawable="@color/asgardeo_colour"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:isCredential="true"/>
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="@color/asgardeo_secondary"
+        android:ems="10"
+        android:hint="@string/activity_login_auth_auth_method_basic_auth.password"
+        android:inputType="textPassword"
+        android:textColor="@color/font_black"
+        android:textColorHighlight="@color/asgardeo_colour"
+        android:textColorHint="@color/font_accent_black"
+        android:textColorLink="@color/asgardeo_colour"
+        android:textCursorDrawable="@color/asgardeo_colour"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/username"
+        android:isCredential="true"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/signinBasicAuth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/activity_login_auth_auth_method_basic_auth.sign_in"
+        android:textColor="@color/font_white"
+        app:backgroundTint="@color/asgardeo_colour"
+        app:iconTint="@color/font_white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password" />
+</androidx.constraintlayout.widget.ConstraintLayout>
