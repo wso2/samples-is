@@ -13,7 +13,7 @@
 #### 1. Setup steps Identity Server
 1.1 Setup the latest version of WSO2 Identity Sever.
 
-1.2 Create a mobile application (Un tick the PKCE `Mandayory` checkbox)
+1.2 [Create a mobile application](https://is.docs.wso2.com/en/next/guides/applications/register-mobile-app/) (Un tick the PKCE `Mandayory` checkbox)
 
 #### 2. Import the configurations
 2.1 Create `config.xml` file in `res/values`
@@ -245,12 +245,12 @@ The application you created requires 2 properties to perform android attestation
   - The JSON secret of Service Account downloaded. Note that this attribute is defined as a JSON object hence use the JSON key as it is.
 
 6.4 Go to the Google play console and create a new application for this application, after that you need to associate your cloud project for the app integrity. To do this,
-- Navigate to Release > App integrity. Under Play Integrity API select Link a Cloud project.
+- Navigate to Release > App integrity. Under Play Integrity API select **Link a Cloud project**.
 - Choose the Cloud project you want to link to your app and this will enable Play Integrity API responses.
 - You can now integrate the Play Integrity API into your app.
 - Create a new release.
   - For this we need a signed app bundle. To create a signed app bundle,
-    - In the android studio go to Build > Generate Signed App Bundle, and select app bundle.
+    - In the Android Studio, go to **Build** > **Generate Signed App Bundle**, and select app bundle.
     - Then create a new keystore (make sure to store the credentials of the keystore in a secure location), then upload the released bundle to the play console internal testing release section.
 - In the testers section, add yourself as a tester in a new list of testers and select that list only for the testing.
 - Then copy the web link and download the application from there.
