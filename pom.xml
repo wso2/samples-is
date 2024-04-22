@@ -827,7 +827,7 @@
         <google.collect.wso2.version>1.0.0.wso2v2</google.collect.wso2.version>
         <axiom.wso2.version>1.2.11.wso2v10</axiom.wso2.version>
         <identity.inbound.auth.oauth.version>6.4.49</identity.inbound.auth.oauth.version>
-        <carbon.kernel.version>4.6.1</carbon.kernel.version>
+        <carbon.kernel.version>4.10.12</carbon.kernel.version>
         <json.simple.version>1.1</json.simple.version>
         <XmlSchema.version>1.4.7-wso2v5</XmlSchema.version>
         <wsdl4j.version>1.6.2.wso2v2</wsdl4j.version>
@@ -854,7 +854,7 @@
         <!--=============================================================================-->
 
         <!--repo versions of sample-post-authentication-handler-->
-        <identity.framework.version>5.21.0</identity.framework.version>
+        <identity.framework.version>7.0.110</identity.framework.version>
         <maven.compiler.plugin.version>3.6.1</maven.compiler.plugin.version>
         <maven.scr.plugin.version>1.22.0</maven.scr.plugin.version>
         <maven.bundle.plugin.version>3.2.0</maven.bundle.plugin.version>
