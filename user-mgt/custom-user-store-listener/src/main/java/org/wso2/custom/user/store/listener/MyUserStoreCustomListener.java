@@ -1,40 +1,54 @@
-package org.soasecurity.user.mgt.custom.extension;
+/*
+ * Copyright (c)  WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.wso2.custom.user.store.listener;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.wso2.carbon.user.core.UserStoreException;
 import org.wso2.carbon.user.core.UserStoreManager;
 import org.wso2.carbon.user.core.common.AbstractUserOperationEventListener;
-import org.wso2.carbon.user.core.claim.Claim;
 
 import java.lang.Override;
 import java.lang.String;
 
-import java.util.List;
 import java.util.Map;
+
 /**
  *
  */
-public class MyUserMgtCustomExtension extends AbstractUserOperationEventListener {
+public class MyUserStoreCustomListener extends AbstractUserOperationEventListener {
 
-    private static Log log = LogFactory.getLog(MyUserMgtCustomExtension.class);
+    private static final Log log = LogFactory.getLog(MyUserStoreCustomListener.class);
 
     @Override
     public int getExecutionOrderId() {
+
         return 9883;
     }
 
-
     @Override
-    public boolean doPostAuthenticate(String userName, boolean authenticated, UserStoreManager userStoreManager) throws UserStoreException {
+    public boolean doPostAuthenticate(String userName, boolean authenticated, UserStoreManager userStoreManager)
+            throws UserStoreException {
 
         // check whether user is authenticated
-        if(authenticated){
+        if (authenticated) {
 
             log.info("=== doPostAuthenticate ===");
             log.info("User " + userName + " logged in at " + System.currentTimeMillis());
             log.info("=== /doPostAuthenticate ===");
-
         }
 
         return true;
@@ -46,7 +60,6 @@ public class MyUserMgtCustomExtension extends AbstractUserOperationEventListener
                                  UserStoreManager userStoreManager)
             throws UserStoreException {
 
-
         log.info("=== doPostAddUser ===");
         log.info("User " + userName + " created at " + System.currentTimeMillis());
         log.info(credential.toString());
@@ -57,21 +70,20 @@ public class MyUserMgtCustomExtension extends AbstractUserOperationEventListener
         return true;
     }
 
-
     @Override
     public boolean doPostSetUserClaimValues(String userName, Map<String, String> claims,
                                             String profileName, UserStoreManager userStoreManager)
             throws UserStoreException {
-
 
         log.info("=== doPostSetUserClaimValues ===");
 
         log.info("Username: " + userName);
         log.info("Profile: " + profileName);
 
-        log.info("NAME: " + userStoreManager.getUserClaimValue(userName, "http://wso2.org/claims/fullname", profileName));
-        log.info("EMAIL: " + userStoreManager.getUserClaimValue(userName, "http://wso2.org/claims/emailaddress", profileName));
-
+        log.info("NAME: " +
+                userStoreManager.getUserClaimValue(userName, "http://wso2.org/claims/fullname", profileName));
+        log.info("EMAIL: " +
+                userStoreManager.getUserClaimValue(userName, "http://wso2.org/claims/emailaddress", profileName));
 
 //        This doens't work for identity claims
 //        log.info("LOCKED: " + userStoreManager.getUserClaimValue(userName, "http://wso2.org/claims/identity/accountLocked", profileName));
@@ -94,6 +106,5 @@ public class MyUserMgtCustomExtension extends AbstractUserOperationEventListener
 
         return true;
     }
-
 
 }

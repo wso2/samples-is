@@ -14,39 +14,34 @@
  * limitations under the License.
  */
 
-package org.soasecurity.user.mgt.custom.extension.internal;
+package org.wso2.custom.user.store.listener.internal;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.component.ComponentContext;
-import org.soasecurity.user.mgt.custom.extension.MyUserMgtCustomExtension;
+import org.osgi.service.component.annotations.Component;
+import org.wso2.custom.user.store.listener.MyUserStoreCustomListener;
 import org.wso2.carbon.user.core.listener.UserOperationEventListener;
 
-
 /**
- * @scr.component name="org.soasecurity.user.mgt.custom.extension.internal.CustomExtensionServiceComponent"
- * immediate="true"
+ * Custom User Store Listener Component.
  */
-
+@Component(name = "custom.user.store.listener.component",
+        immediate = true)
 public class CustomExtensionServiceComponent {
 
-    private static Log log = LogFactory.getLog(CustomExtensionServiceComponent.class);
-
-    private ServiceRegistration serviceRegistration = null;
+    private static final Log log = LogFactory.getLog(CustomExtensionServiceComponent.class);
 
     protected void activate(ComponentContext context) {
 
-        MyUserMgtCustomExtension listener = new MyUserMgtCustomExtension();
-        serviceRegistration =
-                context.getBundleContext().registerService(UserOperationEventListener.class.getName(),
-                        listener, null);
+        MyUserStoreCustomListener listener = new MyUserStoreCustomListener();
+        context.getBundleContext().registerService(UserOperationEventListener.class.getName(), listener, null);
 
         log.debug("My Custom bundle is de-activated");
     }
 
-
     protected void deactivate(ComponentContext context) {
+
         log.debug("My Custom bundle is de-activated");
     }
 }
