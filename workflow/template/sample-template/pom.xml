@@ -26,7 +26,7 @@
     <packaging>bundle</packaging>
     <dependencies>
         <dependency>
-            <groupId>org.wso2.carbon.identity.framework</groupId>
+            <groupId>org.wso2.carbon.identity.workflow.impl.bps</groupId>
             <artifactId>org.wso2.carbon.identity.workflow.mgt</artifactId>
         </dependency>
         <dependency>

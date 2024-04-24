@@ -491,25 +491,24 @@
             </dependency>
             <dependency>
                 <groupId>org.wso2.carbon.identity.framework</groupId>
-                <artifactId>org.wso2.carbon.identity.workflow.mgt.stub</artifactId>
-                <version>${carbon.identity.framework.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.wso2.carbon.identity.framework</groupId>
                 <artifactId>org.wso2.carbon.identity.application.mgt.stub</artifactId>
                 <version>${carbon.identity.framework.version}</version>
                 <scope>compile</scope>
             </dependency>
             <dependency>
-                <groupId>org.wso2.carbon.identity.framework</groupId>
+                <groupId>org.wso2.carbon.identity.workflow.impl.bps</groupId>
                 <artifactId>org.wso2.carbon.identity.workflow.mgt</artifactId>
-                <version>${carbon.identity.framework.version}</version>
+                <version>${identity.workflow.impl.bps.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.wso2.carbon.identity.framework</groupId>
-                <artifactId>org.wso2.carbon.identity.application.mgt</artifactId>
-                <version>${carbon.identity.framework.version}</version>
-                <scope>compile</scope>
+                <groupId>org.wso2.carbon.identity.workflow.impl.bps</groupId>
+                <artifactId>org.wso2.carbon.identity.workflow.mgt.stub</artifactId>
+                <version>${identity.workflow.impl.bps.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.identity.workflow.impl.bps</groupId>
+                <artifactId>org.wso2.carbon.identity.workflow.impl</artifactId>
+                <version>${identity.workflow.impl.bps.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.wso2.carbon.identity.workflow.impl.bps</groupId>
@@ -517,9 +516,10 @@
                 <version>${identity.workflow.impl.bps.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.wso2.carbon.identity.workflow.impl.bps</groupId>
-                <artifactId>org.wso2.carbon.identity.workflow.impl</artifactId>
-                <version>${identity.workflow.impl.bps.version}</version>
+                <groupId>org.wso2.carbon.identity.framework</groupId>
+                <artifactId>org.wso2.carbon.identity.application.mgt</artifactId>
+                <version>${carbon.identity.framework.version}</version>
+                <scope>compile</scope>
             </dependency>
             <dependency>
                 <groupId>org.wso2.carbon.identity.user.ws</groupId>
@@ -885,7 +885,7 @@
         <identity.user.ws.version>5.4.0</identity.user.ws.version>
         <carbon.identity.framework.version>7.0.110</carbon.identity.framework.version>
         <commons.pool.wso2.version>1.5.6.wso2v1</commons.pool.wso2.version>
-        <identity.workflow.impl.bps.version>5.4.1</identity.workflow.impl.bps.version>
+        <identity.workflow.impl.bps.version>5.5.7</identity.workflow.impl.bps.version>
         <identity.user.ws.version>5.4.0</identity.user.ws.version>
         <slf4j.version>1.7.28</slf4j.version>
         <rampart.wso2.version>1.6.1-wso2v43</rampart.wso2.version>
