@@ -118,7 +118,7 @@ export default function EmailAsMFA(props: EmailAsMFAProps) {
                             : (
                                 <FlexboxGrid.Item colspan={ 6 }>
                                     <Button 
-                                        style={ { width: "125%", opacity:"0.9" } } 
+                                        style={ { width: "125%", opacity:"0.9", borderRadius: "22px" } } 
                                         appearance="primary" 
                                         onClick={ onAddToLoginFlowClick }>
                                         Add to the Login Flow

@@ -72,7 +72,7 @@ function FileUploadSingle(props: FileUploadProps) {
 
     return (
         <><div className='upload-btn-div'>
-            <button onClick={handleClick} className='upload-btn-style-sec'>
+            <button onClick={handleClick} className='upload-btn-style'>
                 Choose a file
             </button>
             <input type="file"

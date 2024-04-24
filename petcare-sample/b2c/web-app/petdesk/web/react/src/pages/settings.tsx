@@ -100,20 +100,20 @@ export default function GetSettings(props: SettingsProps) {
                                 <label className="notification-label">Notifications</label>
                                 <div className="settings-grid">
                                     <Grid container spacing={2}>
-                                        <Grid item xs={6} style={{ textAlign: "right", fontSize: "2.7vh" }}>
+                                        <Grid item xs={6} style={{ textAlign: "right", fontSize: "16px" }}>
                                             <label>Enable</label>
                                         </Grid>
-                                        <Grid item xs={6} style={{ textAlign: "left", fontSize: "2.7vh" }}>
+                                        <Grid item xs={6} style={{ textAlign: "left", fontSize: "16px" }}>
                                             <CustomSwitch
                                                 checked={enabled}
                                                 onChange={toggleSwitch}
                                                 className="switch-style"
                                             />
                                         </Grid>
-                                        <Grid item xs={6} style={{ textAlign: "right", fontSize: "2.7vh" }}>
+                                        <Grid item xs={6} style={{ textAlign: "right", fontSize: "16px" }}>
                                             <label>Email Address</label>
                                         </Grid>
-                                        <Grid item xs={6} style={{ textAlign: "left", fontSize: "2.7vh" }}>
+                                        <Grid item xs={6} style={{ textAlign: "left", fontSize: "16px" }}>
                                             <input
                                                 className="input-style"
                                                 id="email"

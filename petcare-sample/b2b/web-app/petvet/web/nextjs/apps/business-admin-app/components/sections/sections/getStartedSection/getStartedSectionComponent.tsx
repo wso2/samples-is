@@ -19,7 +19,7 @@
 import Image from "next/image";
 import { FlexboxGrid } from "rsuite";
 import GetStartedText from "./otherComponents/getStartedText";
-import getStartedImage from "../../../../../../libs/business-admin-app/ui/ui-assets/src/lib/images/getStarted.svg";
+import getStartedImage from "../../../../../../libs/business-admin-app/ui/ui-assets/src/lib/images/getStarted.png";
 
 /**
  * 

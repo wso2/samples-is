@@ -17,6 +17,7 @@
  */
 
 import { Button } from "rsuite";
+import styles from "../../../../../../styles/app.module.css";
 
 interface AddUserButtonProps {
     onClick : ()=>void
@@ -28,8 +29,7 @@ export default function AddUserButton(props : AddUserButtonProps) {
 
     return (
         <Button
-            appearance="primary"
-            size="lg"
+            className={ styles.buttonCircular }
             onClick={ onClick }>
             Add User
         </Button>

@@ -57,12 +57,12 @@ function PetCard(props: PetCardProps) {
             <CardContent>
                 <div className="card-pet-image-style">
                     { url? (<img
-                        style={{ width: "20vw", height: "20vw", borderRadius: "10%" }}
+                        style={{ width: "20vw", height: "20vw", borderRadius: "50%" }}
                         src={url}
                         alt="pet-image"
                     />) :(
                         <img
-                        style={{ width: "20vw", height: "20vw", borderRadius: "10%"}}
+                        style={{ width: "20vw", height: "20vw", borderRadius: "50%"}}
                         src={PET_IMAGE}
                         alt="pet-image"
                     />

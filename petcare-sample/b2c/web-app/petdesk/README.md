@@ -28,6 +28,7 @@ dbPort = "<DB_PORT>"
 1. Create a Single-Page Application named `Pet Desk App` in root organization.
 2. Add the `Authorized redirect URLs` as `http://localhost:5173`.
 3. Go to the `Protocol` tab and copy the `Client ID`.
+4. Select `Access token` type as `JWT`.
 
 ## Deploy the Front End Application
 1. Navigate to <PROJECT_HOME>/petcare-sample/b2c/web-app/petdesk/web/react and update the configuration file 

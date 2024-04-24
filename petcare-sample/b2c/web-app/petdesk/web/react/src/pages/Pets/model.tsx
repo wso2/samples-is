@@ -55,7 +55,7 @@ export default function Model(props: ModalProps) {
                     <div className="align-title">
                         <Dialog.Panel>
                             <Dialog.Title
-                                as="h3" className="add-pet-div">
+                                as="h2" className="add-pet-div">
                                 {title}
                             </Dialog.Title>
                             <div className="child-div">{children}</div>

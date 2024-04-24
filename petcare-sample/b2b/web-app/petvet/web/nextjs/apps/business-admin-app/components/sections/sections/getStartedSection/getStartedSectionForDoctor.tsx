@@ -166,7 +166,7 @@ export default function GetStartedSectionComponentForDoctor(props: GetStartedSec
                             datasets: [
                                 {
                                     data: [ filteredCount["confirmed"], filteredCount["completed"] ],
-                                    backgroundColor: [ "#4e40ed", "#4e7eed" ]
+                                    backgroundColor: [ "#69A2F4", "#4e7eed" ]
                                 }
                             ]
                         },

@@ -22,9 +22,9 @@ body {
     padding: 0;
     text-align: center;
     color: #2A2A2A;
-    background-color: #e6e3e3;
-    /* background-image: url("https://user-images.githubusercontent.com/35829027/230572364-20406db8-6f8e-4f52-9b50-d776765bd1fd.png"); */
-    font-family: BlinkMacSystemFont, Segoe WPC, Segoe UI, HelveticaNeue-Light, Ubuntu, Droid Sans, sans-serif, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    background-color: #ffffff;
+    /* background-imagrgb(255, 255, 255)"https://user-images.githubusercontent.com/35829027/230572364-20406db8-6f8e-4f52-9b50-d776765bd1fd.png"); */
+    font-family: 'Montserrat', sans-serif;
 }
 
 h1, h2, h3, h4, h5 {
@@ -166,7 +166,7 @@ code {
 }
 
 .header-title {
-    background-color: #4AD6DB;
+    background-color: #ffffff;
     color: #ffffff;
     /* padding: 20px; */
     /* border-radius: 10px 10px 0 0; */
@@ -182,7 +182,7 @@ code {
     height: 100vh;
     position: absolute;
     overflow: hidden;
-    background-color: #4AD6DB;
+    background-color: #ffffff;
     /* background-image: url("https://user-images.githubusercontent.com/35829027/230468155-2e1ac5d7-b35c-4392-b9fe-40cfb7fea7d8.png");
     background-repeat: no-repeat;
     -webkit-background-size: contain;
@@ -266,16 +266,19 @@ code {
 
 .header {
     padding: 1vw;
-    background: #4AD6DB;
-    font-size: 1vw;
-    height: 8vh;
+    background: #69A2F4;
+    font-size: 16px;
+    height: 4vh;
     max-width: 100vW;
+    justify-content: center;
+    flex-direction: column;
+    display: flex;
   }
 
 .username {
     position: absolute;
     right: 200px;
-    color: white;
+    color: #ffffff;
     top:3%;
 }  
 
@@ -343,18 +346,17 @@ code {
     right: 20px;
     position:absolute;
     height: 100px;
-    top: 10px;
 }
 
 .menu-btn {
-    background-color: #4AD6DB;
+    background-color: #69A2F4;
     width: 10vw;
     height: 5vh;
     border: none;
 }
 
 .arrow-down {
-    border: solid white;
+    border: solid rgb(255, 255, 255);
     border-width: 0 0.5vh 0.5vh 0;
     display: inline-block;
     padding: 0.8vh;
@@ -362,22 +364,30 @@ code {
     -webkit-transform: rotate(45deg);
     right: 0px;
     position: absolute;
+    height: 1px;
 }
 
 .usename-label {
     padding: 0px;
-    font-weight: bold;
-    color: white;
-    font-size: 3vh;
+    color: rgb(255, 255, 255);
+    font-size: 16px;
     position: absolute;
     right: 1vw;
     width: 20vw;
     text-align: center;  
+    font-family: 'montserrat';
 }
 
 .list-style {
-    width: 15vw;
+    width: 12vw;
     position: absolute;
+    padding: 5px 10px 5px 15px !important;
+    margin: 20px;
+}
+
+.nav-list-item {
+    padding: 10px;
+    margin: 10px;
 }
 
 .menu-style {
@@ -406,7 +416,6 @@ code {
 }
 
 .notification-div {
-    border: solid #bcbebf;
     border-radius: 10px;
     width: 37vw;
     height: 27vh;
@@ -423,9 +432,8 @@ code {
 }
 
 .settings-title-style {
-    font-weight: bolder;
-    font-size:5vh;
-    font-family: Arial, Helvetica, sans-serif;
+    font-size:32px;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .settings-grid {
@@ -438,17 +446,22 @@ code {
 }
 
 .settings-save-btn {
-    background-color: #4AD6DB;  
-    color: white;
     border: none;
-    width: 7vw;
-    height: 5vh;
-    border-radius: 5px;
+    width: 200px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, 18vh);
     font-size: 2vh;
+    height: 45px;
+    font-size: 18px;
+    border-radius: 22px;
+    box-shadow: none;
+    font-size: 1rem;
+    font-weight: 400;
+    padding: 14px 24px;
+    background-color: #69A2F4;
+    color: #ffffff;
 }
 
 .test {
@@ -460,36 +473,28 @@ code {
 }
 
 .get-started-btn {
-    background-color: #faa11b;
-    border-radius: 30vh;
-    border: none;
+    height: 45px;
+    font-size: 18px;
+    border-radius: 22px;
+    box-shadow: none;
+    font-size: 1rem;
+    font-weight: 400;
+    padding: 14px 24px;
+    background-color: #69A2F4;
     color: #ffffff;
-    display: inline-block;
-    font-size: 3.9vh;
-    font-weight: bolder;
-    text-align: center;
-    text-decoration: none;
-    min-width: 18vw;
-    height: 10vh;
-    max-height: 10vh;
-    cursor: pointer;
-    -webkit-text-size-adjust: none;
-    padding: .78571429em 1.5em .78571429em;
-    outline: none;
-    position: absolute;
-    bottom: 20vh;
-    left: 5vw;
+    border-color: #e2e2e2;
+    border-width: 0;
+    width: 200px;
 }
 
 .home-wording {
-    font-weight: bold;
-    font-size: 8vh;
-    font-family: Arial, Helvetica, sans-serif;
+    font-size: 22px;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .wording-div {
-    position: absolute;
-    top: 15%;
+    /* position: absolute; */
+    /* top: 15%; */
     left: 22%;
     text-align: left;
 }
@@ -497,57 +502,50 @@ code {
 .home-wording-sec {
     font-weight: bold;
     font-size: 20px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Montserrat', sans-serif;
     text-align: left;
     color: rgb(131, 133, 131);
 }
 
 .add-pet-btn {
-    background-color: #4AD6DB;
-    border-radius: 100%;
+    height: 45px;
+    font-size: 18px;
+    border-radius: 22px;
     border: none;
+    font-size: 1rem;
+    font-weight: 400;
+    padding: 14px 24px;
+    background-color: #69A2F4;
     color: #ffffff;
-    display: inline-block;
-    font-size: 3vw;
-    font-weight: bolder;
-    text-align: center;
-    cursor: pointer;
-    -webkit-text-size-adjust: none;
-    /* padding: .78571429em 1.5em .78571429em; */
-    padding: 1vw;
-    position: relative;
-    width: 5vw;
-    height: 5vw;
-    margin-left: 3vw;
+    width: 200px;
 }
 
-
 .my-pets {
+    margin-top: 10px;
     position: absolute;
     top: 65vh;
-    /* left: 22vw; */
-    text-align: left;
-    max-width: 30vw;
-    left: 50%;
-    transform: translate(-50%, 0%);
+    margin-left: 10%;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .notification-label {
-    font-weight: bold;
-    font-size: 3vh;
+    font-size: 16px;
     color: rgb(114, 112, 112);
     text-align: left;
     position: absolute;
     left: 2vw;
     top: 3vh;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .enable-label {
     position: absolute;
     /* top: 1vh;
     left: 9vw; */
-    font-size: 2.7vh;
+    font-size: 16px;
 }
 
 .email-label {
@@ -565,19 +563,36 @@ code {
 
 .cover-div {
     position: absolute;
-    top: 11vh;
     left: 0px;
-    /* background-image: url("https://user-images.githubusercontent.com/35829027/230943187-0924ad69-dfa4-4bdb-9cb6-1e8246d12633.png"); */
+    /* background-image: url("../src/images/basic_cover.png"); */
     padding: 0px;
-    background: linear-gradient(to right, #FFDE59, #F4B24E);
     min-width: 100%;
     min-height:40vh;
-    height: 40vh;
+    height: 50vh;
     overflow-x: hidden;
     /* -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover; */
+    background-color: #d7dfee4a;
+    margin: 10px;
+    padding: 20px;
+}
+
+.cover-row {
+    display: flex;
+
+}
+
+.cover-column-left {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cover-column-right {
+    width: 40%;
 }
 
 .logo-div {
@@ -592,7 +607,7 @@ code {
     color: white;
     font-weight: bold;
     font-size: 4vw;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .get-started-wording-div {
@@ -652,16 +667,32 @@ code {
 }
 
 .wording-style {
-    font-size: 6vh;
-    color: #4AD6DB;
-    font-weight: bolder;
-    font-family: Arial, Helvetica, sans-serif;
-    font-style: italic;
+    font-size: 16px;
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .list-text {
     font-size: 30%;
     color: #de3f67;
     font-weight: bolder;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.signInDiv {
+    padding: 5rem 2rem;
+    background-color: #ffffff;
+    /* width: 25vw; */
+    /* padding: 10rem 2rem; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    flex: 1;
+}
+
+.tagline {
+    width: 60%;
+    color: #939B9B;
 }

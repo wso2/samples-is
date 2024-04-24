@@ -95,8 +95,7 @@ export default function ManageDoctorsSection(props: ManageDoctorsSectionProps) {
                     <p>{ "Manage doctors in the organization" }</p>
                 </Stack>
                 <Button
-                    appearance="primary"
-                    size="lg"
+                    className={ styles.buttonCircular }
                     onClick={ onAddDoctorClick }
                 >
                         Add Doctor

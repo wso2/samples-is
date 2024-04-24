@@ -197,7 +197,7 @@ export default function UpdatePet(props: UpdateProps) {
                                     </Grid>
                                 </div>
                                 <div className="vcc-div-style-sec">
-                                    <h4 className="bold">Vaccination Details</h4>
+                                    <h4>Vaccination Details</h4>
                                     <div className="date-div-style">
                                         <label className="date-label-style">Last vaccination date</label>
                                     </div>
@@ -290,7 +290,7 @@ export default function UpdatePet(props: UpdateProps) {
                                 <div className="pet-image-style">
                                     {imageUrl ? (
                                     <img
-                                        style={{ width: "20vw", height: "20vw", borderRadius: "10%"}}
+                                        style={{ width: "20vw", height: "20vw", borderRadius: "50%"}}
                                         src={imageUrl}
                                         alt="pet-image"
                                     />) : (

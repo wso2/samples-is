@@ -19,6 +19,7 @@
 .nameTag {
     position: relative;
     font-size: 16px;
+    padding: 1vh;
 }
 
 .logoDiv {

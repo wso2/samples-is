@@ -21,7 +21,7 @@
     flex-direction: column;
     gap: 40px;
     height: 100%;
-    background-color: rgb(228, 228, 228);
+    background-color: rgb(255, 255, 255);
 }
 
 .tableMainPanelDivDoc .rs-table-body-row-wrapper {
@@ -293,7 +293,7 @@
     font-size: 2vh;
     background-color: var(--primary-color);
     color: #fff;
-    border-radius: 5px;
+    border-radius: 22px;
     box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
     cursor: pointer;
     outline: none;
@@ -588,4 +588,18 @@
     height: 100%;
     margin-left: 20%;
     margin-top: 5%;
+}
+
+.buttonCircular {
+    height: 50px;
+    font-size: 18px;
+    border-radius: 22px;
+    box-shadow: none;
+    font-size: 1rem;
+    font-weight: 400;
+    padding: 14px 24px;
+    background-color: #69A2F4;
+    color: #ffffff;
+    border-color: #e2e2e2;
+    border-width: 0;
 }

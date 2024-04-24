@@ -27,7 +27,16 @@ a {
     text-decoration: none;
 }
 
+button {
+    border-radius: 22px !important;
+}
+
+h2 {
+    color: #3E4747;
+    font-weight: 200;
+}
+
 * {
     box-sizing: border-box;
-    font-family: 'Nunito Sans', sans-serif;
+    font-family: 'montserrat', sans-serif;
 }

@@ -85,7 +85,7 @@ export default function Org(props : OrgProps) {
     useEffect(() => {
         getDoctor(session.accessToken, session.user.emails[0])
             .catch((err) => {
-                if (err.response.status === 404 && session.group === "doctor") {
+                if (err.response?.status === 404 && session.group === "doctor") {
                     const payload: DoctorInfo = {
                         address: "",
                         availability: [],
@@ -106,7 +106,7 @@ export default function Org(props : OrgProps) {
                 personalize(response.data);
             })
             .catch(async (err) => {
-                if (err.response.status === 404 && session.group === "admin") {
+                if (err.response?.status === 404 && session.group === "admin") {
                     const res: BrandingPreference = 
                         (await controllerDecodeGetBrandingPreference(session) as BrandingPreference);
                     const activeTheme: string = res["preference"]["theme"]["activeTheme"];

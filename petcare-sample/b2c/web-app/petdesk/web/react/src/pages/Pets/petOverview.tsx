@@ -154,7 +154,7 @@ export default function PetOverview(props: OverviewProps) {
                                 </div>
                                 <div className="pet-image-style">
                                     {url ? (<img
-                                        style={{ width: "20vw", height: "20vw", borderRadius: "10%"}}
+                                        style={{ width: "20vw", height: "20vw", borderRadius: "50%"}}
                                         src={url}
                                         alt="pet-image"
                                     />) : (
