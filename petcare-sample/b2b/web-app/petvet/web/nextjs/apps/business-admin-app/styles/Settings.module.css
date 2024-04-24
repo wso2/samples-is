@@ -53,10 +53,32 @@
     justify-content: center;
     align-items: center;
     padding: 10px;
+    border: none;
 }
 
 /* getStartedSectionComponent-GetStartedText-P */
 .getStartedSectionComponentGetStartedTextP {
     text-align: center ;
+}
+
+.revertButton{
+    width: 25%;
+    height: 50px;
+    font-size: 18px;
+    border-radius: 22px;
+    box-shadow: none;
+    font-size: 1rem;
+    font-weight: 400;
+    padding: 14px 24px;
+    background-color: rgba(255, 0, 0, 0.8);
+    color: #ffffff;
+    border-color: #e2e2e2;
+    border-width: 0;
+}
+
+.getStartedButton{
+    height: 50px;
+    font-size: 18px;
+    border-radius: 22px;
 }
 

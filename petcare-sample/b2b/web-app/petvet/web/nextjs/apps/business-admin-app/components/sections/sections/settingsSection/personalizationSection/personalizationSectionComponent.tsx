@@ -266,7 +266,7 @@ export default function PersonalizationSectionComponent(props: PersonalizationSe
                 />
                 <Divider style={ { background: "#bebebe" } }/>
                 <Button
-                    style={ { background: "rgba(255, 0, 0, 0.8)", width: "25%" } }
+                    className={ styles["revertButton"] }
                     size="lg"
                     appearance="primary"
                     onClick={ onRevert } >

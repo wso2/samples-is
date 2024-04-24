@@ -22,12 +22,12 @@
     background-color: white;
     margin-left: auto;
     margin-right: auto;
-    outline: 1px solid #6d7273;
     border-radius: 20px;
     position: absolute;
     align-items: left;
     left: 50%;
     transform: translate(-50%, 10vh);
+    box-shadow: 2px 2px #88888826;
 }
 
 .input-style {
@@ -40,14 +40,15 @@
 .input-style-2 {
     width: 22vw;
     height: 2vh;
-    font-size: 2.7vh;
+    font-size: 16px;
     padding: 1vh;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .align-left {
     display: inline-block;
     text-align: left;
-    margin-left: 5vw;
+    margin-left: 3vw;
     padding: 1.5vh;
     font-size: 3vh;
     }
@@ -65,10 +66,9 @@
 
 .overview-title-style {
     top:0vh;
-    font-weight: bold;
     /* margin-top:10vw; */
     left: 29vw;
-    font-size: 6vh;
+    font-size: 32px;
     display: block;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -76,12 +76,11 @@
     width: 40vw;
     position: absolute;
     text-align: left;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .label-style {
     margin-bottom: 2vh;
-    font-weight: bold;
     font-size: medium;
 }
 
@@ -94,7 +93,7 @@
     /* margin-top: 7%; */
     /* top: 13vh;
         left: 13vw; */
-    outline: 2px solid #bcbebf;
+    box-shadow: 2px 2px #88888826;
     border-radius: 2vw;
     /* border-style: outset; */
     /* align-items: left; */
@@ -159,6 +158,7 @@
     top:14vh;
     left: 2vw;
     position: absolute;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .update-grid-div {
@@ -203,7 +203,7 @@
     left: 1vw;
     color: #6d7273;
     font-size: 1.5vw;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .vcc-div-style {
@@ -233,24 +233,22 @@
 }
 
 .update-button {
-    background-color: #0e8a33;
+    background-color: #69A2F4;
     border: none;
     color: white;
     padding: 1.7vh 1.7vh;
     text-align: center;
     font-size: 2vh;
-    margin: 0vh 2vh;
-    opacity: 1;
-    transition: 0.3s;
+    margin: 0px 2px;
     display: inline-block;
     text-decoration: none;
-    cursor: pointer;
-    border-radius: 5px;
+    border-radius: 22px;
     width: 6vw;
+    border-color: #dce0e0;
   }  
 
 .save-button {
-    background-color: #4AD6DB;
+    background-color: #69A2F4;
     border: none;
     color: white;
     padding: 9px 17px;
@@ -278,7 +276,7 @@
     width: 6vw;
     height: 7vh;
     object-fit: contain;
-    right:2.5vw;
+    right:2vw;
     top:17vh;
     position: absolute;
 }  
@@ -318,12 +316,9 @@
     text-align: center;
     font-size: 2vh;
     margin: 0px 2px;
-    opacity: 0.6;
-    transition: 0.3s;
     display: inline-block;
     text-decoration: none;
-    cursor: pointer;
-    border-radius: 5px;
+    border-radius: 22px;
     width: 6vw;
   }
   
@@ -342,7 +337,7 @@
     display: inline-block;
     text-decoration: none;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 22px;
     width: 6vw;
 }  
 
@@ -350,26 +345,28 @@
     width: 13vw;
     font-size: 2.2vh;
     padding: 1.5vh;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Montserrat', sans-serif;
 } 
 
 .vcc-update-input-style {
     width: 150px;
     font-size: 13px;
     padding: 9.2px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .vcc-update-input-style-sec {
     width: 11vw;
     font-size: 2vh;
     padding: 1vh;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .vaccine-input-style {
     width: 150px;
     font-size: 13px;
     padding: 10px;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .update-img-div {
@@ -377,7 +374,7 @@
 }
 
 .update-form-save-btn {
-    background-color: #4AD6DB;
+    background-color: #69A2F4;
     border-radius: 3px;
     border: none;
     color: #ffffff;
@@ -402,27 +399,26 @@
     background-color: #d3d5d6;
     width:95%;
     height: 95%;  
+    padding: 0;
 }
 
 .card-pet-image-style {
     width:20vw;
     top: 10vw;
     margin: 0 auto;
-    border-radius: 10%;
+    border-radius: 50%;
 }
 
 .card-typo-style {
     width: 100%;
-    font-weight: bolder;
     word-wrap: break-word;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 2vw;
     display: block;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
     width: 100%;
-    font-family: Arial, Helvetica, sans-serif;
 }
 
 .file-upload-name {
@@ -435,9 +431,8 @@
 
 .breed-style {
     width: 100%;
-    font-weight: bolder;
     word-wrap: break-word;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Montserrat', sans-serif;
     color: #6d7273;
     font-size: 1.5vw;
     display: block;
@@ -445,7 +440,6 @@
     text-overflow: ellipsis;
     overflow: hidden;
     width: 100%;
-    font-family: Arial, Helvetica, sans-serif;
 }
 
 .vcc-info-grid {
@@ -477,7 +471,7 @@
     padding: 1vh 2vw;
     max-width: 13vw;
     color: #6d7273;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .date-div-style {
@@ -498,24 +492,22 @@
 
 .vacc-grid-header-style {
     font-size: 10px;
-    font-weight: bold;
     padding: 3px 20px;
     color: #6d7273;
 }
 
 .update-image-label {
     font-size: 2.5vh;
-    font-weight: bold;
     color: #6d7273;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .plus-button-style {
     height: 5vh;
     width: 5vh;
-    background-color: #4AD6DB; 
+    background-color: #69A2F4; 
     border: none;
-    border-radius: 1vh;
+    border-radius: 50%;
     color: white;
     font-weight: bolder;
     font-size: 2vh;
@@ -526,7 +518,6 @@
     border-radius: 3px;
     background-color: #f09090;
     color: white;
-    font-weight: bolder;
 }
 
 .checkbox-div {
@@ -534,7 +525,7 @@
 }
 
 .vcc-info-div {
-    background-color: #4AD6DB;
+    background-color: #69A2F4;
     width: 500px;
 }
 
@@ -572,31 +563,34 @@
 }
 
 .save-btn-style {
-    background-color: #4AD6DB;
-    border: none;
-    width: 7vw;
-    height: 5vh;
-    border-radius: 5px;
-    font-size: 2vh;
+    height: 50px;
+    font-size: 18px;
+    border-radius: 22px;
+    box-shadow: none;
+    font-size: 1rem;
+    font-weight: 400;
+    padding: 14px 24px;
+    background-color: #69A2F4;
+    color: #ffffff;
+    border-color: #e2e2e2;
+    border-width: 0;
     
 }
 
 .upload-btn-style {
-    background-color: #4AD6DB;
-    border: none;
-    color: white;
-    padding: 1vh 1vh;
-    text-align: center;
-    font-size: 1vw;
-    margin: 1vh 1vh;
-    opacity: 1;
-    transition: 0.3s;
-    display: inline-block;
     text-decoration: none;
+    padding: 1vh 2vh;
+    margin-right: 1vw;
+    font-size: 2vh;
+    background-color: #ffffff;
+    color: #918d8d;
+    border-radius: 22px;
     cursor: pointer;
-    border-radius: 5px;
-    width: 8vw;
-    object-fit: contain;
+    outline: none;
+    transition: 0.2s all;
+    border-width: 1px;
+    border-color: #918d8d59;
+    width: 150px;
 }
 
 .upload-btn-style-sec {
@@ -605,13 +599,13 @@
     padding: 1vh 2vh;
     margin-right: 1vw;
     font-size: 2vh;
-    background-color: #4AD6DB;
+    background-color: #69A2F4;
     color: #fff;
-    border-radius: 5px;
-    box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+    border-radius: 22px;
     cursor: pointer;
     outline: none;
     transition: 0.2s all;
+    width: 150px;
 }
 /* Adding transformation when the button is active */
   
@@ -638,7 +632,7 @@
     max-width: 10vw;
     display: inline-block;
     font-size: 2vh;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Montserrat', sans-serif;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -659,8 +653,8 @@
 
 .add-pet-div {
     position: absolute;
-    font-weight: bold;
-    font-size: 4vh;
+    font-weight: 200;
+    font-size: 32px;
     left:50%;
     transform: translate(-50%, 2vh);
 }
@@ -672,10 +666,11 @@
 }
 
 .overview-font {
-    font-size: 3vh;
+    font-size: 2vh;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .update-view-font {
-    font-size: 2.5vh;
-    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
 }

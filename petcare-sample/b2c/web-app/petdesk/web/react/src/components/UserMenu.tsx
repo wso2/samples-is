@@ -91,17 +91,18 @@ export default function MenuListComposition(props: {
                 <List className="list-style">
                     <ListItem
                         button
+                        className="nav-list-item"
                         component="nav"
                         disableGutters
                         onClick={() => { setSettingsOpen(true); setUserMenuOpen(false); getSettings();}}
                         data-testid="header-user-profile-settings"
                     >
                         <ListItemIcon>
-                            <MiscellaneousServicesIcon style={{width: "4vh", height: "4vh", padding: "2vh"}}/>
+                            <MiscellaneousServicesIcon style={{ width: "3vh", height: "3vh" }}/>
                         </ListItemIcon>
                         <ListItemText
                             disableTypography
-                            primary={<Typography variant="body2" style={{ color: 'black', fontSize: "2.5vh" }}>Settings</Typography>}
+                            primary={<Typography variant="body2" style={{ color: 'black', fontSize: "16px", fontFamily: "montserrat" }}>Settings</Typography>}
                         />
                     </ListItem>
                     <ListItem
@@ -112,11 +113,11 @@ export default function MenuListComposition(props: {
                         data-testid="header-user-profile-item-logout"
                     >
                         <ListItemIcon>
-                            <AccountCircleIcon style={{width: "4vh", height: "4vh", padding: "2vh"}}/>
+                            <AccountCircleIcon style={{ width: "3vh", height: "3vh" }}/>
                         </ListItemIcon>
                         <ListItemText
                             disableTypography
-                            primary={<Typography variant="body2" style={{ color: 'black', fontSize: "2.5vh" }}>MyAccount</Typography>}
+                            primary={<Typography variant="body2" style={{ color: 'black', fontSize: "16px", fontFamily: "montserrat"}}>MyAccount</Typography>}
                         />
                     </ListItem>
                     <ListItem
@@ -127,11 +128,11 @@ export default function MenuListComposition(props: {
                         data-testid="header-user-profile-item-logout"
                     >
                         <ListItemIcon>
-                            <LogoutIcon style={{width: "4vh", height: "4vh", padding: "2vh"}}/>
+                            <LogoutIcon style={{width: "3vh", height: "3vh"}}/>
                         </ListItemIcon>
                         <ListItemText
                             disableTypography
-                            primary={<Typography variant="body2" style={{ color: 'black', fontSize: "2.5vh" }}>Logout</Typography>}
+                            primary={<Typography variant="body2" style={{ color: 'black', fontSize: "16px", fontFamily: "montserrat"}}>Logout</Typography>}
                         />
                     </ListItem>
                 </List>

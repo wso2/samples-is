@@ -20,7 +20,7 @@ import { IndexHomeComponent } from "@pet-management-webapp/shared/ui/ui-componen
 import { NextRouter, useRouter } from "next/router";
 import React, { useEffect } from "react";
 import "rsuite/dist/rsuite.min.css";
-import homeImage from "../../../libs/business-admin-app/ui/ui-assets/src/lib/images/businessAdminHome.jpeg";
+import homeImage from "../../../libs/business-admin-app/ui/ui-assets/src/lib/images/businessAdminHome.png";
 import { getPersonalization } from "../APICalls/GetPersonalization/get-personalization";
 import personalize from "../components/sections/sections/settingsSection/personalizationSection/personalize";
 import { Personalization } from "../types/personalization";

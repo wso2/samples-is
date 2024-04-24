@@ -27,8 +27,9 @@
 }
 
 .logoComponentDiv {
-    margin-bottom: 25px;
-    margin-top: 35px;
+    margin-bottom: 15px;
+    margin-top: 25px;
+    height: 20vh;
 }
 
 .nextButtonDiv {

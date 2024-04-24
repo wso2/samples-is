@@ -102,6 +102,7 @@ export default function DoctorProfileSection(props: DoctorProfileSectionProps) {
                     <p>{ "Profile Information of the doctor" }</p>
                 </Stack>
                 <Button
+                    className={ styles.buttonCircular }
                     appearance="primary"
                     size="lg"
                     onClick={ onEditProfileClick }

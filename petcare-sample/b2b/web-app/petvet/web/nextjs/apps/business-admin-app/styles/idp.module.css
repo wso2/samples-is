@@ -33,7 +33,7 @@
 }
 
 .idp__template__card:hover {
-    background-color: rgba(245, 245, 245, 0.2);
+    background-color: rgb(255, 255, 255);
     transition: background-color 10ms linear;
     cursor: pointer;
 }
