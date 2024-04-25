@@ -22,6 +22,7 @@ interface Config {
     scope: string[];
     signInRedirectURL: string;
     signOutRedirectURL: string;
+    myAccountAppURL: string;
     resourceServerURL: string;
   }
 
@@ -36,6 +37,7 @@ const authConfig = {
     clientID: window.config.clientID,
     signInRedirectURL: window.config.signInRedirectURL,
     signOutRedirectURL: window.config.signOutRedirectURL,
+    myAccountAppURL: window.config.myAccountAppURL,
     resourceServerURL: window.config.resourceServerURL,
     scope: ["openid", "profile", "email"],
   };
