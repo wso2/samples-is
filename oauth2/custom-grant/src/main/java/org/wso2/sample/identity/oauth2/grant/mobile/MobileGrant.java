@@ -30,6 +30,8 @@ import org.wso2.carbon.identity.oauth2.token.handlers.grant.AbstractAuthorizatio
 import org.wso2.carbon.utils.multitenancy.MultitenantUtils;
 
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * New grant type for Identity Server
@@ -158,22 +160,21 @@ public class MobileGrant extends AbstractAuthorizationGrantHandler  {
 
 
     /**
-     * TODO
-     *
      * You need to implement how to validate the mobile number
      *
-     * @param mobileNumber
-     * @return
+     * @param mobileNumber Mobile number of the user.
+     * @return true if the mobile number is valid, otherwise false.
      */
     private boolean isValidMobileNumber(String mobileNumber){
 
-        // just demo validation
-
-        if(mobileNumber.startsWith("033")){
-            return true;
-        }
-
-        return false;
+        // Regular expression to match 10 digits, with optional country code
+        String pattern = "^(\\+\\d{1,3})?\\d{10}$";
+        // Create a Pattern object
+        Pattern r = Pattern.compile(pattern);
+        // Create Matcher object
+        Matcher m = r.matcher(mobileNumber);
+        // Check if the pattern matches
+        return m.matches();
     }
 
     @Override
