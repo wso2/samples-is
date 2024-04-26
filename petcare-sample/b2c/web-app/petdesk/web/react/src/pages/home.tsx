@@ -33,7 +33,7 @@ import PetOverview from "./Pets/petOverview";
 import PetCard from "./Pets/PetCard";
 import { getPets } from "../components/getPetList/get-pets";
 import MenuListComposition from "../components/UserMenu";
-import { getConfig } from "../util/getConfig";
+import { default as authConfig } from "../../config.json";
 
 interface DerivedState {
     authenticateResponse: BasicUserInfo,
@@ -88,7 +88,6 @@ export const HomePage: FunctionComponent = (): ReactElement => {
             setUser(basicUserInfo);
             const idToken = await getIDToken();
             const decodedIDToken = await getDecodedIDToken();
-            console.log("decodedIDToken", decodedIDToken);
             
 
             const derivedState: DerivedState = {
@@ -127,10 +126,10 @@ export const HomePage: FunctionComponent = (): ReactElement => {
     }
 
     useEffect(() => {
-        if (!isAddPetOpen) {
+        if (!isAddPetOpen && state.isAuthenticated) {
             getPetList();
         }
-    }, [isAddPetOpen, isOverviewOpen, isUpdateViewOpen]);
+    }, [isAddPetOpen, isOverviewOpen, isUpdateViewOpen, state.isAuthenticated]);
 
 
     useEffect(() => {
@@ -166,7 +165,7 @@ export const HomePage: FunctionComponent = (): ReactElement => {
     };
 
     // If `clientID` is not defined in `config.json`, show a UI warning.
-    if (!getConfig().clientID) {
+    if (!authConfig.clientID) {
 
         return (
             <div className="content">
