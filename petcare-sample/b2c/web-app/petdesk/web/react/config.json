@@ -9,5 +9,6 @@
     "signInRedirectURL": "http://localhost:3000",
     "signOutRedirectURL": "http://localhost:3000",
     "resourceServerURL": "http://localhost:9090",
+    "enableOIDCSessionManagement": true,
     "myAccountAppURL": ""
 }
