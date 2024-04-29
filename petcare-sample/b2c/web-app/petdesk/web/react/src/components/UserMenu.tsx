@@ -67,7 +67,7 @@ export default function MenuListComposition(props: {
     };
 
     const gotoMyAccount = () => {
-        window.open(authConfig.baseUrl.myAccountAppURL, '_blank');
+        window.open(authConfig.myAccountAppURL, '_blank');
     };
 
     return (
