@@ -26,7 +26,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { BasicUserInfo, useAuthContext } from "@asgardeo/auth-react";
 import { getNotification } from "./Notifications/get-notification";
-import { default as authConfig } from "../../config.json";
+import { getConfig } from "../util/getConfig";
 
 export default function MenuListComposition(props: {
     user: BasicUserInfo;
@@ -67,7 +67,7 @@ export default function MenuListComposition(props: {
     };
 
     const gotoMyAccount = () => {
-        window.open(authConfig.myAccountAppURL, '_blank');
+        window.open(getConfig().myAccountAppURL, '_blank');
     };
 
     return (

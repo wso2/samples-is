@@ -33,7 +33,7 @@ import PetOverview from "./Pets/petOverview";
 import PetCard from "./Pets/PetCard";
 import { getPets } from "../components/getPetList/get-pets";
 import MenuListComposition from "../components/UserMenu";
-import { default as authConfig } from "../../config.json";
+import { getConfig } from "../util/getConfig";
 
 interface DerivedState {
     authenticateResponse: BasicUserInfo,
@@ -165,7 +165,7 @@ export const HomePage: FunctionComponent = (): ReactElement => {
     };
 
     // If `clientID` is not defined in `config.json`, show a UI warning.
-    if (!authConfig.clientID) {
+    if (!getConfig().clientID) {
 
         return (
             <div className="content">
