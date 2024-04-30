@@ -1,6 +1,6 @@
 {
-    "baseUrl": "https://api.asgardeo.io/t/sachinm",
-    "clientID": "U8BU5WbBkmBondfwjMOnd7buJRYa",
+    "baseUrl": "https://localhost:9443",
+    "clientID": "<CONFIGURED_SPA_CLIENT_ID>",
     "scope": [
         "openid",
         "profile",
