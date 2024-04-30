@@ -1,0 +1,71 @@
+openapi: 3.0.1
+info:
+  title: Service Openapi Yaml
+  version: 1.0.0
+servers:
+- url: "{server}:{port}/"
+  variables:
+    server:
+      default: http://localhost
+    port:
+      default: "9091"
+paths:
+  /billing:
+    get:
+      summary: Get Billing Information
+      operationId: getBilling
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Billing'
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+    post:
+      summary: Create a new billing
+      operationId: postBilling
+      requestBody:
+        description: basic billing details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BillingInfo'
+      responses:
+        "201":
+          description: Created
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+components:
+  schemas:
+    Billing:
+      allOf:
+      - $ref: '#/components/schemas/BillingInfo'
+      - required:
+        - owner
+        type: object
+        properties:
+          owner:
+            type: string
+    BillingInfo:
+      type: object
+      properties:
+        cardName:
+          type: string
+        cardNumber:
+          type: string
+        expiryDate:
+          type: string
+        securityCode:
+          type: string

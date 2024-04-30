@@ -18,25 +18,26 @@
 
 import { Button, List, ListItem, ListItemIcon, ListItemText, Menu, Theme, Typography, createStyles, makeStyles } from "@mui/material";
 import React from "react";
-import getSettingsView from "../pages/settings";
 import GetSettings from "../pages/settings";
-import SETTINGS_ICON from "../images/settings.png";
 import MiscellaneousServicesIcon from '@mui/icons-material/MiscellaneousServices';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { BasicUserInfo, useAuthContext } from "@asgardeo/auth-react";
 import { getNotification } from "./Notifications/get-notification";
 import { default as authConfig } from "../../config.json";
+import GetBilling from "../pages/billing";
+import { getBilling } from "./Billing/billing";
+import { AddCard } from "@mui/icons-material";
 
 export default function MenuListComposition(props: {
     user: BasicUserInfo;
     signout: (callback?: (response: boolean) => void) => Promise<boolean>;
+    setIsBillingWariningOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-    const { user, signout } = props;
-    const anchorRef = React.useRef<HTMLButtonElement>(null);
+    const { user, signout, setIsBillingWariningOpen } = props;
     const [userMenuOpen, setUserMenuOpen] = React.useState(false);
-    const prevOpen = React.useRef(userMenuOpen);
     const [settingsOpen, setSettingsOpen] = React.useState(false);
+    const [billingOpen, setBillingOpen] = React.useState(false);
     const { getAccessToken } = useAuthContext();
     const [enabled, setEnabled] = React.useState(false);
     const [email, setEmail] = React.useState(user.email);
@@ -69,6 +70,19 @@ export default function MenuListComposition(props: {
     const gotoMyAccount = () => {
         window.open(authConfig.myAccountAppURL, '_blank');
     };
+
+    async function handleBilling() {
+        const accessToken = await getAccessToken();
+        return getBilling(accessToken)
+        .then((res) => {
+            setBillingOpen(true);
+            return Promise.resolve(res);
+        })
+        .catch((e) => {
+            setIsBillingWariningOpen(true);
+            return Promise.reject(e);
+        });    
+    }
 
     return (
         <><div className="user-menu-div">
@@ -122,6 +136,22 @@ export default function MenuListComposition(props: {
                     </ListItem>
                     <ListItem
                         button
+                        className="nav-list-item"
+                        component="nav"
+                        disableGutters
+                        onClick={() => { setUserMenuOpen(false); sessionStorage.setItem("billing", "true");}}
+                        data-testid="header-user-profile-settings"
+                    >
+                        <ListItemIcon>
+                            <AddCard style={{ width: "3vh", height: "3vh" }}/>
+                        </ListItemIcon>
+                        <ListItemText
+                            disableTypography
+                            primary={<Typography variant="body2" style={{ color: 'black', fontSize: "16px", fontFamily: "montserrat" }}>Billing</Typography>}
+                        />
+                    </ListItem>
+                    <ListItem
+                        button
                         component="nav"
                         disableGutters
                         onClick={handleLogout}
@@ -141,6 +171,9 @@ export default function MenuListComposition(props: {
             <div>
                 <GetSettings isOpen={settingsOpen} setIsOpen={setSettingsOpen}
                     enabled={enabled} email={email} setEnabled={setEnabled} setEmail={setEmail} />
+            </div>
+            <div>
+                <GetBilling handleBilling={handleBilling} isOpen={billingOpen} setIsOpen={setBillingOpen} />
             </div>
         </>
     );

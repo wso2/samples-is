@@ -19,7 +19,8 @@ Read more about the SDK configurations [here](../../README.md#authprovider).
     "signInRedirectURL": "http://localhost:3000",
     "signOutRedirectURL": "http://localhost:3000",
     "scope": ["profile","openid","email"],
-    "resourceServerURL": "<API-ENDPOINT-OF-PET-MGT-SERVICE>"
+    "resourceServerURL": "<API-ENDPOINT-OF-PET-MGT-SERVICE>",
+    "billingServerURL": "<API-ENDPOINT-OF-BILLING-MGT-SERVICE>"
 }
 ```
 

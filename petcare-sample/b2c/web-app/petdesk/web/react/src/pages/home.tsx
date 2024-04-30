@@ -29,6 +29,7 @@ import { LogoutRequestDenied } from "../components/LogoutRequestDenied";
 import { USER_DENIED_LOGOUT } from "../constants/errors";
 import { Pet, PetInfo } from "../types/pet";
 import AddPet from "./Pets/addPets";
+import BillingAlert from "./Billing/billingAlert";
 import PetOverview from "./Pets/petOverview";
 import PetCard from "./Pets/PetCard";
 import { getPets } from "../components/getPetList/get-pets";
@@ -66,6 +67,8 @@ export const HomePage: FunctionComponent = (): ReactElement => {
     const [hasLogoutFailureError, setHasLogoutFailureError] = useState<boolean>();
     const [user, setUser] = useState<BasicUserInfo | null>(null);
     const [isAddPetOpen, setIsAddPetOpen] = useState(false);
+    const [isBillingWariningOpen, setIsBillingWariningOpen] = useState(false);
+    const [isInvokeBillingLogin, seIsInvokeBillingLogin] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [isOverviewOpen, setIsOverviewOpen] = useState(false);
     const [isUpdateViewOpen, setIsUpdateViewOpen] = useState(false);
@@ -138,11 +141,26 @@ export const HomePage: FunctionComponent = (): ReactElement => {
         } 
       }, [state.isAuthenticated]);
 
+    useEffect(() => {
+        if (isInvokeBillingLogin) {
+            handleBillingLogin();
+        }
+      }, [isInvokeBillingLogin]);
+
     const handleLogin = useCallback(() => {
         setHasLogoutFailureError(false);
         signIn()
             .catch(() => setHasAuthenticationErrors(true));
     }, [signIn]);
+
+    const handleBillingLogin = useCallback(() => {
+        signIn({
+            acr_values:"acr2"
+        })
+        .catch(() => setHasAuthenticationErrors(true));
+        //set value in session storage
+        sessionStorage.setItem("billing", "true");
+    }, []);
 
     /**
       * handles the error occurs when the logout consent page is enabled
@@ -236,7 +254,7 @@ export const HomePage: FunctionComponent = (): ReactElement => {
         <><nav className="header">
             <div>
                 {user && (
-                    <MenuListComposition user={user} signout={signOut} />
+                    <MenuListComposition setIsBillingWariningOpen={setIsBillingWariningOpen} user={user} signout={signOut} />
                 )}
             </div>
             <div className="app-title-style">
@@ -326,6 +344,9 @@ export const HomePage: FunctionComponent = (): ReactElement => {
             )}
             <div>
                 <AddPet isOpen={isAddPetOpen} setIsOpen={setIsAddPetOpen} />
+            </div>
+            <div>
+                <BillingAlert isOpen={isBillingWariningOpen} setIsOpen={setIsBillingWariningOpen} setInvokeLogin={seIsInvokeBillingLogin} />
             </div>
             <div>
                 <PetOverview 

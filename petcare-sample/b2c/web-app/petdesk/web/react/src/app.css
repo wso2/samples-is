@@ -400,10 +400,29 @@ code {
     width: 45vw;
     height: 55vh;
     background-color: white;
-    /* margin-top: 7%; */
-    /* top: 10%;
+    margin-top: 7%;
+    top: 10%;
     left: 30%;
-    right:30%; */
+    right:30%;
+    outline: 2px solid #bcbebf;
+    border-radius: 10px;
+    position: absolute;
+    align-items: left;
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.billing-div {
+    width: 35vw;
+    height: 57vh;
+    background-color: white;
+    margin-top: 7%;
+    top: 10%;
+    left: 30%;
+    right:30%;
     outline: 2px solid #bcbebf;
     border-radius: 10px;
     position: absolute;
@@ -422,6 +441,17 @@ code {
     position: absolute;
     top: 50%;
     left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+.billing-form-div {
+    border-radius: 10px;
+    width: 39vw;
+    height: 30vh;
+    position: absolute;
+    top: 50%;
+    left: 55%;
     transform: translate(-50%, -50%);
 
 }
@@ -449,7 +479,7 @@ code {
     border: none;
     width: 200px;
     position: absolute;
-    top: 50%;
+    top: 53%;
     left: 50%;
     transform: translate(-50%, 18vh);
     font-size: 2vh;

@@ -19,6 +19,7 @@
 import { Dialog, Transition } from "@headlessui/react";
 import React, { Fragment } from "react";
 import "./pets.css";
+import Typography from "@mui/material/Typography/Typography";
 
 interface ModalProps {
     isOpen: boolean;
@@ -56,7 +57,9 @@ export default function Model(props: ModalProps) {
                         <Dialog.Panel>
                             <Dialog.Title
                                 as="h2" className="add-pet-div">
-                                {title}
+                                <Typography variant="h4" component="h4">
+                                    {title}
+                                </Typography>
                             </Dialog.Title>
                             <div className="child-div">{children}</div>
                             <div className="save-btn-div">
