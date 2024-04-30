@@ -31,7 +31,7 @@
     "scripts": {
         "start": "webpack-dev-server --mode development --hot --open",
         "prebuild": "yarn install",
-        "build": "webpack",
+        "build": "webpack && sed -i '' 's/%PUBLIC_URL%//g' dist/index.html",
         "prod": "webpack --mode production"
     },
     "dependencies": {
