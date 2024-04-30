@@ -23,7 +23,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./app.css";
 import { ErrorBoundary } from "./error-boundary";
 import { HomePage, NotFoundPage } from "./pages";
-import { default as authConfig } from "../../../web/react/config.json";
+import { default as authConfig } from "../config.json";
 
 const AppContent: FunctionComponent = (): ReactElement => {
     const { error } = useAuthContext();
