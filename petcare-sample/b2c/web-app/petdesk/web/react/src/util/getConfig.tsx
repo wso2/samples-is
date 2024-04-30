@@ -33,12 +33,12 @@ declare global {
 }  
 
 const authConfig = {
-    baseUrl: window.config.baseUrl,
-    clientID: window.config.clientID,
-    signInRedirectURL: window.config.signInRedirectURL,
-    signOutRedirectURL: window.config.signOutRedirectURL,
-    myAccountAppURL: window.config.myAccountAppURL,
-    resourceServerURL: window.config.resourceServerURL,
+    baseUrl: process.env.REACT_APP_BASE_URL,
+    clientID: process.env.REACT_APP_CLIENT_ID,
+    signInRedirectURL: process.env.REACT_APP_SIGN_IN_REDIRECT_URL,
+    signOutRedirectURL: process.env.REACT_APP_SIGN_OUT_REDIRECT_URL,
+    myAccountAppURL: process.env.REACT_APP_MY_ACCOUNT_URL,
+    resourceServerURL: process.env.REACT_APP_RESOURCE_URL,
     scope: ["openid", "profile", "email"],
   };
 
