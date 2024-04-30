@@ -4,11 +4,13 @@
     "scope": [
         "openid",
         "profile",
-        "email"
+        "email",
+        "acr"
     ],
     "signInRedirectURL": "http://localhost:3000",
     "signOutRedirectURL": "http://localhost:3000",
     "resourceServerURL": "http://localhost:9090",
+    "billingServerURL": "http://localhost:9091",
     "enableOIDCSessionManagement": true,
     "myAccountAppURL": ""
 }

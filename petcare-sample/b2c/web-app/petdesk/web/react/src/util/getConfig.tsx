@@ -24,6 +24,7 @@ interface Config {
     signOutRedirectURL: string;
     myAccountAppURL: string;
     resourceServerURL: string;
+    billingServerURL: string;
   }
 
 declare global {
@@ -39,7 +40,8 @@ const authConfig = {
     signOutRedirectURL: window.config.signOutRedirectURL,
     myAccountAppURL: window.config.myAccountAppURL,
     resourceServerURL: window.config.resourceServerURL,
-    scope: ["openid", "profile", "email"],
+    billingServerURL: window.config.billingServerURL,
+    scope: ["openid", "profile", "email", "acr"],
   };
 
 export function getConfig() {

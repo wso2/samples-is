@@ -11,6 +11,11 @@
     ```
     bal run
     ```
+1. Navigate to <PROJECT_HOME>/petcare-sample/b2c/web-app/petdesk/apis/ballerina/billing-management-service and start the 
+   pet management service by executing the following command in the terminal.
+    ```
+    bal run
+    ```
     
     
 > [!NOTE]
@@ -40,6 +45,7 @@ dbPort = "<DB_PORT>"
     signInRedirectURL: "http://localhost:5173",
     signOutRedirectURL: "http://localhost:5173",
     resourceServerURL: "http://localhost:9090",
+    billingServerURL: "http://localhost:9091",
     scope: ["openid", "email", "profile"]
    ```
 2. Run the application by executing the following command in the terminal.
