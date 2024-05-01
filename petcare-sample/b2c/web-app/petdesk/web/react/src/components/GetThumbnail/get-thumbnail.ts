@@ -6,9 +6,15 @@ export async function getThumbnail(accessToken: string, petId: string) {
       'accept': `*/*`,
     };
 
+    try {
     const response = await getPetInstance().get("/pets/" + petId + "/thumbnail" , {
       headers: headers,
       responseType: 'blob',
     });
     return response;
+  } catch (error) {
+    // Handle errors here
+    console.error('Error fetching thumbnail:', error);
+    // throw error; // Rethrow the error or handle it as appropriate
+  }
   }
