@@ -27,7 +27,7 @@ import { DefaultLayout } from "../layouts/default";
 import { useLocation } from "react-router-dom";
 import { LogoutRequestDenied } from "../components/LogoutRequestDenied";
 import { USER_DENIED_LOGOUT } from "../constants/errors";
-import { Pet, PetInfo } from "../types/pet";
+import { Pet } from "../types/pet";
 import AddPet from "./Pets/addPets";
 import PetOverview from "./Pets/petOverview";
 import PetCard from "./Pets/PetCard";
@@ -61,12 +61,12 @@ export const HomePage: FunctionComponent = (): ReactElement => {
         on
     } = useAuthContext();
     const [petList, setPetList] = useState<Pet[] | null>(null);
-    const [derivedAuthenticationState, setDerivedAuthenticationState] = useState<DerivedState>(null);
+    const [, setDerivedAuthenticationState] = useState<DerivedState>(null);
     const [hasAuthenticationErrors, setHasAuthenticationErrors] = useState<boolean>(false);
     const [hasLogoutFailureError, setHasLogoutFailureError] = useState<boolean>();
     const [user, setUser] = useState<BasicUserInfo | null>(null);
     const [isAddPetOpen, setIsAddPetOpen] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+    const [, setIsLoading] = useState(false);
     const [isOverviewOpen, setIsOverviewOpen] = useState(false);
     const [isUpdateViewOpen, setIsUpdateViewOpen] = useState(false);
     const [pet, setPet] = useState<Pet | null>(null);
@@ -189,154 +189,154 @@ export const HomePage: FunctionComponent = (): ReactElement => {
         );
     }
 
-    if (!state.isAuthenticated) {
+    
         return (
             <DefaultLayout
                 isLoading={state.isLoading}
                 hasErrors={hasAuthenticationErrors}
             >
                 {
-                
-                    <div className="signInDiv">
+                (!state.isAuthenticated) ? (
+                    <>
+                        <div className="signInDiv">
+                            <img
+                                style={{ width: "20vw" }}
+                                src={LOGO_IMAGE}
+                                alt="pet-care-logo"
+                            />
+                        <div >
+                        <label>
+                            Helping you to take good care of your pet
+                        </label>
+                        <br />
+                        <br/>
+                        <br/>
+                                    
+                        <button
+                            className="get-started-btn"
+                            onClick={() => {
+                                handleLogin();
+                            }}
+                        >
+                            Get Started
+                        </button>
+                        </div>
+                        <br /> 
                         <img
-                            style={{ width: "20vw" }}
-                            src={LOGO_IMAGE}
+                            style={{ width: "80%" }}
+                            src={HOME_PAGE_IMAGE}
                             alt="pet-care-logo"
                         />
-                    <div >
-                    <label>
-                        Helping you to take good care of your pet
-                    </label>
-                    <br />
-                    <br/>
-                    <br/>
-                                
-                    <button
-                        className="get-started-btn"
-                        onClick={() => {
-                            handleLogin();
-                        }}
-                    >
-                        Get Started
-                    </button>
-                    </div>
-                    <br /> 
-                    <img
-                        style={{ width: "80%" }}
-                        src={HOME_PAGE_IMAGE}
-                        alt="pet-care-logo"
-                    />
-                    </div>
-                }
-            </DefaultLayout>
-        )
-    }
+                        </div>
+                    </>
+                ): (
 
-    return (
-        <><nav className="header">
-            <div>
-                {user && (
-                    <MenuListComposition user={user} signout={signOut} />
-                )}
-            </div>
-            <div className="app-title-style">
-                <img
-                    style={{ width: "3vw"}}
-                    src={LOGO_THUMBNAIL_IMAGE}
-                    alt="pet-care-logo"
-                />
-            </div>
-            <p className="wording-style">City Vet Hospital</p>
-        </nav>
-            <div className="cover-div">
-                <div className="cover-row ">
-                    <div className="cover-column-left">
-                        <b>Welcome to</b>
-                        <br />
-                        <br />
-                        <img
-                            style={{ width: "15vw"}}
-                            src={LOGO_IMAGE}
-                            alt="pet-care-logo"
-                        />
-                        <br />
-                        Best pet care starts here.
-                        <br />
-                        <br />
-                        <br />
-                        <div className="tagline">
-                            <p>
-                                Schedule appointments & keep your furry friend healthy – all at your fingertips.
-                            </p>
+                    <><nav className="header">
+                        <div>
+                            {user && (
+                                <MenuListComposition user={user} signout={signOut} />
+                            )}
+                        </div>
+                        <div className="app-title-style">
+                            <img
+                                style={{ width: "3vw"}}
+                                src={LOGO_THUMBNAIL_IMAGE}
+                                alt="pet-care-logo"
+                            />
+                        </div>
+                        <p className="wording-style">City Vet Hospital</p>
+                    </nav>
+                    <div className="cover-div">
+                        <div className="cover-row ">
+                            <div className="cover-column-left">
+                                <b>Welcome to</b>
+                                <br />
+                                <br />
+                                <img
+                                    style={{ width: "15vw"}}
+                                    src={LOGO_IMAGE}
+                                    alt="pet-care-logo"
+                                />
+                                <br />
+                                Best pet care starts here.
+                                <br />
+                                <br />
+                                <br />
+                                <div className="tagline">
+                                    <p>
+                                        Schedule appointments & keep your furry friend healthy – all at your fingertips.
+                                    </p>
+                                </div>
+                            </div>
+                            <div className="cover-column-right">
+                                {/* <div className="cover-img"> */}
+                                <img
+                                    style={{ width: "40vh", height: "40vh"}}
+                                    src={COVER_IMAGE}
+                                    alt="cover-image"
+                                />
+                            </div>
                         </div>
                     </div>
-                    <div className="cover-column-right">
-                        {/* <div className="cover-img"> */}
-                        <img
-                            style={{ width: "40vh", height: "40vh"}}
-                            src={COVER_IMAGE}
-                            alt="cover-image"
-                        />
+                    <div className="my-pets">
+                        <label className="home-wording">
+                            My Pets 
+                        </label>
+                        <br />
+                        <br />
+                        <button className="add-pet-btn" onClick={() => setIsAddPetOpen(true)}>
+                            Add
+                        </button>
                     </div>
-                </div>
-            </div>
-            <div className="my-pets">
-                <label className="home-wording">
-                    My Pets 
-                </label>
-                <br />
-                <br />
-                <button className="add-pet-btn" onClick={() => setIsAddPetOpen(true)}>
-                    Add
-                </button>
-            </div>
-            {petList &&(
-                <div className="table-view">
-                {/* <Grid container item lg={10} md={10} sm={12} xs={12}> */}
-                    <Grid container item spacing={10}>
-                        {petList.map((pet) => (
-                            <Grid
-                                item
-                                key={pet.name}
-                                xs={4}
-                                sm={4}
-                                md={4}
-                                lg={4}
-                                className="grid-item"
-                                onClick={() => {
-                                    setIsOverviewOpen(true);
-                                    setPet(pet);
-                                }}
-                            >
-                                <PetCard
-                                    petId={pet.id}
-                                    petName={pet.name}
-                                    breed={pet.breed}
-                                    petThumbnail={thumbnail}
-                                    setPetThumbnail={setThumbnail}
-                                    isAuthenticated={state.isAuthenticated}
-                                    setIsHomeLoading={setIsLoading}
-                                    isUpdateViewOpen={isUpdateViewOpen}
-                                />
+                    {petList &&(
+                        <div className="table-view">
+                        {/* <Grid container item lg={10} md={10} sm={12} xs={12}> */}
+                            <Grid container item spacing={10}>
+                                {petList.map((pet) => (
+                                    <Grid
+                                        item
+                                        key={pet.name}
+                                        xs={4}
+                                        sm={4}
+                                        md={4}
+                                        lg={4}
+                                        className="grid-item"
+                                        onClick={() => {
+                                            setIsOverviewOpen(true);
+                                            setPet(pet);
+                                        }}
+                                    >
+                                        <PetCard
+                                            petId={pet.id}
+                                            petName={pet.name}
+                                            breed={pet.breed}
+                                            petThumbnail={thumbnail}
+                                            setPetThumbnail={setThumbnail}
+                                            isAuthenticated={state.isAuthenticated}
+                                            setIsHomeLoading={setIsLoading}
+                                            isUpdateViewOpen={isUpdateViewOpen}
+                                        />
+                                    </Grid>
+                                ))}
                             </Grid>
-                        ))}
-                    </Grid>
-                {/* </Grid> */}
-            </div>
-            )}
-            <div>
-                <AddPet isOpen={isAddPetOpen} setIsOpen={setIsAddPetOpen} />
-            </div>
-            <div>
-                <PetOverview 
-                isOpen={isOverviewOpen} 
-                setIsOpen={setIsOverviewOpen} 
-                isUpdateViewOpen={isUpdateViewOpen} 
-                setIsUpdateViewOpen={setIsUpdateViewOpen} 
-                pet={pet}
-                petThumbnail={thumbnail}
-                setPetThumbnail={setThumbnail} />
-            </div>
-        </>
-    );
+                        </div>
+                    )}
+                    <div>
+                        <AddPet isOpen={isAddPetOpen} setIsOpen={setIsAddPetOpen} />
+                    </div>
+                    <div>
+                        <PetOverview 
+                        isOpen={isOverviewOpen} 
+                        setIsOpen={setIsOverviewOpen} 
+                        isUpdateViewOpen={isUpdateViewOpen} 
+                        setIsUpdateViewOpen={setIsUpdateViewOpen} 
+                        pet={pet}
+                        petThumbnail={thumbnail}
+                        setPetThumbnail={setThumbnail} />
+                    </div>
+                </>
+                )
+            }
+            </DefaultLayout>
+        );
 };
