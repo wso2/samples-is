@@ -11,7 +11,7 @@
     ```
     bal run
     ```
-1. Navigate to <PROJECT_HOME>/petcare-sample/b2c/web-app/petdesk/apis/ballerina/billing-management-service and start the 
+2. Navigate to <PROJECT_HOME>/petcare-sample/b2c/web-app/petdesk/apis/ballerina/billing-management-service and start the 
    pet management service by executing the following command in the terminal.
     ```
     bal run
