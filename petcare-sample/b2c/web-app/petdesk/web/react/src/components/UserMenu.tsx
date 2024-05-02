@@ -41,6 +41,7 @@ export default function MenuListComposition(props: {
     const { getAccessToken } = useAuthContext();
     const [enabled, setEnabled] = React.useState(false);
     const [email, setEmail] = React.useState(user.email);
+    const [isUpgraded, setisUpgraded] = React.useState(false);
 
     const handleToggle = () => {
         setUserMenuOpen((prevOpen) => !prevOpen);
@@ -106,6 +107,7 @@ export default function MenuListComposition(props: {
                         button
                         className="nav-list-item"
                         component="nav"
+                        disabled={!isUpgraded}
                         disableGutters
                         onClick={() => { setSettingsOpen(true); setUserMenuOpen(false); getSettings();}}
                         data-testid="header-user-profile-settings"
@@ -172,7 +174,7 @@ export default function MenuListComposition(props: {
                     enabled={enabled} email={email} setEnabled={setEnabled} setEmail={setEmail} />
             </div>
             <div>
-                <GetBilling handleBilling={handleBilling} isOpen={billingOpen} setIsOpen={setBillingOpen} />
+                <GetBilling isUpgraded={isUpgraded} setisUpgraded={setisUpgraded} user={user} handleBilling={handleBilling} isOpen={billingOpen} setIsOpen={setBillingOpen} />
             </div>
         </>
     );

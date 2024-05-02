@@ -25,6 +25,7 @@ interface Config {
     myAccountAppURL: string;
     resourceServerURL: string;
     billingServerURL: string;
+    salesforceServerURL: string;
   }
 
 declare global {
@@ -41,6 +42,7 @@ const authConfig = {
     myAccountAppURL: window.config.myAccountAppURL,
     resourceServerURL: window.config.resourceServerURL,
     billingServerURL: window.config.billingServerURL,
+    salesforceServerURL: window.config.salesforceServerURL,
     scope: ["openid", "profile", "email", "acr"],
   };
 
