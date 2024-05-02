@@ -4,7 +4,7 @@ window.config = {
   signInRedirectURL: "http://localhost:3000",
   signOutRedirectURL: "http://localhost:3000",
   myAccountAppURL: "",
-  resourceServerURL: "http://localhost:9090",
+  petManagementServiceURL: "http://localhost:9090",
   billingServerURL: "http://localhost:9091",
   salesforceServerURL: "http://localhost:9092",
   scope: ["openid", "email", "profile", "acr"],

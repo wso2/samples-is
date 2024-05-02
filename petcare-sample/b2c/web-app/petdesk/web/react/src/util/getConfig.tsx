@@ -23,7 +23,7 @@ interface Config {
     signInRedirectURL: string;
     signOutRedirectURL: string;
     myAccountAppURL: string;
-    resourceServerURL: string;
+    petManagementServiceURL: string;
     billingServerURL: string;
     salesforceServerURL: string;
   }
@@ -40,7 +40,7 @@ const authConfig = {
     signInRedirectURL: window.config.signInRedirectURL,
     signOutRedirectURL: window.config.signOutRedirectURL,
     myAccountAppURL: window.config.myAccountAppURL,
-    resourceServerURL: window.config.resourceServerURL,
+    petManagementServiceURL: window.config.petManagementServiceURL,
     billingServerURL: window.config.billingServerURL,
     salesforceServerURL: window.config.salesforceServerURL,
     scope: ["openid", "profile", "email", "acr"],
