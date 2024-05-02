@@ -157,8 +157,6 @@ function getOwnerWithEmail(http:Headers headers) returns [string, string]|error 
         return jwtHeader;
     }
 
-    io:println("JWT Header : ", jwtHeader);
-
     [jwt:Header, jwt:Payload] [_, payload] = check jwt:decode(jwtHeader);
     string owner = getOwnerFromPayload(payload);
     string emailAddress = payload["email"].toString();
