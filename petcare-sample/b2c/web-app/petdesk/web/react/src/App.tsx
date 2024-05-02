@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2021, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ * Copyright (c) 2024, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
  * WSO2 Inc. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
@@ -16,10 +16,21 @@
  * under the License.
  */
 
-import { initInstance } from "../../pages/instance";
-import { getConfig } from "../../util/getConfig";
+import React from 'react'; 
 
-export const getPetInstance = () => {
-  const conf =  getConfig().resourceServerURL;
-  return initInstance(conf);
-};
+import './App.css';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { HomePage, NotFoundPage } from './pages';
+
+function App() {
+  return (
+    <Router>
+    <Routes>
+        <Route path="/" element={ <HomePage /> } />
+        <Route element={ <NotFoundPage /> } />
+    </Routes>
+</Router>
+  );
+}
+
+export default App;

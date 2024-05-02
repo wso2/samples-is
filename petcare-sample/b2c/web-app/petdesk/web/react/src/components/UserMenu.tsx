@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { Button, List, ListItem, ListItemIcon, ListItemText, Menu, Theme, Typography, createStyles, makeStyles } from "@mui/material";
+import { List, ListItem, ListItemIcon, ListItemText, Menu, Typography } from "@mui/material";
 import React from "react";
 import GetSettings from "../pages/settings";
 import MiscellaneousServicesIcon from '@mui/icons-material/MiscellaneousServices';
@@ -24,10 +24,10 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { BasicUserInfo, useAuthContext } from "@asgardeo/auth-react";
 import { getNotification } from "./Notifications/get-notification";
-import { default as authConfig } from "../../config.json";
 import GetBilling from "../pages/billing";
 import { getBilling } from "./Billing/billing";
 import { AddCard } from "@mui/icons-material";
+import { getConfig } from "../util/getConfig";
 
 export default function MenuListComposition(props: {
     user: BasicUserInfo;
@@ -68,7 +68,7 @@ export default function MenuListComposition(props: {
     };
 
     const gotoMyAccount = () => {
-        window.open(authConfig.myAccountAppURL, '_blank');
+        window.open(getConfig().myAccountAppURL, '_blank');
     };
 
     async function handleBilling() {
@@ -100,7 +100,6 @@ export default function MenuListComposition(props: {
                 open={userMenuOpen}
                 onClose={handleClose}
                 className="menu-style"
-                getContentAnchorEl={null}
             >
                 <List className="list-style">
                     <ListItem

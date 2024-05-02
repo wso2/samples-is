@@ -70,21 +70,22 @@ export default function GetBilling(props: BillingProps) {
         setBilling();
     };
 
+    async function setBillingInfo() {
+        const handleLoginResponse = await handleBilling();
+        setCardName(handleLoginResponse.data.cardName);
+        setCardNumber(handleLoginResponse.data.cardNumber);
+        setExpiryDate(handleLoginResponse.data.expiryDate);
+        setSecurityCode(handleLoginResponse.data.securityCode);
+        //remove the billing key from session storage
+        sessionStorage.removeItem("billing");
+    }
+
     useEffect(() => {
         //if session strage has billing true, then open the billing dialog
         const billingExists = sessionStorage.getItem("billing") !== null;
         if (billingExists) {
             const billing = sessionStorage.getItem("billing");
             if (billing === "true") {
-                async function setBillingInfo() {
-                    const handleLoginResponse = await handleBilling();
-                    setCardName(handleLoginResponse.data.cardName);
-                    setCardNumber(handleLoginResponse.data.cardNumber);
-                    setExpiryDate(handleLoginResponse.data.expiryDate);
-                    setSecurityCode(handleLoginResponse.data.securityCode);
-                    //remove the billing key from session storage
-                    sessionStorage.removeItem("billing");
-                }
                 setBillingInfo();
             }
         }

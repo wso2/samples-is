@@ -17,9 +17,9 @@
  */
 
 import { initInstance } from "../../pages/instance";
-import { default as authConfig } from "../../../config.json";
+import { getConfig } from "../../util/getConfig";
 
 export const getBillingInstance = () => {
-  let conf =  authConfig.billingServerURL;
+  const conf =  getConfig().billingServerURL;
   return initInstance(conf);
 };
