@@ -20,6 +20,6 @@ import { initInstance } from "../../pages/instance";
 import { getConfig } from "../../util/getConfig";
 
 export const getBillingInstance = () => {
-  let conf =  getConfig().billingServerURL;
+  const conf =  getConfig().billingServerURL;
   return initInstance(conf);
 };
