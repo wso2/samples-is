@@ -1,6 +1,7 @@
 [versions]
 activityCompose = "1.9.0"
 agp = "8.3.2"
+asgardeoAndroidUi = "0.1.1"
 arrowCore = "1.2.0"
 coilCompose = "2.5.0"
 composeBom = "2024.04.01"
@@ -22,6 +23,7 @@ uiToolingPreviewAndroid = "1.6.6"
 uiTooling = "1.6.6"
 
 [libraries]
+asgardeo-android-ui = { module = "io.asgardeo:android.ui", version.ref = "asgardeoAndroidUi" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
 androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
 androidx-compose-bom-v20240400 = { module = "androidx.compose:compose-bom", version.ref = "composeBomVersion" }

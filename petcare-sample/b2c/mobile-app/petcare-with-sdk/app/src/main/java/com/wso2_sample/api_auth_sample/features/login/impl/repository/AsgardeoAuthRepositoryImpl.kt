@@ -11,10 +11,12 @@ import javax.inject.Inject
 class AsgardeoAuthRepositoryImpl @Inject constructor() : AsgardeoAuthRepository {
     private val asgardeoAuth: AsgardeoAuth = AsgardeoAuth.getInstance(
         AuthenticationCoreConfig(
-            authorizeEndpoint = Config.getAuthorizeUrl(),
-            tokenEndpoint = Config.getTokenUrl(),
-            logoutEndpoint = Config.getLogoutUrl(),
-            userInfoEndpoint = Config.getUserInfoUrl(),
+//            Enable these configs at your discretion
+//            authorizeEndpoint = Config.getAuthorizeUrl(),
+//            tokenEndpoint = Config.getTokenUrl(),
+//            logoutEndpoint = Config.getLogoutUrl(),
+//            userInfoEndpoint = Config.getUserInfoUrl(),
+            discoveryEndpoint = Config.getDiscoveryUrl(),
             authnEndpoint = Config.getAuthnUrl(),
             redirectUri = Config.getRedirectUri(),
             clientId = Config.getClientId(),
