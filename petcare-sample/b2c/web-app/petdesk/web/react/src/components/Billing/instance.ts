@@ -23,3 +23,8 @@ export const getBillingInstance = () => {
   const conf =  getConfig().billingServerURL;
   return initInstance(conf);
 };
+
+export const getSalesForceInstance = () => {
+  const conf =  getConfig().salesforceServerURL;
+  return initInstance(conf);
+};

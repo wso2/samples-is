@@ -25,7 +25,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { BasicUserInfo, useAuthContext } from "@asgardeo/auth-react";
 import { getNotification } from "./Notifications/get-notification";
 import GetBilling from "../pages/billing";
-import { getBilling } from "./Billing/billing";
+import { getBilling, getUpgrade } from "./Billing/billing";
 import { AddCard } from "@mui/icons-material";
 import { getConfig } from "../util/getConfig";
 
@@ -41,8 +41,10 @@ export default function MenuListComposition(props: {
     const { getAccessToken } = useAuthContext();
     const [enabled, setEnabled] = React.useState(false);
     const [email, setEmail] = React.useState(user.email);
+    const [isUpgraded, setisUpgraded] = React.useState(false);
 
     const handleToggle = () => {
+        checkUpgrade();
         setUserMenuOpen((prevOpen) => !prevOpen);
     };
 
@@ -84,6 +86,30 @@ export default function MenuListComposition(props: {
         });    
     }
 
+    const checkUpgrade = () => {
+        async function getUpgradeDetail() {
+            const accessToken = await getAccessToken();
+            try {
+                const response = await getUpgrade(accessToken);
+                if (response.data instanceof Object) {
+                    if (response.data.isUpgraded) {
+                        setisUpgraded(true);
+                    } else {
+                        setisUpgraded(false);
+                    }
+                }
+            } catch (error) {
+                setisUpgraded(false);
+                //if error is Error: Network Error set isUpgraded to true
+                if (error.toString().includes("Error: Network Error")) {
+                    setisUpgraded(true);
+                }
+                console.error('Error during upgrade process:', error);
+            }
+        }
+        getUpgradeDetail();
+    };
+
     return (
         <><div className="user-menu-div">
             <button className="menu-btn" onClick={handleToggle}>
@@ -106,6 +132,7 @@ export default function MenuListComposition(props: {
                         button
                         className="nav-list-item"
                         component="nav"
+                        disabled={!isUpgraded}
                         disableGutters
                         onClick={() => { setSettingsOpen(true); setUserMenuOpen(false); getSettings();}}
                         data-testid="header-user-profile-settings"
@@ -172,7 +199,7 @@ export default function MenuListComposition(props: {
                     enabled={enabled} email={email} setEnabled={setEnabled} setEmail={setEmail} />
             </div>
             <div>
-                <GetBilling handleBilling={handleBilling} isOpen={billingOpen} setIsOpen={setBillingOpen} />
+                <GetBilling isUpgraded={isUpgraded} setisUpgraded={setisUpgraded} user={user} handleBilling={handleBilling} checkUpgrade={checkUpgrade} isOpen={billingOpen} setIsOpen={setBillingOpen} />
             </div>
         </>
     );

@@ -16,42 +16,33 @@
  * under the License.
  */
 
-import { useAuthContext } from "@asgardeo/auth-react";
+import { BasicUserInfo, useAuthContext } from "@asgardeo/auth-react";
 import { Dialog, Transition } from "@headlessui/react";
-import { Box, Grid, Switch, TextField, Typography } from "@mui/material";
-import { alpha, styled } from '@mui/material/styles';
+import { Box, Grid, TextField } from "@mui/material";
 import React, { Fragment, useEffect, useState } from "react";
 import { AxiosResponse } from "axios";
 import { BillingInfo } from "../types/billing";
-import { postBilling } from "../components/Billing/billing";
+import { getUpgrade, postBilling, postUpgrade } from "../components/Billing/billing";
 import { AddCard } from "@mui/icons-material";
 
 interface BillingProps {
+    user: BasicUserInfo;
+    isUpgraded: boolean;
+    setisUpgraded: React.Dispatch<React.SetStateAction<boolean>>;
     isOpen: boolean;
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
     handleBilling: () => Promise<AxiosResponse<BillingInfo, any>>;
+    checkUpgrade: () => void;
 }
 
 export default function GetBilling(props: BillingProps) {
-    const { isOpen, setIsOpen, handleBilling } = props;
+    const { user, isUpgraded, setisUpgraded, isOpen, setIsOpen, handleBilling, checkUpgrade } = props;
     const { getAccessToken } = useAuthContext();
 
     const [cardName, setCardName] = useState("");
     const [cardNumber, setCardNumber] = useState("");
     const [expiryDate, setExpiryDate] = useState("");
     const [securityCode, setSecurityCode] = useState("");
-
-    const CustomSwitch = styled(Switch)(({ theme }) => ({
-        '& .MuiSwitch-switchBase.Mui-checked': {
-            color: "#09b6d0",
-            '&:hover': {
-                backgroundColor: alpha("#09b6d0", theme.palette.action.hoverOpacity),
-            },
-        },
-        '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-            backgroundColor: "#09b6d0",
-        },
-    }));
 
     const handleOnSave = () => {
         async function setBilling() {
@@ -71,19 +62,45 @@ export default function GetBilling(props: BillingProps) {
     };
 
     async function setBillingInfo() {
-        const handleLoginResponse = await handleBilling();
-        setCardName(handleLoginResponse.data.cardName);
-        setCardNumber(handleLoginResponse.data.cardNumber);
-        setExpiryDate(handleLoginResponse.data.expiryDate);
-        setSecurityCode(handleLoginResponse.data.securityCode);
+        try {
+            const handleLoginResponse = await handleBilling();
+            setCardName(handleLoginResponse.data.cardName);
+            setCardNumber(handleLoginResponse.data.cardNumber);
+            setExpiryDate(handleLoginResponse.data.expiryDate);
+            setSecurityCode(handleLoginResponse.data.securityCode);
+            // Proceed with using handleLoginResponse if needed
+            console.log('Billing handled successfully:', handleLoginResponse);
+        } catch (error) {
+            console.error('Error during billing process:', error);
+            // Handle errors, possibly update UI or state accordingly
+        }
         //remove the billing key from session storage
         sessionStorage.removeItem("billing");
     }
+    const handleOnUpgrade = () => {
+        async function setUpgrade() {
+            if (cardName != "" && cardNumber != "" && expiryDate != "" && securityCode != "") {
+                const accessToken = await getAccessToken();
+                const payload: BillingInfo = {
+                    cardName: cardName,
+                    cardNumber: cardNumber,
+                    expiryDate: expiryDate,
+                    securityCode: securityCode
+                };
+                await postBilling(accessToken, payload);
+                await postUpgrade(accessToken, user);
+                setisUpgraded(true);
+                setIsOpen(false);
+            }
+        }
+        setUpgrade();
+    };
 
     useEffect(() => {
         //if session strage has billing true, then open the billing dialog
         const billingExists = sessionStorage.getItem("billing") !== null;
         if (billingExists) {
+            checkUpgrade();
             const billing = sessionStorage.getItem("billing");
             if (billing === "true") {
                 setBillingInfo();
@@ -186,7 +203,8 @@ export default function GetBilling(props: BillingProps) {
                                     </Grid>
                                 </div>
                             </div>
-                            <button className="settings-save-btn" onClick={() => handleOnSave()}>Save</button>
+                            {isUpgraded && <button className="settings-save-btn" onClick={() => handleOnSave()}>Save</button>}
+                            {!isUpgraded && <button className="billing-upgrade-btn" onClick={() => handleOnUpgrade()}>Upgrade</button>}
                         </Dialog.Panel>
                     </div>
                 </Dialog>

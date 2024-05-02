@@ -17,8 +17,9 @@
  */
 
 import { AxiosResponse } from "axios";
-import { getBillingInstance } from "./instance";
-import { BillingInfo } from "../../types/billing";
+import { getBillingInstance, getSalesForceInstance } from "./instance";
+import { AccountInfo, BillingInfo } from "../../types/billing";
+import { BasicUserInfo } from "@asgardeo/auth-react";
 
 function timeout(delay: number) {
   return new Promise(res => setTimeout(res, delay));
@@ -40,6 +41,27 @@ export async function postBilling(accessToken: string, payload?: BillingInfo) {
     Authorization: `Bearer ${accessToken}`,
   };
   const response = await getBillingInstance().post("/billing", payload, {
+    headers: headers,
+  });
+  return response;
+}
+
+export async function getUpgrade(accessToken: string) {
+  const headers = {
+    Authorization: `Bearer ${accessToken}`,
+  };
+  await timeout(50);
+  const response = await getSalesForceInstance().get("/upgrade", {
+    headers: headers,
+  });
+  return response as AxiosResponse<AccountInfo>;
+}
+
+export async function postUpgrade(accessToken: string, payload?: BasicUserInfo) {
+  const headers = {
+    Authorization: `Bearer ${accessToken}`,
+  };
+  const response = await getSalesForceInstance().post("/upgrade", payload, {
     headers: headers,
   });
   return response;

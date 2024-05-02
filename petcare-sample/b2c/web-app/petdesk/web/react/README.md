@@ -397,7 +397,7 @@ To configure the front-end application, follow the steps given below.
     clientID: "<asgardeo-client-id>",
     signInRedirectURL: "<web-app-url>",
     signOutRedirectURL: "<web-app-url>",
-    resourceServerURL: "<pet-management-service-url>"
+    petManagementServiceURL: "<pet-management-service-url>"
     };
    ```
  7. Fill the placeholders with the values you copied from the previous steps as follows.
@@ -412,7 +412,7 @@ To configure the front-end application, follow the steps given below.
         - Click **Production** Keys in the left navigation menu.
         - Copy and paste the value of the **Consumer Key**.
       
-    - resourceServerURL
+    - petManagementServiceURL
         - Open the **API** you created previously via **Developer Portal**.
         - In the **Overview** section of the API, you can find the **Endpoint(s)**.
         - Copy and paste the value of On the **Endpoint(s)** section.
@@ -454,7 +454,7 @@ Read more about the SDK configurations [here](../../README.md#authprovider).
     "signInRedirectURL": "http://localhost:3000",
     "signOutRedirectURL": "http://localhost:3000",
     "scope": ["profile","openid","email"],
-    "resourceServerURL": "<API-ENDPOINT-OF-PET-MGT-SERVICE>",
+    "petManagementServiceURL": "<API-ENDPOINT-OF-PET-MGT-SERVICE>",
     "billingServerURL": "<API-ENDPOINT-OF-BILLING-MGT-SERVICE>"
 }
 ```
