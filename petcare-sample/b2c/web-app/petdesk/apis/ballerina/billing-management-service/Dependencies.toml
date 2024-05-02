@@ -292,7 +292,7 @@ modules = [
 ]
 
 [[package]]
-org = "sachinm"
+org = "WSO2"
 name = "billing_management_service"
 version = "0.1.0"
 dependencies = [
@@ -301,7 +301,7 @@ dependencies = [
 	{org = "ballerinai", name = "observe"}
 ]
 modules = [
-	{org = "sachinm", packageName = "billing_management_service", moduleName = "billing_management_service"}
+	{org = "WSO2", packageName = "billing_management_service", moduleName = "billing_management_service"}
 ]
 
 

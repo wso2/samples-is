@@ -359,7 +359,7 @@ modules = [
 ]
 
 [[package]]
-org = "sachinm"
+org = "WSO2"
 name = "salesforce_integration_service"
 version = "0.1.0"
 dependencies = [
@@ -371,7 +371,7 @@ dependencies = [
 	{org = "ballerinax", name = "salesforce"}
 ]
 modules = [
-	{org = "sachinm", packageName = "salesforce_integration_service", moduleName = "salesforce_integration_service"}
+	{org = "WSO2", packageName = "salesforce_integration_service", moduleName = "salesforce_integration_service"}
 ]
 
 
