@@ -64,4 +64,12 @@ class HomeScreenViewModel @Inject constructor(
             )
         }
     }
+
+    fun navigateToAddPet() {
+        viewModelScope.launch {
+            NavigationViewModel.navigationEvents.emit(
+                NavigationViewModel.Companion.NavigationEvent.NavigateToAddPet
+            )
+        }
+    }
 }

@@ -12,9 +12,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun AddPetFab() {
+fun AddPetFab(
+    navigateToAddPet: ()-> Unit
+) {
     FloatingActionButton(
-        onClick = {},
+        onClick = navigateToAddPet,
         elevation = FloatingActionButtonDefaults.elevation(0.dp),
         shape = MaterialTheme.shapes.extraSmall,
         modifier = Modifier.offset(x = (-16).dp)

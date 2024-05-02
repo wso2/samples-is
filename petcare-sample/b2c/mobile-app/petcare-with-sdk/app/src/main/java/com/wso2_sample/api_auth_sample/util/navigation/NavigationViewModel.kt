@@ -15,8 +15,8 @@ class NavigationViewModel @Inject constructor() : ViewModel() {
             data object NavigateToLanding : NavigationEvent()
             data object NavigateToHome : NavigationEvent()
             data object NavigateToProfile : NavigationEvent()
+            data object NavigateToAddPet : NavigationEvent()
             data class NavigateToAuthWithData(val data: String) : NavigationEvent()
         }
     }
-
 }

@@ -41,7 +41,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.10"
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -61,10 +61,10 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.material3.android)
     implementation(libs.androidx.ui.tooling.preview.android)
-    implementation(fileTree(mapOf(
-        "dir" to "/Users/achintha/.m2/repository/io/asgardeo/android.ui.core/0.0.1-SNAPSHOT",
-        "include" to listOf("*.aar", "*.jar"),
-    )))
+//    implementation(fileTree(mapOf(
+//        "dir" to "/Users/achintha/.m2/repository/io/asgardeo/android.ui.core/0.0.1-SNAPSHOT",
+//        "include" to listOf("*.aar", "*.jar", "*.pom"),
+//    )))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -77,13 +77,14 @@ dependencies {
     implementation(libs.coil.compose)
     // Dagger hilt
     implementation(libs.hilt.android)
+    debugImplementation(libs.androidx.ui.tooling)
     kapt(libs.hilt.android.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
 
     implementation(libs.androidx.lifecycle.runtime.compose)
 
     // Asgardeo android SDK
-    //implementation("io.asgardeo:android.ui:0.0.1-SNAPSHOT@aar")
+    implementation("io.asgardeo:android.ui.core:0.0.1@aar")
 
     // to remove
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
@@ -101,5 +102,4 @@ dependencies {
     implementation ("androidx.browser:browser:1.8.0")
     implementation("androidx.activity:activity-ktx:1.8.2")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-
 }

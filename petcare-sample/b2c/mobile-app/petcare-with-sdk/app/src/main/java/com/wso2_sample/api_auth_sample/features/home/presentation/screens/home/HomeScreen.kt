@@ -37,15 +37,17 @@ internal fun HomeScreen(
     val state = viewModel.state.collectAsStateWithLifecycle()
 
     val navigateToProfile: () -> Unit = viewModel::navigateToProfile
+    val navigateToAddPet: () -> Unit = viewModel::navigateToAddPet
 
-    HomeScreenContent(state.value, navigateToProfile)
+    HomeScreenContent(state.value, navigateToProfile, navigateToAddPet)
 }
 
 @Composable
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 fun HomeScreenContent(
     state: HomeScreenState,
-    navigateToProfile: () -> Unit = {}
+    navigateToProfile: () -> Unit = {},
+    navigateToAddPet: () -> Unit = {}
 ) {
     Scaffold(
         modifier = Modifier
@@ -54,7 +56,7 @@ fun HomeScreenContent(
         topBar = {
             TopBar(navigateToHome = {}, navigateToProfile = navigateToProfile)
         },
-        floatingActionButton = { AddPetFab() },
+        floatingActionButton = { AddPetFab(navigateToAddPet) },
         floatingActionButtonPosition = FabPosition.End,
     ) { innerPadding ->
         Column(
@@ -92,13 +94,6 @@ fun HomeScreenPreview() {
         HomeScreenContent(
             HomeScreenState(
                 isLoading = false,
-//                user = UserDetails(
-//                    imageUrl = "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=3570&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-//                    username = "JohnDoe",
-//                    email = "john@wso2.com",
-//                    firstName = "John",
-//                    lastName = "Doe"
-//                ),
                 pets = listOf(
                     Pet(
                         "Bella",

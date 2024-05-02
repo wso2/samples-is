@@ -7,9 +7,11 @@ pluginManagement {
                 includeGroupByRegex("androidx.*")
             }
         }
-        mavenLocal()
         mavenCentral()
         gradlePluginPortal()
+        maven {
+            url = uri("file:/Users/achintha/.m2/repository/")
+        }
         maven {
             url = uri("https://maven.wso2.org/nexus/content/repositories/releases")
         }
@@ -20,7 +22,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        mavenLocal()
+        maven {
+            url = uri("file:/Users/achintha/.m2/repository/")
+        }
         maven {
             url = uri("https://maven.wso2.org/nexus/content/repositories/releases")
         }

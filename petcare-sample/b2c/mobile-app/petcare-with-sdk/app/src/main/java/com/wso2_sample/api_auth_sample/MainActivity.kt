@@ -56,12 +56,12 @@ class MainActivity : ComponentActivity() {
                             }
 
                             is NavigationViewModel.Companion.NavigationEvent.NavigateToLanding -> {
-                                navigationController.navigate(NavDestination.LandingScreen)
+                                navigationController.navigate(NavDestination.LANDING_SCREEN)
                             }
 
                             is NavigationViewModel.Companion.NavigationEvent.NavigateToAuthWithData -> {
                                 navigationController.navigate(
-                                    "${NavDestination.AuthScreen}?authenticationFlow={authenticationFlow}"
+                                    "${NavDestination.AUTH_SCREEN}?authenticationFlow={authenticationFlow}"
                                         .replace(
                                             "{authenticationFlow}",
                                             newValue = it.data
@@ -70,11 +70,15 @@ class MainActivity : ComponentActivity() {
                             }
 
                             is NavigationViewModel.Companion.NavigationEvent.NavigateToHome -> {
-                                navigationController.navigate(NavDestination.HomeScreen)
+                                navigationController.navigate(NavDestination.HOME_SCREEN)
                             }
 
                             is NavigationViewModel.Companion.NavigationEvent.NavigateToProfile -> {
-                                navigationController.navigate(NavDestination.ProfileScreen)
+                                navigationController.navigate(NavDestination.PROFILE_SCREEN)
+                            }
+
+                            is NavigationViewModel.Companion.NavigationEvent.NavigateToAddPet -> {
+                                navigationController.navigate(NavDestination.ADD_PET_SCREEN)
                             }
                         }
                     }
@@ -86,7 +90,6 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.surface
                 ) {
                     NavGraph(navController = navigationController)
-                    //HomeScreen()
                 }
             }
         }
