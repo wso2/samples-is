@@ -1,6 +1,6 @@
 window.config = {
-  baseUrl: "https://api.asgardeo.io/t/sachinm",
-  clientID: "U8BU5WbBkmBondfwjMOnd7buJRYa",
+  baseUrl: "",
+  clientID: "",
   signInRedirectURL: "http://localhost:3000",
   signOutRedirectURL: "http://localhost:3000",
   myAccountAppURL: "",
