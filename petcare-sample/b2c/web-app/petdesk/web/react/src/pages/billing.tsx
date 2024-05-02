@@ -32,10 +32,11 @@ interface BillingProps {
     isOpen: boolean;
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
     handleBilling: () => Promise<AxiosResponse<BillingInfo, any>>;
+    checkUpgrade: () => void;
 }
 
 export default function GetBilling(props: BillingProps) {
-    const { user, isUpgraded, setisUpgraded, isOpen, setIsOpen, handleBilling } = props;
+    const { user, isUpgraded, setisUpgraded, isOpen, setIsOpen, handleBilling, checkUpgrade } = props;
     const { getAccessToken } = useAuthContext();
 
     const [cardName, setCardName] = useState("");
@@ -93,30 +94,6 @@ export default function GetBilling(props: BillingProps) {
             }
         }
         setUpgrade();
-    };
-
-    const checkUpgrade = () => {
-        async function getUpgradeDetail() {
-            const accessToken = await getAccessToken();
-            try {
-                const response = await getUpgrade(accessToken);
-                if (response.data instanceof Object) {
-                    if (response.data.isUpgraded) {
-                        setisUpgraded(true);
-                    } else {
-                        setisUpgraded(false);
-                    }
-                }
-            } catch (error) {
-                setisUpgraded(false);
-                //if error is Error: Network Error set isUpgraded to true
-                if (error.toString().includes("Error: Network Error")) {
-                    setisUpgraded(true);
-                }
-                console.error('Error during upgrade process:', error);
-            }
-        }
-        getUpgradeDetail();
     };
 
     useEffect(() => {

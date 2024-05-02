@@ -25,7 +25,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { BasicUserInfo, useAuthContext } from "@asgardeo/auth-react";
 import { getNotification } from "./Notifications/get-notification";
 import GetBilling from "../pages/billing";
-import { getBilling } from "./Billing/billing";
+import { getBilling, getUpgrade } from "./Billing/billing";
 import { AddCard } from "@mui/icons-material";
 import { getConfig } from "../util/getConfig";
 
@@ -44,6 +44,7 @@ export default function MenuListComposition(props: {
     const [isUpgraded, setisUpgraded] = React.useState(false);
 
     const handleToggle = () => {
+        checkUpgrade();
         setUserMenuOpen((prevOpen) => !prevOpen);
     };
 
@@ -84,6 +85,30 @@ export default function MenuListComposition(props: {
             return Promise.reject(e);
         });    
     }
+
+    const checkUpgrade = () => {
+        async function getUpgradeDetail() {
+            const accessToken = await getAccessToken();
+            try {
+                const response = await getUpgrade(accessToken);
+                if (response.data instanceof Object) {
+                    if (response.data.isUpgraded) {
+                        setisUpgraded(true);
+                    } else {
+                        setisUpgraded(false);
+                    }
+                }
+            } catch (error) {
+                setisUpgraded(false);
+                //if error is Error: Network Error set isUpgraded to true
+                if (error.toString().includes("Error: Network Error")) {
+                    setisUpgraded(true);
+                }
+                console.error('Error during upgrade process:', error);
+            }
+        }
+        getUpgradeDetail();
+    };
 
     return (
         <><div className="user-menu-div">
@@ -174,7 +199,7 @@ export default function MenuListComposition(props: {
                     enabled={enabled} email={email} setEnabled={setEnabled} setEmail={setEmail} />
             </div>
             <div>
-                <GetBilling isUpgraded={isUpgraded} setisUpgraded={setisUpgraded} user={user} handleBilling={handleBilling} isOpen={billingOpen} setIsOpen={setBillingOpen} />
+                <GetBilling isUpgraded={isUpgraded} setisUpgraded={setisUpgraded} user={user} handleBilling={handleBilling} checkUpgrade={checkUpgrade} isOpen={billingOpen} setIsOpen={setBillingOpen} />
             </div>
         </>
     );
