@@ -1,7 +1,6 @@
 import ballerina/http;
 import ballerinax/salesforce;
 import ballerinax/salesforce.soap;
-import ballerina/log;
 import ballerina/jwt;
 import ballerina/io;
 
@@ -73,20 +72,33 @@ service / on new http:Listener(9092) {
         if owner is error {
             return owner;
         }
-
-        soap:Client soapClient = check new(config);
-        string sampleQuery = string `SELECT Id FROM Lead WHERE Email = '${payload.email ?: ""}'`;
+        
+        string sampleQuery = string `SELECT AccountID FROM Contact WHERE Email = '${payload.email ?: ""}'`;
         stream<record {}, error?> queryResults = check baseClient->query(sampleQuery);
         
         int nLines = 0;
         string recordId;
         check from record {} rd in queryResults
             do {
-                recordId = check rd.toJson().Id;
+                recordId = check rd.toJson().AccountId;
                 nLines += 1;
             };
 
-        if (nLines == 0) {
+        if (nLines != 0) {
+            return http:CREATED;
+        }
+
+        sampleQuery = string `SELECT Id FROM Lead WHERE Email = '${payload.email ?: ""}'`;
+        queryResults = check baseClient->query(sampleQuery);
+        
+        int nLines2 = 0;
+        check from record {} rd in queryResults
+            do {
+                recordId = check rd.toJson().Id;
+                nLines2 += 1;
+            };
+
+        if (nLines2 == 0) {
             return http:NOT_FOUND;
         }
         
