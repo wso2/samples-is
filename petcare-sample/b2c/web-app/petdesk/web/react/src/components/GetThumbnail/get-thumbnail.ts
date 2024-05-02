@@ -13,8 +13,6 @@ export async function getThumbnail(accessToken: string, petId: string) {
     });
     return response;
   } catch (error) {
-    // Handle errors here
-    console.error('Error fetching thumbnail:', error);
-    // throw error; // Rethrow the error or handle it as appropriate
+    // Handle errors silently.
   }
   }

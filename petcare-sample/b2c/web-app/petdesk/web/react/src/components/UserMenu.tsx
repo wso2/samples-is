@@ -100,7 +100,6 @@ export default function MenuListComposition(props: {
                 open={userMenuOpen}
                 onClose={handleClose}
                 className="menu-style"
-                // getContentAnchorEl={null}
             >
                 <List className="list-style">
                     <ListItem
