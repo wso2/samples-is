@@ -262,7 +262,7 @@ export const HomePage: FunctionComponent = (): ReactElement => {
                                 alt="pet-care-logo"
                             />
                         </div>
-                        <p className="wording-style">City Vet Hospital</p>
+                        <p className="wording-style">Pet Care</p>
                     </nav>
                     <div className="cover-div">
                         <div className="cover-row ">
