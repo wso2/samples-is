@@ -516,7 +516,7 @@ code {
     width: 120px;
     position: absolute;
     top: 53%;
-    left: 30%;
+    left: 50%;
     transform: translate(-50%, 18vh);
     font-size: 2vh;
     height: 45px;
@@ -528,6 +528,25 @@ code {
     padding: 14px 24px;
     background-color: #69A2F4;
     color: #ffffff;
+}
+
+.billing-save-btn {
+  border: none;
+  width: 120px;
+  position: absolute;
+  top: 53%;
+  left: 30%;
+  transform: translate(-50%, 18vh);
+  font-size: 2vh;
+  height: 45px;
+  font-size: 18px;
+  border-radius: 22px;
+  box-shadow: none;
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 14px 24px;
+  background-color: #69A2F4;
+  color: #ffffff;
 }
 
 .cancel-btn {

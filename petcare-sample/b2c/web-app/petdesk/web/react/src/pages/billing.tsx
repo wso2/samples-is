@@ -208,7 +208,7 @@ export default function GetBilling(props: BillingProps) {
                                 </div>
                             </div>
                             <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                                {isUpgraded && <button className="settings-save-btn" onClick={() => handleOnSave()}>Save</button>}
+                                {isUpgraded && <button className="billing-save-btn" onClick={() => handleOnSave()}>Save</button>}
                                 {!isUpgraded && <button className="billing-upgrade-btn" onClick={() => handleOnUpgrade()}>Upgrade</button>}
                                 <button className="cancel-btn" onClick={() => handleOnCancel()}>Cancel</button>
                             </div>
