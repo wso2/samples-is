@@ -27,9 +27,12 @@ import com.wso2_sample.api_auth_sample.features.home.domain.models.UserDetails
 import com.wso2_sample.api_auth_sample.features.home.domain.repository.PetRepository
 import com.wso2_sample.api_auth_sample.features.login.domain.repository.AsgardeoAuthRepository
 import com.wso2_sample.api_auth_sample.util.navigation.NavigationViewModel
+import io.asgardeo.android.core.provider.providers.authentication.AuthenticationProvider
+import io.asgardeo.android.core.provider.providers.token.TokenProvider
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 @HiltViewModel
@@ -46,8 +49,16 @@ class ProfileScreenViewModel @Inject constructor(
     private val _state = MutableStateFlow(ProfileScreenState())
     val state = _state
 
-    private val authenticationProvider = asgardeoAuthRepository.getAuthenticationProvider()
-    private val tokenProvider = asgardeoAuthRepository.getTokenProvider()
+    private var authenticationProvider: AuthenticationProvider
+    private var tokenProvider: TokenProvider
+
+    init {
+        authenticationProvider = asgardeoAuthRepository.getAuthenticationProvider()
+        tokenProvider = asgardeoAuthRepository.getTokenProvider()
+        _state.update {
+            it.copy(isLoading = false)
+        }
+    }
 
     init {
         getBasicUserInfo()

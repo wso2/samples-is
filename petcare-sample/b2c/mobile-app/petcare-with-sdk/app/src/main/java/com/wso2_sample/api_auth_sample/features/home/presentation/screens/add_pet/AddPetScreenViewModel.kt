@@ -22,13 +22,15 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.wso2_sample.api_auth_sample.features.home.domain.repository.PetRepository
-import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import com.wso2_sample.api_auth_sample.features.login.domain.repository.AsgardeoAuthRepository
 import com.wso2_sample.api_auth_sample.util.navigation.NavigationViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
+import io.asgardeo.android.core.provider.providers.token.TokenProvider
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 @HiltViewModel
@@ -45,7 +47,14 @@ class AddPetScreenViewModel @Inject constructor(
     private val _state = MutableStateFlow(AddPetScreenState())
     val state = _state
 
-    private val tokenProvider = asgardeoAuthRepository.getTokenProvider()
+    private lateinit var tokenProvider: TokenProvider
+
+    init {
+        tokenProvider = asgardeoAuthRepository.getTokenProvider()
+        _state.update {
+            it.copy(isLoading = false)
+        }
+    }
 
     fun navigateToHome() {
         viewModelScope.launch {

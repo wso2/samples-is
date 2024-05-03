@@ -25,12 +25,20 @@ import dagger.hilt.components.SingletonComponent
 import com.wso2_sample.api_auth_sample.features.home.domain.repository.PetRepository
 import com.wso2_sample.api_auth_sample.features.home.impl.repository.PetRepositoryImpl
 import com.wso2_sample.api_auth_sample.features.login.domain.repository.AsgardeoAuthRepository
+import com.wso2_sample.api_auth_sample.features.login.domain.repository.AttestationRepository
 import com.wso2_sample.api_auth_sample.features.login.impl.repository.AsgardeoAuthRepositoryImpl
+import com.wso2_sample.api_auth_sample.features.login.impl.repository.AttestationRepositoryImpl
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class RepositoryModule {
+
+    @Binds
+    @Singleton
+    abstract fun bindAttestationRepository(
+        attestationRepositoryImpl: AttestationRepositoryImpl
+    ): AttestationRepository
 
     @Binds
     @Singleton

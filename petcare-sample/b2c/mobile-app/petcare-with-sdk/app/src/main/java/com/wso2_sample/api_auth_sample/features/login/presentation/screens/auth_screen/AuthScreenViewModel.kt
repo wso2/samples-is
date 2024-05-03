@@ -32,9 +32,11 @@ import com.wso2_sample.api_auth_sample.features.login.domain.repository.Asgardeo
 import io.asgardeo.android.core.models.autheniticator.Authenticator
 import io.asgardeo.android.core.models.authentication_flow.AuthenticationFlow
 import io.asgardeo.android.core.models.authentication_flow.AuthenticationFlowNotSuccess
+import io.asgardeo.android.core.provider.providers.authentication.AuthenticationProvider
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 @HiltViewModel
@@ -50,7 +52,14 @@ class AuthScreenViewModel @Inject constructor(
     private val _state = MutableStateFlow(AuthScreenState())
     val state = _state
 
-    private val authenticationProvider = asgardeoAuthRepository.getAuthenticationProvider()
+    private var authenticationProvider: AuthenticationProvider
+
+    init {
+        authenticationProvider = asgardeoAuthRepository.getAuthenticationProvider()
+        _state.update {
+            it.copy(isLoading = false)
+        }
+    }
 
     fun setAuthenticationFlow(authenticationFlow: AuthenticationFlow) {
         _state.update {

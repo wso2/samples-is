@@ -24,13 +24,17 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import com.wso2_sample.api_auth_sample.features.login.domain.repository.AsgardeoAuthRepository
+import com.wso2_sample.api_auth_sample.features.login.domain.repository.AttestationRepository
 import com.wso2_sample.api_auth_sample.util.ui.sendEvent
 import com.wso2_sample.api_auth_sample.util.Event
 import com.wso2_sample.api_auth_sample.util.navigation.NavigationViewModel
 import io.asgardeo.android.core.models.state.AuthenticationState
+import io.asgardeo.android.core.provider.providers.authentication.AuthenticationProvider
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.net.URLEncoder
 import javax.inject.Inject
 
@@ -38,6 +42,7 @@ import javax.inject.Inject
 class LandingScreenViewModel @Inject constructor(
     @ApplicationContext private val applicationContext: Context,
     asgardeoAuthRepository: AsgardeoAuthRepository,
+    attestationRepository: AttestationRepository
 ) : ViewModel() {
     companion object {
         const val TAG = "LandingScreen"
@@ -46,23 +51,42 @@ class LandingScreenViewModel @Inject constructor(
     private val _state = MutableStateFlow(LandingScreenState())
     val state = _state
 
-    private val authenticationProvider = asgardeoAuthRepository.getAuthenticationProvider()
-    private val authenticationStateFlow = authenticationProvider.getAuthenticationStateFlow()
+    private lateinit var authenticationProvider: AuthenticationProvider
+    private lateinit var authenticationStateFlow: SharedFlow<AuthenticationState>
 
     init {
-        handleAuthenticationState()
-        isLoggedInStateFlow()
+        var integrityToken: String? = null
+
+        viewModelScope.launch {
+            integrityToken = attestationRepository.getPlayIntegrityTokenResponse()
+
+            asgardeoAuthRepository.initializeAsgardeoAuth(integrityToken)
+            authenticationProvider = asgardeoAuthRepository.getAuthenticationProvider()
+            authenticationStateFlow = authenticationProvider.getAuthenticationStateFlow()
+
+            handleAuthenticationState()
+            isLoggedInStateFlow()
+        }
     }
 
     fun initializeAuthentication() {
+        _state.update { landingScreenState ->
+            landingScreenState.copy(isLoading = true)
+        }
         viewModelScope.launch {
             authenticationProvider.initializeAuthentication(applicationContext)
+        }
+        _state.update { landingScreenState ->
+            landingScreenState.copy(isLoading = false)
         }
     }
 
     private fun isLoggedInStateFlow() {
         viewModelScope.launch {
             authenticationProvider.isLoggedInStateFlow(applicationContext)
+        }
+        _state.update { landingScreenState ->
+            landingScreenState.copy(isLoading = false)
         }
     }
 

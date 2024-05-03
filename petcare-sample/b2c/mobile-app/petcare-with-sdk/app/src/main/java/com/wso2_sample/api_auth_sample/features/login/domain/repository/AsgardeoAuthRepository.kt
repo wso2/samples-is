@@ -25,6 +25,7 @@ import io.asgardeo.android.core.provider.providers.token.TokenProvider
  * Use as a repository to handle the authentication related operations using Asgardeo authentication SDK.
  */
 interface AsgardeoAuthRepository {
+    fun initializeAsgardeoAuth(integrityToken: String?)
     fun getAuthenticationProvider(): AuthenticationProvider
     fun getTokenProvider(): TokenProvider
 }

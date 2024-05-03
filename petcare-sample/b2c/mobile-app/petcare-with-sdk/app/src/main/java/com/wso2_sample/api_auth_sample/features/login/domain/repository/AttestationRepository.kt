@@ -16,9 +16,14 @@
  *  under the License.
  */
 
-package com.wso2_sample.api_auth_sample.features.login.presentation.screens.landing_screen
+package com.wso2_sample.api_auth_sample.features.login.domain.repository
 
-data class LandingScreenState(
-    val isLoading: Boolean = true,
-    val error: String = ""
-)
+import io.asgardeo.android.core.provider.providers.authentication.AuthenticationProvider
+import io.asgardeo.android.core.provider.providers.token.TokenProvider
+
+/**
+ * Repository interface for the Attestation feature.
+ */
+interface AttestationRepository {
+    suspend fun getPlayIntegrityTokenResponse(): String?
+}
