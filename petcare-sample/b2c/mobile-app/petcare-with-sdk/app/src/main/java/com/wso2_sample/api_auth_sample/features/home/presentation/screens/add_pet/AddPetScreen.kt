@@ -17,6 +17,10 @@ import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -34,16 +38,18 @@ internal fun AddPetScreen(
     val state = viewModel.state.collectAsStateWithLifecycle()
 
     val navigateToHome: () -> Unit = viewModel::navigateToHome
+    val addPets: (name: String, breed: String, dateOfBirth: String) -> Unit = viewModel::addPets
 
     LoadingDialog(isLoading = state.value.isLoading)
-    AddPetScreenContent(state.value, navigateToHome)
+    AddPetScreenContent(state.value, navigateToHome, addPets)
 }
 
 @Composable
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 fun AddPetScreenContent(
     state: AddPetScreenState,
-    navigateToHome: () -> Unit = {}
+    navigateToHome: () -> Unit = {},
+    addPets: (name: String, breed: String, dateOfBirth: String) -> Unit = { _, _, _ -> }
 ) {
     Scaffold(
         modifier = Modifier
@@ -65,9 +71,13 @@ fun AddPetScreenContent(
                 verticalArrangement = Arrangement.spacedBy(16.dp),
                 modifier = Modifier.padding(horizontal = 32.dp)
             ) {
+                var name by remember { mutableStateOf("") }
+                var breed by remember { mutableStateOf("") }
+                var dateOfBirth by remember { mutableStateOf("") }
+
                 OutlinedTextField(
-                    value = "",
-                    onValueChange = { },
+                    value = name,
+                    onValueChange = { name = it },
                     label = { Text(text = "Pet Name") },
                     modifier = Modifier.fillMaxWidth(),
                     shape = MaterialTheme.shapes.medium,
@@ -81,8 +91,8 @@ fun AddPetScreenContent(
                     )
                 )
                 OutlinedTextField(
-                    value = "",
-                    onValueChange = { },
+                    value = breed,
+                    onValueChange = { breed = it },
                     label = { Text(text = "Pet Breed") },
                     modifier = Modifier.fillMaxWidth(),
                     shape = MaterialTheme.shapes.medium,
@@ -96,8 +106,8 @@ fun AddPetScreenContent(
                     )
                 )
                 OutlinedTextField(
-                    value = "",
-                    onValueChange = { },
+                    value = dateOfBirth,
+                    onValueChange = { dateOfBirth = it },
                     label = { Text(text = "Date of Birth") },
                     modifier = Modifier.fillMaxWidth(),
                     shape = MaterialTheme.shapes.medium,
@@ -111,7 +121,7 @@ fun AddPetScreenContent(
                     )
                 )
                 Button(
-                    onClick = { },
+                    onClick = { addPets(name, breed, dateOfBirth) },
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(top = 8.dp)

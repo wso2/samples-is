@@ -102,7 +102,8 @@ class ProfileScreenViewModel @Inject constructor(
             } catch (e: Exception) {
                 _state.update {
                     it.copy(
-                        error = e.message!!
+                        error = e.message!!,
+                        isLoading = false
                     )
                 }
             }
