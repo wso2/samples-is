@@ -101,7 +101,7 @@ export default function MenuListComposition(props: {
             } catch (error) {
                 setisUpgraded(false);
                 //if error is Error: Network Error set isUpgraded to true
-                if (error.toString().includes("Error: Network Error")) {
+                if (error.toString().includes("Error: Network Error") || error.toString().includes("status code 503")){
                     setisUpgraded(true);
                 }
                 console.error('Error during upgrade process:', error);
