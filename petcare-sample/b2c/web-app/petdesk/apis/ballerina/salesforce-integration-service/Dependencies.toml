@@ -99,6 +99,9 @@ dependencies = [
 	{org = "ballerina", name = "jballerina.java"},
 	{org = "ballerina", name = "lang.value"}
 ]
+modules = [
+	{org = "ballerina", packageName = "io", moduleName = "io"}
+]
 
 [[package]]
 org = "ballerina"
@@ -143,7 +146,23 @@ dependencies = [
 
 [[package]]
 org = "ballerina"
+name = "lang.boolean"
+version = "0.0.0"
+dependencies = [
+	{org = "ballerina", name = "jballerina.java"}
+]
+
+[[package]]
+org = "ballerina"
 name = "lang.decimal"
+version = "0.0.0"
+dependencies = [
+	{org = "ballerina", name = "jballerina.java"}
+]
+
+[[package]]
+org = "ballerina"
+name = "lang.float"
 version = "0.0.0"
 dependencies = [
 	{org = "ballerina", name = "jballerina.java"}
@@ -197,6 +216,14 @@ dependencies = [
 
 [[package]]
 org = "ballerina"
+name = "lang.xml"
+version = "0.0.0"
+dependencies = [
+	{org = "ballerina", name = "jballerina.java"}
+]
+
+[[package]]
+org = "ballerina"
 name = "log"
 version = "2.5.1"
 dependencies = [
@@ -204,6 +231,9 @@ dependencies = [
 	{org = "ballerina", name = "jballerina.java"},
 	{org = "ballerina", name = "lang.value"},
 	{org = "ballerina", name = "observe"}
+]
+modules = [
+	{org = "ballerina", packageName = "log", moduleName = "log"}
 ]
 
 [[package]]
@@ -292,16 +322,56 @@ modules = [
 ]
 
 [[package]]
+org = "ballerinax"
+name = "client.config"
+version = "1.0.1"
+dependencies = [
+	{org = "ballerina", name = "http"},
+	{org = "ballerina", name = "oauth2"}
+]
+
+[[package]]
+org = "ballerinax"
+name = "salesforce"
+version = "7.3.0"
+dependencies = [
+	{org = "ballerina", name = "http"},
+	{org = "ballerina", name = "io"},
+	{org = "ballerina", name = "jballerina.java"},
+	{org = "ballerina", name = "lang.boolean"},
+	{org = "ballerina", name = "lang.float"},
+	{org = "ballerina", name = "lang.int"},
+	{org = "ballerina", name = "lang.runtime"},
+	{org = "ballerina", name = "lang.string"},
+	{org = "ballerina", name = "lang.xml"},
+	{org = "ballerina", name = "log"},
+	{org = "ballerina", name = "os"},
+	{org = "ballerina", name = "regex"},
+	{org = "ballerina", name = "url"},
+	{org = "ballerinai", name = "observe"},
+	{org = "ballerinax", name = "client.config"}
+]
+modules = [
+	{org = "ballerinax", packageName = "salesforce", moduleName = "salesforce"},
+	{org = "ballerinax", packageName = "salesforce", moduleName = "salesforce.bulk"},
+	{org = "ballerinax", packageName = "salesforce", moduleName = "salesforce.soap"},
+	{org = "ballerinax", packageName = "salesforce", moduleName = "salesforce.utils"}
+]
+
+[[package]]
 org = "WSO2"
-name = "billing_management_service"
+name = "salesforce_integration_service"
 version = "0.1.0"
 dependencies = [
 	{org = "ballerina", name = "http"},
+	{org = "ballerina", name = "io"},
 	{org = "ballerina", name = "jwt"},
-	{org = "ballerinai", name = "observe"}
+	{org = "ballerina", name = "log"},
+	{org = "ballerinai", name = "observe"},
+	{org = "ballerinax", name = "salesforce"}
 ]
 modules = [
-	{org = "WSO2", packageName = "billing_management_service", moduleName = "billing_management_service"}
+	{org = "WSO2", packageName = "salesforce_integration_service", moduleName = "salesforce_integration_service"}
 ]
 
 

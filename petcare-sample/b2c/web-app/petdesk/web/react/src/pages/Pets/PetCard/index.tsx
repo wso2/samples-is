@@ -42,8 +42,8 @@ function PetCard(props: PetCardProps) {
     async function getThumbnails() {
         const accessToken = await getAccessToken();
         const response = await getThumbnail(accessToken, petId);
-        if (response.data.size > 0) {
-            const imageUrl = URL.createObjectURL(response.data);
+        if (response?.data.size > 0) {
+            const imageUrl = URL.createObjectURL(response?.data);
             setUrl(imageUrl);
         }
     }

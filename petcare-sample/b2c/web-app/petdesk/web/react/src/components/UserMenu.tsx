@@ -16,7 +16,7 @@
  * under the License.
  */
 
-import { Button, List, ListItem, ListItemIcon, ListItemText, Menu, Theme, Typography, createStyles, makeStyles } from "@mui/material";
+import { List, ListItem, ListItemIcon, ListItemText, Menu, Typography } from "@mui/material";
 import React from "react";
 import GetSettings from "../pages/settings";
 import MiscellaneousServicesIcon from '@mui/icons-material/MiscellaneousServices';
@@ -24,10 +24,10 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { BasicUserInfo, useAuthContext } from "@asgardeo/auth-react";
 import { getNotification } from "./Notifications/get-notification";
-import { default as authConfig } from "../../config.json";
 import GetBilling from "../pages/billing";
-import { getBilling } from "./Billing/billing";
+import { getBilling, getUpgrade } from "./Billing/billing";
 import { AddCard } from "@mui/icons-material";
+import { getConfig } from "../util/getConfig";
 
 export default function MenuListComposition(props: {
     user: BasicUserInfo;
@@ -41,8 +41,10 @@ export default function MenuListComposition(props: {
     const { getAccessToken } = useAuthContext();
     const [enabled, setEnabled] = React.useState(false);
     const [email, setEmail] = React.useState(user.email);
+    const [isUpgraded, setisUpgraded] = React.useState(false);
 
     const handleToggle = () => {
+        checkUpgrade();
         setUserMenuOpen((prevOpen) => !prevOpen);
     };
 
@@ -68,7 +70,7 @@ export default function MenuListComposition(props: {
     };
 
     const gotoMyAccount = () => {
-        window.open(authConfig.myAccountAppURL, '_blank');
+        window.open(getConfig().myAccountAppURL, '_blank');
     };
 
     async function handleBilling() {
@@ -83,6 +85,30 @@ export default function MenuListComposition(props: {
             return Promise.reject(e);
         });    
     }
+
+    const checkUpgrade = () => {
+        async function getUpgradeDetail() {
+            const accessToken = await getAccessToken();
+            try {
+                const response = await getUpgrade(accessToken);
+                if (response.data instanceof Object) {
+                    if (response.data.isUpgraded) {
+                        setisUpgraded(true);
+                    } else {
+                        setisUpgraded(false);
+                    }
+                }
+            } catch (error) {
+                setisUpgraded(false);
+                //if error is Error: Network Error set isUpgraded to true
+                if (error.toString().includes("Error: Network Error")) {
+                    setisUpgraded(true);
+                }
+                console.error('Error during upgrade process:', error);
+            }
+        }
+        getUpgradeDetail();
+    };
 
     return (
         <><div className="user-menu-div">
@@ -100,13 +126,13 @@ export default function MenuListComposition(props: {
                 open={userMenuOpen}
                 onClose={handleClose}
                 className="menu-style"
-                getContentAnchorEl={null}
             >
                 <List className="list-style">
                     <ListItem
                         button
                         className="nav-list-item"
                         component="nav"
+                        disabled={!isUpgraded}
                         disableGutters
                         onClick={() => { setSettingsOpen(true); setUserMenuOpen(false); getSettings();}}
                         data-testid="header-user-profile-settings"
@@ -173,7 +199,7 @@ export default function MenuListComposition(props: {
                     enabled={enabled} email={email} setEnabled={setEnabled} setEmail={setEmail} />
             </div>
             <div>
-                <GetBilling handleBilling={handleBilling} isOpen={billingOpen} setIsOpen={setBillingOpen} />
+                <GetBilling isUpgraded={isUpgraded} setisUpgraded={setisUpgraded} user={user} handleBilling={handleBilling} checkUpgrade={checkUpgrade} isOpen={billingOpen} setIsOpen={setBillingOpen} />
             </div>
         </>
     );

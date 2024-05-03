@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2021, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ * Copyright (c) 2024, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
  * WSO2 Inc. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
@@ -16,35 +16,21 @@
  * under the License.
  */
 
-import { AuthProvider, useAuthContext } from "@asgardeo/auth-react";
-import React, { FunctionComponent, ReactElement } from "react";
-import { createRoot } from "react-dom/client";
+import React from 'react'; 
+
+import './App.css';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import "./app.css";
-import { ErrorBoundary } from "./error-boundary";
-import { HomePage, NotFoundPage } from "./pages";
-import { default as authConfig } from "../../../web/react/config.json";
+import { HomePage, NotFoundPage } from './pages';
 
-const AppContent: FunctionComponent = (): ReactElement => {
-    const { error } = useAuthContext();
+function App() {
+  return (
+    <Router>
+    <Routes>
+        <Route path="/" element={ <HomePage /> } />
+        <Route element={ <NotFoundPage /> } />
+    </Routes>
+</Router>
+  );
+}
 
-    return (
-        <ErrorBoundary error={error}>
-            <Router>
-            <Routes>
-                <Route path="/" element={ <HomePage /> } />
-                <Route element={ <NotFoundPage /> } />
-            </Routes>
-        </Router>
-        </ErrorBoundary>
-    )
-};
-
-const App = () => (
-    <AuthProvider config={authConfig}>
-        <AppContent />
-    </AuthProvider>
-);
-
-const root = createRoot(document.getElementById("root"));
-root.render(<App />);
+export default App;

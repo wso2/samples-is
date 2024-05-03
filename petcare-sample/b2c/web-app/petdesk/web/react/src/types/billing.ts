@@ -22,6 +22,10 @@ export interface BillingInfo {
     expiryDate: string;
     owner?: string;
     securityCode: string;
+  }
 
+export interface AccountInfo {
+    accountId: string;
+    isUpgraded: boolean;
   }
   
