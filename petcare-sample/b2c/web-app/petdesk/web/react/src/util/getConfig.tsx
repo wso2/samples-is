@@ -26,6 +26,7 @@ interface Config {
     petManagementServiceURL: string;
     billingServerURL: string;
     salesforceServerURL: string;
+    enableOIDCSessionManagement: boolean;
   }
 
 declare global {
@@ -43,7 +44,8 @@ const authConfig = {
     petManagementServiceURL: window.config.petManagementServiceURL,
     billingServerURL: window.config.billingServerURL,
     salesforceServerURL: window.config.salesforceServerURL,
-    scope: ["openid", "profile", "email", "acr"],
+    enableOIDCSessionManagement: true,
+    scope: ["openid", "profile", "email", "acr"]
   };
 
 export function getConfig() {
