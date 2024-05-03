@@ -1,4 +1,4 @@
-package com.wso2_sample.api_auth_sample.features.add_pet.presentation.screens.add_pet
+package com.wso2_sample.api_auth_sample.features.home.presentation.screens.add_pet
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
@@ -22,8 +22,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.wso2_sample.api_auth_sample.features.add_pet.presentation.util.AddPetCard
-import com.wso2_sample.api_auth_sample.features.add_pet.presentation.util.TopBar
+import com.wso2_sample.api_auth_sample.features.home.presentation.util.add_pet.AddPetCard
+import com.wso2_sample.api_auth_sample.features.home.presentation.util.add_pet.TopBar
 import com.wso2_sample.api_auth_sample.ui.theme.Api_authenticator_sdkTheme
 import com.wso2_sample.api_auth_sample.util.ui.LoadingDialog
 

@@ -81,4 +81,7 @@ dependencies {
 
     // Asgardeo android SDK
     implementation(libs.asgardeo.android.ui)
+
+    implementation(libs.okhttp)
+    implementation(libs.jackson.module.kotlin)
 }

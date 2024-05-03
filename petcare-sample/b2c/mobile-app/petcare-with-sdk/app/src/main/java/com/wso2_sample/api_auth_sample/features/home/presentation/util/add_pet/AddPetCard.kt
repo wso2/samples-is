@@ -1,4 +1,4 @@
-package com.wso2_sample.api_auth_sample.features.add_pet.presentation.util
+package com.wso2_sample.api_auth_sample.features.home.presentation.util.add_pet
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box

@@ -1,46 +1,145 @@
 package com.wso2_sample.api_auth_sample.features.home.impl.repository
 
-import com.wso2_sample.api_auth_sample.features.home.domain.models.Pet
+import android.util.Log
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.wso2_sample.api_auth_sample.features.home.domain.models.pet.Pet
+import com.wso2_sample.api_auth_sample.features.home.domain.models.pet.PetModule
 import com.wso2_sample.api_auth_sample.features.home.domain.repository.PetRepository
+import com.wso2_sample.api_auth_sample.features.home.impl.less_secure_client.LessSecureHttpClient
+import com.wso2_sample.api_auth_sample.util.Config
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.Response
+import org.json.JSONArray
+import org.json.JSONObject
+import java.io.IOException
 import javax.inject.Inject
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
 
 class PetRepositoryImpl @Inject constructor() : PetRepository {
-    override fun getPets(): List<Pet> = listOf(
-        Pet(
-            "Bella",
-            "https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_1280.jpg",
-            "Cat - Persian",
-            "Next appointment on 29/04/24"
-        ),
-        Pet(
-            "Charlie",
-            "https://cdn.pixabay.com/photo/2023/09/19/12/34/dog-8262506_1280.jpg",
-            "Rabbit - Holland Lop",
-            "Next appointment on 19/06/24"
-        ),
-        Pet(
-            "Luna",
-            "https://cdn.pixabay.com/photo/2023/08/18/15/02/dog-8198719_1280.jpg",
-            "Dog - Golden Retriever",
-            "Next appointment on 04/05/24"
-        ),
-        Pet(
-            "Max",
-            "https://cdn.pixabay.com/photo/2024/03/26/15/50/ai-generated-8657140_1280.jpg",
-            "Hamster - Syrian",
-            "Next appointment on 01/06/24"
-        ),
-        Pet(
-            "Oliver",
-            "https://cdn.pixabay.com/photo/2020/04/29/04/01/boy-5107099_1280.jpg",
-            "Dog - Poddle",
-            "Next appointment on 29/04/24"
-        ),
-        Pet(
-            "Lucy",
-            "https://cdn.pixabay.com/photo/2023/09/24/14/05/dog-8272860_1280.jpg",
-            "Dog - Beagle",
-            "Next appointment on 05/08/24"
-        )
+    private val client: OkHttpClient = LessSecureHttpClient.getInstance().getClient()
+    private val dataSourcesResourcesUrl: String? = Config.getDataSourceResourceServerUrl()
+
+    override suspend fun getPets(accessToken: String): List<Pet> =
+        if (dataSourcesResourcesUrl == null) {
+            getPetsFromLocalDataSource()
+        } else {
+            getPetsFromDataSource(accessToken)
+        }
+
+    @Throws(IOException::class)
+    override suspend fun addPet(
+        accessToken: String,
+        name: String,
+        breed: String,
+        dateOfBirth: String
+    ): Unit? = withContext(Dispatchers.IO) {
+        suspendCoroutine { continuation ->
+            if (dataSourcesResourcesUrl == null) {
+                continuation.resumeWithException(Exception("Data source URL is not set"))
+                return@suspendCoroutine
+            }
+
+            // authorize URL
+            val url = "$dataSourcesResourcesUrl/pets"
+
+            // POST form parameters
+            val postData = JSONObject()
+            postData.put("name", name)
+            postData.put("breed", breed)
+            postData.put("dateOfBirth", dateOfBirth)
+            postData.put("vaccinations", JSONArray())
+
+            val requestBuilder: Request.Builder = Request.Builder().url(url)
+            requestBuilder.addHeader("Authorization", "Bearer $accessToken")
+
+            val request: Request = requestBuilder.post(
+                postData.toString().toRequestBody("application/json".toMediaTypeOrNull())
+            ).build()
+
+            client.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    println(e)
+                    continuation.resumeWithException(e)
+                }
+
+                @Throws(IOException::class)
+                override fun onResponse(call: Call, response: Response) {
+                    try {
+                        if (response.code == 201) {
+                            continuation.resume(Unit)
+                        } else {
+                            continuation.resumeWithException(Exception("Failed to add pet"))
+                        }
+                    } catch (e: Exception) {
+                        Log.e("PetAPI Add Pet", e.toString())
+                        continuation.resumeWithException(e)
+                    }
+                }
+            })
+        }
+    }
+
+    private fun getPetsFromLocalDataSource(): List<Pet> = listOf(
+        Pet.createPetWithRandomData("Bella", "Cat - Persian"),
+        Pet.createPetWithRandomData("Charlie", "Rabbit - Holland Lop"),
+        Pet.createPetWithRandomData("Luna", "Dog - Golden Retriever"),
+        Pet.createPetWithRandomData("Max", "Hamster - Syrian"),
+        Pet.createPetWithRandomData("Oliver", "Dog - Poddle"),
+        Pet.createPetWithRandomData("Lucy", "Dog - Beagle")
     )
+
+    private suspend fun getPetsFromDataSource(accessToken: String): List<Pet> =
+        withContext(Dispatchers.IO) {
+            suspendCoroutine { continuation ->
+                // authorize URL
+                val url = "${dataSourcesResourcesUrl!!}/pets"
+
+                val requestBuilder: Request.Builder = Request.Builder().url(url)
+                requestBuilder.addHeader("Authorization", "Bearer $accessToken")
+
+                val request: Request = requestBuilder.get().build()
+
+                client.newCall(request).enqueue(object : Callback {
+                    override fun onFailure(call: Call, e: IOException) {
+                        println(e)
+                        continuation.resumeWithException(e)
+                    }
+
+                    @Throws(IOException::class)
+                    override fun onResponse(call: Call, response: Response) {
+                        try {
+                            if (response.code == 200) {
+                                val responseBody: String = response.body!!.string()
+                                // reading the json
+                                val pets: ArrayList<Pet> = jacksonObjectMapper().registerModule(
+                                    PetModule()
+                                )
+                                    .readValue(
+                                        responseBody,
+                                        jacksonObjectMapper().typeFactory.constructCollectionType(
+                                            ArrayList::class.java,
+                                            Pet::class.java
+                                        )
+                                    )
+                                continuation.resume(pets)
+                            } else {
+                                continuation.resumeWithException(Exception("Failed to get pets"))
+                            }
+                        } catch (e: Exception) {
+                            Log.e("PetAPI Get Pets", e.toString())
+                            continuation.resumeWithException(e)
+                        }
+                    }
+                })
+            }
+        }
 }

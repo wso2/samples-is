@@ -9,7 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.wso2_sample.api_auth_sample.features.home.domain.models.Pet
+import com.wso2_sample.api_auth_sample.features.home.domain.models.pet.Pet
 
 @Composable
 fun PetsList(pets: List<Pet>) {

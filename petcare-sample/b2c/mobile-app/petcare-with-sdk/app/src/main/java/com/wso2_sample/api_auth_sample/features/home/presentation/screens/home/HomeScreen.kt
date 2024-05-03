@@ -21,7 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.wso2_sample.api_auth_sample.features.home.domain.models.Pet
+import com.wso2_sample.api_auth_sample.features.home.domain.models.pet.Pet
 import com.wso2_sample.api_auth_sample.features.home.presentation.util.AddPetFab
 import com.wso2_sample.api_auth_sample.features.home.presentation.util.DoctorSearchField
 import com.wso2_sample.api_auth_sample.features.home.presentation.util.EmergencyCard

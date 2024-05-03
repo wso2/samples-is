@@ -4,8 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.wso2_sample.api_auth_sample.features.add_pet.presentation.screens.add_pet.AddPetScreen
-import com.wso2_sample.api_auth_sample.features.add_pet.presentation.screens.add_pet.AddPetScreenViewModel
+import com.wso2_sample.api_auth_sample.features.home.presentation.screens.add_pet.AddPetScreen
+import com.wso2_sample.api_auth_sample.features.home.presentation.screens.add_pet.AddPetScreenViewModel
 import com.wso2_sample.api_auth_sample.features.home.presentation.screens.home.HomeScreen
 import com.wso2_sample.api_auth_sample.features.home.presentation.screens.home.HomeScreenViewModel
 import com.wso2_sample.api_auth_sample.features.home.presentation.screens.profile.ProfileScreen

@@ -1,4 +1,4 @@
-package com.wso2_sample.api_auth_sample.features.add_pet.presentation.screens.add_pet
+package com.wso2_sample.api_auth_sample.features.home.presentation.screens.add_pet
 
 import android.content.Context
 import androidx.lifecycle.ViewModel

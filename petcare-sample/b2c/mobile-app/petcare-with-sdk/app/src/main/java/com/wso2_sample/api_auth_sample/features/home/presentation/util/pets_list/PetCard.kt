@@ -23,7 +23,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
-import com.wso2_sample.api_auth_sample.features.home.domain.models.Pet
+import com.wso2_sample.api_auth_sample.features.home.domain.models.pet.Pet
 
 @Composable
 fun PetCard(pet: Pet) {
@@ -53,11 +53,11 @@ fun PetCard(pet: Pet) {
                 verticalArrangement = Arrangement.spacedBy(2.dp)
             ) {
                 Text(
-                    text = pet.name,
+                    text = pet.name ?: "Dobby",
                     style = MaterialTheme.typography.bodyLarge
                 )
                 Text(
-                    text = pet.type,
+                    text = pet.breed ?: "Golden Retriever",
                     style = MaterialTheme.typography.bodyMedium,
                 )
             }
@@ -75,7 +75,7 @@ fun PetCard(pet: Pet) {
                 )
 
                 Text(
-                    text = pet.nextAppointment,
+                    text = pet.nextAppointment ?: "Next appointment: 12th June 2025",
                     style = MaterialTheme.typography.labelSmall
                 )
             }
