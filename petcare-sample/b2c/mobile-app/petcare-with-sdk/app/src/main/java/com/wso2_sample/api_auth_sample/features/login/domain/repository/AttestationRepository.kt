@@ -18,9 +18,6 @@
 
 package com.wso2_sample.api_auth_sample.features.login.domain.repository
 
-import io.asgardeo.android.core.provider.providers.authentication.AuthenticationProvider
-import io.asgardeo.android.core.provider.providers.token.TokenProvider
-
 /**
  * Repository interface for the Attestation feature.
  */

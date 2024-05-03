@@ -21,20 +21,19 @@ package com.wso2_sample.api_auth_sample.features.login.presentation.screens.land
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import com.wso2_sample.api_auth_sample.features.login.domain.repository.AsgardeoAuthRepository
 import com.wso2_sample.api_auth_sample.features.login.domain.repository.AttestationRepository
-import com.wso2_sample.api_auth_sample.util.ui.sendEvent
 import com.wso2_sample.api_auth_sample.util.Event
 import com.wso2_sample.api_auth_sample.util.navigation.NavigationViewModel
+import com.wso2_sample.api_auth_sample.util.ui.sendEvent
+import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import io.asgardeo.android.core.models.state.AuthenticationState
 import io.asgardeo.android.core.provider.providers.authentication.AuthenticationProvider
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import java.net.URLEncoder
 import javax.inject.Inject
 
