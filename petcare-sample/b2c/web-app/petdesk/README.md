@@ -48,9 +48,9 @@ Authorized redirect URLs: https://localhost:3000 (This will be updated with the 
     - You can provide values to **Copyright Text** and **Contact Email**.
     - Go to the **Design** tab and choose layout as **Centered**.
     - Choose the **Light** theme.
-    - Go to **Theme preferences > Images** and enter logo url.
-    - Enter **Favicon url**.
-    - Go to **Color Pallet** and choose primary color as **##69a2f4**
+    - Go to **Theme preferences > Images** and enter logo url https://github.com/wso2/samples-is/assets/27746285/9b37d814-dcb8-4838-8435-603ef9ee88ed
+    - Enter **Favicon url** https://github.com/wso2/samples-is/assets/27746285/b11e7c0e-64b5-4028-a884-2d24fe4a6ed2
+    - Go to **Color Pallet** and choose primary color as **#69a2f4**
     - Keep other options as default
     - Click **Save**.
     
@@ -168,10 +168,7 @@ Update the following configurations in the config.js file.
         - Click **Production** Keys in the left navigation menu.
         - Copy and paste the value of the **Consumer Key**.
 
-5. Update the **petManagementServiceURL**, **billingServerURL** and **salesforceServerURL** API resource URLs
-        - Open the **API** you created previously via **Developer Portal**.
-        - In the **Overview** section of the API, you can find the **Endpoint(s)**.
-        - Copy and paste the value of On the **Endpoint(s)** section.
+5. Update the **petManagementServiceURL**, **billingServerURL** and **salesforceServerURL** API resource URLs. (This will be updated in a future step)
 
 &nbsp;<br>
 
@@ -192,28 +189,28 @@ Let's create your first Service.
     | Name | Pet Management Service |
     | Description | Manage your pets |
 
-5. Click **Next**.
-6. To allow Choreo to connect to your GitHub account, click **Authorize with GitHub**.
-7. If you have not already connected your GitHub repository to Choreo, enter your GitHub credentials, and select the repository you created by forking https://github.com/wso2/samples-is to install the Choreo GitHub App.
-8. In the Connect Repository dialog box, enter the following information:
+5. To allow Choreo to connect to your GitHub account, click **Authorize with GitHub**.
+6. If you have not already connected your GitHub repository to Choreo, enter your GitHub credentials, and select the repository you created by forking https://github.com/wso2/samples-is to install the Choreo GitHub App.
+7. In the Connect Repository dialog box, enter the following information:
 
     | Field | Value |
     | -------- | -------- |
     | GitHub Account | Your account |
     | GitHub Repository | samples-is|
-    | Branch | main |
+    | Branch | master |
     | Build Preset | Click **Ballerina** because you are creating the REST API from a Ballerina project and Choreo needs to run a Ballerina build to build it. |
-    | Path | /b2c-apps/pet-care-app/pet-management-service |
+    | Path | /petcare-sample/b2c/web-app/petdesk/apis/ballerina/pet-management-service |
 
-9. Click **Create** to initialize a Service with the implementation from your GitHub repository.
+8. Click **Create** to initialize a Service with the implementation from your GitHub repository.
 
 The Service opens on a separate page where you can see its overview.
 
 ## Step 4.2: Deploy the Service
 
 For the Service to be invokable, you need to deploy it. To deploy the Service, follow the steps given below:
-1. Navigate to the **Choreo Console**. Verify that you are logged into the **organization** you used for Asgardeo. Otherwise, select the appropriate **organization** by clicking on the organization menu at the top.
+1. Navigate to the **Choreo Console**. 
 You will be viewing an overview of the Pet Management Service.
+2. Navigate to the **Build** section from left menu and click **Build Latest**.
 2. In the left pane, click **Deploy**, and then click **Configure & Deploy**.
 3. In the **Configure & Deploy** pane, you will be asking to enter values for the **Defaultable Configurables**.
     - You can setup a **Mysql database** to store the service's data. This is **optional**, and if you do not specify database values, the service will save the data in memory. 
@@ -308,16 +305,18 @@ If you are not connecting the service to a MySQL database and storing the servic
 
 ## Step 4.4: Update API settings
 
-1. Navigate to the **Manage** section in the component.
-2. Click **Settings**.
-3. Under API Settings click **Edit**.
-4. Toggle the **Pass Security Context To Backend** to pass the security context details to backend and click **Save**.
-5. In the **Apply to Development** pane that opens on the right-hand side of the page, enter a meaningful message. Then click **Apply**.
+1. Navigate to the **Deploy** section in the component.
+2. Go to the Set Up card and click **Endpoint Configurations**. This opens the Endpoint Configurations pane.
+3. Toggle the **Pass Security Context To Backend** to pass the security context details to backend and click **Save**.
+4. Select the **Pass Security Context To Backend** checkbox.
+5. Optionally, specify an appropriate audience claim value for the backend service.
+Click Apply.
+6. To redeploy the component with the applied setting, go to the Set Up card and click Deploy.
 
 ## Step 4.5: Test the Service
 
-Let's test the Pet Management Service via Choreo's Open API Console by following the steps given below:
-1. Navigate to the **Test** section in the component and click **OpenAPI Console**. This will open up the Open API definition of the service.
+Let's test the Pet Management Service via Choreo's Console by following the steps given below:
+1. Navigate to the **Test** section in the component and click **Console**. This will open up the definition of the service.
 2. Expand the **POST** method and click **Try it out**.
 3. Update the request body as below:
     ``` 
@@ -350,44 +349,27 @@ Now that yourService is tested, let's publish it and make it available for appli
 4. The Pet Management Service will open in the Developer Portal.
 
 &nbsp;<br>
-# Step 5: Consume the Service from Developer Portal
+# Step 5: Generate the keys and Create Connection between Web App and Service
 
-## Step 5.1: Enable Asgardeo Key Manager
+## Step 5.1: Add Asgardeo as an Identity Provider in Choreo
 
-You can skip this step if you are new to Choreo. If not, follow the below steps to **Enable Asgardeo Key Manager**.
-
-1. Go to the **Choreo Console**, click **Settings**, and then click **API Management**.
-2. On the API Management page, click **Enable Asgardeo Key Manager**.
-
-![Alt text](readme-resources/enable-km.png?raw=true "Enable Asgardeo Key Manager")
-
-## Step 5.2: Create an application
-
-An application in the Developer Portal is a logical representation of a physical application such as a mobile app, web app, device, etc.
-Let's create the application to consume the Pet Management Service by following the steps given below:
-1. Go to the **Developer Portal**.
-2. In the top menu of the Developer Portal, click **Applications**.
-3. Click **Create**.
-4. Enter a name for the application (for example, **Pet Management App**) and click **Create**.
-
-Your Application will open on a separate page.
-
-## Step 5.3: Subscribe to the Service
-
-To consume the Service, the `Pet Management App` application needs to subscribe to it. To subscribe your application to the Service, follow the steps given below:
-1. In the left navigation menu, click **Subscriptions**.
-2. Click **Add APIs**.
-3. Find your Service and click **Add**.
-
-Now your application has subscribed to the `Pet Management Service` Service.
-
-## Step 5.4: Generate Credentials for the Application
-
-To consume the Service, you need to use the application keys. The below steps specify how you can generate keys for the application.
-1. In the left navigation menu, click **Production** on **Credentials**.
-2. Click **Generate Credentials**.
+1. Navigate to the **Pet Management App** in the Choreo console.
+2. Click **Settings** in the bottom of the side panel.
+3. Select **Asgardeo org** as the Identity Provider.
+4. Add the **client ID** of the **Pet Management App** application created in Asgardeo console. (Refer step 2.4 to obtain the client id)
+5. Click **Add Keys**
 
 Now you have generated keys for the application.
+
+## Step 5.2: Create a connection between the web application and the deployed service
+
+1. In the left navigation menu, click **Dependencies** and then click **Connections**.
+2. Click **+ Create**.
+3. In the Create Connection pane, click **Pet Management Service** REST Endpoint.
+4. Provide a preferable Name and description
+5. Click **Next**. This displays the service URL of the connection for each environment the service is deployed in. You will see the service URL for the Development environment here.
+6. Click **Finish**. This opens the detailed view of the connection you created.
+7. You can copy the**Service URL** displayed here and update in the config.js file of the web application.
 
 &nbsp;<br>
 
