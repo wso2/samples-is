@@ -30,6 +30,9 @@ pluginManagement {
         maven {
             url = uri("https://maven.wso2.org/nexus/content/repositories/releases")
         }
+//        maven {
+//            url = uri("file:/Users/<username>/.m2/repository")
+//        }
     }
 }
 dependencyResolutionManagement {
@@ -40,6 +43,9 @@ dependencyResolutionManagement {
         maven {
             url = uri("https://maven.wso2.org/nexus/content/repositories/releases")
         }
+//        maven {
+//            url = uri("file:/Users/<username>/.m2/repository")
+//        }
     }
 }
 

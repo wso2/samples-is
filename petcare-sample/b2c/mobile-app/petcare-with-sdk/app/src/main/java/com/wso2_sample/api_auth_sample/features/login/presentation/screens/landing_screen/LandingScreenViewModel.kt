@@ -74,18 +74,18 @@ class LandingScreenViewModel @Inject constructor(
         }
         viewModelScope.launch {
             authenticationProvider.initializeAuthentication(applicationContext)
-        }
-        _state.update { landingScreenState ->
-            landingScreenState.copy(isLoading = false)
+            _state.update { landingScreenState ->
+                landingScreenState.copy(isLoading = false)
+            }
         }
     }
 
     private fun isLoggedInStateFlow() {
         viewModelScope.launch {
             authenticationProvider.isLoggedInStateFlow(applicationContext)
-        }
-        _state.update { landingScreenState ->
-            landingScreenState.copy(isLoading = false)
+            _state.update { landingScreenState ->
+                landingScreenState.copy(isLoading = false)
+            }
         }
     }
 

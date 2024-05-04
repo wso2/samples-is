@@ -32,6 +32,7 @@ class AsgardeoAuthRepositoryImpl @Inject constructor() : AsgardeoAuthRepository 
     override fun initializeAsgardeoAuth(integrityToken: String?) {
         asgardeoAuth = AsgardeoAuth.getInstance(
             AuthenticationCoreConfig(
+                // Change these values at your discretion
                 authorizeEndpoint = Config.getAuthorizeUrl(),
                 tokenEndpoint = Config.getTokenUrl(),
                 logoutEndpoint = Config.getLogoutUrl(),

@@ -19,9 +19,11 @@
 package com.wso2_sample.api_auth_sample.features.login.presentation.screens.auth_screen.components
 
 import android.content.Intent
+import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -31,6 +33,7 @@ import com.wso2_sample.api_auth_sample.features.login.presentation.screens.auth_
 import com.wso2_sample.api_auth_sample.features.login.presentation.util.common_component.AuthButton
 
 //@RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
+@RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
 @Composable
 internal fun GoogleNativeAuth(
     viewModel: AuthScreenViewModel = hiltViewModel(),
@@ -48,7 +51,9 @@ internal fun GoogleNativeAuth(
                 authenticator.authenticatorId,
                 launcher
             )
-            //viewModel.authenticateWithGoogle(authenticatorType.authenticatorId)
+
+            // Using the Google Credential Manager API
+            //viewModel.authenticateWithGoogleNative(authenticator.authenticatorId)
         }
     )
 }
