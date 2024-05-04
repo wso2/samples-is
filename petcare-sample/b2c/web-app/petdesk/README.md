@@ -307,11 +307,10 @@ If you are not connecting the service to a MySQL database and storing the servic
 
 1. Navigate to the **Deploy** section in the component.
 2. Go to the Set Up card and click **Endpoint Configurations**. This opens the Endpoint Configurations pane.
-3. Toggle the **Pass Security Context To Backend** to pass the security context details to backend and click **Save**.
-4. Select the **Pass Security Context To Backend** checkbox.
-5. Optionally, specify an appropriate audience claim value for the backend service.
+3. Select the **Pass Security Context To Backend** checkbox.
+4. Optionally, specify an appropriate audience claim value for the backend service.
 Click Apply.
-6. To redeploy the component with the applied setting, go to the Set Up card and click Deploy.
+5. To redeploy the component with the applied setting, go to the Set Up card and click Deploy.
 
 ## Step 4.5: Test the Service
 
