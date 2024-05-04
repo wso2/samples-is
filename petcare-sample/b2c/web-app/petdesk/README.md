@@ -30,13 +30,57 @@ Authorized redirect URLs: https://localhost:3000 (This will be updated with the 
 7. Tick **Public client** on the next section.
 8. Use **Web App URL** in the step 3.3 as the **Authorized redirect URLs** and **Allowed origins**.
 9. Keep the rest of the default configurations and click **Update**.
-10. Go to the **User Attributes** tab.
-11. Tick on the **Email** section.
-12. Expand the **Profile** section.
-13. Add a tick on the Requested Column for the **Full Name** and click **Update**.
-14. Then go to the **Sign-In Method** tab.
-15. Configure **Google login** as described in https://wso2.com/asgardeo/docs/guides/authentication/social-login/add-google-login/
-16. As shown in the below, add **Username & Password** as an **Authentication** step.
+10. Create `acr` claim from `User Attributes & Stores/Attributes section.
+11. Create a scope called `acr` and map it to the previously created `acr` claim.
+12. Go to the **User Attributes** tab.
+13. Tick on the `acr`.
+14. Tick on the **Email** section.
+15. Expand the **Profile** section.
+16. Add a tick on the Requested Column for the **Full Name** and click **Update**.
+17. Then go to the **Sign-In Method** tab.
+18. Configure **Google login** as described in https://wso2.com/asgardeo/docs/guides/authentication/social-login/add-google-login/
+19. As shown in the below, add **Username & Password** as an **Authentication** step.
+20. To perform the acr-based step up authentication add the following conditional script to the login flow.
+
+```toml
+// Define conditional authentication by passing one or many Authentication Context Class References 
+// as comma separated values.
+
+// Specify the ordered list of ACR here.
+var supportedAcrValues = ['acr1', 'acr2'];
+
+var onLoginRequest = function (context) {
+    var selectedAcr = selectAcrFrom(context, supportedAcrValues);
+    Log.info('--------------- ACR selected: ' + selectedAcr);
+    context.selectedAcr = selectedAcr;
+    switch (selectedAcr) {
+        case supportedAcrValues[0]:
+            executeStep(1, {
+                onSuccess: function (context) {
+                    var user = context.steps[1].subject;
+                    user.claims["http://wso2.org/claims/acr"] = "acr1"
+                }
+            });
+            break;
+        case supportedAcrValues[1]:
+            executeStep(1);
+            executeStep(2, {
+                onSuccess: function (context) {
+                    var user = context.steps[1].subject;
+                    user.claims["http://wso2.org/claims/acr"] = "acr2"
+                }
+            });
+            break;
+        default:
+            executeStep(1, {
+                onSuccess: function (context) {
+                    var user = context.steps[1].subject;
+                    user.claims["http://wso2.org/claims/acr"] = "acr1"
+                }
+            });
+    }
+};
+```
 
 ![Alt text](readme-resources/sign-in-methods.png?raw=true "Sign In Methods")
 
@@ -417,6 +461,9 @@ Now you have generated keys for the application.
 1. Install Ballerina 2201.5.0 https://dist.ballerina.io/downloads/2201.5.0/ballerina-2201.5.0-swan-lake-macos-arm-x64.pkg
 2. Install Node 16 LTS (Tested in v16.13.0).
 3. Clone https://github.com/wso2/samples-is and the sample will be in the petcare-sample/b2c directory.
+4. Configure choreo webhook for [Asgardeo user registration event](https://wso2.com/asgardeo/docs/guides/asgardeo-events/#implement-business-use-cases-for-asgardeo-events). Use [asgardeo_registration_webhook](https://github.com/wso2/samples-is/tree/master/petcare-sample/b2c/web-app/petdesk/webhooks/asgardeo_registration_webhook).
+
+When deploying the webhook through choreo, provide the salesforce related configuration mention as in salesforce-integration-service deployment.
 
 ## Deploy API Services
 1. Navigate to <PROJECT_HOME>/petcare-sample/b2c/web-app/petdesk/apis/ballerina/pet-management-service and start the 
@@ -426,6 +473,66 @@ Now you have generated keys for the application.
     ```
 2. Navigate to <PROJECT_HOME>/petcare-sample/b2c/web-app/petdesk/apis/ballerina/billing-management-service and start the 
    pet management service by executing the following command in the terminal.
+    ```
+    bal run
+    ```
+3. Navigate to <PROJECT_HOME>/petcare-sample/b2c/web-app/petdesk/apis/ballerina/salesforce-integration-service and provide following configurations.
+
+```config
+// Create Salesforce client configuration by reading from environment.
+configurable string clientId = "";
+configurable string clientSecret = "";
+configurable string refreshToken = "";
+configurable string refreshUrl = "";
+configurable string baseUrl = "";
+```
+
+**Setup guide**
+
+1. Create a Salesforce account with the REST capability.
+
+2. Go to Setup --> Apps --> App Manager
+
+![!\[alt text\](image.png)](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-sfdc/master/docs/setup/resources/side-panel.png)
+
+Setup Side Panel
+Create a New Connected App.
+![alt text](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-sfdc/master/docs/setup/resources/create-connected-apps.png)
+
+3. Create Connected Apps
+
+- Here we will be using https://test.salesforce.com as we are using sandbox enviorenment. Users can use https://login.salesforce.com for normal usage.
+![alt text](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-sfdc/master/docs/setup/resources/create_connected%20_app.png)
+Create Connected Apps
+
+4. After the creation user can get consumer key and secret through clicking on the Manage Consume Details button.
+![alt text](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-sfdc/master/docs/setup/resources/crdentials.png)
+Consumer Secrets
+
+5 .Next step would be to get the token.
+
+- Log in to salesforce in your prefered browser and enter the following url.
+```url
+https://<YOUR_INSTANCE>.salesforce.com/services/oauth2/authorize?response_type=code&client_id=<CONSUMER_KEY>&redirect_uri=<REDIRECT_URL>
+```
+- Allow access if an alert pops up and the browser will be redirected to a Url like follows.
+
+```url
+https://login.salesforce.com/?code=<ENCODED_CODE>
+```
+- The code can be obtained after decoding the encoded code
+
+6. Get Access and Refresh tokens
+
+- Following request can be sent to obtain the tokens.
+
+```curl
+curl -X POST https://<YOUR_INSTANCE>.salesforce.com/services/oauth2/token?code=<CODE>&grant_type=authorization_code&client_id=<CONSUMER_KEY>&client_secret=<CONSUMER_SECRET>&redirect_uri=https://test.salesforce.com/
+```
+- Tokens can be obtained from the response.
+
+Then start the 
+   salesforce integration service by executing the following command in the terminal.
     ```
     bal run
     ```
