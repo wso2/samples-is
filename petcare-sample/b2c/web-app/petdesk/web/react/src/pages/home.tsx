@@ -182,13 +182,13 @@ export const HomePage: FunctionComponent = (): ReactElement => {
         signOut();
     };
 
-    // If `clientID` is not defined in `config.json`, show a UI warning.
+    // If `clientID` is not defined in `config.js`, show a UI warning.
     if (!getConfig().clientID) {
 
         return (
             <div className="content">
                 <h2>You need to update the Client ID to proceed.</h2>
-                <p>Please open &quot;src/config.json&quot; file using an editor, and update
+                <p>Please open &quot;public/config.js&quot; file using an editor, and update
                     the <code>clientID</code> value with the registered application&apos;s client ID.</p>
                 <p>Visit repo <a
                     href="https://github.com/asgardeo/asgardeo-auth-react-sdk/tree/master/samples/asgardeo-react-app">README</a> for
