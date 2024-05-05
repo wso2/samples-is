@@ -32,11 +32,10 @@ interface BillingProps {
     isOpen: boolean;
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
     handleBilling: () => Promise<AxiosResponse<BillingInfo, any>>;
-    checkUpgrade: () => void;
 }
 
 export default function GetBilling(props: BillingProps) {
-    const { user, isUpgraded, setisUpgraded, isOpen, setIsOpen, handleBilling, checkUpgrade } = props;
+    const { user, isUpgraded, setisUpgraded, isOpen, setIsOpen, handleBilling } = props;
     const { getAccessToken } = useAuthContext();
 
     const [cardName, setCardName] = useState("");
@@ -91,9 +90,12 @@ export default function GetBilling(props: BillingProps) {
                     expiryDate: expiryDate,
                     securityCode: securityCode
                 };
-                await postBilling(accessToken, payload);
-                await postUpgrade(accessToken, user);
-                setisUpgraded(true);
+                await postUpgrade(accessToken, user).then(async (result) => {
+                    await postBilling(accessToken, payload);
+                    setisUpgraded(true);
+                }).catch((error) => {
+                    console.log("Upgrade error: ", error);
+                });
                 setIsOpen(false);
             }
         }
@@ -104,7 +106,6 @@ export default function GetBilling(props: BillingProps) {
         //if session strage has billing true, then open the billing dialog
         const billingExists = sessionStorage.getItem("billing") !== null;
         if (billingExists) {
-            checkUpgrade();
             const billing = sessionStorage.getItem("billing");
             if (billing === "true") {
                 setBillingInfo();
