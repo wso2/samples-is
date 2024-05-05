@@ -176,7 +176,7 @@ window.config = {
     billingServerURL: "<billing-service-url>",
     salesforceServerURL: "<sales-force-service-url>",
     scope: ["openid", "email", "profile"]
-    myAccountAppURL: "<MY_ACCOUNT_URL>",
+    myAccountAppURL: "<my-account-url>",
     enableOIDCSessionManagement: true
     };
    ```
@@ -187,9 +187,13 @@ window.config = {
 7. When the application is deployed successfully you will get an url in the section **Web App URL**. Copy the **Web App URL**.
 8. Click the **Manage Configs & Secrets** on the bottom of the deployment card.
 9. On the Config-file you created, click the **edit icon** on the right side corner.
-9. Copy and paste the **Web App URL** as the **signInRedirectURL** and **signOutRedirectURL** in the config.js.
-10. Click **Save**.
-11. Add the same **Web App URL** in the Asgardeo application
+10. Update the file mount path to **/usr/share/nginx/html/config.js**
+11. Copy and paste the **Web App URL** as the **signInRedirectURL** and **signOutRedirectURL** in the config.js file mount.
+12. Click **Save**.
+13. Navigate to **Asgardeo** console. 
+14. Click Applications and open the `Pet Management App`.
+15. Navigate to Protocol tab
+15. Add the same **Web App URL** to **Authorized redirect URLs** and **Allowed origins**.
 
 
 ## Step 2.4: Update the configurations of the front-end application
@@ -568,7 +572,7 @@ dbPort = "<DB_PORT>"
     billingServerURL: "http://localhost:9091",
     salesforceServerURL: "http://localhost:9092",
     scope: ["openid", "email", "profile"]
-    myAccountAppURL: "<MY_ACCOUNT_URL>",
+    myAccountAppURL: "<my-account-url>",
     enableOIDCSessionManagement: true
    ```
 2. Run the application by executing the following command in the terminal.
