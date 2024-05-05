@@ -22,7 +22,7 @@
 ```
 private const val BASE_URL: String = <BASE_URL of the tenant>
 private const val DISCOVERY_URL: String = null
-private const val CLIENT_ID: String = "<CLIENT_ID of th>
+private const val CLIENT_ID: String = "<CLIENT_ID of the created application>
 private const val REDIRECT_URI: String = "wso2.apiauth.sample.android://login-callback"
 private const val SCOPE: String = "openid internal_login profile email"
 private const val GOOGLE_WEB_CLIENT_ID = <GOOGLE_WEB_CLIENT_ID>
