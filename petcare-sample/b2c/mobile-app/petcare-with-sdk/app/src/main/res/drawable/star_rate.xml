@@ -1,0 +1,27 @@
+<!--
+  ~  Copyright (c) 2024, WSO2 LLC. (https://www.wso2.com).
+  ~
+  ~  WSO2 LLC. licenses this file to you under the Apache License,
+  ~  Version 2.0 (the "License"); you may not use this file except
+  ~  in compliance with the License.
+  ~  You may obtain a copy of the License at
+  ~
+  ~         http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~  Unless required by applicable law or agreed to in writing,
+  ~  software distributed under the License is distributed on an
+  ~  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~  KIND, either express or implied. See the License for the
+  ~  specific language governing permissions and limitations
+  ~  under the License.
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+  <path
+      android:pathData="M12,8.89L12.94,12H15.76L13.49,13.62L14.42,16.63L12,14.79L9.58,16.63L10.51,13.62L8.24,12H11.06L12,8.89ZM12,2L9.58,10H2L8.17,14.41L5.83,22L12,17.31L18.18,22L15.83,14.41L22,10H14.42L12,2Z"
+      android:fillColor="#000000"/>
+</vector>

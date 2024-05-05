@@ -1,0 +1,27 @@
+<!--
+  ~  Copyright (c) 2024, WSO2 LLC. (https://www.wso2.com).
+  ~
+  ~  WSO2 LLC. licenses this file to you under the Apache License,
+  ~  Version 2.0 (the "License"); you may not use this file except
+  ~  in compliance with the License.
+  ~  You may obtain a copy of the License at
+  ~
+  ~         http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~  Unless required by applicable law or agreed to in writing,
+  ~  software distributed under the License is distributed on an
+  ~  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~  KIND, either express or implied. See the License for the
+  ~  specific language governing permissions and limitations
+  ~  under the License.
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+  <path
+      android:pathData="M11.5,23.295V19.695C6.49,19.435 2.5,15.275 2.5,10.205C2.5,4.965 6.76,0.705 12,0.705C17.24,0.705 21.5,4.965 21.5,10.205C21.5,15.155 18.06,20.135 12.93,22.605L11.5,23.295ZM12,2.705C7.86,2.705 4.5,6.065 4.5,10.205C4.5,14.345 7.86,17.705 12,17.705H13.5V20.005C17.14,17.705 19.5,13.925 19.5,10.205C19.5,6.065 16.14,2.705 12,2.705ZM11,14.205H13V16.205H11V14.205ZM13,12.705H11C11,9.455 14,9.705 14,7.705C14,6.605 13.1,5.705 12,5.705C10.9,5.705 10,6.605 10,7.705H8C8,5.495 9.79,3.705 12,3.705C14.21,3.705 16,5.495 16,7.705C16,10.205 13,10.455 13,12.705Z"
+      android:fillColor="#000000"/>
+</vector>
