@@ -250,3 +250,5 @@ The application you created requires 2 properties to perform android attestation
 ![Screenshot_20240411_223521](https://github.com/wso2/samples-is/assets/46097917/34bd711c-aa69-418a-a5a9-6e517d15ba1a)
 ![Screenshot_20240411_223607](https://github.com/wso2/samples-is/assets/46097917/6c6a6d25-4be3-454b-930d-9fd4332c1e4c)
 
+###### Credits
+- Images used in the application are taken from [Freepik](https://www.freepik.com/), [Unsplash](https://unsplash.com/), and [Flaticon](https://www.flaticon.com/).

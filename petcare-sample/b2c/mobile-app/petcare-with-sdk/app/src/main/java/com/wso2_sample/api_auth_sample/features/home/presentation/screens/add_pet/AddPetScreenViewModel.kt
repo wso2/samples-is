@@ -87,6 +87,7 @@ class AddPetScreenViewModel @Inject constructor(
                         _state.update {
                             it.copy(isLoading = false)
                         }
+                        navigateToHome()
                     }.onFailure { e ->
                         _state.update {
                             it.copy(error = e.message!!, isLoading = false)
@@ -94,7 +95,6 @@ class AddPetScreenViewModel @Inject constructor(
                     }
                 }
             }
-
         }
     }
 }

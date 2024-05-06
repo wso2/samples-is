@@ -32,8 +32,8 @@ android {
         applicationId = "com.wso2_sample.api_auth_sample"
         minSdk = 26
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 17
+        versionName = "0.0.17"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 

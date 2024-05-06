@@ -25,7 +25,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.wso2_sample.api_auth_sample.features.home.domain.models.pet.Pet
 
@@ -42,9 +44,20 @@ fun PetsList(pets: List<Pet>) {
         Column(
             modifier = Modifier
                 .padding(top = 16.dp)
-                .fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+                .fillMaxWidth()
+                .align(Alignment.CenterHorizontally),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
+
+            if (pets.isEmpty()) {
+                Text(
+                    text = "You don't have any pets yet",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.tertiaryContainer,
+                    textAlign = TextAlign.Center
+                )
+            }
+
             pets.forEach { pet ->
                 PetCard(pet = pet)
             }
