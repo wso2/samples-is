@@ -94,10 +94,12 @@ fun ProfileScreenContent(
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 ProfileImage(imageUrl = state.user?.imageUrl ?: "")
-                NameSection(
-                    firstName = state.user?.firstName,
-                    lastName = state.user?.lastName
-                )
+                if (state.user?.firstName != null || state.user?.lastName != null) {
+                    NameSection(
+                        firstName = state.user.firstName,
+                        lastName = state.user.lastName
+                    )
+                }
             }
             Spacer(modifier = Modifier.height(32.dp))
             Column(
