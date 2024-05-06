@@ -51,11 +51,13 @@ export default function PetOverview(props: OverviewProps) {
     }
 
     async function getThumbnails() {
-        const accessToken = await getAccessToken();
-        const response = await getThumbnail(accessToken, pet.id);
-        if (response.data.size > 0) {
-            const imageUrl = URL.createObjectURL(response.data);
-            setUrl(imageUrl);
+        if (pet?.id) {
+            const accessToken = await getAccessToken();
+            const response = await getThumbnail(accessToken, pet?.id);
+            if (response?.data?.size > 0) {
+                const imageUrl = URL.createObjectURL(response?.data);
+                setUrl(imageUrl);
+            }
         }
     }
 
@@ -154,14 +156,14 @@ export default function PetOverview(props: OverviewProps) {
                                 </div>
                                 <div className="pet-image-style">
                                     {url ? (<img
-                                        style={{ width: "20vw", height: "20vw", borderRadius: "10%"}}
+                                        style={{ width: "20vw", height: "20vw", borderRadius: "50%"}}
                                         src={url}
-                                        alt="pet-image"
+                                        alt="pet-thumbnail"
                                     />) : (
                                         <img
                                             style={{ width: "20vw", height: "20vw", borderRadius: "10%"}}
                                             src={PET_IMAGE}
-                                            alt="pet-image"
+                                            alt="pet-thumbnail"
                                         />
                                     )}
                                 </div>

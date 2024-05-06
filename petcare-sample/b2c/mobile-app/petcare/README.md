@@ -51,7 +51,7 @@
 > https://stackoverflow.com/a/67983215/10601286.
 > 
 > After that make sure to sync the gradle of the project. This can be done using the `Sync project with Gradle files` icon in the top right hand corner of the IDE (or in Apple `Shift + Command + O`).
-> <img width="1797" alt="Screenshot 2023-12-06 at 10 02 18" src="https://github.com/Achintha444/api-auth-android/assets/46097917/edc40aeb-395d-42c9-ae78-8a0499278c69">
+> ![image](https://github.com/wso2/samples-is/assets/46097917/dbd6738c-384d-495c-bc57-03bfd8dd7105)
 
 > `WSO2_CLIENT_ID_OF_GOOGLE` is the client ID of the client ID crated for the WSO2 identity server.
 
@@ -143,17 +143,17 @@ Currently this sample application supports the following authenticators.
 #### 5. Run the application
 
 5.1 To run the application you need to open the application from the Android Studio IDE, and select the project to open with an `Android` view from the project view selection.
-<img width="491" alt="Screenshot 2023-12-06 at 10 01 35" src="https://github.com/Achintha444/api-auth-android/assets/46097917/fc6c64aa-9fde-45cd-b2ee-8d9cd66c83da">
+![image](https://github.com/wso2/samples-is/assets/46097917/c5ebb28f-335e-4a0f-a560-5504f5402f55)
 
 5.2 You may require to sync the gradle files again. This can be done using the `Sync project with Gradle files` icon in the top right hand corner of the IDE (or in Apple `Shift + Command + O`).
-<img width="1797" alt="Screenshot 2023-12-06 at 10 02 18" src="https://github.com/Achintha444/api-auth-android/assets/46097917/edc40aeb-395d-42c9-ae78-8a0499278c69">
+![image](https://github.com/wso2/samples-is/assets/46097917/f4548481-9eda-425b-8535-eed610012723)
 
 ###### Optional
 > This project is recommended to run on an emulator version `Pixel 7` or above, becuase some authenticators like `Passkey` are not supported for older version of Andriod.  To download the new emulator you can refer the following documentation. When selecting the device make sure to select `Pixel 7` or above version.
 https://developer.android.com/studio/run/managing-avds
 
 5.3 After the gradle files are synced you can run the app from the `Run `app`` button on the top bar (or in Apple `Command + R`)
-<img width="1800" alt="Screenshot 2023-12-06 at 10 08 11" src="https://github.com/Achintha444/api-auth-android/assets/46097917/d3556ea1-80ea-41ec-9c83-7a57e1244467">
+![image](https://github.com/wso2/samples-is/assets/46097917/2ec180e4-4aec-4c0c-83b7-258118bfd988)
 
 #### 6. Client attestation
 
@@ -259,8 +259,6 @@ The application you created requires 2 properties to perform android attestation
 > When you have released multiple versions of the application, you may face a problem that the application you download from the link are still giving the old version, to mitigate this you can change the device and open the link or wait a few minutes.
 
 ###### App Screens
-![image](https://github.com/Achintha444/api-auth-android/assets/46097917/b1612af5-9c27-40ab-af40-5c492eac7995)
-<img width="563" alt="Screenshot 2023-12-06 at 10 15 03" src="https://github.com/Achintha444/api-auth-android/assets/46097917/dd8e6b2d-2647-439d-80c9-5aef246aaf2c">
-<img width="552" alt="Screenshot 2023-12-06 at 10 14 47" src="https://github.com/Achintha444/api-auth-android/assets/46097917/b3e4795e-e3fb-4dc5-aa31-55514fa54740">
-
-
+![image](https://github.com/wso2/samples-is/assets/46097917/5a31af56-b3ae-4b37-992d-aae42046ab31)
+![image](https://github.com/wso2/samples-is/assets/46097917/cc67d9da-2f47-408b-8b75-77499f03802f)
+![image](https://github.com/wso2/samples-is/assets/46097917/65f04443-e43a-4c28-a68a-436f890deb7e)

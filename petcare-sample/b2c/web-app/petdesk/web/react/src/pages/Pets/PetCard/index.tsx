@@ -42,8 +42,8 @@ function PetCard(props: PetCardProps) {
     async function getThumbnails() {
         const accessToken = await getAccessToken();
         const response = await getThumbnail(accessToken, petId);
-        if (response.data.size > 0) {
-            const imageUrl = URL.createObjectURL(response.data);
+        if (response?.data.size > 0) {
+            const imageUrl = URL.createObjectURL(response?.data);
             setUrl(imageUrl);
         }
     }
@@ -57,12 +57,12 @@ function PetCard(props: PetCardProps) {
             <CardContent>
                 <div className="card-pet-image-style">
                     { url? (<img
-                        style={{ width: "20vw", height: "20vw", borderRadius: "10%" }}
+                        style={{ width: "20vw", height: "20vw", borderRadius: "50%" }}
                         src={url}
                         alt="pet-image"
                     />) :(
                         <img
-                        style={{ width: "20vw", height: "20vw", borderRadius: "10%"}}
+                        style={{ width: "20vw", height: "20vw", borderRadius: "50%"}}
                         src={PET_IMAGE}
                         alt="pet-image"
                     />

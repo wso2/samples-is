@@ -70,7 +70,7 @@ export default function AddPets(props: AddPetProps) {
             <form>
                 <div className="align-left">
                     <div className="label-style">
-                        <label style={{fontSize: "3vh"}}>
+                        <label style={{fontSize: "16px"}}>
                             Name
                         </label>
                     </div>
@@ -84,7 +84,7 @@ export default function AddPets(props: AddPetProps) {
                 </div>
                 <div className="align-left">
                     <div className="label-style">
-                        <label style={{fontSize: "3vh"}}>
+                        <label style={{fontSize: "16px"}}>
                             Type
                         </label>
                     </div>
@@ -98,7 +98,7 @@ export default function AddPets(props: AddPetProps) {
                 </div>
                 <div className="align-left">
                     <div className="label-style">
-                        <label style={{fontSize: "3vh"}}>
+                        <label style={{fontSize: "16px"}}>
                             Date of Birth
                         </label>
                     </div>

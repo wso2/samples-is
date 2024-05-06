@@ -16,32 +16,35 @@
  * under the License.
  */
 
-import { Button, List, ListItem, ListItemIcon, ListItemText, Menu, Theme, Typography, createStyles, makeStyles } from "@mui/material";
+import { List, ListItem, ListItemIcon, ListItemText, Menu, Typography } from "@mui/material";
 import React from "react";
-import getSettingsView from "../pages/settings";
 import GetSettings from "../pages/settings";
-import SETTINGS_ICON from "../images/settings.png";
 import MiscellaneousServicesIcon from '@mui/icons-material/MiscellaneousServices';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { BasicUserInfo, useAuthContext } from "@asgardeo/auth-react";
 import { getNotification } from "./Notifications/get-notification";
+import GetBilling from "../pages/billing";
+import { getBilling, getUpgrade } from "./Billing/billing";
+import { AddCard } from "@mui/icons-material";
 import { getConfig } from "../util/getConfig";
 
 export default function MenuListComposition(props: {
     user: BasicUserInfo;
     signout: (callback?: (response: boolean) => void) => Promise<boolean>;
+    setIsBillingWariningOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-    const { user, signout } = props;
-    const anchorRef = React.useRef<HTMLButtonElement>(null);
+    const { user, signout, setIsBillingWariningOpen } = props;
     const [userMenuOpen, setUserMenuOpen] = React.useState(false);
-    const prevOpen = React.useRef(userMenuOpen);
     const [settingsOpen, setSettingsOpen] = React.useState(false);
+    const [billingOpen, setBillingOpen] = React.useState(false);
     const { getAccessToken } = useAuthContext();
     const [enabled, setEnabled] = React.useState(false);
     const [email, setEmail] = React.useState(user.email);
+    const [isUpgraded, setisUpgraded] = React.useState(false);
 
     const handleToggle = () => {
+        checkUpgrade();
         setUserMenuOpen((prevOpen) => !prevOpen);
     };
 
@@ -67,7 +70,44 @@ export default function MenuListComposition(props: {
     };
 
     const gotoMyAccount = () => {
-        window.open(getConfig().baseUrl + '/myaccount', '_blank');
+        window.open(getConfig().myAccountAppURL, '_blank');
+    };
+
+    async function handleBilling() {
+        const accessToken = await getAccessToken();
+        return getBilling(accessToken)
+        .then((res) => {
+            setBillingOpen(true);
+            return Promise.resolve(res);
+        })
+        .catch((e) => {
+            setIsBillingWariningOpen(true);
+            return Promise.reject(e);
+        });    
+    }
+
+    const checkUpgrade = () => {
+        async function getUpgradeDetail() {
+            const accessToken = await getAccessToken();
+            try {
+                const response = await getUpgrade(accessToken);
+                if (response.data instanceof Object) {
+                    if (response.data.isUpgraded) {
+                        setisUpgraded(true);
+                    } else {
+                        setisUpgraded(false);
+                    }
+                }
+            } catch (error) {
+                setisUpgraded(false);
+                //if error is Error: Network Error set isUpgraded to true
+                if (error.toString().includes("Error: Network Error") || error.toString().includes("status code 503")){
+                    setisUpgraded(true);
+                }
+                console.error('Error during upgrade process:', error);
+            }
+        }
+        getUpgradeDetail();
     };
 
     return (
@@ -86,22 +126,23 @@ export default function MenuListComposition(props: {
                 open={userMenuOpen}
                 onClose={handleClose}
                 className="menu-style"
-                getContentAnchorEl={null}
             >
                 <List className="list-style">
                     <ListItem
                         button
+                        className="nav-list-item"
                         component="nav"
+                        disabled={!isUpgraded}
                         disableGutters
                         onClick={() => { setSettingsOpen(true); setUserMenuOpen(false); getSettings();}}
                         data-testid="header-user-profile-settings"
                     >
                         <ListItemIcon>
-                            <MiscellaneousServicesIcon style={{width: "4vh", height: "4vh", padding: "2vh"}}/>
+                            <MiscellaneousServicesIcon style={{ width: "3vh", height: "3vh" }}/>
                         </ListItemIcon>
                         <ListItemText
                             disableTypography
-                            primary={<Typography variant="body2" style={{ color: 'black', fontSize: "2.5vh" }}>Settings</Typography>}
+                            primary={<Typography variant="body2" style={{ color: 'black', fontSize: "16px", fontFamily: "montserrat" }}>Settings</Typography>}
                         />
                     </ListItem>
                     <ListItem
@@ -112,11 +153,27 @@ export default function MenuListComposition(props: {
                         data-testid="header-user-profile-item-logout"
                     >
                         <ListItemIcon>
-                            <AccountCircleIcon style={{width: "4vh", height: "4vh", padding: "2vh"}}/>
+                            <AccountCircleIcon style={{ width: "3vh", height: "3vh" }}/>
                         </ListItemIcon>
                         <ListItemText
                             disableTypography
-                            primary={<Typography variant="body2" style={{ color: 'black', fontSize: "2.5vh" }}>MyAccount</Typography>}
+                            primary={<Typography variant="body2" style={{ color: 'black', fontSize: "16px", fontFamily: "montserrat"}}>MyAccount</Typography>}
+                        />
+                    </ListItem>
+                    <ListItem
+                        button
+                        className="nav-list-item"
+                        component="nav"
+                        disableGutters
+                        onClick={() => { setUserMenuOpen(false); sessionStorage.setItem("billing", "true");}}
+                        data-testid="header-user-profile-settings"
+                    >
+                        <ListItemIcon>
+                            <AddCard style={{ width: "3vh", height: "3vh" }}/>
+                        </ListItemIcon>
+                        <ListItemText
+                            disableTypography
+                            primary={<Typography variant="body2" style={{ color: 'black', fontSize: "16px", fontFamily: "montserrat" }}>Billing</Typography>}
                         />
                     </ListItem>
                     <ListItem
@@ -127,11 +184,11 @@ export default function MenuListComposition(props: {
                         data-testid="header-user-profile-item-logout"
                     >
                         <ListItemIcon>
-                            <LogoutIcon style={{width: "4vh", height: "4vh", padding: "2vh"}}/>
+                            <LogoutIcon style={{width: "3vh", height: "3vh"}}/>
                         </ListItemIcon>
                         <ListItemText
                             disableTypography
-                            primary={<Typography variant="body2" style={{ color: 'black', fontSize: "2.5vh" }}>Logout</Typography>}
+                            primary={<Typography variant="body2" style={{ color: 'black', fontSize: "16px", fontFamily: "montserrat"}}>Logout</Typography>}
                         />
                     </ListItem>
                 </List>
@@ -140,6 +197,9 @@ export default function MenuListComposition(props: {
             <div>
                 <GetSettings isOpen={settingsOpen} setIsOpen={setSettingsOpen}
                     enabled={enabled} email={email} setEnabled={setEnabled} setEmail={setEmail} />
+            </div>
+            <div>
+                <GetBilling isUpgraded={isUpgraded} setisUpgraded={setisUpgraded} user={user} handleBilling={handleBilling} checkUpgrade={checkUpgrade} isOpen={billingOpen} setIsOpen={setBillingOpen} />
             </div>
         </>
     );

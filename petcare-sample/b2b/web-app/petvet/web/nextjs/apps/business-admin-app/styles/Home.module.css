@@ -178,7 +178,7 @@
 .welcomeDiv {
     margin-top: -8vh;
     margin-left: 9vh;
-    font-weight: bold;
+    font-weight: 200;
     font-size: 3vh;
 }
 
@@ -194,7 +194,7 @@
 .tagLine {
     margin-top: 0vh;
     margin-left: 9vh;
-    font-size: 2vh;
+    font-size: 16px;
 }
 
 .upcomingBookingsDivForUser {
@@ -230,8 +230,6 @@
 
 .orgInfoInputStyle {
     width: 25vw;
-    font-size: 2vh;
-    margin-bottom: 1.5vh;
     /* padding: 0.1vh;
     margin-bottom: 1vh; */
 }

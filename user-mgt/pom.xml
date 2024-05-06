@@ -30,6 +30,7 @@
 
     <modules>
         <module>remote-user-mgt</module>
+        <module>custom-user-store-listener</module>
         <!--<module>SampleCustomeUserStoreManager</module>-->
     </modules>
 

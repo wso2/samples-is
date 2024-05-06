@@ -78,7 +78,7 @@
                             javax.servlet.http,
                             org.apache.commons.logging,
                             org.osgi.framework,
-                            org.osgi.service.component,
+                            org.osgi.service.component.*;version="${osgi.service.component.imp.pkg.version.range}",
                             org.wso2.carbon.identity.application.authentication.framework.config,
                             org.wso2.carbon.identity.application.authentication.framework.config.model,
                             org.wso2.carbon.identity.application.authentication.framework.context,

@@ -17,8 +17,6 @@
  */
 
 import Image from "next/image";
-import { useState } from "react";
-import { ThreeDots } from "react-loader-spinner";
 import { Button } from "rsuite";
 import styles from "./indexHomeComponent.module.css";
 import { IndexHomeComponentProps } from "../../models/indexHomeComponent/indexHomeComponent";
@@ -30,41 +28,33 @@ import { IndexHomeComponentProps } from "../../models/indexHomeComponent/indexHo
  */
 export function IndexHomeComponent(prop: IndexHomeComponentProps) {
 
-    const { logoComponent, image, tagText, signinOnClick } = prop;
-    const [ isLoading, setIsLoading ] = useState(true);
+    const { logoComponent, image, signinOnClick } = prop;
 
     return (
         <div>
             
-            { isLoading && (
-                <div className={ styles["main"] }>
-                    <div className={ styles["loader"] }>
-                        <ThreeDots color="var(--primary-color)" height={ 200 } width={ 200 } />
-                    </div>
-                </div> ) }
 
             <main className={ styles["main"] }>
                 
-                <div className={ styles["homeImageDiv"] }>
-                    <Image
-                        src={ image }
-                        alt="home image"
-                        className={ styles["homeImage"] } 
-                        onLoad={ () => setIsLoading(false) }/>
-                </div>
                 <div className={ styles["signInDiv"] }>
                     { logoComponent }
 
-                    <hr />
+                    <br />
+                    <br />
+                    <br />
 
-                    <p className={ styles["buttonTag"] }>{ tagText }</p>
                     <Button
                         className={ styles["signInDivButton"] }
-                        size="lg"
+                        size="md"
                         appearance="primary"
                         onClick={ signinOnClick }>
-                        Sign In
+                        Get started
                     </Button>
+                    <Image
+                        src={ image }
+                        alt="home image"
+                        className={ styles["homeImage"] }
+                    />
 
                 </div>
 

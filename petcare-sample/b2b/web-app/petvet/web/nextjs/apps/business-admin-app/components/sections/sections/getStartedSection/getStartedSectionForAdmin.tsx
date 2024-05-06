@@ -160,7 +160,7 @@ export default function GetStartedSectionComponentForAdmin(props: GetStartedSect
                                         filteredCount["nutrition"])
 
                                     ],
-                                    backgroundColor: [ "#4e40ed", "#4e5ded", "#4e7eed", "#4e9bed", "#77b0ed" ]
+                                    backgroundColor: [ "#", "#4e5ded", "#4e7eed", "#4e9bed", "#77b0ed" ]
                                 }
                             ]
                         },
@@ -229,7 +229,11 @@ export default function GetStartedSectionComponentForAdmin(props: GetStartedSect
             <div className={ styles.welcomeMainDiv }>
                 <AccountCircleIcon style={ { width: "8vh", height: "8vh" } }/>
                 <div className={ styles. welcomeDiv }>
-                    { "Welcome, " + session.user?.name.givenName + " " + session.user?.name.familyName + "!" }
+                    { "Welcome, " }
+                    <b>{ session.user?.name.givenName }</b> 
+                    { " " }
+                    <b>{ session.user?.name.familyName }</b>
+                    { "!" }
                 </div>
                 <div className={ styles.tagLine }>
                     { "Taking Veterinary Care to the Next Level of Excellence" }

@@ -82,7 +82,7 @@ function FileUploadSingle(props: FileUploadProps) {
                 appearance="primary"
                 style={ {
                     border: "none",
-                    borderRadius: "5px",
+                    borderRadius: "22px",
                     boxShadow: "7px 6px 28px 1px rgba(0, 0, 0, 0.24)",
                     color: "#fff",
                     cursor: "pointer",
@@ -109,7 +109,7 @@ function FileUploadSingle(props: FileUploadProps) {
                 appearance="primary"
                 style={ {
                     border: "none",
-                    borderRadius: "5px",
+                    borderRadius: "22px",
                     boxShadow: "7px 6px 28px 1px rgba(0, 0, 0, 0.24)",
                     color: "#fff",
                     cursor: "pointer",

@@ -20,6 +20,6 @@ import { initInstance } from "../../pages/instance";
 import { getConfig } from "../../util/getConfig";
 
 export const getPetInstance = () => {
-  let conf =  getConfig().resourceServerURL;
+  const conf =  getConfig().petManagementServiceURL;
   return initInstance(conf);
 };

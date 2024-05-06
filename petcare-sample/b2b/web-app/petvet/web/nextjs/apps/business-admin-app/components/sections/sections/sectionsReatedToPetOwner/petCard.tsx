@@ -84,7 +84,7 @@ function PetCard(props: PetCardProps) {
                                 />
                             ) : (
                                 <Image
-                                    style={ { borderRadius: "10%", height: "100%", width: "100%" } }
+                                    style={ { borderRadius: "10%", height: "70%", width: "70%" } }
                                     src={ PET_IMAGE }
                                     alt="pet-thumbnail"
                                 />

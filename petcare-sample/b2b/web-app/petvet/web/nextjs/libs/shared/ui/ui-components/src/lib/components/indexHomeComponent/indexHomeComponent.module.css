@@ -20,6 +20,7 @@
     min-height: 100vh;
     flex: 1;
     display: flex;
+    font-family: 'montserrat', sans-serif;
 }
 
 .homeImageDiv {
@@ -32,7 +33,7 @@
 }
 
 .homeImage {
-    width: 100%;
+    width: 80%;
     height: 100%;
     object-fit: cover;
     object-position: right;
@@ -41,12 +42,12 @@
 .signInDiv {
     background-color: #0071f309;
     width: 25vw;
-    padding: 2rem 2rem;
+    padding: 5rem 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     flex: 1;
 }
 
@@ -56,9 +57,20 @@
 }
 
 .signInDivButton {
-    width: 50%;
-    height: 50px;
+    border: none;
+    width: 200px;
+    position: absolute;
+    font-size: 2vh;
+    height: 45px;
     font-size: 18px;
+    border-radius: 22px;
+    box-shadow: none;
+    font-size: 1rem;
+    font-weight: 400;
+    padding: 14px 24px;
+    background-color: #69A2F4;
+    color: #ffffff;
+
 }
 
 .buttonTag {

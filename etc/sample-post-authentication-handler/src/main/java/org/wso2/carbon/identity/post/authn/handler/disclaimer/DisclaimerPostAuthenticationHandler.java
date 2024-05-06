@@ -18,16 +18,17 @@
 
 package org.wso2.carbon.identity.post.authn.handler.disclaimer;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import org.wso2.carbon.identity.application.authentication.framework.config.ConfigurationFacade;
 import org.wso2.carbon.identity.application.authentication.framework.context.AuthenticationContext;
 import org.wso2.carbon.identity.application.authentication.framework.exception.PostAuthenticationFailedException;
 import org.wso2.carbon.identity.application.authentication.framework.handler.request.AbstractPostAuthnHandler;
 import org.wso2.carbon.identity.application.authentication.framework.handler.request.PostAuthnHandlerFlowStatus;
 import org.wso2.carbon.identity.application.authentication.framework.model.AuthenticatedUser;
-import org.wso2.carbon.identity.application.authentication.framework.util.FrameworkUtils;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -54,15 +55,20 @@ public class DisclaimerPostAuthenticationHandler extends AbstractPostAuthnHandle
             }
         } else {
             try {
+                String urlEncodedApplicationName = new URI(null, null, authenticationContext
+                        .getSequenceConfig().getApplicationConfig().getApplicationName(), null).toASCIIString();
+
                 httpServletResponse.sendRedirect
-                        (ConfigurationFacade.getInstance().getAuthenticationEndpointURL().replace("/login.do", ""
-                        ) + "/disclaimer" + ".jsp?sessionDataKey=" + authenticationContext.getContextIdentifier() +
-                                "&application=" + authenticationContext
-                                .getSequenceConfig().getApplicationConfig().getApplicationName());
+                        (ConfigurationFacade.getInstance().getAuthenticationEndpointURL().replace("/login.do", "") +
+                                "/disclaimer.jsp?sessionDataKey=" + authenticationContext.getContextIdentifier() +
+                                "&application=" + urlEncodedApplicationName);
                 setConsentPoppedUpState(authenticationContext);
                 return PostAuthnHandlerFlowStatus.INCOMPLETE;
             } catch (IOException e) {
                 throw new PostAuthenticationFailedException("Invalid Consent", "Error while redirecting", e);
+            } catch (URISyntaxException e) {
+                throw new PostAuthenticationFailedException("Invalid Application Name",
+                        "Error encoding application name", e);
             }
         }
     }

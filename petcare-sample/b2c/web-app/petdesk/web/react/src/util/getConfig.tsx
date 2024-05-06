@@ -22,7 +22,11 @@ interface Config {
     scope: string[];
     signInRedirectURL: string;
     signOutRedirectURL: string;
-    resourceServerURL: string;
+    myAccountAppURL: string;
+    petManagementServiceURL: string;
+    billingServerURL: string;
+    salesforceServerURL: string;
+    enableOIDCSessionManagement: boolean;
   }
 
 declare global {
@@ -36,8 +40,12 @@ const authConfig = {
     clientID: window.config.clientID,
     signInRedirectURL: window.config.signInRedirectURL,
     signOutRedirectURL: window.config.signOutRedirectURL,
-    resourceServerURL: window.config.resourceServerURL,
-    scope: ["openid", "profile", "email"],
+    myAccountAppURL: window.config.myAccountAppURL,
+    petManagementServiceURL: window.config.petManagementServiceURL,
+    billingServerURL: window.config.billingServerURL,
+    salesforceServerURL: window.config.salesforceServerURL,
+    enableOIDCSessionManagement: true,
+    scope: ["openid", "profile", "email", "acr"]
   };
 
 export function getConfig() {
