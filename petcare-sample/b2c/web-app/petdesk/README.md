@@ -4,10 +4,13 @@ The Pet Management Application is a B2C (Business-to-Consumer) application that 
 
 There are two ways that you can run this sample application
 
-- [Using Cloud Deployment](#using-cloud-deployment)
-- [Run Locally](#run-locally)
+- Method 1: [Using Cloud Deployment](#️-method-1-using-cloud-deployment)
+- Method 2: [Run Locally](#️-method-2-run-locally)
 
-# Using Cloud Deployment
+&nbsp;<br>
+&nbsp;<br>
+
+# ✍️ Method 1: Using Cloud Deployment
 
 This guide will show you how to use [Asgardeo](https://wso2.com/asgardeo/), WSO2's SaaS Customer IAM (CIAM) solution to secure user authentication to the web application and add CIAM features to your web application. Also to use [Choreo](https://wso2.com/choreo/) to expose a service endpoint as a REST API and safely consume the API from a web application.
 &nbsp;<br>
@@ -457,7 +460,10 @@ Now you have generated keys for the application.
     - Provide an email address.
     - Click **Save**.
 
-# Run Locally
+&nbsp;<br>
+&nbsp;<br>
+
+# ✍️ Method 2: Run Locally
 
 # B2C PetDesk Sample Application Setup Guide
 
@@ -469,7 +475,37 @@ Now you have generated keys for the application.
 
 When deploying the webhook through choreo, provide the salesforce related configuration mention as in salesforce-integration-service deployment.
 
-## Deploy API Services
+
+## Create an Application in WSO2 Identity Server
+1. Create a Single-Page Application named `Pet Desk App` in root organization.
+2. Add the `Authorized redirect URLs` as `http://localhost:3000`.
+3. Go to the `Protocol` tab and copy the `Client ID`.
+4. Select `Access token` type as `JWT`.
+
+## Deploy the Front End Application
+1. Navigate to <PROJECT_HOME>/petcare-sample/b2c/web-app/petdesk/web/react/public and update the configuration file 
+   `config.js` with the registered app details.
+   
+   ```
+    baseUrl: "https://localhost:9443",
+    clientID: "<CONFIGURED_SPA_CLIENT_ID>",
+    signInRedirectURL: "http://localhost:3000",
+    signOutRedirectURL: "http://localhost:3000",
+    petManagementServiceURL: "http://localhost:9090",
+    billingServerURL: "http://localhost:9091",
+    salesforceServerURL: "http://localhost:9092",
+    scope: ["openid", "email", "profile"]
+    myAccountAppURL: "<my-account-url>",
+    enableOIDCSessionManagement: true
+   ```
+2. Run the application by executing the following command in the terminal.
+    ```
+    npm install
+    npm start
+    ```
+3. Visit the sample application at http://localhost:3000. 
+
+## Run API Services
 1. Navigate to <PROJECT_HOME>/petcare-sample/b2c/web-app/petdesk/apis/ballerina/pet-management-service and start the 
    pet management service by executing the following command in the terminal.
     ```
@@ -552,32 +588,3 @@ dbPassword = "<DB_USER_PASSWORD>"
 dbDatabase = "<DB_NAME>" 
 dbPort = "<DB_PORT>"
 ```
-
-## Create an Application in WSO2 Identity Server
-1. Create a Single-Page Application named `Pet Desk App` in root organization.
-2. Add the `Authorized redirect URLs` as `http://localhost:3000`.
-3. Go to the `Protocol` tab and copy the `Client ID`.
-4. Select `Access token` type as `JWT`.
-
-## Deploy the Front End Application
-1. Navigate to <PROJECT_HOME>/petcare-sample/b2c/web-app/petdesk/web/react/public and update the configuration file 
-   `config.js` with the registered app details.
-   
-   ```
-    baseUrl: "https://localhost:9443",
-    clientID: "<CONFIGURED_SPA_CLIENT_ID>",
-    signInRedirectURL: "http://localhost:3000",
-    signOutRedirectURL: "http://localhost:3000",
-    petManagementServiceURL: "http://localhost:9090",
-    billingServerURL: "http://localhost:9091",
-    salesforceServerURL: "http://localhost:9092",
-    scope: ["openid", "email", "profile"]
-    myAccountAppURL: "<my-account-url>",
-    enableOIDCSessionManagement: true
-   ```
-2. Run the application by executing the following command in the terminal.
-    ```
-    npm install
-    npm start
-    ```
-3. Visit the sample application at http://localhost:3000. 
