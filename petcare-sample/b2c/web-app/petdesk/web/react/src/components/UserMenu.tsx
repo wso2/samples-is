@@ -33,18 +33,18 @@ export default function MenuListComposition(props: {
     user: BasicUserInfo;
     signout: (callback?: (response: boolean) => void) => Promise<boolean>;
     setIsBillingWariningOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    isUpgraded: boolean;
+    setisUpgraded: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-    const { user, signout, setIsBillingWariningOpen } = props;
+    const { isUpgraded, setisUpgraded, user, signout, setIsBillingWariningOpen } = props;
     const [userMenuOpen, setUserMenuOpen] = React.useState(false);
     const [settingsOpen, setSettingsOpen] = React.useState(false);
     const [billingOpen, setBillingOpen] = React.useState(false);
     const { getAccessToken } = useAuthContext();
     const [enabled, setEnabled] = React.useState(false);
     const [email, setEmail] = React.useState(user.email);
-    const [isUpgraded, setisUpgraded] = React.useState(false);
 
     const handleToggle = () => {
-        checkUpgrade();
         setUserMenuOpen((prevOpen) => !prevOpen);
     };
 
@@ -85,30 +85,6 @@ export default function MenuListComposition(props: {
             return Promise.reject(e);
         });    
     }
-
-    const checkUpgrade = () => {
-        async function getUpgradeDetail() {
-            const accessToken = await getAccessToken();
-            try {
-                const response = await getUpgrade(accessToken);
-                if (response.data instanceof Object) {
-                    if (response.data.isUpgraded) {
-                        setisUpgraded(true);
-                    } else {
-                        setisUpgraded(false);
-                    }
-                }
-            } catch (error) {
-                setisUpgraded(false);
-                //if error is Error: Network Error set isUpgraded to true
-                if (error.toString().includes("Error: Network Error") || error.toString().includes("status code 503")){
-                    setisUpgraded(true);
-                }
-                console.error('Error during upgrade process:', error);
-            }
-        }
-        getUpgradeDetail();
-    };
 
     return (
         <><div className="user-menu-div">
@@ -199,7 +175,7 @@ export default function MenuListComposition(props: {
                     enabled={enabled} email={email} setEnabled={setEnabled} setEmail={setEmail} />
             </div>
             <div>
-                <GetBilling isUpgraded={isUpgraded} setisUpgraded={setisUpgraded} user={user} handleBilling={handleBilling} checkUpgrade={checkUpgrade} isOpen={billingOpen} setIsOpen={setBillingOpen} />
+                <GetBilling isUpgraded={isUpgraded} setisUpgraded={setisUpgraded} user={user} handleBilling={handleBilling} isOpen={billingOpen} setIsOpen={setBillingOpen} />
             </div>
         </>
     );

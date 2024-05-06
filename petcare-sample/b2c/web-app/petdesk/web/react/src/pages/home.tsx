@@ -35,6 +35,7 @@ import PetCard from "./Pets/PetCard";
 import { getPets } from "../components/getPetList/get-pets";
 import MenuListComposition from "../components/UserMenu";
 import { getConfig } from "../util/getConfig";
+import { getUpgrade } from "../components/Billing/billing";
 
 interface DerivedState {
     authenticateResponse: BasicUserInfo,
@@ -75,6 +76,7 @@ export const HomePage: FunctionComponent = (): ReactElement => {
     const [pet, setPet] = useState<Pet | null>(null);
     const [thumbnail, setThumbnail] = useState(null);
     const { getAccessToken } = useAuthContext();
+    const [isUpgraded, setisUpgraded] = React.useState(false);
 
     const search = useLocation().search;
     const stateParam = new URLSearchParams(search).get('state');
@@ -128,6 +130,30 @@ export const HomePage: FunctionComponent = (): ReactElement => {
         });    
     }
 
+    const checkUpgrade = () => {
+        async function getUpgradeDetail() {
+            const accessToken = await getAccessToken();
+            try {
+                const response = await getUpgrade(accessToken);
+                if (response.data instanceof Object) {
+                    if (response.data.isUpgraded) {
+                        setisUpgraded(true);
+                    } else {
+                        setisUpgraded(false);
+                    }
+                }
+            } catch (error) {
+                setisUpgraded(false);
+                //if error is Error: Network Error set isUpgraded to true
+                if (error.toString().includes("Error: Network Error") || error.toString().includes("status code 503")){
+                    setisUpgraded(true);
+                }
+                console.error('Error during upgrade process:', error);
+            }
+        }
+        getUpgradeDetail();
+    };
+
     useEffect(() => {
         if (!isAddPetOpen && state.isAuthenticated) {
             getPetList();
@@ -137,6 +163,7 @@ export const HomePage: FunctionComponent = (): ReactElement => {
 
     useEffect(() => {
         if(state.isAuthenticated){
+            checkUpgrade();
             getPetList();
         } 
       }, [state.isAuthenticated]);
@@ -252,7 +279,7 @@ export const HomePage: FunctionComponent = (): ReactElement => {
                     <><nav className="header">
                         <div>
                             {user && (
-                                <MenuListComposition setIsBillingWariningOpen={setIsBillingWariningOpen} user={user} signout={signOut} />
+                                <MenuListComposition isUpgraded={isUpgraded} setisUpgraded={setisUpgraded} setIsBillingWariningOpen={setIsBillingWariningOpen} user={user} signout={signOut} />
                             )}
                         </div>
                         <div className="app-title-style">
