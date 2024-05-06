@@ -1,4 +1,4 @@
-# API Authentication Android Sample - WSO2 Identity Server
+# Pet care sample with Asgardeo Android SDK
 
 ## ⚠️ Read this first
 
@@ -14,34 +14,32 @@
 1.1 Setup the latest version of WSO2 Identity Sever.
 
 1.2 [Create a mobile application](https://is.docs.wso2.com/en/next/guides/applications/register-mobile-app/) (Un tick the PKCE `Mandayory` checkbox)
+- Add `wso2.apiauth.sample.android://login-callback` as the redirect URL of the application
 
 #### 2. Import the configurations
-2.1 Create `config.xml` file in `res/values`
+2.1 Go to the `<APP_CONTENT_LOCATION>/com/wso2_sample/api_auth_sample/util/Config.kt` file and change the following values according the application you created above,
 
 ```
-<resources>
-    <string name="oauth_client_base_url"> <BASE_URL> </string>
-    <string name="oauth_client_client_id"> <CLIENT_ID> </string>
-    <string name="oauth_client_redirect_uri">https://example-app.com/redirect</string>
-    <string name="oauth_client_scope">openid internal_login</string>
-    <string name="oauth_client_response_type">code</string>
-    <string name="oauth_client_response_mode">direct</string>
-    <string name="oauth_client_google_web_client_id"> <WSO2_CLIENT_ID_OF_GOOGLE> </string>
-    <string name="oauth_client_google_web_client_secret"> <WSO2_CLIENT_SECRET_OF_GOOGLE> </string>
-    <string name="data_source_resource_server_url"> <PET_RESOURCE_SERVER_URL> </string>
-</resources>
+private const val BASE_URL: String = <BASE_URL of the tenant>
+private const val DISCOVERY_URL: String = null
+private const val CLIENT_ID: String = "<CLIENT_ID of the created application>
+private const val REDIRECT_URI: String = "wso2.apiauth.sample.android://login-callback"
+private const val SCOPE: String = "openid internal_login profile email"
+private const val GOOGLE_WEB_CLIENT_ID = <GOOGLE_WEB_CLIENT_ID>
+private val DATA_SOURCE_RESOURCE_SERVER_URL: String? = null
 ```
 
 >| Property                    |                                    Value/s                                     |
 >|--------------------------|:------------------------------------------------------------------------------:|
->| oauth_client_base_url      |            Enter the base URL of the IS server here. If you are using an emulator to try with a locally hosted IS instance, <b>make sure to replace `localhost` with `10.0.2.2` !</b>          |
->| oauth_client_client_id |  Client ID of the created mobile application in the identity server  |
->| oauth_client_redirect_uri           |            This does not affect the API authentication flow, but is required since we are using `Authorization Code` grant flow. Hence use a random URL, better to keep the value as it is. Also make sure to use the same URL in the crated application as well.             |
->| oauth_client_scope      |            `openid internal_login`             |
->| oauth_client_response_mode |  `direct` is the header value where we force the API authenitcation flow.  |
->| oauth_client_google_web_client_id           |            Enter the client id of the Google credential that will be used to create the Google connection in the IS. Since we are using the IS to authenticate the user we need to identify the currently signed-in user on the server. To do so securely, after a user successfully signs in, we need to send the user's ID token to the IS using HTTPS. Then, on the server, we are verifing the integrity of the ID token and use the user information contained in the token to establish the session. To generate the user's ID token for the IS, we will require the client id that is used to create the Google connection in the IS. For more details, https://developers.google.com/identity/sign-in/android/backend-auth         |
->| oauth_client_google_web_client_secret           |            Enter the client secret of the Google credential that will be used to create the Google connection in the IS.         |
->| data_source_resource_server_url |  This is the url where we have hosted the pet care service. If you do not have that setup enter a random URL, the app is developed to show a dummy data if the resource server is not available. <b>This should be a URL!</b>  |
+>| BASE_URL      |            Enter the base URL of the IS server here. If you are using an emulator to try with a locally hosted IS instance, <b>make sure to replace `localhost` with `10.0.2.2` !</b>          |
+>| DISCOVERY_URL |  Discovery URL of the teant. This will not work in a locally hosted version of IS hence keep this value `null` if you are plannig to use a locally hosted version of IS.  |
+>| CLIENT_ID | Client ID of the created application. |
+>| REDIRECT_URI | `wso2.apiauth.sample.android://login-callback` |
+>| SCOPE |            `openid internal_login`             |
+>| GOOGLE_WEB_CLIENT_ID  | Enter the client id of the Google credential that will be used to create the Google connection in the IS. Since we are using the IS to authenticate the user we need to identify the currently signed-in user on the server. To do so securely, after a user successfully signs in, we need to send the user's ID token to the IS using HTTPS. Then, on the server, we are verifing the integrity of the ID token and use the user information contained in the token to establish the session. To generate the user's ID token for the IS, we will require the client id that is used to create the Google connection in the IS. For more details, https://developers.google.com/identity/sign-in/android/backend-auth         |
+>| DATA_SOURCE_RESOURCE_SERVER_URL |  This is the url where we have hosted the pet care service. If you do not have that setup keep this value `null`, the app is developed to show a dummy data if the resource server is not available. |
+
+2.2 Go to the `<APP_CONTENT_LOCATION>/java/com/wso2_sample/api_auth_sample/features/login/impl/repository/AsgardeoAuthRepositoryImpl.kt` file, and change the values passed for the `AuthenticationCoreConfig` object at your discretion.
 
 #### 3. Setup Google Login
 3.1 Go to `https://console.cloud.google.com/` and create a new project.
@@ -129,35 +127,24 @@ curl --location 'https://localhost:9443/api/server/v1/identity-providers' \
 ```
 3.4 Add the created Google connection to the created application (in step 2) as a level 1 sign-in option.
 
-#### 4. Supported authenticators
-Currently this sample application supports the following authenticators.
+#### 4. Run the application
 
-- Basic authenticatator
-- Google authenticator
-- TOTP
-- Passkey authenticator
-    - NOTE
-        - This authenticator is only supported from `Android 13` and above.
-    - For this, we have to enrol a passkey in my account for the user's account. Also, you may the face a difficulty when accessing the registred passkey in your device, to overcome this you can register a passkey from another device. <b>We are working on mitigating this issue.</b>
-
-#### 5. Run the application
-
-5.1 To run the application you need to open the application from the Android Studio IDE, and select the project to open with an `Android` view from the project view selection.
+4.1 To run the application you need to open the application from the Android Studio IDE, and select the project to open with an `Android` view from the project view selection.
 ![image](https://github.com/wso2/samples-is/assets/46097917/c5ebb28f-335e-4a0f-a560-5504f5402f55)
 
-5.2 You may require to sync the gradle files again. This can be done using the `Sync project with Gradle files` icon in the top right hand corner of the IDE (or in Apple `Shift + Command + O`).
+4.2 You may require to sync the gradle files again. This can be done using the `Sync project with Gradle files` icon in the top right hand corner of the IDE (or in Apple `Shift + Command + O`).
 ![image](https://github.com/wso2/samples-is/assets/46097917/f4548481-9eda-425b-8535-eed610012723)
 
 ###### Optional
 > This project is recommended to run on an emulator version `Pixel 7` or above, becuase some authenticators like `Passkey` are not supported for older version of Andriod.  To download the new emulator you can refer the following documentation. When selecting the device make sure to select `Pixel 7` or above version.
 https://developer.android.com/studio/run/managing-avds
 
-5.3 After the gradle files are synced you can run the app from the `Run `app`` button on the top bar (or in Apple `Command + R`)
+4.3 After the gradle files are synced you can run the app from the `Run `app`` button on the top bar (or in Apple `Command + R`)
 ![image](https://github.com/wso2/samples-is/assets/46097917/2ec180e4-4aec-4c0c-83b7-258118bfd988)
 
-#### 6. Client attestation
+#### 5. Client attestation
 
-6.1 To test the client attestation you need to test the application from a real device, where the app downloaded from the playstore, for this <b>you will require a Google play account</b>.
+5.1 To test the client attestation you need to test the application from a real device, where the app downloaded from the playstore, for this <b>you will require a Google play account</b>.
 This application is bound to one of my Google cloud projects, hence you need to change the package name of the application and associate the project with a new Google Project, for this you can use the Google project that you created for the step 3.
 > Changing the package name of an Android application involves several steps. It's a common task, but it requires careful attention to detail to ensure that all components of the app work correctly after the change. Here are the general steps:
 >
@@ -169,15 +156,15 @@ This application is bound to one of my Google cloud projects, hence you need to 
 >
 > 1. Open the `AndroidManifest.xml` file in your Android Studio.
 > 2. Locate the `package` attribute in the `<manifest>` element and change the package name to your desired name.
-     >
-     >    ```xml
+>
+>    ```xml
 >    <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 >        package="com.your.old.packagename">
 >    ```
-     >
-     >    Change it to:
-     >
-     >    ```xml
+>
+>    Change it to:
+>
+>    ```xml
 >    <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 >        package="com.your.new.packagename">
 >    ```
@@ -192,8 +179,8 @@ This application is bound to one of my Google cloud projects, hence you need to 
 >
 > 1. Open the `build.gradle` file (Module: app).
 > 2. Update the `applicationId` to the new package name.
-     >
-     >    ```gradle
+>
+>    ```gradle
 >    android {
 >        ...
 >        defaultConfig {
@@ -227,7 +214,7 @@ This application is bound to one of my Google cloud projects, hence you need to 
 
 Also make sure to subscribe to Google Play Integrity API from the project, you can do this from `Enabled API's & Services` in the Google cloud project.
 
-6.2 After that you need to create a new service account in the google project.
+5.2 After that you need to create a new service account in the google project.
 You can create a Service Account for yourself with the following scopes.
 - Go to IAM& Admin -> Service Accounts
 - Click Create Service Account
@@ -238,13 +225,13 @@ You can create a Service Account for yourself with the following scopes.
 - Click Add key and Select JSON.
 - Save the JSON in secure place (We need this for Android Attestation Credentials for application metadata)
 
-6.3 After that, Update Application Advanced properties.
+5.3 After that, Update Application Advanced properties.
 The application you created requires 2 properties to perform android attestation.
 - Android package name
 - androidAttestationServiceCredentials
     - The JSON secret of Service Account downloaded. Note that this attribute is defined as a JSON object hence use the JSON key as it is.
 
-6.4 Go to the Google play console and create a new application for this application, after that you need to associate your cloud project for the app integrity. To do this,
+5.4 Go to the Google play console and create a new application for this application, after that you need to associate your cloud project for the app integrity. To do this,
 - Navigate to Release > App integrity. Under Play Integrity API select **Link a Cloud project**.
 - Choose the Cloud project you want to link to your app and this will enable Play Integrity API responses.
 - You can now integrate the Play Integrity API into your app.
@@ -259,6 +246,7 @@ The application you created requires 2 properties to perform android attestation
 > When you have released multiple versions of the application, you may face a problem that the application you download from the link are still giving the old version, to mitigate this you can change the device and open the link or wait a few minutes.
 
 ###### App Screens
-![image](https://github.com/wso2/samples-is/assets/46097917/5a31af56-b3ae-4b37-992d-aae42046ab31)
-![image](https://github.com/wso2/samples-is/assets/46097917/cc67d9da-2f47-408b-8b75-77499f03802f)
-![image](https://github.com/wso2/samples-is/assets/46097917/65f04443-e43a-4c28-a68a-436f890deb7e)
+![Screenshot_20240411_223503](https://github.com/wso2/samples-is/assets/46097917/e2aabd05-4450-4dff-a93d-587bd37360b8)
+![Screenshot_20240411_223521](https://github.com/wso2/samples-is/assets/46097917/34bd711c-aa69-418a-a5a9-6e517d15ba1a)
+![Screenshot_20240411_223607](https://github.com/wso2/samples-is/assets/46097917/6c6a6d25-4be3-454b-930d-9fd4332c1e4c)
+
