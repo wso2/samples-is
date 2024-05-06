@@ -246,12 +246,9 @@ The application you created requires 2 properties to perform android attestation
 > When you have released multiple versions of the application, you may face a problem that the application you download from the link are still giving the old version, to mitigate this you can change the device and open the link or wait a few minutes.
 
 ###### App Screens
-![image](https://github.com/wso2/samples-is/assets/46097917/5a31af56-b3ae-4b37-992d-aae42046ab31)
-![image](https://github.com/wso2/samples-is/assets/46097917/cc67d9da-2f47-408b-8b75-77499f03802f)
-![image](https://github.com/wso2/samples-is/assets/46097917/65f04443-e43a-4c28-a68a-436f890deb7e)
-
-###### Credits
-- Images used in the application are taken from [Freepik](https://www.freepik.com/), [Unsplash](https://unsplash.com/), and [Flaticon](https://www.flaticon.com/).
 ![Screenshot_20240411_223503](https://github.com/wso2/samples-is/assets/46097917/e2aabd05-4450-4dff-a93d-587bd37360b8)
 ![Screenshot_20240411_223521](https://github.com/wso2/samples-is/assets/46097917/34bd711c-aa69-418a-a5a9-6e517d15ba1a)
 ![Screenshot_20240411_223607](https://github.com/wso2/samples-is/assets/46097917/6c6a6d25-4be3-454b-930d-9fd4332c1e4c)
+
+###### Credits
+- Images used in the application are taken from [Freepik](https://www.freepik.com/), [Unsplash](https://unsplash.com/), and [Flaticon](https://www.flaticon.com/).
