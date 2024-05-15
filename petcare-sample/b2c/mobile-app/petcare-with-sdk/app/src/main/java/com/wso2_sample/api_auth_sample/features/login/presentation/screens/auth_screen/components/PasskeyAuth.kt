@@ -23,7 +23,7 @@ import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import io.asgardeo.android.core.models.autheniticator.Authenticator
+import io.asgardeo.android.core_auth_direct.models.autheniticator.Authenticator
 import com.wso2_sample.api_auth_sample.R
 import com.wso2_sample.api_auth_sample.features.login.presentation.screens.auth_screen.AuthScreenViewModel
 import com.wso2_sample.api_auth_sample.features.login.presentation.util.common_component.AuthButton

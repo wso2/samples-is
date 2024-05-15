@@ -20,9 +20,9 @@ package com.wso2_sample.api_auth_sample.features.login.presentation.screens.auth
 
 import androidx.compose.runtime.Composable
 import com.wso2_sample.api_auth_sample.features.login.presentation.util.common_component.ContinueText
-import io.asgardeo.android.core.models.autheniticator.Authenticator
-import io.asgardeo.android.core.models.autheniticator.AuthenticatorTypes
-import io.asgardeo.android.core.models.authentication_flow.AuthenticationFlowNotSuccess
+import io.asgardeo.android.core_auth_direct.models.autheniticator.Authenticator
+import io.asgardeo.android.core_auth_direct.models.autheniticator.AuthenticatorTypes
+import io.asgardeo.android.core_auth_direct.models.authentication_flow.AuthenticationFlowNotSuccess
 
 @Composable
 internal fun AuthUI(authenticationFlow: AuthenticationFlowNotSuccess) {

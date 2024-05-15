@@ -18,8 +18,8 @@
 
 package com.wso2_sample.api_auth_sample.features.login.domain.repository
 
-import io.asgardeo.android.core.provider.providers.authentication.AuthenticationProvider
-import io.asgardeo.android.core.provider.providers.token.TokenProvider
+import io.asgardeo.android.core_auth_direct.provider.providers.authentication.AuthenticationProvider
+import io.asgardeo.android.core_auth_direct.provider.providers.token.TokenProvider
 
 /**
  * Use as a repository to handle the authentication related operations using Asgardeo authentication SDK.

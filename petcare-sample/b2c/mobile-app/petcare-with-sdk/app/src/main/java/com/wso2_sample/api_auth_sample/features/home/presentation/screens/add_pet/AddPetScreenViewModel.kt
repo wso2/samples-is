@@ -26,7 +26,7 @@ import com.wso2_sample.api_auth_sample.features.login.domain.repository.Asgardeo
 import com.wso2_sample.api_auth_sample.util.navigation.NavigationViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
-import io.asgardeo.android.core.provider.providers.token.TokenProvider
+import io.asgardeo.android.core_auth_direct.provider.providers.token.TokenProvider
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch

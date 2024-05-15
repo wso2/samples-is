@@ -100,7 +100,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.compose)
 
     // Asgardeo android SDK
-    implementation(libs.asgardeo.android.ui)
+    implementation(libs.asgardeo.android)
 
     implementation(libs.okhttp)
     implementation(libs.jackson.module.kotlin)

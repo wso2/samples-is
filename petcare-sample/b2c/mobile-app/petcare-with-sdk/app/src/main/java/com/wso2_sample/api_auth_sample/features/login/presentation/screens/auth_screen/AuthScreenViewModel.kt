@@ -29,10 +29,10 @@ import androidx.lifecycle.viewModelScope
 import com.wso2_sample.api_auth_sample.features.login.domain.repository.AsgardeoAuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
-import io.asgardeo.android.core.models.autheniticator.Authenticator
-import io.asgardeo.android.core.models.authentication_flow.AuthenticationFlow
-import io.asgardeo.android.core.models.authentication_flow.AuthenticationFlowNotSuccess
-import io.asgardeo.android.core.provider.providers.authentication.AuthenticationProvider
+import io.asgardeo.android.core_auth_direct.models.autheniticator.Authenticator
+import io.asgardeo.android.core_auth_direct.models.authentication_flow.AuthenticationFlow
+import io.asgardeo.android.core_auth_direct.models.authentication_flow.AuthenticationFlowNotSuccess
+import io.asgardeo.android.core_auth_direct.provider.providers.authentication.AuthenticationProvider
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
