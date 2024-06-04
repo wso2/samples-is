@@ -88,7 +88,7 @@ service / on new http:Listener(9090) {
             // Validate the username.
             if asgardeoUser.username !== user.username {
                 log:printInfo(string `${contextId}: Invalid username provided for the user: ${user.id}.`);
-                fail error("Invalid username");
+                fail error("Invalid credentials");
             }
             log:printInfo(string `${contextId}: Username validated successfully.`);
 
