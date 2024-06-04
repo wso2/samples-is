@@ -18,8 +18,9 @@ import ballerina/http;
 import ballerina/log;
 import ballerina/uuid;
 
-// In this example, authentication results are stored in an in-memory map. This is not recommended for 
-// production use. You may replace this with an implementation that suits your requirement.
+// In this example, authentication results are stored in an in-memory map and hence supports only 
+// single-replica deployments. This is not recommended for production use. You need to replace this 
+// with a high available implementation that suits your requirement (i.e. DB or cache service).
 isolated map<AuthenticationContext> userAuthContextMap = {};
 
 isolated function pushToContext(string contextId, AuthenticationContext context) {
