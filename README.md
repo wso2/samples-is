@@ -142,6 +142,9 @@ SAMPLES_HOME
 ├── user-mgt
 │   ├── remote-user-mgt
 │   └── sample-custom-user-store-manager
+|── user-migration-samples
+│   └── asgardeo
+│       └── external-authentication-service
 ├── workflow
 │   ├── handler
 │   │   └── service-provider
