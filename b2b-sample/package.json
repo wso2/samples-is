@@ -15,7 +15,6 @@
     "@nrwl/jest": "15.2.0",
     "@nrwl/linter": "15.1.1",
     "@nrwl/next": "^15.2.0",
-    "@nrwl/nx-cloud": "latest",
     "@nrwl/react": "15.2.0",
     "@nrwl/web": "15.2.0",
     "@swc/core": "^1.2.173",
