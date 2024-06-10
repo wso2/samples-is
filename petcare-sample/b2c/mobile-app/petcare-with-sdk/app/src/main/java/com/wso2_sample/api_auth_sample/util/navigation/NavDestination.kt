@@ -32,8 +32,8 @@ import com.wso2_sample.api_auth_sample.features.login.presentation.screens.auth_
 import com.wso2_sample.api_auth_sample.features.login.presentation.screens.auth_screen.AuthScreenViewModel
 import com.wso2_sample.api_auth_sample.features.login.presentation.screens.landing_screen.LandingScreen
 import com.wso2_sample.api_auth_sample.features.login.presentation.screens.landing_screen.LandingScreenViewModel
-import io.asgardeo.android.core.models.authentication_flow.AuthenticationFlow
-import io.asgardeo.android.core.models.authentication_flow.AuthenticationFlowNotSuccess
+import io.asgardeo.android.core_auth_direct.models.authentication_flow.AuthenticationFlow
+import io.asgardeo.android.core_auth_direct.models.authentication_flow.AuthenticationFlowNotSuccess
 import java.net.URLDecoder
 
 object NavDestination {

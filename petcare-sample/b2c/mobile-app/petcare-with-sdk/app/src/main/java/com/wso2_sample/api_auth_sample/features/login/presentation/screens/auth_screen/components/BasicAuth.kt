@@ -44,7 +44,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.wso2_sample.api_auth_sample.features.login.presentation.screens.auth_screen.AuthScreenViewModel
 import com.wso2_sample.api_auth_sample.ui.theme.Api_authenticator_sdkTheme
-import io.asgardeo.android.core.models.autheniticator.Authenticator
+import io.asgardeo.android.core_auth_direct.models.autheniticator.Authenticator
 
 @Composable
 internal fun BasicAuth(

@@ -28,8 +28,8 @@ import com.wso2_sample.api_auth_sample.util.navigation.NavigationViewModel
 import com.wso2_sample.api_auth_sample.util.ui.sendEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
-import io.asgardeo.android.core.models.state.AuthenticationState
-import io.asgardeo.android.core.provider.providers.authentication.AuthenticationProvider
+import io.asgardeo.android.core_auth_direct.models.state.AuthenticationState
+import io.asgardeo.android.core_auth_direct.provider.providers.authentication.AuthenticationProvider
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.update

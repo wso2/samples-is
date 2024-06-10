@@ -20,10 +20,10 @@ package com.wso2_sample.api_auth_sample.features.login.impl.repository
 
 import com.wso2_sample.api_auth_sample.features.login.domain.repository.AsgardeoAuthRepository
 import com.wso2_sample.api_auth_sample.util.Config
-import io.asgardeo.android.core.asgardeo_auth.AsgardeoAuth
-import io.asgardeo.android.core.core_config.AuthenticationCoreConfig
-import io.asgardeo.android.core.provider.providers.authentication.AuthenticationProvider
-import io.asgardeo.android.core.provider.providers.token.TokenProvider
+import io.asgardeo.android.core_auth_direct.asgardeo_auth.AsgardeoAuth
+import io.asgardeo.android.core_auth_direct.core_config.AuthenticationCoreConfig
+import io.asgardeo.android.core_auth_direct.provider.providers.authentication.AuthenticationProvider
+import io.asgardeo.android.core_auth_direct.provider.providers.token.TokenProvider
 import javax.inject.Inject
 
 class AsgardeoAuthRepositoryImpl @Inject constructor() : AsgardeoAuthRepository {

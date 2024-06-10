@@ -47,7 +47,7 @@ import com.wso2_sample.api_auth_sample.features.login.presentation.util.common_c
 import com.wso2_sample.api_auth_sample.util.ui.LoadingDialog
 import com.wso2_sample.api_auth_sample.ui.theme.Api_authenticator_sdkTheme
 import com.wso2_sample.api_auth_sample.features.login.presentation.screens.auth_screen.components.PasskeyAuthComponent
-import io.asgardeo.android.core.models.authentication_flow.AuthenticationFlow
+import io.asgardeo.android.core_auth_direct.models.authentication_flow.AuthenticationFlow
 
 @Composable
 internal fun AuthScreen(
