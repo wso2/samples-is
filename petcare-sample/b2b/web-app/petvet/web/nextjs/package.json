@@ -33,7 +33,6 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.11.16",
     "@mui/x-date-pickers": "^6.5.0",
-    "@nrwl/nx-cloud": "^16.0.5",
     "@types/jest": "^28.1.1",
     "@types/styled-components": "^5.1.26",
     "chart.js": "^3.9.1",
