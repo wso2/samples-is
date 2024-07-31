@@ -5,10 +5,10 @@
 1. The root of the sample-is repository  will be referred to as `<SAMPLE_IS_HOME>` throughout this document.
 2. Required versions
  ```
- Node version >= v16.16.0
+ Node version >= v16.16.0 (Tested in v20.16.0)
  ```
  ```
- NPM version >= 8.11.0
+ NPM version >= 8.11.0 (Tested in v10.8.2)
  ```
 
 ## 1. Story
