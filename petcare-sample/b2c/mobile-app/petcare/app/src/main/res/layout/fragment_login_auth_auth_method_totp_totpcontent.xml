@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/totpContentView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/card_white"
+    android:backgroundTint="@color/card_white"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+    tools:context=".ui.activities.login.fragments.auth.auth_method.totp.TotpContent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/totpTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_login_auth_auth_method_totp_auth.totp_content.title"
+            android:textAlignment="center"
+            android:textColor="@color/font_black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/totpSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/activity_login_auth_auth_method_totp_auth.totp_content.description"
+            android:textAlignment="center"
+            android:textColor="@color/font_accent_black"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/totpTitle" />
+
+        <EditText
+            android:id="@+id/totpValue"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:backgroundTint="@color/asgardeo_secondary"
+            android:drawableTint="@color/asgardeo_colour_variant"
+            android:ems="10"
+            android:foregroundTint="@color/asgardeo_colour_variant"
+            android:hint="@string/activity_login_auth_auth_method_totp_auth.totp_content.totp_value"
+            android:inputType="textPersonName"
+            android:textAlignment="center"
+            android:textColor="@color/font_black"
+            android:textColorHint="@color/font_accent_black"
+            android:textColorLink="@color/asgardeo_colour"
+            android:textCursorDrawable="@color/asgardeo_colour"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/totpSubtitle" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/totpContinueButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="72dp"
+            android:text="@string/activity_login_auth_auth_method_totp_auth.totp_content.continue"
+            android:textColor="@color/font_white"
+            app:backgroundTint="@color/asgardeo_colour"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/totpValue" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/totpCancelButton"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/activity_login_auth_auth_method_totp_auth.totp_content.cancel"
+            android:textColor="@color/asgardeo_colour"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/totpContinueButton"
+            app:strokeColor="@color/asgardeo_colour" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

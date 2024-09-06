@@ -1,0 +1,97 @@
+{
+    "CommonConfig": {
+        "AuthorizationConfig": {
+            "BaseOrganizationUrl": "<PARENT ORGANIZATION URL> ex: https://api.asgardeo.io/t/guardio",
+            "BaseUrl": "https://localhost:9443"
+        },
+        "ApplicationConfig": {
+            "SampleOrganization": [
+                {
+                    "id": "<SUB ORGANIZATION ID>",
+                    "name": "<SUB ORGANIZATION NAME>"
+                }
+            ]
+        }
+    },
+    "BusinessAdminAppConfig": {
+        "AuthorizationConfig": {
+            "ClientId": "<CLIENT ID OF THE BUSINESS APP>",
+            "ClientSecret": "<CLIENT SECRET OF THE BUSINESS APP>"
+        },
+        "ManagementAuthorizationConfig": {
+            "ClientId": "<CLIENT ID OF THE MANAGEMENT APP>",
+            "ClientSecret": "<CLIENT SECRET OF THE MANAGEMENT APP>"
+        },
+        "ApplicationConfig": {
+            "HostedUrl": "http://localhost:3002",
+            "APIScopes": [
+                "openid",
+                "email",
+                "profile",
+                "groups",
+                "roles",
+                "internal_login",
+                "internal_org_user_mgt_view",
+                "internal_org_user_mgt_list",
+                "internal_org_user_mgt_update",
+                "internal_org_user_mgt_delete",
+                "internal_org_user_mgt_create",
+                "internal_org_idp_view",
+                "internal_org_idp_create",
+                "internal_org_idp_update",
+                "internal_org_idp_delete",
+                "internal_org_application_mgt_view",
+                "internal_org_application_mgt_update",
+                "internal_org_organization_view",
+                "internal_org_group_mgt_view",
+                "internal_org_group_mgt_list",
+                "internal_org_group_mgt_update",
+                "internal_org_group_mgt_delete",
+                "internal_org_group_mgt_create",
+                "internal_org_role_mgt_view",
+                "internal_org_role_mgt_update",
+                "internal_org_branding_preference_update",
+                "list_doctors",
+                "create_doctor",
+                "view_doctor",
+                "update_doctor",
+                "delete_doctor",
+                "list_bookings",
+                "view_appointment",
+                "view_profile",
+                "create_bookings",
+                "view_booking",
+                "update_booking",
+                "delete_booking",
+                "view_org_info",
+                "update_org_info",
+                "list_pets",
+                "create_pet",
+                "view_pet",
+                "update_pet",
+                "view_user_settings",
+                "update_user_settings",
+                "create_branding",
+                "update_branding",
+                "delete_branding",
+                "internal_org_claim_meta_create", 
+                "internal_org_claim_meta_view", 
+                "internal_org_claim_meta_update", 
+                "internal_org_claim_meta_delete"
+            ],
+            "Branding": {
+                "name": "Pet Care App",
+                "tag": "Helping you to take good care  of your pets"
+            }
+        },
+        "resourceServerURLs": {
+            "channellingService": "<CHANNELLING_SERVICE_URL>",
+            "petManagementService": "<PET_MANAGEMENT_SERVICE_URL>",
+            "personalizationService": "<PERSONALIZATION_SERVICE_URL>"
+        },
+        "ManagementAPIConfig": {
+            "SharedApplicationName": "<SHARED APPLICATION NAME FOR BUSINESS APP> ex: guardio-app",
+            "UserStore" : "PRIMARY"
+        }
+    }
+}

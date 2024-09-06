@@ -18,7 +18,7 @@
     <parent>
         <groupId>org.wso2.samples.is</groupId>
         <artifactId>wso2is-workflow-samples</artifactId>
-        <version>4.5.1-SNAPSHOT</version>
+        <version>4.6.3-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -26,7 +26,7 @@
     <packaging>bundle</packaging>
     <dependencies>
         <dependency>
-            <groupId>org.wso2.carbon.identity.framework</groupId>
+            <groupId>org.wso2.carbon.identity.workflow.impl.bps</groupId>
             <artifactId>org.wso2.carbon.identity.workflow.mgt</artifactId>
         </dependency>
         <dependency>

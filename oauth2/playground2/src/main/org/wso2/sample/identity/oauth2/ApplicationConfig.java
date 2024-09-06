@@ -41,6 +41,7 @@ public class ApplicationConfig {
     public static final String LOGOUT_ENDPOINT_CONTEXT = "LogoutEndpointContext";
     public static final String USER_INFO_ENDPOINT_CONTEXT = "UserInfoEndpointContext";
     public static final String SESSION_IFRAME_ENDPOINT_CONTEXT = "SessionIFrameEndpointContext";
+    public static final String POST_LOGOUT_REDIRECT_URI = "PostLogoutRedirectUri";
 
     private static Properties properties = new Properties();
 
@@ -136,6 +137,15 @@ public class ApplicationConfig {
             LOGGER.warning("Invalid input for Identity Server PORT.");
         }
         return value;
+    }
+
+    public static String getPostLogoutRedirectUri() {
+
+        String postLogoutRedirectUri = getProperties().getProperty(POST_LOGOUT_REDIRECT_URI);
+        if (StringUtils.isBlank(postLogoutRedirectUri)) {
+            postLogoutRedirectUri = StringUtils.EMPTY;
+        }
+        return postLogoutRedirectUri;
     }
 
     private static String buildURL(String context) {

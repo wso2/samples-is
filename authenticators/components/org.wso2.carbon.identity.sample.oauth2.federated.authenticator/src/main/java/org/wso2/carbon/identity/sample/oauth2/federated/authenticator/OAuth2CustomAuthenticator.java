@@ -1,7 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2022, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ * Copyright (c) 2022, WSO2 LLC. (http://www.wso2.org) All Rights Reserved.
  *
- * WSO2 Inc. licenses this file to you under the Apache License,
+ * WSO2 LLC. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License.
  * You may obtain a copy of the License at
@@ -26,9 +26,8 @@ import java.util.List;
 
 import static org.wso2.carbon.identity.sample.oauth2.federated.authenticator.OAuth2CustomAuthenticatorConstants.*;
 
-/***
- * OAuth2 Custom Authenticator is an outbound authenticator
- * This extends OAuth2 Generic Authenticator implementation
+/**
+ * This class is used to create an OAuth2 Custom Authenticator as an outbound authenticator.
  */
 public class OAuth2CustomAuthenticator extends Oauth2GenericAuthenticator {
 
@@ -105,4 +104,3 @@ public class OAuth2CustomAuthenticator extends Oauth2GenericAuthenticator {
         return configProperties;
     }
 }
-

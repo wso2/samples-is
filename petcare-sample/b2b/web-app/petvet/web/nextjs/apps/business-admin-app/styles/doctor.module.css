@@ -1,0 +1,605 @@
+/*
+ * Copyright (c) 2022 WSO2 LLC. (http://www.wso2.com).
+ *
+ * WSO2 LLC. licenses this file to you under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *http://www.apache.org/licenses/LICENSE-2.
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+ .tableMainPanelDivDoc {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+}
+
+.tableMainPanelDivDoc .rs-table-body-row-wrapper {
+    height: 100vh;
+}
+
+ .doctorIcon {
+    position: relative;
+    width: 15vh;
+    height: 15vh;
+    margin-top: 1.5vh;
+    margin-left: 1vw;
+ }
+
+ .petIcon {
+    position: relative;
+    width: 15vh;
+    height: 15vh;
+    margin-top: 1.5vh;
+    margin-left: 1vw;
+ }
+
+ .doctorCard {
+    height: 25vh;
+ }
+
+ .doctorSummary {
+    position: relative;
+    width: 10vw;
+    margin-left: 10vw;
+    margin-top: -15vh;
+    text-align: left;
+ }
+
+ .petSummary {
+    position: relative;
+    width: 10vw;
+    margin-left: 10vw;
+    margin-top: -15vh;
+    text-align: left;
+ }
+
+ .docTitleInCard {
+    font-size: 2.5vh;
+    font-weight: bold;
+ }
+
+ .docSummaryInCard {
+    font-size: 2vh;
+    color: rgb(145, 143, 143);
+    font-weight: bold;
+ }
+
+.doctorOverviewMainDiv {
+    width: 70vw;
+    height: 80vh;
+    min-height: 50vh;
+    /* overflow: hidden; */
+} 
+
+.doctorOverviewTitle{
+    width: 30%;
+    position: absolute;
+    left: 25vw;
+    text-align: left;
+    font-weight: bold;
+    font-size: 5vh;
+}
+
+.basicInfoDiv {
+    width: 29vw;
+    margin-left: 24vw;
+}
+
+.docOverviewFont {
+    font-size: 2vh;
+    color: rgb(105, 105, 105);
+    font-weight: bold;
+    padding-bottom: 1vh;
+}
+
+.availabilityHeaderInOverview {
+    width: 20vw;
+    position: absolute;
+    left: 24vw;
+    text-align: left;
+    font-weight: bold;
+    font-size: 2.5vh;
+    color: black;
+    top: 35vh;
+}
+
+.availabilityHeaderInProfileEdit {
+    width: 20vw;
+    position: absolute;
+    left: 24vw;
+    text-align: left;
+    font-weight: bold;
+    font-size: 2.5vh;
+    color: black;
+    top: 48vh;
+}
+
+.availabilityHeaderInEdit {
+    width: 20vw;
+    position: absolute;
+    left: 24vw;
+    text-align: left;
+    font-weight: bold;
+    font-size: 2.5vh;
+    color: black;
+    top: 50vh;
+}
+
+.medicineHeaderInReport {
+    width: 20vw;
+    /* position: absolute; */
+    left: 0vw;
+    text-align: left;
+    font-weight: bold;
+    font-size: 2.3vh;
+    color: rgb(82, 82, 82);
+    /* top: 35vh; */
+}
+
+.noAvailabilityInfoDiv {
+    font-size: 2vh;
+    color: rgb(105, 105, 105);
+    font-weight: bold;
+    position: relative;
+    left: 0vw;
+    margin-top: 2vw;
+}
+
+.availabilityInfoDivInOverview {
+    width:30vw;
+    position: absolute;
+    left: 24vw;
+    top: 38vh;
+}
+
+.availabilityInfoDivInEdit {
+    width:30vw;
+    position: absolute;
+    left: 24vw;
+}
+
+.vaccInfoDivInOverview {
+    width:30vw;
+    /* position: absolute; */
+    top:18vh;
+    margin-left: 24vw;
+}
+
+.docImageStyle {
+    width: 30vh;
+    height: 30vh;
+    object-fit: contain;
+    left:4vw;
+    top:1vh;
+    position: absolute;
+}
+
+.editButton {
+    width: 6vw;
+    height: 6vh;
+    object-fit: contain;
+    right:1%;
+    position: absolute;
+    transform: translate(-35%, 10vh);
+}
+
+.docEditFont {
+    font-size: 2vh;
+    color: rgb(105, 105, 105);
+    font-weight: bold;
+    padding-bottom: 1.5vh;
+    padding-top: 1vh;
+}
+
+.docEditInputStyle {
+    width: 13vw;
+    height: 2vh;
+    padding: 2vh;
+    margin-bottom: 1vh;
+    font-size: 2vh;
+    color: rgb(105, 105, 105);
+}
+
+.availabilityInfoGridInEditView {
+    width: 40vw;
+    left: 24vw;
+    position: absolute;
+    top: 70vh;
+}
+
+.availabilityInfoGridHeadersInEdit {
+    text-align: left;
+    width: 40vw  
+}
+
+.availabilityInfoGridHeaderStyleInEdit{
+    width: 6.7vw;
+    font-size: 1.5vh;
+    padding: 1vh;
+    margin-right: 4vw;
+    font-weight: bold;
+    color: rgb(101, 101, 101);
+}
+
+.availabilityInputStyle {
+    width: 8vw;
+    font-size: 1.5vh;
+    padding: 1vh;
+    margin-right: 1vw;
+}
+
+.availabilityPlusButtonStyle {
+    height: 5vh;
+    width: 5vh;
+    background-color: var(--primary-color); 
+    border: none;
+    border-radius: 1vh;
+    color: white;
+    font-weight: bolder;
+    font-size: 2vh;
+}
+
+.availabilityInfoResultTableInEdit {
+    width: 40vw;
+    left: 24vw;
+    position: absolute;
+    top: 78vh;
+}
+
+.removeBtn {
+    border: none;
+    border-radius: 3px;
+    background-color: #f09090;
+    color: white;
+    font-weight: bolder;
+}
+
+.updateDocImageDiv {
+    width: 15vw;
+    height: 5vh;
+    object-fit: contain;
+    left:4vw;
+    top:35vh;
+    position: absolute;
+    text-align: left;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 2vh;
+    color: rgb(105, 105, 105);
+}
+
+.docUploadBtnDiv {
+    position: absolute;
+    top: 40vh;
+    left: 4vw;
+}
+
+.docUploadBtnStyleSec {
+    text-decoration: none;
+    border: none;
+    padding: 1vh 2vh;
+    margin-right: 1vw;
+    font-size: 2vh;
+    background-color: var(--primary-color);
+    color: #fff;
+    border-radius: 22px;
+    box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+    cursor: pointer;
+    outline: none;
+    transition: 0.2s all;
+}
+
+
+.fileNameLabel {
+    max-width: 10vw;
+    display: inline-block;
+    font-size: 2vh;
+    font-family: Arial, Helvetica, sans-serif;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.docUploadBtnDivSec {
+    position: absolute;
+    top: 47vh;
+    left: 4vw;
+}
+
+.infoDiv {
+    position: absolute;
+    left: 24vw;
+    top: 55vh;
+    width: 40vw;
+    height: 13vh;
+    font-size: 2vh;
+}
+
+.doctorProfilePic {
+    position: absolute;
+    width: 30vh;
+    height: 30vh;
+    margin-top: 25vh;
+    margin-left: 5vw;
+}
+
+.docProfileInfoDiv {
+    position: absolute;
+    width: 50vw;
+    margin-top: 25vh;
+    margin-left: 25vw;
+    padding: 1vw;
+    padding-left: 2vw;
+    padding-right: 7vw;
+    background-color: #fff;
+    border-radius: 1vh;
+}
+
+.docProfileFont {
+    font-size: 2.5vh;
+    color: rgb(124, 124, 124);
+    font-weight: bold;
+    padding: 1vh;
+}
+
+.noVaccinationInfoDiv {
+    font-size: 2vh;
+    color: rgb(105, 105, 105);
+    font-weight: bold;
+    left: 0vw;
+    margin-top: 1vh;
+    padding-bottom: 1vh;
+}
+
+.addUserMainDiv {
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.addMedicalMainDiv {
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: fit-content;
+    width: 45vw
+}
+
+.petOverviewMainDiv {
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    min-height: 40vh;
+}
+
+.editMedicalReportMainDiv {
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    min-height: 40vh;
+}
+.vaccinationHeaderInOverview {
+    width: 20vw;
+    /* position: absolute; */
+    margin-left: 24vw;
+    text-align: left;
+    font-weight: bold;
+    font-size: 2.5vh;
+    top: 15vh;
+    color: black;
+}
+
+.medicalReportHeaderInOverview {
+    text-align: left;
+  font-weight: bold;
+  font-size: 2.5vh;
+  color: black;
+  margin-left: 24vw;
+  /* margin-top: 10vh; */
+}
+
+.vaccinationHeaderInEdit {
+    width: 20vw;
+    position: absolute;
+    left: 24vw;
+    text-align: left;
+    font-weight: bold;
+    font-size: 2.5vh;
+    top: 20vh;
+    color: black;
+}
+
+.vccDivGridStyle {
+    width: 50vw;
+    top:43vh;
+    left: 24vw;
+    position: absolute;
+}
+
+.infoDivInPetEdit {
+    position: absolute;
+    top: 25vh;
+    left: 24vw;
+    width: 40vw;
+    height: 13vh;
+    font-size: 2vh;
+}
+
+.vccUpdateInputStyleSec {
+    width: 11vw;
+    font-size: 2vh;
+    padding: 1vh;
+}
+
+.editPetMainDiv {
+    width: 29vw;
+    height: 40vh;
+    margin-left: 24vw;
+    overflow-x: hidden;
+}
+
+.plusButtonStyle {
+    height: 5vh;
+    width: 5vh;
+    background-color: var(--primary-color); 
+    border: none;
+    border-radius: 1vh;
+    color: white;
+    font-weight: bolder;
+    font-size: 2vh;
+}
+
+.vaccineInfoBox{
+    width: 50vw;
+    position: absolute;
+    left: 23vw;
+    top: 50vh;
+}
+
+.medicineInfoGrid {
+    width: 40vw;
+    left: 2vw;
+    padding-top: 3vh;
+}
+
+.medicineInputStyle {
+    width: 10vw;
+    font-size: 1.5vh;
+    padding: 1vh;
+    margin-right: 1vw;
+}
+
+.medicinePlusButtonStyle {
+    height: 5vh;
+    width: 5vh;
+    background-color: var(--primary-color); 
+    border: none;
+    border-radius: 1vh;
+    color: white;
+    font-weight: bolder;
+    font-size: 2vh;
+}
+
+.medicalReportCard {
+    background-color: #e0dfdf;
+    padding: 2vh;
+    margin-bottom: 2vh;
+    width: 40vw;
+    overflow-y: auto;
+}
+
+.medicationTable {
+    background-color: #ededed;
+    margin-top:2vh;
+}
+
+.trashIcon {
+    width: 100%;
+    height: 3vw;
+    padding-top: 2vh;
+    padding-left: 36vw;
+    position: relative;
+    right: 0px; bottom: 0px;
+}
+
+.trashButton {
+    height: 4vh;
+    width: 4vh;
+    background-color: #ffffff;
+    border-radius: 1vh;
+}
+
+.notificationDiv {
+    background-color: #ffffff;
+    height: 40vh;
+    width: 50vw;
+    border-radius: 1vh;
+}
+
+.notificationHeader {
+    padding-left: 3vh;
+    padding-top: 2vh;
+    font-size: 2.5vh;
+    font-weight: bold;
+}
+
+.settingsGrid {
+    margin-top: 5vh;
+}
+
+.container {
+    position: relative;
+    background-color: #f09090;
+}
+
+.settingsSaveBtn {
+    background-color: var(--primary-color);  
+    color: white;
+    border: none;
+    width: 7vw;
+    height: 5vh;
+    border-radius: 5px;
+    position: absolute;
+    bottom: -13vh;
+    right: 2vw;
+    font-size: 2vh;
+}
+
+.settingsEmailInputStyle {
+    width: 15vw;
+    height: 2vh;
+    font-size: 2vh;
+    padding: 2vh;
+}
+
+.datePickerDiv {
+    width: 40vw;
+    height: 30vh;
+}
+
+.petVaccInfoContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.tailSpinDiv {
+    position: sticky;
+    top:50%;
+    left: 50%;
+    height: 100%;
+    margin-left: 20%;
+    margin-top: 5%;
+}
+
+.buttonCircular {
+    height: 50px;
+    font-size: 18px;
+    border-radius: 22px;
+    box-shadow: none;
+    font-size: 1rem;
+    font-weight: 400;
+    padding: 14px 24px;
+    background-color: #69A2F4;
+    color: #ffffff;
+    border-color: #e2e2e2;
+    border-width: 0;
+}

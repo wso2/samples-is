@@ -22,22 +22,22 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.component.ComponentContext;
+import org.osgi.service.component.annotations.*;
 import org.wso2.carbon.identity.event.handler.AbstractEventHandler;
 import org.wso2.carbon.identity.customhandler.handler.UserRegistrationCustomEventHandler;
 import org.wso2.carbon.user.core.service.RealmService;
 
-/**
- * @scr.component name="org.wso2.carbon.identity.customhandler.internal.UserRegistrationCustomEventHandlerComponent" immediate="true"
- * @scr.reference name="realm.service"
- * interface="org.wso2.carbon.user.core.service.RealmService" cardinality="1..1"
- * policy="dynamic" bind="setRealmService" unbind="unsetRealmService"
- */
+@Component(
+        name = "org.wso2.carbon.identity.customhandler.internal.UserRegistrationCustomEventHandlerComponent",
+        immediate = true
+)
 public class UserRegistrationCustomEventHandlerComponent {
 
     private static Log log = LogFactory.getLog(UserRegistrationCustomEventHandlerComponent.class);
-    private UserRegistrationCustomEventHandlerDataHolder dataHolder = UserRegistrationCustomEventHandlerDataHolder
+    private final UserRegistrationCustomEventHandlerDataHolder dataHolder = UserRegistrationCustomEventHandlerDataHolder
             .getInstance();
 
+    @Activate
     protected void activate(ComponentContext context) {
         try {
             BundleContext bundleContext = context.getBundleContext();
@@ -48,12 +48,19 @@ public class UserRegistrationCustomEventHandlerComponent {
         }
     }
 
+    @Deactivate
     protected void deactivate(ComponentContext context) {
         if (log.isDebugEnabled()) {
             log.debug("custom self registration handler is de-activated");
         }
     }
 
+    @Reference(
+            name = "RealmService",
+            service = org.wso2.carbon.user.core.service.RealmService.class,
+            cardinality = ReferenceCardinality.MANDATORY,
+            policy = ReferencePolicy.DYNAMIC,
+            unbind = "unsetRealmService")
     protected void setRealmService(RealmService realmService) {
         if (log.isDebugEnabled()) {
             log.debug("Setting the Realm Service");

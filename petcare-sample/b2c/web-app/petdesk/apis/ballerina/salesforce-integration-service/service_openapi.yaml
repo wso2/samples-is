@@ -1,0 +1,63 @@
+openapi: 3.0.1
+info:
+  title: Service Openapi Yaml
+  version: 1.0.0
+servers:
+- url: "{server}:{port}/"
+  variables:
+    server:
+      default: http://localhost
+    port:
+      default: "9092"
+paths:
+  /upgrade:
+    get:
+      summary: Get Upgraded Lead Status
+      operationId: getUpgradeLeadStatus
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+    post:
+      summary: Upgrade the Lead
+      operationId: postUpgradeLeadStatus
+      requestBody:
+        description: Upgrade the Lead to customer
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LeadInfo'
+      responses:
+        "201":
+          description: Created
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+components:
+  schemas:
+    Account:
+      type: object
+      properties:
+        accountId:
+          type: string
+        isUpgraded:
+          type: boolean
+    LeadInfo:
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string

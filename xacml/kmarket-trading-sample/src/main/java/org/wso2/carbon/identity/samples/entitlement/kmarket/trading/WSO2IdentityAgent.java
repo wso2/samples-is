@@ -104,7 +104,7 @@ public class WSO2IdentityAgent {
             try{
                 trustStore =  (new File(".")).getCanonicalPath() + File.separator +
                                                  "src" + File.separator + "main" + File.separator +
-                                                 "resources" + File.separator + "wso2carbon.jks";
+                                                 "resources" + File.separator + "wso2carbon.P12";
             } catch (IOException e) {
                 e.printStackTrace(); 
             }
@@ -119,7 +119,7 @@ public class WSO2IdentityAgent {
          * Call to https://localhost:9443/services/   uses HTTPS protocol.
          * Therefore we to validate the server certificate or CA chain. The server certificate is looked up in the
          * trust store.
-         * Following code sets what trust-store to look for and its JKs password.
+         * Following code sets what trust-store to look for and its PKCS12 password.
          */
         System.setProperty("javax.net.ssl.trustStore",  trustStore );
 

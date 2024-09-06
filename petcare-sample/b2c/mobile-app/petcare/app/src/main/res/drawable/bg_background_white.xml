@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:drawable="@color/font_white">
+    </item>
+
+    <item>
+        <rotate
+            android:fromDegrees="55"
+            android:pivotX="-60%"
+            android:pivotY="90%"
+            >
+            <shape
+                android:shape="oval">
+                <solid android:color="@color/asgardeo_colour_variant" />
+                <corners android:radius="2000dp" />
+            </shape>
+        </rotate>
+    </item>
+
+</layer-list>

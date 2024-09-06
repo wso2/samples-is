@@ -1,7 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2022, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ * Copyright (c) 2022, WSO2 LLC. (http://www.wso2.org) All Rights Reserved.
  *
- * WSO2 Inc. licenses this file to you under the Apache License,
+ * WSO2 LLC. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License.
  * You may obtain a copy of the License at
@@ -43,11 +43,11 @@ public class OAuth2CustomAuthenticatorServiceComponent {
             ctxt.getBundleContext().registerService(ApplicationAuthenticator.class.getName(), oAuth2CustomAuthenticator,
                     props);
             if (logger.isDebugEnabled()) {
-                logger.debug("OAuth2 Custom Authenticator is activated");
+                logger.debug("OAuth2 Custom Authenticator is activated.");
             }
 
         } catch (Throwable e) {
-            logger.error("Error while activating OAuth2 Custom Authenticator", e);
+            logger.error("Error while activating OAuth2 Custom Authenticator.", e);
         }
     }
 
@@ -55,9 +55,8 @@ public class OAuth2CustomAuthenticatorServiceComponent {
     protected void deactivate(ComponentContext ctxt) {
 
         if (logger.isDebugEnabled()) {
-            logger.debug("OAuth2 Custom Authenticator is deactivated");
+            logger.debug("OAuth2 Custom Authenticator is deactivated.");
         }
     }
 
 }
-

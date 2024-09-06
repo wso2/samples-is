@@ -1,0 +1,478 @@
+openapi: 3.0.1
+info:
+  title: Service Openapi Yaml
+  version: 1.0.0
+servers:
+- url: "{server}:{port}/"
+  variables:
+    server:
+      default: http://localhost
+    port:
+      default: "9092"
+paths:
+  /pets:
+    get:
+      summary: Get all pets
+      operationId: getPets
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pet'
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+    post:
+      summary: Create a new pet
+      operationId: postPets
+      requestBody:
+        description: Basic pet details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PetItem'
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+  /pets/{petId}:
+    get:
+      summary: Get a pet by ID
+      operationId: getPetsPetid
+      parameters:
+      - name: petId
+        in: path
+        description: ID of the pet
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+        "404":
+          description: NotFound
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+    put:
+      summary: Update a pet
+      operationId: putPetsPetid
+      parameters:
+      - name: petId
+        in: path
+        description: ID of the pet
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Updated pet details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PetItem'
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+        "404":
+          description: NotFound
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+    delete:
+      summary: Delete a pet
+      operationId: deletePetsPetid
+      parameters:
+      - name: petId
+        in: path
+        description: ID of the pet
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: NoContent
+        "404":
+          description: NotFound
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+  /pets/{petId}/thumbnail:
+    get:
+      summary: Get thumbnail for the pet
+      operationId: getPetsPetidThumbnail
+      parameters:
+      - name: petId
+        in: path
+        description: ID of the pet
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: Any Response
+          content:
+            '*/*':
+              schema:
+                description: Any type of entity body
+        "404":
+          description: NotFound
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+    put:
+      summary: Update thumbnail for the pet
+      operationId: putPetsPetidThumbnail
+      parameters:
+      - name: petId
+        in: path
+        description: ID of the pet
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              description: Any type of entity body
+      responses:
+        "200":
+          description: Ok
+        "404":
+          description: NotFound
+        "400":
+          description: BadRequest
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+  /pets/{petId}/medical-reports:
+    get:
+      summary: Get medical reports of the pet
+      operationId: getPetsPetidMedicalReports
+      parameters:
+      - name: petId
+        in: path
+        description: ID of the pet
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MedicalReport'
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+    post:
+      summary: Create a new medical report
+      operationId: postPetsPetidMedicalReports
+      parameters:
+      - name: petId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Medical report details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MedicalReportItem'
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MedicalReport'
+        "404":
+          description: NotFound
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+  /pets/{petId}/medical-reports/{reportId}:
+    get:
+      summary: Get medical reports of the pet
+      operationId: getPetsPetidMedicalReportsReportid
+      parameters:
+      - name: petId
+        in: path
+        description: ID of the pet
+        required: true
+        schema:
+          type: string
+      - name: reportId
+        in: path
+        description: ID of the report
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MedicalReport'
+        "404":
+          description: NotFound
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+    put:
+      summary: Update medical reports of the pet
+      operationId: putPetsPetidMedicalReportsReportid
+      parameters:
+      - name: petId
+        in: path
+        description: ID of the pet
+        required: true
+        schema:
+          type: string
+      - name: reportId
+        in: path
+        description: ID of the report
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Updated medical report details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MedicalReportItem'
+      responses:
+        "200":
+          description: Ok
+        "404":
+          description: NotFound
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+    delete:
+      summary: Delete medical reports of the pet
+      operationId: deletePetsPetidMedicalReportsReportid
+      parameters:
+      - name: petId
+        in: path
+        description: ID of the pet
+        required: true
+        schema:
+          type: string
+      - name: reportId
+        in: path
+        description: ID of the report
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: NoContent
+        "404":
+          description: NotFound
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+  /settings:
+    get:
+      summary: Get settings for the user
+      operationId: getSettings
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Settings'
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+    put:
+      summary: Updated settings for the user
+      operationId: putSettings
+      requestBody:
+        description: Settings details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Settings'
+      responses:
+        "200":
+          description: Ok
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+components:
+  schemas:
+    PetItem:
+      required:
+      - breed
+      - dateOfBirth
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+        breed:
+          type: string
+        dateOfBirth:
+          type: string
+        vaccinations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Vaccination'
+    Vaccination:
+      required:
+      - lastVaccinationDate
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+        lastVaccinationDate:
+          type: string
+        nextVaccinationDate:
+          type: string
+        enableAlerts:
+          type: boolean
+    Medication:
+      required:
+      - dosage
+      - drugName
+      - duration
+      type: object
+      properties:
+        drugName:
+          type: string
+        dosage:
+          type: string
+        duration:
+          type: string
+    MedicalReport:
+      allOf:
+      - $ref: '#/components/schemas/MedicalReportItem'
+      - required:
+        - createdAt
+        - reportId
+        - updatedAt
+        type: object
+        properties:
+          createdAt:
+            type: string
+          updatedAt:
+            type: string
+          reportId:
+            type: string
+    OwnerInfo:
+      required:
+      - org
+      - owner
+      type: object
+      properties:
+        owner:
+          type: string
+        org:
+          type: string
+    MedicalReportItem:
+      required:
+      - diagnosis
+      type: object
+      properties:
+        diagnosis:
+          type: string
+        treatment:
+          type: string
+        medications:
+          type: array
+          items:
+            $ref: '#/components/schemas/Medication'
+    Notifications:
+      required:
+      - enabled
+      type: object
+      properties:
+        enabled:
+          type: boolean
+        emailAddress:
+          type: string
+    Pet:
+      allOf:
+      - $ref: '#/components/schemas/PetItem'
+      - $ref: '#/components/schemas/OwnerInfo'
+      - required:
+        - id
+        type: object
+        properties:
+          id:
+            type: string
+    Settings:
+      required:
+      - notifications
+      type: object
+      properties:
+        notifications:
+          $ref: '#/components/schemas/Notifications'

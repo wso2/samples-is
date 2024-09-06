@@ -1,0 +1,126 @@
+[
+    {
+        "label": "All Permissions",
+        "value": "/permission",
+        "children": [
+            {
+                "label": "Admin",
+                "value": "/permission/admin",
+                "children": [
+                    {
+                        "label": "Manage",
+                        "value": "/permission/admin/manage",
+                        "children": [
+                            {
+                                "label": "Identity",
+                                "value": "/permission/admin/manage/identity",
+                                "children": [
+                                    {
+                                        "label": "Role Management",
+                                        "value": "/permission/admin/manage/identity/rolemgt",
+                                        "children": [
+                                            {
+                                                "label": "Roles view",
+                                                "value": "/permission/admin/manage/identity/rolemgt/view"
+                                            },
+                                            {
+                                                "label": "Roles create",
+                                                "value": "/permission/admin/manage/identity/rolemgt/create"
+                                            },
+                                            {
+                                                "label": "Roles update",
+                                                "value": "/permission/admin/manage/identity/rolemgt/update"
+                                            },
+                                            {
+                                                "label": "Roles delete",
+                                                "value": "/permission/admin/manage/identity/rolemgt/delete"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "label": "User Management",
+                                        "value": "/permission/admin/manage/identity/usermgt",
+                                        "children": [
+                                            {
+                                                "label": "Users view",
+                                                "value": "/permission/admin/manage/identity/usermgt/view"
+                                            },
+                                            {
+                                                "label": "Users list",
+                                                "value": "/permission/admin/manage/identity/usermgt/list"
+                                            },
+                                            {
+                                                "label": "Users create",
+                                                "value": "/permission/admin/manage/identity/usermgt/create"
+                                            },
+                                            {
+                                                "label": "Users update",
+                                                "value": "/permission/admin/manage/identity/usermgt/update"
+                                            },
+                                            {
+                                                "label": "Users delete",
+                                                "value": "/permission/admin/manage/identity/usermgt/delete"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "label": "Identity Providers",
+                                        "value": "/permission/admin/manage/identity/idpmgt",
+                                        "children": [
+                                            {
+                                                "label": "Identity Providers view",
+                                                "value": "/permission/admin/manage/identity/idpmgt/view"
+                                            },
+                                            {
+                                                "label": "Identity Providers list",
+                                                "value": "/permission/admin/manage/identity/idpmgt/list"
+                                            },
+                                            {
+                                                "label": "Identity Providers create",
+                                                "value": "/permission/admin/manage/identity/idpmgt/create"
+                                            },
+                                            {
+                                                "label": "Identity Providers update",
+                                                "value": "/permission/admin/manage/identity/idpmgt/update"
+                                            },
+                                            {
+                                                "label": "Identity Providers delete",
+                                                "value": "/permission/admin/manage/identity/idpmgt/delete"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "label": "Applications",
+                                        "value": "/permission/admin/manage/identity/applicationmgt",
+                                        "children": [
+                                            {
+                                                "label": "Applications view",
+                                                "value": "/permission/admin/manage/identity/applicationmgt/view"
+                                            },
+                                            {
+                                                "label": "Applications list",
+                                                "value": "/permission/admin/manage/identity/applicationmgt/list"
+                                            },
+                                            {
+                                                "label": "Applications create",
+                                                "value": "/permission/admin/manage/identity/applicationmgt/create"
+                                            },
+                                            {
+                                                "label": "Applications update",
+                                                "value": "/permission/admin/manage/identity/applicationmgt/update"
+                                            },
+                                            {
+                                                "label": "Applications delete",
+                                                "value": "/permission/admin/manage/identity/applicationmgt/delete"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

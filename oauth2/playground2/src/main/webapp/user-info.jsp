@@ -1,6 +1,7 @@
 <%@page import="org.apache.commons.lang.StringUtils" %>
 <%@page import="org.json.simple.JSONObject" %>
 <%@page import="org.json.simple.parser.JSONParser" %>
+<%@page import="org.wso2.sample.identity.oauth2.ApplicationConfig" %>
 <%@page import="org.wso2.sample.identity.oauth2.OAuth2Constants" %>
 <%@page import="java.util.Iterator" %>
 <%@page import="java.util.Map" %>
@@ -92,10 +93,22 @@
         <tr>
             <%
                 if (isOIDCLogoutEnabled) {
+                    String idTokenHint = (String)session.getAttribute(OAuth2Constants.ID_TOKEN);
+                    String logout_url = (String)session.getAttribute(OAuth2Constants.OIDC_LOGOUT_ENDPOINT);
+                    if (StringUtils.isNotBlank(ApplicationConfig.getPostLogoutRedirectUri())) {
+                        logout_url+= "?post_logout_redirect_uri=" + ApplicationConfig.getPostLogoutRedirectUri() + "&";
+                    } else {
+                        logout_url+= "?";
+                    }
+                    if (StringUtils.isNotBlank(idTokenHint)) {
+                        logout_url+= "id_token_hint=" + idTokenHint;
+                    } else {
+                        logout_url+= "client_id=" + (String)session.getAttribute(OAuth2Constants.CONSUMER_KEY);
+                    }
             %>
             <td colspan="2">
                 <button type="button" class="button"
-                        onclick="document.location.href='<%=(String)session.getAttribute(OAuth2Constants.OIDC_LOGOUT_ENDPOINT)%>';">
+                        onclick="document.location.href='<%=logout_url%>';">
                     Logout
                 </button>
             </td>

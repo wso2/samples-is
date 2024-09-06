@@ -13,7 +13,7 @@ This guide discusses the three main steps required when introducing custom local
 
 ## Sample scenario
 
-Let’s say we need to log in to an application using our telephone number(http://wso2.org/claims/telephone) instead of the username. Therefore if the user enters his/her telephone number as the username, the authentication logic should validate the credentials of the user identified by the given telephone number.
+Let’s say we need to log in to an application using our telephone number(http://wso2.org/claims/mobile) instead of the username. Therefore if the user enters his/her telephone number as the username, the authentication logic should validate the credentials of the user identified by the given telephone number.
 
 <br>
 

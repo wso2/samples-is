@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activities.add_pet.AddPet">
+
+    <RelativeLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@color/asgardeo_secondary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:src="@drawable/baseline_arrow_back_24" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/asgardeo_colour" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingTop="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/topBar"
+        tools:layout_editor_absoluteX="47dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="8dp"
+            android:paddingBottom="16dp">
+
+            <TextView
+                android:id="@+id/petsTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/activity_add_pet.title"
+                android:textColor="@color/font_black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/petsDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="0dp"
+                android:text="@string/activity_add_pet.description"
+                android:textColor="@color/font_accent_black"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/activityAddPetProgressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/addPetForm"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <EditText
+                android:id="@+id/petNameForm"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/asgardeo_secondary"
+                android:drawableTint="@color/asgardeo_colour_variant"
+                android:ems="10"
+                android:foregroundTint="@color/asgardeo_colour_variant"
+                android:hint="@string/activity_add_pet.pet_name"
+                android:inputType="textPersonName"
+                android:textColor="@color/font_black"
+                android:textColorHighlight="@color/asgardeo_colour"
+                android:textColorHint="@color/font_accent_black"
+                android:textColorLink="@color/asgardeo_colour"
+                android:textCursorDrawable="@color/asgardeo_colour" />
+
+            <EditText
+                android:id="@+id/petBreedForm"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/asgardeo_secondary"
+                android:drawableTint="@color/asgardeo_colour_variant"
+                android:ems="10"
+                android:foregroundTint="@color/asgardeo_colour_variant"
+                android:hint="@string/activity_add_pet.breed"
+                android:inputType="text"
+                android:textColor="@color/black"
+                android:textColorHint="@color/font_accent_black"
+                android:textColorLink="@color/asgardeo_colour"
+                android:textCursorDrawable="@color/asgardeo_colour" />
+
+            <EditText
+                android:id="@+id/dobPetForm"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/asgardeo_secondary"
+                android:drawableTint="@color/asgardeo_colour_variant"
+                android:ems="10"
+                android:foregroundTint="@color/asgardeo_colour_variant"
+                android:hint="@string/activity_add_pet.dob"
+                android:inputType="date" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/addPetButtonForm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/activity_add_pet.add_pet"
+                android:textColor="@color/font_white"
+                app:backgroundTint="@color/asgardeo_colour"
+                app:iconTint="@color/font_white" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

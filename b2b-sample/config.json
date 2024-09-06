@@ -1,0 +1,65 @@
+{
+    "CommonConfig": {
+        "AuthorizationConfig": {
+            "BaseOrganizationUrl": "<ROOT ORGANIZATION URL>"
+        }
+    },
+    "BusinessAppConfig": {
+        "AuthorizationConfig": {
+            "ClientId": "<CLIENT ID OF THE BUSINESS APP>",
+            "ClientSecret": "<CLIENT SECRET OF THE BUSINESS APP>"
+        },
+        "ApplicationConfig": {
+            "HostedUrl": "http://localhost:3000",
+            "APIScopes": [
+                "openid",
+                "email",
+                "profile",
+                "internal_login"
+            ],
+            "Branding": {
+                "name": "Guardio Insurance",
+                "tag": "Anytime . Anywhere"
+            }
+        },
+        "ManagementAPIConfig": {
+            "SharedApplicationName": "<SHARED APPLICATION NAME FOR BUSINESS APP> eg: Guardio-Business-App",
+            "UserStore" : "<USERSTORE USED TO PROVISION USERS IN ORGANIZATION>"
+        }
+    },
+    "BusinessAdminAppConfig": {
+        "AuthorizationConfig": {
+            "ClientId": "<CLIENT ID OF THE ADMIN APP>",
+            "ClientSecret": "<CLIENT SECRET OF THE ADMIN APP>"
+        },
+        "ApplicationConfig": {
+            "HostedUrl": "http://localhost:3001",
+            "APIScopes": [
+                "openid",
+                "email",
+                "profile",
+                "internal_login",
+                "internal_org_user_mgt_view",
+                "internal_org_user_mgt_list",
+                "internal_org_user_mgt_update",
+                "internal_org_user_mgt_delete",
+                "internal_org_user_mgt_create",
+                "internal_org_idp_view",
+                "internal_org_idp_create",
+                "internal_org_idp_update",
+                "internal_org_idp_delete",
+                "internal_org_application_mgt_view",
+                "internal_org_application_mgt_update",
+                "internal_org_organization_view",
+                "internal_org_role_mgt_view",
+                "internal_org_role_mgt_update",
+                "internal_org_group_mgt_view",
+                "internal_org_group_mgt_update"
+            ],
+            "Branding": {
+                "name": "Guardio Insurance - Administrator Application",
+                "tag": "Administrator Application"
+            }
+        }
+    }
+}

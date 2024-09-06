@@ -21,7 +21,7 @@
     <parent>
         <groupId>org.wso2.samples.is</groupId>
         <artifactId>wso2is-identity-samples-authenticators</artifactId>
-        <version>4.5.1-SNAPSHOT</version>
+        <version>4.6.3-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
@@ -68,6 +68,10 @@
             <groupId>org.wso2.carbon.identity.framework</groupId>
             <artifactId>org.wso2.carbon.identity.application.authentication.framework</artifactId>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
         </dependency>
     </dependencies>
 

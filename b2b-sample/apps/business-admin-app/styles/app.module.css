@@ -1,0 +1,102 @@
+/*
+ * Copyright (c) 2022 WSO2 LLC. (http://www.wso2.com).
+ *
+ * WSO2 LLC. licenses this file to you under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *http://www.apache.org/licenses/LICENSE-2.
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+ 
+.step_wrapper {
+    background: #fafafa;
+    margin-bottom: 10px;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    row-gap: 10px;
+    align-items: center;
+    border: 1px lightgrey solid;
+    position: relative;
+}
+
+.step_name {
+    position: absolute;
+    border: 1px lightgrey solid;
+    background: #fafafa;
+    padding: 8px 12px;
+    top: -15px;
+    left: 15px;
+    border-radius: 16px;
+}
+
+.step {
+    padding-top: 15px;
+    border-radius: 4px;
+    display: flex;
+    column-gap: 15px;
+}
+
+.option {
+    background: white;
+    width: fit-content;
+    border: 1px lightgrey solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 10px;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.option_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 10px;
+}
+
+.option_add_button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    background: #eaeaea;
+    padding: 30px;
+    right: 0;
+    height: 100%;
+    font-size: 2em;
+    color: slategray;
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+
+.option_add_button:hover {
+    background: #d9d9d9;
+    cursor: pointer;
+}
+
+.idp_option_list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.idp_option {
+    padding: 10px;
+    border: 1px lightgray solid;
+    border-radius: 8px;
+}
+
+.idp_option:hover {
+    background: #fafafa;
+    cursor: pointer;
+}

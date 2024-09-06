@@ -1,0 +1,208 @@
+{
+    "items": [
+        {
+            "title": "Dashboard",
+            "eventKey": "10",
+            "icon": "DashboardIcon",
+            "type": "item",
+            "hideBasedOnScope": true,
+            "scopes": [
+                "list_doctors",
+                "view_org_info",
+                "update_org_info"
+            ]
+        },
+        {
+            "title": "Dashboard",
+            "eventKey": "9",
+            "icon": "DashboardIcon",
+            "type": "item",
+            "hideBasedOnScope": true,
+            "scopes": [
+                "view_profile",
+                "list_bookings",
+                "list_pets"
+            ]
+        },
+        {
+            "title": "Dashboard",
+            "eventKey": "11",
+            "icon": "DashboardIcon",
+            "type": "item",
+            "hideBasedOnScope": true,
+            "scopes": [
+                "create_pet",
+                "list_bookings"
+            ]
+        },
+        {
+            "title": "Manage Doctors",
+            "eventKey": "3",
+            "icon": "ProfileIcon",
+            "type": "item",
+            "hideBasedOnScope": true,
+            "scopes": [
+                "create_doctor"
+            ]
+        },
+        {
+            "title": "Profile",
+            "eventKey": "4",
+            "icon": "ProfileIcon",
+            "type": "item",
+            "hideBasedOnScope": true,
+            "scopes": [
+                "view_profile",
+                "view_doctor",
+                "update_doctor"
+            ]
+        },
+        {
+            "title": "Manage Users",
+            "eventKey": "2-1",
+            "icon": "AdminIcon",
+            "type": "item",
+            "hideBasedOnScope": true,
+            "scopes": [
+                "internal_org_user_mgt_view",
+                "internal_org_user_mgt_list",
+                "internal_org_user_mgt_update",
+                "internal_org_user_mgt_delete",
+                "internal_org_user_mgt_create"
+            ]
+        },
+        {
+            "title": "Manage Roles",
+            "eventKey": "2-2",
+            "icon": "ManageDoctorIcon",
+            "type": "item",
+            "hideBasedOnScope": true,
+            "scopes": [
+                "internal_org_role_mgt_view",
+                "internal_org_role_mgt_update"
+            ]
+        },
+        {
+            "title": "Manage Groups",
+            "eventKey": "2-3",
+            "icon": "ManageGroups",
+            "type": "item",
+            "hideBasedOnScope": true,
+            "scopes": [
+                "internal_org_group_mgt_view",
+                "internal_org_group_mgt_list",
+                "internal_org_group_mgt_update",
+                "internal_org_group_mgt_delete",
+                "internal_org_group_mgt_create"
+            ]
+        },
+        {
+            "title": "Personalization",
+            "eventKey": "12",
+            "icon": "BrandingIcon",
+            "type": "item",
+            "hideBasedOnScope": true,
+            "scopes": [
+                "internal_org_branding_preference_update"
+            ]
+        },
+        {
+            "title": "Security",
+            "eventKey": "2",
+            "icon": "GearCircleIcon",
+            "type": "menu",
+            "hideBasedOnScope": true,
+            "items": [
+                {
+                    "title": "SSO",
+                    "eventKey": "2-4",
+                    "type": "item",
+                    "hideBasedOnScope": true,
+                    "scopes": [
+                        "internal_org_idp_view",
+                        "internal_org_idp_create",
+                        "internal_org_idp_update",
+                        "internal_org_idp_delete",
+                        "internal_org_application_mgt_view",
+                        "internal_org_application_mgt_update"
+                    ]
+                },
+                {
+                    "title": "2-Step Verification",
+                    "eventKey": "13",
+                    "type": "item",
+                    "hideBasedOnScope": true,
+                    "scopes": [
+                        "internal_org_application_mgt_view",
+                        "internal_org_application_mgt_update"
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Bookings",
+            "eventKey": "5",
+            "icon": "BookingsIcon",
+            "type": "item",
+            "hideBasedOnScope": true,
+            "scopes": [
+                "view_profile",
+                "list_bookings"
+            ]
+        },
+        {
+            "title": "Pets",
+            "eventKey": "6",
+            "icon": "PetsIcon",
+            "type": "item",
+            "hideBasedOnScope": true,
+            "scopes": [
+                "create_pet",
+                "view_pet",
+                "list_pets"
+            ]
+        },
+        {
+            "title": "Channelling",
+            "eventKey": "7",
+            "icon": "ChannellingIcon",
+            "type": "menu",
+            "hideBasedOnScope": true,
+            "items": [
+                {
+                    "title": "Channel a Doctor",
+                    "eventKey": "7-1",
+                    "type": "item",
+                    "icon": "ManageUserIcon",
+                    "scopes": [
+                        "create_pet",
+                        "list_pets",
+                        "list_doctors",
+                        "view_doctor",
+                        "view_pet",
+                        "create_bookings"
+                    ]
+                },
+                {
+                    "title": "Available Bookings",
+                    "eventKey": "7-2",
+                    "type": "item",
+                    "scopes": [
+                        "create_pet",
+                        "list_bookings"
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Settings",
+            "eventKey": "8",
+            "icon": "GearCircleIcon",
+            "type": "menu",
+            "hideBasedOnScope": true,
+            "scopes": [
+                "create_pet"
+            ]
+        }
+    ]
+}

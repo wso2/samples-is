@@ -37,7 +37,7 @@ public class BackendApplication {
     private static final Logger logger = LoggerFactory.getLogger(BookingService.class);
     private static final Properties properties = new Properties();
 
-    // Perform property loading and JKS setup
+    // Perform property loading and keystore setup
     static {
         final InputStream resourceAsStream =
                 BackendApplication.class.getClassLoader().getResourceAsStream("service.properties");
@@ -50,40 +50,41 @@ public class BackendApplication {
             throw new RuntimeException("Service start failed due to configuration loading failure", e);
         }
 
-        setupJKS();
+        setupKeystore();
     }
 
-    private static void setupJKS() {
-        // First find jks properties
-        final InputStream jksInputStream = BackendApplication.class.getClassLoader().getResourceAsStream("jks.properties");
+    private static void setupKeystore() {
+        // First find keystore properties
+        final InputStream keystoreInputStream = BackendApplication.class.getClassLoader()
+                .getResourceAsStream("keystore.properties");
 
-        if (jksInputStream == null) {
-            logger.error("jks.properties not found. Trust store properties will not be set.");
+        if (keystoreInputStream == null) {
+            logger.error("keystore.properties not found. Trust store properties will not be set.");
             return;
         }
 
         // Load properties
-        final Properties jksProperties = new Properties();
+        final Properties keystoreProperties = new Properties();
 
         try {
-            jksProperties.load(jksInputStream);
+            keystoreProperties.load(keystoreInputStream);
         } catch (IOException e) {
             logger.error("Error while loading properties.", e);
             return;
         }
 
-        // Find and store JKS required for SSL communication on a temporary location
-        final InputStream keyStoreAsStream = BackendApplication.class.getClassLoader().getResourceAsStream(jksProperties.getProperty("keystorename"));
+        // Find and store keystore required for SSL communication on a temporary location
+        final InputStream keyStoreAsStream = BackendApplication.class.getClassLoader().getResourceAsStream(keystoreProperties.getProperty("keystorename"));
 
         try {
-            final File keystoreTempFile = File.createTempFile(jksProperties.getProperty("keystorename"), "");
+            final File keystoreTempFile = File.createTempFile(keystoreProperties.getProperty("keystorename"), "");
             keystoreTempFile.deleteOnExit();
 
             Files.copy(keyStoreAsStream, keystoreTempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
             logger.info("Setting trust store path to : " + keystoreTempFile.getPath());
             System.setProperty("javax.net.ssl.trustStore", keystoreTempFile.getPath());
-            System.setProperty("javax.net.ssl.trustStorePassword", jksProperties.getProperty("keystorepassword"));
+            System.setProperty("javax.net.ssl.trustStorePassword", keystoreProperties.getProperty("keystorepassword"));
         } catch (IOException e) {
             logger.error("Error while setting trust store", e);
             throw new RuntimeException(e);

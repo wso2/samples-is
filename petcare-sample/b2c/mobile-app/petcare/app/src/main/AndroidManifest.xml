@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.wso2_sample.api_auth_sample">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.USE_CREDENTIAL_MANAGER" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Api_auth_sample"
+        tools:targetApi="31">
+
+        <activity
+            android:name=".ui.activities.add_pet.AddPet"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.home.Home"
+            android:exported="true"
+            android:label="@string/title_activity_signed_in_interface"
+            android:theme="@style/Theme.Api_auth_sample.NoActionBar" />
+        <activity
+            android:name=".ui.activities.login.Login"
+            android:exported="false"
+            android:label="@string/title_activity_first_factor"
+            android:theme="@style/Theme.Api_auth_sample.NoActionBar" />
+        <activity
+            android:name=".ui.activities.main.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
