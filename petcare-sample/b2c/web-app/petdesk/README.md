@@ -34,13 +34,13 @@ Authorized redirect URLs: https://localhost:3000 (This will be updated with the 
 8. Use **Web App URL** in the step 3.3 as the **Authorized redirect URLs** and **Allowed origins**.
 9. Keep the rest of the default configurations and click **Update**.
 10. Create `acr` claim from `User Attributes & Stores/Attributes section.
-11. Create a scope called `acr` and map it to the previously created `acr` claim.
-12. Go to the **User Attributes** tab.
+11. Create an OIDC scope called `acr` and map it to the previously created `acr` claim.
+12. Go to the **User Attributes** tab in the created application in step 4.
 13. Tick on the `acr`.
 14. Tick on the **Email** section.
 15. Expand the **Profile** section.
 16. Add a tick on the Requested Column for the **Full Name** and click **Update**.
-17. Then go to the **Sign-In Method** tab.
+17. Then go to the **Login Flow** tab.
 18. Configure **Google login** as described in https://wso2.com/asgardeo/docs/guides/authentication/social-login/add-google-login/
 19. As shown in the below, add **Username & Password** as an **Authentication** step.
 20. To perform the acr-based step up authentication add the following conditional script to the login flow.
@@ -241,7 +241,7 @@ In this step, you will play the role of the API developer. You will create and p
 Let's create your first Service.
 1. On the **Home** page, click on the project you created.
 2. To add a new component, select **Components** from the left-side menu and click **Create**.
-3. Click **Create** in the **Service** card.
+3. Under **Select a Type**, click on the **Service** card.
 4. Enter a unique name and a description for the Service. For example, you can enter the name and the description given below:
 
     | Field | Value |
