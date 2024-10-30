@@ -62,6 +62,7 @@ public class CommonUtils {
 
         JSONObject obj = new JSONObject();
         obj.append("status-code", "200");
+        obj.append("scope", oAuthResponse.getParam("scope"));
         obj.append("id_token", oAuthResponse.getParam("id_token"));
         obj.append("access_token", oAuthResponse.getParam("access_token"));
         return obj;
@@ -95,13 +96,13 @@ public class CommonUtils {
 
         final TokenData storedTokenData;
 
-        if (appIdCookie.isPresent()) {
-            storedTokenData = TOKEN_STORE.get(appIdCookie.get().getValue());
-            if (storedTokenData != null) {
-                setTokenDataToSession(session, storedTokenData);
-                return;
-            }
-        }
+        // if (appIdCookie.isPresent()) {
+        //     storedTokenData = TOKEN_STORE.get(appIdCookie.get().getValue());
+        //     if (storedTokenData != null) {
+        //         setTokenDataToSession(session, storedTokenData);
+        //         return;
+        //     }
+        // }
 
         final String authzCode = request.getParameter("code");
 
@@ -112,12 +113,39 @@ public class CommonUtils {
         final OAuthClientRequest.TokenRequestBuilder oAuthTokenRequestBuilder =
                 new OAuthClientRequest.TokenRequestBuilder(properties.getProperty("tokenEndpoint"));
 
+                    // Get all cookies from the request
+    Cookie[] cookies = request.getCookies();
+
+    String pkceCookieValue = "";
+
+    // Check if any cookies are present
+    if (cookies != null) {
+        for (Cookie cookie : cookies) {
+            // Find the specific cookie by name
+            if ("code_verifier".equals(cookie.getName())) {
+                pkceCookieValue = cookie.getValue();
+                // Remove the cookie once the value is obtained.
+                cookie.setMaxAge(0);
+                break;
+            }
+        }
+    }
+
+    // Display the cookie value
+    if (pkceCookieValue != null) {
+        System.out.println("Value of 'cookieName': " + pkceCookieValue);
+    } else {
+        System.out.println("Cookie 'cookieName' not found.");
+    }
+
         final OAuthClientRequest accessRequest = oAuthTokenRequestBuilder.setGrantType(GrantType.AUTHORIZATION_CODE)
                 .setClientId(properties.getProperty("consumerKey"))
                 .setClientSecret(properties.getProperty("consumerSecret"))
                 .setRedirectURI(properties.getProperty("callBackUrl"))
                 .setCode(authzCode)
+                .setParameter("code_verifier", pkceCookieValue)
                 .buildBodyMessage();
+
 
         //create OAuth client that uses custom http client under the hood
         final OAuthClient oAuthClient = new OAuthClient(new URLConnectionClient());
