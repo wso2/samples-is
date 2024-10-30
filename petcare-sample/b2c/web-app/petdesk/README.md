@@ -258,7 +258,7 @@ Let's create your first Service.
     | GitHub Account | Your account |
     | GitHub Repository | samples-is|
     | Branch | master |
-    | Build Preset | Click **Ballerina** because you are creating the REST API from a Ballerina project and Choreo needs to run a Ballerina build to build it. |
+    | Buildpack | Click **Ballerina** because you are creating the REST API from a Ballerina project and Choreo needs to run a Ballerina build to build it. |
     | Path | /petcare-sample/b2c/web-app/petdesk/apis/ballerina/pet-management-service |
 
 8. Click **Create** to initialize a Service with the implementation from your GitHub repository.
@@ -381,8 +381,8 @@ If you are not connecting the service to a MySQL database and storing the servic
 2. Go to the Set Up card and click **Endpoint Configurations**. This opens the Endpoint Configurations pane.
 3. Select the **Pass Security Context To Backend** checkbox.
 4. Optionally, specify an appropriate audience claim value for the backend service.
-Click Apply.
-5. To redeploy the component with the applied setting, go to the Set Up card and click Deploy.
+5. Scroll down the **Endpoint Configurations** wizard and click **Apply**.
+6. To redeploy the component with the applied setting, go to the Set Up card and click Deploy.
 
 ## Step 4.5: Test the Service
 
@@ -390,6 +390,7 @@ Let's test the Pet Management Service via Choreo's Console by following the step
 1. Navigate to the **Test** section in the component and click **Console**. This will open up the definition of the service.
 2. Expand the **POST** method and click **Try it out**.
 3. Update the request body as below:
+
     ``` 
     {
       "breed": "Golden Retriever",
@@ -414,7 +415,7 @@ Similarly, you can expand and try out the other methods.
 
 Now that yourService is tested, let's publish it and make it available for applications to consume.
 
-1. Navigate to the **Manage** section of the channel service and click **Lifecycle**.
+1. Navigate to the **Manage** section of the created service and click **Lifecycle**.
 2. Click **Publish** to publish the Service to the **Developer Portal**. External applications can subscribe to the API via the Developer Portal.
 3. To access the Developer Portal, click **Go to DevPortal** in the top right corner.
 4. The Pet Management Service will open in the Developer Portal.
@@ -508,13 +509,13 @@ When deploying the webhook through choreo, provide the salesforce related config
 8. Use **Web App URL** in the step 3.3 as the **Authorized redirect URLs** and **Allowed origins**.
 9. Keep the rest of the default configurations and click **Update**.
 10. Create `acr` claim from `User Attributes & Stores/Attributes section.
-11. Create a scope called `acr` and map it to the previously created `acr` claim.
-12. Go to the **User Attributes** tab.
+11. Create an OIDC scope called `acr` and map it to the previously created `acr` claim.
+12. Go to the **User Attributes** tab of the created app.
 13. Tick on the `acr`.
 14. Tick on the **Email** section.
 15. Expand the **Profile** section.
 16. Add a tick on the Requested Column for the **Full Name** and click **Update**.
-17. Then go to the **Sign-In Method** tab.
+17. Then go to the **Login Flow** tab.
 18. Configure **Google login** as described in https://wso2.com/asgardeo/docs/guides/authentication/social-login/add-google-login/
 19. As shown in the below, add **Username & Password** as an **Authentication** step.
 20. To perform the acr-based step up authentication add the following conditional script to the login flow.
@@ -583,13 +584,11 @@ var onLoginRequest = function (context) {
 3. Visit the sample application at http://localhost:3000. 
 
 ## Run API Services
-1. Navigate to <PROJECT_HOME>/petcare-sample/b2c/web-app/petdesk/apis/ballerina/pet-management-service and start the 
-   pet management service by executing the following command in the terminal.
+1. Navigate to <PROJECT_HOME>/petcare-sample/b2c/web-app/petdesk/apis/ballerina/pet-management-service and start the pet management service by executing the following command in the terminal.
     ```
     bal run
     ```
-2. Navigate to <PROJECT_HOME>/petcare-sample/b2c/web-app/petdesk/apis/ballerina/billing-management-service and start the 
-   pet management service by executing the following command in the terminal.
+2. Navigate to <PROJECT_HOME>/petcare-sample/b2c/web-app/petdesk/apis/ballerina/billing-management-service and start the billing management service by executing the following command in the terminal.
     ```
     bal run
     ```

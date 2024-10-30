@@ -25,7 +25,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { BasicUserInfo, useAuthContext } from "@asgardeo/auth-react";
 import { getNotification } from "./Notifications/get-notification";
 import GetBilling from "../pages/billing";
-import { getBilling, getUpgrade } from "./Billing/billing";
+import { getBilling } from "./Billing/billing";
 import { AddCard } from "@mui/icons-material";
 import { getConfig } from "../util/getConfig";
 

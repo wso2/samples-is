@@ -180,11 +180,14 @@ export const HomePage: FunctionComponent = (): ReactElement => {
             .catch(() => setHasAuthenticationErrors(true));
     }, [signIn]);
 
-    const handleBillingLogin = useCallback(() => {
+    const handleBillingLogin = useCallback(() => {        
         signIn({
             acr_values:"acr2"
         })
-        .catch(() => setHasAuthenticationErrors(true));
+        .catch((err) => {
+            console.error(err)
+            setHasAuthenticationErrors(true)
+        });
         //set value in session storage
         sessionStorage.setItem("billing", "true");
     }, []);
