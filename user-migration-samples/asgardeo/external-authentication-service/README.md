@@ -10,6 +10,7 @@ This sample demonstrates how to implement an external authentication service in 
 
 > [!NOTE]
 > - This guide provides a sample authentication service which satisfies only the basic functional requirement.
+> - In this example, authentication results are stored in an in-memory map and hence supports only single-replica deployments. This is not recommended for production use. You need to replace this with a high available implementation that suits your requirement (i.e. DB or cache service).
 
 > [!WARNING]
 > - We recommend adding necessary logs for audit purposes when developing the REST service. However be cautious on the information you log, especially DO NOT log any sensitive information including PII.
