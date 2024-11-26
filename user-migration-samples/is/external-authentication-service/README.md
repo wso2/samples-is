@@ -2,9 +2,9 @@
 
 ## Introduction
 
-On-demand silent password migration enables the seamless migration of user passwords from the legacy system to Asgardeo during login time. Prior to on-demand silent password migration, user accounts need to be bulk imported to the Asgardeo user store. In this process, both the legacy system and Asgardeo operate in parallel for a specified period of time, allowing users to access applications and services using their existing credentials stored in the legacy system.
+On-demand silent password migration enables the seamless migration of user passwords from the legacy system to WSO2 Identity Server during login time. Prior to on-demand silent password migration, user accounts need to be bulk imported to the Identity Server user store. In this process, both the legacy system and Identity Server operate in parallel for a specified period of time, allowing users to access applications and services using their existing credentials stored in the legacy system.
 
-When a user attempts to log in to Asgardeo for the first time, Asgardeo checks whether the user's password has been migrated and if not, it initiates an external authentication process to the legacy system. Once a user is authenticated successfully with the legacy system, Asgardeo imports the user’s password into the local system. Once the password is migrated to Asgardeo, users can continue to access the application and services through Asgardeo without invoking the external legacy system.
+When a user attempts to log in to WSO2 Identity Server for the first time, Identity Server checks whether the user's password has been migrated and if not, it initiates an external authentication process to the legacy system. Once a user is authenticated successfully with the legacy system, Identity Server imports the user’s password into the local system. Once the password is migrated to Identity Server, users can continue to access the application and services through Identity Server without invoking the external legacy system.
 
 This sample demonstrates how to implement an external authentication service in [Ballerina](https://ballerina.io/learn/get-started/) programming language that can be used to authenticate users against a legacy system.
 
@@ -38,7 +38,7 @@ external-authentication-service
     ├── service.bal
     |── types.bal
     ├── legacy-idp-utils.bal
-    ├── asgardeo-utils.bal
+    ├── identity-server-utils.bal
     ├── Ballerina.toml
     └── README.md
 ```
@@ -46,12 +46,12 @@ external-authentication-service
 - `service.bal` contains the implementation of the external authentication service. This file acts as the main entry point to the service and defines the three REST APIs.
 - `types.bal` contains the type definitions used in the service.
 - `legacy-idp-utils.bal` contains the utility functions to authenticate users against the legacy system.
-- `asgardeo-utils.bal` contains the utility functions to validate users against Asgardeo.
+- `identity-server-utils.bal` contains the utility functions to validate users against WSO2 Identity Server.
 
 ## Setting up the Sample
 
 1. Create a new Ballerina package. Learn how to do so in the [Ballerina documentation](https://ballerina.io/learn/get-started/).
-2. Copy the content of the `service.bal`, `types.bal`, `legacy-idp-utils.bal`, and `asgardeo-utils.bal` files to the respective files in your Ballerina package.
+2. Copy the content of the `service.bal`, `types.bal`, `legacy-idp-utils.bal`, and `identity-server-utils.bal` files to the respective files in your Ballerina package.
 3. Implement the logic as per your requirement.
 4. Build the Ballerina package using the following command:
     ```bash
@@ -62,4 +62,4 @@ external-authentication-service
     bal run <package-name>
     ```
 
-Follow the Asgardeo documentation to configure the external authentication service with Asgardeo and Choreo.
+Follow the WSO2 Identity Server documentation to configure the external authentication service with Identity Server and Choreo.

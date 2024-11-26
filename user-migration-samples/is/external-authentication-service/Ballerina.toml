@@ -1,0 +1,8 @@
+[package]
+org = "WSO2"
+name = "external_authentication_service"
+version = "0.1.0"
+distribution = "2201.8.6"
+
+[build-options]
+observabilityIncluded = true
