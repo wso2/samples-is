@@ -1,0 +1,50 @@
+{
+    "federated": [
+        {
+            "id": "8a2b49b5-91fa-4f3b-b2d8-d12f7f77dcaa",
+            "username": "peter",
+            "pin": "5678",
+            "data": {
+              "id": "8a2b49b5-91fa-4f3b-b2d8-d12f7f77dcaa",
+              "claims": [
+                {
+                  "uri": "http://wso2.org/claims/emailaddress",
+                  "value": "peter@aol.com"
+                },
+                {
+                  "uri": "http://wso2.org/claims/lastname",
+                  "value": "Parker"
+                },
+                {
+                  "uri": "http://wso2.org/claims/givenname",
+                  "value": "Peter"
+                }
+              ]
+            }
+          }
+    ],
+    "internal": [
+      {
+        "id": "5d009575-8962-4402-94ae-0b14ec0a8d31",
+        "username": "emily",
+        "pin": "1234",
+        "data": {
+          "id": "5d009575-8962-4402-94ae-0b14ec0a8d31",
+          "claims": [
+            {
+              "uri": "http://wso2.org/claims/emailaddress",
+              "value": "emily@aol.com"
+            },
+            {
+              "uri": "http://wso2.org/claims/lastname",
+              "value": "Ellon"
+            },
+            {
+              "uri": "http://wso2.org/claims/givenname",
+              "value": "Emily"
+            }
+          ]
+        }
+      }
+    ]
+  }
