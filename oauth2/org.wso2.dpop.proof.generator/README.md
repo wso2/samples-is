@@ -18,7 +18,7 @@ Ensure you have the following installed:
 1. Clone the repository:
 2. Navigate to the project directory:
    ```sh
-   cd dpop/dpop-proof-generator
+   cd org.wso2.dpop.proof.generator
    ```
 3. Build the project using Maven:
    ```sh
@@ -34,7 +34,7 @@ In this method, you generate a key pair once and use it for multiple requests.
 1. Navigate to the project folder:
 2. Run the following command to generate the key pair:
    ```sh
-   java -cp target/client-app-1.0-jar-with-dependencies.jar org.wso2.dpop.client.GeneratePublicKeyPair
+   java -cp target/org.wso2.dpop.proof.generator-(*)-jar-with-dependenciess.jar org.wso2.dpop.proof.generator.GeneratePublicKeyPair
    ```
    This will generate two files:
     - `dpop.key` (Private Key)
@@ -44,7 +44,7 @@ In this method, you generate a key pair once and use it for multiple requests.
 
 1. Run the following command:
    ```sh
-   java -cp target/client-app-1.0-jar-with-dependencies.jar org.wso2.dpop.client.DPOPProofGeneratorFromPP
+   java -cp target/org.wso2.dpop.proof.generator-(*)-jar-with-dependenciess.jar org.wso2.dpop.proof.generator.DPOPProofGenerator
    ```
 2. Enter the requested inputs:
    ```
