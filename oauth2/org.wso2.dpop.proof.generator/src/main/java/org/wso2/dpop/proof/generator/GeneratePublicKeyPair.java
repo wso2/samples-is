@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2024, WSO2 LLC. (http://www.wso2.com).
+ *  Copyright (c) 2025, WSO2 LLC. (http://www.wso2.com).
  *
  *  WSO2 LLC. licenses this file to you under the Apache License,
  *  Version 2.0 (the "License"); you may not use this file except
@@ -33,6 +33,11 @@ import java.security.interfaces.ECPublicKey;
 import java.security.interfaces.RSAPublicKey;
 import java.util.Scanner;
 
+import static org.wso2.dpop.proof.generator.Constant.EC;
+import static org.wso2.dpop.proof.generator.Constant.PRIVATE_KEY_FILE_NAME;
+import static org.wso2.dpop.proof.generator.Constant.PUB_KEY_FILE_NAME;
+import static org.wso2.dpop.proof.generator.Constant.RSA;
+
 /**
  * Utility class to generate a public-private key pair and store them in files.
  * <p>
@@ -43,11 +48,6 @@ import java.util.Scanner;
 public class GeneratePublicKeyPair {
 
     private static final Log log = LogFactory.getLog(GeneratePublicKeyPair.class);
-    private static final String EC = "EC";
-    private static final String RSA = "RSA";
-    private static final String PUB_KEY_FILE_NAME = "dpop.pub";
-    private static final String PRIVATE_KEY_FILE_NAME = "dpop.key";
-
 
     public static void main(String[] args) {
 
@@ -104,6 +104,7 @@ public class GeneratePublicKeyPair {
      * @return The corresponding JWK object.
      */
     private static JWK generateJWK(String keyPairType, KeyPair keyPair) {
+
         if (EC.equals(keyPairType)) {
             return new ECKey.Builder(Curve.P_256, (ECPublicKey) keyPair.getPublic()).build();
         } else {
@@ -118,6 +119,7 @@ public class GeneratePublicKeyPair {
      * @param keyBytes The key bytes to write to the file.
      */
     private static void saveKeyToFile(String filename, byte[] keyBytes) {
+
         try (FileOutputStream out = new FileOutputStream(filename)) {
             out.write(keyBytes);
         } catch (IOException e) {

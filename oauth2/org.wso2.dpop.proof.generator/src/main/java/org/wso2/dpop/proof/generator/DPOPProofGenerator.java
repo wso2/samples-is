@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2024, WSO2 LLC. (http://www.wso2.com).
+ *  Copyright (c) 2025, WSO2 LLC. (http://www.wso2.com).
  *
  *  WSO2 LLC. licenses this file to you under the Apache License,
  *  Version 2.0 (the "License"); you may not use this file except
@@ -55,6 +55,16 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.UUID;
 
+import static org.wso2.dpop.proof.generator.Constant.CLAIM_ATH;
+import static org.wso2.dpop.proof.generator.Constant.CLAIM_HTM;
+import static org.wso2.dpop.proof.generator.Constant.CLAIM_HTU;
+import static org.wso2.dpop.proof.generator.Constant.DPOP_JWT_TYPE;
+import static org.wso2.dpop.proof.generator.Constant.EC;
+import static org.wso2.dpop.proof.generator.Constant.EXPIRATION_TIME_MILLIS;
+import static org.wso2.dpop.proof.generator.Constant.ISSUER;
+import static org.wso2.dpop.proof.generator.Constant.RSA;
+import static org.wso2.dpop.proof.generator.Constant.SUBJECT;
+
 /**
  * Generates a DPoP (Demonstrating Proof-of-Possession) proof using an existing key pair.
  * <p>
@@ -67,6 +77,7 @@ public class DPOPProofGenerator {
     private static final Log log = LogFactory.getLog(DPOPProofGenerator.class);
 
     public static void main(String[] args) {
+
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
 
             // Get user input with validation
@@ -76,7 +87,7 @@ public class DPOPProofGenerator {
             String keyPairType;
             while (true) {
                 keyPairType = promptUser(reader, "Enter the key pair type (EC or RSA): ").toUpperCase();
-                if (keyPairType.equals("EC") || keyPairType.equals("RSA")) {
+                if (keyPairType.equals(EC) || keyPairType.equals(RSA)) {
                     break;
                 }
                 log.warn("Invalid key pair type. Please enter 'EC' or 'RSA'.");
@@ -110,6 +121,7 @@ public class DPOPProofGenerator {
             log.warn("Input cannot be empty. Please try again.");
         }
     }
+
     /**
      * Generates a signed DPoP JWT using the provided key files.
      *
@@ -132,27 +144,28 @@ public class DPOPProofGenerator {
 
         // Build JWT claims
         JWTClaimsSet.Builder jwtClaimsSetBuilder = new JWTClaimsSet.Builder();
-        jwtClaimsSetBuilder.issuer("wso2_dpop_client")
-                .subject("sub")
+        jwtClaimsSetBuilder.issuer(ISSUER)
+                .subject(SUBJECT)
                 .issueTime(new Date())
                 .jwtID(UUID.randomUUID().toString())
                 .notBeforeTime(new Date())
-                .claim("htm", httpMethod)
-                .claim("htu", httpUrl)
-                .expirationTime(new Date(System.currentTimeMillis() + 86400000L));
+                .claim(CLAIM_HTM, httpMethod)
+                .claim(CLAIM_HTU, httpUrl)
+                .expirationTime(new Date(System.currentTimeMillis() + EXPIRATION_TIME_MILLIS));
+
         if (StringUtils.isNotBlank(accessToken)) {
-            log.info("access token: " + accessToken);
-            jwtClaimsSetBuilder.claim("ath", generateAccessTokenHash(accessToken));
+            log.info("Access token: " + accessToken);
+            jwtClaimsSetBuilder.claim(CLAIM_ATH, generateAccessTokenHash(accessToken));
         }
 
         JWTClaimsSet jwtClaimsSet = jwtClaimsSetBuilder.build();
 
         // Create JWT Header
-        JWSHeader.Builder headerBuilder = ("EC".equals(keyPairType))
+        JWSHeader.Builder headerBuilder = (EC.equals(keyPairType))
                 ? new JWSHeader.Builder(JWSAlgorithm.ES256)
                 : new JWSHeader.Builder(JWSAlgorithm.RS256);
 
-        headerBuilder.type(new JOSEObjectType("dpop+jwt"));
+        headerBuilder.type(new JOSEObjectType(DPOP_JWT_TYPE));
         headerBuilder.jwk(jwk);
 
         // Sign JWT
@@ -174,6 +187,7 @@ public class DPOPProofGenerator {
      */
     private static PrivateKey loadPrivateKey(String keyPath, String keyType)
             throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
+
         byte[] keyBytes = Files.readAllBytes(Paths.get(keyPath));
         KeyFactory keyFactory = KeyFactory.getInstance(keyType);
         return keyFactory.generatePrivate(new PKCS8EncodedKeySpec(keyBytes));
@@ -189,6 +203,7 @@ public class DPOPProofGenerator {
      */
     private static PublicKey loadPublicKey(String keyPath, String keyType)
             throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
+
         byte[] keyBytes = Files.readAllBytes(Paths.get(keyPath));
         KeyFactory keyFactory = KeyFactory.getInstance(keyType);
         return keyFactory.generatePublic(new X509EncodedKeySpec(keyBytes));
@@ -202,7 +217,8 @@ public class DPOPProofGenerator {
      * @return JWK object.
      */
     private static JWK createJWK(String keyPairType, PublicKey publicKey) {
-        return "EC".equals(keyPairType)
+
+        return EC.equals(keyPairType)
                 ? new ECKey.Builder(Curve.P_256, (ECPublicKey) publicKey).build()
                 : new RSAKey.Builder((RSAPublicKey) publicKey).build();
     }
@@ -216,7 +232,8 @@ public class DPOPProofGenerator {
      * @throws JOSEException If an error occurs while signing the JWT.
      */
     private static void signJWT(SignedJWT signedJWT, PrivateKey privateKey, String keyPairType) throws JOSEException {
-        if ("EC".equals(keyPairType)) {
+
+        if (EC.equals(keyPairType)) {
             signedJWT.sign(new ECDSASigner(privateKey, Curve.P_256));
         } else {
             signedJWT.sign(new RSASSASigner(privateKey));
@@ -224,6 +241,7 @@ public class DPOPProofGenerator {
     }
 
     private static String generateAccessTokenHash(String accessToken) {
+
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hashedBytes = digest.digest(accessToken.getBytes(StandardCharsets.UTF_8));

@@ -3,7 +3,6 @@
 This client application can be used as stand alone application to generate dpop proofs.
 Source code for DPoP can be found here: https://github.com/wso2-extensions/identity-oauth-dpop
 
-
 ## Setup Instructions
 
 ### Prerequisites
