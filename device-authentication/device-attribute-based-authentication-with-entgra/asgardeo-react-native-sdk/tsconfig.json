@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+      "esModuleInterop": true,
+      "target": "es6",
+      "module": "esnext",
+      "moduleResolution": "node",
+      "noImplicitAny": false,
+      "jsx": "react",
+      "resolveJsonModule": true,
+      "sourceMap": true,
+      "noLib": false,
+      "lib":["es5","es2017","dom"],
+      "suppressImplicitAnyIndexErrors": true,
+      "experimentalDecorators": true,
+      "composite": true,
+      "declarationMap": true,
+      "baseUrl": "/",
+      "paths": {
+          "*": ["types/*"]
+      },
+      
+  },
+  "compileOnSave": false,
+  "exclude": ["node_modules", "test-configs", "src/**/tests/*", "babel.config.js", "metro.config.js", "jest.config.js"]
+}
