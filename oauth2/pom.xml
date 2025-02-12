@@ -33,6 +33,7 @@
         <module>playground2</module>
         <module>custom-grant</module>
         <module>custom-token-issuer</module>
+        <module>org.wso2.dpop.proof.generator</module>
     </modules>
 
 </project>
