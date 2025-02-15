@@ -88,8 +88,8 @@ Create a `users.json` file inside the `data/` directory with the following struc
 }
 ```
 
-- **Internal users**: Ensure the `id` and `username` fields match the user definitions in **Identity Server**.
-- **Federated users**: External users that **do not** need to be pre-registered in Identity Server.
+- **Internal users**: Ensure that you have users in **WSO2 Identity Server** matching the `id` and `username` fields.
+- **Federated users**: External users **do not** need to be pre-registered in Identity Server.
 - To authenticate, use the username and PIN specified in this file to ensure successful authentication.
 
 ### 5️⃣ Run the Service Locally
@@ -114,14 +114,38 @@ Expected Response:
 { "status": "ok", "message": "Service is running." }
 ```
 
+### 7️⃣ Configure the Authenticator in WSO2 Identity Server
+
+To integrate this authentication service with WSO2 Identity Server, follow the step-by-step guide at the [documentation](https://is.docs.wso2.com/en/next/guides/service-extensions/in-flow-extensions/custom-authentication/) to configure the authenticator.
+
+When configuring the authenticator, consider the following:
+
+1. Select the appropriate authenticator type based on the `AUTH_MODE` configured in the environment variables:
+
+   - External (Federated) User Authentication
+   - Internal User Authentication
+   - 2FA Authentication
+
+2. Set the authentication endpoint to your deployed service URL:
+   - If running locally: http://localhost:3000/api/authenticate
+   - If deployed in Vercel: https://your-vercel-app.vercel.app/api/authenticate
+
+Configure user attributes to be shared with the application. Ensure that the attributes retrieved from the authenticator are correctly mapped to the application’s requirements.
+
+Once configured, WSO2 Identity Server will utilize this service for PIN-based authentication.
+
 ## API Endpoints
 
 ### 🔹 **Health Check**
+
+This endpoint is to check if the service is successfully running.
 
 - **GET** `/api/health`
 - **Response:** `{ "status": "ok", "message": "Service is running." }`
 
 ### 🔹 **Authenticate User**
+
+This is the endpoint that will receive requests from the Identity Server for user authentication.
 
 - **POST** `/api/authenticate`
 - **Request Body:**
@@ -147,10 +171,14 @@ Expected Response:
 
 ### 🔹 **PIN Entry Page**
 
+This is a page with a form to collect username and the PIN.
+
 - **GET** `/api/pin-entry?flowId=1234`
 - **Returns:** HTML page for entering PIN.
 
 ### 🔹 **Validate PIN**
+
+This endpoint checks if a user exists for the given username and the PIN.
 
 - **POST** `/api/validate-pin`
 - **Request Body:**
