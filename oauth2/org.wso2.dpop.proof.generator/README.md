@@ -33,7 +33,7 @@ In this method, you generate a key pair once and use it for multiple requests.
 1. Navigate to the project folder:
 2. Run the following command to generate the key pair:
    ```sh
-   java -cp target/org.wso2.dpop.proof.generator-(*)-jar-with-dependenciess.jar org.wso2.dpop.proof.generator.GeneratePublicKeyPair
+   java -cp target/org.wso2.dpop.proof.generator-(*)-jar-with-dependencies.jar org.wso2.dpop.proof.generator.GeneratePublicKeyPair
    ```
    This will generate two files:
     - `dpop.key` (Private Key)
@@ -43,7 +43,7 @@ In this method, you generate a key pair once and use it for multiple requests.
 
 1. Run the following command:
    ```sh
-   java -cp target/org.wso2.dpop.proof.generator-(*)-jar-with-dependenciess.jar org.wso2.dpop.proof.generator.DPOPProofGenerator
+   java -cp target/org.wso2.dpop.proof.generator-(*)-jar-with-dependencies.jar org.wso2.dpop.proof.generator.DPOPProofGenerator
    ```
 2. Enter the requested inputs:
    ```
