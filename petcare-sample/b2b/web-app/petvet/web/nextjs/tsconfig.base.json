@@ -1,0 +1,76 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "resolveJsonModule": true,
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@pet-management-webapp/business-admin-app/data-access/data-access-common-api-util": [
+        "libs/business-admin-app/data-access/data-access-common-api-util/src/index.ts"
+      ],
+      "@pet-management-webapp/business-admin-app/data-access/data-access-common-models-util": [
+        "libs/business-admin-app/data-access/data-access-common-models-util/src/index.ts"
+      ],
+      "@pet-management-webapp/business-admin-app/data-access/data-access-controller": [
+        "libs/business-admin-app/data-access/data-access-controller/src/index.ts"
+      ],
+      "@pet-management-webapp/business-admin-app/ui/ui-assets": [
+        "libs/business-admin-app/ui/ui-assets/src/index.ts"
+      ],
+      "@pet-management-webapp/business-admin-app/ui/ui-components": [
+        "libs/business-admin-app/ui/ui-components/src/index.ts"
+      ],
+      "@pet-management-webapp/business-admin-app/util/util-application-config-util": [
+        "libs/business-admin-app/util/util-application-config-util/src/index.ts"
+      ],
+      "@pet-management-webapp/business-admin-app/util/util-authorization-config-util": [
+        "libs/business-admin-app/util/util-authorization-config-util/src/index.ts"
+      ],
+      "@pet-management-webapp/shared/data-access/data-access-common-api-util": [
+        "libs/shared/data-access/data-access-common-api-util/src/index.ts"
+      ],
+      "@pet-management-webapp/shared/data-access/data-access-common-models-util": [
+        "libs/shared/data-access/data-access-common-models-util/src/index.ts"
+      ],
+      "@pet-management-webapp/shared/ui/ui-assets": [
+        "libs/shared/ui/ui-assets/src"
+      ],
+      "@pet-management-webapp/shared/ui/ui-basic-components": [
+        "libs/shared/ui/ui-basic-components/src/index.ts"
+      ],
+      "@pet-management-webapp/shared/ui/ui-components": [
+        "libs/shared/ui/ui-components/src/index.ts"
+      ],
+      "@pet-management-webapp/shared/util/util-application-config-util": [
+        "libs/shared/util/util-application-config-util/src/index.ts"
+      ],
+      "@pet-management-webapp/shared/util/util-authorization-config-util": [
+        "libs/shared/util/util-authorization-config-util/src/index.ts"
+      ],
+      "@pet-management-webapp/shared/util/util-common": [
+        "libs/shared/util/util-common/src/index.ts"
+      ],
+      "@pet-management-webapp/shared/util/util-front-end-util": [
+        "libs/shared/util/util-front-end-util/src/index.ts"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
+}

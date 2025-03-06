@@ -22,7 +22,8 @@ import org.wso2.carbon.user.core.service.RealmService;
 
 public class UserRegistrationCustomEventHandlerDataHolder {
 
-    private static UserRegistrationCustomEventHandlerDataHolder instance = new UserRegistrationCustomEventHandlerDataHolder();
+    private static final UserRegistrationCustomEventHandlerDataHolder instance =
+            new UserRegistrationCustomEventHandlerDataHolder();
     private RealmService realmService;
 
     public static UserRegistrationCustomEventHandlerDataHolder getInstance() {

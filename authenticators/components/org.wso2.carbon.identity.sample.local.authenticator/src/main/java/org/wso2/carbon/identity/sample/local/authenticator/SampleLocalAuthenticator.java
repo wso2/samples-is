@@ -50,7 +50,7 @@ public class SampleLocalAuthenticator extends AbstractApplicationAuthenticator i
         LocalApplicationAuthenticator {
 
     private static final Log log = LogFactory.getLog(SampleLocalAuthenticator.class);
-    private static final String TELEPHONE_CLAIM_URL = "http://wso2.org/claims/telephone";
+    private static final String TELEPHONE_CLAIM_URL = "http://wso2.org/claims/mobile";
     private static final String USERNAME = "username";
     private static final String PASSWORD = "password";
 
@@ -105,7 +105,7 @@ public class SampleLocalAuthenticator extends AbstractApplicationAuthenticator i
                 UniqueIDUserStoreManager userStoreManager = (UniqueIDUserStoreManager) userRealm.getUserStoreManager();
 
                 // This custom local authenticator is using the telephone number as the username.
-                // Therefore the login identifier claim is http://wso2.org/claims/telephone.
+                // Therefore the login identifier claim is http://wso2.org/claims/mobile.
                 AuthenticationResult authenticationResult = userStoreManager.
                         authenticateWithID(TELEPHONE_CLAIM_URL, username, password, UserCoreConstants.DEFAULT_PROFILE);
                 if (AuthenticationResult.AuthenticationStatus.SUCCESS == authenticationResult.getAuthenticationStatus()) {

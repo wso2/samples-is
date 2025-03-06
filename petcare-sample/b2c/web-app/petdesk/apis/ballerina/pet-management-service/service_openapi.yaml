@@ -1,0 +1,270 @@
+openapi: 3.0.1
+info:
+  title: Service Openapi Yaml
+  version: 1.0.0
+servers:
+- url: "{server}:{port}/"
+  variables:
+    server:
+      default: http://localhost
+    port:
+      default: "9090"
+paths:
+  /pets:
+    get:
+      summary: Get all pets
+      operationId: getPets
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pet'
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+    post:
+      summary: Create a new pet
+      operationId: postPets
+      requestBody:
+        description: basic pet details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PetItem'
+      responses:
+        "201":
+          description: Created
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+  /pets/{petId}:
+    get:
+      summary: Get a pet by ID
+      operationId: getPetsPetid
+      parameters:
+      - name: petId
+        in: path
+        description: ID of the pet
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+        "404":
+          description: NotFound
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+    put:
+      summary: Update a pet
+      operationId: putPetsPetid
+      parameters:
+      - name: petId
+        in: path
+        description: ID of the pet
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: updated pet details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PetItem'
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+        "404":
+          description: NotFound
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+    delete:
+      summary: Delete a pet
+      operationId: deletePetsPetid
+      parameters:
+      - name: petId
+        in: path
+        description: ID of the pet
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: NoContent
+        "404":
+          description: NotFound
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+  /pets/{petId}/thumbnail:
+    get:
+      operationId: getPetsPetidThumbnail
+      parameters:
+      - name: petId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: Any Response
+          content:
+            '*/*':
+              schema:
+                description: Any type of entity body
+        "404":
+          description: NotFound
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+    put:
+      operationId: putPetsPetidThumbnail
+      parameters:
+      - name: petId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              description: Any type of entity body
+      responses:
+        "200":
+          description: Ok
+        "404":
+          description: NotFound
+        "400":
+          description: BadRequest
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+  /settings:
+    get:
+      operationId: getSettings
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Settings'
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+    put:
+      operationId: putSettings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Settings'
+      responses:
+        "200":
+          description: Ok
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+components:
+  schemas:
+    PetItem:
+      required:
+      - breed
+      - dateOfBirth
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+        breed:
+          type: string
+        dateOfBirth:
+          type: string
+        vaccinations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Vaccination'
+    Vaccination:
+      required:
+      - lastVaccinationDate
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+        lastVaccinationDate:
+          type: string
+        nextVaccinationDate:
+          type: string
+        enableAlerts:
+          type: boolean
+    Notifications:
+      required:
+      - enabled
+      type: object
+      properties:
+        enabled:
+          type: boolean
+        emailAddress:
+          type: string
+    Pet:
+      allOf:
+      - $ref: '#/components/schemas/PetItem'
+      - required:
+        - id
+        - owner
+        type: object
+        properties:
+          id:
+            type: string
+          owner:
+            type: string
+    Settings:
+      required:
+      - notifications
+      type: object
+      properties:
+        notifications:
+          $ref: '#/components/schemas/Notifications'

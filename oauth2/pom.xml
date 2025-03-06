@@ -20,7 +20,7 @@
     <parent>
         <groupId>org.wso2.samples.is</groupId>
         <artifactId>samples-is</artifactId>
-        <version>4.5.2-SNAPSHOT</version>
+        <version>4.6.3-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -33,6 +33,7 @@
         <module>playground2</module>
         <module>custom-grant</module>
         <module>custom-token-issuer</module>
+        <module>org.wso2.dpop.proof.generator</module>
     </modules>
 
 </project>

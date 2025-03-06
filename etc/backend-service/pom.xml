@@ -18,7 +18,7 @@
     <parent>
         <artifactId>samples-is</artifactId>
         <groupId>org.wso2.samples.is</groupId>
-        <version>4.5.2-SNAPSHOT</version>
+        <version>4.6.3-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -37,6 +37,14 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
         </dependency>
     </dependencies>
 
@@ -71,7 +79,7 @@
                                 <resource>
                                     <directory>${project.basedir}/../resources</directory>
                                     <includes>
-                                        <include>wso2carbon.jks</include>
+                                        <include>wso2carbon.p12</include>
                                     </includes>
                                 </resource>
                             </resources>

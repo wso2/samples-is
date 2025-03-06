@@ -34,13 +34,11 @@ cp -r ${IS_WEB_APP_HOME}/authenticationendpoint ${WEB_APP_HOME}
 cp -r ${IS_WEB_APP_HOME}/accountrecoveryendpoint/WEB-INF/classes/RecoveryEndpointConfig.properties ${WEB_APP_CLASSES}
 
 cp $IS_HOME/repository/components/plugins/abdera_*.jar $WEB_APP_LIB
-cp $IS_HOME/repository/components/plugins/ant_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/axiom_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/axis2_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/bcprov-jdk15on_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/commons-cli_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/commons-collections_*.jar $WEB_APP_LIB
-cp $IS_HOME/repository/components/plugins/commons-dbcp_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/commons-fileupload_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/commons-httpclient_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/commons-io_*.jar $WEB_APP_LIB
@@ -65,12 +63,17 @@ cp $IS_HOME/repository/components/plugins/org.wso2.carbon.base_*.jar $WEB_APP_LI
 cp $IS_HOME/repository/components/plugins/org.eclipse.osgi_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.eclipse.osgi.services_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.base_*.jar $WEB_APP_LIB
+cp $IS_HOME/repository/components/plugins/org.wso2.carbon.claim.mgt_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.core_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.crypto.api_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.database.utils_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.application.common_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.base_*.jar $WEB_APP_LIB
+cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.claim.metadata.mgt_*.jar $WEB_APP_LIB
+cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.event_*.jar $WEB_APP_LIB
+cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.user.profile_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.template.mgt_*.jar $WEB_APP_LIB
+cp $IS_HOME/repository/components/plugins/org.wso2.carbon.idp.mgt_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.queuing_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.registry.api_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.registry.core_*.jar $WEB_APP_LIB
@@ -79,21 +82,22 @@ cp $IS_HOME/repository/components/plugins/org.wso2.carbon.user.api_*.jar $WEB_AP
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.user.core_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.utils_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.securevault_*.jar $WEB_APP_LIB
-cp $IS_HOME/repository/components/plugins/rampart-core_*.jar $WEB_APP_LIB
-cp $IS_HOME/repository/components/plugins/slf4j.api_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/tomcat-catalina-ha_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/tomcat-servlet-api_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/wsdl4j_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/XmlSchema_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.ui_*.jar $WEB_APP_LIB
-cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.application.authentication.endpoint.util_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.core_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.user.registration.stub_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.mgt.stub_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.mgt_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.mgt.ui_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.oauth_*.jar $WEB_APP_LIB
-cp $IS_HOME/repository/components/features/org.wso2.carbon.identity.application.authentication.framework.server_*/runtimes/cxf3/org.wso2.carbon.identity.application.authentication.endpoint.util-*.jar $WEB_APP_LIB
+cp $IS_HOME/repository/components/plugins/org.wso2.carbon.extension.identity.authenticator.backupcode.connector_*.jar $WEB_APP_LIB
+cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.application.authentication.framework_*.jar $WEB_APP_LIB
+cp $IS_HOME/repository/components/plugins/org.wso2.carbon.tomcat.ext_*.jar $WEB_APP_LIB
+cp $IS_HOME/lib/runtimes/cxf3/org.wso2.carbon.identity.application.authentication.endpoint.util-*.jar $WEB_APP_LIB
+cp $IS_HOME/lib/runtimes/cxf3/org.wso2.carbon.identity.mgt.endpoint.util-*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/jettison_*.jar $WEB_APP_LIB
 cp $IS_HOME/lib/runtimes/cxf3/javax.ws.rs-api-*.jar $WEB_APP_LIB
 cp $IS_HOME/lib/runtimes/cxf3/cxf-core-*.jar $WEB_APP_LIB
@@ -109,13 +113,18 @@ cp $IS_HOME/lib/xercesImpl-*.jar $WEB_APP_LIB
 cp $IS_HOME/lib/geronimo-jta_*.jar $WEB_APP_LIB
 cp $IS_HOME/lib/stax2-api-*.jar $WEB_APP_LIB
 cp $IS_HOME/lib/woodstox-core-asl-*.jar $WEB_APP_LIB
-cp $IS_HOME/repository/components/tools/forget-me/lib/log4j-*.jar $WEB_APP_LIB
-cp $IS_HOME/repository/components/tools/forget-me/lib/pax-logging-api-*.jar $WEB_APP_LIB
+cp $IS_HOME/lib/log4j-*.jar $WEB_APP_LIB
+cp $IS_HOME/lib/jaxb-impl-*.jar $WEB_APP_LIB
+cp $IS_HOME/repository/components/plugins/org.ops4j.pax.logging.pax-logging-api_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.captcha_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/commons-text_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/org.wso2.carbon.identity.governance_*.jar $WEB_APP_LIB
 cp $IS_HOME/repository/components/plugins/commons-lang3_*.jar $WEB_APP_LIB
-
+cp $IS_HOME/repository/components/plugins/org.wso2.orbit.javax.xml.bind.jaxb-api_*.jar $WEB_APP_LIB
+cp $IS_HOME/repository/components/plugins/org.wso2.orbit.sun.xml.bind.jaxb_*.jar $WEB_APP_LIB
+cp $IS_HOME/repository/components/plugins/org.wso2.carbon.extension.identity.authenticator.totp.connector_*.jar $WEB_APP_LIB
+cp $IS_HOME/repository/components/dropins/org.wso2.carbon.extension.identity.authenticator.smsotp.connector-*.jar $WEB_APP_LIB
+rm $WEB_APP_LIB/javax.cache.wso2_*.jar
 
 echo
 echo "Please Open ${WEB_APP_HOME}/authenticationendpoint/WEB-INF/web.xml file and make"
@@ -124,12 +133,16 @@ echo
 echo "===================================================================================="
 echo "..."
 echo "   <context-param>"
-echo "      <param-name>IdentityManagementEndpointContextURL</param-name>"
-echo "     <param-value>https://localhost:9443/accountrecoveryendpoint</param-value>"
+echo "      <param-name>IsHostedExternally</param-name>"
+echo "      <param-value>true</param-value>"
 echo "   </context-param>"
 echo "   <context-param>"
-echo "      <param-name>AccountRecoveryRESTEndpointURL</param-name>"
-echo "    <param-value>https://localhost:9443/t/tenant-domain/api/identity/user/v1.0/</param-value>"
+echo "      <param-name>IdentityServerEndpointContextURL</param-name>"
+echo "      <param-value>https://localhost:9443</param-value>"
+echo "   </context-param>"
+echo "   <context-param>"
+echo "      <param-name>IdentityManagementEndpointContextURL</param-name>"
+echo "      <param-value>https://localhost:9443/accountrecoveryendpoint</param-value>"
 echo "   </context-param>"
 echo "   <context-param>"
 echo "      <param-name>EnableRecoveryEndpoint</param-name>"
@@ -137,8 +150,13 @@ echo "    <param-value>true</param-value>"
 echo "   </context-param>"
 echo "..."
 echo "   <context-param>"
-echo "      <param-name>IdentityServerEndpointContextURL</param-name>"
-echo "      <param-value>https://localhost:9443</param-value>"
+echo "      <param-name>EnableSelfSignUpEndpoint</param-name>"
+echo "      <param-value>true</param-value>"
+echo "   </context-param>"
+echo "..."
+echo "   <context-param>"
+echo "      <param-name>AuthenticationRESTEndpointURL</param-name>"
+echo "      <param-value>https://localhost:9443/api/identity/auth/v1.1/</param-value>"
 echo "   </context-param>"
 echo "..."
 echo "===================================================================================="

@@ -130,7 +130,8 @@ SAMPLES_HOME
 │   ├── oidc-sso-sample
 │   │   ├── oidc-jks-loader
 │   │   ├── pickup-dispatch
-│   │   └── pickup-manager
+│   │   ├── pickup-manager
+│   │   └── oidc-keystore-loader
 │   └── saml2-sso-sample
 │       ├── saml2-web-app-pickup-dispatch
 │       └── saml2-web-app-pickup-manager
@@ -141,6 +142,9 @@ SAMPLES_HOME
 ├── user-mgt
 │   ├── remote-user-mgt
 │   └── sample-custom-user-store-manager
+|── user-migration-samples
+│   └── asgardeo
+│       └── external-authentication-service
 ├── workflow
 │   ├── handler
 │   │   └── service-provider

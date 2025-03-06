@@ -19,7 +19,7 @@
     <parent>
         <groupId>org.wso2.samples.is</groupId>
         <artifactId>saml2-sso-sample</artifactId>
-        <version>4.5.2-SNAPSHOT</version>
+        <version>4.6.3-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -138,6 +138,18 @@
             <artifactId>org.wso2.carbon.user.api</artifactId>
         </dependency>
         <dependency>
+            <groupId>javax.xml.soap</groupId>
+            <artifactId>javax.xml.soap-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.messaging.saaj</groupId>
+            <artifactId>saaj-impl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jvnet.staxex</groupId>
+            <artifactId>stax-ex</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.wso2.samples.is</groupId>
             <artifactId>claim-manager</artifactId>
             <version>${project.version}</version>
@@ -164,7 +176,7 @@
                             <directory>${project.parent.parent.basedir}/etc/resources/</directory>
                             <targetPath>WEB-INF/classes</targetPath>
                             <includes>
-                                <include>wso2carbon.jks</include>
+                                <include>wso2carbon.p12</include>
                             </includes>
                         </resource>
                     </webResources>

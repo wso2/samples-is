@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/googleIdpView"
+    tools:context=".ui.activities.login.fragments.auth.auth_method.GoogleFragment">
+
+    <Button
+        android:id="@+id/googleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/activity_login_auth_auth_method_google_auth.sign_in"
+        android:textColor="@color/asgardeo_colour"
+        app:icon="@drawable/googleg_standard_color_18"
+        app:iconTint="@color/asgardeo_colour"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/asgardeo_colour"
+        style="?attr/materialButtonOutlinedStyle" />
+</androidx.constraintlayout.widget.ConstraintLayout>

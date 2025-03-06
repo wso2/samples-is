@@ -1,0 +1,149 @@
+{
+    "description": "Authenticate users with Enterprise OIDC connections.",
+    "id": "enterprise-oidc-idp",
+    "idp": {
+        "certificate": {
+            "jwksUri": "",
+            "certificates": [
+                ""
+            ]
+        },
+        "claims": {
+            "provisioningClaims": [],
+            "roleClaim": {
+                "uri": ""
+            },
+            "userIdClaim": {
+                "uri": ""
+            }
+        },
+        "description": "Configure a new enterprise identity provider with OpenID Connect",
+        "federatedAuthenticators": {
+            "authenticators": [
+                {
+                    "isEnabled": true,
+                    "authenticatorId": "T3BlbklEQ29ubmVjdEF1dGhlbnRpY2F0b3I",
+                    "properties": [
+                        {
+                            "key": "ClientId",
+                            "displayName": "Client Id",
+                            "description": "The client identifier value of the identity provider.",
+                            "type": "STRING",
+                            "displayOrder": 1,
+                            "regex": ".*",
+                            "isMandatory": true,
+                            "isConfidential": false,
+                            "options": [],
+                            "defaultValue": "",
+                            "subProperties": []
+                        },
+                        {
+                            "key": "ClientSecret",
+                            "displayName": "Client Secret",
+                            "description": "The client secret value of the identity provider.",
+                            "type": "STRING",
+                            "displayOrder": 2,
+                            "regex": ".*",
+                            "isMandatory": true,
+                            "isConfidential": true,
+                            "options": [],
+                            "defaultValue": "",
+                            "subProperties": []
+                        },
+                        {
+                            "key": "OAuth2AuthzEPUrl",
+                            "displayName": "Authorization Endpoint URL",
+                            "description": "The standard authorization endpoint URL obtained from the identity provider.",
+                            "type": "STRING",
+                            "displayOrder": 3,
+                            "regex": ".*",
+                            "isMandatory": true,
+                            "isConfidential": false,
+                            "options": [],
+                            "defaultValue": "",
+                            "subProperties": []
+                        },
+                        {
+                            "key": "OAuth2TokenEPUrl",
+                            "displayName": "Token Endpoint URL",
+                            "description": "The standard token endpoint URL obtained from the identity provider.",
+                            "type": "STRING",
+                            "displayOrder": 4,
+                            "regex": ".*",
+                            "isMandatory": true,
+                            "isConfidential": false,
+                            "options": [],
+                            "defaultValue": "",
+                            "subProperties": []
+                        },
+                        {
+                            "key": "OIDCLogoutEPUrl",
+                            "displayName": "Logout URL",
+                            "description": "The URL of the identity provider to which Asgardeo will send session invalidation requests.",
+                            "type": "STRING",
+                            "displayOrder": 4,
+                            "regex": ".*",
+                            "isMandatory": false,
+                            "isConfidential": false,
+                            "options": [],
+                            "defaultValue": "",
+                            "subProperties": []
+                        },
+                        {
+                            "key": "callbackUrl",
+                            "displayName": "Callback Url",
+                            "description": "The WSO2 Identity Server URL to which the user needs to be redirected after completing the authentication at the identity provider. The identity provider needs to send the authorization code to this URL upon successful authentication.",
+                            "type": "STRING",
+                            "displayOrder": 5,
+                            "regex": ".*",
+                            "isMandatory": false,
+                            "isConfidential": false,
+                            "options": [],
+                            "defaultValue": "",
+                            "subProperties": [],
+                            "readOnly": true
+                        },
+                        {
+                            "key": "Scopes",
+                            "displayName": "Scopes",
+                            "description": "Scopes. e.g: value1 value2",
+                            "type": "STRING",
+                            "displayOrder": 4,
+                            "regex": ".*",
+                            "isMandatory": false,
+                            "isConfidential": false,
+                            "options": [],
+                            "defaultValue": "",
+                            "subProperties": [],
+                            "readOnly": false
+                        }
+                    ]
+                }
+            ],
+            "defaultAuthenticatorId": "T3BlbklEQ29ubmVjdEF1dGhlbnRpY2F0b3I"
+        },
+        "homeRealmIdentifier": "",
+        "isFederationHub": false,
+        "isPrimary": false,
+        "name": "Enterprise Authentication Provider",
+        "provisioning": {
+            "jit": {
+                "isEnabled": true,
+                "scheme": "PROVISION_SILENTLY",
+                "userstore": "PRIMARY",
+                "associateLocalUser": true
+            }
+        },
+        "roles": {
+            "mappings": [],
+            "outboundProvisioningRoles": []
+        },
+        "templateId": "enterprise-oidc-idp"
+    },
+    "image": "enterprise",
+    "name": "OpenID Connect",
+    "services": [],
+    "disabled": false,
+    "templateId": "enterprise-oidc-idp",
+    "type": "ENTERPRISE"
+}

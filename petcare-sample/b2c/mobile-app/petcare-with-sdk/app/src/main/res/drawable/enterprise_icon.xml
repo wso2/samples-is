@@ -1,0 +1,28 @@
+<!--
+  ~  Copyright (c) 2024, WSO2 LLC. (https://www.wso2.com).
+  ~
+  ~  WSO2 LLC. licenses this file to you under the Apache License,
+  ~  Version 2.0 (the "License"); you may not use this file except
+  ~  in compliance with the License.
+  ~  You may obtain a copy of the License at
+  ~
+  ~         http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~  Unless required by applicable law or agreed to in writing,
+  ~  software distributed under the License is distributed on an
+  ~  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~  KIND, either express or implied. See the License for the
+  ~  specific language governing permissions and limitations
+  ~  under the License.
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="16dp"
+    android:height="16dp"
+    android:viewportWidth="16"
+    android:viewportHeight="16">
+  <path
+      android:pathData="M7.454,2.5C7.454,3.328 6.782,4 5.954,4C5.125,4 4.454,3.328 4.454,2.5C4.454,1.672 5.125,1 5.954,1C6.782,1 7.454,1.672 7.454,2.5ZM8.454,2.5C8.454,3.881 7.334,5 5.954,5C4.573,5 3.454,3.881 3.454,2.5C3.454,1.119 4.573,0 5.954,0C7.334,0 8.454,1.119 8.454,2.5ZM5.953,6C2.911,6 0.422,8.255 0.012,11.538C-0.092,12.373 0.6,13 1.355,13H3.5C3.776,13 4,12.776 4,12.5C4,12.224 3.776,12 3.5,12H1.355C1.113,12 0.985,11.816 1.005,11.662C1.357,8.839 3.454,7 5.953,7H6.404C6.874,7 7.34,7.08 7.783,7.236C8.044,7.328 8.329,7.192 8.421,6.932C8.513,6.671 8.377,6.386 8.116,6.294C7.566,6.099 6.987,6 6.404,6H5.953ZM14.127,11.337C14.082,10.888 13.418,10.888 13.373,11.337L13.243,12.634L12.039,12.096C11.622,11.91 11.29,12.477 11.661,12.741L12.735,13.5L11.661,14.259C11.29,14.523 11.622,15.09 12.039,14.904L13.243,14.366L13.373,15.663C13.418,16.112 14.082,16.112 14.127,15.663L14.257,14.366L15.461,14.904C15.878,15.09 16.211,14.523 15.839,14.259L14.765,13.5L15.839,12.741C16.211,12.477 15.878,11.91 15.461,12.096L14.257,12.634L14.127,11.337ZM7.873,11.337C7.918,10.888 8.582,10.888 8.627,11.337L8.757,12.634L9.961,12.096C10.378,11.91 10.71,12.477 10.339,12.741L9.265,13.5L10.339,14.259C10.71,14.523 10.378,15.09 9.961,14.904L8.757,14.366L8.627,15.663C8.582,16.112 7.918,16.112 7.873,15.663L7.743,14.366L6.539,14.904C6.122,15.09 5.789,14.523 6.161,14.259L7.235,13.5L6.161,12.741C5.789,12.477 6.122,11.91 6.539,12.096L7.743,12.634L7.873,11.337Z"
+      android:fillColor="#69A2F4"
+      android:fillType="evenOdd"/>
+</vector>

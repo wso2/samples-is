@@ -27,7 +27,7 @@
     <artifactId>samples-is</artifactId>
     <packaging>pom</packaging>
     <description>WSO2 Identity Server Samples</description>
-    <version>4.5.2-SNAPSHOT</version>
+    <version>4.6.3-SNAPSHOT</version>
 
     <scm>
         <url>https://github.com/wso2/samples-is.git</url>
@@ -267,6 +267,21 @@
                 <artifactId>commons-net</artifactId>
                 <version>${commons-net.version}</version>
             </dependency>
+            <dependency>
+                <groupId>javax.xml.soap</groupId>
+                <artifactId>javax.xml.soap-api</artifactId>
+                <version>${javax.xml.soap.api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.xml.messaging.saaj</groupId>
+                <artifactId>saaj-impl</artifactId>
+                <version>${saaj.impl.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jvnet.staxex</groupId>
+                <artifactId>stax-ex</artifactId>
+                <version>${stax.ex.version}</version>
+            </dependency>
 
             <!--=============================================================================-->
 
@@ -476,25 +491,24 @@
             </dependency>
             <dependency>
                 <groupId>org.wso2.carbon.identity.framework</groupId>
-                <artifactId>org.wso2.carbon.identity.workflow.mgt.stub</artifactId>
-                <version>${carbon.identity.framework.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.wso2.carbon.identity.framework</groupId>
                 <artifactId>org.wso2.carbon.identity.application.mgt.stub</artifactId>
                 <version>${carbon.identity.framework.version}</version>
                 <scope>compile</scope>
             </dependency>
             <dependency>
-                <groupId>org.wso2.carbon.identity.framework</groupId>
+                <groupId>org.wso2.carbon.identity.workflow.impl.bps</groupId>
                 <artifactId>org.wso2.carbon.identity.workflow.mgt</artifactId>
-                <version>${carbon.identity.framework.version}</version>
+                <version>${identity.workflow.impl.bps.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.wso2.carbon.identity.framework</groupId>
-                <artifactId>org.wso2.carbon.identity.application.mgt</artifactId>
-                <version>${carbon.identity.framework.version}</version>
-                <scope>compile</scope>
+                <groupId>org.wso2.carbon.identity.workflow.impl.bps</groupId>
+                <artifactId>org.wso2.carbon.identity.workflow.mgt.stub</artifactId>
+                <version>${identity.workflow.impl.bps.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.identity.workflow.impl.bps</groupId>
+                <artifactId>org.wso2.carbon.identity.workflow.impl</artifactId>
+                <version>${identity.workflow.impl.bps.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.wso2.carbon.identity.workflow.impl.bps</groupId>
@@ -502,9 +516,10 @@
                 <version>${identity.workflow.impl.bps.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.wso2.carbon.identity.workflow.impl.bps</groupId>
-                <artifactId>org.wso2.carbon.identity.workflow.impl</artifactId>
-                <version>${identity.workflow.impl.bps.version}</version>
+                <groupId>org.wso2.carbon.identity.framework</groupId>
+                <artifactId>org.wso2.carbon.identity.application.mgt</artifactId>
+                <version>${carbon.identity.framework.version}</version>
+                <scope>compile</scope>
             </dependency>
             <dependency>
                 <groupId>org.wso2.carbon.identity.user.ws</groupId>
@@ -664,6 +679,20 @@
                 <artifactId>gson</artifactId>
                 <version>${com.google.code.gson.version}</version>
             </dependency>
+            <!--=============================================================================-->
+
+            <!--dependencies of backend-service-->
+            <dependency>
+                <groupId>javax.annotation</groupId>
+                <artifactId>javax.annotation-api</artifactId>
+                <version>${javax.annotation.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.xml.bind</groupId>
+                <artifactId>jaxb-api</artifactId>
+                <version>${javax.xml.bind.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -786,6 +815,9 @@
         <joda.wso2.version>2.9.4.wso2v1</joda.wso2.version>
         <axiom.impl.version>1.2.12</axiom.impl.version>
         <commons-collections.version>3.2.2</commons-collections.version>
+        <javax.xml.soap.api.version>1.4.0</javax.xml.soap.api.version>
+        <saaj.impl.version>1.5.1</saaj.impl.version>
+        <stax.ex.version>1.8.3</stax.ex.version>
 
         <!--=============================================================================-->
 
@@ -795,7 +827,7 @@
         <google.collect.wso2.version>1.0.0.wso2v2</google.collect.wso2.version>
         <axiom.wso2.version>1.2.11.wso2v10</axiom.wso2.version>
         <identity.inbound.auth.oauth.version>6.4.49</identity.inbound.auth.oauth.version>
-        <carbon.kernel.version>4.6.1</carbon.kernel.version>
+        <carbon.kernel.version>4.10.12</carbon.kernel.version>
         <json.simple.version>1.1</json.simple.version>
         <XmlSchema.version>1.4.7-wso2v5</XmlSchema.version>
         <wsdl4j.version>1.6.2.wso2v2</wsdl4j.version>
@@ -822,10 +854,10 @@
         <!--=============================================================================-->
 
         <!--repo versions of sample-post-authentication-handler-->
-        <identity.framework.version>5.21.0</identity.framework.version>
+        <identity.framework.version>7.0.110</identity.framework.version>
         <maven.compiler.plugin.version>3.6.1</maven.compiler.plugin.version>
         <maven.scr.plugin.version>1.22.0</maven.scr.plugin.version>
-        <maven.bundle.plugin.version>3.2.0</maven.bundle.plugin.version>
+        <maven.bundle.plugin.version>2.4.0</maven.bundle.plugin.version>
         <maven.buildnumber.plugin.version>1.4</maven.buildnumber.plugin.version>
         <http.client.version>4.5.13</http.client.version>
         <http.core.version>4.4.8</http.core.version>
@@ -851,9 +883,9 @@
         <securevault.wso2.version>1.1.3</securevault.wso2.version>
         <commons.httpclient.version>3.1</commons.httpclient.version>
         <identity.user.ws.version>5.4.0</identity.user.ws.version>
-        <carbon.identity.framework.version>5.18.0</carbon.identity.framework.version>
+        <carbon.identity.framework.version>7.0.110</carbon.identity.framework.version>
         <commons.pool.wso2.version>1.5.6.wso2v1</commons.pool.wso2.version>
-        <identity.workflow.impl.bps.version>5.4.1</identity.workflow.impl.bps.version>
+        <identity.workflow.impl.bps.version>5.5.7</identity.workflow.impl.bps.version>
         <identity.user.ws.version>5.4.0</identity.user.ws.version>
         <slf4j.version>1.7.28</slf4j.version>
         <rampart.wso2.version>1.6.1-wso2v43</rampart.wso2.version>
@@ -883,10 +915,16 @@
         <commons.logging.version.range>[1.2.0,2.0.0)</commons.logging.version.range>
         <commons.model.version.range>[5.18,6.0)</commons.model.version.range>
         <commons-lang.wso2.version>2.6.0.wso2v1</commons-lang.wso2.version>
-        <carbon.identity.framework.version.range>[5.14.67, 6.0.0]</carbon.identity.framework.version.range>
+        <carbon.identity.framework.version.range>[5.14.67, 8.0.0]</carbon.identity.framework.version.range>
         <nimbusds.osgi.version.range>[2.26.0,8.0.0)</nimbusds.osgi.version.range>
         <json-smart.version.range>[1.3.0,3.0.0)</json-smart.version.range>
         <oauth2.outbound.version.range>[1.0.5, 2.0.0)</oauth2.outbound.version.range>
+
+        <!--=============================================================================-->
+
+        <!--repo versions of backend-service-->
+        <javax.annotation.version>1.2</javax.annotation.version>
+        <javax.xml.bind.version>2.3.1</javax.xml.bind.version>
     </properties>
 
 </project>

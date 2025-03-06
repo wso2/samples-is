@@ -245,7 +245,7 @@
     </context-param>
     <context-param>
         <param-name>trustStorePath</param-name>
-        <param-value>/client-truststore.jks</param-value>
+        <param-value>/client-truststore.p12</param-value>
     </context-param>
     <context-param>
         <param-name>accessUsername</param-name>

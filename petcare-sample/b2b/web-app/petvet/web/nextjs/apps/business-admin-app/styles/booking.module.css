@@ -1,0 +1,484 @@
+/*
+ * Copyright (c) 2022 WSO2 LLC. (http://www.wso2.com).
+ *
+ * WSO2 LLC. licenses this file to you under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *http://www.apache.org/licenses/LICENSE-2.
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+ .addBookingFormDiv {
+    position: absolute;
+    top: 0vh;
+    left: 2vw;
+    width: 42vw;
+    height: 50vh;
+    overflow: hidden;
+}
+
+.addUserMainDiv {
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 45vw;
+    height: 50vh;
+}
+
+.channelDocMainDiv {
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100vw;
+    height: 50vh;
+}
+
+.chooseTimeHeader {
+    font-weight: bold;
+    font-size: 3vh;
+    color: #6b6e6e;
+    text-align: left;
+
+}
+
+.timeSlotButton {
+    background-color: #d1cfcf;
+    border-radius: 3px;
+    border: none;
+    color: #080808;
+    display: inline-block;
+    font-size: 2vh;
+    text-align: center;
+    text-decoration: none;
+    width: 45vw;
+    cursor: pointer;
+    -webkit-text-size-adjust: none;
+    padding: 1vh;
+    position: absolute;
+    outline: none;
+}
+
+.timeSlotButton:focus{
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.nextBtnDiv {
+    position: absolute;
+    bottom: 2vh;
+    right: 3vw;
+}
+
+.cancelBtnDiv {
+    position: absolute;
+    bottom: 2vh;
+    right: 11vw;
+}
+
+.docUnavailableDiv {
+    font-size: 2vh;
+    color: #6b6e6e;
+    margin-top: 2vh;
+}
+
+.petsDiv {
+    text-align: left;
+    margin-top: 2vh;
+    background-color: #dbdcdc;
+    position: absolute;
+    padding: 1vh;
+    width: 43vw;
+    height: 42vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.petInAddBooking {
+    background-color: #ffffff;
+    border-radius: 3px;
+    border: none;
+    color: #080808;
+    display: inline-block;
+    font-size: 2vh;
+    text-align: center;
+    text-decoration: none;
+    width: 19vw;
+    height: 20vh;
+    cursor: pointer;
+    -webkit-text-size-adjust: none;
+    padding: 1vh;
+    position: relative;
+    outline: none;
+}
+
+.petInAddBooking:focus {
+    background-color: var(--primary-color);
+}
+
+.petIcon {
+    position: absolute;
+    width: 15vh;
+    height: 15vh;
+    top: 1vh;
+    left: 1vw;
+}
+
+.petSummary {
+    position: absolute;
+    width: 10vw;
+    left: 11vw;
+    top: 5vh;
+    text-align: left;
+}
+
+.petTitleInCard {
+    font-size: 2.5vh;
+    font-weight: bold;
+}
+
+.petSummaryInCard {
+    font-size: 2vh;
+    color: rgb(145, 143, 143);
+    font-weight: bold;
+}
+
+.timeslotDiv {
+    text-align: left;
+    margin-top: 2vh;
+}
+
+.alignLeft {
+    display: inline-block;
+    text-align: left;
+    padding: 1.5vh;
+    font-size: 3vh;
+    }
+
+.labelStyle {
+    margin-bottom: 2vh;
+    font-size: medium;
+}   
+
+.inputStyle2 {
+    width: 40vw;
+    height: 2vh;
+    font-size: 2.5vh;
+    padding: 2vh;
+}
+
+.bookingCard {
+    height: 27vh;
+}
+
+.bookingIcon {
+    /* position: absolute; */
+    /* width: 5vh;
+    height: 5vh;
+    margin-top: 2.5vh;
+    margin-left: 0.5vw; */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 5vh;
+    height: 5vh;
+    margin-top: 3vh;
+    margin-left: 0.5vw;
+}
+
+.bookingSummary {
+    /* position: absolute; */
+    /* width: 18vw;
+    margin-left: 4vw;
+    margin-top: 0vh;
+    text-align: left; */
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 15vw;
+    margin-left: 4vw;
+    margin-top: -4vh;
+    text-align: left;
+}
+
+.bookingOverviewFont {
+    font-size: 2vh;
+    color: rgb(105, 105, 105);
+    font-weight: bold;
+    padding-bottom: 1vh;
+}
+
+.bookingOverviewFontSec {
+    font-size: 2vh;
+    color: rgb(22, 164, 36);
+    font-weight: bold;
+    padding-bottom: 1vh;
+}
+
+.bookingIconInOverview {
+    width: 30vh;
+    height: 30vh;
+    object-fit: contain;
+    left:4vw;
+    top:1vh;
+    position: absolute;
+}
+
+.bookingOverviewMainDiv {
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 75vw;
+    height: 80vh;
+}
+
+.bookingOverviewFont {
+    font-size: 2vh;
+    color: rgb(105, 105, 105);
+    font-weight: bold;
+    padding-bottom: 1vh;
+}
+
+.basicInfoDiv {
+    width: 45vw;
+    position: absolute;
+    margin-left: 24vw;
+}
+
+.bookingInfoDiv {
+    background-color: rgb(240, 239, 239);
+    border-radius: 1vh;
+    width: 33vw;
+    height: 40vh;
+    position: absolute;
+    margin-top: 25vh;
+    right: 3vw;
+}
+
+.bookingDetailsMainDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    height: 100vh;
+    width: 100vw;
+    overflow-y: scroll;
+}
+
+.bookingDetailHeader {
+    position: absolute;
+    left: 20vw;
+    top: 3vh;
+    width: 76%;
+}
+
+.backBtn {
+    background-color: var(--primary-color);
+    border-radius: 3px;
+    border: none;
+    color: #ffffff;
+    display: inline-block;
+    font-size: 2vh;
+    text-align: center;
+    text-decoration: none;
+    width: 8vw;
+    cursor: pointer;
+    -webkit-text-size-adjust: none;
+    padding: 1vh;
+    position: absolute;
+    margin-top: 5vh;
+    left: 7vw;
+    outline: none;
+}
+
+
+.bookingInfoDivHeader {
+    font-size: 2.5vh;
+    font-weight: bold;
+    text-align: left;
+    margin-top: 3vh;
+    margin-left: 2vw;
+}
+
+.bokingDetailGridItemInfo {
+    position: absolute;
+    margin-top: 3vh;
+    margin-left: 2vw;
+    width: 28vw;
+    height: 40vh;
+}
+
+.bookingDetailFont {
+    font-size: 2vh;
+    color: rgb(105, 105, 105);
+    font-weight: bold;
+    padding-bottom: 1vh;
+}
+
+.bookingDetailFontSec {
+    font-size: 2vh;
+    color: rgb(22, 164, 36);
+    font-weight: bold;
+}
+
+.petInfoDiv {
+    position: absolute;
+    margin-top: 25vh;
+    margin-left: 20vw;
+}
+
+.petInfoHeader {
+    font-size: 2.5vh;
+    font-weight: bold;
+    margin-top: 2vh;
+}
+
+.petImageInBookingDetails {
+    position: absolute;
+    width: 30vh;
+    height: 30vh;
+    margin-top: 8vh;
+    margin-left: 0vw;
+}
+
+.petInfoBasicDetails {
+    position: absolute;
+    width: 20vw;
+    height: 17vh;
+    margin-top: 8vh;
+    margin-left: 18vw;
+    background-color: rgb(240, 239, 239);
+    border-radius: 1vh;
+    padding: 2vh;
+}
+
+.vaccInfoDivHeader {
+    font-size: 2.5vh;
+    font-weight: bold;
+    text-align: left;
+    margin-top: 80vh;
+    margin-left: 20vw;
+    overflow-y: auto;
+}
+
+.vaccInfoDiv {
+    position: absolute;
+    background-color: rgb(240, 239, 239);
+    border-radius: 1vh;
+    width: 45vw;
+    height: 30vh;
+    margin-top: 88vh;
+    margin-left: 20vw;
+    overflow-y: auto;
+}
+
+.vaccineInfoBoxInBookingDetail{
+    width: 40vw;
+    padding-left: 2vh;
+}
+
+.noVaccDetailsLabel {
+    position: absolute;
+    left: 1vw;
+    top: 3vh;
+}
+
+.noDetailLabel {
+    font-size: 2vh;
+    color: #6d7273;
+}
+
+.medicalReportDivHeader {
+    font-size: 2.5vh;
+    font-weight: bold;
+    text-align: left;
+    position: absolute;
+    margin-top: 125vh;
+    margin-left: 20vw;
+}
+
+.medicalReportInfoDivHeader {
+    font-size: 2.5vh;
+    font-weight: bold;
+    text-align: left;
+    position: absolute;
+    margin-top: 130vh;
+    margin-left: 20vw;
+}
+
+.medicalReportDiv {
+    position: absolute;
+    background-color: rgb(240, 239, 239);
+    border-radius: 1vh;
+    width: 45vw;
+    height: 30vh;
+    margin-top: 140vh;
+    margin-left: 20vw;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+.noMedicalReportsLabel {
+    position: absolute;
+    left: 1vw;
+    top: 4vh;
+    font-size: 2vh;
+    color: #6d7273;
+    overflow-y: auto;
+}
+
+.addMedicalReportBtnDiv{
+    position: absolute;
+    top: 128vh;
+    margin-left: 60vw;
+}
+
+.addReportBtn {
+    background-color: var(--primary-color);
+    border-radius: 3px;
+    border: none;
+    color: #ffffff;
+    display: inline-block;
+    font-size: 2vh;
+    text-align: center;
+    text-decoration: none;
+    width: 5vw;
+    cursor: pointer;
+    -webkit-text-size-adjust: none;
+    padding: 1vh;
+    position: absolute;
+    margin-top: 12vh;
+    left: 7vw;
+    outline: none;
+}
+
+.medicalReportRow {
+    background-color: #f8f8f8;
+}
+
+.medicalReportRow:hover {
+    background-color: #bcbcbc;
+}
+
+.medicalReportInfolabel {
+    font-size: 2vh;
+    height: 9vh;
+}
+
+.doctorOverviewMainDiv {
+    width: 50vw;
+    height: 80vh;
+    min-height: 50vh;
+}

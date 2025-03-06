@@ -1,0 +1,22 @@
+{
+    "items": [
+        {
+            "title": "Dashboard",
+            "eventKey": "9",
+            "icon": "DashboardIcon",
+            "type": "menu"
+        },
+        {
+            "title": "Profile",
+            "eventKey": "4",
+            "icon": "ProfileIcon",
+            "type": "menu"
+        },
+        {
+            "title": "Bookings",
+            "eventKey": "5",
+            "icon": "BookingsIcon",
+            "type": "menu"
+        }
+    ]
+}

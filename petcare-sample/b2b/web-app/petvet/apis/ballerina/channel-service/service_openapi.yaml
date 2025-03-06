@@ -1,0 +1,648 @@
+openapi: 3.0.1
+info:
+  title: Service Openapi Yaml
+  version: 1.0.0
+servers:
+- url: "{server}:{port}/"
+  variables:
+    server:
+      default: http://localhost
+    port:
+      default: "9091"
+paths:
+  /doctors:
+    get:
+      summary: Get all doctors
+      operationId: getDoctors
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Doctor'
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+    post:
+      summary: Create a new doctor
+      operationId: postDoctors
+      requestBody:
+        description: basic doctor details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DoctorItem'
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Doctor'
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+  /doctors/{doctorId}:
+    get:
+      summary: Get a doctor by ID
+      operationId: getDoctorsDoctorid
+      parameters:
+      - name: doctorId
+        in: path
+        description: ID of the doctor
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Doctor'
+        "404":
+          description: NotFound
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+    put:
+      summary: Update a doctor
+      operationId: putDoctorsDoctorid
+      parameters:
+      - name: doctorId
+        in: path
+        description: ID of the doctor
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: updated doctor details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DoctorItem'
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Doctor'
+        "404":
+          description: NotFound
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+    delete:
+      summary: Delete a doctor
+      operationId: deleteDoctorsDoctorid
+      parameters:
+      - name: doctorId
+        in: path
+        description: ID of the doctor
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: NoContent
+        "404":
+          description: NotFound
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+  /doctors/{doctorId}/thumbnail:
+    get:
+      summary: Get the thumbnail image of a doctor
+      operationId: getDoctorsDoctoridThumbnail
+      parameters:
+      - name: doctorId
+        in: path
+        description: ID of the doctor
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: Any Response
+          content:
+            '*/*':
+              schema:
+                description: Any type of entity body
+        "404":
+          description: NotFound
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+    put:
+      summary: Update the thumbnail image of a doctor
+      operationId: putDoctorsDoctoridThumbnail
+      parameters:
+      - name: doctorId
+        in: path
+        description: ID of the doctor
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              description: Any type of entity body
+      responses:
+        "200":
+          description: Ok
+        "404":
+          description: NotFound
+        "400":
+          description: BadRequest
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+  /doctors/{doctorId}/bookings:
+    get:
+      summary: Get all bookings of a doctor
+      operationId: getDoctorsDoctoridBookings
+      parameters:
+      - name: doctorId
+        in: path
+        description: ID of the doctor
+        required: true
+        schema:
+          type: string
+      - name: date
+        in: query
+        description: "Date of the boookings (Format: yyyy-MM-dd)"
+        schema:
+          type: string
+          nullable: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Booking'
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+  /doctors/{doctorId}/next-appointment-number:
+    get:
+      summary: Get next appointment number of a doctor
+      operationId: getDoctorsDoctoridNextAppointmentNumber
+      parameters:
+      - name: doctorId
+        in: path
+        description: ID of the doctor
+        required: true
+        schema:
+          type: string
+      - name: date
+        in: query
+        description: "Date of the boookings (Format: yyyy-MM-dd)"
+        required: true
+        schema:
+          type: string
+      - name: sessionStartTime
+        in: query
+        description: "Start time of the session (Format: HH:mm AM/PM)"
+        required: true
+        schema:
+          type: string
+      - name: sessionEndTime
+        in: query
+        description: "End time of the session (Format: HH:mm AM/PM)"
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NextAppointment'
+        "404":
+          description: NotFound
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+  /me:
+    get:
+      summary: Get doctor's details
+      operationId: getMe
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Doctor'
+        "404":
+          description: NotFound
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+  /bookings:
+    get:
+      summary: Get all bookings
+      operationId: getBookings
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Booking'
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+    post:
+      summary: Create a new booking
+      operationId: postBookings
+      requestBody:
+        description: basic booking details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookingItem'
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+  /bookings/{bookingId}:
+    get:
+      summary: Get a booking by ID
+      operationId: getBookingsBookingid
+      parameters:
+      - name: bookingId
+        in: path
+        description: ID of the booking
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+        "404":
+          description: NotFound
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+    put:
+      summary: Update a booking
+      operationId: putBookingsBookingid
+      parameters:
+      - name: bookingId
+        in: path
+        description: ID of the booking
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: updated booking details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookingItemUpdated'
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+        "404":
+          description: NotFound
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+    delete:
+      summary: Delete a booking
+      operationId: deleteBookingsBookingid
+      parameters:
+      - name: bookingId
+        in: path
+        description: ID of the booking
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: NoContent
+        "404":
+          description: NotFound
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+  /org-info:
+    get:
+      summary: Get information about the organization
+      operationId: getOrgInfo
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrgInfo'
+        "404":
+          description: NotFound
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+    put:
+      summary: Update organization information
+      operationId: putOrgInfo
+      requestBody:
+        description: updated organization details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrgInfoItem'
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrgInfo'
+        "500":
+          description: Internal server error
+          content:
+            text/plain:
+              schema:
+                type: string
+components:
+  schemas:
+    Availability:
+      required:
+      - date
+      - timeSlots
+      type: object
+      properties:
+        date:
+          type: string
+        timeSlots:
+          type: array
+          items:
+            $ref: '#/components/schemas/TimeSlot'
+    OrgInfo:
+      allOf:
+      - $ref: '#/components/schemas/OrgInfoItem'
+      - required:
+        - orgName
+        type: object
+        properties:
+          orgName:
+            type: string
+    AppointmentItem:
+      required:
+      - date
+      - sessionEndTime
+      - sessionStartTime
+      type: object
+      properties:
+        date:
+          type: string
+        sessionStartTime:
+          type: string
+        sessionEndTime:
+          type: string
+    BookingItem:
+      required:
+      - date
+      - doctorId
+      - petDoB
+      - petId
+      - petName
+      - petOwnerName
+      - petType
+      - sessionEndTime
+      - sessionStartTime
+      type: object
+      properties:
+        petOwnerName:
+          type: string
+        mobileNumber:
+          type: string
+        doctorId:
+          type: string
+        petId:
+          type: string
+        petName:
+          type: string
+        petType:
+          type: string
+        petDoB:
+          type: string
+        date:
+          type: string
+        sessionStartTime:
+          type: string
+        sessionEndTime:
+          type: string
+    OrgInfoItem:
+      required:
+      - address
+      - name
+      - telephoneNumber
+      type: object
+      properties:
+        name:
+          type: string
+        address:
+          type: string
+        telephoneNumber:
+          type: string
+        registrationNumber:
+          type: string
+    DoctorItem:
+      required:
+      - availability
+      - emailAddress
+      - gender
+      - name
+      - registrationNumber
+      - specialty
+      type: object
+      properties:
+        name:
+          type: string
+        gender:
+          type: string
+        registrationNumber:
+          type: string
+        specialty:
+          type: string
+        emailAddress:
+          type: string
+        dateOfBirth:
+          type: string
+        address:
+          type: string
+        availability:
+          type: array
+          items:
+            $ref: '#/components/schemas/Availability'
+    Booking:
+      allOf:
+      - $ref: '#/components/schemas/BookingItem'
+      - required:
+        - appointmentNumber
+        - createdAt
+        - emailAddress
+        - id
+        - org
+        - referenceNumber
+        - status
+        type: object
+        properties:
+          appointmentNumber:
+            type: integer
+            format: int64
+          status:
+            oneOf:
+            - {}
+            - {}
+            - type: string
+          id:
+            type: string
+          org:
+            type: string
+          referenceNumber:
+            type: string
+          emailAddress:
+            type: string
+          createdAt:
+            type: string
+    Doctor:
+      allOf:
+      - $ref: '#/components/schemas/DoctorItem'
+      - required:
+        - createdAt
+        - id
+        - org
+        type: object
+        properties:
+          id:
+            type: string
+          org:
+            type: string
+          createdAt:
+            type: string
+    TimeSlot:
+      required:
+      - availableBookingCount
+      - endTime
+      - startTime
+      type: object
+      properties:
+        startTime:
+          type: string
+        endTime:
+          type: string
+        availableBookingCount:
+          type: integer
+          format: int64
+    BookingItemUpdated:
+      allOf:
+      - $ref: '#/components/schemas/BookingItem'
+      - required:
+        - status
+        type: object
+        properties:
+          status:
+            oneOf:
+            - {}
+            - {}
+            - type: string
+    NextAppointment:
+      required:
+      - activeBookingCount
+      - date
+      - doctorId
+      - nextAppointmentNumber
+      - sessionEndTime
+      - sessionStartTime
+      type: object
+      properties:
+        doctorId:
+          type: string
+        date:
+          type: string
+        sessionStartTime:
+          type: string
+        sessionEndTime:
+          type: string
+        activeBookingCount:
+          type: integer
+          format: int64
+        nextAppointmentNumber:
+          type: integer
+          format: int64

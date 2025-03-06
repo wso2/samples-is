@@ -17,6 +17,8 @@
  */
 package org.wso2.sample.identity.jks;
 
+import java.net.URISyntaxException;
+import java.nio.file.Paths;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import java.io.IOException;
@@ -58,8 +60,14 @@ public class JKSLoader implements ServletContextListener {
         final URL resource = this.getClass().getClassLoader().getResource(jksProperties.getProperty("keystorename"));
 
         if (resource != null) {
-            LOGGER.log(Level.INFO, "Setting trust store path to : " + resource.getPath());
-            System.setProperty("javax.net.ssl.trustStore", resource.getPath());
+            try {
+                String trustStorePath = Paths.get(resource.toURI()).toFile().getAbsolutePath();
+                LOGGER.log(Level.INFO, "Setting trust store path to : " + trustStorePath);
+                System.setProperty("javax.net.ssl.trustStore", trustStorePath);
+            } catch (URISyntaxException e) {
+                LOGGER.log(Level.SEVERE, "Unable to find JKS defined by properties. " +
+                        "Trust store properties will not be set.", e);
+            }
             System.setProperty("javax.net.ssl.trustStorePassword", jksProperties.getProperty("keystorepassword"));
         } else {
             LOGGER.log(Level.INFO, "Unable to find JKS defined by properties. Trust store properties will not be set.");
