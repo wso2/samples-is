@@ -184,7 +184,10 @@ export const HomePage: FunctionComponent = (): ReactElement => {
         signIn({
             acr_values:"acr2"
         })
-        .catch(() => setHasAuthenticationErrors(true));
+        .catch((err) => {
+            console.error(err)
+            setHasAuthenticationErrors(true)
+        });
         //set value in session storage
         sessionStorage.setItem("billing", "true");
     }, []);

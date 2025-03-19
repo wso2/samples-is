@@ -608,6 +608,7 @@ code {
   border-color: #e2e2e2;
   border-width: 0;
   width: 200px;
+  cursor: pointer;
 }
 
 .home-wording {

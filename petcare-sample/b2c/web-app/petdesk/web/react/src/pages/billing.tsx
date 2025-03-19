@@ -22,7 +22,7 @@ import { Box, Grid, TextField } from "@mui/material";
 import React, { Fragment, useEffect, useState } from "react";
 import { AxiosResponse } from "axios";
 import { BillingInfo } from "../types/billing";
-import { getUpgrade, postBilling, postUpgrade } from "../components/Billing/billing";
+import { postBilling, postUpgrade } from "../components/Billing/billing";
 import { AddCard } from "@mui/icons-material";
 
 interface BillingProps {
