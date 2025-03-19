@@ -180,7 +180,7 @@ export const HomePage: FunctionComponent = (): ReactElement => {
             .catch(() => setHasAuthenticationErrors(true));
     }, [signIn]);
 
-    const handleBillingLogin = useCallback(() => {        
+    const handleBillingLogin = useCallback(() => {
         signIn({
             acr_values:"acr2"
         })
