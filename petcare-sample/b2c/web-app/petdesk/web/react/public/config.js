@@ -1,12 +1,12 @@
 window.config = {
-  baseUrl: "https://api.asgardeo.io/t/pavinduorg",
-  clientID: "6X_5VJHgFIQYU1OFepf3ubPbw0oa",
-  signInRedirectURL: "https://localhost:3000",
-  signOutRedirectURL: "https://localhost:3000",
-  petManagementServiceURL: "<pet-management-service-url>",
-  billingServerURL: "<billing-service-url>",
-  salesforceServerURL: "<sales-force-service-url>",
-  scope: ["openid", "email", "profile"],
-  myAccountAppURL: "https://myaccount.asgardeo.io/t/pavinduorg",
+  baseUrl: "",
+  clientID: "",
+  signInRedirectURL: "http://localhost:3000",
+  signOutRedirectURL: "http://localhost:3000",
+  myAccountAppURL: "",
+  petManagementServiceURL: "http://localhost:9090",
+  billingServerURL: "http://localhost:9091",
+  salesforceServerURL: "http://localhost:9092",
+  scope: ["openid", "email", "profile", "acr"],
   enableOIDCSessionManagement: true
-  };
+};
