@@ -131,15 +131,15 @@ REM Add users in the wso2-is.
 CALL :add_user admin admin Common %is_domain% %is_port%
 
 REM Add service providers in wso2-is
-CALL :add_service_provider dispatch Common urn:createApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz %is_domain% %is_port%
-CALL :add_service_provider manager Common urn:createApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz %is_domain% %is_port%
+CALL :add_service_provider dispatch Common urn:createApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpDYW1lcm9uQDEyMw== %is_domain% %is_port%
+CALL :add_service_provider manager Common urn:createApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpDYW1lcm9uQDEyMw== %is_domain% %is_port%
 
 REM Configure OIDC for the Service Providers
-CALL :configure_oidc "manager" "03" "urn:registerOAuthApplicationData" "https://%is_domain%:%is_port%/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/" "Y2FtZXJvbjpjYW1lcm9uMTIz" %is_domain% %is_port% %server_domain% %server_port%
-CALL :configure_oidc "dispatch" "03" "urn:registerOAuthApplicationData" "https://%is_domain%:%is_port%/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/" "Y2FtZXJvbjpjYW1lcm9uMTIz" %is_domain% %is_port% %server_domain% %server_port%
+CALL :configure_oidc "manager" "03" "urn:registerOAuthApplicationData" "https://%is_domain%:%is_port%/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/" "Y2FtZXJvbjpDYW1lcm9uQDEyMw==" %is_domain% %is_port% %server_domain% %server_port%
+CALL :configure_oidc "dispatch" "03" "urn:registerOAuthApplicationData" "https://%is_domain%:%is_port%/services/OAuthAdminService.OAuthAdminServiceHttpsSoap11Endpoint/" "Y2FtZXJvbjpDYW1lcm9uQDEyMw==" %is_domain% %is_port% %server_domain% %server_port%
 
-CALL :update_application_oidc "dispatch" "Y2FtZXJvbjpjYW1lcm9uMTIz" "ZGlzcGF0Y2g=" "ZGlzcGF0Y2gxMjM0" "urn:updateApplication" "https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" %is_domain% %is_port%
-CALL :update_application_oidc "manager" "Y2FtZXJvbjpjYW1lcm9uMTIz" "c3dpZnRhcHA=" "c3dpZnRhcHAxMjM=" "urn:updateApplication" "https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" %is_domain% %is_port%
+CALL :update_application_oidc "dispatch" "Y2FtZXJvbjpDYW1lcm9uQDEyMw==" "ZGlzcGF0Y2g=" "ZGlzcGF0Y2gxMjM0" "urn:updateApplication" "https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" %is_domain% %is_port%
+CALL :update_application_oidc "manager" "Y2FtZXJvbjpDYW1lcm9uQDEyMw==" "c3dpZnRhcHA=" "c3dpZnRhcHAxMjM=" "urn:updateApplication" "https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" %is_domain% %is_port%
 
 EXIT /B
 
@@ -155,15 +155,15 @@ REM Add users in wso2-is.
 CALL :add_user admin admin Common %is_domain% %is_port%
 
 REM Add service providers in wso2-is for the user cameron
-CALL :add_service_provider dispatch Common urn:createApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz %is_domain% %is_port%
-CALL :add_service_provider manager Common urn:createApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz %is_domain% %is_port%
+CALL :add_service_provider dispatch Common urn:createApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpDYW1lcm9uQDEyMw== %is_domain% %is_port%
+CALL :add_service_provider manager Common urn:createApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpDYW1lcm9uQDEyMw== %is_domain% %is_port%
 
 REM Configure SAML for the service providers in the cameron account
-CALL :configure_saml dispatch 02 urn:addRPServiceProvider https://%is_domain%:%is_port%/services/IdentitySAMLSSOConfigService.IdentitySAMLSSOConfigServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz %is_domain% %is_port% %server_domain% %server_port%
-CALL :configure_saml manager 02 urn:addRPServiceProvider  https://%is_domain%:%is_port%/services/IdentitySAMLSSOConfigService.IdentitySAMLSSOConfigServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz %is_domain% %is_port% %server_domain% %server_port%
+CALL :configure_saml dispatch 02 urn:addRPServiceProvider https://%is_domain%:%is_port%/services/IdentitySAMLSSOConfigService.IdentitySAMLSSOConfigServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpDYW1lcm9uQDEyMw== %is_domain% %is_port% %server_domain% %server_port%
+CALL :configure_saml manager 02 urn:addRPServiceProvider  https://%is_domain%:%is_port%/services/IdentitySAMLSSOConfigService.IdentitySAMLSSOConfigServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpDYW1lcm9uQDEyMw== %is_domain% %is_port% %server_domain% %server_port%
 
-CALL :update_application_saml dispatch Y2FtZXJvbjpjYW1lcm9uMTIz urn:updateApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ %is_domain% %is_port% %server_domain% %server_port%
-CALL :update_application_saml manager Y2FtZXJvbjpjYW1lcm9uMTIz urn:updateApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ %is_domain% %is_port% %server_domain% %server_port%
+CALL :update_application_saml dispatch Y2FtZXJvbjpDYW1lcm9uQDEyMw== urn:updateApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ %is_domain% %is_port% %server_domain% %server_port%
+CALL :update_application_saml manager Y2FtZXJvbjpDYW1lcm9uQDEyMw== urn:updateApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ %is_domain% %is_port% %server_domain% %server_port%
 
 EXIT /B
 
@@ -197,8 +197,8 @@ set /p input="Please enter your answer..."
      IF "%result%" == "true" (
         CALL :configure_sso_saml2 %is_domain% %is_port% %server_domain% %server_port%
         CALL :add_identity_provider admin admin %is_domain% %is_port%
-        CALL :updateapp_multi "dispatch" "Y2FtZXJvbjpjYW1lcm9uMTIz" "urn:updateApplication" "https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" %is_domain% %is_port% %server_domain% %server_port%
-        CALL :updateapp_multi "manager" "Y2FtZXJvbjpjYW1lcm9uMTIz" "urn:updateApplication" "https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" %is_domain% %is_port% %server_domain% %server_port%
+        CALL :updateapp_multi "dispatch" "Y2FtZXJvbjpDYW1lcm9uQDEyMw==" "urn:updateApplication" "https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" %is_domain% %is_port% %server_domain% %server_port%
+        CALL :updateapp_multi "manager" "Y2FtZXJvbjpDYW1lcm9uQDEyMw==" "urn:updateApplication" "https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/" %is_domain% %is_port% %server_domain% %server_port%
      )
      IF "%result%" == "false" (
         echo Please register a Twitter application and restart the script.
@@ -237,8 +237,8 @@ IF "%user%"=="Y" set result=true
 IF "%result%" == "true" (
     CALL :configure_sso_saml2 %is_domain% %is_port% %server_domain% %server_port%
     CALL :add_identity_provider admin admin %is_domain% %is_port%
-    CALL :updateapp_fed_auth dispatch Y2FtZXJvbjpjYW1lcm9uMTIz urn:updateApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ %is_domain% %is_port% %server_domain% %server_port%
-    CALL :updateapp_fed_auth manager Y2FtZXJvbjpjYW1lcm9uMTIz urn:updateApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ %is_domain% %is_port% %server_domain% %server_port%
+    CALL :updateapp_fed_auth dispatch Y2FtZXJvbjpDYW1lcm9uQDEyMw== urn:updateApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ %is_domain% %is_port% %server_domain% %server_port%
+    CALL :updateapp_fed_auth manager Y2FtZXJvbjpDYW1lcm9uQDEyMw== urn:updateApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ %is_domain% %is_port% %server_domain% %server_port%
 )
 
 IF "%result%" == "false" (
@@ -454,11 +454,11 @@ echo "|    WSO2 Dashboard: https://%is_domain%:%is_port%/dashboard              
 echo "|                                                                             |"
 echo "|    First login with Junior Manager                                          |"
 echo "|      Username: alex                                                         |"
-echo "|      Password: alex123                                                      |"
+echo "|      Password: Alex@123                                                      |"
 echo "|                                                                             |"
 echo "|    Secondly, login with Senior Manager                                      |"
 echo "|      Username: cameron                                                      |"
-echo "|      Password: cameron123                                                   |"
+echo "|      Password: Cameron@123                                                   |"
 echo "|                                                                             |"
 echo "|    Now you can use your new user credentials to log into                    |"
 echo "|    the app pickup-dispatch:  http://127.0.0.1:8080/pickup-dispatch/         |"
@@ -550,7 +550,7 @@ echo(
 echo Creating a user named cameron...
 
 REM The following command can be used to create a user cameron.
-curl -s -k --user %is_user_name%:%is_user_pass% --data "{"schemas":[],"name":{"familyName":"Smith","givenName":"Cameron"},"userName":"cameron","password":"cameron123","emails":"cameron@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://%is_domain%:%is_port%/wso2/scim/Users
+curl -s -k --user %is_user_name%:%is_user_pass% --data "{"schemas":[],"name":{"familyName":"Smith","givenName":"Cameron"},"userName":"cameron","password":"Cameron@123","emails":"cameron@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://%is_domain%:%is_port%/wso2/scim/Users
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while creating user cameron. !!
@@ -563,7 +563,7 @@ echo(
 echo Creating a user named alex...
 
 REM The following command can be used to create a user alex.
-curl -s -k --user %is_user_name%:%is_user_pass% --data "{"schemas":[],"name":{"familyName":"Miller","givenName":"Alex"},"userName":"alex","password":"alex123","emails":"alex@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://%is_domain%:%is_port%/wso2/scim/Users
+curl -s -k --user %is_user_name%:%is_user_pass% --data "{"schemas":[],"name":{"familyName":"Miller","givenName":"Alex"},"userName":"alex","password":"Alex@123","emails":"alex@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://%is_domain%:%is_port%/wso2/scim/Users
 
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while creating user alex. !!
@@ -621,7 +621,7 @@ echo(
 echo "Creating a user named cameron..."
 
 REM The following command can be used to create a user.
-curl -s -k --user %IS_name%:%IS_pass% --data "{"schemas":[],"name":{"familyName":"Smith","givenName":"Cameron"},"userName":"cameron","password":"cameron123","emails":"cameron@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://%is_domain%:%is_port%/wso2/scim/Users
+curl -s -k --user %IS_name%:%IS_pass% --data "{"schemas":[],"name":{"familyName":"Smith","givenName":"Cameron"},"userName":"cameron","password":"Cameron@123","emails":"cameron@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://%is_domain%:%is_port%/wso2/scim/Users
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while creating user cameron. !!"
   CALL :delete_user %is_domain% %is_port%
@@ -634,7 +634,7 @@ echo(
 echo "Creating a user named alex..."
 
 REM The following command can be used to create a user.
-curl -s -k --user %IS_name%:%IS_pass% --data "{"schemas":[],"name":{"familyName":"Miller","givenName":"Alex"},"userName":"alex","password":"alex123","emails":"alex@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://%is_domain%:%is_port%/wso2/scim/Users
+curl -s -k --user %IS_name%:%IS_pass% --data "{"schemas":[],"name":{"familyName":"Miller","givenName":"Alex"},"userName":"alex","password":"Alex@123","emails":"alex@gmail.com","addresses":{"country":"Canada"}}" --header "Content-Type:application/json" -o NUL https://%is_domain%:%is_port%/wso2/scim/Users
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while creating user alex. !!"
   CALL :delete_user %is_domain% %is_port%
@@ -706,8 +706,8 @@ curl -s -k -d @%request_data% -H "Authorization: Basic %~5" -H "Content-Type: te
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while creating the service provider. !!
   echo(
-  CALL :delete_sp dispatch Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  CALL :delete_sp manager Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  CALL :delete_sp dispatch Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpDYW1lcm9uQDEyMw==
+  CALL :delete_sp manager Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpDYW1lcm9uQDEyMw==
   CALL :delete_user %is_domain% %is_port%
   echo(
   exit -1
@@ -789,8 +789,8 @@ curl -s -k -d @%request_data% -H "Authorization: Basic %~5" -H "Content-Type: te
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while configuring SAML2 web SSO for %~1.... !!
   echo(
-  CALL :delete_sp dispatch Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  CALL :delete_sp manager Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  CALL :delete_sp dispatch Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpDYW1lcm9uQDEyMw==
+  CALL :delete_sp manager Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpDYW1lcm9uQDEyMw==
   CALL :delete_user %is_domain% %is_port%
   echo(
   exit -1
@@ -854,8 +854,8 @@ curl -s -k -d @%request_data% -H "Authorization: Basic %~2" -H "Content-Type: te
 IF %ERRORLEVEL% NEQ 0 (
   echo !! Problem occurred while getting application details for %~1.... !!
   echo(
-  CALL :delete_sp dispatch Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  CALL :delete_sp manager Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  CALL :delete_sp dispatch Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpDYW1lcm9uQDEyMw==
+  CALL :delete_sp manager Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpDYW1lcm9uQDEyMw==
   CALL :delete_user %is_domain% %is_port%
   echo(
   exit -1
@@ -967,8 +967,8 @@ curl -s -k -d @%request_data% -H "Authorization: Basic %auth%" -H "Content-Type:
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while getting application details for %sp_name%.... !!"
   echo(
-  CALL :delete_sp dispatch Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  CALL :delete_sp manager Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  CALL :delete_sp dispatch Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpDYW1lcm9uQDEyMw==
+  CALL :delete_sp manager Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpDYW1lcm9uQDEyMw==
   CALL :delete_user %is_domain% %is_port%
   echo(
   exit -1
@@ -995,8 +995,8 @@ curl -s -k -H "Authorization: Basic %auth%" -H "Content-Type: text/xml" -H "SOAP
 IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while updating application %sp_name%.... !!"
   echo(
-  CALL :delete_sp dispatch Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  CALL :delete_sp manager Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  CALL :delete_sp dispatch Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpDYW1lcm9uQDEyMw==
+  CALL :delete_sp manager Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpDYW1lcm9uQDEyMw==
   CALL :delete_user %is_domain% %is_port%
   echo(
   exit -1
@@ -1032,8 +1032,8 @@ IF %ERRORLEVEL% NEQ 0 (
   echo(
   echo "!! Problem occurred while getting application details for %sp_name%.... !!"
   echo(
-  CALL :delete_sp dispatch Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  CALL :delete_sp manager Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  CALL :delete_sp dispatch Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpDYW1lcm9uQDEyMw==
+  CALL :delete_sp manager Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpDYW1lcm9uQDEyMw==
   CALL :delete_user %is_domain% %is_port%
   echo(
   exit -1
@@ -1087,8 +1087,8 @@ IF %ERRORLEVEL% NEQ 0 (
   echo "!! Problem occurred while getting application details for %sp_name%.... !!"
 
   echo(
-  CALL :delete_sp dispatch Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-  CALL :delete_sp manager Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+  CALL :delete_sp dispatch Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpDYW1lcm9uQDEyMw==
+  CALL :delete_sp manager Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpDYW1lcm9uQDEyMw==
   CALL :delete_user  %is_domain% %is_port%
   echo(
   exit -1
@@ -1374,11 +1374,11 @@ echo "|    Please use one of the following user credentials to log in.          
 echo "|                                                                               |"
 echo "|    Junior Manager                                                             |"
 echo "|      Username: alex                                                           |"
-echo "|      Password: alex123                                                        |"
+echo "|      Password: Alex@123                                                        |"
 echo "|                                                                               |"
 echo "|    Senior Manager                                                             |"
 echo "|      Username: cameron                                                        |"
-echo "|      Password: cameron123                                                     |"
+echo "|      Password: Cameron@123                                                     |"
 echo "---------------------------------------------------------------------------------"
 echo(
 echo "If you have finished trying out the sample web apps, you can clean the process now."
@@ -1392,8 +1392,8 @@ set result=false
      IF "%clean%"=="y" set result=true
      IF "%clean%"=="Y" set result=true
      IF "%result%" == "true" (
-        CALL :delete_sp dispatch Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
-        CALL :delete_sp manager Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpjYW1lcm9uMTIz
+        CALL :delete_sp dispatch Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpDYW1lcm9uQDEyMw==
+        CALL :delete_sp manager Common urn:deleteApplication https://%is_domain%:%is_port%/services/IdentityApplicationManagementService.IdentityApplicationManagementServiceHttpsSoap11Endpoint/ Y2FtZXJvbjpDYW1lcm9uQDEyMw==
         CALL :delete_user %is_domain% %is_port%
 	 )
      IF "%result%" == "false" (
