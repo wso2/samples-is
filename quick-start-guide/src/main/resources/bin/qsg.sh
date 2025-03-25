@@ -28,7 +28,7 @@ if ! command -v curl >/dev/null 2>&1; then
 fi
 
 configure_sso_saml2 () {
-  add_user admin admin Common
+  add_user_data admin admin
 
   add_service_provider dispatch Y2FtZXJvbjpDYW1lcm9uQDEyMw==
   add_service_provider manager Y2FtZXJvbjpDYW1lcm9uQDEyMw==
@@ -43,7 +43,7 @@ configure_sso_saml2 () {
 }
 
 configure_sso_oidc() {
-  add_user admin admin Common
+  add_user_data admin admin
 
   add_service_provider dispatch Y2FtZXJvbjpDYW1lcm9uQDEyMw==
   add_service_provider manager Y2FtZXJvbjpDYW1lcm9uQDEyMw==
@@ -400,7 +400,7 @@ getProperty() {
    echo "$PROP_VALUE"
 }
 
-add_user() {
+add_user_data() {
   IS_name=$1
   IS_pass=$2
 
