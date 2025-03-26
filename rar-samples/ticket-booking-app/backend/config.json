@@ -1,0 +1,6 @@
+{
+    "clientId": "",
+    "clientSecret": "",
+    "baseUrl": "https://127.0.0.1:9443",
+    "allowedOrigins": [ "https://localhost:3000" ]
+}
