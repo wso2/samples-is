@@ -16,20 +16,16 @@
  * under the License.
  */
 
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { Grid } from "@mui/material";
-import CheckOutlineIcon from "@rsuite/icons/CheckOutline";
-import CloseOutlineIcon from "@rsuite/icons/CloseOutline";
-import EditIcon from "@rsuite/icons/Edit";
+import { Container, Grid } from "@mui/material";
 import { getDoctors } from "apps/business-admin-app/APICalls/getDoctors/get-doctors";
 import { getOrgInfo } from "apps/business-admin-app/APICalls/GetOrgDetails/get-org-info";
 import { putOrgInfo } from "apps/business-admin-app/APICalls/UpdateOrgInfo/put-org-info";
 import { Doctor, OrgInfo, UpdateOrgInfo } from "apps/business-admin-app/types/doctor";
-import Chart from "chart.js/auto";
 import { Session } from "next-auth";
-import { useEffect, useRef, useState } from "react";
-import { Stack } from "rsuite";
-import styles from "../../../../styles/Home.module.css";
+import { useEffect, useState } from "react";
+import BookingCountChart from "./otherComponents/bookingCountChart";
+import DoctorSpecialtyChart from "./otherComponents/doctorSpecialityChart";
+import OrgProfileCard from "./otherComponents/orgProfileCard";
 
 interface GetStartedSectionComponentForAdminProps {
     session: Session
@@ -52,8 +48,6 @@ export default function GetStartedSectionComponentForAdmin(props: GetStartedSect
     const [ edit, setEdit ] = useState(false);
     const [ orgInfo, setOrgInfo ] = useState<OrgInfo | null>(null);
     const [ regNo, setRegNo ] = useState("");
-    const [ orgAddress, setOrgAddress ] = useState("");
-    const [ telephoneNo, setTelephoneNo ] = useState("");
     const [ reload, setReload ] = useState(false);
 
     async function getDoctorList() {
@@ -81,7 +75,7 @@ export default function GetStartedSectionComponentForAdmin(props: GetStartedSect
     async function getOrgDetails() {
         const accessToken = session.accessToken;
 
-        getOrgInfo(accessToken, session.orgId)
+        getOrgInfo(accessToken)
             .then((res) => {
                 if (res.data) {
                     setOrgInfo(res.data);
@@ -102,29 +96,11 @@ export default function GetStartedSectionComponentForAdmin(props: GetStartedSect
         setRegNo(orgInfo?.registrationNumber);
     }, [ orgInfo ]);
 
-    const handleEdit = () => {
-        setEdit(true);
-    };
-
-    const handleSave = () => {
-        setEdit(false);
-        async function updateOrgDetails() {
-            const accessToken = session.accessToken;
-            const name = session.orgName;
-            const address = (orgAddress) ? orgAddress : orgInfo?.address;
-            const registrationNumber = (regNo) ? regNo : orgInfo?.registrationNumber;
-            const telephoneNumber = (telephoneNo) ? telephoneNo : orgInfo?.telephoneNumber;
-
-            const payload: UpdateOrgInfo = {
-                address: address,
-                name: name,
-                registrationNumber: registrationNumber,
-                telephoneNumber: telephoneNumber
-            };
-
-            putOrgInfo(accessToken, session.orgId, payload);
-        }
-        updateOrgDetails();
+    const handleSave = async (payload: UpdateOrgInfo) => {
+        const accessToken = session.accessToken;
+        
+        await putOrgInfo(accessToken, payload);
+        getOrgDetails();
     };
 
     const handleCancel = async () => {
@@ -135,222 +111,30 @@ export default function GetStartedSectionComponentForAdmin(props: GetStartedSect
         setReload(false);
     };
 
-
-    const DonutChart: React.FC = () => {
-        const chartRef = useRef<HTMLCanvasElement>(null);
-      
-        useEffect(() => {
-            if (chartRef.current) {
-                const ctx = chartRef.current.getContext("2d");
-      
-                if (ctx) {
-                    new Chart(ctx, {
-                        type: "doughnut",
-                        data: {
-                            labels: [ "Cardiology", "Neurology", "Oncology", "Nutrition", "Other" ],
-                            datasets: [
-                                {
-                                    data: [ filteredCount["cardiology"], 
-                                        filteredCount["neurology"], 
-                                        filteredCount["oncology"], 
-                                        filteredCount["nutrition"],
-                                        doctorList?.length - (filteredCount["cardiology"]+ 
-                                        filteredCount["neurology"] + 
-                                        filteredCount["oncology"] + 
-                                        filteredCount["nutrition"])
-
-                                    ],
-                                    backgroundColor: [ "#", "#4e5ded", "#4e7eed", "#4e9bed", "#77b0ed" ]
-                                }
-                            ]
-                        },
-                        options: {
-                            plugins: {
-                                legend: {
-                                    position: "right", // Adjust the legend position to 'right'
-                                    align: "center" // Align the legend items to the end of the container
-                                }
-                            }
-                        }
-                    });
-                }
-            }
-        }, []);
-      
-        return <canvas ref={ chartRef } />;
-    };
-
-    const BarChart: React.FC = () => {
-        const chartRef = useRef<HTMLCanvasElement>(null);
-      
-        useEffect(() => {
-            if (chartRef.current) {
-                const ctx = chartRef.current.getContext("2d");
-      
-                if (ctx) {
-                    new Chart(ctx, {
-                        type: "bar",
-                        data: {
-                            labels: labels,
-                            datasets: [
-                                {
-                                    label: "Booking Count",
-                                    data: data,
-                                    backgroundColor: 
-                                    [ "#4e7eed" ]
-                                }
-                            ]
-                        },
-                        options: {
-                            responsive: true,
-                            scales: {
-                                y: {
-                                    beginAtZero: true,
-                                    ticks: {
-                                        precision: 0 
-                                    }
-                                }
-                            }
-                        }
-                    });
-                }
-            }
-        }, []);
-      
-        return <canvas ref={ chartRef }></canvas>;
-    };
-      
-
-
     return (
-        <div
-            className={ styles.tableMainPanelDivDoc }
-        >
-            <div className={ styles.welcomeMainDiv }>
-                <AccountCircleIcon style={ { width: "8vh", height: "8vh" } }/>
-                <div className={ styles. welcomeDiv }>
-                    { "Welcome, " }
-                    <b>{ session.user?.name.givenName }</b> 
-                    { " " }
-                    <b>{ session.user?.name.familyName }</b>
-                    { "!" }
-                </div>
-                <div className={ styles.tagLine }>
-                    { "Taking Veterinary Care to the Next Level of Excellence" }
-                </div>
+        <Container maxWidth="lg" sx={ { mb: 4, mt: 4 } }>
+            <Grid container spacing={ 4 }>
+                <Grid item xs={ 12 }>
+                    <OrgProfileCard
+                        orgInfo={ orgInfo }
+                        session={ session }
+                        onSave={ handleSave }
+                        onCancel={ handleCancel }
+                    />
+                </Grid>
 
-            </div>
-            <Stack
-                direction="row"
-                justifyContent="space-between">
-                <div className={ styles.orgProfileDiv }>
-                    <div className={ styles.bookingSummaryHeader }>
-                        Organization Profile
-                    </div>
-                    { edit? (
-                        <div className={ styles.buttonContainer }>
-                            <button className={ styles.closeEditOrgDetailBtn } onClick={ () => { handleCancel(); } }>
-                                <CloseOutlineIcon 
-                                    style={ { width: "100%", height: "100%", color: "var(--primary-color)" } } />
-                            </button>
-                            <button className={ styles.saveEditOrgDetailBtn } onClick={ () => { handleSave(); } }>
-                                <CheckOutlineIcon 
-                                    style={ { width: "100%", height: "100%", color: "var(--primary-color)" } } />
-                            </button>
-                        </div>
-                    ):(
-                        <button className={ styles.editOrgDetailBtn } onClick={ () => {handleEdit(); } }>
-                            <EditIcon style={ { width: "100%", height: "100%", color: "var(--primary-color)" } }/>
-                        </button>
-                    ) }
-                    <div className={ styles.orgInfoGrid }>
-                        <Grid container spacing={ 2 }>
-                            <Grid item xs={ 6 }>
-                                <Grid container direction="column">
-                                    { !reload && (
-                                        <><Grid item>
-                                            <p className={ styles.orgInfoFont }>Organization Name</p>
-                                            <input
-                                                className={ styles.orgInfoInputStyle }
-                                                id="org_name"
-                                                type="text"
-                                                placeholder="Organization Name"
-                                                disabled={ true }
-                                                defaultValue={ session.orgName } />
-                                        </Grid><Grid item>
-                                            <p className={ styles.orgInfoFont }>Registration Number</p>
-                                            <input
-                                                className={ styles.orgInfoInputStyle }
-                                                id="registration_number"
-                                                type="text"
-                                                placeholder="Registration Number"
-                                                disabled={ !edit }
-                                                defaultValue={ orgInfo?.registrationNumber
-                                                        === "" ? "Registration Number" : orgInfo?.registrationNumber }
-                                                onChange={ (e) => setRegNo(e.target.value) } />
+                <Grid item xs={ 12 } md={ 6 }>
+                    <DoctorSpecialtyChart
+                        filteredCount={ filteredCount }
+                        totalDoctors={ doctorList?.length || 0 }
+                    />
+                </Grid>
 
-                                        </Grid><Grid item>
-                                            <p className={ styles.orgInfoFont }>Adress</p>
-                                            <input
-                                                className={ styles.orgInfoInputStyle }
-                                                id="address"
-                                                type="text"
-                                                placeholder="Address"
-                                                disabled={ !edit }
-                                                defaultValue={ orgInfo?.address === "" ?
-                                                    "Address" : orgInfo?.address }
-                                                onChange={ (e) => setOrgAddress(e.target.value) } />
-                                        </Grid><Grid item>
-                                            <p className={ styles.orgInfoFont }>Telephone Number</p>
-                                            <input
-                                                className={ styles.orgInfoInputStyle }
-                                                id="telephone_no"
-                                                type="text"
-                                                placeholder="Telephone Number"
-                                                disabled={ !edit }
-                                                defaultValue={ orgInfo?.telephoneNumber === "" ?
-                                                    "Telephone Number" : orgInfo?.telephoneNumber }
-                                                onChange={ (e) => setTelephoneNo(e.target.value) } />
-                                        </Grid></>) }
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                    </div>
-                </div>
-            </Stack>
-            <Stack
-                direction="row"
-                justifyContent="space-between">
-                <div className={ styles.chartDivForDoc }>
-                    <div className={ styles.bookingSummaryHeader }>
-                        Doctor Specialty Summary
-                    </div>
-                    <div className={ styles.chartForBookingSummary }>
-                        <div id="chartContainer">
-                            <DonutChart />
-                        </div>
-                    </div>
-                    <div className={ styles.totalBookingCountHeader }>
-                        { doctorList? doctorList.length:0 }
-                    </div>
-                    <div className={ styles.totalBookingHeader } >
-                        Total Doctors
-                    </div>
-                </div>
-            </Stack>
-            <Stack
-                direction="row"
-                justifyContent="space-between">
-                <div className={ styles.dailyChartDivForDoc }>
-                    <div className={ styles.dailyBookingSummaryHeader }>
-                        Bookings Count Per Day
-                    </div>
-                    <div id="lineChartContainer" className={ styles.dailiBookingsChart }>
-                        <BarChart />
-                    </div>
-                </div>
-            </Stack>
-        </div>
+                <Grid item xs={ 12 } md={ 6 }>
+                    <BookingCountChart labels={ labels } data={ data } />
+                </Grid>
+            </Grid>
+        </Container>
     );
 }
 

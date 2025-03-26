@@ -16,6 +16,7 @@
  * under the License.
  */
 
+import { Role } from "@pet-management-webapp/business-admin-app/data-access/data-access-common-models-util";
 import { InviteConst, controllerDecodeAddUser, controllerDecodeListAllRoles, controllerDecodePatchRole } 
     from "@pet-management-webapp/business-admin-app/data-access/data-access-controller";
 import { User } from "@pet-management-webapp/shared/data-access/data-access-common-models-util";
@@ -35,8 +36,6 @@ import { Form } from "react-final-form";
 import { Divider, Loader, Modal, Panel, Radio, RadioGroup, SelectPicker, Stack, useToaster } from "rsuite";
 import FormSuite from "rsuite/Form";
 import styles from "../../../../../../styles/Settings.module.css";
-import { Role } from "@pet-management-webapp/business-admin-app/data-access/data-access-common-models-util";
-
 
 interface AddUserComponentProps {
     session: Session
@@ -217,8 +216,8 @@ export default function AddUserComponent(props: AddUserComponentProps) {
     };
 
     const options = [
-        { value: "male", label: "Male" },
-        { value: "female", label: "Female" }
+        { label: "Male", value: "male" },
+        { label: "Female", value: "female" }
     ];
 
     return (

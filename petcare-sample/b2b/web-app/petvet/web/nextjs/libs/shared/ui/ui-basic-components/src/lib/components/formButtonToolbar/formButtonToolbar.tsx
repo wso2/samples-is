@@ -64,9 +64,9 @@ export function FormButtonToolbar(props: FormButtonToolbarProps) {
 }
 
 FormButtonToolbar.defaultProps = {
-    submitButtonText: "Submit",
     cancelButtonText: "Cancel",
-    needCancel: true
+    needCancel: true,
+    submitButtonText: "Submit"
 };
 
 

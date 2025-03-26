@@ -30,7 +30,6 @@ import styled from "styled-components";
 import PetCardInAddBooking from "./petCardInAddBooking";
 import convertTo12HourTime from "./timeConverter";
 import styles from "../../../../styles/booking.module.css";
-import { IdentityProviderConfigureType } from "@pet-management-webapp/business-admin-app/data-access/data-access-common-models-util";
 
 interface buttonProps {
     isDisabled: boolean;

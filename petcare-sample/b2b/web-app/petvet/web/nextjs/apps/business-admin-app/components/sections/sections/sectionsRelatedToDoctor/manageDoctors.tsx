@@ -97,6 +97,7 @@ export default function ManageDoctorsSection(props: ManageDoctorsSectionProps) {
                 <Button
                     className={ styles.buttonCircular }
                     onClick={ onAddDoctorClick }
+                    appearance="primary" 
                 >
                         Add Doctor
                 </Button>
