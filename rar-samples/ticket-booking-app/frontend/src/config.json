@@ -1,0 +1,8 @@
+{
+    "clientID": "",
+    "baseUrl": "https://localhost:9443",
+    "signInRedirectURL": "https://localhost:3000",
+    "signOutRedirectURL": "https://localhost:3000",
+    "scope": [ "profile" ],
+    "resourceServerURLs": [ "http://localhost:5001/booking-creation" ]
+}

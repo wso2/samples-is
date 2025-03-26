@@ -1,0 +1,286 @@
+/**
+ * Copyright (c) 2025, WSO2 LLC. (https://www.wso2.com).
+ *
+ * WSO2 LLC. licenses this file to you under the Apache License,
+ * Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+body {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    color: #2A2A2A;
+    background-color: #fff;
+    font-family: BlinkMacSystemFont, Segoe WPC, Segoe UI, HelveticaNeue-Light, Ubuntu, Droid Sans, sans-serif, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}
+
+h1, h2, h3, h4, h5 {
+    font-weight: 300;
+}
+
+h1 b, h2 b, h3 b, h4 b, h5 b {
+    font-weight: 400;
+}
+
+b {
+    font-weight: 500;
+}
+
+a {
+    color: #f47421;
+}
+
+a:hover {
+    text-decoration: none;
+    ;
+}
+
+.mb-0 {
+    margin-bottom: 0 !important;
+}
+
+.mt-4 {
+    margin-top: 40px !important;
+}
+
+.mt-0 {
+    margin-top: 0 !important;
+}
+
+.my-4 {
+    margin: 40px auto 40px auto;
+}
+
+.home-image {
+    vertical-align: middle;
+    margin-bottom: 50px;
+}
+
+.home-image .logo {
+    width: 150px;
+    vertical-align: middle;
+}
+
+.home-image .logo-plus {
+    display: inline-block;
+    font-size: 50px;
+    margin: 0 15px 0 30px;
+    vertical-align: middle;
+}
+
+img.footer-image {
+    width: 50px;
+    margin: 30px auto;
+    opacity: .8;
+}
+
+img.logo-image {
+    width: 200px;
+    margin-top: 100px;
+}
+
+.error-page_h6 {
+    font-size: 30px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-top: 3rem;
+    margin-bottom: 8px;
+    color: #151515;
+}
+
+.error-page_p {
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    color: #151515;
+}
+
+.container {
+    background: #fff;
+    border: 1px solid #e2e2e2;
+    width: 980px;
+    margin: 0 auto;
+    margin-top: 50px;
+    border-radius: 10px;
+}
+
+.header-title {
+    background-color: #f47421;
+    color: #ffffff;
+    padding: 20px;
+    border-radius: 10px 10px 0 0;
+}
+
+.content {
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.content .spa-app-description {
+    line-height: 1.7;
+}
+
+.btn.primary, .btn.primary:active, .btn.primary:focus {
+    background-color: #282c34;
+    border-radius: 3px;
+    border: none;
+    color: #ffffff;
+    display: inline-block;
+    font-size: 1.14285714rem;
+    text-align: center;
+    text-decoration: none;
+    width: 150px;
+    cursor: pointer;
+    -webkit-text-size-adjust: none;
+    padding: .78571429em 1.5em .78571429em;
+    margin-top: 30px;
+    outline: none;
+}
+
+.btn.secondary, .btn.secondary:active, .btn.secondary:focus {
+    background-color: #ffffff;
+    border-radius: 3px;
+    border: 1px solid #282c34;
+    color: #282c34;
+    display: inline-block;
+    font-size: 1.14285714rem;
+    text-align: center;
+    text-decoration: none;
+    width: 150px;
+    cursor: pointer;
+    -webkit-text-size-adjust: none;
+    padding: .78571429em 1.5em .78571429em;
+    margin-top: 30px;
+    outline: none;
+}
+
+.sub-title {
+    margin-top: 0;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.ui.attached.negative.message,
+.ui.negative.message {
+    background-color: #fff6f6;
+    color: #9f3a38;
+    box-shadow: 0 0 0 1px #e0b4b4 inset, 0 0 0 0 transparent;
+    padding: 1em 1.5em;
+}
+
+.ui.attached.success.message,
+.ui.success.message {
+    background-color: #f6fff8;
+    color: #389f4e;
+    box-shadow: 0 0 0 1px #b4e0c2 inset, 0 0 0 0 transparent;
+    padding: 1em 1.5em;
+}
+
+input {
+    display: block;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 0.375rem;
+}
+  
+input:focus {
+    outline: 0;
+}
+
+select {
+    display: block;
+    padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 0.375rem;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23343a40' d='M2 0L0 2h4zM2 5l2-2H0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 8px 10px;
+}
+  
+select:focus {
+    outline: 0;
+}
+
+.form-container {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-container .form-group {
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    gap: 5px;
+}
+
+.booking-types-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.booking-types-container .booking-type-card {
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 5px;
+    border: #282c34 1px solid;
+}
+
+.booking-types-container .booking-type-card:hover {
+    border: #f47421 1px solid;
+}
+
+.booking-types-container .booking-type-card:hover p {
+    color: #f47421;
+}
+
+.booking-types-container .booking-type-card img {
+    width: 60px;
+    height: 60px;
+}
+
+code {
+    background: #272822;
+    padding: 4px;
+    font-size: 90%;
+    color: #fd971f;
+}
