@@ -30,7 +30,8 @@ export default function AddUserButton(props : AddUserButtonProps) {
     return (
         <Button
             className={ styles.buttonCircular }
-            onClick={ onClick }>
+            onClick={ onClick }
+            appearance="primary" >
             Add User
         </Button>
     );

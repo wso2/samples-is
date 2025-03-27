@@ -24,11 +24,12 @@ import { postDoctor } from "apps/business-admin-app/APICalls/CreateDoctor/post-d
 import { getDoctor } from "apps/business-admin-app/APICalls/getDoctors/get-doctor";
 import { getPersonalization } from "apps/business-admin-app/APICalls/GetPersonalization/get-personalization";
 import { postPersonalization } from "apps/business-admin-app/APICalls/UpdatePersonalization/post-personalization";
-import personalize from "apps/business-admin-app/components/sections/sections/settingsSection/personalizationSection/personalize";
+import personalize 
+    from "apps/business-admin-app/components/sections/sections/settingsSection/personalizationSection/personalize";
 import { DoctorInfo } from "apps/business-admin-app/types/doctor";
 import { Personalization } from "apps/business-admin-app/types/personalization";
-import controllerDecodeGetBrandingPreference 
-    from "libs/business-admin-app/data-access/data-access-controller/src/lib/controller/branding/controllerDecodeGetBrandingPreference";
+import controllerDecodeGetBrandingPreference from 
+    "libs/business-admin-app/data-access/data-access-controller/src/lib/controller/branding/controllerDecodeGetBrandingPreference";
 import { Session } from "next-auth";
 import { getSession } from "next-auth/react";
 import { useEffect } from "react";

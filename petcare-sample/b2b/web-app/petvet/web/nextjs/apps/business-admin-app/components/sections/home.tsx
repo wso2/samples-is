@@ -19,7 +19,6 @@
 import { LogoComponent } from "@pet-management-webapp/business-admin-app/ui/ui-components";
 import { signout } from "@pet-management-webapp/business-admin-app/util/util-authorization-config-util";
 import { SignOutComponent } from "@pet-management-webapp/shared/ui/ui-components";
-import { getPersonalization } from "apps/business-admin-app/APICalls/GetPersonalization/get-personalization";
 import DoctorBookingsSection 
     from "apps/business-admin-app/components/sections/sections/sectionsRelatedToDoctor/doctorBookings";
 import { Session } from "next-auth";
@@ -41,7 +40,6 @@ import ManageUserSectionComponent from "./sections/settingsSection/manageUserSec
 import ConfigureMFASection from "./sections/settingsSection/mfaSection/configureMfaSection";
 import PersonalizationSectionComponent 
     from "./sections/settingsSection/personalizationSection/personalizationSectionComponent";
-import personalize from "./sections/settingsSection/personalizationSection/personalize";
 import RoleManagementSectionComponent from
     "./sections/settingsSection/roleManagementSection/roleManagementSectionComponent";
 import sideNavDataForAdmin

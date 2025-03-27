@@ -43,7 +43,7 @@ export function SignOutComponent(prop: SignOutComponentProps) {
             </Modal.Header>
             <Modal.Body>
                 <Stack direction="column" alignItems="flex-start" spacing={ 20 }>
-                    <p>Are you sure you want to logout, from your account ?</p>
+                    <p>Are you sure you want to logout from your account ?</p>
                     <Stack>
                         <ButtonToolbar>
                             <Button
@@ -58,6 +58,7 @@ export function SignOutComponent(prop: SignOutComponentProps) {
                                 size="lg"
                                 appearance="ghost"
                                 type="button"
+                                onClick={ onClose }
                             >Cancel
                             </Button>
                         </ButtonToolbar>
