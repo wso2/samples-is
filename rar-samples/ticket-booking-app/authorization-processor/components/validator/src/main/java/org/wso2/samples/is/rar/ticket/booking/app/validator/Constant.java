@@ -88,14 +88,17 @@ public class Constant {
      * Key name for the booking type.
      */
     public static final String BOOKING_TYPE_KEY = "bookingType";
+
     /**
      * Key name for the limit.
      */
     public static final String LIMIT_KEY = "limit";
+
     /**
      * Key name for the currency.
      */
     public static final String CURRENCY_KEY = "currency";
+    
     /**
      * Key name for the allowed amount object.
      */
