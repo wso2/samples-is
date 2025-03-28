@@ -44,7 +44,7 @@ import static org.wso2.samples.is.rar.ticket.booking.app.validator.Constant.SUPP
 import static org.wso2.samples.is.rar.ticket.booking.app.validator.Constant.USER_TYPE_CLAIM_MAPPING;
 
 /**
- * This class is responsible for processing the authorization details of the booking creation request.
+ * Contains operations which are responsible for processing the authorization details of the booking creation request.
  */
 public class BookingCreationAuthorizationProcessor implements AuthorizationDetailsProcessor {
 
