@@ -48,18 +48,15 @@ import static org.wso2.samples.is.rar.ticket.booking.app.validator.Constant.USER
  */
 public class BookingCreationAuthorizationProcessor implements AuthorizationDetailsProcessor {
 
-    private String accountType;
-    private String bookingType;
-
     @Override
     public ValidationResult validate(AuthorizationDetailsContext authorizationDetailsContext)
             throws AuthorizationDetailsProcessingException, IdentityOAuth2ServerException {
 
         JSONObject authzDetailsObject = new JSONObject(authorizationDetailsContext.
                 getAuthorizationDetail().getDetails());
-        bookingType = authzDetailsObject.getString(BOOKING_TYPE_KEY);
+        String bookingType = authzDetailsObject.getString(BOOKING_TYPE_KEY);
         AuthenticatedUser authenticatedUser = authorizationDetailsContext.getAuthenticatedUser();
-        accountType = authenticatedUser.getUserAttributes().get(USER_TYPE_CLAIM_MAPPING);
+        String accountType = authenticatedUser.getUserAttributes().get(USER_TYPE_CLAIM_MAPPING);
         if (StringUtils.isBlank(accountType) ||
                 (StringUtils.equals(accountType, Constant.UserType.SILVER.getUserType()) &&
                         StringUtils.equals(bookingType, Constant.BookingType.CONCERT.getBookingType()))) {
@@ -83,6 +80,12 @@ public class BookingCreationAuthorizationProcessor implements AuthorizationDetai
 
     @Override
     public AuthorizationDetail enrich(AuthorizationDetailsContext authorizationDetailsContext) {
+
+        JSONObject authzDetailsObject = new JSONObject(authorizationDetailsContext.
+                getAuthorizationDetail().getDetails());
+        String bookingType = authzDetailsObject.getString(BOOKING_TYPE_KEY);
+        AuthenticatedUser authenticatedUser = authorizationDetailsContext.getAuthenticatedUser();
+        String accountType = authenticatedUser.getUserAttributes().get(USER_TYPE_CLAIM_MAPPING);
 
         if (StringUtils.equals(accountType, Constant.UserType.GOLD.getUserType())) {
             if (StringUtils.equals(bookingType, Constant.BookingType.FILM.getBookingType())) {
