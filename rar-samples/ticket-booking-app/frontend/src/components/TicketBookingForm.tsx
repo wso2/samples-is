@@ -159,7 +159,7 @@ export const TicketBookingForm: FunctionComponent<TicketBookingFormProps> = (
                                     }
                                 </select>
                             </div>
-                            <h1>Total Amount: { getTotalAmount() } USD</h1>
+                            <h1>Total Amount: { getTotalAmount().toFixed(2) } USD</h1>
                             <button
                                 className="btn primary mt-0"
                                 onClick={ handleSubmit }

@@ -19,6 +19,8 @@ Follow these steps to create a new attribute `accountType` in WSO2 Identity Serv
     - **Attribute Name**: `accountType`
     - **Display Name**: `Account Type`
 5. Click **Finish** to create the new attribute.
+6. Scroll to the bottom of the **General** tab. Under the **Attribute Configurations** section, enable the checkbox labeled **Display** to make the attribute visible in the **Administrator Console**.
+7. Click **Update** to persist the configurations.
 
 ### Step 2: Add `accountType` to the OIDC `profile` Scope
 1. Navigate to **User Attributes & Stores** > **Attributes** > **OpenID Connect** > **Scopes** > **Profile**.
@@ -42,6 +44,97 @@ Follow these steps to create a Single Page Application (SPA) in WSO2 Identity Se
 1. After registering the application, navigate to the **User Attributes** tab of the application.
 2. Under the **Profile** section, ensure the `accountType` scope is selected as requested.
 5. Click **Update** to update the application configuration.
+
+### Register the API Resources
+
+Follow these steps to register the `booking_creation` authorization details for the API resource and associate it with your application:
+
+#### Step 1: Create the API Resource
+Use the following `curl` command to create an API resource for the `Ticket Booking API`:
+
+```bash
+curl --location 'https://localhost:9443/api/server/v1/api-resources' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Basic YWRtaW46YWRtaW4=' \
+--data '{
+    "name": "Ticket Booking API",
+    "identifier": "booking_api",
+    "description": "Payments API representation",
+    "requiresAuthorization": true,
+    "authorizationDetailsTypes": [
+        {
+            "type": "booking_creation",
+            "name": "Booking Creation Type",
+            "description": "Booking creation authorization details type",
+            "schema": {
+                "type": "object",
+                "required": [
+                    "type",
+                    "bookingType"
+                ],
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "booking_creation"
+                        ]
+                    },
+                    "bookingType": {
+                        "type": "string",
+                        "enum": [
+                            "film",
+                            "concert"
+                        ]
+                    },
+                    "allowedAmount": {
+                        "type": "object",
+                        "properties": {
+                            "currency": {
+                                "type": "string",
+                                "minLength": 3
+                            },
+                            "limit": {
+                                "type": "number"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}'
+```
+
+#### Step 2: Retrieve the API Resource ID
+After creating the API resource, note down the `id` of the newly created resource from the response.
+
+#### Step 3: Retrieve the Application ID
+Run the following `curl` command to retrieve the application ID. Replace `<URL_ENCODED_APP_NAME>` with the URL-encoded name of your application (e.g., `RAR%20Sample%20App%20Frontend`):
+
+```bash
+curl --location 'https://localhost:9443/api/server/v1/applications?filter=name+eq+<URL_ENCODED_APP_NAME>' \
+--header 'Authorization: Basic YWRtaW46YWRtaW4='
+```
+
+From the response, copy the `id` of your application.
+
+#### Step 4: Authorize the API Resource for the Application
+Use the following `curl` command to authorize the created API resource for your application. Replace `<APPLICATION_ID>` with the application ID and `<API_RESOURCE_ID>` with the API resource ID retrieved earlier:
+
+```bash
+curl --location 'https://localhost:9443/api/server/v1/applications/<APPLICATION_ID>/authorized-apis' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Basic YWRtaW46YWRtaW4=' \
+--data '{
+    "id": "<API_RESOURCE_ID>",
+    "policyIdentifier": "RBAC",
+    "authorizationDetailsTypes": [
+        "booking_creation"
+    ]
+}'
+```
+
+By completing these steps, the `Ticket Booking API` will be registered and authorized for your application with the `booking_creation` authorization details type.
 
 ## Update `src/config.json` File
 
@@ -77,7 +170,7 @@ Follow these steps to update the `src/config.json` file with the necessary confi
 Follow these steps to install dependencies, start the server, and access the frontend application:
 
 ### Step 1: Install Dependencies
-1. Navigate to the root directory.
+1. Navigate to the `samples-is/rar-samples/ticket-booking-app/frontend` directory.
 2. Install the required dependencies using `npm`:
     ```bash
     npm install
