@@ -128,7 +128,7 @@ export const HomePage: FunctionComponent = (): ReactElement => {
                 <p>Please open &quot;src/config.json&quot; file using an editor, and update
                     the <code>clientID</code> value with the registered application&apos;s client ID.</p>
                 <p>Visit repo <a
-                    href="https://github.com/wso2/samples-is/rar-samples/ticket-booking-app/frontend/README.md"
+                    href="https://github.com/wso2/samples-is/blob/master/rar-samples/ticket-booking-app/frontend/README.md"
                     target="_blank" rel="noreferrer noopener">README</a> for
                     more details.</p>
             </div>
@@ -171,7 +171,7 @@ export const HomePage: FunctionComponent = (): ReactElement => {
                             <h4 className={ "spa-app-description" }>
                                 Sample demo showcasing how Rich Authorization Requests (RAR) can be used to handle complex 
                                 authorization scenarios through the&nbsp;
-                                <a href="https://github.com/wso2/samples-is/rar-samples/ticket-booking-app/README.md" target="_blank" rel="noreferrer noopener">
+                                <a href="https://github.com/wso2/samples-is/blob/master/rar-samples/ticket-booking-app/README.md" target="_blank" rel="noreferrer noopener">
                                     Ticket Booking application
                                 </a>.
                             </h4>
