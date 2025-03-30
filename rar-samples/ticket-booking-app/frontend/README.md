@@ -6,6 +6,7 @@ This sample demonstrates the basic usage of Rich Authorization Requests (RAR). T
  1. [Add a New Attribute `accountType` to the OIDC `profile` Scope](#add-a-new-attribute-accounttype-to-the-oidc-profile-scope)
  2. [Create a Single Page Application (SPA)](#create-a-single-page-application-spa)
  3. [Update `src/config.json` File](#update-srcconfigjson-file)
+ 3. [Run the Application](#run-the-application)
 
 ## Add a New Attribute `accountType` to the OIDC `profile` Scope
 
