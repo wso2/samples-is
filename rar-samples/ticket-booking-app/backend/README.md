@@ -6,7 +6,8 @@ This is the backend of a ticket booking application.
  1. [API Endpoint](#api-endpoint)
  2. [Configure an Application in WSO2 Identity Server](#configure-an-application-in-wso2-identity-server)
  3. [Configure the `config.json` File](#configure-the-configjson-file)
- 4. [Run the application](#run-the-application)
+ 4. [Configure the `deployment.toml` File for Introspection Endpoint](#configure-the-deploymenttoml-file-for-introspection-endpoint)
+ 5. [Run the application](#run-the-application)
 
 ## API Endpoint
 
@@ -130,12 +131,44 @@ After obtaining the **Client ID** and **Client Secret**, you need to configure t
 5. **Save the File**  
     Save the changes to the `config.json` file.
 
+## Configure the `deployment.toml` File for Introspection Endpoint
+
+To enable the introspection endpoint to work with client ID and client secret authentication, you need to update the `deployment.toml` file in your WSO2 Identity Server. Follow these steps:
+
+1. **Locate the `deployment.toml` File**  
+    Navigate to the `<IS_HOME>/repository/conf` directory and open the `deployment.toml` file.
+
+2. **Add Access Control Configuration**  
+    Add the following configuration under the `[[resource.access_control]]` section:
+    ```toml
+    [[resource.access_control]]
+    context="(.*)/oauth2/introspect(.*)"
+    secure = "true"
+    http_method = "all"
+    cross_tenant = true
+    cross_access_allowed_tenants="carbon.super"
+    allowed_auth_handlers="BasicClientAuthentication"
+    permissions=["/permission/admin/manage/identity/applicationmgt/view"]
+    scopes=["internal_application_mgt_view"]
+    ```
+
+3. **Save the File**  
+    Save the changes to the `deployment.toml` file.
+
+4. **Restart the Server**  
+    Restart the WSO2 Identity Server to apply the changes:
+    ```bash
+    sh <IS_HOME>/bin/wso2server.sh
+    ```
+
+By completing these steps, the introspection endpoint will be configured to authenticate requests using client ID and client secret.
+
 ## Run the application
 
 To run the backend server, follow these steps:
 
 1. **Install Dependencies**
-    Navigate to the root directory of the application and run the following command to install the required dependencies:
+    Navigate to the `samples-is/rar-samples/ticket-booking-app/backend` directory of the application and run the following command to install the required dependencies:
     ```bash
     npm install
     ```

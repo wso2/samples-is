@@ -7,7 +7,7 @@ This is a extension written by implementing `AuthorizationDetailsProcessor` inte
 Follow these steps to build the repository and deploy the generated JAR file:
 
 ### Step 1: Build the Repository
-1. Open a terminal and navigate to the root directory of the project.
+1. Open a terminal and navigate to the `samples-is/rar-samples/ticket-booking-app/authorization-processor` directory of the project.
 2. Run the following command to build the project:
     ```bash
     mvn clean install
