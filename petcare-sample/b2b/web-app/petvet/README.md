@@ -2,7 +2,7 @@
 
 ## Prerequisites:
 1. Install Ballerina 2201.5.0 https://dist.ballerina.io/downloads/2201.5.0/ballerina-2201.5.0-swan-lake-macos-arm-x64.pkg
-2. Install Node 16 LTS (Tested in v16.13.0).
+2. Install Node 18 LTS (Tested in v18.12.0).
 3. Clone https://github.com/wso2/samples-is and the sample will be in the petcare-sample directory.
 
 ## Deploy API Services
