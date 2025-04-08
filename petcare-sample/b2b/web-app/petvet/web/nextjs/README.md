@@ -2,7 +2,7 @@
 
 ## Prerequisites:
 
-- Node.js (version 10 or above).
+- Node.js (version 18.12.0 or above).
 
 ### Build the source
 
