@@ -1,0 +1,115 @@
+[
+  
+  {
+    "id": "callback-handler",
+    "upstream": {
+      "url": "http://app.example.com:8081/home/id_token",
+      "preserve_host": false
+    },
+    "match": {
+      "url": "https://localhost:9444/callback",
+      "methods": ["GET"] 
+    },
+    "authenticators": [
+      {
+        "handler": "callback",
+        "config": {
+          "client_id": "your-client-id",
+          "client_secret": "your-client-secret",
+          "token_url": "https://localhost:9443/oauth2/token",
+          "redirect_url": "https://localhost:9444/callback",
+          "userinfo_url": "https://localhost:9443/oauth2/userinfo",
+          "token_endpoint_auth_method": "client_secret_post"
+        }
+      }
+          
+    ],
+    "authorizer": {
+      "handler": "allow"
+    },
+    "mutators": [
+  {
+    "handler": "header",
+    "config": {
+      "headers": {
+        "X-User": "{{ .Extra.sub }}",
+        "X-User-Email": "{{ .Extra.username }}",
+        "X-User-Name": "{{ .Extra.username}}",
+        "X-User-Access-Token": "{{ .Extra.access_token }}",
+        "X-User-Id-Token": "{{ .Extra.id_token }}"
+
+
+      }
+    }
+  }
+]
+  },
+  {
+    "id": "protected-resources",
+    "upstream": {
+      "url": "http://app.example.com:8081/home/id_token",
+      "preserve_host": false
+    },
+    "match": {
+       "url": "https://localhost:9444/home/id_token",
+      "methods": ["GET"]
+    },
+    "authenticators": [
+      {
+        "handler": "jwt",
+        "config": {
+          "required_scope": ["openid", "email" , "profile"]
+        }
+      }
+    ],
+    "authorizer": {
+      "handler": "allow"
+    },
+    "mutators": [
+      {
+        "handler": "header",
+        "config": {
+          "headers": {
+            "X-User-Email": "{{ .Extra.username }}",
+            "Authorization": "Bearer {{ print .Extra.access_token }}",
+            "state": "randomstate"
+          }
+        }
+      }
+    ],
+    "errors": [
+      {
+        "handler": "redirect",
+        "config": {
+          "to": "https://localhost:9443/oauth2/authorize?response_type=code&client_id=<your-client-id>&redirect_uri=https://localhost:9444/callback&scope=openid%20profile%20email&state=randomstate"
+        }
+      }
+    ]
+  },
+
+  {
+    "id": "static-assets",
+    "match": {
+      "url": "https://localhost:9444/css/<**>",
+      "methods": ["GET"]
+    },
+    "upstream": {
+      "url": "http://app.example.com:8081",
+      "preserve_host": false
+    },
+    "authenticators": [
+      {
+        "handler": "noop"
+      }
+    ],
+    "authorizer": {
+      "handler": "allow"
+    },
+    "mutators": [
+      {
+        "handler": "noop"
+      }
+    ]
+  }
+  
+]
