@@ -1,0 +1,82 @@
+serve:
+  proxy:
+    tls:
+      cert:
+        path: /Users/aaisham/Desktop/WSO2/oathkeeper-demo/certificates/cert.pem
+      key:
+        path: /Users/aaisham/Desktop/WSO2/oathkeeper-demo/certificates/key.pem
+    port: 9444
+    host: localhost
+    timeout:
+      read: 5s
+      write: 10s
+      idle: 120s
+  api:
+    port: 4456
+
+access_rules:
+  repositories:
+    - file:///Users/aaisham/Desktop/wso2/oathkeeper-demo/rules.json
+  matching_strategy: glob
+
+authenticators:
+  noop:
+    enabled: true
+  jwt:
+    enabled: true
+    config:
+      jwks_urls:
+        - "https://localhost:9443/oauth2/jwks"
+      trusted_issuers:
+        - "https://localhost:9443/oauth2/token"
+      target_audience:
+        - "<your-client-id>"
+      required_scope:
+        - "openid"
+        - "email"
+        - "profile"
+      allowed_algorithms:
+        - "RS256"
+  callback:
+    enabled: true
+    config:
+      client_id: "<your-client-id>"
+      client_secret: "lo89N8uDm3AvrZKJD0bzlKwtpycsf1Cqve2RhfHQJ4ka"
+      token_url: "https://localhost:9443/oauth2/token"
+      redirect_url: "https://localhost:9444/callback"
+      userinfo_url: "https://localhost:9443/oauth2/userinfo"
+      token_endpoint_auth_method: "client_secret_basic"
+
+
+authorizers:
+  allow:
+    enabled: true
+
+mutators:
+  header:
+    enabled: true
+    config:
+      headers:
+        X-User: "{{ print .Extra.sub }}"
+        X-User-Name: 
+          - "{{ .Extra.username }}"
+          - "i added this"
+        Authorization: "Bearer {{ print .Extra.access_token }}"
+        X-User-Access-Token: "{{ print .Extra.access_token }}"
+        X-User-Id-Token: "{{ print .Extra.id_token }}"
+        state: "randomstate"
+  noop:
+    enabled: true
+errors:
+  handlers:
+    redirect:
+      enabled: true
+      config:
+        to: https://localhost:9443/oauth2/authorize?response_type=code&client_id=<your-client-id>&redirect_uri=https://localhost:9444/callback&scope=openid%20profile%20email&state=randomstate
+        when:
+          - error:
+              - unauthorized
+            request:
+              header:
+                accept:
+                  - text/html
