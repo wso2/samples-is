@@ -1395,6 +1395,66 @@
         }
       },
       "additionalProperties": false
+    },
+     "configSessionStore": {
+      "type": "object",
+      "title": "Session Store Configuration",
+      "description": "Configuration for the session store backend. Defaults to in-memory storage if not specified.",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "title": "Session Store Type",
+          "description": "The type of session store to use. 'memory' for in-memory storage (default), 'redis' for Redis backend.",
+          "enum": ["memory", "redis"],
+          "default": "memory"
+        },
+        "redis": {
+          "type": "object",
+          "title": "Redis Configuration",
+          "description": "Redis-specific configuration. Only used when type is 'redis'.",
+          "additionalProperties": false,
+          "properties": {
+            "addr": {
+              "type": "string",
+              "title": "Redis Address",
+              "description": "Redis server address in the format host:port."
+            },
+            "password": {
+              "type": "string",
+              "title": "Redis Password",
+              "description": "Password for Redis authentication. Leave empty if no authentication is required."
+            },
+            "db": {
+              "type": "integer",
+              "title": "Redis Database",
+              "description": "Redis database number to use.",
+              "default": 0,
+              "minimum": 0,
+              "maximum": 15
+            },
+            "session_prefix": {
+              "type": "string",
+              "title": "Session Key Prefix",
+              "description": "Prefix for session keys in Redis.",
+              "default": "session:"
+            },
+            "state_prefix": {
+              "type": "string",
+              "title": "State Key Prefix",
+              "description": "Prefix for state keys in Redis (used for CSRF protection).",
+              "default": "state:"
+            },
+            "ttl": {
+              "type": "string",
+              "title": "Time To Live",
+              "description": "Default TTL for session data in Redis.",
+              "pattern": "^[0-9]+(ns|us|ms|s|m|h)$",
+              "default": "24h"
+            }
+          }
+        }
+      }
     }
   },
   "properties": {
@@ -2229,6 +2289,11 @@
       "title": "The Oathkeeper version this config is written for.",
       "description": "SemVer according to https://semver.org/ prefixed with `v` as in our releases.",
       "pattern": "^v(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$"
+    },
+    "session_store": {
+      "title": "Session Store",
+      "description": "Configuration for the session store backend used by Oathkeeper.",
+      "$ref": "#/definitions/configSessionStore"
     }
   },
   "required": [],

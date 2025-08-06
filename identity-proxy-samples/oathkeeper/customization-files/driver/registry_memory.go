@@ -11,7 +11,6 @@ import (
 
 	"github.com/ory/oathkeeper/pipeline"
 	pe "github.com/ory/oathkeeper/pipeline/errors"
-	"github.com/ory/oathkeeper/pipeline/session_store"
 	"github.com/ory/oathkeeper/proxy"
 	"github.com/ory/oathkeeper/x"
 
@@ -29,6 +28,7 @@ import (
 	"github.com/ory/oathkeeper/pipeline/authn"
 	"github.com/ory/oathkeeper/pipeline/authz"
 	"github.com/ory/oathkeeper/pipeline/mutate"
+	"github.com/ory/oathkeeper/pipeline/session_store"
 	"github.com/ory/oathkeeper/rule"
 )
 
@@ -64,6 +64,7 @@ type RegistryMemory struct {
 	authorizers    map[string]authz.Authorizer
 	mutators       map[string]mutate.Mutator
 	errors         map[string]pe.Handler
+	sessionStore   session_store.SessionStorer
 }
 
 func (r *RegistryMemory) Init() {
@@ -270,7 +271,6 @@ func (r *RegistryMemory) prepareErrors() {
 		interim := []pe.Handler{
 			pe.NewErrorJSON(r.c, r),
 			pe.NewErrorRedirect(r.c, r),
-			pe.NewErrorOidcRedirect(r.c, r),
 			pe.NewErrorWWWAuthenticate(r.c, r),
 		}
 
@@ -440,4 +440,8 @@ func (r *RegistryMemory) Tracer() trace.Tracer {
 		}
 	}
 	return r.trc.Tracer()
+}
+
+func (r *RegistryMemory) SessionStore() session_store.SessionStorer {
+	return r.sessionStore
 }

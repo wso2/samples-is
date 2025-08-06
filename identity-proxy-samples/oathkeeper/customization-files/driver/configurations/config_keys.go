@@ -58,6 +58,9 @@ const (
 	// cookie session
 	AuthenticatorCookieSessionIsEnabled Key = "authenticators.cookie_session.enabled"
 
+	// callback
+	AuthenticatorCallbackIsEnabled Key = "authenticators.callback.enabled"
+
 	// jwt
 	AuthenticatorJwtIsEnabled  Key = "authenticators.jwt.enabled"
 	AuthenticatorJwtJwkMaxWait Key = "authenticators.jwt.config.jwks_max_wait"
