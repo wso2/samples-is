@@ -1,0 +1,204 @@
+[
+  {
+    "id": "callback-handler",
+    "upstream": {
+      "url": "",
+      "preserve_host": true
+    },
+    "match": {
+      "url": "<your_redirect_url>",
+      "methods": [
+        "GET"
+      ]
+    },
+    "authenticators": [
+      {
+        "handler": "callback",
+        "config": {
+          "client_id": "<your_client_id>",
+          "client_secret": "<your_client_secret>",
+          "token_url": "https://localhost:9443/oauth2/token",
+          "redirect_url": "<your_redirect_url>",
+          "userinfo_url": "https://localhost:9443/oauth2/userinfo",
+          "token_endpoint_auth_method": "client_secret_post"
+        }
+      }
+    ],
+    "authorizer": {
+      "handler": "allow"
+    },
+    "mutators": [
+      {
+        "handler": "header",
+        "config": {
+          "headers": {
+            "X-User": "{{ .Extra.sub }}",
+            "X-User-Email": "{{ .Extra.username }}",
+            "X-User-Name": "{{ .Extra.username}}",
+            "X-User-Access-Token": "{{ .Extra.access_token }}",
+            "X-User-Id-Token": "{{ .Extra.id_token }}"
+          }
+        }
+      }
+    ],
+    "errors": [
+      {
+        "handler": "redirect",
+        "config": {
+          "to": "request_url",
+          "when": [
+            {
+              "error": [
+                "unauthorized",
+                "internal_server_error"
+              ],
+              "request": {
+                "header": {
+                  "accept": [
+                    "text/html"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "protected-resources",
+    "upstream": {
+      "url": "http://localhost:8080/home",
+      "preserve_host": false
+    },
+    "match": {
+      "url": "https://localhost:9444/home/<**>",
+      "methods": [
+        "GET"
+      ]
+    },
+    "authenticators": [
+      {
+        "handler": "session_jwt",
+        "config": {
+          "jwks_urls": [
+            "https://localhost:9443/oauth2/jwks"
+          ],
+          "required_scope": [
+            "openid",
+            "email",
+            "profile"
+          ],
+          "target_audience": [
+            "<your_client_id>"
+          ],
+          "trusted_issuers": [
+            "https://localhost:9443/oauth2/token"
+          ],
+          "allowed_algorithms": [
+            "RS256"
+          ],
+          "jwks_max_wait": "1s",
+          "jwks_ttl": "30m",
+          "scope_strategy": "exact"
+        }
+      }
+    ],
+    "authorizer": {
+      "handler": "allow"
+    },
+    "mutators": [
+      {
+        "handler": "header",
+        "config": {
+          "headers": {
+            "X-User-Email": "{{ .Extra.username }}",
+            "Authorization": "Bearer {{ print .Extra.access_token }}",
+            "state": "randomstate"
+          }
+        }
+      }
+    ],
+    "errors": [
+      {
+        "handler": "redirect",
+        "config": {
+          "to": "https://localhost:9443/oauth2/authorize",
+          "type": "auth",
+          "oidc_authorization_url": "https://localhost:9443/oauth2/authorize",
+          "client_id": "<your_client_id>",
+          "redirect_url": "<your_redirect_url>",
+          "scopes": [
+            "openid",
+            "profile",
+            "email"
+          ],
+          "use_pkce": true
+        }
+      }
+    ]
+  },
+  {
+    "id": "logout-handler",
+    "match": {
+      "url": "https://localhost:9444/logout",
+      "methods": [
+        "GET"
+      ]
+    },
+    "upstream": {
+      "url": "http://localhost:8080/home/id_token",
+      "preserve_host": true
+    },
+    "authenticators": [
+      {
+        "handler": "unauthorized"
+      }
+    ],
+    "authorizer": {
+      "handler": "allow"
+    },
+    "mutators": [
+      {
+        "handler": "noop"
+      }
+    ],
+    "errors": [
+      {
+        "handler": "redirect",
+        "config": {
+          "to": "https://localhost:9443/oauth2/authorize",
+          "type": "logout",
+          "oidc_logout_url": "https://localhost:9443/oidc/logout",
+          "post_logout_redirect_url": "https://localhost:9444/home/id_token"
+        }
+      }
+    ]
+  },
+  {
+    "id": "static-assets",
+    "match": {
+      "url": "https://localhost:9444/css/<**>",
+      "methods": [
+        "GET"
+      ]
+    },
+    "upstream": {
+      "url": "http://localhost:8080",
+      "preserve_host": false
+    },
+    "authenticators": [
+      {
+        "handler": "noop"
+      }
+    ],
+    "authorizer": {
+      "handler": "allow"
+    },
+    "mutators": [
+      {
+        "handler": "noop"
+      }
+    ]
+  }
+]

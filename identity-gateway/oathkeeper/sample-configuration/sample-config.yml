@@ -1,0 +1,117 @@
+# Sample configuration for Oathkeeper with OIDC integration
+# Copy this file to config.yml and modify according to your environment
+
+serve:
+  proxy:
+    port: 9444 # 4455 if no TLS configured
+    host: localhost
+    tls:
+      cert:
+        path: /path/to/certificates/cert.pem
+      key:
+        path: /path/to/certificates/key.pem
+    timeout:
+      read: 5s
+      write: 10s
+      idle: 120s
+  api:
+    port: 4456
+
+# Session store configuration
+session_store:
+  type: redis
+  redis:
+    addr: "127.0.0.1:6379"
+    password: "<your_redis_password>"
+    db: 0
+    session_prefix: "session:"
+    state_prefix: "state:"
+    ttl: "24h"
+
+# Access rules configuration
+access_rules:
+  repositories:
+    - file:////path/to/rules.sample.json
+  matching_strategy: glob
+
+# Authenticators configuration
+authenticators:
+  # Session JWT authenticator for validating session tokens
+  session_jwt:
+    enabled: true
+    config:
+      jwks_urls:
+        - "https://localhost:9443/oauth2/jwks"
+      required_scope:
+        - "openid"
+        - "email"
+        - "profile"
+      target_audience:
+        - "api://default"
+      trusted_issuers:
+        - "https://localhost:9443/oauth2/token"
+      allowed_algorithms:
+        - "RS256"
+      jwks_max_wait: "1s"
+      jwks_ttl: "30m"
+      scope_strategy: "exact"
+  noop:
+    enabled: true
+
+  # Callback authenticator for handling OAuth2/OIDC callbacks
+  callback:
+    enabled: true
+    config:
+      client_id: "<your_client_id>"
+      client_secret: "<your_client_secret>"
+      token_url: "https://localhost:9443/oauth2/token"
+      redirect_url: "<your_redirect_url>"
+      userinfo_url: "https://localhost:9443/oauth2/userinfo"
+      token_endpoint_auth_method: "client_secret_basic"
+
+  # Logout handler for session termination
+  unauthorized:
+    enabled: true
+
+# Authorizers
+authorizers:
+  allow:
+    enabled: true
+
+# Mutators configuration for request transformation
+mutators:
+  header:
+    enabled: true
+    config:
+      headers:
+        X-User: "{{ print .Extra.sub }}"
+        X-User-Name: "{{ .Extra.username }}"
+        Authorization: "Bearer {{ print .Extra.access_token }}"
+        X-User-Access-Token: "{{ print .Extra.access_token }}"
+        X-User-Id-Token: "{{ print .Extra.id_token }}"
+  noop:
+    enabled: true
+
+# Error handlers configuration
+errors:
+  handlers:
+    redirect:
+      enabled: true
+      config:
+        to: "https://localhost:9443/oauth2/authorize"
+        type: "auth"
+        oidc_authorization_url: "https://localhost:9443/oauth2/authorize"
+        client_id: "<your_client_id>"
+        redirect_url: "<your_redirect_url>"
+        scopes:
+          - "openid"
+          - "profile"
+          - "email"
+        use_pkce: true
+        when:
+          - error:
+              - unauthorized
+            request:
+              header:
+                accept:
+                  - text/html
