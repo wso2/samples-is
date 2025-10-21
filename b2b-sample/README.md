@@ -299,7 +299,7 @@ setup the config json file as mentioned above.
 - Open [http://localhost:3001](http://localhost:3001) with your browser to see the result.
 - Click `Sign in`.
 - Select the `Sign in With SSO` option.
-- Type `Best Car Mart` when pop up to type the organization name and click `Submit`.
+- Type `bestcarmart` when pop up to type the organization handle and click `Submit`.
 - You will get the login page of `Best Car Mart` organization.
 - Provide the credentials of `Alex` and login.
 
@@ -337,7 +337,7 @@ Prerequisite
  # From `<SAMPE_IS_HOME>/b2b-sample`
  nx serve business-app
 ```
-> **_NOTE:_** If `nx serve business-admin-app` produces an error, try using `npx nx serve business-admin-app`.
+> **_NOTE:_** If `nx serve business-app` produces an error, try using `npx nx serve business-app`.
 
 - Open a **private browser** and type [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 - Click `Sign in`.
