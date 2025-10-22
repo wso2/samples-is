@@ -1,6 +1,6 @@
 {
     "clientId": "",
     "clientSecret": "",
-    "baseUrl": "https://127.0.0.1:9443",
-    "allowedOrigins": [ "https://localhost:3000" ]
+    "baseUrl": "https://localhost:9443/t/carbon.super",
+    "allowedOrigins": [ "http://localhost:3000", "http://rar-sample-app-frontend.com" ]
 }

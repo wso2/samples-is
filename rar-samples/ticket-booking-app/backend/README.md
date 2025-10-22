@@ -124,7 +124,7 @@ After obtaining the **Client ID** and **Client Secret**, you need to configure t
     ```json
     "allowedOrigins": [
             "http://localhost:3000",
-            "https://your-frontend-app.com"
+            "http://your-frontend-app.com"
     ]
     ```
 

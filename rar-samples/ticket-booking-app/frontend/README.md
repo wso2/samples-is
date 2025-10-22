@@ -148,12 +148,12 @@ Follow these steps to update the `src/config.json` file with the necessary confi
 {
     "clientId": "<CLIENT_ID>",
     "baseUrl": "https://<IS_HOST>:<PORT>/t/<TENANT_DOMAIN>",
-    "signInRedirectUrl": "https://<YOUR_APP_HOST>:<PORT>/callback",
-    "signOutRedirectUrl": "https://<YOUR_APP_HOST>:<PORT>",
+    "signInRedirectUrl": "http://<YOUR_APP_HOST>:<PORT>",
+    "signOutRedirectUrl": "http://<YOUR_APP_HOST>:<PORT>",
     "scope": "openid profile",
     "resourceServerUrls": [
-        "https://<RESOURCE_SERVER_HOST>:<PORT>/api/resource1",
-        "https://<RESOURCE_SERVER_HOST>:<PORT>/api/resource2"
+        "http://<RESOURCE_SERVER_HOST>:<PORT>/api/resource1",
+        "http://<RESOURCE_SERVER_HOST>:<PORT>/api/resource2"
     ]
 }
 ```
