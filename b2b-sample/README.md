@@ -41,7 +41,7 @@ configuring an identity provider for the organization, and customize the login f
 ## 2. Setting up
 
 ### Step 1: Create an organization
-Create an organization named **Best Car Mart**.
+Create an organization named **Best Car Mart**. Set the organization handle as `bestcarmart`.
 
 ### Step 2: Create applications
 Now we need **two** applications in the root organization to communicate with the **Guardio-Business-App** and the ****Guardio-Admin-App****.
