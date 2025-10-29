@@ -20,7 +20,8 @@ import express from 'express';
 import cors from 'cors';
 import axios from 'axios';
 import https from 'https';
-import IDPConfig from './config.json' assert { type: 'json' };
+import fs from 'fs';
+const IDPConfig = JSON.parse(fs.readFileSync('./config.json', 'utf-8'));
 
 // Added to compress self signed cert validation
 const agent = new https.Agent({

@@ -104,13 +104,12 @@ dbPort = "<DB_PORT>"
    2. http://localhost:3002/api/auth/callback/wso2isAdmin
 6. Add the following Allowed Origins
    1. http://localhost:3002
-7. Enable app as a public client.
-8. Select Access token type as JWT.
-9. Click on Update.
-10. Navigate to `User Attributes` tab of the created application and mark Email, First Name, Last Name and Roles as 
-    requested attributes.
-11. Click on Update.
-12. Navigate to `API Authorization` tab and authorize the following API resources for the application with all the 
+7. Select Access token type as JWT. 
+8. Click on Update. 
+9. Navigate to `User Attributes` tab of the created application and mark Email, First Name, Last Name and Roles as 
+    requested attributes. 
+10. Click on Update. 
+11. Navigate to `API Authorization` tab and authorize the following API resources for the application with all the 
     scopes. When subscribing / authorizing to APIs make sure to subscribe to Organizational APIs. 
     Not the Management APIs (https://is.docs.wso2.com/en/latest/apis/)
     1. SCIM2 Users API - /o/scim/Users 
@@ -122,9 +121,9 @@ dbPort = "<DB_PORT>"
     7. Branding Preference Management API - /o/api/server/v1/branding-preference 
     8. Channel Service 
     9. Pet Management Service 
-    10. Personalization Service
-13. In the `Roles` tab, change role audience to Application.
-14. Navigate to the `Login Flow` tab and add the following conditional authentication script.
+    10. Personalization Service 
+12. In the `Roles` tab, change role audience to Application. 
+13. Navigate to the `Login Flow` tab and add the following conditional authentication script.
     ```dtd
     var onLoginRequest = function(context) {
        executeStep(1, {

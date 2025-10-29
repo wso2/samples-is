@@ -7,9 +7,8 @@ Identity server(IS) using scenarios given below.
     2 - Configuring Single-Sign-On with OIDC
     3 - Configuring Multi-Factor Authentication
     4 - Configuring Twitter as a Federated Authenticator
-    5 - Setting up Self-Signup
-    6 - Creating a workflow
-       
+    5 - Setting up Self-Signup 
+
 ## Table of contents
 
 - [Getting started](#getting-started)
