@@ -110,14 +110,19 @@
               org.wso2.carbon.identity.application.authentication.framework.config.model.graph,
               org.wso2.carbon.identity.application.authentication.framework.config.model,
               org.wso2.carbon.identity.application.authentication.framework.context,
-              org.wso2.carbon.identity.user.profile.mgt.association.federation,
-              org.wso2.carbon.identity.user.profile.mgt.association.federation.exception,
               org.apache.commons.collections,
               org.wso2.carbon.registry.core.service,
               org.wso2.carbon.user.core,
               org.wso2.carbon.user.core.claim,
-              org.wso2.carbon.user.core.service
+              org.wso2.carbon.user.core.service,
+                org.wso2.carbon.identity.user.profile.mgt,
+                org.wso2.carbon.identity.user.profile.mgt.association.federation,
+                org.wso2.carbon.identity.user.profile.mgt.association.federation.exception
             </Import-Package>
+          <DynamicImport-Package>
+              org.graalvm.polyglot,
+              org.graalvm.polyglot.proxy
+          </DynamicImport-Package>
           </instructions>
         </configuration>
       </plugin>
