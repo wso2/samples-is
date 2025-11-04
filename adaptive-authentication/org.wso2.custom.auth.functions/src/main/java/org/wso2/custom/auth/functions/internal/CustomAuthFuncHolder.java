@@ -19,6 +19,7 @@
 package org.wso2.custom.auth.functions.internal;
 
 import org.wso2.carbon.identity.application.authentication.framework.JsFunctionRegistry;
+import org.wso2.carbon.identity.user.profile.mgt.association.federation.FederatedAssociationManager;
 import org.wso2.carbon.registry.core.service.RegistryService;
 import org.wso2.carbon.user.core.service.RealmService;
 
@@ -28,6 +29,7 @@ public class CustomAuthFuncHolder {
     private RealmService realmService;
     private RegistryService registryService;
     private JsFunctionRegistry jsFunctionRegistry;
+    private FederatedAssociationManager federatedAssociationManager;
 
     private CustomAuthFuncHolder() {
 
@@ -66,5 +68,16 @@ public class CustomAuthFuncHolder {
     public void setJsFunctionRegistry(JsFunctionRegistry jsFunctionRegistry) {
 
         this.jsFunctionRegistry = jsFunctionRegistry;
+    }
+
+    public FederatedAssociationManager getFederatedAssociationManager() {
+
+        return federatedAssociationManager;
+    }
+
+    public void setFederatedAssociationManager(
+            FederatedAssociationManager federatedAssociationManager) {
+
+        this.federatedAssociationManager = federatedAssociationManager;
     }
 }

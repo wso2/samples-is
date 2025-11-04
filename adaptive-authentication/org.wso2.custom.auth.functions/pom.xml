@@ -43,6 +43,12 @@
       <version>${carbon.kernel.version}</version>
 <!--      <scope>provided</scope>-->
     </dependency>
+    <dependency>
+      <groupId>org.graalvm.sdk</groupId>
+      <artifactId>graal-sdk</artifactId>
+      <version>${graalvm.version}</version>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -104,6 +110,8 @@
               org.wso2.carbon.identity.application.authentication.framework.config.model.graph,
               org.wso2.carbon.identity.application.authentication.framework.config.model,
               org.wso2.carbon.identity.application.authentication.framework.context,
+              org.wso2.carbon.identity.user.profile.mgt.association.federation,
+              org.wso2.carbon.identity.user.profile.mgt.association.federation.exception,
               org.apache.commons.collections,
               org.wso2.carbon.registry.core.service,
               org.wso2.carbon.user.core,
@@ -122,8 +130,9 @@
 
 
   <properties>
-    <identity.framework.version>5.20.324</identity.framework.version>
+    <identity.framework.version>7.7.34</identity.framework.version>
     <carbon.kernel.version>4.7.0-beta6</carbon.kernel.version>
-    <identity.framework.version.range>[5.0.0, 6.0.0)</identity.framework.version.range>
+    <identity.framework.version.range>[5.0.0, 8.0.0)</identity.framework.version.range>
+    <graalvm.version>22.3.4</graalvm.version>
   </properties>
 </project>

@@ -28,8 +28,10 @@ import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ReferenceCardinality;
 import org.osgi.service.component.annotations.ReferencePolicy;
 import org.wso2.carbon.identity.application.authentication.framework.JsFunctionRegistry;
+import org.wso2.carbon.identity.user.profile.mgt.association.federation.FederatedAssociationManager;
 import org.wso2.carbon.registry.core.service.RegistryService;
 import org.wso2.carbon.user.core.service.RealmService;
+import org.wso2.custom.auth.functions.GetFederatedAssociationsFunctionImpl;
 import org.wso2.custom.auth.functions.GetUsernameFromContextFunction;
 import org.wso2.custom.auth.functions.GetUsernameFromContextFunctionImpl;
 @Component(
@@ -47,6 +49,8 @@ public class CustomAuthFuncComponent {
         GetUsernameFromContextFunction getUsernameFromContextFunctionImpl = new GetUsernameFromContextFunctionImpl();
         jsFunctionRegistry.register(JsFunctionRegistry.Subsystem.SEQUENCE_HANDLER, "getUsernameFromContext",
                 getUsernameFromContextFunctionImpl);
+        jsFunctionRegistry.register(JsFunctionRegistry.Subsystem.SEQUENCE_HANDLER, "getFederatedAssociations",
+                new GetFederatedAssociationsFunctionImpl());
     }
 
     @Deactivate
@@ -56,6 +60,7 @@ public class CustomAuthFuncComponent {
             jsFunctionRegistry.deRegister(JsFunctionRegistry.Subsystem.SEQUENCE_HANDLER, "setForceAuth");
             jsFunctionRegistry.deRegister(JsFunctionRegistry.Subsystem.SEQUENCE_HANDLER, "getUsernameFromContext");
             jsFunctionRegistry.deRegister(JsFunctionRegistry.Subsystem.SEQUENCE_HANDLER, "getClaimsForUsername");
+            jsFunctionRegistry.deRegister(JsFunctionRegistry.Subsystem.SEQUENCE_HANDLER, "getFederatedAssociations");
         }
     }
 
@@ -119,5 +124,32 @@ public class CustomAuthFuncComponent {
     public void unsetJsFunctionRegistry(JsFunctionRegistry jsFunctionRegistry) {
 
         this.jsFunctionRegistry = null;
+    }
+
+    @Reference(
+            name = "identity.user.profile.mgt.component",
+            service = FederatedAssociationManager.class,
+            cardinality = ReferenceCardinality.MANDATORY,
+            policy = ReferencePolicy.DYNAMIC,
+            unbind = "unsetFederatedAssociationManagerService"
+    )
+    protected void setFederatedAssociationManagerService(FederatedAssociationManager
+                                                                 federatedAssociationManagerService) {
+
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Federated Association Manager Service is set in the Application Authentication Framework " +
+                    "bundle");
+        }
+        CustomAuthFuncHolder.getInstance().setFederatedAssociationManager(federatedAssociationManagerService);
+    }
+
+    protected void unsetFederatedAssociationManagerService(FederatedAssociationManager
+                                                                   federatedAssociationManagerService) {
+
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Federated Association Manager Service is unset in the Application Authentication Framework " +
+                    "bundle");
+        }
+        CustomAuthFuncHolder.getInstance().setFederatedAssociationManager(null);
     }
 }
