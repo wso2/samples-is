@@ -23,7 +23,7 @@
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-react-hooks": "4.6.0",
     "less": "^4.2.0",
-    "next-auth": "^4.16.4",
+    "next-auth": "^4.24.12",
     "next-with-less": "^2.0.5",
     "react-final-form": "^6.5.9",
     "rsuite": "^5.22.2"
@@ -43,7 +43,7 @@
     "eslint-plugin-tsdoc": "^0.2.17",
     "jwt-decode": "^4.0.0",
     "next": "13.0.0",
-    "next-auth": "^4.16.4",
+    "next-auth": "^4.24.12",
     "next-fonts": "^1.5.1",
     "next-with-less": "^2.0.5",
     "react": "^18.2.0",
