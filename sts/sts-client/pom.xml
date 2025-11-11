@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.wso2.samples.is</groupId>
         <artifactId>wso2is-identity-samples-sts</artifactId>
-        <version>4.6.4-SNAPSHOT</version>
+        <version>4.6.4</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
