@@ -31,5 +31,4 @@
     </script>
     <p><%= request.getContextPath()%> logged out.</p>
 </body>
-
 </html>
