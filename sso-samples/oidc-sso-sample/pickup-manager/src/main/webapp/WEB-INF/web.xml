@@ -18,6 +18,11 @@
         <servlet-class>org.wso2.sample.identity.oauth2.logout.OIDCBackChannelLogoutServlet</servlet-class>
         <load-on-startup>0</load-on-startup>
     </servlet>
+    <servlet>
+        <servlet-name>OIDCFrontChannelLogoutServlet</servlet-name>
+        <servlet-class>org.wso2.sample.identity.oauth2.logout.OIDCFrontChannelLogoutServlet</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
 
     <servlet>
         <servlet-name>ApplicationSessionStateCheckServlet</servlet-name>
@@ -33,6 +38,10 @@
     <servlet-mapping>
         <servlet-name>OIDCBackChannelLogoutServlet</servlet-name>
         <url-pattern>/bclogout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OIDCFrontChannelLogoutServlet</servlet-name>
+        <url-pattern>/fclogout</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
