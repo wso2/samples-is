@@ -120,7 +120,7 @@ public class CustomUserStoreManager extends UniqueIDJDBCUserStoreManager {
                         GregorianCalendar gc = new GregorianCalendar();
                         gc.add(GregorianCalendar.HOUR, -24);
                         Date date = gc.getTime();
-                        if (!(requireChange && changedTime.before(date))) {
+                        if (!(requireChange && changedTime != null && changedTime.before(date))) {
                             // compare the given password with stored password using jasypt
                             isAuthenticated = passwordEncryptor.checkPassword(candidatePassword, storedPassword);
                         }
