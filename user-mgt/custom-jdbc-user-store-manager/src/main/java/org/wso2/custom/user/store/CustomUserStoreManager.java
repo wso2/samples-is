@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ * Copyright (c) 2020-2026, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
  * WSO2 Inc. licenses this file to you under the Apache License,
  * Version 2.0 (the "License"); you may not use this file except
@@ -93,52 +93,45 @@ public class CustomUserStoreManager extends UniqueIDJDBCUserStoreManager {
         try {
             String candidatePassword = String.copyValueOf(((Secret) credential).getChars());
 
-            Connection dbConnection = null;
-            ResultSet rs = null;
-            PreparedStatement prepStmt = null;
-            String sql = null;
-            dbConnection = this.getDBConnection();
-            dbConnection.setAutoCommit(false);
             // get the SQL statement used to select user details
-            sql = this.realmConfig.getUserStoreProperty(JDBCRealmConstants.SELECT_USER_NAME);
+            String sql = this.realmConfig.getUserStoreProperty(JDBCRealmConstants.SELECT_USER_NAME);
             if (log.isDebugEnabled()) {
                 log.debug(sql);
             }
 
-            prepStmt = dbConnection.prepareStatement(sql);
-            prepStmt.setString(1, userName);
-            // check whether tenant id is used
-            if (sql.contains(UserCoreConstants.UM_TENANT_COLUMN)) {
-                prepStmt.setInt(2, this.tenantId);
-            }
+            try (Connection dbConnection = this.getDBConnection();
+                PreparedStatement prepStmt = dbConnection.prepareStatement(sql)) {
 
-            rs = prepStmt.executeQuery();
-            if (rs.next()) {
-                userID = rs.getString(1);
-                String storedPassword = rs.getString(3);
-
-                // check whether password is expired or not
-                boolean requireChange = rs.getBoolean(5);
-                Timestamp changedTime = rs.getTimestamp(6);
-                GregorianCalendar gc = new GregorianCalendar();
-                gc.add(GregorianCalendar.HOUR, -24);
-                Date date = gc.getTime();
-                if (!(requireChange && changedTime.before(date))) {
-                    // compare the given password with stored password using jasypt
-                    isAuthenticated = passwordEncryptor.checkPassword(candidatePassword, storedPassword);
+                dbConnection.setAutoCommit(false);
+                prepStmt.setString(1, userName);
+                // check whether tenant id is used
+                if (sql.contains(UserCoreConstants.UM_TENANT_COLUMN)) {
+                    prepStmt.setInt(2, this.tenantId);
                 }
+
+                try (ResultSet rs = prepStmt.executeQuery()) {
+                    if (rs.next()) {
+                        userID = rs.getString(1);
+                        String storedPassword = rs.getString(3);
+
+                        // check whether password is expired or not
+                        boolean requireChange = rs.getBoolean(5);
+                        Timestamp changedTime = rs.getTimestamp(6);
+                        GregorianCalendar gc = new GregorianCalendar();
+                        gc.add(GregorianCalendar.HOUR, -24);
+                        Date date = gc.getTime();
+                        if (!(requireChange && changedTime != null && changedTime.before(date))) {
+                            // compare the given password with stored password using jasypt
+                            isAuthenticated = passwordEncryptor.checkPassword(candidatePassword, storedPassword);
+                        }
+                    }
+                }
+                dbConnection.commit();
             }
-            dbConnection.commit();
             log.info(userName + " is authenticated? " + isAuthenticated);
         } catch (SQLException exp) {
-            try {
-                this.getDBConnection().rollback();
-            } catch (SQLException e1) {
-                throw new UserStoreException("Transaction rollback connection error occurred while" +
-                        " retrieving user authentication info. Authentication Failure.", e1);
-            }
             log.error("Error occurred while retrieving user authentication info.", exp);
-            throw new UserStoreException("Authentication Failure");
+            throw new UserStoreException("Authentication Failure", exp);
         }
         if (isAuthenticated) {
             user = getUser(userID, userName);
