@@ -1,0 +1,32 @@
+{
+  "name": "wayfinder-enterprise-ai-agent",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch agent.ts",
+    "claude:dev": "tsx watch agent-with-claude-wif.ts",
+    "start": "tsx agent.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@asgardeo/javascript": "^0.9.0",
+    "@langchain/anthropic": "^0.3.34",
+    "@langchain/google-genai": "^0.2.16",
+    "@langchain/langgraph": "^0.3.6",
+    "@langchain/mcp-adapters": "^0.6.0",
+    "@langchain/openai": "^0.6.17",
+    "dotenv": "^16.5.0",
+    "tsx": "^4.19.4"
+  },
+  "overrides": {
+    "@modelcontextprotocol/sdk": "1.12.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.19"
+  }
+}

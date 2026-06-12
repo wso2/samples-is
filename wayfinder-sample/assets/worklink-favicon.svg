@@ -1,0 +1,14 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <rect width="32" height="32" rx="6" fill="#2B2940"/>
+  <g transform="translate(16, 14)">
+    <rect x="-9" y="-4.5" width="9" height="9" rx="4.5" fill="none" stroke="#FFD4C2" stroke-width="2"/>
+    <rect x="-7" y="-2.5" width="5" height="5" rx="2.5" fill="#2B2940"/>
+    <rect x="-4" y="-1.5" width="4" height="1.5" rx="0.75" fill="#FFD4C2"/>
+    <rect x="-4" y="0.5" width="4" height="1.5" rx="0.75" fill="#FFB8A0"/>
+    <rect x="0" y="-4.5" width="9" height="9" rx="4.5" fill="none" stroke="#FFD4C2" stroke-width="2"/>
+    <rect x="2" y="-2.5" width="5" height="5" rx="2.5" fill="#2B2940"/>
+    <rect x="0" y="-1.5" width="4" height="1.5" rx="0.75" fill="#FFD4C2"/>
+    <rect x="0" y="0.5" width="4" height="1.5" rx="0.75" fill="#FFB8A0"/>
+  </g>
+  <text x="16" y="29" text-anchor="middle" font-family="Georgia, serif" font-size="8" font-weight="700" letter-spacing="1" fill="#FFD4C2">WL</text>
+</svg>
