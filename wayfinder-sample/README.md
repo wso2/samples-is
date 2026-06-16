@@ -13,7 +13,6 @@ The app demonstrates the following Asgardeo B2B IAM capabilities:
 - Enterprise IdP federation (OIDC) per organization
 - Branding customization per organization
 - User and permission management across organizations
-- AI agent authentication with autonomous and delegated access flows
 
 ### Organizational hierarchy
 
@@ -41,14 +40,10 @@ Root Organization (Wayfinder Enterprise)
 ```text
 wayfinder-sample/
 ├── README.md                  # Main tutorial guide (this file)
-├── webapp/                    # Next.js B2B app (port 3000)
-│   ├── app/                   # Next.js App Router pages and API routes
-│   ├── scripts/               # Database seed and drop scripts
-│   └── README.md              # Webapp-specific setup instructions
-├── mcp/                       # MCP server (port 8001)
-│   └── README.md              # MCP server setup instructions
-└── ai-agent/                  # AI agent service (port 8791)
-    └── README.md              # AI agent setup instructions
+└── webapp/                    # Next.js B2B app (port 3000)
+    ├── app/                   # Next.js App Router pages and API routes
+    ├── scripts/               # Database seed and drop scripts
+    └── README.md              # Webapp-specific setup instructions
 ```
 
 ## Asgardeo Configuration Steps
@@ -241,45 +236,7 @@ Allows full portal branding including logo and font customization. Shared when t
 
 > The `IdP-Manager`, `Basic-Branding-Editor`, and `Advanced-Branding-Editor` roles are shared dynamically when an organization admin upgrades their subscription tier through the app.
 
-### 8. Configure the AI Agent (Optional)
-
-The AI agent authenticates with Asgardeo to call B2B APIs autonomously and on behalf of signed-in users.
-
-#### Enable App-Native Authentication
-
-1. Open the **Advanced** tab of the application.
-2. Under **App-Native Authentication**, enable **Enable app-native authentication API**.
-3. Click **Update**.
-
-#### Create the AI Agent
-
-1. Navigate to **Agents** in the Asgardeo Console.
-2. Click **New Agent**.
-3. Fill in the details:
-   - **Name:** Wayfinder Enterprise Agent
-   - **Description:** AI agent for the Wayfinder Enterprise B2B platform
-4. Click **Create**.
-5. Note the **Agent ID** and **Agent Secret** from the created agent.
-6. Navigate to the **Wayfinder** application and open the **Protocol** tab.
-7. Add `http://localhost:8791` and `http://localhost:8791/obo/callback` as **Authorized Redirect URLs**.
-8. Add `http://localhost:8791` to **Allowed Origins**.
-9. Note the **Client ID** and **Client Secret** of the application.
-10. Click **Update**.
-
-#### Register the MCP Server
-
-1. Navigate to **Resources** → **MCP Servers** in the side panel and click **New MCP Server**.
-3. Fill in the details:
-   - **Name:** Wayfinder Enterprise MCP Server
-   - **URL:** `http://localhost:8001/mcp`
-4. Add the following scopes that the agent needs to access the B2B APIs:
-   - `view_travel_policy`
-   - `create_booking`
-   - `view_booking`
-   - `delete_booking`
-5. Click **Save**.
-
-### 9. Configure Root Organization Branding (Optional)
+### 8. Configure Root Organization Branding (Optional)
 
 1. Navigate to **Branding → Styles & Text** in the root organization.
 2. Open the **Design** tab and expand **Images**:
@@ -303,22 +260,6 @@ See [webapp/README.md](webapp/README.md) for full setup instructions. Fill in th
 | `ASGARDEO_PARENT_ORGANIZATION_ID` | Organization ID from step 1 |
 | `ASGARDEO_APP_ID` | Application ID from step 1 |
 | `ASGARDEO_APP_DISPLAY_NAME` | `Wayfinder` |
-
-### mcp (Optional)
-
-See [mcp/README.md](mcp/README.md) for full setup instructions. No Asgardeo-specific values are required — the defaults in `.env.example` are sufficient for local development.
-
-### ai-agent (Optional)
-
-See [ai-agent/README.md](ai-agent/README.md) for full setup instructions. Fill in the following values from the Asgardeo configuration above:
-
-| Variable | Value |
-|---|---|
-| `CLIENT_ID` | Client ID from step 1 |
-| `CLIENT_SECRET` | Client Secret from step 1 |
-| `ASGARDEO_BASE_URL` | `https://api.asgardeo.io/t/<your-org-name>` |
-| `AGENT_ID` | Agent ID from step 8 |
-| `AGENT_SECRET` | Agent Secret from step 8 |
 
 ## Using the Application
 
