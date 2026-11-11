@@ -17,8 +17,8 @@
     "better-sqlite3": "^12.10.0",
     "jose": "^6.2.3",
     "next": "^15.3.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react": "~19.2.9",
+    "react-dom": "~19.2.9"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
